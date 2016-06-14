@@ -22,8 +22,8 @@ class CardTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let dao = CGSSDAO.sharedDAO
-        self.cardList = dao.cardDict?.allValues as! NSArray
-        
+        //self.cardList = dao.cardDict?.allValues as! NSArray
+        self.cardList = dao.getSortedList(dao.cardDict, attList: ["album_id"], compare: (<))
         
         //        self.cardList = dao.getSortedList(dao.cardDict, attList: ["id"], compare: {$0<$1 })
 //
@@ -71,7 +71,7 @@ class CardTableViewController: UITableViewController {
         let row = indexPath.row
         let card = cardList[row] as! CGSSCard
         
-        cell.cardName.text = card.name
+        cell.cardName.text = String(card.name) + String(card.album_id)
         
         
 //        let iconIndex = cardList.valueForKey(cardName)?.valueForKey("iconIndex")!.integerValue
