@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1282EE5E1D011A8F0024318C"
-               BuildableName = "CGSSGuide.app"
-               BlueprintName = "CGSSGuide"
+               BlueprintIdentifier = "12A9F2C31D04052300E97A1A"
+               BuildableName = "DownloadImageOfCard"
+               BlueprintName = "DownloadImageOfCard"
                ReferencedContainer = "container:CGSSGuide.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,43 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1282EE751D011A8F0024318C"
-               BuildableName = "CGSSGuideTests.xctest"
-               BlueprintName = "CGSSGuideTests"
-               ReferencedContainer = "container:CGSSGuide.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1282EE801D011A8F0024318C"
-               BuildableName = "CGSSGuideUITests.xctest"
-               BlueprintName = "CGSSGuideUITests"
-               ReferencedContainer = "container:CGSSGuide.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "127AF71D1D01B2E9007EFBE0"
-               BuildableName = "CGSSFoudationTests.xctest"
-               BlueprintName = "CGSSFoudationTests"
-               ReferencedContainer = "container:CGSSGuide.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1282EE5E1D011A8F0024318C"
-            BuildableName = "CGSSGuide.app"
-            BlueprintName = "CGSSGuide"
+            BlueprintIdentifier = "12A9F2C31D04052300E97A1A"
+            BuildableName = "DownloadImageOfCard"
+            BlueprintName = "DownloadImageOfCard"
             ReferencedContainer = "container:CGSSGuide.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1282EE5E1D011A8F0024318C"
-            BuildableName = "CGSSGuide.app"
-            BlueprintName = "CGSSGuide"
+            BlueprintIdentifier = "12A9F2C31D04052300E97A1A"
+            BuildableName = "DownloadImageOfCard"
+            BlueprintName = "DownloadImageOfCard"
             ReferencedContainer = "container:CGSSGuide.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -104,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1282EE5E1D011A8F0024318C"
-            BuildableName = "CGSSGuide.app"
-            BlueprintName = "CGSSGuide"
+            BlueprintIdentifier = "12A9F2C31D04052300E97A1A"
+            BuildableName = "DownloadImageOfCard"
+            BlueprintName = "DownloadImageOfCard"
             ReferencedContainer = "container:CGSSGuide.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
