@@ -21,9 +21,13 @@ class CardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //let updater = CGSSUpdater()
+        //updater.getDataFromWebApi()
+        //updater.getCardIconData()
         let dao = CGSSDAO.sharedDAO
-        //self.cardList = dao.cardDict?.allValues as! NSArray
-        self.cardList = dao.getSortedList(dao.cardDict, attList: ["album_id"], compare: (<))
+
+        self.cardList = dao.cardDict?.allValues as! NSArray
+        //self.cardList = dao.getSortedList(dao.cardDict, attList: ["album_id"], compare: (<))
         
         //        self.cardList = dao.getSortedList(dao.cardDict, attList: ["id"], compare: {$0<$1 })
 //
@@ -67,46 +71,46 @@ class CardTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as? CardTableViewCell
-        _ = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.sharedDAO
         let row = indexPath.row
         let card = cardList[row] as! CGSSCard
+        if let name = card.name {
+            cell.cardName.text = name
+        }
         
-        cell.cardName.text = String(card.name) + String(card.album_id)
         
         
-//        let iconIndex = cardList.valueForKey(cardName)?.valueForKey("iconIndex")!.integerValue
-//        
-//        
-//        let imageFileNumber = iconIndex! / 64
-//        let imageOffsetRow:Int = iconIndex! % 64 / 8
-//        let imageOffsetCol:Int = iconIndex! % 64 % 8
-//        let imagePath = String(format: "%d.jpg", imageFileNumber)
-//        let image = UIImage(named: imagePath)
-//        let cgRef = image!.CGImage
-//        let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(imageOffsetCol), 96 * CGFloat(imageOffsetRow) as CGFloat, 96, 96))
-//        let icon = UIImage.init(CGImage: iconRef!)
-//        cell.imageView?.image = icon
-//        
-//        //边角圆滑处理
-//        cell.imageView?.layer.cornerRadius = 4
-//        cell.imageView?.layer.masksToBounds = true
+        let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
+        
+        let iconFile = cardIcon.file_name!
+        
+
+        let image = UIImage(named: iconFile)
+        let cgRef = image!.CGImage
+        let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
+        let icon = UIImage.init(CGImage: iconRef!)
+        cell.imageView?.image = icon
+        
+        //边角圆滑处理
+        cell.imageView?.layer.cornerRadius = 4
+        cell.imageView?.layer.masksToBounds = true
         
         //textLabel?.text = self.cardList[row] as? String
-        
+
         
 
         //显示三项数值
-        if let vocal = card.vocal_max {
-            cell.vocal.text = String(vocal)
+        if let vocal = card.vocal_max, let bonus = card.bonus_vocal {
+            cell.vocal.text = String(vocal + bonus)
         }
-        if let dance = card.dance_max {
-            cell.dance.text = String(dance)
+        if let dance = card.dance_max, let bonus = card.bonus_dance {
+            cell.dance.text = String(dance + bonus)
         }
-        if let visual = card.visual_max {
-            cell.visual.text = String(visual)
+        if let visual = card.visual_max, let bonus = card.bonus_visual {
+            cell.visual.text = String(visual + bonus)
         }
-        if let overall = card.overall_max {
-            cell.total.text = String(overall)
+        if let overall = card.overall_max, let bonus = card.overall_bonus {
+            cell.total.text = String(overall + bonus)
         }
         
         
