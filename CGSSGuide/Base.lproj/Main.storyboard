@@ -17,13 +17,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="JSe-2g-2Cw" kind="relationship" relationship="viewControllers" id="NFi-DE-Wh5"/>
-                        <segue destination="Vyy-c1-pdD" kind="relationship" relationship="viewControllers" id="13u-Sl-DQO"/>
+                        <segue destination="t6u-70-eeT" kind="relationship" relationship="viewControllers" id="Yem-Tl-QvU"/>
+                        <segue destination="Vyy-c1-pdD" kind="relationship" relationship="viewControllers" id="sWx-8K-OGG"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOj-cW-kze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1102" y="417"/>
+            <point key="canvasLocation" x="-1102" y="407"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="mdB-qO-sIf">
@@ -79,9 +79,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="search by name" id="0F9-f9-RzG">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" id="8ek-sG-pff" customClass="CardTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8ek-sG-pff" id="q7q-3v-FeP">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -201,6 +206,7 @@
                                     <outlet property="total" destination="6eH-nv-hXO" id="G7K-k7-n6G"/>
                                     <outlet property="visual" destination="YOJ-5i-6N8" id="NHz-3L-pcZ"/>
                                     <outlet property="vocal" destination="OfE-lF-ELh" id="8AZ-sy-nn3"/>
+                                    <segue destination="sf2-HR-c0j" kind="showDetail" identifier="ShowCardDetail" id="A4G-uW-KCq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -209,28 +215,85 @@
                             <outlet property="delegate" destination="ZPx-U9-TVC" id="JRU-Fq-MJf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Ef0-ol-NOl"/>
+                    <navigationItem key="navigationItem" title="Card" id="Ef0-ol-NOl">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="7hN-dP-axa"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S7j-d4-MAC"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEN-y0-Fob" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434" y="8"/>
+            <point key="canvasLocation" x="420" y="-11"/>
+        </scene>
+        <!--Card Detail-->
+        <scene sceneID="Peq-o3-zVg">
+            <objects>
+                <viewController title="Card Detail" id="sf2-HR-c0j" customClass="CardDetailViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VXL-XV-Xv3"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Bz-d1-cWC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cbN-bW-Nc6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIZ-jl-UV4">
+                                <rect key="frame" x="0.0" y="64" width="600" height="228"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGP-kP-LKE">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Card Detail" id="KOS-xx-e1X">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="bGq-AK-QET">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5sH-Ue-Wsb">
+                                                <rect key="frame" x="20" y="7" width="133" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Return"/>
+                                                <connections>
+                                                    <segue destination="2Hl-V7-TqJ" kind="showDetail" id="bE3-NG-IYo"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LGP-kP-LKE" firstAttribute="top" secondItem="VXL-XV-Xv3" secondAttribute="bottom" id="4gk-7w-hGa"/>
+                            <constraint firstItem="LGP-kP-LKE" firstAttribute="leading" secondItem="VIZ-jl-UV4" secondAttribute="leading" id="58w-ux-Cxz"/>
+                            <constraint firstItem="LGP-kP-LKE" firstAttribute="leading" secondItem="cbN-bW-Nc6" secondAttribute="leading" id="MLV-34-ePt"/>
+                            <constraint firstAttribute="trailing" secondItem="LGP-kP-LKE" secondAttribute="trailing" id="MtT-uO-Taq"/>
+                            <constraint firstItem="LGP-kP-LKE" firstAttribute="trailing" secondItem="VIZ-jl-UV4" secondAttribute="trailing" id="S5o-wY-hzc"/>
+                            <constraint firstItem="0Bz-d1-cWC" firstAttribute="top" secondItem="VIZ-jl-UV4" secondAttribute="bottom" constant="282" id="uQh-tU-JGD"/>
+                            <constraint firstItem="VIZ-jl-UV4" firstAttribute="top" secondItem="LGP-kP-LKE" secondAttribute="bottom" id="uU8-nd-5xY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fullImage" destination="VIZ-jl-UV4" id="CGJ-x7-cPR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JvP-Aa-qvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1102" y="-501"/>
         </scene>
         <!--Card-->
-        <scene sceneID="Akx-jp-l4C">
+        <scene sceneID="JlV-x0-Yig">
             <objects>
-                <navigationController title="Card" id="JSe-2g-2Cw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Card" id="iub-G1-kb5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tZH-mp-e38">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t6u-70-eeT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Card" id="2rQ-VC-YvI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u0y-GB-YTo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZPx-U9-TVC" kind="relationship" relationship="rootViewController" id="CBS-au-Rmc"/>
+                        <segue destination="ZPx-U9-TVC" kind="relationship" relationship="rootViewController" id="yA8-Wh-dZg"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ac7-zn-XDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wLb-cd-BIf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="7"/>
+            <point key="canvasLocation" x="-392" y="-11"/>
         </scene>
     </scenes>
 </document>

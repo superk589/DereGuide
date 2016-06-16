@@ -22,11 +22,14 @@ class CardTableViewController: UITableViewController {
         super.viewDidLoad()
         
         //let updater = CGSSUpdater()
+        //updater.getCardImages("")
+        //updater.getFullImages("")
+        
         //updater.getDataFromWebApi()
         //updater.getCardIconData()
         let dao = CGSSDAO.sharedDAO
 
-        self.cardList = dao.cardDict?.allValues as! NSArray
+        self.cardList = dao.cardDict?.allValues
         //self.cardList = dao.getSortedList(dao.cardDict, attList: ["album_id"], compare: (<))
         
         //        self.cardList = dao.getSortedList(dao.cardDict, attList: ["id"], compare: {$0<$1 })
@@ -69,6 +72,15 @@ class CardTableViewController: UITableViewController {
         return cardList.count
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowCardDetail"
+        {
+            let dest = segue.destinationViewController as! CardDetailViewController
+            let selectedIndex = self.tableView.indexPathForSelectedRow?.row
+            let card = cardList[selectedIndex!]
+            dest.card = card as! CGSSCard
+        }
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as? CardTableViewCell
         let dao = CGSSDAO.sharedDAO
@@ -96,8 +108,6 @@ class CardTableViewController: UITableViewController {
         cell.imageView?.layer.masksToBounds = true
         
         //textLabel?.text = self.cardList[row] as? String
-
-        
 
         //显示三项数值
         if let vocal = card.vocal_max, let bonus = card.bonus_vocal {

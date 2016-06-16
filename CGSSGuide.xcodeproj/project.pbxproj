@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12117DD11D0FA80E00112DCB /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12117DD01D0FA80E00112DCB /* CGSSFoundation.framework */; };
 		12117DD21D0FA81300112DCB /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12117DD01D0FA80E00112DCB /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		12547DE51D128A3100D78049 /* 200248_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE41D128A3100D78049 /* 200248_card.png */; };
+		12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE61D128A4B00D78049 /* 200248_spread.png */; };
 		127AF70B1D01A3D9007EFBE0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AF70A1D01A3D9007EFBE0 /* main.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE651D011A8F0024318C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE641D011A8F0024318C /* ViewController.swift */; };
@@ -36,6 +38,7 @@
 		12CE3EE41D0E846D00E77957 /* icons_7@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDA1D0E846D00E77957 /* icons_7@2x.jpg */; };
 		12CE3EE51D0E846D00E77957 /* icons_8@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDB1D0E846D00E77957 /* icons_8@2x.jpg */; };
 		12CE3EE61D0E846D00E77957 /* icons_9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDC1D0E846D00E77957 /* icons_9@2x.jpg */; };
+		12DB29811D124AE5000D2A29 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +101,8 @@
 
 /* Begin PBXFileReference section */
 		12117DD01D0FA80E00112DCB /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphonesimulator/CGSSFoundation.framework"; sourceTree = "<group>"; };
+		12547DE41D128A3100D78049 /* 200248_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_card.png; path = cardImage/200248_card.png; sourceTree = "<group>"; };
+		12547DE61D128A4B00D78049 /* 200248_spread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_spread.png; path = fullImage/200248_spread.png; sourceTree = "<group>"; };
 		127AF7081D01A3D9007EFBE0 /* ReadFileToPlist */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ReadFileToPlist; sourceTree = BUILT_PRODUCTS_DIR; };
 		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +139,7 @@
 		12CE3EDA1D0E846D00E77957 /* icons_7@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_7@2x.jpg"; sourceTree = "<group>"; };
 		12CE3EDB1D0E846D00E77957 /* icons_8@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_8@2x.jpg"; sourceTree = "<group>"; };
 		12CE3EDC1D0E846D00E77957 /* icons_9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_9@2x.jpg"; sourceTree = "<group>"; };
+		12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +228,7 @@
 			children = (
 				12A9F2BF1D04041800E97A1A /* ImageOfIcon */,
 				12CE3EF01D0E853A00E77957 /* data */,
+				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
 				12A9F2BD1D03FE8900E97A1A /* CardTableViewCell.swift */,
 				1282EE621D011A8F0024318C /* AppDelegate.swift */,
@@ -281,6 +288,8 @@
 		12CE3EF01D0E853A00E77957 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				12547DE41D128A3100D78049 /* 200248_card.png */,
+				12547DE61D128A4B00D78049 /* 200248_spread.png */,
 				12CB0AA41D1179F700383178 /* card.plist */,
 				12CB0AA51D1179F700383178 /* char.plist */,
 				12CB0AAF1D11856800383178 /* card_icon.plist */,
@@ -469,11 +478,13 @@
 				1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */,
 				12CE3EE31D0E846D00E77957 /* icons_6@2x.jpg in Resources */,
 				12CB0AB01D11856800383178 /* card_icon.plist in Resources */,
+				12547DE51D128A3100D78049 /* 200248_card.png in Resources */,
 				12CE3EE41D0E846D00E77957 /* icons_7@2x.jpg in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
 				12CE3EDF1D0E846D00E77957 /* icons_2@2x.jpg in Resources */,
 				12CE3EDD1D0E846D00E77957 /* icons_0@2x.jpg in Resources */,
 				12CB0AA91D1179F700383178 /* card.plist in Resources */,
+				12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */,
 				12CE3EE01D0E846D00E77957 /* icons_3@2x.jpg in Resources */,
 				12CE3EDE1D0E846D00E77957 /* icons_1@2x.jpg in Resources */,
 				12CE3EE21D0E846D00E77957 /* icons_5@2x.jpg in Resources */,
@@ -512,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12A9F2BE1D03FE8900E97A1A /* CardTableViewCell.swift in Sources */,
+				12DB29811D124AE5000D2A29 /* CardDetailViewController.swift in Sources */,
 				1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */,
 				1282EE651D011A8F0024318C /* ViewController.swift in Sources */,
 				12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */,
