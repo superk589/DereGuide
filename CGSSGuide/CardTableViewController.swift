@@ -10,16 +10,29 @@ import UIKit
 import CGSSFoundation
 
 class CardTableViewController: UITableViewController {
-        
-    var cardDict:NSDictionary!
-    var cardList:NSArray!
-    var presentedDict:NSMutableDictionary!
-    var centerSkillDict:NSDictionary!
-    var specialSkillDict:NSDictionary!
-    //var cardTableArray:Array<CGSSCard>
     
+    var cardList:[CGSSCard]!
+    //var cardTableArray:Array<CGSSCard>
+    var searchBar:UISearchBar!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.tabBarItem = UITabBarItem.init(title: "卡片", image: nil, tag: 1)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
+        //初始化导航栏的搜索条
+        searchBar = UISearchBar()
+        self.navigationItem.titleView = searchBar
+        searchBar.returnKeyType = .Done
+        //searchBar.showsCancelButton = true
+        searchBar.placeholder = "输入角色日文名或罗马字"
+        searchBar.autocapitalizationType = .None
+        searchBar.autocorrectionType = .No
+        searchBar.delegate = self
+       
         
         //let updater = CGSSUpdater()
         //updater.getCardImages("")
@@ -29,30 +42,10 @@ class CardTableViewController: UITableViewController {
         //updater.getCardIconData()
         let dao = CGSSDAO.sharedDAO
 
-        self.cardList = dao.cardDict?.allValues
-        //self.cardList = dao.getSortedList(dao.cardDict, attList: ["album_id"], compare: (<))
+        dao.loadAllDataFromFile()
         
-        //        self.cardList = dao.getSortedList(dao.cardDict, attList: ["id"], compare: {$0<$1 })
-//
-//        let cardPListPath = NSBundle.mainBundle().pathForResource("Card", ofType: "plist")
-//        cardDict = NSDictionary(contentsOfFile: cardPListPath!)
-//        presentedDict = NSMutableDictionary()
-//        for (k, v) in cardDict {
-//            if let rare = v.objectForKey("cardRare")
-//            {
-//                switch rare as! String {
-//                case "SSR", "SSR＋", "SR", "SR＋":
-//                    presentedDict.setValue(v, forKey: k as! String)
-//                default:
-//                    break
-//                }
-//            }
-//        }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,22 +65,14 @@ class CardTableViewController: UITableViewController {
         return cardList.count
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowCardDetail"
-        {
-            let dest = segue.destinationViewController as! CardDetailViewController
-            let selectedIndex = self.tableView.indexPathForSelectedRow?.row
-            let card = cardList[selectedIndex!]
-            dest.card = card as! CGSSCard
-        }
-    }
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as? CardTableViewCell
         let dao = CGSSDAO.sharedDAO
         let row = indexPath.row
-        let card = cardList[row] as! CGSSCard
-        if let name = card.name {
-            cell.cardName.text = name
+        let card = cardList[row] 
+        if let name = card.chara?.name, let conventional = card.chara?.conventional {
+            cell.cardNameLabel.text = name + "  " + conventional
         }
         
         
@@ -101,27 +86,40 @@ class CardTableViewController: UITableViewController {
         let cgRef = image!.CGImage
         let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
         let icon = UIImage.init(CGImage: iconRef!)
-        cell.imageView?.image = icon
+        cell.cardIconView?.image = icon
         
         //边角圆滑处理
-        cell.imageView?.layer.cornerRadius = 4
-        cell.imageView?.layer.masksToBounds = true
+        cell.cardIconView?.layer.cornerRadius = 6
+        cell.cardIconView?.layer.masksToBounds = true
         
         //textLabel?.text = self.cardList[row] as? String
 
-        //显示三项数值
+        //显示数值
+        if let life = card.hp_max, let bonus = card.bonus_hp {
+            cell.lifeLabel.text = "hp:"+String(life + bonus)
+        }
         if let vocal = card.vocal_max, let bonus = card.bonus_vocal {
-            cell.vocal.text = String(vocal + bonus)
+            cell.vocalLabel?.text = "vo:"+String(vocal + bonus)
         }
         if let dance = card.dance_max, let bonus = card.bonus_dance {
-            cell.dance.text = String(dance + bonus)
+            cell.danceLabel?.text = "da:"+String(dance + bonus)
         }
         if let visual = card.visual_max, let bonus = card.bonus_visual {
-            cell.visual.text = String(visual + bonus)
+            cell.visualLabel?.text = "vi:"+String(visual + bonus)
         }
         if let overall = card.overall_max, let bonus = card.overall_bonus {
-            cell.total.text = String(overall + bonus)
+            cell.totalLabel?.text = "T:"+String(overall + bonus)
         }
+        
+        
+        //显示稀有度
+        cell.rarityLabel.text = card.rarity?.rarityString ?? ""
+        
+        //显示主动技能类型
+        cell.skillLabel.text = card.skill?.skill_type ?? ""
+        
+        //显示title
+        cell.titleLabel.text = card.title ?? ""
         
         
         
@@ -131,7 +129,18 @@ class CardTableViewController: UITableViewController {
         return cell
     }
     
+    func filterAction() {
+        //let
+    }
 
+    
+    func cancelAction() {
+        searchBar.resignFirstResponder()
+        let dao = CGSSDAO.sharedDAO
+        searchBar.text = ""
+        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        self.tableView.reloadData()
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -177,4 +186,35 @@ class CardTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension CardTableViewController : UISearchBarDelegate {
+    
+    //文字改变时
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let dao = CGSSDAO.sharedDAO
+        if searchText == "" {
+            self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        } else {
+            self.cardList = dao.getCardListByName(searchText)
+        }
+        self.tableView.reloadData()
+    }
+    //开始编辑时
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        
+        return true
+    }
+    //点击搜索按钮时
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    //点击searchbar自带的取消按钮时
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        let dao = CGSSDAO.sharedDAO
+
+        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        self.tableView.reloadData()
+    }
 }
