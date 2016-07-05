@@ -14,6 +14,8 @@ class CardTableViewController: UITableViewController {
     var cardList:[CGSSCard]!
     //var cardTableArray:Array<CGSSCard>
     var searchBar:UISearchBar!
+    var filter:CGSSCardFilter!
+    var sorter:CGSSCardSorter!
     
 
     override func viewDidLoad() {
@@ -32,7 +34,8 @@ class CardTableViewController: UITableViewController {
         searchBar.autocapitalizationType = .None
         searchBar.autocorrectionType = .No
         searchBar.delegate = self
-       
+
+        
         
         //let updater = CGSSUpdater()
         //updater.getCardImages("")
@@ -40,11 +43,13 @@ class CardTableViewController: UITableViewController {
         
         //updater.getDataFromWebApi()
         //updater.getCardIconData()
-        let dao = CGSSDAO.sharedDAO
-
-        dao.loadAllDataFromFile()
         
-        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        //设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
+        filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000)
+
+        //按更新顺序排序
+        sorter = CGSSCardSorter.init(att: "update_id")
+
         
     }
 
@@ -53,6 +58,14 @@ class CardTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        let dao = CGSSDAO.sharedDAO
+        dao.loadAllDataFromFile()
+        self.cardList = dao.getCardListByMask(filter)
+        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
+
+        tableView.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -67,10 +80,10 @@ class CardTableViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as? CardTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as! CardTableViewCell
         let dao = CGSSDAO.sharedDAO
         let row = indexPath.row
-        let card = cardList[row] 
+        let card = cardList[row]
         if let name = card.chara?.name, let conventional = card.chara?.conventional {
             cell.cardNameLabel.text = name + "  " + conventional
         }
@@ -95,22 +108,11 @@ class CardTableViewController: UITableViewController {
         //textLabel?.text = self.cardList[row] as? String
 
         //显示数值
-        if let life = card.hp_max, let bonus = card.bonus_hp {
-            cell.lifeLabel.text = "hp:"+String(life + bonus)
-        }
-        if let vocal = card.vocal_max, let bonus = card.bonus_vocal {
-            cell.vocalLabel?.text = "vo:"+String(vocal + bonus)
-        }
-        if let dance = card.dance_max, let bonus = card.bonus_dance {
-            cell.danceLabel?.text = "da:"+String(dance + bonus)
-        }
-        if let visual = card.visual_max, let bonus = card.bonus_visual {
-            cell.visualLabel?.text = "vi:"+String(visual + bonus)
-        }
-        if let overall = card.overall_max, let bonus = card.overall_bonus {
-            cell.totalLabel?.text = "T:"+String(overall + bonus)
-        }
-        
+        cell.lifeLabel.text = String(card.life)
+        cell.vocalLabel.text = String(card.vocal)
+        cell.danceLabel.text = String(card.dance)
+        cell.visualLabel.text = String(card.visual)
+        cell.totalLabel.text = String(card.overall)
         
         //显示稀有度
         cell.rarityLabel.text = card.rarity?.rarityString ?? ""
@@ -122,15 +124,26 @@ class CardTableViewController: UITableViewController {
         cell.titleLabel.text = card.title ?? ""
         
         
-        
-        
         // Configure the cell...
 
         return cell
     }
     
     func filterAction() {
-        //let
+        let sb = self.storyboard!
+        let filterVC = sb.instantiateViewControllerWithIdentifier("CardFilterAndSorterTableView") as! CardFilterAndSorterTableViewController
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        //navigationController?.pushViewController(filterVC, animated: true)
+        
+        
+        //使用自定义动画效果
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionFade
+        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController?.pushViewController(filterVC, animated: false)
+        
     }
 
     
@@ -138,7 +151,8 @@ class CardTableViewController: UITableViewController {
         searchBar.resignFirstResponder()
         let dao = CGSSDAO.sharedDAO
         searchBar.text = ""
-        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        self.cardList = dao.getCardListByMask(filter)
+        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         self.tableView.reloadData()
     }
     /*
@@ -193,10 +207,10 @@ extension CardTableViewController : UISearchBarDelegate {
     //文字改变时
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         let dao = CGSSDAO.sharedDAO
-        if searchText == "" {
-            self.cardList = dao.cardDict?.allValues as! [CGSSCard]
-        } else {
-            self.cardList = dao.getCardListByName(searchText)
+        self.cardList = dao.getCardListByMask(filter)
+        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
+        if searchText != "" {
+            self.cardList = dao.getCardListByName(self.cardList, string: searchText)
         }
         self.tableView.reloadData()
     }
@@ -213,8 +227,8 @@ extension CardTableViewController : UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         let dao = CGSSDAO.sharedDAO
-
-        self.cardList = dao.cardDict?.allValues as! [CGSSCard]
+        self.cardList = dao.getCardListByMask(filter)
+        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         self.tableView.reloadData()
     }
 }

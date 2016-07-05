@@ -10,10 +10,9 @@
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AA9FE1D28BE820055D156 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */; };
 		122AA9FF1D28BE850055D156 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		122AAA031D28C43A0055D156 /* CardFilterAndSorterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA021D28C43A0055D156 /* CardFilterAndSorterViewController.swift */; };
+		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		12547DE51D128A3100D78049 /* 200248_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE41D128A3100D78049 /* 200248_card.png */; };
 		12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE61D128A4B00D78049 /* 200248_spread.png */; };
-		127AF70B1D01A3D9007EFBE0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AF70A1D01A3D9007EFBE0 /* main.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
 		1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE691D011A8F0024318C /* CGSSGuide.xcdatamodeld */; };
@@ -62,15 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		127AF7061D01A3D9007EFBE0 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		127AF72F1D01B2E9007EFBE0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,10 +95,9 @@
 /* Begin PBXFileReference section */
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphoneos/CGSSFoundation.framework"; sourceTree = "<group>"; };
-		122AAA021D28C43A0055D156 /* CardFilterAndSorterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterViewController.swift; sourceTree = "<group>"; };
+		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		12547DE41D128A3100D78049 /* 200248_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_card.png; path = cardImage/200248_card.png; sourceTree = "<group>"; };
 		12547DE61D128A4B00D78049 /* 200248_spread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_spread.png; path = fullImage/200248_spread.png; sourceTree = "<group>"; };
-		127AF7081D01A3D9007EFBE0 /* ReadFileToPlist */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ReadFileToPlist; sourceTree = BUILT_PRODUCTS_DIR; };
 		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,13 +138,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		127AF7051D01A3D9007EFBE0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1282EE5C1D011A8F0024318C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,7 +204,6 @@
 				1282EE5F1D011A8F0024318C /* CGSSGuide.app */,
 				1282EE761D011A8F0024318C /* CGSSGuideTests.xctest */,
 				1282EE811D011A8F0024318C /* CGSSGuideUITests.xctest */,
-				127AF7081D01A3D9007EFBE0 /* ReadFileToPlist */,
 				12A9F2C41D04052300E97A1A /* DownloadImageOfCard */,
 				12CE3E7B1D0C3B5C00E77957 /* GetJsonData */,
 			);
@@ -307,7 +288,7 @@
 		12ED085E1D180741007E350D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				122AAA021D28C43A0055D156 /* CardFilterAndSorterViewController.swift */,
+				122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */,
 				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
 				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
@@ -327,23 +308,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		127AF7071D01A3D9007EFBE0 /* ReadFileToPlist */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 127AF70C1D01A3D9007EFBE0 /* Build configuration list for PBXNativeTarget "ReadFileToPlist" */;
-			buildPhases = (
-				127AF7041D01A3D9007EFBE0 /* Sources */,
-				127AF7051D01A3D9007EFBE0 /* Frameworks */,
-				127AF7061D01A3D9007EFBE0 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ReadFileToPlist;
-			productName = ReadFileToPlist;
-			productReference = 127AF7081D01A3D9007EFBE0 /* ReadFileToPlist */;
-			productType = "com.apple.product-type.tool";
-		};
 		1282EE5E1D011A8F0024318C /* CGSSGuide */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1282EE8A1D011A8F0024318C /* Build configuration list for PBXNativeTarget "CGSSGuide" */;
@@ -442,9 +406,6 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = zzk;
 				TargetAttributes = {
-					127AF7071D01A3D9007EFBE0 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
 					1282EE5E1D011A8F0024318C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 79JCQCP8K4;
@@ -483,7 +444,6 @@
 				1282EE5E1D011A8F0024318C /* CGSSGuide */,
 				1282EE751D011A8F0024318C /* CGSSGuideTests */,
 				1282EE801D011A8F0024318C /* CGSSGuideUITests */,
-				127AF7071D01A3D9007EFBE0 /* ReadFileToPlist */,
 				12A9F2C31D04052300E97A1A /* DownloadImageOfCard */,
 				12CE3E7A1D0C3B5C00E77957 /* GetJsonData */,
 			);
@@ -535,14 +495,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		127AF7041D01A3D9007EFBE0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				127AF70B1D01A3D9007EFBE0 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1282EE5B1D011A8F0024318C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,10 +504,10 @@
 				1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */,
 				12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
+				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,
 				12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */,
 				121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */,
-				122AAA031D28C43A0055D156 /* CardFilterAndSorterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,26 +577,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		127AF70D1D01A3D9007EFBE0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		127AF70E1D01A3D9007EFBE0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 		1282EE881D011A8F0024318C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -859,15 +791,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		127AF70C1D01A3D9007EFBE0 /* Build configuration list for PBXNativeTarget "ReadFileToPlist" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				127AF70D1D01A3D9007EFBE0 /* Debug */,
-				127AF70E1D01A3D9007EFBE0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1282EE5A1D011A8F0024318C /* Build configuration list for PBXProject "CGSSGuide" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
