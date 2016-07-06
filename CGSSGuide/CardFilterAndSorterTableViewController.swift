@@ -25,12 +25,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     var filter:CGSSCardFilter!
     var sorter:CGSSCardSorter!
     //let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
-    var sorterString = ["vocal","dance","visual","overall","update_id","album_id","rarity_ref"]
+    var sorterString = ["vocal","dance","visual","overall","update_id","rarity_ref","album_id"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let backButton = UIBarButtonItem.init(barButtonSystemItem: .Done, target: self, action: #selector(doneAction))
+        
+        let backButton = UIBarButtonItem.init(title: "完成", style: .Plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
         
         for i in 0...7 {

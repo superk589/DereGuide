@@ -34,8 +34,10 @@ class CardTableViewController: UITableViewController {
         searchBar.autocapitalizationType = .None
         searchBar.autocorrectionType = .No
         searchBar.delegate = self
-
         
+        
+//        self.tableView.separatorInset = UIEdgeInsetsZero
+//        self.tableView.layoutMargins = UIEdgeInsetsZero
         
         //let updater = CGSSUpdater()
         //updater.getCardImages("")
@@ -59,12 +61,15 @@ class CardTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
         let dao = CGSSDAO.sharedDAO
-        dao.loadAllDataFromFile()
         self.cardList = dao.getCardListByMask(filter)
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
 
         tableView.reloadData()
+  
+        
     }
     // MARK: - Table view data source
 
@@ -75,7 +80,7 @@ class CardTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cardList.count
+        return cardList?.count ?? 0
     }
 
 
@@ -88,13 +93,8 @@ class CardTableViewController: UITableViewController {
             cell.cardNameLabel.text = name + "  " + conventional
         }
         
-        
-        
         let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
-        
         let iconFile = cardIcon.file_name!
-        
-
         let image = UIImage(named: iconFile)
         let cgRef = image!.CGImage
         let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
@@ -154,6 +154,22 @@ class CardTableViewController: UITableViewController {
         self.cardList = dao.getCardListByMask(filter)
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         self.tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cardDetailVC = CardDetailViewController()
+        
+        cardDetailVC.card = self.cardList[indexPath.row]
+        cardDetailVC.modalTransitionStyle = .CoverVertical
+        self.navigationController?.pushViewController(cardDetailVC, animated: true)
+        //使用自定义动画效果
+//        let transition = CATransition()
+//        transition.duration = 0.3
+//        transition.type = kCATransitionPush
+//        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+//        navigationController?.pushViewController(cardDetailVC, animated: false)
+        
+        
     }
     /*
     // Override to support conditional editing of the table view.

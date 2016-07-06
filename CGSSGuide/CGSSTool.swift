@@ -19,4 +19,10 @@ public class CGSSTool: NSObject {
     public static let visualColor = UIColor.init(red: 1.0*254/255, green: 1.0*154/255, blue: 1.0*66/255, alpha: 1)
     public static let lifeColor = UIColor.init(red: 1.0*75/255, green: 1.0*202/255, blue: 1.0*137/255, alpha: 1)
     
+    public static let fullImageWidth:CGFloat = 1280
+    public static let fullImageHeight:CGFloat = 824
+    
+
+      
+    
 }

@@ -11,6 +11,7 @@
 		122AA9FE1D28BE820055D156 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */; };
 		122AA9FF1D28BE850055D156 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
+		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
 		12547DE51D128A3100D78049 /* 200248_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE41D128A3100D78049 /* 200248_card.png */; };
 		12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE61D128A4B00D78049 /* 200248_spread.png */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
@@ -96,6 +97,7 @@
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AA9FD1D28BE820055D156 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphoneos/CGSSFoundation.framework"; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
+		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
 		12547DE41D128A3100D78049 /* 200248_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_card.png; path = cardImage/200248_card.png; sourceTree = "<group>"; };
 		12547DE61D128A4B00D78049 /* 200248_spread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_spread.png; path = fullImage/200248_spread.png; sourceTree = "<group>"; };
 		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -290,8 +292,8 @@
 			children = (
 				122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */,
 				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
-				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
+				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				121569671D1CE0B800C3055A /* CardDetailView.swift */,
+				122AAB441D2BF62D0055D156 /* CGSSGridView.swift */,
 				12CD5E371D2536E70058BE19 /* CardTableViewCell.swift */,
 			);
 			name = View;
@@ -503,6 +506,7 @@
 				12DB29811D124AE5000D2A29 /* CardDetailViewController.swift in Sources */,
 				1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */,
 				12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */,
+				122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,

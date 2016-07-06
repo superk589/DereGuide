@@ -58,7 +58,6 @@
         <!--Card Filter And Sorter Table View Controller-->
         <scene sceneID="QZt-3R-LJz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MRk-3N-APF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="CardFilterAndSorterTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XB8-jt-AiW" customClass="CardFilterAndSorterTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IdU-PC-xRx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -74,7 +73,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rrW-PM-imY">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="rrW-PM-imY">
                                                     <rect key="frame" x="23" y="8" width="559" height="28"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvK-S0-WhK">
@@ -83,19 +82,19 @@
                                                             <state key="normal" title="SSR+"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9r5-JT-QLk">
-                                                            <rect key="frame" x="80.5" y="0.0" width="30" height="28"/>
+                                                            <rect key="frame" x="81" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="SSR"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNn-WX-05k">
-                                                            <rect key="frame" x="155.5" y="0.0" width="30" height="28"/>
+                                                            <rect key="frame" x="156" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="SR+"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0K-W1-Xqm">
                                                             <rect key="frame" x="230" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title="SR"/>
+                                                            <state key="normal" title=" SR "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-sB-Xx6">
                                                             <rect key="frame" x="305" y="0.0" width="30" height="28"/>
@@ -103,12 +102,12 @@
                                                             <state key="normal" title=" R+ "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-X6-5GL">
-                                                            <rect key="frame" x="379.5" y="0.0" width="30" height="28"/>
+                                                            <rect key="frame" x="380" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" R "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-gU-gqO">
-                                                            <rect key="frame" x="454.5" y="0.0" width="30" height="28"/>
+                                                            <rect key="frame" x="455" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" N+ "/>
                                                         </button>
@@ -214,12 +213,12 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Cx-fc-9Lo">
                                                     <rect key="frame" x="23" y="8" width="377" height="28"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-Mv-ukR">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-Mv-ukR">
                                                             <rect key="frame" x="0.0" y="0.0" width="189" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="            ▽            "/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-PC-phX">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-PC-phX">
                                                             <rect key="frame" x="189" y="0.0" width="189" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="            △            "/>
@@ -329,6 +328,7 @@
                         <outlet property="rarityStackView" destination="rrW-PM-imY" id="Qej-pR-BHV"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MRk-3N-APF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4406" y="215"/>
         </scene>
