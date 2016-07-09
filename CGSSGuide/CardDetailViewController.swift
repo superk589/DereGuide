@@ -14,14 +14,28 @@ class CardDetailViewController: UIViewController {
     var card:CGSSCard!
     var cardDV:CardDetailView?
 
+    var fullScreenView:UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //设置全屏视图 用于显示放大图片
+        fullScreenView = UIView()
+        fullScreenView?.frame = UIScreen.mainScreen().bounds
+        view.addSubview(fullScreenView!)
+
+        
         cardDV = CardDetailView()
         
-        self.automaticallyAdjustsScrollViewInsets = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageLongPress), name: "CGSSImageLongPress", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageFullScreen), name: "CGSSImageFullScreen", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageRestore), name: "CGSSImageRestore", object: nil)
+        
+        //self.automaticallyAdjustsScrollViewInsets = true
         view.addSubview(cardDV!)
-
+        
+       
         let titleView = UILabel.init(frame: CGRectMake(0, 0, 360, 44))
         titleView.text = card.name
         titleView.font = UIFont.systemFontOfSize(12)
@@ -41,23 +55,14 @@ class CardDetailViewController: UIViewController {
         else {
             cardDV?.setWithoutSpreadImage()
         }
-        
+               
         cardDV?.cardNameLabel.text = card.name_only! + "  " + (card.chara?.conventional)!
         cardDV?.titleLabel.text = card.title
         cardDV?.rarityLabel.text = card.rarity?.rarityString
         
         let dao = CGSSDAO.sharedDAO
-        let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
-        let iconFile = cardIcon.file_name!
-        let image = UIImage(named: iconFile)
-        let cgRef = image!.CGImage
-        let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
-        let icon = UIImage.init(CGImage: iconRef!)
-        cardDV?.cardIconView?.image = icon
+        cardDV?.cardIconView?.image = CGSSTool.getIconFromCardId(card.id!)
         
-        //边角圆滑处理
-        cardDV?.cardIconView?.layer.cornerRadius = 6
-        cardDV?.cardIconView?.layer.masksToBounds = true
         
 
         //设置属性列表
@@ -95,6 +100,8 @@ class CardDetailViewController: UIViewController {
             cardDV?.setSkillContentView()
             cardDV?.skillNameLabel.text = skill.skill_name
             cardDV?.skillDescriptionLabel.text = skill.explain_en
+            //cardDV?.skillTypeLabel.text = skill.skill_type
+            
             var procGridStrings = [[String]]()
             let procChanceMax = Double((skill.proc_chance?.1)!) / 100
             let procChanceMin = Double((skill.proc_chance?.0)!) / 100
@@ -108,10 +115,54 @@ class CardDetailViewController: UIViewController {
             cardDV?.skillProcGridView.setGridContent(procGridStrings)
         }
         
+        //设置队长技能
+        if let leaderSkill = card.leader_skill {
+            cardDV?.setLeaderSkillContentView()
+            cardDV?.leaderSkillNameLabel.text = leaderSkill.name
+            cardDV?.leaderSkillDescriptionLabel.text = leaderSkill.explain_en
+        }
+        
+        //设置进化信息
+        if let evolution_id = card.evolution_id where evolution_id > 0 {
+            cardDV?.setEvolutionContentView()
+            cardDV?.evolutionFromImageView.image = CGSSTool.getIconFromCardId(card.id!)
+            cardDV?.evolutionToImageView.image = CGSSTool.getIconFromCardId(evolution_id)
+            let tap = UITapGestureRecognizer(target: self, action: #selector(evolutionToImageClick))
+            cardDV?.evolutionToImageView.addGestureRecognizer(tap)
+
+        }
+        
+        //设置角色信息
+        
+        
+        //设置技能升级信息
+   
+        
+        
+        //设置出售价格
+        
+        
+        //设置饲料经验信息
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
+    
+    //添加当前卡到收藏
     func addFavorite() {
-        //todo
+        let callBack = {(s:String) -> Void in
+            let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
+            alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+            self.presentViewController(alVC, animated: true, completion: nil)
+        }
+        CGSSFavoriteManager.defaultManager.addFavoriteCard(self.card, callBack: callBack)
+        //print(CGSSFavoriteManager.favoriteCardsFilePath)
     }
     func backAction() {
         //使用自定义动画返回
@@ -125,8 +176,18 @@ class CardDetailViewController: UIViewController {
 //            self.cardName.text = name
 //        }
 //        
-//        
-//        
+    //点击进化后头像
+    func evolutionToImageClick() {
+        let cardDetailVC = CardDetailViewController()
+        let dao = CGSSDAO.sharedDAO
+        cardDetailVC.card = dao.findCardById(card.evolution_id!)
+        cardDetailVC.modalTransitionStyle = .CoverVertical
+        self.navigationController?.pushViewController(cardDetailVC, animated: true)
+        
+    }
+    
+  
+//
 //        let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
 //        
 //        let iconFile = cardIcon.file_name!
@@ -181,6 +242,76 @@ class CardDetailViewController: UIViewController {
     }
     
 
+    //当恢复时,将图片置于原视图上
+    func imageRestore () {
+    
+        self.cardDV?.addSubview((self.cardDV?.fullImageView)!)
+        self.view.sendSubviewToBack(fullScreenView!)
+        self.cardDV?.fullImageView?.frame.origin.y = -64 + (self.cardDV?.contentOffset.y)!
+        UIView.animateWithDuration(0.3) {
+            self.cardDV?.fullImageView?.frame.origin.y = 0
+            self.navigationController?.navigationBar.alpha = 1
+            self.tabBarController?.tabBar.alpha = 1
+        }
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.tabBarController?.tabBar.hidden = false
+
+        //self.cardDV?.backgroundColor = UIColor.whiteColor()
+    }
+    //设置大图全屏效果
+    func imageFullScreen() {
+        //置于顶层 覆盖一切
+        //UIApplication.sharedApplication().keyWindow?.addSubview((self.cardDV?.fullImageView)!)
+        self.fullScreenView?.bounds.origin.y = -64 + (self.cardDV?.contentOffset.y)!
+        self.fullScreenView?.addSubview((self.cardDV?.fullImageView)!)
+        UIView.animateWithDuration(0.3) {
+            self.fullScreenView?.bounds.origin.y = 0
+            self.navigationController?.navigationBar.alpha = 0
+            self.tabBarController?.tabBar.alpha = 0
+        }
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //self.tabBarController?.tabBar.hidden = true
+    
+        self.view.bringSubviewToFront(fullScreenView!)
+        //self.navigationController?.setToolbarHidden(true, animated: true)
+        
+//        let vc = UIViewController()
+//        self.modalTransitionStyle = .CoverVertical
+//        presentViewController(vc, animated: true, completion: nil)
+//        vc.view.addSubview((self.cardDV?.fullImageView)!)
+
+        //self.tabBarController?.tabBar.hidden = true
+        //self.navigationController?.navigationBar.hidden = true
+        //self.automaticallyAdjustsScrollViewInsets = false
+        //self.cardDV?.scrollEnabled = false
+        //self.cardDV?.contentOffset = CGPointMake(0, -64)
+        //self.cardDV?.backgroundColor = UIColor.blackColor()
+    }
+
+    func imageLongPress() {
+        
+        //长按实现更多操作 保存/分享等
+        let alVC = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alVC.addAction(UIAlertAction.init(title: "保存", style: .Default, handler: { (_:UIAlertAction) in
+            UIImageWriteToSavedPhotosAlbum((self.cardDV?.fullImageView?.image)!, self, #selector(self.imageDidFinishingSaving), nil)
+        }))
+//        alVC.addAction(UIAlertAction.init(title: "分享", style: .Default, handler: { (_:UIAlertAction) in
+//            //todo
+//        }))
+        alVC.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: { (_:UIAlertAction) in
+            //todo
+        }))
+
+        presentViewController(alVC, animated: true, completion: nil)
+    }
+    
+    //保存成功的回调方法
+    func imageDidFinishingSaving(image: UIImage,didFinishSavingWithError: NSError?,contextInfo: AnyObject) {
+        let alVC = UIAlertController(title: "保存成功", message: nil, preferredStyle: .Alert)
+        alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+        presentViewController(alVC, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

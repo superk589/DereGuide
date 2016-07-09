@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CGSSFoundation
 
 public class CGSSTool: NSObject {
 
@@ -22,6 +23,21 @@ public class CGSSTool: NSObject {
     public static let fullImageWidth:CGFloat = 1280
     public static let fullImageHeight:CGFloat = 824
     
+    
+    
+    
+    //应放置到逻辑层的函数,暂时放到这里
+    static func getIconFromCardId(id:Int) -> UIImage {
+        let dao = CGSSDAO.sharedDAO
+        let cardIcon = dao.cardIconDict!.objectForKey(String(id)) as! CGSSCardIcon
+        let iconFile = cardIcon.file_name!
+        let image = UIImage(named: iconFile)
+        let cgRef = image!.CGImage
+        let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
+        let icon = UIImage.init(CGImage: iconRef!)
+        return icon
+    }
+
 
       
     

@@ -86,24 +86,16 @@ class CardTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as! CardTableViewCell
-        let dao = CGSSDAO.sharedDAO
+ 
         let row = indexPath.row
         let card = cardList[row]
         if let name = card.chara?.name, let conventional = card.chara?.conventional {
             cell.cardNameLabel.text = name + "  " + conventional
         }
         
-        let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
-        let iconFile = cardIcon.file_name!
-        let image = UIImage(named: iconFile)
-        let cgRef = image!.CGImage
-        let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon.col!), 96 * CGFloat(cardIcon.row!) as CGFloat, 96, 96))
-        let icon = UIImage.init(CGImage: iconRef!)
-        cell.cardIconView?.image = icon
         
-        //边角圆滑处理
-        cell.cardIconView?.layer.cornerRadius = 6
-        cell.cardIconView?.layer.masksToBounds = true
+        
+        cell.cardIconView?.image = CGSSTool.getIconFromCardId(card.id!)
         
         //textLabel?.text = self.cardList[row] as? String
 

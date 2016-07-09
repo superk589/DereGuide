@@ -116,6 +116,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "CGSSGuide"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

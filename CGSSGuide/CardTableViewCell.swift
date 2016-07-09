@@ -30,6 +30,8 @@ class CardTableViewCell: UITableViewCell {
         
         cardIconView = UIImageView()
         cardIconView.frame = CGRectMake(5, 5, 48, 48)
+        cardIconView.layer.cornerRadius = 6
+        cardIconView.layer.masksToBounds = true
         
         rarityLabel = UILabel()
         rarityLabel.frame = CGRectMake(58, 5, 30, 10)
