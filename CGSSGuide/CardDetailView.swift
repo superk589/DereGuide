@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CGSSFoundation
 
 class CardDetailView: UIScrollView {
   

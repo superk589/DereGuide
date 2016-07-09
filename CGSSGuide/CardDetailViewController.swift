@@ -138,6 +138,7 @@ class CardDetailViewController: UIViewController {
         //设置技能升级信息
    
         
+        //设置推荐组队信息
         
         //设置出售价格
         
@@ -307,7 +308,8 @@ class CardDetailViewController: UIViewController {
     
     //保存成功的回调方法
     func imageDidFinishingSaving(image: UIImage,didFinishSavingWithError: NSError?,contextInfo: AnyObject) {
-        let alVC = UIAlertController(title: "保存成功", message: nil, preferredStyle: .Alert)
+
+        let alVC = UIAlertController(title: didFinishSavingWithError?.localizedFailureReason ?? "保存成功", message: nil, preferredStyle: .Alert)
         alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
         presentViewController(alVC, animated: true, completion: nil)
     }
