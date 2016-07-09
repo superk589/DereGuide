@@ -25,7 +25,6 @@ public class CGSSTool: NSObject {
     
     
     
-    
     //应放置到逻辑层的函数,暂时放到这里
     static func getIconFromCardId(id:Int) -> UIImage {
         let dao = CGSSDAO.sharedDAO
