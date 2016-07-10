@@ -29,12 +29,16 @@ class CGSSFavoriteManager: NSObject {
     }
     
     func addFavoriteCard(card:CGSSCard, callBack: (String)->Void ) {
-        if self.favoriteCards.contains(card.id!) {
-            callBack("已收藏过了")
-            return
-        } else {
-            self.favoriteCards.append(card.id!)
-            callBack("收藏成功")
+        self.favoriteCards.append(card.id!)
+        callBack("收藏成功")
+    }
+    func removeFavoriteCard(card:CGSSCard, callBack: (String)->Void ) {
+        if let index = favoriteCards.indexOf(card.id!) {
+            self.favoriteCards.removeAtIndex(index)
         }
+        callBack("取消收藏成功")
+    }
+    func contains(cardId:Int) -> Bool {
+        return favoriteCards.contains(cardId)
     }
 }

@@ -28,9 +28,6 @@ class CardDetailViewController: UIViewController {
         
         cardDV = CardDetailView()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageLongPress), name: "CGSSImageLongPress", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageFullScreen), name: "CGSSImageFullScreen", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(imageRestore), name: "CGSSImageRestore", object: nil)
         
         //self.automaticallyAdjustsScrollViewInsets = true
         view.addSubview(cardDV!)
@@ -42,10 +39,11 @@ class CardDetailViewController: UIViewController {
         titleView.textAlignment = .Center
         navigationItem.titleView = titleView
 
-        let rightItem = UIBarButtonItem.init(title: "收藏", style: .Plain, target: self, action: #selector(addFavorite))
+        let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
         navigationItem.rightBarButtonItem = rightItem
         
         let leftItem = UIBarButtonItem.init(title: "返回", style: .Plain, target: self, action: #selector(backAction))
+
         navigationItem.leftBarButtonItem = leftItem
         
         if card.has_spread! {
@@ -127,9 +125,7 @@ class CardDetailViewController: UIViewController {
             cardDV?.setEvolutionContentView()
             cardDV?.evolutionFromImageView.image = CGSSTool.getIconFromCardId(card.id!)
             cardDV?.evolutionToImageView.image = CGSSTool.getIconFromCardId(evolution_id)
-            let tap = UITapGestureRecognizer(target: self, action: #selector(evolutionToImageClick))
-            cardDV?.evolutionToImageView.addGestureRecognizer(tap)
-
+            cardDV?.evolutionToImageView.cardId = evolution_id
         }
         
         //设置角色信息
@@ -156,37 +152,45 @@ class CardDetailViewController: UIViewController {
     }
     
     //添加当前卡到收藏
-    func addFavorite() {
-        let callBack = {(s:String) -> Void in
-            let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
-            alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-            self.presentViewController(alVC, animated: true, completion: nil)
+    func addOrRemoveFavorite() {
+        if navigationItem.rightBarButtonItem?.title == "收藏" {
+            let callBack = {(s:String) -> Void in
+                let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
+                alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                self.presentViewController(alVC, animated: true, completion: nil)
+                self.navigationItem.rightBarButtonItem?.title = "取消"
+            }
+            CGSSFavoriteManager.defaultManager.addFavoriteCard(self.card, callBack: callBack)
+            //print(CGSSFavoriteManager.favoriteCardsFilePath)
+        } else {
+            let callBack = {(s:String) -> Void in
+                let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
+                alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                self.presentViewController(alVC, animated: true, completion: nil)
+                self.navigationItem.rightBarButtonItem?.title = "收藏"
+            }
+            CGSSFavoriteManager.defaultManager.removeFavoriteCard(self.card, callBack: callBack)
         }
-        CGSSFavoriteManager.defaultManager.addFavoriteCard(self.card, callBack: callBack)
-        //print(CGSSFavoriteManager.favoriteCardsFilePath)
+        
     }
     func backAction() {
-        //使用自定义动画返回
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionReveal
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-        navigationController?.popViewControllerAnimated(false)
+        if navigationController?.viewControllers.count > 2 {
+            navigationController?.popViewControllerAnimated(true)
+        } else {
+            //当返回列表页时为了搜索栏显示效果(使用默认的动画 会出现闪烁) 只能使用自定义动画返回
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = kCATransitionReveal
+            navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+            navigationController?.popViewControllerAnimated(false)
+        }
+
+        
     }
 //        if let name = card.name {
 //            self.cardName.text = name
 //        }
-//        
-    //点击进化后头像
-    func evolutionToImageClick() {
-        let cardDetailVC = CardDetailViewController()
-        let dao = CGSSDAO.sharedDAO
-        cardDetailVC.card = dao.findCardById(card.evolution_id!)
-        cardDetailVC.modalTransitionStyle = .CoverVertical
-        self.navigationController?.pushViewController(cardDetailVC, animated: true)
-        
-    }
-    
+//
   
 //
 //        let cardIcon = dao.cardIconDict!.objectForKey(String(card.id!)) as! CGSSCardIcon
@@ -242,7 +246,19 @@ class CardDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    //监听图片相关的通知
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        CGSSNotificationCenter.add(self, selector: #selector(imageLongPress), name: "IMAGE_LONG_PRESS", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(imageFullScreen), name: "IMAGE_FULLSIZE_START", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(imageRestore), name: "IMAGE_RESTORE_START", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(iconClick), name: "CARDICON_CLICK", object: nil)
+    }
+    //取消监听
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        CGSSNotificationCenter.removeAll(self)
+    }
     //当恢复时,将图片置于原视图上
     func imageRestore () {
     
@@ -312,6 +328,15 @@ class CardDetailViewController: UIViewController {
         let alVC = UIAlertController(title: didFinishSavingWithError?.localizedFailureReason ?? "保存成功", message: nil, preferredStyle: .Alert)
         alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
         presentViewController(alVC, animated: true, completion: nil)
+    }
+    
+    //点击卡片小图标时的响应方法
+    func iconClick(iv:CGSSCardIconView) {
+        let cardDetailVC = CardDetailViewController()
+        let dao = CGSSDAO.sharedDAO
+        cardDetailVC.card = dao.findCardById(card.evolution_id!)
+        cardDetailVC.modalTransitionStyle = .CoverVertical
+        self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }
     
     /*

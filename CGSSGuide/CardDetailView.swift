@@ -29,8 +29,8 @@ class CardDetailView: UIScrollView {
     var leaderSkillNameLabel:UILabel!
     var leaderSkillDescriptionLabel:UILabel!
     
-    var evolutionFromImageView:UIImageView!
-    var evolutionToImageView:UIImageView!
+    var evolutionFromImageView:CGSSCardIconView!
+    var evolutionToImageView:CGSSCardIconView!
     
     
     //var skillTypeLabel:UILabel!
@@ -261,17 +261,9 @@ class CardDetailView: UIScrollView {
         //        descLabel4.text = "类型:"
         //        skillContentView.addSubview(descLabel4)
         
-        evolutionToImageView = UIImageView()
-        evolutionFromImageView = UIImageView()
-        //可以点击进化后卡片的链接, 故此处应打开用户交互
+        evolutionToImageView = CGSSCardIconView(frame: CGRectMake(108, 29, 48, 48))
+        evolutionFromImageView = CGSSCardIconView(frame: CGRectMake(5, 29, 48, 48))
         evolutionToImageView.userInteractionEnabled = true
-        evolutionFromImageView.frame = CGRectMake(5, 29, 48, 48)
-        evolutionToImageView.frame = CGRectMake(108, 29, 48, 48)
-        //边角圆滑处理
-        evolutionToImageView.layer.cornerRadius = 6
-        evolutionToImageView.layer.masksToBounds = true
-        evolutionFromImageView.layer.cornerRadius = 6
-        evolutionFromImageView.layer.masksToBounds = true
         evolutionContentView.addSubview(evolutionToImageView)
         evolutionContentView.addSubview(evolutionFromImageView)
         

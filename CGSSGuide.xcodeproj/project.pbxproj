@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1201F3B81D31E76B00EB25E8 /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */; };
+		1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */; };
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
@@ -96,6 +98,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
+		1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIconView.swift; sourceTree = "<group>"; };
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 				12ED085F1D18074F007E350D /* View */,
 				1282EE621D011A8F0024318C /* AppDelegate.swift */,
 				12CD5E391D2549120058BE19 /* CGSSTool.swift */,
+				1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */,
 				1282EE661D011A8F0024318C /* Main.storyboard */,
 				1282EE6C1D011A8F0024318C /* Assets.xcassets */,
 				1282EE6E1D011A8F0024318C /* LaunchScreen.storyboard */,
@@ -314,6 +319,7 @@
 		12ED085F1D18074F007E350D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */,
 				12BB13AC1D2E888800F68FF1 /* CGSSImageView.swift */,
 				121569671D1CE0B800C3055A /* CardDetailView.swift */,
 				122AAB441D2BF62D0055D156 /* CGSSGridView.swift */,
@@ -522,10 +528,12 @@
 				12BB13AD1D2E888800F68FF1 /* CGSSImageView.swift in Sources */,
 				12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */,
 				122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */,
+				1201F3B81D31E76B00EB25E8 /* CGSSNotificationCenter.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,
 				12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */,
+				1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */,
 				121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */,
 				123F311C1D30FC490084B589 /* CGSSFavoriteManager.swift in Sources */,
 			);

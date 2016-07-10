@@ -94,7 +94,6 @@ class CardTableViewController: UITableViewController {
         }
         
         
-        
         cell.cardIconView?.image = CGSSTool.getIconFromCardId(card.id!)
         
         //textLabel?.text = self.cardList[row] as? String

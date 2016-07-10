@@ -10,7 +10,7 @@ import UIKit
 
 class CardTableViewCell: UITableViewCell {
 
-    var cardIconView:UIImageView!
+    var cardIconView:CGSSCardIconView!
     var cardNameLabel:UILabel!
     var rarityLabel:UILabel!
     var skillLabel:UILabel!
@@ -27,11 +27,8 @@ class CardTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        cardIconView = UIImageView()
-        cardIconView.frame = CGRectMake(5, 5, 48, 48)
-        cardIconView.layer.cornerRadius = 6
-        cardIconView.layer.masksToBounds = true
-        
+        cardIconView = CGSSCardIconView(frame: CGRectMake(5, 5, 48, 48))
+                
         rarityLabel = UILabel()
         rarityLabel.frame = CGRectMake(58, 5, 30, 10)
         rarityLabel.textAlignment = .Left

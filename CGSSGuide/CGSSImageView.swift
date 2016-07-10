@@ -33,8 +33,8 @@ class CGSSImageView: UIImageView {
     func tapAction() {
         if !isTapped {
             //let sv = self.superview as! UIScrollView
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(restoreUserInterface), userInfo: nil, repeats: false)
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(postDidFullScreenNotification), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
+             //动画过程中禁掉点击动作,3秒后开启
             self.userInteractionEnabled = false
             UIView.animateWithDuration(0.3) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(90/180*M_PI))
@@ -44,51 +44,41 @@ class CGSSImageView: UIImageView {
                 self.center = CGPointMake(CGSSTool.width/2, CGSSTool.height/2)
             }
             self.superview?.bringSubviewToFront(self)
-            NSNotificationCenter.defaultCenter().postNotificationName("CGSSImageFullScreen", object: self)
+            CGSSNotificationCenter.post("IMAGE_FULLSIZE_START", object: self)
            // (self.superview as! UIScrollView).scrollEnabled = false
             isTapped = true
             //self.superview.
         }
         else {
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(restoreUserInterface), userInfo: nil, repeats: false)
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(resetLayerToBack), userInfo: nil, repeats: false)
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(postNotification), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(restored), userInfo: nil, repeats: false)
             self.userInteractionEnabled = false
             UIView.animateWithDuration(0.3) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(-90/180*M_PI))
                 self.frame = self.originFrame
             }
-            NSNotificationCenter.defaultCenter().postNotificationName("CGSSImageRestore", object: self)
+            CGSSNotificationCenter.post("IMAGE_RESTORE_START", object: self)
             isTapped = false
         }
 
     }
     
-    //动画过程中禁掉点击动作
-    func restoreUserInterface() {
+   
+    //恢复完成
+    func restored() {
         self.userInteractionEnabled = true
+        CGSSNotificationCenter.post("IMAGE_RESTORE_END", object: self)
     }
     
-    //恢复原大小后将图层置于底层
-    func resetLayerToBack() {
-        self.superview?.sendSubviewToBack(self)
-        
-    }
-    
-    //发送完成恢复原大小消息
-    func postNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName("CGSSImageDidRestore", object: self)
-    }
-    
-    //发送完成全屏化消息
-    func postDidFullScreenNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName("CGSSImageDidFullScreen", object: self)
+    //完成全屏化
+    func fullsized() {
+        self.userInteractionEnabled = true
+        CGSSNotificationCenter.post("IMAGE_FULLSIZE_END", object: self)
     }
     
     func longPressAction(longPress:UILongPressGestureRecognizer) {
         //长按手势会触发两次 此处判定是长按开始而非结束
         if isTapped && longPress.state == .Began {
-            NSNotificationCenter.defaultCenter().postNotificationName("CGSSImageLongPress", object: self)
+            CGSSNotificationCenter.post("IMAGE_LONG_PRESS", object: self)
         }
     }
     
