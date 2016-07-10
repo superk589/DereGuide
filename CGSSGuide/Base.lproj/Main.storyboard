@@ -199,12 +199,43 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YF9-Wv-syJ">
+                                        <rect key="frame" x="0.0" y="182" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YF9-Wv-syJ" id="5kv-T1-GCP">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RU2-pd-96n">
+                                                    <rect key="frame" x="23" y="8" width="277" height="28"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88G-Qa-pCH">
+                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="28"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <state key="normal" title="    已收藏    "/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07k-ho-sBa">
+                                                            <rect key="frame" x="203" y="0.0" width="74" height="28"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="    未收藏    "/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="trailing" secondItem="5kv-T1-GCP" secondAttribute="centerX" id="hOE-ht-MKq"/>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="leading" secondItem="5kv-T1-GCP" secondAttribute="leadingMargin" constant="15" id="pup-Pv-dlo"/>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="top" secondItem="5kv-T1-GCP" secondAttribute="topMargin" id="sgm-aX-4Ek"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RU2-pd-96n" secondAttribute="bottom" id="wUZ-Sz-3oO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="排序" id="rD2-JL-rj6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wja-Bf-LZv">
-                                        <rect key="frame" x="0.0" y="231.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="275.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wja-Bf-LZv" id="i6T-Nv-hVD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -235,7 +266,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3Qp-4Y-Ln0">
-                                        <rect key="frame" x="0.0" y="275.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="319.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Qp-4Y-Ln0" id="PNs-aW-SP0">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -276,7 +307,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gJ2-cf-pd3">
-                                        <rect key="frame" x="0.0" y="319.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="363.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJ2-cf-pd3" id="404-Ep-O92">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -324,6 +355,7 @@
                         <outlet property="attributeSortingStackView" destination="6aL-nv-zBV" id="Nlu-SM-tcj"/>
                         <outlet property="attributeStackView" destination="imv-Ny-DkJ" id="BHN-k0-aSm"/>
                         <outlet property="cardTypeStackView" destination="NpU-br-hCF" id="uPl-FL-umo"/>
+                        <outlet property="favoriteStackView" destination="RU2-pd-96n" id="7kf-bs-Eds"/>
                         <outlet property="otherSortingStackView" destination="pDC-JG-g4b" id="pii-o5-WE5"/>
                         <outlet property="rarityStackView" destination="rrW-PM-imY" id="Qej-pR-BHV"/>
                     </connections>

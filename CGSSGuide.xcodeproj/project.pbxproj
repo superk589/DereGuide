@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		1201F3B81D31E76B00EB25E8 /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */; };
 		1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */; };
+		1201F3D41D32521600EB25E8 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */; };
+		1201F3D51D32521800EB25E8 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
-		123F311C1D30FC490084B589 /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F311B1D30FC490084B589 /* CGSSFavoriteManager.swift */; };
-		123F31381D312E6E0084B589 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123F31371D312E6E0084B589 /* CGSSFoundation.framework */; };
-		123F31391D312E720084B589 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 123F31371D312E6E0084B589 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		12547DE51D128A3100D78049 /* 200248_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE41D128A3100D78049 /* 200248_card.png */; };
 		12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE61D128A4B00D78049 /* 200248_spread.png */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
@@ -72,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				123F31391D312E720084B589 /* CGSSFoundation.framework in Embed Frameworks */,
+				1201F3D51D32521800EB25E8 /* CGSSFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,11 +99,10 @@
 /* Begin PBXFileReference section */
 		1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
 		1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIconView.swift; sourceTree = "<group>"; };
+		1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphonesimulator/CGSSFoundation.framework"; sourceTree = "<group>"; };
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
-		123F311B1D30FC490084B589 /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
-		123F31371D312E6E0084B589 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphoneos/CGSSFoundation.framework"; sourceTree = "<group>"; };
 		12547DE41D128A3100D78049 /* 200248_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_card.png; path = cardImage/200248_card.png; sourceTree = "<group>"; };
 		12547DE61D128A4B00D78049 /* 200248_spread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_spread.png; path = fullImage/200248_spread.png; sourceTree = "<group>"; };
 		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -152,7 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				123F31381D312E6E0084B589 /* CGSSFoundation.framework in Frameworks */,
+				1201F3D41D32521600EB25E8 /* CGSSFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +188,6 @@
 		123F311D1D3123310084B589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				123F311B1D30FC490084B589 /* CGSSFavoriteManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -206,7 +203,7 @@
 		1282EE561D011A8F0024318C = {
 			isa = PBXGroup;
 			children = (
-				123F31371D312E6E0084B589 /* CGSSFoundation.framework */,
+				1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */,
 				1282EE611D011A8F0024318C /* CGSSGuide */,
 				12A9F2C51D04052300E97A1A /* DownloadImageOfCard */,
 				127AF7091D01A3D9007EFBE0 /* ReadFileToPlist */,
@@ -535,7 +532,6 @@
 				12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */,
 				1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */,
 				121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */,
-				123F311C1D30FC490084B589 /* CGSSFavoriteManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +696,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(BUILT_PRODUCTS_DIR)",
 				);
 				INFOPLIST_FILE = CGSSGuide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -716,6 +713,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(BUILT_PRODUCTS_DIR)",
 				);
 				INFOPLIST_FILE = CGSSGuide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

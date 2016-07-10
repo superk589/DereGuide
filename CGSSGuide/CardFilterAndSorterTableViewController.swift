@@ -20,6 +20,8 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     @IBOutlet weak var otherSortingStackView: UIStackView!
     
+    @IBOutlet weak var favoriteStackView: UIStackView!
+ 
     var sortingButtons:[UIButton]!
     
     var filter:CGSSCardFilter!
@@ -73,6 +75,19 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             }
         }
         
+        for i in 0...1 {
+            let button = favoriteStackView.arrangedSubviews[i] as! UIButton
+            //button.layer.borderWidth = 1
+            //button.layer.borderColor = UIColor.blueColor().CGColor
+            //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
+            button.addTarget(self, action: #selector(favoriteButtonClick), forControlEvents: .TouchUpInside)
+            button.tag = 1000 + i
+            if filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1<<UInt(i))!) {
+                button.selected = true
+                //button.backgroundColor = color
+            }
+        }
+        
         let ascendingbutton = ascendingStackView.arrangedSubviews[1] as! UIButton
         ascendingbutton.addTarget(self, action: #selector(ascendingAction), forControlEvents: .TouchUpInside)
         if sorter.ascending {
@@ -111,6 +126,8 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         
         
         
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -143,6 +160,20 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             sender.selected = true
             //sender.backgroundColor = color
             filter.addAttributeFilterType(CGSSAttributeFilterType.init(rawValue: 1<<UInt(tag))!)
+        }
+        
+    }
+    
+    func favoriteButtonClick(sender:UIButton) {
+        let tag = sender.tag - 1000
+        if sender.selected {
+            sender.selected = false
+            //sender.backgroundColor = UIColor.clearColor()
+            filter.removeFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1<<UInt(tag))!)
+        } else {
+            sender.selected = true
+            //sender.backgroundColor = color
+            filter.addFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1<<UInt(tag))!)
         }
         
     }
@@ -216,7 +247,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        if section == 0 {
+            return 4
+        } else {
+            return 3
+        }
     }
 
     /*
