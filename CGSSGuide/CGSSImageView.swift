@@ -22,7 +22,7 @@ class CGSSImageView: UIImageView {
         self.contentMode = .ScaleAspectFit
 
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        longPress.minimumPressDuration = 2
+        longPress.minimumPressDuration = 1
         self.addGestureRecognizer(longPress)
         self.originFrame = self.frame
         //全屏时背景色为黑色

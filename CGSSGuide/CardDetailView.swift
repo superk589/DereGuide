@@ -145,7 +145,9 @@ class CardDetailView: UIScrollView {
     }
     
     func setWithoutSpreadImage() {
-        self.bounds.origin.y -= CGSSTool.fullImageWidth/CGSSTool.width*CGSSTool.fullImageHeight
+        self.contentInset = UIEdgeInsetsMake(-(fullImageView?.frame.size.height)!, 0, 0, 0)
+        //self.bounds.origin.y += 1000 //CGSSTool.fullImageWidth/CGSSTool.width*CGSSTool.fullImageHeight
+        //self.contentSize
     }
 
     
