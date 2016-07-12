@@ -32,6 +32,8 @@ class CardDetailView: UIScrollView {
     var evolutionFromImageView:CGSSCardIconView!
     var evolutionToImageView:CGSSCardIconView!
     
+    var priceLabel:UILabel!
+    
     
     //var skillTypeLabel:UILabel!
     /*
@@ -246,6 +248,7 @@ class CardDetailView: UIScrollView {
         addSubview(leaderSkillContentView)
     }
 
+    //设置进化信息视图
     func setEvolutionContentView() {
         let evolutionContentView = UIView()
         evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 87 + (1 / UIScreen.mainScreen().scale))
@@ -291,6 +294,7 @@ class CardDetailView: UIScrollView {
         addSubview(evolutionContentView)
     }
     
+    //设置角色信息视图
     func setCharInfoContentView() {
 //        public var age:Int?
 //        //    "age": 20,
@@ -359,7 +363,28 @@ class CardDetailView: UIScrollView {
 //        //    "weight": 45
     }
     
-    
+    //设置出售价格视图
+    func setPriceContentView() {
+        let priceContentView = UIView()
+        priceContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 51 + (1 / UIScreen.mainScreen().scale))
+        let descLabel4 = UILabel()
+        descLabel4.frame = CGRectMake(10, 10, 80, 14)
+        descLabel4.textColor = UIColor.blackColor()
+        descLabel4.font = UIFont.systemFontOfSize(14)
+        descLabel4.text = "出售价格:"
+        priceContentView.addSubview(descLabel4)
+        
+        priceLabel = UILabel()
+        priceLabel.frame = CGRectMake(10, 29, 100, 12)
+        priceLabel.font = UIFont.systemFontOfSize(12)
+        priceLabel.textAlignment = .Left
+        priceContentView.addSubview(priceLabel)
+        
+        priceContentView.layer.borderColor = UIColor.blackColor().CGColor
+        priceContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        
+        originY = originY + 51
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

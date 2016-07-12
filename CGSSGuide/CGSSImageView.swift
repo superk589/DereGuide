@@ -8,6 +8,7 @@
 
 import UIKit
 
+//CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
 
     var isTapped:Bool
@@ -34,7 +35,7 @@ class CGSSImageView: UIImageView {
         if !isTapped {
             //let sv = self.superview as! UIScrollView
             NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
-             //动画过程中禁掉点击动作,3秒后开启
+             //动画过程中禁掉点击动作,0.3秒后开启
             self.userInteractionEnabled = false
             UIView.animateWithDuration(0.3) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(90/180*M_PI))
@@ -45,9 +46,7 @@ class CGSSImageView: UIImageView {
             }
             self.superview?.bringSubviewToFront(self)
             CGSSNotificationCenter.post("IMAGE_FULLSIZE_START", object: self)
-           // (self.superview as! UIScrollView).scrollEnabled = false
             isTapped = true
-            //self.superview.
         }
         else {
             NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(restored), userInfo: nil, repeats: false)

@@ -21,6 +21,7 @@ class CardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.tabBarItem = UITabBarItem.init(title: "卡片", image: nil, tag: 1)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
@@ -151,12 +152,13 @@ class CardTableViewController: UITableViewController {
         let cardDetailVC = CardDetailViewController()
         
         cardDetailVC.card = self.cardList[indexPath.row]
-        cardDetailVC.modalTransitionStyle = .CoverVertical
+        //cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
         //使用自定义动画效果
 //        let transition = CATransition()
 //        transition.duration = 0.3
-//        transition.type = kCATransitionPush
+//        transition.type = kCATransitionMoveIn
+//        transition.subtype = kCATransitionFromRight
 //        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
 //        navigationController?.pushViewController(cardDetailVC, animated: false)
         

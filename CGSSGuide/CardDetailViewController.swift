@@ -19,7 +19,7 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        view.backgroundColor = UIColor.whiteColor()
         //设置全屏视图 用于显示放大图片
         fullScreenView = UIView()
         fullScreenView?.frame = UIScreen.mainScreen().bounds
@@ -136,17 +136,11 @@ class CardDetailViewController: UIViewController {
         
         //设置推荐组队信息
         
+
         //设置出售价格
-        
+
         
         //设置饲料经验信息
-        
-        
-        
-        
-        
-        
-        
         
         
     }

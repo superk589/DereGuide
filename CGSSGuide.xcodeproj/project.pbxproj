@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		1201F3B81D31E76B00EB25E8 /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */; };
 		1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */; };
-		1201F3D41D32521600EB25E8 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */; };
-		1201F3D51D32521800EB25E8 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
 		12547DE51D128A3100D78049 /* 200248_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE41D128A3100D78049 /* 200248_card.png */; };
 		12547DE71D128A4B00D78049 /* 200248_spread.png in Resources */ = {isa = PBXBuildFile; fileRef = 12547DE61D128A4B00D78049 /* 200248_spread.png */; };
+		125F56811D348A8600B00C03 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125F56801D348A8600B00C03 /* main.swift */; };
+		125F56861D34901200B00C03 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 125F56851D34901200B00C03 /* CGSSFoundation.framework */; };
+		125F56871D34901700B00C03 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 125F56851D34901200B00C03 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
 		1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE691D011A8F0024318C /* CGSSGuide.xcdatamodeld */; };
@@ -65,13 +66,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		125F567C1D348A8600B00C03 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		127AF72F1D01B2E9007EFBE0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1201F3D51D32521800EB25E8 /* CGSSFoundation.framework in Embed Frameworks */,
+				125F56871D34901700B00C03 /* CGSSFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,12 +109,14 @@
 /* Begin PBXFileReference section */
 		1201F3B71D31E76B00EB25E8 /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
 		1201F3B91D31F1A800EB25E8 /* CGSSCardIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIconView.swift; sourceTree = "<group>"; };
-		1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphonesimulator/CGSSFoundation.framework"; sourceTree = "<group>"; };
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
 		12547DE41D128A3100D78049 /* 200248_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_card.png; path = cardImage/200248_card.png; sourceTree = "<group>"; };
 		12547DE61D128A4B00D78049 /* 200248_spread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 200248_spread.png; path = fullImage/200248_spread.png; sourceTree = "<group>"; };
+		125F567E1D348A8600B00C03 /* GetDataFromGameServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GetDataFromGameServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		125F56801D348A8600B00C03 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		125F56851D34901200B00C03 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphoneos/CGSSFoundation.framework"; sourceTree = "<group>"; };
 		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,11 +158,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		125F567B1D348A8600B00C03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1282EE5C1D011A8F0024318C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1201F3D41D32521600EB25E8 /* CGSSFoundation.framework in Frameworks */,
+				125F56861D34901200B00C03 /* CGSSFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +211,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		125F567F1D348A8600B00C03 /* GetDataFromGameServer */ = {
+			isa = PBXGroup;
+			children = (
+				125F56801D348A8600B00C03 /* main.swift */,
+			);
+			path = GetDataFromGameServer;
+			sourceTree = "<group>";
+		};
 		127AF7091D01A3D9007EFBE0 /* ReadFileToPlist */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,12 +230,13 @@
 		1282EE561D011A8F0024318C = {
 			isa = PBXGroup;
 			children = (
-				1201F3D31D32521600EB25E8 /* CGSSFoundation.framework */,
+				125F56851D34901200B00C03 /* CGSSFoundation.framework */,
 				1282EE611D011A8F0024318C /* CGSSGuide */,
 				12A9F2C51D04052300E97A1A /* DownloadImageOfCard */,
 				127AF7091D01A3D9007EFBE0 /* ReadFileToPlist */,
 				1282EE791D011A8F0024318C /* CGSSGuideTests */,
 				1282EE841D011A8F0024318C /* CGSSGuideUITests */,
+				125F567F1D348A8600B00C03 /* GetDataFromGameServer */,
 				1282EE601D011A8F0024318C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,6 +249,7 @@
 				1282EE811D011A8F0024318C /* CGSSGuideUITests.xctest */,
 				12A9F2C41D04052300E97A1A /* DownloadImageOfCard */,
 				12CE3E7B1D0C3B5C00E77957 /* GetJsonData */,
+				125F567E1D348A8600B00C03 /* GetDataFromGameServer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,6 +357,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		125F567D1D348A8600B00C03 /* GetDataFromGameServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 125F56841D348A8700B00C03 /* Build configuration list for PBXNativeTarget "GetDataFromGameServer" */;
+			buildPhases = (
+				125F567A1D348A8600B00C03 /* Sources */,
+				125F567B1D348A8600B00C03 /* Frameworks */,
+				125F567C1D348A8600B00C03 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GetDataFromGameServer;
+			productName = GetDataFromGameServer;
+			productReference = 125F567E1D348A8600B00C03 /* GetDataFromGameServer */;
+			productType = "com.apple.product-type.tool";
+		};
 		1282EE5E1D011A8F0024318C /* CGSSGuide */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1282EE8A1D011A8F0024318C /* Build configuration list for PBXNativeTarget "CGSSGuide" */;
@@ -426,6 +472,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = zzk;
 				TargetAttributes = {
+					125F567D1D348A8600B00C03 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					1282EE5E1D011A8F0024318C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MXJJEEMF3U;
@@ -466,6 +515,7 @@
 				1282EE801D011A8F0024318C /* CGSSGuideUITests */,
 				12A9F2C31D04052300E97A1A /* DownloadImageOfCard */,
 				12CE3E7A1D0C3B5C00E77957 /* GetJsonData */,
+				125F567D1D348A8600B00C03 /* GetDataFromGameServer */,
 			);
 		};
 /* End PBXProject section */
@@ -515,6 +565,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		125F567A1D348A8600B00C03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				125F56811D348A8600B00C03 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1282EE5B1D011A8F0024318C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,6 +659,26 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		125F56821D348A8600B00C03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		125F56831D348A8600B00C03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		1282EE881D011A8F0024318C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -819,6 +897,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		125F56841D348A8700B00C03 /* Build configuration list for PBXNativeTarget "GetDataFromGameServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				125F56821D348A8600B00C03 /* Debug */,
+				125F56831D348A8600B00C03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1282EE5A1D011A8F0024318C /* Build configuration list for PBXProject "CGSSGuide" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
