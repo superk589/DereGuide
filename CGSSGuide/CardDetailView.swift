@@ -10,7 +10,6 @@ import UIKit
 
 class CardDetailView: UIScrollView {
   
-    
     var fullImageView:CGSSImageView?
 
     var cardIconView:UIImageView!

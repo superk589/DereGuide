@@ -19,6 +19,7 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //设置背景颜色为白色 防止导航动画时效果卡顿
         view.backgroundColor = UIColor.whiteColor()
         //设置全屏视图 用于显示放大图片
         fullScreenView = UIView()
@@ -27,17 +28,18 @@ class CardDetailViewController: UIViewController {
 
         
         cardDV = CardDetailView()
-        
-        
-        //self.automaticallyAdjustsScrollViewInsets = true
+        //关闭自动躲避导航栏
+        self.automaticallyAdjustsScrollViewInsets = false
         view.addSubview(cardDV!)
         
        
-        let titleView = UILabel.init(frame: CGRectMake(0, 0, 360, 44))
+        //自定义titleView的文字大小
+        let titleView = UILabel.init(frame: CGRectMake(0, 0, 0, 44))
         titleView.text = card.name
         titleView.font = UIFont.systemFontOfSize(12)
         titleView.textAlignment = .Center
         navigationItem.titleView = titleView
+        
 
         let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
         navigationItem.rightBarButtonItem = rightItem
@@ -48,7 +50,14 @@ class CardDetailViewController: UIViewController {
         
         if card.has_spread! {
             //使用非常驻的方式读取大图
-            cardDV?.fullImageView?.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("200248_spread", ofType: "png")!)
+            //cardDV?.fullImageView?.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("200248_spread", ofType: "png")!)
+        
+            //使用网络资源
+            //print(NSURL(string: card.spread_image_ref!))
+            //cardDV?.fullImageView?.sd_setImageWithURL(NSURL(string: card.spread_image_ref!))
+     
+            cardDV?.fullImageView?.setIndicator()
+            cardDV?.fullImageView?.setCustomImageWithURL(NSURL(string: card.spread_image_ref!)!)
         }
         else {
             cardDV?.setWithoutSpreadImage()

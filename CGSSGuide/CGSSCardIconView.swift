@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CGSSFoundation
 
 class CGSSCardIconView: UIImageView {
 

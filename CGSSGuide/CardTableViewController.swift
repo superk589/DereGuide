@@ -16,10 +16,15 @@ class CardTableViewController: UITableViewController {
     var searchBar:UISearchBar!
     var filter:CGSSCardFilter!
     var sorter:CGSSCardSorter!
-    
+    var updater = CGSSUpdater()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //启动时根据用户设置检查更新
+        if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
+            updater.checkUpdate()
+        }
         
         //self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.tabBarItem = UITabBarItem.init(title: "卡片", image: nil, tag: 1)
@@ -35,6 +40,9 @@ class CardTableViewController: UITableViewController {
         searchBar.autocapitalizationType = .None
         searchBar.autocorrectionType = .No
         searchBar.delegate = self
+        
+        
+        //
         
         
 //        self.tableView.separatorInset = UIEdgeInsetsZero
@@ -58,20 +66,37 @@ class CardTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        CGSSNotificationCenter.removeAll(self)
         // Dispose of any resources that can be recreated.
     }
 
     override func viewWillAppear(animated: Bool) {
+
+        super.viewWillAppear(animated)
+        
+        CGSSNotificationCenter.add(self, selector: #selector(updateFinished), name: "UPDATE_DATA_SAVED", object: nil)
+        
+        //页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         searchBar.text = ""
         let dao = CGSSDAO.sharedDAO
         self.cardList = dao.getCardListByMask(filter)
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
-
         tableView.reloadData()
   
         
     }
+    
+    func updateFinished() {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        let dao = CGSSDAO.sharedDAO
+        self.cardList = dao.getCardListByMask(filter)
+        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
+        tableView.reloadData()
+    }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -150,7 +175,6 @@ class CardTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cardDetailVC = CardDetailViewController()
-        
         cardDetailVC.card = self.cardList[indexPath.row]
         //cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
