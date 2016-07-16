@@ -15,14 +15,13 @@ class CardTableViewController: UITableViewController {
     var searchBar:UISearchBar!
     var filter:CGSSCardFilter!
     var sorter:CGSSCardSorter!
-    var updater:CGSSUpdater!
+    var updater:CGSSUpdater = CGSSUpdater()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(NSHomeDirectory())
         //启动时根据用户设置检查更新
         if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
-            updater = CGSSUpdater()
 //            let checkUpdateLabel = UILabel()
 //            checkUpdateLabel.frame = CGRectMake(0, 0, 130, 30)
 //            checkUpdateLabel.text = "正在检查更新..."
@@ -30,6 +29,10 @@ class CardTableViewController: UITableViewController {
 //            view.addSubview(checkUpdateLabel)
             updater.checkUpdate()
         }
+        //添加下拉刷新
+//        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//            self.updater.checkUpdate()
+//        })
         
         //self.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.tabBarItem = UITabBarItem.init(title: "卡片", image: nil, tag: 1)
@@ -41,7 +44,7 @@ class CardTableViewController: UITableViewController {
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .Done
         //searchBar.showsCancelButton = true
-        searchBar.placeholder = "输入角色日文名或罗马字"
+        searchBar.placeholder = "日文名/罗马字/技能类型/稀有度等"
         searchBar.autocapitalizationType = .None
         searchBar.autocorrectionType = .No
         searchBar.delegate = self
@@ -83,9 +86,11 @@ class CardTableViewController: UITableViewController {
        
         //页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
-        searchBar.text = ""
         let dao = CGSSDAO.sharedDAO
         self.cardList = dao.getCardListByMask(filter)
+        if searchBar.text != "" {
+            self.cardList = dao.getCardListByName(self.cardList, string: searchBar.text!)
+        }
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         tableView.reloadData()
   

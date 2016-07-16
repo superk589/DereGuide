@@ -89,13 +89,20 @@ public class CGSSDAO: NSObject {
     //根据名字搜索
     public func getCardListByName(cardList:[CGSSCard], string:String) -> [CGSSCard] {
         return cardList.filter({ (v:CGSSCard) -> Bool in
-            if let b1 = v.name?.lowercaseString.containsString(string.lowercaseString), let b2 = v.chara?.conventional?.lowercaseString.containsString(string.lowercaseString) {
-                if b1 || b2 {
-                    return true
+            let comps = string.componentsSeparatedByString(" ")
+            for comp in comps {
+                if comp == "" {continue}
+                let b1 = v.name?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b2 = v.chara?.conventional?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b3 = v.skill?.skill_type?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b4 = (v.rarity?.rarityString.lowercaseString == (comp.lowercaseString)) ?? false
+                if b1 || b2 || b3 || b4 {
+                    continue
+                } else {
+                    return false
                 }
-                return false
             }
-            return false
+            return true
         })
     }
 

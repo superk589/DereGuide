@@ -9,5 +9,6 @@
 #ifndef SDWebImage_Bridge_Header_h
 #define SDWebImage_Bridge_Header_h
 #import "UIImageView+WebCache.h"
+//#import "MJRefresh.h"
 
 #endif /* SDWebImage_Bridge_Header_h */

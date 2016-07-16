@@ -243,6 +243,7 @@ public class CGSSUpdater: NSObject {
                         self.cardsNeedUpdate.removeAtIndex(index!)
                     }
                 }
+                //CGSSNotificationCenter.post("CHECK_UPDATE_FINISH", object: self)
                 self.updateAll()
             }
         })
