@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CGSSFoundation
 
 class CardFilterAndSorterTableViewController: UITableViewController {
     @IBOutlet weak var rarityStackView: UIStackView!
@@ -43,7 +42,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             button.addTarget(self, action: #selector(rarityButtonClick), forControlEvents: .TouchUpInside)
             //button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
             button.tag = 1000 + i
-            if filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rawValue: 1<<UInt(7-i))!) {
+            if filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7-i))!) {
                 button.selected = true
                 //button.backgroundColor = color
             }
@@ -56,7 +55,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
             button.addTarget(self, action: #selector(cardTypeButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 1000 + i
-            if filter.hasCardFilterType(CGSSCardFilterType.init(rawValue: 1<<UInt(i))!) {
+            if filter.hasCardFilterType(CGSSCardFilterType.init(cardType: Int(i))!) {
                 button.selected = true
                 //button.backgroundColor = color
             }
@@ -69,7 +68,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
             button.addTarget(self, action: #selector(attributeButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 1000 + i
-            if filter.hasAttributeFilterType(CGSSAttributeFilterType.init(rawValue: 1<<UInt(i))!) {
+            if filter.hasAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(i))!) {
                 button.selected = true
                 //button.backgroundColor = color
             }
@@ -141,11 +140,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.selected {
             sender.selected = false
             //sender.backgroundColor = UIColor.clearColor()
-            filter.removeCardRarityFilterType(CGSSCardRarityFilterType.init(rawValue: 1<<UInt(7-tag))!)
+            filter.removeCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7-tag))!)
         } else {
             sender.selected = true
             //sender.backgroundColor = color
-            filter.addCardRarityFilterType(CGSSCardRarityFilterType.init(rawValue: 1<<UInt(7-tag))!)
+            filter.addCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7-tag))!)
         }
       
     }
@@ -155,11 +154,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.selected {
             sender.selected = false
             //sender.backgroundColor = UIColor.clearColor()
-            filter.removeAttributeFilterType(CGSSAttributeFilterType.init(rawValue: 1<<UInt(tag))!)
+            filter.removeAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(tag))!)
         } else {
             sender.selected = true
             //sender.backgroundColor = color
-            filter.addAttributeFilterType(CGSSAttributeFilterType.init(rawValue: 1<<UInt(tag))!)
+            filter.addAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(tag))!)
         }
         
     }
@@ -183,11 +182,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.selected {
             sender.selected = false
             //sender.backgroundColor = UIColor.clearColor()
-            filter.removeCardFilterType(CGSSCardFilterType.init(rawValue: 1<<UInt(tag))!)
+            filter.removeCardFilterType(CGSSCardFilterType.init(cardType: Int(tag))!)
         } else {
             sender.selected = true
             //sender.backgroundColor = color
-            filter.addCardFilterType(CGSSCardFilterType.init(rawValue: 1<<UInt(tag))!)
+            filter.addCardFilterType(CGSSCardFilterType.init(cardType: Int(tag))!)
         }
         
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CGSSFoundation
 
 class CardDetailViewController: UIViewController {
     
@@ -68,7 +67,7 @@ class CardDetailViewController: UIViewController {
         cardDV?.rarityLabel.text = card.rarity?.rarityString
         
         let dao = CGSSDAO.sharedDAO
-        cardDV?.cardIconView?.image = CGSSTool.getIconFromCardId(card.id!)
+        cardDV?.cardIconView?.image = dao.getIconFromCardId(card.id!)
         
         
 
@@ -132,8 +131,8 @@ class CardDetailViewController: UIViewController {
         //设置进化信息
         if let evolution_id = card.evolution_id where evolution_id > 0 {
             cardDV?.setEvolutionContentView()
-            cardDV?.evolutionFromImageView.image = CGSSTool.getIconFromCardId(card.id!)
-            cardDV?.evolutionToImageView.image = CGSSTool.getIconFromCardId(evolution_id)
+            cardDV?.evolutionFromImageView.image = dao.getIconFromCardId(card.id!)
+            cardDV?.evolutionToImageView.image = dao.getIconFromCardId(evolution_id)
             cardDV?.evolutionToImageView.cardId = evolution_id
         }
         

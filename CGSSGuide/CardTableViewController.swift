@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CGSSFoundation
 
 class CardTableViewController: UITableViewController {
     
@@ -16,13 +15,19 @@ class CardTableViewController: UITableViewController {
     var searchBar:UISearchBar!
     var filter:CGSSCardFilter!
     var sorter:CGSSCardSorter!
-    var updater = CGSSUpdater()
-
+    var updater:CGSSUpdater!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(NSHomeDirectory())
         //启动时根据用户设置检查更新
         if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
+            updater = CGSSUpdater()
+//            let checkUpdateLabel = UILabel()
+//            checkUpdateLabel.frame = CGRectMake(0, 0, 130, 30)
+//            checkUpdateLabel.text = "正在检查更新..."
+//            checkUpdateLabel.center = view.center
+//            view.addSubview(checkUpdateLabel)
             updater.checkUpdate()
         }
         
@@ -75,7 +80,7 @@ class CardTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         CGSSNotificationCenter.add(self, selector: #selector(updateFinished), name: "UPDATE_DATA_SAVED", object: nil)
-        
+       
         //页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -120,7 +125,7 @@ class CardTableViewController: UITableViewController {
         }
         
         
-        cell.cardIconView?.image = CGSSTool.getIconFromCardId(card.id!)
+        cell.cardIconView?.image = CGSSDAO.sharedDAO.getIconFromCardId(card.id!)
         
         //textLabel?.text = self.cardList[row] as? String
 

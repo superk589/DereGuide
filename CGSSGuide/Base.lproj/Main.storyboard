@@ -230,6 +230,55 @@
             </objects>
             <point key="canvasLocation" x="-4406" y="-566"/>
         </scene>
+        <!--Updating View Controller-->
+        <scene sceneID="l2X-yp-WOM">
+            <objects>
+                <viewController storyboardIdentifier="UpdatingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6bf-I1-Pkg" customClass="UpdatingViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8yB-Zi-1LN"/>
+                        <viewControllerLayoutGuide type="bottom" id="v9w-43-VFi"/>
+                    </layoutGuides>
+                    <view key="view" alpha="0.29999999999999999" contentMode="scaleToFill" id="f2m-Cn-MnT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jyB-6a-0tt">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2t-DL-Gm8">
+                                <rect key="frame" x="275" y="349" width="51" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pN-oQ-Bn3">
+                                <rect key="frame" x="287" y="388" width="27" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="n2t-DL-Gm8" firstAttribute="centerX" secondItem="3pN-oQ-Bn3" secondAttribute="centerX" id="AQR-8s-M2d"/>
+                            <constraint firstItem="3pN-oQ-Bn3" firstAttribute="top" secondItem="n2t-DL-Gm8" secondAttribute="bottom" constant="18" id="Hkk-9M-Lzm"/>
+                            <constraint firstItem="jyB-6a-0tt" firstAttribute="centerX" secondItem="f2m-Cn-MnT" secondAttribute="centerX" id="OQ0-My-wAH"/>
+                            <constraint firstItem="jyB-6a-0tt" firstAttribute="centerY" secondItem="f2m-Cn-MnT" secondAttribute="centerY" id="Szu-92-e1K"/>
+                            <constraint firstItem="jyB-6a-0tt" firstAttribute="centerX" secondItem="n2t-DL-Gm8" secondAttribute="centerX" id="Xjt-y8-IbG"/>
+                            <constraint firstItem="n2t-DL-Gm8" firstAttribute="top" secondItem="jyB-6a-0tt" secondAttribute="bottom" constant="31" id="Xxe-Cg-kh2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="jyB-6a-0tt" id="Erw-i2-M0r"/>
+                        <outlet property="numberLabel" destination="3pN-oQ-Bn3" id="veO-Di-I0q"/>
+                        <outlet property="statusLabel" destination="n2t-DL-Gm8" id="syp-by-zUD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDG-8v-yLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5059" y="215"/>
+        </scene>
         <!--Card Filter And Sorter Table View Controller-->
         <scene sceneID="QZt-3R-LJz">
             <objects>
@@ -494,7 +543,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lt-cg-VIJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="56" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <state key="normal" title="序号顺序"/>
+                                                            <state key="normal" title="更新时间"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyg-Og-4GD">
                                                             <rect key="frame" x="167" y="0.0" width="42" height="28"/>

@@ -11,15 +11,26 @@
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
-		1258F16F1D392F3400B2B018 /* CGSSFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1258F16E1D392F3400B2B018 /* CGSSFoundation.framework */; };
-		1258F1701D392F3600B2B018 /* CGSSFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1258F16E1D392F3400B2B018 /* CGSSFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		125C2CE81D39BF1500FCD277 /* CGSSBaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */; };
+		125C2CE91D39BF1500FCD277 /* CGSSCardRarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */; };
+		125C2CEA1D39BF1500FCD277 /* CGSSChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */; };
+		125C2CEB1D39BF1500FCD277 /* CGSSSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */; };
+		125C2CEC1D39BF1500FCD277 /* CGSSLearderSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDE1D39BF1500FCD277 /* CGSSLearderSkill.swift */; };
+		125C2CED1D39BF1500FCD277 /* CGSSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDF1D39BF1500FCD277 /* CGSSCard.swift */; };
+		125C2CEE1D39BF1500FCD277 /* CGSSDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE01D39BF1500FCD277 /* CGSSDAO.swift */; };
+		125C2CEF1D39BF1500FCD277 /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE11D39BF1500FCD277 /* CGSSNotificationCenter.swift */; };
+		125C2CF01D39BF1500FCD277 /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE21D39BF1500FCD277 /* CGSSFavoriteManager.swift */; };
+		125C2CF11D39BF1500FCD277 /* CGSSConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE31D39BF1500FCD277 /* CGSSConnection.swift */; };
+		125C2CF21D39BF1500FCD277 /* CGSSUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */; };
+		125C2CF31D39BF1500FCD277 /* CGSSCardFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */; };
+		125C2CF41D39BF1500FCD277 /* CGSSCardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */; };
+		125C2CF51D39BF1500FCD277 /* CGSSCardIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
 		1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE691D011A8F0024318C /* CGSSGuide.xcdatamodeld */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6E1D011A8F0024318C /* LaunchScreen.storyboard */; };
 		12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */; };
-		12A9F2C71D04052300E97A1A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F2C61D04052300E97A1A /* main.swift */; };
 		12BB13AD1D2E888800F68FF1 /* CGSSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BB13AC1D2E888800F68FF1 /* CGSSImageView.swift */; };
 		12C8C17F1D35E83B00DA0F34 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C8C15F1D35E83B00DA0F34 /* MKAnnotationView+WebCache.m */; };
 		12C8C1801D35E83B00DA0F34 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C8C1611D35E83B00DA0F34 /* NSData+ImageContentType.m */; };
@@ -38,23 +49,9 @@
 		12C8C18D1D35E83B00DA0F34 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C8C17C1D35E83B00DA0F34 /* UIImageView+WebCache.m */; };
 		12C8C18E1D35E83B00DA0F34 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C8C17E1D35E83B00DA0F34 /* UIView+WebCacheOperation.m */; };
 		12CA487A1D2295E300DC4713 /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */; };
-		12CB0AA91D1179F700383178 /* card.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12CB0AA41D1179F700383178 /* card.plist */; };
-		12CB0AAA1D1179F700383178 /* char.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12CB0AA51D1179F700383178 /* char.plist */; };
-		12CB0AAB1D1179F700383178 /* leader_skill.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12CB0AA61D1179F700383178 /* leader_skill.plist */; };
-		12CB0AAC1D1179F700383178 /* skill.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12CB0AA71D1179F700383178 /* skill.plist */; };
-		12CB0AB01D11856800383178 /* card_icon.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12CB0AAF1D11856800383178 /* card_icon.plist */; };
 		12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD5E371D2536E70058BE19 /* CardTableViewCell.swift */; };
 		12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD5E391D2549120058BE19 /* CGSSTool.swift */; };
-		12CE3EDD1D0E846D00E77957 /* icons_0@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED31D0E846D00E77957 /* icons_0@2x.jpg */; };
-		12CE3EDE1D0E846D00E77957 /* icons_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED41D0E846D00E77957 /* icons_1@2x.jpg */; };
-		12CE3EDF1D0E846D00E77957 /* icons_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED51D0E846D00E77957 /* icons_2@2x.jpg */; };
-		12CE3EE01D0E846D00E77957 /* icons_3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED61D0E846D00E77957 /* icons_3@2x.jpg */; };
-		12CE3EE11D0E846D00E77957 /* icons_4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED71D0E846D00E77957 /* icons_4@2x.jpg */; };
-		12CE3EE21D0E846D00E77957 /* icons_5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED81D0E846D00E77957 /* icons_5@2x.jpg */; };
-		12CE3EE31D0E846D00E77957 /* icons_6@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3ED91D0E846D00E77957 /* icons_6@2x.jpg */; };
-		12CE3EE41D0E846D00E77957 /* icons_7@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDA1D0E846D00E77957 /* icons_7@2x.jpg */; };
-		12CE3EE51D0E846D00E77957 /* icons_8@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDB1D0E846D00E77957 /* icons_8@2x.jpg */; };
-		12CE3EE61D0E846D00E77957 /* icons_9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CE3EDC1D0E846D00E77957 /* icons_9@2x.jpg */; };
+		12D24BCE1D3A19CA00727B05 /* UpdatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D24BCD1D3A19CA00727B05 /* UpdatingViewController.swift */; };
 		12DB29811D124AE5000D2A29 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */; };
 		12EF0A1B1D38C3810025B80D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF0A1A1D38C3810025B80D /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -66,28 +63,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1258F1701D392F3600B2B018 /* CGSSFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		12A9F2C21D04052300E97A1A /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		12CE3E791D0C3B5C00E77957 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = usr/share/man/man1;
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -96,8 +74,20 @@
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
-		1258F16E1D392F3400B2B018 /* CGSSFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGSSFoundation.framework; path = "../../../Library/Developer/Xcode/DerivedData/CGSSWorkSpace-dqhapyudqrbvaacmbnsrtctpfhmc/Build/Products/Debug-iphoneos/CGSSFoundation.framework"; sourceTree = "<group>"; };
-		127AF70A1D01A3D9007EFBE0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBaseTypes.swift; sourceTree = "<group>"; };
+		125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardRarity.swift; sourceTree = "<group>"; };
+		125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSChar.swift; sourceTree = "<group>"; };
+		125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSkill.swift; sourceTree = "<group>"; };
+		125C2CDE1D39BF1500FCD277 /* CGSSLearderSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLearderSkill.swift; sourceTree = "<group>"; };
+		125C2CDF1D39BF1500FCD277 /* CGSSCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCard.swift; sourceTree = "<group>"; };
+		125C2CE01D39BF1500FCD277 /* CGSSDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSDAO.swift; sourceTree = "<group>"; };
+		125C2CE11D39BF1500FCD277 /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
+		125C2CE21D39BF1500FCD277 /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
+		125C2CE31D39BF1500FCD277 /* CGSSConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSConnection.swift; sourceTree = "<group>"; };
+		125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdater.swift; sourceTree = "<group>"; };
+		125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardFilter.swift; sourceTree = "<group>"; };
+		125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardSorter.swift; sourceTree = "<group>"; };
+		125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIcon.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE671D011A8F0024318C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,8 +96,6 @@
 		1282EE6F1D011A8F0024318C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1282EE711D011A8F0024318C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewController.swift; sourceTree = "<group>"; };
-		12A9F2C41D04052300E97A1A /* DownloadImageOfCard */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DownloadImageOfCard; sourceTree = BUILT_PRODUCTS_DIR; };
-		12A9F2C61D04052300E97A1A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		12BB13AC1D2E888800F68FF1 /* CGSSImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSImageView.swift; sourceTree = "<group>"; };
 		12C8C15D1D35E72200DA0F34 /* SDWebImage_Bridge_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDWebImage_Bridge_Header.h; sourceTree = "<group>"; };
 		12C8C15E1D35E83B00DA0F34 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -144,24 +132,9 @@
 		12C8C17D1D35E83B00DA0F34 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		12C8C17E1D35E83B00DA0F34 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
-		12CB0AA41D1179F700383178 /* card.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = card.plist; sourceTree = "<group>"; };
-		12CB0AA51D1179F700383178 /* char.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = char.plist; sourceTree = "<group>"; };
-		12CB0AA61D1179F700383178 /* leader_skill.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = leader_skill.plist; sourceTree = "<group>"; };
-		12CB0AA71D1179F700383178 /* skill.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = skill.plist; sourceTree = "<group>"; };
-		12CB0AAF1D11856800383178 /* card_icon.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = card_icon.plist; sourceTree = "<group>"; };
 		12CD5E371D2536E70058BE19 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		12CD5E391D2549120058BE19 /* CGSSTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTool.swift; sourceTree = "<group>"; };
-		12CE3E7B1D0C3B5C00E77957 /* GetJsonData */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GetJsonData; sourceTree = BUILT_PRODUCTS_DIR; };
-		12CE3ED31D0E846D00E77957 /* icons_0@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_0@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED41D0E846D00E77957 /* icons_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_1@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED51D0E846D00E77957 /* icons_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_2@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED61D0E846D00E77957 /* icons_3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_3@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED71D0E846D00E77957 /* icons_4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_4@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED81D0E846D00E77957 /* icons_5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_5@2x.jpg"; sourceTree = "<group>"; };
-		12CE3ED91D0E846D00E77957 /* icons_6@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_6@2x.jpg"; sourceTree = "<group>"; };
-		12CE3EDA1D0E846D00E77957 /* icons_7@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_7@2x.jpg"; sourceTree = "<group>"; };
-		12CE3EDB1D0E846D00E77957 /* icons_8@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_8@2x.jpg"; sourceTree = "<group>"; };
-		12CE3EDC1D0E846D00E77957 /* icons_9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "icons_9@2x.jpg"; sourceTree = "<group>"; };
+		12D24BCD1D3A19CA00727B05 /* UpdatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatingViewController.swift; sourceTree = "<group>"; };
 		12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		12EF0A111D38A1480025B80D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		12EF0A121D38A1480025B80D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -170,21 +143,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		1282EE5C1D011A8F0024318C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1258F16F1D392F3400B2B018 /* CGSSFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		12A9F2C11D04052300E97A1A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		12CE3E781D0C3B5C00E77957 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -197,25 +155,28 @@
 		123F311D1D3123310084B589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */,
+				125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */,
+				125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */,
+				125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */,
+				125C2CDE1D39BF1500FCD277 /* CGSSLearderSkill.swift */,
+				125C2CDF1D39BF1500FCD277 /* CGSSCard.swift */,
+				125C2CE01D39BF1500FCD277 /* CGSSDAO.swift */,
+				125C2CE11D39BF1500FCD277 /* CGSSNotificationCenter.swift */,
+				125C2CE21D39BF1500FCD277 /* CGSSFavoriteManager.swift */,
+				125C2CE31D39BF1500FCD277 /* CGSSConnection.swift */,
+				125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */,
+				125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */,
+				125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */,
+				125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		127AF7091D01A3D9007EFBE0 /* ReadFileToPlist */ = {
-			isa = PBXGroup;
-			children = (
-				127AF70A1D01A3D9007EFBE0 /* main.swift */,
-			);
-			path = ReadFileToPlist;
 			sourceTree = "<group>";
 		};
 		1282EE561D011A8F0024318C = {
 			isa = PBXGroup;
 			children = (
-				1258F16E1D392F3400B2B018 /* CGSSFoundation.framework */,
 				1282EE611D011A8F0024318C /* CGSSGuide */,
-				12A9F2C51D04052300E97A1A /* DownloadImageOfCard */,
-				127AF7091D01A3D9007EFBE0 /* ReadFileToPlist */,
 				1282EE601D011A8F0024318C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -224,8 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				1282EE5F1D011A8F0024318C /* CGSSGuide.app */,
-				12A9F2C41D04052300E97A1A /* DownloadImageOfCard */,
-				12CE3E7B1D0C3B5C00E77957 /* GetJsonData */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,10 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				12C8C15C1D35E6E200DA0F34 /* SDWebImage */,
-				12A9F2BF1D04041800E97A1A /* ImageOfIcon */,
-				12CE3EF01D0E853A00E77957 /* data */,
-				12ED085E1D180741007E350D /* Controller */,
 				123F311D1D3123310084B589 /* Model */,
+				12ED085E1D180741007E350D /* Controller */,
 				12ED085F1D18074F007E350D /* View */,
 				1282EE621D011A8F0024318C /* AppDelegate.swift */,
 				12CD5E391D2549120058BE19 /* CGSSTool.swift */,
@@ -249,31 +206,6 @@
 				1282EE691D011A8F0024318C /* CGSSGuide.xcdatamodeld */,
 			);
 			path = CGSSGuide;
-			sourceTree = "<group>";
-		};
-		12A9F2BF1D04041800E97A1A /* ImageOfIcon */ = {
-			isa = PBXGroup;
-			children = (
-				12CE3ED31D0E846D00E77957 /* icons_0@2x.jpg */,
-				12CE3ED41D0E846D00E77957 /* icons_1@2x.jpg */,
-				12CE3ED51D0E846D00E77957 /* icons_2@2x.jpg */,
-				12CE3ED61D0E846D00E77957 /* icons_3@2x.jpg */,
-				12CE3ED71D0E846D00E77957 /* icons_4@2x.jpg */,
-				12CE3ED81D0E846D00E77957 /* icons_5@2x.jpg */,
-				12CE3ED91D0E846D00E77957 /* icons_6@2x.jpg */,
-				12CE3EDA1D0E846D00E77957 /* icons_7@2x.jpg */,
-				12CE3EDB1D0E846D00E77957 /* icons_8@2x.jpg */,
-				12CE3EDC1D0E846D00E77957 /* icons_9@2x.jpg */,
-			);
-			name = ImageOfIcon;
-			sourceTree = "<group>";
-		};
-		12A9F2C51D04052300E97A1A /* DownloadImageOfCard */ = {
-			isa = PBXGroup;
-			children = (
-				12A9F2C61D04052300E97A1A /* main.swift */,
-			);
-			path = DownloadImageOfCard;
 			sourceTree = "<group>";
 		};
 		12C8C15C1D35E6E200DA0F34 /* SDWebImage */ = {
@@ -316,18 +248,6 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
-		12CE3EF01D0E853A00E77957 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				12CB0AA41D1179F700383178 /* card.plist */,
-				12CB0AA51D1179F700383178 /* char.plist */,
-				12CB0AAF1D11856800383178 /* card_icon.plist */,
-				12CB0AA61D1179F700383178 /* leader_skill.plist */,
-				12CB0AA71D1179F700383178 /* skill.plist */,
-			);
-			name = data;
-			sourceTree = "<group>";
-		};
 		12ED085E1D180741007E350D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +255,7 @@
 				122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */,
 				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
+				12D24BCD1D3A19CA00727B05 /* UpdatingViewController.swift */,
 				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 			);
 			name = Controller;
@@ -373,40 +294,6 @@
 			productReference = 1282EE5F1D011A8F0024318C /* CGSSGuide.app */;
 			productType = "com.apple.product-type.application";
 		};
-		12A9F2C31D04052300E97A1A /* DownloadImageOfCard */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 12A9F2C81D04052300E97A1A /* Build configuration list for PBXNativeTarget "DownloadImageOfCard" */;
-			buildPhases = (
-				12A9F2C01D04052300E97A1A /* Sources */,
-				12A9F2C11D04052300E97A1A /* Frameworks */,
-				12A9F2C21D04052300E97A1A /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DownloadImageOfCard;
-			productName = DownloadImageOfCard;
-			productReference = 12A9F2C41D04052300E97A1A /* DownloadImageOfCard */;
-			productType = "com.apple.product-type.tool";
-		};
-		12CE3E7A1D0C3B5C00E77957 /* GetJsonData */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 12CE3E7F1D0C3B5C00E77957 /* Build configuration list for PBXNativeTarget "GetJsonData" */;
-			buildPhases = (
-				12CE3E771D0C3B5C00E77957 /* Sources */,
-				12CE3E781D0C3B5C00E77957 /* Frameworks */,
-				12CE3E791D0C3B5C00E77957 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GetJsonData;
-			productName = GetJsonData;
-			productReference = 12CE3E7B1D0C3B5C00E77957 /* GetJsonData */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -420,12 +307,6 @@
 					1282EE5E1D011A8F0024318C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MXJJEEMF3U;
-					};
-					12A9F2C31D04052300E97A1A = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
-					12CE3E7A1D0C3B5C00E77957 = {
-						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -443,8 +324,6 @@
 			projectRoot = "";
 			targets = (
 				1282EE5E1D011A8F0024318C /* CGSSGuide */,
-				12A9F2C31D04052300E97A1A /* DownloadImageOfCard */,
-				12CE3E7A1D0C3B5C00E77957 /* GetJsonData */,
 			);
 		};
 /* End PBXProject section */
@@ -454,23 +333,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12CB0AAC1D1179F700383178 /* skill.plist in Resources */,
-				12CB0AAB1D1179F700383178 /* leader_skill.plist in Resources */,
-				12CE3EE51D0E846D00E77957 /* icons_8@2x.jpg in Resources */,
-				12CE3EE11D0E846D00E77957 /* icons_4@2x.jpg in Resources */,
 				1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */,
-				12CE3EE31D0E846D00E77957 /* icons_6@2x.jpg in Resources */,
-				12CB0AB01D11856800383178 /* card_icon.plist in Resources */,
-				12CE3EE41D0E846D00E77957 /* icons_7@2x.jpg in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
-				12CE3EDF1D0E846D00E77957 /* icons_2@2x.jpg in Resources */,
-				12CB0AAA1D1179F700383178 /* char.plist in Resources */,
-				12CE3EDD1D0E846D00E77957 /* icons_0@2x.jpg in Resources */,
-				12CB0AA91D1179F700383178 /* card.plist in Resources */,
-				12CE3EE01D0E846D00E77957 /* icons_3@2x.jpg in Resources */,
-				12CE3EDE1D0E846D00E77957 /* icons_1@2x.jpg in Resources */,
-				12CE3EE21D0E846D00E77957 /* icons_5@2x.jpg in Resources */,
-				12CE3EE61D0E846D00E77957 /* icons_9@2x.jpg in Resources */,
 				1282EE681D011A8F0024318C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,44 +352,44 @@
 				1282EE6B1D011A8F0024318C /* CGSSGuide.xcdatamodeld in Sources */,
 				12BB13AD1D2E888800F68FF1 /* CGSSImageView.swift in Sources */,
 				12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */,
+				125C2CED1D39BF1500FCD277 /* CGSSCard.swift in Sources */,
 				122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */,
 				12C8C1851D35E83B00DA0F34 /* SDWebImageDownloaderOperation.m in Sources */,
 				12C8C1811D35E83B00DA0F34 /* SDImageCache.m in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
+				125C2CE91D39BF1500FCD277 /* CGSSCardRarity.swift in Sources */,
+				125C2CEF1D39BF1500FCD277 /* CGSSNotificationCenter.swift in Sources */,
+				125C2CE81D39BF1500FCD277 /* CGSSBaseTypes.swift in Sources */,
+				125C2CF41D39BF1500FCD277 /* CGSSCardSorter.swift in Sources */,
 				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,
 				12C8C1821D35E83B00DA0F34 /* SDWebImageCompat.m in Sources */,
 				12C8C1801D35E83B00DA0F34 /* NSData+ImageContentType.m in Sources */,
 				12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */,
+				125C2CF31D39BF1500FCD277 /* CGSSCardFilter.swift in Sources */,
+				125C2CF11D39BF1500FCD277 /* CGSSConnection.swift in Sources */,
 				12C8C1861D35E83B00DA0F34 /* SDWebImageManager.m in Sources */,
 				12C8C1841D35E83B00DA0F34 /* SDWebImageDownloader.m in Sources */,
 				12C8C18D1D35E83B00DA0F34 /* UIImageView+WebCache.m in Sources */,
 				12C8C18C1D35E83B00DA0F34 /* UIImageView+HighlightedWebCache.m in Sources */,
 				12C8C17F1D35E83B00DA0F34 /* MKAnnotationView+WebCache.m in Sources */,
+				125C2CF21D39BF1500FCD277 /* CGSSUpdater.swift in Sources */,
 				12C8C1891D35E83B00DA0F34 /* UIImage+GIF.m in Sources */,
+				125C2CEA1D39BF1500FCD277 /* CGSSChar.swift in Sources */,
+				125C2CF51D39BF1500FCD277 /* CGSSCardIcon.swift in Sources */,
 				1201F3BA1D31F1A800EB25E8 /* CGSSCardIconView.swift in Sources */,
 				12C8C1871D35E83B00DA0F34 /* SDWebImagePrefetcher.m in Sources */,
 				12C8C1881D35E83B00DA0F34 /* UIButton+WebCache.m in Sources */,
+				125C2CEC1D39BF1500FCD277 /* CGSSLearderSkill.swift in Sources */,
+				125C2CEB1D39BF1500FCD277 /* CGSSSkill.swift in Sources */,
 				12C8C18A1D35E83B00DA0F34 /* UIImage+MultiFormat.m in Sources */,
 				12EF0A1B1D38C3810025B80D /* SettingsTableViewController.swift in Sources */,
+				125C2CEE1D39BF1500FCD277 /* CGSSDAO.swift in Sources */,
 				12C8C1831D35E83B00DA0F34 /* SDWebImageDecoder.m in Sources */,
+				125C2CF01D39BF1500FCD277 /* CGSSFavoriteManager.swift in Sources */,
 				12C8C18E1D35E83B00DA0F34 /* UIView+WebCacheOperation.m in Sources */,
+				12D24BCE1D3A19CA00727B05 /* UpdatingViewController.swift in Sources */,
 				121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		12A9F2C01D04052300E97A1A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				12A9F2C71D04052300E97A1A /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		12CE3E771D0C3B5C00E77957 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,54 +547,6 @@
 			};
 			name = Release;
 		};
-		12A9F2C91D04052300E97A1A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		12A9F2CA1D04052300E97A1A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		12CE3E801D0C3B5C00E77957 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		12CE3E811D0C3B5C00E77957 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -748,24 +564,6 @@
 			buildConfigurations = (
 				1282EE8B1D011A8F0024318C /* Debug */,
 				1282EE8C1D011A8F0024318C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		12A9F2C81D04052300E97A1A /* Build configuration list for PBXNativeTarget "DownloadImageOfCard" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				12A9F2C91D04052300E97A1A /* Debug */,
-				12A9F2CA1D04052300E97A1A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		12CE3E7F1D0C3B5C00E77957 /* Build configuration list for PBXNativeTarget "GetJsonData" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				12CE3E801D0C3B5C00E77957 /* Debug */,
-				12CE3E811D0C3B5C00E77957 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
