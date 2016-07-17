@@ -22,7 +22,4 @@ public class CGSSTool: NSObject {
     public static let fullImageWidth:CGFloat = 1280
     public static let fullImageHeight:CGFloat = 824
     
-
-      
-    
 }
