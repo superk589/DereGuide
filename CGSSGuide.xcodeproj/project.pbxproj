@@ -11,7 +11,6 @@
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
-		125C2CE81D39BF1500FCD277 /* CGSSBaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */; };
 		125C2CE91D39BF1500FCD277 /* CGSSCardRarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */; };
 		125C2CEA1D39BF1500FCD277 /* CGSSChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */; };
 		125C2CEB1D39BF1500FCD277 /* CGSSSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */; };
@@ -57,7 +56,6 @@
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
-		125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBaseTypes.swift; sourceTree = "<group>"; };
 		125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardRarity.swift; sourceTree = "<group>"; };
 		125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSChar.swift; sourceTree = "<group>"; };
 		125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSkill.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 		123F311D1D3123310084B589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				125C2CDA1D39BF1500FCD277 /* CGSSBaseTypes.swift */,
 				125C2CDB1D39BF1500FCD277 /* CGSSCardRarity.swift */,
 				125C2CDC1D39BF1500FCD277 /* CGSSChar.swift */,
 				125C2CDD1D39BF1500FCD277 /* CGSSSkill.swift */,
@@ -332,7 +329,6 @@
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				125C2CE91D39BF1500FCD277 /* CGSSCardRarity.swift in Sources */,
 				125C2CEF1D39BF1500FCD277 /* CGSSNotificationCenter.swift in Sources */,
-				125C2CE81D39BF1500FCD277 /* CGSSBaseTypes.swift in Sources */,
 				125C2CF41D39BF1500FCD277 /* CGSSCardSorter.swift in Sources */,
 				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,
