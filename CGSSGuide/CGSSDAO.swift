@@ -6,7 +6,7 @@
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public enum CGSSDataKey:String {
     case Skill = "skill"

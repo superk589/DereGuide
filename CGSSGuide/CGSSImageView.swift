@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 //CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
