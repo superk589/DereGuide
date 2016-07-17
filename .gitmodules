@@ -1,3 +1,0 @@
-[submodule "SDWebImage"]
-	path = SDWebImage
-	url = git@github.com:rs/SDWebImage.git
