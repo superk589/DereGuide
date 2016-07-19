@@ -76,6 +76,9 @@ public class CGSSUpdater: NSObject {
                         
                         arr2.append(Int(integer)!)
                     }
+                    if arr2.count < 2 {
+                        continue
+                    }
                     let cardIcon = CGSSCardIcon.init(card_id: Int(id), file_name: file_name as? String, url: urlx as? String, xoffset: arr2[0], yoffset: arr2[1])
                     dao.cardIconDict.setObject(cardIcon, forKey: id)
                     //一个图标文件包含很多小图标 要避免重复
@@ -262,6 +265,8 @@ public class CGSSUpdater: NSObject {
     }
     func prepareSession() {
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        //更新时不使用本地缓存数据
+        sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
         session = NSURLSession.init(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 }
