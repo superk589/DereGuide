@@ -195,9 +195,9 @@ class CardTableViewController: UITableViewController {
 //        transition.subtype = kCATransitionFromRight
 //        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
 //        navigationController?.pushViewController(cardDetailVC, animated: false)
-        
-        
+   
     }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -245,6 +245,7 @@ class CardTableViewController: UITableViewController {
 
 }
 
+//MARK: searchBar的协议方法
 extension CardTableViewController : UISearchBarDelegate {
     
     //文字改变时
@@ -273,5 +274,13 @@ extension CardTableViewController : UISearchBarDelegate {
         self.cardList = dao.getCardListByMask(filter)
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         self.tableView.reloadData()
+    }
+}
+
+//MARK: scrollView的协议方法
+extension CardTableViewController {
+    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        //向下滑动时取消输入框的第一响应者
+        searchBar.resignFirstResponder()
     }
 }
