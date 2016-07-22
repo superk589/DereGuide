@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CGSSChar: NSObject, NSCoding {
+public class CGSSChar: CGSSBaseModel {
     //    GET /api/v1/char_t/168
     //
     //    {
@@ -114,7 +114,7 @@ public class CGSSChar: NSObject, NSCoding {
         self.valist = valist
         self.voice = voice
         self.weight = weight
-        
+        super.init()
     }
     public init(age:Int?, birth_day:Int?, birth_month:Int?, blood_type:Int?, body_size_1:Int?, body_size_2:Int?, body_size_3:Int?, chara_id:Int?, constellation:Int?, conventional:String?, favorite:String?, hand:Int?, height:Int?, home_town:Int?, kana_spaced:String?, kanji_spaced:String?, model_bust_id:Int?, model_height_id:Int?, model_skin_id:Int?, model_wight_id:Int?, name:String?, name_kana:String?, personality:Int?, spine_size:Int?, type:String?, valist:NSMutableArray?, voice:String?, weight:Int?) {
         self.age = age
@@ -146,6 +146,7 @@ public class CGSSChar: NSObject, NSCoding {
         self.valist = valist
         self.voice = voice
         self.weight = weight
+        super.init()
     }
     
     public convenience init?(attList: NSDictionary?) {
@@ -208,7 +209,8 @@ public class CGSSChar: NSObject, NSCoding {
         //self.init(condition: nil, cutin_type: nil, effect_length: nil, explain: nil, id: nil, judge_type: nil, proc_chance: nil, skill_name: nil, skill_trigger_type: nil, skill_trigger_value: nil, skill_type: nil, value: nil)
     }
     
-    public func encodeWithCoder(aCoder: NSCoder) {
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(age, forKey: "age")
         aCoder.encodeObject(birth_day, forKey: "birth_day")
         aCoder.encodeObject(birth_month, forKey: "birth_month")
@@ -242,7 +244,7 @@ public class CGSSChar: NSObject, NSCoding {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        
+        super.init(coder: aDecoder)
         self.age = aDecoder.decodeObjectForKey("age") as? Int
         self.birth_day = aDecoder.decodeObjectForKey("birth_day") as? Int
         self.birth_month = aDecoder.decodeObjectForKey("birth_month") as? Int

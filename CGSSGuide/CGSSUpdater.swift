@@ -7,12 +7,7 @@
 //
 
 import Foundation
-
-
-//protocol CGSSUpdaterDelegate {
-//    func taskProgress(a:Int, b:Int)
-//    func currentContentType(s:String)
-//}
+import SwiftyJSON
 
 public class CGSSUpdater: NSObject {
 
@@ -21,16 +16,205 @@ public class CGSSUpdater: NSObject {
     static let URLOfImages = "https://hoshimoriuta.kirara.ca"
     static let URLOfWiki = "http://imascg-slstage-wiki.gamerch.com"
     static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
+    static let URLOfDeresuteApi = "https://apiv2.deresute.info"
+    static let defaultUpdater = CGSSUpdater()
+
+    //var updateItems = [CGSSUpdateItem]()
+    var updateDataTypes = [CGSSUpdateDataType]()
     
+    
+    public var iconTaskFinished = false
+    public var cardTaskFinished = false
     var cardsNeedUpdate = [String]()
     var iconsNeedUpdate = [String]()
     var cardsFinished = [String]()
     var iconsFinished = [String]()
-    var session:NSURLSession!
-    public var iconTaskFinished = false
-    public var cardTaskFinished = false
-    //var delegate:CGSSUpdaterDelegate?
     
+    var session:NSURLSession!
+    
+   
+    
+    private override init() {
+        super.init()
+        configSession()
+    }
+    
+    func configSession() {
+        //使用轻量级设定 不缓存
+        let sessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        //更新时不使用本地缓存数据
+        sessionConfig.timeoutIntervalForRequest = 0
+        //sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
+        //因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
+        session = NSURLSession.init(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+    }
+    
+    //废弃当前全部任务 重新开启新的session
+    func cancelCurrentSession() {
+        session.invalidateAndCancel()
+        configSession()
+    }
+
+    //检查最新的数据版本号
+    func checkNewestDataVersion() -> (String, String){
+        let major = NSBundle.mainBundle().infoDictionary?["Data Version"]?["Major"] as! String
+        let minor = NSBundle.mainBundle().infoDictionary?["Data Version"]?["Minor"] as! String
+        return (major, minor)
+    }
+    
+    //检查当前的数据版本号
+    func checkCurrentDataVersion() -> (String, String){
+        let major = NSUserDefaults.standardUserDefaults().objectForKey("Major") as? String ?? "0"
+        let minor = NSUserDefaults.standardUserDefaults().objectForKey("Minor") as? String ?? "0"
+        return (major, minor)
+    }
+    
+    //设置当前的数据版本号
+    func setCurrentDataVersion(major:String, minor:String) {
+        NSUserDefaults.standardUserDefaults().setObject(major, forKey: "Major")
+        NSUserDefaults.standardUserDefaults().setObject(minor, forKey: "Minor")
+    }
+    
+    //设置当前数据版本号为最新版本
+    func setVersionToNewest() {
+        NSUserDefaults.standardUserDefaults().setObject(checkNewestDataVersion().0, forKey: "Major")
+        NSUserDefaults.standardUserDefaults().setObject(checkNewestDataVersion().1, forKey: "Minor")
+    }
+    
+   
+    //检查指定类型的数据是否存在更新
+    func checkUpdate(reset:Bool, typeMask:UInt, complete:([CGSSUpdateItem], [String])->Void) {
+        //初始化待更新数据数组
+        var items = [CGSSUpdateItem]()
+        //初始化错误信息数组
+        var errors = [String]()
+        //检查需要更新的数据类型
+        var dataTypes = [CGSSUpdateDataType]()
+        for i:UInt in 0...2 {
+            let mask = typeMask >> i
+            if mask % 2 == 1 {
+                dataTypes.append(CGSSUpdateDataType(rawValue: 1 << i)!)
+            }
+        }
+        var count = 0
+        func completeInside(error:String?) {
+            if let e = error {
+                if !errors.contains(e) {
+                    errors.append(e)
+                }
+            }
+            count += 1
+            if count == dataTypes.count {
+                dispatch_async(dispatch_get_main_queue(), {
+                    complete(items, errors)
+                })
+            }
+        }
+        for dataType in dataTypes {
+            switch dataType {
+            case .Card:
+                let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
+                let task = session.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                    if let e = error {
+                        print("检查卡片更新失败: \(e.localizedDescription)")
+                        completeInside(e.localizedDescription)
+                    } else {
+                        let json = JSON.init(data: data!)
+                        if let cards = json["result"].array {
+                            for card in cards {
+                                if reset {
+                                    let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
+                                    items.append(item)
+                                    let item2 = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
+                                    items.append(item2)
+                                } else {
+                                    let dao = CGSSDAO.sharedDAO
+                                    if let oldCard = dao.findCardById(card["id"].intValue) {
+                                        if oldCard.isOldVersion() {
+                                            let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
+                                            items.append(item)
+                                        }
+                                    } else {
+                                        let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
+                                        items.append(item)
+
+                                    }
+                                    
+                                    if let oldCard = dao.findCardById(card["evolution_id"].intValue) {
+                                        if oldCard.isOldVersion() {
+                                            let item = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
+                                            items.append(item)
+                                        }
+                                    } else {
+                                        let item = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
+                                        items.append(item)
+                                        
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        completeInside(nil)
+                    }
+                })
+                task.resume()
+                
+            case .Song:
+                completeInside(nil)
+                break
+            case .Story:
+                completeInside(nil)
+                break
+            }
+        }
+    }
+    
+    func updateItems(items:[CGSSUpdateItem], progress: (Int, Int) -> Void,  complete:(Int, Int) -> Void) {
+        var success = 0
+        var process = 0
+        var total = items.count
+        
+        func insideComplete(e:NSError?) {
+            if e == nil {
+                success += 1
+            }
+            process += 1
+            dispatch_async(dispatch_get_main_queue(), {
+                progress(process, total)
+            })
+            if process == items.count {
+                dispatch_async(dispatch_get_main_queue(), {
+                    complete(success, total)
+                })
+            }
+        }
+
+        for item in items {
+            switch item.dataType {
+            case .Card:
+                let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(item.id)"
+                let url = NSURL(string: strURL as String)!
+                let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print("获取卡数据出错:\(error!.localizedDescription)\(url)")
+                        insideComplete(error)
+                    }else {
+                        if let card = CGSSCard.init(jsonData:data!){
+                            let dao = CGSSDAO.sharedDAO
+                            dao.cardDict.setObject(card, forKey: item.id)
+                        }
+                    }
+                    insideComplete(nil)
+                })
+                task.resume()
+            case .Song:
+                break
+            case .Story:
+                break
+            }
+        }
+    }
+
     private func getStringByPattern(str:String, pattern:String) -> [NSString] {
         let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive )
         let res = regex!.matchesInString(str, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))
@@ -231,13 +415,13 @@ public class CGSSUpdater: NSObject {
     public func checkUpdate() {
         
         clearNeedUpdate()
-        prepareSession()
         let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
         let task = session.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
             if let e = error {
                 print("检查更新失败: \(e.localizedDescription)")
             } else {
-                self.parseData(data!)
+                //self.parseData(data!)
+                //print(NSThread.currentThread() == NSThread.mainThread())
                 let dao = CGSSDAO.sharedDAO
                 let cardsInCache = dao.cardDict.allKeys as! [String]
                 for id in self.cardsNeedUpdate {
@@ -251,23 +435,6 @@ public class CGSSUpdater: NSObject {
             }
         })
         task.resume()
-    }
-    func parseData(data:NSData) {
-        let root = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! [String:AnyObject]
-        let result = root["result"] as! [[String:AnyObject]]
-        for card in result {
-            let id = card["id"] as! Int
-            cardsNeedUpdate.append(String(id))
-            if let evolutionId = card["evolution_id"] as? Int{
-                cardsNeedUpdate.append(String(evolutionId))
-            }
-        }
-    }
-    func prepareSession() {
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        //更新时不使用本地缓存数据
-        sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
-        session = NSURLSession.init(configuration: sessionConfig, delegate: self, delegateQueue: nil)
     }
 }
 

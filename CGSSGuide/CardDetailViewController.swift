@@ -122,6 +122,8 @@ class CardDetailViewController: UIViewController {
         }
         
         //设置队长技能
+        print(card.leader_skill_id)
+        print(dao.leaderSkillDict)
         if let leaderSkill = card.leader_skill {
             cardDV?.setLeaderSkillContentView()
             cardDV?.leaderSkillNameLabel.text = leaderSkill.name
@@ -131,8 +133,8 @@ class CardDetailViewController: UIViewController {
         //设置进化信息
         if let evolution_id = card.evolution_id where evolution_id > 0 {
             cardDV?.setEvolutionContentView()
-            cardDV?.evolutionFromImageView.image = dao.getIconFromCardId(card.id!)
-            cardDV?.evolutionToImageView.image = dao.getIconFromCardId(evolution_id)
+            cardDV?.evolutionFromImageView.setWithCardId(card.id!)
+            cardDV?.evolutionFromImageView.setWithCardId(card.evolution_id!)
             cardDV?.evolutionToImageView.cardId = evolution_id
         }
         

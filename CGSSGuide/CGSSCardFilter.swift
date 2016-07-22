@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CGSSCardFilterType:UInt {
+public enum CGSSCardFilterType:UInt {
     case Cute = 1
     case Cool = 2
     case Passion = 4
@@ -34,7 +34,7 @@ enum CGSSCardFilterType:UInt {
 }
 
 
-enum CGSSAttributeFilterType:UInt {
+public enum CGSSAttributeFilterType:UInt {
     case Vocal = 1
     case Dance = 2
     case Visual = 4
@@ -44,7 +44,7 @@ enum CGSSAttributeFilterType:UInt {
     }
 }
 
-enum CGSSCardRarityFilterType:UInt {
+public enum CGSSCardRarityFilterType:UInt {
     case N = 1
     case NP = 2
     case R = 4
@@ -54,16 +54,16 @@ enum CGSSCardRarityFilterType:UInt {
     case SSR = 64
     case SSRP = 128
     
-    init? (rarity:Int) {
+    public init? (rarity:Int) {
         self.init(rawValue: 1 << UInt(rarity))
     }
 }
 
-enum CGSSFavoriteFilterType:UInt {
+public enum CGSSFavoriteFilterType:UInt {
     case InFavorite = 1
     case NotInFavorite = 2
     
-    init? (rawValue:UInt) {
+    public init? (rawValue:UInt) {
         if rawValue == 1 {
             self = .InFavorite
         } else {

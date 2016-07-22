@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class CGSSLeaderSkill: NSObject, NSCoding {
+public class CGSSLeaderSkill: CGSSBaseModel {
     //    {
     //    "result": [
     //    {
@@ -58,6 +58,7 @@ public class CGSSLeaderSkill: NSObject, NSCoding {
         self.type = type
         self.up_type = up_type
         self.up_value = up_value
+        super.init()
     }
     public init (explain:String?, explain_en:String?, id:Int?, name:String?, need_cool:Int?, need_cute:Int?, need_passion:Int?, target_attribute:String?, target_param:String?, type:Int?, up_type:Int?, up_value:Int?) {
         self.explain = explain
@@ -72,6 +73,7 @@ public class CGSSLeaderSkill: NSObject, NSCoding {
         self.type = type
         self.up_type = up_type
         self.up_value = up_value
+        super.init()
     }
     
     public convenience init?(attList:NSDictionary?){
@@ -109,7 +111,8 @@ public class CGSSLeaderSkill: NSObject, NSCoding {
         return nil
         
     }
-    public func encodeWithCoder(aCoder: NSCoder) {
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(need_cool, forKey: "need_cool")
         aCoder.encodeObject(explain, forKey: "explain")
@@ -127,7 +130,7 @@ public class CGSSLeaderSkill: NSObject, NSCoding {
         
     }
     public required init?(coder aDecoder: NSCoder) {
-        
+        super.init(coder: aDecoder)
         name = aDecoder.decodeObjectForKey("name") as? String
         need_cool = aDecoder.decodeObjectForKey("need_cool") as? Int
         explain = aDecoder.decodeObjectForKey("explain") as? String

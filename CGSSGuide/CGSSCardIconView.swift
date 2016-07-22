@@ -10,7 +10,7 @@ import UIKit
 
 class CGSSCardIconView: UIImageView {
 
-    var cardId:Int? 
+    var cardId:Int?
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,6 +19,11 @@ class CGSSCardIconView: UIImageView {
         //userInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         addGestureRecognizer(tap)
+    }
+    
+    func setWithCardId(id:Int) {
+        let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
+        self.sd_setImageWithURL(url)
     }
     
     func tapped() {

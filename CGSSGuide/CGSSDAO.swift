@@ -48,13 +48,18 @@ public class CGSSDAO: NSObject {
         }
     }
     
-    func saveDataToFile(key:CGSSDataKey) {
-        let path = getDataPath(key)
-        let theData = NSMutableData()
-        let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
-        achiver.encodeObject(getDictForKey(key) , forKey: key.rawValue)
-        achiver.finishEncoding()
-        theData.writeToFile(path!, atomically: true)
+    func saveDataToFile(key:CGSSDataKey, complete:(()->Void)? ) {
+        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+            let path = self.getDataPath(key)
+            let theData = NSMutableData()
+            let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
+            achiver.encodeObject(self.getDictForKey(key) , forKey: key.rawValue)
+            achiver.finishEncoding()
+            theData.writeToFile(path!, atomically: true)
+            dispatch_async(dispatch_get_main_queue(), { 
+                complete?()
+            })
+        }
     }
     func loadDataFromFile(key:CGSSDataKey) {
         if let path = getDataPath(key) {
@@ -125,6 +130,12 @@ public class CGSSDAO: NSObject {
         loadDataFromFile(.Card)
         loadDataFromFile(.CardIcon)
     }
+    func removeAllData() {
+        self.cardDict.removeAllObjects()
+        self.charDict.removeAllObjects()
+        self.skillDict.removeAllObjects()
+        self.leaderSkillDict.removeAllObjects()
+    }
     
     private override init() {
 
@@ -191,19 +202,31 @@ public class CGSSDAO: NSObject {
     }
     
     func saveIconData() {
-        saveDataToFile(.CardIcon)
+        saveDataToFile(.CardIcon, complete: nil)
         CGSSNotificationCenter.post("UPDATE_DATA_SAVED", object: self)
     }
     
     func saveCardData() {
         //此处写数据应该更换线程
-        saveDataToFile(.Card)
-        saveDataToFile(.Skill)
-        saveDataToFile(.LeaderSkill)
-        saveDataToFile(.Char)
+        saveDataToFile(.Card, complete: nil)
+        saveDataToFile(.Skill, complete: nil)
+        saveDataToFile(.LeaderSkill, complete: nil)
+        saveDataToFile(.Char, complete: nil)
         CGSSNotificationCenter.post("UPDATE_DATA_SAVED", object: self)
     }
     
+    //异步存储全部数据
+    func saveAll(complete:(()->Void)?) {
+        dispatch_async(dispatch_get_global_queue(0, 0)) { 
+            self.saveDataToFile(.Card, complete: nil)
+            self.saveDataToFile(.Skill, complete: nil)
+            self.saveDataToFile(.LeaderSkill, complete: nil)
+            self.saveDataToFile(.Char, complete: nil)
+            dispatch_async(dispatch_get_main_queue(), { 
+                complete?()
+            })
+        }
+    }
  
     
     public func findCharById(id:Int) -> CGSSChar? {
@@ -279,9 +302,8 @@ public class CGSSDAO: NSObject {
                 let icon = UIImage.init(CGImage: iconRef!)
                 return icon
             } else {
-                let updater = CGSSUpdater()
+                let updater = CGSSUpdater.defaultUpdater
                 updater.iconsNeedUpdate.append((cardIcon?.url)!)
-                updater.prepareSession()
                 updater.updateIconImageData()
                 return nil
             }

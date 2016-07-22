@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CGSSSkill: NSObject, NSCoding {
+public class CGSSSkill: CGSSBaseModel {
     //    {
     //    "result": [
     //    {
@@ -86,6 +86,7 @@ public class CGSSSkill: NSObject, NSCoding {
         self.skill_type = skill_type
         //    "skill_type": 17,
         self.value = value
+        super.init()
     }
     public init(condition:Int?, cutin_type:Int?, effect_length:(Int?,Int?)?, explain:String?, explain_en:String?, id:Int?, judge_type:Int?, proc_chance:(Int?,Int?)?, skill_name:String?, skill_trigger_type:Int?, skill_trigger_value:Int?, skill_type:String?, value:Int?) {
         self.condition = condition
@@ -112,6 +113,7 @@ public class CGSSSkill: NSObject, NSCoding {
         self.skill_type = skill_type
         //    "skill_type": 17,
         self.value = value
+        super.init()
     }
     
     public convenience init?(attList:NSDictionary?){
@@ -225,7 +227,8 @@ public class CGSSSkill: NSObject, NSCoding {
         return str
     }
     
-    public func encodeWithCoder(aCoder: NSCoder) {
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(condition, forKey: "condition")
         aCoder.encodeObject(cutin_type, forKey: "cutin_type")
         
@@ -262,7 +265,7 @@ public class CGSSSkill: NSObject, NSCoding {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        
+        super.init(coder: aDecoder)
         self.condition =  aDecoder.decodeObjectForKey("condition") as? Int
         self.cutin_type =  aDecoder.decodeObjectForKey("cutin_type") as? Int
         let effect_length0 = aDecoder.decodeObjectForKey("effect_length0") as? Int

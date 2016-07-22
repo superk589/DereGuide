@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CGSSCard:NSObject, NSCoding{
+public class CGSSCard:CGSSBaseModel {
     //    GET /api/v1/card_t/200167
     //
     //    {
@@ -250,7 +250,8 @@ public class CGSSCard:NSObject, NSCoding{
     }
     
     
-    public func encodeWithCoder(aCoder: NSCoder) {
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(album_id, forKey: "album_id")
         aCoder.encodeObject(attribute, forKey: "attribute")
         aCoder.encodeObject(bonus_dance, forKey: "bonus_dance")
@@ -498,6 +499,7 @@ public class CGSSCard:NSObject, NSCoding{
         self.vocal_min = vocal_min
         //        "vocal_min": 1504
         //
+        super.init()
     }
     
     
@@ -624,6 +626,7 @@ public class CGSSCard:NSObject, NSCoding{
         //        "vocal_min": 1504
         //        ; see dance_min
         self.update_date = aDecoder.decodeObjectForKey("update_date") as? NSDate
+        super.init(coder: aDecoder)
 //        
         
         
