@@ -39,7 +39,8 @@ class UpdateStatusView: UIView {
         
         self.addSubview(statusLabel)
         self.addSubview(descriptionLabel)
-        self.addSubview(progressView)
+        //暂时取消进度条
+        //self.addSubview(progressView)
         self.addSubview(activityIndicator)
     }
     

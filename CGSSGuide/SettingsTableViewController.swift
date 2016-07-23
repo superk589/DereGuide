@@ -7,21 +7,77 @@
 //
 
 import UIKit
+import MessageUI
 
 class SettingsTableViewController: UITableViewController {
 
-
-    @IBOutlet weak var downloadAtStartSwitch: UISwitch! {
+    @IBOutlet weak var downloadAtStartCell: UITableViewCell! {
         didSet {
+            let downloadAtStartSwitch = UISwitch()
+            downloadAtStartCell.accessoryView = downloadAtStartSwitch
             let downloadAtStart = NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true
             downloadAtStartSwitch.on = downloadAtStart
             downloadAtStartSwitch.addTarget(self, action: #selector(downloadAtStartValueChanged), forControlEvents: .ValueChanged)
         }
     }
 
+    @IBOutlet weak var dataVersionLabel: UILabel! {
+        didSet {
+            dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
+        }
+    }
+    @IBOutlet weak var appVersionLabel: UILabel! {
+        didSet {
+            let infoDic = NSBundle.mainBundle().infoDictionary
+            appVersionLabel.text = (infoDic!["CFBundleShortVersionString"] as! String) + "." + (infoDic!["CFBundleVersion"] as! String)
+        }
+    }
+
     func downloadAtStartValueChanged(sender:UISwitch) {
         NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: "DownloadAtStart")
-        print(NSHomeDirectory())
+    }
+    
+    
+    @IBOutlet weak var sendEmailCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(sendEmail))
+            sendEmailCell.addGestureRecognizer(tap)
+        }
+    }
+    func sendEmail() {
+        //首先要判断设备具不具备发送邮件功能
+        if MFMailComposeViewController.canSendMail(){
+            let controller = MFMailComposeViewController()
+            controller.setSubject("CGSSGuide问题反馈")
+            controller.mailComposeDelegate = self
+            controller.setToRecipients(["superk589@vip.qq.com"])
+            controller.setMessageBody("app v\(appVersionLabel.text!)\ndata v\(dataVersionLabel.text!)\n", isHTML: false)
+            self.presentViewController(controller, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertController.init(title: "打开邮箱失败", message: "未设置邮箱账户", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+//    @IBOutlet weak var checkDataUpdateLabel: UITableViewCell! {
+//        didSet {
+//            let tap = UITapGestureRecognizer.init(target: self, action: #selector(checkUpdate))
+//            checkDataUpdateLabel.addGestureRecognizer(tap)
+//        }
+//    }
+//    func checkUpdate() {
+//        //todo
+//    }
+    
+    @IBOutlet weak var reviewCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(postReview))
+            reviewCell.addGestureRecognizer(tap)
+        }
+    }
+    func postReview() {
+        let url = "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1131934691"
+        UIApplication.sharedApplication().openURL(NSURL.init(string: url)!)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +95,6 @@ class SettingsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
-    }
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -105,4 +151,30 @@ class SettingsTableViewController: UITableViewController {
     }
     */
 
+}
+
+//MARK: MFMailComposeViewControllerDelegate
+extension SettingsTableViewController : MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+    //发送邮件代理方法
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+//        switch result{
+//        case MFMailComposeResultSent:
+//            let alert = UIAlertController.init(title: "邮件发送成功", message: "", preferredStyle: .Alert)
+//            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        case MFMailComposeResultCancelled:
+//            break //print("邮件已取消")
+//        case MFMailComposeResultSaved:
+//            break //print("邮件已保存")
+//        case MFMailComposeResultFailed:
+//            let alert = UIAlertController.init(title: "邮件发送失败", message: "", preferredStyle: .Alert)
+//            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
+//        default:
+//            //print("邮件没有发送")
+//            break
+//        }
+    }
 }

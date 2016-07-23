@@ -24,7 +24,7 @@ public class CGSSBaseModel: NSObject, NSCoding {
         aCoder.encodeObject(self.major, forKey: "major")
         aCoder.encodeObject(self.minor, forKey: "minor")
     }
-    func isOldVersion() -> Bool {
+    var isOldVersion: Bool {
         if self.major < CGSSUpdater.defaultUpdater.checkNewestDataVersion().0 {
             return true
         } else if self.minor < CGSSUpdater.defaultUpdater.checkNewestDataVersion().1 {

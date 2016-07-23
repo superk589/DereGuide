@@ -17,16 +17,26 @@ class CardTableViewController: UITableViewController {
     var updateStatusView: UpdateStatusView!
     
     
-    func check(reset:Bool) {
+    func check() {
         let updater = CGSSUpdater.defaultUpdater
         self.updateStatusView.setContent("检查更新中", hasProgress: false)
-        updater.checkUpdate(reset, typeMask: 0b111, complete: { (items, errors) in
+        updater.checkUpdate(0b111, complete: { (items, errors) in
             if !errors.isEmpty {
                 self.updateStatusView.hidden = true
                 let alert = UIAlertController.init(title: "检查更新失败", message: errors.joinWithSeparator("\n"), preferredStyle: .Alert)
                 alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
+                if items.count == 0 {
+                    self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
+                    self.updateStatusView.activityIndicator.stopAnimating()
+                    UIView.animateWithDuration(2.5, animations: {
+                        self.updateStatusView.alpha = 0
+                        }, completion: { (b) in
+                            self.updateStatusView.hidden = true
+                    })
+                    return
+                }
                 self.updateStatusView.setContent("更新数据中", hasProgress: true)
                 updater.updateItems(items, progress: { (process, total) in
                     self.updateStatusView.updateProgress(process, b: total)
@@ -43,7 +53,7 @@ class CardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(NSHomeDirectory())
+        //print(NSHomeDirectory())
         //检查更新
         updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
         updateStatusView.center = view.center
@@ -58,7 +68,7 @@ class CardTableViewController: UITableViewController {
             dao.saveAll(nil)
             let alert = UIAlertController.init(title: "数据需要更新", message: "请点击确定开始更新", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
-                self.check(true)
+                self.check()
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
@@ -66,13 +76,13 @@ class CardTableViewController: UITableViewController {
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
             let alert = UIAlertController.init(title: "数据需要更新", message: "请点击确定开始更新", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
-                self.check(true)
+                self.check()
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         //启动时根据用户设置检查常规更新
         else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
-            check(false)
+            check()
         }
         
         
@@ -83,7 +93,6 @@ class CardTableViewController: UITableViewController {
         //        })
         
         //self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.tabBarItem = UITabBarItem.init(title: "卡片", image: nil, tag: 1)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))

@@ -30,8 +30,8 @@ public class CGSSUpdater: NSObject {
     var cardsFinished = [String]()
     var iconsFinished = [String]()
     
-    var session:NSURLSession!
-    
+    var dataSession:NSURLSession!
+    var checkSession:NSURLSession!
    
     
     private override init() {
@@ -40,18 +40,27 @@ public class CGSSUpdater: NSObject {
     }
     
     func configSession() {
-        //使用轻量级设定 不缓存
-        let sessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        //更新时不使用本地缓存数据
-        sessionConfig.timeoutIntervalForRequest = 0
+        //初始化用于传输数据的dataSession
+        //使用不缓存的config
+        let dataSessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        //超时时间设置为0
+        dataSessionConfig.timeoutIntervalForRequest = 0
         //sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
         //因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
-        session = NSURLSession.init(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+        dataSession = NSURLSession.init(configuration: dataSessionConfig, delegate: self, delegateQueue: nil)
+        
+        //初始化用于检查更新的checkSession
+        let checkSessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        //sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
+        //因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
+        checkSession = NSURLSession.init(configuration: checkSessionConfig, delegate: self, delegateQueue: nil)
+        
     }
     
     //废弃当前全部任务 重新开启新的session
     func cancelCurrentSession() {
-        session.invalidateAndCancel()
+        dataSession.invalidateAndCancel()
+        checkSession.invalidateAndCancel()
         configSession()
     }
 
@@ -81,16 +90,21 @@ public class CGSSUpdater: NSObject {
         NSUserDefaults.standardUserDefaults().setObject(checkNewestDataVersion().1, forKey: "Minor")
     }
     
+    //获取当前数据版本字符串
+    func getCurrentVersionString() -> String {
+        return checkCurrentDataVersion().0 + "." + checkCurrentDataVersion().1
+    }
+    
    
     //检查指定类型的数据是否存在更新
-    func checkUpdate(reset:Bool, typeMask:UInt, complete:([CGSSUpdateItem], [String])->Void) {
+    func checkUpdate(typeMask:UInt, complete:([CGSSUpdateItem], [String])->Void) {
         //初始化待更新数据数组
         var items = [CGSSUpdateItem]()
         //初始化错误信息数组
         var errors = [String]()
         //检查需要更新的数据类型
         var dataTypes = [CGSSUpdateDataType]()
-        for i:UInt in 0...2 {
+        for i:UInt in 0...3 {
             let mask = typeMask >> i
             if mask % 2 == 1 {
                 dataTypes.append(CGSSUpdateDataType(rawValue: 1 << i)!)
@@ -114,7 +128,7 @@ public class CGSSUpdater: NSObject {
             switch dataType {
             case .Card:
                 let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
-                let task = session.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         print("检查卡片更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
@@ -122,36 +136,29 @@ public class CGSSUpdater: NSObject {
                         let json = JSON.init(data: data!)
                         if let cards = json["result"].array {
                             for card in cards {
-                                if reset {
-                                    let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
-                                    items.append(item)
-                                    let item2 = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
-                                    items.append(item2)
-                                } else {
-                                    let dao = CGSSDAO.sharedDAO
-                                    if let oldCard = dao.findCardById(card["id"].intValue) {
-                                        if oldCard.isOldVersion() {
-                                            let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
-                                            items.append(item)
-                                        }
-                                    } else {
+                                let dao = CGSSDAO.sharedDAO
+                                if let oldCard = dao.findCardById(card["id"].intValue) {
+                                    if oldCard.isOldVersion {
                                         let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
                                         items.append(item)
-
                                     }
-                                    
-                                    if let oldCard = dao.findCardById(card["evolution_id"].intValue) {
-                                        if oldCard.isOldVersion() {
-                                            let item = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
-                                            items.append(item)
-                                        }
-                                    } else {
+                                } else {
+                                    let item = CGSSUpdateItem.init(dataType: .Card, id: card["id"].stringValue)
+                                    items.append(item)
+
+                                }
+                                
+                                if let oldCard = dao.findCardById(card["evolution_id"].intValue) {
+                                    if oldCard.isOldVersion {
                                         let item = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
                                         items.append(item)
-                                        
                                     }
+                                } else {
+                                    let item = CGSSUpdateItem.init(dataType: .Card, id: card["evolution_id"].stringValue)
+                                    items.append(item)
                                     
                                 }
+
                             }
                         }
                         completeInside(nil)
@@ -160,11 +167,62 @@ public class CGSSUpdater: NSObject {
                 task.resume()
                 
             case .Song:
-                completeInside(nil)
-                break
+                let url = CGSSUpdater.URLOfDeresuteApi + "/data/music"
+                let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                    if let e = error {
+                        print("检查歌曲更新失败: \(e.localizedDescription)")
+                        completeInside(e.localizedDescription)
+                    } else {
+                        let json = JSON.init(data: data!)
+                        if let songs = json.array {
+                            for song in songs {
+                                let dao = CGSSDAO.sharedDAO
+                                if let oldSong = dao.findSongById(song["id"].intValue) {
+                                    if oldSong.isOldVersion {
+                                        let newSong = CGSSSong.init(json: song)
+                                        dao.songDict.setValue(newSong, forKey: song["id"].stringValue)
+                                    }
+                                } else {
+                                    let newSong = CGSSSong.init(json: song)
+                                    dao.songDict.setValue(newSong, forKey: song["id"].stringValue)
+                                }
+                            }
+                        }
+                        completeInside(nil)
+                    }
+                })
+                task.resume()
+            case .Live:
+                let url = CGSSUpdater.URLOfDeresuteApi + "/data/live"
+                let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                    if let e = error {
+                        print("检查live更新失败: \(e.localizedDescription)")
+                        completeInside(e.localizedDescription)
+                    } else {
+                        let json = JSON.init(data: data!)
+                        if let lives = json.array {
+                            for live in lives {
+                                let dao = CGSSDAO.sharedDAO
+                                if let oldLive = dao.findSongById(live["id"].intValue) {
+                                    if oldLive.isOldVersion {
+                                        let newLive = CGSSLive.init(json: live)
+                                        dao.liveDict.setValue(newLive, forKey: live["id"].stringValue)
+                                    }
+                                } else {
+                                    let newLive = CGSSLive.init(json: live)
+                                    dao.liveDict.setValue(newLive, forKey: live["id"].stringValue)
+                                }
+                            }
+                        }
+                        completeInside(nil)
+                    }
+                })
+                task.resume()
+                
             case .Story:
                 completeInside(nil)
                 break
+            
             }
         }
     }
@@ -183,6 +241,8 @@ public class CGSSUpdater: NSObject {
                 progress(process, total)
             })
             if process == items.count {
+                let dao = CGSSDAO.sharedDAO
+                dao.saveAll(nil)
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(success, total)
                 })
@@ -194,7 +254,7 @@ public class CGSSUpdater: NSObject {
             case .Card:
                 let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(item.id)"
                 let url = NSURL(string: strURL as String)!
-                let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+                let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                     if error != nil {
                         print("获取卡数据出错:\(error!.localizedDescription)\(url)")
                         insideComplete(error)
@@ -208,6 +268,8 @@ public class CGSSUpdater: NSObject {
                 })
                 task.resume()
             case .Song:
+                break
+            case .Live:
                 break
             case .Story:
                 break
@@ -237,7 +299,7 @@ public class CGSSUpdater: NSObject {
         
         let strURL = "https://hoshimoriuta.kirara.ca/icons2/icons@2x.css"
         let url = NSURL(string: strURL as String)!
-        let task = session.dataTaskWithURL(url) { (data, response, error) in
+        let task = dataSession.dataTaskWithURL(url) { (data, response, error) in
             if error != nil {
                 print("获取头像图标css文件失败:\(error?.localizedDescription)")
             } else {
@@ -289,7 +351,7 @@ public class CGSSUpdater: NSObject {
             let strURL = CGSSUpdater.URLOfIcons + "/" + urlStr
             
             let url = NSURL(string: strURL as String)!
-            let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+            let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                 if error != nil {
                     print("icon图片获取失败:\(error!.localizedDescription)\(url)")
                 }else {
@@ -369,7 +431,7 @@ public class CGSSUpdater: NSObject {
             let cardId = cardsNeedUpdate[index]
             let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(cardId)"
             let url = NSURL(string: strURL as String)!
-            let task = session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+            let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                 if error != nil {
                     print("获取卡数据出错:\(error!.localizedDescription)\(url)")
                 }else {
@@ -416,7 +478,7 @@ public class CGSSUpdater: NSObject {
         
         clearNeedUpdate()
         let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
-        let task = session.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+        let task = dataSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
             if let e = error {
                 print("检查更新失败: \(e.localizedDescription)")
             } else {

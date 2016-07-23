@@ -768,7 +768,7 @@ public class CGSSCard:CGSSBaseModel {
                         }
                     }
                     if dao.findLeaderSkillById(leader_skill_id!) == nil {
-                        if let leaderSkill = CGSSSkill.init(attList: root2["lead_skill"] as? NSDictionary) {
+                        if let leaderSkill = CGSSLeaderSkill.init(attList: root2["lead_skill"] as? NSDictionary) {
                             dao.leaderSkillDict.setValue(leaderSkill, forKey:String(leader_skill_id!))
                         }
                     }
