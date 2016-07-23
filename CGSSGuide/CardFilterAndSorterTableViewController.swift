@@ -24,7 +24,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     var sortingButtons:[UIButton]!
     
     var filter:CGSSCardFilter!
-    var sorter:CGSSCardSorter!
+    var sorter:CGSSSorter!
     //let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
     var sorterString = ["vocal","dance","visual","overall","update_id","rarity_ref","album_id"]
     

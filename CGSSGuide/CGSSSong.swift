@@ -16,6 +16,10 @@ public class CGSSSong: CGSSBaseModel {
     var composer:String?
     var lyricist:String?
     
+    var live:CGSSLive? {
+        return CGSSDAO.sharedDAO.findLivebySongId(id!)
+    }
+    
     override public func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(id, forKey: "id")

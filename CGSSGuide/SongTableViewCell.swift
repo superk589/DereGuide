@@ -26,24 +26,24 @@ class SongTableViewCell: UITableViewCell {
         jacketImageView.frame = CGRectMake(5, 5, 66, 66)
         
         nameLabel = UILabel()
-        nameLabel.frame = CGRectMake(76, 5, CGSSTool.width - 86, 18)
-        nameLabel.font = UIFont.systemFontOfSize(18)
+        nameLabel.frame = CGRectMake(76, 5, CGSSTool.width - 86, 20)
+        nameLabel.font = UIFont.boldSystemFontOfSize(18)
         
         descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRectMake(76, 33, CGSSTool.width - 86, 14)
+        descriptionLabel.frame = CGRectMake(76, 30, CGSSTool.width - 86, 16)
         descriptionLabel.font = UIFont.init(name: "menlo", size: 14)
         
         let width = (CGSSTool.width - 86 - 40) / 5
         let space:CGFloat = 10
-        let fontSize:CGFloat = 15
-        let height:CGFloat = 15
+        let fontSize:CGFloat = 16
+        let height:CGFloat = 16
         
 //        diffLabel = UILabel()
 //        diffLabel.frame = CGRectMake(76, 40, 150, 12)
 //        diffLabel.text = "diff"
         
         debutLabel = UILabel()
-        debutLabel.frame = CGRectMake(76, 57, width, height )
+        debutLabel.frame = CGRectMake(76, 55, width, height )
         debutLabel.font = UIFont.init(name: "menlo", size: fontSize)
         debutLabel.backgroundColor = CGSSTool.debutColor
         debutLabel.layer.cornerRadius = 6
@@ -51,7 +51,7 @@ class SongTableViewCell: UITableViewCell {
         debutLabel.textAlignment = .Center
         
         regularLabel = UILabel()
-        regularLabel.frame = CGRectMake(76 + width + space, 57, width, height )
+        regularLabel.frame = CGRectMake(76 + width + space, 55, width, height )
         regularLabel.font = UIFont.init(name: "menlo", size: fontSize)
         regularLabel.backgroundColor = CGSSTool.regularColor
         regularLabel.layer.cornerRadius = 6
@@ -59,7 +59,7 @@ class SongTableViewCell: UITableViewCell {
         regularLabel.textAlignment = .Center
         
         proLabel = UILabel()
-        proLabel.frame = CGRectMake(76 + 2 * (width + space), 57, width, height )
+        proLabel.frame = CGRectMake(76 + 2 * (width + space), 55, width, height )
         proLabel.font = UIFont.init(name: "menlo", size: fontSize)
         proLabel.backgroundColor = CGSSTool.proColor
         proLabel.layer.cornerRadius = 6
@@ -67,7 +67,7 @@ class SongTableViewCell: UITableViewCell {
         proLabel.textAlignment = .Center
         
         masterLabel = UILabel()
-        masterLabel.frame = CGRectMake(76 + 3 * (width + space), 57, width, height )
+        masterLabel.frame = CGRectMake(76 + 3 * (width + space), 55, width, height )
         masterLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterLabel.backgroundColor = CGSSTool.masterColor
         masterLabel.layer.cornerRadius = 6
@@ -75,7 +75,7 @@ class SongTableViewCell: UITableViewCell {
         masterLabel.textAlignment = .Center
         
         masterPlusLabel = UILabel()
-        masterPlusLabel.frame = CGRectMake(76 + 4 * (width + space), 57, width, height )
+        masterPlusLabel.frame = CGRectMake(76 + 4 * (width + space), 55, width, height )
         masterPlusLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterPlusLabel.backgroundColor = CGSSTool.masterPlusColor
         masterPlusLabel.layer.cornerRadius = 6
@@ -101,6 +101,18 @@ class SongTableViewCell: UITableViewCell {
             self.regularLabel.text = String(live.regular!)
             self.proLabel.text = String(live.pro!)
             self.masterLabel.text = String(live.master!)
+            switch live.type! {
+            case 1:
+                self.nameLabel.textColor = CGSSTool.cuteColor
+            case 2:
+                self.nameLabel.textColor = CGSSTool.coolColor
+            case 3:
+                self.nameLabel.textColor = CGSSTool.passionColor
+            case 4:
+                self.nameLabel.textColor = UIColor.darkTextColor()
+            default:
+                break
+            }
             if live.masterPlus != 0 {
                 masterPlusLabel.hidden = false
                 masterPlusLabel.text = String(live.masterPlus!)

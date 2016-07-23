@@ -12,6 +12,7 @@
 		12129A541D4345FF00ABFE3A /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12129A531D4345FF00ABFE3A /* SongTableViewCell.swift */; };
 		12129A561D43471800ABFE3A /* CGSSLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12129A551D43471800ABFE3A /* CGSSLive.swift */; };
 		12129A581D43483400ABFE3A /* CGSSBeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12129A571D43483400ABFE3A /* CGSSBeatmap.swift */; };
+		12129A5A1D43990500ABFE3A /* CGSSSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12129A591D43990500ABFE3A /* CGSSSorter.swift */; };
 		121569681D1CE0B800C3055A /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121569671D1CE0B800C3055A /* CardDetailView.swift */; };
 		122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */; };
 		122AAB451D2BF62D0055D156 /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122AAB441D2BF62D0055D156 /* CGSSGridView.swift */; };
@@ -26,7 +27,6 @@
 		125C2CF01D39BF1500FCD277 /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE21D39BF1500FCD277 /* CGSSFavoriteManager.swift */; };
 		125C2CF21D39BF1500FCD277 /* CGSSUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */; };
 		125C2CF31D39BF1500FCD277 /* CGSSCardFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */; };
-		125C2CF41D39BF1500FCD277 /* CGSSCardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */; };
 		125C2CF51D39BF1500FCD277 /* CGSSCardIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
@@ -64,6 +64,7 @@
 		12129A531D4345FF00ABFE3A /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		12129A551D43471800ABFE3A /* CGSSLive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLive.swift; sourceTree = "<group>"; };
 		12129A571D43483400ABFE3A /* CGSSBeatmap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmap.swift; sourceTree = "<group>"; };
+		12129A591D43990500ABFE3A /* CGSSSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorter.swift; sourceTree = "<group>"; };
 		121569671D1CE0B800C3055A /* CardDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		122AAB441D2BF62D0055D156 /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		125C2CE21D39BF1500FCD277 /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
 		125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdater.swift; sourceTree = "<group>"; };
 		125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardFilter.swift; sourceTree = "<group>"; };
-		125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardSorter.swift; sourceTree = "<group>"; };
 		125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIcon.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 				125C2CE41D39BF1500FCD277 /* CGSSUpdater.swift */,
 				124C170D1D40FD1600943924 /* CGSSUpdateItem.swift */,
 				125C2CE51D39BF1500FCD277 /* CGSSCardFilter.swift */,
-				125C2CE61D39BF1500FCD277 /* CGSSCardSorter.swift */,
+				12129A591D43990500ABFE3A /* CGSSSorter.swift */,
 				125C2CE71D39BF1500FCD277 /* CGSSCardIcon.swift */,
 			);
 			name = Model;
@@ -353,7 +353,7 @@
 				125C2CE91D39BF1500FCD277 /* CGSSCardRarity.swift in Sources */,
 				12129A541D4345FF00ABFE3A /* SongTableViewCell.swift in Sources */,
 				125C2CEF1D39BF1500FCD277 /* CGSSNotificationCenter.swift in Sources */,
-				125C2CF41D39BF1500FCD277 /* CGSSCardSorter.swift in Sources */,
+				12129A5A1D43990500ABFE3A /* CGSSSorter.swift in Sources */,
 				122AAA251D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12CD5E3A1D2549120058BE19 /* CGSSTool.swift in Sources */,
 				12CD5E381D2536E70058BE19 /* CardTableViewCell.swift in Sources */,

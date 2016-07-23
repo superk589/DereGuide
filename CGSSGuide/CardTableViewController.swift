@@ -13,7 +13,7 @@ class CardTableViewController: UITableViewController {
     var cardList:[CGSSCard]!
     var searchBar:UISearchBar!
     var filter:CGSSCardFilter!
-    var sorter:CGSSCardSorter!
+    var sorter:CGSSSorter!
     var updateStatusView: UpdateStatusView!
     
     
@@ -124,7 +124,7 @@ class CardTableViewController: UITableViewController {
         filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
         
         //按更新顺序排序
-        sorter = CGSSCardSorter.init(att: "update_id")
+        sorter = CGSSSorter.init(att: "update_id")
         
         
     }

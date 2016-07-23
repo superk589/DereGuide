@@ -11,6 +11,7 @@ import UIKit
 class SongTableViewController: UITableViewController {
 
     var songList:[CGSSSong]!
+    var sorter:CGSSSorter!
     override func viewDidLoad() {
         super.viewDidLoad()
         let dao = CGSSDAO.sharedDAO
@@ -21,6 +22,8 @@ class SongTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        sorter = CGSSSorter.init(att: "live.updateId")
+        dao.sortListByAttibuteName(&songList!, sorter: sorter)
     }
 
     override func didReceiveMemoryWarning() {

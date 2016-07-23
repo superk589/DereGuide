@@ -14,13 +14,16 @@ public class CGSSLive: CGSSBaseModel {
     var musicId:Int?
     var musicTitle:String?
     var type:Int?
-    //var liveDetailId:[Int]?
+    var liveDetailId:[Int]?
     var eventType:Int?
     var debut:Int?
     var regular:Int?
     var pro:Int?
     var master:Int?
     var masterPlus:Int?
+    var updateId:Int {
+        return self.liveDetailId![0]
+    }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,7 +31,7 @@ public class CGSSLive: CGSSBaseModel {
         self.musicId = aDecoder.decodeObjectForKey("musicId") as? Int
         self.musicTitle = aDecoder.decodeObjectForKey("musicTitle") as? String
         self.type = aDecoder.decodeObjectForKey("type") as? Int
-        //self.liveDetailId = aDecoder.decodeObjectForKey("liveDetailId") as?
+        self.liveDetailId = aDecoder.decodeObjectForKey("liveDetailId") as? [Int]
         self.eventType = aDecoder.decodeObjectForKey("eventType") as? Int
         self.debut = aDecoder.decodeObjectForKey("debut") as? Int
         self.regular = aDecoder.decodeObjectForKey("regular") as? Int
@@ -36,15 +39,29 @@ public class CGSSLive: CGSSBaseModel {
         self.master = aDecoder.decodeObjectForKey("master") as? Int
         self.masterPlus = aDecoder.decodeObjectForKey("masterPlus") as? Int
     }
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.id, forKey: "id")
+        aCoder.encodeObject(self.musicId, forKey: "musicId")
+        aCoder.encodeObject(self.musicTitle, forKey: "musicTitle")
+        aCoder.encodeObject(self.type, forKey: "type")
+        aCoder.encodeObject(self.liveDetailId, forKey: "liveDetailId")
+        aCoder.encodeObject(self.eventType, forKey: "eventType")
+        aCoder.encodeObject(self.debut, forKey: "debut")
+        aCoder.encodeObject(self.regular, forKey: "regular")
+        aCoder.encodeObject(self.pro, forKey: "pro")
+        aCoder.encodeObject(self.master, forKey: "master")
+        aCoder.encodeObject(self.masterPlus, forKey: "masterPlus")        
+
+    }
     init(json:JSON) {
         self.id = json["id"].int
         self.musicId = json["musicId"].int
         self.musicTitle = json["musicTitle"].string
         self.type = json["type"].int
-//        self.liveDetailId = [Int]()
-//        for i in json["liveDetailId"].arrayValue {
-//            self.liveDetailId?.append(i.intValue)
-//        }
+        self.liveDetailId = [Int]()
+        for i in json["liveDetailId"].arrayValue {
+            self.liveDetailId?.append(i.intValue)
+        }
         self.eventType = json["eventType"].int
         self.debut = json["debut"].int
         self.regular = json["regular"].int

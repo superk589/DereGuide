@@ -139,13 +139,22 @@ public class CGSSDAO: NSObject {
     //原地排序指定的cardList
     public func sortCardListByAttibuteName(inout cardList:[CGSSCard], att:String, ascending:Bool ) {
         
-        let sorter = CGSSCardSorter.init(att: att, ascending: ascending)
-        sorter.sortCardList(&cardList)
-    }
-    public func sortCardListByAttibuteName(inout cardList:[CGSSCard], sorter:CGSSCardSorter) {
-        sorter.sortCardList(&cardList)
+        let sorter = CGSSSorter.init(att: att, ascending: ascending)
+        sorter.sortList(&cardList)
     }
     
+    public func sortCardListByAttibuteName(inout cardList:[CGSSCard], sorter:CGSSSorter) {
+        sorter.sortList(&cardList)
+    }
+    
+    //原地排血指定的songList
+    public func sortSongListByAttibuteName(inout songList:[CGSSSong], sorter:CGSSSorter) {
+        sorter.sortList(&songList)
+    }
+    
+    public func sortListByAttibuteName<T:CGSSBaseModel>(inout list:[T], sorter:CGSSSorter) {
+        sorter.sortList(&list)
+    }
     
     func loadAllDataFromFile() {
         loadDataFromFile(.Skill)
@@ -279,13 +288,15 @@ public class CGSSDAO: NSObject {
         return self.liveDict.objectForKey(String(id)) as? CGSSLive
     }
     public func findLivebySongId(id:Int) -> CGSSLive? {
+        var result:CGSSLive?
+        //如果同时有event版本和常规版本的歌曲 优先选择event版本
         for v in self.liveDict.allValues {
             let live = v as? CGSSLive
-            if live?.musicId == id {
-                return live
+            if live?.musicId == id && ((live?.eventType ?? 0) >= (result?.eventType ?? 0)) {
+                result = live
             }
         }
-        return nil
+        return result
     }
     
     public func getRankInAll(card:CGSSCard) -> [Int] {
