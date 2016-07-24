@@ -67,8 +67,7 @@ class CardDetailViewController: UIViewController {
         cardDV?.rarityLabel.text = card.rarity?.rarityString
         
         let dao = CGSSDAO.sharedDAO
-        cardDV?.cardIconView?.image = dao.getIconFromCardId(card.id!)
-        
+        cardDV?.cardIconView?.setWithCardId(card.id!)
         
 
         //设置属性列表
@@ -122,8 +121,6 @@ class CardDetailViewController: UIViewController {
         }
         
         //设置队长技能
-        print(card.leader_skill_id)
-        print(dao.leaderSkillDict)
         if let leaderSkill = card.leader_skill {
             cardDV?.setLeaderSkillContentView()
             cardDV?.leaderSkillNameLabel.text = leaderSkill.name
@@ -134,8 +131,7 @@ class CardDetailViewController: UIViewController {
         if let evolution_id = card.evolution_id where evolution_id > 0 {
             cardDV?.setEvolutionContentView()
             cardDV?.evolutionFromImageView.setWithCardId(card.id!)
-            cardDV?.evolutionFromImageView.setWithCardId(card.evolution_id!)
-            cardDV?.evolutionToImageView.cardId = evolution_id
+            cardDV?.evolutionToImageView.setWithCardId(card.evolution_id!, target: self, action: #selector(iconClick))
         }
         
         //设置角色信息
@@ -256,7 +252,6 @@ class CardDetailViewController: UIViewController {
         CGSSNotificationCenter.add(self, selector: #selector(imageLongPress), name: "IMAGE_LONG_PRESS", object: nil)
         CGSSNotificationCenter.add(self, selector: #selector(imageFullScreen), name: "IMAGE_FULLSIZE_START", object: nil)
         CGSSNotificationCenter.add(self, selector: #selector(imageRestore), name: "IMAGE_RESTORE_START", object: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(iconClick), name: "CARDICON_CLICK", object: nil)
     }
     //取消监听
     override func viewWillDisappear(animated: Bool) {
@@ -338,7 +333,7 @@ class CardDetailViewController: UIViewController {
     func iconClick(iv:CGSSCardIconView) {
         let cardDetailVC = CardDetailViewController()
         let dao = CGSSDAO.sharedDAO
-        cardDetailVC.card = dao.findCardById(card.evolution_id!)
+        cardDetailVC.card = dao.findCardById(iv.cardId!)
         cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }

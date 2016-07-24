@@ -10,20 +10,20 @@ import UIKit
 
 class SongTableViewController: UITableViewController {
 
-    var songList:[CGSSSong]!
+    var liveList:[CGSSLive]!
     var sorter:CGSSSorter!
     override func viewDidLoad() {
         super.viewDidLoad()
         let dao = CGSSDAO.sharedDAO
-        songList = dao.getDictForKey(CGSSDataKey.Song)?.allValues as! [CGSSSong]
+        liveList = Array(dao.validLiveDict.values)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        sorter = CGSSSorter.init(att: "live.updateId")
-        dao.sortListByAttibuteName(&songList!, sorter: sorter)
+        sorter = CGSSSorter.init(att: "updateId")
+        dao.sortListByAttibuteName(&liveList!, sorter: sorter)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,14 +40,14 @@ class SongTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return songList.count
+        return liveList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SongCell", forIndexPath: indexPath) as! SongTableViewCell
 
-        cell.initWith(songList[indexPath.row])
+        cell.initWith(liveList[indexPath.row])
         // Configure the cell...
 
         return cell

@@ -59,7 +59,7 @@
                                                     <rect key="frame" x="15" y="12" width="144" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vb5-8u-hgJ">
@@ -83,7 +83,7 @@
                                                     <rect key="frame" x="15" y="12" width="96" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CCB-QY-KRe">
@@ -111,7 +111,7 @@
                                                     <rect key="frame" x="15" y="12" width="64" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yea-dy-MAs">
@@ -135,7 +135,7 @@
                                                     <rect key="frame" x="15" y="12" width="32" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iFg-0j-m3k">
@@ -163,7 +163,7 @@
                                                     <rect key="frame" x="15" y="12" width="32" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JC6-90-IPo">
@@ -190,7 +190,7 @@
                                                     <rect key="frame" x="15" y="12" width="64" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FDQ-Ta-OpR">
@@ -217,7 +217,7 @@
                                                     <rect key="frame" x="15" y="12" width="64" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PtN-e6-otR">
@@ -254,8 +254,7 @@
         <!--版权声明-->
         <scene sceneID="mpe-pe-GeF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v04-Ko-Y0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController title="版权声明" id="nP6-u4-qm0" sceneMemberID="viewController">
+                <viewController title="版权声明" automaticallyAdjustsScrollViewInsets="NO" id="nP6-u4-qm0" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FIN-cz-Bcs"/>
                         <viewControllerLayoutGuide type="bottom" id="tr1-d2-MaF"/>
@@ -309,6 +308,7 @@
                         </variation>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v04-Ko-Y0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2028" y="215"/>
         </scene>
@@ -351,7 +351,7 @@
         <!--致谢-->
         <scene sceneID="l2X-yp-WOM">
             <objects>
-                <viewController storyboardIdentifier="UpdatingView" title="致谢" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6bf-I1-Pkg" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpdatingView" title="致谢" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6bf-I1-Pkg" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8yB-Zi-1LN"/>
                         <viewControllerLayoutGuide type="bottom" id="v9w-43-VFi"/>
@@ -515,11 +515,35 @@ http://imascg-slstage-wiki.gamerch.com
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="6tz-1w-Xg2"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="HXd-ot-6Iq"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="L3M-ue-3Sv"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="NpU-br-hCF" secondAttribute="bottom" id="Pyq-hI-cXh"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="centerY" secondItem="Pgn-8r-sPL" secondAttribute="centerY" id="dQW-jo-xJh"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="trailing" secondItem="Pgn-8r-sPL" secondAttribute="centerX" id="iVT-Dr-Mck"/>
+                                                <constraint firstAttribute="trailing" secondItem="NpU-br-hCF" secondAttribute="trailing" constant="200" id="v6d-4F-aPb"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="wRS-k6-XHD"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="6tz-1w-Xg2"/>
+                                                    <exclude reference="L3M-ue-3Sv"/>
+                                                    <exclude reference="dQW-jo-xJh"/>
+                                                    <exclude reference="v6d-4F-aPb"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="6tz-1w-Xg2"/>
+                                                    <exclude reference="HXd-ot-6Iq"/>
+                                                    <include reference="L3M-ue-3Sv"/>
+                                                    <exclude reference="Pyq-hI-cXh"/>
+                                                    <include reference="dQW-jo-xJh"/>
+                                                    <exclude reference="iVT-Dr-Mck"/>
+                                                    <include reference="v6d-4F-aPb"/>
+                                                    <exclude reference="wRS-k6-XHD"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2JZ-vC-xRJ">
@@ -728,12 +752,15 @@ http://imascg-slstage-wiki.gamerch.com
             <objects>
                 <tableViewController id="NCZ-z5-ATr" customClass="SongTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZgZ-l1-I3U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="76" id="mBa-Fp-3R7" customClass="SongTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mBa-Fp-3R7" id="dB4-rP-TGU">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

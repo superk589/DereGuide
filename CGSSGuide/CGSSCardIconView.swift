@@ -11,24 +11,43 @@ import UIKit
 class CGSSCardIconView: UIImageView {
 
     var cardId:Int?
+    var tap:UITapGestureRecognizer?
+    var action:Selector?
+    weak var target:AnyObject?
         
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 6
         layer.masksToBounds = true
-        //userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
-        addGestureRecognizer(tap)
+        userInteractionEnabled = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
+        addGestureRecognizer(tap!)
     }
-    
     func setWithCardId(id:Int) {
+        self.cardId = id
         let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
         self.sd_setImageWithURL(url)
     }
     
-    func tapped() {
-        CGSSNotificationCenter.post("CARDICON_CLICK", object: self)
+    func setWithCardId(id:Int, target: AnyObject, action: Selector) {
+        self.cardId = id
+        let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
+        self.sd_setImageWithURL(url)
+        self.action = action
+        self.target = target
     }
+    
+    func setAction(target: AnyObject, action: Selector) {
+        self.action = action
+        self.target = target
+    }
+    
+    func onClick() {
+        if action != nil {
+            self.target?.performSelector(action!, withObject: self)
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -12,7 +12,7 @@ class CardDetailView: UIScrollView {
   
     var fullImageView:CGSSImageView?
 
-    var cardIconView:UIImageView!
+    var cardIconView:CGSSCardIconView!
     var cardNameLabel:UILabel!
     var rarityLabel:UILabel!
     var titleLabel:UILabel!
@@ -55,12 +55,8 @@ class CardDetailView: UIScrollView {
 
         //人物名称 图标视图
         originY = fullImageHeigth
-        cardIconView = UIImageView()
-        cardIconView.frame = CGRectMake(5, originY + 5, 48, 48)
-        //边角圆滑处理
-        cardIconView.layer.cornerRadius = 6
-        cardIconView.layer.masksToBounds = true
-        
+        cardIconView = CGSSCardIconView.init(frame: CGRectMake(5, originY + 5, 48, 48))
+            
         rarityLabel = UILabel()
         rarityLabel.frame = CGRectMake(58, originY + 11, 30, 10)
         rarityLabel.textAlignment = .Left
@@ -267,7 +263,6 @@ class CardDetailView: UIScrollView {
         
         evolutionToImageView = CGSSCardIconView(frame: CGRectMake(108, 29, 48, 48))
         evolutionFromImageView = CGSSCardIconView(frame: CGRectMake(5, 29, 48, 48))
-        evolutionToImageView.userInteractionEnabled = true
         evolutionContentView.addSubview(evolutionToImageView)
         evolutionContentView.addSubview(evolutionFromImageView)
         
@@ -277,16 +272,10 @@ class CardDetailView: UIScrollView {
         descLabel5.font = UIFont.systemFontOfSize(24)
         descLabel5.text = " >> "
         descLabel5.textAlignment = .Center
-        evolutionContentView.addSubview(descLabel5)        //        skillTypeLabel = UILabel()
-        //        skillTypeLabel.frame = CGRectMake(50, 19, 140, 14)
-        //        skillTypeLabel.font = UIFont.systemFontOfSize(14)
-        //        skillTypeLabel.textAlignment = .Left
-        //        skillContentView.addSubview(skillTypeLabel)
-        
+        evolutionContentView.addSubview(descLabel5)
         
         evolutionContentView.layer.borderColor = UIColor.blackColor().CGColor
         evolutionContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        
         
         originY = originY + 87
         contentSize = CGSizeMake(CGSSTool.width, originY+20)

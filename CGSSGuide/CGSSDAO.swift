@@ -13,7 +13,6 @@ public enum CGSSDataKey:String {
     case Card = "card"
     case Char = "char"
     case LeaderSkill = "leader_skill"
-    case CardIcon = "card_icon"
     case Live = "live"
     case Song = "song"
     case BeatMap = "beatmap"
@@ -24,19 +23,35 @@ public class CGSSDAO: NSObject {
     
     public static let sharedDAO = CGSSDAO()
     
-    public var skillDict = NSMutableDictionary()
-    public var cardDict = NSMutableDictionary()
-    public var leaderSkillDict = NSMutableDictionary()
-    public var charDict = NSMutableDictionary()
-    public var cardIconDict = NSMutableDictionary()
-    public var songDict = NSMutableDictionary()
-    public var storyDict = NSMutableDictionary()
-    public var liveDict = NSMutableDictionary()
-    public var beatMapDict = NSMutableDictionary()
+    //主数据
+    public lazy var skillDict = CGSSDAO.loadDataFromFile(.Skill)
+    public lazy var cardDict = CGSSDAO.loadDataFromFile(.Card)
+    public lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.LeaderSkill)
+    public lazy var charDict = CGSSDAO.loadDataFromFile(.Char)
+    public lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
+    public lazy var storyDict = CGSSDAO.loadDataFromFile(.Story)
+    public lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
+    public lazy var beatMapDict = CGSSDAO.loadDataFromFile(.BeatMap)
+    
+    public var validLiveDict:[String:CGSSLive] {
+        var lives = [String:CGSSLive]()
+        for live in liveDict.allValues as! [CGSSLive] {
+            if [1018,1901].contains(live.musicId!) { continue }
+            if [514].contains(live.id!) { continue }
+            if lives.keys.contains(String(live.musicId!)) {
+                if lives[String(live.musicId!)]!.eventType < live.eventType! {
+                    lives[String(live.musicId!)] = live
+                }
+            } else {
+                lives[String(live.musicId!)] = live
+            }
+        }
+        return lives
+    }
     
     static let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first!
     
-    func getDataPath(key:CGSSDataKey) -> String? {
+    internal static func getDataPath(key:CGSSDataKey) -> String? {
         //return NSBundle.mainBundle().pathForResource(key.rawValue, ofType: "plist")
         //return NSHomeDirectory() + "/Documents/" + key.rawValue + ".plist"
         return CGSSDAO.path + "/Data/" + key.rawValue + ".plist"
@@ -51,8 +66,6 @@ public class CGSSDAO: NSObject {
             return self.charDict
         case .LeaderSkill:
             return self.leaderSkillDict
-        case .CardIcon:
-            return self.cardIconDict
         case .Song:
             return self.songDict
         case .Live:
@@ -66,7 +79,7 @@ public class CGSSDAO: NSObject {
     
     func saveDataToFile(key:CGSSDataKey, complete:(()->Void)? ) {
         dispatch_async(dispatch_get_global_queue(0, 0)) { 
-            let path = self.getDataPath(key)
+            let path = CGSSDAO.getDataPath(key)
             let theData = NSMutableData()
             let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
             achiver.encodeObject(self.getDictForKey(key) , forKey: key.rawValue)
@@ -77,33 +90,14 @@ public class CGSSDAO: NSObject {
             })
         }
     }
-    func loadDataFromFile(key:CGSSDataKey) {
+    internal static func loadDataFromFile(key:CGSSDataKey) -> NSMutableDictionary {
         if let path = getDataPath(key) {
             if let theData = NSData(contentsOfFile: path) {
                 let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
-                switch key {
-                case .Skill:
-                    self.skillDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .Card:
-                    self.cardDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .Char:
-                    self.charDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .LeaderSkill:
-                    self.leaderSkillDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .CardIcon:
-                    self.cardIconDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .Song:
-                    self.songDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .Live:
-                    self.liveDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .Story:
-                    self.storyDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                case .BeatMap:
-                    self.beatMapDict = achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
-                    //
-                }
+                return achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
             }
         }
+        return NSMutableDictionary()
     }
     
     //根据掩码筛选
@@ -156,17 +150,17 @@ public class CGSSDAO: NSObject {
         sorter.sortList(&list)
     }
     
-    func loadAllDataFromFile() {
-        loadDataFromFile(.Skill)
-        loadDataFromFile(.LeaderSkill)
-        loadDataFromFile(.Char)
-        loadDataFromFile(.Card)
-        loadDataFromFile(.Live)
-        loadDataFromFile(.BeatMap)
-        loadDataFromFile(.Song)
-        loadDataFromFile(.Story)
-        //loadDataFromFile(.CardIcon)
-    }
+//    func loadAllDataFromFile() {
+//        loadDataFromFile(.Skill)
+//        loadDataFromFile(.LeaderSkill)
+//        loadDataFromFile(.Char)
+//        loadDataFromFile(.Card)
+//        //song必须在live之前加载
+//        loadDataFromFile(.Song)
+//        loadDataFromFile(.Live)
+//        loadDataFromFile(.BeatMap)
+//        loadDataFromFile(.Story)
+//    }
     func removeAllData() {
         self.cardDict.removeAllObjects()
         self.charDict.removeAllObjects()
@@ -181,7 +175,7 @@ public class CGSSDAO: NSObject {
     private override init() {
         super.init()
         self.prepareFileDirectory()
-        self.loadAllDataFromFile()
+        //self.loadAllDataFromFile()
     }
     
     
@@ -263,41 +257,41 @@ public class CGSSDAO: NSObject {
  
     
     public func findCharById(id:Int) -> CGSSChar? {
-        let dic = self.charDict
-        return dic.objectForKey(String(id)) as? CGSSChar
+        return self.charDict.objectForKey(String(id)) as? CGSSChar
     }
     
     public func findSkillById(id:Int) -> CGSSSkill? {
-        let dic = self.skillDict
-        return dic.objectForKey(String(id)) as? CGSSSkill
+        return self.skillDict.objectForKey(String(id)) as? CGSSSkill
     }
     
     public func findLeaderSkillById(id:Int) -> CGSSLeaderSkill? {
-        let dic = self.leaderSkillDict
-        return dic.objectForKey(String(id)) as? CGSSLeaderSkill
+        return self.leaderSkillDict.objectForKey(String(id)) as? CGSSLeaderSkill
     }
     
     public func findCardById(id:Int) -> CGSSCard? {
-        let dic = self.cardDict
-        return dic.objectForKey(String(id)) as? CGSSCard
+        return self.cardDict.objectForKey(String(id)) as? CGSSCard
     }
+    
     public func findSongById(id:Int) -> CGSSSong? {
         return self.songDict.objectForKey(String(id)) as? CGSSSong
     }
+    
     public func findLiveById(id:Int) -> CGSSLive? {
         return self.liveDict.objectForKey(String(id)) as? CGSSLive
     }
-    public func findLivebySongId(id:Int) -> CGSSLive? {
-        var result:CGSSLive?
-        //如果同时有event版本和常规版本的歌曲 优先选择event版本
-        for v in self.liveDict.allValues {
-            let live = v as? CGSSLive
-            if live?.musicId == id && ((live?.eventType ?? 0) >= (result?.eventType ?? 0)) {
-                result = live
-            }
-        }
-        return result
-    }
+
+    
+//    public func findLivebySongId(id:Int) -> CGSSLive? {
+//        var result:CGSSLive?
+//        //如果同时有event版本和常规版本的歌曲 优先选择event版本
+//        for v in self.liveDict.allValues {
+//            let live = v as? CGSSLive
+//            if live?.musicId == id && ((live?.eventType ?? 0) >= (result?.eventType ?? 0)) {
+//                result = live
+//            }
+//        }
+//        return result
+//    }
     
     public func getRankInAll(card:CGSSCard) -> [Int] {
         //let vocal = card.vocal
@@ -341,26 +335,26 @@ public class CGSSDAO: NSObject {
     }
     
     
-    func getIconFromCardId(id:Int) -> UIImage? {
-        let dao = CGSSDAO.sharedDAO
-        let cardIcon = dao.cardIconDict.objectForKey(String(id)) as? CGSSCardIcon
-        if let iconFile = cardIcon?.file_name {
-            let path = CGSSDAO.path + "/Icons/" + iconFile
-            let image = UIImage(contentsOfFile: path)
-            if let cgRef = image?.CGImage {
-                let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon!.col!), 96 * CGFloat(cardIcon!.row!) as CGFloat, 96, 96))
-                let icon = UIImage.init(CGImage: iconRef!)
-                return icon
-            } else {
-                let updater = CGSSUpdater.defaultUpdater
-                updater.iconsNeedUpdate.append((cardIcon?.url)!)
-                updater.updateIconImageData()
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
+//    func getIconFromCardId(id:Int) -> UIImage? {
+//        let dao = CGSSDAO.sharedDAO
+//        let cardIcon = dao.cardIconDict.objectForKey(String(id)) as? CGSSCardIcon
+//        if let iconFile = cardIcon?.file_name {
+//            let path = CGSSDAO.path + "/Icons/" + iconFile
+//            let image = UIImage(contentsOfFile: path)
+//            if let cgRef = image?.CGImage {
+//                let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon!.col!), 96 * CGFloat(cardIcon!.row!) as CGFloat, 96, 96))
+//                let icon = UIImage.init(CGImage: iconRef!)
+//                return icon
+//            } else {
+//                let updater = CGSSUpdater.defaultUpdater
+//                updater.iconsNeedUpdate.append((cardIcon?.url)!)
+//                updater.updateIconImageData()
+//                return nil
+//            }
+//        } else {
+//            return nil
+//        }
+//    }
 
 }
 

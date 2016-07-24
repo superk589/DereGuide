@@ -51,6 +51,7 @@ public class CGSSUpdater: NSObject {
         
         //初始化用于检查更新的checkSession
         let checkSessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        checkSessionConfig.timeoutIntervalForRequest = 30
         //sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
         //因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
         checkSession = NSURLSession.init(configuration: checkSessionConfig, delegate: self, delegateQueue: nil)
@@ -203,10 +204,11 @@ public class CGSSUpdater: NSObject {
                         if let lives = json.array {
                             for live in lives {
                                 let dao = CGSSDAO.sharedDAO
-                                if let oldLive = dao.findSongById(live["id"].intValue) {
+                                if let oldLive = dao.findLiveById(live["id"].intValue) {
                                     if oldLive.isOldVersion {
                                         let newLive = CGSSLive.init(json: live)
-                                        dao.liveDict.setValue(newLive, forKey: live["id"].stringValue)
+                                        dao.liveDict.setValue(newLive,
+                                            forKey: (live["id"].stringValue))
                                     }
                                 } else {
                                     let newLive = CGSSLive.init(json: live)
@@ -289,57 +291,56 @@ public class CGSSUpdater: NSObject {
         return arr
     }
     
-    func updateAll() {
-        updateCardIconData()
-        updateCardData()
-        
-    }
-    //获取偶像的小头像图标
-    func updateCardIconData() {
-        
-        let strURL = "https://hoshimoriuta.kirara.ca/icons2/icons@2x.css"
-        let url = NSURL(string: strURL as String)!
-        let task = dataSession.dataTaskWithURL(url) { (data, response, error) in
-            if error != nil {
-                print("获取头像图标css文件失败:\(error?.localizedDescription)")
-            } else {
-                let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
-                //let cardIconDict = NSMutableDictionary()
-                let dao = CGSSDAO.sharedDAO
-                
-                for id in self.cardsNeedUpdate {
-                    let pattern = id + "\\{([^\\{]*)\\}"
-                    let subStr = self.getStringByPattern(dataStr, pattern: pattern).first as? String ?? ""
-
-                    let file_name = self.getStringByPattern(subStr, pattern: "icons_[0-9]+@2x.jpg").first
-                    let urlx = self.getStringByPattern(subStr, pattern: "icons[^\"]+").first
-                    
-                    
-                    let arr = self.getStringByPattern(subStr, pattern: "[0-9]+px")
-                    var arr2 = [Int]()
-                    for str in arr {
-                        let integer = str.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "px"))
-                        
-                        arr2.append(Int(integer)!)
-                    }
-                    if arr2.count < 2 {
-                        continue
-                    }
-                    let cardIcon = CGSSCardIcon.init(card_id: Int(id), file_name: file_name as? String, url: urlx as? String, xoffset: arr2[0], yoffset: arr2[1])
-                    dao.cardIconDict.setObject(cardIcon, forKey: id)
-                    //一个图标文件包含很多小图标 要避免重复
-                    let urlNeedToUpdate = urlx as! String
-                    if !self.iconsNeedUpdate.contains(urlNeedToUpdate) {
-                        self.iconsNeedUpdate.append(urlNeedToUpdate)
-                    }
-                }
-                self.updateIconImageData()
-            }
-        }
-        
-        task.resume()
-        
-    }
+//    func updateAll() {
+//        updateCardIconData()
+//        updateCardData()
+//    }
+//    //获取偶像的小头像图标
+//    func updateCardIconData() {
+//        
+//        let strURL = "https://hoshimoriuta.kirara.ca/icons2/icons@2x.css"
+//        let url = NSURL(string: strURL as String)!
+//        let task = dataSession.dataTaskWithURL(url) { (data, response, error) in
+//            if error != nil {
+//                print("获取头像图标css文件失败:\(error?.localizedDescription)")
+//            } else {
+//                let dataStr = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+//                //let cardIconDict = NSMutableDictionary()
+//                let dao = CGSSDAO.sharedDAO
+//                
+//                for id in self.cardsNeedUpdate {
+//                    let pattern = id + "\\{([^\\{]*)\\}"
+//                    let subStr = self.getStringByPattern(dataStr, pattern: pattern).first as? String ?? ""
+//
+//                    let file_name = self.getStringByPattern(subStr, pattern: "icons_[0-9]+@2x.jpg").first
+//                    let urlx = self.getStringByPattern(subStr, pattern: "icons[^\"]+").first
+//                    
+//                    
+//                    let arr = self.getStringByPattern(subStr, pattern: "[0-9]+px")
+//                    var arr2 = [Int]()
+//                    for str in arr {
+//                        let integer = str.stringByTrimmingCharactersInSet(NSCharacterSet.init(charactersInString: "px"))
+//                        
+//                        arr2.append(Int(integer)!)
+//                    }
+//                    if arr2.count < 2 {
+//                        continue
+//                    }
+//                    let cardIcon = CGSSCardIcon.init(card_id: Int(id), file_name: file_name as? String, url: urlx as? String, xoffset: arr2[0], yoffset: arr2[1])
+//                    dao.cardIconDict.setObject(cardIcon, forKey: id)
+//                    //一个图标文件包含很多小图标 要避免重复
+//                    let urlNeedToUpdate = urlx as! String
+//                    if !self.iconsNeedUpdate.contains(urlNeedToUpdate) {
+//                        self.iconsNeedUpdate.append(urlNeedToUpdate)
+//                    }
+//                }
+//                self.updateIconImageData()
+//            }
+//        }
+//        
+//        task.resume()
+//        
+//    }
 
     
     func updateIconImageData() {
@@ -474,30 +475,30 @@ public class CGSSUpdater: NSObject {
     }
 
 
-    public func checkUpdate() {
-        
-        clearNeedUpdate()
-        let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
-        let task = dataSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
-            if let e = error {
-                print("检查更新失败: \(e.localizedDescription)")
-            } else {
-                //self.parseData(data!)
-                //print(NSThread.currentThread() == NSThread.mainThread())
-                let dao = CGSSDAO.sharedDAO
-                let cardsInCache = dao.cardDict.allKeys as! [String]
-                for id in self.cardsNeedUpdate {
-                    if cardsInCache.contains(id) {
-                        let index = self.cardsNeedUpdate.indexOf(id)
-                        self.cardsNeedUpdate.removeAtIndex(index!)
-                    }
-                }
-                //CGSSNotificationCenter.post("CHECK_UPDATE_FINISH", object: self)
-                self.updateAll()
-            }
-        })
-        task.resume()
-    }
+//    public func checkUpdate() {
+//        
+//        clearNeedUpdate()
+//        let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
+//        let task = dataSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+//            if let e = error {
+//                print("检查更新失败: \(e.localizedDescription)")
+//            } else {
+//                //self.parseData(data!)
+//                //print(NSThread.currentThread() == NSThread.mainThread())
+//                let dao = CGSSDAO.sharedDAO
+//                let cardsInCache = dao.cardDict.allKeys as! [String]
+//                for id in self.cardsNeedUpdate {
+//                    if cardsInCache.contains(id) {
+//                        let index = self.cardsNeedUpdate.indexOf(id)
+//                        self.cardsNeedUpdate.removeAtIndex(index!)
+//                    }
+//                }
+//                //CGSSNotificationCenter.post("CHECK_UPDATE_FINISH", object: self)
+//                self.updateAll()
+//            }
+//        })
+//        task.resume()
+//    }
 }
 
 extension CGSSUpdater : NSURLSessionDelegate, NSURLSessionDataDelegate {

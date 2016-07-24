@@ -19,7 +19,6 @@ class SongTableViewCell: UITableViewCell {
     var masterLabel: UILabel!
     var masterPlusLabel: UILabel!
     var diffLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         jacketImageView = UIImageView()
@@ -32,54 +31,55 @@ class SongTableViewCell: UITableViewCell {
         descriptionLabel = UILabel()
         descriptionLabel.frame = CGRectMake(76, 30, CGSSTool.width - 86, 16)
         descriptionLabel.font = UIFont.init(name: "menlo", size: 14)
-        
-        let width = (CGSSTool.width - 86 - 40) / 5
+
+        let width = floor((CGSSTool.width - 86 - 40) / 5)
         let space:CGFloat = 10
         let fontSize:CGFloat = 16
         let height:CGFloat = 16
-        
-//        diffLabel = UILabel()
-//        diffLabel.frame = CGRectMake(76, 40, 150, 12)
-//        diffLabel.text = "diff"
-        
+//
+////        diffLabel = UILabel()
+////        diffLabel.frame = CGRectMake(76, 40, 150, 12)
+////        diffLabel.text = "diff"
+//        
         debutLabel = UILabel()
         debutLabel.frame = CGRectMake(76, 55, width, height )
         debutLabel.font = UIFont.init(name: "menlo", size: fontSize)
         debutLabel.backgroundColor = CGSSTool.debutColor
-        debutLabel.layer.cornerRadius = 6
-        debutLabel.layer.masksToBounds = true
+        //debutLabel.layer.cornerRadius = 6
+        //debutLabel.layer.masksToBounds = true
         debutLabel.textAlignment = .Center
-        
+//
         regularLabel = UILabel()
         regularLabel.frame = CGRectMake(76 + width + space, 55, width, height )
         regularLabel.font = UIFont.init(name: "menlo", size: fontSize)
         regularLabel.backgroundColor = CGSSTool.regularColor
-        regularLabel.layer.cornerRadius = 6
-        regularLabel.layer.masksToBounds = true
+        //regularLabel.layer.cornerRadius = 6
+        //regularLabel.layer.masksToBounds = true
         regularLabel.textAlignment = .Center
         
         proLabel = UILabel()
         proLabel.frame = CGRectMake(76 + 2 * (width + space), 55, width, height )
         proLabel.font = UIFont.init(name: "menlo", size: fontSize)
         proLabel.backgroundColor = CGSSTool.proColor
-        proLabel.layer.cornerRadius = 6
-        proLabel.layer.masksToBounds = true
+//        proLabel.layer.cornerRadius = 6
+//        proLabel.layer.masksToBounds = true
         proLabel.textAlignment = .Center
         
         masterLabel = UILabel()
         masterLabel.frame = CGRectMake(76 + 3 * (width + space), 55, width, height )
         masterLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterLabel.backgroundColor = CGSSTool.masterColor
-        masterLabel.layer.cornerRadius = 6
-        masterLabel.layer.masksToBounds = true
+        //masterLabel.layer.cornerRadius = 6
+        //masterLabel.layer.masksToBounds = true
         masterLabel.textAlignment = .Center
         
         masterPlusLabel = UILabel()
         masterPlusLabel.frame = CGRectMake(76 + 4 * (width + space), 55, width, height )
         masterPlusLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterPlusLabel.backgroundColor = CGSSTool.masterPlusColor
-        masterPlusLabel.layer.cornerRadius = 6
-        masterPlusLabel.layer.masksToBounds = true
+        masterPlusLabel.tintColor = CGSSTool.masterPlusColor
+        //masterPlusLabel.layer.cornerRadius = 6
+        //masterPlusLabel.layer.masksToBounds = true
         masterPlusLabel.textAlignment = .Center
         
         contentView.addSubview(jacketImageView)
@@ -92,11 +92,13 @@ class SongTableViewCell: UITableViewCell {
         contentView.addSubview(masterPlusLabel)
     }
     
-    func initWith(song:CGSSSong) {
-        self.nameLabel.text = song.title
-        self.descriptionLabel.text = "bpm:\(song.bpm!)  composer:\(song.composer!)  lyricist:\(song.lyricist!)"
-        self.descriptionLabel.text = "bpm:\(song.bpm!)"
-        if let live = CGSSDAO.sharedDAO.findLivebySongId(song.id!) {
+    func initWith(live:CGSSLive) {
+        let dao = CGSSDAO.sharedDAO
+        if let song = dao.findSongById(live.musicId!) {
+            self.nameLabel.text = song.title
+            //self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
+            self.descriptionLabel.text = "bpm:\(song.bpm!)"
+
             self.debutLabel.text = String(live.debut!)
             self.regularLabel.text = String(live.regular!)
             self.proLabel.text = String(live.pro!)
@@ -119,9 +121,10 @@ class SongTableViewCell: UITableViewCell {
             } else {
                 masterPlusLabel.hidden = true
             }
+            
+            let url = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song.id!).png"
+            self.jacketImageView.sd_setImageWithURL(NSURL.init(string: url))
         }
-        let url = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song.id!).png"
-        self.jacketImageView.sd_setImageWithURL(NSURL.init(string: url))
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -46,6 +46,7 @@ class CardTableViewController: UITableViewController {
                         self.presentViewController(alert, animated: true, completion: nil)
                         self.updateStatusView.hidden = true
                         updater.setVersionToNewest()
+                        self.refresh()
                 })
             }
         })
@@ -70,15 +71,15 @@ class CardTableViewController: UITableViewController {
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
                 self.check()
             }))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.navigationController?.presentViewController(alert, animated: true, completion: nil)
         }
-        //如果数据Minor版本号过低采用覆盖更新
+        //如果数据Minor版本号过低提示更新
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
             let alert = UIAlertController.init(title: "数据需要更新", message: "请点击确定开始更新", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
                 self.check()
             }))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.navigationController?.presentViewController(alert, animated: true, completion: nil)
         }
         //启动时根据用户设置检查常规更新
         else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
@@ -129,20 +130,8 @@ class CardTableViewController: UITableViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        CGSSNotificationCenter.removeAll(self)
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        CGSSNotificationCenter.add(self, selector: #selector(updateFinished), name: "UPDATE_DATA_SAVED", object: nil)
-        
-        //页面出现时根据设定刷新排序和搜索内容
-        searchBar.resignFirstResponder()
+    //根据设定的筛选和排序方法重新展现数据
+    func refresh() {
         let dao = CGSSDAO.sharedDAO
         self.cardList = dao.getCardListByMask(filter)
         if searchBar.text != "" {
@@ -150,17 +139,20 @@ class CardTableViewController: UITableViewController {
         }
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         tableView.reloadData()
-        
-        
     }
     
-    func updateFinished() {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        CGSSNotificationCenter.removeAll(self)
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
-        searchBar.text = ""
-        let dao = CGSSDAO.sharedDAO
-        self.cardList = dao.getCardListByMask(filter)
-        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
-        tableView.reloadData()
+        refresh()
     }
     
     
@@ -188,6 +180,7 @@ class CardTableViewController: UITableViewController {
         
         
         cell.cardIconView?.setWithCardId(card.id!)
+        cell.cardIconView?.userInteractionEnabled = false
         
         //textLabel?.text = self.cardList[row] as? String
         
@@ -233,11 +226,7 @@ class CardTableViewController: UITableViewController {
     
     func cancelAction() {
         searchBar.resignFirstResponder()
-        let dao = CGSSDAO.sharedDAO
-        searchBar.text = ""
-        self.cardList = dao.getCardListByMask(filter)
-        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
-        self.tableView.reloadData()
+        refresh()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -307,13 +296,7 @@ extension CardTableViewController : UISearchBarDelegate {
     
     //文字改变时
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let dao = CGSSDAO.sharedDAO
-        self.cardList = dao.getCardListByMask(filter)
-        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
-        if searchText != "" {
-            self.cardList = dao.getCardListByName(self.cardList, string: searchText)
-        }
-        self.tableView.reloadData()
+        refresh()
     }
     //开始编辑时
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -327,10 +310,7 @@ extension CardTableViewController : UISearchBarDelegate {
     //点击searchbar自带的取消按钮时
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        let dao = CGSSDAO.sharedDAO
-        self.cardList = dao.getCardListByMask(filter)
-        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
-        self.tableView.reloadData()
+        refresh()
     }
 }
 
