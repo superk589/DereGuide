@@ -18,18 +18,9 @@ public class CGSSUpdater: NSObject {
     static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
     static let URLOfDeresuteApi = "https://apiv2.deresute.info"
     static let defaultUpdater = CGSSUpdater()
-
-    //var updateItems = [CGSSUpdateItem]()
-    var updateDataTypes = [CGSSUpdateDataType]()
     
     
-    public var iconTaskFinished = false
-    public var cardTaskFinished = false
-    var cardsNeedUpdate = [String]()
-    var iconsNeedUpdate = [String]()
-    var cardsFinished = [String]()
-    var iconsFinished = [String]()
-    
+    var isUpdating = false
     var dataSession:NSURLSession!
     var checkSession:NSURLSession!
    
@@ -99,6 +90,7 @@ public class CGSSUpdater: NSObject {
    
     //检查指定类型的数据是否存在更新
     func checkUpdate(typeMask:UInt, complete:([CGSSUpdateItem], [String])->Void) {
+        isUpdating = true
         //初始化待更新数据数组
         var items = [CGSSUpdateItem]()
         //初始化错误信息数组
@@ -123,6 +115,7 @@ public class CGSSUpdater: NSObject {
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(items, errors)
                 })
+                isUpdating = false
             }
         }
         for dataType in dataTypes {
@@ -221,15 +214,22 @@ public class CGSSUpdater: NSObject {
                 })
                 task.resume()
                 
+            case .CardIcon:
+                completeInside(nil)
+                break
             case .Story:
                 completeInside(nil)
                 break
-            
+            case .BeatMap:
+                
+                completeInside(nil)
+                break
             }
         }
     }
     
     func updateItems(items:[CGSSUpdateItem], progress: (Int, Int) -> Void,  complete:(Int, Int) -> Void) {
+        isUpdating = true
         var success = 0
         var process = 0
         var total = items.count
@@ -245,6 +245,7 @@ public class CGSSUpdater: NSObject {
             if process == items.count {
                 let dao = CGSSDAO.sharedDAO
                 dao.saveAll(nil)
+                isUpdating = false
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(success, total)
                 })
@@ -273,7 +274,11 @@ public class CGSSUpdater: NSObject {
                 break
             case .Live:
                 break
+            case .CardIcon:
+                break
             case .Story:
+                break
+            case .BeatMap:
                 break
             }
         }
@@ -342,42 +347,42 @@ public class CGSSUpdater: NSObject {
 //        
 //    }
 
-    
-    func updateIconImageData() {
-//        dispatch_async(dispatch_get_main_queue(), { 
-//            self.delegate?.currentContentType("更新图标数据")
-//        })
-        for index in 0..<iconsNeedUpdate.count {
-            let urlStr = iconsNeedUpdate[index]
-            let strURL = CGSSUpdater.URLOfIcons + "/" + urlStr
-            
-            let url = NSURL(string: strURL as String)!
-            let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print("icon图片获取失败:\(error!.localizedDescription)\(url)")
-                }else {
-                    let file_name = self.getStringByPattern(urlStr, pattern: "icons_[0-9]+@2x.jpg").first
-                    //print(NSBundle.mainBundle().resourcePath)
-                    let toPath = CGSSDAO.path + "/Icons/" + (file_name as! String)
-                    data!.writeToFile(toPath, atomically: true)
-//                    dispatch_async(dispatch_get_main_queue(), {
-//                        self.delegate?.taskProgress(index+1, b: self.iconsNeedUpdate.count)
-//                    })
-                }
-                //如果是最后一个图片 结束后发送完成通知
-                if index == self.iconsNeedUpdate.count - 1 {
-                    self.iconTaskFinished = true
-                    //dispatch_async(dispatch_get_main_queue(), {
-                    CGSSNotificationCenter.post("ICON_UPDATE_FINISH", object: self)
-                    //})
-
-                }
-            })
-            task.resume()
-        }
-
-    }
-    
+//    
+//    func updateIconImageData() {
+////        dispatch_async(dispatch_get_main_queue(), { 
+////            self.delegate?.currentContentType("更新图标数据")
+////        })
+//        for index in 0..<iconsNeedUpdate.count {
+//            let urlStr = iconsNeedUpdate[index]
+//            let strURL = CGSSUpdater.URLOfIcons + "/" + urlStr
+//            
+//            let url = NSURL(string: strURL as String)!
+//            let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+//                if error != nil {
+//                    print("icon图片获取失败:\(error!.localizedDescription)\(url)")
+//                }else {
+//                    let file_name = self.getStringByPattern(urlStr, pattern: "icons_[0-9]+@2x.jpg").first
+//                    //print(NSBundle.mainBundle().resourcePath)
+//                    let toPath = CGSSDAO.path + "/Icons/" + (file_name as! String)
+//                    data!.writeToFile(toPath, atomically: true)
+////                    dispatch_async(dispatch_get_main_queue(), {
+////                        self.delegate?.taskProgress(index+1, b: self.iconsNeedUpdate.count)
+////                    })
+//                }
+//                //如果是最后一个图片 结束后发送完成通知
+//                if index == self.iconsNeedUpdate.count - 1 {
+//                    self.iconTaskFinished = true
+//                    //dispatch_async(dispatch_get_main_queue(), {
+//                    CGSSNotificationCenter.post("ICON_UPDATE_FINISH", object: self)
+//                    //})
+//
+//                }
+//            })
+//            task.resume()
+//        }
+//
+//    }
+//    
     //获取偶像的卡片图
 //    public func getCardImages (toPath:String) {
 //        let dao = CGSSDAO.sharedDAO
@@ -423,57 +428,7 @@ public class CGSSUpdater: NSObject {
 //    }
 
     //public func getDataFromWebApi() {
-    func updateCardData() {
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.delegate?.currentContentType("更新卡数据")
-//        })
-
-        for index in 0..<cardsNeedUpdate.count {
-            let cardId = cardsNeedUpdate[index]
-            let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(cardId)"
-            let url = NSURL(string: strURL as String)!
-            let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print("获取卡数据出错:\(error!.localizedDescription)\(url)")
-                }else {
-                    if let card = CGSSCard.init(jsonData:data!){
-                        let dao = CGSSDAO.sharedDAO
-//                        if dao.findSkillById(card.skill_id!) == nil {
-//                            self.skillsNeedUpdate.append(String(card.skill_id!))
-//                        }
-//                        if dao.findLeaderSkillById(card.leader_skill_id!) == nil {
-//                            self.leaderSkillsNeedUpdate.append(String(card.leader_skill_id!))
-//                        }
-//                        if dao.findSkillById(card.chara_id!) == nil {
-//                            self.charsNeedUpdate.append(String(card.chara_id!))
-//                        }
-//                        dispatch_async(dispatch_get_main_queue(), {
-//                            self.delegate?.taskProgress(index+1, b: self.cardsNeedUpdate.count)
-//                        }) 
-                        //card.update_date = NSDate()
-                        dao.cardDict.setObject(card, forKey: cardId)
-                    }
-                }
-                //如果是最后一个卡数据 结束后发送完成通知
-                if index == self.cardsNeedUpdate.count - 1 {
-                    self.cardTaskFinished = true
-                    //dispatch_async(dispatch_get_main_queue(), {
-                    CGSSNotificationCenter.post("CARD_UPDATE_FINISH", object: self)
-                    //})
-                }
-            
-            })
-            task.resume()
-        }
-    }
-    
-    func clearNeedUpdate() {
-        iconTaskFinished = false
-        cardTaskFinished = false
-        cardsNeedUpdate.removeAll()
-        iconsNeedUpdate.removeAll()
-    }
-
+  
 
 //    public func checkUpdate() {
 //        

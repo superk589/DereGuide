@@ -10,9 +10,11 @@ import UIKit
 
 public enum CGSSUpdateDataType:UInt {
     case Card = 1
-    case Song = 2
-    case Live = 4
-    case Story = 8
+    case CardIcon = 2
+    case Song = 4
+    case Live = 8
+    case BeatMap = 16
+    case Story = 32
 }
 class CGSSUpdateItem: NSObject {
 

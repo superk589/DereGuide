@@ -32,6 +32,7 @@
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6E1D011A8F0024318C /* LaunchScreen.storyboard */; };
+		129DA88A1D463324004B6E6D /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129DA8891D463324004B6E6D /* RefreshableTableViewController.swift */; };
 		12A9F2BC1D03EF0600E97A1A /* CardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */; };
 		12B98B591D42294200A14D30 /* CGSSBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B98B581D42294200A14D30 /* CGSSBaseModel.swift */; };
 		12B98B5B1D4229B400A14D30 /* CGSSSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B98B5A1D4229B400A14D30 /* CGSSSong.swift */; };
@@ -86,6 +87,7 @@
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1282EE6F1D011A8F0024318C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1282EE711D011A8F0024318C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		129DA8891D463324004B6E6D /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
 		12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewController.swift; sourceTree = "<group>"; };
 		12B98B581D42294200A14D30 /* CGSSBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBaseModel.swift; sourceTree = "<group>"; };
 		12B98B5A1D4229B400A14D30 /* CGSSSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSong.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
 				12129A511D4345EB00ABFE3A /* SongTableViewController.swift */,
+				129DA8891D463324004B6E6D /* RefreshableTableViewController.swift */,
 				12DB29801D124AE5000D2A29 /* CardDetailViewController.swift */,
 			);
 			name = Controller;
@@ -341,6 +344,7 @@
 			files = (
 				12CA487A1D2295E300DC4713 /* RootTabBarViewController.swift in Sources */,
 				12B98B591D42294200A14D30 /* CGSSBaseModel.swift in Sources */,
+				129DA88A1D463324004B6E6D /* RefreshableTableViewController.swift in Sources */,
 				124C170E1D40FD1600943924 /* CGSSUpdateItem.swift in Sources */,
 				12DB29811D124AE5000D2A29 /* CardDetailViewController.swift in Sources */,
 				12BB13AD1D2E888800F68FF1 /* CGSSImageView.swift in Sources */,

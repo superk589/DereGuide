@@ -1,77 +1,44 @@
 //
-//  SongTableViewController.swift
+//  RefreshableTableViewController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 16/7/23.
+//  Created by zzk on 16/7/25.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class SongTableViewController: RefreshableTableViewController {
+class RefreshableTableViewController: UITableViewController {
 
-    var liveList:[CGSSLive]!
-    var sorter:CGSSSorter!
-
-    func check(mask:UInt) {
-        let updater = CGSSUpdater.defaultUpdater
-        if updater.isUpdating {
-            refresher.endRefreshing()
-            return
-        }
-        self.updateStatusView.setContent("检查更新中", hasProgress: false)
-        updater.checkUpdate(mask, complete: { (items, errors) in
-            if !errors.isEmpty {
-                self.updateStatusView.hidden = true
-                let alert = UIAlertController.init(title: "检查更新失败", message: errors.joinWithSeparator("\n"), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
-            } else {
-                self.updateStatusView.setContent("检查更新完成", hasProgress: false)
-                self.updateStatusView.activityIndicator.stopAnimating()
-                UIView.animateWithDuration(2.5, animations: {
-                    self.updateStatusView.alpha = 0
-                    }, completion: { (b) in
-                        self.updateStatusView.hidden = true
-                        self.updateStatusView.alpha = 1
-                })
-                self.refresh()
-            }
-        })
-        refresher.endRefreshing()
-    }
-
-    //根据设定的筛选和排序方法重新展现数据
-    func refresh() {
-        let dao = CGSSDAO.sharedDAO
-        liveList = Array(dao.validLiveDict.values)
-        dao.sortListByAttibuteName(&liveList!, sorter: sorter)
-        tableView.reloadData()
-    }
-    
-    override func refresherValueChanged() {
-        super.refresherValueChanged()
-        check(0b1100)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        refresh()
-    }
-    
+    var refresher: UIRefreshControl!
+    var updateStatusView: UpdateStatusView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dao = CGSSDAO.sharedDAO
-        liveList = Array(dao.validLiveDict.values)
 
+        refresher = UIRefreshControl()
+        refreshControl = refresher
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString.init(string: "检查更新")
+        refreshControl = refresher
+        refresher.addTarget(self, action: #selector(refresherValueChanged), forControlEvents: .ValueChanged)
+        
+        updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
+        updateStatusView.center = view.center
+        updateStatusView.hidden = true
+        UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        sorter = CGSSSorter.init(att: "updateId")
-        dao.sortListByAttibuteName(&liveList!, sorter: sorter)
+    }
+    
+    func refresherValueChanged() {
+//        if CGSSUpdater.defaultUpdater.isUpdating {
+//            refresher.attributedTitle = NSAttributedString.init(string: "正在进行更新，请稍后再试")
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,24 +50,23 @@ class SongTableViewController: RefreshableTableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return liveList.count
+        return 0
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SongCell", forIndexPath: indexPath) as! SongTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        cell.initWith(liveList[indexPath.row])
         // Configure the cell...
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.

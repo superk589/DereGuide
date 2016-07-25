@@ -30,17 +30,16 @@ class CGSSCardIconView: UIImageView {
     }
     
     func setWithCardId(id:Int, target: AnyObject, action: Selector) {
-        self.cardId = id
-        let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
-        self.sd_setImageWithURL(url)
-        self.action = action
-        self.target = target
+        self.setWithCardId(id)
+        self.setAction(target, action: action)
     }
     
     func setAction(target: AnyObject, action: Selector) {
         self.action = action
         self.target = target
     }
+    
+
     
     func onClick() {
         if action != nil {

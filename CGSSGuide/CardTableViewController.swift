@@ -8,24 +8,26 @@
 
 import UIKit
 
-class CardTableViewController: UITableViewController {
+class CardTableViewController: RefreshableTableViewController {
     
     var cardList:[CGSSCard]!
     var searchBar:UISearchBar!
     var filter:CGSSCardFilter!
     var sorter:CGSSSorter!
-    var updateStatusView: UpdateStatusView!
     
-    
-    func check() {
+    func check(mask:UInt) {
         let updater = CGSSUpdater.defaultUpdater
+        if updater.isUpdating {
+            refresher.endRefreshing()
+            return
+        }
         self.updateStatusView.setContent("检查更新中", hasProgress: false)
-        updater.checkUpdate(0b111, complete: { (items, errors) in
+        updater.checkUpdate(mask, complete: { (items, errors) in
             if !errors.isEmpty {
                 self.updateStatusView.hidden = true
                 let alert = UIAlertController.init(title: "检查更新失败", message: errors.joinWithSeparator("\n"), preferredStyle: .Alert)
                 alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
             } else {
                 if items.count == 0 {
                     self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
@@ -34,6 +36,7 @@ class CardTableViewController: UITableViewController {
                         self.updateStatusView.alpha = 0
                         }, completion: { (b) in
                             self.updateStatusView.hidden = true
+                            self.updateStatusView.alpha = 1
                     })
                     return
                 }
@@ -43,23 +46,21 @@ class CardTableViewController: UITableViewController {
                     }, complete: { (success, total) in
                         let alert = UIAlertController.init(title: "更新完成", message: "成功\(success),失败\(total-success)", preferredStyle: .Alert)
                         alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
                         self.updateStatusView.hidden = true
                         updater.setVersionToNewest()
                         self.refresh()
                 })
             }
         })
+        refresher.endRefreshing()
+    }
+    override func refresherValueChanged() {
+        super.refresherValueChanged()
+        check(0b11)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //print(NSHomeDirectory())
-        //检查更新
-        updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
-        updateStatusView.center = view.center
-        updateStatusView.hidden = true
-        UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
     
         let updater = CGSSUpdater.defaultUpdater
         //如果数据Major版本号过低强制删除老数据 再更新
@@ -69,7 +70,7 @@ class CardTableViewController: UITableViewController {
             dao.saveAll(nil)
             let alert = UIAlertController.init(title: "数据需要更新", message: "请点击确定开始更新", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
-                self.check()
+                self.check(0b1111)
             }))
             self.navigationController?.presentViewController(alert, animated: true, completion: nil)
         }
@@ -77,13 +78,13 @@ class CardTableViewController: UITableViewController {
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
             let alert = UIAlertController.init(title: "数据需要更新", message: "请点击确定开始更新", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
-                self.check()
+                self.check(0b1111)
             }))
             self.navigationController?.presentViewController(alert, animated: true, completion: nil)
         }
         //启动时根据用户设置检查常规更新
         else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
-            check()
+            check(0b1111)
         }
         
         
@@ -154,8 +155,6 @@ class CardTableViewController: UITableViewController {
         searchBar.resignFirstResponder()
         refresh()
     }
-    
-    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

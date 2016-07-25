@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import SDWebImage
 
 class SettingsTableViewController: UITableViewController {
 
@@ -21,11 +22,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
 
-    @IBOutlet weak var dataVersionLabel: UILabel! {
-        didSet {
-            dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
-        }
-    }
+    @IBOutlet weak var dataVersionLabel: UILabel!
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
             let infoDic = NSBundle.mainBundle().infoDictionary
@@ -59,15 +56,36 @@ class SettingsTableViewController: UITableViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-//    @IBOutlet weak var checkDataUpdateLabel: UITableViewCell! {
-//        didSet {
-//            let tap = UITapGestureRecognizer.init(target: self, action: #selector(checkUpdate))
-//            checkDataUpdateLabel.addGestureRecognizer(tap)
-//        }
-//    }
-//    func checkUpdate() {
-//        //todo
-//    }
+
+    @IBOutlet weak var wipeDataCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(wipeData))
+            wipeDataCell.addGestureRecognizer(tap)
+        }
+    }
+
+    func wipeData() {
+        if CGSSUpdater.defaultUpdater.isUpdating {
+            return
+        }
+        let alert = UIAlertController.init(title: "确定要清空数据吗？", message: "将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction.init(title: "确定", style: .Destructive, handler: { (alert) in
+            CGSSDAO.sharedDAO.removeAllData()
+            SDImageCache.sharedImageCache().clearDisk()
+            CGSSUpdater.defaultUpdater.setCurrentDataVersion(String(0), minor: String(0))
+            self.refresh()
+        }))
+        alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    func refresh() {
+        dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refresh()
+    }
     
     @IBOutlet weak var reviewCell: UITableViewCell! {
         didSet {

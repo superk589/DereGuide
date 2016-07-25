@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CGSSCardIcon: NSObject, NSCoding {
+public class CGSSCardIcon: CGSSBaseModel {
     public var card_id:Int?
     public var file_name:String?
     public var url:String?
@@ -31,13 +31,15 @@ public class CGSSCardIcon: NSObject, NSCoding {
         }
     }
     init(card_id:Int?, file_name:String?, url:String?, xoffset:Int?, yoffset:Int?) {
+        super.init()
         self.card_id = card_id
         self.file_name = file_name
         self.url = url
         self.xoffset = xoffset
         self.yoffset = yoffset
     }
-    public func encodeWithCoder(aCoder: NSCoder) {
+    public override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(xoffset, forKey: "xoffset")
         aCoder.encodeObject(yoffset, forKey: "yoffset")
         aCoder.encodeObject(card_id, forKey: "card_id")
@@ -45,6 +47,7 @@ public class CGSSCardIcon: NSObject, NSCoding {
         aCoder.encodeObject(url, forKey: "url")
     }
     public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.xoffset = aDecoder.decodeObjectForKey("xoffset") as? Int
         self.yoffset = aDecoder.decodeObjectForKey("yoffset") as? Int
         self.file_name = aDecoder.decodeObjectForKey("file_name") as? String

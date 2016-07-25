@@ -13,6 +13,7 @@ public enum CGSSDataKey:String {
     case Card = "card"
     case Char = "char"
     case LeaderSkill = "leader_skill"
+    case CardIcon = "card_icon"
     case Live = "live"
     case Song = "song"
     case BeatMap = "beatmap"
@@ -23,11 +24,12 @@ public class CGSSDAO: NSObject {
     
     public static let sharedDAO = CGSSDAO()
     
-    //主数据
+    //主数据 采用懒加载
     public lazy var skillDict = CGSSDAO.loadDataFromFile(.Skill)
     public lazy var cardDict = CGSSDAO.loadDataFromFile(.Card)
     public lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.LeaderSkill)
     public lazy var charDict = CGSSDAO.loadDataFromFile(.Char)
+    public lazy var cardIconDict = CGSSDAO.loadDataFromFile(.CardIcon)
     public lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
     public lazy var storyDict = CGSSDAO.loadDataFromFile(.Story)
     public lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
@@ -36,7 +38,7 @@ public class CGSSDAO: NSObject {
     public var validLiveDict:[String:CGSSLive] {
         var lives = [String:CGSSLive]()
         for live in liveDict.allValues as! [CGSSLive] {
-            if [1018,1901].contains(live.musicId!) { continue }
+            if [1018].contains(live.musicId!) { continue }
             if [514].contains(live.id!) { continue }
             if lives.keys.contains(String(live.musicId!)) {
                 if lives[String(live.musicId!)]!.eventType < live.eventType! {
@@ -51,7 +53,7 @@ public class CGSSDAO: NSObject {
     
     static let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first!
     
-    internal static func getDataPath(key:CGSSDataKey) -> String? {
+    private static func getDataPath(key:CGSSDataKey) -> String? {
         //return NSBundle.mainBundle().pathForResource(key.rawValue, ofType: "plist")
         //return NSHomeDirectory() + "/Documents/" + key.rawValue + ".plist"
         return CGSSDAO.path + "/Data/" + key.rawValue + ".plist"
@@ -74,6 +76,8 @@ public class CGSSDAO: NSObject {
             return self.storyDict
         case .BeatMap:
             return self.beatMapDict
+        case .CardIcon:
+            return self.cardIconDict
         }
     }
     
@@ -90,7 +94,7 @@ public class CGSSDAO: NSObject {
             })
         }
     }
-    internal static func loadDataFromFile(key:CGSSDataKey) -> NSMutableDictionary {
+    private static func loadDataFromFile(key:CGSSDataKey) -> NSMutableDictionary {
         if let path = getDataPath(key) {
             if let theData = NSData(contentsOfFile: path) {
                 let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
@@ -170,6 +174,7 @@ public class CGSSDAO: NSObject {
         self.songDict.removeAllObjects()
         self.liveDict.removeAllObjects()
         self.storyDict.removeAllObjects()
+        self.cardIconDict.removeAllObjects()
     }
     
     private override init() {
@@ -197,7 +202,7 @@ public class CGSSDAO: NSObject {
     }
     
     func prepareDefaultData() {
-        let data = [CGSSDataKey.Card.rawValue, CGSSDataKey.Char.rawValue, CGSSDataKey.Skill.rawValue, CGSSDataKey.LeaderSkill.rawValue, CGSSDataKey.Live.rawValue, CGSSDataKey.Song.rawValue, CGSSDataKey.BeatMap.rawValue, CGSSDataKey.Story.rawValue]
+        let data = [CGSSDataKey.Card.rawValue, CGSSDataKey.Char.rawValue, CGSSDataKey.Skill.rawValue, CGSSDataKey.LeaderSkill.rawValue, CGSSDataKey.Live.rawValue, CGSSDataKey.Song.rawValue, CGSSDataKey.BeatMap.rawValue, CGSSDataKey.Story.rawValue, CGSSDataKey.CardIcon.rawValue]
         let nfd = NSFileManager.defaultManager()
         for i in 0..<data.count {
             if !nfd.fileExistsAtPath(CGSSDAO.path + "/Data/\(data[i]).plist") {
@@ -249,6 +254,7 @@ public class CGSSDAO: NSObject {
             self.saveDataToFile(.Live, complete: nil)
             self.saveDataToFile(.BeatMap, complete: nil)
             self.saveDataToFile(.Story, complete: nil)
+            self.saveDataToFile(.CardIcon, complete: nil)
             dispatch_async(dispatch_get_main_queue(), { 
                 complete?()
             })
