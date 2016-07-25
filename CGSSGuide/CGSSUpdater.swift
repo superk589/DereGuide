@@ -97,7 +97,7 @@ public class CGSSUpdater: NSObject {
         var errors = [String]()
         //检查需要更新的数据类型
         var dataTypes = [CGSSUpdateDataType]()
-        for i:UInt in 0...3 {
+        for i:UInt in 0...4 {
             let mask = typeMask >> i
             if mask % 2 == 1 {
                 dataTypes.append(CGSSUpdateDataType(rawValue: 1 << i)!)
@@ -207,6 +207,25 @@ public class CGSSUpdater: NSObject {
                                     let newLive = CGSSLive.init(json: live)
                                     dao.liveDict.setValue(newLive, forKey: live["id"].stringValue)
                                 }
+                                
+                                let max = (live["masterPlus"].intValue == 0) ? 4 : 5
+                                if let beatmap = dao.findBeatmapById(live["id"].intValue, diffId: 1) {
+                                    if beatmap.isOldVersion {
+                                        for i in 1...max {
+                                            let itemId = String(format: "%03d_%d", live["id"].intValue, i)
+                                            let item = CGSSUpdateItem.init(dataType: .Beatmap, id: itemId)
+                                            items.append(item)
+                                        }
+                                    }
+                                } else {
+                                    for i in 1...max {
+                                        let itemId = String(format: "%03d_%d", live["id"].intValue, i)
+                                        let item = CGSSUpdateItem.init(dataType: .Beatmap, id: itemId)
+                                        items.append(item)
+                                    }
+                                    
+                                }
+
                             }
                         }
                         completeInside(nil)
@@ -220,8 +239,7 @@ public class CGSSUpdater: NSObject {
             case .Story:
                 completeInside(nil)
                 break
-            case .BeatMap:
-                
+            case .Beatmap:
                 completeInside(nil)
                 break
             }
@@ -278,8 +296,21 @@ public class CGSSUpdater: NSObject {
                 break
             case .Story:
                 break
-            case .BeatMap:
-                break
+            case .Beatmap:
+                let strURL = CGSSUpdater.URLOfDeresuteApi + "/pattern/\(item.id)"
+                let url = NSURL(string: strURL as String)!
+                let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print("获取谱面数据出错:\(error!.localizedDescription)\(url)")
+                        insideComplete(error)
+                    }else {
+                        let beatmap = CGSSBeatmap.init(json: JSON.init(data: data!))
+                        let dao = CGSSDAO.sharedDAO
+                        dao.beatmapDict.setObject(beatmap, forKey: item.id)
+                    }
+                    insideComplete(nil)
+                })
+                task.resume()
             }
         }
     }

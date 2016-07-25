@@ -16,7 +16,7 @@ public enum CGSSDataKey:String {
     case CardIcon = "card_icon"
     case Live = "live"
     case Song = "song"
-    case BeatMap = "beatmap"
+    case Beatmap = "beatmap"
     case Story = "story"
 }
 
@@ -33,7 +33,7 @@ public class CGSSDAO: NSObject {
     public lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
     public lazy var storyDict = CGSSDAO.loadDataFromFile(.Story)
     public lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
-    public lazy var beatMapDict = CGSSDAO.loadDataFromFile(.BeatMap)
+    public lazy var beatmapDict = CGSSDAO.loadDataFromFile(.Beatmap)
     
     public var validLiveDict:[String:CGSSLive] {
         var lives = [String:CGSSLive]()
@@ -74,8 +74,8 @@ public class CGSSDAO: NSObject {
             return self.liveDict
         case .Story:
             return self.storyDict
-        case .BeatMap:
-            return self.beatMapDict
+        case .Beatmap:
+            return self.beatmapDict
         case .CardIcon:
             return self.cardIconDict
         }
@@ -162,7 +162,7 @@ public class CGSSDAO: NSObject {
 //        //song必须在live之前加载
 //        loadDataFromFile(.Song)
 //        loadDataFromFile(.Live)
-//        loadDataFromFile(.BeatMap)
+//        loadDataFromFile(.Beatmap)
 //        loadDataFromFile(.Story)
 //    }
     func removeAllData() {
@@ -170,7 +170,7 @@ public class CGSSDAO: NSObject {
         self.charDict.removeAllObjects()
         self.skillDict.removeAllObjects()
         self.leaderSkillDict.removeAllObjects()
-        self.beatMapDict.removeAllObjects()
+        self.beatmapDict.removeAllObjects()
         self.songDict.removeAllObjects()
         self.liveDict.removeAllObjects()
         self.storyDict.removeAllObjects()
@@ -202,7 +202,7 @@ public class CGSSDAO: NSObject {
     }
     
     func prepareDefaultData() {
-        let data = [CGSSDataKey.Card.rawValue, CGSSDataKey.Char.rawValue, CGSSDataKey.Skill.rawValue, CGSSDataKey.LeaderSkill.rawValue, CGSSDataKey.Live.rawValue, CGSSDataKey.Song.rawValue, CGSSDataKey.BeatMap.rawValue, CGSSDataKey.Story.rawValue, CGSSDataKey.CardIcon.rawValue]
+        let data = [CGSSDataKey.Card.rawValue, CGSSDataKey.Char.rawValue, CGSSDataKey.Skill.rawValue, CGSSDataKey.LeaderSkill.rawValue, CGSSDataKey.Live.rawValue, CGSSDataKey.Song.rawValue, CGSSDataKey.Beatmap.rawValue, CGSSDataKey.Story.rawValue, CGSSDataKey.CardIcon.rawValue]
         let nfd = NSFileManager.defaultManager()
         for i in 0..<data.count {
             if !nfd.fileExistsAtPath(CGSSDAO.path + "/Data/\(data[i]).plist") {
@@ -252,7 +252,7 @@ public class CGSSDAO: NSObject {
             self.saveDataToFile(.Char, complete: nil)
             self.saveDataToFile(.Song, complete: nil)
             self.saveDataToFile(.Live, complete: nil)
-            self.saveDataToFile(.BeatMap, complete: nil)
+            self.saveDataToFile(.Beatmap, complete: nil)
             self.saveDataToFile(.Story, complete: nil)
             self.saveDataToFile(.CardIcon, complete: nil)
             dispatch_async(dispatch_get_main_queue(), { 
@@ -286,6 +286,10 @@ public class CGSSDAO: NSObject {
         return self.liveDict.objectForKey(String(id)) as? CGSSLive
     }
 
+    public func findBeatmapById(liveId:Int, diffId:Int) -> CGSSBeatmap? {
+        let itemId = String(format: "%03d_%d", liveId, diffId)
+        return self.beatmapDict.objectForKey(itemId) as? CGSSBeatmap
+    }
     
 //    public func findLivebySongId(id:Int) -> CGSSLive? {
 //        var result:CGSSLive?

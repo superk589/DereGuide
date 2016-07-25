@@ -13,7 +13,7 @@ public enum CGSSUpdateDataType:UInt {
     case CardIcon = 2
     case Song = 4
     case Live = 8
-    case BeatMap = 16
+    case Beatmap = 16
     case Story = 32
 }
 class CGSSUpdateItem: NSObject {

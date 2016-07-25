@@ -27,15 +27,29 @@ class SongTableViewController: RefreshableTableViewController {
                 alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                 self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
             } else {
-                self.updateStatusView.setContent("检查更新完成", hasProgress: false)
-                self.updateStatusView.activityIndicator.stopAnimating()
-                UIView.animateWithDuration(2.5, animations: {
-                    self.updateStatusView.alpha = 0
-                    }, completion: { (b) in
+                if items.count == 0 {
+                    self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
+                    self.updateStatusView.activityIndicator.stopAnimating()
+                    UIView.animateWithDuration(2.5, animations: {
+                        self.updateStatusView.alpha = 0
+                        }, completion: { (b) in
+                            self.updateStatusView.hidden = true
+                            self.updateStatusView.alpha = 1
+                    })
+                    return
+                }
+                self.updateStatusView.setContent("更新数据中", hasProgress: true)
+                updater.updateItems(items, progress: { (process, total) in
+                    self.updateStatusView.updateProgress(process, b: total)
+                    }, complete: { (success, total) in
+                        let alert = UIAlertController.init(title: "更新完成", message: "成功\(success),失败\(total-success)", preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                        self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
                         self.updateStatusView.hidden = true
-                        self.updateStatusView.alpha = 1
+                        updater.setVersionToNewest()
+                        self.refresh()
                 })
-                self.refresh()
+
             }
         })
         refresher.endRefreshing()
@@ -51,7 +65,7 @@ class SongTableViewController: RefreshableTableViewController {
     
     override func refresherValueChanged() {
         super.refresherValueChanged()
-        check(0b1100)
+        check(0b11100)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -101,6 +115,20 @@ class SongTableViewController: RefreshableTableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let beatmapVC = BeatmapViewController()
+        let live = liveList[indexPath.row]
+        var beatmaps = [CGSSBeatmap]()
+        let dao = CGSSDAO.sharedDAO
+        let max = (live.masterPlus == 0) ? 4 : 5
+        for i in 1...max {
+            if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
+                beatmaps.append(beatmap)
+            }
+        }
+        beatmapVC.beatmaps = beatmaps
+        self.navigationController?.pushViewController(beatmapVC, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
