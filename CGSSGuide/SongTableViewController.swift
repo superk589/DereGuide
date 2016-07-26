@@ -118,15 +118,8 @@ class SongTableViewController: RefreshableTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let beatmapVC = BeatmapViewController()
         let live = liveList[indexPath.row]
-        var beatmaps = [CGSSBeatmap]()
-        let dao = CGSSDAO.sharedDAO
-        let max = (live.masterPlus == 0) ? 4 : 5
-        for i in 1...max {
-            if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
-                beatmaps.append(beatmap)
-            }
-        }
-        beatmapVC.beatmaps = beatmaps
+       
+        beatmapVC.initWithLive(live)
         self.navigationController?.pushViewController(beatmapVC, animated: true)
     }
 

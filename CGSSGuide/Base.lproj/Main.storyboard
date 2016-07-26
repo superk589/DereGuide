@@ -97,7 +97,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="L0F-L7-4EY" detailTextLabel="aJQ-Ij-J1K" style="IBUITableViewCellStyleValue1" id="pGC-HV-4yd">
-                                        <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="180" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGC-HV-4yd" id="cCd-ci-eDF">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -125,7 +125,7 @@
                             <tableViewSection headerTitle="反馈" id="1cN-eL-xzi">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" editingAccessoryType="checkmark" textLabel="xrP-YC-gLm" detailTextLabel="yea-dy-MAs" style="IBUITableViewCellStyleValue1" id="ccx-8P-Gr7">
-                                        <rect key="frame" x="0.0" y="208" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="252" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccx-8P-Gr7" id="ONS-te-AaG">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -149,7 +149,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" editingAccessoryType="checkmark" textLabel="r3b-gr-oUP" detailTextLabel="iFg-0j-m3k" style="IBUITableViewCellStyleValue1" id="Uze-Od-qJl">
-                                        <rect key="frame" x="0.0" y="252" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="296" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uze-Od-qJl" id="FRX-tC-uR8">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -177,7 +177,7 @@
                             <tableViewSection headerTitle="关于" id="Sc7-uC-obv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fQd-50-rlt" detailTextLabel="JC6-90-IPo" style="IBUITableViewCellStyleValue1" id="TVA-im-EEd">
-                                        <rect key="frame" x="0.0" y="324" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="368" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TVA-im-EEd" id="7vs-6L-2NQ">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -204,7 +204,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="FGJ-uD-iwy" detailTextLabel="FDQ-Ta-OpR" style="IBUITableViewCellStyleValue1" id="4rH-M9-kH7">
-                                        <rect key="frame" x="0.0" y="368" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="412" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rH-M9-kH7" id="F0W-Am-h5x">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -231,7 +231,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="UuG-iS-uix" detailTextLabel="PtN-e6-otR" style="IBUITableViewCellStyleValue1" id="xLR-n9-piR">
-                                        <rect key="frame" x="0.0" y="412" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="456" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xLR-n9-piR" id="rWj-1H-Rez">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -530,43 +530,52 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <rect key="frame" x="114" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Cool"/>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="64" y="0.0" width="30" height="28"/>
+                                                            </variation>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGN-vw-0uS">
                                                             <rect key="frame" x="227" y="0.0" width="50" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Passion"/>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="127" y="0.0" width="50" height="28"/>
+                                                            </variation>
                                                         </button>
                                                     </subviews>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="23" y="8" width="177" height="28"/>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="51a-QS-WNG"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="HXd-ot-6Iq"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="centerY" secondItem="Pgn-8r-sPL" secondAttribute="centerY" id="O9x-3n-dgd"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="NpU-br-hCF" secondAttribute="bottom" id="Pyq-hI-cXh"/>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="fYj-HP-6Ph"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="trailing" secondItem="Pgn-8r-sPL" secondAttribute="centerX" id="iVT-Dr-Mck"/>
-                                                <constraint firstAttribute="trailing" secondItem="NpU-br-hCF" secondAttribute="trailing" constant="200" id="uDB-Uq-zu5"/>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="vmv-iG-fqY"/>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="centerY" secondItem="Pgn-8r-sPL" secondAttribute="centerY" id="w6r-nv-Y0k"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="wRS-k6-XHD"/>
+                                                <constraint firstAttribute="trailing" secondItem="NpU-br-hCF" secondAttribute="trailing" constant="200" id="y3e-aN-WfY"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="yQc-Iu-uSA"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="fYj-HP-6Ph"/>
-                                                    <exclude reference="uDB-Uq-zu5"/>
-                                                    <exclude reference="vmv-iG-fqY"/>
-                                                    <exclude reference="w6r-nv-Y0k"/>
+                                                    <exclude reference="51a-QS-WNG"/>
+                                                    <exclude reference="O9x-3n-dgd"/>
+                                                    <exclude reference="y3e-aN-WfY"/>
+                                                    <exclude reference="yQc-Iu-uSA"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="constraints">
+                                                    <include reference="51a-QS-WNG"/>
                                                     <exclude reference="HXd-ot-6Iq"/>
+                                                    <include reference="O9x-3n-dgd"/>
                                                     <exclude reference="Pyq-hI-cXh"/>
-                                                    <include reference="fYj-HP-6Ph"/>
                                                     <exclude reference="iVT-Dr-Mck"/>
-                                                    <include reference="uDB-Uq-zu5"/>
-                                                    <include reference="vmv-iG-fqY"/>
-                                                    <include reference="w6r-nv-Y0k"/>
                                                     <exclude reference="wRS-k6-XHD"/>
+                                                    <include reference="y3e-aN-WfY"/>
+                                                    <include reference="yQc-Iu-uSA"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -626,8 +635,14 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <rect key="frame" x="203" y="0.0" width="74" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="    未收藏    "/>
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="103" y="0.0" width="74" height="28"/>
+                                                            </variation>
                                                         </button>
                                                     </subviews>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="23" y="8" width="177" height="28"/>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

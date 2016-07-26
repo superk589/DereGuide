@@ -33,6 +33,8 @@ public class CGSSDAO: NSObject {
     public lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
     public lazy var storyDict = CGSSDAO.loadDataFromFile(.Story)
     public lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
+    
+    //beatmap字典存在载入性能问题 延迟大约3秒
     public lazy var beatmapDict = CGSSDAO.loadDataFromFile(.Beatmap)
     
     public var validLiveDict:[String:CGSSLive] {

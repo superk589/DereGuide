@@ -43,10 +43,51 @@ public class CGSSBeatmap: CGSSBaseModel{
             aCoder.encodeObject(self.groupId, forKey: "groupId")
         }
     }
-    var notes:[Note]?
+    var notes:[Note]
+
+    var numberOfNotes:Int {
+        if let note = notes.first {
+            return note.status ?? 0
+        }
+        return 0
+    }
+    
+    var firstNote:Note? {
+        for i in 0...notes.count - 1 {
+            if notes[i].finishPos != 0 {
+                return notes[i]
+            }
+        }
+        return nil
+    }
+    
+    var lastNote:Note? {
+        for i in 0...notes.count - 1 {
+            if notes[notes.count - i - 1].finishPos != 0 {
+                return notes[notes.count - i - 1]
+            }
+        }
+        return nil
+    }
+    
+    var preSeconds:Float? {
+        return firstNote?.sec
+    }
+    var postSeconds:Float? {
+        return lastNote?.sec
+    }
+    var totalSeconds:Float {
+        return notes.last!.sec!
+    }
+    
+    var validSeconds:Float {
+        return postSeconds! - preSeconds!
+    }
+        
     required public init?(coder aDecoder: NSCoder) {
+        self.notes = aDecoder.decodeObjectForKey("notes") as? [Note] ?? [Note]()
         super.init(coder: aDecoder)
-        self.notes = aDecoder.decodeObjectForKey("notes") as? [Note]
+        
     }
     override public func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -65,9 +106,11 @@ public class CGSSBeatmap: CGSSBaseModel{
             note.status = sub["status"].intValue
             note.sync = sub["sync"].intValue
             note.groupId = sub["groupId"].intValue
-            self.notes?.append(note)
+            self.notes.append(note)
         }
         super.init()
     }
+    
+    
     
 }
