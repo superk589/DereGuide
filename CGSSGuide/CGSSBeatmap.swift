@@ -83,6 +83,24 @@ public class CGSSBeatmap: CGSSBaseModel{
     var validSeconds:Float {
         return postSeconds! - preSeconds!
     }
+    
+
+    func comboForSec(sec:Float) -> Int {
+        func findnear(sec:Float, start:Int, length:Int) -> Int {
+            if length <= 1 {
+                return start - 1
+            }
+            let middle = start + length/2
+            if sec == notes[middle].sec {
+                return middle - 1
+            } else if sec < notes[middle].sec {
+                return findnear(sec, start: start, length: length/2)
+            } else {
+                return findnear(sec, start: start + length/2, length: length/2)
+            }
+        }
+        return findnear(sec + preSeconds!, start: 2, length: numberOfNotes)
+    }
         
     required public init?(coder aDecoder: NSCoder) {
         self.notes = aDecoder.decodeObjectForKey("notes") as? [Note] ?? [Note]()

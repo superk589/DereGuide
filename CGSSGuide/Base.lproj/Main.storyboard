@@ -530,22 +530,13 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <rect key="frame" x="114" y="0.0" width="30" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Cool"/>
-                                                            <variation key="widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="64" y="0.0" width="30" height="28"/>
-                                                            </variation>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGN-vw-0uS">
                                                             <rect key="frame" x="227" y="0.0" width="50" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Passion"/>
-                                                            <variation key="widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="127" y="0.0" width="50" height="28"/>
-                                                            </variation>
                                                         </button>
                                                     </subviews>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="23" y="8" width="177" height="28"/>
-                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -635,14 +626,8 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <rect key="frame" x="203" y="0.0" width="74" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="    未收藏    "/>
-                                                            <variation key="widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="103" y="0.0" width="74" height="28"/>
-                                                            </variation>
                                                         </button>
                                                     </subviews>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="23" y="8" width="177" height="28"/>
-                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
