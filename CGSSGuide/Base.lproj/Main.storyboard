@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Card Table View Controller-->
+        <!--卡片-->
         <scene sceneID="KCR-Q9-PSW">
             <objects>
-                <tableViewController id="XEw-Y1-ITn" customClass="CardTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="卡片" id="XEw-Y1-ITn" customClass="CardTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="5" sectionFooterHeight="5" id="IPd-c3-lQ2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -313,10 +313,10 @@
             </objects>
             <point key="canvasLocation" x="-2027.9999999999998" y="214.99999999999997"/>
         </scene>
-        <!--设置-->
+        <!--设置导航-->
         <scene sceneID="3UH-G6-k3Y">
             <objects>
-                <navigationController id="Lc3-lA-ZOL" sceneMemberID="viewController">
+                <navigationController title="设置导航" id="Lc3-lA-ZOL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="设置" id="gI8-ss-NS6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PYk-Gh-Jnc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -330,10 +330,10 @@
             </objects>
             <point key="canvasLocation" x="-3594" y="214.99999999999997"/>
         </scene>
-        <!--Root Tab Bar View Controller-->
+        <!--根标签栏-->
         <scene sceneID="6Yg-Ih-m8u">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="根标签栏" automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR">
                         <autoresizingMask key="autoresizingMask"/>
@@ -342,12 +342,59 @@
                     <connections>
                         <segue destination="5Hs-jz-swe" kind="relationship" relationship="viewControllers" id="eSt-La-P0t"/>
                         <segue destination="KxG-H5-NIc" kind="relationship" relationship="viewControllers" id="9Po-cc-mal"/>
-                        <segue destination="Lc3-lA-ZOL" kind="relationship" relationship="viewControllers" id="ZZf-Gm-Jpq"/>
+                        <segue destination="IyO-O4-iMn" kind="relationship" relationship="viewControllers" id="vi5-tW-gH1"/>
+                        <segue destination="Lc3-lA-ZOL" kind="relationship" relationship="viewControllers" id="umc-cu-3CW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSz-SK-JmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4406" y="-565.99999999999989"/>
+            <point key="canvasLocation" x="-5894" y="-574"/>
+        </scene>
+        <!--组队-->
+        <scene sceneID="4om-XR-tsE">
+            <objects>
+                <tableViewController title="组队" id="Zys-WZ-9cy" customClass="TeamTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3og-Fu-WEt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TeamCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamCell" id="nT8-0z-vMu" customClass="TeamTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nT8-0z-vMu" id="2SE-Rf-waV">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Zys-WZ-9cy" id="bLP-SL-O8T"/>
+                            <outlet property="delegate" destination="Zys-WZ-9cy" id="XzS-P2-Dxw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的队伍" id="1N5-JG-Kjr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9J9-Wr-vyq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4401" y="1721"/>
+        </scene>
+        <!--组队导航-->
+        <scene sceneID="3Ro-R5-hIA">
+            <objects>
+                <navigationController title="组队导航" id="IyO-O4-iMn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="组队" id="Ji2-5n-2Mz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="agS-1H-YQh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Zys-WZ-9cy" kind="relationship" relationship="rootViewController" id="aR7-Z5-Bwt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6nx-Ag-0t2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5894" y="1721"/>
         </scene>
         <!--致谢-->
         <scene sceneID="l2X-yp-WOM">
@@ -828,10 +875,10 @@ http://imascg-slstage-wiki.gamerch.com
             </objects>
             <point key="canvasLocation" x="-3594" y="-1252"/>
         </scene>
-        <!--歌曲-->
+        <!--歌曲导航-->
         <scene sceneID="kBj-5g-TfY">
             <objects>
-                <navigationController id="KxG-H5-NIc" sceneMemberID="viewController">
+                <navigationController title="歌曲导航" id="KxG-H5-NIc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="歌曲" id="gE2-j0-zef"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="unN-TZ-n18">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -843,7 +890,7 @@ http://imascg-slstage-wiki.gamerch.com
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jda-UR-jBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4407" y="-1252"/>
+            <point key="canvasLocation" x="-4463" y="-1252"/>
         </scene>
         <!--卡片-->
         <scene sceneID="73S-hd-Baf">
