@@ -209,23 +209,19 @@ public class CGSSUpdater: NSObject {
                                 }
                                 
                                 let max = (live["masterPlus"].intValue == 0) ? 4 : 5
-                                if let beatmap = dao.findBeatmapById(live["id"].intValue, diffId: 1) {
-                                    if beatmap.isOldVersion {
-                                        for i in 1...max {
+                                for i in 1...max {
+                                    if let beatmap = dao.findBeatmapById(live["id"].intValue, diffId: i) {
+                                        if beatmap.isOldVersion {
                                             let itemId = String(format: "%03d_%d", live["id"].intValue, i)
                                             let item = CGSSUpdateItem.init(dataType: .Beatmap, id: itemId)
                                             items.append(item)
                                         }
-                                    }
-                                } else {
-                                    for i in 1...max {
+                                    } else {
                                         let itemId = String(format: "%03d_%d", live["id"].intValue, i)
                                         let item = CGSSUpdateItem.init(dataType: .Beatmap, id: itemId)
                                         items.append(item)
                                     }
-                                    
                                 }
-
                             }
                         }
                         completeInside(nil)

@@ -220,7 +220,6 @@ class CardTableViewController: RefreshableTableViewController {
         transition.type = kCATransitionFade
         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
         navigationController?.pushViewController(filterVC, animated: false)
-        
     }
     
     
@@ -232,6 +231,9 @@ class CardTableViewController: RefreshableTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cardDetailVC = CardDetailViewController()
         cardDetailVC.card = self.cardList[indexPath.row]
+        //打开谱面时 隐藏tabbar
+        cardDetailVC.hidesBottomBarWhenPushed = true
+
         //cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
         //使用自定义动画效果

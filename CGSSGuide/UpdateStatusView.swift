@@ -52,6 +52,7 @@ class UpdateStatusView: UIView {
         } else {
             activityIndicator.stopAnimating()
         }
+        statusLabel.text = ""
         statusLabel.hidden = !hasProgress
         progressView.hidden = !hasProgress
     }

@@ -182,8 +182,8 @@
 			children = (
 				12EF0A1A1D38C3810025B80D /* SettingsTableViewController.swift */,
 				122AAA241D2A11C50055D156 /* CardFilterAndSorterTableViewController.swift */,
-				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
 				12A9F2BB1D03EF0600E97A1A /* CardTableViewController.swift */,
+				12CA48791D2295E300DC4713 /* RootTabBarViewController.swift */,
 				12129A511D4345EB00ABFE3A /* SongTableViewController.swift */,
 				129DA88D1D46518E004B6E6D /* BeatmapViewController.swift */,
 				129DA8891D463324004B6E6D /* RefreshableTableViewController.swift */,

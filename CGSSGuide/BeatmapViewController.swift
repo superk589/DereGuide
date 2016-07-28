@@ -45,8 +45,9 @@ class BeatmapViewController: UIViewController {
     var tv:UIToolbar!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         bv = BeatmapView()
-        bv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 112 )
+        bv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64 )
 
         //自定义descLabel
         descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
@@ -90,17 +91,27 @@ class BeatmapViewController: UIViewController {
     }
     
     
-    func initWithLive(live:CGSSLive) {
+    func initWithLive(live:CGSSLive) -> Bool {
+        //打开谱面时 隐藏tabbar
+        self.hidesBottomBarWhenPushed = true
+
         var beatmaps = [CGSSBeatmap]()
         let dao = CGSSDAO.sharedDAO
         maxDiff = (live.masterPlus == 0) ? 4 : 5
         for i in 1...maxDiff {
             if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
                 beatmaps.append(beatmap)
+            } else {
+                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(diffStringFromInt(i))的歌曲,建议等待当前更新完成,或尝试下拉歌曲列表手动更新数据", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                self.navigationController?.presentViewController(alert, animated: true, completion: nil)
+                return false
             }
+
         }
         self.beatmaps = beatmaps
         self.live = live
+        return true
     }
 
     /*

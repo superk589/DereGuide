@@ -119,8 +119,14 @@ class SongTableViewController: RefreshableTableViewController {
         let beatmapVC = BeatmapViewController()
         let live = liveList[indexPath.row]
        
-        beatmapVC.initWithLive(live)
-        self.navigationController?.pushViewController(beatmapVC, animated: true)
+        if beatmapVC.initWithLive(live) {
+            self.navigationController?.pushViewController(beatmapVC, animated: true)
+        }
+        else {
+            let alert = UIAlertController.init(title: "数据缺失", message: "缺少歌曲数据,建议等待当前更新完成,或尝试下拉歌曲列表手动更新数据", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     /*

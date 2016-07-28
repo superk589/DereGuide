@@ -10,6 +10,9 @@ import UIKit
 
 class CardDetailView: UIScrollView {
   
+    //滚动视图内容距底部边距
+    static let bottomInset:CGFloat = 60
+    
     var fullImageView:CGSSImageView?
 
     var cardIconView:CGSSCardIconView!
@@ -130,14 +133,14 @@ class CardDetailView: UIScrollView {
         
         //
         //originY = originY + 300
-        contentSize = CGSizeMake(CGSSTool.width, originY)
+        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
         
     }
     
     
     
     convenience init() {
-        let frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height-112)
+        let frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height-64)
         self.init(frame: frame)
     }
     
@@ -193,7 +196,7 @@ class CardDetailView: UIScrollView {
         addSubview(skillContentView)
         
         originY = originY + 114
-        contentSize = CGSizeMake(CGSSTool.width, originY+20)
+        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
     }
     
     func setLeaderSkillContentView() {
@@ -239,7 +242,7 @@ class CardDetailView: UIScrollView {
         
         
         originY = originY + 69
-        contentSize = CGSizeMake(CGSSTool.width, originY+20)
+        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
         addSubview(leaderSkillContentView)
     }
 
@@ -278,7 +281,7 @@ class CardDetailView: UIScrollView {
         evolutionContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         
         originY = originY + 87
-        contentSize = CGSizeMake(CGSSTool.width, originY+20)
+        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
         addSubview(evolutionContentView)
     }
     
@@ -372,6 +375,8 @@ class CardDetailView: UIScrollView {
         priceContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         
         originY = originY + 51
+        
+        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
     }
     
     required init?(coder aDecoder: NSCoder) {

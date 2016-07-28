@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Eme-MZ-6LK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Eme-MZ-6LK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -354,10 +354,10 @@
             </objects>
             <point key="canvasLocation" x="-3594" y="215"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Root Tab Bar View Controller-->
         <scene sceneID="6Yg-Ih-m8u">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR">
                         <autoresizingMask key="autoresizingMask"/>
@@ -537,36 +537,46 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <state key="normal" title="Passion"/>
                                                         </button>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="dfb-tZ-B9F" firstAttribute="leading" secondItem="ZPt-aB-fDS" secondAttribute="trailing" constant="33" id="V7T-36-bYV"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="V7T-36-bYV"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="V7T-36-bYV"/>
+                                                        </mask>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="51a-QS-WNG"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="4Nt-dk-NJJ"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="HXd-ot-6Iq"/>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="centerY" secondItem="Pgn-8r-sPL" secondAttribute="centerY" id="O9x-3n-dgd"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="NpU-br-hCF" secondAttribute="bottom" id="Pyq-hI-cXh"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="trailing" secondItem="Pgn-8r-sPL" secondAttribute="centerX" id="iVT-Dr-Mck"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="centerY" secondItem="Pgn-8r-sPL" secondAttribute="centerY" id="jTv-tW-HXx"/>
+                                                <constraint firstItem="NpU-br-hCF" firstAttribute="leading" secondItem="Pgn-8r-sPL" secondAttribute="leadingMargin" constant="15" id="sbI-WJ-Iz1"/>
                                                 <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="wRS-k6-XHD"/>
-                                                <constraint firstAttribute="trailing" secondItem="NpU-br-hCF" secondAttribute="trailing" constant="200" id="y3e-aN-WfY"/>
-                                                <constraint firstItem="NpU-br-hCF" firstAttribute="top" secondItem="Pgn-8r-sPL" secondAttribute="topMargin" id="yQc-Iu-uSA"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="51a-QS-WNG"/>
-                                                    <exclude reference="O9x-3n-dgd"/>
-                                                    <exclude reference="y3e-aN-WfY"/>
-                                                    <exclude reference="yQc-Iu-uSA"/>
+                                                    <exclude reference="4Nt-dk-NJJ"/>
+                                                    <exclude reference="jTv-tW-HXx"/>
+                                                    <exclude reference="sbI-WJ-Iz1"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="51a-QS-WNG"/>
+                                                    <include reference="4Nt-dk-NJJ"/>
                                                     <exclude reference="HXd-ot-6Iq"/>
-                                                    <include reference="O9x-3n-dgd"/>
                                                     <exclude reference="Pyq-hI-cXh"/>
                                                     <exclude reference="iVT-Dr-Mck"/>
+                                                    <include reference="jTv-tW-HXx"/>
+                                                    <include reference="sbI-WJ-Iz1"/>
                                                     <exclude reference="wRS-k6-XHD"/>
-                                                    <include reference="y3e-aN-WfY"/>
-                                                    <include reference="yQc-Iu-uSA"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -628,14 +638,48 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <state key="normal" title="    未收藏    "/>
                                                         </button>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="07k-ho-sBa" firstAttribute="leading" secondItem="88G-Qa-pCH" secondAttribute="trailing" constant="30" id="Q6R-lH-vF9"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Q6R-lH-vF9"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="Q6R-lH-vF9"/>
+                                                        </mask>
+                                                    </variation>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="top" secondItem="5kv-T1-GCP" secondAttribute="topMargin" id="KRQ-aX-Ckj"/>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="centerY" secondItem="5kv-T1-GCP" secondAttribute="centerY" id="VCQ-Ba-auF"/>
+                                                <constraint firstItem="RU2-pd-96n" firstAttribute="leading" secondItem="5kv-T1-GCP" secondAttribute="leadingMargin" constant="15" id="ebd-7k-iwM"/>
                                                 <constraint firstItem="RU2-pd-96n" firstAttribute="trailing" secondItem="5kv-T1-GCP" secondAttribute="centerX" id="hOE-ht-MKq"/>
                                                 <constraint firstItem="RU2-pd-96n" firstAttribute="leading" secondItem="5kv-T1-GCP" secondAttribute="leadingMargin" constant="15" id="pup-Pv-dlo"/>
                                                 <constraint firstItem="RU2-pd-96n" firstAttribute="top" secondItem="5kv-T1-GCP" secondAttribute="topMargin" id="sgm-aX-4Ek"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="RU2-pd-96n" secondAttribute="bottom" id="wUZ-Sz-3oO"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="KRQ-aX-Ckj"/>
+                                                    <exclude reference="VCQ-Ba-auF"/>
+                                                    <exclude reference="ebd-7k-iwM"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="KRQ-aX-Ckj"/>
+                                                    <include reference="VCQ-Ba-auF"/>
+                                                    <include reference="ebd-7k-iwM"/>
+                                                    <exclude reference="hOE-ht-MKq"/>
+                                                    <exclude reference="pup-Pv-dlo"/>
+                                                    <exclude reference="sgm-aX-4Ek"/>
+                                                    <exclude reference="wUZ-Sz-3oO"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

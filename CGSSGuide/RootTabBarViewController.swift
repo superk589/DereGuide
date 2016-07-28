@@ -14,9 +14,9 @@ class RootTabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         
-        let cardTableViewController = CardTableViewController()
+        //let cardTableViewController = CardTableViewController()
         
-        self.addChildViewController(cardTableViewController)
+        //self.addChildViewController(cardTableViewController)
         
         // Do any additional setup after loading the view.
     }

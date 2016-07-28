@@ -85,21 +85,38 @@ public class CGSSBeatmap: CGSSBaseModel{
     }
     
 
+//    func comboForSec(sec:Float) -> Int {
+//        func findnear(sec:Float, start:Int, end:Int) -> Int {
+//            if start == end {
+//                return start - 2
+//            }
+//            let middle = (start + end) / 2
+//            if abs(sec - notes[middle].sec!) <= 0.01 {
+//                return middle - 1
+//            } else if sec < notes[middle].sec {
+//                return findnear(sec, start: start, end: middle)
+//            } else {
+//                return findnear(sec, start: middle + 1, end: end)
+//            }
+//        }
+//        return findnear(sec + preSeconds!, start: 2, end: notes.count - 1)
+//    }
+    
+    
+    //折半查找指定秒数对应的combo数
     func comboForSec(sec:Float) -> Int {
-        func findnear(sec:Float, start:Int, length:Int) -> Int {
-            if length <= 1 {
-                return start - 1
-            }
-            let middle = start + length/2
-            if sec == notes[middle].sec {
-                return middle - 1
-            } else if sec < notes[middle].sec {
-                return findnear(sec, start: start, length: length/2)
+        let newSec = sec + preSeconds!
+        var end = numberOfNotes + 2
+        var start = 2
+        while start <= end {
+            let middle = (start + end) / 2
+            if newSec < notes[middle].sec {
+                end = middle - 1
             } else {
-                return findnear(sec, start: start + length/2, length: length/2)
+                start = middle + 1
             }
         }
-        return findnear(sec + preSeconds!, start: 2, length: numberOfNotes)
+        return start - 2
     }
         
     required public init?(coder aDecoder: NSCoder) {
