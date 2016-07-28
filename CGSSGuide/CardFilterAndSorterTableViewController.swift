@@ -9,18 +9,17 @@
 import UIKit
 
 class CardFilterAndSorterTableViewController: UITableViewController {
-    @IBOutlet weak var rarityStackView: UIStackView!
-    @IBOutlet weak var attributeStackView: UIStackView!
-    @IBOutlet weak var cardTypeStackView: UIStackView!
+  
+    @IBOutlet weak var rarityStackView: UIView!
+    @IBOutlet weak var cardTypeStackView: UIView!
+    @IBOutlet weak var attributeStackView: UIView!
+    @IBOutlet weak var favoriteStackView: UIView!
 
-    @IBOutlet weak var ascendingStackView: UIStackView!
-    
-    @IBOutlet weak var attributeSortingStackView: UIStackView!
-    
-    @IBOutlet weak var otherSortingStackView: UIStackView!
-    
-    @IBOutlet weak var favoriteStackView: UIStackView!
+    @IBOutlet weak var ascendingStackView: UIView!
+    @IBOutlet weak var attributeSortingStackView: UIView!
+    @IBOutlet weak var otherSortingStackView: UIView!
  
+    
     var sortingButtons:[UIButton]!
     
     var filter:CGSSCardFilter!
@@ -36,7 +35,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = backButton
         
         for i in 0...7 {
-            let button = rarityStackView.arrangedSubviews[i] as! UIButton
+            let button = rarityStackView.subviews[i] as! UIButton
             //button.layer.borderWidth = 1
             //button.layer.borderColor = color.CGColor
             button.addTarget(self, action: #selector(rarityButtonClick), forControlEvents: .TouchUpInside)
@@ -49,7 +48,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         }
         
         for i in 0...2 {
-            let button = cardTypeStackView.arrangedSubviews[i] as! UIButton
+            let button = cardTypeStackView.subviews[i] as! UIButton
             //button.layer.borderWidth = 1
             //button.layer.borderColor = UIColor.blueColor().CGColor
             //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
@@ -62,7 +61,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         }
         
         for i in 0...2 {
-            let button = attributeStackView.arrangedSubviews[i] as! UIButton
+            let button = attributeStackView.subviews[i] as! UIButton
             //button.layer.borderWidth = 1
             //button.layer.borderColor = UIColor.blueColor().CGColor
             //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
@@ -75,7 +74,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         }
         
         for i in 0...1 {
-            let button = favoriteStackView.arrangedSubviews[i] as! UIButton
+            let button = favoriteStackView.subviews[i] as! UIButton
             //button.layer.borderWidth = 1
             //button.layer.borderColor = UIColor.blueColor().CGColor
             //button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
@@ -87,14 +86,14 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             }
         }
         
-        let ascendingbutton = ascendingStackView.arrangedSubviews[1] as! UIButton
+        let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
         ascendingbutton.addTarget(self, action: #selector(ascendingAction), forControlEvents: .TouchUpInside)
         if sorter.ascending {
             ascendingbutton.selected = true
                 //button.backgroundColor = color
         }
         
-        let descendingButton = ascendingStackView.arrangedSubviews[0] as! UIButton
+        let descendingButton = ascendingStackView.subviews[0] as! UIButton
         descendingButton.addTarget(self, action: #selector(descendingAction), forControlEvents: .TouchUpInside)
         if !sorter.ascending {
             descendingButton.selected = true
@@ -103,7 +102,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
 
         sortingButtons = [UIButton]()
         for i in 0...3 {
-            let button = attributeSortingStackView.arrangedSubviews[i] as! UIButton
+            let button = attributeSortingStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 1000+i
             button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
@@ -113,7 +112,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             }
         }
         for i in 0...2 {
-            let button = otherSortingStackView.arrangedSubviews[i] as! UIButton
+            let button = otherSortingStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 2000+i
             button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
@@ -194,7 +193,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     func ascendingAction(sender:UIButton) {
         if !sender.selected {
             sender.selected = true
-            let descendingButton = ascendingStackView.arrangedSubviews[0] as! UIButton
+            let descendingButton = ascendingStackView.subviews[0] as! UIButton
             descendingButton.selected = false
             sorter.ascending = true
         }
@@ -202,7 +201,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     func descendingAction(sender:UIButton){
         if !sender.selected {
             sender.selected = true
-            let ascendingButton = ascendingStackView.arrangedSubviews[1] as! UIButton
+            let ascendingButton = ascendingStackView.subviews[1] as! UIButton
             ascendingButton.selected = false
             sorter.ascending = false
         }
