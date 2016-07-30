@@ -1,7 +1,7 @@
 ```plain
 # The MIT License
 
-Copyright (c) 2016 superk <superk589@gmail.com>
+Copyright (c) 2016 Zhenkai Zhao <superk589@gmail.com>
 
 Permission is hereby granted, free of charge, to any
 person obtaining a copy of this software and associated
