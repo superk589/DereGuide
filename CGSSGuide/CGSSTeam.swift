@@ -8,29 +8,40 @@
 
 import UIKit
 
-class CGSSTeam {
-    var members:[Int]!
-    var skills:[Int]!
-    
-    var teamPresentValue:Int?
+class CGSSTeam: NSObject, NSCoding {
+    var leader: CGSSTeamMember!
+    var subs: [CGSSTeamMember]!
+    //队伍总表现值
+    var teamPresentValue:Int? {
+        return 0
+    }
+    var teamVocal:Int? {
+        return 0
+    }
+    var teamDance:Int? {
+        return 0
+    }
+    var teamVisual:Int? {
+        return 0
+    }
     var teamBackSupportValue:Int?
     
-    
-    var teamLeader: CGSSCard? {
-        if members[0] > 0 {
-            return CGSSDAO.sharedDAO.findCardById(members[0])
-        }
-        return nil
+    init(leader:CGSSTeamMember, subs:[CGSSTeamMember], teamBackSupportValue:Int) {
+        self.leader = leader
+        self.subs = subs
+        self.teamBackSupportValue = teamBackSupportValue
     }
     
-    init(members:[Int], skills:[Int]) {
-        self.members = members
-        self.skills = skills
+    required init?(coder aDecoder: NSCoder) {
+        self.leader = aDecoder.decodeObjectForKey("leader") as? CGSSTeamMember
+        self.subs = aDecoder.decodeObjectForKey("subs") as? [CGSSTeamMember]
+        self.teamBackSupportValue = aDecoder.decodeObjectForKey("teamBackSupportValue") as? Int
     }
-    convenience init() {
-        let members = [Int].init(count: 0, repeatedValue: 5)
-        let skills = [Int].init(count: 1, repeatedValue: 5)
-        self.init(members: members, skills: skills)
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(leader, forKey: "leader")
+        aCoder.encodeObject(subs, forKey: "subs")
+        aCoder.encodeObject(teamBackSupportValue, forKey: "teamBackSupportValue")
     }
    
 }

@@ -12,7 +12,7 @@ class SongTableViewController: RefreshableTableViewController {
 
     var liveList:[CGSSLive]!
     var sorter:CGSSSorter!
-
+    var searchBar:UISearchBar!
     func check(mask:UInt) {
         let updater = CGSSUpdater.defaultUpdater
         if updater.isUpdating {
@@ -59,9 +59,33 @@ class SongTableViewController: RefreshableTableViewController {
     func refresh() {
         let dao = CGSSDAO.sharedDAO
         liveList = Array(dao.validLiveDict.values)
+        if searchBar.text != "" {
+            liveList = dao.getLiveListByName(liveList, string: searchBar.text!)
+        }
         dao.sortListByAttibuteName(&liveList!, sorter: sorter)
         tableView.reloadData()
     }
+    func cancelAction() {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        refresh()
+    }
+
+//    func filterAction() {
+//        let sb = self.storyboard!
+//        let filterVC = sb.instantiateViewControllerWithIdentifier("SongFilterTable") as! SongFilterTable
+//        filterVC.filter = self.filter
+//        //navigationController?.pushViewController(filterVC, animated: true)
+//        
+//        
+//        //使用自定义动画效果
+//        let transition = CATransition()
+//        transition.duration = 0.3
+//        transition.type = kCATransitionFade
+//        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+//        navigationController?.pushViewController(filterVC, animated: false)
+//
+//    }
     
     override func refresherValueChanged() {
         super.refresherValueChanged()
@@ -84,6 +108,19 @@ class SongTableViewController: RefreshableTableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //初始化导航栏的搜索条
+        searchBar = UISearchBar()
+        self.navigationItem.titleView = searchBar
+        searchBar.returnKeyType = .Done
+        //searchBar.showsCancelButton = true
+        searchBar.placeholder = "歌曲名"
+        searchBar.autocapitalizationType = .None
+        searchBar.autocorrectionType = .No
+        searchBar.delegate = self
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
+
+        
         sorter = CGSSSorter.init(att: "updateId")
         dao.sortListByAttibuteName(&liveList!, sorter: sorter)
     }
@@ -116,6 +153,7 @@ class SongTableViewController: RefreshableTableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        searchBar.resignFirstResponder()
         let beatmapVC = BeatmapViewController()
         let live = liveList[indexPath.row]
        
@@ -175,3 +213,36 @@ class SongTableViewController: RefreshableTableViewController {
     */
 
 }
+
+//MARK: searchBar的协议方法
+extension SongTableViewController : UISearchBarDelegate {
+    
+    //文字改变时
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        refresh()
+    }
+    //开始编辑时
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        
+        return true
+    }
+    //点击搜索按钮时
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    //点击searchbar自带的取消按钮时
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        refresh()
+    }
+}
+
+//MARK: scrollView的协议方法
+extension SongTableViewController {
+    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        //向下滑动时取消输入框的第一响应者
+        searchBar.resignFirstResponder()
+    }
+}
+
+

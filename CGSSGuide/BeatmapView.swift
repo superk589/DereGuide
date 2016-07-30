@@ -128,7 +128,7 @@ class BeatmapView: UIScrollView , UIScrollViewDelegate {
                         sliders[note.groupId!] = note
                         strokeColor.colorWithAlphaComponent(0.5).set()
                         //path.stroke()
-                        path.fill()
+                        path?.fill()
                     } else {
                         sliders[note.groupId!] = note
                     }
@@ -171,7 +171,7 @@ class BeatmapView: UIScrollView , UIScrollViewDelegate {
                     let point1 = CGPointMake(center.x + BeatmapView.noteRadius - 1, center.y)
                     let point2 = CGPointMake(center.x + 1, center.y - BeatmapView.noteRadius + 2)
                     let point3 = CGPointMake(center.x + 1, center.y + BeatmapView.noteRadius - 2)
-                    let rect = CGRectMake(center.x - BeatmapView.noteRadius + 1, center.y - 1, BeatmapView.noteRadius + 1, 2)
+                    let rect = CGRectMake(center.x - BeatmapView.noteRadius + 1, center.y - 1, BeatmapView.noteRadius, 2)
                     let path = UIBezierPath.init(rect: rect)
                     let path2 = UIBezierPath.init()
                     path.moveToPoint(point1)
@@ -240,12 +240,16 @@ class BeatmapView: UIScrollView , UIScrollViewDelegate {
         return path
     }
     
-    private func pathForSlider(note1:CGSSBeatmap.Note, note2:CGSSBeatmap.Note) -> UIBezierPath {
+    private func pathForSlider(note1:CGSSBeatmap.Note, note2:CGSSBeatmap.Note) -> UIBezierPath? {
+        
         let x1 = getPointX(note1.finishPos!)
         let x2 = getPointX(note2.finishPos!)
         let y1 = getPointY(note1.sec!)
         let y2 = getPointY(note2.sec!)
-        
+        //个别情况下滑条的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
+        if y1 - y2 > BeatmapView.sectionHeight {
+            return nil
+        }
         let path = UIBezierPath()
         path.moveToPoint(CGPointMake(x1, y1 - BeatmapView.noteRadius))
         path.addLineToPoint(CGPointMake(x1, y1 + BeatmapView.noteRadius))

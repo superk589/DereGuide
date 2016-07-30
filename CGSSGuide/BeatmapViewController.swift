@@ -19,7 +19,7 @@ class BeatmapViewController: UIViewController {
         didSet {
             let dao = CGSSDAO.sharedDAO
             let song = dao.findSongById(live.musicId!)
-            descLabel.text = "\(song!.title!) \(diffStringFromInt(currentDiff)) bpm:\(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
+            titleLabel.text = "\(song!.title!)\n\(live.getStarsForDiff(currentDiff))☆ \(diffStringFromInt(currentDiff)) bpm: \(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
             bv?.initWith(beatmaps[currentDiff-1], bpm: (song?.bpm)!, type: live.type!)
             bv?.setNeedsDisplay()
         }
@@ -39,30 +39,38 @@ class BeatmapViewController: UIViewController {
         default:
             return "unknown"
         }
-
     }
 
     var tv:UIToolbar!
+    var titleLabel:UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()        
         bv = BeatmapView()
         bv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64 )
 
         //自定义descLabel
-        descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
-        descLabel.textAlignment = .Center
-        descLabel.font = UIFont.systemFontOfSize(12)
+//        descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
+//        descLabel.textAlignment = .Center
+//        descLabel.font = UIFont.systemFontOfSize(12)
 
+        //自定义title描述歌曲信息
+        titleLabel = UILabel()
+        titleLabel.frame = CGRectMake(0, 0, 0, 44)
+        titleLabel.numberOfLines = 2
+        titleLabel.font = UIFont.systemFontOfSize(12)
+        titleLabel.textAlignment = .Center
+        navigationItem.titleView = titleLabel
         
         //初始化难度为最高难度
         currentDiff = maxDiff
         
     
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .Plain, target: self, action: #selector(self.selectDiff))
-        self.title = "谱面"
+     
+
         
         self.view.addSubview(bv)
-        self.view.addSubview(descLabel)
+        //self.view.addSubview(descLabel)
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.whiteColor()
 //

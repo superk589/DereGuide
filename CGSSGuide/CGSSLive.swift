@@ -24,6 +24,22 @@ public class CGSSLive: CGSSBaseModel {
     var updateId:Int {
         return self.liveDetailId![0]
     }
+    func getStarsForDiff(diff:Int) -> Int {
+        switch diff {
+        case 1 :
+            return debut ?? 0
+        case 2:
+            return regular ?? 0
+        case 3:
+            return pro ?? 0
+        case 4:
+            return master ?? 0
+        case 5:
+            return masterPlus ?? 0
+        default:
+            return 0
+        }
+    }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -97,10 +97,6 @@ class CardTableViewController: RefreshableTableViewController {
         //        })
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-
-//            
-//            
-//            UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
         //初始化导航栏的搜索条
         searchBar = UISearchBar()
@@ -111,7 +107,6 @@ class CardTableViewController: RefreshableTableViewController {
         searchBar.autocapitalizationType = .None
         searchBar.autocorrectionType = .No
         searchBar.delegate = self
-        
         
         //
         
@@ -144,6 +139,8 @@ class CardTableViewController: RefreshableTableViewController {
         }
         dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
         tableView.reloadData()
+        //滑至tableView的顶部 暂时不需要
+        //tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -228,10 +225,15 @@ class CardTableViewController: RefreshableTableViewController {
     
     func cancelAction() {
         searchBar.resignFirstResponder()
+        searchBar.text = ""
+        //恢复初始筛选
+        filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
+        sorter = CGSSSorter.init(att: "update_id")
         refresh()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        searchBar.resignFirstResponder()
         let cardDetailVC = CardDetailViewController()
         cardDetailVC.card = self.cardList[indexPath.row]
         //打开谱面时 隐藏tabbar

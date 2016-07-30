@@ -10,16 +10,16 @@
         <scene sceneID="KCR-Q9-PSW">
             <objects>
                 <tableViewController title="卡片" id="XEw-Y1-ITn" customClass="CardTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="5" sectionFooterHeight="5" id="IPd-c3-lQ2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="5" sectionFooterHeight="5" id="IPd-c3-lQ2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" id="hZ0-ct-x4I" customClass="CardTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="69" width="600" height="58"/>
+                                <rect key="frame" x="0.0" y="69" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hZ0-ct-x4I" id="JPc-Ge-958">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
@@ -294,7 +294,8 @@
                                 <string key="text">本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：
 株式会社 万代 (BANDAI Co., Ltd)
 
-本程序无法保证数据的绝对准确性，因数据错误导致的使用风险需由使用者自身承担。</string>
+本程序无法保证数据的绝对准确性，因数据错误导致的使用风险需由使用者自身承担。
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -441,10 +442,10 @@ http://imascg-slstage-wiki.gamerch.com
             </objects>
             <point key="canvasLocation" x="-2775" y="945"/>
         </scene>
-        <!--Card Filter And Sorter Table View Controller-->
+        <!--卡片筛选和排序-->
         <scene sceneID="QZt-3R-LJz">
             <objects>
-                <tableViewController storyboardIdentifier="CardFilterAndSorterTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XB8-jt-AiW" customClass="CardFilterAndSorterTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CardFilterAndSorterTableView" title="卡片筛选和排序" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XB8-jt-AiW" customClass="CardFilterAndSorterTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IdU-PC-xRx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -691,12 +692,12 @@ http://imascg-slstage-wiki.gamerch.com
                                                     <rect key="frame" x="8" y="8" width="584" height="27.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-Mv-ukR">
-                                                            <rect key="frame" x="15" y="0.5" width="106" height="27"/>
+                                                            <rect key="frame" x="15" y="0.0" width="91" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <state key="normal" title="            ▽            "/>
+                                                            <state key="normal" title="          ▽          "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-PC-phX">
-                                                            <rect key="frame" x="121" y="0.0" width="106" height="27"/>
+                                                            <rect key="frame" x="126" y="0.0" width="106" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="            △            "/>
                                                         </button>
@@ -704,8 +705,8 @@ http://imascg-slstage-wiki.gamerch.com
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="jfI-Mv-ukR" secondAttribute="bottom" id="0o5-OS-GoK"/>
-                                                        <constraint firstItem="UCU-PC-phX" firstAttribute="leading" secondItem="jfI-Mv-ukR" secondAttribute="trailing" id="LiF-Kp-fAK"/>
                                                         <constraint firstItem="jfI-Mv-ukR" firstAttribute="top" secondItem="cAW-YM-E7d" secondAttribute="top" id="QCW-RT-x9A"/>
+                                                        <constraint firstItem="UCU-PC-phX" firstAttribute="leading" secondItem="jfI-Mv-ukR" secondAttribute="trailing" constant="20" id="Rg4-uN-xyQ"/>
                                                         <constraint firstAttribute="bottom" secondItem="UCU-PC-phX" secondAttribute="bottom" id="VX4-Rl-U3G"/>
                                                         <constraint firstItem="UCU-PC-phX" firstAttribute="top" secondItem="cAW-YM-E7d" secondAttribute="top" id="c0j-3N-Bw1"/>
                                                         <constraint firstItem="jfI-Mv-ukR" firstAttribute="leading" secondItem="cAW-YM-E7d" secondAttribute="leading" constant="15" id="iQT-ah-MlB"/>
@@ -832,6 +833,7 @@ http://imascg-slstage-wiki.gamerch.com
                             <outlet property="delegate" destination="XB8-jt-AiW" id="O0f-DG-QPX"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Fh4-Cu-plX"/>
                     <connections>
                         <outlet property="ascendingStackView" destination="cAW-YM-E7d" id="b6i-Dl-pb7"/>
                         <outlet property="attributeSortingStackView" destination="C96-en-ERb" id="0cB-2v-Iwz"/>
@@ -850,16 +852,16 @@ http://imascg-slstage-wiki.gamerch.com
         <scene sceneID="5me-Bd-loQ">
             <objects>
                 <tableViewController id="NCZ-z5-ATr" customClass="SongTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZgZ-l1-I3U">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZgZ-l1-I3U">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="76" id="mBa-Fp-3R7" customClass="SongTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="76"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="86" id="mBa-Fp-3R7" customClass="SongTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mBa-Fp-3R7" id="dB4-rP-TGU">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="75.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="85.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

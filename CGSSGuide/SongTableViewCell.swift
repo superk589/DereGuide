@@ -22,28 +22,29 @@ class SongTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         jacketImageView = UIImageView()
-        jacketImageView.frame = CGRectMake(5, 5, 66, 66)
+        jacketImageView.frame = CGRectMake(10, 10, 66, 66)
         
         nameLabel = UILabel()
-        nameLabel.frame = CGRectMake(76, 5, CGSSTool.width - 86, 20)
+        nameLabel.frame = CGRectMake(86, 10, CGSSTool.width - 96, 20)
         nameLabel.font = UIFont.boldSystemFontOfSize(18)
         
         descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRectMake(76, 30, CGSSTool.width - 86, 16)
+        descriptionLabel.frame = CGRectMake(86, 35, CGSSTool.width - 96, 16)
         descriptionLabel.font = UIFont.init(name: "menlo", size: 14)
 
-        let width = floor((CGSSTool.width - 86 - 40) / 5)
+        let width = floor((CGSSTool.width - 96 - 40) / 5)
         let space:CGFloat = 10
         let fontSize:CGFloat = 16
         let height:CGFloat = 16
-        let originY:CGFloat = 52
+        let originY:CGFloat = 60
+        let originX:CGFloat = 86
 //
 ////        diffLabel = UILabel()
 ////        diffLabel.frame = CGRectMake(76, 40, 150, 12)
 ////        diffLabel.text = "diff"
 //        
         debutLabel = UILabel()
-        debutLabel.frame = CGRectMake(76, originY, width, height )
+        debutLabel.frame = CGRectMake(originX, originY, width, height )
         debutLabel.font = UIFont.init(name: "menlo", size: fontSize)
         debutLabel.backgroundColor = CGSSTool.debutColor
         //debutLabel.layer.cornerRadius = 6
@@ -51,7 +52,7 @@ class SongTableViewCell: UITableViewCell {
         debutLabel.textAlignment = .Center
 //
         regularLabel = UILabel()
-        regularLabel.frame = CGRectMake(76 + width + space, originY, width, height )
+        regularLabel.frame = CGRectMake(originX + width + space, originY, width, height )
         regularLabel.font = UIFont.init(name: "menlo", size: fontSize)
         regularLabel.backgroundColor = CGSSTool.regularColor
         //regularLabel.layer.cornerRadius = 6
@@ -59,7 +60,7 @@ class SongTableViewCell: UITableViewCell {
         regularLabel.textAlignment = .Center
         
         proLabel = UILabel()
-        proLabel.frame = CGRectMake(76 + 2 * (width + space), originY, width, height )
+        proLabel.frame = CGRectMake(originX + 2 * (width + space), originY, width, height )
         proLabel.font = UIFont.init(name: "menlo", size: fontSize)
         proLabel.backgroundColor = CGSSTool.proColor
 //        proLabel.layer.cornerRadius = 6
@@ -67,7 +68,7 @@ class SongTableViewCell: UITableViewCell {
         proLabel.textAlignment = .Center
         
         masterLabel = UILabel()
-        masterLabel.frame = CGRectMake(76 + 3 * (width + space), originY, width, height )
+        masterLabel.frame = CGRectMake(originX + 3 * (width + space), originY, width, height )
         masterLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterLabel.backgroundColor = CGSSTool.masterColor
         //masterLabel.layer.cornerRadius = 6
@@ -75,7 +76,7 @@ class SongTableViewCell: UITableViewCell {
         masterLabel.textAlignment = .Center
         
         masterPlusLabel = UILabel()
-        masterPlusLabel.frame = CGRectMake(76 + 4 * (width + space), 50, width, height )
+        masterPlusLabel.frame = CGRectMake(originX + 4 * (width + space), originY, width, height )
         masterPlusLabel.font = UIFont.init(name: "menlo", size: fontSize)
         masterPlusLabel.backgroundColor = CGSSTool.masterPlusColor
         masterPlusLabel.tintColor = CGSSTool.masterPlusColor

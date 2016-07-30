@@ -136,6 +136,7 @@ public class CGSSDAO: NSObject {
     }
 
     
+    
     //原地排序指定的cardList
     public func sortCardListByAttibuteName(inout cardList:[CGSSCard], att:String, ascending:Bool ) {
         
@@ -155,6 +156,26 @@ public class CGSSDAO: NSObject {
     public func sortListByAttibuteName<T:CGSSBaseModel>(inout list:[T], sorter:CGSSSorter) {
         sorter.sortList(&list)
     }
+    //根据名字搜索live
+    public func getLiveListByName(liveList:[CGSSLive], string:String) -> [CGSSLive] {
+        return liveList.filter({ (v:CGSSLive) -> Bool in
+            let song = findSongById(v.musicId!)
+            let comps = string.componentsSeparatedByString(" ")
+            for comp in comps {
+                if comp == "" {continue}
+                let b1 = song?.title?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                if b1 {
+                    continue
+                } else {
+                    return false
+                }
+            }
+            return true
+        })
+    }
+
+    
+    
     
 //    func loadAllDataFromFile() {
 //        loadDataFromFile(.Skill)

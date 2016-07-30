@@ -10,12 +10,7 @@ import UIKit
 
 class CGSSTeamManager: NSObject {
 
-    var teams:[CGSSTeam]! {
-        didSet {
-            writeFavoriteCardsToFile()
-        }
-    }
-
+    var teams:[CGSSTeam]!
     static let defaultManager = CGSSTeamManager()
     static let teamsFilePath = NSHomeDirectory()+"/Documents/teams.plist"
 
@@ -26,28 +21,38 @@ class CGSSTeamManager: NSObject {
     }
     
     func initTeams() {
-        teams = [CGSSTeam]()
-        let arr = NSArray.init(contentsOfFile: CGSSTeamManager.teamsFilePath) as? [[[Int]]] ?? [[[Int]]]()
-        for teamArr in arr {
-            let team = CGSSTeam.init(members: teamArr[0], skills: teamArr[1])
-            teams.append(team)
+        if let theData = NSData(contentsOfFile: CGSSTeamManager.teamsFilePath) {
+            let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
+                self.teams = achiver.decodeObjectForKey("team") as? [CGSSTeam] ?? [CGSSTeam]()
+        } else {
+            self.teams = [CGSSTeam]()
         }
     }
-    func writeFavoriteCardsToFile() {
-        var arr = [[[Int]]]()
-        for team in teams {
-            arr.append([team.members, team.skills])
+    func writeToFile(complete:(()->Void)?) {
+        dispatch_async(dispatch_get_global_queue(0, 0)) {
+            let path = CGSSTeamManager.teamsFilePath
+            let theData = NSMutableData()
+            let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
+            achiver.encodeObject(self.teams , forKey: "team")
+            achiver.finishEncoding()
+            theData.writeToFile(path, atomically: true)
+            dispatch_async(dispatch_get_main_queue(), {
+                complete?()
+            })
         }
-        
-        (arr as NSArray).writeToFile(CGSSTeamManager.teamsFilePath, atomically: true)
     }
     
     func addATeam(team:CGSSTeam) {
         teams.append(team)
+        writeToFile(nil)
     }
     
     func removeATeam(index:Int) {
         teams.removeAtIndex(index)
-        
+        writeToFile(nil)
     }
+    func getTeamByIndex(index:Int) -> CGSSTeam {
+        return self.teams[index]
+    }
+ 
 }

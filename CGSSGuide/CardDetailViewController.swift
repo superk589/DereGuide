@@ -156,23 +156,15 @@ class CardDetailViewController: UIViewController {
     
     //添加当前卡到收藏
     func addOrRemoveFavorite() {
-        if !CGSSFavoriteManager.defaultManager.contains(card.id!) {
-            let callBack = {(s:String) -> Void in
-                let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
-                alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.presentViewController(alVC, animated: true, completion: nil)
+        let fm = CGSSFavoriteManager.defaultManager
+        if !fm.contains(card.id!) {
+            fm.addFavoriteCard(self.card, callBack: { (s) in
                 self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
-            }
-            CGSSFavoriteManager.defaultManager.addFavoriteCard(self.card, callBack: callBack)
-            //print(CGSSFavoriteManager.favoriteCardsFilePath)
+            })
         } else {
-            let callBack = {(s:String) -> Void in
-                let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
-                alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.presentViewController(alVC, animated: true, completion: nil)
+            fm.removeFavoriteCard(self.card, callBack: { (s) in
                 self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
-            }
-            CGSSFavoriteManager.defaultManager.removeFavoriteCard(self.card, callBack: callBack)
+            })
         }
         
     }

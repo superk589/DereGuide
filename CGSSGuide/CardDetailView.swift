@@ -58,10 +58,10 @@ class CardDetailView: UIScrollView {
 
         //人物名称 图标视图
         originY = fullImageHeigth
-        cardIconView = CGSSCardIconView.init(frame: CGRectMake(5, originY + 5, 48, 48))
+        cardIconView = CGSSCardIconView.init(frame: CGRectMake(10, originY + 10, 48, 48))
             
         rarityLabel = UILabel()
-        rarityLabel.frame = CGRectMake(58, originY + 11, 30, 10)
+        rarityLabel.frame = CGRectMake(68, originY + 11, 30, 10)
         rarityLabel.textAlignment = .Left
         rarityLabel.font = UIFont.systemFontOfSize(10)
         
@@ -71,12 +71,12 @@ class CardDetailView: UIScrollView {
 //        skillLabel.textAlignment = .Right
         
         cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRectMake(58, originY + 26, CGSSTool.width - 68, 16)
+        cardNameLabel.frame = CGRectMake(68, originY + 26, CGSSTool.width - 78, 16)
         cardNameLabel.font = UIFont.systemFontOfSize(16)
         
         
         titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(88, originY + 11, CGSSTool.width - 150, 10)
+        titleLabel.frame = CGRectMake(98, originY + 11, CGSSTool.width - 150, 10)
         titleLabel.font = UIFont.systemFontOfSize(10)
 //        titleLabel.layer.borderWidth = 1/UIScreen.mainScreen().scale
 //        titleLabel.layer.borderColor = UIColor.blackColor().CGColor
@@ -87,7 +87,7 @@ class CardDetailView: UIScrollView {
         addSubview(titleLabel)
         
         //属性表格
-        originY = originY + 58
+        originY = originY + 68
         
         let attContentView = UIView()
         attContentView.frame = CGRectMake(-1, originY, CGSSTool.width+2, 109)
@@ -98,7 +98,7 @@ class CardDetailView: UIScrollView {
         descLabel1.text = "卡片属性:"
         attContentView.addSubview(descLabel1)
         
-        attGridView = CGSSGridView(frame: CGRectMake(5, 29, CGSSTool.width - 10, 70), rows: 5, columns: 6)
+        attGridView = CGSSGridView(frame: CGRectMake(10, 29, CGSSTool.width - 20, 70), rows: 5, columns: 6)
         //attGridView.layer.borderColor = UIColor.blackColor().CGColor
         //attGridView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         attContentView.addSubview(attGridView)
@@ -117,7 +117,7 @@ class CardDetailView: UIScrollView {
         descLabel2.text = "属性排名:"
         rankContentView.addSubview(descLabel2)
         
-        rankGridView = CGSSGridView(frame: CGRectMake(5, 29, CGSSTool.width - 10, 42), rows: 3, columns: 5)
+        rankGridView = CGSSGridView(frame: CGRectMake(10, 29, CGSSTool.width - 20, 42), rows: 3, columns: 5)
         rankContentView.addSubview(rankGridView)
         
         
@@ -189,7 +189,7 @@ class CardDetailView: UIScrollView {
         skillDescriptionLabel.frame = CGRectMake(10, 29, CGSSTool.width-20, 30)
         skillContentView.addSubview(skillDescriptionLabel)
         
-        skillProcGridView = CGSSGridView.init(frame: CGRectMake(5, 62, CGSSTool.width-10, 42), rows: 3, columns: 5)
+        skillProcGridView = CGSSGridView.init(frame: CGRectMake(10, 62, CGSSTool.width-20, 42), rows: 3, columns: 5)
         skillContentView.addSubview(skillProcGridView)
         skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
@@ -219,7 +219,7 @@ class CardDetailView: UIScrollView {
         
         
         leaderSkillNameLabel = UILabel()
-        leaderSkillNameLabel.frame = CGRectMake(90, 10, CGSSTool.width-95, 14)
+        leaderSkillNameLabel.frame = CGRectMake(90, 10, CGSSTool.width-100, 14)
         leaderSkillNameLabel.font = UIFont.systemFontOfSize(14)
         leaderSkillContentView.addSubview(leaderSkillNameLabel)
         
@@ -249,7 +249,7 @@ class CardDetailView: UIScrollView {
     //设置进化信息视图
     func setEvolutionContentView() {
         let evolutionContentView = UIView()
-        evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 87 + (1 / UIScreen.mainScreen().scale))
+        evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let descLabel4 = UILabel()
         descLabel4.frame = CGRectMake(10, 10, 80, 14)
         descLabel4.textColor = UIColor.blackColor()
@@ -264,13 +264,13 @@ class CardDetailView: UIScrollView {
         //        descLabel4.text = "类型:"
         //        skillContentView.addSubview(descLabel4)
         
-        evolutionToImageView = CGSSCardIconView(frame: CGRectMake(108, 29, 48, 48))
-        evolutionFromImageView = CGSSCardIconView(frame: CGRectMake(5, 29, 48, 48))
+        evolutionToImageView = CGSSCardIconView(frame: CGRectMake(113, 34, 48, 48))
+        evolutionFromImageView = CGSSCardIconView(frame: CGRectMake(10, 34, 48, 48))
         evolutionContentView.addSubview(evolutionToImageView)
         evolutionContentView.addSubview(evolutionFromImageView)
         
         let descLabel5 = UILabel()
-        descLabel5.frame = CGRectMake(53, 29, 50, 48)
+        descLabel5.frame = CGRectMake(58, 34, 50, 48)
         descLabel5.textColor = UIColor.blackColor()
         descLabel5.font = UIFont.systemFontOfSize(24)
         descLabel5.text = " >> "
@@ -280,7 +280,7 @@ class CardDetailView: UIScrollView {
         evolutionContentView.layer.borderColor = UIColor.blackColor().CGColor
         evolutionContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         
-        originY = originY + 87
+        originY = originY + 92
         contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
         addSubview(evolutionContentView)
     }

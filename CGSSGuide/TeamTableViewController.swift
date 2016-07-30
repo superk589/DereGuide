@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamTableViewController: UITableViewController {
+class TeamTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
     var teams:[CGSSTeam] {
         let manager = CGSSTeamManager.defaultManager
@@ -18,14 +18,23 @@ class TeamTableViewController: UITableViewController {
         super.viewDidLoad()
 
         
-        self.navigationItem.rightBarButtonItem = editButtonItem()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(addTeam))
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
+    func addTeam() {
+        let vc = TeamEditViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

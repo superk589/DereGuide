@@ -11,21 +11,16 @@ import Foundation
 public class CGSSFavoriteManager: NSObject {
     public static let defaultManager = CGSSFavoriteManager()
     static let favoriteCardsFilePath = NSHomeDirectory()+"/Documents/favoriteCards.plist"
-    var favoriteCards:[Int]! {
+    var favoriteCards:[Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCardsToFile()
-            //print(favoriteCards)
         }
     }
     
-    override init() {
+    private override init() {
         super.init()
-        initFavoriteCards()
     }
     
-    func initFavoriteCards() {
-        favoriteCards = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]()
-    }
     func writeFavoriteCardsToFile() {
         (favoriteCards as NSArray).writeToFile(CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }

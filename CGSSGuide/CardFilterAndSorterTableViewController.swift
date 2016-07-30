@@ -29,7 +29,6 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         let backButton = UIBarButtonItem.init(title: "完成", style: .Plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
