@@ -23,10 +23,11 @@ class CardTableViewController: RefreshableTableViewController {
         }
         self.updateStatusView.setContent("检查更新中", hasProgress: false)
         updater.checkUpdate(mask, complete: { (items, errors) in
-            if !errors.isEmpty {
+            if !errors.isEmpty && items.count == 0 {
                 self.updateStatusView.hidden = true
                 let alert = UIAlertController.init(title: "检查更新失败", message: errors.joinWithSeparator("\n"), preferredStyle: .Alert)
                 alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                //使用tabBarController来展现UIAlertController的原因是, 该方法处于异步子线程中,当执行时可能这个ViewController已经不在前台,会造成不必要的警告(虽然不会崩溃,但是官方不建议这样)
                 self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
             } else {
                 if items.count == 0 {
@@ -61,7 +62,7 @@ class CardTableViewController: RefreshableTableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         print(NSHomeDirectory())
         let updater = CGSSUpdater.defaultUpdater
         //如果数据Major版本号过低强制删除老数据 再更新
@@ -73,7 +74,7 @@ class CardTableViewController: RefreshableTableViewController {
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
                 self.check(0b1111)
             }))
-            self.navigationController?.presentViewController(alert, animated: true, completion: nil)
+            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
         //如果数据Minor版本号过低提示更新
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
@@ -81,7 +82,7 @@ class CardTableViewController: RefreshableTableViewController {
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
                 self.check(0b1111)
             }))
-            self.navigationController?.presentViewController(alert, animated: true, completion: nil)
+            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
         //启动时根据用户设置检查常规更新
         else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
@@ -94,10 +95,12 @@ class CardTableViewController: RefreshableTableViewController {
         //        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
         //            self.updater.checkUpdate()
         //        })
-        
-        //self.view.backgroundColor = UIColor.whiteColor()
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
+
+//            
+//            
+//            UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
         //初始化导航栏的搜索条
         searchBar = UISearchBar()

@@ -121,7 +121,7 @@ public class CGSSUpdater: NSObject {
         for dataType in dataTypes {
             switch dataType {
             case .Card:
-                let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
+                let url = CGSSUpdater.URLOfEnglishDatabase + "/api/v1/list/card_t?key=id,evolution_id"
                 let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         print("检查卡片更新失败: \(e.localizedDescription)")
@@ -154,6 +154,8 @@ public class CGSSUpdater: NSObject {
                                 }
 
                             }
+                        } else {
+                            completeInside("获取到的卡片数据异常")
                         }
                         completeInside(nil)
                     }
@@ -181,6 +183,8 @@ public class CGSSUpdater: NSObject {
                                     dao.songDict.setValue(newSong, forKey: song["id"].stringValue)
                                 }
                             }
+                        } else {
+                            completeInside("获取到的歌曲数据异常")
                         }
                         completeInside(nil)
                     }
@@ -223,6 +227,8 @@ public class CGSSUpdater: NSObject {
                                     }
                                 }
                             }
+                        } else {
+                            completeInside("获取到的live数据异常")
                         }
                         completeInside(nil)
                     }

@@ -316,8 +316,8 @@
         <!--设置导航-->
         <scene sceneID="3UH-G6-k3Y">
             <objects>
-                <navigationController title="设置导航" id="Lc3-lA-ZOL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" id="gI8-ss-NS6"/>
+                <navigationController title="设置导航" id="Lc3-lA-ZOL" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="设置" image="740-gear.png" selectedImage="740-gear-selected.png" id="gI8-ss-NS6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PYk-Gh-Jnc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -382,8 +382,8 @@
         <!--组队导航-->
         <scene sceneID="3Ro-R5-hIA">
             <objects>
-                <navigationController title="组队导航" id="IyO-O4-iMn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="组队" id="Ji2-5n-2Mz"/>
+                <navigationController title="组队导航" id="IyO-O4-iMn" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="组队" image="779-users.png" selectedImage="779-users.png" id="Ji2-5n-2Mz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="agS-1H-YQh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -419,7 +419,7 @@ https://hoshimoriuta.kirara.ca
 http://imascg-slstage-wiki.gamerch.com
 
 技术支持：
-@chieri
+@Chieri
 @CaiMiao
 @Snack-X
 @summertriangle-dev </string>
@@ -878,8 +878,8 @@ http://imascg-slstage-wiki.gamerch.com
         <!--歌曲导航-->
         <scene sceneID="kBj-5g-TfY">
             <objects>
-                <navigationController title="歌曲导航" id="KxG-H5-NIc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="歌曲" id="gE2-j0-zef"/>
+                <navigationController title="歌曲导航" id="KxG-H5-NIc" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="歌曲" image="898-music-note.png" selectedImage="898-music-note-selected.png" id="gE2-j0-zef"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="unN-TZ-n18">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -892,11 +892,11 @@ http://imascg-slstage-wiki.gamerch.com
             </objects>
             <point key="canvasLocation" x="-4463" y="-1252"/>
         </scene>
-        <!--卡片-->
+        <!--卡片导航-->
         <scene sceneID="73S-hd-Baf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Hs-jz-swe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="卡片" id="8Lu-2l-B9T"/>
+                <navigationController title="卡片导航" automaticallyAdjustsScrollViewInsets="NO" id="5Hs-jz-swe" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="卡片" image="981-contact-card.png" selectedImage="981-contact-card-selected.png" id="8Lu-2l-B9T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TKb-dn-xix">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -912,4 +912,13 @@ http://imascg-slstage-wiki.gamerch.com
             <point key="canvasLocation" x="-3594" y="-565.99999999999989"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="740-gear-selected.png" width="28" height="28"/>
+        <image name="740-gear.png" width="28" height="28"/>
+        <image name="779-users.png" width="28" height="25"/>
+        <image name="898-music-note-selected.png" width="28" height="28"/>
+        <image name="898-music-note.png" width="28" height="28"/>
+        <image name="981-contact-card-selected.png" width="28" height="20"/>
+        <image name="981-contact-card.png" width="28" height="20"/>
+    </resources>
 </document>

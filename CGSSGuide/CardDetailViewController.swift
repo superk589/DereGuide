@@ -40,10 +40,13 @@ class CardDetailViewController: UIViewController {
         navigationItem.titleView = titleView
         
 
-        let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
+        //let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
+        let rightItem  = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.contains(card.id!) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
+        rightItem.tintColor = UIColor.redColor()
         navigationItem.rightBarButtonItem = rightItem
         
-        let leftItem = UIBarButtonItem.init(title: "返回", style: .Plain, target: self, action: #selector(backAction))
+        //let leftItem = UIBarButtonItem.init(title: "返回", style: .Plain, target: self, action: #selector(backAction))
+        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(backAction))
 
         navigationItem.leftBarButtonItem = leftItem
         
@@ -153,12 +156,12 @@ class CardDetailViewController: UIViewController {
     
     //添加当前卡到收藏
     func addOrRemoveFavorite() {
-        if navigationItem.rightBarButtonItem?.title == "收藏" {
+        if !CGSSFavoriteManager.defaultManager.contains(card.id!) {
             let callBack = {(s:String) -> Void in
                 let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
                 alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                 self.presentViewController(alVC, animated: true, completion: nil)
-                self.navigationItem.rightBarButtonItem?.title = "取消"
+                self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
             }
             CGSSFavoriteManager.defaultManager.addFavoriteCard(self.card, callBack: callBack)
             //print(CGSSFavoriteManager.favoriteCardsFilePath)
@@ -167,7 +170,7 @@ class CardDetailViewController: UIViewController {
                 let alVC = UIAlertController(title: s, message: nil, preferredStyle: .Alert)
                 alVC.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                 self.presentViewController(alVC, animated: true, completion: nil)
-                self.navigationItem.rightBarButtonItem?.title = "收藏"
+                self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
             }
             CGSSFavoriteManager.defaultManager.removeFavoriteCard(self.card, callBack: callBack)
         }

@@ -19,12 +19,13 @@ class RefreshableTableViewController: UITableViewController {
         refreshControl = refresher
         
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: "检查更新")
+        refresher.attributedTitle = NSAttributedString.init(string: "下拉检查更新")
         refreshControl = refresher
         refresher.addTarget(self, action: #selector(refresherValueChanged), forControlEvents: .ValueChanged)
         
         updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
         updateStatusView.center = view.center
+        updateStatusView.center.y = view.center.y - 100
         updateStatusView.hidden = true
         UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
         
@@ -36,8 +37,8 @@ class RefreshableTableViewController: UITableViewController {
     }
     
     func refresherValueChanged() {
-//        if CGSSUpdater.defaultUpdater.isUpdating {
-//            refresher.attributedTitle = NSAttributedString.init(string: "正在进行更新，请稍后再试")
+//        if refresher.refreshing {
+//            refresher.attributedTitle = NSAttributedString.init(string: "开始更新")
 //        }
     }
 

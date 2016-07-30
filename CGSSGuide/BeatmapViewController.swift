@@ -44,8 +44,7 @@ class BeatmapViewController: UIViewController {
 
     var tv:UIToolbar!
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         bv = BeatmapView()
         bv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64 )
 
