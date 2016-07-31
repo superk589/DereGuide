@@ -25,6 +25,18 @@ public class CGSSCard:CGSSBaseModel {
     public dynamic var album_id:Int
     //    "album_id": 1680030,
     public var attribute:String!
+    public var attShort:String! {
+        switch attribute {
+        case "cute":
+            return "cu"
+        case "cool":
+            return "co"
+        case "passion":
+            return "pa"
+        default:
+            return "unknown"
+        }
+    }
     //    "attribute": 2,
     //    ; Any of "cool", "cute", "passion", "office"
     //    ; (last one reserved for Chihiro)

@@ -254,7 +254,7 @@ public class CGSSUpdater: NSObject {
         var process = 0
         var total = items.count
         
-        func insideComplete(e:NSError?) {
+        func insideComplete(e:String?) {
             if e == nil {
                 success += 1
             }
@@ -280,14 +280,16 @@ public class CGSSUpdater: NSObject {
                 let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                     if error != nil {
                         print("获取卡数据出错:\(error!.localizedDescription)\(url)")
-                        insideComplete(error)
+                        insideComplete(error?.localizedDescription)
                     }else {
                         if let card = CGSSCard.init(jsonData:data!){
                             let dao = CGSSDAO.sharedDAO
                             dao.cardDict.setObject(card, forKey: item.id)
+                            insideComplete(nil)
+                        } else {
+                            insideComplete("获取到的卡数据异常")
                         }
                     }
-                    insideComplete(nil)
                 })
                 task.resume()
             case .Song:
@@ -304,13 +306,16 @@ public class CGSSUpdater: NSObject {
                 let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                     if error != nil {
                         print("获取谱面数据出错:\(error!.localizedDescription)\(url)")
-                        insideComplete(error)
+                        insideComplete(error?.localizedDescription)
                     }else {
-                        let beatmap = CGSSBeatmap.init(json: JSON.init(data: data!))
-                        let dao = CGSSDAO.sharedDAO
-                        dao.beatmapDict.setObject(beatmap, forKey: item.id)
+                        if let beatmap = CGSSBeatmap.init(json: JSON.init(data: data!)) {
+                            let dao = CGSSDAO.sharedDAO
+                            dao.beatmapDict.setObject(beatmap, forKey: item.id)
+                            insideComplete(nil)
+                        } else {
+                            insideComplete("获取到的谱面数据异常")
+                        }
                     }
-                    insideComplete(nil)
                 })
                 task.resume()
             }

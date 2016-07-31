@@ -152,9 +152,8 @@ class CardDetailView: UIScrollView {
 
     
     func setSkillContentView() {
-        //主动技能
         let skillContentView = UIView()
-        skillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 114 + (1 / UIScreen.mainScreen().scale))
+        skillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 129 + (1 / UIScreen.mainScreen().scale))
         let descLabel3 = UILabel()
         descLabel3.frame = CGRectMake(10, 10, 80, 14)
         descLabel3.textColor = UIColor.blackColor()
@@ -182,25 +181,24 @@ class CardDetailView: UIScrollView {
 //        skillContentView.addSubview(skillTypeLabel)
         
         skillDescriptionLabel = UILabel()
-        skillDescriptionLabel.numberOfLines = 2
+        skillDescriptionLabel.numberOfLines = 3
         skillDescriptionLabel.lineBreakMode = .ByCharWrapping
         skillDescriptionLabel.font = UIFont.systemFontOfSize(12)
         skillDescriptionLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        skillDescriptionLabel.frame = CGRectMake(10, 29, CGSSTool.width-20, 30)
+        skillDescriptionLabel.frame = CGRectMake(10, 29, CGSSTool.width-20, 45)
         skillContentView.addSubview(skillDescriptionLabel)
         
-        skillProcGridView = CGSSGridView.init(frame: CGRectMake(10, 62, CGSSTool.width-20, 42), rows: 3, columns: 5)
+        skillProcGridView = CGSSGridView.init(frame: CGRectMake(10, 77, CGSSTool.width-20, 42), rows: 3, columns: 5)
         skillContentView.addSubview(skillProcGridView)
         skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         addSubview(skillContentView)
         
-        originY = originY + 114
+        originY = originY + 129
         contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
     }
     
     func setLeaderSkillContentView() {
-        //主动技能
         let leaderSkillContentView = UIView()
         leaderSkillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 69 + (1 / UIScreen.mainScreen().scale))
         let descLabel4 = UILabel()

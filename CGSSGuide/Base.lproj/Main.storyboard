@@ -384,7 +384,7 @@
         <scene sceneID="3Ro-R5-hIA">
             <objects>
                 <navigationController title="组队导航" id="IyO-O4-iMn" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="组队" image="779-users.png" selectedImage="779-users.png" id="Ji2-5n-2Mz"/>
+                    <tabBarItem key="tabBarItem" title="组队" image="779-users.png" selectedImage="779-users-selected.png" id="Ji2-5n-2Mz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="agS-1H-YQh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -856,6 +856,7 @@ http://imascg-slstage-wiki.gamerch.com
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="86" id="mBa-Fp-3R7" customClass="SongTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="86"/>
@@ -917,6 +918,7 @@ http://imascg-slstage-wiki.gamerch.com
     <resources>
         <image name="740-gear-selected.png" width="28" height="28"/>
         <image name="740-gear.png" width="28" height="28"/>
+        <image name="779-users-selected.png" width="28" height="25"/>
         <image name="779-users.png" width="28" height="25"/>
         <image name="898-music-note-selected.png" width="28" height="28"/>
         <image name="898-music-note.png" width="28" height="28"/>

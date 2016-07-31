@@ -99,7 +99,7 @@ class CardDetailViewController: UIViewController {
         let rankInType = dao.getRankInType(card)
         let rankInAll = dao.getRankInAll(card)
         rankGridStrings.append(["  ", "Vocal", "Dance", "Visual", "Total"])
-        rankGridStrings.append(["In \(card.attribute)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
+        rankGridStrings.append(["In \(card.attShort)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
         rankGridStrings.append(["In all", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
         cardDV?.rankGridView.setGridContent(rankGridStrings)
         

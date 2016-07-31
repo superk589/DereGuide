@@ -128,7 +128,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(self.notes, forKey: "notes")
     }
-    init(json:JSON) {
+    init?(json:JSON) {
         self.notes = [Note]()
         let array = json.arrayValue
         for sub in array {
