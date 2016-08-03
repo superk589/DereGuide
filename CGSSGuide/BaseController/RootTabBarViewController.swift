@@ -13,7 +13,6 @@ class RootTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //let cardTableViewController = CardTableViewController()
         
         //self.addChildViewController(cardTableViewController)

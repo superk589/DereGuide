@@ -48,7 +48,12 @@ class CGSSCardIconView: UIImageView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        layer.cornerRadius = 6
+        layer.masksToBounds = true
+        userInteractionEnabled = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
+        addGestureRecognizer(tap!)
     }
     /*
     // Only override drawRect: if you perform custom drawing.

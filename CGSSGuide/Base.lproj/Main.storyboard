@@ -14,6 +14,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" id="hZ0-ct-x4I" customClass="CardTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="69" width="600" height="68"/>
@@ -882,7 +883,9 @@ http://imascg-slstage-wiki.gamerch.com
         <scene sceneID="kBj-5g-TfY">
             <objects>
                 <navigationController title="歌曲导航" id="KxG-H5-NIc" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="歌曲" image="898-music-note.png" selectedImage="898-music-note-selected.png" id="gE2-j0-zef"/>
+                    <tabBarItem key="tabBarItem" title="歌曲" image="898-music-note.png" selectedImage="898-music-note-selected.png" id="gE2-j0-zef">
+                        <inset key="imageInsets" minX="0.0" minY="2" maxX="0.0" maxY="-2"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="unN-TZ-n18">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -899,7 +902,7 @@ http://imascg-slstage-wiki.gamerch.com
         <scene sceneID="73S-hd-Baf">
             <objects>
                 <navigationController title="卡片导航" automaticallyAdjustsScrollViewInsets="NO" id="5Hs-jz-swe" customClass="BaseNavigationController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="卡片" image="981-contact-card.png" selectedImage="981-contact-card-selected.png" id="8Lu-2l-B9T"/>
+                    <tabBarItem key="tabBarItem" title="卡片" image="726-star.png" selectedImage="726-star-selected.png" id="8Lu-2l-B9T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TKb-dn-xix">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -916,13 +919,13 @@ http://imascg-slstage-wiki.gamerch.com
         </scene>
     </scenes>
     <resources>
+        <image name="726-star-selected.png" width="28" height="26"/>
+        <image name="726-star.png" width="28" height="26"/>
         <image name="740-gear-selected.png" width="28" height="28"/>
         <image name="740-gear.png" width="28" height="28"/>
         <image name="779-users-selected.png" width="28" height="25"/>
         <image name="779-users.png" width="28" height="25"/>
         <image name="898-music-note-selected.png" width="28" height="28"/>
         <image name="898-music-note.png" width="28" height="28"/>
-        <image name="981-contact-card-selected.png" width="28" height="20"/>
-        <image name="981-contact-card.png" width="28" height="20"/>
     </resources>
 </document>

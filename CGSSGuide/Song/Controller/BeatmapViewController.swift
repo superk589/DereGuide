@@ -27,17 +27,17 @@ class BeatmapViewController: UIViewController {
     func diffStringFromInt(i:Int) -> String {
         switch i {
         case 1 :
-            return "debut"
+            return "DEBUT"
         case 2:
-            return "regular"
+            return "REGULAR"
         case 3:
-            return "pro"
+            return "PRO"
         case 4:
-            return "master"
+            return "MASTER"
         case 5:
-            return "master+"
+            return "MASTER+"
         default:
-            return "unknown"
+            return "UNKNOWN"
         }
     }
 

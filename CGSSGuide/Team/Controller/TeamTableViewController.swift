@@ -1,5 +1,5 @@
 //
-//  TeamCardSelectTableViewController.swift
+//  TeamTableViewController.swift
 //  CGSSGuide
 //
 //  Created by zzk on 16/7/28.
@@ -8,49 +8,58 @@
 
 import UIKit
 
-class TeamCardSelectTableViewController: BaseCardTableViewController {
+class TeamTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
+    var teams:[CGSSTeam] {
+        let manager = CGSSTeamManager.defaultManager
+        return manager.teams
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(addTeam))
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
+    func addTeam() {
+        let vc = TeamEditViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
 
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let manager = CGSSTeamManager.defaultManager
+        return manager.teams.count
+    }
 
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("TeamCell", forIndexPath: indexPath) as! TeamTableViewCell
+        cell.initWith(teams[indexPath.row])
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

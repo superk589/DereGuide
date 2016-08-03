@@ -24,6 +24,18 @@ public class CGSSLive: CGSSBaseModel {
     var updateId:Int {
         return self.liveDetailId![0]
     }
+    
+    var bpm:Int? {
+        let dao = CGSSDAO.sharedDAO
+        return dao.findSongById(self.musicId!)?.bpm
+    }
+    
+    var barSec:Float? {
+        if bpm != nil {
+            return 1 / Float(bpm!) / 60
+        }
+        return nil
+    }
     func getStarsForDiff(diff:Int) -> Int {
         switch diff {
         case 1 :

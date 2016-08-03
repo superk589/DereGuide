@@ -96,7 +96,7 @@ class BeatmapView: UIScrollView , UIScrollViewDelegate {
                         let path = pathForLongPress(note.finishPos!, sec1: positionPressed[note.finishPos!-1], sec2: note.sec!)
                         positionPressed[note.finishPos!-1] = 0
                         strokeColor.colorWithAlphaComponent(0.5).set()
-                        path.stroke()
+                        //path.stroke()
                         path.fill()
                     }
                 }
