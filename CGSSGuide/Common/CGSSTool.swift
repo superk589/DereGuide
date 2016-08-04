@@ -30,10 +30,18 @@ public class CGSSTool: NSObject {
     public static let passionColor = UIColor.init(red: 1.0*250/255, green: 1.0*168/255, blue: 1.0*57/255, alpha: 1)
     //public static let allTypeColor = UIColor.init(red: 1.0*255/255, green: 1.0*253/255, blue: 1.0*114/255, alpha: 1)
     
-
-    
-    
     public static let fullImageWidth:CGFloat = 1280
     public static let fullImageHeight:CGFloat = 824
+    
+    public static func getStringByPattern(str:String, pattern:String) -> [NSString] {
+        let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive )
+        let res = regex!.matchesInString(str, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))
+        var arr = Array<NSString>()
+        for checkingRes in res {
+            arr.append((str as NSString).substringWithRange(checkingRes.range))
+        }
+        return arr
+    }
+    
     
 }

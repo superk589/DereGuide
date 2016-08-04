@@ -61,6 +61,20 @@ public class CGSSSkill: CGSSBaseModel {
     //    ; This value is used by the skill's active effect.
     //    ; this value is a percentage (e.g. 116).
     
+    func procChanceOfLevel(lv:Int) -> Float? {
+        if let p = proc_chance {
+            return Float((p.1! - p.0!) / 10 * lv + p.0!) / 100
+        }
+        return nil
+    }
+    func effectLengthOfLevel(lv:Int) -> Float? {
+        if let e = effect_length {
+            return Float((e.1! - e.0!) / 10 * lv + e.0!) / 100
+        }
+        return nil
+    }
+    
+    
     public init(condition:Int, cutin_type:Int, effect_length:(Int?,Int?), explain:String, explain_en:String, id:Int, judge_type:Int, proc_chance:(Int?,Int?), skill_name:String, skill_trigger_type:Int, skill_trigger_value:Int, skill_type:String, value:Int) {
         self.condition = condition
         self.cutin_type = cutin_type

@@ -70,7 +70,6 @@
 		1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */; };
 		1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */; };
 		1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */; };
-		1269E9FB1D520C3E0071AD7F /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F51D520C3E0071AD7F /* TeamMemberView.swift */; };
 		1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */; };
 		1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */; };
 		1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */; };
@@ -176,7 +175,6 @@
 		1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditViewController.swift; sourceTree = "<group>"; };
 		1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
-		1269E9F51D520C3E0071AD7F /* TeamMemberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapViewController.swift; sourceTree = "<group>"; };
 		1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 		1269E9F41D520C3E0071AD7F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1269E9F51D520C3E0071AD7F /* TeamMemberView.swift */,
 				1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */,
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
 				1269EA2A1D5210160071AD7F /* TeamMemberTableViewCell.xib */,
@@ -716,7 +713,6 @@
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
-				1269E9FB1D520C3E0071AD7F /* TeamMemberView.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,

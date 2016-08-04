@@ -27,6 +27,50 @@ class CGSSTeam: NSObject, NSCoding {
     }
     var teamBackSupportValue:Int?
     
+    subscript (index:Int) -> CGSSTeamMember? {
+        if index == 0 {
+            return leader
+        } else if index < 5 {
+            return subs[index - 1]
+        } else {
+            return friendLeader
+        }
+    }
+    
+    //队伍原始值
+    var rawPresentValue:Int {
+        return rawDance + rawVisual + rawVocal
+    }
+    var rawVocal:Int {
+        var sum = 0
+        for i in 0...5 {
+            sum += (self[i]?.cardRef?.vocal) ?? 0
+        }
+        return sum
+    }
+    var rawDance:Int {
+        var sum = 0
+        for i in 0...5 {
+            sum += (self[i]?.cardRef?.dance) ?? 0
+        }
+        return sum
+    }
+    var rawVisual:Int {
+        var sum = 0
+        for i in 0...5 {
+            sum += (self[i]?.cardRef?.visual) ?? 0
+        }
+        return sum
+    }
+    var rawHP:Int {
+        var sum = 0
+        for i in 0...5 {
+            sum += (self[i]?.cardRef?.life) ?? 0
+        }
+        return sum
+    }
+
+    
     init(leader:CGSSTeamMember, subs:[CGSSTeamMember], teamBackSupportValue:Int, friendLeader: CGSSTeamMember?) {
         self.leader = leader
         self.subs = subs

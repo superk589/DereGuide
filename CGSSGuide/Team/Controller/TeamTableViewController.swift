@@ -20,8 +20,6 @@ class TeamTableViewController: UITableViewController, UIPopoverPresentationContr
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(addTeam))
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -33,6 +31,11 @@ class TeamTableViewController: UITableViewController, UIPopoverPresentationContr
         let vc = TeamEditViewController()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
     
     
@@ -49,8 +52,7 @@ class TeamTableViewController: UITableViewController, UIPopoverPresentationContr
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let manager = CGSSTeamManager.defaultManager
-        return manager.teams.count
+        return teams.count
     }
 
     

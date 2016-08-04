@@ -43,13 +43,24 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         tv.delegate = self
         tv.dataSource = self
         tv.registerNib(UINib.init(nibName: "TeamMemberTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamMemberCell")
-        tv.rowHeight = 84
+        tv.rowHeight = 90
+        tv.tableFooterView = UIView.init(frame: CGRectZero)
         view.addSubview(tv)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getMemberByIndex(index:Int) -> CGSSTeamMember? {
+        if index == 0 {
+           return leader
+        } else if index < 5 {
+           return subs[index - 1]
+        } else {
+           return friendLeader
+        }
     }
     
     func saveTeam() {
@@ -91,6 +102,8 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
                 leaderSkillLabel2.text = "好友技能:\((fLeader.cardRef?.leader_skill?.explain_en ?? ""))"
             }
         }
+        cell.tag = 100 + indexPath.row
+        cell.delegate = self
         
         return cell
     }
@@ -114,6 +127,30 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     */
 
 }
+extension TeamEditViewController :TeamMemberTableViewCellDelegate {
+ 
+    func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
+        UIView.animateWithDuration(0.2, animations: {
+            self.tv.contentOffset = CGPointMake(0, 0)
+        })
+        let member = getMemberByIndex(cell.tag - 100)
+        var newLevel = Int(lv) ?? 10
+        if newLevel > 10 || newLevel < 0 {
+            newLevel = 10
+        }
+        member?.skillLevel = newLevel
+        cell.updateLevel(getMemberByIndex(cell.tag - 100)!)
+    }
+    
+    func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
+        if cell.tag - 100 >= 3 {
+            UIView.animateWithDuration(0.2, animations: { 
+                self.tv.contentOffset = CGPointMake(0, 160)
+            })
+            
+        }
+    }
+}
 
 extension TeamEditViewController : BaseCardTableViewControllerDelegate {
     func selectCard(card: CGSSCard) {
@@ -128,6 +165,21 @@ extension TeamEditViewController : BaseCardTableViewControllerDelegate {
             self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
         }
         tv.reloadData()
+    }
+}
 
+//MARK: UIScrollView代理方法
+extension TeamEditViewController : UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        tv.endEditing(true)
+        for i in 0...5 {
+            let cell = tv.cellForRowAtIndexPath(NSIndexPath.init(forRow: i, inSection: 0)) as! TeamMemberTableViewCell
+            let member = getMemberByIndex(i)
+            var newLevel = Int(cell.skilllevel.text ?? "0") ?? 10
+            if newLevel > 10 || newLevel < 0 {
+                newLevel = 10
+            }
+            member?.skillLevel = newLevel
+        }
     }
 }
