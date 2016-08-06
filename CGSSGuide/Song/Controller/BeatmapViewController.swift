@@ -15,6 +15,7 @@ class BeatmapViewController: UIViewController {
     var bv:BeatmapView!
     var descLabel: UILabel!
     var maxDiff:Int!
+    var preSetDiff:Int?
     var currentDiff:Int! {
         didSet {
             let dao = CGSSDAO.sharedDAO
@@ -61,8 +62,8 @@ class BeatmapViewController: UIViewController {
         titleLabel.textAlignment = .Center
         navigationItem.titleView = titleLabel
         
-        //初始化难度为最高难度
-        currentDiff = maxDiff
+        //如果没有指定难度 则初始化难度为最高难度
+        currentDiff = preSetDiff ?? maxDiff
         
     
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .Plain, target: self, action: #selector(self.selectDiff))

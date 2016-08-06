@@ -3,4 +3,5 @@ use_frameworks!
 target 'CGSSGuide' do
   pod 'SDWebImage'
   pod 'SwiftyJSON'
+  pod 'CMPopTipView'
 end

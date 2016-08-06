@@ -11,7 +11,7 @@ protocol TeamMemberTableViewCellDelegate {
     func skillLevelDidChange(cell:TeamMemberTableViewCell, lv:String)
     func skillLevelDidBeginEditing(cell:TeamMemberTableViewCell)
 }
-class TeamMemberTableViewCell: UITableViewCell {
+class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     var delegate:TeamMemberTableViewCellDelegate?
     @IBOutlet weak var detail: UIView! {
@@ -19,7 +19,11 @@ class TeamMemberTableViewCell: UITableViewCell {
             detail.hidden = true
         }
     }
-    @IBOutlet weak var skilllevel: UITextField!
+    @IBOutlet weak var skilllevel: UITextField! {
+        didSet {
+            skilllevel.delegate = self
+        }
+    }
     @IBOutlet weak var skillDesc: UILabel!
     @IBOutlet weak var icon: CGSSCardIconView!
     @IBOutlet weak var title: UILabel!
@@ -40,10 +44,10 @@ class TeamMemberTableViewCell: UITableViewCell {
             let skill = model.cardRef!.skill!
             let sub1 = subs[0]
             let range1 = skillDesc.rangeOfString(sub1 as String)
-            skillDesc.replaceRange(range1!, with: String(skill.procChanceOfLevel(model.skillLevel!)!))
+            skillDesc.replaceRange(range1!, with: String(format: "%.2f",  skill.procChanceOfLevel(model.skillLevel!)!))
             let sub2 = subs[1]
             let range2 = skillDesc.rangeOfString(sub2 as String)
-            skillDesc.replaceRange(range2!, with: String(skill.effectLengthOfLevel(model.skillLevel!)!))
+            skillDesc.replaceRange(range2!, with: String(format: "%.2f", skill.effectLengthOfLevel(model.skillLevel!)!))
             self.skillDesc.text = skillDesc
         }
     }
@@ -61,9 +65,19 @@ class TeamMemberTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.selectedTextRange = textField.textRangeFromPosition(textField.beginningOfDocument, toPosition: textField.endOfDocument)
+    }
+    
+    //如果通过协议方法实现结束时的回调 会导致按键盘的return键时 调用了两次skillLevelDidChange回调, 故此处不采用这个方法
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        delegate?.skillLevelDidChange(self, lv: skilllevel.text!)
+//        print("aaa")
+//    }
     @IBAction func levelFieldBegin(sender: UITextField) {
         delegate?.skillLevelDidBeginEditing(self)
     }
+    //此方法同时处理did end on exit 和 editing did end
     @IBAction func levelFieldDone(sender: UITextField) {
         skilllevel.resignFirstResponder()
         delegate?.skillLevelDidChange(self, lv: skilllevel.text!)

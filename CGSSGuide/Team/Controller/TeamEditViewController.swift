@@ -130,12 +130,12 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 extension TeamEditViewController :TeamMemberTableViewCellDelegate {
  
     func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animateWithDuration(0.25, animations: {
             self.tv.contentOffset = CGPointMake(0, 0)
         })
         let member = getMemberByIndex(cell.tag - 100)
         var newLevel = Int(lv) ?? 10
-        if newLevel > 10 || newLevel < 0 {
+        if newLevel > 10 || newLevel < 1 {
             newLevel = 10
         }
         member?.skillLevel = newLevel
@@ -143,9 +143,10 @@ extension TeamEditViewController :TeamMemberTableViewCellDelegate {
     }
     
     func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
+        //通常第5,6格会被键盘挡住 判断是否要上移表视图
         if cell.tag - 100 >= 3 {
-            UIView.animateWithDuration(0.2, animations: { 
-                self.tv.contentOffset = CGPointMake(0, 160)
+            UIView.animateWithDuration(0.25, animations: {
+                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - 216 - CGFloat(cell.tag - 99) * 90, 0))
             })
             
         }
@@ -172,14 +173,5 @@ extension TeamEditViewController : BaseCardTableViewControllerDelegate {
 extension TeamEditViewController : UIScrollViewDelegate {
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         tv.endEditing(true)
-        for i in 0...5 {
-            let cell = tv.cellForRowAtIndexPath(NSIndexPath.init(forRow: i, inSection: 0)) as! TeamMemberTableViewCell
-            let member = getMemberByIndex(i)
-            var newLevel = Int(cell.skilllevel.text ?? "0") ?? 10
-            if newLevel > 10 || newLevel < 0 {
-                newLevel = 10
-            }
-            member?.skillLevel = newLevel
-        }
     }
 }

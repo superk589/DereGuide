@@ -13,6 +13,7 @@ class TeamTableViewCell: UITableViewCell {
     var icons :[CGSSCardIconView]!
     var skillLvLabels : [UILabel]!
     var leftSpace:CGFloat = 20
+    var rightSpace:CGFloat = 50
     var space:CGFloat = 10
     var rawValueLabels: [UILabel]!
 
@@ -24,7 +25,7 @@ class TeamTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let btnW = (CGSSTool.width - 2 * leftSpace + space ) / 6 - space
+        let btnW = (CGSSTool.width - rightSpace - leftSpace + space ) / 6 - space
         icons = [CGSSCardIconView]()
         skillLvLabels = [UILabel]()
         for index in 0...5 {
@@ -42,10 +43,10 @@ class TeamTableViewCell: UITableViewCell {
         let originY = 10 + btnW + 23
 
         
-        let width = (CGSSTool.width - 52 ) / 5
+        let width = (CGSSTool.width - leftSpace - rightSpace - 4) / 5
         let fontSize:CGFloat = 12
         let height:CGFloat = 12
-        let originX:CGFloat = 26
+        let originX:CGFloat = 20
         
         lifeLabel = UILabel()
         lifeLabel.frame = CGRectMake(originX, originY, width, height )
@@ -82,6 +83,12 @@ class TeamTableViewCell: UITableViewCell {
         contentView.addSubview(danceLabel)
         contentView.addSubview(visualLabel)
         contentView.addSubview(totalLabel)
+        
+        let asView = UILabel()
+        asView.frame = CGRectMake(0, 0, 30, 30)
+        asView.text = ">"
+        asView.textAlignment = .Right
+        self.accessoryView = asView
 
         // Initialization code
     }

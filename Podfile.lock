@@ -1,17 +1,20 @@
 PODS:
+  - CMPopTipView (2.3.0)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - CMPopTipView
   - SDWebImage
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  CMPopTipView: 774e0230b5c73abb3c39051da6d8a383373c4f7f
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: ebe8136a34b4064f59e6d38d7538896e93a9af8d
+PODFILE CHECKSUM: c4b6dd91313fb1658bed8d0eedd225ef78ea49cd
 
 COCOAPODS: 1.0.1

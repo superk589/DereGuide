@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIR-TU-f90">
-                        <rect key="frame" x="379" y="5" width="11" height="21"/>
+                        <rect key="frame" x="379" y="3" width="11" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="eDm-Y4-E82"/>
                         </constraints>
@@ -53,8 +53,8 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUw-Sk-Uso">
-                                <rect key="frame" x="68" y="18" width="322" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUw-Sk-Uso">
+                                <rect key="frame" x="68" y="21" width="322" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Mlo-0S-LeR"/>
                                 </constraints>
@@ -62,8 +62,8 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqD-ub-3FT">
-                                <rect key="frame" x="110" y="0.0" width="35.5" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqD-ub-3FT">
+                                <rect key="frame" x="110" y="0.0" width="158" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="OPU-i7-mak"/>
                                 </constraints>
@@ -81,7 +81,8 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                                 <connections>
                                     <action selector="levelFieldBegin:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="Cdd-hT-7gL"/>
-                                    <action selector="levelFieldDone:" destination="KGk-i7-Jjw" eventType="editingDidEndOnExit" id="i5q-p1-OCF"/>
+                                    <action selector="levelFieldDone:" destination="KGk-i7-Jjw" eventType="editingDidEndOnExit" id="BBz-Co-VyD"/>
+                                    <action selector="levelFieldDone:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="RgY-Q6-CQa"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -91,7 +92,8 @@
                             <constraint firstItem="RtF-Ry-o2d" firstAttribute="leading" secondItem="o1q-2o-FWH" secondAttribute="trailing" constant="10" id="0eD-Id-9kK"/>
                             <constraint firstAttribute="trailing" secondItem="s7M-LP-pJL" secondAttribute="trailing" constant="10" id="6ng-jG-igG"/>
                             <constraint firstAttribute="trailing" secondItem="lUw-Sk-Uso" secondAttribute="trailing" constant="10" id="Bz9-kO-tgu"/>
-                            <constraint firstItem="lUw-Sk-Uso" firstAttribute="top" secondItem="RtF-Ry-o2d" secondAttribute="bottom" id="FDM-B3-GZt"/>
+                            <constraint firstItem="lUw-Sk-Uso" firstAttribute="top" secondItem="RtF-Ry-o2d" secondAttribute="bottom" constant="3" id="FDM-B3-GZt"/>
+                            <constraint firstItem="34w-V9-N1E" firstAttribute="leading" secondItem="EqD-ub-3FT" secondAttribute="trailing" constant="10" id="KlD-QH-fA5"/>
                             <constraint firstItem="EqD-ub-3FT" firstAttribute="top" secondItem="3cP-64-FR3" secondAttribute="top" id="QwZ-hj-ile"/>
                             <constraint firstItem="o1q-2o-FWH" firstAttribute="leading" secondItem="3cP-64-FR3" secondAttribute="leading" constant="10" id="TMA-J4-21y"/>
                             <constraint firstItem="RtF-Ry-o2d" firstAttribute="top" secondItem="3cP-64-FR3" secondAttribute="top" id="XJz-2Y-TzD"/>
@@ -125,7 +127,7 @@
                     <constraint firstItem="3cP-64-FR3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CJx-2a-wxE"/>
                     <constraint firstItem="3cP-64-FR3" firstAttribute="top" secondItem="oKx-6K-wql" secondAttribute="bottom" constant="5" id="L3v-4V-e6k"/>
                     <constraint firstAttribute="bottom" secondItem="3cP-64-FR3" secondAttribute="bottom" id="LVE-bT-KRz"/>
-                    <constraint firstItem="xIR-TU-f90" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="UIB-1f-uRj"/>
+                    <constraint firstItem="xIR-TU-f90" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="UIB-1f-uRj"/>
                     <constraint firstItem="t4l-ZY-5Er" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Wvb-3W-QQB"/>
                     <constraint firstItem="oKx-6K-wql" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a2y-VT-VuT"/>
                     <constraint firstAttribute="trailing" secondItem="3cP-64-FR3" secondAttribute="trailing" id="er6-EX-rL3"/>

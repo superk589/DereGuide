@@ -63,13 +63,13 @@ public class CGSSSkill: CGSSBaseModel {
     
     func procChanceOfLevel(lv:Int) -> Float? {
         if let p = proc_chance {
-            return Float((p.1! - p.0!) / 10 * lv + p.0!) / 100
+            return (Float(p.1! - p.0!) / 9 * (Float(lv) - 1) + Float(p.0!)) / 100
         }
         return nil
     }
     func effectLengthOfLevel(lv:Int) -> Float? {
         if let e = effect_length {
-            return Float((e.1! - e.0!) / 10 * lv + e.0!) / 100
+            return (Float(e.1! - e.0!) / 9 * (Float(lv) - 1) + Float(e.0!)) / 100
         }
         return nil
     }

@@ -7,17 +7,21 @@
 //
 
 import UIKit
+protocol SongTableViewCellDelegate: class {
+    func diffSelected(live:CGSSLive, diff:Int)
+}
 
 class SongTableViewCell: UITableViewCell {
 
+    weak var delegate: SongTableViewCellDelegate?
     var jacketImageView: UIImageView!
     var nameLabel: UILabel!
     var descriptionLabel: UILabel!
-    var debutLabel: UILabel!
-    var regularLabel: UILabel!
-    var proLabel: UILabel!
-    var masterLabel: UILabel!
-    var masterPlusLabel: UILabel!
+    var debutButton: UIButton!
+    var regularButton: UIButton!
+    var proButton: UIButton!
+    var masterButton: UIButton!
+    var masterPlusButton: UIButton!
     var diffLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,68 +47,89 @@ class SongTableViewCell: UITableViewCell {
 ////        diffLabel.frame = CGRectMake(76, 40, 150, 12)
 ////        diffLabel.text = "diff"
 //        
-        debutLabel = UILabel()
-        debutLabel.frame = CGRectMake(originX, originY, width, height )
-        debutLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        debutLabel.backgroundColor = CGSSTool.debutColor
-        //debutLabel.layer.cornerRadius = 6
-        //debutLabel.layer.masksToBounds = true
-        debutLabel.textAlignment = .Center
+        debutButton = UIButton()
+        debutButton.frame = CGRectMake(originX, originY, width, height)
+        debutButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
+        debutButton.backgroundColor = CGSSTool.debutColor
+        debutButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        //debutButton.layer.cornerRadius = 6
+        //debutButton.layer.masksToBounds = true
+        debutButton.tag = 1
+        debutButton.addTarget(self, action: #selector(diffClick), forControlEvents: .TouchUpInside)
 //
-        regularLabel = UILabel()
-        regularLabel.frame = CGRectMake(originX + width + space, originY, width, height )
-        regularLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        regularLabel.backgroundColor = CGSSTool.regularColor
-        //regularLabel.layer.cornerRadius = 6
-        //regularLabel.layer.masksToBounds = true
-        regularLabel.textAlignment = .Center
+        regularButton = UIButton()
+        regularButton.frame = CGRectMake(originX + width + space, originY, width, height )
+        regularButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
+        regularButton.backgroundColor = CGSSTool.regularColor
+        regularButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        //regularButton.layer.cornerRadius = 6
+        //regularButton.layer.masksToBounds = true
+        //regularButton.textAlignment = .Center
+        regularButton.tag = 2
+        regularButton.addTarget(self, action: #selector(diffClick), forControlEvents: .TouchUpInside)
         
-        proLabel = UILabel()
-        proLabel.frame = CGRectMake(originX + 2 * (width + space), originY, width, height )
-        proLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        proLabel.backgroundColor = CGSSTool.proColor
-//        proLabel.layer.cornerRadius = 6
-//        proLabel.layer.masksToBounds = true
-        proLabel.textAlignment = .Center
+        proButton = UIButton()
+        proButton.frame = CGRectMake(originX + 2 * (width + space), originY, width, height )
+        proButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
+        proButton.backgroundColor = CGSSTool.proColor
+        proButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+//        proButton.layer.cornerRadius = 6
+//        proButton.layer.masksToBounds = true
+        //proButton.textAlignment = .Center
+        proButton.tag = 3
+        proButton.addTarget(self, action: #selector(diffClick), forControlEvents: .TouchUpInside)
         
-        masterLabel = UILabel()
-        masterLabel.frame = CGRectMake(originX + 3 * (width + space), originY, width, height )
-        masterLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        masterLabel.backgroundColor = CGSSTool.masterColor
-        //masterLabel.layer.cornerRadius = 6
-        //masterLabel.layer.masksToBounds = true
-        masterLabel.textAlignment = .Center
+        masterButton = UIButton()
+        masterButton.frame = CGRectMake(originX + 3 * (width + space), originY, width, height )
+        masterButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
+        masterButton.backgroundColor = CGSSTool.masterColor
+        masterButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        //masterButton.layer.cornerRadius = 6
+        //masterButton.layer.masksToBounds = true
+        //masterButton.textAlignment = .Center
+        masterButton.tag = 4
+        masterButton.addTarget(self, action: #selector(diffClick), forControlEvents: .TouchUpInside)
         
-        masterPlusLabel = UILabel()
-        masterPlusLabel.frame = CGRectMake(originX + 4 * (width + space), originY, width, height )
-        masterPlusLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        masterPlusLabel.backgroundColor = CGSSTool.masterPlusColor
-        masterPlusLabel.tintColor = CGSSTool.masterPlusColor
-        //masterPlusLabel.layer.cornerRadius = 6
-        //masterPlusLabel.layer.masksToBounds = true
-        masterPlusLabel.textAlignment = .Center
+        masterPlusButton = UIButton()
+        masterPlusButton.frame = CGRectMake(originX + 4 * (width + space), originY, width, height )
+        masterPlusButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
+        masterPlusButton.backgroundColor = CGSSTool.masterPlusColor
+        masterPlusButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        //masterPlusButton.tintColor = CGSSTool.masterPlusColor
+        //masterPlusButton.layer.cornerRadius = 6
+        //masterPlusButton.layer.masksToBounds = true
+        //masterPlusButton.textAlignment = .Center
+        masterPlusButton.tag = 5
+        masterPlusButton.addTarget(self, action: #selector(diffClick), forControlEvents: .TouchUpInside)
         
         contentView.addSubview(jacketImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(descriptionLabel)
-        contentView.addSubview(debutLabel)
-        contentView.addSubview(regularLabel)
-        contentView.addSubview(proLabel)
-        contentView.addSubview(masterLabel)
-        contentView.addSubview(masterPlusLabel)
+        contentView.addSubview(debutButton)
+        contentView.addSubview(regularButton)
+        contentView.addSubview(proButton)
+        contentView.addSubview(masterButton)
+        contentView.addSubview(masterPlusButton)
     }
     
+    func diffClick(button:UIButton) {
+        delegate?.diffSelected(live, diff: button.tag)
+    }
+    
+    var live:CGSSLive!
     func initWith(live:CGSSLive) {
+        self.live = live
         let dao = CGSSDAO.sharedDAO
         if let song = dao.findSongById(live.musicId!) {
             self.nameLabel.text = song.title
             //self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
             self.descriptionLabel.text = "bpm:\(song.bpm!)"
 
-            self.debutLabel.text = String(live.debut!)
-            self.regularLabel.text = String(live.regular!)
-            self.proLabel.text = String(live.pro!)
-            self.masterLabel.text = String(live.master!)
+            self.debutButton.setTitle(String(live.debut!), forState: .Normal)
+           // self.debutButton.ad
+            self.regularButton.setTitle(String(live.regular!), forState: .Normal)
+            self.proButton.setTitle(String(live.master!), forState: .Normal)
+            self.masterButton.setTitle(String(live.master!), forState: .Normal)
             switch live.type! {
             case 1:
                 self.nameLabel.textColor = CGSSTool.cuteColor
@@ -118,10 +143,10 @@ class SongTableViewCell: UITableViewCell {
                 break
             }
             if live.masterPlus != 0 {
-                masterPlusLabel.hidden = false
-                masterPlusLabel.text = String(live.masterPlus!)
+                masterPlusButton.hidden = false
+                masterPlusButton.setTitle(String(live.masterPlus!), forState: .Normal)
             } else {
-                masterPlusLabel.hidden = true
+                masterPlusButton.hidden = true
             }
             
             let url = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song.id!).png"

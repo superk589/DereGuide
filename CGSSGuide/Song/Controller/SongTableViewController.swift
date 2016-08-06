@@ -147,16 +147,21 @@ class SongTableViewController: RefreshableTableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("SongCell", forIndexPath: indexPath) as! SongTableViewCell
 
         cell.initWith(liveList[indexPath.row])
+        cell.delegate = self
         // Configure the cell...
 
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let live = liveList[indexPath.row]
+        pushBeatMapView(live, diff: nil)
+    }
+    
+    func pushBeatMapView(live:CGSSLive, diff:Int?) {
         searchBar.resignFirstResponder()
         let beatmapVC = BeatmapViewController()
-        let live = liveList[indexPath.row]
-       
+        beatmapVC.preSetDiff = diff
         if beatmapVC.initWithLive(live) {
             self.navigationController?.pushViewController(beatmapVC, animated: true)
         }
@@ -165,6 +170,7 @@ class SongTableViewController: RefreshableTableViewController {
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         }
+
     }
 
     /*
@@ -212,6 +218,13 @@ class SongTableViewController: RefreshableTableViewController {
     }
     */
 
+}
+
+//MARK: SongTableViewCell的协议方法
+extension SongTableViewController: SongTableViewCellDelegate {
+    func diffSelected(live: CGSSLive, diff: Int) {
+        pushBeatMapView(live, diff: diff)
+    }
 }
 
 //MARK: searchBar的协议方法

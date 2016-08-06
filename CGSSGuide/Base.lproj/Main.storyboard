@@ -295,8 +295,7 @@
                                 <string key="text">本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：
 株式会社 万代 (BANDAI Co., Ltd)
 
-本程序无法保证数据的绝对准确性，因数据错误导致的使用风险需由使用者自身承担。
-</string>
+本程序无法保证数据的绝对准确性，因数据错误导致的使用风险需由使用者自身承担。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
