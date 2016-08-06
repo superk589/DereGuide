@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class TeamTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, TeamEditViewControllerDelegate {
 
     var teams:[CGSSTeam] {
         let manager = CGSSTeamManager.defaultManager
@@ -29,6 +29,7 @@ class TeamTableViewController: UITableViewController, UIPopoverPresentationContr
     
     func addTeam() {
         let vc = TeamEditViewController()
+        vc.delegate = self
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -80,18 +81,26 @@ class TeamTableViewController: UITableViewController, UIPopoverPresentationContr
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            CGSSTeamManager.defaultManager.removeATeam(indexPath.row)
+            CGSSTeamManager.defaultManager.removeATeamAtIndex(indexPath.row)
             // Delete the row from the data source
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let teamDV = TeamDetailViewController()
-        //navigationController?.pushViewController(teamDV, animated: true)
+        let teamDVC = TeamDetailViewController()
+        teamDVC.team = teams[indexPath.row]
+        teamDVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(teamDVC, animated: true)
+    }
+    
+    //MARK: TeamEditViewController的协议方法
+    
+    func save(team: CGSSTeam) {
+        CGSSTeamManager.defaultManager.addATeam(team)
     }
     /*
     // Override to support rearranging the table view.

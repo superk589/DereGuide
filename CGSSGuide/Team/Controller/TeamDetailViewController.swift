@@ -7,25 +7,25 @@
 //
 
 import UIKit
-import CMPopTipView
 
 class TeamDetailViewController: UIViewController {
+    
+    var team:CGSSTeam!
+    var teamDV:TeamDetailView!
+    var sv :UIScrollView!
 
-    var selfLeaderLabel: CMPopTipView!
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
-        selfLeaderLabel = CMPopTipView.init(message: "sdsdsd")
-        selfLeaderLabel.frame = CGRectMake(0, 0, 300, 300)
-        let button = UIButton.init(frame: CGRectMake(20, 300, 400, 100))
-        button.setTitle("adadadasd", forState: .Normal)
-        selfLeaderLabel.presentPointingAtView(button, inView: view, animated: true)
-        selfLeaderLabel.has3DStyle = false
-        selfLeaderLabel.borderColor = UIColor.grayColor()
-        selfLeaderLabel.hasGradientBackground = false
-        selfLeaderLabel.backgroundColor = UIColor.grayColor()
-        view.addSubview(selfLeaderLabel)
+        self.automaticallyAdjustsScrollViewInsets = false
+        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64))
+        teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
+        //teamDV.initWith(team)
+        teamDV.delegate = self
+        sv.contentSize = teamDV.frame.size
+        sv.addSubview(teamDV)
         
+        view.addSubview(sv)
         // Do any additional setup after loading the view.
     }
 
@@ -35,6 +35,10 @@ class TeamDetailViewController: UIViewController {
     }
     
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        teamDV.initWith(team)
+    }
     /*
     // MARK: - Navigation
 
@@ -45,4 +49,39 @@ class TeamDetailViewController: UIViewController {
     }
     */
 
+}
+
+//MARK: TeamEditViewControllerDelegate协议方法
+
+extension TeamDetailViewController: TeamEditViewControllerDelegate {
+    func save(team: CGSSTeam) {
+        CGSSTeamManager.defaultManager.removeATeam(self.team)
+        self.team = team
+        CGSSTeamManager.defaultManager.addATeam(team)
+    }
+}
+
+//MARK: TeamDetailViewDelegate 协议方法
+extension TeamDetailViewController :TeamDetailViewDelegate {
+    func skillShowOrHide() {
+        
+    }
+    
+    func editTeam(){
+        let teamEditDVC = TeamEditViewController()
+        teamEditDVC.initWith(team)
+        teamEditDVC.delegate = self
+        navigationController?.pushViewController(teamEditDVC, animated: true)
+        
+    }
+    func startCalc() {
+        
+    }
+    
+    func cardIconClick(id: Int) {
+        let cardDVC = CardDetailViewController()
+        cardDVC.card = CGSSDAO.sharedDAO.findCardById(id)
+        navigationController?.pushViewController(cardDVC, animated: true)
+    }
+    
 }

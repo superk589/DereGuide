@@ -43,13 +43,27 @@ class CGSSTeamManager: NSObject {
     }
     
     func addATeam(team:CGSSTeam) {
-        teams.append(team)
-        writeToFile(nil)
+        addATeam(team, complete: nil)
     }
-    
-    func removeATeam(index:Int) {
+    private func addATeam(team:CGSSTeam, complete:(()->Void)?) {
+        teams.insert(team, atIndex: 0)
+        writeToFile(complete)
+    }
+    func removeATeamAtIndex(index:Int) {
+        removeATeamAtIndex(index, complete: nil)
+    }
+    private func removeATeamAtIndex(index:Int, complete:(()->Void)?) {
         teams.removeAtIndex(index)
-        writeToFile(nil)
+        writeToFile(complete)
+    }
+    private func removeATeam(team:CGSSTeam, complete:(()->Void)?) {
+        if let index = teams.indexOf(team) {
+            teams.removeAtIndex(index)
+            writeToFile(complete)
+        }
+    }
+    func removeATeam(team:CGSSTeam) {
+        removeATeam(team, complete: nil)
     }
     func getTeamByIndex(index:Int) -> CGSSTeam {
         return self.teams[index]

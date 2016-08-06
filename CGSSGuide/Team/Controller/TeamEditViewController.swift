@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol TeamEditViewControllerDelegate:class {
+    func save(team :CGSSTeam)
+}
+
 class TeamEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    weak var delegate: TeamEditViewControllerDelegate?
     var leader:CGSSTeamMember?
+    //因为设置时可能存在不按1234的顺序设置的情况 故此处设置队员为int下标的字典
     var subs = [Int:CGSSTeamMember]()
     var friendLeader:CGSSTeamMember?
     let tv = UITableView()
@@ -46,11 +52,23 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         tv.rowHeight = 90
         tv.tableFooterView = UIView.init(frame: CGRectZero)
         view.addSubview(tv)
+        
+        let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
+        swipe.direction = .Right
+        self.view.addGestureRecognizer(swipe)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func initWith(team:CGSSTeam) {
+        self.leader = team.leader
+        self.friendLeader = team.friendLeader
+        for i in 0...3 {
+            self.subs[i] = team.subs[i]
+        }
     }
     
     func getMemberByIndex(index:Int) -> CGSSTeamMember? {
@@ -65,8 +83,8 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     
     func saveTeam() {
         if let leader = self.leader, friendLeader = self.friendLeader where subs.count == 4 {
-            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), teamBackSupportValue: 0, friendLeader: friendLeader)
-            CGSSTeamManager.defaultManager.addATeam(team)
+            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), teamBackSupportValue: 100000, friendLeader: friendLeader)
+            delegate?.save(team)
             self.navigationController?.popViewControllerAnimated(true)
         }
     }

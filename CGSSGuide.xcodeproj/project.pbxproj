@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
+		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
+		121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
 		1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */; };
@@ -62,7 +65,6 @@
 		1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9D01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift */; };
 		1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */; };
 		1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9D21D520B5D0071AD7F /* CGSSSong.swift */; };
-		1269E9E41D520B5D0071AD7F /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9D41D520B5D0071AD7F /* CGSSTeamManager.swift */; };
 		1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9E71D520B750071AD7F /* CGSSGridView.swift */; };
 		1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9E81D520B750071AD7F /* CGSSImageView.swift */; };
 		1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */; };
@@ -112,6 +114,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
+		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
+		121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAttributeValue.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
@@ -167,7 +172,6 @@
 		1269E9D01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSShiftingBPMLive.swift; sourceTree = "<group>"; };
 		1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSkill.swift; sourceTree = "<group>"; };
 		1269E9D21D520B5D0071AD7F /* CGSSSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSong.swift; sourceTree = "<group>"; };
-		1269E9D41D520B5D0071AD7F /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		1269E9E71D520B750071AD7F /* CGSSGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridView.swift; sourceTree = "<group>"; };
 		1269E9E81D520B750071AD7F /* CGSSImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSImageView.swift; sourceTree = "<group>"; };
 		1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 		1269E9121D5208B80071AD7F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */,
 				1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */,
 				1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */,
 				1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */,
@@ -336,7 +341,7 @@
 				1269E9D01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift */,
 				1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */,
 				1269E9D21D520B5D0071AD7F /* CGSSSong.swift */,
-				1269E9D41D520B5D0071AD7F /* CGSSTeamManager.swift */,
+				121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -370,9 +375,9 @@
 			isa = PBXGroup;
 			children = (
 				1269E9F01D520C3E0071AD7F /* TeamCardSelectTableViewController.swift */,
-				1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */,
 				1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */,
 				1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */,
+				1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */,
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
 				1269EA2A1D5210160071AD7F /* TeamMemberTableViewCell.xib */,
+				121C78C51D557B3900D0B636 /* TeamDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -673,7 +679,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1269E9E41D520B5D0071AD7F /* CGSSTeamManager.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarViewController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
@@ -690,6 +695,7 @@
 				1269E9DF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
+				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
@@ -703,10 +709,12 @@
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
+				121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
+				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,

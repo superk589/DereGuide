@@ -184,19 +184,17 @@ public class CGSSCard:CGSSBaseModel {
     //    "vocal_min": 1504
     //    ; see dance_min
     
-    //对于旧卡暂时这个属性为nil ,对于新卡这个属性设置为更新日期
-    public var update_date:NSDate?
     
     //对卡片进行按更新时间先后排序时使用, 对于新卡取更新时间, 对于旧卡取id%1000
     public dynamic var update_id :Int {
-        var returnValue = 0
+        var returnValue:Int
        
         if evolution_id != 0 {
             returnValue = evolution_id! % 1000
         } else {
             returnValue = id! % 1000
         }
-        if let date = update_date {
+        if let date = updateTime {
             returnValue += Int(date.timeIntervalSince1970)
         }
         return returnValue
@@ -385,7 +383,6 @@ public class CGSSCard:CGSSBaseModel {
         aCoder.encodeObject(vocal_min, forKey: "vocal_min")
         //        "vocal_min": 1504
         //        ; see dance_min
-        aCoder.encodeObject(update_date, forKey: "update_date")
     }
     
     
@@ -637,7 +634,6 @@ public class CGSSCard:CGSSBaseModel {
         self.vocal_min = aDecoder.decodeObjectForKey("vocal_min") as? Int
         //        "vocal_min": 1504
         //        ; see dance_min
-        self.update_date = aDecoder.decodeObjectForKey("update_date") as? NSDate
         super.init(coder: aDecoder)
 //        
         

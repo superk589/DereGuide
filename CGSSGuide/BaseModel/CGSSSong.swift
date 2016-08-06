@@ -9,6 +9,13 @@
 import Foundation
 import SwiftyJSON
 
+enum SongType {
+    case All
+    case Cool
+    case Passion
+    case Cute
+}
+
 public class CGSSSong: CGSSBaseModel {
     var id:Int?
     var bpm:Int?
