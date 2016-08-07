@@ -164,6 +164,10 @@ class TeamDetailView: UIView {
 
         originY += 25 + topSpace
         scoreGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 70), rows: 5, columns: 3)
+        
+        originY += 70 + topSpace + 50
+        
+        bottomView.frame.size.height = originY
     
         bottomView.addSubview(selectSongLabel)
         bottomView.addSubview(selectSongButton)
@@ -311,7 +315,7 @@ class TeamDetailView: UIView {
         skillListGrid.setGridColor(skillListColor)
         
         //skillProcGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, scoreGrid.frame.size.height + scoreGrid.frame.origin.y + topSpace, CGSSTool.width - 2 * leftSpace, CGFloat(skillKind) * 14 + 1), rows: skillKind, columns: 3)
-        bottomView.frame.size.height = skillListGrid.frame.size.height + skillListGrid.frame.origin.y
+        //bottomView.frame.origin.y = skillListGrid.frame.size.height + skillListGrid.frame.origin.y
         frame.size = CGSizeMake(CGSSTool.width, bottomView.frame.size.height + bottomView.frame.origin.y)
     }
 
@@ -361,7 +365,7 @@ class TeamDetailView: UIView {
     func updateSongInfo(live:CGSSLive, beatmaps:[CGSSBeatmap], diff:Int) {
         selectSongLabel.hidden = true
         let song = live.musicRef!
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSTool.diffStringFromInt(diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长:\(Int(beatmaps[diff - 1].totalSeconds))秒"
+        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSTool.diffStringFromInt(diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长: \(Int(beatmaps[diff - 1].totalSeconds))秒"
         
         //songDiffLabel.text = CGSSTool.diffStringFromInt(diff)
         songNameLabel.text = live.musicRef?.title
