@@ -21,7 +21,7 @@ class CGSSGridView: UIView {
         }
     }
     
-    init(frame: CGRect, rows:Int, columns:Int) {
+    init(frame: CGRect, rows:Int, columns:Int, textAligment:NSTextAlignment = .Center) {
         self.rows = rows
         self.columns = columns
         self.grid = [UILabel]()
@@ -41,9 +41,11 @@ class CGSSGridView: UIView {
             view.layer.borderWidth = borderWidth
             view.layer.borderColor = UIColor.blackColor().CGColor
             
-            view.textAlignment = .Center
+            view.textAlignment = textAligment
             //view.font = UIFont.systemFontOfSize(gridHeight-2)
+            view.numberOfLines = 0
             view.font = UIFont.init(name: "menlo", size: gridHeight-2)
+            view.adjustsFontSizeToFitWidth = true
 
             self.grid.append(view)
             self.addSubview(view)

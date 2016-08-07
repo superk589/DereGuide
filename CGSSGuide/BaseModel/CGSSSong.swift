@@ -23,6 +23,10 @@ public class CGSSSong: CGSSBaseModel {
     var composer:String?
     var lyricist:String?
     
+    var imageURLString: String {
+        return CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(id!).png"
+    }
+    
     override public func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(id, forKey: "id")

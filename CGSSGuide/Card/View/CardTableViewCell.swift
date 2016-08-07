@@ -24,89 +24,17 @@ class CardTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        cardIconView = CGSSCardIconView(frame: CGRectMake(10, 10, 48, 48))
-        
-        rarityLabel = UILabel()
-        rarityLabel.frame = CGRectMake(68, 10, 30, 10)
-        rarityLabel.textAlignment = .Left
-        rarityLabel.font = UIFont.systemFontOfSize(10)
-        
-        skillLabel = UILabel()
-        skillLabel.frame = CGRectMake(CGSSTool.width - 150, 10, 140, 10)
-        skillLabel.font = UIFont.systemFontOfSize(10)
-        skillLabel.textAlignment = .Right
-        
-        cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRectMake(68, 25, CGSSTool.width - 78, 16)
-        cardNameLabel.font = UIFont.systemFontOfSize(16)
-        
-        
-        titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(98, 10, CGSSTool.width - 150, 10)
-        titleLabel.font = UIFont.systemFontOfSize(10)
-        
-        
-        
-        
-        let width = (CGSSTool.width - 78 ) / 5
-        let fontSize:CGFloat = 12
-        let height:CGFloat = 12
-        let originX:CGFloat = 68
-        let originY:CGFloat = 46
-        
-        lifeLabel = UILabel()
-        lifeLabel.frame = CGRectMake(originX, originY, width, height )
-        lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        lifeLabel.textColor = CGSSTool.lifeColor
-        lifeLabel.textAlignment = .Right
-        
-        vocalLabel = UILabel()
-        vocalLabel.frame = CGRectMake(originX + width, originY, width, height )
-        vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        vocalLabel.textColor = CGSSTool.vocalColor
-        vocalLabel.textAlignment = .Right
-        
-        danceLabel = UILabel()
-        danceLabel.frame = CGRectMake(originX + 2 * width, originY, width, height )
-        danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        danceLabel.textColor = CGSSTool.danceColor
-        danceLabel.textAlignment = .Right
-        
-        visualLabel = UILabel()
-        visualLabel.frame = CGRectMake(originX + 3 * width, originY, width, height )
-        visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        visualLabel.textColor = CGSSTool.visualColor
-        visualLabel.textAlignment = .Right
-        
-        totalLabel = UILabel()
-        totalLabel.frame = CGRectMake(originX + 4 * width, originY, width, height )
-        totalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        totalLabel.textColor = UIColor.darkTextColor().colorWithAlphaComponent(0.5)
-        totalLabel.textAlignment = .Right
-        
-        contentView.addSubview(cardNameLabel)
-        contentView.addSubview(cardIconView)
-        contentView.addSubview(skillLabel)
-        contentView.addSubview(rarityLabel)
-        contentView.addSubview(vocalLabel)
-        contentView.addSubview(lifeLabel)
-        contentView.addSubview(danceLabel)
-        contentView.addSubview(visualLabel)
-        contentView.addSubview(totalLabel)
-        contentView.addSubview(titleLabel)
+        prepare()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    private func prepare() {
         
         cardIconView = CGSSCardIconView(frame: CGRectMake(10, 10, 48, 48))
-                
+        
         rarityLabel = UILabel()
         rarityLabel.frame = CGRectMake(68, 10, 30, 10)
         rarityLabel.textAlignment = .Left
@@ -140,7 +68,7 @@ class CardTableViewCell: UITableViewCell {
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
         lifeLabel.textColor = CGSSTool.lifeColor
         lifeLabel.textAlignment = .Right
- 
+        
         vocalLabel = UILabel()
         vocalLabel.frame = CGRectMake(originX + width, originY, width, height )
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
@@ -175,8 +103,11 @@ class CardTableViewCell: UITableViewCell {
         contentView.addSubview(visualLabel)
         contentView.addSubview(totalLabel)
         contentView.addSubview(titleLabel)
-        
-        // Initialization code
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        prepare()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

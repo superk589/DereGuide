@@ -14,33 +14,17 @@ class BeatmapViewController: UIViewController {
     var beatmaps:[CGSSBeatmap]!
     var bv:BeatmapView!
     var descLabel: UILabel!
-    var maxDiff:Int!
     var preSetDiff:Int?
     var currentDiff:Int! {
         didSet {
             let dao = CGSSDAO.sharedDAO
             let song = dao.findSongById(live.musicId!)
-            titleLabel.text = "\(song!.title!)\n\(live.getStarsForDiff(currentDiff))☆ \(diffStringFromInt(currentDiff)) bpm: \(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
+            titleLabel.text = "\(song!.title!)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSTool.diffStringFromInt(currentDiff)) bpm: \(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
             bv?.initWith(beatmaps[currentDiff-1], bpm: (song?.bpm)!, type: live.type!)
             bv?.setNeedsDisplay()
         }
     }
-    func diffStringFromInt(i:Int) -> String {
-        switch i {
-        case 1 :
-            return "DEBUT"
-        case 2:
-            return "REGULAR"
-        case 3:
-            return "PRO"
-        case 4:
-            return "MASTER"
-        case 5:
-            return "MASTER+"
-        default:
-            return "UNKNOWN"
-        }
-    }
+
 
     var tv:UIToolbar!
     var titleLabel:UILabel!
@@ -63,7 +47,7 @@ class BeatmapViewController: UIViewController {
         navigationItem.titleView = titleLabel
         
         //如果没有指定难度 则初始化难度为最高难度
-        currentDiff = preSetDiff ?? maxDiff
+        currentDiff = preSetDiff ?? live.maxDiff
         
     
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .Plain, target: self, action: #selector(self.selectDiff))
@@ -84,8 +68,8 @@ class BeatmapViewController: UIViewController {
     
     func selectDiff() {
         let alvc = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .ActionSheet)
-        for i in 1...maxDiff {
-            alvc.addAction(UIAlertAction.init(title: diffStringFromInt(i), style: .Default, handler: { (a) in
+        for i in 1...live.maxDiff {
+            alvc.addAction(UIAlertAction.init(title: CGSSTool.diffStringFromInt(i), style: .Default, handler: { (a) in
                 self.currentDiff = i
             }))
         }
@@ -99,24 +83,9 @@ class BeatmapViewController: UIViewController {
     }
     
     
-    func initWithLive(live:CGSSLive) -> Bool {
+    func initWithLive(live:CGSSLive, beatmaps:[CGSSBeatmap]) -> Bool {
         //打开谱面时 隐藏tabbar
         self.hidesBottomBarWhenPushed = true
-
-        var beatmaps = [CGSSBeatmap]()
-        let dao = CGSSDAO.sharedDAO
-        maxDiff = (live.masterPlus == 0) ? 4 : 5
-        for i in 1...maxDiff {
-            if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
-                beatmaps.append(beatmap)
-            } else {
-                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(diffStringFromInt(i))的歌曲,建议等待当前更新完成,或尝试下拉歌曲列表手动更新数据", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.navigationController?.presentViewController(alert, animated: true, completion: nil)
-                return false
-            }
-
-        }
         self.beatmaps = beatmaps
         self.live = live
         return true

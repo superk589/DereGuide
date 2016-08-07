@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        //异步预加载较大的谱面部分 暂时去除
+//        dispatch_async (dispatch_get_global_queue(0, 0)) {
+//            let _ = CGSSDAO.sharedDAO.beatmapDict
+//        }
         // Override point for customization after application launch.
         return true
     }

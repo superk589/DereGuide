@@ -22,7 +22,6 @@ class TeamDetailViewController: UIViewController {
         teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
         //teamDV.initWith(team)
         teamDV.delegate = self
-        sv.contentSize = teamDV.frame.size
         sv.addSubview(teamDV)
         
         view.addSubview(sv)
@@ -38,6 +37,7 @@ class TeamDetailViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         teamDV.initWith(team)
+        sv.contentSize = teamDV.frame.size
     }
     /*
     // MARK: - Navigation
@@ -52,7 +52,6 @@ class TeamDetailViewController: UIViewController {
 }
 
 //MARK: TeamEditViewControllerDelegate协议方法
-
 extension TeamDetailViewController: TeamEditViewControllerDelegate {
     func save(team: CGSSTeam) {
         CGSSTeamManager.defaultManager.removeATeam(self.team)
@@ -64,7 +63,13 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 //MARK: TeamDetailViewDelegate 协议方法
 extension TeamDetailViewController :TeamDetailViewDelegate {
     func skillShowOrHide() {
-        
+        sv.contentSize = teamDV.frame.size
+    }
+    
+    func selectSong() {
+        let songSelectVC = TeamSongSelectViewController()
+        songSelectVC.delegate = self
+        navigationController?.pushViewController(songSelectVC, animated: true)
     }
     
     func backValueChanged(value: Int) {
@@ -90,4 +95,12 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         navigationController?.pushViewController(cardDVC, animated: true)
     }
     
+}
+
+//MARK: BaseSongTableViewControllerDelegate的协议方法
+extension TeamDetailViewController: BaseSongTableViewControllerDelegate {
+    func selectSong(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+        teamDV.updateSongInfo(live, beatmaps: beatmaps, diff: diff)
+
+    }
 }

@@ -10,6 +10,17 @@
 		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */; };
+		121C78CE1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78CB1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png */; };
+		121C78CF1D57200400D0B636 /* 763-arrow-up-toolbar-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78CC1D57200400D0B636 /* 763-arrow-up-toolbar-selected@2x.png */; };
+		121C78D01D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78CD1D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png */; };
+		121C78D41D57201D00D0B636 /* 764-arrow-down-toolbar-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78D11D57201D00D0B636 /* 764-arrow-down-toolbar-selected@3x.png */; };
+		121C78D91D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78D71D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png */; };
+		121C78DA1D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78D81D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png */; };
+		121C78DE1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78DB1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png */; };
+		121C78DF1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78DC1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png */; };
+		121C78E01D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78DD1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png */; };
+		121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */; };
+		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
 		1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */; };
@@ -117,6 +128,17 @@
 		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAttributeValue.swift; sourceTree = "<group>"; };
+		121C78CB1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "763-arrow-up-toolbar-selected.png"; sourceTree = "<group>"; };
+		121C78CC1D57200400D0B636 /* 763-arrow-up-toolbar-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "763-arrow-up-toolbar-selected@2x.png"; sourceTree = "<group>"; };
+		121C78CD1D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "763-arrow-up-toolbar-selected@3x.png"; sourceTree = "<group>"; };
+		121C78D11D57201D00D0B636 /* 764-arrow-down-toolbar-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "764-arrow-down-toolbar-selected@3x.png"; sourceTree = "<group>"; };
+		121C78D71D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "764-arrow-down-toolbar-selected.png"; sourceTree = "<group>"; };
+		121C78D81D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "764-arrow-down-toolbar-selected@2x.png"; sourceTree = "<group>"; };
+		121C78DB1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "766-arrow-right-toolbar-selected.png"; sourceTree = "<group>"; };
+		121C78DC1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "766-arrow-right-toolbar-selected@2x.png"; sourceTree = "<group>"; };
+		121C78DD1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "766-arrow-right-toolbar-selected@3x.png"; sourceTree = "<group>"; };
+		121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSongTableViewController.swift; sourceTree = "<group>"; };
+		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +295,15 @@
 		1269E9111D5208760071AD7F /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				121C78CB1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png */,
+				121C78CC1D57200400D0B636 /* 763-arrow-up-toolbar-selected@2x.png */,
+				121C78CD1D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png */,
+				121C78D11D57201D00D0B636 /* 764-arrow-down-toolbar-selected@3x.png */,
+				121C78D71D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png */,
+				121C78D81D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png */,
+				121C78DB1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png */,
+				121C78DC1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png */,
+				121C78DD1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png */,
 				1269E93D1D5209A40071AD7F /* 748-heart-toolbar-selected.png */,
 				1269E93E1D5209A40071AD7F /* 748-heart-toolbar-selected@2x.png */,
 				1269E93F1D5209A40071AD7F /* 748-heart-toolbar-selected@3x.png */,
@@ -375,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9F01D520C3E0071AD7F /* TeamCardSelectTableViewController.swift */,
+				121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */,
 				1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */,
 				1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */,
 				1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */,
@@ -396,6 +428,7 @@
 		1269E9FD1D520C9F0071AD7F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */,
 				1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */,
 				1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */,
 			);
@@ -596,11 +629,14 @@
 				1269E94D1D5209A40071AD7F /* 748-heart-toolbar@2x.png in Resources */,
 				1269E9501D5209A40071AD7F /* 765-arrow-left-toolbar@2x.png in Resources */,
 				1269E9C01D520AAE0071AD7F /* 898-music-note@3x.png in Resources */,
+				121C78DE1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png in Resources */,
+				121C78CE1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png in Resources */,
 				1269E9A31D520A960071AD7F /* 740-gear-selected.png in Resources */,
 				1269E99B1D520A840071AD7F /* 726-star@2x.png in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
 				1269E94B1D5209A40071AD7F /* 748-heart-toolbar-selected@3x.png in Resources */,
 				1269E9BB1D520AAE0071AD7F /* 898-music-note-selected.png in Resources */,
+				121C78DA1D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png in Resources */,
 				1269E9A71D520A960071AD7F /* 740-gear@2x.png in Resources */,
 				1269E94F1D5209A40071AD7F /* 765-arrow-left-toolbar.png in Resources */,
 				1269E9A41D520A960071AD7F /* 740-gear-selected@2x.png in Resources */,
@@ -610,17 +646,23 @@
 				1269E9521D5209A40071AD7F /* 889-sort-descending-toolbar.png in Resources */,
 				1269E9A81D520A960071AD7F /* 740-gear@3x.png in Resources */,
 				1269E9A61D520A960071AD7F /* 740-gear.png in Resources */,
+				121C78DF1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png in Resources */,
 				1282EE681D011A8F0024318C /* Main.storyboard in Resources */,
 				1269EA2C1D5210160071AD7F /* TeamMemberTableViewCell.xib in Resources */,
 				1269E9B21D520AA10071AD7F /* 779-users.png in Resources */,
+				121C78D01D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png in Resources */,
 				1269E9BE1D520AAE0071AD7F /* 898-music-note.png in Resources */,
+				121C78E01D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png in Resources */,
 				1269E9BD1D520AAE0071AD7F /* 898-music-note-selected@3x.png in Resources */,
+				121C78D41D57201D00D0B636 /* 764-arrow-down-toolbar-selected@3x.png in Resources */,
+				121C78CF1D57200400D0B636 /* 763-arrow-up-toolbar-selected@2x.png in Resources */,
 				1269E99C1D520A840071AD7F /* 726-star@3x.png in Resources */,
 				1269E9531D5209A40071AD7F /* 889-sort-descending-toolbar@2x.png in Resources */,
 				1269E9511D5209A40071AD7F /* 765-arrow-left-toolbar@3x.png in Resources */,
 				1269E9AF1D520AA10071AD7F /* 779-users-selected.png in Resources */,
 				1269E94C1D5209A40071AD7F /* 748-heart-toolbar.png in Resources */,
 				1269E9B31D520AA10071AD7F /* 779-users@2x.png in Resources */,
+				121C78D91D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +733,7 @@
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
+				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				1269E9DF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
@@ -700,6 +743,7 @@
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
+				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,

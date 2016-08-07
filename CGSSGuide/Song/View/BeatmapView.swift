@@ -214,7 +214,7 @@ class BeatmapView: UIScrollView , UIScrollViewDelegate {
         case 3:
             self.strokeColor = CGSSTool.passionColor
         case 4:
-            self.strokeColor = UIColor.darkTextColor()
+            self.strokeColor = UIColor.darkGrayColor()
         default:
             break
         }

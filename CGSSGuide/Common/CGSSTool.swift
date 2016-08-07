@@ -43,5 +43,20 @@ public class CGSSTool: NSObject {
         return arr
     }
     
-    
+    public static func diffStringFromInt(i:Int) -> String {
+        switch i {
+        case 1 :
+            return "DEBUT"
+        case 2:
+            return "REGULAR"
+        case 3:
+            return "PRO"
+        case 4:
+            return "MASTER"
+        case 5:
+            return "MASTER+"
+        default:
+            return "UNKNOWN"
+        }
+    }
 }

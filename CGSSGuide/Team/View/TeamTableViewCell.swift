@@ -84,10 +84,10 @@ class TeamTableViewCell: UITableViewCell {
         contentView.addSubview(visualLabel)
         contentView.addSubview(totalLabel)
         
-        let asView = UILabel()
-        asView.frame = CGRectMake(0, 0, 30, 30)
-        asView.text = ">"
-        asView.textAlignment = .Right
+        let asView = UIImageView.init(frame: CGRectMake(0, 0, 10, 20))
+        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
+        asView.tintColor = UIColor.lightGrayColor()
+
         self.accessoryView = asView
 
         // Initialization code

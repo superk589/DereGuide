@@ -37,18 +37,8 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     func updateLevel(model:CGSSTeamMember) {
         self.skilllevel.text = String(model.skillLevel!)
-        if var skillDesc = model.cardRef?.skill?.explain_en {
-            
-            let pattern =  "[0-9.]+ ~ [0-9.]+"
-            let subs = CGSSTool.getStringByPattern(skillDesc, pattern: pattern)
-            let skill = model.cardRef!.skill!
-            let sub1 = subs[0]
-            let range1 = skillDesc.rangeOfString(sub1 as String)
-            skillDesc.replaceRange(range1!, with: String(format: "%.2f",  skill.procChanceOfLevel(model.skillLevel!)!))
-            let sub2 = subs[1]
-            let range2 = skillDesc.rangeOfString(sub2 as String)
-            skillDesc.replaceRange(range2!, with: String(format: "%.2f", skill.effectLengthOfLevel(model.skillLevel!)!))
-            self.skillDesc.text = skillDesc
+        if model.cardRef?.skill?.explain_en != nil {
+            self.skillDesc.text = model.cardRef?.skill?.getExplainByLevel(model.skillLevel!)
         }
     }
     func initWith(model:CGSSTeamMember) {

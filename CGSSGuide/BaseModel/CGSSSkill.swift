@@ -74,6 +74,19 @@ public class CGSSSkill: CGSSBaseModel {
         return nil
     }
     
+    func getExplainByLevel(lv:Int) -> String {
+        var explain = explain_en ?? ""
+        let pattern =  "[0-9.]+ ~ [0-9.]+"
+        let subs = CGSSTool.getStringByPattern(explain_en!, pattern: pattern)
+        let sub1 = subs[0]
+        let range1 = explain.rangeOfString(sub1 as String)
+        explain.replaceRange(range1!, with: String(format: "%.2f",  self.procChanceOfLevel(lv)!))
+        let sub2 = subs[1]
+        let range2 = explain.rangeOfString(sub2 as String)
+        explain.replaceRange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
+        return explain
+    }
+    
     
     public init(condition:Int, cutin_type:Int, effect_length:(Int?,Int?), explain:String, explain_en:String, id:Int, judge_type:Int, proc_chance:(Int?,Int?), skill_name:String, skill_trigger_type:Int, skill_trigger_value:Int, skill_type:String, value:Int) {
         self.condition = condition

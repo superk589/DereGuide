@@ -24,7 +24,9 @@ public class CGSSLive: CGSSBaseModel {
     var updateId:Int {
         return self.liveDetailId![0]
     }
-    
+    var musicRef:CGSSSong? {
+        return CGSSDAO.sharedDAO.findSongById(musicId!)
+    }
     var bpm:Int? {
         let dao = CGSSDAO.sharedDAO
         return dao.findSongById(self.musicId!)?.bpm
@@ -35,6 +37,19 @@ public class CGSSLive: CGSSBaseModel {
             return 1 / Float(bpm!) / 60
         }
         return nil
+    }
+    
+    func getLiveColor() -> UIColor {
+        switch type! {
+        case 1:
+            return CGSSTool.cuteColor
+        case 2:
+            return CGSSTool.coolColor
+        case 3:
+            return CGSSTool.passionColor
+        default:
+            return UIColor.darkTextColor()
+        }
     }
     func getStarsForDiff(diff:Int) -> Int {
         switch diff {
@@ -52,7 +67,9 @@ public class CGSSLive: CGSSBaseModel {
             return 0
         }
     }
-    
+    var maxDiff :Int {
+        return (self.masterPlus == 0) ? 4 : 5
+    }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.id = aDecoder.decodeObjectForKey("id") as? Int
