@@ -67,6 +67,12 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         
     }
     
+    func backValueChanged(value: Int) {
+        team.backSupportValue = value
+        teamDV.updatePresentValueGrid(team)
+        CGSSTeamManager.defaultManager.writeToFile(nil)
+    }
+    
     func editTeam(){
         let teamEditDVC = TeamEditViewController()
         teamEditDVC.initWith(team)

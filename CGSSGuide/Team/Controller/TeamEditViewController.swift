@@ -19,6 +19,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     //因为设置时可能存在不按1234的顺序设置的情况 故此处设置队员为int下标的字典
     var subs = [Int:CGSSTeamMember]()
     var friendLeader:CGSSTeamMember?
+    var backValue:Int?
     let tv = UITableView()
     var hv = UIView()
     var leaderSkillLabel1:UILabel!
@@ -69,6 +70,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         for i in 0...3 {
             self.subs[i] = team.subs[i]
         }
+        self.backValue = team.backSupportValue
     }
     
     func getMemberByIndex(index:Int) -> CGSSTeamMember? {
@@ -83,7 +85,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     
     func saveTeam() {
         if let leader = self.leader, friendLeader = self.friendLeader where subs.count == 4 {
-            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), teamBackSupportValue: 100000, friendLeader: friendLeader)
+            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? 100000, friendLeader: friendLeader)
             delegate?.save(team)
             self.navigationController?.popViewControllerAnimated(true)
         }
@@ -126,12 +128,22 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    var teamCardVC: TeamCardSelectTableViewController?
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         lastIndex = indexPath.row
-        let vc = TeamCardSelectTableViewController()
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc
-            , animated: true)
+        if teamCardVC == nil {
+            teamCardVC = TeamCardSelectTableViewController()
+            teamCardVC!.delegate = self
+        }
+        //self.navigationController?.pushViewController(teamCardVC!, animated: true)
+        
+        //使用自定义动画效果
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionFade
+        //transition.subtype = kCATransitionFromRight
+        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController?.pushViewController(teamCardVC!, animated: false)
         
     }
     /*

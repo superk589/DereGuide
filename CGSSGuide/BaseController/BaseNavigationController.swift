@@ -14,6 +14,7 @@ class BaseNavigationController: UINavigationController {
         super.viewDidLoad()
         //设置导航控制器背景颜色 防止跳转时页面闪烁
         self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationBar.backgroundColor = UIColor.whiteColor()
         // Do any additional setup after loading the view.
     }
 

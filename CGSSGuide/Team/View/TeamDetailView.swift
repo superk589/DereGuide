@@ -13,6 +13,7 @@ protocol TeamDetailViewDelegate: class {
     func skillShowOrHide()
     func startCalc()
     func cardIconClick(id:Int)
+    func backValueChanged(value:Int)
 }
 
 class TeamDetailView: UIView {
@@ -27,27 +28,14 @@ class TeamDetailView: UIView {
     var leaderSkillGrid : CGSSGridView!
     
     var backSupportLabel: UILabel!
-    var backSupportTF :UITextField! {
-        didSet {
-            backSupportTF.text = "100000"
-        }
-    }
+    var backSupportTF :UITextField!
     
     var presentValueGrid: CGSSGridView!
-    var selectSongLabel: UILabel! {
-        didSet {
-            selectSongLabel.text = "请选择歌曲和难度"
-        }
-    }
-    
+    var selectSongLabel: UILabel!
     var songNameLabel: UILabel!
     var songDiffLabel: UILabel!
     var songLengthLabel: UILabel!
-    var skillListDescLabel: UILabel! {
-        didSet {
-            skillListDescLabel.text = "技能列表: "
-        }
-    }
+    var skillListDescLabel: UILabel!
     var skillShowOrHideButton: UIButton!
     var skillListGrid: CGSSGridView!
     
@@ -102,18 +90,21 @@ class TeamDetailView: UIView {
         backSupportTF.autocapitalizationType = .None
         backSupportTF.borderStyle = .RoundedRect
         backSupportTF.textAlignment = .Right
-        backSupportTF.addTarget(self, action: #selector(endEditing), forControlEvents: .EditingDidEnd)
-        backSupportTF.addTarget(self, action: #selector(endEditing), forControlEvents: .EditingDidEndOnExit)
+        backSupportTF.addTarget(self, action: #selector(backValueChanged), forControlEvents: .EditingDidEnd)
+        backSupportTF.addTarget(self, action: #selector(backValueChanged), forControlEvents: .EditingDidEndOnExit)
         backSupportTF.keyboardType = .NumbersAndPunctuation
+        backSupportTF.returnKeyType = .Done
         backSupportTF.font = UIFont.systemFontOfSize(14)
         
         originY += 21 + topSpace
         
-        presentValueGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 112), rows: 8, columns: 6)
+        presentValueGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 112), rows: 8, columns: 5)
         originY += 112 + topSpace
         
         selectSongLabel = UILabel.init(frame: CGRectMake(leftSpace, originY, 150, 21))
         selectSongLabel.textColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
+        selectSongLabel.text = "请选择歌曲和难度"
+
         originY += 21 + topSpace
         
         songNameLabel = UILabel.init(frame: CGRectMake(leftSpace, originY, width, 21))
@@ -131,6 +122,7 @@ class TeamDetailView: UIView {
         originY += 18 + topSpace
         
         skillListDescLabel = UILabel.init(frame: CGRectMake(leftSpace, originY, 100, 21))
+        skillListDescLabel.text = "技能列表: "
         originY += 21 + topSpace
         
         skillListGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 140), rows: 10, columns: 1)
@@ -257,39 +249,8 @@ class TeamDetailView: UIView {
         leaderSkillGrid.setGridColor(upValueColors)
      
         
-        var presentValueString = [[String]]()
-        var presentColor = [[UIColor]]()
-        
-        presentValueString.append([" ", "HP", "Vocal","Dance","Visual","Total"])
-        var presentSub1 = ["彩色曲"]
-        presentSub1.appendContentsOf(team.getPresentValue(.Office).toStringArray())
-        var presentSub2 = ["Cu曲"]
-        presentSub2.appendContentsOf(team.getPresentValue(.Cute).toStringArray())
-        var presentSub3 = ["Co曲"]
-        presentSub3.appendContentsOf(team.getPresentValue(.Cool).toStringArray())
-        var presentSub4 = ["Pa曲"]
-        presentSub4.appendContentsOf(team.getPresentValue(.Passion).toStringArray())
-        var presentSub5 = ["Cu(G)"]
-        presentSub5.appendContentsOf(team.getPresentValueInGroove(.Cute).toStringArray())
-        var presentSub6 = ["Co(G)"]
-        presentSub6.appendContentsOf(team.getPresentValueInGroove(.Cool).toStringArray())
-        var presentSub7 = ["Pa(G)"]
-        presentSub7.appendContentsOf(team.getPresentValueInGroove(.Passion).toStringArray())
-        presentValueString.append(presentSub1)
-        presentValueString.append(presentSub2)
-        presentValueString.append(presentSub3)
-        presentValueString.append(presentSub4)
-        presentValueString.append(presentSub5)
-        presentValueString.append(presentSub6)
-        presentValueString.append(presentSub7)
-
-        
-        let colorArray2 = [UIColor.blackColor(), CGSSTool.lifeColor, CGSSTool.vocalColor,CGSSTool.danceColor,CGSSTool.visualColor, UIColor.blackColor().colorWithAlphaComponent(0.5)]
-        presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
-        presentValueGrid.setGridContent(presentValueString)
-        presentValueGrid.setGridColor(presentColor)
-        
-        backSupportTF.text = String(team.teamBackSupportValue ?? 100000)
+        updatePresentValueGrid(team)
+        backSupportTF.text = String(team.backSupportValue ?? 100000)
 
         
         
@@ -298,8 +259,44 @@ class TeamDetailView: UIView {
         frame.size = CGSizeMake(CGSSTool.width, bottomView.frame.size.height + bottomView.frame.origin.y)
     }
 
-    
+    func updatePresentValueGrid(team:CGSSTeam) {
+        var presentValueString = [[String]]()
+        var presentColor = [[UIColor]]()
+        
+        presentValueString.append([" ", "Vocal","Dance","Visual","Total"])
+        var presentSub1 = ["彩色曲"]
+        presentSub1.appendContentsOf(team.getPresentValue(.Office).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub2 = ["Cu曲"]
+        presentSub2.appendContentsOf(team.getPresentValue(.Cute).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub3 = ["Co曲"]
+        presentSub3.appendContentsOf(team.getPresentValue(.Cool).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub4 = ["Pa曲"]
+        presentSub4.appendContentsOf(team.getPresentValue(.Passion).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub5 = ["Vo(G)"]
+        presentSub5.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Vocal).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub6 = ["Da(G)"]
+        presentSub6.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Dance).toStringArrayWithBackValue(team.backSupportValue))
+        var presentSub7 = ["Vi(G)"]
+        presentSub7.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Visual).toStringArrayWithBackValue(team.backSupportValue))
+        presentValueString.append(presentSub1)
+        presentValueString.append(presentSub2)
+        presentValueString.append(presentSub3)
+        presentValueString.append(presentSub4)
+        presentValueString.append(presentSub5)
+        presentValueString.append(presentSub6)
+        presentValueString.append(presentSub7)
+        
+        
+        let colorArray2 = [UIColor.blackColor(), CGSSTool.vocalColor,CGSSTool.danceColor,CGSSTool.visualColor, UIColor.blackColor().colorWithAlphaComponent(0.5)]
+        presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
+        presentValueGrid.setGridContent(presentValueString)
+        presentValueGrid.setGridColor(presentColor)
 
+    }
+
+    func backValueChanged() {
+        delegate?.backValueChanged(Int(backSupportTF.text!) ?? 100000)
+    }
     
     /*
     // Only override drawRect: if you perform custom drawing.

@@ -17,7 +17,10 @@ struct CGSSAttributeValue {
         return visual + dance + vocal
     }
     func toStringArray() -> [String]{
-        return [String(life), String(vocal), String(dance), String(visual), String(total)]
+        return [String(vocal), String(dance), String(visual), String(total)]
+    }
+    func toStringArrayWithBackValue(backValue:Int) -> [String] {
+        return [String(vocal), String(dance), String(visual), String(total + backValue)]
     }
 }
 
