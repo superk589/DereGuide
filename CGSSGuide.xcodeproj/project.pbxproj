@@ -108,6 +108,8 @@
 		1282EE681D011A8F0024318C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE661D011A8F0024318C /* Main.storyboard */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6E1D011A8F0024318C /* LaunchScreen.storyboard */; };
+		129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */; };
+		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
 		323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +230,8 @@
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1282EE6F1D011A8F0024318C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1282EE711D011A8F0024318C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
+		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC08E5FCC707441E3BB3424 /* Pods-CGSSGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGSSGuide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CGSSGuide/Pods-CGSSGuide.debug.xcconfig"; sourceTree = "<group>"; };
 		B37A71CAFCD8386385BCF8B2 /* Pods-CGSSGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CGSSGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-CGSSGuide/Pods-CGSSGuide.release.xcconfig"; sourceTree = "<group>"; };
@@ -260,8 +264,7 @@
 				1269E9111D5208760071AD7F /* Other */,
 				12C959001D4C4770008D4C1A /* Tabbar */,
 			);
-			name = Resource;
-			path = CGSSGuide/Resource;
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		1269E90E1D52085C0071AD7F /* Settings */ = {
@@ -331,6 +334,7 @@
 				1269EA101D520D370071AD7F /* CGSSTool.swift */,
 				1269EA111D520D370071AD7F /* CGSSUpdateItem.swift */,
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
+				129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 				1269E9CF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift */,
 				1269E9D01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift */,
 				1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */,
+				129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */,
 				1269E9D21D520B5D0071AD7F /* CGSSSong.swift */,
 				121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */,
 			);
@@ -467,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				1282EE611D011A8F0024318C /* CGSSGuide */,
-				1269E90D1D52085C0071AD7F /* Resource */,
 				1282EE601D011A8F0024318C /* Products */,
 				B944DE078DA419AC45D4315A /* Pods */,
 				C670F2DE7E4FDF80136AB4F2 /* Frameworks */,
@@ -485,6 +489,7 @@
 		1282EE611D011A8F0024318C /* CGSSGuide */ = {
 			isa = PBXGroup;
 			children = (
+				1269E90D1D52085C0071AD7F /* Resource */,
 				1269EA071D520CD50071AD7F /* BaseController */,
 				1269E9E61D520B750071AD7F /* BaseView */,
 				1269E9C51D520B5D0071AD7F /* BaseModel */,
@@ -723,6 +728,7 @@
 			files = (
 				1269EA0B1D520CD50071AD7F /* RootTabBarViewController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
+				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
@@ -738,6 +744,7 @@
 				1269E9DF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
+				129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,

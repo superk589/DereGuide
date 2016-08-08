@@ -9,6 +9,16 @@
 import Foundation
 import SwiftyJSON
 
+enum CGSSLiveType:String {
+    case Normal = "常规模式"
+    case VocalBurstGroove = "Vocal Burst"
+    case DanceBurstGroove = "Dance Burst"
+    case VisualBurstGroove = "Visual Burst"
+    static func getAll() -> [CGSSLiveType] {
+        return [.Normal, .VocalBurstGroove, .DanceBurstGroove, .VisualBurstGroove]
+    }
+}
+
 public class CGSSLive: CGSSBaseModel {
     var id:Int?
     var musicId:Int?
@@ -51,6 +61,20 @@ public class CGSSLive: CGSSBaseModel {
             return UIColor.darkTextColor()
         }
     }
+    
+    var songType:CGSSCardFilterType {
+        switch type! {
+        case 1:
+            return .Cute
+        case 2:
+            return .Cool
+        case 3:
+            return .Passion
+        default:
+            return .Office
+        }
+    }
+    
     func getStarsForDiff(diff:Int) -> Int {
         switch diff {
         case 1 :
@@ -69,6 +93,10 @@ public class CGSSLive: CGSSBaseModel {
     }
     var maxDiff :Int {
         return (self.masterPlus == 0) ? 4 : 5
+    }
+    
+    func getBeatmapByDiff(diff:Int) -> CGSSBeatmap? {
+        return CGSSDAO.sharedDAO.findBeatmapById(self.id!, diffId: diff)
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

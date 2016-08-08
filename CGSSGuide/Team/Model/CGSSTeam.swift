@@ -36,7 +36,16 @@ class CGSSTeam: NSObject, NSCoding {
     }
     var testLiveId: Int?
     var testDiff: Int?
-    
+    var skills:[CGSSRankedSkill] {
+        var arr = [CGSSRankedSkill]()
+        for i in 0...4 {
+            if let skill = self[i]?.cardRef?.skill {
+                let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (self[i]?.skillLevel)!)
+                arr.append(rankedSkill)
+            }
+        }
+        return arr
+    }
     subscript (index:Int) -> CGSSTeamMember? {
         if index == 0 {
             return leader
@@ -129,6 +138,19 @@ class CGSSTeam: NSObject, NSCoding {
             attValue += self[i]!.cardRef!.getPresentValue(type, roomUpScalar: 10, contents: getUpContentInGroove(burstType))
         }
         return attValue
+    }
+    
+    func getPresentValueByType(liveType:CGSSLiveType, songType:CGSSCardFilterType) -> CGSSAttributeValue {
+        switch liveType {
+        case .Normal:
+            return getPresentValue(songType)
+        case .VisualBurstGroove:
+            return getPresentValueInGroove(songType, burstType: .Visual)
+        case .DanceBurstGroove:
+            return getPresentValueInGroove(songType, burstType: .Dance)
+        case .VocalBurstGroove:
+            return getPresentValueInGroove(songType, burstType: .Vocal)
+        }
     }
     
     //判断需要的指定颜色的队员是否满足条件
@@ -294,6 +316,7 @@ class CGSSTeam: NSObject, NSCoding {
     }
    
 }
+
 
 extension CGSSCard {
     //扩展一个获取卡片在队伍中的表现值的方法

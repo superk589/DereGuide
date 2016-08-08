@@ -70,6 +70,16 @@ public class CGSSBeatmap: CGSSBaseModel{
         return nil
     }
     
+    var validNotes:[Note] {
+        var arr = [Note]()
+        for i in 0...notes.count - 1 {
+            if notes[i].finishPos != 0 {
+                arr.append(notes[i])
+            }
+        }
+        return arr
+    }
+    
     var preSeconds:Float? {
         return firstNote?.sec
     }
@@ -83,6 +93,7 @@ public class CGSSBeatmap: CGSSBaseModel{
     var validSeconds:Float {
         return postSeconds! - preSeconds!
     }
+    
     
 
 //    func comboForSec(sec:Float) -> Int {
@@ -102,6 +113,13 @@ public class CGSSBeatmap: CGSSBaseModel{
 //        return findnear(sec + preSeconds!, start: 2, end: notes.count - 1)
 //    }
     
+    func getCriticalPointNoteIndexes() -> [Int] {
+        var arr = [Int]()
+        for i in CGSSTool.criticalPercent {
+            arr.append(Int(floor(Float(numberOfNotes * i) / 100)))
+        }
+        return arr
+    }
     
     //折半查找指定秒数对应的combo数
     func comboForSec(sec:Float) -> Int {

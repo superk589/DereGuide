@@ -15,6 +15,7 @@ protocol TeamDetailViewDelegate: class {
     func cardIconClick(id:Int)
     func backValueChanged(value:Int)
     func selectSong()
+    func liveTypeButtonClick()
 }
 
 class TeamDetailView: UIView {
@@ -43,7 +44,8 @@ class TeamDetailView: UIView {
     var songNameLabel: UILabel!
     var songDiffLabel: UILabel!
     var songLengthLabel: UILabel!
- 
+    var liveTypeButton : UIButton!
+    var liveTypeDescLable: UILabel!
     
     var bottomView: UIView!
     var startCalcButton:UIButton!
@@ -159,11 +161,30 @@ class TeamDetailView: UIView {
         songLengthLabel.font = UIFont.systemFontOfSize(12)
         originY += 18 + topSpace
         
+        liveTypeDescLable = UILabel.init(frame: CGRectMake(leftSpace, originY, 100, 21))
+        liveTypeDescLable.text = "歌曲模式: "
+        liveTypeDescLable.font = UIFont.systemFontOfSize(14)
+        liveTypeDescLable.textColor = UIColor.darkGrayColor()
+        
+        liveTypeButton = UIButton.init(frame: CGRectMake(CGSSTool.width - 100, originY, 90, 21))
+        liveTypeButton.setTitle("常规模式", forState: .Normal)
+        liveTypeButton.titleLabel?.textAlignment = .Right
+        liveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        liveTypeButton.setTitleColor(UIColor.darkGrayColor() , forState: .Normal)
+        liveTypeButton.addTarget(self, action: #selector(liveTypeButtonClick), forControlEvents: .TouchUpInside)
+        
+        originY += 21 + topSpace
+        
+        
         startCalcButton = UIButton.init(frame: CGRectMake(leftSpace, originY, width, 25))
         startCalcButton.setTitle("开始计算", forState: .Normal)
+        startCalcButton.backgroundColor = CGSSTool.danceColor
+        startCalcButton.titleLabel?.font = UIFont.systemFontOfSize(18)
+        startCalcButton.addTarget(self, action: #selector(startCalc), forControlEvents: .TouchUpInside)
 
         originY += 25 + topSpace
         scoreGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 70), rows: 5, columns: 3)
+        scoreGrid.hidden = true
         
         originY += 70 + topSpace + 50
         
@@ -175,6 +196,8 @@ class TeamDetailView: UIView {
         bottomView.addSubview(songDiffLabel)
         bottomView.addSubview(songLengthLabel)
         bottomView.addSubview(songJacket)
+        bottomView.addSubview(liveTypeDescLable)
+        bottomView.addSubview(liveTypeButton)
         bottomView.addSubview(startCalcButton)
         bottomView.addSubview(scoreGrid)
         
@@ -297,7 +320,7 @@ class TeamDetailView: UIView {
      
         
         updatePresentValueGrid(team)
-        backSupportTF.text = String(team.backSupportValue ?? 100000)
+        backSupportTF.text = String(team.backSupportValue!)
 
      
         
@@ -353,11 +376,58 @@ class TeamDetailView: UIView {
         presentValueGrid.setGridColor(presentColor)
 
     }
+    
+    func updateScoreGrid(team:CGSSTeam, live:CGSSLive, diff:Int) {
+        startCalcButton.setTitle("计算中...", forState: .Normal)
+//        team.simulate()
+//        
+//        
+//        
+//        var scoreString = [[String]]()
+//        var scoreColor = [[UIColor]]()
+//        
+//        presentValueString.append([" ", "Vocal","Dance","Visual","Total"])
+//        var presentSub1 = ["彩色曲"]
+//        presentSub1.appendContentsOf(team.getPresentValue(.Office).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub2 = ["Cu曲"]
+//        presentSub2.appendContentsOf(team.getPresentValue(.Cute).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub3 = ["Co曲"]
+//        presentSub3.appendContentsOf(team.getPresentValue(.Cool).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub4 = ["Pa曲"]
+//        presentSub4.appendContentsOf(team.getPresentValue(.Passion).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub5 = ["Vo(G)"]
+//        presentSub5.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Vocal).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub6 = ["Da(G)"]
+//        presentSub6.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Dance).toStringArrayWithBackValue(team.backSupportValue))
+//        var presentSub7 = ["Vi(G)"]
+//        presentSub7.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Visual).toStringArrayWithBackValue(team.backSupportValue))
+//        presentValueString.append(presentSub1)
+//        presentValueString.append(presentSub2)
+//        presentValueString.append(presentSub3)
+//        presentValueString.append(presentSub4)
+//        presentValueString.append(presentSub5)
+//        presentValueString.append(presentSub6)
+//        presentValueString.append(presentSub7)
+//        
+//        
+//        let colorArray2 = [UIColor.blackColor(), CGSSTool.vocalColor,CGSSTool.danceColor,CGSSTool.visualColor, UIColor.darkGrayColor()]
+//        presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
+//        presentValueGrid.setGridContent(presentValueString)
+//        presentValueGrid.setGridColor(presentColor)
+
+    }
 
     func backValueChanged() {
         delegate?.backValueChanged(Int(backSupportTF.text!) ?? 100000)
     }
-    
+    var currentLiveType: CGSSLiveType = .Normal {
+        didSet {
+            self.liveTypeButton.setTitle(currentLiveType.rawValue, forState: .Normal)
+        }
+    }
+    func liveTypeButtonClick() {
+        delegate?.liveTypeButtonClick()
+    }
     func selectSong() {
         delegate?.selectSong()
     }

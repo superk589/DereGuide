@@ -13,6 +13,10 @@ class TeamDetailViewController: UIViewController {
     var team:CGSSTeam!
     var teamDV:TeamDetailView!
     var sv :UIScrollView!
+    
+    var live:CGSSLive?
+    var beatmaps: [CGSSBeatmap]?
+    var diff:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,13 +99,32 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         
     }
     func startCalc() {
-        
+        if let live = self.live, diff = self.diff {
+            let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, diff: diff)
+            //
+            teamDV.updateScoreGrid(team, live: live, diff: diff)
+        } else {
+            let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     func cardIconClick(id: Int) {
         let cardDVC = CardDetailViewController()
         cardDVC.card = CGSSDAO.sharedDAO.findCardById(id)
         navigationController?.pushViewController(cardDVC, animated: true)
+    }
+    func liveTypeButtonClick() {
+        let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .ActionSheet)
+        
+        for liveType in CGSSLiveType.getAll() {
+            alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .Default, handler: { (a) in
+                self.teamDV.currentLiveType = liveType
+            }))
+        }
+        alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alvc, animated: true, completion: nil)
     }
     
 }
@@ -110,6 +133,8 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
 extension TeamDetailViewController: BaseSongTableViewControllerDelegate {
     func selectSong(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         teamDV.updateSongInfo(live, beatmaps: beatmaps, diff: diff)
-
+        self.live = live
+        self.beatmaps = beatmaps
+        self.diff = diff
     }
 }
