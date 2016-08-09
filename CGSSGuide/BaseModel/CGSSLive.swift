@@ -61,6 +61,19 @@ public class CGSSLive: CGSSBaseModel {
             return UIColor.darkTextColor()
         }
     }
+    func getLiveIconName() -> String {
+        switch type! {
+        case 1:
+            return "song_cute"
+        case 2:
+            return "song_cool"
+        case 3:
+            return "song_passion"
+        default:
+            return "song_all"
+        }
+
+    }
     
     var songType:CGSSCardFilterType {
         switch type! {

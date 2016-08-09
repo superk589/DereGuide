@@ -21,6 +21,10 @@
 		121C78E01D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 121C78DD1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png */; };
 		121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */; };
 		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
+		125164B21D5A0422001D66FC /* song_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AE1D5A0422001D66FC /* song_all.png */; };
+		125164B31D5A0422001D66FC /* song_cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AF1D5A0422001D66FC /* song_cool.png */; };
+		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
+		125164B51D5A0422001D66FC /* song_passion.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B11D5A0422001D66FC /* song_passion.png */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
 		1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */; };
@@ -143,6 +147,10 @@
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		125164881D59BF76001D66FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		125164891D59BF76001D66FC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
+		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
+		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
+		125164B11D5A0422001D66FC /* song_passion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_passion.png; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +259,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		125164B61D5A0426001D66FC /* InGame */ = {
+			isa = PBXGroup;
+			children = (
+				125164AE1D5A0422001D66FC /* song_all.png */,
+				125164AF1D5A0422001D66FC /* song_cool.png */,
+				125164B01D5A0422001D66FC /* song_cute.png */,
+				125164B11D5A0422001D66FC /* song_passion.png */,
+			);
+			name = InGame;
+			sourceTree = "<group>";
+		};
 		1269E90C1D52085C0071AD7F /* Card */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +282,7 @@
 		1269E90D1D52085C0071AD7F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				125164B61D5A0426001D66FC /* InGame */,
 				1269E9111D5208760071AD7F /* Other */,
 				12C959001D4C4770008D4C1A /* Tabbar */,
 			);
@@ -627,9 +647,12 @@
 				1269E9B11D520AA10071AD7F /* 779-users-selected@3x.png in Resources */,
 				1269E9B01D520AA10071AD7F /* 779-users-selected@2x.png in Resources */,
 				1282EE701D011A8F0024318C /* LaunchScreen.storyboard in Resources */,
+				125164B21D5A0422001D66FC /* song_all.png in Resources */,
+				125164B41D5A0422001D66FC /* song_cute.png in Resources */,
 				1269E9BF1D520AAE0071AD7F /* 898-music-note@2x.png in Resources */,
 				1269E9B41D520AA10071AD7F /* 779-users@3x.png in Resources */,
 				1269E9971D520A840071AD7F /* 726-star-selected.png in Resources */,
+				125164B31D5A0422001D66FC /* song_cool.png in Resources */,
 				1269E9BC1D520AAE0071AD7F /* 898-music-note-selected@2x.png in Resources */,
 				1269E9A51D520A960071AD7F /* 740-gear-selected@3x.png in Resources */,
 				1269E99A1D520A840071AD7F /* 726-star.png in Resources */,
@@ -641,6 +664,7 @@
 				1269E9A31D520A960071AD7F /* 740-gear-selected.png in Resources */,
 				1269E99B1D520A840071AD7F /* 726-star@2x.png in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
+				125164B51D5A0422001D66FC /* song_passion.png in Resources */,
 				1269E94B1D5209A40071AD7F /* 748-heart-toolbar-selected@3x.png in Resources */,
 				1269E9BB1D520AAE0071AD7F /* 898-music-note-selected.png in Resources */,
 				121C78DA1D57203C00D0B636 /* 764-arrow-down-toolbar-selected@2x.png in Resources */,

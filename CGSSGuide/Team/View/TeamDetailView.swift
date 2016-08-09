@@ -193,7 +193,7 @@ class TeamDetailView: UIView {
         scoreDescLabel.font = UIFont.systemFontOfSize(14)
         scoreDescLabel.textColor = UIColor.darkGrayColor()
         scoreDescLabel.numberOfLines = 0
-        scoreDescLabel.text = "* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100真实模拟后求平均值的方法，每次计算会略有不同"
+        scoreDescLabel.text = "* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同"
         scoreDescLabel.hidden = true
         originY += topSpace + 80 + topSpace
         

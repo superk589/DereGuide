@@ -16,6 +16,7 @@ class SongTableViewCell: UITableViewCell {
     weak var delegate: SongTableViewCellDelegate?
     var jacketImageView: UIImageView!
     var nameLabel: UILabel!
+    var typeIcon: UIImageView!
     var descriptionLabel: UILabel!
     var debutButton: UIButton!
     var regularButton: UIButton!
@@ -32,8 +33,9 @@ class SongTableViewCell: UITableViewCell {
         jacketImageView = UIImageView()
         jacketImageView.frame = CGRectMake(10, 10, 66, 66)
         
+        typeIcon = UIImageView.init(frame: CGRectMake(86, 10, 20, 20))
         nameLabel = UILabel()
-        nameLabel.frame = CGRectMake(86, 10, CGSSTool.width - 96, 20)
+        nameLabel.frame = CGRectMake(111, 10, CGSSTool.width - 121, 20)
         nameLabel.font = UIFont.boldSystemFontOfSize(18)
         
         descriptionLabel = UILabel()
@@ -108,6 +110,7 @@ class SongTableViewCell: UITableViewCell {
         
         contentView.addSubview(jacketImageView)
         contentView.addSubview(nameLabel)
+        contentView.addSubview(typeIcon)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(debutButton)
         contentView.addSubview(regularButton)
@@ -149,6 +152,7 @@ class SongTableViewCell: UITableViewCell {
             self.proButton.setTitle(String(live.pro!), forState: .Normal)
             self.masterButton.setTitle(String(live.master!), forState: .Normal)
             self.nameLabel.textColor = live.getLiveColor()
+            self.typeIcon.image = UIImage.init(named: live.getLiveIconName())
             if live.masterPlus != 0 {
                 masterPlusButton.hidden = false
                 masterPlusButton.setTitle(String(live.masterPlus!), forState: .Normal)
