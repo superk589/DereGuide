@@ -101,6 +101,12 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
     func startCalc() {
         if let live = self.live, diff = self.diff {
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, diff: diff)
+            simulator.simulateOnce(true, callBack: { (score) in
+                team
+            })
+            simulator.simulate(100, callBack: { (scores, avg) in
+                teamDV.updateScoreGrid(<#T##team: CGSSTeam##CGSSTeam#>, live: <#T##CGSSLive#>, diff: <#T##Int#>)
+            })
             //
             teamDV.updateScoreGrid(team, live: live, diff: diff)
         } else {

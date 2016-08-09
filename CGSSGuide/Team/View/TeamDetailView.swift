@@ -377,7 +377,41 @@ class TeamDetailView: UIView {
 
     }
     
-    func updateScoreGrid(team:CGSSTeam, live:CGSSLive, diff:Int) {
+    func initScoreGrid() {
+        var scoreString = [[String]]()
+        var scoreColor = [[UIColor]]()
+        
+                presentValueString.append([" ", "Vocal","Dance","Visual","Total"])
+                var presentSub1 = ["彩色曲"]
+                presentSub1.appendContentsOf(team.getPresentValue(.Office).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub2 = ["Cu曲"]
+                presentSub2.appendContentsOf(team.getPresentValue(.Cute).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub3 = ["Co曲"]
+                presentSub3.appendContentsOf(team.getPresentValue(.Cool).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub4 = ["Pa曲"]
+                presentSub4.appendContentsOf(team.getPresentValue(.Passion).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub5 = ["Vo(G)"]
+                presentSub5.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Vocal).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub6 = ["Da(G)"]
+                presentSub6.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Dance).toStringArrayWithBackValue(team.backSupportValue))
+                var presentSub7 = ["Vi(G)"]
+                presentSub7.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Visual).toStringArrayWithBackValue(team.backSupportValue))
+                presentValueString.append(presentSub1)
+                presentValueString.append(presentSub2)
+                presentValueString.append(presentSub3)
+                presentValueString.append(presentSub4)
+                presentValueString.append(presentSub5)
+                presentValueString.append(presentSub6)
+                presentValueString.append(presentSub7)
+        
+        
+                let colorArray2 = [UIColor.blackColor(), CGSSTool.vocalColor,CGSSTool.danceColor,CGSSTool.visualColor, UIColor.darkGrayColor()]
+                presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
+                presentValueGrid.setGridContent(presentValueString)
+                presentValueGrid.setGridColor(presentColor)
+
+    }
+    func updateScoreGrid() {
         startCalcButton.setTitle("计算中...", forState: .Normal)
 //        team.simulate()
 //        

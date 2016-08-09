@@ -469,37 +469,37 @@ http://imascg-slstage-wiki.gamerch.com
                                                             <state key="normal" title="SSR+"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9r5-JT-QLk">
-                                                            <rect key="frame" x="61" y="0.0" width="30" height="27"/>
+                                                            <rect key="frame" x="71" y="0.0" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="SSR"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNn-WX-05k">
-                                                            <rect key="frame" x="101" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="116" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="SR+"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0K-W1-Xqm">
-                                                            <rect key="frame" x="141" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="161" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" SR "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-sB-Xx6">
-                                                            <rect key="frame" x="181" y="0.0" width="30" height="27"/>
+                                                            <rect key="frame" x="206" y="0.0" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" R+ "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-X6-5GL">
-                                                            <rect key="frame" x="221" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="246" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" R "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-MJ-QQY">
-                                                            <rect key="frame" x="301" y="0.0" width="30" height="27"/>
+                                                            <rect key="frame" x="326" y="0.0" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" N "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-gU-gqO">
-                                                            <rect key="frame" x="261" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="286" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" N+ "/>
                                                         </button>
@@ -512,20 +512,20 @@ http://imascg-slstage-wiki.gamerch.com
                                                         <constraint firstItem="9r5-JT-QLk" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="8ru-1H-t8z"/>
                                                         <constraint firstAttribute="bottom" secondItem="b0K-W1-Xqm" secondAttribute="bottom" id="H9j-hs-Q6X"/>
                                                         <constraint firstItem="MNn-WX-05k" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="J7e-pl-dOq"/>
-                                                        <constraint firstItem="MNn-WX-05k" firstAttribute="leading" secondItem="9r5-JT-QLk" secondAttribute="trailing" constant="10" id="N1H-PZ-gRt"/>
+                                                        <constraint firstItem="MNn-WX-05k" firstAttribute="leading" secondItem="9r5-JT-QLk" secondAttribute="trailing" constant="15" id="N1H-PZ-gRt"/>
                                                         <constraint firstItem="8rf-MJ-QQY" firstAttribute="leading" secondItem="mQn-gU-gqO" secondAttribute="trailing" constant="10" id="OOJ-UL-VC1"/>
                                                         <constraint firstItem="b0K-W1-Xqm" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="Tvk-J7-MmB"/>
                                                         <constraint firstAttribute="bottom" secondItem="MNn-WX-05k" secondAttribute="bottom" id="UUu-yO-yVI"/>
                                                         <constraint firstItem="Oka-sB-Xx6" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="Yt9-ys-gJo"/>
-                                                        <constraint firstItem="9r5-JT-QLk" firstAttribute="leading" secondItem="gvK-S0-WhK" secondAttribute="trailing" constant="10" id="civ-pm-fg1"/>
+                                                        <constraint firstItem="9r5-JT-QLk" firstAttribute="leading" secondItem="gvK-S0-WhK" secondAttribute="trailing" constant="20" id="civ-pm-fg1"/>
                                                         <constraint firstAttribute="bottom" secondItem="8rf-MJ-QQY" secondAttribute="bottom" id="d5V-fI-PsS"/>
                                                         <constraint firstItem="jn3-X6-5GL" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="e3s-RG-K1T"/>
                                                         <constraint firstItem="jn3-X6-5GL" firstAttribute="leading" secondItem="Oka-sB-Xx6" secondAttribute="trailing" constant="10" id="h7U-67-PLS"/>
                                                         <constraint firstItem="gvK-S0-WhK" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="hMR-d7-Eub"/>
                                                         <constraint firstAttribute="bottom" secondItem="gvK-S0-WhK" secondAttribute="bottom" id="kEk-Cq-11C"/>
-                                                        <constraint firstItem="b0K-W1-Xqm" firstAttribute="leading" secondItem="MNn-WX-05k" secondAttribute="trailing" constant="10" id="mV5-ti-ejn"/>
+                                                        <constraint firstItem="b0K-W1-Xqm" firstAttribute="leading" secondItem="MNn-WX-05k" secondAttribute="trailing" constant="15" id="mV5-ti-ejn"/>
                                                         <constraint firstItem="8rf-MJ-QQY" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="med-h6-x4Z"/>
-                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="leading" secondItem="b0K-W1-Xqm" secondAttribute="trailing" constant="10" id="oss-rj-dZL"/>
+                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="leading" secondItem="b0K-W1-Xqm" secondAttribute="trailing" constant="15" id="oss-rj-dZL"/>
                                                         <constraint firstItem="mQn-gU-gqO" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="teF-dT-Nzq"/>
                                                         <constraint firstAttribute="bottom" secondItem="Oka-sB-Xx6" secondAttribute="bottom" id="vfE-7d-HKv"/>
                                                         <constraint firstAttribute="bottom" secondItem="jn3-X6-5GL" secondAttribute="bottom" id="yZ1-oY-26E"/>

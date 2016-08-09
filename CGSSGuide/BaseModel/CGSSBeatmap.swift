@@ -69,7 +69,26 @@ public class CGSSBeatmap: CGSSBaseModel{
         }
         return nil
     }
+    var startNoteIndex:Int {
+        for i in 0...notes.count - 1 {
+            if notes[i].finishPos != 0 {
+                return i
+            }
+        }
+        return notes.count - 1
+    }
     
+    var lastNoteIndex:Int {
+        for i in 0...notes.count - 1 {
+            if notes[notes.count - i - 1].finishPos != 0 {
+                return notes.count - i - 1
+            }
+        }
+        return 0
+    }
+
+    
+    //效率低 不建议使用 而是取起止index
     var validNotes:[Note] {
         var arr = [Note]()
         for i in 0...notes.count - 1 {

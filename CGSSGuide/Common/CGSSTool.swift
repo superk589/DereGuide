@@ -61,7 +61,7 @@ public class CGSSTool: NSObject {
     }
     
     
-    public static var diffScale:[Int:Float] = [
+    public static var diffFactor:[Int:Float] = [
         5:	1.0,
         6:	1.025,
         7:	1.05,
@@ -90,7 +90,7 @@ public class CGSSTool: NSObject {
         30:	2.2,
     ]
     
-    static var comboScale:[Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
+    static var comboFactor:[Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
 
     static var criticalPercent:[Int] = [0, 5, 10, 25, 50, 70, 80, 90]
 

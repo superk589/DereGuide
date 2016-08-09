@@ -37,37 +37,71 @@ class CGSSLiveSimulator: NSObject {
         self.liveType = liveType
     }
     
-    func simulateOnce(procMax:Bool, callBack:((Double)->Void)?) {
+    
+    
+    func simulateOnce(procMax:Bool, callBack:((Int)->Void)?) {
         dispatch_async(dispatch_get_global_queue(0, 0)) {
             
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
-            //此时不对小数部分进行取舍
-            let scorePerNote = Float(self.presentTotal) * CGSSTool.diffScale[self.diff]! / Float(beatmap.numberOfNotes)
-            let notes = beatmap.validNotes
+            //此时不对小数部分进行取舍 保留浮点部分
+            let scorePerNote = Float(self.presentTotal) * CGSSTool.diffFactor[self.diff]! / Float(beatmap.numberOfNotes)
+            //let notes = beatmap.validNotes
             let criticalPoints = beatmap.getCriticalPointNoteIndexes()
+            let schedule = self.getSimulateSchedules(procMax)
             var criticalIndex = 0 
-            var sum = 0.0
-            for i in 0..<notes.count {
-                let note = notes[i]
+            var sum:Float = 0
+            for i in beatmap.startNoteIndex...beatmap.lastNoteIndex {
+                let note = beatmap.notes[i]
                 if criticalIndex < criticalPoints.count - 1 {
-                    if i >= criticalPoints[criticalIndex + 1] {
+                    if i - beatmap.startNoteIndex >= criticalPoints[criticalIndex + 1] {
                         criticalIndex += 1
                     }
                 }
-                let comboScale = CGSSTool.comboScale[criticalIndex]
-                if find  note.sec
+                let comboFactor = CGSSTool.comboFactor[criticalIndex]
+                let skillFactor = self.getSkillFactorFor(note, schedules: schedule)
+                //默认全P 不需要判定的因子 此处需要四舍五入
+                sum += round (scorePerNote * comboFactor * skillFactor)
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                callBack?(sum)
+                callBack?(Int(sum))
             })
         }
         
     }
     
-    private func getSkillUpValueForNote(note:CGSSBeatmap.Note) -> Float {
-        
+    func simulate(times:Int, callBack:((scores:[Int], avg:Int)->Void)?) {
+        var arr = [Int]()
+        var sum = 0
+        func completeInside(score:Int) {
+            arr.append(score)
+            sum += score
+            if arr.count == times {
+                callBack?(scores: arr, avg: sum / times)
+            }
+        }
+        for _ in 0..<times {
+            simulateOnce(false) { (score) in
+                completeInside(score)
+            }
+        }
     }
+    func getSkillFactorFor(note:CGSSBeatmap.Note, schedules:[ScoreUpType: [ScoreUpSchedule]]) -> Float {
+        var skillFactor:Float = 1
+        for sub in schedules.values {
+            var maxFactor:Float = 1
+            for schedule in sub {
+                if note.sec >= schedule.begin && note.sec <= schedule.end {
+                    if Float(schedule.upValue) / 100 > maxFactor {
+                        maxFactor = Float(schedule.upValue)
+                    }
+                }
+            }
+            skillFactor *= maxFactor
+        }
+        return skillFactor
+    }
+    
     
     private func getSimulateSchedules(procMax:Bool) -> [ScoreUpType:[ScoreUpSchedule]] {
         var scheduleDic = [ScoreUpType:[ScoreUpSchedule]]()
