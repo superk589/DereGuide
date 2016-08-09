@@ -9,9 +9,10 @@
 import UIKit
 
 enum ScoreUpType:String {
-    case Combo = "Combo加分"
+    case Combo = "COMBO加成"
     case Overload = "过载"
     case Perfect = "PERFECT分数加成"
+    case Bonus = "分数加成"
 }
 
 struct ScoreUpSchedule {
@@ -27,7 +28,7 @@ class CGSSLiveSimulator: NSObject {
     var liveType:CGSSLiveType!
     
     var presentTotal:Int {
-        return team.getPresentValueByType(liveType, songType: live.songType).total
+        return team.getPresentValueByType(liveType, songType: live.songType).total + team.backSupportValue
     }
     
     init(team:CGSSTeam, live:CGSSLive, liveType:CGSSLiveType, diff:Int) {
@@ -43,17 +44,19 @@ class CGSSLiveSimulator: NSObject {
         dispatch_async(dispatch_get_global_queue(0, 0)) {
             
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
+            let diffStars = self.live.getStarsForDiff(self.diff)
             //此时不对小数部分进行取舍 保留浮点部分
-            let scorePerNote = Float(self.presentTotal) * CGSSTool.diffFactor[self.diff]! / Float(beatmap.numberOfNotes)
-            //let notes = beatmap.validNotes
+            let scorePerNote = Float(self.presentTotal) * CGSSTool.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
             let criticalPoints = beatmap.getCriticalPointNoteIndexes()
             let schedule = self.getSimulateSchedules(procMax)
             var criticalIndex = 0 
             var sum:Float = 0
+      
+            //var log = [[Float]]()
             for i in beatmap.startNoteIndex...beatmap.lastNoteIndex {
                 let note = beatmap.notes[i]
                 if criticalIndex < criticalPoints.count - 1 {
-                    if i - beatmap.startNoteIndex >= criticalPoints[criticalIndex + 1] {
+                    if i - beatmap.startNoteIndex + 1 >= criticalPoints[criticalIndex + 1] {
                         criticalIndex += 1
                     }
                 }
@@ -61,7 +64,9 @@ class CGSSLiveSimulator: NSObject {
                 let skillFactor = self.getSkillFactorFor(note, schedules: schedule)
                 //默认全P 不需要判定的因子 此处需要四舍五入
                 sum += round (scorePerNote * comboFactor * skillFactor)
+                //log.append([Float(i), sum, scorePerNote, comboFactor, skillFactor])
             }
+            //(log as NSArray).writeToFile("/Users/zzk/Documents/aaa", atomically: true)
             
             dispatch_async(dispatch_get_main_queue(), {
                 callBack?(Int(sum))
@@ -81,7 +86,7 @@ class CGSSLiveSimulator: NSObject {
             }
         }
         for _ in 0..<times {
-            simulateOnce(false) { (score) in
+            simulateOnce(false) {(score) in
                 completeInside(score)
             }
         }
@@ -93,7 +98,7 @@ class CGSSLiveSimulator: NSObject {
             for schedule in sub {
                 if note.sec >= schedule.begin && note.sec <= schedule.end {
                     if Float(schedule.upValue) / 100 > maxFactor {
-                        maxFactor = Float(schedule.upValue)
+                        maxFactor = Float(schedule.upValue) / 100
                     }
                 }
             }
@@ -105,12 +110,12 @@ class CGSSLiveSimulator: NSObject {
     
     private func getSimulateSchedules(procMax:Bool) -> [ScoreUpType:[ScoreUpSchedule]] {
         var scheduleDic = [ScoreUpType:[ScoreUpSchedule]]()
-        scheduleDic[.Perfect] = [ScoreUpSchedule]()
+        scheduleDic[.Bonus] = [ScoreUpSchedule]()
         scheduleDic[.Combo] = [ScoreUpSchedule]()
         for rankedSkill in team.skills {
             if var type = ScoreUpType.init(rawValue: rankedSkill.skill.skill_type!) {
-                if type == .Overload {
-                    type = .Perfect
+                if type == .Overload || type == .Perfect{
+                    type = .Bonus
                 }
                 let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.totalSeconds, procMax: procMax)
                 for tuple in tuples {

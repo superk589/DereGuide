@@ -101,14 +101,14 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
     func startCalc() {
         if let live = self.live, diff = self.diff {
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, diff: diff)
-            simulator.simulateOnce(true, callBack: { (score) in
-                team
+            self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
+            simulator.simulateOnce(true, callBack: { [weak self] (score) in
+                self?.teamDV.updateScoreGridMaxScore(score)
             })
-            simulator.simulate(100, callBack: { (scores, avg) in
-                teamDV.updateScoreGrid(<#T##team: CGSSTeam##CGSSTeam#>, live: <#T##CGSSLive#>, diff: <#T##Int#>)
+            simulator.simulate(100, callBack: { [weak self] (scores, avg) in
+                self?.teamDV.updateScoreGridAvgScore(avg)
             })
-            //
-            teamDV.updateScoreGrid(team, live: live, diff: diff)
+            
         } else {
             let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))

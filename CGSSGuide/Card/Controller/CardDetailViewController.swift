@@ -105,29 +105,12 @@ class CardDetailViewController: UIViewController {
         
         //设置主动技能
         if let skill = card.skill {
-            cardDV?.setSkillContentView()
-            cardDV?.skillNameLabel.text = skill.skill_name
-            cardDV?.skillDescriptionLabel.text = skill.explain_en
-            //cardDV?.skillTypeLabel.text = skill.skill_type
-            
-            var procGridStrings = [[String]]()
-            let procChanceMax = Double((skill.proc_chance?.1)!) / 100
-            let procChanceMin = Double((skill.proc_chance?.0)!) / 100
-            let durationMax = Double((skill.effect_length?.1)!) / 100
-            let durationMin = Double((skill.effect_length?.0)!) / 100
-            procGridStrings.append(["  ","触发几率%","持续时间s","最大覆盖率%","平均覆盖率%"])
-            procGridStrings.append(["Lv.1",String(format: "%.2f", procChanceMin), String(format: "%.2f",durationMin)
-                ,String(format:"%.2f", durationMin/Double(skill.condition!)*100),String(format:"%.2f", durationMin/Double(skill.condition!)*procChanceMin)])
-            procGridStrings.append(["Lv.10",String(format: "%.2f",procChanceMax), String(format: "%.2f", durationMax)
-                ,String(format:"%.2f", durationMax/Double(skill.condition!)*100),String(format:"%.2f", durationMax/Double(skill.condition!)*procChanceMax)])
-            cardDV?.skillProcGridView.setGridContent(procGridStrings)
+            cardDV?.setSkillContentView(skill)
         }
         
         //设置队长技能
         if let leaderSkill = card.leader_skill {
-            cardDV?.setLeaderSkillContentView()
-            cardDV?.leaderSkillNameLabel.text = leaderSkill.name
-            cardDV?.leaderSkillDescriptionLabel.text = leaderSkill.explain_en
+            cardDV?.setLeaderSkillContentView(leaderSkill)
         }
         
         //设置进化信息
