@@ -331,7 +331,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content"> (BANDAI Co., Ltd)
-------------------------------------------------
+------------------------------------------
 </string>
                                         <attributes>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -347,7 +347,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-------------------------------------------------
+------------------------------------------
 </string>
                                         <attributes>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -367,7 +367,7 @@ SwiftyJson (MIT License)
 Copyright (c) 2014 Ruoyu Fu
 SDWebImage (MIT License)
 Copyright (c) 2016 Olivier Poitrey
-------------------------------------------------
+------------------------------------------
 </string>
                                         <attributes>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -543,19 +543,22 @@ Cg
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UWg-ir-9wl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">数据来源：
+                                <mutableString key="text">数据来源：
 https://starlight.kirara.ca
 http://starlight.hyspace.io
 https://deresute.info
 https://hoshimoriuta.kirara.ca
 http://imascg-slstage-wiki.gamerch.com
-
+------------------------------------------
 技术支持：
-@Chieri
-@CaiMiao
-@Snack-X
-@summertriangle-dev </string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+Chieri
+CaiMiao
+Snack-X
+summertriangle-dev 
+------------------------------------------
+图标和封面设计：
+ZXQ</mutableString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>

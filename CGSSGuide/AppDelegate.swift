@@ -19,8 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //异步预加载较大的谱面部分 暂时去除
 //        dispatch_async (dispatch_get_global_queue(0, 0)) {
 //            let _ = CGSSDAO.sharedDAO.beatmapDict
+//            dispatch_async(dispatch_get_main_queue(), { 
+//                
+//            })
 //        }
-        // Override point for customization after application launch.
+       
         return true
     }
 
