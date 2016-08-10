@@ -98,7 +98,7 @@ class CGSSImageView: UIImageView {
             self.progressIndicator?.progress = Float(a) / Float(b)
             }, completed: { (image, error, sdImageCache, nsurl) in
                 if error != nil {
-                    print("加载大图时出错:\(error.localizedDescription)")
+                    //print("加载大图时出错:\(error.localizedDescription)")
                 }
                 else {
                     self.isFinishedLoading = true

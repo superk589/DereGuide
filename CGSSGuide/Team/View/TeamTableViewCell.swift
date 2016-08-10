@@ -31,6 +31,7 @@ class TeamTableViewCell: UITableViewCell {
         for index in 0...5 {
             let icon = CGSSCardIconView.init(frame: CGRectMake(leftSpace + (btnW + space) * CGFloat(index) , 10, btnW, btnW))
             let label = UILabel.init(frame: CGRectMake(icon.frame.origin.x, icon.frame.origin.y + icon.frame.size.height, icon.frame.size.width, 21))
+            label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .Center
             label.font = UIFont.systemFontOfSize(12)
             label.textColor = UIColor.darkGrayColor()
@@ -97,8 +98,10 @@ class TeamTableViewCell: UITableViewCell {
     func initWith(team:CGSSTeam) {
         for i in 0...5 {
             let tm = team[i]
-            icons[i].setWithCardId((tm?.cardRef?.id)!)
-            skillLvLabels[i].text = "SLv.\((tm?.skillLevel)!)"
+            if let id = tm?.cardRef?.id {
+                icons[i].setWithCardId(id)
+                skillLvLabels[i].text = "SLv.\((tm?.skillLevel)!)"
+            }
         }
         vocalLabel.text = String(team.rawVocal)
         visualLabel.text = String(team.rawVisual)
