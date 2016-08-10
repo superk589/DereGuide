@@ -26,7 +26,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
             let infoDic = NSBundle.mainBundle().infoDictionary
-            appVersionLabel.text = (infoDic!["CFBundleShortVersionString"] as! String) + "." + (infoDic!["CFBundleVersion"] as! String)
+            appVersionLabel.text = (infoDic!["CFBundleShortVersionString"] as! String)
         }
     }
 

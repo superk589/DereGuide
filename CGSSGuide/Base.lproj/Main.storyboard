@@ -543,7 +543,7 @@ Cg
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UWg-ir-9wl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">数据来源：
+                                <string key="text">数据来源：
 https://starlight.kirara.ca
 http://starlight.hyspace.io
 https://deresute.info
@@ -557,7 +557,7 @@ Snack-X
 summertriangle-dev 
 ------------------------------------------
 图标和封面设计：
-ZXQ</mutableString>
+ZXQ</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
