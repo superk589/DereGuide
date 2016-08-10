@@ -63,7 +63,7 @@ class CardTableViewController: RefreshableTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(NSHomeDirectory())
+        //print(NSHomeDirectory())
         let updater = CGSSUpdater.defaultUpdater
         //如果数据Major版本号过低强制删除老数据 再更新
         if updater.checkNewestDataVersion().0 > updater.checkCurrentDataVersion().0 {

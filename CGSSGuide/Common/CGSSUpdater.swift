@@ -124,7 +124,7 @@ public class CGSSUpdater: NSObject {
                 let url = CGSSUpdater.URLOfEnglishDatabase + "/api/v1/list/card_t?key=id,evolution_id"
                 let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
-                        print("检查卡片更新失败: \(e.localizedDescription)")
+                        //print("检查卡片更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
                     } else {
                         let json = JSON.init(data: data!)
@@ -166,7 +166,7 @@ public class CGSSUpdater: NSObject {
                 let url = CGSSUpdater.URLOfDeresuteApi + "/data/music"
                 let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
-                        print("检查歌曲更新失败: \(e.localizedDescription)")
+                        //print("检查歌曲更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
                     } else {
                         let json = JSON.init(data: data!)
@@ -194,7 +194,7 @@ public class CGSSUpdater: NSObject {
                 let url = CGSSUpdater.URLOfDeresuteApi + "/data/live"
                 let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
-                        print("检查live更新失败: \(e.localizedDescription)")
+                        //print("检查live更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
                     } else {
                         let json = JSON.init(data: data!)
@@ -279,7 +279,7 @@ public class CGSSUpdater: NSObject {
                 let url = NSURL(string: strURL as String)!
                 let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                     if error != nil {
-                        print("获取卡数据出错:\(error!.localizedDescription)\(url)")
+                        //print("获取卡数据出错:\(error!.localizedDescription)\(url)")
                         insideComplete(error?.localizedDescription)
                     }else {
                         if let card = CGSSCard.init(jsonData:data!){
@@ -305,7 +305,7 @@ public class CGSSUpdater: NSObject {
                 let url = NSURL(string: strURL as String)!
                 let task = dataSession.dataTaskWithURL(url, completionHandler: { (data, response, error) in
                     if error != nil {
-                        print("获取谱面数据出错:\(error!.localizedDescription)\(url)")
+                        //print("获取谱面数据出错:\(error!.localizedDescription)\(url)")
                         insideComplete(error?.localizedDescription)
                     }else {
                         if let beatmap = CGSSBeatmap.init(json: JSON.init(data: data!)) {

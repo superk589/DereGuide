@@ -22,7 +22,7 @@ class TeamTableViewCell: UITableViewCell {
     var danceLabel:UILabel!
     var visualLabel:UILabel!
     var totalLabel:UILabel!
-    
+    static var btnW:CGFloat = (CGSSTool.width - 50 - 20 + 10 ) / 6 - 10
     override func awakeFromNib() {
         super.awakeFromNib()
         let btnW = (CGSSTool.width - rightSpace - leftSpace + space ) / 6 - space
