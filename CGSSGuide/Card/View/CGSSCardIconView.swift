@@ -25,7 +25,9 @@ class CGSSCardIconView: UIImageView {
     }
     func setWithCardId(id:Int) {
         self.cardId = id
-        let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
+        //let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
+        //修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
+        let url = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(id).png")
         self.sd_setImageWithURL(url)
     }
     
