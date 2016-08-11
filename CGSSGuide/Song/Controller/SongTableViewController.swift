@@ -21,7 +21,6 @@ class SongTableViewController: BaseSongTableViewController {
     }
 
     // MARK: - Table view data source
-
     override func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         super.selectLive(live, beatmaps: beatmaps, diff: diff)
         let beatmapVC = BeatmapViewController()

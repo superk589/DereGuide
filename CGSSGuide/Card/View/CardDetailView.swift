@@ -45,12 +45,11 @@ class CardDetailView: UIScrollView {
         // Drawing code
     }
     */
-    
     var topSpace:CGFloat = 10
     
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         self.backgroundColor = UIColor.whiteColor()
         //self.bounces = false
         //全尺寸大图视图
@@ -115,6 +114,7 @@ class CardDetailView: UIScrollView {
         //addSubview(attContentView)
         originY = originY + topSpace * 2 + 70
 
+        
         //属性排名表格
         //let rankContentView = UIView()
         //rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 81 + (1 / UIScreen.mainScreen().scale))

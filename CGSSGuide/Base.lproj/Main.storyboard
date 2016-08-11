@@ -581,15 +581,15 @@ ZXQ</string>
         <scene sceneID="QZt-3R-LJz">
             <objects>
                 <tableViewController storyboardIdentifier="CardFilterAndSorterTableView" title="卡片筛选和排序" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XB8-jt-AiW" customClass="CardFilterAndSorterTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IdU-PC-xRx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="IdU-PC-xRx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection headerTitle="筛选" id="hJn-41-ekr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9bO-mG-Gkn">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9bO-mG-Gkn" id="XAV-sT-xtt">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -604,66 +604,34 @@ ZXQ</string>
                                                             <state key="normal" title="SSR+"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9r5-JT-QLk">
-                                                            <rect key="frame" x="71" y="0.0" width="30" height="27"/>
+                                                            <rect key="frame" x="69" y="0.0" width="36" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title="SSR"/>
+                                                            <state key="normal" title=" SSR "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNn-WX-05k">
-                                                            <rect key="frame" x="116" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="122" y="0.0" width="35" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title="SR+"/>
+                                                            <state key="normal" title=" SR+ "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0K-W1-Xqm">
-                                                            <rect key="frame" x="161" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="172" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title=" SR "/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-sB-Xx6">
-                                                            <rect key="frame" x="206" y="0.0" width="30" height="27"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title=" R+ "/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-X6-5GL">
-                                                            <rect key="frame" x="246" y="0.0" width="30" height="27.5"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title=" R "/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-MJ-QQY">
-                                                            <rect key="frame" x="326" y="0.0" width="30" height="27"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title=" N "/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-gU-gqO">
-                                                            <rect key="frame" x="286" y="0.0" width="30" height="27.5"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title=" N+ "/>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="gvK-S0-WhK" firstAttribute="leading" secondItem="i0S-zc-iTX" secondAttribute="leading" constant="15" id="20o-mw-fYC"/>
-                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="leading" secondItem="jn3-X6-5GL" secondAttribute="trailing" constant="10" id="87l-PX-cU0"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mQn-gU-gqO" secondAttribute="bottom" id="8XG-zA-93s"/>
                                                         <constraint firstItem="9r5-JT-QLk" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="8ru-1H-t8z"/>
                                                         <constraint firstAttribute="bottom" secondItem="b0K-W1-Xqm" secondAttribute="bottom" id="H9j-hs-Q6X"/>
                                                         <constraint firstItem="MNn-WX-05k" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="J7e-pl-dOq"/>
-                                                        <constraint firstItem="MNn-WX-05k" firstAttribute="leading" secondItem="9r5-JT-QLk" secondAttribute="trailing" constant="15" id="N1H-PZ-gRt"/>
-                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="leading" secondItem="mQn-gU-gqO" secondAttribute="trailing" constant="10" id="OOJ-UL-VC1"/>
+                                                        <constraint firstItem="MNn-WX-05k" firstAttribute="leading" secondItem="9r5-JT-QLk" secondAttribute="trailing" constant="17" id="N1H-PZ-gRt"/>
                                                         <constraint firstItem="b0K-W1-Xqm" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="Tvk-J7-MmB"/>
                                                         <constraint firstAttribute="bottom" secondItem="MNn-WX-05k" secondAttribute="bottom" id="UUu-yO-yVI"/>
-                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="Yt9-ys-gJo"/>
-                                                        <constraint firstItem="9r5-JT-QLk" firstAttribute="leading" secondItem="gvK-S0-WhK" secondAttribute="trailing" constant="20" id="civ-pm-fg1"/>
-                                                        <constraint firstAttribute="bottom" secondItem="8rf-MJ-QQY" secondAttribute="bottom" id="d5V-fI-PsS"/>
-                                                        <constraint firstItem="jn3-X6-5GL" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="e3s-RG-K1T"/>
-                                                        <constraint firstItem="jn3-X6-5GL" firstAttribute="leading" secondItem="Oka-sB-Xx6" secondAttribute="trailing" constant="10" id="h7U-67-PLS"/>
+                                                        <constraint firstItem="9r5-JT-QLk" firstAttribute="leading" secondItem="gvK-S0-WhK" secondAttribute="trailing" constant="18" id="civ-pm-fg1"/>
                                                         <constraint firstItem="gvK-S0-WhK" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="hMR-d7-Eub"/>
                                                         <constraint firstAttribute="bottom" secondItem="gvK-S0-WhK" secondAttribute="bottom" id="kEk-Cq-11C"/>
                                                         <constraint firstItem="b0K-W1-Xqm" firstAttribute="leading" secondItem="MNn-WX-05k" secondAttribute="trailing" constant="15" id="mV5-ti-ejn"/>
-                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="med-h6-x4Z"/>
-                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="leading" secondItem="b0K-W1-Xqm" secondAttribute="trailing" constant="15" id="oss-rj-dZL"/>
-                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="top" secondItem="i0S-zc-iTX" secondAttribute="top" id="teF-dT-Nzq"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Oka-sB-Xx6" secondAttribute="bottom" id="vfE-7d-HKv"/>
-                                                        <constraint firstAttribute="bottom" secondItem="jn3-X6-5GL" secondAttribute="bottom" id="yZ1-oY-26E"/>
                                                         <constraint firstAttribute="bottom" secondItem="9r5-JT-QLk" secondAttribute="bottom" id="z9K-Ro-xSc"/>
                                                     </constraints>
                                                 </view>
@@ -676,8 +644,64 @@ ZXQ</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GMp-Kg-sTM">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GMp-Kg-sTM" id="WVJ-wk-OZc">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCw-AB-eBM">
+                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-sB-Xx6">
+                                                            <rect key="frame" x="15" y="0.0" width="34" height="28"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="  R+  "/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-X6-5GL">
+                                                            <rect key="frame" x="64" y="0.0" width="30" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="  R  "/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-MJ-QQY">
+                                                            <rect key="frame" x="109" y="0.0" width="30" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="  N  "/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-gU-gqO">
+                                                            <rect key="frame" x="154" y="0.0" width="35" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="  N+  "/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="jn3-X6-5GL" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="7f9-Mc-0Bb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mQn-gU-gqO" secondAttribute="bottom" id="8Dq-hZ-IbZ"/>
+                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="leading" secondItem="HCw-AB-eBM" secondAttribute="leading" constant="15" id="HYj-Qq-91H"/>
+                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="leading" secondItem="8rf-MJ-QQY" secondAttribute="trailing" constant="15" id="I9N-lc-LwW"/>
+                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="JzK-92-GAz"/>
+                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="KNr-bB-rXw"/>
+                                                        <constraint firstItem="Oka-sB-Xx6" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="Qql-f6-tUC"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8rf-MJ-QQY" secondAttribute="bottom" id="VNR-5k-hkw"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Oka-sB-Xx6" secondAttribute="bottom" id="XgX-pm-5KI"/>
+                                                        <constraint firstItem="jn3-X6-5GL" firstAttribute="leading" secondItem="Oka-sB-Xx6" secondAttribute="trailing" constant="15" id="Yva-UC-UIa"/>
+                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="leading" secondItem="jn3-X6-5GL" secondAttribute="trailing" constant="15" id="f1T-VM-jcx"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jn3-X6-5GL" secondAttribute="bottom" id="t57-W3-4kD"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HCw-AB-eBM" secondAttribute="trailing" id="2hn-oo-Cje"/>
+                                                <constraint firstItem="HCw-AB-eBM" firstAttribute="top" secondItem="WVJ-wk-OZc" secondAttribute="topMargin" id="EOc-zz-GBf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="HCw-AB-eBM" secondAttribute="bottom" id="j8U-kU-H3E"/>
+                                                <constraint firstItem="HCw-AB-eBM" firstAttribute="leading" secondItem="WVJ-wk-OZc" secondAttribute="leadingMargin" id="kb0-It-Me3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oQc-7r-JXe">
-                                        <rect key="frame" x="0.0" y="93.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oQc-7r-JXe" id="Pgn-8r-sPL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -692,12 +716,12 @@ ZXQ</string>
                                                             <state key="normal" title="Cute"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-tZ-B9F">
-                                                            <rect key="frame" x="61" y="0.0" width="30" height="27.5"/>
+                                                            <rect key="frame" x="64" y="0.0" width="30" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Cool"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGN-vw-0uS">
-                                                            <rect key="frame" x="106" y="0.0" width="50" height="27.5"/>
+                                                            <rect key="frame" x="112" y="0.0" width="50" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Passion"/>
                                                         </button>
@@ -707,9 +731,9 @@ ZXQ</string>
                                                         <constraint firstItem="sGN-vw-0uS" firstAttribute="top" secondItem="OBT-RK-Bxi" secondAttribute="top" id="6OG-Pc-Dft"/>
                                                         <constraint firstAttribute="bottom" secondItem="dfb-tZ-B9F" secondAttribute="bottom" id="CTT-Em-bbz"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZPt-aB-fDS" secondAttribute="bottom" id="LNJ-7G-rK3"/>
-                                                        <constraint firstItem="sGN-vw-0uS" firstAttribute="leading" secondItem="dfb-tZ-B9F" secondAttribute="trailing" constant="15" id="Ohs-co-pgs"/>
+                                                        <constraint firstItem="sGN-vw-0uS" firstAttribute="leading" secondItem="dfb-tZ-B9F" secondAttribute="trailing" constant="18" id="Ohs-co-pgs"/>
                                                         <constraint firstAttribute="bottom" secondItem="sGN-vw-0uS" secondAttribute="bottom" id="T1K-3a-j4H"/>
-                                                        <constraint firstItem="dfb-tZ-B9F" firstAttribute="leading" secondItem="ZPt-aB-fDS" secondAttribute="trailing" constant="15" id="ZZr-pJ-Fja"/>
+                                                        <constraint firstItem="dfb-tZ-B9F" firstAttribute="leading" secondItem="ZPt-aB-fDS" secondAttribute="trailing" constant="18" id="ZZr-pJ-Fja"/>
                                                         <constraint firstItem="ZPt-aB-fDS" firstAttribute="top" secondItem="OBT-RK-Bxi" secondAttribute="top" id="fOI-Xq-81Q"/>
                                                         <constraint firstItem="ZPt-aB-fDS" firstAttribute="leading" secondItem="OBT-RK-Bxi" secondAttribute="leading" constant="15" id="jdR-H8-BrR"/>
                                                         <constraint firstItem="dfb-tZ-B9F" firstAttribute="top" secondItem="OBT-RK-Bxi" secondAttribute="top" id="lTh-jM-vAZ"/>
@@ -725,7 +749,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2JZ-vC-xRJ">
-                                        <rect key="frame" x="0.0" y="137.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2JZ-vC-xRJ" id="BCe-Or-FxH">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -740,12 +764,12 @@ ZXQ</string>
                                                             <state key="normal" title="Vocal"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiM-RA-fhT">
-                                                            <rect key="frame" x="66" y="0.0" width="41" height="27"/>
+                                                            <rect key="frame" x="69" y="0.0" width="41" height="27"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Dance"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipj-ta-j3r">
-                                                            <rect key="frame" x="122" y="0.0" width="37" height="27.5"/>
+                                                            <rect key="frame" x="128" y="0.0" width="37" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="Visual"/>
                                                         </button>
@@ -754,9 +778,9 @@ ZXQ</string>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="HIM-42-iDe" secondAttribute="bottom" id="BXY-3i-tfz"/>
                                                         <constraint firstItem="HIM-42-iDe" firstAttribute="top" secondItem="221-Ll-JgO" secondAttribute="top" id="NgF-FC-r1b"/>
-                                                        <constraint firstItem="ipj-ta-j3r" firstAttribute="leading" secondItem="uiM-RA-fhT" secondAttribute="trailing" constant="15" id="Teb-2m-WSH"/>
+                                                        <constraint firstItem="ipj-ta-j3r" firstAttribute="leading" secondItem="uiM-RA-fhT" secondAttribute="trailing" constant="18" id="Teb-2m-WSH"/>
                                                         <constraint firstAttribute="bottom" secondItem="uiM-RA-fhT" secondAttribute="bottom" id="UKs-4I-dPN"/>
-                                                        <constraint firstItem="uiM-RA-fhT" firstAttribute="leading" secondItem="HIM-42-iDe" secondAttribute="trailing" constant="15" id="VVi-Op-7h6"/>
+                                                        <constraint firstItem="uiM-RA-fhT" firstAttribute="leading" secondItem="HIM-42-iDe" secondAttribute="trailing" constant="18" id="VVi-Op-7h6"/>
                                                         <constraint firstItem="HIM-42-iDe" firstAttribute="leading" secondItem="221-Ll-JgO" secondAttribute="leading" constant="15" id="Y7c-sk-H7l"/>
                                                         <constraint firstAttribute="bottom" secondItem="ipj-ta-j3r" secondAttribute="bottom" id="dCR-Oe-2Q8"/>
                                                         <constraint firstItem="uiM-RA-fhT" firstAttribute="top" secondItem="221-Ll-JgO" secondAttribute="top" id="mn7-bN-Cs7"/>
@@ -773,7 +797,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YF9-Wv-syJ">
-                                        <rect key="frame" x="0.0" y="181.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YF9-Wv-syJ" id="5kv-T1-GCP">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -788,7 +812,7 @@ ZXQ</string>
                                                             <state key="normal" title="已收藏"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07k-ho-sBa">
-                                                            <rect key="frame" x="72" y="0.0" width="42" height="28"/>
+                                                            <rect key="frame" x="75" y="0.0" width="42" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="未收藏"/>
                                                         </button>
@@ -799,7 +823,7 @@ ZXQ</string>
                                                         <constraint firstAttribute="bottom" secondItem="07k-ho-sBa" secondAttribute="bottom" id="KBF-sk-1aT"/>
                                                         <constraint firstAttribute="bottom" secondItem="88G-Qa-pCH" secondAttribute="bottom" id="SOA-zZ-90p"/>
                                                         <constraint firstItem="88G-Qa-pCH" firstAttribute="top" secondItem="zxb-Wj-KNP" secondAttribute="top" id="Uu7-ls-8f9"/>
-                                                        <constraint firstItem="07k-ho-sBa" firstAttribute="leading" secondItem="88G-Qa-pCH" secondAttribute="trailing" constant="15" id="UwL-Pd-Tdd"/>
+                                                        <constraint firstItem="07k-ho-sBa" firstAttribute="leading" secondItem="88G-Qa-pCH" secondAttribute="trailing" constant="18" id="UwL-Pd-Tdd"/>
                                                         <constraint firstItem="07k-ho-sBa" firstAttribute="top" secondItem="zxb-Wj-KNP" secondAttribute="top" id="kTF-sF-gLG"/>
                                                     </constraints>
                                                 </view>
@@ -817,7 +841,7 @@ ZXQ</string>
                             <tableViewSection headerTitle="排序" id="rD2-JL-rj6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wja-Bf-LZv">
-                                        <rect key="frame" x="0.0" y="275.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="276" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wja-Bf-LZv" id="i6T-Nv-hVD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -827,14 +851,14 @@ ZXQ</string>
                                                     <rect key="frame" x="8" y="8" width="584" height="27.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfI-Mv-ukR">
-                                                            <rect key="frame" x="15" y="0.0" width="91" height="27"/>
+                                                            <rect key="frame" x="15" y="0.0" width="91" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="          ▽          "/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-PC-phX">
-                                                            <rect key="frame" x="126" y="0.0" width="106" height="27"/>
+                                                            <rect key="frame" x="126" y="0.0" width="91" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <state key="normal" title="            △            "/>
+                                                            <state key="normal" title="          △          "/>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -857,7 +881,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gJ2-cf-pd3">
-                                        <rect key="frame" x="0.0" y="319.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="320" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJ2-cf-pd3" id="404-Ep-O92">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -913,7 +937,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3Qp-4Y-Ln0">
-                                        <rect key="frame" x="0.0" y="363.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="364" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Qp-4Y-Ln0" id="PNs-aW-SP0">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -977,6 +1001,7 @@ ZXQ</string>
                         <outlet property="favoriteStackView" destination="zxb-Wj-KNP" id="Scr-5F-zgB"/>
                         <outlet property="otherSortingStackView" destination="cnY-t1-Aip" id="tnZ-sb-WNA"/>
                         <outlet property="rarityStackView" destination="i0S-zc-iTX" id="ntg-5u-Osr"/>
+                        <outlet property="rarityStackView2" destination="HCw-AB-eBM" id="7TI-QT-Yqs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MRk-3N-APF" userLabel="First Responder" sceneMemberID="firstResponder"/>
