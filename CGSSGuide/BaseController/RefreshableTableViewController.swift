@@ -42,6 +42,17 @@ class RefreshableTableViewController: UITableViewController {
 //        }
     }
 
+    //下面这两个方法可以让分割线左侧顶格显示 不再留15像素
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+    }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

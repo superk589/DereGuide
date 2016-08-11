@@ -118,6 +118,7 @@ public class CGSSUpdater: NSObject {
                 isUpdating = false
             }
         }
+        
         for dataType in dataTypes {
             switch dataType {
             case .Card:
