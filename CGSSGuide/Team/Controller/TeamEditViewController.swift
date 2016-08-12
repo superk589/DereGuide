@@ -22,9 +22,8 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 	var backValue: Int?
 	let tv = UITableView()
 	var hv = UIView()
-	var leaderSkillLabel1: UILabel!
-	var leaderSkillLabel2: UILabel!
 	var lastIndex = 0
+	var cells = [TeamMemberTableViewCell]()
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = UIColor.whiteColor()
@@ -32,26 +31,39 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 		navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Save, target: self, action: #selector(saveTeam))
 		
 		hv.frame = CGRectMake(0, 0, CGSSTool.width, 100)
-		leaderSkillLabel2 = UILabel()
-		leaderSkillLabel1 = UILabel()
-		leaderSkillLabel1.frame = CGRectMake(0, 10, CGSSTool.width, 35)
-		leaderSkillLabel2.frame = CGRectMake(0, 55, CGSSTool.width, 35)
-		leaderSkillLabel1.font = UIFont.systemFontOfSize(12)
-		leaderSkillLabel1.numberOfLines = 0
+		for i in 0...5 {
+			let cell = TeamMemberTableViewCell()
+			if i == 0 {
+				cell.title.text = "队长"
+				if let leader = self.leader {
+					cell.initWith(leader, type: .Leader)
+				}
+			} else if i < 5 {
+				cell.title.text = "队员\(i)"
+				if let sub = subs[i - 1] {
+					cell.initWith(sub, type: .Sub)
+				}
+			} else {
+				cell.title.text = "好友"
+				if let fLeader = self.friendLeader {
+					cell.initWith(fLeader, type: .Friend)
+				}
+			}
+			cell.tag = 100 + i
+			cell.delegate = self
+			cells.append(cell)
+		}
 		
-		leaderSkillLabel2.font = UIFont.systemFontOfSize(12)
-		leaderSkillLabel2.numberOfLines = 0
-		hv.addSubview(leaderSkillLabel2)
-		hv.addSubview(leaderSkillLabel1)
 		// 暂时去除header
 		// tv.tableHeaderView = hv
 		tv.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
 		tv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64)
 		tv.delegate = self
 		tv.dataSource = self
-		tv.registerClass(TeamMemberTableViewCell.self, forCellReuseIdentifier: "TeamMemberCell")
-		tv.rowHeight = 90
+		// tv.registerClass(TeamMemberTableViewCell.self, forCellReuseIdentifier: "TeamMemberCell")
 		tv.tableFooterView = UIView.init(frame: CGRectZero)
+		// tv.estimatedRowHeight = 100
+		// tv.rowHeight = UITableViewAutomaticDimension
 		view.addSubview(tv)
 		
 		let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
@@ -83,6 +95,10 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return max(cells[indexPath.row].contentView.fheight, 96)
+	}
+	
 	func saveTeam() {
 		if let leader = self.leader, friendLeader = self.friendLeader where subs.count == 4 {
 			let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? 100000, friendLeader: friendLeader)
@@ -95,16 +111,6 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 		self.navigationController?.popViewControllerAnimated(true)
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		if indexPath.row == 0 {
-			return 120
-		} else if indexPath.row < 5 {
-			return 90
-		} else {
-			return 120
-		}
-	}
-	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
 	}
@@ -113,28 +119,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("TeamMemberCell", forIndexPath: indexPath) as! TeamMemberTableViewCell
-		if indexPath.row == 0 {
-			cell.title.text = "队长"
-			if let leader = self.leader {
-				cell.initWith(leader)
-				leaderSkillLabel1.text = "队长技能:\((leader.cardRef?.leader_skill?.explain_en ?? ""))"
-			}
-		} else if indexPath.row < 5 {
-			cell.title.text = "队员\(indexPath.row)"
-			if let sub = subs[indexPath.row - 1] {
-				cell.initWith(sub)
-			}
-		} else {
-			cell.title.text = "好友"
-			if let fLeader = self.friendLeader {
-				cell.initWith(fLeader)
-				leaderSkillLabel2.text = "好友技能:\((fLeader.cardRef?.leader_skill?.explain_en ?? ""))"
-			}
-		}
-		cell.tag = 100 + indexPath.row
-		cell.delegate = self
-		
+		let cell = cells[indexPath.row]
 		return cell
 	}
 	
@@ -155,6 +140,16 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
 		navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
 		navigationController?.pushViewController(teamCardVC!, animated: false)
 		
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		tv.separatorInset = UIEdgeInsetsZero
+		tv.layoutMargins = UIEdgeInsetsZero
+	}
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		cell.separatorInset = UIEdgeInsetsZero
+		cell.layoutMargins = UIEdgeInsetsZero
 	}
 	/*
 	 // MARK: - Navigation
@@ -179,12 +174,11 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
 			newLevel = 10
 		}
 		member?.skillLevel = newLevel
-		cell.updateLevel(getMemberByIndex(cell.tag - 100)!)
+		cell.initSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
 	}
 	
 	func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
-		// 通常第5,6格会被键盘挡住 判断是否要上移表视图
-		if cell.tag - 100 >= 3 {
+		if cell.tag - 100 >= 2 {
 			UIView.animateWithDuration(0.25, animations: {
 				self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - 216 - CGFloat(cell.tag - 99) * 90, 0))
 			})
@@ -195,15 +189,21 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
 
 extension TeamEditViewController: BaseCardTableViewControllerDelegate {
 	func selectCard(card: CGSSCard) {
+		let cell = cells[lastIndex]
 		if lastIndex == 0 {
 			self.leader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+			cell.initWith(leader!, type: .Leader)
 			if self.friendLeader == nil {
 				self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+				cells.last!.initWith(friendLeader!, type: .Friend)
 			}
 		} else if lastIndex < 5 {
 			self.subs[lastIndex - 1] = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+			cell.initWith(subs[lastIndex - 1]!, type: .Sub)
 		} else {
 			self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+			cell.initWith(friendLeader!, type: .Friend)
+			
 		}
 		tv.reloadData()
 	}

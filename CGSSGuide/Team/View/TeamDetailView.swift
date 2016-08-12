@@ -27,16 +27,16 @@ class TeamDetailView: UIView {
 	var editTeamButton: UIButton!
 	var friendLeaderLabel: UILabel!
 	
-	var leaderSkillGrid: CGSSGridView!
+	var leaderSkillGrid: CGSSGridLabel!
 	
 	var backSupportLabel: UILabel!
 	var backSupportTF: UITextField!
 	
-	var presentValueGrid: CGSSGridView!
+	var presentValueGrid: CGSSGridLabel!
 	
 	var skillListDescLabel: UILabel!
 	var skillShowOrHideButton: UIButton!
-	var skillListGrid: CGSSGridView!
+	var skillListGrid: CGSSGridLabel!
 	
 	var selectSongLabel: UILabel!
 	var selectSongButton: UIButton!
@@ -49,8 +49,8 @@ class TeamDetailView: UIView {
 	
 	var bottomView: UIView!
 	var startCalcButton: UIButton!
-	var skillProcGrid: CGSSGridView!
-	var scoreGrid: CGSSGridView!
+	var skillProcGrid: CGSSGridLabel!
+	var scoreGrid: CGSSGridLabel!
 	var scoreDescLabel: UILabel!
 	
 	override init(frame: CGRect) {
@@ -84,7 +84,7 @@ class TeamDetailView: UIView {
 		friendLeaderLabel.textAlignment = .Right
 		originY += 55 + topSpace
 		
-		leaderSkillGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 56), rows: 4, columns: 6)
+		leaderSkillGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 56), rows: 4, columns: 6)
 		
 		originY += 56 + topSpace
 		
@@ -106,7 +106,7 @@ class TeamDetailView: UIView {
 		
 		originY += 21 + topSpace
 		
-		presentValueGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 112), rows: 8, columns: 5)
+		presentValueGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 112), rows: 8, columns: 5)
 		originY += 112 + topSpace
 		
 		skillListDescLabel = UILabel.init(frame: CGRectMake(leftSpace, originY, 100, 22))
@@ -122,7 +122,7 @@ class TeamDetailView: UIView {
 		skillShowOrHideButton.addTarget(self, action: #selector(skillShowOrHide), forControlEvents: .TouchUpInside)
 		originY += 22 + topSpace
 		
-		skillListGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 225), rows: 5, columns: 1, textAligment: .Left)
+		skillListGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 225), rows: 5, columns: 1, textAligment: .Left)
 		
 		bottomView = UIView.init(frame: CGRectMake(0, originY, CGSSTool.width, 0))
 		bottomView.backgroundColor = UIColor.whiteColor()
@@ -179,7 +179,7 @@ class TeamDetailView: UIView {
 		startCalcButton.addTarget(self, action: #selector(startCalc), forControlEvents: .TouchUpInside)
 		
 		originY += 25 + topSpace
-		scoreGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, originY, width, 28), rows: 2, columns: 3)
+		scoreGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 28), rows: 2, columns: 3)
 		scoreGrid.hidden = true
 		
 		originY += 28 + topSpace

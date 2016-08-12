@@ -9,60 +9,58 @@
 import UIKit
 
 class CGSSCardIconView: UIImageView {
-
-    var cardId:Int?
-    var tap:UITapGestureRecognizer?
-    var action:Selector?
-    weak var target:AnyObject?
-        
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        layer.cornerRadius = 6
-        layer.masksToBounds = true
-        userInteractionEnabled = true
-        tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
-        addGestureRecognizer(tap!)
-    }
-    func setWithCardId(id:Int) {
-        self.cardId = id
-        //let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
-        //修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
-        let url = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(id).png")
-        self.sd_setImageWithURL(url)
-    }
-    
-    func setWithCardId(id:Int, target: AnyObject, action: Selector) {
-        self.setWithCardId(id)
-        self.setAction(target, action: action)
-    }
-    
-    func setAction(target: AnyObject, action: Selector) {
-        self.action = action
-        self.target = target
-    }
-    
-
-    
-    func onClick() {
-        if action != nil {
-            self.target?.performSelector(action!, withObject: self)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        layer.cornerRadius = 6
-        layer.masksToBounds = true
-        userInteractionEnabled = true
-        tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
-        addGestureRecognizer(tap!)
-    }
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+	
+	var cardId: Int?
+	var tap: UITapGestureRecognizer?
+	var action: Selector?
+	weak var target: AnyObject?
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		layer.cornerRadius = 6
+		layer.masksToBounds = true
+		userInteractionEnabled = true
+		tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
+		addGestureRecognizer(tap!)
+	}
+	func setWithCardId(id: Int) {
+		self.cardId = id
+		// let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
+		// 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
+		let url = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(id).png")
+		self.sd_setImageWithURL(url)
+	}
+	
+	func setWithCardId(id: Int, target: AnyObject, action: Selector) {
+		self.setWithCardId(id)
+		self.setAction(target, action: action)
+	}
+	
+	func setAction(target: AnyObject, action: Selector) {
+		self.action = action
+		self.target = target
+	}
+	
+	func onClick() {
+		if action != nil {
+			self.target?.performSelector(action!, withObject: self)
+		}
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		layer.cornerRadius = 6
+		layer.masksToBounds = true
+		userInteractionEnabled = true
+		tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
+		addGestureRecognizer(tap!)
+	}
+	/*
+	 // Only override drawRect: if you perform custom drawing.
+	 // An empty implementation adversely affects performance during animation.
+	 override func drawRect(rect: CGRect) {
+	 // Drawing code
+	 }
+	 */
+	
 }
