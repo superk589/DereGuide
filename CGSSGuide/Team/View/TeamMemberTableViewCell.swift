@@ -128,6 +128,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         contentView.addSubview(skillView)
         contentView.fheight = max(skillView.fy, icon.fheight + icon.fy)
         
+        // 让skillView拦截点击事件,防止误点tableview的cell跳入下一层
+        let tap = UITapGestureRecognizer.init()
+        skillView.addGestureRecognizer(tap)
+        
     }
     
     func setupLeaderSkillView() {
@@ -160,7 +164,6 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         contentView.addSubview(leaderSkillView)
         contentView.fheight = max(leaderSkillView.fy, icon.fheight + icon.fy)
-        
     }
     
     func initSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
@@ -180,6 +183,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             skillName.text = "无"
             skillDesc.fheight = 0
         }
+        
         skillView.fheight = skillDesc.fheight + skillDesc.fy
         originY += skillView.fheight + topSpace
     }
