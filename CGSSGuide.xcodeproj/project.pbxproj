@@ -30,6 +30,9 @@
 		122EECDA1D5EF6E5008ADE08 /* 741-box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EECD41D5EF6E5008ADE08 /* 741-box@2x.png */; };
 		122EECDB1D5EF6E5008ADE08 /* 741-box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EECD51D5EF6E5008ADE08 /* 741-box@3x.png */; };
 		122EECE11D5EF9F9008ADE08 /* ToolboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE01D5EF9F9008ADE08 /* ToolboxTableViewCell.swift */; };
+		122EECE31D5F18D7008ADE08 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */; };
+		122EECE51D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */; };
+		122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */; };
 		125164B21D5A0422001D66FC /* song_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AE1D5A0422001D66FC /* song_all.png */; };
 		125164B31D5A0422001D66FC /* song_cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AF1D5A0422001D66FC /* song_cool.png */; };
 		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
@@ -168,6 +171,9 @@
 		122EECD41D5EF6E5008ADE08 /* 741-box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "741-box@2x.png"; path = "Resource/741-box@2x.png"; sourceTree = "<group>"; };
 		122EECD51D5EF6E5008ADE08 /* 741-box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "741-box@3x.png"; path = "Resource/741-box@3x.png"; sourceTree = "<group>"; };
 		122EECE01D5EF9F9008ADE08 /* ToolboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewCell.swift; sourceTree = "<group>"; };
+		122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolboxTableViewController.swift; path = CGSSGuide/Toolbox/View/ToolboxTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayNotificationViewController.swift; path = CGSSGuide/Toolbox/View/BirthdayNotificationViewController.swift; sourceTree = SOURCE_ROOT; };
+		122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
@@ -302,6 +308,8 @@
 		122EECDD1D5EF9CF008ADE08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */,
+				122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -541,6 +549,7 @@
 				1269EA081D520CD50071AD7F /* BaseNavigationController.swift */,
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
+				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -878,11 +887,14 @@
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
+				122EECE31D5F18D7008ADE08 /* ToolboxTableViewController.swift in Sources */,
 				122EECE11D5EF9F9008ADE08 /* ToolboxTableViewCell.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
+				122EECE51D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift in Sources */,
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
+				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,

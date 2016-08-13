@@ -1,33 +1,20 @@
 //
-//  RefreshableTableViewController.swift
+//  ToolboxTableViewController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 16/7/25.
+//  Created by zzk on 16/8/13.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class RefreshableTableViewController: BaseTableViewController {
+class ToolboxTableViewController: BaseTableViewController {
     
-    var refresher: UIRefreshControl!
-    var updateStatusView: UpdateStatusView!
+    let dataSource = ["偶像生日提醒"]
+    var viewControllerNames = ["BirthdayNotificationViewController"]
+    var iconIds = ["200247"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refresher = UIRefreshControl()
-        refreshControl = refresher
-        
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: "下拉检查更新")
-        refreshControl = refresher
-        refresher.addTarget(self, action: #selector(refresherValueChanged), forControlEvents: .ValueChanged)
-        
-        updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
-        updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 100
-        updateStatusView.hidden = true
-        UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,13 +22,6 @@ class RefreshableTableViewController: BaseTableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
-    func refresherValueChanged() {
-//        if refresher.refreshing {
-//            refresher.attributedTitle = NSAttributedString.init(string: "开始更新")
-//        }
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,23 +32,30 @@ class RefreshableTableViewController: BaseTableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return dataSource.count
     }
     
-    /*
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-     // Configure the cell...
-
-     return cell
-     }
-     */
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ToolboxCell", forIndexPath: indexPath) as! ToolboxTableViewCell
+        
+        cell.descLabel.text = dataSource[indexPath.row]
+        cell.icon.setWithCardId(Int(iconIds[indexPath.row])!)
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vcType = NSClassFromString("CGSSGuide." + viewControllerNames[indexPath.row]) as! UIViewController.Type
+        let vc = vcType.init()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     /*
      // Override to support conditional editing of the table view.

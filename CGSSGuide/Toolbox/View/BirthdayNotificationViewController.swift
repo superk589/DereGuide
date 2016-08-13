@@ -1,33 +1,17 @@
 //
-//  RefreshableTableViewController.swift
+//  BirthdayNotificationViewController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 16/7/25.
+//  Created by zzk on 16/8/13.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class RefreshableTableViewController: BaseTableViewController {
+class BirthdayNotificationViewController: BaseTableViewController {
     
-    var refresher: UIRefreshControl!
-    var updateStatusView: UpdateStatusView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refresher = UIRefreshControl()
-        refreshControl = refresher
-        
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: "下拉检查更新")
-        refreshControl = refresher
-        refresher.addTarget(self, action: #selector(refresherValueChanged), forControlEvents: .ValueChanged)
-        
-        updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
-        updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 100
-        updateStatusView.hidden = true
-        UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,13 +19,6 @@ class RefreshableTableViewController: BaseTableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
-    func refresherValueChanged() {
-//        if refresher.refreshing {
-//            refresher.attributedTitle = NSAttributedString.init(string: "开始更新")
-//        }
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
