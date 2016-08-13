@@ -23,6 +23,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     let tv = UITableView()
     var hv = UIView()
     var lastIndex = 0
+    var lastScrollViewOffset: CGPoint?
     var cells = [TeamMemberTableViewCell]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,7 +167,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     
     func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
         UIView.animateWithDuration(0.25, animations: {
-            self.tv.contentOffset = CGPointMake(0, 0)
+            self.tv.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, 0)
         })
         let member = getMemberByIndex(cell.tag - 100)
         var newLevel = Int(lv) ?? 10
@@ -178,6 +179,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     }
     
     func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
+        lastScrollViewOffset = tv.contentOffset
         if cell.tag - 100 >= 2 {
             var height: CGFloat = 0
             for i in 0...cell.tag - 100 {
