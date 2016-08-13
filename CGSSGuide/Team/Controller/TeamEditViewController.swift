@@ -24,7 +24,17 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     var hv = UIView()
     var lastIndex = 0
     var lastScrollViewOffset: CGPoint?
+    var keyBoardHeigt: CGFloat = 258
     var cells = [TeamMemberTableViewCell]()
+    /*override func viewWillAppear(animated: Bool) {
+     super.viewWillAppear(animated)
+     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setKeyboardHeight), name: UIKeyboardWillShowNotification, object: nil)
+     }
+
+     override func viewDidDisappear(animated: Bool) {
+     super.viewWillDisappear(animated)
+     NSNotificationCenter.defaultCenter().removeObserver(self)
+     }*/
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
@@ -186,7 +196,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
                 height += cells[i].contentView.fheight
             }
             UIView.animateWithDuration(0.25, animations: {
-                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - 216 - height, 0))
+                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - self.keyBoardHeigt - height, 0))
             })
             
         }

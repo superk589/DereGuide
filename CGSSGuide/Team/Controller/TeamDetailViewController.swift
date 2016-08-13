@@ -10,49 +10,48 @@ import UIKit
 
 class TeamDetailViewController: UIViewController {
     
-    var team:CGSSTeam!
-    var teamDV:TeamDetailView!
-    var sv :UIScrollView!
+    var team: CGSSTeam!
+    var teamDV: TeamDetailView!
+    var sv: UIScrollView!
     
-    var live:CGSSLive?
+    var live: CGSSLive?
     var beatmaps: [CGSSBeatmap]?
-    var diff:Int?
-
+    var diff: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
         self.automaticallyAdjustsScrollViewInsets = false
         sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64))
         teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
-        //teamDV.initWith(team)
+        // teamDV.initWith(team)
         teamDV.delegate = self
         sv.addSubview(teamDV)
         
         view.addSubview(sv)
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         teamDV.initWith(team)
         sv.contentSize = teamDV.frame.size
     }
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 //MARK: TeamEditViewControllerDelegate协议方法
@@ -65,14 +64,14 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 }
 
 //MARK: TeamDetailViewDelegate 协议方法
-extension TeamDetailViewController :TeamDetailViewDelegate {
+extension TeamDetailViewController: TeamDetailViewDelegate {
     func skillShowOrHide() {
         if sv.contentSize.height < teamDV.frame.size.height {
-            UIView.animateWithDuration(0.25, animations: { 
-                 self.sv.contentSize = self.teamDV.frame.size
+            UIView.animateWithDuration(0.25, animations: {
+                self.sv.contentSize = self.teamDV.frame.size
             })
         } else {
-            //当收起时 不做任何动作 不改变scrollview的contentsize
+            // 当收起时 不做任何动作 不改变scrollview的contentsize
 //            let offset = sv.contentOffset
 //            sv.contentSize = teamDV.frame.size
 //            sv.contentOffset = offset
@@ -91,7 +90,7 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         CGSSTeamManager.defaultManager.writeToFile(nil)
     }
     
-    func editTeam(){
+    func editTeam() {
         let teamEditDVC = TeamEditViewController()
         teamEditDVC.initWith(team)
         teamEditDVC.delegate = self
@@ -102,10 +101,10 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         if let live = self.live, diff = self.diff {
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, diff: diff)
             self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
-            simulator.simulateOnce(true, callBack: { [weak self] (score) in
+            simulator.simulateOnce(true, callBack: { [weak self](score) in
                 self?.teamDV.updateScoreGridMaxScore(score)
             })
-            simulator.simulate(100, callBack: { [weak self] (scores, avg) in
+            simulator.simulate(100, callBack: { [weak self](scores, avg) in
                 self?.teamDV.updateScoreGridAvgScore(avg)
             })
             
@@ -113,6 +112,7 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
             let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .Alert)
             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+            teamDV.resetCalcButton()
         }
     }
     
@@ -127,7 +127,7 @@ extension TeamDetailViewController :TeamDetailViewDelegate {
         for liveType in CGSSLiveType.getAll() {
             alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .Default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType
-            }))
+                }))
         }
         alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
         self.presentViewController(alvc, animated: true, completion: nil)

@@ -371,6 +371,11 @@ class TeamDetailView: UIView {
 		presentValueGrid.setGridColor(presentColor)
 		
 	}
+    
+    func resetCalcButton() {
+        startCalcButton.setTitle("开始计算", forState: .Normal)
+        startCalcButton.userInteractionEnabled = true
+    }
 	
 	func updateScoreGridMaxScore(score: Int) {
 		if scoreGrid.hidden {
@@ -383,8 +388,7 @@ class TeamDetailView: UIView {
 			setupScoreGrid()
 		}
 		scoreGrid[1, 2].text = String(score)
-		startCalcButton.setTitle("开始计算", forState: .Normal)
-		startCalcButton.userInteractionEnabled = true
+		resetCalcButton()
 	}
 	
 	func updateSimulatorPresentValue(value: Int) {
