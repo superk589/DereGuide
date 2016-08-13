@@ -103,6 +103,9 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillLevelTF.autocorrectionType = .No
         skillLevelTF.autocapitalizationType = .None
         skillLevelTF.autocapitalizationType = .None
+        skillLevelTF.returnKeyType = .Done
+        // 因为还不会给数字键盘加完成按钮 暂时采用这个键盘
+        skillLevelTF.keyboardType = .NumbersAndPunctuation
         skillLevelTF.addTarget(self, action: #selector(levelFieldBegin), forControlEvents: .EditingDidBegin)
         skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEndOnExit)
         skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEnd)
