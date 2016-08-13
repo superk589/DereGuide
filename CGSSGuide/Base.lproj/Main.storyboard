@@ -664,30 +664,30 @@ ZXQ</string>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="  R  "/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-MJ-QQY">
-                                                            <rect key="frame" x="109" y="0.0" width="30" height="27.5"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                            <state key="normal" title="  N  "/>
-                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-gU-gqO">
-                                                            <rect key="frame" x="154" y="0.0" width="35" height="27.5"/>
+                                                            <rect key="frame" x="109" y="0.5" width="35" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <state key="normal" title="  N+  "/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-MJ-QQY">
+                                                            <rect key="frame" x="159" y="0.0" width="30" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="  N  "/>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="8rf-MJ-QQY" secondAttribute="bottom" id="2lv-6d-i7r"/>
                                                         <constraint firstItem="jn3-X6-5GL" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="7f9-Mc-0Bb"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mQn-gU-gqO" secondAttribute="bottom" id="8Dq-hZ-IbZ"/>
+                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="leading" secondItem="mQn-gU-gqO" secondAttribute="trailing" constant="15" id="CQu-g4-Kkg"/>
+                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="Djp-0O-Alm"/>
+                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="HVU-7n-nLr"/>
                                                         <constraint firstItem="Oka-sB-Xx6" firstAttribute="leading" secondItem="HCw-AB-eBM" secondAttribute="leading" constant="15" id="HYj-Qq-91H"/>
-                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="leading" secondItem="8rf-MJ-QQY" secondAttribute="trailing" constant="15" id="I9N-lc-LwW"/>
-                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="JzK-92-GAz"/>
-                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="KNr-bB-rXw"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mQn-gU-gqO" secondAttribute="bottom" id="NMg-id-UcC"/>
                                                         <constraint firstItem="Oka-sB-Xx6" firstAttribute="top" secondItem="HCw-AB-eBM" secondAttribute="top" id="Qql-f6-tUC"/>
-                                                        <constraint firstAttribute="bottom" secondItem="8rf-MJ-QQY" secondAttribute="bottom" id="VNR-5k-hkw"/>
                                                         <constraint firstAttribute="bottom" secondItem="Oka-sB-Xx6" secondAttribute="bottom" id="XgX-pm-5KI"/>
                                                         <constraint firstItem="jn3-X6-5GL" firstAttribute="leading" secondItem="Oka-sB-Xx6" secondAttribute="trailing" constant="15" id="Yva-UC-UIa"/>
-                                                        <constraint firstItem="8rf-MJ-QQY" firstAttribute="leading" secondItem="jn3-X6-5GL" secondAttribute="trailing" constant="15" id="f1T-VM-jcx"/>
+                                                        <constraint firstItem="mQn-gU-gqO" firstAttribute="leading" secondItem="jn3-X6-5GL" secondAttribute="trailing" constant="15" id="qlY-od-SRM"/>
                                                         <constraint firstAttribute="bottom" secondItem="jn3-X6-5GL" secondAttribute="bottom" id="t57-W3-4kD"/>
                                                     </constraints>
                                                 </view>

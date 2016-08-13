@@ -150,6 +150,10 @@
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		122EECC81D5DC516008ADE08 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		122EECCA1D5DE5CB008ADE08 /* CGSSGridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridLabel.swift; sourceTree = "<group>"; };
+		122EECCC1D5EB0D2008ADE08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		122EECCD1D5EB0D2008ADE08 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		122EECCE1D5EB0D8008ADE08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		122EECCF1D5EB0D8008ADE08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
@@ -841,6 +845,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12F3761C1D5C96A8003A358C /* Base */,
+				122EECCC1D5EB0D2008ADE08 /* zh-Hans */,
+				122EECCE1D5EB0D8008ADE08 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -849,6 +855,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12F3761E1D5C96A8003A358C /* Base */,
+				122EECCD1D5EB0D2008ADE08 /* zh-Hans */,
+				122EECCF1D5EB0D8008ADE08 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -965,7 +973,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -988,7 +996,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -118,12 +118,7 @@ class CardTableViewController: RefreshableTableViewController {
 		searchBar.autocapitalizationType = .None
 		searchBar.autocorrectionType = .No
 		searchBar.delegate = self
-		
-		//
-		
-		// self.tableView.separatorInset = UIEdgeInsetsZero
-		// self.tableView.layoutMargins = UIEdgeInsetsZero
-		
+            
 		// let updater = CGSSUpdater()
 		// updater.getCardImages("")
 		// updater.getFullImages("")

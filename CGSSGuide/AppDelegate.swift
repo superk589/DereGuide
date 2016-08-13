@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//
 	}
 	
+    
+    
 	// 接收到本地消息
 	func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
 		
