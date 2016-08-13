@@ -100,6 +100,12 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillLevelTF.font = UIFont.systemFontOfSize(14)
         skillLevelTF.delegate = self
         skillLevelTF.textAlignment = .Right
+        skillLevelTF.autocorrectionType = .No
+        skillLevelTF.autocapitalizationType = .None
+        skillLevelTF.autocapitalizationType = .None
+        skillLevelTF.addTarget(self, action: #selector(levelFieldBegin), forControlEvents: .EditingDidBegin)
+        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEndOnExit)
+        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEnd)
         
         // originY += 16 + topSpace / 2
         
@@ -155,6 +161,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func initSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
+        originY = cardName.fy + cardName.fheight + topSpace
         skillView.fy = originY
         if skill != nil {
             skillLevelTF.hidden = false
@@ -197,13 +204,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView?.fheight = 0
         switch type {
         case .Leader:
-            
             self.setupSkillView()
             self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
-            
             self.setupLeaderSkillView()
             self.initLeaderSkillViewWith(card.leader_skill)
-            
         case .Sub:
             self.setupSkillView()
             self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
@@ -229,11 +233,11 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
 //        delegate?.skillLevelDidChange(self, lv: skilllevel.text!)
 //        print("aaa")
 //    }
-    @IBAction func levelFieldBegin(sender: UITextField) {
+    func levelFieldBegin(sender: UITextField) {
         delegate?.skillLevelDidBeginEditing(self)
     }
     // 此方法同时处理did end on exit 和 editing did end
-    @IBAction func levelFieldDone(sender: UITextField) {
+    func levelFieldDone(sender: UITextField) {
         skillLevelTF.resignFirstResponder()
         delegate?.skillLevelDidChange(self, lv: skillLevelTF.text!)
     }

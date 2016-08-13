@@ -179,8 +179,12 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     
     func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
         if cell.tag - 100 >= 2 {
+            var height: CGFloat = 0
+            for i in 0...cell.tag - 100 {
+                height += cells[i].contentView.fheight
+            }
             UIView.animateWithDuration(0.25, animations: {
-                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - 216 - CGFloat(cell.tag - 99) * 90, 0))
+                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - 216 - height, 0))
             })
             
         }
