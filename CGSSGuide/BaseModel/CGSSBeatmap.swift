@@ -9,16 +9,16 @@
 import Foundation
 import SwiftyJSON
 
-public class CGSSBeatmap: CGSSBaseModel{
+public class CGSSBeatmap: CGSSBaseModel {
     class Note: NSObject, NSCoding {
-        var id:Int?
-        var sec:Float?
-        var type:Int?
-        var startPos:Int?
-        var finishPos:Int?
-        var status:Int?
-        var sync:Int?
-        var groupId:Int?
+        var id: Int?
+        var sec: Float?
+        var type: Int?
+        var startPos: Int?
+        var finishPos: Int?
+        var status: Int?
+        var sync: Int?
+        var groupId: Int?
         override init() {
             super.init()
         }
@@ -43,16 +43,16 @@ public class CGSSBeatmap: CGSSBaseModel{
             aCoder.encodeObject(self.groupId, forKey: "groupId")
         }
     }
-    var notes:[Note]
-
-    var numberOfNotes:Int {
+    var notes: [Note]
+    
+    var numberOfNotes: Int {
         if let note = notes.first {
             return note.status ?? 0
         }
         return 0
     }
     
-    var firstNote:Note? {
+    var firstNote: Note? {
         for i in 0...notes.count - 1 {
             if notes[i].finishPos != 0 {
                 return notes[i]
@@ -61,7 +61,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         return nil
     }
     
-    var lastNote:Note? {
+    var lastNote: Note? {
         for i in 0...notes.count - 1 {
             if notes[notes.count - i - 1].finishPos != 0 {
                 return notes[notes.count - i - 1]
@@ -69,7 +69,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         }
         return nil
     }
-    var startNoteIndex:Int {
+    var startNoteIndex: Int {
         for i in 0...notes.count - 1 {
             if notes[i].finishPos != 0 {
                 return i
@@ -78,7 +78,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         return notes.count - 1
     }
     
-    var lastNoteIndex:Int {
+    var lastNoteIndex: Int {
         for i in 0...notes.count - 1 {
             if notes[notes.count - i - 1].finishPos != 0 {
                 return notes.count - i - 1
@@ -86,10 +86,9 @@ public class CGSSBeatmap: CGSSBaseModel{
         }
         return 0
     }
-
     
-    //效率低 不建议使用 而是取起止index
-    var validNotes:[Note] {
+    // 效率低 不建议使用 而是取起止index
+    var validNotes: [Note] {
         var arr = [Note]()
         for i in 0...notes.count - 1 {
             if notes[i].finishPos != 0 {
@@ -99,22 +98,20 @@ public class CGSSBeatmap: CGSSBaseModel{
         return arr
     }
     
-    var preSeconds:Float? {
+    var preSeconds: Float? {
         return firstNote?.sec
     }
-    var postSeconds:Float? {
+    var postSeconds: Float? {
         return lastNote?.sec
     }
-    var totalSeconds:Float {
+    var totalSeconds: Float {
         return notes.last!.sec!
     }
     
-    var validSeconds:Float {
+    var validSeconds: Float {
         return postSeconds! - preSeconds!
     }
     
-    
-
 //    func comboForSec(sec:Float) -> Int {
 //        func findnear(sec:Float, start:Int, end:Int) -> Int {
 //            if start == end {
@@ -140,9 +137,10 @@ public class CGSSBeatmap: CGSSBaseModel{
         return arr
     }
     
-    //折半查找指定秒数对应的combo数
-    func comboForSec(sec:Float) -> Int {
-        let newSec = sec + preSeconds!
+    // 折半查找指定秒数对应的combo数
+    func comboForSec(sec: Float) -> Int {
+        // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.00001
+        let newSec = sec + preSeconds! + 0.00001
         var end = numberOfNotes + 2
         var start = 2
         while start <= end {
@@ -155,7 +153,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         }
         return start - 2
     }
-        
+    
     required public init?(coder aDecoder: NSCoder) {
         self.notes = aDecoder.decodeObjectForKey("notes") as? [Note] ?? [Note]()
         super.init(coder: aDecoder)
@@ -165,7 +163,7 @@ public class CGSSBeatmap: CGSSBaseModel{
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(self.notes, forKey: "notes")
     }
-    init?(json:JSON) {
+    init?(json: JSON) {
         self.notes = [Note]()
         let array = json.arrayValue
         for sub in array {
@@ -182,7 +180,5 @@ public class CGSSBeatmap: CGSSBaseModel{
         }
         super.init()
     }
-    
-    
     
 }
