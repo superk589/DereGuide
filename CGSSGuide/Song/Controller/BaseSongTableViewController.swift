@@ -164,7 +164,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
     }
     
     //此方法应该被override或者通过代理来响应
-    func selectLive(live:CGSSLive, beatmaps:[CGSSBeatmap], diff:Int) {
+    func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         searchBar.resignFirstResponder()
         delegate?.selectSong(live, beatmaps: beatmaps, diff: diff)
     }

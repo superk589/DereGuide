@@ -65,19 +65,7 @@ class CardTableViewController: RefreshableTableViewController {
 		
 		// print(NSHomeDirectory())
 		
-		// 推送本地通知的代码
-		/*let localNotification = UILocalNotification()
-		 localNotification.fireDate = NSDate.init(timeIntervalSinceNow: 10)
-		 localNotification.repeatInterval = NSCalendarUnit.Minute
-		 localNotification.alertBody = "body"
-		 // localNotification.alertTitle = "title"
-		 localNotification.alertTitle.userInfo = ["From":"aaa", "content":"bbb"]
-		 localNotification.alertAction = "action"
-		 UIApplication.sharedApplication().scheduleLocalNotification(localNotification)*/
-//        UIApplication.sharedApplication().cancelLocalNotification(notification: UILocalNotification)
-		// UIApplication.sharedApplication().cancelAllLocalNotifications()
-		
-		let updater = CGSSUpdater.defaultUpdater
+        let updater = CGSSUpdater.defaultUpdater
 		// 如果数据Major版本号过低强制删除老数据 再更新
 		if updater.checkNewestDataVersion().0 > updater.checkCurrentDataVersion().0 {
 			let dao = CGSSDAO.sharedDAO

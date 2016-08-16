@@ -2,6 +2,9 @@
 /* Class = "UIButton"; normalTitle = "未收藏"; ObjectID = "07k-ho-sBa"; */
 "07k-ho-sBa.normalTitle" = "未收藏";
 
+/* Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx"; */
+"08b-yF-FVx.title" = "工具";
+
 /* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "1N5-JG-Kjr"; */
 "1N5-JG-Kjr.title" = "我的队伍";
 
@@ -74,8 +77,8 @@
 /* Class = "UIButton"; normalTitle = "          △          "; ObjectID = "UCU-PC-phX"; */
 "UCU-PC-phX.normalTitle" = "          △          ";
 
-/* Class = "UITextView"; text = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n图标和封面设计：\nZXQ"; ObjectID = "UWg-ir-9wl"; */
-"UWg-ir-9wl.text" = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n图标和封面设计：\nZXQ";
+/* Class = "UITextView"; text = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n封面设计：\nZXQ"; ObjectID = "UWg-ir-9wl"; */
+"UWg-ir-9wl.text" = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n封面设计：\nZXQ";
 
 /* Class = "UILabel"; text = "当前版本"; ObjectID = "UuG-iS-uix"; */
 "UuG-iS-uix.text" = "当前版本";
@@ -149,11 +152,17 @@
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
 "rD2-JL-rj6.headerTitle" = "排序";
 
+/* Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8"; */
+"sAv-Q2-aG8.title" = "工具导航";
+
 /* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "sGN-vw-0uS"; */
 "sGN-vw-0uS.normalTitle" = "Passion";
 
 /* Class = "UIButton"; normalTitle = "Dance"; ObjectID = "uiM-RA-fhT"; */
 "uiM-RA-fhT.normalTitle" = "Dance";
+
+/* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
+"wJt-PI-tVQ.title" = "工具";
 
 /* Class = "UILabel"; text = "当前数据版本"; ObjectID = "we8-dY-w1C"; */
 "we8-dY-w1C.text" = "当前数据版本";
@@ -163,6 +172,9 @@
 
 /* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "zA8-n9-zYp"; */
 "zA8-n9-zYp.headerTitle" = "数据";
+
+/* Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6"; */
+"zeC-Rh-4X6.title" = "实用工具";
 
 /* Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78"; */
 "zkd-c8-p78.title" = "设置";
