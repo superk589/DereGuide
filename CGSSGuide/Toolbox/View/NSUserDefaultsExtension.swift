@@ -24,4 +24,7 @@ extension NSUserDefaults {
     var shouldPostBirthdayNotice: Bool {
         return NSUserDefaults.standardUserDefaults().valueForKey("BirthdayNotice") as? Bool ?? false
     }
+    var shouldCacheFullImage: Bool {
+        return NSUserDefaults.standardUserDefaults().valueForKey("FullImageCache") as? Bool ?? true
+    }
 }

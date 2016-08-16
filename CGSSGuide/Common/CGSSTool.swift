@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReachabilitySwift
 
 public class CGSSTool: NSObject {
     
@@ -111,6 +112,23 @@ public class CGSSTool: NSObject {
         let timeInv = NSTimeInterval(inv)
         let newDate = oldDate.dateByAddingTimeInterval(timeInv)
         return newDate
+        
+    }
+    
+    static func isWifi() -> Bool {
+        let reachability = try? Reachability.reachabilityForInternetConnection()
+        if reachability?.isReachableViaWiFi() ?? false {
+            return true
+        }
+        return false
+    }
+    
+    static func isMobileNet() -> Bool {
+        let reachability = try? Reachability.reachabilityForInternetConnection()
+        if reachability?.isReachableViaWWAN() ?? false {
+            return true
+        }
+        return false
         
     }
     

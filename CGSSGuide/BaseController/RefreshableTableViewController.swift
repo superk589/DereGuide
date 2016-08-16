@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RefreshableTableViewController: BaseTableViewController {
+class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate {
     
     var refresher: UIRefreshControl!
     var updateStatusView: UpdateStatusView!
@@ -27,6 +27,7 @@ class RefreshableTableViewController: BaseTableViewController {
         updateStatusView.center = view.center
         updateStatusView.center.y = view.center.y - 100
         updateStatusView.hidden = true
+        updateStatusView.delegate = self
         UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)
         
         // Uncomment the following line to preserve selection between presentations
@@ -36,12 +37,25 @@ class RefreshableTableViewController: BaseTableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func cancelUpdate() {
+        let updater = CGSSUpdater.defaultUpdater
+        updater.cancelCurrentSession()
+    }
+    
+    // 当该页面作为二级页面被销毁时 仍有未完成的下载任务时 强行终止下载(作为tabbar的一级页面时 永远不会销毁 不会触发此方法)
+    deinit {
+        if !self.updateStatusView.hidden {
+            updateStatusView.hidden = true
+            let updater = CGSSUpdater.defaultUpdater
+            updater.cancelCurrentSession()
+        }
+    }
+    
     func refresherValueChanged() {
 //        if refresher.refreshing {
 //            refresher.attributedTitle = NSAttributedString.init(string: "开始更新")
 //        }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

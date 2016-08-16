@@ -158,6 +158,9 @@
 /* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "sGN-vw-0uS"; */
 "sGN-vw-0uS.normalTitle" = "Passion";
 
+/* Class = "UILabel"; text = "使用移动网络时隐藏卡片大图"; ObjectID = "u1E-LY-NTo"; */
+"u1E-LY-NTo.text" = "使用移动网络时隐藏卡片大图";
+
 /* Class = "UIButton"; normalTitle = "Dance"; ObjectID = "uiM-RA-fhT"; */
 "uiM-RA-fhT.normalTitle" = "Dance";
 
@@ -169,6 +172,9 @@
 
 /* Class = "UILabel"; text = "发送邮件"; ObjectID = "xrP-YC-gLm"; */
 "xrP-YC-gLm.text" = "发送邮件";
+
+/* Class = "UILabel"; text = "缓存所有卡片大图"; ObjectID = "yF0-cl-Say"; */
+"yF0-cl-Say.text" = "缓存所有卡片大图";
 
 /* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "zA8-n9-zYp"; */
 "zA8-n9-zYp.headerTitle" = "数据";

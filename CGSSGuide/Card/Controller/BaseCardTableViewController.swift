@@ -45,7 +45,7 @@ class BaseCardTableViewController: RefreshableTableViewController {
                     })
                     return
                 }
-                self.updateStatusView.setContent("更新数据中", hasProgress: true)
+                self.updateStatusView.setContent("更新数据中", total: items.count)
                 updater.updateItems(items, progress: { (process, total) in
                     self.updateStatusView.updateProgress(process, b: total)
                     }, complete: { (success, total) in

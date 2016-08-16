@@ -22,7 +22,6 @@ class BirthdayCenter: NSObject {
                 localNotification.fireDate = self.getNextBirthday(char)
                 localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birth_month!)月\(char.birth_day!)日)"
                 localNotification.category = "Birthday"
-                localNotification.alertAction = nil
                 UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
             }
         }
