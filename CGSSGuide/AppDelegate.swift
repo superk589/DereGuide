@@ -26,6 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 注册消息推送服务
         // self.registerAPNS()
+        
+        
+        
+        
+        //异步处理一系列启动任务
+        //规划近期偶像生日
+        if NSUserDefaults.standardUserDefaults().shouldPostBirthdayNotice {
+            BirthdayCenter.defaultCenter.scheduleNotifications()
+        }
+        
+        
+        
         return true
     }
     
@@ -35,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(setting)
         //UIApplication.sharedApplication().registerForRemoteNotifications()
     }
+    
     
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         //
@@ -77,6 +90,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        //每次进入前台时 规划接下来一个月的偶像生日
+        if NSUserDefaults.standardUserDefaults().shouldPostBirthdayNotice {
+            BirthdayCenter.defaultCenter.scheduleNotifications()
+        }
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

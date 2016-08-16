@@ -32,7 +32,10 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
         cv.registerClass(BirthdayCollectionViewCell.self, forCellWithReuseIdentifier: "BirthdayCollectionViewCell")
         cv.showsHorizontalScrollIndicator = false
         contentView.addSubview(cv)
-        // cv.contentInset = UIEdgeInsetsMake(0, 10, 0, )
+        var inset = self.separatorInset
+        inset.left = inset.left - 10
+        inset.right = inset.left
+        cv.contentInset = inset
         cv.delegate = self
         cv.dataSource = self
         

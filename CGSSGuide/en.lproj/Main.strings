@@ -77,8 +77,8 @@
 /* Class = "UIButton"; normalTitle = "          △          "; ObjectID = "UCU-PC-phX"; */
 "UCU-PC-phX.normalTitle" = "          △          ";
 
-/* Class = "UITextView"; text = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n图标和封面设计：\nZXQ"; ObjectID = "UWg-ir-9wl"; */
-"UWg-ir-9wl.text" = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n图标和封面设计：\nZXQ";
+/* Class = "UITextView"; text = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n封面设计：\nZXQ"; ObjectID = "UWg-ir-9wl"; */
+"UWg-ir-9wl.text" = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n------------------------------------------\n技术支持：\nChieri\nCaiMiao\nSnack-X\nsummertriangle-dev \n------------------------------------------\n封面设计：\nZXQ";
 
 /* Class = "UILabel"; text = "当前版本"; ObjectID = "UuG-iS-uix"; */
 "UuG-iS-uix.text" = "当前版本";

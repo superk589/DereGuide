@@ -40,51 +40,23 @@ class BirthdayNotificationViewController: UITableViewController {
 //        super.init(style: .Grouped)
 //    }
     
-    private func getTimeZone() -> NSTimeZone {
-        let timeZoneString = NSUserDefaults.standardUserDefaults().valueForKey("BirthdayTimeZone") as? String ?? "Asia/Tokyo"
-        switch timeZoneString {
-        case "System":
-            return NSTimeZone.systemTimeZone()
-        default:
-            return NSTimeZone.init(name: timeZoneString)!
-        }
-        
-    }
-    
     func prepareChars() {
-        let dao = CGSSDAO.sharedDAO
-        let nowDate = NSDate()
-        let timeZone = getTimeZone()
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        gregorian?.timeZone = timeZone
-        let nowComp = gregorian!.components(NSCalendarUnit.init(rawValue: NSCalendarUnit.Year.rawValue | NSCalendarUnit.Month.rawValue | NSCalendarUnit.Day.rawValue), fromDate: nowDate)
-        
-        let chars = dao.charDict.allValues as! [CGSSChar]
-        for char in chars {
-            let dateformatter = NSDateFormatter()
-            dateformatter.dateFormat = "yyyyMMdd"
-            dateformatter.timeZone = timeZone
-            let dateString = String.init(format: "%04d%02d%02d", nowComp.year, char.birth_month!, char.birth_day!)
-            let date = dateformatter.dateFromString(dateString)
-            let newDate = dateformatter.dateFromString(String.init(format: "%04d%02d%02d", nowComp.year, nowComp.month, nowComp.day))
-            let result = gregorian!.components(NSCalendarUnit.Day, fromDate: newDate!, toDate: date!, options: NSCalendarOptions(rawValue: 0))
-            if result.day == 0 {
-                presentChars[0].append(char)
-            } else if result.day == 1 {
-                presentChars[1].append(char)
-            } else if result.day > 1 && result.day <= 6 {
-                presentChars[2].append(char)
-            } else if result.day > 6 && result.day <= 30 {
-                presentChars[3].append(char)
-            }
+        for i in 0...3 {
+            presentChars[i].removeAll()
         }
+        let bc = BirthdayCenter.defaultCenter
+        presentChars[0].appendContentsOf(bc.getRecent(0, endDays: 0))
+        presentChars[1].appendContentsOf(bc.getRecent(1, endDays: 1))
+        presentChars[2].appendContentsOf(bc.getRecent(2, endDays: 6))
+        presentChars[3].appendContentsOf(bc.getRecent(7, endDays: 30))
+        
     }
     func prepareSettingCells() {
         headerCells = [UITableViewCell]()
         let cell = UITableViewCell.init(style: .Default, reuseIdentifier: "BirthDaySettingCell")
         let swich1 = UISwitch.init(frame: CGRectZero)
         cell.accessoryView = swich1
-        cell.textLabel?.text = "开启生日提醒"
+        cell.textLabel?.text = "开启生日通知提醒"
         let birthdayNotice = NSUserDefaults.standardUserDefaults().valueForKey("BirthdayNotice") as? Bool ?? false
         swich1.on = birthdayNotice
         swich1.addTarget(self, action: #selector(valueChanged), forControlEvents: .ValueChanged)
@@ -99,49 +71,6 @@ class BirthdayNotificationViewController: UITableViewController {
         
     }
     
-    func removeNotification() {
-        if let notifications = UIApplication.sharedApplication().scheduledLocalNotifications {
-            for notification in notifications {
-                if notification.category == "Birthday" {
-                    UIApplication.sharedApplication().cancelLocalNotification(notification)
-                }
-            }
-        }
-        
-    }
-    func prepareNotification() {
-        removeNotification()
-        let dao = CGSSDAO.sharedDAO
-        let chars = dao.charDict.allValues as! [CGSSChar]
-        for char in chars {
-            
-            let dateformatter = NSDateFormatter()
-            dateformatter.dateFormat = "MMdd"
-            
-            dateformatter.timeZone = getTimeZone()
-            let dateString = String.init(format: "%02d%02d", char.birth_month!, char.birth_day!)
-            let date = dateformatter.dateFromString(dateString)
-            let localNotification = UILocalNotification()
-            localNotification.fireDate = date
-            // print(NSDate())
-            // print(date)
-            // localNotification.timeZone = NSTimeZone.systemTimeZone()
-            localNotification.repeatInterval = NSCalendarUnit.Year
-            localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birth_month!)月\(char.birth_day!)日)"
-            localNotification.category = "Birthday"
-//            if #available(iOS 8.2, *) {
-//                localNotification.alertTitle = "title"
-//            } else {
-//                // Fallback on earlier versions
-//            }
-            
-            // localNotification.alertAction = ""
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        }
-        // UIApplication.sharedApplication().cancelLocalNotification(notification: UILocalNotification)
-        
-    }
-    
     func valueChanged(sw: UISwitch) {
         NSUserDefaults.standardUserDefaults().setValue(sw.on, forKey: "BirthdayNotice")
         refreshData()
@@ -149,9 +78,9 @@ class BirthdayNotificationViewController: UITableViewController {
     
     func selectTimeZone() {
         let alvc = UIAlertController.init(title: "选择提醒时区", message: nil, preferredStyle: .ActionSheet)
-        alvc.addAction(UIAlertAction.init(title: "当前系统时区", style: .Default, handler: { (a) in
+        alvc.addAction(UIAlertAction.init(title: "System", style: .Default, handler: { (a) in
             NSUserDefaults.standardUserDefaults().setValue("System", forKey: "BirthdayTimeZone")
-            self.headerCells[1].detailTextLabel?.text = "当前系统时区"
+            self.headerCells[1].detailTextLabel?.text = "System"
             self.refreshData()
             }))
         alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .Default, handler: { (a) in
@@ -164,12 +93,16 @@ class BirthdayNotificationViewController: UITableViewController {
     }
     
     func refreshData() {
-        if NSUserDefaults.standardUserDefaults().valueForKey("BirthdayNotice") as? Bool ?? false {
+        if NSUserDefaults.standardUserDefaults().shouldPostBirthdayNotice {
             (UIApplication.sharedApplication().delegate as! AppDelegate).registerAPNS()
-            prepareNotification()
-            
+            if UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None {
+                let alert = UIAlertController.init(title: "警告", message: "CGSSGuide的通知被禁用了，请前往手机设置中打开", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            BirthdayCenter.defaultCenter.scheduleNotifications()
         } else {
-            removeNotification()
+            BirthdayCenter.defaultCenter.removeNotification()
         }
         prepareChars()
         tableView.reloadData()
@@ -179,6 +112,16 @@ class BirthdayNotificationViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshData), name: UIApplicationDidBecomeActiveNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: - Table view data source
@@ -223,6 +166,7 @@ class BirthdayNotificationViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("BirthdayNotificationCell", forIndexPath: indexPath) as! BirthdayNotificationTableViewCell
             cell.initWith(presentChars[indexPath.section])
+            cell.cv.reloadData()
             // Configure the cell...
             
             return cell
