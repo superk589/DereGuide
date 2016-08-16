@@ -27,12 +27,12 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
             let fullImageCacheSwitch = UISwitch()
             fullImageCacheCell.accessoryView = fullImageCacheSwitch
             let fullImageCache = NSUserDefaults.standardUserDefaults().valueForKey("FullImageCache") as? Bool ?? true
-            fullImageCacheSwitch.on = !fullImageCache
+            fullImageCacheSwitch.on = fullImageCache
             fullImageCacheSwitch.addTarget(self, action: #selector(fullImageCacheChanged), forControlEvents: .ValueChanged)
         }
     }
     func fullImageCacheChanged(sender: UISwitch) {
-        NSUserDefaults.standardUserDefaults().setBool(!sender.on, forKey: "FullImageCache")
+        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: "FullImageCache")
     }
     
     @IBOutlet weak var dataVersionLabel: UILabel!

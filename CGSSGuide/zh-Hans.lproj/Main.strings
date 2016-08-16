@@ -158,8 +158,8 @@
 /* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "sGN-vw-0uS"; */
 "sGN-vw-0uS.normalTitle" = "Passion";
 
-/* Class = "UILabel"; text = "使用移动网络时隐藏卡片大图"; ObjectID = "u1E-LY-NTo"; */
-"u1E-LY-NTo.text" = "使用移动网络时隐藏卡片大图";
+/* Class = "UILabel"; text = "移动网络下加载卡片大图"; ObjectID = "u1E-LY-NTo"; */
+"u1E-LY-NTo.text" = "移动网络下加载卡片大图";
 
 /* Class = "UIButton"; normalTitle = "Dance"; ObjectID = "uiM-RA-fhT"; */
 "uiM-RA-fhT.normalTitle" = "Dance";
