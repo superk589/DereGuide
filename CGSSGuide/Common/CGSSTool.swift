@@ -30,6 +30,7 @@ public class CGSSTool: NSObject {
     public static let coolColor = UIColor.init(red: 1.0 * 42 / 255, green: 1.0 * 113 / 255, blue: 1.0 * 247 / 255, alpha: 1)
     public static let passionColor = UIColor.init(red: 1.0 * 250 / 255, green: 1.0 * 168 / 255, blue: 1.0 * 57 / 255, alpha: 1)
     // public static let allTypeColor = UIColor.init(red: 1.0*255/255, green: 1.0*253/255, blue: 1.0*114/255, alpha: 1)
+    public static let allTypeColor = UIColor.darkGrayColor()
     
     public static let fullImageWidth: CGFloat = 1280
     public static let fullImageHeight: CGFloat = 824

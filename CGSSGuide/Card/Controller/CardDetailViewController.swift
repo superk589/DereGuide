@@ -48,18 +48,10 @@ class CardDetailViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = leftItem
         
-        if card.has_spread!{
-            // 使用非常驻的方式读取大图
-            // cardDV?.fullImageView?.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("200248_spread", ofType: "png")!)
-            
-            // 使用网络资源
-            // print(NSURL(string: card.spread_image_ref!))
-            // cardDV?.fullImageView?.sd_setImageWithURL(NSURL(string: card.spread_image_ref!))
-            
+        if card.has_spread! {
             cardDV?.fullImageView?.setIndicator()
             cardDV?.fullImageView?.setCustomImageWithURL(NSURL(string: card.spread_image_ref!)!)
-        }
-        else {
+        } else {
             cardDV?.setWithoutSpreadImage()
         }
         
@@ -76,14 +68,14 @@ class CardDetailViewController: UIViewController {
         attGridStrings.append(["Lv.1", String(card.hp_min!), String(card.vocal_min!), String(card.dance_min!), String(card.visual_min!), String(card.overall_min!)])
         attGridStrings.append(["Lv.\(card.rarity!.base_max_level)", String(card.hp_max!), String(card.vocal_max!), String(card.dance_max!), String(card.visual_max!), String(card.overall_max!)])
         attGridStrings.append(["Bonus", String(card.bonus_hp!), String(card.bonus_vocal!), String(card.bonus_dance!), String(card.bonus_visual!), String(card.overall_bonus!)])
-        attGridStrings.append(["Overall", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
+        attGridStrings.append(["Total", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
         
         cardDV?.attGridView.setGridContent(attGridStrings)
         
         var colors = [[UIColor]]()
         
-        let colorArray = [UIColor.blackColor(), CGSSTool.lifeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, UIColor.blackColor().colorWithAlphaComponent(0.5)]
-        colors.append(Array.init(count: 6, repeatedValue: UIColor.blackColor()))
+        let colorArray = [CGSSTool.allTypeColor, CGSSTool.lifeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
+        colors.append(colorArray)
         colors.append(colorArray)
         colors.append(colorArray)
         colors.append(colorArray)
@@ -96,8 +88,17 @@ class CardDetailViewController: UIViewController {
         let rankInAll = dao.getRankInAll(card)
         rankGridStrings.append(["  ", "Vocal", "Dance", "Visual", "Total"])
         rankGridStrings.append(["In \(card.attShort)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
-        rankGridStrings.append(["In all", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
+        rankGridStrings.append(["In All", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
         cardDV?.rankGridView.setGridContent(rankGridStrings)
+        
+        var colors2 = [[UIColor]]()
+        let colorArray2 = [card.attColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
+        let colorArray3 = [CGSSTool.allTypeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
+        
+        colors2.append(colorArray3)
+        colors2.append(colorArray2)
+        colors2.append(colorArray3)
+        cardDV?.rankGridView.setGridColor(colors2)
         
         // 设置主动技能
         if let skill = card.skill {

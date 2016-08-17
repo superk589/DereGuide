@@ -192,7 +192,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 path.fill()
                 
                 // 长按类型中间画一个小圆
-                if note.type == 2 {
+                if note.type == 2 && (note.status < 1 || note.status > 2) {
                     let path = pathForPointSmall(note.finishPos!, sec: note.sec!)
                     UIColor.whiteColor().set()
                     path.stroke()
@@ -289,12 +289,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     }
     
     private func pathForLongPress(position: Int, sec1: Float, sec2: Float) -> UIBezierPath {
-        let x = getPointX(position)
-        let y1 = getPointY(sec1)
         let y2 = getPointY(sec2)
-        let r = BeatmapView.noteRadius
-        let path = UIBezierPath.init(rect: CGRectMake(x - r, y2, r * 2, y1 - y2))
-        return path
+        return pathForLongPress(position, sec1: sec1, y: y2)
     }
     
     private func pathForSlider(note1: CGSSBeatmap.Note, note2: CGSSBeatmap.Note) -> UIBezierPath? {
@@ -309,7 +305,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         }
         
         let t = atan((y1 - y2) / (x2 - x1))
-        let r = BeatmapView.noteRadius - 2
+        let r = BeatmapView.noteRadius - 3
         let path = UIBezierPath()
         path.moveToPoint(CGPointMake(x1 - sin(t) * r, y1 - cos(t) * r))
         path.addLineToPoint(CGPointMake(x1 + sin(t) * r, y1 + cos(t) * r))
@@ -321,7 +317,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     private func pathForLongPress(position: Int, sec1: Float, y: CGFloat) -> UIBezierPath {
         let x = getPointX(position)
         let y1 = getPointY(sec1)
-        let path = UIBezierPath.init(rect: CGRectMake(x - BeatmapView.noteRadius, y, BeatmapView.noteRadius * 2, y1 - y))
+        let r = BeatmapView.noteRadius - 1
+        let path = UIBezierPath.init(rect: CGRectMake(x - r, y, r * 2, y1 - y))
         return path
     }
     

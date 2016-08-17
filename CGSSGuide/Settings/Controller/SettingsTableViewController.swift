@@ -162,12 +162,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     func postReview() {
-        /*let sksv = SKStoreProductViewController.init()
-         sksv.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier: "1131934691"]) { (result, error) in
-         if error == nil {
-
-         }
-         }*/
         let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSTool.appid)"
         UIApplication.sharedApplication().openURL(NSURL.init(string: url)!)
     }
