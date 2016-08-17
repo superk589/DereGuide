@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardDetailView: UIScrollView {
+class CardDetailView: UIView {
     
     // 滚动视图内容距底部边距
     static let bottomInset: CGFloat = 60
@@ -109,7 +109,10 @@ class CardDetailView: UIScrollView {
         // attContentView.layer.borderColor = UIColor.blackColor().CGColor
         // attContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // addSubview(attContentView)
-        originY = originY + topSpace * 2 + 70
+        
+        originY = originY + topSpace + 70
+        drawSectionLine(originY)
+        originY = originY + topSpace
         
         // 属性排名表格
         // let rankContentView = UIView()
@@ -132,11 +135,13 @@ class CardDetailView: UIScrollView {
         // rankContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // addSubview(rankContentView)
         
-        originY = originY + topSpace * 2 + 42
+        originY = originY + topSpace + 42
+        drawSectionLine(originY)
+        originY = originY + topSpace
         
         //
         // originY = originY + 300
-        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
+        self.fheight = originY + CardDetailView.bottomInset
         
     }
     
@@ -146,7 +151,7 @@ class CardDetailView: UIScrollView {
     }
     
     func setWithoutSpreadImage() {
-        self.contentInset = UIEdgeInsetsMake(-(fullImageView?.frame.size.height)!, 0, 0, 0)
+        self.bounds = CGRectMake(-(fullImageView?.frame.size.height)!, 0, 0, 0)
         // self.bounds.origin.y += 1000 //CGSSTool.fullImageWidth/CGSSTool.width*CGSSTool.fullImageHeight
         // self.contentSize
     }
@@ -213,8 +218,11 @@ class CardDetailView: UIScrollView {
             , String(format: "%.2f", durationMax / Double(skill.condition!) * 100), String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax)])
         skillProcGridView.setGridContent(procGridStrings)
         
-        originY = originY + topSpace * 2 + 42
-        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
+        originY = originY + topSpace + 42
+        drawSectionLine(originY)
+        originY = originY + topSpace
+        
+        self.fheight = originY + CardDetailView.bottomInset
     }
     
     func setLeaderSkillContentView(leaderSkill: CGSSLeaderSkill) {
@@ -265,8 +273,12 @@ class CardDetailView: UIScrollView {
         // leaderSkillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         addSubview(leaderSkillDescriptionLabel)
         
-        originY = originY + topSpace * 2 + leaderSkillDescriptionLabel.frame.size.height
-        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
+        originY = originY + topSpace + leaderSkillDescriptionLabel.frame.size.height
+        
+        drawSectionLine(originY)
+        originY = originY + topSpace
+        
+        self.fheight = originY + CardDetailView.bottomInset
         // addSubview(leaderSkillContentView)
     }
     
@@ -308,8 +320,10 @@ class CardDetailView: UIScrollView {
         // evolutionContentView.layer.borderColor = UIColor.blackColor().CGColor
         // evolutionContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         
-        originY = originY + topSpace * 2 + 48
-        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
+        originY = originY + topSpace + 48
+        drawSectionLine(originY)
+        originY = originY + topSpace
+        self.fheight = originY + CardDetailView.bottomInset
         // addSubview(evolutionContentView)
     }
     
@@ -404,11 +418,18 @@ class CardDetailView: UIScrollView {
         
         originY = originY + 51
         
-        contentSize = CGSizeMake(CGSSTool.width, originY + CardDetailView.bottomInset)
+        self.fheight = originY + CardDetailView.bottomInset
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func drawSectionLine(positionY: CGFloat) {
+        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSTool.width, 1 / UIScreen.mainScreen().scale))
+        view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
+        self.addSubview(view)
     }
     
 }

@@ -42,6 +42,8 @@ class TeamDetailViewController: UIViewController {
         teamDV.initWith(team)
         sv.contentSize = teamDV.frame.size
     }
+    
+    
     /*
      // MARK: - Navigation
 
@@ -66,16 +68,19 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 //MARK: TeamDetailViewDelegate 协议方法
 extension TeamDetailViewController: TeamDetailViewDelegate {
     func skillShowOrHide() {
-        if sv.contentSize.height < teamDV.frame.size.height {
-            UIView.animateWithDuration(0.25, animations: {
-                self.sv.contentSize = self.teamDV.frame.size
-            })
-        } else {
-            // 当收起时 不做任何动作 不改变scrollview的contentsize
+        UIView.animateWithDuration(0.25, animations: {
+            self.sv.contentSize = self.teamDV.frame.size
+        })
+//        if sv.contentSize.height < teamDV.frame.size.height {
+//            UIView.animateWithDuration(0.25, animations: {
+//                self.sv.contentSize = self.teamDV.frame.size
+//            })
+//        } else {
+//            // 当收起时 不做任何动作 不改变scrollview的contentsize
 //            let offset = sv.contentOffset
 //            sv.contentSize = teamDV.frame.size
 //            sv.contentOffset = offset
-        }
+//        }
     }
     
     func selectSong() {

@@ -9,7 +9,7 @@
 import UIKit
 
 class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var chars: [CGSSChar]!
+    var chars = [CGSSChar]()
     var cv: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,7 +46,8 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
     }
     
     func initWith(models: [CGSSChar]) {
-        chars = models
+        chars.removeAll()
+        chars.appendContentsOf(models)
         if chars.count == 0 {
             cv.frame = CGRectZero
         } else {

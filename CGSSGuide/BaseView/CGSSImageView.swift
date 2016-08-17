@@ -121,11 +121,11 @@ class CGSSImageView: UIImageView {
     func tapAction() {
         if !isTapped {
             // let sv = self.superview as! UIScrollView
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
             // 动画过程中禁掉点击动作,0.3秒后开启
             hideIndicator()
             self.userInteractionEnabled = false
-            UIView.animateWithDuration(0.3) {
+            UIView.animateWithDuration(0.25) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(90 / 180 * M_PI))
                 self.frame.size.width = CGSSTool.width
                 self.frame.size.height = CGSSTool.height
@@ -137,9 +137,9 @@ class CGSSImageView: UIImageView {
             isTapped = true
         }
         else {
-            NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(restored), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(restored), userInfo: nil, repeats: false)
             self.userInteractionEnabled = false
-            UIView.animateWithDuration(0.3) {
+            UIView.animateWithDuration(0.25) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(-90 / 180 * M_PI))
                 self.frame = self.originFrame
             }

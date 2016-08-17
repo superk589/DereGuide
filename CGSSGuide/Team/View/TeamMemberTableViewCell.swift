@@ -77,25 +77,25 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
         skillView = UIView.init(frame: CGRectMake(68, originY, CGSSTool.width - 78, 0))
         
-        let skillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 35, 16))
+        let skillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 35, 17))
         skillStaticDesc.text = "特技:"
         skillStaticDesc.font = UIFont.systemFontOfSize(14)
         skillStaticDesc.textAlignment = .Left
-        skillStaticDesc.textColor = UIColor.lightGrayColor()
+        skillStaticDesc.textColor = UIColor.blackColor()
         skillStaticDesc.sizeToFit()
         
-        skillName = UILabel.init(frame: CGRectMake(skillStaticDesc.fwidth + 5, 0, skillView.fwidth - skillStaticDesc.fwidth - 130, 16))
-        skillName.textColor = UIColor.darkGrayColor()
+        skillName = UILabel.init(frame: CGRectMake(skillStaticDesc.fwidth + 5, 0, skillView.fwidth - skillStaticDesc.fwidth - 85, 17))
+        skillName.textColor = UIColor.blackColor()
         skillName.textAlignment = .Left
         skillName.font = UIFont.systemFontOfSize(14)
         
-        skillLevelStaticDesc = UILabel.init(frame: CGRectMake(skillView.fwidth - 120, 0, 70, 16))
-        skillLevelStaticDesc.text = "特技等级:"
+        skillLevelStaticDesc = UILabel.init(frame: CGRectMake(skillView.fwidth - 75, 0, 35, 17))
+        skillLevelStaticDesc.text = "SLv."
         skillLevelStaticDesc.font = UIFont.systemFontOfSize(14)
         skillLevelStaticDesc.textAlignment = .Left
-        skillLevelStaticDesc.textColor = UIColor.lightGrayColor()
+        skillLevelStaticDesc.textColor = UIColor.blackColor()
         
-        skillLevelTF = UITextField.init(frame: CGRectMake(skillView.fwidth - 50, 0, 50, 16))
+        skillLevelTF = UITextField.init(frame: CGRectMake(skillView.fwidth - 40, 0, 40, 17))
         skillLevelTF.borderStyle = .RoundedRect
         skillLevelTF.font = UIFont.systemFontOfSize(14)
         skillLevelTF.delegate = self
@@ -139,15 +139,15 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             return
         }
         leaderSkillView = UIView.init(frame: CGRectMake(68, originY, CGSSTool.width - 78, 0))
-        let leaderSkillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 65, 16))
+        let leaderSkillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 65, 17))
         leaderSkillStaticDesc.text = "队长技能:"
         leaderSkillStaticDesc.font = UIFont.systemFontOfSize(14)
         leaderSkillStaticDesc.textAlignment = .Left
-        leaderSkillStaticDesc.textColor = UIColor.lightGrayColor()
+        leaderSkillStaticDesc.textColor = UIColor.blackColor()
         leaderSkillStaticDesc.sizeToFit()
         
-        leaderSkillName = UILabel.init(frame: CGRectMake(leaderSkillStaticDesc.fwidth + 5, 0, leaderSkillView.fwidth - leaderSkillStaticDesc.fwidth - 5, 16))
-        leaderSkillName.textColor = UIColor.darkGrayColor()
+        leaderSkillName = UILabel.init(frame: CGRectMake(leaderSkillStaticDesc.fwidth + 5, 0, leaderSkillView.fwidth - leaderSkillStaticDesc.fwidth - 5, 17))
+        leaderSkillName.textColor = UIColor.blackColor()
         leaderSkillName.textAlignment = .Left
         leaderSkillName.font = UIFont.systemFontOfSize(14)
         

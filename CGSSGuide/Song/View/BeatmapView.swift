@@ -10,7 +10,7 @@ import UIKit
 
 class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
-    static let widthInset: CGFloat = 100
+    static let widthInset: CGFloat = ceil(CGSSTool.width / 7.2) * 2
     static let sectionHeight: CGFloat = 245
     static let heightInset: CGFloat = 60
     static let noteRadius: CGFloat = 7
@@ -55,9 +55,9 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 UIColor.darkGrayColor().set()
                 let sectionNumber: NSString = NSString.init(format: "%03d", i / 8)
                 let attDict = [NSFontAttributeName: UIFont.systemFontOfSize(12), NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-                sectionNumber.drawAtPoint(CGPointMake(25, pointY - 7), withAttributes: attDict)
+                sectionNumber.drawAtPoint(CGPointMake(BeatmapView.widthInset / 2 - 25, pointY - 7), withAttributes: attDict)
                 let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
-                comboNumber.drawAtPoint(CGPointMake(CGSSTool.width - 46, pointY - 7), withAttributes: attDict)
+                comboNumber.drawAtPoint(CGPointMake(CGSSTool.width - BeatmapView.widthInset / 2 + 4, pointY - 7), withAttributes: attDict)
             }
             else if i % 2 == 0 { UIColor.lightGrayColor().set() }
             else { UIColor.lightGrayColor().colorWithAlphaComponent(0.5).set() }
@@ -325,8 +325,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     private func pathForSectionLine(positionY: CGFloat) -> UIBezierPath
     {
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: 50, y: positionY))
-        path.addLineToPoint(CGPoint(x: CGSSTool.width - 50, y: positionY))
+        path.moveToPoint(CGPoint(x: BeatmapView.widthInset / 2, y: positionY))
+        path.addLineToPoint(CGPoint(x: CGSSTool.width - BeatmapView.widthInset / 2, y: positionY))
         path.lineWidth = lineWidth
         return path
     }

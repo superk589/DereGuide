@@ -11,12 +11,13 @@ import UIKit
 class CardDetailViewController: UIViewController {
     
     var card: CGSSCard!
-    var cardDV: CardDetailView?
-    
-    var fullScreenView: UIView?
+    var cardDV: CardDetailView!
+    var sv: UIScrollView!
+    var fullScreenView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64))
         
         // 设置背景颜色为白色 防止导航动画时效果卡顿
         view.backgroundColor = UIColor.whiteColor()
@@ -24,12 +25,13 @@ class CardDetailViewController: UIViewController {
         fullScreenView = UIView()
         fullScreenView?.frame = UIScreen.mainScreen().bounds
         view.addSubview(fullScreenView!)
+        view.addSubview(sv)
         
-        cardDV = CardDetailView()
+        cardDV = CardDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
         cardDV?.fullImageView?.delegate = self
         // 关闭自动躲避导航栏
         self.automaticallyAdjustsScrollViewInsets = false
-        view.addSubview(cardDV!)
+        sv.addSubview(cardDV!)
         
         // 自定义titleView的文字大小
         let titleView = UILabel.init(frame: CGRectMake(0, 0, 0, 44))
@@ -117,6 +119,8 @@ class CardDetailViewController: UIViewController {
             cardDV?.evolutionToImageView.setWithCardId(card.evolution_id!, target: self, action: #selector(iconClick))
         }
         
+        sv.contentSize = cardDV.frame.size
+        
         // 设置角色信息
         
         // 设置技能升级信息
@@ -128,7 +132,6 @@ class CardDetailViewController: UIViewController {
         // 设置饲料经验信息
         
     }
-    
     // 添加当前卡到收藏
     func addOrRemoveFavorite() {
         let fm = CGSSFavoriteManager.defaultManager
@@ -204,8 +207,8 @@ extension CardDetailViewController: CGSSImageViewDelegate {
     func beginRestore() {
         self.cardDV?.addSubview((self.cardDV?.fullImageView)!)
         self.view.sendSubviewToBack(fullScreenView!)
-        self.cardDV?.fullImageView?.frame.origin.y = -64 + (self.cardDV?.contentOffset.y)!
-        UIView.animateWithDuration(0.3) {
+        self.cardDV?.fullImageView?.frame.origin.y = -64 + (self.sv.contentOffset.y)
+        UIView.animateWithDuration(0.25) {
             self.cardDV?.fullImageView?.frame.origin.y = 0
             self.navigationController?.navigationBar.alpha = 1
             self.tabBarController?.tabBar.alpha = 1
@@ -221,12 +224,12 @@ extension CardDetailViewController: CGSSImageViewDelegate {
     func beginFullSize() {
         // 置于顶层 覆盖一切
         // UIApplication.sharedApplication().keyWindow?.addSubview((self.cardDV?.fullImageView)!)
-        self.fullScreenView?.bounds.origin.y = -64 + (self.cardDV?.contentOffset.y)!
+        self.fullScreenView?.bounds.origin.y = -64 + (self.sv.contentOffset.y)
         self.fullScreenView?.addSubview((self.cardDV?.fullImageView)!)
-        UIView.animateWithDuration(0.3) {
-            self.fullScreenView?.bounds.origin.y = 0
+        UIView.animateWithDuration(0.25) {
             self.navigationController?.navigationBar.alpha = 0
             self.tabBarController?.tabBar.alpha = 0
+            self.fullScreenView?.bounds.origin.y = 0
         }
         // self.navigationController?.setNavigationBarHidden(true, animated: true)
         // self.tabBarController?.tabBar.hidden = true
