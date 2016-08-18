@@ -189,6 +189,10 @@
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
 		124E471A1D654C9A00DD0399 /* ToolboxList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ToolboxList.plist; sourceTree = "<group>"; };
+		124E474F1D6590A700DD0399 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		124E47501D6590A700DD0399 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		124E47511D6590AB00DD0399 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		124E47521D6590AB00DD0399 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
@@ -280,10 +284,6 @@
 		1277132E1D633D0E00B65473 /* 433-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "433-x@2x.png"; sourceTree = "<group>"; };
 		1277132F1D633D0E00B65473 /* 433-x@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "433-x@3x.png"; sourceTree = "<group>"; };
 		127713331D6353FD00B65473 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
-		1277133D1D63597300B65473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		1277133E1D63597300B65473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		1277133F1D63597700B65473 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		127713401D63597800B65473 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -953,8 +953,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12F3761C1D5C96A8003A358C /* Base */,
-				1277133D1D63597300B65473 /* en */,
-				1277133F1D63597700B65473 /* zh-Hans */,
+				124E474F1D6590A700DD0399 /* en */,
+				124E47511D6590AB00DD0399 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -963,8 +963,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12F3761E1D5C96A8003A358C /* Base */,
-				1277133E1D63597300B65473 /* en */,
-				127713401D63597800B65473 /* zh-Hans */,
+				124E47501D6590A700DD0399 /* en */,
+				124E47521D6590AB00DD0399 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

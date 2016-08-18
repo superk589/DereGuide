@@ -173,8 +173,8 @@
 /* Class = "UILabel"; text = "发送邮件"; ObjectID = "xrP-YC-gLm"; */
 "xrP-YC-gLm.text" = "发送邮件";
 
-/* Class = "UILabel"; text = "缓存所有卡片大图"; ObjectID = "yF0-cl-Say"; */
-"yF0-cl-Say.text" = "缓存所有卡片大图";
+/* Class = "UILabel"; text = "缓存所有图片"; ObjectID = "yF0-cl-Say"; */
+"yF0-cl-Say.text" = "缓存所有图片";
 
 /* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "zA8-n9-zYp"; */
 "zA8-n9-zYp.headerTitle" = "数据";

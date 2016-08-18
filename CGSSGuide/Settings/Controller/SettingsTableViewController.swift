@@ -102,11 +102,13 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         if CGSSUpdater.defaultUpdater.isUpdating {
             return
         }
-        let alert = UIAlertController.init(title: "确定要缓存所有大图吗？", message: "所有卡片大图超过300MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", preferredStyle: .Alert)
+        let alert = UIAlertController.init(title: "确定要缓存所有图片吗？", message: "所有图片总计超过300MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", preferredStyle: .Alert)
         alert.addAction(UIAlertAction.init(title: "确定", style: .Destructive, handler: { (alert) in
             dispatch_async(dispatch_get_global_queue(0, 0)) {
                 let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
                 var urls = [NSURL]()
+                
+                //所有卡片大图和头像图
                 for card in cards {
                     if card.has_spread! {
                         let url = NSURL.init(string: card.spread_image_ref!)
@@ -114,9 +116,25 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                             urls.append(url!)
                         }
                     }
+                    let url = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(card.id!).png")
+                    if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
+                        urls.append(url!)
+                    }
                 }
+                
+                //所有歌曲封面图
+                let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
+                for live in lives {
+                    let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
+                    let urlStr = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song!.id!).png"
+                    let url = NSURL.init(string: urlStr)
+                    if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
+                        urls.append(url!)
+                    }
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.updateStatusView.setContent("缓存卡片大图", total: urls.count)
+                    self.updateStatusView.setContent("缓存所有图片", total: urls.count)
                 })
                 CGSSUpdater.defaultUpdater.isUpdating = true
                 // SDWebImagePrefetcher默认在主线程, 此处改为子线程
@@ -144,6 +162,9 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     func cancelUpdate() {
         SDWebImagePrefetcher.sharedImagePrefetcher().cancelPrefetching()
         CGSSUpdater.defaultUpdater.isUpdating = false
+        let alvc = UIAlertController.init(title: "提示", message: "已取消", preferredStyle: .Alert)
+        alvc.addAction(UIAlertAction.init(title: "确定", style: .Cancel, handler: nil))
+        self.tabBarController?.presentViewController(alvc, animated: true, completion: nil)
     }
     
     func refresh() {

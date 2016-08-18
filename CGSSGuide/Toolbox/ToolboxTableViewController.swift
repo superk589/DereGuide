@@ -9,12 +9,11 @@
 import UIKit
 
 class ToolboxTableViewController: BaseTableViewController {
-    
-    let dataSource = ["偶像生日提醒", "角色信息查看"]
-    var viewControllerNames = ["BirthdayNotificationViewController", "CharInfoViewController"]
-    var iconIds = ["200247", "300151"]
+    let path = NSBundle.mainBundle().pathForResource("ToolboxList", ofType: ".plist")
+    var dataSource: [[String: String]]!
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource = NSArray.init(contentsOfFile: path!) as! [[String: String]]
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,14 +42,14 @@ class ToolboxTableViewController: BaseTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ToolboxCell", forIndexPath: indexPath) as! ToolboxTableViewCell
         
-        cell.descLabel.text = dataSource[indexPath.row]
-        cell.icon.setWithCardId(Int(iconIds[indexPath.row])!)
+        cell.descLabel.text = dataSource[indexPath.row]["title"]
+        cell.icon.setWithCardId(Int(dataSource[indexPath.row]["iconId"]!)!)
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vcType = NSClassFromString("CGSSGuide." + viewControllerNames[indexPath.row]) as! UIViewController.Type
+        let vcType = NSClassFromString("CGSSGuide." + dataSource[indexPath.row]["cName"]!) as! UIViewController.Type
         let vc = vcType.init()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
