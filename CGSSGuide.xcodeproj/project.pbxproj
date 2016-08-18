@@ -23,9 +23,6 @@
 		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
 		122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECC81D5DC516008ADE08 /* UIViewExtension.swift */; };
 		122EECCB1D5DE5CB008ADE08 /* CGSSGridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECCA1D5DE5CB008ADE08 /* CGSSGridLabel.swift */; };
-		122EECE11D5EF9F9008ADE08 /* ToolboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE01D5EF9F9008ADE08 /* ToolboxTableViewCell.swift */; };
-		122EECE31D5F18D7008ADE08 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */; };
-		122EECE51D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */; };
 		122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */; };
 		122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */; };
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
@@ -35,6 +32,15 @@
 		122EED1A1D617307008ADE08 /* 921-toolbox-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED171D617307008ADE08 /* 921-toolbox-selected.png */; };
 		122EED1B1D617307008ADE08 /* 921-toolbox-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */; };
 		122EED1C1D617307008ADE08 /* 921-toolbox-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */; };
+		124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47051D654AB700DD0399 /* BirthdayCenter.swift */; };
+		124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */; };
+		124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */; };
+		124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */; };
+		124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470A1D654AB700DD0399 /* CharInfoViewController.swift */; };
+		124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */; };
+		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
+		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
+		124E471B1D654C9A00DD0399 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 124E471A1D654C9A00DD0399 /* ToolboxList.plist */; };
 		125164B21D5A0422001D66FC /* song_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AE1D5A0422001D66FC /* song_all.png */; };
 		125164B31D5A0422001D66FC /* song_cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AF1D5A0422001D66FC /* song_cool.png */; };
 		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
@@ -130,10 +136,6 @@
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
-		12CFE88E1D61C5C200143250 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CFE88D1D61C5C200143250 /* BirthdayCollectionViewCell.swift */; };
-		12CFE8901D61D94E00143250 /* BirthdayNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CFE88F1D61D94E00143250 /* BirthdayNotificationTableViewCell.swift */; };
-		12CFE8961D62B48600143250 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CFE8951D62B48600143250 /* BirthdayCenter.swift */; };
-		12CFE8981D62B71C00143250 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CFE8971D62B71C00143250 /* NSUserDefaultsExtension.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */; };
@@ -169,9 +171,6 @@
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		122EECC81D5DC516008ADE08 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		122EECCA1D5DE5CB008ADE08 /* CGSSGridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGridLabel.swift; sourceTree = "<group>"; };
-		122EECE01D5EF9F9008ADE08 /* ToolboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewCell.swift; sourceTree = "<group>"; };
-		122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolboxTableViewController.swift; path = CGSSGuide/Toolbox/View/ToolboxTableViewController.swift; sourceTree = SOURCE_ROOT; };
-		122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayNotificationViewController.swift; path = CGSSGuide/Toolbox/View/BirthdayNotificationViewController.swift; sourceTree = SOURCE_ROOT; };
 		122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharIconView.swift; sourceTree = "<group>"; };
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
@@ -181,6 +180,15 @@
 		122EED171D617307008ADE08 /* 921-toolbox-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected.png"; path = "Resource/921-toolbox-selected.png"; sourceTree = "<group>"; };
 		122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@2x.png"; path = "Resource/921-toolbox-selected@2x.png"; sourceTree = "<group>"; };
 		122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@3x.png"; path = "Resource/921-toolbox-selected@3x.png"; sourceTree = "<group>"; };
+		124E47051D654AB700DD0399 /* BirthdayCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayCenter.swift; sourceTree = "<group>"; };
+		124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayCollectionViewCell.swift; sourceTree = "<group>"; };
+		124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayNotificationTableViewCell.swift; sourceTree = "<group>"; };
+		124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayNotificationViewController.swift; sourceTree = "<group>"; };
+		124E470A1D654AB700DD0399 /* CharInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoViewController.swift; sourceTree = "<group>"; };
+		124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewCell.swift; sourceTree = "<group>"; };
+		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
+		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
+		124E471A1D654C9A00DD0399 /* ToolboxList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ToolboxList.plist; sourceTree = "<group>"; };
 		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
@@ -282,10 +290,6 @@
 		1282EE711D011A8F0024318C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
-		12CFE88D1D61C5C200143250 /* BirthdayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayCollectionViewCell.swift; sourceTree = "<group>"; };
-		12CFE88F1D61D94E00143250 /* BirthdayNotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayNotificationTableViewCell.swift; sourceTree = "<group>"; };
-		12CFE8951D62B48600143250 /* BirthdayCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayCenter.swift; path = CGSSGuide/Toolbox/View/BirthdayCenter.swift; sourceTree = SOURCE_ROOT; };
-		12CFE8971D62B71C00143250 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaultsExtension.swift; path = CGSSGuide/Toolbox/View/NSUserDefaultsExtension.swift; sourceTree = SOURCE_ROOT; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,7 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				122EECC81D5DC516008ADE08 /* UIViewExtension.swift */,
-				12CFE8971D62B71C00143250 /* NSUserDefaultsExtension.swift */,
+				124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -317,38 +321,32 @@
 		122EECDC1D5EF9A1008ADE08 /* Toolbox */ = {
 			isa = PBXGroup;
 			children = (
-				122EECDD1D5EF9CF008ADE08 /* Controller */,
-				122EECDE1D5EF9CF008ADE08 /* Model */,
-				122EECDF1D5EF9CF008ADE08 /* View */,
+				124E47041D654AB700DD0399 /* BirthdayNotification */,
+				124E47091D654AB700DD0399 /* CharInfo */,
+				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
+				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
+				124E471A1D654C9A00DD0399 /* ToolboxList.plist */,
 			);
 			path = Toolbox;
 			sourceTree = "<group>";
 		};
-		122EECDD1D5EF9CF008ADE08 /* Controller */ = {
+		124E47041D654AB700DD0399 /* BirthdayNotification */ = {
 			isa = PBXGroup;
 			children = (
-				122EECE21D5F18D7008ADE08 /* ToolboxTableViewController.swift */,
-				122EECE41D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift */,
+				124E47051D654AB700DD0399 /* BirthdayCenter.swift */,
+				124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */,
+				124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */,
+				124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */,
 			);
-			path = Controller;
+			path = BirthdayNotification;
 			sourceTree = "<group>";
 		};
-		122EECDE1D5EF9CF008ADE08 /* Model */ = {
+		124E47091D654AB700DD0399 /* CharInfo */ = {
 			isa = PBXGroup;
 			children = (
-				12CFE8951D62B48600143250 /* BirthdayCenter.swift */,
+				124E470A1D654AB700DD0399 /* CharInfoViewController.swift */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		122EECDF1D5EF9CF008ADE08 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				122EECE01D5EF9F9008ADE08 /* ToolboxTableViewCell.swift */,
-				12CFE88D1D61C5C200143250 /* BirthdayCollectionViewCell.swift */,
-				12CFE88F1D61D94E00143250 /* BirthdayNotificationTableViewCell.swift */,
-			);
-			path = View;
+			path = CharInfo;
 			sourceTree = "<group>";
 		};
 		125164B61D5A0426001D66FC /* InGame */ = {
@@ -798,6 +796,7 @@
 				127713311D633D0E00B65473 /* 433-x@2x.png in Resources */,
 				1269E9491D5209A40071AD7F /* 748-heart-toolbar-selected.png in Resources */,
 				1269E9521D5209A40071AD7F /* 889-sort-descending-toolbar.png in Resources */,
+				124E471B1D654C9A00DD0399 /* ToolboxList.plist in Resources */,
 				1269E9A81D520A960071AD7F /* 740-gear@3x.png in Resources */,
 				1269E9A61D520A960071AD7F /* 740-gear.png in Resources */,
 				121C78DF1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png in Resources */,
@@ -881,14 +880,15 @@
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
+				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
+				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
-				12CFE8901D61D94E00143250 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
@@ -899,20 +899,21 @@
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,
+				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				122EECCB1D5DE5CB008ADE08 /* CGSSGridLabel.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
-				12CFE8961D62B48600143250 /* BirthdayCenter.swift in Sources */,
+				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
 				126B5BEC1D5C1942004261C6 /* TeamLeaderTableViewCell.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
-				12CFE8981D62B71C00143250 /* NSUserDefaultsExtension.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
 				1269EA171D520D370071AD7F /* CGSSTool.swift in Sources */,
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
+				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
@@ -921,22 +922,21 @@
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
-				122EECE31D5F18D7008ADE08 /* ToolboxTableViewController.swift in Sources */,
-				122EECE11D5EF9F9008ADE08 /* ToolboxTableViewCell.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
-				122EECE51D5F1C3A008ADE08 /* BirthdayNotificationViewController.swift in Sources */,
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
-				12CFE88E1D61C5C200143250 /* BirthdayCollectionViewCell.swift in Sources */,
+				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
+				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
+				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
@@ -1079,6 +1079,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1103,6 +1104,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

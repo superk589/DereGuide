@@ -10,9 +10,9 @@ import UIKit
 
 class ToolboxTableViewController: BaseTableViewController {
     
-    let dataSource = ["偶像生日提醒"]
-    var viewControllerNames = ["BirthdayNotificationViewController"]
-    var iconIds = ["200247"]
+    let dataSource = ["偶像生日提醒", "角色信息查看"]
+    var viewControllerNames = ["BirthdayNotificationViewController", "CharInfoViewController"]
+    var iconIds = ["200247", "300151"]
     override func viewDidLoad() {
         super.viewDidLoad()
         

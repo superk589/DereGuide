@@ -99,11 +99,11 @@ class BirthdayNotificationViewController: UITableViewController {
     func refreshData() {
         if NSUserDefaults.standardUserDefaults().shouldPostBirthdayNotice {
             (UIApplication.sharedApplication().delegate as! AppDelegate).registerAPNS()
-            if UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None {
-                let alert = UIAlertController.init(title: "警告", message: "CGSSGuide的通知被禁用了，请前往手机设置中打开", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
+            /*if UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None {
+             let alert = UIAlertController.init(title: "警告", message: "CGSSGuide的通知被禁用了，请前往手机设置中打开", preferredStyle: .Alert)
+             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+             self.presentViewController(alert, animated: true, completion: nil)
+             }*/
             BirthdayCenter.defaultCenter.scheduleNotifications()
         } else {
             BirthdayCenter.defaultCenter.removeNotification()
