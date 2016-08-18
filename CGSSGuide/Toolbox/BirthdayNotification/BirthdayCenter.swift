@@ -20,7 +20,7 @@ class BirthdayCenter: NSObject {
             for char in self.getRecent(1, endDays: 30) {
                 let localNotification = UILocalNotification()
                 localNotification.fireDate = self.getNextBirthday(char)
-                localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birth_month!)月\(char.birth_day!)日)"
+                localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birthMonth!)月\(char.birthDay!)日)"
                 localNotification.category = "Birthday"
                 UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
             }
@@ -72,10 +72,10 @@ class BirthdayCenter: NSObject {
         dateformatter.dateFormat = "yyyyMMdd"
         dateformatter.timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
         let dateString: String
-        if nowComp.month > char.birth_month! || (nowComp.month == char.birth_month! && nowComp.day > char.birth_day!) {
-            dateString = String.init(format: "%04d%02d%02d", nowComp.year + 1, char.birth_month!, char.birth_day!)
+        if nowComp.month > char.birthMonth! || (nowComp.month == char.birthMonth! && nowComp.day > char.birthDay!) {
+            dateString = String.init(format: "%04d%02d%02d", nowComp.year + 1, char.birthMonth!, char.birthDay!)
         } else {
-            dateString = String.init(format: "%04d%02d%02d", nowComp.year, char.birth_month!, char.birth_day!)
+            dateString = String.init(format: "%04d%02d%02d", nowComp.year, char.birthMonth!, char.birthDay!)
         }
         let date = dateformatter.dateFromString(dateString)
         return date!

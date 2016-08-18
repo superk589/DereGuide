@@ -175,7 +175,7 @@ class BaseCardTableViewController: RefreshableTableViewController {
         cell.rarityLabel.text = card.rarity?.rarityString ?? ""
         
         // 显示主动技能类型
-        cell.skillLabel.text = card.skill?.skill_type ?? ""
+        cell.skillLabel.text = card.skill?.skillType ?? ""
         
         // 显示title
         cell.titleLabel.text = card.title ?? ""

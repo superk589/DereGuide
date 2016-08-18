@@ -10,8 +10,8 @@ import Foundation
 
 public class CGSSFavoriteManager: NSObject {
     public static let defaultManager = CGSSFavoriteManager()
-    static let favoriteCardsFilePath = NSHomeDirectory()+"/Documents/favoriteCards.plist"
-    var favoriteCards:[Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
+    static let favoriteCardsFilePath = NSHomeDirectory() + "/Documents/favoriteCards.plist"
+    var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCardsToFile()
         }
@@ -25,17 +25,17 @@ public class CGSSFavoriteManager: NSObject {
         (favoriteCards as NSArray).writeToFile(CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }
     
-    public func addFavoriteCard(card:CGSSCard, callBack: ((String)->Void)? ) {
+    func addFavoriteCard(card: CGSSCard, callBack: ((String) -> Void)?) {
         self.favoriteCards.append(card.id!)
         callBack?("收藏成功")
     }
-    public func removeFavoriteCard(card:CGSSCard, callBack: ((String)->Void)? ) {
+    func removeFavoriteCard(card: CGSSCard, callBack: ((String) -> Void)?) {
         if let index = favoriteCards.indexOf(card.id!) {
             self.favoriteCards.removeAtIndex(index)
         }
         callBack?("取消收藏成功")
     }
-    public func contains(cardId:Int) -> Bool {
+    public func contains(cardId: Int) -> Bool {
         return favoriteCards.contains(cardId)
     }
 }

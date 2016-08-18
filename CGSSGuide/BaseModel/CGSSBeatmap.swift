@@ -131,7 +131,7 @@ public class CGSSBeatmap: CGSSBaseModel {
     
     func getCriticalPointNoteIndexes() -> [Int] {
         var arr = [Int]()
-        for i in CGSSTool.criticalPercent {
+        for i in CGSSGlobal.criticalPercent {
             arr.append(Int(floor(Float(numberOfNotes * i) / 100)))
         }
         return arr

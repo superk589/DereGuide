@@ -108,10 +108,10 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                 let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
                 var urls = [NSURL]()
                 
-                //所有卡片大图和头像图
+                // 所有卡片大图和头像图
                 for card in cards {
-                    if card.has_spread! {
-                        let url = NSURL.init(string: card.spread_image_ref!)
+                    if card.hasSpread! {
+                        let url = NSURL.init(string: card.spreadImageRef!)
                         if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
                             urls.append(url!)
                         }
@@ -122,7 +122,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                     }
                 }
                 
-                //所有歌曲封面图
+                // 所有歌曲封面图
                 let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
                 for live in lives {
                     let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
@@ -183,7 +183,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     func postReview() {
-        let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSTool.appid)"
+        let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
         UIApplication.sharedApplication().openURL(NSURL.init(string: url)!)
     }
     

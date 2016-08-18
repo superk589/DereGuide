@@ -46,11 +46,11 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         title.textColor = UIColor.lightGrayColor()
         title.textAlignment = .Left
         
-        cardName = UILabel.init(frame: CGRectMake(68, originY, CGSSTool.width - 90, 18))
+        cardName = UILabel.init(frame: CGRectMake(68, originY, CGSSGlobal.width - 90, 18))
         cardName.font = UIFont.systemFontOfSize(16)
         cardName.textAlignment = .Left
         
-        let detail = UILabel.init(frame: CGRectMake(CGSSTool.width - 22, originY, 12, 18))
+        let detail = UILabel.init(frame: CGRectMake(CGSSGlobal.width - 22, originY, 12, 18))
         detail.text = ">"
         detail.textColor = UIColor.lightGrayColor()
         
@@ -75,7 +75,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         if skillView != nil {
             return
         }
-        skillView = UIView.init(frame: CGRectMake(68, originY, CGSSTool.width - 78, 0))
+        skillView = UIView.init(frame: CGRectMake(68, originY, CGSSGlobal.width - 78, 0))
         
         let skillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 35, 17))
         skillStaticDesc.text = "特技:"
@@ -138,7 +138,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         if leaderSkillView != nil {
             return
         }
-        leaderSkillView = UIView.init(frame: CGRectMake(68, originY, CGSSTool.width - 78, 0))
+        leaderSkillView = UIView.init(frame: CGRectMake(68, originY, CGSSGlobal.width - 78, 0))
         let leaderSkillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 65, 17))
         leaderSkillStaticDesc.text = "队长技能:"
         leaderSkillStaticDesc.font = UIFont.systemFontOfSize(14)
@@ -173,7 +173,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             skillLevelTF.hidden = false
             skillLevelStaticDesc.hidden = false
             skillLevelTF.text = String(skillLevel!)
-            skillName.text = skill!.skill_name
+            skillName.text = skill!.skillName
             skillDesc.fwidth = skillView.fwidth
             skillDesc.text = skill!.getExplainByLevel(skillLevel!)
             skillDesc.sizeToFit()
@@ -192,7 +192,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView.fy = originY
         if leaderSkill != nil {
             leaderSkillName.text = leaderSkill!.name
-            leaderSkillDesc.text = leaderSkill!.explain_en
+            leaderSkillDesc.text = leaderSkill!.explainEn
             leaderSkillDesc.fwidth = leaderSkillView.fwidth
             leaderSkillDesc.sizeToFit()
         } else {
@@ -214,13 +214,13 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.setupSkillView()
             self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
             self.setupLeaderSkillView()
-            self.initLeaderSkillViewWith(card.leader_skill)
+            self.initLeaderSkillViewWith(card.leaderSkill)
         case .Sub:
             self.setupSkillView()
             self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
         case .Friend:
             self.setupLeaderSkillView()
-            self.initLeaderSkillViewWith(card.leader_skill)
+            self.initLeaderSkillViewWith(card.leaderSkill)
         }
         contentView.fheight = max(originY, icon.fheight + icon.fy)
     }

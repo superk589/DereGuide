@@ -51,8 +51,8 @@ class CardDetailView: UIView {
         self.backgroundColor = UIColor.whiteColor()
         // self.bounces = false
         // 全尺寸大图视图
-        let fullImageHeigth = CGSSTool.width / CGSSTool.fullImageWidth * CGSSTool.fullImageHeight
-        fullImageView = CGSSImageView(frame: CGRectMake(0, 0, CGSSTool.width, fullImageHeigth))
+        let fullImageHeigth = CGSSGlobal.width / CGSSGlobal.fullImageWidth * CGSSGlobal.fullImageHeight
+        fullImageView = CGSSImageView(frame: CGRectMake(0, 0, CGSSGlobal.width, fullImageHeigth))
         fullImageView?.userInteractionEnabled = true
         addSubview(fullImageView!)
         
@@ -66,16 +66,16 @@ class CardDetailView: UIView {
         rarityLabel.font = UIFont.systemFontOfSize(10)
         
 //        skillLabel = UILabel()
-//        skillLabel.frame = CGRectMake(CGSSTool.width - 150, 5, 140, 10)
+//        skillLabel.frame = CGRectMake(CGSSGlobal.width - 150, 5, 140, 10)
 //        skillLabel.font = UIFont.systemFontOfSize(10)
 //        skillLabel.textAlignment = .Right
         
         cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRectMake(68, originY + 27, CGSSTool.width - 78, 16)
+        cardNameLabel.frame = CGRectMake(68, originY + 27, CGSSGlobal.width - 78, 16)
         cardNameLabel.font = UIFont.systemFontOfSize(16)
         
         titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(98, originY + 5, CGSSTool.width - 150, 10)
+        titleLabel.frame = CGRectMake(98, originY + 5, CGSSGlobal.width - 150, 10)
         titleLabel.font = UIFont.systemFontOfSize(10)
 //        titleLabel.layer.borderWidth = 1/UIScreen.mainScreen().scale
 //        titleLabel.layer.borderColor = UIColor.blackColor().CGColor
@@ -89,7 +89,7 @@ class CardDetailView: UIView {
         originY = originY + topSpace + 48
         
         // let attContentView = UIView()
-        // attContentView.frame = CGRectMake(-1, originY, CGSSTool.width+2, 109)
+        // attContentView.frame = CGRectMake(-1, originY, CGSSGlobal.width+2, 109)
         let descLabel1 = UILabel()
         descLabel1.frame = CGRectMake(10, originY, 80, 14)
         descLabel1.textColor = UIColor.blackColor()
@@ -101,7 +101,7 @@ class CardDetailView: UIView {
         
         originY = originY + topSpace + 14
         
-        attGridView = CGSSGridLabel(frame: CGRectMake(10, originY, CGSSTool.width - 20, 70), rows: 5, columns: 6)
+        attGridView = CGSSGridLabel(frame: CGRectMake(10, originY, CGSSGlobal.width - 20, 70), rows: 5, columns: 6)
         // attGridView.layer.borderColor = UIColor.blackColor().CGColor
         // attGridView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // attContentView.addSubview(attGridView)
@@ -116,7 +116,7 @@ class CardDetailView: UIView {
         
         // 属性排名表格
         // let rankContentView = UIView()
-        // rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 81 + (1 / UIScreen.mainScreen().scale))
+        // rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 81 + (1 / UIScreen.mainScreen().scale))
         let descLabel2 = UILabel()
         descLabel2.frame = CGRectMake(10, originY, 80, 14)
         descLabel2.textColor = UIColor.blackColor()
@@ -127,7 +127,7 @@ class CardDetailView: UIView {
         addSubview(descLabel2)
         originY = originY + topSpace + 14
         
-        rankGridView = CGSSGridLabel(frame: CGRectMake(10, originY, CGSSTool.width - 20, 42), rows: 3, columns: 5)
+        rankGridView = CGSSGridLabel(frame: CGRectMake(10, originY, CGSSGlobal.width - 20, 42), rows: 3, columns: 5)
         // rankContentView.addSubview(rankGridView)
         addSubview(rankGridView)
         
@@ -146,19 +146,19 @@ class CardDetailView: UIView {
     }
     
     convenience init() {
-        let frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64)
+        let frame = CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64)
         self.init(frame: frame)
     }
     
     func setWithoutSpreadImage() {
         self.bounds = CGRectMake(-(fullImageView?.frame.size.height)!, 0, 0, 0)
-        // self.bounds.origin.y += 1000 //CGSSTool.fullImageWidth/CGSSTool.width*CGSSTool.fullImageHeight
+        // self.bounds.origin.y += 1000 //CGSSGlobal.fullImageWidth/CGSSGlobal.width*CGSSGlobal.fullImageHeight
         // self.contentSize
     }
     
     func setSkillContentView(skill: CGSSSkill) {
         // let skillContentView = UIView()
-        // skillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 129 + (1 / UIScreen.mainScreen().scale))
+        // skillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 129 + (1 / UIScreen.mainScreen().scale))
         let descLabel3 = UILabel()
         descLabel3.frame = CGRectMake(10, originY, 50, 14)
         descLabel3.textColor = UIColor.blackColor()
@@ -175,9 +175,9 @@ class CardDetailView: UIView {
 //        skillContentView.addSubview(descLabel4)
         
         skillNameLabel = UILabel()
-        skillNameLabel.frame = CGRectMake(90, originY, CGSSTool.width - 95, 14)
+        skillNameLabel.frame = CGRectMake(90, originY, CGSSGlobal.width - 95, 14)
         skillNameLabel.font = UIFont.systemFontOfSize(14)
-        skillNameLabel.text = skill.skill_name
+        skillNameLabel.text = skill.skillName
         // skillContentView.addSubview(skillNameLabel)
         addSubview(skillNameLabel)
 //        skillTypeLabel = UILabel()
@@ -192,14 +192,14 @@ class CardDetailView: UIView {
         skillDescriptionLabel.lineBreakMode = .ByCharWrapping
         skillDescriptionLabel.font = UIFont.systemFontOfSize(12)
         skillDescriptionLabel.textColor = UIColor.darkGrayColor()
-        skillDescriptionLabel.frame = CGRectMake(10, originY, CGSSTool.width - 20, 45)
-        skillDescriptionLabel.text = skill.explain_en
+        skillDescriptionLabel.frame = CGRectMake(10, originY, CGSSGlobal.width - 20, 45)
+        skillDescriptionLabel.text = skill.explainEn
         skillDescriptionLabel.sizeToFit()
         // skillContentView.addSubview(skillDescriptionLabel)
         addSubview(skillDescriptionLabel)
         
         originY = originY + topSpace + skillDescriptionLabel.frame.height
-        skillProcGridView = CGSSGridLabel.init(frame: CGRectMake(10, originY, CGSSTool.width - 20, 42), rows: 3, columns: 5)
+        skillProcGridView = CGSSGridLabel.init(frame: CGRectMake(10, originY, CGSSGlobal.width - 20, 42), rows: 3, columns: 5)
         // skillContentView.addSubview(skillProcGridView)
         // skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         // skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
@@ -207,10 +207,10 @@ class CardDetailView: UIView {
         addSubview(skillProcGridView)
         
         var procGridStrings = [[String]]()
-        let procChanceMax = Double((skill.proc_chance?.1)!) / 100
-        let procChanceMin = Double((skill.proc_chance?.0)!) / 100
-        let durationMax = Double((skill.effect_length?.1)!) / 100
-        let durationMin = Double((skill.effect_length?.0)!) / 100
+        let procChanceMax = Double((skill.procChance[1])) / 100
+        let procChanceMin = Double((skill.procChance[0])) / 100
+        let durationMax = Double((skill.effectLength[1])) / 100
+        let durationMin = Double((skill.effectLength[0])) / 100
         procGridStrings.append(["  ", "触发几率%", "持续时间s", "最大覆盖率%", "平均覆盖率%"])
         procGridStrings.append(["Lv.1", String(format: "%.2f", procChanceMin), String(format: "%.2f", durationMin)
             , String(format: "%.2f", durationMin / Double(skill.condition!) * 100), String(format: "%.2f", durationMin / Double(skill.condition!) * procChanceMin)])
@@ -227,7 +227,7 @@ class CardDetailView: UIView {
     
     func setLeaderSkillContentView(leaderSkill: CGSSLeaderSkill) {
         // let leaderSkillContentView = UIView()
-        // leaderSkillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 69 + (1 / UIScreen.mainScreen().scale))
+        // leaderSkillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 69 + (1 / UIScreen.mainScreen().scale))
         let descLabel4 = UILabel()
         descLabel4.frame = CGRectMake(10, originY, 80, 14)
         descLabel4.textColor = UIColor.blackColor()
@@ -245,7 +245,7 @@ class CardDetailView: UIView {
         // skillContentView.addSubview(descLabel4)
         
         leaderSkillNameLabel = UILabel()
-        leaderSkillNameLabel.frame = CGRectMake(90, originY, CGSSTool.width - 100, 14)
+        leaderSkillNameLabel.frame = CGRectMake(90, originY, CGSSGlobal.width - 100, 14)
         leaderSkillNameLabel.font = UIFont.systemFontOfSize(14)
         leaderSkillNameLabel.text = leaderSkill.name
         
@@ -263,8 +263,8 @@ class CardDetailView: UIView {
         leaderSkillDescriptionLabel.lineBreakMode = .ByCharWrapping
         leaderSkillDescriptionLabel.font = UIFont.systemFontOfSize(12)
         leaderSkillDescriptionLabel.textColor = UIColor.darkGrayColor()
-        leaderSkillDescriptionLabel.frame = CGRectMake(10, originY, CGSSTool.width - 20, 30)
-        leaderSkillDescriptionLabel.text = leaderSkill.explain_en
+        leaderSkillDescriptionLabel.frame = CGRectMake(10, originY, CGSSGlobal.width - 20, 30)
+        leaderSkillDescriptionLabel.text = leaderSkill.explainEn
         leaderSkillDescriptionLabel.sizeToFit()
         
         // leaderSkillDescriptionLabel.contentMode = .Top //顶端左对齐
@@ -285,7 +285,7 @@ class CardDetailView: UIView {
     // 设置进化信息视图
     func setEvolutionContentView() {
         // let evolutionContentView = UIView()
-        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width+2, 92 + (1 / UIScreen.mainScreen().scale))
+        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let descLabel4 = UILabel()
         descLabel4.frame = CGRectMake(10, originY, 80, 14)
         descLabel4.textColor = UIColor.blackColor()
@@ -399,7 +399,7 @@ class CardDetailView: UIView {
     // 设置出售价格视图
     func setPriceContentView() {
         let priceContentView = UIView()
-        priceContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSTool.width + 2, 51 + (1 / UIScreen.mainScreen().scale))
+        priceContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width + 2, 51 + (1 / UIScreen.mainScreen().scale))
         let descLabel4 = UILabel()
         descLabel4.frame = CGRectMake(10, 10, 80, 14)
         descLabel4.textColor = UIColor.blackColor()
@@ -426,7 +426,7 @@ class CardDetailView: UIView {
     }
     
     private func drawSectionLine(positionY: CGFloat) {
-        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSTool.width, 1 / UIScreen.mainScreen().scale))
+        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
         view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
         self.addSubview(view)

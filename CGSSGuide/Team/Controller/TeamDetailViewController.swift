@@ -22,8 +22,8 @@ class TeamDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
         self.automaticallyAdjustsScrollViewInsets = false
-        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64))
-        teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
+        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64))
+        teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
         // teamDV.initWith(team)
         teamDV.delegate = self
         sv.addSubview(teamDV)

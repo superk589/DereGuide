@@ -35,14 +35,14 @@ class SongTableViewCell: UITableViewCell {
         
         typeIcon = UIImageView.init(frame: CGRectMake(86, 10, 20, 20))
         nameLabel = UILabel()
-        nameLabel.frame = CGRectMake(111, 10, CGSSTool.width - 121, 20)
+        nameLabel.frame = CGRectMake(111, 10, CGSSGlobal.width - 121, 20)
         nameLabel.font = UIFont.boldSystemFontOfSize(18)
         
         descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRectMake(86, 35, CGSSTool.width - 96, 16)
+        descriptionLabel.frame = CGRectMake(86, 35, CGSSGlobal.width - 96, 16)
         descriptionLabel.font = UIFont.init(name: "menlo", size: 14)
         
-        let width = floor((CGSSTool.width - 96 - 40) / 5)
+        let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space:CGFloat = 10
         let fontSize:CGFloat = 16
         let height:CGFloat = 16
@@ -56,7 +56,7 @@ class SongTableViewCell: UITableViewCell {
         debutButton = UIButton()
         debutButton.frame = CGRectMake(originX, originY, width, height)
         debutButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
-        debutButton.backgroundColor = CGSSTool.debutColor
+        debutButton.backgroundColor = CGSSGlobal.debutColor
         debutButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         //debutButton.layer.cornerRadius = 6
         //debutButton.layer.masksToBounds = true
@@ -66,7 +66,7 @@ class SongTableViewCell: UITableViewCell {
         regularButton = UIButton()
         regularButton.frame = CGRectMake(originX + width + space, originY, width, height )
         regularButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
-        regularButton.backgroundColor = CGSSTool.regularColor
+        regularButton.backgroundColor = CGSSGlobal.regularColor
         regularButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         //regularButton.layer.cornerRadius = 6
         //regularButton.layer.masksToBounds = true
@@ -77,7 +77,7 @@ class SongTableViewCell: UITableViewCell {
         proButton = UIButton()
         proButton.frame = CGRectMake(originX + 2 * (width + space), originY, width, height )
         proButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
-        proButton.backgroundColor = CGSSTool.proColor
+        proButton.backgroundColor = CGSSGlobal.proColor
         proButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         //        proButton.layer.cornerRadius = 6
         //        proButton.layer.masksToBounds = true
@@ -88,7 +88,7 @@ class SongTableViewCell: UITableViewCell {
         masterButton = UIButton()
         masterButton.frame = CGRectMake(originX + 3 * (width + space), originY, width, height )
         masterButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
-        masterButton.backgroundColor = CGSSTool.masterColor
+        masterButton.backgroundColor = CGSSGlobal.masterColor
         masterButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         //masterButton.layer.cornerRadius = 6
         //masterButton.layer.masksToBounds = true
@@ -99,9 +99,9 @@ class SongTableViewCell: UITableViewCell {
         masterPlusButton = UIButton()
         masterPlusButton.frame = CGRectMake(originX + 4 * (width + space), originY, width, height )
         masterPlusButton.titleLabel?.font = UIFont.init(name: "menlo", size: fontSize)
-        masterPlusButton.backgroundColor = CGSSTool.masterPlusColor
+        masterPlusButton.backgroundColor = CGSSGlobal.masterPlusColor
         masterPlusButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
-        //masterPlusButton.tintColor = CGSSTool.masterPlusColor
+        //masterPlusButton.tintColor = CGSSGlobal.masterPlusColor
         //masterPlusButton.layer.cornerRadius = 6
         //masterPlusButton.layer.masksToBounds = true
         //masterPlusButton.textAlignment = .Center

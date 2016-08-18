@@ -10,7 +10,7 @@ import UIKit
 
 class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
-    static let widthInset: CGFloat = ceil(CGSSTool.width / 7.2) * 2
+    static let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2) * 2
     static let sectionHeight: CGFloat = 245
     static let heightInset: CGFloat = 60
     static let noteRadius: CGFloat = 7
@@ -19,7 +19,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     var notes: [CGSSBeatmap.Note]!
     var bpm: Int!
     var interval: CGFloat {
-        return (CGSSTool.width - 2 * BeatmapView.widthInset) / 4
+        return (CGSSGlobal.width - 2 * BeatmapView.widthInset) / 4
     }
     
     var secScale: CGFloat {
@@ -57,7 +57,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 let attDict = [NSFontAttributeName: UIFont.systemFontOfSize(12), NSForegroundColorAttributeName: UIColor.darkGrayColor()]
                 sectionNumber.drawAtPoint(CGPointMake(BeatmapView.widthInset / 2 - 25, pointY - 7), withAttributes: attDict)
                 let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
-                comboNumber.drawAtPoint(CGPointMake(CGSSTool.width - BeatmapView.widthInset / 2 + 4, pointY - 7), withAttributes: attDict)
+                comboNumber.drawAtPoint(CGPointMake(CGSSGlobal.width - BeatmapView.widthInset / 2 + 4, pointY - 7), withAttributes: attDict)
             }
             else if i % 2 == 0 { UIColor.lightGrayColor().set() }
             else { UIColor.lightGrayColor().colorWithAlphaComponent(0.5).set() }
@@ -246,18 +246,18 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         self.bpm = bpm
         switch type {
         case 1:
-            self.strokeColor = CGSSTool.cuteColor
+            self.strokeColor = CGSSGlobal.cuteColor
         case 2:
-            self.strokeColor = CGSSTool.coolColor
+            self.strokeColor = CGSSGlobal.coolColor
         case 3:
-            self.strokeColor = CGSSTool.passionColor
+            self.strokeColor = CGSSGlobal.passionColor
         case 4:
             self.strokeColor = UIColor.darkGrayColor()
         default:
             break
         }
         self.backgroundColor = UIColor.clearColor()
-        self.contentSize = CGSizeMake(CGSSTool.width, secScale * CGFloat(beatmap.validSeconds) + 2 * BeatmapView.heightInset)
+        self.contentSize = CGSizeMake(CGSSGlobal.width, secScale * CGFloat(beatmap.validSeconds) + 2 * BeatmapView.heightInset)
         self.contentOffset = CGPointMake(0, self.contentSize.height - self.frame.size.height)
         self.delegate = self
     }
@@ -326,7 +326,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     {
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: BeatmapView.widthInset / 2, y: positionY))
-        path.addLineToPoint(CGPoint(x: CGSSTool.width - BeatmapView.widthInset / 2, y: positionY))
+        path.addLineToPoint(CGPoint(x: CGSSGlobal.width - BeatmapView.widthInset / 2, y: positionY))
         path.lineWidth = lineWidth
         return path
     }

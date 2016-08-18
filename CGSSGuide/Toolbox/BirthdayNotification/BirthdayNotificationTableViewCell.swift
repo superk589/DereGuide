@@ -22,12 +22,12 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
         
 //        let left = UIButton.init(frame: CGRectMake(0, 32, 10, 15))
 //        left.setImage(UIImage.init(named: "765-arrow-left-toolbar"), forState: .Normal)
-//        let right = UIButton.init(frame: CGRectMake(CGSSTool.width - 10, 32, 10, 15))
+//        let right = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 10, 32, 10, 15))
 //        left.setImage(UIImage.init(named: "766-arrow-right-toolbar"), forState: .Normal)
 //        contentView.addSubview(left)
 //        contentView.addSubview(right)
         
-        cv = UICollectionView.init(frame: CGRectMake(0, 0, CGSSTool.width - 0, 79), collectionViewLayout: layout)
+        cv = UICollectionView.init(frame: CGRectMake(0, 0, CGSSGlobal.width - 0, 79), collectionViewLayout: layout)
         cv.backgroundColor = UIColor.whiteColor()
         cv.registerClass(BirthdayCollectionViewCell.self, forCellWithReuseIdentifier: "BirthdayCollectionViewCell")
         cv.showsHorizontalScrollIndicator = false
@@ -51,7 +51,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
         if chars.count == 0 {
             cv.frame = CGRectZero
         } else {
-            cv.frame = CGRectMake(0, 0, CGSSTool.width, 79)
+            cv.frame = CGRectMake(0, 0, CGSSGlobal.width, 79)
         }
     }
     

@@ -23,9 +23,9 @@
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
-		<string>1</string>
+		<string>2</string>
 		<key>Minor</key>
-		<string>1</string>
+		<string>0</string>
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>

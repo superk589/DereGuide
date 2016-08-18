@@ -1,6 +1,6 @@
 //
-//  CGSSTool.swift
-//  CGSSFoundation
+//  CGSSGlobal.swift
+//  CGSSGuide
 //
 //  Created by zzk on 16/6/28.
 //  Copyright © 2016年 zzk. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import ReachabilitySwift
 
-public class CGSSTool: NSObject {
+public class CGSSGlobal: NSObject {
     
     // 当前屏幕的宽度和高度常量
     public static let width = UIScreen.mainScreen().bounds.width
@@ -94,6 +94,8 @@ public class CGSSTool: NSObject {
     static var comboFactor: [Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
     
     static var criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
+    
+    static var rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
     
     // 传入0-9999的rate 判断是否触发
     static func isProc(rate: Int) -> Bool {

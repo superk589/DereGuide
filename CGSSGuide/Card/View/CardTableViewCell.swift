@@ -41,19 +41,19 @@ class CardTableViewCell: UITableViewCell {
         rarityLabel.font = UIFont.systemFontOfSize(10)
         
         skillLabel = UILabel()
-        skillLabel.frame = CGRectMake(CGSSTool.width - 150, 10, 140, 10)
+        skillLabel.frame = CGRectMake(CGSSGlobal.width - 150, 10, 140, 10)
         skillLabel.font = UIFont.systemFontOfSize(10)
         skillLabel.textAlignment = .Right
         
         cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRectMake(68, 25, CGSSTool.width - 78, 16)
+        cardNameLabel.frame = CGRectMake(68, 25, CGSSGlobal.width - 78, 16)
         cardNameLabel.font = UIFont.systemFontOfSize(16)
         
         titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(98, 10, CGSSTool.width - 150, 10)
+        titleLabel.frame = CGRectMake(98, 10, CGSSGlobal.width - 150, 10)
         titleLabel.font = UIFont.systemFontOfSize(10)
         
-        let width = (CGSSTool.width - 78) / 5
+        let width = (CGSSGlobal.width - 78) / 5
         let fontSize: CGFloat = 12
         let height: CGFloat = 12
         let originX: CGFloat = 68
@@ -62,25 +62,25 @@ class CardTableViewCell: UITableViewCell {
         lifeLabel = UILabel()
         lifeLabel.frame = CGRectMake(originX, originY, width, height)
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        lifeLabel.textColor = CGSSTool.lifeColor
+        lifeLabel.textColor = CGSSGlobal.lifeColor
         lifeLabel.textAlignment = .Right
         
         vocalLabel = UILabel()
         vocalLabel.frame = CGRectMake(originX + width, originY, width, height)
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        vocalLabel.textColor = CGSSTool.vocalColor
+        vocalLabel.textColor = CGSSGlobal.vocalColor
         vocalLabel.textAlignment = .Right
         
         danceLabel = UILabel()
         danceLabel.frame = CGRectMake(originX + 2 * width, originY, width, height)
         danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        danceLabel.textColor = CGSSTool.danceColor
+        danceLabel.textColor = CGSSGlobal.danceColor
         danceLabel.textAlignment = .Right
         
         visualLabel = UILabel()
         visualLabel.frame = CGRectMake(originX + 3 * width, originY, width, height)
         visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        visualLabel.textColor = CGSSTool.visualColor
+        visualLabel.textColor = CGSSGlobal.visualColor
         visualLabel.textAlignment = .Right
         
         totalLabel = UILabel()

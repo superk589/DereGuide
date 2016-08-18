@@ -17,7 +17,7 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64))
+        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64))
         
         // 设置背景颜色为白色 防止导航动画时效果卡顿
         view.backgroundColor = UIColor.whiteColor()
@@ -27,7 +27,7 @@ class CardDetailViewController: UIViewController {
         view.addSubview(fullScreenView!)
         view.addSubview(sv)
         
-        cardDV = CardDetailView.init(frame: CGRectMake(0, 0, CGSSTool.width, 0))
+        cardDV = CardDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
         cardDV?.fullImageView?.delegate = self
         // 关闭自动躲避导航栏
         self.automaticallyAdjustsScrollViewInsets = false
@@ -50,14 +50,14 @@ class CardDetailViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = leftItem
         
-        if card.has_spread! {
+        if card.hasSpread! {
             cardDV?.fullImageView?.setIndicator()
-            cardDV?.fullImageView?.setCustomImageWithURL(NSURL(string: card.spread_image_ref!)!)
+            cardDV?.fullImageView?.setCustomImageWithURL(NSURL(string: card.spreadImageRef!)!)
         } else {
             cardDV?.setWithoutSpreadImage()
         }
         
-        cardDV?.cardNameLabel.text = card.name_only! + "  " + (card.chara?.conventional)!
+        cardDV?.cardNameLabel.text = card.nameOnly! + "  " + (card.chara?.conventional)!
         cardDV?.titleLabel.text = card.title
         cardDV?.rarityLabel.text = card.rarity?.rarityString
         
@@ -67,16 +67,16 @@ class CardDetailViewController: UIViewController {
         // 设置属性列表
         var attGridStrings = [[String]]()
         attGridStrings.append(["  ", "HP", "Vocal", "Dance", "Visual", "Total"])
-        attGridStrings.append(["Lv.1", String(card.hp_min!), String(card.vocal_min!), String(card.dance_min!), String(card.visual_min!), String(card.overall_min!)])
-        attGridStrings.append(["Lv.\(card.rarity!.base_max_level)", String(card.hp_max!), String(card.vocal_max!), String(card.dance_max!), String(card.visual_max!), String(card.overall_max!)])
-        attGridStrings.append(["Bonus", String(card.bonus_hp!), String(card.bonus_vocal!), String(card.bonus_dance!), String(card.bonus_visual!), String(card.overall_bonus!)])
+        attGridStrings.append(["Lv.1", String(card.hpMin), String(card.vocalMin), String(card.danceMin), String(card.visualMin), String(card.overallMin)])
+        attGridStrings.append(["Lv.\(card.rarity.baseMaxLevel)", String(card.hpMax), String(card.vocalMax), String(card.danceMax), String(card.visualMax), String(card.overallMax)])
+        attGridStrings.append(["Bonus", String(card.bonusHp), String(card.bonusVocal), String(card.bonusDance), String(card.bonusVisual), String(card.overallBonus)])
         attGridStrings.append(["Total", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
         
         cardDV?.attGridView.setGridContent(attGridStrings)
         
         var colors = [[UIColor]]()
         
-        let colorArray = [CGSSTool.allTypeColor, CGSSTool.lifeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
+        let colorArray = [CGSSGlobal.allTypeColor, CGSSGlobal.lifeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
         colors.append(colorArray)
         colors.append(colorArray)
         colors.append(colorArray)
@@ -94,8 +94,8 @@ class CardDetailViewController: UIViewController {
         cardDV?.rankGridView.setGridContent(rankGridStrings)
         
         var colors2 = [[UIColor]]()
-        let colorArray2 = [card.attColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
-        let colorArray3 = [CGSSTool.allTypeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, CGSSTool.allTypeColor]
+        let colorArray2 = [card.attColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
+        let colorArray3 = [CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
         
         colors2.append(colorArray3)
         colors2.append(colorArray2)
@@ -108,15 +108,15 @@ class CardDetailViewController: UIViewController {
         }
         
         // 设置队长技能
-        if let leaderSkill = card.leader_skill {
+        if let leaderSkill = card.leaderSkill {
             cardDV?.setLeaderSkillContentView(leaderSkill)
         }
         
         // 设置进化信息
-        if let evolution_id = card.evolution_id where evolution_id > 0 {
+        if let evolution_id = card.evolutionId where evolution_id > 0 {
             cardDV?.setEvolutionContentView()
-            cardDV?.evolutionFromImageView.setWithCardId(card.id!)
-            cardDV?.evolutionToImageView.setWithCardId(card.evolution_id!, target: self, action: #selector(iconClick))
+            cardDV?.evolutionFromImageView.setWithCardId(card.id)
+            cardDV?.evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
         }
         
         sv.contentSize = cardDV.frame.size

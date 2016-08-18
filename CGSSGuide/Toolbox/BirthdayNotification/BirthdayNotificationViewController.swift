@@ -18,7 +18,7 @@ class BirthdayNotificationViewController: UITableViewController {
         super.viewDidLoad()
         prepareSettingCells()
         prepareChars()
-        headerView = UITableView.init(frame: CGRectMake(0, 0, CGSSTool.width, 87), style: .Plain)
+        headerView = UITableView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 87), style: .Plain)
         headerView.delegate = self
         headerView.dataSource = self
         headerView.allowsSelection = false

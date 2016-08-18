@@ -41,7 +41,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Save, target: self, action: #selector(saveTeam))
         
-        hv.frame = CGRectMake(0, 0, CGSSTool.width, 100)
+        hv.frame = CGRectMake(0, 0, CGSSGlobal.width, 100)
         for i in 0...5 {
             let cell = TeamMemberTableViewCell()
             if i == 0 {
@@ -68,7 +68,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         // 暂时去除header
         // tv.tableHeaderView = hv
         tv.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        tv.frame = CGRectMake(0, 64, CGSSTool.width, CGSSTool.height - 64)
+        tv.frame = CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64)
         tv.delegate = self
         tv.dataSource = self
         // tv.registerClass(TeamMemberTableViewCell.self, forCellReuseIdentifier: "TeamMemberCell")
@@ -196,7 +196,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
                 height += cells[i].contentView.fheight
             }
             UIView.animateWithDuration(0.25, animations: {
-                self.tv.contentOffset = CGPointMake(0, -min(CGSSTool.height - 64 - self.keyBoardHeigt - height, 0))
+                self.tv.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - 64 - self.keyBoardHeigt - height, 0))
             })
             
         }

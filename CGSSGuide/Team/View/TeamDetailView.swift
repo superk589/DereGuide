@@ -56,7 +56,7 @@ class TeamDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         var originY: CGFloat = topSpace
-        let width = CGSSTool.width - 2 * leftSpace
+        let width = CGSSGlobal.width - 2 * leftSpace
         selfLeaderLabel = UILabel.init(frame: CGRectMake(leftSpace, topSpace, width, 55))
         selfLeaderLabel.numberOfLines = 3
         selfLeaderLabel.font = UIFont.systemFontOfSize(14)
@@ -71,7 +71,7 @@ class TeamDetailView: UIView {
             icons.append(icon)
         }
         
-        editTeamButton = UIButton.init(frame: CGRectMake(CGSSTool.width - 40, originY + 7, 30, 30))
+        editTeamButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY + 7, 30, 30))
         editTeamButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         editTeamButton.tintColor = UIColor.lightGrayColor()
         editTeamButton.addTarget(self, action: #selector(editTeam), forControlEvents: .TouchUpInside)
@@ -109,7 +109,7 @@ class TeamDetailView: UIView {
         // backSupportLabel.textColor = UIColor.lightGrayColor()
         backSupportLabel.text = "后援数值: "
         backSupportLabel.textColor = UIColor.darkGrayColor()
-        backSupportTF = UITextField.init(frame: CGRectMake(CGSSTool.width - 150, originY, 140, 17))
+        backSupportTF = UITextField.init(frame: CGRectMake(CGSSGlobal.width - 150, originY, 140, 17))
         backSupportTF.autocorrectionType = .No
         backSupportTF.autocapitalizationType = .None
         backSupportTF.borderStyle = .RoundedRect
@@ -133,7 +133,7 @@ class TeamDetailView: UIView {
         skillListDescLabel.font = UIFont.systemFontOfSize(14)
         skillListDescLabel.textColor = UIColor.blackColor()
         
-        skillShowOrHideButton = UIButton.init(frame: CGRectMake(CGSSTool.width - 40, originY, 22, 22))
+        skillShowOrHideButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY, 22, 22))
         // 让图片总是可以被染色影响
         let image = UIImage.init(named: "764-arrow-down-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
         skillShowOrHideButton.setImage(image, forState: .Normal)
@@ -143,11 +143,11 @@ class TeamDetailView: UIView {
         
         skillListGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 225), rows: 5, columns: 1, textAligment: .Left)
         
-        bottomView = UIView.init(frame: CGRectMake(0, originY, CGSSTool.width, 0))
+        bottomView = UIView.init(frame: CGRectMake(0, originY, CGSSGlobal.width, 0))
         bottomView.backgroundColor = UIColor.whiteColor()
         
         originY = 0
-        let view = UIView.init(frame: CGRectMake(0, originY, CGSSTool.width, 1 / UIScreen.mainScreen().scale))
+        let view = UIView.init(frame: CGRectMake(0, originY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
         view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
         bottomView.addSubview(view)
@@ -160,7 +160,7 @@ class TeamDetailView: UIView {
         
         originY += topSpace + 17
         
-        selectSongLabel = UILabel.init(frame: CGRectMake(40, originY + 9, CGSSTool.width - 80, 30))
+        selectSongLabel = UILabel.init(frame: CGRectMake(40, originY + 9, CGSSGlobal.width - 80, 30))
         selectSongLabel.textColor = UIColor.lightGrayColor()
         selectSongLabel.text = "请选择歌曲"
         selectSongLabel.textAlignment = .Center
@@ -168,7 +168,7 @@ class TeamDetailView: UIView {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectSong))
         selectSongLabel.addGestureRecognizer(tap)
         selectSongLabel.font = UIFont.systemFontOfSize(18)
-        selectSongButton = UIButton.init(frame: CGRectMake(CGSSTool.width - 40, originY + 7, 30, 30))
+        selectSongButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY + 7, 30, 30))
         selectSongButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         selectSongButton.tintColor = UIColor.lightGrayColor()
         selectSongButton.addTarget(self, action: #selector(selectSong), forControlEvents: .TouchUpInside)
@@ -184,7 +184,7 @@ class TeamDetailView: UIView {
         songDiffLabel.textAlignment = .Left
         songDiffLabel.font = UIFont.systemFontOfSize(12)
         
-//        songLengthLabel = UILabel.init(frame: CGRectMake(CGSSTool.width / 2 + leftSpace, originY, width / 2, 18))
+//        songLengthLabel = UILabel.init(frame: CGRectMake(CGSSGlobal.width / 2 + leftSpace, originY, width / 2, 18))
 //        songLengthLabel.textColor = UIColor.darkGrayColor()
 //        songLengthLabel.textAlignment = .Left
 //        songLengthLabel.font = UIFont.systemFontOfSize(12)
@@ -195,7 +195,7 @@ class TeamDetailView: UIView {
         liveTypeDescLable.font = UIFont.systemFontOfSize(14)
         liveTypeDescLable.textColor = UIColor.darkGrayColor()
         
-        liveTypeButton = UIButton.init(frame: CGRectMake(CGSSTool.width - 100, originY, 90, 21))
+        liveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 100, originY, 90, 21))
         liveTypeButton.setTitle("常规模式", forState: .Normal)
         liveTypeButton.titleLabel?.textAlignment = .Right
         liveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
@@ -206,7 +206,7 @@ class TeamDetailView: UIView {
         
         startCalcButton = UIButton.init(frame: CGRectMake(leftSpace, originY, width, 25))
         startCalcButton.setTitle("开始计算", forState: .Normal)
-        startCalcButton.backgroundColor = CGSSTool.danceColor
+        startCalcButton.backgroundColor = CGSSGlobal.danceColor
         startCalcButton.titleLabel?.font = UIFont.systemFontOfSize(18)
         startCalcButton.addTarget(self, action: #selector(startCalc), forControlEvents: .TouchUpInside)
         
@@ -290,7 +290,7 @@ class TeamDetailView: UIView {
         } else {
             bottomView.frame.origin.y = skillListGrid.frame.origin.y
         }
-        frame.size = CGSizeMake(CGSSTool.width, bottomView.frame.size.height + bottomView.frame.origin.y)
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y)
     }
     
     func cardIconClick(icon: CGSSCardIconView) {
@@ -303,10 +303,10 @@ class TeamDetailView: UIView {
             icons[i].setWithCardId((team[i]?.cardRef?.id)!, target: self, action: #selector(cardIconClick))
         }
         if let selfLeaderRef = team.leader.cardRef {
-            selfLeaderLabel.text = "队长技能: \(selfLeaderRef.leader_skill?.name ?? "无")\n\(selfLeaderRef.leader_skill?.explain_en ?? "")"
+            selfLeaderLabel.text = "队长技能: \(selfLeaderRef.leaderSkill?.name ?? "无")\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
-            friendLeaderLabel.text = "好友技能: \(friendLeaderRef.leader_skill?.name ?? "无")\n\(friendLeaderRef.leader_skill?.explain_en ?? "")"
+            friendLeaderLabel.text = "好友技能: \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.explainEn ?? "")"
         }
         
         var upValueStrings = [[String]]()
@@ -343,11 +343,11 @@ class TeamDetailView: UIView {
         upValueStrings.append(upPassionString)
         
         var upValueColors = [[UIColor]]()
-        let colorArray = [UIColor.blackColor(), CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor, UIColor.darkGrayColor(), CGSSTool.lifeColor]
+        let colorArray = [UIColor.blackColor(), CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, UIColor.darkGrayColor(), CGSSGlobal.lifeColor]
         upValueColors.appendContentsOf(Array.init(count: 4, repeatedValue: colorArray))
-        upValueColors[1][0] = CGSSTool.cuteColor
-        upValueColors[2][0] = CGSSTool.coolColor
-        upValueColors[3][0] = CGSSTool.passionColor
+        upValueColors[1][0] = CGSSGlobal.cuteColor
+        upValueColors[2][0] = CGSSGlobal.coolColor
+        upValueColors[3][0] = CGSSGlobal.passionColor
         
         leaderSkillGrid.setGridContent(upValueStrings)
         leaderSkillGrid.setGridColor(upValueColors)
@@ -359,7 +359,7 @@ class TeamDetailView: UIView {
         let skillListColor = [[UIColor]].init(count: 5, repeatedValue: [UIColor.darkGrayColor()])
         for i in 0...4 {
             if let skill = team[i]?.cardRef?.skill {
-                skillListStrings.append([skill.skill_name! + ": Lv.\(team[i]!.skillLevel!)\n" + skill.getExplainByLevel(team[i]!.skillLevel!)])
+                skillListStrings.append([skill.skillName! + ": Lv.\(team[i]!.skillLevel!)\n" + skill.getExplainByLevel(team[i]!.skillLevel!)])
             } else {
                 skillListStrings.append([""])
             }
@@ -368,9 +368,9 @@ class TeamDetailView: UIView {
         skillListGrid.setGridContent(skillListStrings)
         skillListGrid.setGridColor(skillListColor)
         
-        // skillProcGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, scoreGrid.frame.size.height + scoreGrid.frame.origin.y + topSpace, CGSSTool.width - 2 * leftSpace, CGFloat(skillKind) * 14 + 1), rows: skillKind, columns: 3)
+        // skillProcGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, scoreGrid.frame.size.height + scoreGrid.frame.origin.y + topSpace, CGSSGlobal.width - 2 * leftSpace, CGFloat(skillKind) * 14 + 1), rows: skillKind, columns: 3)
         // bottomView.frame.origin.y = skillListGrid.frame.size.height + skillListGrid.frame.origin.y
-        frame.size = CGSizeMake(CGSSTool.width, bottomView.frame.size.height + bottomView.frame.origin.y)
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y)
     }
     
     func updatePresentValueGrid(team: CGSSTeam) {
@@ -400,14 +400,14 @@ class TeamDetailView: UIView {
         presentValueString.append(presentSub6)
         presentValueString.append(presentSub7)
         
-        let colorArray2 = [UIColor.darkGrayColor(), CGSSTool.allTypeColor, CGSSTool.vocalColor, CGSSTool.danceColor, CGSSTool.visualColor]
+        let colorArray2 = [UIColor.darkGrayColor(), CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor]
         presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
-        presentColor[2][0] = CGSSTool.cuteColor
-        presentColor[3][0] = CGSSTool.coolColor
-        presentColor[4][0] = CGSSTool.passionColor
-        presentColor[5][0] = CGSSTool.vocalColor
-        presentColor[6][0] = CGSSTool.danceColor
-        presentColor[7][0] = CGSSTool.visualColor
+        presentColor[2][0] = CGSSGlobal.cuteColor
+        presentColor[3][0] = CGSSGlobal.coolColor
+        presentColor[4][0] = CGSSGlobal.passionColor
+        presentColor[5][0] = CGSSGlobal.vocalColor
+        presentColor[6][0] = CGSSGlobal.danceColor
+        presentColor[7][0] = CGSSGlobal.visualColor
         
         presentValueGrid.setGridContent(presentValueString)
         presentValueGrid.setGridColor(presentColor)
@@ -466,9 +466,9 @@ class TeamDetailView: UIView {
     func updateSongInfo(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         selectSongLabel.hidden = true
         let song = live.musicRef!
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSTool.diffStringFromInt(diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长: \(Int(beatmaps[diff - 1].totalSeconds))秒"
+        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长: \(Int(beatmaps[diff - 1].totalSeconds))秒"
         
-        // songDiffLabel.text = CGSSTool.diffStringFromInt(diff)
+        // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
         songNameLabel.text = live.musicRef?.title
         songNameLabel.textColor = live.getLiveColor()
         // songLengthLabel.text = String(Int(beatmaps[diff - 1].totalSeconds)) + "秒"
@@ -476,7 +476,7 @@ class TeamDetailView: UIView {
     }
     
     private func drawSectionLine(positionY: CGFloat) {
-        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSTool.width, 1 / UIScreen.mainScreen().scale))
+        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
         view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
         self.addSubview(view)

@@ -20,7 +20,7 @@ class ToolboxTableViewCell: UITableViewCell {
     
     func prepare() {
         icon = CGSSCardIconView.init(frame: CGRectMake(10, 10, 48, 48))
-        descLabel = UILabel.init(frame: CGRectMake(68, 25, CGSSTool.width - 78, 18))
+        descLabel = UILabel.init(frame: CGRectMake(68, 25, CGSSGlobal.width - 78, 18))
         descLabel.font = UIFont.systemFontOfSize(16)
         descLabel.textAlignment = .Left
         

@@ -52,11 +52,11 @@ public class CGSSLive: CGSSBaseModel {
     func getLiveColor() -> UIColor {
         switch type! {
         case 1:
-            return CGSSTool.cuteColor
+            return CGSSGlobal.cuteColor
         case 2:
-            return CGSSTool.coolColor
+            return CGSSGlobal.coolColor
         case 3:
-            return CGSSTool.passionColor
+            return CGSSGlobal.passionColor
         default:
             return UIColor.darkTextColor()
         }

@@ -97,7 +97,7 @@ class CGSSImageView: UIImageView {
 //        retry?()
 //    }
     func setCustomImageWithURL(url: NSURL) {
-        if !NSUserDefaults.standardUserDefaults().shouldCacheFullImage && CGSSTool.isMobileNet() && !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
+        if !NSUserDefaults.standardUserDefaults().shouldCacheFullImage && CGSSGlobal.isMobileNet() && !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
             return
         }
         self.activityIndicator?.startAnimating()
@@ -127,10 +127,10 @@ class CGSSImageView: UIImageView {
             self.userInteractionEnabled = false
             UIView.animateWithDuration(0.25) {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(90 / 180 * M_PI))
-                self.frame.size.width = CGSSTool.width
-                self.frame.size.height = CGSSTool.height
-                // self.center = CGPointMake(CGSSTool.width/2, (CGSSTool.width/self.originFrame.size.height*self.originFrame.size.width)/2)
-                self.center = CGPointMake(CGSSTool.width / 2, CGSSTool.height / 2)
+                self.frame.size.width = CGSSGlobal.width
+                self.frame.size.height = CGSSGlobal.height
+                // self.center = CGPointMake(CGSSGlobal.width/2, (CGSSGlobal.width/self.originFrame.size.height*self.originFrame.size.width)/2)
+                self.center = CGPointMake(CGSSGlobal.width / 2, CGSSGlobal.height / 2)
             }
             self.superview?.bringSubviewToFront(self)
             delegate?.beginFullSize()

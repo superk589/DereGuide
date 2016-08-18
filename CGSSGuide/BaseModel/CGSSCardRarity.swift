@@ -7,195 +7,94 @@
 //
 
 import Foundation
+import SwiftyJSON
 
-
-
-
-public class CGSSCardRarity : NSObject{
-    //    "rarity": {
-    public var add_max_level:Int
-    //    "add_max_level": 0,
-    public var add_param:Int
-    //    "add_param": 0,
-    public var base_give_exp:Int
-    public var base_give_money:Int
-    //    "base_give_exp": 1000,
-    //    "base_give_money": 5000,
-    public var base_max_level:Int
-    //    "base_max_level": 60,
-    public var max_love:Int
-    //    "max_love": 100,
-    public var max_star_rank:Int
-    //    "max_star_rank": 20,
-    public var rarity:Int
-    //    "rarity": 5
-    //    ; from 1 = N to 8 = SSR+.
-    //    },
-    public var rarityString:String
-    
-    public init?(value: Int) {
-        switch value {
-        case 1:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 200
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 20
-            //    "base_max_level": 20,
-            self.max_love = 20
-            //    "max_love": 100,
-            self.max_star_rank = 5
-            //    "max_star_rank": 20,
-            self.rarity = 1
-            self.rarityString = "N"
-        case 2:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 300
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 30
-            //    "base_max_level": 20,
-            self.max_love = 50
-            //    "max_love": 100,
-            self.max_star_rank = 5
-            //    "max_star_rank": 20,
-            self.rarity = 2
-            self.rarityString = "N+"
-        case 3:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 500
-            self.base_give_money = 1000
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 40
-            //    "base_max_level": 20,
-            self.max_love = 50
-            //    "max_love": 100,
-            self.max_star_rank = 10
-            //    "max_star_rank": 20,
-            self.rarity = 3
-            self.rarityString = "R"
-            
-        case 4:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 1500
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 50
-            //    "base_max_level": 20,
-            self.max_love = 150
-            //    "max_love": 100,
-            self.max_star_rank = 10
-            //    "max_star_rank": 20,
-            self.rarity = 4
-            self.rarityString = "R+"
-            
-        case 5:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 5000
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 60
-            //    "base_max_level": 20,
-            self.max_love = 100
-            //    "max_love": 100,
-            self.max_star_rank = 15
-            //    "max_star_rank": 20,
-            self.rarity = 5
-            self.rarityString = "SR"
-            
-        case 6:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 7500
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 70
-            //    "base_max_level": 20,
-            self.max_love = 300
-            //    "max_love": 100,
-            self.max_star_rank = 15
-            //    "max_star_rank": 20,
-            self.rarity = 6
-            self.rarityString = "SR+"
-            
-        case 7:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 10000
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 80
-            //    "base_max_level": 20,
-            self.max_love = 200
-            //    "max_love": 100,
-            self.max_star_rank = 20
-            //    "max_star_rank": 20,
-            self.rarity = 7
-            self.rarityString = "SSR"
-        case 8:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 1000
-            self.base_give_money = 15000
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 90
-            //    "base_max_level": 20,
-            self.max_love = 600
-            //    "max_love": 100,
-            self.max_star_rank = 20
-            //    "max_star_rank": 20,
-            self.rarity = 8
-            self.rarityString = "SSR+"
-            
-        default:
-            self.add_max_level = 0
-            //    "add_max_level": 0,
-            self.add_param = 0
-            //    "add_param": 0,
-            self.base_give_exp = 0
-            self.base_give_money = 0
-            //    "base_give_exp": 1000,
-            //    "base_give_money": 5000,
-            self.base_max_level = 0
-            //    "base_max_level": 20,
-            self.max_love = 0
-            //    "max_love": 100,
-            self.max_star_rank = 0
-            //    "max_star_rank": 20,
-            self.rarity = 0
-            self.rarityString = ""
-            
+extension CGSSCardRarity {
+    var rarityString: String! {
+        if rarity != nil {
+            return CGSSGlobal.rarityToStirng[rarity]
+        } else {
+            return ""
         }
-  
     }
 }
 
+class CGSSCardRarity: NSObject, NSCoding {
+    
+    var addMaxLevel: Int!
+    var addParam: Int!
+    var baseGiveExp: Int!
+    var baseGiveMoney: Int!
+    var baseMaxLevel: Int!
+    var maxLove: Int!
+    var maxStarRank: Int!
+    var rarity: Int!
+    
+    /**
+     * Instantiate the instance using the passed json values to set the properties values
+     */
+    init(fromJson json: JSON!) {
+        if json == nil {
+            return
+        }
+        addMaxLevel = json["add_max_level"].intValue
+        addParam = json["add_param"].intValue
+        baseGiveExp = json["base_give_exp"].intValue
+        baseGiveMoney = json["base_give_money"].intValue
+        baseMaxLevel = json["base_max_level"].intValue
+        maxLove = json["max_love"].intValue
+        maxStarRank = json["max_star_rank"].intValue
+        rarity = json["rarity"].intValue
+    }
+    
+    /**
+     * NSCoding required initializer.
+     * Fills the data from the passed decoder
+     */
+    required init?(coder aDecoder: NSCoder)
+    {
+        addMaxLevel = aDecoder.decodeObjectForKey("add_max_level") as? Int
+        addParam = aDecoder.decodeObjectForKey("add_param") as? Int
+        baseGiveExp = aDecoder.decodeObjectForKey("base_give_exp") as? Int
+        baseGiveMoney = aDecoder.decodeObjectForKey("base_give_money") as? Int
+        baseMaxLevel = aDecoder.decodeObjectForKey("base_max_level") as? Int
+        maxLove = aDecoder.decodeObjectForKey("max_love") as? Int
+        maxStarRank = aDecoder.decodeObjectForKey("max_star_rank") as? Int
+        rarity = aDecoder.decodeObjectForKey("rarity") as? Int
+        
+    }
+    
+    /**
+     * NSCoding required method.
+     * Encodes mode properties into the decoder
+     */
+    func encodeWithCoder(aCoder: NSCoder)
+    {
+        if addMaxLevel != nil {
+            aCoder.encodeObject(addMaxLevel, forKey: "add_max_level")
+        }
+        if addParam != nil {
+            aCoder.encodeObject(addParam, forKey: "add_param")
+        }
+        if baseGiveExp != nil {
+            aCoder.encodeObject(baseGiveExp, forKey: "base_give_exp")
+        }
+        if baseGiveMoney != nil {
+            aCoder.encodeObject(baseGiveMoney, forKey: "base_give_money")
+        }
+        if baseMaxLevel != nil {
+            aCoder.encodeObject(baseMaxLevel, forKey: "base_max_level")
+        }
+        if maxLove != nil {
+            aCoder.encodeObject(maxLove, forKey: "max_love")
+        }
+        if maxStarRank != nil {
+            aCoder.encodeObject(maxStarRank, forKey: "max_star_rank")
+        }
+        if rarity != nil {
+            aCoder.encodeObject(rarity, forKey: "rarity")
+        }
+        
+    }
+    
+}

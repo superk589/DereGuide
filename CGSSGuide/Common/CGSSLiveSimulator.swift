@@ -44,7 +44,7 @@ class CGSSLiveSimulator: NSObject {
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
             let diffStars = self.live.getStarsForDiff(self.diff)
             // 此时不对小数部分进行取舍 保留浮点部分
-            let scorePerNote = Float(self.presentTotal) * CGSSTool.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
+            let scorePerNote = Float(self.presentTotal) * CGSSGlobal.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
             let criticalPoints = beatmap.getCriticalPointNoteIndexes()
             let schedule = self.getSimulateSchedules(procMax)
             var criticalIndex = 0
@@ -58,7 +58,7 @@ class CGSSLiveSimulator: NSObject {
                         criticalIndex += 1
                     }
                 }
-                let comboFactor = CGSSTool.comboFactor[criticalIndex]
+                let comboFactor = CGSSGlobal.comboFactor[criticalIndex]
                 let skillFactor = self.getSkillFactorFor(note, schedules: schedule)
                 // 默认全P 不需要判定的因子 此处需要四舍五入
                 sum += round (scorePerNote * comboFactor * skillFactor)
@@ -110,7 +110,7 @@ class CGSSLiveSimulator: NSObject {
         scheduleDic[.Bonus] = [ScoreUpSchedule]()
         scheduleDic[.Combo] = [ScoreUpSchedule]()
         for rankedSkill in team.skills {
-            if var type = ScoreUpType.init(rawValue: rankedSkill.skill.skill_type!) {
+            if var type = ScoreUpType.init(rawValue: rankedSkill.skill.skillType) {
                 if type == .Overload || type == .Perfect {
                     type = .Bonus
                 }

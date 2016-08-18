@@ -17,17 +17,17 @@ enum LeaderSkillUpType {
 }
 
 struct LeaderSkillUpContent {
-    var upType:LeaderSkillUpType
-    var upTarget:CGSSCardFilterType
-    var upValue:Int
+    var upType: LeaderSkillUpType
+    var upTarget: CGSSCardFilterType
+    var upValue: Int
 }
 
 class CGSSTeam: NSObject, NSCoding {
     var leader: CGSSTeamMember!
     var subs: [CGSSTeamMember]!
     var friendLeader: CGSSTeamMember!
-    //队伍总表现值
-    var backSupportValue:Int!
+    // 队伍总表现值
+    var backSupportValue: Int!
     var testLive: CGSSLive? {
         if let id = testLiveId {
             return CGSSDAO.sharedDAO.findLiveById(id)
@@ -36,7 +36,7 @@ class CGSSTeam: NSObject, NSCoding {
     }
     var testLiveId: Int?
     var testDiff: Int?
-    var skills:[CGSSRankedSkill] {
+    var skills: [CGSSRankedSkill] {
         var arr = [CGSSRankedSkill]()
         for i in 0...4 {
             if let skill = self[i]?.cardRef?.skill {
@@ -46,7 +46,7 @@ class CGSSTeam: NSObject, NSCoding {
         }
         return arr
     }
-    subscript (index:Int) -> CGSSTeamMember? {
+    subscript (index: Int) -> CGSSTeamMember? {
         if index == 0 {
             return leader
         } else if index < 5 {
@@ -56,73 +56,71 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
-    //队伍原始值
-    var rawPresentValue:CGSSAttributeValue {
+    // 队伍原始值
+    var rawPresentValue: CGSSAttributeValue {
         let attValue = CGSSAttributeValue.init(visual: rawVisual, vocal: rawVocal, dance: rawDance, life: rawHP)
         return attValue
     }
-    var rawPresentValueInGroove:CGSSAttributeValue {
+    var rawPresentValueInGroove: CGSSAttributeValue {
         let attValue = CGSSAttributeValue.init(visual: rawVisualInGroove, vocal: rawVocalInGroove, dance: rawDanceInGroove, life: rawHPInGroove)
         return attValue
     }
-    var rawVocal:Int {
+    var rawVocal: Int {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.vocal) ?? 0
         }
         return sum
     }
-    var rawVocalInGroove:Int {
+    var rawVocalInGroove: Int {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.vocal) ?? 0
         }
         return sum
     }
-    var rawDance:Int {
+    var rawDance: Int {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.dance) ?? 0
         }
         return sum
     }
-    var rawDanceInGroove:Int {
+    var rawDanceInGroove: Int {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.dance) ?? 0
         }
         return sum
     }
-    var rawVisual:Int {
+    var rawVisual: Int {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.visual) ?? 0
         }
         return sum
     }
-    var rawVisualInGroove:Int {
+    var rawVisualInGroove: Int {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.visual) ?? 0
         }
         return sum
     }
-    var rawHP:Int {
+    var rawHP: Int {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.life) ?? 0
         }
         return sum
     }
-    var rawHPInGroove:Int {
+    var rawHPInGroove: Int {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.life) ?? 0
         }
         return sum
     }
-    
-
     
     func getPresentValue(type: CGSSCardFilterType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
@@ -132,7 +130,7 @@ class CGSSTeam: NSObject, NSCoding {
         return attValue
     }
     
-    func getPresentValueInGroove(type: CGSSCardFilterType, burstType: LeaderSkillUpType ) -> CGSSAttributeValue {
+    func getPresentValueInGroove(type: CGSSCardFilterType, burstType: LeaderSkillUpType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...4 {
             attValue += self[i]!.cardRef!.getPresentValue(type, roomUpScalar: 10, contents: getUpContentInGroove(burstType))
@@ -140,7 +138,7 @@ class CGSSTeam: NSObject, NSCoding {
         return attValue
     }
     
-    func getPresentValueByType(liveType:CGSSLiveType, songType:CGSSCardFilterType) -> CGSSAttributeValue {
+    func getPresentValueByType(liveType: CGSSLiveType, songType: CGSSCardFilterType) -> CGSSAttributeValue {
         switch liveType {
         case .Normal:
             return getPresentValue(songType)
@@ -153,8 +151,8 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
-    //判断需要的指定颜色的队员是否满足条件
-    func hasType(type:CGSSCardFilterType, count:Int?) -> Bool {
+    // 判断需要的指定颜色的队员是否满足条件
+    func hasType(type: CGSSCardFilterType, count: Int?) -> Bool {
         if count == 0 {
             return true
         }
@@ -170,33 +168,33 @@ class CGSSTeam: NSObject, NSCoding {
             return false
         }
     }
-
-    func getContentFor(leaderSkill:CGSSLeaderSkill) -> [LeaderSkillUpContent] {
+    
+    func getContentFor(leaderSkill: CGSSLeaderSkill) -> [LeaderSkillUpContent] {
         var contents = [LeaderSkillUpContent]()
-        if hasType(.Cute, count: leaderSkill.need_cute) && hasType(.Cool, count: leaderSkill.need_cool) && hasType(.Passion, count: leaderSkill.need_passion) {
-            switch leaderSkill.target_attribute! {
+        if hasType(.Cute, count: leaderSkill.needCute) && hasType(.Cool, count: leaderSkill.needCool) && hasType(.Passion, count: leaderSkill.needPassion) {
+            switch leaderSkill.targetAttribute! {
             case "cute":
                 for upType in getUpType(leaderSkill) {
-                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Cute, upValue: leaderSkill.up_value!)
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Cute, upValue: leaderSkill.upValue!)
                     contents.append(content)
                 }
             case "cool":
                 for upType in getUpType(leaderSkill) {
-                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Cool, upValue: leaderSkill.up_value!)
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Cool, upValue: leaderSkill.upValue!)
                     contents.append(content)
                 }
             case "passion":
                 for upType in getUpType(leaderSkill) {
-                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Passion, upValue: leaderSkill.up_value!)
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .Passion, upValue: leaderSkill.upValue!)
                     contents.append(content)
                 }
             case "all":
                 for upType in getUpType(leaderSkill) {
-                    let content1 = LeaderSkillUpContent.init(upType: upType, upTarget: .Cute, upValue: leaderSkill.up_value!)
+                    let content1 = LeaderSkillUpContent.init(upType: upType, upTarget: .Cute, upValue: leaderSkill.upValue!)
                     contents.append(content1)
-                    let content2 = LeaderSkillUpContent.init(upType: upType, upTarget: .Cool, upValue: leaderSkill.up_value!)
+                    let content2 = LeaderSkillUpContent.init(upType: upType, upTarget: .Cool, upValue: leaderSkill.upValue!)
                     contents.append(content2)
-                    let content3 = LeaderSkillUpContent.init(upType: upType, upTarget: .Passion, upValue: leaderSkill.up_value!)
+                    let content3 = LeaderSkillUpContent.init(upType: upType, upTarget: .Passion, upValue: leaderSkill.upValue!)
                     contents.append(content3)
                 }
             default:
@@ -207,20 +205,19 @@ class CGSSTeam: NSObject, NSCoding {
         return contents
     }
     
-
-    //获取队长技能对队伍的加成效果
+    // 获取队长技能对队伍的加成效果
     func getUpContent() -> [CGSSCardFilterType: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
-        //自己的队长技能
-        if let leaderSkill = leader.cardRef?.leader_skill {
+        // 自己的队长技能
+        if let leaderSkill = leader.cardRef?.leaderSkill {
             contents.appendContentsOf(getContentFor(leaderSkill))
         }
-        //队友的队长技能
-        if let leaderSkill = friendLeader.cardRef?.leader_skill {
+        // 队友的队长技能
+        if let leaderSkill = friendLeader.cardRef?.leaderSkill {
             contents.appendContentsOf(getContentFor(leaderSkill))
         }
         
-        //合并同类型
+        // 合并同类型
         var newContents = [CGSSCardFilterType: [LeaderSkillUpType: Int]]()
         for content in contents {
             if newContents.keys.contains(content.upTarget) {
@@ -230,36 +227,7 @@ class CGSSTeam: NSObject, NSCoding {
                     newContents[content.upTarget]![content.upType] = content.upValue
                 }
             } else {
-                newContents[content.upTarget] = [LeaderSkillUpType:Int]()
-                newContents[content.upTarget]![content.upType] = content.upValue
-            }
-
-        }
-        return newContents
-    }
-    
-    func getUpContentInGroove(burstType: LeaderSkillUpType) -> [CGSSCardFilterType: [LeaderSkillUpType: Int]] {
-        var contents = [LeaderSkillUpContent]()
-        //自己的队长技能
-        if let leaderSkill = leader.cardRef?.leader_skill {
-            contents.appendContentsOf(getContentFor(leaderSkill))
-        }
-        //设定Groove中的up值
-        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Cool, upValue: 150))
-        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Cute, upValue: 150))
-        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Passion, upValue: 150))
-        
-        //合并同类型
-        var newContents = [CGSSCardFilterType: [LeaderSkillUpType: Int]]()
-        for content in contents {
-            if newContents.keys.contains(content.upTarget) {
-                if newContents[content.upTarget]!.keys.contains(content.upType) {
-                    newContents[content.upTarget]![content.upType]! += content.upValue
-                } else {
-                    newContents[content.upTarget]![content.upType] = content.upValue
-                }
-            } else {
-                newContents[content.upTarget] = [LeaderSkillUpType:Int]()
+                newContents[content.upTarget] = [LeaderSkillUpType: Int]()
                 newContents[content.upTarget]![content.upType] = content.upValue
             }
             
@@ -267,10 +235,37 @@ class CGSSTeam: NSObject, NSCoding {
         return newContents
     }
     
-
+    func getUpContentInGroove(burstType: LeaderSkillUpType) -> [CGSSCardFilterType: [LeaderSkillUpType: Int]] {
+        var contents = [LeaderSkillUpContent]()
+        // 自己的队长技能
+        if let leaderSkill = leader.cardRef?.leaderSkill {
+            contents.appendContentsOf(getContentFor(leaderSkill))
+        }
+        // 设定Groove中的up值
+        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Cool, upValue: 150))
+        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Cute, upValue: 150))
+        contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .Passion, upValue: 150))
+        
+        // 合并同类型
+        var newContents = [CGSSCardFilterType: [LeaderSkillUpType: Int]]()
+        for content in contents {
+            if newContents.keys.contains(content.upTarget) {
+                if newContents[content.upTarget]!.keys.contains(content.upType) {
+                    newContents[content.upTarget]![content.upType]! += content.upValue
+                } else {
+                    newContents[content.upTarget]![content.upType] = content.upValue
+                }
+            } else {
+                newContents[content.upTarget] = [LeaderSkillUpType: Int]()
+                newContents[content.upTarget]![content.upType] = content.upValue
+            }
+            
+        }
+        return newContents
+    }
     
-    func getUpType(leaderSkill:CGSSLeaderSkill) -> [LeaderSkillUpType] {
-        switch leaderSkill.target_param! {
+    func getUpType(leaderSkill: CGSSLeaderSkill) -> [LeaderSkillUpType] {
+        switch leaderSkill.targetParam! {
         case "vocal":
             return [LeaderSkillUpType.Vocal]
         case "dance":
@@ -279,7 +274,7 @@ class CGSSTeam: NSObject, NSCoding {
             return [LeaderSkillUpType.Visual]
         case "all":
             return [LeaderSkillUpType.Vocal, LeaderSkillUpType.Dance, LeaderSkillUpType.Visual]
-        case "life" :
+        case "life":
             return [LeaderSkillUpType.Life]
         case "skill_probability":
             return [LeaderSkillUpType.Proc]
@@ -287,15 +282,13 @@ class CGSSTeam: NSObject, NSCoding {
             return [LeaderSkillUpType]()
         }
     }
-
     
-    init(leader:CGSSTeamMember, subs:[CGSSTeamMember], backSupportValue:Int, friendLeader: CGSSTeamMember?) {
+    init(leader: CGSSTeamMember, subs: [CGSSTeamMember], backSupportValue: Int, friendLeader: CGSSTeamMember?) {
         self.leader = leader
         self.subs = subs
         self.backSupportValue = backSupportValue
         self.friendLeader = friendLeader ?? leader
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         self.leader = aDecoder.decodeObjectForKey("leader") as? CGSSTeamMember
@@ -314,13 +307,12 @@ class CGSSTeam: NSObject, NSCoding {
         aCoder.encodeObject(testLiveId, forKey: "testLiveId")
         aCoder.encodeObject(testDiff, forKey: "testDiff")
     }
-   
+    
 }
 
-
 extension CGSSCard {
-    //扩展一个获取卡片在队伍中的表现值的方法
-    func getPresentValue(songType:CGSSCardFilterType, roomUpScalar:Int?, contents:[CGSSCardFilterType: [LeaderSkillUpType: Int]]) -> CGSSAttributeValue {
+    // 扩展一个获取卡片在队伍中的表现值的方法
+    func getPresentValue(songType: CGSSCardFilterType, roomUpScalar: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]]) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: visual, vocal: vocal, dance: dance, life: life)
         var scalar = 100 + (roomUpScalar ?? 10)
         if songType == cardFilterType || songType == .Office {
