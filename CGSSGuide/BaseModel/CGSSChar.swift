@@ -36,8 +36,10 @@ class CGSSChar: CGSSBaseModel {
     var nameKana: String!
     var personality: Int!
     var spineSize: Int!
+    // 中文版数据库独有
     var translated: String!
     var translatedCht: String!
+    //
     var type: String!
     var valist: [AnyObject]!
     var voice: String!

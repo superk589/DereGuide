@@ -278,6 +278,17 @@ public class CGSSUpdater: NSObject {
         var process = 0
         var total = items.count
         
+        // 为了让较老的数据早更新 做一次排序
+        let sortedItems = items.sort { (item1, item2) -> Bool in
+            let index1 = Int(item1.id) ?? 9999999
+            let index2 = Int(item2.id) ?? 9999999
+            if index1 <= index2 {
+                return true
+            } else {
+                return false
+            }
+        }
+        
         func insideComplete(e: String?) {
             if e == nil {
                 success += 1
@@ -296,7 +307,7 @@ public class CGSSUpdater: NSObject {
             }
         }
         
-        for item in items {
+        for item in sortedItems {
             switch item.dataType {
             case .Card:
                 let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(item.id)"
