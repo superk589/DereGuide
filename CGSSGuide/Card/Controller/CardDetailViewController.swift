@@ -208,7 +208,9 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         self.cardDV?.addSubview((self.cardDV?.fullImageView)!)
         self.view.sendSubviewToBack(fullScreenView!)
         self.cardDV?.fullImageView?.frame.origin.y = -64 + (self.sv.contentOffset.y)
+        
         UIView.animateWithDuration(0.25) {
+            UIApplication.sharedApplication().statusBarHidden = false
             self.cardDV?.fullImageView?.frame.origin.y = 0
             self.navigationController?.navigationBar.alpha = 1
             self.tabBarController?.tabBar.alpha = 1
@@ -226,7 +228,9 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         // UIApplication.sharedApplication().keyWindow?.addSubview((self.cardDV?.fullImageView)!)
         self.fullScreenView?.bounds.origin.y = -64 + (self.sv.contentOffset.y)
         self.fullScreenView?.addSubview((self.cardDV?.fullImageView)!)
+        
         UIView.animateWithDuration(0.25) {
+            UIApplication.sharedApplication().statusBarHidden = true
             self.navigationController?.navigationBar.alpha = 0
             self.tabBarController?.tabBar.alpha = 0
             self.fullScreenView?.bounds.origin.y = 0
