@@ -43,6 +43,7 @@ class BeatmapViewController: UIViewController {
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFontOfSize(12)
         titleLabel.textAlignment = .Center
+        titleLabel.adjustsFontSizeToFitWidth = true
         navigationItem.titleView = titleLabel
         
         // 如果没有指定难度 则初始化难度为最高难度

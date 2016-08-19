@@ -125,7 +125,7 @@ class CGSSTeam: NSObject, NSCoding {
     func getPresentValue(type: CGSSCardFilterType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...5 {
-            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpScalar: 10, contents: getUpContent())
+            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContent())
         }
         return attValue
     }
@@ -133,7 +133,7 @@ class CGSSTeam: NSObject, NSCoding {
     func getPresentValueInGroove(type: CGSSCardFilterType, burstType: LeaderSkillUpType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...4 {
-            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpScalar: 10, contents: getUpContentInGroove(burstType))
+            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(burstType))
         }
         return attValue
     }
@@ -283,6 +283,21 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
+    func validateCardRef() -> Bool {
+        if leader.cardRef == nil {
+            return false
+        }
+        if friendLeader.cardRef == nil {
+            return false
+        }
+        for sub in subs {
+            if sub.cardRef == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
     init(leader: CGSSTeamMember, subs: [CGSSTeamMember], backSupportValue: Int, friendLeader: CGSSTeamMember?) {
         self.leader = leader
         self.subs = subs
@@ -312,16 +327,16 @@ class CGSSTeam: NSObject, NSCoding {
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getPresentValue(songType: CGSSCardFilterType, roomUpScalar: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]]) -> CGSSAttributeValue {
+    func getPresentValue(songType: CGSSCardFilterType, roomUpValue: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]]) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: visual, vocal: vocal, dance: dance, life: life)
-        var scalar = 100 + (roomUpScalar ?? 10)
+        var factor = 100 + (roomUpValue ?? 10)
         if songType == cardFilterType || songType == .Office {
-            scalar += 30
+            factor += 30
         }
         
-        attValue.vocal = Int(ceil(Float(attValue.vocal * (scalar + (contents[cardFilterType]?[.Vocal] ?? 0))) / 100))
-        attValue.dance = Int(ceil(Float(attValue.dance * (scalar + (contents[cardFilterType]?[.Dance] ?? 0))) / 100))
-        attValue.visual = Int(ceil(Float(attValue.visual * (scalar + (contents[cardFilterType]?[.Visual] ?? 0))) / 100))
+        attValue.vocal = Int(ceil(Float(attValue.vocal * (factor + (contents[cardFilterType]?[.Vocal] ?? 0))) / 100))
+        attValue.dance = Int(ceil(Float(attValue.dance * (factor + (contents[cardFilterType]?[.Dance] ?? 0))) / 100))
+        attValue.visual = Int(ceil(Float(attValue.visual * (factor + (contents[cardFilterType]?[.Visual] ?? 0))) / 100))
         attValue.life = Int(ceil(Float(attValue.visual * (100 + (contents[cardFilterType]?[.Life] ?? 0))) / 100))
         return attValue
     }

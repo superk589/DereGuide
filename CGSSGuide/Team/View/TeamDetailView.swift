@@ -176,13 +176,15 @@ class TeamDetailView: UIView {
         
         songJacket = UIImageView.init(frame: CGRectMake(leftSpace, originY, 48, 48))
         
-        songNameLabel = UILabel.init(frame: CGRectMake(48 + 2 * leftSpace, originY, width, 21))
+        songNameLabel = UILabel.init(frame: CGRectMake(48 + 2 * leftSpace, originY, width - 48 - 40, 21))
+        songNameLabel.adjustsFontSizeToFitWidth = true
         originY += 21 + topSpace
         
-        songDiffLabel = UILabel.init(frame: CGRectMake(48 + 2 * leftSpace, originY, width, 18))
+        songDiffLabel = UILabel.init(frame: CGRectMake(48 + 2 * leftSpace, originY, width - 48 - 40, 18))
         songDiffLabel.textColor = UIColor.darkGrayColor()
         songDiffLabel.textAlignment = .Left
         songDiffLabel.font = UIFont.systemFontOfSize(12)
+        songDiffLabel.adjustsFontSizeToFitWidth = true
         
 //        songLengthLabel = UILabel.init(frame: CGRectMake(CGSSGlobal.width / 2 + leftSpace, originY, width / 2, 18))
 //        songLengthLabel.textColor = UIColor.darkGrayColor()
@@ -300,7 +302,9 @@ class TeamDetailView: UIView {
     func initWith(team: CGSSTeam) {
         
         for i in 0...5 {
-            icons[i].setWithCardId((team[i]?.cardRef?.id)!, target: self, action: #selector(cardIconClick))
+            if let card = team[i]?.cardRef {
+                icons[i].setWithCardId(card.id, target: self, action: #selector(cardIconClick))
+            }
         }
         if let selfLeaderRef = team.leader.cardRef {
             selfLeaderLabel.text = "队长技能: \(selfLeaderRef.leaderSkill?.name ?? "无")\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
@@ -464,7 +468,8 @@ class TeamDetailView: UIView {
     }
     
     func updateSongInfo(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
-        selectSongLabel.hidden = true
+        // selectSongLabel.hidden = true
+        selectSongLabel.text = ""
         let song = live.musicRef!
         songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长: \(Int(beatmaps[diff - 1].totalSeconds))秒"
         

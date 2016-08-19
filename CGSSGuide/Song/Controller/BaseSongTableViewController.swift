@@ -175,7 +175,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
             if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
                 beatmaps.append(beatmap)
             } else {
-                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(CGSSGlobal.diffStringFromInt(i))的歌曲,建议等待当前更新完成,或尝试下拉歌曲列表手动更新数据", preferredStyle: .Alert)
+                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(CGSSGlobal.diffStringFromInt(i))的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                 self.navigationController?.presentViewController(alert, animated: true, completion: nil)
                 return nil
@@ -231,7 +231,6 @@ class BaseSongTableViewController: RefreshableTableViewController {
     
 }
 
-//MARK: SongTableViewCell的协议方法
 //MARK: SongTableViewCell的协议方法
 extension BaseSongTableViewController: SongTableViewCellDelegate {
     func diffSelected(live: CGSSLive, diff: Int) {
