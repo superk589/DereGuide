@@ -342,7 +342,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S16-eJ-ucp">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：
+                                <string key="text">本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：
 株式会社 万代 (BANDAI Co., Ltd)
 ------------------------------------------
 本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。
@@ -357,7 +357,7 @@ Copyright (c) 2016 Ashley Mills
 ------------------------------------------
 本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。
 如果对此项目感兴趣，请访问：
-https://github.com/superk589/CGSSGuide</mutableString>
+https://github.com/superk589/CGSSGuide</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -505,7 +505,7 @@ https://github.com/superk589/CGSSGuide</mutableString>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UWg-ir-9wl">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">数据来源：
+                                <string key="text">数据来源：
 https://starlight.kirara.ca
 http://starlight.hyspace.io
 https://deresute.info
@@ -519,7 +519,7 @@ Snack-X
 summertriangle-dev 
 ------------------------------------------
 封面设计：
-ZXQ</mutableString>
+ZXQ</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
