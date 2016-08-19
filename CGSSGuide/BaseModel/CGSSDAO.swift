@@ -218,9 +218,8 @@ public class CGSSDAO: NSObject {
         func completeInside() {
             count += 1
             if count == CGSSDataKey.allValues.count {
-                dispatch_async(dispatch_get_main_queue(), {
-                    complete?()
-                })
+                //因为saveDataToFile的回调已经是主线程了 所以此处没必要再dispatch_async到主线程
+                complete?()
             }
         }
         dispatch_async(dispatch_get_global_queue(0, 0)) {

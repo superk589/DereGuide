@@ -53,7 +53,6 @@ class BaseCardTableViewController: RefreshableTableViewController {
                     alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                     self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
                     self.updateStatusView.hidden = true
-                    updater.setVersionToNewest()
                     self.refresh()
                 })
             }

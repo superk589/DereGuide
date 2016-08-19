@@ -299,7 +299,10 @@ public class CGSSUpdater: NSObject {
             })
             if process == items.count {
                 let dao = CGSSDAO.sharedDAO
-                dao.saveAll(nil)
+                dao.saveAll({
+                    // 保存成功后 将版本置为最新版
+                    self.setVersionToNewest()
+                })
                 isUpdating = false
                 dispatch_async(dispatch_get_main_queue(), {
                     complete(success, total)
