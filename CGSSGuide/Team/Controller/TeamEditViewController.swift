@@ -67,7 +67,11 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         
         // 暂时去除header
         // tv.tableHeaderView = hv
-        tv.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        if #available(iOS 9.0, *) {
+            tv.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
         tv.frame = CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64)
         tv.delegate = self
         tv.dataSource = self

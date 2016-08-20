@@ -29,6 +29,14 @@ class BirthdayNotificationViewController: UITableViewController {
         tableView.tableFooterView = UIView.init(frame: CGRectZero)
         tableView.separatorStyle = .None
         tableView.registerClass(BirthdayNotificationTableViewCell.self, forCellReuseIdentifier: "BirthdayNotificationCell")
+        
+        if #available(iOS 9.0, *) {
+            headerView.cellLayoutMarginsFollowReadableWidth = false
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -44,6 +52,10 @@ class BirthdayNotificationViewController: UITableViewController {
 //        fatalError("init(coder:) has not been implemented")
 //    }
     
+    override func viewWillLayoutSubviews() {
+        // 对齐tableview和headerview的左边界
+        tableView.layoutMargins = UIEdgeInsetsMake(0, 15, 0, 0)
+    }
     func prepareChars() {
         for i in 0...3 {
             presentChars[i].removeAll()
@@ -172,6 +184,7 @@ class BirthdayNotificationViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("BirthdayNotificationCell", forIndexPath: indexPath) as! BirthdayNotificationTableViewCell
             cell.initWith(presentChars[indexPath.section])
+            cell.cv.contentInset.left = cell.layoutMargins.left - 10
             cell.cv.reloadData()
             // Configure the cell...
             

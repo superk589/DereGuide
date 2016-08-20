@@ -172,6 +172,13 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                     }
                 }
                 
+                if urls.count == 0 {
+                    let alert = UIAlertController.init(title: "提示", message: "暂无需要缓存的图片，请先尝试更新其他数据。", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
+                    self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+                    return
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.updateStatusView.setContent("缓存所有图片", total: urls.count)
                 })
@@ -184,7 +191,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                     })
                     }, completed: { (a, b) in
                     dispatch_async(dispatch_get_main_queue(), {
-                        let alert = UIAlertController.init(title: "缓存大图完成", message: "成功\(a - b),失败\(b)", preferredStyle: .Alert)
+                        let alert = UIAlertController.init(title: "缓存图片完成", message: "成功\(a - b),失败\(b)", preferredStyle: .Alert)
                         alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                         self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
                         self.updateStatusView.hidden = true
@@ -201,7 +208,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     func cancelUpdate() {
         SDWebImagePrefetcher.sharedImagePrefetcher().cancelPrefetching()
         CGSSUpdater.defaultUpdater.isUpdating = false
-        let alvc = UIAlertController.init(title: "提示", message: "已取消", preferredStyle: .Alert)
+        let alvc = UIAlertController.init(title: "缓存图片取消", message: "缓存图片已被中止", preferredStyle: .Alert)
         alvc.addAction(UIAlertAction.init(title: "确定", style: .Cancel, handler: nil))
         self.tabBarController?.presentViewController(alvc, animated: true, completion: nil)
     }
