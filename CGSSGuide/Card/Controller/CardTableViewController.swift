@@ -13,7 +13,7 @@ class CardTableViewController: BaseCardTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // print(NSHomeDirectory())
+        //print(NSHomeDirectory())
         // 作为工具启动的第一个页面 在此页面做自动更新检查
         let updater = CGSSUpdater.defaultUpdater
         // 如果数据Major版本号过低强制删除旧数据 再更新 没有取消按钮

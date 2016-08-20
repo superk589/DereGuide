@@ -54,6 +54,14 @@ class CGSSGridLabel: CGSSGridView {
         }
     }
     
+    func setGridFont(content: [[UIFont]]) {
+        for i in 0...columns - 1 {
+            for j in 0...rows - 1 {
+                self[j, i].font = content[j][i]
+            }
+        }
+    }
+    
     /*
      // Only override drawRect: if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.

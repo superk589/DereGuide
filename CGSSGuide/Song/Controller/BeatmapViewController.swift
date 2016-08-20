@@ -64,14 +64,15 @@ class BeatmapViewController: UIViewController {
     }
     
     func selectDiff() {
-        let alvc = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .ActionSheet)
+        let alert = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .ActionSheet)
+        alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         for i in 1...live.maxDiff {
-            alvc.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i), style: .Default, handler: { (a) in
+            alert.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i), style: .Default, handler: { (a) in
                 self.currentDiff = i
                 }))
         }
-        alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
-        self.presentViewController(alvc, animated: true, completion: nil)
+        alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

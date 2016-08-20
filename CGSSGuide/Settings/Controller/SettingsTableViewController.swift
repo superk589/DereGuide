@@ -83,6 +83,44 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     
+    func getCacheSize() -> Int {
+        if let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, .UserDomainMask, true).first {
+            if let files = NSFileManager.defaultManager().subpathsAtPath(cachePath) {
+                var size = 0
+                for file in files {
+                    let path = cachePath.stringByAppendingFormat("/\(file)")
+                    if let attributes = try? NSFileManager.defaultManager().attributesOfItemAtPath(path) {
+                        size += attributes[NSFileSize]?.integerValue ?? 0
+                    }
+                }
+                return size
+            }
+        }
+        return 0
+        
+    }
+    @IBOutlet weak var cacheSizeLabel: UILabel! {
+        didSet {
+            cacheSizeLabel.text = "\(getCacheSize()/(1024*1024))MB"
+        }
+    }
+    private func deleteAllCacheFiles() {
+        if let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, .UserDomainMask, true).first {
+            if let files = NSFileManager.defaultManager().subpathsAtPath(cachePath) {
+                for file in files {
+                    let path = cachePath.stringByAppendingFormat("/\(file)")
+                    if (NSFileManager.defaultManager().fileExistsAtPath(path)) {
+                        do {
+                            try NSFileManager.defaultManager().removeItemAtPath(path)
+                        } catch {
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func wipeData() {
         if CGSSUpdater.defaultUpdater.isUpdating {
             return
@@ -91,7 +129,8 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         alert.addAction(UIAlertAction.init(title: "确定", style: .Destructive, handler: { (alert) in
             CGSSDAO.sharedDAO.removeAllData()
             SDImageCache.sharedImageCache().clearDisk()
-            CGSSUpdater.defaultUpdater.setCurrentDataVersion(String(0), minor: String(0))
+            self.deleteAllCacheFiles()
+            CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
             self.refresh()
             }))
         alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
@@ -169,6 +208,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     func refresh() {
         dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
+        cacheSizeLabel.text = "\(getCacheSize()/(1024*1024))MB"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -191,7 +231,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.tableFooterView = UIView.init(frame: CGRectZero)
         
         updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))

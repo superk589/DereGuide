@@ -315,6 +315,7 @@
                     <connections>
                         <outlet property="appVersionLabel" destination="PtN-e6-otR" id="vY0-3H-bms"/>
                         <outlet property="cacheImageCell" destination="EtT-sZ-pNR" id="UVS-0s-VIa"/>
+                        <outlet property="cacheSizeLabel" destination="aJQ-Ij-J1K" id="tTe-qy-Yp4"/>
                         <outlet property="dataVersionLabel" destination="CCB-QY-KRe" id="vLg-eS-gRL"/>
                         <outlet property="downloadAtStartCell" destination="36s-1H-nmN" id="tH2-VQ-vmr"/>
                         <outlet property="fullImageCacheCell" destination="jFB-MI-Y0I" id="bXL-mh-l3E"/>

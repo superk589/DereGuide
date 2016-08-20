@@ -257,20 +257,22 @@ extension CardDetailViewController: CGSSImageViewDelegate {
     func endFullSize() {
         
     }
-    func longPress() {
+    func longPress(press: UILongPressGestureRecognizer) {
         // 长按实现更多操作 保存/分享等
-        let alVC = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alVC.addAction(UIAlertAction.init(title: "保存", style: .Default, handler: { (_: UIAlertAction) in
-            UIImageWriteToSavedPhotosAlbum((self.cardDV?.fullImageView?.image)!, self, #selector(self.imageDidFinishingSaving), nil)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let location = press.locationInView(fullScreenView)
+        alert.popoverPresentationController?.sourceView = fullScreenView
+        alert.popoverPresentationController?.sourceRect = CGRectMake(location.x, location.y, 0, 0)
+        alert.addAction(UIAlertAction.init(title: "保存到相册", style: .Default, handler: { (_: UIAlertAction) in
+            if let image = self.cardDV?.fullImageView?.image {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.imageDidFinishingSaving), nil)
+            }
             }))
         // alVC.addAction(UIAlertAction.init(title: "分享", style: .Default, handler: { (_:UIAlertAction) in
         // //todo
         // }))
-        alVC.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: { (_: UIAlertAction) in
-            // todo
-            }))
-        
-        presentViewController(alVC, animated: true, completion: nil)
+        alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
         
     }
 }

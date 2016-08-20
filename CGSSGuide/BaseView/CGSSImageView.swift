@@ -14,7 +14,7 @@ protocol CGSSImageViewDelegate: class {
     func beginRestore()
     func endRestore()
     func endFullSize()
-    func longPress()
+    func longPress(press:UILongPressGestureRecognizer)
 }
 //CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
@@ -165,7 +165,7 @@ class CGSSImageView: UIImageView {
     func longPressAction(longPress: UILongPressGestureRecognizer) {
         // 长按手势会触发两次 此处判定是长按开始而非结束
         if isTapped && longPress.state == .Began {
-            delegate?.longPress()
+            delegate?.longPress(longPress)
         }
     }
     

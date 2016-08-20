@@ -89,6 +89,7 @@ public class CGSSDAO: NSObject {
     
     func saveDataToFile(key: CGSSDataKey, complete: (() -> Void)?) {
         dispatch_async(dispatch_get_global_queue(0, 0)) {
+            self.prepareFileDirectory()
             let path = CGSSDAO.getDataPath(key)
             let theData = NSMutableData()
             let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
@@ -198,7 +199,7 @@ public class CGSSDAO: NSObject {
         }
     }
     
-    func prepareDefaultData() {
+    /*func prepareDefaultData() {
         let nfd = NSFileManager.defaultManager()
         for dataKey in CGSSDataKey.allValues {
             if !nfd.fileExistsAtPath(CGSSDAO.path + "/Data/\(dataKey.rawValue).plist") {
@@ -210,8 +211,8 @@ public class CGSSDAO: NSObject {
                 }
             }
         }
-        
-    }
+    }*/
+    
     // 异步存储全部数据
     func saveAll(complete: (() -> Void)?) {
         var count = 0

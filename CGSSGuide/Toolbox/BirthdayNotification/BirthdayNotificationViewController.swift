@@ -82,6 +82,8 @@ class BirthdayNotificationViewController: UITableViewController {
     
     func selectTimeZone() {
         let alvc = UIAlertController.init(title: "选择提醒时区", message: nil, preferredStyle: .ActionSheet)
+        alvc.popoverPresentationController?.sourceView = headerCells[1].detailTextLabel
+        alvc.popoverPresentationController?.sourceRect = CGRectMake(headerCells[1].detailTextLabel!.fwidth / 2, headerCells[1].detailTextLabel!.fheight, 0, 0)
         alvc.addAction(UIAlertAction.init(title: "System", style: .Default, handler: { (a) in
             NSUserDefaults.standardUserDefaults().setValue("System", forKey: "BirthdayTimeZone")
             self.headerCells[1].detailTextLabel?.text = "System"

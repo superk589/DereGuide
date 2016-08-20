@@ -43,7 +43,6 @@ class TeamDetailViewController: UIViewController {
         sv.contentSize = teamDV.frame.size
     }
     
-    
     /*
      // MARK: - Navigation
 
@@ -128,7 +127,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     func liveTypeButtonClick() {
         let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .ActionSheet)
-        
+        alvc.popoverPresentationController?.sourceView = teamDV.liveTypeButton
+        alvc.popoverPresentationController?.sourceRect = CGRectMake(0, teamDV.liveTypeButton.fheight / 2, 0, 0)
+        alvc.popoverPresentationController?.permittedArrowDirections = .Right
         for liveType in CGSSLiveType.getAll() {
             alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .Default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType

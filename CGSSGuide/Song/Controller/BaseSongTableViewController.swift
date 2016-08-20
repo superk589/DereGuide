@@ -158,6 +158,9 @@ class BaseSongTableViewController: RefreshableTableViewController {
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
         if let beatmaps = checkBeatmapData(live) {
             selectLive(live, beatmaps: beatmaps, diff: maxDiff)
+        } else {
+            // 手动取消选中状态
+            tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         }
     }
     
