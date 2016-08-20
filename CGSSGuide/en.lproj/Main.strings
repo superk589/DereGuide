@@ -71,6 +71,9 @@
 /* Class = "UIButton"; normalTitle = "  R+  "; ObjectID = "Oka-sB-Xx6"; */
 "Oka-sB-Xx6.normalTitle" = "  R+  ";
 
+/* Class = "UITextView"; text = "本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\n株式会社 万代 (BANDAI Co., Ltd)\n------------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n------------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\n------------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide"; ObjectID = "S16-eJ-ucp"; */
+"S16-eJ-ucp.text" = "本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\n株式会社 万代 (BANDAI Co., Ltd)\n------------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n------------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\n------------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide";
+
 /* Class = "UITableViewSection"; headerTitle = "关于"; ObjectID = "Sc7-uC-obv"; */
 "Sc7-uC-obv.headerTitle" = "关于";
 
