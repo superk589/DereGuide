@@ -41,7 +41,7 @@ class SongTableViewCell: UITableViewCell {
         
         descriptionLabel = UILabel()
         descriptionLabel.frame = CGRectMake(86, 35, CGSSGlobal.width - 96, 16)
-        descriptionLabel.font = UIFont.init(name: "menlo", size: 14)
+        descriptionLabel.font = CGSSGlobal.alphabetFont
         
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space: CGFloat = 10

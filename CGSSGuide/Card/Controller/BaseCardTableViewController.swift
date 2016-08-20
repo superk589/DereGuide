@@ -80,7 +80,6 @@ class BaseCardTableViewController: RefreshableTableViewController {
         
         // 按更新顺序排序
         sorter = CGSSSorter.init(att: "update_id")
-        
     }
     
     // 根据设定的筛选和排序方法重新展现数据
@@ -132,7 +131,6 @@ class BaseCardTableViewController: RefreshableTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()

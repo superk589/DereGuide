@@ -217,6 +217,8 @@ class CardDetailView: UIView {
         procGridStrings.append(["Lv.10", String(format: "%.2f", procChanceMax), String(format: "%.2f", durationMax)
             , String(format: "%.2f", durationMax / Double(skill.condition!) * 100), String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax)])
         skillProcGridView.setGridContent(procGridStrings)
+        skillProcGridView[1,0].font = UIFont.systemFontOfSize(14)
+        skillProcGridView[2,0].font = UIFont.systemFontOfSize(14)
         
         originY = originY + topSpace + 42
         drawSectionLine(originY)

@@ -96,8 +96,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     
     func editTeam() {
         let teamEditDVC = TeamEditViewController()
-        teamEditDVC.initWith(team)
         teamEditDVC.delegate = self
+        teamEditDVC.initWith(team)
+        
         navigationController?.pushViewController(teamEditDVC, animated: true)
         
     }

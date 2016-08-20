@@ -48,6 +48,7 @@ class CardTableViewCell: UITableViewCell {
         cardNameLabel = UILabel()
         cardNameLabel.frame = CGRectMake(68, 25, CGSSGlobal.width - 78, 16)
         cardNameLabel.font = UIFont.systemFontOfSize(16)
+        cardNameLabel.adjustsFontSizeToFitWidth = true
         
         titleLabel = UILabel()
         titleLabel.frame = CGRectMake(98, 10, CGSSGlobal.width - 150, 10)

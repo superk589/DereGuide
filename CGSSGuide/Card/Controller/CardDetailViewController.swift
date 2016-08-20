@@ -38,6 +38,7 @@ class CardDetailViewController: UIViewController {
         titleView.text = card.name
         titleView.font = UIFont.systemFontOfSize(12)
         titleView.textAlignment = .Center
+        titleView.adjustsFontSizeToFitWidth = true
         navigationItem.titleView = titleView
         
         // let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
@@ -74,15 +75,20 @@ class CardDetailViewController: UIViewController {
         
         cardDV?.attGridView.setGridContent(attGridStrings)
         
-        var colors = [[UIColor]]()
-        
         let colorArray = [CGSSGlobal.allTypeColor, CGSSGlobal.lifeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
-        colors.append(colorArray)
-        colors.append(colorArray)
-        colors.append(colorArray)
-        colors.append(colorArray)
-        colors.append(colorArray)
+        let colors = [[UIColor]].init(count: 6, repeatedValue: colorArray)
         cardDV?.attGridView.setGridColor(colors)
+        
+        var fonts = [[UIFont]]()
+        let fontArray = [UIFont].init(count: 6, repeatedValue: CGSSGlobal.alphabetFont)
+        var fontArray2 = [UIFont].init(count: 6, repeatedValue: CGSSGlobal.numberFont!)
+        fontArray2[0] = CGSSGlobal.alphabetFont
+        fonts.append(fontArray)
+        fonts.append(fontArray2)
+        fonts.append(fontArray2)
+        fonts.append(fontArray2)
+        fonts.append(fontArray2)
+        cardDV?.attGridView.setGridFont(fonts)
         
         // 设置属性排名列表
         var rankGridStrings = [[String]]()
@@ -101,6 +107,15 @@ class CardDetailViewController: UIViewController {
         colors2.append(colorArray2)
         colors2.append(colorArray3)
         cardDV?.rankGridView.setGridColor(colors2)
+        
+        var fonts2 = [[UIFont]]()
+        let fontArray3 = [UIFont].init(count: 5, repeatedValue: CGSSGlobal.alphabetFont)
+        var fontArray4 = [UIFont].init(count: 5, repeatedValue: CGSSGlobal.numberFont!)
+        fontArray4[0] = CGSSGlobal.alphabetFont
+        fonts2.append(fontArray3)
+        fonts2.append(fontArray4)
+        fonts2.append(fontArray4)
+        cardDV?.rankGridView.setGridFont(fonts2)
         
         // 设置主动技能
         if let skill = card.skill {

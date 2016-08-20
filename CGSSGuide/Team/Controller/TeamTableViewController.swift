@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, TeamEditViewControllerDelegate {
+class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate, TeamEditViewControllerDelegate {
     
     var teams: [CGSSTeam] {
         let manager = CGSSTeamManager.defaultManager

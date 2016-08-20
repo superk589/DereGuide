@@ -71,7 +71,7 @@ class TeamDetailView: UIView {
             icons.append(icon)
         }
         
-        editTeamButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY + 7, 30, 30))
+        editTeamButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY + btnW / 2 - 15, 30, 30))
         editTeamButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         editTeamButton.tintColor = UIColor.lightGrayColor()
         editTeamButton.addTarget(self, action: #selector(editTeam), forControlEvents: .TouchUpInside)
@@ -109,7 +109,7 @@ class TeamDetailView: UIView {
         // backSupportLabel.textColor = UIColor.lightGrayColor()
         backSupportLabel.text = "后援数值: "
         backSupportLabel.textColor = UIColor.darkGrayColor()
-        backSupportTF = UITextField.init(frame: CGRectMake(CGSSGlobal.width - 150, originY, 140, 17))
+        backSupportTF = UITextField.init(frame: CGRectMake(CGSSGlobal.width - 150, originY - 5, 140, 27))
         backSupportTF.autocorrectionType = .No
         backSupportTF.autocapitalizationType = .None
         backSupportTF.borderStyle = .RoundedRect
@@ -356,6 +356,13 @@ class TeamDetailView: UIView {
         leaderSkillGrid.setGridContent(upValueStrings)
         leaderSkillGrid.setGridColor(upValueColors)
         
+        for i in 0..<6 {
+            leaderSkillGrid[0, i].font = CGSSGlobal.alphabetFont
+        }
+        for i in 0..<4 {
+            leaderSkillGrid[i, 0].font = CGSSGlobal.alphabetFont
+        }
+        
         updatePresentValueGrid(team)
         backSupportTF.text = String(team.backSupportValue!)
         
@@ -415,6 +422,13 @@ class TeamDetailView: UIView {
         
         presentValueGrid.setGridContent(presentValueString)
         presentValueGrid.setGridColor(presentColor)
+        
+        for i in 0..<5 {
+            presentValueGrid[0, i].font = CGSSGlobal.alphabetFont
+        }
+        for i in 0..<8 {
+            presentValueGrid[i, 0].font = CGSSGlobal.alphabetFont
+        }
         
     }
     

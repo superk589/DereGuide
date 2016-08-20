@@ -12,7 +12,7 @@ protocol TeamEditViewControllerDelegate: class {
     func save(team: CGSSTeam)
 }
 
-class TeamEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamEditViewController: BaseTableViewController {
     
     weak var delegate: TeamEditViewControllerDelegate?
     var leader: CGSSTeamMember?
@@ -20,7 +20,6 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     var subs = [Int: CGSSTeamMember]()
     var friendLeader: CGSSTeamMember?
     var backValue: Int?
-    let tv = UITableView()
     var hv = UIView()
     var lastIndex = 0
     var lastScrollViewOffset: CGPoint?
@@ -38,7 +37,6 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
-        self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Save, target: self, action: #selector(saveTeam))
         
         hv.frame = CGRectMake(0, 0, CGSSGlobal.width, 100)
@@ -68,18 +66,14 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         // 暂时去除header
         // tv.tableHeaderView = hv
         if #available(iOS 9.0, *) {
-            tv.cellLayoutMarginsFollowReadableWidth = false
+            tableView.cellLayoutMarginsFollowReadableWidth = false
         } else {
             // Fallback on earlier versions
         }
-        tv.frame = CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64)
-        tv.delegate = self
-        tv.dataSource = self
         // tv.registerClass(TeamMemberTableViewCell.self, forCellReuseIdentifier: "TeamMemberCell")
-        tv.tableFooterView = UIView.init(frame: CGRectZero)
+        tableView.tableFooterView = UIView.init(frame: CGRectZero)
         // tv.estimatedRowHeight = 100
         // tv.rowHeight = UITableViewAutomaticDimension
-        view.addSubview(tv)
         
         let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
         swipe.direction = .Right
@@ -110,7 +104,7 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return max(cells[indexPath.row].contentView.fheight, 96)
     }
     
@@ -126,20 +120,20 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = cells[indexPath.row]
         return cell
     }
     
     var teamCardVC: TeamCardSelectTableViewController?
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         lastIndex = indexPath.row
         if teamCardVC == nil {
             teamCardVC = TeamCardSelectTableViewController()
@@ -157,15 +151,6 @@ class TeamEditViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tv.separatorInset = UIEdgeInsetsZero
-        tv.layoutMargins = UIEdgeInsetsZero
-    }
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-    }
     /*
      // MARK: - Navigation
 
@@ -181,7 +166,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     
     func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
         UIView.animateWithDuration(0.25, animations: {
-            self.tv.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, 0)
+            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, 0)
         })
         let member = getMemberByIndex(cell.tag - 100)
         var newLevel = Int(lv) ?? 10
@@ -193,14 +178,14 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     }
     
     func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
-        lastScrollViewOffset = tv.contentOffset
+        lastScrollViewOffset = tableView.contentOffset
         if cell.tag - 100 >= 2 {
             var height: CGFloat = 0
             for i in 0...cell.tag - 100 {
                 height += cells[i].contentView.fheight
             }
             UIView.animateWithDuration(0.25, animations: {
-                self.tv.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - 64 - self.keyBoardHeigt - height, 0))
+                self.tableView.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - 64 - self.keyBoardHeigt - height, 0))
             })
             
         }
@@ -225,13 +210,13 @@ extension TeamEditViewController: BaseCardTableViewControllerDelegate {
             cell.initWith(friendLeader!, type: .Friend)
             
         }
-        tv.reloadData()
+        tableView.reloadData()
     }
 }
 
 //MARK: UIScrollView代理方法
-extension TeamEditViewController: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        tv.endEditing(true)
+extension TeamEditViewController {
+    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        tableView.endEditing(true)
     }
 }
