@@ -1,14 +1,14 @@
 //
-//  CharInfoViewController.swift
+//  CharDetailViewController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 16/8/18.
+//  Created by zzk on 16/8/21.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class CharInfoViewController: BaseTableViewController {
+class CharDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
