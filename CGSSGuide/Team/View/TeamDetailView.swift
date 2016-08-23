@@ -494,12 +494,6 @@ class TeamDetailView: UIView {
         songJacket.sd_setImageWithURL(NSURL.init(string: live.musicRef!.imageURLString)!)
     }
     
-    private func drawSectionLine(positionY: CGFloat) {
-        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
-        view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
-        self.addSubview(view)
-    }
     /*
      // Only override drawRect: if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.

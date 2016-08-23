@@ -10,11 +10,11 @@ import UIKit
 import SDWebImage
 
 protocol CGSSImageViewDelegate: class {
-    func beginFullSize()
-    func beginRestore()
-    func endRestore()
-    func endFullSize()
-    func longPress(press: UILongPressGestureRecognizer)
+    func beginFullSize(iv: CGSSImageView)
+    func beginRestore(iv: CGSSImageView)
+    func endRestore(iv: CGSSImageView)
+    func endFullSize(iv: CGSSImageView)
+    func longPress(press: UILongPressGestureRecognizer, iv: CGSSImageView)
 }
 //CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
@@ -43,6 +43,8 @@ class CGSSImageView: UIImageView {
         self.originFrame = self.frame
         // 全屏时背景色为黑色
         self.backgroundColor = UIColor.blackColor()
+        setIndicator()
+        hideIndicator()
     }
     
     func setIndicator() {
@@ -100,22 +102,32 @@ class CGSSImageView: UIImageView {
         if !NSUserDefaults.standardUserDefaults().shouldCacheFullImage && CGSSGlobal.isMobileNet() && !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
             return
         }
+        
+        self.reset()
         self.activityIndicator?.startAnimating()
-        self.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "未标题-4.jpg"), options: SDWebImageOptions.init(rawValue: 0b1001), progress: { (a, b) in
+        self.showIndicator()
+        self.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self] (a, b) in
             // print(a, b)
-            self.progressIndicator?.progress = Float(a) / Float(b)
-            }, completed: { (image, error, sdImageCache, nsurl) in
-            if error != nil {
-                // print("加载大图时出错:\(error.localizedDescription)")
-            }
-            else {
-                self.isFinishedLoading = true
-                self.activityIndicator?.stopAnimating()
-                self.hideIndicator()
-            }
+            self?.progressIndicator?.progress = Float(a) / Float(b)
+            }, completed: {[weak self] (image, error, sdImageCache, nsurl) in
+            /*if error != nil {
+             // print("加载大图时出错:\(error.localizedDescription)")
+             }
+             else {
+
+             }*/
+            self?.progressIndicator?.progress = 1
+            self?.isFinishedLoading = true
+            self?.activityIndicator?.stopAnimating()
+            self?.hideIndicator()
             }
         )
         
+    }
+    
+    func reset() {
+        self.isFinishedLoading = false
+        self.progressIndicator?.progress = 0
     }
     
     func tapAction() {
@@ -133,7 +145,7 @@ class CGSSImageView: UIImageView {
                 self.center = CGPointMake(CGSSGlobal.width / 2, CGSSGlobal.height / 2)
             }
             self.superview?.bringSubviewToFront(self)
-            delegate?.beginFullSize()
+            delegate?.beginFullSize(self)
             isTapped = true
         }
         else {
@@ -143,7 +155,7 @@ class CGSSImageView: UIImageView {
                 self.transform = CGAffineTransformRotate(self.transform, CGFloat(-90 / 180 * M_PI))
                 self.frame = self.originFrame
             }
-            delegate?.beginRestore()
+            delegate?.beginRestore(self)
             isTapped = false
         }
         
@@ -153,19 +165,19 @@ class CGSSImageView: UIImageView {
     func restored() {
         self.userInteractionEnabled = true
         showIndicator()
-        delegate?.endRestore()
+        delegate?.endRestore(self)
     }
     
     // 完成全屏化
     func fullsized() {
         self.userInteractionEnabled = true
-        delegate?.endFullSize()
+        delegate?.endFullSize(self)
     }
     
     func longPressAction(longPress: UILongPressGestureRecognizer) {
         // 长按手势会触发两次 此处判定是长按开始而非结束
         if isTapped && longPress.state == .Began {
-            delegate?.longPress(longPress)
+            delegate?.longPress(longPress, iv: self)
         }
     }
     

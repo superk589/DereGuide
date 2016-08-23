@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardDetailViewController: UIViewController {
+class CardDetailViewController: UIViewController, CardDetailViewDelegate {
     
     var card: CGSSCard!
     var cardDV: CardDetailView!
@@ -28,7 +28,8 @@ class CardDetailViewController: UIViewController {
         view.addSubview(sv)
         
         cardDV = CardDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
-        cardDV?.fullImageView?.delegate = self
+        cardDV.delegate = self
+        cardDV.fullImageView?.delegate = self
         // 关闭自动躲避导航栏
         self.automaticallyAdjustsScrollViewInsets = false
         sv.addSubview(cardDV!)
@@ -51,102 +52,11 @@ class CardDetailViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = leftItem
         
-        if card.hasSpread! {
-            cardDV?.fullImageView?.setIndicator()
-            cardDV?.fullImageView?.setCustomImageWithURL(NSURL(string: card.spreadImageRef!)!)
-        } else {
-            cardDV?.setWithoutSpreadImage()
-        }
-        
-        cardDV?.cardNameLabel.text = card.nameOnly! + "  " + (card.chara?.conventional)!
-        cardDV?.titleLabel.text = card.title
-        cardDV?.rarityLabel.text = card.rarity?.rarityString
-        
-        let dao = CGSSDAO.sharedDAO
-        cardDV?.cardIconView?.setWithCardId(card.id!)
-        
-        // 设置属性列表
-        var attGridStrings = [[String]]()
-        attGridStrings.append(["  ", "HP", "Vocal", "Dance", "Visual", "Total"])
-        attGridStrings.append(["Lv.1", String(card.hpMin), String(card.vocalMin), String(card.danceMin), String(card.visualMin), String(card.overallMin)])
-        attGridStrings.append(["Lv.\(card.rarity.baseMaxLevel)", String(card.hpMax), String(card.vocalMax), String(card.danceMax), String(card.visualMax), String(card.overallMax)])
-        attGridStrings.append(["Bonus", String(card.bonusHp), String(card.bonusVocal), String(card.bonusDance), String(card.bonusVisual), String(card.overallBonus)])
-        attGridStrings.append(["Total", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
-        
-        cardDV?.attGridView.setGridContent(attGridStrings)
-        
-        let colorArray = [CGSSGlobal.allTypeColor, CGSSGlobal.lifeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
-        let colors = [[UIColor]].init(count: 6, repeatedValue: colorArray)
-        cardDV?.attGridView.setGridColor(colors)
-        
-        var fonts = [[UIFont]]()
-        let fontArray = [UIFont].init(count: 6, repeatedValue: CGSSGlobal.alphabetFont)
-        var fontArray2 = [UIFont].init(count: 6, repeatedValue: CGSSGlobal.numberFont!)
-        fontArray2[0] = CGSSGlobal.alphabetFont
-        fonts.append(fontArray)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        cardDV?.attGridView.setGridFont(fonts)
-        
-        // 设置属性排名列表
-        var rankGridStrings = [[String]]()
-        let rankInType = dao.getRankInType(card)
-        let rankInAll = dao.getRankInAll(card)
-        rankGridStrings.append(["  ", "Vocal", "Dance", "Visual", "Total"])
-        rankGridStrings.append(["In \(card.attShort)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
-        rankGridStrings.append(["In All", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
-        cardDV?.rankGridView.setGridContent(rankGridStrings)
-        
-        var colors2 = [[UIColor]]()
-        let colorArray2 = [card.attColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
-        let colorArray3 = [CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
-        
-        colors2.append(colorArray3)
-        colors2.append(colorArray2)
-        colors2.append(colorArray3)
-        cardDV?.rankGridView.setGridColor(colors2)
-        
-        var fonts2 = [[UIFont]]()
-        let fontArray3 = [UIFont].init(count: 5, repeatedValue: CGSSGlobal.alphabetFont)
-        var fontArray4 = [UIFont].init(count: 5, repeatedValue: CGSSGlobal.numberFont!)
-        fontArray4[0] = CGSSGlobal.alphabetFont
-        fonts2.append(fontArray3)
-        fonts2.append(fontArray4)
-        fonts2.append(fontArray4)
-        cardDV?.rankGridView.setGridFont(fonts2)
-        
-        // 设置主动技能
-        if let skill = card.skill {
-            cardDV?.setSkillContentView(skill)
-        }
-        
-        // 设置队长技能
-        if let leaderSkill = card.leaderSkill {
-            cardDV?.setLeaderSkillContentView(leaderSkill)
-        }
-        
-        // 设置进化信息
-        if let evolution_id = card.evolutionId where evolution_id > 0 {
-            cardDV?.setEvolutionContentView()
-            cardDV?.evolutionFromImageView.setWithCardId(card.id)
-            cardDV?.evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
-        }
-        
+        cardDV.initWith(card)
         sv.contentSize = cardDV.frame.size
         
-        // 设置角色信息
-        
-        // 设置技能升级信息
-        
-        // 设置推荐组队信息
-        
-        // 设置出售价格
-        
-        // 设置饲料经验信息
-        
     }
+    
     // 添加当前卡到收藏
     func addOrRemoveFavorite() {
         let fm = CGSSFavoriteManager.defaultManager
@@ -219,14 +129,14 @@ class CardDetailViewController: UIViewController {
 }
 
 extension CardDetailViewController: CGSSImageViewDelegate {
-    func beginRestore() {
-        self.cardDV?.addSubview((self.cardDV?.fullImageView)!)
+    func beginRestore(iv: CGSSImageView) {
+        self.cardDV?.addSubview(iv)
         self.view.sendSubviewToBack(fullScreenView!)
-        self.cardDV?.fullImageView?.frame.origin.y = -64 + (self.sv.contentOffset.y)
+        iv.frame.origin.y = -64 + (self.sv.contentOffset.y)
         
         UIView.animateWithDuration(0.25) {
             UIApplication.sharedApplication().statusBarHidden = false
-            self.cardDV?.fullImageView?.frame.origin.y = 0
+            iv.frame.origin.y = 0
             self.navigationController?.navigationBar.alpha = 1
             self.tabBarController?.tabBar.alpha = 1
         }
@@ -235,14 +145,14 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         
         // self.cardDV?.backgroundColor = UIColor.whiteColor()
     }
-    func endRestore() {
+    func endRestore(iv: CGSSImageView) {
         
     }
-    func beginFullSize() {
+    func beginFullSize(iv: CGSSImageView) {
         // 置于顶层 覆盖一切
-        // UIApplication.sharedApplication().keyWindow?.addSubview((self.cardDV?.fullImageView)!)
+        // UIApplication.sharedApplication().keyWindow?.addSubview((iv)!)
         self.fullScreenView?.bounds.origin.y = -64 + (self.sv.contentOffset.y)
-        self.fullScreenView?.addSubview((self.cardDV?.fullImageView)!)
+        self.fullScreenView?.addSubview(iv)
         
         UIView.animateWithDuration(0.25) {
             UIApplication.sharedApplication().statusBarHidden = true
@@ -259,7 +169,7 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         // let vc = UIViewController()
         // self.modalTransitionStyle = .CoverVertical
         // presentViewController(vc, animated: true, completion: nil)
-        // vc.view.addSubview((self.cardDV?.fullImageView)!)
+        // vc.view.addSubview((iv)!)
         
         // self.tabBarController?.tabBar.hidden = true
         // self.navigationController?.navigationBar.hidden = true
@@ -269,17 +179,17 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         // self.cardDV?.backgroundColor = UIColor.blackColor()
         
     }
-    func endFullSize() {
+    func endFullSize(iv: CGSSImageView) {
         
     }
-    func longPress(press: UILongPressGestureRecognizer) {
+    func longPress(press: UILongPressGestureRecognizer, iv: CGSSImageView) {
         // 长按实现更多操作 保存/分享等
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let location = press.locationInView(fullScreenView)
         alert.popoverPresentationController?.sourceView = fullScreenView
         alert.popoverPresentationController?.sourceRect = CGRectMake(location.x, location.y, 0, 0)
         alert.addAction(UIAlertAction.init(title: "保存到相册", style: .Default, handler: { (_: UIAlertAction) in
-            if let image = self.cardDV?.fullImageView?.image {
+            if let image = iv.image {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.imageDidFinishingSaving), nil)
             }
             }))

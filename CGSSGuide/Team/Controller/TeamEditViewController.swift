@@ -174,7 +174,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
             newLevel = 10
         }
         member?.skillLevel = newLevel
-        cell.initSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
+        cell.setupSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
     }
     
     func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {

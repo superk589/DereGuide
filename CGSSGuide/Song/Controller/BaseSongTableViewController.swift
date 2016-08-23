@@ -124,7 +124,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         self.tableView.rowHeight = 86
         sorter = CGSSSorter.init(att: "updateId")
         dao.sortListByAttibuteName(&liveList!, sorter: sorter)
-    
+        
     }
     
     override func didReceiveMemoryWarning() {

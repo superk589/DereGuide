@@ -13,7 +13,7 @@ class CardTableViewController: BaseCardTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print(NSHomeDirectory())
+        // print(NSHomeDirectory())
         // 作为工具启动的第一个页面 在此页面做自动更新检查
         let updater = CGSSUpdater.defaultUpdater
         // 如果数据Major版本号过低强制删除旧数据 再更新 没有取消按钮
@@ -54,7 +54,7 @@ class CardTableViewController: BaseCardTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.resignFirstResponder()
         let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = self.cardList[indexPath.row]
+        cardDetailVC.card = cardList[indexPath.row]
         // 打开谱面时 隐藏tabbar
         cardDetailVC.hidesBottomBarWhenPushed = true
         

@@ -41,4 +41,11 @@ extension UIView {
 			self.frame.origin.x = newValue
 		}
 	}
+    
+    func drawSectionLine(positionY: CGFloat) {
+        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
+        view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
+        self.addSubview(view)
+    }
 }

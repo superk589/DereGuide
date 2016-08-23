@@ -122,9 +122,11 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func cardIconClick(id: Int) {
-        let cardDVC = CardDetailViewController()
-        cardDVC.card = CGSSDAO.sharedDAO.findCardById(id)
-        navigationController?.pushViewController(cardDVC, animated: true)
+        if let card = CGSSDAO.sharedDAO.findCardById(id) {
+            let cardDVC = CardDetailViewController()
+            cardDVC.card = card
+            navigationController?.pushViewController(cardDVC, animated: true)
+        }
     }
     func liveTypeButtonClick() {
         let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .ActionSheet)

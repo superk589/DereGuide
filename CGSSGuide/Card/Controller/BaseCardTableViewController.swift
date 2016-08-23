@@ -64,6 +64,12 @@ class BaseCardTableViewController: RefreshableTableViewController {
         super.viewDidLoad()
         // 初始化导航栏的搜索条
         searchBar = UISearchBar()
+        // 为了避免push/pop时闪烁,searchBar的背景图设置为透明的
+        for sub in searchBar.subviews.first!.subviews {
+            if let iv = sub as? UIImageView {
+                iv.alpha = 0
+            }
+        }
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .Done
         // searchBar.showsCancelButton = true

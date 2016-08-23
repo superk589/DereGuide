@@ -72,7 +72,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupSkillView() {
+    func prepareSkillView() {
         if skillView != nil {
             return
         }
@@ -136,7 +136,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
     }
     
-    func setupLeaderSkillView() {
+    func prepareLeaderSkillView() {
         if leaderSkillView != nil {
             return
         }
@@ -168,7 +168,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         contentView.fheight = max(leaderSkillView.fy, icon.fheight + icon.fy)
     }
     
-    func initSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
+    func setupSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
         originY = cardName.fy + cardName.fheight + topSpace
         skillView.fy = originY
         if skill != nil {
@@ -190,7 +190,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         originY += skillView.fheight + topSpace
     }
     
-    func initLeaderSkillViewWith(leaderSkill: CGSSLeaderSkill?) {
+    func setupLeaderSkillViewWith(leaderSkill: CGSSLeaderSkill?) {
         leaderSkillView.fy = originY
         if leaderSkill != nil {
             leaderSkillName.text = leaderSkill!.name
@@ -213,16 +213,16 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView?.fheight = 0
         switch type {
         case .Leader:
-            self.setupSkillView()
-            self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
-            self.setupLeaderSkillView()
-            self.initLeaderSkillViewWith(card.leaderSkill)
+            self.prepareSkillView()
+            self.setupSkillViewWith(card.skill, skillLevel: model.skillLevel)
+            self.prepareLeaderSkillView()
+            self.setupLeaderSkillViewWith(card.leaderSkill)
         case .Sub:
-            self.setupSkillView()
-            self.initSkillViewWith(card.skill, skillLevel: model.skillLevel)
+            self.prepareSkillView()
+            self.setupSkillViewWith(card.skill, skillLevel: model.skillLevel)
         case .Friend:
-            self.setupLeaderSkillView()
-            self.initLeaderSkillViewWith(card.leaderSkill)
+            self.prepareLeaderSkillView()
+            self.setupLeaderSkillViewWith(card.leaderSkill)
         }
         contentView.fheight = max(originY, icon.fheight + icon.fy)
     }
