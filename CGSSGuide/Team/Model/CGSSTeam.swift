@@ -308,7 +308,7 @@ class CGSSTeam: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.leader = aDecoder.decodeObjectForKey("leader") as? CGSSTeamMember
         self.subs = aDecoder.decodeObjectForKey("subs") as? [CGSSTeamMember]
-        self.backSupportValue = aDecoder.decodeObjectForKey("backSupportValue") as? Int ?? 100000
+        self.backSupportValue = aDecoder.decodeObjectForKey("backSupportValue") as? Int ?? CGSSGlobal.presetBackValue
         self.friendLeader = aDecoder.decodeObjectForKey("friendLeader") as? CGSSTeamMember
         self.testDiff = aDecoder.decodeObjectForKey("testDiff") as? Int
         self.testLiveId = aDecoder.decodeObjectForKey("testLiveId") as? Int

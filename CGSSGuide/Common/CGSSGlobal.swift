@@ -140,5 +140,7 @@ public class CGSSGlobal: NSObject {
         
     }
     
+    static let presetBackValue = 103463
+    
 }
 

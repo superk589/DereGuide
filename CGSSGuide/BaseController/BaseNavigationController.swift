@@ -20,14 +20,6 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         // Do any additional setup after loading the view.
     }
     
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if self.viewControllers.count > 1 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

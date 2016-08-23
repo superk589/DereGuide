@@ -30,7 +30,7 @@ class TeamTableViewCell: UITableViewCell {
         skillLvLabels = [UILabel]()
         for index in 0...5 {
             let icon = CGSSCardIconView.init(frame: CGRectMake(leftSpace + (btnW + space) * CGFloat(index), 10, btnW, btnW))
-            
+            icon.userInteractionEnabled = false
             let label = UILabel.init(frame: CGRectMake(icon.frame.origin.x, icon.frame.origin.y + icon.frame.size.height, icon.frame.size.width, 21))
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .Center

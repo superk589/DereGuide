@@ -16,7 +16,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.rowHeight = TeamTableViewCell.btnW + 55
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Add, target: self, action: #selector(addTeam))
         self.navigationItem.leftBarButtonItem = self.editButtonItem()

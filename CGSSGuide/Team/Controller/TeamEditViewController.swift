@@ -110,7 +110,7 @@ class TeamEditViewController: BaseTableViewController {
     
     func saveTeam() {
         if let leader = self.leader, friendLeader = self.friendLeader where subs.count == 4 {
-            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? 100000, friendLeader: friendLeader)
+            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? CGSSGlobal.presetBackValue, friendLeader: friendLeader)
             delegate?.save(team)
             self.navigationController?.popViewControllerAnimated(true)
         }
