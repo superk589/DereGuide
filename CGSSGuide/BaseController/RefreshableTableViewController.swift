@@ -25,7 +25,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         
         updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 160, 50))
         updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 100
+        updateStatusView.center.y = view.center.y - 120
         updateStatusView.hidden = true
         updateStatusView.delegate = self
         UIApplication.sharedApplication().keyWindow?.addSubview(updateStatusView)

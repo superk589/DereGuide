@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121282891D6BE20F001E9EDA /* BaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121282881D6BE20F001E9EDA /* BaseDetailViewController.swift */; };
 		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */; };
@@ -142,6 +143,8 @@
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
+		12CDD8281D6B2C4000312EF2 /* icon_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 12CDD8271D6B2C4000312EF2 /* icon_placeholder.png */; };
+		12CDD82A1D6B31B800312EF2 /* 未标题-4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 12CDD8291D6B31B800312EF2 /* 未标题-4.jpg */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */; };
@@ -161,6 +164,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		121282881D6BE20F001E9EDA /* BaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDetailViewController.swift; sourceTree = "<group>"; };
 		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAttributeValue.swift; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
+		12CDD8271D6B2C4000312EF2 /* icon_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_placeholder.png; sourceTree = "<group>"; };
+		12CDD8291D6B31B800312EF2 /* 未标题-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "未标题-4.jpg"; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,6 +432,8 @@
 		1269E9111D5208760071AD7F /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				12CDD8291D6B31B800312EF2 /* 未标题-4.jpg */,
+				12CDD8271D6B2C4000312EF2 /* icon_placeholder.png */,
 				1277132D1D633D0E00B65473 /* 433-x.png */,
 				1277132E1D633D0E00B65473 /* 433-x@2x.png */,
 				1277132F1D633D0E00B65473 /* 433-x@3x.png */,
@@ -593,6 +601,7 @@
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
+				121282881D6BE20F001E9EDA /* BaseDetailViewController.swift */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -790,6 +799,7 @@
 				1269E99A1D520A840071AD7F /* 726-star.png in Resources */,
 				1269E94D1D5209A40071AD7F /* 748-heart-toolbar@2x.png in Resources */,
 				1269E9501D5209A40071AD7F /* 765-arrow-left-toolbar@2x.png in Resources */,
+				12CDD8281D6B2C4000312EF2 /* icon_placeholder.png in Resources */,
 				1269E9C01D520AAE0071AD7F /* 898-music-note@3x.png in Resources */,
 				121C78DE1D5729A600D0B636 /* 766-arrow-right-toolbar-selected.png in Resources */,
 				121C78CE1D57200400D0B636 /* 763-arrow-up-toolbar-selected.png in Resources */,
@@ -820,6 +830,7 @@
 				121C78DF1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png in Resources */,
 				1269E9B21D520AA10071AD7F /* 779-users.png in Resources */,
 				122EED0F1D6171B6008ADE08 /* 921-toolbox@2x.png in Resources */,
+				12CDD82A1D6B31B800312EF2 /* 未标题-4.jpg in Resources */,
 				121C78D01D57200400D0B636 /* 763-arrow-up-toolbar-selected@3x.png in Resources */,
 				1269E9BE1D520AAE0071AD7F /* 898-music-note.png in Resources */,
 				121C78E01D5729A600D0B636 /* 766-arrow-right-toolbar-selected@3x.png in Resources */,
@@ -907,6 +918,7 @@
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
+				121282891D6BE20F001E9EDA /* BaseDetailViewController.swift in Sources */,
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,

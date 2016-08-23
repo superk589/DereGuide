@@ -14,7 +14,7 @@ protocol CGSSImageViewDelegate: class {
     func beginRestore()
     func endRestore()
     func endFullSize()
-    func longPress(press:UILongPressGestureRecognizer)
+    func longPress(press: UILongPressGestureRecognizer)
 }
 //CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
@@ -101,7 +101,7 @@ class CGSSImageView: UIImageView {
             return
         }
         self.activityIndicator?.startAnimating()
-        self.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { (a, b) in
+        self.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "未标题-4.jpg"), options: SDWebImageOptions.init(rawValue: 0b1001), progress: { (a, b) in
             // print(a, b)
             self.progressIndicator?.progress = Float(a) / Float(b)
             }, completed: { (image, error, sdImageCache, nsurl) in

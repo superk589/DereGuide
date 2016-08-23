@@ -29,7 +29,8 @@ class CGSSIconView: UIImageView {
     }
     
     func setIconImage(urlStr: String) {
-        sd_setImageWithURL(NSURL.init(string: urlStr)!)
+        sd_setImageWithURL(NSURL.init(string: urlStr)!, placeholderImage: UIImage.init(named: "icon_placeholder"))
+        // sd_setImageWithURL(NSURL.init(string: urlStr)!)
     }
     
     func setAction(target: AnyObject, action: Selector) {
