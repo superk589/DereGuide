@@ -32,7 +32,10 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        tableView.superview?.addSubview(tb)
+        if let superview = tableView.superview {
+            superview.addSubview(tb)
+            tb.fy = superview.fheight - 40
+        }
     }
     
     override func didReceiveMemoryWarning() {

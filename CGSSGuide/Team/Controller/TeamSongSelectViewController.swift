@@ -33,7 +33,10 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        tableView.superview?.addSubview(tb)
+        if let superview = tableView.superview {
+            superview.addSubview(tb)
+            tb.fy = superview.fheight - 40
+        }
     }
     
     override func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {

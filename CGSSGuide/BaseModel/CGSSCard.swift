@@ -69,6 +69,16 @@ extension CGSSCard {
         }
         return returnValue
     }
+    
+    //用户排序的动态属性
+    dynamic var sAlbumId: Int {
+        return albumId
+    }
+    
+    dynamic var sRarity :Int {
+        return rarity.rarity
+    }
+    
     //
     dynamic var dance: Int {
         if let base = danceMax, bonus = bonusDance {
