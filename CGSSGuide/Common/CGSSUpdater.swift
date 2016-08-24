@@ -324,6 +324,10 @@ public class CGSSUpdater: NSObject {
                         if json != JSON.null {
                             let card = CGSSCard.init(fromJson: json)
                             let dao = CGSSDAO.sharedDAO
+                            if let oldCard = dao.cardDict.objectForKey(item.id) as? CGSSCard {
+                                let updateTime = oldCard.updateTime
+                                card.updateTime = updateTime
+                            }
                             dao.cardDict.setObject(card, forKey: item.id)
                             insideComplete(nil)
                         } else {
@@ -349,8 +353,15 @@ public class CGSSUpdater: NSObject {
                         insideComplete(error?.localizedDescription)
                     } else {
                         if let beatmap = CGSSBeatmap.init(json: JSON.init(data: data!)) {
+                            let subs = item.id.componentsSeparatedByString("_")
                             let dao = CGSSDAO.sharedDAO
-                            dao.beatmapDict.setObject(beatmap, forKey: item.id)
+                            if let dict = dao.beatmapDict.objectForKey(subs[0]) as? NSMutableDictionary {
+                                dict.setValue(beatmap, forKey: subs[1])
+                            } else {
+                                let dict = NSMutableDictionary()
+                                dict.setValue(beatmap, forKey: subs[1])
+                                dao.beatmapDict.setValue(dict, forKey: subs[0])
+                            }
                             insideComplete(nil)
                         } else {
                             insideComplete("获取到的谱面数据异常")

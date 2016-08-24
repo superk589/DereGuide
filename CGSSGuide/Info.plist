@@ -24,13 +24,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
 		<string>2</string>
 		<key>Minor</key>
-		<string>0</string>
+		<string>1</string>
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
