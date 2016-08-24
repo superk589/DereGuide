@@ -159,7 +159,7 @@ class CardDetailView: UIView {
             setWithoutSpreadImage()
         }
         
-        cardNameLabel.text = card.nameOnly! + "  " + (card.chara?.conventional)!
+        cardNameLabel.text = card.chara!.name + "  " + (card.chara?.conventional)!
         titleLabel.text = card.title
         rarityLabel.text = card.rarity?.rarityString
         cardIconView?.setWithCardId(card.id!)
@@ -244,7 +244,7 @@ class CardDetailView: UIView {
         }
         evolutionContentView.fy = leaderSkillContentView.fy + leaderSkillContentView.fheight
         
-        self.fheight = evolutionContentView.fy + evolutionContentView.fheight + topSpace + CardDetailView.bottomInset
+        self.fheight = evolutionContentView.fy + evolutionContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
         
         // 设置角色信息
         
@@ -266,6 +266,10 @@ class CardDetailView: UIView {
         self.bounds = CGRectMake(0, (fullImageView?.frame.size.height)!, CGSSGlobal.width, 0)
         // self.bounds.origin.y += 1000 //CGSSGlobal.fullImageWidth/CGSSGlobal.width*CGSSGlobal.fullImageHeight
         // self.contentSize
+    }
+    
+    func setWithSpreadImage() {
+        self.bounds = CGRectMake(0, 0, CGSSGlobal.width, 0)
     }
     
     var skillContentView: UIView!

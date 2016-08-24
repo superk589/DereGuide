@@ -58,7 +58,6 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         originY += 18 + topSpace
         
         icon = CGSSCardIconView.init(frame: CGRectMake(10, originY + 5, 48, 48))
-        
         // originY += 30 + topSpace
         
         contentView.addSubview(icon)
@@ -130,10 +129,18 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         contentView.addSubview(skillView)
         contentView.fheight = max(skillView.fy, icon.fheight + icon.fy)
         
-        // 让skillView拦截点击事件,防止误点tableview的cell跳入下一层
-        let tap = UITapGestureRecognizer.init()
-        skillView.addGestureRecognizer(tap)
-        
+    }
+    
+    // 当点击的位置是编辑技能等级的周围部分时 也触发编辑效果
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let view = super.hitTest(point, withEvent: event)
+        if view == skillView {
+            let newPoint = convertPoint(point, toView: skillView)
+            if newPoint.x >= skillView.fwidth - 85 && newPoint.y <= 50 {
+                return skillLevelTF
+            }
+        }
+        return view
     }
     
     func prepareLeaderSkillView() {

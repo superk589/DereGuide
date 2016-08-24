@@ -133,7 +133,7 @@ class TeamDetailView: UIView {
         skillListDescLabel.font = UIFont.systemFontOfSize(14)
         skillListDescLabel.textColor = UIColor.blackColor()
         
-        skillShowOrHideButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY, 22, 22))
+        skillShowOrHideButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY - 4, 30, 30))
         // 让图片总是可以被染色影响
         let image = UIImage.init(named: "764-arrow-down-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
         skillShowOrHideButton.setImage(image, forState: .Normal)

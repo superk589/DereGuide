@@ -7,12 +7,16 @@
 //
 
 import UIKit
+protocol CGSSIconViewDelegate: class {
+    func iconClick(iv: CGSSIconView)
+}
 
 class CGSSIconView: UIImageView {
     
     var tap: UITapGestureRecognizer?
     var action: Selector?
     weak var target: AnyObject?
+    weak var delegate: CGSSIconViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +43,7 @@ class CGSSIconView: UIImageView {
     }
     
     func onClick() {
+        delegate?.iconClick(self)
         if action != nil {
             self.target?.performSelector(action!, withObject: self)
         }

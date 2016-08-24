@@ -42,6 +42,7 @@ class TeamEditViewController: BaseTableViewController {
         hv.frame = CGRectMake(0, 0, CGSSGlobal.width, 100)
         for i in 0...5 {
             let cell = TeamMemberTableViewCell()
+            cell.icon.delegate = self
             if i == 0 {
                 cell.title.text = "队长"
                 if let leader = self.leader {
@@ -218,5 +219,19 @@ extension TeamEditViewController: BaseCardTableViewControllerDelegate {
 extension TeamEditViewController {
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         tableView.endEditing(true)
+    }
+}
+
+//MARK: CGSSIconViewDelegate
+extension TeamEditViewController: CGSSIconViewDelegate {
+    func iconClick(iv: CGSSIconView) {
+        let cardIcon = iv as! CGSSCardIconView
+        if let id = cardIcon.cardId {
+            if let card = CGSSDAO.sharedDAO.findCardById(id) {
+                let cardDVC = CardDetailViewController()
+                cardDVC.card = card
+                navigationController?.pushViewController(cardDVC, animated: true)
+            }
+        }
     }
 }

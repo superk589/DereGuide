@@ -362,7 +362,6 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
      */
     
     // MARK: scrollView的代理方法
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         setNeedsDisplay()
     }
