@@ -32,10 +32,9 @@ public class CGSSGlobal: NSObject {
     // public static let allTypeColor = UIColor.init(red: 1.0*255/255, green: 1.0*253/255, blue: 1.0*114/255, alpha: 1)
     public static let allTypeColor = UIColor.darkGrayColor()
     
-    //用于GridView的字体
+    // 用于GridView的字体
     public static let numberFont = UIFont.init(name: "menlo", size: 14)
     public static let alphabetFont = UIFont.systemFontOfSize(14)
-    
     
     public static let fullImageWidth: CGFloat = 1280
     public static let fullImageHeight: CGFloat = 824

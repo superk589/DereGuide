@@ -51,7 +51,6 @@ public class CGSSUpdater: NSObject {
     func cancelCurrentSession() {
         dataSession.invalidateAndCancel()
         checkSession.invalidateAndCancel()
-        isUpdating = false
         configSession()
     }
     
