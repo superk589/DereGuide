@@ -140,8 +140,6 @@ class CardDetailView: UIView {
         // addSubview(rankContentView)
         
         originY = originY + topSpace + 42
-        drawSectionLine(originY)
-        originY = originY + topSpace
         
         prepareSkillContentView()
         prepareLeaderSkillContentView()
