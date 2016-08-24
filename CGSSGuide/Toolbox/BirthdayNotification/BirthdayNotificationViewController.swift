@@ -118,10 +118,12 @@ class BirthdayNotificationViewController: UITableViewController {
              alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
              self.presentViewController(alert, animated: true, completion: nil)
              }*/
+                   BirthdayCenter.defaultCenter.sortInside()
             BirthdayCenter.defaultCenter.scheduleNotifications()
         } else {
             BirthdayCenter.defaultCenter.removeNotification()
         }
+ 
         prepareChars()
         tableView.reloadData()
         

@@ -10,8 +10,43 @@ import UIKit
 
 class BirthdayCenter: NSObject {
     static let defaultCenter = BirthdayCenter()
+    var sortedChars: [CGSSChar]!
     private override init() {
         super.init()
+        let dao = CGSSDAO.sharedDAO
+        sortedChars = dao.charDict.allValues as! [CGSSChar]
+        sortInside()
+    }
+    
+    var tempChar: CGSSChar!
+    var indexOfTempChar: Int? {
+        if tempChar == nil {
+            return nil
+        } else {
+            return sortedChars.indexOf(tempChar)
+        }
+    }
+    
+    func sortInside() {
+        if let index = indexOfTempChar {
+            sortedChars.removeAtIndex(index)
+        }
+        tempChar = CGSSChar()
+        let nowComp = getNowDateComponents()
+        tempChar.birthDay = nowComp.day
+        tempChar.birthMonth = nowComp.month
+        sortedChars.append(tempChar)
+        sortedChars.sortInPlace({ (char1, char2) -> Bool in
+            if char1.birthMonth > char2.birthMonth {
+                return false
+            } else if char1.birthMonth == char2.birthMonth && char1.birthDay > char2.birthDay {
+                return false
+            } else if char1.birthMonth == char2.birthMonth && char1.birthDay == char2.birthDay && char2 == tempChar {
+                return false
+            } else {
+                return true
+            }
+        })
     }
     
     func scheduleNotifications() {
@@ -28,21 +63,28 @@ class BirthdayCenter: NSObject {
     }
     
     func getRecent(startDays: Int, endDays: Int) -> [CGSSChar] {
-        let dao = CGSSDAO.sharedDAO
-        let chars = dao.charDict.allValues as! [CGSSChar]
         let timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
         let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         gregorian?.timeZone = timeZone
         var arr = [CGSSChar]()
-        for char in chars {
-            let date = getNextBirthday(char)
-            let dateformatter = NSDateFormatter()
-            dateformatter.dateFormat = "yyyyMMdd"
-            dateformatter.timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
+        var index = indexOfTempChar!
+        while true {
+            index += 1
+            if index >= sortedChars.count {
+                index = 0
+            }
+            if sortedChars[index] == tempChar {
+                break
+            }
             let newdate = getNowDateTruncateHours()
+            let date = getNextBirthday(sortedChars[index])
             let result = gregorian!.components(NSCalendarUnit.Day, fromDate: newdate!, toDate: date, options: NSCalendarOptions(rawValue: 0))
-            if result.day >= startDays && result.day <= endDays {
-                arr.append(char)
+            if result.day < startDays {
+                continue
+            } else if result.day >= startDays && result.day <= endDays {
+                arr.append(sortedChars[index])
+            } else {
+                break
             }
         }
         return arr
@@ -67,7 +109,6 @@ class BirthdayCenter: NSObject {
     func getNextBirthday(char: CGSSChar) -> NSDate {
         
         let nowComp = getNowDateComponents()
-        
         let dateformatter = NSDateFormatter()
         dateformatter.dateFormat = "yyyyMMdd"
         dateformatter.timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone

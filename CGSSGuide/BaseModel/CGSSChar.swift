@@ -90,6 +90,11 @@ class CGSSChar: CGSSBaseModel {
         weight = json["weight"].intValue
     }
     
+    // 用于创建一个空角色, 生日提醒中使用
+    override init() {
+        super.init()
+    }
+    
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
