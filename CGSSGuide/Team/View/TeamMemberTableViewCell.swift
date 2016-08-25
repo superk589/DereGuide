@@ -32,6 +32,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     var originY: CGFloat = 0
     var topSpace: CGFloat = 10
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -111,8 +112,6 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEndOnExit)
         skillLevelTF.addTarget(self, action: #selector(levelFieldDone), forControlEvents: .EditingDidEnd)
         
-        // originY += 16 + topSpace / 2
-        
         skillDesc = UILabel.init(frame: CGRectMake(0, 26, skillView.fwidth, 0))
         skillDesc.numberOfLines = 0
         skillDesc.lineBreakMode = .ByCharWrapping
@@ -127,16 +126,17 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         skillView.clipsToBounds = true
         contentView.addSubview(skillView)
-        contentView.fheight = max(skillView.fy, iconView.fheight + iconView.fy)
-        
     }
     
     // 当点击的位置是编辑技能等级的周围部分时 也触发编辑效果
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, withEvent: event)
-        if view == skillView {
-            let newPoint = convertPoint(point, toView: skillView)
-            if newPoint.x >= skillView.fwidth - 85 && newPoint.y <= 50 {
+        if view == nil {
+            return nil
+        }
+        if let sView = skillView where view == sView {
+            let newPoint = convertPoint(point, toView: sView)
+            if newPoint.x >= sView.fwidth - 85 && newPoint.y <= 50 {
                 return skillLevelTF
             }
         }
@@ -148,19 +148,19 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             return
         }
         leaderSkillView = UIView.init(frame: CGRectMake(68, originY, CGSSGlobal.width - 78, 0))
-        let leaderSkillStaticDesc = UILabel.init(frame: CGRectMake(0, 0, 65, 17))
+        let leaderSkillStaticDesc = UILabel.init(frame: CGRectMake(0, 5, 65, 17))
         leaderSkillStaticDesc.text = "队长技能:"
         leaderSkillStaticDesc.font = UIFont.systemFontOfSize(14)
         leaderSkillStaticDesc.textAlignment = .Left
         leaderSkillStaticDesc.textColor = UIColor.blackColor()
         leaderSkillStaticDesc.sizeToFit()
         
-        leaderSkillName = UILabel.init(frame: CGRectMake(leaderSkillStaticDesc.fwidth + 5, 0, leaderSkillView.fwidth - leaderSkillStaticDesc.fwidth - 5, 17))
+        leaderSkillName = UILabel.init(frame: CGRectMake(leaderSkillStaticDesc.fwidth + 5, 5, leaderSkillView.fwidth - leaderSkillStaticDesc.fwidth - 5, 17))
         leaderSkillName.textColor = UIColor.blackColor()
         leaderSkillName.textAlignment = .Left
         leaderSkillName.font = UIFont.systemFontOfSize(14)
         
-        leaderSkillDesc = UILabel.init(frame: CGRectMake(0, 21, leaderSkillView.fwidth, 0))
+        leaderSkillDesc = UILabel.init(frame: CGRectMake(0, 26, leaderSkillView.fwidth, 0))
         leaderSkillDesc.numberOfLines = 0
         leaderSkillDesc.lineBreakMode = .ByCharWrapping
         leaderSkillDesc.font = UIFont.systemFontOfSize(12)
@@ -172,7 +172,6 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView.clipsToBounds = true
         
         contentView.addSubview(leaderSkillView)
-        contentView.fheight = max(leaderSkillView.fy, iconView.fheight + iconView.fy)
     }
     
     func setupSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
@@ -186,29 +185,33 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             skillDesc.fwidth = skillView.fwidth
             skillDesc.text = skill!.getExplainByLevel(skillLevel!)
             skillDesc.sizeToFit()
+            skillView.fheight = skillDesc.fheight + skillDesc.fy
         } else {
             skillLevelTF.hidden = true
             skillLevelStaticDesc.hidden = true
             skillName.text = "无"
             skillDesc.fheight = 0
+            skillView.fheight = skillName.fheight + skillName.fy
         }
-        
-        skillView.fheight = skillDesc.fheight + skillDesc.fy
         originY += skillView.fheight + topSpace
     }
     
     func setupLeaderSkillViewWith(leaderSkill: CGSSLeaderSkill?) {
+        if skillView != nil {
+            originY = originY - 5
+        }
         leaderSkillView.fy = originY
         if leaderSkill != nil {
             leaderSkillName.text = leaderSkill!.name
             leaderSkillDesc.text = leaderSkill!.explainEn
             leaderSkillDesc.fwidth = leaderSkillView.fwidth
             leaderSkillDesc.sizeToFit()
+            leaderSkillView.fheight = leaderSkillDesc.fheight + leaderSkillDesc.fy
         } else {
             leaderSkillName.text = "无"
             leaderSkillDesc.fheight = 0
+            leaderSkillView.fheight = leaderSkillName.fheight + leaderSkillName.fy
         }
-        leaderSkillView.fheight = leaderSkillDesc.fheight + leaderSkillDesc.fy
         originY += leaderSkillView.fheight + topSpace
     }
     func initWith(model: CGSSTeamMember, type: CGSSTeamMemberType) {
@@ -231,7 +234,8 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.prepareLeaderSkillView()
             self.setupLeaderSkillViewWith(card.leaderSkill)
         }
-        contentView.fheight = max(originY, iconView.fheight + iconView.fy)
+        contentView.fheight = max(originY, iconView.fheight + iconView.fy + topSpace)
+        // print(contentView.fheight)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

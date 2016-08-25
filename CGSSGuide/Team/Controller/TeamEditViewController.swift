@@ -71,11 +71,7 @@ class TeamEditViewController: BaseTableViewController {
         } else {
             // Fallback on earlier versions
         }
-        // tv.registerClass(TeamMemberTableViewCell.self, forCellReuseIdentifier: "TeamMemberCell")
         tableView.tableFooterView = UIView.init(frame: CGRectZero)
-        // tv.estimatedRowHeight = 100
-        // tv.rowHeight = UITableViewAutomaticDimension
-        
         let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
         swipe.direction = .Right
         self.view.addGestureRecognizer(swipe)
@@ -106,7 +102,9 @@ class TeamEditViewController: BaseTableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return max(cells[indexPath.row].contentView.fheight, 96)
+        //print(indexPath.row, cells[indexPath.row].contentView.fheight)
+        //如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
+        return cells[indexPath.row].contentView.fheight + 1 / UIScreen.mainScreen().scale
     }
     
     func saveTeam() {
