@@ -140,15 +140,15 @@ class TeamEditViewController: BaseTableViewController {
             teamCardVC = TeamCardSelectTableViewController()
             teamCardVC!.delegate = self
         }
-        // self.navigationController?.pushViewController(teamCardVC!, animated: true)
+        self.navigationController?.pushViewController(teamCardVC!, animated: true)
         
-        // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionFade
-        // transition.subtype = kCATransitionFromRight
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-        navigationController?.pushViewController(teamCardVC!, animated: false)
+        /* // 使用自定义动画效果
+         let transition = CATransition()
+         transition.duration = 0.3
+         transition.type = kCATransitionFade
+         // transition.subtype = kCATransitionFromRight
+         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+         navigationController?.pushViewController(teamCardVC!, animated: false)*/
         
         // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -11,7 +11,7 @@ protocol BaseCardTableViewControllerDelegate {
     func selectCard(card: CGSSCard)
 }
 
-class BaseCardTableViewController: RefreshableTableViewController , CardFilterAndSorterTableViewControllerDelegate {
+class BaseCardTableViewController: RefreshableTableViewController, CardFilterAndSorterTableViewControllerDelegate {
     
     var cardList: [CGSSCard]!
     var searchBar: UISearchBar!
@@ -115,14 +115,14 @@ class BaseCardTableViewController: RefreshableTableViewController , CardFilterAn
         filterVC.sorter = self.sorter
         filterVC.hidesBottomBarWhenPushed = true
         filterVC.delegate = self
-        // navigationController?.pushViewController(filterVC, animated: true)
+        navigationController?.pushViewController(filterVC, animated: true)
         
         // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionFade
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-        navigationController?.pushViewController(filterVC, animated: false)
+        /*let transition = CATransition()
+         transition.duration = 0.3
+         transition.type = kCATransitionFade
+         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+         navigationController?.pushViewController(filterVC, animated: false)*/
     }
     
     func cancelAction() {

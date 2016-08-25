@@ -244,13 +244,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     func doneAction() {
         delegate?.doneAndReturn(filter, sorter: sorter)
-        // self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(true)
         // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionReveal
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-        navigationController?.popViewControllerAnimated(false)
+        /*let transition = CATransition()
+         transition.duration = 0.3
+         transition.type = kCATransitionReveal
+         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+         navigationController?.popViewControllerAnimated(false)*/
     }
     
     func resetAction() {

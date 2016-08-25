@@ -72,16 +72,17 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         
     }
     func backAction() {
-        if navigationController?.viewControllers.count > 2 {
-            navigationController?.popViewControllerAnimated(true)
-        } else {
-            // 当返回列表页时为了搜索栏显示效果(使用默认的动画 会出现闪烁) 只能使用自定义动画返回
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = kCATransitionReveal
-            navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-            navigationController?.popViewControllerAnimated(false)
-        }
+        navigationController?.popViewControllerAnimated(true)
+        /*if navigationController?.viewControllers.count > 2 {
+         navigationController?.popViewControllerAnimated(true)
+         } else {
+         // 当返回列表页时为了搜索栏显示效果(使用默认的动画 会出现闪烁) 只能使用自定义动画返回
+         let transition = CATransition()
+         transition.duration = 0.3
+         transition.type = kCATransitionReveal
+         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+         navigationController?.popViewControllerAnimated(false)
+         }*/
         
     }
     
@@ -112,7 +113,7 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         let cardDetailVC = CardDetailViewController()
         let dao = CGSSDAO.sharedDAO
         cardDetailVC.card = dao.findCardById(iv.cardId!)
-        cardDetailVC.modalTransitionStyle = .CoverVertical
+        // cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }
     
