@@ -46,8 +46,8 @@ class SongTableViewCell: UITableViewCell {
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space: CGFloat = 10
         let fontSize: CGFloat = 16
-        let height: CGFloat = 16
-        let originY: CGFloat = 60
+        let height: CGFloat = 20
+        let originY: CGFloat = 56
         let originX: CGFloat = 86
         //
         //// diffLabel = UILabel()

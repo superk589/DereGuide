@@ -246,7 +246,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView.init(frame: CGRectZero)
-        
         updateStatusView = UpdateStatusView.init(frame: CGRectMake(0, 0, 150, 50))
         updateStatusView.center = view.center
         updateStatusView.center.y = view.center.y - 100

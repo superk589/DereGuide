@@ -39,7 +39,6 @@ class CardTableViewController: BaseCardTableViewController {
         else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
             check(0b1111)
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,4 +70,3 @@ class CardTableViewController: BaseCardTableViewController {
     }
     
 }
-

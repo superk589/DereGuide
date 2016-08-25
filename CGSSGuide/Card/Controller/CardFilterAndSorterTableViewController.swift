@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol CardFilterAndSorterTableViewControllerDelegate: class {
+    func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter)
+}
 
 class CardFilterAndSorterTableViewController: UITableViewController {
     
@@ -22,7 +25,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     @IBOutlet weak var rarityStackView2: UIView!
     
     var sortingButtons: [UIButton]!
-    
+    weak var delegate: CardFilterAndSorterTableViewControllerDelegate?
     var filter: CGSSCardFilter!
     var sorter: CGSSSorter!
     // let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
@@ -34,6 +37,65 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         let backButton = UIBarButtonItem.init(title: "完成", style: .Plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
         
+        let resetButton = UIBarButtonItem.init(title: "重置", style: .Plain, target: self, action: #selector(resetAction))
+        self.navigationItem.rightBarButtonItem = resetButton
+        
+        prepare()
+        setup()
+        
+    }
+    
+    func setup() {
+        var rarityButtons = [UIButton]()
+        rarityButtons.appendContentsOf(rarityStackView.subviews as! [UIButton])
+        rarityButtons.appendContentsOf(rarityStackView2.subviews as! [UIButton])
+        for i in 0...7 {
+            let button = rarityButtons[i]
+            button.selected = filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - i))!)
+        }
+        
+        for i in 0...2 {
+            let button = cardTypeStackView.subviews[i] as! UIButton
+            button.selected = filter.hasCardFilterType(CGSSCardFilterType.init(cardType: Int(i))!)
+        }
+        
+        for i in 0...2 {
+            let button = attributeStackView.subviews[i] as! UIButton
+            button.selected = filter.hasAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(i))!)
+        }
+        
+        for i in 0...1 {
+            let button = favoriteStackView.subviews[i] as! UIButton
+            button.selected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
+        }
+        
+        let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
+        ascendingbutton.selected = sorter.ascending
+        
+        let descendingButton = ascendingStackView.subviews[0] as! UIButton
+        descendingButton.selected = !sorter.ascending
+        
+        for i in 0...3 {
+            let button = attributeSortingStackView.subviews[i] as! UIButton
+            let index = sorterString.indexOf(sorter.att)
+            button.selected = (index == i)
+            
+        }
+        for i in 0...2 {
+            let button = otherSortingStackView.subviews[i] as! UIButton
+            let index = sorterString.indexOf(sorter.att)
+            button.selected = (index == i + 4)
+        }
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+    }
+    
+    func prepare() {
         var rarityButtons = [UIButton]()
         rarityButtons.appendContentsOf(rarityStackView.subviews as! [UIButton])
         rarityButtons.appendContentsOf(rarityStackView2.subviews as! [UIButton])
@@ -44,10 +106,6 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             button.addTarget(self, action: #selector(rarityButtonClick), forControlEvents: .TouchUpInside)
             // button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
             button.tag = 1000 + i
-            if filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - i))!) {
-                button.selected = true
-                // button.backgroundColor = color
-            }
         }
         
         for i in 0...2 {
@@ -57,10 +115,6 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             // button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
             button.addTarget(self, action: #selector(cardTypeButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 1000 + i
-            if filter.hasCardFilterType(CGSSCardFilterType.init(cardType: Int(i))!) {
-                button.selected = true
-                // button.backgroundColor = color
-            }
         }
         
         for i in 0...2 {
@@ -70,10 +124,6 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             // button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
             button.addTarget(self, action: #selector(attributeButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 1000 + i
-            if filter.hasAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(i))!) {
-                button.selected = true
-                // button.backgroundColor = color
-            }
         }
         
         for i in 0...1 {
@@ -83,25 +133,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             // button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
             button.addTarget(self, action: #selector(favoriteButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 1000 + i
-            if filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!) {
-                button.selected = true
-                // button.backgroundColor = color
-            }
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
         ascendingbutton.addTarget(self, action: #selector(ascendingAction), forControlEvents: .TouchUpInside)
-        if sorter.ascending {
-            ascendingbutton.selected = true
-            // button.backgroundColor = color
-        }
         
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
         descendingButton.addTarget(self, action: #selector(descendingAction), forControlEvents: .TouchUpInside)
-        if !sorter.ascending {
-            descendingButton.selected = true
-            // button.backgroundColor = color
-        }
         
         sortingButtons = [UIButton]()
         for i in 0...3 {
@@ -109,28 +147,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             sortingButtons.append(button)
             button.tag = 1000 + i
             button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
-            let index = sorterString.indexOf(sorter.att)
-            if index == i {
-                button.selected = true
-            }
         }
         for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 2000 + i
             button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
-            let index = sorterString.indexOf(sorter.att)
-            if index == i + 4 {
-                button.selected = true
-            }
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
     }
     
     func rarityButtonClick(sender: UIButton) {
@@ -220,6 +243,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     }
     
     func doneAction() {
+        delegate?.doneAndReturn(filter, sorter: sorter)
         // self.navigationController?.popViewControllerAnimated(true)
         // 使用自定义动画效果
         let transition = CATransition()
@@ -227,6 +251,19 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         transition.type = kCATransitionReveal
         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
         navigationController?.popViewControllerAnimated(false)
+    }
+    
+    func resetAction() {
+        if delegate is CardTableViewController {
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
+            sorter = CGSSSorter.init(att: "update_id")
+        } else if delegate is TeamCardSelectTableViewController {
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, favoriteMask: nil)
+            sorter = CGSSSorter.init(att: "update_id")
+        } else {
+            
+        }
+        setup()
     }
     
     override func didReceiveMemoryWarning() {

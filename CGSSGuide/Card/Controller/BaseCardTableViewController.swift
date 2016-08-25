@@ -11,7 +11,7 @@ protocol BaseCardTableViewControllerDelegate {
     func selectCard(card: CGSSCard)
 }
 
-class BaseCardTableViewController: RefreshableTableViewController {
+class BaseCardTableViewController: RefreshableTableViewController , CardFilterAndSorterTableViewControllerDelegate {
     
     var cardList: [CGSSCard]!
     var searchBar: UISearchBar!
@@ -81,15 +81,18 @@ class BaseCardTableViewController: RefreshableTableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
         
         self.tableView.registerClass(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
-        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
         
-        // 按更新顺序排序
-        sorter = CGSSSorter.init(att: "update_id")
     }
     
+    func prepareFilterAndSorter() {
+        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
+        filter = CGSSSorterFilterManager.defaultManager.cardfilter
+        // 按更新顺序排序
+        sorter = CGSSSorterFilterManager.defaultManager.cardSorter
+    }
     // 根据设定的筛选和排序方法重新展现数据
     func refresh() {
+        prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
         self.cardList = dao.getCardListByMask(filter)
         if searchBar.text != "" {
@@ -110,6 +113,8 @@ class BaseCardTableViewController: RefreshableTableViewController {
         let filterVC = sb.instantiateViewControllerWithIdentifier("CardFilterAndSorterTableView") as! CardFilterAndSorterTableViewController
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
+        filterVC.hidesBottomBarWhenPushed = true
+        filterVC.delegate = self
         // navigationController?.pushViewController(filterVC, animated: true)
         
         // 使用自定义动画效果
@@ -123,9 +128,6 @@ class BaseCardTableViewController: RefreshableTableViewController {
     func cancelAction() {
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        // 恢复初始筛选
-        filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
-        sorter = CGSSSorter.init(att: "update_id")
         refresh()
     }
     
@@ -194,6 +196,12 @@ class BaseCardTableViewController: RefreshableTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         delegate?.selectCard(cardList[indexPath.row])
+    }
+    
+    func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.defaultManager.cardfilter = filter
+        CGSSSorterFilterManager.defaultManager.cardSorter = sorter
+        CGSSSorterFilterManager.defaultManager.saveForCard()
     }
     
 }

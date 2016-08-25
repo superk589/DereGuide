@@ -9,6 +9,20 @@
 import Foundation
 import SwiftyJSON
 
+extension CGSSChar {
+    var attColor: UIColor {
+        switch type {
+        case "cute":
+            return CGSSGlobal.cuteColor
+        case "cool":
+            return CGSSGlobal.coolColor
+        case "passion":
+            return CGSSGlobal.passionColor
+        default:
+            return CGSSGlobal.allTypeColor
+        }
+    }
+}
 class CGSSChar: CGSSBaseModel {
     
     var age: Int!

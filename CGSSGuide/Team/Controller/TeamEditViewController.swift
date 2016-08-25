@@ -42,7 +42,7 @@ class TeamEditViewController: BaseTableViewController {
         hv.frame = CGRectMake(0, 0, CGSSGlobal.width, 100)
         for i in 0...5 {
             let cell = TeamMemberTableViewCell()
-            cell.icon.delegate = self
+            cell.iconView.delegate = self
             if i == 0 {
                 cell.title.text = "队长"
                 if let leader = self.leader {
@@ -150,6 +150,9 @@ class TeamEditViewController: BaseTableViewController {
         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
         navigationController?.pushViewController(teamCardVC!, animated: false)
         
+        // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
     
     /*
@@ -209,7 +212,6 @@ extension TeamEditViewController: BaseCardTableViewControllerDelegate {
         } else {
             self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
             cell.initWith(friendLeader!, type: .Friend)
-            
         }
         tableView.reloadData()
     }

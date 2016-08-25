@@ -19,6 +19,7 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
         
         tb.items = [backItem]
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -28,6 +29,13 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     func tbBack() {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    override func prepareFilterAndSorter() {
+        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
+        filter = CGSSSorterFilterManager.defaultManager.teamCardfilter
+        // 按更新顺序排序
+        sorter = CGSSSorterFilterManager.defaultManager.teamCardSorter
     }
     
     override func viewWillLayoutSubviews() {
@@ -50,4 +58,9 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.defaultManager.teamCardfilter = filter
+        CGSSSorterFilterManager.defaultManager.teamCardSorter = sorter
+        CGSSSorterFilterManager.defaultManager.saveForTeam()
+    }
 }

@@ -71,7 +71,7 @@ class TeamDetailView: UIView {
             icons.append(icon)
         }
         
-        editTeamButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY + btnW / 2 - 15, 30, 30))
+        editTeamButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 40, originY, 30, btnW))
         editTeamButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         editTeamButton.tintColor = UIColor.lightGrayColor()
         editTeamButton.addTarget(self, action: #selector(editTeam), forControlEvents: .TouchUpInside)

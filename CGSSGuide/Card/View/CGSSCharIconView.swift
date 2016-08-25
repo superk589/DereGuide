@@ -21,6 +21,7 @@ class CGSSCharIconView: CGSSCardIconView {
     
     func setWithCharId(id: Int) {
         self.charId = id
+        self.backgroundColor = CGSSDAO.sharedDAO.findCharById(id)?.attColor.colorWithAlphaComponent(0.5)
         // let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
         // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
         let url = CGSSUpdater.URLOfImages + "/icon_char/\(id).png"

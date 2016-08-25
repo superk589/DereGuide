@@ -18,7 +18,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     var skillView: UIView!
     var skillLevelTF: UITextField!
     var skillDesc: UILabel!
-    var icon: CGSSCardIconView!
+    var iconView: CGSSCardIconView!
     var title: UILabel!
     
     var cardName: UILabel!
@@ -57,10 +57,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         originY += 18 + topSpace
         
-        icon = CGSSCardIconView.init(frame: CGRectMake(10, originY + 5, 48, 48))
+        iconView = CGSSCardIconView.init(frame: CGRectMake(10, originY + 5, 48, 48))
         // originY += 30 + topSpace
         
-        contentView.addSubview(icon)
+        contentView.addSubview(iconView)
         contentView.addSubview(title)
         contentView.addSubview(cardName)
         contentView.addSubview(detail)
@@ -127,7 +127,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         skillView.clipsToBounds = true
         contentView.addSubview(skillView)
-        contentView.fheight = max(skillView.fy, icon.fheight + icon.fy)
+        contentView.fheight = max(skillView.fy, iconView.fheight + iconView.fy)
         
     }
     
@@ -172,7 +172,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView.clipsToBounds = true
         
         contentView.addSubview(leaderSkillView)
-        contentView.fheight = max(leaderSkillView.fy, icon.fheight + icon.fy)
+        contentView.fheight = max(leaderSkillView.fy, iconView.fheight + iconView.fy)
     }
     
     func setupSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
@@ -213,7 +213,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     func initWith(model: CGSSTeamMember, type: CGSSTeamMemberType) {
         let card = model.cardRef!
-        self.icon.setWithCardId(card.id!)
+        self.iconView.setWithCardId(card.id!)
         self.cardName.text = card.chara?.name
         originY = cardName.fy + cardName.fheight + topSpace
         skillView?.fheight = 0
@@ -231,7 +231,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.prepareLeaderSkillView()
             self.setupLeaderSkillViewWith(card.leaderSkill)
         }
-        contentView.fheight = max(originY, icon.fheight + icon.fy)
+        contentView.fheight = max(originY, iconView.fheight + iconView.fy)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
