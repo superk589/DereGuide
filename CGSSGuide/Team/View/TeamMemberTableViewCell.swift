@@ -58,14 +58,12 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         originY += 18 + topSpace
         
-        iconView = CGSSCardIconView.init(frame: CGRectMake(10, originY + 5, 48, 48))
-        // originY += 30 + topSpace
+        iconView = CGSSCardIconView.init(frame: CGRectMake(10, originY, 48, 48))
         
         contentView.addSubview(iconView)
         contentView.addSubview(title)
         contentView.addSubview(cardName)
         contentView.addSubview(detail)
-        contentView.fheight = originY
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -175,7 +173,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func setupSkillViewWith(skill: CGSSSkill?, skillLevel: Int?) {
-        originY = cardName.fy + cardName.fheight + topSpace
+        originY = cardName.fy + cardName.fheight + 5
         skillView.fy = originY
         if skill != nil {
             skillLevelTF.hidden = false
@@ -218,7 +216,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         let card = model.cardRef!
         self.iconView.setWithCardId(card.id!)
         self.cardName.text = card.chara?.name
-        originY = cardName.fy + cardName.fheight + topSpace
+        originY = cardName.fy + cardName.fheight + 5
         skillView?.fheight = 0
         leaderSkillView?.fheight = 0
         switch type {

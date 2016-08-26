@@ -102,9 +102,9 @@ class TeamEditViewController: BaseTableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //print(indexPath.row, cells[indexPath.row].contentView.fheight)
-        //如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
-        return cells[indexPath.row].contentView.fheight + 1 / UIScreen.mainScreen().scale
+        // print(indexPath.row, cells[indexPath.row].contentView.fheight)
+        // 如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
+        return max(cells[indexPath.row].contentView.fheight, 96) + 1 / UIScreen.mainScreen().scale
     }
     
     func saveTeam() {
@@ -184,10 +184,10 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
         if cell.tag - 100 >= 2 {
             var height: CGFloat = 0
             for i in 0...cell.tag - 100 {
-                height += cells[i].contentView.fheight
+                height += cells[i].contentView.fheight + 1 / UIScreen.mainScreen().scale
             }
             UIView.animateWithDuration(0.25, animations: {
-                self.tableView.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - 64 - self.keyBoardHeigt - height, 0))
+                self.tableView.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - self.keyBoardHeigt - height, 0))
             })
             
         }
