@@ -128,7 +128,6 @@
 		1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */; };
 		1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */; };
 		1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */; };
-		126B5BEC1D5C1942004261C6 /* TeamLeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126B5BEA1D5C1942004261C6 /* TeamLeaderTableViewCell.swift */; };
 		1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */; };
 		1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B61D69816800DEF52B /* CharDetailViewController.swift */; };
 		1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B81D69818E00DEF52B /* CharDetailView.swift */; };
@@ -283,7 +282,6 @@
 		1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
 		1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatusView.swift; sourceTree = "<group>"; };
 		1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
-		126B5BEA1D5C1942004261C6 /* TeamLeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamLeaderTableViewCell.swift; sourceTree = "<group>"; };
 		1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1271C6B61D69816800DEF52B /* CharDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailViewController.swift; sourceTree = "<group>"; };
 		1271C6B81D69818E00DEF52B /* CharDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailView.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 			children = (
 				1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */,
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
-				126B5BEA1D5C1942004261C6 /* TeamLeaderTableViewCell.swift */,
 				121C78C51D557B3900D0B636 /* TeamDetailView.swift */,
 			);
 			path = View;
@@ -925,7 +922,6 @@
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
-				126B5BEC1D5C1942004261C6 /* TeamLeaderTableViewCell.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,

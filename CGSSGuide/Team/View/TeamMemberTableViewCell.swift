@@ -132,7 +132,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         if view == nil {
             return nil
         }
-        if let sView = skillView where view == sView {
+        if let sView = skillView where view == sView && !skillLevelTF.hidden {
             let newPoint = convertPoint(point, toView: sView)
             if newPoint.x >= sView.fwidth - 85 && newPoint.y <= 50 {
                 return skillLevelTF
