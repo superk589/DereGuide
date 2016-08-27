@@ -101,6 +101,11 @@ class TeamEditViewController: BaseTableViewController {
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.endEditing(true)
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         // print(indexPath.row, cells[indexPath.row].contentView.fheight)
         // 如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
@@ -168,7 +173,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     
     func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
         UIView.animateWithDuration(0.25, animations: {
-            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, 0)
+            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, -64)
         })
         let member = getMemberByIndex(cell.tag - 100)
         var newLevel = Int(lv) ?? 10
@@ -187,7 +192,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
                 height += cells[i].contentView.fheight + 1 / UIScreen.mainScreen().scale
             }
             UIView.animateWithDuration(0.25, animations: {
-                self.tableView.contentOffset = CGPointMake(0, -min(CGSSGlobal.height - self.keyBoardHeigt - height, 0))
+                self.tableView.contentOffset = CGPointMake(0, max(self.keyBoardHeigt + height - CGSSGlobal.height, -64))
             })
             
         }

@@ -4,17 +4,20 @@ PODS:
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SwiftyJSON (2.3.2)
+  - ZYCornerRadius (1.0.1)
 
 DEPENDENCIES:
   - ReachabilitySwift
   - SDWebImage
   - SwiftyJSON
+  - ZYCornerRadius
 
 SPEC CHECKSUMS:
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  ZYCornerRadius: 94720e8722acf30de5b73ae185ffe56a2240f6a3
 
-PODFILE CHECKSUM: c28c72227043b23d3bff8b2da48f24b4b8a55d04
+PODFILE CHECKSUM: fa7b28960d38b49c576be735631a0f9001e84d47
 
 COCOAPODS: 1.0.1

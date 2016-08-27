@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ZYCornerRadius
+
 protocol CGSSIconViewDelegate: class {
     func iconClick(iv: CGSSIconView)
 }
@@ -25,15 +27,16 @@ class CGSSIconView: UIImageView {
     }
     
     func prepare() {
-        layer.cornerRadius = 6
-        layer.masksToBounds = true
+        zy_cornerRadiusAdvance(self.fheight / 8, rectCornerType: .AllCorners)
+//        layer.cornerRadius = 6
+//        layer.masksToBounds = true
         userInteractionEnabled = true
         tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
         addGestureRecognizer(tap!)
     }
     
     func setIconImage(urlStr: String) {
-        sd_setImageWithURL(NSURL.init(string: urlStr)!) // , placeholderImage: UIImage.init(named: "icon_placeholder"))
+        sd_setImageWithURL(NSURL.init(string: urlStr)!, placeholderImage: UIImage.init(named: "icon_placeholder")?.imageWithRenderingMode(.AlwaysTemplate))
         // sd_setImageWithURL(NSURL.init(string: urlStr)!)
     }
     

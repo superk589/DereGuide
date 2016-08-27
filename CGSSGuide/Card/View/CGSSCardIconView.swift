@@ -18,10 +18,10 @@ class CGSSCardIconView: CGSSIconView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     func setWithCardId(id: Int) {
         self.cardId = id
-        self.backgroundColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.colorWithAlphaComponent(0.5)
+        self.tintColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.colorWithAlphaComponent(0.5)
         // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
         let url = CGSSUpdater.URLOfImages + "/icon_card/\(id).png"
         self.setIconImage(url)

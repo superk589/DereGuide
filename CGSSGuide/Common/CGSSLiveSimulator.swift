@@ -40,7 +40,6 @@ class CGSSLiveSimulator: NSObject {
     
     func simulateOnce(procMax: Bool, callBack: ((Int) -> Void)?) {
         dispatch_async(dispatch_get_global_queue(0, 0)) {
-            
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
             let diffStars = self.live.getStarsForDiff(self.diff)
             // 此时不对小数部分进行取舍 保留浮点部分
@@ -70,7 +69,6 @@ class CGSSLiveSimulator: NSObject {
                 callBack?(Int(sum))
             })
         }
-        
     }
     
     func simulate(times: Int, callBack: ((scores: [Int], avg: Int) -> Void)?) {

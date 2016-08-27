@@ -4,4 +4,5 @@ target 'CGSSGuide' do
   pod 'SDWebImage'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
+  pod 'ZYCornerRadius'
 end
