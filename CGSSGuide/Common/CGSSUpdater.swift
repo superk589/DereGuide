@@ -19,7 +19,11 @@ public class CGSSUpdater: NSObject {
     static let URLOfDeresuteApi = "https://apiv2.deresute.info"
     static let defaultUpdater = CGSSUpdater()
     
-    var isUpdating = false
+    var isUpdating = false {
+        didSet {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = isUpdating
+        }
+    }
     var dataSession: NSURLSession!
     var checkSession: NSURLSession!
     

@@ -105,6 +105,10 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 }
                 
                 // 简单长按类型
+                // 部分歌曲存在长按结束时但是结束type != 2的情况(Nation Blue) 手工修改
+                if positionPressed[note.finishPos! - 1] != 0 && note.type != 2 {
+                    note.type = 2
+                }
                 if note.type == 2 {
                     if positionPressed[note.finishPos! - 1] == 0 {
                         positionPressed[note.finishPos! - 1] = note.sec!
