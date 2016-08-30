@@ -97,19 +97,14 @@ public class CGSSDAO: NSObject {
                 let path = CGSSDAO.path + "/Data/Beatmap/"
                 for (k, v) in self.beatmapDict {
                     let id = k as! String
-                    var beatmaps = v as! [String: CGSSBeatmap]
-                    let live = self.findLiveById(Int(id)!)!
-                    // 如果数量不足 先尝试取出同liveId的所有现存谱面
-                    // if self.validLiveDict.keys.contains(String(live.id)) && beatmaps.count < live.maxDiff {
-                    for i in 1...live.maxDiff {
-                        beatmaps[String(i)] = self.findBeatmapById(live.id!, diffId: i)
+                    let beatmaps = v as! [String: CGSSBeatmap]
+                    for (diff, beatmap) in beatmaps {
+                        let theData = NSMutableData()
+                        let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
+                        achiver.encodeObject(beatmap, forKey: key.rawValue)
+                        achiver.finishEncoding()
+                        theData.writeToFile(path + "\(id)_\(diff).plist", atomically: true)
                     }
-                    // }
-                    let theData = NSMutableData()
-                    let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
-                    achiver.encodeObject(beatmaps, forKey: key.rawValue)
-                    achiver.finishEncoding()
-                    theData.writeToFile(path + "\(id).plist", atomically: true)
                 }
                 
             } else {
@@ -293,29 +288,14 @@ public class CGSSDAO: NSObject {
     
     public func findBeatmapById(liveId: Int, diffId: Int) -> CGSSBeatmap? {
         let itemId = String(format: "%03d", liveId)
-        if let dict = self.beatmapDict.objectForKey(itemId) as? [String: CGSSBeatmap] {
-            if let beatmap = dict[String(diffId)] {
+        let path = CGSSDAO.path + "/Data/Beatmap/\(itemId)_\(diffId)" + ".plist"
+        if let theData = NSData(contentsOfFile: path) {
+            let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
+            if let beatmap = achiver.decodeObjectForKey(CGSSDataKey.Beatmap.rawValue) as? CGSSBeatmap {
                 return beatmap
             }
         }
-        let path = CGSSDAO.path + "/Data/Beatmap/" + String(format: "%03d", liveId) + ".plist"
         
-        if let theData = NSData(contentsOfFile: path) {
-            let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
-            if let dict = achiver.decodeObjectForKey(CGSSDataKey.Beatmap.rawValue) as? [String: CGSSBeatmap] {
-                if let beatmap = dict[String(diffId)] {
-                    if let dict = self.beatmapDict.objectForKey(itemId) as? NSMutableDictionary {
-                        dict.setValue(beatmap, forKey: String(diffId))
-                    } else {
-                        let dict = NSMutableDictionary()
-                        dict.setValue(beatmap, forKey: String(diffId))
-                        self.beatmapDict.setValue(dict, forKey: itemId)
-                    }
-                    self.beatmapDict.setValue(dict, forKey: itemId)
-                    return beatmap
-                }
-            }
-        }
         return nil
     }
     

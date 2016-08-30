@@ -16,16 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // 异步预加载较大的谱面部分 暂时去除
-//        dispatch_async (dispatch_get_global_queue(0, 0)) {
-//            let _ = CGSSDAO.sharedDAO.beatmapDict
-//            dispatch_async(dispatch_get_main_queue(), {
-//
-//            })
-//        }
-        
-        // 注册消息推送服务
-        // self.registerAPNS()
         
         // 异步处理一系列启动任务
         // 规划近期偶像生日
