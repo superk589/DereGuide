@@ -244,7 +244,14 @@ class CardDetailView: UIView {
         }
         evolutionContentView.fy = leaderSkillContentView.fy + leaderSkillContentView.fheight
         
-        self.fheight = evolutionContentView.fy + evolutionContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
+        // 设置关联卡信息
+        
+        let cards = CGSSDAO.sharedDAO.findCardsByCharId(card.charaId)
+        if cards.count > 0 {
+            prepareRelatedCardsContentView()
+            setupRelatedCardsContentView(cards)
+        }
+        relatedCardsContentView.fy = evolutionContentView.fy + evolutionContentView.fheight
         
         // 设置角色信息
         
@@ -256,6 +263,7 @@ class CardDetailView: UIView {
         
         // 设置饲料经验信息
         
+        self.fheight = relatedCardsContentView.fy + relatedCardsContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
     }
     
     func iconClick(icon: CGSSCardIconView) {
@@ -472,6 +480,44 @@ class CardDetailView: UIView {
         evolutionContentView.fheight = evolutionFromImageView.fy + evolutionFromImageView.fheight + topSpace
     }
     
+    // 相关卡片
+    var relatedCardsContentView: UIView!
+    func prepareRelatedCardsContentView() {
+        if relatedCardsContentView != nil {
+            return
+        }
+        relatedCardsContentView = UIView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
+        relatedCardsContentView.clipsToBounds = true
+        relatedCardsContentView.drawSectionLine(0)
+        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
+        let insideY: CGFloat = topSpace
+        let descLabel = UILabel()
+        descLabel.frame = CGRectMake(10, insideY, 140, 14)
+        descLabel.textColor = UIColor.blackColor()
+        descLabel.font = UIFont.systemFontOfSize(14)
+        descLabel.text = "同角色其他卡片:"
+        descLabel.textColor = UIColor.blackColor()
+        relatedCardsContentView.addSubview(descLabel)
+        addSubview(relatedCardsContentView)
+        
+    }
+    
+    // 设置相关卡片
+    func setupRelatedCardsContentView(cards: [CGSSCard]) {
+        let column = floor((CGSSGlobal.width - 2 * topSpace) / 50)
+        let space = (CGSSGlobal.width - 2 * topSpace - column * 48)
+            / (column - 1)
+        
+        for i in 0..<cards.count {
+            let y = CGFloat(i / Int(column)) * (48 + space) + 34
+            let x = CGFloat(i % Int(column)) * (48 + space) + topSpace
+            let icon = CGSSCardIconView.init(frame: CGRectMake(x, y, 48, 48))
+            icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
+            relatedCardsContentView.addSubview(icon)
+        }
+        relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 34 + topSpace
+        
+    }
     // 设置角色信息视图
     func setCharInfoContentView() {
 //        public var age:Int?

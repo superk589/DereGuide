@@ -278,6 +278,16 @@ public class CGSSDAO: NSObject {
         return self.cardDict.objectForKey(String(id)) as? CGSSCard
     }
     
+    func findCardsByCharId(id: Int) -> [CGSSCard] {
+        var cards = [CGSSCard]()
+        for card in self.cardDict.allValues as! [CGSSCard] {
+            if card.charaId == id {
+                cards.append(card)
+            }
+        }
+        return cards
+    }
+    
     public func findSongById(id: Int) -> CGSSSong? {
         return self.songDict.objectForKey(String(id)) as? CGSSSong
     }
