@@ -287,7 +287,13 @@ public class CGSSDAO: NSObject {
     }
     
     public func findBeatmapById(liveId: Int, diffId: Int) -> CGSSBeatmap? {
-        let itemId = String(format: "%03d", liveId)
+        var itemId: String
+        // 修复純情Midnight伝説master难度缺失的问题 重定位到非活动模式的master
+        if liveId == 519 && diffId == 4 {
+            itemId = String(format: "%03d", 306)
+        } else {
+            itemId = String(format: "%03d", liveId)
+        }
         let path = CGSSDAO.path + "/Data/Beatmap/\(itemId)_\(diffId)" + ".plist"
         if let theData = NSData(contentsOfFile: path) {
             let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
