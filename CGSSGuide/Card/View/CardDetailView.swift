@@ -246,7 +246,9 @@ class CardDetailView: UIView {
         
         // 设置关联卡信息
         
-        let cards = CGSSDAO.sharedDAO.findCardsByCharId(card.charaId)
+        var cards = CGSSDAO.sharedDAO.findCardsByCharId(card.charaId)
+        let sorter = CGSSSorter.init(att: "sAlbumId")
+        sorter.sortList(&cards)
         if cards.count > 0 {
             prepareRelatedCardsContentView()
             setupRelatedCardsContentView(cards)

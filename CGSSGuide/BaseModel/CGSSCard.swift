@@ -57,25 +57,19 @@ extension CGSSCard {
     
     // 对卡片进行按更新时间先后排序时使用, 对于新卡取更新时间, 对于旧卡取id%1000
     dynamic var update_id: Int {
-        var returnValue: Int
-        
-        if evolutionId != 0 {
-            returnValue = evolutionId! % 1000
-        } else {
-            returnValue = id! % 1000
-        }
+        var returnValue = id! % 1000
         if let date = updateTime {
             returnValue += Int(date.timeIntervalSince1970)
         }
         return returnValue
     }
     
-    //用户排序的动态属性
+    // 用户排序的动态属性
     dynamic var sAlbumId: Int {
         return albumId
     }
     
-    dynamic var sRarity :Int {
+    dynamic var sRarity: Int {
         return rarity.rarity
     }
     
