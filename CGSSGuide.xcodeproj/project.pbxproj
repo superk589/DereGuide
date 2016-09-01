@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */; };
 		120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */; };
+		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
 		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */; };
@@ -166,6 +167,7 @@
 /* Begin PBXFileReference section */
 		1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharFilter.swift; sourceTree = "<group>"; };
 		120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
+		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
 		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAttributeValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAttributeValue.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */,
 				1271C6B61D69816800DEF52B /* CharDetailViewController.swift */,
 				1271C6B81D69818E00DEF52B /* CharDetailView.swift */,
+				120541771D78289F0021F875 /* CharProfileView.swift */,
 			);
 			path = CharInfo;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
+				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,

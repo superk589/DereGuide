@@ -9,9 +9,20 @@
 import UIKit
 
 class CharDetailViewController: UIViewController {
-    var char:CGSSChar!
+    var char: CGSSChar!
+    var detailView: CharDetailView!
+    var sv: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.whiteColor()
+        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height -
+                64))
+        automaticallyAdjustsScrollViewInsets = false
+        detailView = CharDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
+        detailView.setup(char)
+        sv.contentSize = detailView.frame.size
+        sv.addSubview(detailView)
+        view.addSubview(sv)
         
         // Do any additional setup after loading the view.
     }

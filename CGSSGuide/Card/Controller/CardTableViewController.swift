@@ -12,7 +12,6 @@ class CardTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // print(NSHomeDirectory())
         // 作为工具启动的第一个页面 在此页面做自动更新检查
         let updater = CGSSUpdater.defaultUpdater

@@ -14,7 +14,9 @@ public class CGSSGlobal: NSObject {
     // 当前屏幕的宽度和高度常量
     public static let width = UIScreen.mainScreen().bounds.width
     public static let height = UIScreen.mainScreen().bounds.height
-    
+    // 当前屏幕1坐标的像素点数量
+    public static let scale = UIScreen.mainScreen().scale
+    // 常用颜色
     public static let vocalColor = UIColor.init(red: 1.0 * 236 / 255, green: 1.0 * 87 / 255, blue: 1.0 * 105 / 255, alpha: 1)
     public static let danceColor = UIColor.init(red: 1.0 * 89 / 255, green: 1.0 * 187 / 255, blue: 1.0 * 219 / 255, alpha: 1)
     public static let visualColor = UIColor.init(red: 1.0 * 254 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 66 / 255, alpha: 1)

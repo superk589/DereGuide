@@ -46,13 +46,13 @@ extension CGSSChar {
         return age
     }
     dynamic var sizeB: Int {
-        return bodySize1
+        return bodySize1 >= 5000 ? 0 : bodySize1
     }
     dynamic var sizeW: Int {
-        return bodySize2
+        return bodySize2 >= 5000 ? 0 : bodySize2
     }
     dynamic var sizeH: Int {
-        return bodySize3
+        return bodySize3 >= 5000 ? 0 : bodySize3
     }
     dynamic var sName: String {
         return nameKana
@@ -60,6 +60,95 @@ extension CGSSChar {
     dynamic var sCharaId: Int {
         return charaId
     }
+    
+    // 一些属性的特殊转换
+    var handToString: String {
+        if hand == 3001 {
+            return "右"
+        } else if hand == 3002 {
+            return "左"
+        } else if hand == 3003 {
+            return "两手"
+        } else {
+            return "不明"
+        }
+    }
+    
+    var constellationToString: String {
+        switch constellation {
+            
+        case 1001:
+            return "金牛座"
+        case 1002:
+            return "白羊座"
+        case 1003:
+            return "天秤座"
+        case 1004:
+            return "水瓶座"
+        case 1005:
+            return "双鱼座"
+        case 1006:
+            return "处女座"
+        case 1007:
+            return "魔羯座"
+        case 1008:
+            return "双子座"
+        case 1009:
+            return "天蝎座"
+        case 1010:
+            return "射手座"
+        case 1011:
+            return "狮子座"
+        case 1012:
+            return "巨蟹座"
+        default:
+            return "不明"
+        }
+    }
+    
+    var bloodTypeToString: String {
+        switch bloodType {
+        case 2001: return "A"
+        case 2002: return "B"
+        case 2003: return "AB"
+        case 2004: return "O"
+        default: return "不明"
+        }
+    }
+    
+    var threeSizeToString: String {
+        return "\(getSizeString(bodySize1))/\(getSizeString(bodySize2))/\(getSizeString(bodySize3))"
+    }
+    
+    func getSizeString(size: Int) -> String {
+        switch size {
+        case 5004:
+            return "?"
+        case 5005:
+            return "ぼんっ"
+        case 5006:
+            return "きゅっ"
+        case 5007:
+            return "ぼんっ♪"
+        case 5001:
+            return "おっきい"
+        case 5002:
+            return "ふつう"
+        case 5003:
+            return "まぁまぁ"
+        default:
+            return String(size)
+        }
+    }
+    
+    var ageToString: String {
+        if age == 5009 {
+            return "永远の17岁"
+        } else {
+            return "\(age)岁"
+        }
+    }
+    
 }
 class CGSSChar: CGSSBaseModel {
     
