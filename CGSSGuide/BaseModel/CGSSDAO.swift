@@ -139,6 +139,10 @@ public class CGSSDAO: NSObject {
         return filter.filterCardList(self.cardDict.allValues as! [CGSSCard])
     }
     
+    func getCharListByFilter(filter: CGSSCharFilter) -> [CGSSChar] {
+        return filter.filterCharList(self.charDict.allValues as! [CGSSChar])
+    }
+    
     // 根据名字搜索
     func getCardListByName(cardList: [CGSSCard], string: String) -> [CGSSCard] {
         return cardList.filter({ (v: CGSSCard) -> Bool in
@@ -158,26 +162,25 @@ public class CGSSDAO: NSObject {
             return true
         })
     }
-    
-    // 原地排序指定的cardList
-    func sortCardListByAttibuteName(inout cardList: [CGSSCard], att: String, ascending: Bool) {
-        
-        let sorter = CGSSSorter.init(att: att, ascending: ascending)
-        sorter.sortList(&cardList)
+    func getCharListByName(charList: [CGSSChar], string: String) -> [CGSSChar] {
+        return charList.filter({ (v: CGSSChar) -> Bool in
+            let comps = string.componentsSeparatedByString(" ")
+            for comp in comps {
+                if comp == "" { continue }
+                let b1 = v.name?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b2 = v.conventional?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b3 = v.voice?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b4 = v.nameKana?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                if b1 || b2 || b3 || b4 {
+                    continue
+                } else {
+                    return false
+                }
+            }
+            return true
+        })
     }
     
-    func sortCardListByAttibuteName(inout cardList: [CGSSCard], sorter: CGSSSorter) {
-        sorter.sortList(&cardList)
-    }
-    
-    // 原地排血指定的songList
-    public func sortSongListByAttibuteName(inout songList: [CGSSSong], sorter: CGSSSorter) {
-        sorter.sortList(&songList)
-    }
-    
-    public func sortListByAttibuteName<T: CGSSBaseModel>(inout list: [T], sorter: CGSSSorter) {
-        sorter.sortList(&list)
-    }
     // 根据名字搜索live
     public func getLiveListByName(liveList: [CGSSLive], string: String) -> [CGSSLive] {
         return liveList.filter({ (v: CGSSLive) -> Bool in
@@ -194,6 +197,15 @@ public class CGSSDAO: NSObject {
             }
             return true
         })
+    }
+    
+    // 排序指定的CGSSBaseModel的list
+    func sortListInPlace<T: CGSSBaseModel>(inout list: [T], att: String, ascending: Bool) {
+        let sorter = CGSSSorter.init(att: att, ascending: ascending)
+        sorter.sortList(&list)
+    }
+    func sortListInPlace<T: CGSSBaseModel>(inout list: [T], sorter: CGSSSorter) {
+        sorter.sortList(&list)
     }
     
     func removeAllData() {

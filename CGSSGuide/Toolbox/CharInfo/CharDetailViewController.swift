@@ -9,7 +9,7 @@
 import UIKit
 
 class CharDetailViewController: UIViewController {
-    
+    var char:CGSSChar!
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -16,7 +16,9 @@ public enum CGSSCardFilterType: UInt {
     init? (cardType: Int) {
         self.init(rawValue: 1 << UInt(cardType))
     }
-    
+    init?(raw: UInt) {
+        self.init(rawValue: raw)
+    }
     init? (typeString: String) {
         switch typeString {
         case "cute":

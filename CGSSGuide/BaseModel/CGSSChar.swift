@@ -22,6 +22,44 @@ extension CGSSChar {
             return CGSSGlobal.allTypeColor
         }
     }
+    var charFilterType: CGSSCharFilterType {
+        return CGSSCharFilterType.init(typeString: type) ?? CGSSCharFilterType.Office
+    }
+    var charAgeFilterType: CGSSCharAgeFilterType {
+        return CGSSCharAgeFilterType.init(age: age)
+    }
+    var charBloodFilterType: CGSSCharBloodFilterType {
+        return CGSSCharBloodFilterType.init(bloodType: bloodType)
+    }
+    var charCVFilterType: CGSSCharCVTypeFilter {
+        return voice == "" ? CGSSCharCVTypeFilter.NO : CGSSCharCVTypeFilter.YES
+    }
+    
+    // 用于排序的动态属性
+    dynamic var sHeight: Int {
+        return height
+    }
+    dynamic var sWeight: Int {
+        return weight
+    }
+    dynamic var sAge: Int {
+        return age
+    }
+    dynamic var sizeB: Int {
+        return bodySize1
+    }
+    dynamic var sizeW: Int {
+        return bodySize2
+    }
+    dynamic var sizeH: Int {
+        return bodySize3
+    }
+    dynamic var sName: String {
+        return nameKana
+    }
+    dynamic var sCharaId: Int {
+        return charaId
+    }
 }
 class CGSSChar: CGSSBaseModel {
     

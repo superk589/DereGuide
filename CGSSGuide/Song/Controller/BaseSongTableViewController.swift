@@ -64,7 +64,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         if searchBar.text != "" {
             liveList = dao.getLiveListByName(liveList, string: searchBar.text!)
         }
-        dao.sortListByAttibuteName(&liveList!, sorter: sorter)
+        dao.sortListInPlace(&liveList!, sorter: sorter)
         tableView.reloadData()
     }
     func cancelAction() {
@@ -123,8 +123,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         self.tableView.registerClass(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
         self.tableView.rowHeight = 86
         sorter = CGSSSorter.init(att: "updateId")
-        dao.sortListByAttibuteName(&liveList!, sorter: sorter)
-        
+        dao.sortListInPlace(&liveList!, sorter: sorter)
     }
     
     override func didReceiveMemoryWarning() {

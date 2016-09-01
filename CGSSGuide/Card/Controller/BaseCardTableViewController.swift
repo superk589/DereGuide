@@ -98,7 +98,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         if searchBar.text != "" {
             self.cardList = dao.getCardListByName(self.cardList, string: searchBar.text!)
         }
-        dao.sortCardListByAttibuteName(&self.cardList!, sorter: sorter)
+        dao.sortListInPlace(&self.cardList!, sorter: sorter)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
@@ -110,7 +110,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     
     func filterAction() {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("CardFilterAndSorterTableView") as! CardFilterAndSorterTableViewController
+        let filterVC = sb.instantiateViewControllerWithIdentifier("CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.hidesBottomBarWhenPushed = true
