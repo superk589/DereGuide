@@ -26,16 +26,21 @@ class CGSSLiveSimulator: NSObject {
     var live: CGSSLive!
     var diff: Int!
     var liveType: CGSSLiveType!
-    
+    var grooveType: CGSSGrooveType?
     var presentTotal: Int {
-        return team.getPresentValueByType(liveType, songType: live.songType).total + team.backSupportValue
+        if grooveType != nil {
+            return team.getPresentValueByType(liveType, songType: CGSSCardFilterType.init(grooveType: grooveType!)!).total + team.backSupportValue
+        } else {
+            return team.getPresentValueByType(liveType, songType: live.songType).total + team.backSupportValue
+        }
     }
     
-    init(team: CGSSTeam, live: CGSSLive, liveType: CGSSLiveType, diff: Int) {
+    init(team: CGSSTeam, live: CGSSLive, liveType: CGSSLiveType, grooveType: CGSSGrooveType?, diff: Int) {
         self.team = team
         self.live = live
         self.diff = diff
         self.liveType = liveType
+        self.grooveType = grooveType
     }
     
     func simulateOnce(procMax: Bool, callBack: ((Int) -> Void)?) {

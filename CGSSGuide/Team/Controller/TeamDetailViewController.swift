@@ -104,7 +104,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     func startCalc() {
         if let live = self.live, diff = self.diff {
-            let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, diff: diff)
+            let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff)
             self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
             simulator.simulateOnce(true, callBack: { [weak self](score) in
                 self?.teamDV.updateScoreGridMaxScore(score)
@@ -136,10 +136,32 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         for liveType in CGSSLiveType.getAll() {
             alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .Default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType
+                if liveType != .Normal {
+                    self.teamDV.showGrooveSelectButton()
+                    self.teamDV.currentGrooveType = CGSSGrooveType.init(type: (self.team.leader.cardRef?.cardFilterType)!)!
+                } else {
+                    self.teamDV.currentGrooveType = nil
+                    self.teamDV.hideGrooveSelectButton()
+                }
                 }))
         }
         alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
         self.presentViewController(alvc, animated: true, completion: nil)
+    }
+    
+    func grooveTypeButtonClick() {
+        let alvc = UIAlertController.init(title: "选择Groove颜色", message: nil, preferredStyle: .ActionSheet)
+        alvc.popoverPresentationController?.sourceView = teamDV.grooveTypeButton
+        alvc.popoverPresentationController?.sourceRect = CGRectMake(0, teamDV.grooveTypeButton.fheight / 2, 0, 0)
+        alvc.popoverPresentationController?.permittedArrowDirections = .Right
+        for grooveType in CGSSGrooveType.getAll() {
+            alvc.addAction(UIAlertAction.init(title: grooveType.rawValue, style: .Default, handler: { (a) in
+                self.teamDV.currentGrooveType = grooveType
+                }))
+        }
+        alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alvc, animated: true, completion: nil)
+        
     }
     
 }

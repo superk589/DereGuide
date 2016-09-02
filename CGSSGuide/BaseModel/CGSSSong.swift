@@ -14,7 +14,19 @@ enum SongType {
     case Cool
     case Passion
     case Cute
+    init? (type: CGSSGrooveType) {
+        switch type {
+        case .Cute:
+            self = .Cute
+        case .Cool:
+            self = .Cool
+        case .Passion:
+            self = .Passion
+        }
+    }
 }
+
+
 
 public class CGSSSong: CGSSBaseModel {
     var id:Int?

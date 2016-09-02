@@ -33,6 +33,16 @@ public enum CGSSCardFilterType: UInt {
             self = .Office
         }
     }
+    init? (grooveType: CGSSGrooveType) {
+        switch grooveType {
+        case .Cute:
+            self = .Cute
+        case .Cool:
+            self = .Cool
+        case .Passion:
+            self = .Passion
+        }
+    }
 }
 
 public enum CGSSAttributeFilterType: UInt {

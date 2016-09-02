@@ -6,10 +6,10 @@
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyJSON
 
-enum CGSSLiveType:String {
+enum CGSSLiveType: String {
     case Normal = "常规模式"
     case VocalBurstGroove = "Vocal Burst"
     case DanceBurstGroove = "Dance Burst"
@@ -17,32 +17,75 @@ enum CGSSLiveType:String {
     static func getAll() -> [CGSSLiveType] {
         return [.Normal, .VocalBurstGroove, .DanceBurstGroove, .VisualBurstGroove]
     }
+    func typeColor() -> UIColor {
+        switch self {
+        case .Normal:
+            return CGSSGlobal.allTypeColor
+        case .VocalBurstGroove:
+            return CGSSGlobal.vocalColor
+        case .DanceBurstGroove:
+            return CGSSGlobal.danceColor
+        case .VisualBurstGroove:
+            return CGSSGlobal.passionColor
+        }
+    }
+}
+
+enum CGSSGrooveType: String {
+    case Cute = "Cute Groove"
+    case Cool = "Cool Groove"
+    case Passion = "Passion Groove"
+    static func getAll() -> [CGSSGrooveType] {
+        return [.Cute, .Cool, .Passion]
+    }
+    init? (type: CGSSCardFilterType) {
+        switch type {
+        case .Cute:
+            self = .Cute
+        case .Cool:
+            self = .Cool
+        case .Passion:
+            self = .Passion
+        case .Office:
+            return nil
+        }
+    }
+    func typeColor() -> UIColor {
+        switch self {
+        case .Cute:
+            return CGSSGlobal.cuteColor
+        case .Cool:
+            return CGSSGlobal.coolColor
+        case .Passion:
+            return CGSSGlobal.passionColor
+        }
+    }
 }
 
 public class CGSSLive: CGSSBaseModel {
-    var id:Int?
-    var musicId:Int?
-    var musicTitle:String?
-    var type:Int?
-    var liveDetailId:[Int]?
-    var eventType:Int?
-    var debut:Int?
-    var regular:Int?
-    var pro:Int?
-    var master:Int?
-    var masterPlus:Int?
-    var updateId:Int {
+    var id: Int?
+    var musicId: Int?
+    var musicTitle: String?
+    var type: Int?
+    var liveDetailId: [Int]?
+    var eventType: Int?
+    var debut: Int?
+    var regular: Int?
+    var pro: Int?
+    var master: Int?
+    var masterPlus: Int?
+    var updateId: Int {
         return self.liveDetailId![0]
     }
-    var musicRef:CGSSSong? {
+    var musicRef: CGSSSong? {
         return CGSSDAO.sharedDAO.findSongById(musicId!)
     }
-    var bpm:Int? {
+    var bpm: Int? {
         let dao = CGSSDAO.sharedDAO
         return dao.findSongById(self.musicId!)?.bpm
     }
     
-    var barSec:Float? {
+    var barSec: Float? {
         if bpm != nil {
             return 1 / Float(bpm!) / 60
         }
@@ -72,10 +115,10 @@ public class CGSSLive: CGSSBaseModel {
         default:
             return "song_all"
         }
-
+        
     }
     
-    var songType:CGSSCardFilterType {
+    var songType: CGSSCardFilterType {
         switch type! {
         case 1:
             return .Cute
@@ -88,9 +131,9 @@ public class CGSSLive: CGSSBaseModel {
         }
     }
     
-    func getStarsForDiff(diff:Int) -> Int {
+    func getStarsForDiff(diff: Int) -> Int {
         switch diff {
-        case 1 :
+        case 1:
             return debut ?? 0
         case 2:
             return regular ?? 0
@@ -104,11 +147,11 @@ public class CGSSLive: CGSSBaseModel {
             return 0
         }
     }
-    var maxDiff :Int {
+    var maxDiff: Int {
         return (self.masterPlus == 0) ? 4 : 5
     }
     
-    func getBeatmapByDiff(diff:Int) -> CGSSBeatmap? {
+    func getBeatmapByDiff(diff: Int) -> CGSSBeatmap? {
         return CGSSDAO.sharedDAO.findBeatmapById(self.id!, diffId: diff)
     }
     required public init?(coder aDecoder: NSCoder) {
@@ -136,10 +179,10 @@ public class CGSSLive: CGSSBaseModel {
         aCoder.encodeObject(self.regular, forKey: "regular")
         aCoder.encodeObject(self.pro, forKey: "pro")
         aCoder.encodeObject(self.master, forKey: "master")
-        aCoder.encodeObject(self.masterPlus, forKey: "masterPlus")        
-
+        aCoder.encodeObject(self.masterPlus, forKey: "masterPlus")
+        
     }
-    init(json:JSON) {
+    init(json: JSON) {
         self.id = json["id"].int
         self.musicId = json["musicId"].int
         self.musicTitle = json["musicTitle"].string
@@ -154,8 +197,8 @@ public class CGSSLive: CGSSBaseModel {
         self.pro = json["pro"].int
         self.master = json["master"].int
         self.masterPlus = json["masterPlus"].int
-
+        
         super.init()
     }
- 
+    
 }

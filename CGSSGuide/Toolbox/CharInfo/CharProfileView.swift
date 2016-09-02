@@ -63,6 +63,7 @@ class CharProfileDescView: UIView {
     }
 }
 
+//带虚线下划线的Label
 class CharProfileContentLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)

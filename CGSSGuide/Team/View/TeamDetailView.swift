@@ -16,6 +16,7 @@ protocol TeamDetailViewDelegate: class {
     func backValueChanged(value: Int)
     func selectSong()
     func liveTypeButtonClick()
+    func grooveTypeButtonClick()
 }
 
 class TeamDetailView: UIView {
@@ -46,6 +47,8 @@ class TeamDetailView: UIView {
     var songLengthLabel: UILabel!
     var liveTypeButton: UIButton!
     var liveTypeDescLable: UILabel!
+    var grooveTypeButton: UIButton!
+    var grooveTypeDescLable: UILabel!
     
     var bottomView: UIView!
     var startCalcButton: UIButton!
@@ -122,9 +125,9 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        presentValueGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 112), rows: 8, columns: 5)
+        presentValueGrid = CGSSGridLabel.init(frame: CGRectMake(leftSpace, originY, width, 70), rows: 5, columns: 5)
         
-        originY += 112 + topSpace
+        originY += 70 + topSpace
         drawSectionLine(originY)
         originY += topSpace
         
@@ -199,12 +202,26 @@ class TeamDetailView: UIView {
         
         liveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 100, originY, 90, 21))
         liveTypeButton.setTitle("常规模式", forState: .Normal)
-        liveTypeButton.titleLabel?.textAlignment = .Right
+        liveTypeButton.contentHorizontalAlignment = .Right
         liveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         liveTypeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         liveTypeButton.addTarget(self, action: #selector(liveTypeButtonClick), forControlEvents: .TouchUpInside)
         
         originY += 21 + topSpace
+        
+        grooveTypeDescLable = UILabel.init(frame: CGRectMake(leftSpace, originY, 100, 0))
+        grooveTypeDescLable.text = "Groove颜色: "
+        grooveTypeDescLable.font = UIFont.systemFontOfSize(14)
+        grooveTypeDescLable.textColor = UIColor.darkGrayColor()
+        
+        grooveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 150, originY, 140, 0))
+        grooveTypeButton.setTitle("", forState: .Normal)
+        grooveTypeButton.contentHorizontalAlignment = .Right
+        grooveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        grooveTypeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        grooveTypeButton.addTarget(self, action: #selector(grooveTypeButtonClick), forControlEvents: .TouchUpInside)
+        
+        originY += topSpace
         
         startCalcButton = UIButton.init(frame: CGRectMake(leftSpace, originY, width, 25))
         startCalcButton.setTitle("开始计算", forState: .Normal)
@@ -238,6 +255,8 @@ class TeamDetailView: UIView {
         bottomView.addSubview(songJacket)
         bottomView.addSubview(liveTypeDescLable)
         bottomView.addSubview(liveTypeButton)
+        bottomView.addSubview(grooveTypeButton)
+        bottomView.addSubview(grooveTypeDescLable)
         bottomView.addSubview(startCalcButton)
         bottomView.addSubview(scoreGrid)
         bottomView.addSubview(scoreDescLabel)
@@ -398,28 +417,17 @@ class TeamDetailView: UIView {
         presentSub3.appendContentsOf(team.getPresentValue(.Cool).toStringArrayWithBackValue(team.backSupportValue))
         var presentSub4 = ["Pa曲"]
         presentSub4.appendContentsOf(team.getPresentValue(.Passion).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub5 = ["Vo(G)"]
-        presentSub5.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Vocal).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub6 = ["Da(G)"]
-        presentSub6.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Dance).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub7 = ["Vi(G)"]
-        presentSub7.appendContentsOf(team.getPresentValueInGroove(team.leader.cardRef!.cardFilterType, burstType: .Visual).toStringArrayWithBackValue(team.backSupportValue))
+        
         presentValueString.append(presentSub1)
         presentValueString.append(presentSub2)
         presentValueString.append(presentSub3)
         presentValueString.append(presentSub4)
-        presentValueString.append(presentSub5)
-        presentValueString.append(presentSub6)
-        presentValueString.append(presentSub7)
         
         let colorArray2 = [UIColor.darkGrayColor(), CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor]
-        presentColor.appendContentsOf(Array.init(count: 8, repeatedValue: colorArray2))
+        presentColor.appendContentsOf(Array.init(count: 5, repeatedValue: colorArray2))
         presentColor[2][0] = CGSSGlobal.cuteColor
         presentColor[3][0] = CGSSGlobal.coolColor
         presentColor[4][0] = CGSSGlobal.passionColor
-        presentColor[5][0] = CGSSGlobal.vocalColor
-        presentColor[6][0] = CGSSGlobal.danceColor
-        presentColor[7][0] = CGSSGlobal.visualColor
         
         presentValueGrid.setGridContent(presentValueString)
         presentValueGrid.setGridColor(presentColor)
@@ -427,10 +435,30 @@ class TeamDetailView: UIView {
         for i in 0..<5 {
             presentValueGrid[0, i].font = CGSSGlobal.alphabetFont
         }
-        for i in 0..<8 {
+        for i in 0..<5 {
             presentValueGrid[i, 0].font = CGSSGlobal.alphabetFont
         }
         
+    }
+    
+    func showGrooveSelectButton() {
+        grooveTypeButton.fheight = 21
+        grooveTypeDescLable.fheight = 21
+        updateGrooveSelectButton()
+        
+    }
+    func hideGrooveSelectButton() {
+        grooveTypeButton.fheight = 0
+        grooveTypeDescLable.fheight = 0
+        updateGrooveSelectButton()
+    }
+    
+    func updateGrooveSelectButton() {
+        startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace
+        scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
+        scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
+        bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.fheight + bottomView.fy)
     }
     
     func resetCalcButton() {
@@ -473,10 +501,24 @@ class TeamDetailView: UIView {
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
             self.liveTypeButton.setTitle(currentLiveType.rawValue, forState: .Normal)
+            self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), forState: .Normal)
+        }
+    }
+    var currentGrooveType: CGSSGrooveType? {
+        didSet {
+            if let type = currentGrooveType {
+                self.grooveTypeButton.setTitle(type.rawValue, forState: .Normal)
+                self.grooveTypeButton.setTitleColor(type.typeColor(), forState: .Normal)
+            } else {
+                self.grooveTypeButton.setTitle("", forState: .Normal)
+            }
         }
     }
     func liveTypeButtonClick() {
         delegate?.liveTypeButtonClick()
+    }
+    func grooveTypeButtonClick() {
+        delegate?.grooveTypeButtonClick()
     }
     func selectSong() {
         delegate?.selectSong()
