@@ -200,8 +200,8 @@ class TeamDetailView: UIView {
         liveTypeDescLable.font = UIFont.systemFontOfSize(14)
         liveTypeDescLable.textColor = UIColor.darkGrayColor()
         
-        liveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 100, originY, 90, 21))
-        liveTypeButton.setTitle("常规模式", forState: .Normal)
+        liveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 150, originY, 140, 21))
+        liveTypeButton.setTitle("<常规模式>", forState: .Normal)
         liveTypeButton.contentHorizontalAlignment = .Right
         liveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         liveTypeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
@@ -454,7 +454,11 @@ class TeamDetailView: UIView {
     }
     
     func updateGrooveSelectButton() {
-        startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace
+        if grooveTypeButton.fheight == 0 {
+            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight
+        } else {
+            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace
+        }
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
         scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
@@ -500,14 +504,14 @@ class TeamDetailView: UIView {
     }
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
-            self.liveTypeButton.setTitle(currentLiveType.rawValue, forState: .Normal)
+            self.liveTypeButton.setTitle("<\(currentLiveType.rawValue)>", forState: .Normal)
             self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), forState: .Normal)
         }
     }
     var currentGrooveType: CGSSGrooveType? {
         didSet {
             if let type = currentGrooveType {
-                self.grooveTypeButton.setTitle(type.rawValue, forState: .Normal)
+                self.grooveTypeButton.setTitle("<\(type.rawValue)>", forState: .Normal)
                 self.grooveTypeButton.setTitleColor(type.typeColor(), forState: .Normal)
             } else {
                 self.grooveTypeButton.setTitle("", forState: .Normal)

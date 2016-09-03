@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SDWebImage
 
 @UIApplicationMain
 
@@ -17,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // 异步处理一系列启动任务
+        // 处理一系列启动任务
         // 规划近期偶像生日
         if NSUserDefaults.standardUserDefaults().shouldPostBirthdayNotice {
             BirthdayCenter.defaultCenter.scheduleNotifications()
         }
+        // 设置SDWebImage过期时间
+        SDImageCache.sharedImageCache().maxCacheAge = 60 * 60 * 24 * 365 * 10 // 10年缓存时间
         
         return true
     }

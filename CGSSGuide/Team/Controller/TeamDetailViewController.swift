@@ -138,7 +138,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 self.teamDV.currentLiveType = liveType
                 if liveType != .Normal {
                     self.teamDV.showGrooveSelectButton()
-                    self.teamDV.currentGrooveType = CGSSGrooveType.init(type: (self.team.leader.cardRef?.cardFilterType)!)!
+                    if self.teamDV.currentGrooveType == nil {
+                        self.teamDV.currentGrooveType = CGSSGrooveType.init(type: (self.team.leader.cardRef?.cardFilterType)!)!
+                    }
                 } else {
                     self.teamDV.currentGrooveType = nil
                     self.teamDV.hideGrooveSelectButton()
