@@ -117,6 +117,12 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }
     
+    func charInfoClick() {
+        let charDetailVC = CharDetailViewController()
+        charDetailVC.char = card.chara
+        self.navigationController?.pushViewController(charDetailVC, animated: true)
+    }
+    
     /*
      // MARK: - Navigation
 

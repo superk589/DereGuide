@@ -10,6 +10,7 @@ import UIKit
 
 protocol CardDetailViewDelegate: class {
     func iconClick(icon: CGSSCardIconView)
+    func charInfoClick()
 }
 
 class CardDetailView: UIView {
@@ -244,7 +245,7 @@ class CardDetailView: UIView {
         }
         evolutionContentView.fy = leaderSkillContentView.fy + leaderSkillContentView.fheight
         
-        // 设置关联卡信息
+        // 设置角色和关联卡信息
         
         var cards = CGSSDAO.sharedDAO.findCardsByCharId(card.charaId)
         let sorter = CGSSSorter.init(att: "sAlbumId")
@@ -254,8 +255,6 @@ class CardDetailView: UIView {
             setupRelatedCardsContentView(cards)
         }
         relatedCardsContentView.fy = evolutionContentView.fy + evolutionContentView.fheight
-        
-        // 设置角色信息
         
         // 设置技能升级信息
         
@@ -495,11 +494,21 @@ class CardDetailView: UIView {
         let insideY: CGFloat = topSpace
         let descLabel = UILabel()
         descLabel.frame = CGRectMake(10, insideY, 140, 14)
-        descLabel.textColor = UIColor.blackColor()
         descLabel.font = UIFont.systemFontOfSize(14)
         descLabel.text = "同角色其他卡片:"
         descLabel.textColor = UIColor.blackColor()
+        
+        let charInfoLabel = UILabel.init(frame: CGRectMake(100, insideY, CGSSGlobal.width - 110, 14))
+        charInfoLabel.text = "查看角色详情 >"
+        charInfoLabel.font = UIFont.systemFontOfSize(14)
+        charInfoLabel.textColor = UIColor.lightGrayColor()
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(charInfoClick))
+        charInfoLabel.addGestureRecognizer(tap)
+        charInfoLabel.textAlignment = .Right
+        charInfoLabel.userInteractionEnabled = true
+        
         relatedCardsContentView.addSubview(descLabel)
+        relatedCardsContentView.addSubview(charInfoLabel)
         addSubview(relatedCardsContentView)
         
     }
@@ -520,73 +529,9 @@ class CardDetailView: UIView {
         relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 34 + topSpace
         
     }
-    // 设置角色信息视图
-    func setCharInfoContentView() {
-//        public var age:Int?
-//        //    "age": 20,
-//        //    ; If this is ridiculously high, index into category 6
-//        //    ; of text_data.
-//        public var birth_day:Int?
-//        //    "birth_day": 26,
-//        public var birth_month:Int?
-//        //    "birth_month": 2,
-//        public var blood_type:Int?
-//        //    "blood_type": 2002,
-//        //    ; Category 3 of text_data.
-//        public var body_size_1:Int?
-//        //    "body_size_1": 86,
-//        public var body_size_2:Int?
-//        //    "body_size_2": 57,
-//        public var body_size_3:Int?
-//        //    "body_size_3": 86,
-//        public var chara_id:Int?
-//        //    "chara_id": 168,
-//        public var constellation:Int?
-//        //    "constellation": 1005,
-//        //    ; Category 4 of text_data.
-//        public var conventional:String?
-//        //    "conventional": "Kurokawa Chiaki",
-//        public var favorite:String?
-//        //    "favorite": "クラシック鑑賞",
-//        public var hand:Int?
-//        //    "hand": 3001,
-//        //    ; Category 5 of text_data (subtract 3000 for index).
-//        public var height:Int?
-//        //    "height": 163,
-//        public var home_town:Int?
-//        //    "home_town": 12,
-//        //    ; Category 2 of text_data.
-//        public var kana_spaced:String?
-//        //    "kana_spaced": "くろかわ ちあき",
-//        public var kanji_spaced:String?
-//        //    "kanji_spaced": "黒川 千秋",
-//        public var model_bust_id:Int?
-//        //    "model_bust_id": 2,
-//        public var model_height_id:Int?
-//        //    "model_height_id": 2,
-//        public var model_skin_id:Int?
-//        //    "model_skin_id": 1,
-//        public var model_wight_id:Int?
-//        //    "model_weight_id": 0,
-//        public var name:String?
-//        //    "name": "黒川千秋",
-//        public var name_kana:String?
-//        //    "name_kana": "くろかわちあき",
-//        public var personality:Int?
-//        //    "personality": 3,
-//        public var spine_size:Int?
-//        //    "spine_size": 1,
-//        public var type:String?
-//        //    "type": "cool",
-//        //    ; Any of "cool", "cute", "passion", "office"
-//        //    ; (last one reserved for Chihiro)
-//        //    "valist": [],
-//        public var valist:NSMutableArray?
-//        public var voice:String?
-//        //    "voice": "",
-//        //    ; Voice actress name (Japanese)
-//        public var weight:Int?
-//        //    "weight": 45
+    
+    func charInfoClick() {
+        delegate?.charInfoClick()
     }
     
     // 设置出售价格视图

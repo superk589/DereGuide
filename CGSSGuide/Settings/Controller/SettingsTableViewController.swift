@@ -149,15 +149,22 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                 
                 // 所有卡片大图和头像图
                 for card in cards {
+                    //卡片大图
                     if card.hasSpread! {
                         let url = NSURL.init(string: card.spreadImageRef!)
                         if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
                             urls.append(url!)
                         }
                     }
+                    //卡头像图
                     let url = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(card.id!).png")
                     if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
                         urls.append(url!)
+                    }
+                    //角色头像图
+                    let url2 = NSURL.init(string: CGSSUpdater.URLOfImages + "/icon_char/\(card.charaId!).png")
+                    if !SDWebImageManager.sharedManager().cachedImageExistsForURL(url2) {
+                        urls.append(url2!)
                     }
                 }
                 

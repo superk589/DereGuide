@@ -20,6 +20,7 @@ class CharDetailViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         detailView = CharDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
         detailView.setup(char)
+        detailView.delegate = self
         sv.contentSize = detailView.frame.size
         sv.addSubview(detailView)
         view.addSubview(sv)
@@ -42,4 +43,14 @@ class CharDetailViewController: UIViewController {
      }
      */
     
+}
+
+extension CharDetailViewController: CharDetailViewDelegate {
+    func cardIconClick(icon: CGSSCardIconView) {
+        let cardDetailVC = CardDetailViewController()
+        let dao = CGSSDAO.sharedDAO
+        cardDetailVC.card = dao.findCardById(icon.cardId!)
+        // cardDetailVC.modalTransitionStyle = .CoverVertical
+        self.navigationController?.pushViewController(cardDetailVC, animated: true)
+    }
 }
