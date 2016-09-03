@@ -139,9 +139,9 @@ public class CGSSBeatmap: CGSSBaseModel {
     
     // 折半查找指定秒数对应的combo数
     func comboForSec(sec: Float) -> Int {
-        // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.00001
-        let newSec = sec + preSeconds! + 0.00001
-        var end = numberOfNotes + 2
+        // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
+        let newSec = sec + preSeconds! + 0.0001
+        var end = numberOfNotes + 1
         var start = 2
         while start <= end {
             let middle = (start + end) / 2

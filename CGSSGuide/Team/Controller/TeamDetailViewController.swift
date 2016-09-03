@@ -145,6 +145,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                     self.teamDV.currentGrooveType = nil
                     self.teamDV.hideGrooveSelectButton()
                 }
+                self.sv.contentSize = self.teamDV.frame.size
                 }))
         }
         alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))

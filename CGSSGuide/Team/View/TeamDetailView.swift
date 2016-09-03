@@ -312,7 +312,7 @@ class TeamDetailView: UIView {
         } else {
             bottomView.frame.origin.y = skillListGrid.frame.origin.y
         }
-        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y)
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y + topSpace * 2)
     }
     
     func cardIconClick(icon: CGSSCardIconView) {
@@ -401,7 +401,7 @@ class TeamDetailView: UIView {
         
         // skillProcGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, scoreGrid.frame.size.height + scoreGrid.frame.origin.y + topSpace, CGSSGlobal.width - 2 * leftSpace, CGFloat(skillKind) * 14 + 1), rows: skillKind, columns: 3)
         // bottomView.frame.origin.y = skillListGrid.frame.size.height + skillListGrid.frame.origin.y
-        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y)
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.frame.size.height + bottomView.frame.origin.y + 2 * topSpace)
     }
     
     func updatePresentValueGrid(team: CGSSTeam) {
@@ -462,7 +462,7 @@ class TeamDetailView: UIView {
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
         scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
-        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.fheight + bottomView.fy)
+        frame.size = CGSizeMake(CGSSGlobal.width, bottomView.fheight + bottomView.fy + topSpace * 2)
     }
     
     func resetCalcButton() {
