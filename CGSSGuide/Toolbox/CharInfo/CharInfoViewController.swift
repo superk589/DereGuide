@@ -14,7 +14,6 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     var searchBar: UISearchBar!
     var filter: CGSSCharFilter!
     var sorter: CGSSSorter!
-    var tb: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +36,11 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
         
         self.tableView.registerClass(CharInfoTableViewCell.self, forCellReuseIdentifier: "CharCell")
-        tb = UIToolbar.init(frame: CGRectMake(0, CGSSGlobal.height - 40, CGSSGlobal.width, 40))
-        tableView.tableFooterView = UIView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 40))
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
         
-        tb.items = [backItem]
+        // tb.items = [backItem]
+        
+        toolbarItems = [backItem]
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,14 +51,6 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     func tbBack() {
         navigationController?.popViewControllerAnimated(true)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let superview = tableView.superview {
-            superview.addSubview(tb)
-            tb.fy = superview.fheight - 40
-        }
     }
     
     func prepareFilterAndSorter() {
@@ -107,9 +98,14 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: true)
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

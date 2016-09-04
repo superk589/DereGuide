@@ -495,7 +495,7 @@ class CardDetailView: UIView {
         let descLabel = UILabel()
         descLabel.frame = CGRectMake(10, insideY, 140, 14)
         descLabel.font = UIFont.systemFontOfSize(14)
-        descLabel.text = "同角色其他卡片:"
+        descLabel.text = "角色所有卡片:"
         descLabel.textColor = UIColor.blackColor()
         
         let charInfoLabel = UILabel.init(frame: CGRectMake(100, insideY, CGSSGlobal.width - 110, 14))

@@ -9,15 +9,13 @@
 import UIKit
 
 class TeamSongSelectViewController: BaseSongTableViewController {
-    
-    var tb: UIToolbar!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        tb = UIToolbar.init(frame: CGRectMake(0, CGSSGlobal.height - 40, CGSSGlobal.width, 40))
-        tableView.tableFooterView = UIView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 40))
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
-        tb.items = [backItem]
+
+        toolbarItems = [backItem]
         
         // Do any additional setup after loading the view.
     }
@@ -30,13 +28,15 @@ class TeamSongSelectViewController: BaseSongTableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: true)
+    }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let superview = tableView.superview {
-            superview.addSubview(tb)
-            tb.fy = superview.fheight - 40
-        }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {

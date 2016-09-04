@@ -10,15 +10,11 @@ import UIKit
 
 class TeamCardSelectTableViewController: BaseCardTableViewController {
     
-    var tb: UIToolbar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tb = UIToolbar.init(frame: CGRectMake(0, CGSSGlobal.height - 40, CGSSGlobal.width, 40))
-        tableView.tableFooterView = UIView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 40))
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
         
-        tb.items = [backItem]
+        toolbarItems = [backItem]
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,19 +27,21 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
+    
     override func prepareFilterAndSorter() {
         // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
         filter = CGSSSorterFilterManager.defaultManager.teamCardfilter
         // 按更新顺序排序
         sorter = CGSSSorterFilterManager.defaultManager.teamCardSorter
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let superview = tableView.superview {
-            superview.addSubview(tb)
-            tb.fy = superview.fheight - 40
-        }
     }
     
     override func didReceiveMemoryWarning() {
