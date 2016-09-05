@@ -49,6 +49,8 @@
 		125164B31D5A0422001D66FC /* song_cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AF1D5A0422001D66FC /* song_cool.png */; };
 		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
 		125164B51D5A0422001D66FC /* song_passion.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B11D5A0422001D66FC /* song_passion.png */; };
+		126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */; };
+		126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSSongFilter.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
 		1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */; };
@@ -207,6 +209,8 @@
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
 		125164B11D5A0422001D66FC /* song_passion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_passion.png; sourceTree = "<group>"; };
+		126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
+		126666231D7D70F70022348E /* CGSSSongFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSongFilter.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +471,7 @@
 				121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */,
 				1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */,
 				1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */,
+				126666231D7D70F70022348E /* CGSSSongFilter.swift */,
 				1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */,
 				122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */,
 				1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */,
@@ -581,6 +586,7 @@
 				121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */,
 				1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */,
 				1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */,
+				126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -907,6 +913,7 @@
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
+				126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
@@ -963,6 +970,7 @@
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
+				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,

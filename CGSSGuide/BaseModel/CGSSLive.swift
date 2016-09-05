@@ -62,34 +62,27 @@ enum CGSSGrooveType: String {
     }
 }
 
-public class CGSSLive: CGSSBaseModel {
-    var id: Int?
-    var musicId: Int?
-    var musicTitle: String?
-    var type: Int?
-    var liveDetailId: [Int]?
-    var eventType: Int?
-    var debut: Int?
-    var regular: Int?
-    var pro: Int?
-    var master: Int?
-    var masterPlus: Int?
-    var updateId: Int {
+extension CGSSLive {
+    // 用于排序的属性
+    dynamic var updateId: Int {
         return self.liveDetailId![0]
     }
+    
+    dynamic var bpm: Int {
+        let dao = CGSSDAO.sharedDAO
+        return dao.findSongById(self.musicId!)?.bpm ?? 0
+    }
+    
+    dynamic var maxDiffStars: Int {
+        return getStarsForDiff(maxDiff)
+    }
+    
     var musicRef: CGSSSong? {
         return CGSSDAO.sharedDAO.findSongById(musicId!)
     }
-    var bpm: Int? {
-        let dao = CGSSDAO.sharedDAO
-        return dao.findSongById(self.musicId!)?.bpm
-    }
     
-    var barSec: Float? {
-        if bpm != nil {
-            return 1 / Float(bpm!) / 60
-        }
-        return nil
+    var barSec: Float {
+        return 1 / Float(bpm) / 60
     }
     
     func getLiveColor() -> UIColor {
@@ -131,6 +124,10 @@ public class CGSSLive: CGSSBaseModel {
         }
     }
     
+    var eventFilterType: CGSSSongEventFilterType {
+        return CGSSSongEventFilterType.init(eventType: eventType!)
+    }
+    
     func getStarsForDiff(diff: Int) -> Int {
         switch diff {
         case 1:
@@ -150,6 +147,21 @@ public class CGSSLive: CGSSBaseModel {
     var maxDiff: Int {
         return (self.masterPlus == 0) ? 4 : 5
     }
+    
+}
+
+public class CGSSLive: CGSSBaseModel {
+    var id: Int?
+    var musicId: Int?
+    var musicTitle: String?
+    var type: Int?
+    var liveDetailId: [Int]?
+    var eventType: Int?
+    var debut: Int?
+    var regular: Int?
+    var pro: Int?
+    var master: Int?
+    var masterPlus: Int?
     
     func getBeatmapByDiff(diff: Int) -> CGSSBeatmap? {
         return CGSSDAO.sharedDAO.findBeatmapById(self.id!, diffId: diff)

@@ -14,6 +14,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var liveList: [CGSSLive]!
     var sorter: CGSSSorter!
+    var filter: CGSSSongFilter!
     var searchBar: UISearchBar!
     func check(mask: UInt) {
         let updater = CGSSUpdater.defaultUpdater
@@ -57,10 +58,19 @@ class BaseSongTableViewController: RefreshableTableViewController {
         refresher.endRefreshing()
     }
     
+    func prepareFilterAndSorter() {
+        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
+        filter = CGSSSorterFilterManager.defaultManager.songFilter
+        // 按更新顺序排序
+        sorter = CGSSSorterFilterManager.defaultManager.songSorter
+    }
+    
     // 根据设定的筛选和排序方法重新展现数据
     func refresh() {
+        prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
-        liveList = Array(dao.validLiveDict.values)
+        liveList = filter.filterSongList(Array(dao.validLiveDict.values))
+        
         if searchBar.text != "" {
             liveList = dao.getLiveListByName(liveList, string: searchBar.text!)
         }
@@ -111,6 +121,11 @@ class BaseSongTableViewController: RefreshableTableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         // 初始化导航栏的搜索条
         searchBar = UISearchBar()
+        for sub in searchBar.subviews.first!.subviews {
+            if let iv = sub as? UIImageView {
+                iv.alpha = 0
+            }
+        }
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .Done
         // searchBar.showsCancelButton = true
@@ -120,10 +135,28 @@ class BaseSongTableViewController: RefreshableTableViewController {
         searchBar.delegate = self
         // self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
         self.tableView.registerClass(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
         self.tableView.rowHeight = 86
         sorter = CGSSSorter.init(att: "updateId")
         dao.sortListInPlace(&liveList!, sorter: sorter)
+    }
+    
+    func filterAction() {
+        let sb = UIStoryboard.init(name: "Main", bundle: nil)
+        let filterVC = sb.instantiateViewControllerWithIdentifier("SongFilterAndSorterTableViewController") as! SongFilterAndSorterTableViewController
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.hidesBottomBarWhenPushed = true
+        filterVC.delegate = self
+        // navigationController?.pushViewController(filterVC, animated: true)
+        
+        // 使用自定义动画效果
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = kCATransitionFade
+        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController?.pushViewController(filterVC, animated: false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -274,3 +307,10 @@ extension BaseSongTableViewController {
     }
 }
 
+extension BaseSongTableViewController: SongFilterAndSorterTableViewControllerDelegate {
+    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.defaultManager.songFilter = filter
+        CGSSSorterFilterManager.defaultManager.songSorter = sorter
+        CGSSSorterFilterManager.defaultManager.saveForSong()
+    }
+}

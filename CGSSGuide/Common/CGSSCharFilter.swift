@@ -67,7 +67,7 @@ public class CGSSCharFilter {
         for i: UInt in 0...3 {
             let mask = typeMask >> i
             if mask % 2 == 1 {
-                charFilterTypes.append(CGSSCardFilterType.init(raw: 1 << i)!)
+                charFilterTypes.append(CGSSCharFilterType.init(raw: 1 << i)!)
             }
         }
         

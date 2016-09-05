@@ -16,6 +16,8 @@ class CGSSSorterFilterManager: NSObject {
     static let teamCardFilterPath = NSHomeDirectory() + "/Documents/teamCardFilter.plist"
     static let charFilterPath = NSHomeDirectory() + "/Documents/charFilter.plist"
     static let charSorterPath = NSHomeDirectory() + "/Documents/charSorter.plist"
+    static let songFilterPath = NSHomeDirectory() + "/Documents/songFilter.plist"
+    static let songSorterPath = NSHomeDirectory() + "/Documents/songSorter.plist"
     
     lazy var cardSorter = CGSSSorter.readFromFile(cardSorterPath) ?? CGSSSorter.init(att: "update_id")
     lazy var teamCardSorter = CGSSSorter.readFromFile(teamCardSorterPath) ?? CGSSSorter.init(att: "update_id")
@@ -23,6 +25,8 @@ class CGSSSorterFilterManager: NSObject {
     lazy var teamCardfilter = CGSSCardFilter.readFromFile(teamCardFilterPath) ?? CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, favoriteMask: nil)
     lazy var charFilter = CGSSCharFilter.readFromFile(charFilterPath) ?? CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11)
     lazy var charSorter = CGSSSorter.readFromFile(charSorterPath) ?? CGSSSorter.init(att: "sName", ascending: true)
+    lazy var songFilter = CGSSSongFilter.readFromFile(songFilterPath) ?? CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b111)
+    lazy var songSorter = CGSSSorter.readFromFile(songSorterPath) ?? CGSSSorter.init(att: "updateId")
     
     func saveForTeam() {
         teamCardSorter.writeToFile(CGSSSorterFilterManager.teamCardSorterPath)
@@ -36,6 +40,10 @@ class CGSSSorterFilterManager: NSObject {
     func saveForChar() {
         charFilter.writeToFile(CGSSSorterFilterManager.charFilterPath)
         charSorter.writeToFile(CGSSSorterFilterManager.charSorterPath)
+    }
+    func saveForSong() {
+        songFilter.writeToFile(CGSSSorterFilterManager.songFilterPath)
+        songSorter.writeToFile(CGSSSorterFilterManager.songSorterPath)
     }
     
     private override init() {
