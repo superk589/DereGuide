@@ -30,7 +30,7 @@ class SongDiffView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.whiteColor()
         label.textAlignment = .Center
-        iv.zy_cornerRadiusAdvance(6, rectCornerType: .AllCorners)
+        iv.zy_cornerRadiusAdvance(8, rectCornerType: .AllCorners)
     }
     
     func addTarget(target: AnyObject?, action: Selector) {
@@ -77,14 +77,14 @@ class SongTableViewCell: UITableViewCell {
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space: CGFloat = 10
         // let fontSize: CGFloat = 16
-        let height: CGFloat = 20
-        let originY: CGFloat = 56
+        let height: CGFloat = 33
+        let originY: CGFloat = 43
         let originX: CGFloat = 86
         
         contentView.addSubview(jacketImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(typeIcon)
-        contentView.addSubview(descriptionLabel)
+        // contentView.addSubview(descriptionLabel)
         
         let colors = [CGSSGlobal.debutColor, CGSSGlobal.regularColor, CGSSGlobal.proColor, CGSSGlobal.masterColor, CGSSGlobal.masterPlusColor]
         diffViews = [SongDiffView]()

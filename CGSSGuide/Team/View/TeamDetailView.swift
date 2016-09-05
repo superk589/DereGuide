@@ -500,7 +500,9 @@ class TeamDetailView: UIView {
         scoreGrid.setGridContent(scoreString)
     }
     func backValueChanged() {
-        delegate?.backValueChanged(Int(backSupportTF.text!) ?? 100000)
+        let value = Int(backSupportTF.text!) ?? CGSSGlobal.presetBackValue
+        backSupportTF.text = String(value)
+        delegate?.backValueChanged(value)
     }
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
