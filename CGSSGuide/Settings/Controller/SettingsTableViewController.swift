@@ -83,27 +83,30 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     
-    func getCacheSize() -> Int {
-        if let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, .UserDomainMask, true).first {
-            if let files = NSFileManager.defaultManager().subpathsAtPath(cachePath) {
-                var size = 0
-                for file in files {
-                    let path = cachePath.stringByAppendingFormat("/\(file)")
-                    if let attributes = try? NSFileManager.defaultManager().attributesOfItemAtPath(path) {
-                        size += attributes[NSFileSize]?.integerValue ?? 0
+    func updateCacheSize() {
+        dispatch_async(dispatch_get_global_queue(0, 0)) {
+            if let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, .UserDomainMask, true).first {
+                if let files = NSFileManager.defaultManager().subpathsAtPath(cachePath) {
+                    var size = 0
+                    for file in files {
+                        let path = cachePath.stringByAppendingFormat("/\(file)")
+                        if let attributes = try? NSFileManager.defaultManager().attributesOfItemAtPath(path) {
+                            size += attributes[NSFileSize]?.integerValue ?? 0
+                        }
                     }
+                    dispatch_async(dispatch_get_main_queue(), { [weak self] in
+                        self?.cacheSizeLabel.text = "\(size/(1024*1024))MB"
+                    })
                 }
-                return size
             }
         }
-        return 0
-        
     }
     @IBOutlet weak var cacheSizeLabel: UILabel! {
         didSet {
-            cacheSizeLabel.text = "\(getCacheSize()/(1024*1024))MB"
+            cacheSizeLabel.text = "..MB"
         }
     }
+    
     private func deleteAllCacheFiles() {
         if let cachePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, .UserDomainMask, true).first {
             if let files = NSFileManager.defaultManager().subpathsAtPath(cachePath) {
@@ -198,7 +201,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                     dispatch_async(dispatch_get_main_queue(), {
                         self.updateStatusView.updateProgress(Int(a), b: Int(b))
                         if a % 10 == 0 {
-                            self.cacheSizeLabel.text = "\(self.getCacheSize()/(1024*1024))MB"
+                            self.updateCacheSize()
                         }
                     })
                     }, completed: { (a, b) in
@@ -206,7 +209,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                         let alert = UIAlertController.init(title: "缓存图片完成", message: "成功\(a - b),失败\(b)", preferredStyle: .Alert)
                         alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
                         self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
-                        self.cacheSizeLabel.text = "\(self.getCacheSize()/(1024*1024))MB"
+                        self.updateCacheSize()
                         self.updateStatusView.hidden = true
                     })
                     CGSSUpdater.defaultUpdater.isUpdating = false
@@ -224,12 +227,12 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         let alvc = UIAlertController.init(title: "缓存图片取消", message: "缓存图片已被中止", preferredStyle: .Alert)
         alvc.addAction(UIAlertAction.init(title: "确定", style: .Cancel, handler: nil))
         self.tabBarController?.presentViewController(alvc, animated: true, completion: nil)
-        cacheSizeLabel.text = "\(getCacheSize()/(1024*1024))MB"
+        updateCacheSize()
     }
     
     func refresh() {
         dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
-        cacheSizeLabel.text = "\(getCacheSize()/(1024*1024))MB"
+        updateCacheSize()
     }
     
     override func viewWillAppear(animated: Bool) {
