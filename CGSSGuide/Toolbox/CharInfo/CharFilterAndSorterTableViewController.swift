@@ -22,6 +22,8 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     
     @IBOutlet weak var charBloodTypeView: UIView!
     
+    @IBOutlet weak var favoriteStackView: UIView!
+    
     @IBOutlet weak var ascendingStackView: UIView!
     
     @IBOutlet weak var basicStackView: UIView!
@@ -69,6 +71,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         for i in 0...1 {
             let button = cvTypeView.subviews[i] as! UIButton
             button.selected = filter.hasCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << i)!)
+        }
+        for i in 0...1 {
+            let button = favoriteStackView.subviews[i] as! UIButton
+            button.selected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -120,6 +126,14 @@ class CharFilterAndSorterTableViewController: UITableViewController {
             let button = cvTypeView.subviews[i] as! UIButton
             button.addTarget(self, action: #selector(charCVButtonClick), forControlEvents: .TouchUpInside)
             button.tag = 4000 + i
+        }
+        for i in 0...1 {
+            let button = favoriteStackView.subviews[i] as! UIButton
+            // button.layer.borderWidth = 1
+            // button.layer.borderColor = UIColor.blueColor().CGColor
+            // button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
+            button.addTarget(self, action: #selector(favoriteButtonClick), forControlEvents: .TouchUpInside)
+            button.tag = 5000 + i
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -200,6 +214,20 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         
     }
     
+    func favoriteButtonClick(sender: UIButton) {
+        let tag = sender.tag - 5000
+        if sender.selected {
+            sender.selected = false
+            // sender.backgroundColor = UIColor.clearColor()
+            filter.removeFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+        } else {
+            sender.selected = true
+            // sender.backgroundColor = color
+            filter.addFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+        }
+        
+    }
+    
     func ascendingAction(sender: UIButton) {
         if !sender.selected {
             sender.selected = true
@@ -242,7 +270,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     }
     
     func resetAction() {
-        filter = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11)
+        filter = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
         sorter = CGSSSorter.init(att: "sName", ascending: true)
         setup()
     }
@@ -262,7 +290,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 4
+            return 5
         } else {
             return 4
         }

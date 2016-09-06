@@ -1276,12 +1276,52 @@ ZXQ</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lo2-mN-Vav">
+                                        <rect key="frame" x="0.0" y="204" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lo2-mN-Vav" id="L7p-ki-tSg">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVV-Ey-bpA">
+                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kob-rj-znb">
+                                                            <rect key="frame" x="15" y="0.0" width="42" height="28"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <state key="normal" title="已收藏"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLj-NT-Pgo">
+                                                            <rect key="frame" x="75" y="0.0" width="42" height="27.5"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <state key="normal" title="未收藏"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Kob-rj-znb" firstAttribute="leading" secondItem="JVV-Ey-bpA" secondAttribute="leading" constant="15" id="8a8-L3-8fR"/>
+                                                        <constraint firstItem="uLj-NT-Pgo" firstAttribute="leading" secondItem="Kob-rj-znb" secondAttribute="trailing" constant="18" id="G48-Lc-Kzd"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Kob-rj-znb" secondAttribute="bottom" id="Hww-MO-Bdf"/>
+                                                        <constraint firstItem="Kob-rj-znb" firstAttribute="top" secondItem="JVV-Ey-bpA" secondAttribute="top" id="rr9-gG-XRP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uLj-NT-Pgo" secondAttribute="bottom" id="voe-4A-c6W"/>
+                                                        <constraint firstItem="uLj-NT-Pgo" firstAttribute="top" secondItem="JVV-Ey-bpA" secondAttribute="top" id="wim-8f-5CC"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JVV-Ey-bpA" secondAttribute="bottom" id="4dJ-1B-egO"/>
+                                                <constraint firstItem="JVV-Ey-bpA" firstAttribute="top" secondItem="L7p-ki-tSg" secondAttribute="topMargin" id="OuT-KC-Xka"/>
+                                                <constraint firstItem="JVV-Ey-bpA" firstAttribute="leading" secondItem="L7p-ki-tSg" secondAttribute="leadingMargin" id="R4W-e4-p9y"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JVV-Ey-bpA" secondAttribute="trailing" id="hFx-Oc-i2p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="排序" id="S9a-oB-UoS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QZH-xY-vV1">
-                                        <rect key="frame" x="0.0" y="232" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="276" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QZH-xY-vV1" id="ghW-Bx-UGi">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1321,7 +1361,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eai-gO-vXC">
-                                        <rect key="frame" x="0.0" y="276" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="320" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eai-gO-vXC" id="r9E-a4-M8A">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1369,7 +1409,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="udX-YH-psn">
-                                        <rect key="frame" x="0.0" y="320" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="364" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="udX-YH-psn" id="z4t-5r-a2w">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1417,7 +1457,7 @@ ZXQ</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CaJ-uj-mbv">
-                                        <rect key="frame" x="0.0" y="364" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="408" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CaJ-uj-mbv" id="huV-zP-tbe">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1472,6 +1512,7 @@ ZXQ</string>
                         <outlet property="charBloodTypeView" destination="a30-ud-EUG" id="vt3-9C-bDH"/>
                         <outlet property="charTypeStackView" destination="dOY-ZT-iuT" id="f7i-FJ-yWD"/>
                         <outlet property="cvTypeView" destination="dVL-mI-Um2" id="FDY-nd-ldc"/>
+                        <outlet property="favoriteStackView" destination="JVV-Ey-bpA" id="Spu-pv-oAj"/>
                         <outlet property="otherSortingStackView" destination="v3X-MH-dqF" id="1SQ-YX-sHT"/>
                         <outlet property="threeSizeStackView" destination="t0c-wJ-B4c" id="3Tk-HH-oLw"/>
                     </connections>

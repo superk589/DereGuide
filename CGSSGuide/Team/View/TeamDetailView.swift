@@ -201,7 +201,7 @@ class TeamDetailView: UIView {
         liveTypeDescLable.textColor = UIColor.darkGrayColor()
         
         liveTypeButton = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 150, originY, 140, 21))
-        liveTypeButton.setTitle("<常规模式>", forState: .Normal)
+        liveTypeButton.setTitle("< 常规模式 >", forState: .Normal)
         liveTypeButton.contentHorizontalAlignment = .Right
         liveTypeButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         liveTypeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
@@ -210,7 +210,7 @@ class TeamDetailView: UIView {
         originY += 21 + topSpace
         
         grooveTypeDescLable = UILabel.init(frame: CGRectMake(leftSpace, originY, 100, 0))
-        grooveTypeDescLable.text = "Groove颜色: "
+        grooveTypeDescLable.text = "Groove类别: "
         grooveTypeDescLable.font = UIFont.systemFontOfSize(14)
         grooveTypeDescLable.textColor = UIColor.darkGrayColor()
         
@@ -506,14 +506,14 @@ class TeamDetailView: UIView {
     }
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
-            self.liveTypeButton.setTitle("<\(currentLiveType.rawValue)>", forState: .Normal)
+            self.liveTypeButton.setTitle("< \(currentLiveType.rawValue) >", forState: .Normal)
             self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), forState: .Normal)
         }
     }
     var currentGrooveType: CGSSGrooveType? {
         didSet {
             if let type = currentGrooveType {
-                self.grooveTypeButton.setTitle("<\(type.rawValue)>", forState: .Normal)
+                self.grooveTypeButton.setTitle("< \(type.rawValue) >", forState: .Normal)
                 self.grooveTypeButton.setTitleColor(type.typeColor(), forState: .Normal)
             } else {
                 self.grooveTypeButton.setTitle("", forState: .Normal)

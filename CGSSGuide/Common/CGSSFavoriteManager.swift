@@ -11,9 +11,15 @@ import Foundation
 public class CGSSFavoriteManager: NSObject {
     public static let defaultManager = CGSSFavoriteManager()
     static let favoriteCardsFilePath = NSHomeDirectory() + "/Documents/favoriteCards.plist"
+    static let favoriteCharsFilePath = NSHomeDirectory() + "/Documents/favoriteChars.plist"
     var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCardsToFile()
+        }
+    }
+    var favoriteChars: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCharsFilePath) as? [Int] ?? [Int]() {
+        didSet {
+            writeFavoriteCharsToFile()
         }
     }
     
@@ -24,18 +30,31 @@ public class CGSSFavoriteManager: NSObject {
     func writeFavoriteCardsToFile() {
         (favoriteCards as NSArray).writeToFile(CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }
-    
-    func addFavoriteCard(card: CGSSCard, callBack: ((String) -> Void)?) {
-        self.favoriteCards.append(card.id!)
-        callBack?("收藏成功")
+    func writeFavoriteCharsToFile() {
+        (favoriteChars as NSArray).writeToFile(CGSSFavoriteManager.favoriteCharsFilePath, atomically: true)
     }
-    func removeFavoriteCard(card: CGSSCard, callBack: ((String) -> Void)?) {
+    
+    func addFavoriteCard(card: CGSSCard) {
+        self.favoriteCards.append(card.id!)
+    }
+    func removeFavoriteCard(card: CGSSCard) {
         if let index = favoriteCards.indexOf(card.id!) {
             self.favoriteCards.removeAtIndex(index)
         }
-        callBack?("取消收藏成功")
     }
-    public func contains(cardId: Int) -> Bool {
+    public func containsCard(cardId: Int) -> Bool {
         return favoriteCards.contains(cardId)
+    }
+    
+    func addFavoriteChar(char: CGSSChar) {
+        self.favoriteChars.append(char.charaId)
+    }
+    func removeFavoriteChar(char: CGSSChar) {
+        if let index = favoriteChars.indexOf(char.charaId!) {
+            self.favoriteChars.removeAtIndex(index)
+        }
+    }
+    public func containsChar(charId: Int) -> Bool {
+        return favoriteChars.contains(charId)
     }
 }

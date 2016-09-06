@@ -25,12 +25,32 @@ class CharDetailViewController: UIViewController {
         sv.addSubview(detailView)
         view.addSubview(sv)
         
+        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.containsChar(char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
+        rightItem.tintColor = UIColor.redColor()
+        navigationItem.rightBarButtonItem = rightItem
+
+        
         // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    // 添加当前角色到收藏
+    func addOrRemoveFavorite() {
+        let fm = CGSSFavoriteManager.defaultManager
+        if !fm.containsChar(char.charaId) {
+            fm.addFavoriteChar(self.char)
+            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
+        } else {
+            fm.removeFavoriteChar(self.char)
+            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
+        }
+        
     }
     
     /*

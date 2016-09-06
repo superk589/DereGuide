@@ -127,7 +127,7 @@ extension CGSSCard {
         return CGSSAttributeFilterType.None
     }
     var favoriteFilterType: CGSSFavoriteFilterType {
-        return CGSSFavoriteManager.defaultManager.contains(self.id!) ? CGSSFavoriteFilterType.InFavorite : CGSSFavoriteFilterType.NotInFavorite
+        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteFilterType.InFavorite : CGSSFavoriteFilterType.NotInFavorite
     }
     
 }

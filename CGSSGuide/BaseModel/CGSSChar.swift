@@ -34,6 +34,9 @@ extension CGSSChar {
     var charCVFilterType: CGSSCharCVTypeFilter {
         return voice == "" ? CGSSCharCVTypeFilter.NO : CGSSCharCVTypeFilter.YES
     }
+    var favoriteFilterType: CGSSFavoriteFilterType {
+        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? CGSSFavoriteFilterType.InFavorite : CGSSFavoriteFilterType.NotInFavorite
+    }
     
     // 用于排序的动态属性
     dynamic var sHeight: Int {
