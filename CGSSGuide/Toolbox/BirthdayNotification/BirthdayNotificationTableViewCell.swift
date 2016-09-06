@@ -7,10 +7,14 @@
 //
 
 import UIKit
+protocol BirthdayNotificationTableViewCellDelegate:class {
+    func charIconClick(icon:CGSSCharIconView)
+}
 
 class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var chars = [CGSSChar]()
     var cv: UICollectionView!
+    weak var delegate: BirthdayNotificationTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -62,6 +66,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BirthdayCollectionViewCell", forIndexPath: indexPath) as! BirthdayCollectionViewCell
         cell.initWithChar(chars[indexPath.item])
+        cell.delegate = self
         return cell
     }
     
@@ -75,4 +80,10 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
         // Configure the view for the selected state
     }
     
+}
+
+extension BirthdayNotificationTableViewCell: BirthdayCollectionViewCellDelegate {
+    func charIconClick(icon: CGSSCharIconView) {
+        delegate?.charIconClick(icon)
+    }
 }
