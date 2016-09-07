@@ -104,6 +104,8 @@ extension CGSSChar {
             return "狮子座"
         case 1012:
             return "巨蟹座"
+        case 1013:
+            return "花も恥じらう乙女座"  //双叶杏的特殊星座
         default:
             return "不明"
         }

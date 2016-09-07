@@ -153,7 +153,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func grooveTypeButtonClick() {
-        let alvc = UIAlertController.init(title: "选择Groove颜色", message: nil, preferredStyle: .ActionSheet)
+        let alvc = UIAlertController.init(title: "选择Groove类别", message: nil, preferredStyle: .ActionSheet)
         alvc.popoverPresentationController?.sourceView = teamDV.grooveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRectMake(0, teamDV.grooveTypeButton.fheight / 2, 0, 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .Right
