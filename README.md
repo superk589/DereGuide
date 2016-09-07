@@ -1,13 +1,14 @@
 # CGSSGuide
 
 ## Introduction
-This is an iOS app for Cinderella Girls Starlight Stage. Based on data from   
-* <https://starlight.kirara.ca>
-* <http://starlight.hyspace.io>
-* <https://deresute.info>
-* <https://hoshimoriuta.kirara.ca>
+This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on data/api from   
+* English version of card data api <https://starlight.kirara.ca>
+* Chinese version of card data api <http://starlight.hyspace.io>
+* Beatmap & story api <https://deresute.info>
+* Image data <https://hoshimoriuta.kirara.ca>
 
 ## Features
-* Card information
-* Beatmap
-* Team simulation
+* Card/Character information
+* Music information and Beatmap
+* Team simulation/Live score calculation
+* Birthday notification and other small tools in the furture
