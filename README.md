@@ -11,4 +11,12 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Card/Character information
 * Music information and Beatmap
 * Team simulation/Live score calculation
-* Birthday notification and other small tools in the furture
+* Birthday notification and other small tools in the future
+
+## Acknowledgement
+### [sparklebox](https://github.com/summertriangle-dev/sparklebox) 
+* Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev) 
+* Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
+
+### [deresute.info](https://deresute.info) 
+* Author: [Snack-X](https://github.com/Snack-X)
