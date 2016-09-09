@@ -27,8 +27,10 @@ class BirthdayNotificationViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView.init(frame: CGRectZero)
-        tableView.separatorStyle = .None
         tableView.registerClass(BirthdayNotificationTableViewCell.self, forCellReuseIdentifier: "BirthdayNotificationCell")
+        
+        // 设置tableView的separatorStyle 在9.0版本之前会触发tableView的协议方法, 所以必须在这步之前注册tableView的cell
+        tableView.separatorStyle = .None
         
         if #available(iOS 9.0, *) {
             headerView.cellLayoutMarginsFollowReadableWidth = false
