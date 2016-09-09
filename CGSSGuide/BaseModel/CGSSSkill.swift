@@ -10,6 +10,11 @@ import Foundation
 import SwiftyJSON
 
 extension CGSSSkill {
+    
+    var skillFilterType: CGSSSkillFilterType {
+        return CGSSSkillFilterType.init(type: skillType)
+    }
+    
     func procChanceOfLevel(lv: Int) -> Float? {
         if let p = procChance {
             let p1 = Float(p[1])
@@ -37,6 +42,19 @@ extension CGSSSkill {
         let range2 = explain.rangeOfString(sub2 as String)
         explain.replaceRange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
         return explain
+    }
+    
+    var procTypeShort: String {
+        switch maxChance {
+        case 6000:
+            return "高"
+        case 5250:
+            return "中"
+        case 4500:
+            return "低"
+        default:
+            return "其他"
+        }
     }
     
 }

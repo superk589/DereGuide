@@ -111,6 +111,9 @@ extension CGSSCard {
     var rarityFilterType: CGSSCardRarityFilterType {
         return CGSSCardRarityFilterType.init(rarity: rarity.rarity - 1) ?? CGSSCardRarityFilterType.N
     }
+    var skillFilterType: CGSSSkillFilterType {
+        return skill?.skillFilterType ?? CGSSSkillFilterType.None
+    }
     var cardFilterType: CGSSCardFilterType {
         return CGSSCardFilterType.init(typeString: attribute)!
     }

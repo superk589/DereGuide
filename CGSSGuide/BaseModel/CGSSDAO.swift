@@ -131,8 +131,8 @@ public class CGSSDAO: NSObject {
     }
     
     // 根据掩码筛选
-    func getCardListByMask(cardMask: UInt, attributeMask: UInt, rarityMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
-        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, favoriteMask: favoriteMask)
+    func getCardListByMask(cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
+        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask, favoriteMask: favoriteMask)
         return filter.filterCardList(cardDict.allValues as! [CGSSCard])
     }
     func getCardListByMask(filter: CGSSCardFilter) -> [CGSSCard] {
@@ -369,7 +369,7 @@ public class CGSSDAO: NSObject {
     
     func getRankInType(card: CGSSCard) -> [Int] {
         var rank = [1, 1, 1, 1]
-        let filter = CGSSCardFilter.init(cardMask: card.cardFilterType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, favoriteMask: nil)
+        let filter = CGSSCardFilter.init(cardMask: card.cardFilterType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
         let filteredCardDict = getCardListByMask(filter)
         for cardx in filteredCardDict {
             if cardx.vocal > card.vocal {

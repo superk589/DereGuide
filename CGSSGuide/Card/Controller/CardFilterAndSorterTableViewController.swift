@@ -15,6 +15,8 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     @IBOutlet weak var rarityStackView: UIView!
     @IBOutlet weak var cardTypeStackView: UIView!
+    @IBOutlet weak var skillTypeView: UIView!
+    @IBOutlet weak var skillTypeView2: UIView!
     @IBOutlet weak var attributeStackView: UIView!
     @IBOutlet weak var favoriteStackView: UIView!
     
@@ -52,6 +54,14 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         for i in 0...7 {
             let button = rarityButtons[i]
             button.selected = filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - i))!)
+        }
+        
+        var skillTypeButtons = [UIButton]()
+        skillTypeButtons.appendContentsOf(skillTypeView.subviews as! [UIButton])
+        skillTypeButtons.appendContentsOf(skillTypeView2.subviews as! [UIButton])
+        for i in 0...8 {
+            let button = skillTypeButtons[i]
+            button.selected = filter.hasSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(i))!)
         }
         
         for i in 0...2 {
@@ -104,6 +114,18 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             // button.layer.borderWidth = 1
             // button.layer.borderColor = color.CGColor
             button.addTarget(self, action: #selector(rarityButtonClick), forControlEvents: .TouchUpInside)
+            // button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
+            button.tag = 1000 + i
+        }
+        
+        var skillTypeButtons = [UIButton]()
+        skillTypeButtons.appendContentsOf(skillTypeView.subviews as! [UIButton])
+        skillTypeButtons.appendContentsOf(skillTypeView2.subviews as! [UIButton])
+        for i in 0...8 {
+            let button = skillTypeButtons[i]
+            // button.layer.borderWidth = 1
+            // button.layer.borderColor = color.CGColor
+            button.addTarget(self, action: #selector(skillButtonClick), forControlEvents: .TouchUpInside)
             // button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
             button.tag = 1000 + i
         }
@@ -166,6 +188,20 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             sender.selected = true
             // sender.backgroundColor = color
             filter.addCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - tag))!)
+        }
+        
+    }
+    
+    func skillButtonClick(sender: UIButton) {
+        let tag = sender.tag - 1000
+        if sender.selected {
+            sender.selected = false
+            // sender.backgroundColor = UIColor.clearColor()
+            filter.removeSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(tag))!)
+        } else {
+            sender.selected = true
+            // sender.backgroundColor = color
+            filter.addSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(tag))!)
         }
         
     }
@@ -255,10 +291,10 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     func resetAction() {
         if delegate is CardTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, favoriteMask: nil)
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
         } else if delegate is TeamCardSelectTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, favoriteMask: nil)
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000011, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
         } else {
             
@@ -281,7 +317,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 5
+            return 7
         } else {
             return 3
         }

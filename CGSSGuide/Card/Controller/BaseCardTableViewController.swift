@@ -179,11 +179,19 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         // 显示稀有度
         cell.rarityLabel.text = card.rarity?.rarityString ?? ""
         
-        // 显示主动技能类型
-        cell.skillLabel.text = card.skill?.skillType ?? ""
-        
         // 显示title
         cell.titleLabel.text = card.title ?? ""
+        
+        // 显示主动技能类型
+        if let skill = card.skill {
+            if CGSSGlobal.width > 360 {
+                cell.skillLabel.text = "\(skill.condition)s/\(skill.procTypeShort)/\(skill.skillType)"
+            } else {
+                cell.skillLabel.text = "\(skill.skillType)"
+            }
+        } else {
+            cell.skillLabel.text = ""
+        }
         
         // Configure the cell...
         

@@ -106,10 +106,10 @@ class CGSSImageView: UIImageView {
         self.reset()
         self.activityIndicator?.startAnimating()
         self.showIndicator()
-        self.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self] (a, b) in
+        self.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self](a, b) in
             // print(a, b)
             self?.progressIndicator?.progress = Float(a) / Float(b)
-            }, completed: {[weak self] (image, error, sdImageCache, nsurl) in
+            }, completed: { [weak self](image, error, sdImageCache, nsurl) in
             /*if error != nil {
              // print("加载大图时出错:\(error.localizedDescription)")
              }

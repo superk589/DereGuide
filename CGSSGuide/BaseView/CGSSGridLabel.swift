@@ -7,6 +7,12 @@
 //
 
 import UIKit
+//private class Label: UILabel {
+//    private override func drawTextInRect(rect: CGRect) {
+//        let inset = UIEdgeInsetsMake(0, 5, 0, 5)
+//        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, inset))
+//    }
+//}
 
 class CGSSGridLabel: CGSSGridView {
     
