@@ -112,15 +112,24 @@ class CGSSLiveSimulator: NSObject {
         var scheduleDic = [ScoreUpType: [ScoreUpSchedule]]()
         scheduleDic[.Bonus] = [ScoreUpSchedule]()
         scheduleDic[.Combo] = [ScoreUpSchedule]()
-        for rankedSkill in team.skills {
-            if var type = ScoreUpType.init(rawValue: rankedSkill.skill.skillType) {
-                if type == .Overload || type == .Perfect {
-                    type = .Bonus
-                }
-                let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.totalSeconds, procMax: procMax)
-                for tuple in tuples {
-                    let schedule = ScoreUpSchedule.init(begin: tuple.0, end: tuple.1, upValue: rankedSkill.skill.value!)
-                    scheduleDic[type]?.append(schedule)
+        // for rankedSkill in team.skills {
+        for i in 0...4 {
+            let member = team[i]
+            if let skill = member?.cardRef?.skill {
+                let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (member?.skillLevel)!)
+                if var type = ScoreUpType.init(rawValue: rankedSkill.skill.skillType) {
+                    if type == .Overload || type == .Perfect {
+                        type = .Bonus
+                    }
+                    var upValue = 0
+                    if member!.cardRef!.cardFilterType == live.songType || live.songType == .Office {
+                        upValue = 30
+                    }
+                    let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.totalSeconds, procMax: procMax, upValue: upValue)
+                    for tuple in tuples {
+                        let schedule = ScoreUpSchedule.init(begin: tuple.0, end: tuple.1, upValue: rankedSkill.skill.value!)
+                        scheduleDic[type]?.append(schedule)
+                    }
                 }
             }
         }

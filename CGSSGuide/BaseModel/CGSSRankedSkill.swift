@@ -47,11 +47,11 @@ class CGSSRankedSkill: NSObject {
         return explain
     }
     
-    func getRangesOfProc(sec: Float, procMax: Bool) -> [(Float, Float)] {
+    func getRangesOfProc(sec: Float, procMax: Bool, upValue: Int = 0) -> [(Float, Float)] {
         let count = Int(ceil(sec / Float(skill.condition!)))
         var procArr = [(Float, Float)]()
         for i in 1..<count {
-            if CGSSGlobal.isProc(procMax ? 10000 : Int(procChance! * 100)) {
+            if CGSSGlobal.isProc(procMax ? 10000 : Int(procChance!) * (100 + upValue)) {
                 procArr.append((Float(i * skill.condition!), Float(i * skill.condition!) + effectLength!))
             }
         }

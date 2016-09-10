@@ -24,10 +24,11 @@ class ToolboxTableViewCell: UITableViewCell {
         descLabel.font = UIFont.systemFontOfSize(16)
         descLabel.textAlignment = .Left
         
-        let asView = UIImageView.init(frame: CGRectMake(0, 0, 10, 20))
-        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
-        asView.tintColor = UIColor.lightGrayColor()
-        self.accessoryView = asView
+//        let asView = UIImageView.init(frame: CGRectMake(0, 0, 10, 20))
+//        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
+//        asView.tintColor = UIColor.lightGrayColor()
+//        self.accessoryView = asView
+        self.accessoryType = .DisclosureIndicator
         
         contentView.addSubview(icon)
         contentView.addSubview(descLabel)
