@@ -15,11 +15,12 @@ extension CGSSSkill {
         return CGSSSkillFilterType.init(type: skillType)
     }
     
+    // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
     func procChanceOfLevel(lv: Int) -> Float? {
         if let p = procChance {
             let p1 = Float(p[1])
             let p0 = Float(p[0])
-            return ((p1 - p0) / 9 * (Float(lv) - 1) + p0) / 100
+            return (floor((p1 - p0) / 9) * (Float(lv) - 1) + p0) / 100
         }
         return nil
     }
@@ -27,7 +28,7 @@ extension CGSSSkill {
         if let e = effectLength {
             let e1 = Float(e[1])
             let e0 = Float(e[0])
-            return ((e1 - e0) / 9 * (Float(lv) - 1) + e0) / 100
+            return (floor((e1 - e0) / 9) * (Float(lv) - 1) + e0) / 100
         }
         return nil
     }
@@ -41,6 +42,18 @@ extension CGSSSkill {
         let sub2 = subs[1]
         let range2 = explain.rangeOfString(sub2 as String)
         explain.replaceRange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
+        return explain
+    }
+    func getExplainByLevelRange(start: Int, end: Int) -> String {
+        var explain = explainEn ?? ""
+        let pattern = "[0-9.]+ ~ [0-9.]+"
+        let subs = CGSSGlobal.getStringByPattern(explain, pattern: pattern)
+        let sub1 = subs[0]
+        let range1 = explain.rangeOfString(sub1 as String)
+        explain.replaceRange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start)!, self.procChanceOfLevel(end)!))
+        let sub2 = subs[1]
+        let range2 = explain.rangeOfString(sub2 as String)
+        explain.replaceRange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start)!, self.effectLengthOfLevel(end)!))
         return explain
     }
     

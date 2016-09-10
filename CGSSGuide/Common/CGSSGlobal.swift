@@ -103,9 +103,9 @@ public class CGSSGlobal: NSObject {
     
     static var rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
     
-    // 传入0-9999的rate 判断是否触发
+    // 传入0-99999的rate 判断是否触发
     static func isProc(rate: Int) -> Bool {
-        let ran = arc4random_uniform(10000)
+        let ran = arc4random_uniform(100000)
         if rate > Int(ran) {
             return true
         } else {

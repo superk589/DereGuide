@@ -18,20 +18,10 @@ class CGSSRankedSkill: NSObject {
         self.skill = skill
     }
     var procChance: Float? {
-        if let p = skill.procChance {
-            let p1 = Float(p[1])
-            let p0 = Float(p[0])
-            return ((p1 - p0) / 9 * (Float(level) - 1) + p0) / 100
-        }
-        return nil
+        return skill.procChanceOfLevel(level)
     }
     var effectLength: Float? {
-        if let e = skill.effectLength {
-            let e1 = Float(e[1])
-            let e0 = Float(e[0])
-            return ((e1 - e0) / 9 * (Float(level) - 1) + e0) / 100
-        }
-        return nil
+        return skill.effectLengthOfLevel(level)
     }
     
     var explainRanked: String {
@@ -51,7 +41,7 @@ class CGSSRankedSkill: NSObject {
         let count = Int(ceil(sec / Float(skill.condition!)))
         var procArr = [(Float, Float)]()
         for i in 1..<count {
-            if CGSSGlobal.isProc(procMax ? 10000 : Int(procChance!) * (100 + upValue)) {
+            if CGSSGlobal.isProc(procMax ? 100000 : Int(round(procChance! * Float(100 + upValue) * 10))) {
                 procArr.append((Float(i * skill.condition!), Float(i * skill.condition!) + effectLength!))
             }
         }

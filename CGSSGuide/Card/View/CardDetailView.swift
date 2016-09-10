@@ -340,21 +340,21 @@ class CardDetailView: UIView {
     
     func setupSkillContentView(skill: CGSSSkill) {
         skillNameLabel.text = skill.skillName
-        skillDescriptionLabel.text = skill.explainEn
+        skillDescriptionLabel.text = skill.getExplainByLevelRange(1, end: 10)
         skillDescriptionLabel.fwidth = CGSSGlobal.width - 20
         skillDescriptionLabel.sizeToFit()
         skillProcGridView.fy = skillDescriptionLabel.fheight + skillDescriptionLabel.fy + topSpace
         
         var procGridStrings = [[String]]()
-        let procChanceMax = Double((skill.procChance[1])) / 100
-        let procChanceMin = Double((skill.procChance[0])) / 100
-        let durationMax = Double((skill.effectLength[1])) / 100
-        let durationMin = Double((skill.effectLength[0])) / 100
+        let procChanceMax: Float! = skill.procChanceOfLevel(10)
+        let procChanceMin: Float! = skill.procChanceOfLevel(1)
+        let durationMax: Float! = skill.effectLengthOfLevel(10)
+        let durationMin: Float! = skill.effectLengthOfLevel(1)
         procGridStrings.append(["  ", "触发几率%", "持续时间s", "最大覆盖率%", "平均覆盖率%"])
         procGridStrings.append(["Lv.1", String(format: "%.2f", procChanceMin), String(format: "%.2f", durationMin)
-            , String(format: "%.2f", durationMin / Double(skill.condition!) * 100), String(format: "%.2f", durationMin / Double(skill.condition!) * procChanceMin)])
+            , String(format: "%.2f", durationMin / Float(skill.condition!) * 100), String(format: "%.2f", durationMin / Float(skill.condition!) * procChanceMin)])
         procGridStrings.append(["Lv.10", String(format: "%.2f", procChanceMax), String(format: "%.2f", durationMax)
-            , String(format: "%.2f", durationMax / Double(skill.condition!) * 100), String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax)])
+            , String(format: "%.2f", durationMax / Float(skill.condition!) * 100), String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax)])
         skillProcGridView.setGridContent(procGridStrings)
         skillProcGridView[1, 0].font = UIFont.systemFontOfSize(14)
         skillProcGridView[2, 0].font = UIFont.systemFontOfSize(14)
