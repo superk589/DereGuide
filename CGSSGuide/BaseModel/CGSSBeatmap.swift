@@ -69,34 +69,34 @@ public class CGSSBeatmap: CGSSBaseModel {
         }
         return nil
     }
-    var startNoteIndex: Int {
-        for i in 0...notes.count - 1 {
-            if notes[i].finishPos != 0 {
-                return i
-            }
-        }
-        return notes.count - 1
-    }
+    // 存在问题 官方加入了81 和 82两种type的标志性note 故此处不再采用起止位置的方式获得常规note
+//    var startNoteIndex: Int {
+//        for i in 0...notes.count - 1 {
+//            if notes[i].finishPos != 0 {
+//                return i
+//            }
+//        }
+//        return notes.count - 1
+//    }
+//
+//    var lastNoteIndex: Int {
+//        for i in 0...notes.count - 1 {
+//            if notes[notes.count - i - 1].finishPos != 0 {
+//                return notes.count - i - 1
+//            }
+//        }
+//        return 0
+//    }
     
-    var lastNoteIndex: Int {
-        for i in 0...notes.count - 1 {
-            if notes[notes.count - i - 1].finishPos != 0 {
-                return notes.count - i - 1
-            }
-        }
-        return 0
-    }
-    
-    // 效率低 不建议使用 而是取起止index
-    var validNotes: [Note] {
+    lazy var validNotes: [Note] = {
         var arr = [Note]()
-        for i in 0...notes.count - 1 {
-            if notes[i].finishPos != 0 {
-                arr.append(notes[i])
+        for i in 0...self.notes.count - 1 {
+            if self.notes[i].finishPos != 0 {
+                arr.append(self.notes[i])
             }
         }
         return arr
-    }
+    }()
     
     var preSeconds: Float? {
         return firstNote?.sec
@@ -141,17 +141,17 @@ public class CGSSBeatmap: CGSSBaseModel {
     func comboForSec(sec: Float) -> Int {
         // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
         let newSec = sec + preSeconds! + 0.0001
-        var end = numberOfNotes + 1
-        var start = 2
+        var end = numberOfNotes - 1
+        var start = 0
         while start <= end {
             let middle = (start + end) / 2
-            if newSec < notes[middle].sec {
+            if newSec < validNotes[middle].sec {
                 end = middle - 1
             } else {
                 start = middle + 1
             }
         }
-        return start - 2
+        return start
     }
     
     required public init?(coder aDecoder: NSCoder) {

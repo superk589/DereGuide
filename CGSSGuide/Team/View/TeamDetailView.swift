@@ -221,7 +221,7 @@ class TeamDetailView: UIView {
         grooveTypeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         grooveTypeButton.addTarget(self, action: #selector(grooveTypeButtonClick), forControlEvents: .TouchUpInside)
         
-        originY += topSpace
+//        originY += topSpace
         
         startCalcButton = UIButton.init(frame: CGRectMake(leftSpace, originY, width, 25))
         startCalcButton.setTitle("开始计算", forState: .Normal)

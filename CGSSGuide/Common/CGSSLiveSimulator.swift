@@ -55,10 +55,11 @@ class CGSSLiveSimulator: NSObject {
             var sum: Float = 0
             
             // var log = [[Float]]()
-            for i in beatmap.startNoteIndex...beatmap.lastNoteIndex {
-                let note = beatmap.notes[i]
+            let validNotes = beatmap.validNotes
+            for i in 1...validNotes.count {
+                let note = validNotes[i - 1]
                 if criticalIndex < criticalPoints.count - 1 {
-                    if i - beatmap.startNoteIndex + 1 >= criticalPoints[criticalIndex + 1] {
+                    if i >= criticalPoints[criticalIndex + 1] {
                         criticalIndex += 1
                     }
                 }
@@ -68,8 +69,9 @@ class CGSSLiveSimulator: NSObject {
                 sum += round (scorePerNote * comboFactor * skillFactor)
                 // log.append([Float(i), sum, scorePerNote, comboFactor, skillFactor])
             }
-            // (log as NSArray).writeToFile("/Users/zzk/Documents/aaa", atomically: true)
-            
+            /*if procMax == true {
+             (log as NSArray).writeToFile("/Users/zzk/Desktop/aaa.plist", atomically: true)
+             }*/
             dispatch_async(dispatch_get_main_queue(), {
                 callBack?(Int(sum))
             })
@@ -132,7 +134,7 @@ class CGSSLiveSimulator: NSObject {
                             upValue = 30
                         }
                     }
-                    let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.totalSeconds, procMax: procMax, upValue: upValue)
+                    let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.postSeconds!, procMax: procMax, upValue: upValue)
                     for tuple in tuples {
                         let schedule = ScoreUpSchedule.init(begin: tuple.0, end: tuple.1, upValue: rankedSkill.skill.value!)
                         scheduleDic[type]?.append(schedule)

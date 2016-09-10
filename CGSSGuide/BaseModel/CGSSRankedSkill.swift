@@ -38,7 +38,8 @@ class CGSSRankedSkill: NSObject {
     }
     
     func getRangesOfProc(sec: Float, procMax: Bool, upValue: Int = 0) -> [(Float, Float)] {
-        let count = Int(ceil(sec / Float(skill.condition!)))
+        // 最后一个note的前三秒不再触发新的技能
+        let count = Int(ceil((sec - 3) / Float(skill.condition!)))
         var procArr = [(Float, Float)]()
         for i in 1..<count {
             if CGSSGlobal.isProc(procMax ? 100000 : Int(round(procChance! * Float(100 + upValue) * 10))) {
