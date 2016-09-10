@@ -121,9 +121,16 @@ class CGSSLiveSimulator: NSObject {
                     if type == .Overload || type == .Perfect {
                         type = .Bonus
                     }
+                    // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var upValue = 0
-                    if member!.cardRef!.cardFilterType == live.songType || live.songType == .Office {
-                        upValue = 30
+                    if grooveType != nil {
+                        if member!.cardRef!.cardFilterType == CGSSCardFilterType.init(grooveType: grooveType!) {
+                            upValue = 30
+                        }
+                    } else {
+                        if member!.cardRef!.cardFilterType == live.songType || live.songType == .Office {
+                            upValue = 30
+                        }
                     }
                     let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.totalSeconds, procMax: procMax, upValue: upValue)
                     for tuple in tuples {
