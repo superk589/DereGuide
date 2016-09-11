@@ -5,4 +5,5 @@ target 'CGSSGuide' do
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
   pod 'ZYCornerRadius'
+  pod 'lz4'
 end
