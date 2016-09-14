@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Alamofire
 
 public class CGSSGlobal: NSObject {
     
@@ -125,20 +125,21 @@ public class CGSSGlobal: NSObject {
     }
     
     static func isWifi() -> Bool {
-        let reachability = try? Reachability.reachabilityForInternetConnection()
-        if reachability?.isReachableViaWiFi() ?? false {
+        let manager = NetworkReachabilityManager()
+        if manager!.isReachableOnEthernetOrWiFi {
             return true
+        } else {
+            return false
         }
-        return false
     }
     
     static func isMobileNet() -> Bool {
-        let reachability = try? Reachability.reachabilityForInternetConnection()
-        if reachability?.isReachableViaWWAN() ?? false {
+        let manager = NetworkReachabilityManager()
+        if manager!.isReachableOnWWAN {
             return true
+        } else {
+            return false
         }
-        return false
-        
     }
     
     static let presetBackValue = 103463

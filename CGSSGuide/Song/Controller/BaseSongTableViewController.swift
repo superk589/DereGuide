@@ -16,47 +16,6 @@ class BaseSongTableViewController: RefreshableTableViewController {
     var sorter: CGSSSorter!
     var filter: CGSSSongFilter!
     var searchBar: UISearchBar!
-    func check(mask: UInt) {
-        let updater = CGSSUpdater.defaultUpdater
-        if updater.isUpdating {
-            refresher.endRefreshing()
-            return
-        }
-        self.updateStatusView.setContent("检查更新中", hasProgress: false)
-        updater.checkUpdate(mask, complete: { (items, errors) in
-            if !errors.isEmpty {
-                self.updateStatusView.hidden = true
-                let alert = UIAlertController.init(title: "检查更新失败", message: errors.joinWithSeparator("\n"), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
-            } else {
-                if items.count == 0 {
-                    self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
-                    self.updateStatusView.activityIndicator.stopAnimating()
-                    UIView.animateWithDuration(2.5, animations: {
-                        self.updateStatusView.alpha = 0
-                        }, completion: { (b) in
-                        self.updateStatusView.hidden = true
-                        self.updateStatusView.alpha = 1
-                    })
-                    return
-                }
-                self.updateStatusView.setContent("更新数据中", total: items.count)
-                updater.updateItems(items, progress: { (process, total) in
-                    self.updateStatusView.updateProgress(process, b: total)
-                    }, complete: { (success, total) in
-                    let alert = UIAlertController.init(title: "更新完成", message: "成功\(success),失败\(total-success)", preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                    self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
-                    self.updateStatusView.hidden = true
-                    updater.setVersionToNewest()
-                    self.refresh()
-                })
-                
-            }
-        })
-        refresher.endRefreshing()
-    }
     
     func prepareFilterAndSorter() {
         // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
@@ -66,7 +25,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
     }
     
     // 根据设定的筛选和排序方法重新展现数据
-    func refresh() {
+    override func refresh() {
         prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
         liveList = filter.filterSongList(Array(dao.validLiveDict.values))
@@ -100,7 +59,6 @@ class BaseSongTableViewController: RefreshableTableViewController {
     // }
     
     override func refresherValueChanged() {
-        super.refresherValueChanged()
         check(0b11100)
     }
     

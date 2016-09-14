@@ -17,6 +17,13 @@ public class CGSSUpdater: NSObject {
     static let URLOfWiki = "http://imascg-slstage-wiki.gamerch.com"
     static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
     static let URLOfDeresuteApi = "https://apiv2.deresute.info"
+    
+    // 官方游戏数据
+    private struct URLOfGameResource {
+        static let manifest = "http://storage.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
+        static let master = "http://storage.game.starlight-stage.jp/dl/resources/Generic//%@"
+    }
+    
     static let defaultUpdater = CGSSUpdater()
     
     var isUpdating = false {
@@ -98,7 +105,7 @@ public class CGSSUpdater: NSObject {
         var errors = [String]()
         // 检查需要更新的数据类型
         var dataTypes = [CGSSUpdateDataType]()
-        for i: UInt in 0...4 {
+        for i: UInt in 0...7 {
             let mask = typeMask >> i
             if mask % 2 == 1 {
                 dataTypes.append(CGSSUpdateDataType(rawValue: 1 << i)!)
@@ -271,6 +278,23 @@ public class CGSSUpdater: NSObject {
             case .Beatmap:
                 completeInside(nil)
                 break
+            case .Resource:
+                let url = CGSSUpdater.URLOfEnglishDatabase + "/api/v1/info"
+                let task = checkSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                    if let e = error {
+                        // print("检查游戏资源更新失败: \(e.localizedDescription)")
+                        completeInside(e.localizedDescription)
+                    } else {
+                        let json = JSON.init(data: data!)
+                        let info = CGSSGameInfo.init(fromJson: json)
+                        if (Int(info.truthVersion) >= NSUserDefaults.standardUserDefaults().integerForKey("truthVersion") ?? 0) || !CGSSGameResource.sharedResource.checkMaster() {
+                            let item = CGSSUpdateItem.init(dataType: .Resource, id: info.truthVersion)
+                            items.append(item)
+                        }
+                        completeInside(nil)
+                    }
+                })
+                task.resume()
             }
         }
     }
@@ -368,6 +392,33 @@ public class CGSSUpdater: NSObject {
                             insideComplete(nil)
                         } else {
                             insideComplete("获取到的谱面数据异常")
+                        }
+                    }
+                })
+                task.resume()
+            case .Resource:
+                let url = String.init(format: URLOfGameResource.manifest, item.id)
+                let task = dataSession.dataTaskWithURL(NSURL.init(string: url)!, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        insideComplete(error?.localizedDescription)
+                    } else {
+                        let manifestData = LZ4Decompressor.decompress(data!)
+                        CGSSGameResource.sharedResource.saveManifest(manifestData)
+                        if let hash = CGSSGameResource.sharedResource.getMasterHash() {
+                            let masterUrl = String.init(format: URLOfGameResource.master, hash)
+                            let subTask = self.dataSession.dataTaskWithURL(NSURL.init(string: masterUrl)!, completionHandler: { (data, response, error) in
+                                if error != nil {
+                                    insideComplete(error?.localizedDescription)
+                                } else {
+                                    let masterData = LZ4Decompressor.decompress(data!)
+                                    CGSSGameResource.sharedResource.saveMaster(masterData)
+                                    NSUserDefaults.standardUserDefaults().setInteger(Int(item.id)!, forKey: "truthVersion")
+                                    insideComplete(nil)
+                                }
+                            })
+                            subTask.resume()
+                        } else {
+                            insideComplete("无法获取master.mdb")
                         }
                     }
                 })

@@ -15,7 +15,9 @@ public enum CGSSUpdateDataType:UInt {
     case Live = 8
     case Beatmap = 16
     case Story = 32
+    case Resource = 64
 }
+
 class CGSSUpdateItem: NSObject {
 
     var dataType:CGSSUpdateDataType

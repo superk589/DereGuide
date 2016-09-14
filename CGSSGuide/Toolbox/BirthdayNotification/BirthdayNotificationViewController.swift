@@ -18,7 +18,7 @@ class BirthdayNotificationViewController: UITableViewController {
         super.viewDidLoad()
         prepareSettingCells()
         prepareChars()
-        headerView = UITableView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 87), style: .Plain)
+        headerView = UITableView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 132), style: .Plain)
         headerView.delegate = self
         headerView.dataSource = self
         headerView.allowsSelection = false
@@ -71,6 +71,16 @@ class BirthdayNotificationViewController: UITableViewController {
     }
     func prepareSettingCells() {
         headerCells = [UITableViewCell]()
+        
+        let cell0 = UITableViewCell.init(style: .Default, reuseIdentifier: "BirthDaySettingCell")
+        cell0.textLabel?.text = "系统通知设置"
+        let label = UILabel.init(frame: CGRectMake(0, 0, 60, 20))
+        label.textColor = UIColor.lightGrayColor()
+        label.textAlignment = .Right
+        cell0.accessoryView = label
+        label.text = (UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None) ? "未开启" : "已开启"
+        headerCells.append(cell0)
+        
         let cell = UITableViewCell.init(style: .Default, reuseIdentifier: "BirthDaySettingCell")
         let swich1 = UISwitch.init(frame: CGRectZero)
         cell.accessoryView = swich1
@@ -128,6 +138,7 @@ class BirthdayNotificationViewController: UITableViewController {
         
         prepareChars()
         tableView.reloadData()
+        (headerCells[0].accessoryView as! UILabel).text = (UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None) ? "未开启" : "已开启"
         
     }
     
@@ -139,11 +150,13 @@ class BirthdayNotificationViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshData), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        
     }
     
     // MARK: - Table view data source
