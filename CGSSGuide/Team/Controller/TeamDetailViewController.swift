@@ -20,10 +20,10 @@ class TeamDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
-        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64))
-        teamDV = TeamDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
+        sv = UIScrollView.init(frame: CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64))
+        teamDV = TeamDetailView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
         // teamDV.initWith(team)
         teamDV.delegate = self
         sv.addSubview(teamDV)
@@ -37,7 +37,7 @@ class TeamDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         teamDV.initWith(team)
         sv.contentSize = teamDV.frame.size
@@ -57,7 +57,7 @@ class TeamDetailViewController: UIViewController {
 
 //MARK: TeamEditViewControllerDelegate协议方法
 extension TeamDetailViewController: TeamEditViewControllerDelegate {
-    func save(team: CGSSTeam) {
+    func save(_ team: CGSSTeam) {
         CGSSTeamManager.defaultManager.removeATeam(self.team)
         self.team = team
         CGSSTeamManager.defaultManager.addATeam(team)
@@ -67,7 +67,7 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 //MARK: TeamDetailViewDelegate 协议方法
 extension TeamDetailViewController: TeamDetailViewDelegate {
     func skillShowOrHide() {
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.sv.contentSize = self.teamDV.frame.size
         })
 //        if sv.contentSize.height < teamDV.frame.size.height {
@@ -88,7 +88,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         navigationController?.pushViewController(songSelectVC, animated: true)
     }
     
-    func backValueChanged(value: Int) {
+    func backValueChanged(_ value: Int) {
         team.backSupportValue = value
         teamDV.updatePresentValueGrid(team)
         CGSSTeamManager.defaultManager.writeToFile(nil)
@@ -103,7 +103,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         
     }
     func startCalc() {
-        if let live = self.live, diff = self.diff {
+        if let live = self.live, let diff = self.diff {
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff)
             self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
             simulator.simulateOnce(true, callBack: { [weak self](score) in
@@ -114,14 +114,14 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             })
             
         } else {
-            let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             teamDV.resetCalcButton()
         }
     }
     
-    func cardIconClick(id: Int) {
+    func cardIconClick(_ id: Int) {
         if let card = CGSSDAO.sharedDAO.findCardById(id) {
             let cardDVC = CardDetailViewController()
             cardDVC.card = card
@@ -129,12 +129,12 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         }
     }
     func liveTypeButtonClick() {
-        let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .ActionSheet)
+        let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = teamDV.liveTypeButton
-        alvc.popoverPresentationController?.sourceRect = CGRectMake(0, teamDV.liveTypeButton.fheight / 2, 0, 0)
-        alvc.popoverPresentationController?.permittedArrowDirections = .Right
+        alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.liveTypeButton.fheight / 2, width: 0, height: 0)
+        alvc.popoverPresentationController?.permittedArrowDirections = .right
         for liveType in CGSSLiveType.getAll() {
-            alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .Default, handler: { (a) in
+            alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType
                 if liveType != .Normal {
                     self.teamDV.showGrooveSelectButton()
@@ -148,22 +148,22 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 self.sv.contentSize = self.teamDV.frame.size
                 }))
         }
-        alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
-        self.presentViewController(alvc, animated: true, completion: nil)
+        alvc.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        self.present(alvc, animated: true, completion: nil)
     }
     
     func grooveTypeButtonClick() {
-        let alvc = UIAlertController.init(title: "选择Groove类别", message: nil, preferredStyle: .ActionSheet)
+        let alvc = UIAlertController.init(title: "选择Groove类别", message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = teamDV.grooveTypeButton
-        alvc.popoverPresentationController?.sourceRect = CGRectMake(0, teamDV.grooveTypeButton.fheight / 2, 0, 0)
-        alvc.popoverPresentationController?.permittedArrowDirections = .Right
+        alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.grooveTypeButton.fheight / 2, width: 0, height: 0)
+        alvc.popoverPresentationController?.permittedArrowDirections = .right
         for grooveType in CGSSGrooveType.getAll() {
-            alvc.addAction(UIAlertAction.init(title: grooveType.rawValue, style: .Default, handler: { (a) in
+            alvc.addAction(UIAlertAction.init(title: grooveType.rawValue, style: .default, handler: { (a) in
                 self.teamDV.currentGrooveType = grooveType
                 }))
         }
-        alvc.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
-        self.presentViewController(alvc, animated: true, completion: nil)
+        alvc.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        self.present(alvc, animated: true, completion: nil)
         
     }
     
@@ -171,7 +171,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
 
 //MARK: BaseSongTableViewControllerDelegate的协议方法
 extension TeamDetailViewController: BaseSongTableViewControllerDelegate {
-    func selectSong(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+    func selectSong(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         teamDV.updateSongInfo(live, beatmaps: beatmaps, diff: diff)
         self.live = live
         self.beatmaps = beatmaps

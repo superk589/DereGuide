@@ -12,7 +12,7 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
         
         toolbarItems = [backItem]
         
@@ -24,15 +24,15 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     }
     
     func tbBack() {
-        navigationController?.popViewControllerAnimated(true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: true)
     }
@@ -51,12 +51,12 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-        self.navigationController?.popViewControllerAnimated(true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+    override func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.defaultManager.teamCardfilter = filter
         CGSSSorterFilterManager.defaultManager.teamCardSorter = sorter
         CGSSSorterFilterManager.defaultManager.saveForTeam()

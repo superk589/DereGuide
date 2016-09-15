@@ -19,15 +19,15 @@ class CGSSCardIconView: CGSSIconView {
         super.init(coder: aDecoder)
     }
     
-    func setWithCardId(id: Int) {
+    func setWithCardId(_ id: Int) {
         self.cardId = id
-        self.tintColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.colorWithAlphaComponent(0.5)
+        self.tintColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.withAlphaComponent(0.5)
         // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
         let url = CGSSUpdater.URLOfImages + "/icon_card/\(id).png"
         self.setIconImage(url)
     }
     
-    func setWithCardId(id: Int, target: AnyObject, action: Selector) {
+    func setWithCardId(_ id: Int, target: AnyObject, action: Selector) {
         self.setWithCardId(id)
         self.setAction(target, action: action)
     }

@@ -46,7 +46,7 @@ class CGSSSorterFilterManager: NSObject {
         songSorter.writeToFile(CGSSSorterFilterManager.songSorterPath)
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 }

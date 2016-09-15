@@ -40,13 +40,13 @@ enum CGSSGrooveType: String {
     }
     init? (type: CGSSCardFilterType) {
         switch type {
-        case .Cute:
+        case .cute:
             self = .Cute
-        case .Cool:
+        case .cool:
             self = .Cool
-        case .Passion:
+        case .passion:
             self = .Passion
-        case .Office:
+        case .office:
             return nil
         }
     }
@@ -94,7 +94,7 @@ extension CGSSLive {
         case 3:
             return CGSSGlobal.passionColor
         default:
-            return UIColor.darkTextColor()
+            return UIColor.darkText
         }
     }
     func getLiveIconName() -> String {
@@ -114,13 +114,13 @@ extension CGSSLive {
     var songType: CGSSCardFilterType {
         switch type! {
         case 1:
-            return .Cute
+            return .cute
         case 2:
-            return .Cool
+            return .cool
         case 3:
-            return .Passion
+            return .passion
         default:
-            return .Office
+            return .office
         }
     }
     
@@ -128,7 +128,7 @@ extension CGSSLive {
         return CGSSSongEventFilterType.init(eventType: eventType!)
     }
     
-    func getStarsForDiff(diff: Int) -> Int {
+    func getStarsForDiff(_ diff: Int) -> Int {
         switch diff {
         case 1:
             return debut ?? 0
@@ -150,7 +150,7 @@ extension CGSSLive {
     
 }
 
-public class CGSSLive: CGSSBaseModel {
+open class CGSSLive: CGSSBaseModel {
     var id: Int?
     var musicId: Int?
     var musicTitle: String?
@@ -163,35 +163,35 @@ public class CGSSLive: CGSSBaseModel {
     var master: Int?
     var masterPlus: Int?
     
-    func getBeatmapByDiff(diff: Int) -> CGSSBeatmap? {
+    func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {
         return CGSSDAO.sharedDAO.findBeatmapById(self.id!, diffId: diff)
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.id = aDecoder.decodeObjectForKey("id") as? Int
-        self.musicId = aDecoder.decodeObjectForKey("musicId") as? Int
-        self.musicTitle = aDecoder.decodeObjectForKey("musicTitle") as? String
-        self.type = aDecoder.decodeObjectForKey("type") as? Int
-        self.liveDetailId = aDecoder.decodeObjectForKey("liveDetailId") as? [Int]
-        self.eventType = aDecoder.decodeObjectForKey("eventType") as? Int
-        self.debut = aDecoder.decodeObjectForKey("debut") as? Int
-        self.regular = aDecoder.decodeObjectForKey("regular") as? Int
-        self.pro = aDecoder.decodeObjectForKey("pro") as? Int
-        self.master = aDecoder.decodeObjectForKey("master") as? Int
-        self.masterPlus = aDecoder.decodeObjectForKey("masterPlus") as? Int
+        self.id = aDecoder.decodeObject(forKey: "id") as? Int
+        self.musicId = aDecoder.decodeObject(forKey: "musicId") as? Int
+        self.musicTitle = aDecoder.decodeObject(forKey: "musicTitle") as? String
+        self.type = aDecoder.decodeObject(forKey: "type") as? Int
+        self.liveDetailId = aDecoder.decodeObject(forKey: "liveDetailId") as? [Int]
+        self.eventType = aDecoder.decodeObject(forKey: "eventType") as? Int
+        self.debut = aDecoder.decodeObject(forKey: "debut") as? Int
+        self.regular = aDecoder.decodeObject(forKey: "regular") as? Int
+        self.pro = aDecoder.decodeObject(forKey: "pro") as? Int
+        self.master = aDecoder.decodeObject(forKey: "master") as? Int
+        self.masterPlus = aDecoder.decodeObject(forKey: "masterPlus") as? Int
     }
-    public override func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeObject(self.musicId, forKey: "musicId")
-        aCoder.encodeObject(self.musicTitle, forKey: "musicTitle")
-        aCoder.encodeObject(self.type, forKey: "type")
-        aCoder.encodeObject(self.liveDetailId, forKey: "liveDetailId")
-        aCoder.encodeObject(self.eventType, forKey: "eventType")
-        aCoder.encodeObject(self.debut, forKey: "debut")
-        aCoder.encodeObject(self.regular, forKey: "regular")
-        aCoder.encodeObject(self.pro, forKey: "pro")
-        aCoder.encodeObject(self.master, forKey: "master")
-        aCoder.encodeObject(self.masterPlus, forKey: "masterPlus")
+    open override func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.musicId, forKey: "musicId")
+        aCoder.encode(self.musicTitle, forKey: "musicTitle")
+        aCoder.encode(self.type, forKey: "type")
+        aCoder.encode(self.liveDetailId, forKey: "liveDetailId")
+        aCoder.encode(self.eventType, forKey: "eventType")
+        aCoder.encode(self.debut, forKey: "debut")
+        aCoder.encode(self.regular, forKey: "regular")
+        aCoder.encode(self.pro, forKey: "pro")
+        aCoder.encode(self.master, forKey: "master")
+        aCoder.encode(self.masterPlus, forKey: "masterPlus")
         
     }
     init(json: JSON) {

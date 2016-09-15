@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SongFilterAndSorterTableViewControllerDelegate: class {
-    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter)
+    func doneAndReturn(_ filter: CGSSSongFilter, sorter: CGSSSorter)
 }
 
 class SongFilterAndSorterTableViewController: UITableViewController {
@@ -31,10 +31,10 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem.init(title: "完成", style: .Plain, target: self, action: #selector(doneAction))
+        let backButton = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
         
-        let resetButton = UIBarButtonItem.init(title: "重置", style: .Plain, target: self, action: #selector(resetAction))
+        let resetButton = UIBarButtonItem.init(title: "重置", style: .plain, target: self, action: #selector(resetAction))
         self.navigationItem.rightBarButtonItem = resetButton
         
         prepare()
@@ -45,112 +45,112 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...3 {
             let button = songTypeStackView.subviews[i] as! UIButton
-            button.selected = filter.hasSongFilterType(CGSSSongFilterType.init(cardType: i)!)
+            button.isSelected = filter.hasSongFilterType(CGSSSongFilterType.init(cardType: i)!)
         }
         
         for i in 0...2 {
             let button = eventTypeView.subviews[i] as! UIButton
-            button.selected = filter.hasEventFilterType(CGSSSongEventFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.hasEventFilterType(CGSSSongEventFilterType.init(raw: 1 << i)!)
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
-        ascendingbutton.selected = sorter.ascending
+        ascendingbutton.isSelected = sorter.ascending
         
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
-        descendingButton.selected = !sorter.ascending
+        descendingButton.isSelected = !sorter.ascending
         
         for i in 0...2 {
             let button = basicStackView.subviews[i] as! UIButton
-            let index = sorterString.indexOf(sorter.att)
-            button.selected = (index == i)
+            let index = sorterString.index(of: sorter.att)
+            button.isSelected = (index == i)
         }
     }
     
     func prepare() {
         for i in 0...3 {
             let button = songTypeStackView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(songTypeButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(songTypeButtonClick), for: .touchUpInside)
             // button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
             button.tag = 1000 + i
         }
         for i in 0...2 {
             let button = eventTypeView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(eventTypeButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(eventTypeButtonClick), for: .touchUpInside)
             button.tag = 2000 + i
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
-        ascendingbutton.addTarget(self, action: #selector(ascendingAction), forControlEvents: .TouchUpInside)
+        ascendingbutton.addTarget(self, action: #selector(ascendingAction), for: .touchUpInside)
         
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
-        descendingButton.addTarget(self, action: #selector(descendingAction), forControlEvents: .TouchUpInside)
+        descendingButton.addTarget(self, action: #selector(descendingAction), for: .touchUpInside)
         
         sortingButtons = [UIButton]()
         for i in 0...2 {
             let button = basicStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 1000 + i
-            button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(sortingButtonsAction), for: .touchUpInside)
         }
     }
     
-    func songTypeButtonClick(sender: UIButton) {
+    func songTypeButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 1000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeSongFilterType(CGSSSongFilterType.init(cardType: tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addSongFilterType(CGSSSongFilterType.init(cardType: tag)!)
         }
         
     }
     
-    func eventTypeButtonClick(sender: UIButton) {
+    func eventTypeButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 2000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeEventFilterType(CGSSSongEventFilterType.init(raw: 1 << tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addEventFilterType(CGSSSongEventFilterType.init(raw: 1 << tag)!)
         }
         
     }
     
-    func ascendingAction(sender: UIButton) {
-        if !sender.selected {
-            sender.selected = true
+    func ascendingAction(_ sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = true
             let descendingButton = ascendingStackView.subviews[0] as! UIButton
-            descendingButton.selected = false
+            descendingButton.isSelected = false
             sorter.ascending = true
         }
     }
-    func descendingAction(sender: UIButton) {
-        if !sender.selected {
-            sender.selected = true
+    func descendingAction(_ sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = true
             let ascendingButton = ascendingStackView.subviews[1] as! UIButton
-            ascendingButton.selected = false
+            ascendingButton.isSelected = false
             sorter.ascending = false
         }
     }
     
-    func sortingButtonsAction(sender: UIButton) {
-        if !sender.selected {
+    func sortingButtonsAction(_ sender: UIButton) {
+        if !sender.isSelected {
             for btn in sortingButtons {
-                if btn.selected {
-                    btn.selected = false
+                if btn.isSelected {
+                    btn.isSelected = false
                 }
             }
-            sender.selected = true
-            let index = sortingButtons.indexOf(sender)
+            sender.isSelected = true
+            let index = sortingButtons.index(of: sender)
             sorter.att = sorterString[index!]
         }
     }
     
     func doneAction() {
         delegate?.doneAndReturn(filter, sorter: sorter)
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
         // 使用自定义动画效果
         /*let transition = CATransition()
          transition.duration = 0.3
@@ -172,12 +172,12 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
             return 2

@@ -7,6 +7,17 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 public enum CGSSDataKey: String {
     case Skill = "skill"
@@ -22,25 +33,25 @@ public enum CGSSDataKey: String {
     static let allValues = [Skill, Card, Char, LeaderSkill, CardIcon, Live, Song, Beatmap, StoryEpisode, StoryContent]
 }
 
-public class CGSSDAO: NSObject {
+open class CGSSDAO: NSObject {
     
-    public static let sharedDAO = CGSSDAO()
+    open static let sharedDAO = CGSSDAO()
     
     // 主数据 采用懒加载
-    public lazy var skillDict = CGSSDAO.loadDataFromFile(.Skill)
-    public lazy var cardDict = CGSSDAO.loadDataFromFile(.Card)
-    public lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.LeaderSkill)
-    public lazy var charDict = CGSSDAO.loadDataFromFile(.Char)
-    public lazy var cardIconDict = CGSSDAO.loadDataFromFile(.CardIcon)
-    public lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
-    public lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.StoryEpisode)
-    public lazy var storyContentDict = CGSSDAO.loadDataFromFile(.StoryContent)
-    public lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
+    open lazy var skillDict = CGSSDAO.loadDataFromFile(.Skill)
+    open lazy var cardDict = CGSSDAO.loadDataFromFile(.Card)
+    open lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.LeaderSkill)
+    open lazy var charDict = CGSSDAO.loadDataFromFile(.Char)
+    open lazy var cardIconDict = CGSSDAO.loadDataFromFile(.CardIcon)
+    open lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
+    open lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.StoryEpisode)
+    open lazy var storyContentDict = CGSSDAO.loadDataFromFile(.StoryContent)
+    open lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
     
     // beatmap采用分歌曲单独存储
-    public var beatmapDict = NSMutableDictionary()
+    open var beatmapDict = NSMutableDictionary()
     
-    public var validLiveDict: [String: CGSSLive] {
+    open var validLiveDict: [String: CGSSLive] {
         var lives = [String: CGSSLive]()
         for live in liveDict.allValues as! [CGSSLive] {
             if [1018].contains(live.musicId!) { continue }
@@ -56,14 +67,14 @@ public class CGSSDAO: NSObject {
         return lives
     }
     
-    static let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first!
+    static let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
     
-    private static func getDataPath(key: CGSSDataKey) -> String? {
+    fileprivate static func getDataPath(_ key: CGSSDataKey) -> String? {
         // return NSBundle.mainBundle().pathForResource(key.rawValue, ofType: "plist")
         // return NSHomeDirectory() + "/Documents/" + key.rawValue + ".plist"
         return CGSSDAO.path + "/Data/" + key.rawValue + ".plist"
     }
-    func getDictForKey(key: CGSSDataKey) -> NSMutableDictionary {
+    func getDictForKey(_ key: CGSSDataKey) -> NSMutableDictionary {
         switch key {
         case .Skill:
             return self.skillDict
@@ -88,9 +99,9 @@ public class CGSSDAO: NSObject {
         }
     }
     
-    func saveDataToFile(key: CGSSDataKey, complete: (() -> Void)?) {
+    func saveDataToFile(_ key: CGSSDataKey, complete: (() -> Void)?) {
         
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.prepareFileDirectory()
             
             if key == .Beatmap {
@@ -100,59 +111,59 @@ public class CGSSDAO: NSObject {
                     let beatmaps = v as! [String: CGSSBeatmap]
                     for (diff, beatmap) in beatmaps {
                         let theData = NSMutableData()
-                        let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
-                        achiver.encodeObject(beatmap, forKey: key.rawValue)
+                        let achiver = NSKeyedArchiver(forWritingWith: theData)
+                        achiver.encode(beatmap, forKey: key.rawValue)
                         achiver.finishEncoding()
-                        theData.writeToFile(path + "\(id)_\(diff).plist", atomically: true)
+                        theData.write(toFile: path + "\(id)_\(diff).plist", atomically: true)
                     }
                 }
                 
             } else {
                 let path = CGSSDAO.getDataPath(key)
                 let theData = NSMutableData()
-                let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
-                achiver.encodeObject(self.getDictForKey(key), forKey: key.rawValue)
+                let achiver = NSKeyedArchiver(forWritingWith: theData)
+                achiver.encode(self.getDictForKey(key), forKey: key.rawValue)
                 achiver.finishEncoding()
-                theData.writeToFile(path!, atomically: true)
+                theData.write(toFile: path!, atomically: true)
             }
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 complete?()
             })
         }
     }
-    private static func loadDataFromFile(key: CGSSDataKey) -> NSMutableDictionary {
+    fileprivate static func loadDataFromFile(_ key: CGSSDataKey) -> NSMutableDictionary {
         if let path = getDataPath(key) {
-            if let theData = NSData(contentsOfFile: path) {
-                let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
-                return achiver.decodeObjectForKey(key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
+            if let theData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+                let achiver = NSKeyedUnarchiver(forReadingWith: theData)
+                return achiver.decodeObject(forKey: key.rawValue) as? NSMutableDictionary ?? NSMutableDictionary()
             }
         }
         return NSMutableDictionary()
     }
     
     // 根据掩码筛选
-    func getCardListByMask(cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
+    func getCardListByMask(_ cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
         let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask, favoriteMask: favoriteMask)
         return filter.filterCardList(cardDict.allValues as! [CGSSCard])
     }
-    func getCardListByMask(filter: CGSSCardFilter) -> [CGSSCard] {
+    func getCardListByMask(_ filter: CGSSCardFilter) -> [CGSSCard] {
         return filter.filterCardList(self.cardDict.allValues as! [CGSSCard])
     }
     
-    func getCharListByFilter(filter: CGSSCharFilter) -> [CGSSChar] {
+    func getCharListByFilter(_ filter: CGSSCharFilter) -> [CGSSChar] {
         return filter.filterCharList(self.charDict.allValues as! [CGSSChar])
     }
     
     // 根据名字搜索
-    func getCardListByName(cardList: [CGSSCard], string: String) -> [CGSSCard] {
+    func getCardListByName(_ cardList: [CGSSCard], string: String) -> [CGSSCard] {
         return cardList.filter({ (v: CGSSCard) -> Bool in
-            let comps = string.componentsSeparatedByString(" ")
+            let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
-                let b1 = v.name?.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b2 = v.chara?.conventional?.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b3 = v.skill?.skillType.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b4 = (v.rarity?.rarityString.lowercaseString == (comp.lowercaseString)) ?? false
+                let b1 = v.name?.lowercased().contains(comp.lowercased()) ?? false
+                let b2 = v.chara?.conventional?.lowercased().contains(comp.lowercased()) ?? false
+                let b3 = v.skill?.skillType.lowercased().contains(comp.lowercased()) ?? false
+                let b4 = (v.rarity?.rarityString.lowercased() == (comp.lowercased()))
                 if b1 || b2 || b3 || b4 {
                     continue
                 } else {
@@ -162,15 +173,15 @@ public class CGSSDAO: NSObject {
             return true
         })
     }
-    func getCharListByName(charList: [CGSSChar], string: String) -> [CGSSChar] {
+    func getCharListByName(_ charList: [CGSSChar], string: String) -> [CGSSChar] {
         return charList.filter({ (v: CGSSChar) -> Bool in
-            let comps = string.componentsSeparatedByString(" ")
+            let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
-                let b1 = v.name?.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b2 = v.conventional?.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b3 = v.voice?.lowercaseString.containsString(comp.lowercaseString) ?? false
-                let b4 = v.nameKana?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b1 = v.name?.lowercased().contains(comp.lowercased()) ?? false
+                let b2 = v.conventional?.lowercased().contains(comp.lowercased()) ?? false
+                let b3 = v.voice?.lowercased().contains(comp.lowercased()) ?? false
+                let b4 = v.nameKana?.lowercased().contains(comp.lowercased()) ?? false
                 if b1 || b2 || b3 || b4 {
                     continue
                 } else {
@@ -182,13 +193,13 @@ public class CGSSDAO: NSObject {
     }
     
     // 根据名字搜索live
-    public func getLiveListByName(liveList: [CGSSLive], string: String) -> [CGSSLive] {
+    open func getLiveListByName(_ liveList: [CGSSLive], string: String) -> [CGSSLive] {
         return liveList.filter({ (v: CGSSLive) -> Bool in
             let song = findSongById(v.musicId!)
-            let comps = string.componentsSeparatedByString(" ")
+            let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
-                let b1 = song?.title?.lowercaseString.containsString(comp.lowercaseString) ?? false
+                let b1 = song?.title?.lowercased().contains(comp.lowercased()) ?? false
                 if b1 {
                     continue
                 } else {
@@ -200,11 +211,11 @@ public class CGSSDAO: NSObject {
     }
     
     // 排序指定的CGSSBaseModel的list
-    func sortListInPlace<T: CGSSBaseModel>(inout list: [T], att: String, ascending: Bool) {
+    func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], att: String, ascending: Bool) {
         let sorter = CGSSSorter.init(att: att, ascending: ascending)
         sorter.sortList(&list)
     }
-    func sortListInPlace<T: CGSSBaseModel>(inout list: [T], sorter: CGSSSorter) {
+    func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], sorter: CGSSSorter) {
         sorter.sortList(&list)
     }
     
@@ -212,26 +223,33 @@ public class CGSSDAO: NSObject {
         for dataKey in CGSSDataKey.allValues {
             self.getDictForKey(dataKey).removeAllObjects()
         }
+
+        let path = CGSSDAO.path + "/Data/Beatmap/"
+        if let files = FileManager.default.subpaths(atPath: path) {
+            for file in files {
+                try? FileManager.default.removeItem(atPath: path.appendingFormat("/\(file)"))
+            }
+        }
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
         // self.loadAllDataFromFile()
     }
     
     func prepareFileDirectory() {
-        if !NSFileManager.defaultManager().fileExistsAtPath(CGSSDAO.path + "/Data") {
+        if !FileManager.default.fileExists(atPath: CGSSDAO.path + "/Data") {
             do {
-                try NSFileManager.defaultManager().createDirectoryAtPath(CGSSDAO.path + "/Data", withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath: CGSSDAO.path + "/Data", withIntermediateDirectories: true, attributes: nil)
                 
             } catch {
                 // print(error)
             }
         }
-        if !NSFileManager.defaultManager().fileExistsAtPath(CGSSDAO.path + "/Data/Beatmap") {
+        if !FileManager.default.fileExists(atPath: CGSSDAO.path + "/Data/Beatmap") {
             do {
-                try NSFileManager.defaultManager().createDirectoryAtPath(CGSSDAO.path + "/Data/Beatmap", withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath: CGSSDAO.path + "/Data/Beatmap", withIntermediateDirectories: true, attributes: nil)
             } catch {
                 // print(error)
             }
@@ -254,7 +272,8 @@ public class CGSSDAO: NSObject {
      }*/
     
     // 异步存储全部数据
-    func saveAll(complete: (() -> Void)?) {
+    func saveAll(_ complete: (() -> Void)?) {
+        prepareFileDirectory()
         var count = 0
         func completeInside() {
             count += 1
@@ -263,34 +282,34 @@ public class CGSSDAO: NSObject {
                 complete?()
             }
         }
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+        DispatchQueue.global(qos: .userInitiated).async {
             for dataKey in CGSSDataKey.allValues {
                 self.saveDataToFile(dataKey, complete: completeInside)
             }
         }
     }
     
-    func findDataBy(type: CGSSDataKey, id: Int) -> AnyObject? {
-        return self.getDictForKey(type).objectForKey(String(id))
+    func findDataBy(_ type: CGSSDataKey, id: Int) -> AnyObject? {
+        return self.getDictForKey(type).object(forKey: String(id)) as AnyObject?
     }
     
-    func findCharById(id: Int) -> CGSSChar? {
-        return self.charDict.objectForKey(String(id)) as? CGSSChar
+    func findCharById(_ id: Int) -> CGSSChar? {
+        return self.charDict.object(forKey: String(id)) as? CGSSChar
     }
     
-    func findSkillById(id: Int) -> CGSSSkill? {
-        return self.skillDict.objectForKey(String(id)) as? CGSSSkill
+    func findSkillById(_ id: Int) -> CGSSSkill? {
+        return self.skillDict.object(forKey: String(id)) as? CGSSSkill
     }
     
-    func findLeaderSkillById(id: Int) -> CGSSLeaderSkill? {
-        return self.leaderSkillDict.objectForKey(String(id)) as? CGSSLeaderSkill
+    func findLeaderSkillById(_ id: Int) -> CGSSLeaderSkill? {
+        return self.leaderSkillDict.object(forKey: String(id)) as? CGSSLeaderSkill
     }
     
-    func findCardById(id: Int) -> CGSSCard? {
-        return self.cardDict.objectForKey(String(id)) as? CGSSCard
+    func findCardById(_ id: Int) -> CGSSCard? {
+        return self.cardDict.object(forKey: String(id)) as? CGSSCard
     }
     
-    func findCardsByCharId(id: Int) -> [CGSSCard] {
+    func findCardsByCharId(_ id: Int) -> [CGSSCard] {
         var cards = [CGSSCard]()
         for card in self.cardDict.allValues as! [CGSSCard] {
             if card.charaId == id {
@@ -300,15 +319,15 @@ public class CGSSDAO: NSObject {
         return cards
     }
     
-    public func findSongById(id: Int) -> CGSSSong? {
-        return self.songDict.objectForKey(String(id)) as? CGSSSong
+    open func findSongById(_ id: Int) -> CGSSSong? {
+        return self.songDict.object(forKey: String(id)) as? CGSSSong
     }
     
-    public func findLiveById(id: Int) -> CGSSLive? {
-        return self.liveDict.objectForKey(String(id)) as? CGSSLive
+    open func findLiveById(_ id: Int) -> CGSSLive? {
+        return self.liveDict.object(forKey: String(id)) as? CGSSLive
     }
     
-    public func findBeatmapById(liveId: Int, diffId: Int) -> CGSSBeatmap? {
+    func findBeatmapById(_ liveId: Int, diffId: Int) -> CGSSBeatmap? {
         var itemId: String
         // 修复純情Midnight伝説master难度缺失的问题 重定位到非活动模式的master
         if liveId == 519 && diffId == 4 {
@@ -317,9 +336,9 @@ public class CGSSDAO: NSObject {
             itemId = String(format: "%03d", liveId)
         }
         let path = CGSSDAO.path + "/Data/Beatmap/\(itemId)_\(diffId)" + ".plist"
-        if let theData = NSData(contentsOfFile: path) {
-            let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
-            if let beatmap = achiver.decodeObjectForKey(CGSSDataKey.Beatmap.rawValue) as? CGSSBeatmap {
+        if let theData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+            let achiver = NSKeyedUnarchiver(forReadingWith: theData)
+            if let beatmap = achiver.decodeObject(forKey: CGSSDataKey.Beatmap.rawValue) as? CGSSBeatmap {
                 return beatmap
             }
         }
@@ -327,12 +346,12 @@ public class CGSSDAO: NSObject {
         return nil
     }
     
-    func findStoryEpisodeById(id: Int) -> CGSSStoryEpisode? {
-        return self.storyEpisodeDict.objectForKey(String(id)) as? CGSSStoryEpisode
+    func findStoryEpisodeById(_ id: Int) -> CGSSStoryEpisode? {
+        return self.storyEpisodeDict.object(forKey: String(id)) as? CGSSStoryEpisode
     }
     
-    func findStoryContentById(id: Int) -> CGSSStoryContent? {
-        return self.storyContentDict.objectForKey(String(id)) as? CGSSStoryContent
+    func findStoryContentById(_ id: Int) -> CGSSStoryContent? {
+        return self.storyContentDict.object(forKey: String(id)) as? CGSSStoryContent
     }
     
 //    public func findLivebySongId(id:Int) -> CGSSLive? {
@@ -347,7 +366,7 @@ public class CGSSDAO: NSObject {
 //        return result
 //    }
     
-    func getRankInAll(card: CGSSCard) -> [Int] {
+    func getRankInAll(_ card: CGSSCard) -> [Int] {
         // let vocal = card.vocal
         var rank = [1, 1, 1, 1]
         for cardx in cardDict.allValues as! [CGSSCard] {
@@ -367,7 +386,7 @@ public class CGSSDAO: NSObject {
         return rank
     }
     
-    func getRankInType(card: CGSSCard) -> [Int] {
+    func getRankInType(_ card: CGSSCard) -> [Int] {
         var rank = [1, 1, 1, 1]
         let filter = CGSSCardFilter.init(cardMask: card.cardFilterType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
         let filteredCardDict = getCardListByMask(filter)

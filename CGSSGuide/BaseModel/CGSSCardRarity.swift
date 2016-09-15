@@ -53,14 +53,14 @@ class CGSSCardRarity: NSObject, NSCoding {
      */
     required init?(coder aDecoder: NSCoder)
     {
-        addMaxLevel = aDecoder.decodeObjectForKey("add_max_level") as? Int
-        addParam = aDecoder.decodeObjectForKey("add_param") as? Int
-        baseGiveExp = aDecoder.decodeObjectForKey("base_give_exp") as? Int
-        baseGiveMoney = aDecoder.decodeObjectForKey("base_give_money") as? Int
-        baseMaxLevel = aDecoder.decodeObjectForKey("base_max_level") as? Int
-        maxLove = aDecoder.decodeObjectForKey("max_love") as? Int
-        maxStarRank = aDecoder.decodeObjectForKey("max_star_rank") as? Int
-        rarity = aDecoder.decodeObjectForKey("rarity") as? Int
+        addMaxLevel = aDecoder.decodeObject(forKey: "add_max_level") as? Int
+        addParam = aDecoder.decodeObject(forKey: "add_param") as? Int
+        baseGiveExp = aDecoder.decodeObject(forKey: "base_give_exp") as? Int
+        baseGiveMoney = aDecoder.decodeObject(forKey: "base_give_money") as? Int
+        baseMaxLevel = aDecoder.decodeObject(forKey: "base_max_level") as? Int
+        maxLove = aDecoder.decodeObject(forKey: "max_love") as? Int
+        maxStarRank = aDecoder.decodeObject(forKey: "max_star_rank") as? Int
+        rarity = aDecoder.decodeObject(forKey: "rarity") as? Int
         
     }
     
@@ -68,31 +68,31 @@ class CGSSCardRarity: NSObject, NSCoding {
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encodeWithCoder(aCoder: NSCoder)
+    func encode(with aCoder: NSCoder)
     {
         if addMaxLevel != nil {
-            aCoder.encodeObject(addMaxLevel, forKey: "add_max_level")
+            aCoder.encode(addMaxLevel, forKey: "add_max_level")
         }
         if addParam != nil {
-            aCoder.encodeObject(addParam, forKey: "add_param")
+            aCoder.encode(addParam, forKey: "add_param")
         }
         if baseGiveExp != nil {
-            aCoder.encodeObject(baseGiveExp, forKey: "base_give_exp")
+            aCoder.encode(baseGiveExp, forKey: "base_give_exp")
         }
         if baseGiveMoney != nil {
-            aCoder.encodeObject(baseGiveMoney, forKey: "base_give_money")
+            aCoder.encode(baseGiveMoney, forKey: "base_give_money")
         }
         if baseMaxLevel != nil {
-            aCoder.encodeObject(baseMaxLevel, forKey: "base_max_level")
+            aCoder.encode(baseMaxLevel, forKey: "base_max_level")
         }
         if maxLove != nil {
-            aCoder.encodeObject(maxLove, forKey: "max_love")
+            aCoder.encode(maxLove, forKey: "max_love")
         }
         if maxStarRank != nil {
-            aCoder.encodeObject(maxStarRank, forKey: "max_star_rank")
+            aCoder.encode(maxStarRank, forKey: "max_star_rank")
         }
         if rarity != nil {
-            aCoder.encodeObject(rarity, forKey: "rarity")
+            aCoder.encode(rarity, forKey: "rarity")
         }
         
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol BirthdayNotificationTableViewCellDelegate:class {
-    func charIconClick(icon:CGSSCharIconView)
+    func charIconClick(_ icon:CGSSCharIconView)
 }
 
 class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -22,7 +22,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         
 //        let left = UIButton.init(frame: CGRectMake(0, 32, 10, 15))
 //        left.setImage(UIImage.init(named: "765-arrow-left-toolbar"), forState: .Normal)
@@ -31,9 +31,9 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
 //        contentView.addSubview(left)
 //        contentView.addSubview(right)
         
-        cv = UICollectionView.init(frame: CGRectMake(0, 0, CGSSGlobal.width - 0, 79), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.whiteColor()
-        cv.registerClass(BirthdayCollectionViewCell.self, forCellWithReuseIdentifier: "BirthdayCollectionViewCell")
+        cv = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width - 0, height: 79), collectionViewLayout: layout)
+        cv.backgroundColor = UIColor.white
+        cv.register(BirthdayCollectionViewCell.self, forCellWithReuseIdentifier: "BirthdayCollectionViewCell")
         cv.showsHorizontalScrollIndicator = false
         contentView.addSubview(cv)
         var inset = self.separatorInset
@@ -49,32 +49,32 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
         fatalError("init(coder:) has not been implemented")
     }
     
-    func initWith(models: [CGSSChar]) {
+    func initWith(_ models: [CGSSChar]) {
         chars.removeAll()
-        chars.appendContentsOf(models)
+        chars.append(contentsOf: models)
         if chars.count == 0 {
-            cv.frame = CGRectZero
+            cv.frame = CGRect.zero
         } else {
-            cv.frame = CGRectMake(0, 0, CGSSGlobal.width, 79)
+            cv.frame = CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 79)
         }
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return chars.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BirthdayCollectionViewCell", forIndexPath: indexPath) as! BirthdayCollectionViewCell
-        cell.initWithChar(chars[indexPath.item])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BirthdayCollectionViewCell", for: indexPath) as! BirthdayCollectionViewCell
+        cell.initWithChar(chars[(indexPath as NSIndexPath).item])
         cell.delegate = self
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(68, 79)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 68, height: 79)
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -83,7 +83,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
 }
 
 extension BirthdayNotificationTableViewCell: BirthdayCollectionViewCellDelegate {
-    func charIconClick(icon: CGSSCharIconView) {
+    func charIconClick(_ icon: CGSSCharIconView) {
         delegate?.charIconClick(icon)
     }
 }

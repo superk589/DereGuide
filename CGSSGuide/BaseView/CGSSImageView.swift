@@ -8,13 +8,24 @@
 
 import UIKit
 import SDWebImage
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 protocol CGSSImageViewDelegate: class {
-    func beginFullSize(iv: CGSSImageView)
-    func beginRestore(iv: CGSSImageView)
-    func endRestore(iv: CGSSImageView)
-    func endFullSize(iv: CGSSImageView)
-    func longPress(press: UILongPressGestureRecognizer, iv: CGSSImageView)
+    func beginFullSize(_ iv: CGSSImageView)
+    func beginRestore(_ iv: CGSSImageView)
+    func endRestore(_ iv: CGSSImageView)
+    func endFullSize(_ iv: CGSSImageView)
+    func longPress(_ press: UILongPressGestureRecognizer, iv: CGSSImageView)
 }
 //CGSSImageView可以实现点击放大至全屏 再次点击缩小为原大小并归位 全屏状态下长按可以保存到相册
 class CGSSImageView: UIImageView {
@@ -35,14 +46,14 @@ class CGSSImageView: UIImageView {
         super.init(frame: frame)
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         self.addGestureRecognizer(tap)
-        self.contentMode = .ScaleAspectFit
+        self.contentMode = .scaleAspectFit
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
         longPress.minimumPressDuration = 1
         self.addGestureRecognizer(longPress)
         self.originFrame = self.frame
         // 全屏时背景色为黑色
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         setIndicator()
         hideIndicator()
     }
@@ -53,7 +64,7 @@ class CGSSImageView: UIImageView {
         activityIndicator?.hidesWhenStopped = true
         
         progressIndicator = UIProgressView()
-        progressIndicator?.frame = CGRectMake(0, self.frame.size.height - 2, self.frame.size.width, 0)
+        progressIndicator?.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 0)
         
 //        retryButton = UIButton()
 //        retryButton?.setTitle("加载失败 请点击重试", forState: .Normal)
@@ -77,16 +88,16 @@ class CGSSImageView: UIImageView {
         
     }
     func hideIndicator() {
-        progressIndicator?.hidden = true
-        activityIndicator?.hidden = true
+        progressIndicator?.isHidden = true
+        activityIndicator?.isHidden = true
         // retryButton?.hidden = true
     }
     func showIndicator() {
         if progressIndicator?.progress < 1 && !isFinishedLoading {
-            progressIndicator?.hidden = false
+            progressIndicator?.isHidden = false
         }
-        if let x = activityIndicator?.isAnimating() where x {
-            activityIndicator?.hidden = false
+        if let x = activityIndicator?.isAnimating , x {
+            activityIndicator?.isHidden = false
         }
 //        if isFailed {
 //            retryButton?.hidden = false
@@ -98,15 +109,15 @@ class CGSSImageView: UIImageView {
 //    func retryAction() {
 //        retry?()
 //    }
-    func setCustomImageWithURL(url: NSURL) {
-        if !NSUserDefaults.standardUserDefaults().shouldCacheFullImage && CGSSGlobal.isMobileNet() && !SDWebImageManager.sharedManager().cachedImageExistsForURL(url) {
+    func setCustomImageWithURL(_ url: URL) {
+        if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !SDWebImageManager.shared().cachedImageExists(for: url) {
             return
         }
         
         self.reset()
         self.activityIndicator?.startAnimating()
         self.showIndicator()
-        self.sd_setImageWithURL(url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self](a, b) in
+        self.sd_setImage(with: url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self](a, b) in
             // print(a, b)
             self?.progressIndicator?.progress = Float(a) / Float(b)
             }, completed: { [weak self](image, error, sdImageCache, nsurl) in
@@ -133,28 +144,28 @@ class CGSSImageView: UIImageView {
     func tapAction() {
         if !isTapped {
             // let sv = self.superview as! UIScrollView
-            NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
+            Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(fullsized), userInfo: nil, repeats: false)
             // 动画过程中禁掉点击动作,0.3秒后开启
             hideIndicator()
-            self.userInteractionEnabled = false
-            UIView.animateWithDuration(0.25) {
-                self.transform = CGAffineTransformRotate(self.transform, CGFloat(90 / 180 * M_PI))
+            self.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.25, animations: {
+                self.transform = self.transform.rotated(by: CGFloat(90 / 180 * M_PI))
                 self.frame.size.width = CGSSGlobal.width
                 self.frame.size.height = CGSSGlobal.height
                 // self.center = CGPointMake(CGSSGlobal.width/2, (CGSSGlobal.width/self.originFrame.size.height*self.originFrame.size.width)/2)
-                self.center = CGPointMake(CGSSGlobal.width / 2, CGSSGlobal.height / 2)
-            }
-            self.superview?.bringSubviewToFront(self)
+                self.center = CGPoint(x: CGSSGlobal.width / 2, y: CGSSGlobal.height / 2)
+            }) 
+            self.superview?.bringSubview(toFront: self)
             delegate?.beginFullSize(self)
             isTapped = true
         }
         else {
-            NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(restored), userInfo: nil, repeats: false)
-            self.userInteractionEnabled = false
-            UIView.animateWithDuration(0.25) {
-                self.transform = CGAffineTransformRotate(self.transform, CGFloat(-90 / 180 * M_PI))
+            Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(restored), userInfo: nil, repeats: false)
+            self.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.25, animations: {
+                self.transform = self.transform.rotated(by: CGFloat(-90 / 180 * M_PI))
                 self.frame = self.originFrame
-            }
+            }) 
             delegate?.beginRestore(self)
             isTapped = false
         }
@@ -163,20 +174,20 @@ class CGSSImageView: UIImageView {
     
     // 恢复完成
     func restored() {
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         showIndicator()
         delegate?.endRestore(self)
     }
     
     // 完成全屏化
     func fullsized() {
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         delegate?.endFullSize(self)
     }
     
-    func longPressAction(longPress: UILongPressGestureRecognizer) {
+    func longPressAction(_ longPress: UILongPressGestureRecognizer) {
         // 长按手势会触发两次 此处判定是长按开始而非结束
-        if isTapped && longPress.state == .Began {
+        if isTapped && longPress.state == .began {
             delegate?.longPress(longPress, iv: self)
         }
     }

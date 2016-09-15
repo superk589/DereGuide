@@ -13,7 +13,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .Plain, target: self, action: #selector(tbBack))
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
 
         toolbarItems = [backItem]
         
@@ -21,7 +21,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     }
     
     func tbBack() {
-        navigationController?.popViewControllerAnimated(true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,19 +29,19 @@ class TeamSongSelectViewController: BaseSongTableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    override func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+    override func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         super.selectLive(live, beatmaps: beatmaps, diff: diff)
-        navigationController?.popViewControllerAnimated(true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     /*

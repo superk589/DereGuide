@@ -26,7 +26,7 @@ class GachaViewController: RefreshableTableViewController {
     }
     
     override func refresh() {
-        // print(NSHomeDirectory())
+        //print(NSHomeDirectory())
         tableView.reloadData()
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class BirthdayCenter: NSObject {
     static let defaultCenter = BirthdayCenter()
     var sortedChars: [CGSSChar]!
-    private override init() {
+    fileprivate override init() {
         super.init()
         let dao = CGSSDAO.sharedDAO
         sortedChars = dao.charDict.allValues as! [CGSSChar]
@@ -23,20 +23,20 @@ class BirthdayCenter: NSObject {
         if tempChar == nil {
             return nil
         } else {
-            return sortedChars.indexOf(tempChar)
+            return sortedChars.index(of: tempChar)
         }
     }
     
     func sortInside() {
         if let index = indexOfTempChar {
-            sortedChars.removeAtIndex(index)
+            sortedChars.remove(at: index)
         }
         tempChar = CGSSChar()
         let nowComp = getNowDateComponents()
         tempChar.birthDay = nowComp.day
         tempChar.birthMonth = nowComp.month
         sortedChars.append(tempChar)
-        sortedChars.sortInPlace({ (char1, char2) -> Bool in
+        sortedChars.sort(by: { (char1, char2) -> Bool in
             if char1.birthMonth > char2.birthMonth {
                 return false
             } else if char1.birthMonth == char2.birthMonth && char1.birthDay > char2.birthDay {
@@ -51,21 +51,21 @@ class BirthdayCenter: NSObject {
     
     func scheduleNotifications() {
         self.removeNotification()
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+        DispatchQueue.global(qos: .userInitiated).async {
             for char in self.getRecent(1, endDays: 30) {
                 let localNotification = UILocalNotification()
                 localNotification.fireDate = self.getNextBirthday(char)
                 localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birthMonth!)月\(char.birthDay!)日)"
                 localNotification.category = "Birthday"
-                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                UIApplication.shared.scheduleLocalNotification(localNotification)
             }
         }
     }
     
-    func getRecent(startDays: Int, endDays: Int) -> [CGSSChar] {
-        let timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        gregorian?.timeZone = timeZone
+    func getRecent(_ startDays: Int, endDays: Int) -> [CGSSChar] {
+        let timeZone = UserDefaults.standard.birthdayTimeZone
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = timeZone
         var arr = [CGSSChar]()
         var index = indexOfTempChar!
         while true {
@@ -78,10 +78,10 @@ class BirthdayCenter: NSObject {
             }
             let newdate = getNowDateTruncateHours()
             let date = getNextBirthday(sortedChars[index])
-            let result = gregorian!.components(NSCalendarUnit.Day, fromDate: newdate!, toDate: date, options: NSCalendarOptions(rawValue: 0))
-            if result.day < startDays {
+            let result = (gregorian as NSCalendar).components(NSCalendar.Unit.day, from: newdate!, to: date, options: NSCalendar.Options(rawValue: 0))
+            if result.day! < startDays {
                 continue
-            } else if result.day >= startDays && result.day <= endDays {
+            } else if result.day! >= startDays && result.day! <= endDays {
                 arr.append(sortedChars[index])
             } else {
                 break
@@ -90,44 +90,44 @@ class BirthdayCenter: NSObject {
         return arr
     }
     
-    func getNowDateComponents() -> NSDateComponents {
-        let nowDate = NSDate()
-        let timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        gregorian?.timeZone = timeZone
-        let nowComp = gregorian!.components(NSCalendarUnit.init(rawValue: NSCalendarUnit.Year.rawValue | NSCalendarUnit.Month.rawValue | NSCalendarUnit.Day.rawValue), fromDate: nowDate)
+    func getNowDateComponents() -> DateComponents {
+        let nowDate = Date()
+        let timeZone = UserDefaults.standard.birthdayTimeZone
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = timeZone
+        let nowComp = (gregorian as NSCalendar).components(NSCalendar.Unit.init(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue), from: nowDate)
         return nowComp
     }
     
-    func getNowDateTruncateHours() -> NSDate? {
+    func getNowDateTruncateHours() -> Date? {
         let nowComp = getNowDateComponents()
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        gregorian?.timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
-        return gregorian?.dateFromComponents(nowComp)
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = UserDefaults.standard.birthdayTimeZone
+        return gregorian.date(from: nowComp)
     }
     
-    func getNextBirthday(char: CGSSChar) -> NSDate {
+    func getNextBirthday(_ char: CGSSChar) -> Date {
         
         let nowComp = getNowDateComponents()
-        let dateformatter = NSDateFormatter()
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyyMMdd"
-        dateformatter.timeZone = NSUserDefaults.standardUserDefaults().birthdayTimeZone
+        dateformatter.timeZone = UserDefaults.standard.birthdayTimeZone
         let dateString: String
-        if nowComp.month > char.birthMonth! || (nowComp.month == char.birthMonth! && nowComp.day > char.birthDay!) {
-            dateString = String.init(format: "%04d%02d%02d", nowComp.year + 1, char.birthMonth!, char.birthDay!)
+        if nowComp.month! > char.birthMonth! || (nowComp.month! == char.birthMonth! && nowComp.day! > char.birthDay!) {
+            dateString = String.init(format: "%04d%02d%02d", nowComp.year! + 1, char.birthMonth!, char.birthDay!)
         } else {
-            dateString = String.init(format: "%04d%02d%02d", nowComp.year, char.birthMonth!, char.birthDay!)
+            dateString = String.init(format: "%04d%02d%02d", nowComp.year!, char.birthMonth!, char.birthDay!)
         }
-        let date = dateformatter.dateFromString(dateString)
+        let date = dateformatter.date(from: dateString)
         return date!
     }
     
     func removeNotification() {
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
-            if let notifications = UIApplication.sharedApplication().scheduledLocalNotifications {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let notifications = UIApplication.shared.scheduledLocalNotifications {
                 for notification in notifications {
                     if notification.category == "Birthday" {
-                        UIApplication.sharedApplication().cancelLocalNotification(notification)
+                        UIApplication.shared.cancelLocalNotification(notification)
                     }
                 }
             }

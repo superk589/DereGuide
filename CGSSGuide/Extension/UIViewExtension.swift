@@ -42,10 +42,10 @@ extension UIView {
 		}
 	}
     
-    func drawSectionLine(positionY: CGFloat) {
-        let view = UIView.init(frame: CGRectMake(0, positionY, CGSSGlobal.width, 1 / UIScreen.mainScreen().scale))
-        view.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        view.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.25).CGColor
+    func drawSectionLine(_ positionY: CGFloat) {
+        let view = UIView.init(frame: CGRect(x: 0, y: positionY, width: CGSSGlobal.width, height: 1 / UIScreen.main.scale))
+        view.layer.borderWidth = 1 / UIScreen.main.scale
+        view.layer.borderColor = UIColor.black.withAlphaComponent(0.25).cgColor
         self.addSubview(view)
     }
 }

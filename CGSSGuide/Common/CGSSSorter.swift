@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class CGSSSorter {
+open class CGSSSorter {
     var att: String
     var ascending: Bool
     init(att: String, ascending: Bool) {
@@ -19,26 +19,26 @@ public class CGSSSorter {
         self.init(att: att, ascending: false)
     }
     
-    func sortList<T: CGSSBaseModel>(inout list: [T]) {
+    func sortList<T: CGSSBaseModel>(_ list: inout [T]) {
         let compare = { (c1: T, c2: T) -> Bool in
-            if let i1 = c1.valueForKeyPath(self.att) as? Int, i2 = c2.valueForKeyPath(self.att) as? Int {
+            if let i1 = c1.value(forKeyPath: self.att) as? Int, let i2 = c2.value(forKeyPath: self.att) as? Int {
                 return self.ascending ? (i1 < i2) : (i1 > i2)
-            } else if let s1 = c1.valueForKeyPath(self.att) as? String, s2 = c2.valueForKeyPath(self.att) as? String {
+            } else if let s1 = c1.value(forKeyPath: self.att) as? String, let s2 = c2.value(forKeyPath: self.att) as? String {
                 return self.ascending ? (s1 < s2) : (s1 > s2)
             }
             return false
         }
-        list.sortInPlace(compare)
+        list.sort(by: compare)
     }
     
-    func writeToFile(path: String) {
-        let dict = ["att": att, "ascending": ascending]
-        dict.writeToFile(path, atomically: true)
+    func writeToFile(_ path: String) {
+        let dict = ["att": att, "ascending": ascending] as NSDictionary
+        dict.write(toFile: path, atomically: true)
     }
     
-    static func readFromFile(path: String) -> CGSSSorter? {
+    static func readFromFile(_ path: String) -> CGSSSorter? {
         if let dict = NSDictionary.init(contentsOfFile: path) {
-            if let att = dict.objectForKey("att") as? String, ascending = dict.objectForKey("ascending") as? Bool {
+            if let att = dict.object(forKey: "att") as? String, let ascending = dict.object(forKey: "ascending") as? Bool {
                 return CGSSSorter.init(att: att, ascending: ascending)
             }
         }

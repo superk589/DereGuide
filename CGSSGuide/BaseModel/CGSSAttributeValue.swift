@@ -19,7 +19,7 @@ struct CGSSAttributeValue {
     func toStringArray() -> [String] {
         return [String(vocal), String(dance), String(visual), String(total)]
     }
-    func toStringArrayWithBackValue(backValue: Int) -> [String] {
+    func toStringArrayWithBackValue(_ backValue: Int) -> [String] {
         return [String(total + backValue), String(vocal), String(dance), String(visual)]
     }
 }
@@ -27,7 +27,7 @@ struct CGSSAttributeValue {
 func + (a1: CGSSAttributeValue, a2: CGSSAttributeValue) -> CGSSAttributeValue {
     return CGSSAttributeValue.init(visual: a1.visual + a2.visual, vocal: a1.vocal + a2.vocal, dance: a1.dance + a2.dance, life: a1.life + a2.life)
 }
-func += (inout a1: CGSSAttributeValue, a2: CGSSAttributeValue) {
+func += (a1: inout CGSSAttributeValue, a2: CGSSAttributeValue) {
     a1 = a1 + a2
 }
 

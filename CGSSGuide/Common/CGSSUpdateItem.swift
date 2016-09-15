@@ -9,19 +9,19 @@
 import UIKit
 
 public enum CGSSUpdateDataType:UInt {
-    case Card = 1
-    case CardIcon = 2
-    case Song = 4
-    case Live = 8
-    case Beatmap = 16
-    case Story = 32
-    case Resource = 64
+    case card = 1
+    case cardIcon = 2
+    case song = 4
+    case live = 8
+    case beatmap = 16
+    case story = 32
+    case resource = 64
 }
 
 class CGSSUpdateItem: NSObject {
 
     var dataType:CGSSUpdateDataType
-    var data:NSData?
+    var data:Data?
     var complete:((CGSSUpdateItem)->Void)?
     var id:String
     

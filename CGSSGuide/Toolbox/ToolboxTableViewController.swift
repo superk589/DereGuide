@@ -9,7 +9,7 @@
 import UIKit
 
 class ToolboxTableViewController: BaseTableViewController {
-    let path = NSBundle.mainBundle().pathForResource("ToolboxList", ofType: ".plist")
+    let path = Bundle.main.path(forResource: "ToolboxList", ofType: ".plist")
     var dataSource: [[String: String]]!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,27 +29,27 @@ class ToolboxTableViewController: BaseTableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return dataSource.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ToolboxCell", forIndexPath: indexPath) as! ToolboxTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolboxCell", for: indexPath) as! ToolboxTableViewCell
         
-        cell.descLabel.text = dataSource[indexPath.row]["title"]
-        cell.icon.setWithCardId(Int(dataSource[indexPath.row]["iconId"]!)!)
+        cell.descLabel.text = dataSource[(indexPath as NSIndexPath).row]["title"]
+        cell.icon.setWithCardId(Int(dataSource[(indexPath as NSIndexPath).row]["iconId"]!)!)
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vcType = NSClassFromString("CGSSGuide." + dataSource[indexPath.row]["cName"]!) as! UIViewController.Type
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vcType = NSClassFromString("CGSSGuide." + dataSource[(indexPath as NSIndexPath).row]["cName"]!) as! UIViewController.Type
         let vc = vcType.init()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)

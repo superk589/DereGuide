@@ -16,7 +16,7 @@ extension CGSSSkill {
     }
     
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
-    func procChanceOfLevel(lv: Int) -> Float? {
+    func procChanceOfLevel(_ lv: Int) -> Float? {
         if let p = procChance {
             let p1 = Float(p[1])
             let p0 = Float(p[0])
@@ -24,7 +24,7 @@ extension CGSSSkill {
         }
         return nil
     }
-    func effectLengthOfLevel(lv: Int) -> Float? {
+    func effectLengthOfLevel(_ lv: Int) -> Float? {
         if let e = effectLength {
             let e1 = Float(e[1])
             let e0 = Float(e[0])
@@ -32,28 +32,28 @@ extension CGSSSkill {
         }
         return nil
     }
-    func getExplainByLevel(lv: Int) -> String {
+    func getExplainByLevel(_ lv: Int) -> String {
         var explain = explainEn ?? ""
         let pattern = "[0-9.]+ ~ [0-9.]+"
-        let subs = CGSSGlobal.getStringByPattern(explain, pattern: pattern)
+        let subs = CGSSGlobal.getStringByPattern(str: explain, pattern: pattern)
         let sub1 = subs[0]
-        let range1 = explain.rangeOfString(sub1 as String)
-        explain.replaceRange(range1!, with: String(format: "%.2f", self.procChanceOfLevel(lv)!))
+        let range1 = explain.range(of: sub1 as String)
+        explain.replaceSubrange(range1!, with: String(format: "%.2f", self.procChanceOfLevel(lv)!))
         let sub2 = subs[1]
-        let range2 = explain.rangeOfString(sub2 as String)
-        explain.replaceRange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
+        let range2 = explain.range(of: sub2 as String)
+        explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
         return explain
     }
-    func getExplainByLevelRange(start: Int, end: Int) -> String {
+    func getExplainByLevelRange(_ start: Int, end: Int) -> String {
         var explain = explainEn ?? ""
         let pattern = "[0-9.]+ ~ [0-9.]+"
-        let subs = CGSSGlobal.getStringByPattern(explain, pattern: pattern)
+        let subs = CGSSGlobal.getStringByPattern(str: explain, pattern: pattern)
         let sub1 = subs[0]
-        let range1 = explain.rangeOfString(sub1 as String)
-        explain.replaceRange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start)!, self.procChanceOfLevel(end)!))
+        let range1 = explain.range(of: sub1 as String)
+        explain.replaceSubrange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start)!, self.procChanceOfLevel(end)!))
         let sub2 = subs[1]
-        let range2 = explain.rangeOfString(sub2 as String)
-        explain.replaceRange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start)!, self.effectLengthOfLevel(end)!))
+        let range2 = explain.range(of: sub2 as String)
+        explain.replaceSubrange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start)!, self.effectLengthOfLevel(end)!))
         return explain
     }
     
@@ -130,21 +130,21 @@ class CGSSSkill: CGSSBaseModel {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        condition = aDecoder.decodeObjectForKey("condition") as? Int
-        cutinType = aDecoder.decodeObjectForKey("cutin_type") as? Int
-        effectLength = aDecoder.decodeObjectForKey("effect_length") as? [Int]
-        explain = aDecoder.decodeObjectForKey("explain") as? String
-        explainEn = aDecoder.decodeObjectForKey("explain_en") as? String
-        id = aDecoder.decodeObjectForKey("id") as? Int
-        judgeType = aDecoder.decodeObjectForKey("judge_type") as? Int
-        maxChance = aDecoder.decodeObjectForKey("max_chance") as? Int
-        maxDuration = aDecoder.decodeObjectForKey("max_duration") as? Int
-        procChance = aDecoder.decodeObjectForKey("proc_chance") as? [Int]
-        skillName = aDecoder.decodeObjectForKey("skill_name") as? String
-        skillTriggerType = aDecoder.decodeObjectForKey("skill_trigger_type") as? Int
-        skillTriggerValue = aDecoder.decodeObjectForKey("skill_trigger_value") as? Int
-        skillType = aDecoder.decodeObjectForKey("skill_type") as? String
-        value = aDecoder.decodeObjectForKey("value") as? Int
+        condition = aDecoder.decodeObject(forKey: "condition") as? Int
+        cutinType = aDecoder.decodeObject(forKey: "cutin_type") as? Int
+        effectLength = aDecoder.decodeObject(forKey: "effect_length") as? [Int]
+        explain = aDecoder.decodeObject(forKey: "explain") as? String
+        explainEn = aDecoder.decodeObject(forKey: "explain_en") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        judgeType = aDecoder.decodeObject(forKey: "judge_type") as? Int
+        maxChance = aDecoder.decodeObject(forKey: "max_chance") as? Int
+        maxDuration = aDecoder.decodeObject(forKey: "max_duration") as? Int
+        procChance = aDecoder.decodeObject(forKey: "proc_chance") as? [Int]
+        skillName = aDecoder.decodeObject(forKey: "skill_name") as? String
+        skillTriggerType = aDecoder.decodeObject(forKey: "skill_trigger_type") as? Int
+        skillTriggerValue = aDecoder.decodeObject(forKey: "skill_trigger_value") as? Int
+        skillType = aDecoder.decodeObject(forKey: "skill_type") as? String
+        value = aDecoder.decodeObject(forKey: "value") as? Int
         
     }
     
@@ -152,53 +152,53 @@ class CGSSSkill: CGSSBaseModel {
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if condition != nil {
-            aCoder.encodeObject(condition, forKey: "condition")
+            aCoder.encode(condition, forKey: "condition")
         }
         if cutinType != nil {
-            aCoder.encodeObject(cutinType, forKey: "cutin_type")
+            aCoder.encode(cutinType, forKey: "cutin_type")
         }
         if effectLength != nil {
-            aCoder.encodeObject(effectLength, forKey: "effect_length")
+            aCoder.encode(effectLength, forKey: "effect_length")
         }
         if explain != nil {
-            aCoder.encodeObject(explain, forKey: "explain")
+            aCoder.encode(explain, forKey: "explain")
         }
         if explainEn != nil {
-            aCoder.encodeObject(explainEn, forKey: "explain_en")
+            aCoder.encode(explainEn, forKey: "explain_en")
         }
         if id != nil {
-            aCoder.encodeObject(id, forKey: "id")
+            aCoder.encode(id, forKey: "id")
         }
         if judgeType != nil {
-            aCoder.encodeObject(judgeType, forKey: "judge_type")
+            aCoder.encode(judgeType, forKey: "judge_type")
         }
         if maxChance != nil {
-            aCoder.encodeObject(maxChance, forKey: "max_chance")
+            aCoder.encode(maxChance, forKey: "max_chance")
         }
         if maxDuration != nil {
-            aCoder.encodeObject(maxDuration, forKey: "max_duration")
+            aCoder.encode(maxDuration, forKey: "max_duration")
         }
         if procChance != nil {
-            aCoder.encodeObject(procChance, forKey: "proc_chance")
+            aCoder.encode(procChance, forKey: "proc_chance")
         }
         if skillName != nil {
-            aCoder.encodeObject(skillName, forKey: "skill_name")
+            aCoder.encode(skillName, forKey: "skill_name")
         }
         if skillTriggerType != nil {
-            aCoder.encodeObject(skillTriggerType, forKey: "skill_trigger_type")
+            aCoder.encode(skillTriggerType, forKey: "skill_trigger_type")
         }
         if skillTriggerValue != nil {
-            aCoder.encodeObject(skillTriggerValue, forKey: "skill_trigger_value")
+            aCoder.encode(skillTriggerValue, forKey: "skill_trigger_value")
         }
         if skillType != nil {
-            aCoder.encodeObject(skillType, forKey: "skill_type")
+            aCoder.encode(skillType, forKey: "skill_type")
         }
         if value != nil {
-            aCoder.encodeObject(value, forKey: "value")
+            aCoder.encode(value, forKey: "value")
         }
         
     }

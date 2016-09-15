@@ -9,33 +9,33 @@
 import Foundation
 
 enum CGSSSkillFilterType: UInt {
-    case ComboBonus = 1
-    case PerfectBonus = 2
-    case Overload = 4
-    case PerfectLock = 8
-    case ComboContinue = 16
-    case Heal = 32
-    case Guard = 64
-    case None = 128
-    case Other = 256
+    case comboBonus = 1
+    case perfectBonus = 2
+    case overload = 4
+    case perfectLock = 8
+    case comboContinue = 16
+    case heal = 32
+    case `guard` = 64
+    case none = 128
+    case other = 256
     init (type: String) {
         switch type {
         case "COMBO加成":
-            self = .ComboBonus
+            self = .comboBonus
         case "分数加成", "PERFECT分数加成":
-            self = .PerfectBonus
+            self = .perfectBonus
         case "中级强判", "高级强判", "初级强判":
-            self = .PerfectLock
+            self = .perfectLock
         case "COMBO保护":
-            self = .ComboContinue
+            self = .comboContinue
         case "恢复生命":
-            self = .Heal
+            self = .heal
         case "锁血":
-            self = .Guard
+            self = .guard
         case "过载":
-            self = .Overload
+            self = .overload
         default:
-            self = .Other
+            self = .other
         }
     }
     init?(raw: UInt) {
@@ -44,10 +44,10 @@ enum CGSSSkillFilterType: UInt {
 }
 
 public enum CGSSCardFilterType: UInt {
-    case Cute = 1
-    case Cool = 2
-    case Passion = 4
-    case Office = 8
+    case cute = 1
+    case cool = 2
+    case passion = 4
+    case office = 8
     init? (cardType: Int) {
         self.init(rawValue: 1 << UInt(cardType))
     }
@@ -57,48 +57,48 @@ public enum CGSSCardFilterType: UInt {
     init? (typeString: String) {
         switch typeString {
         case "cute":
-            self = .Cute
+            self = .cute
         case "cool":
-            self = .Cool
+            self = .cool
         case "passion":
-            self = .Passion
+            self = .passion
         case "office":
-            self = .Office
+            self = .office
         default:
-            self = .Office
+            self = .office
         }
     }
     init? (grooveType: CGSSGrooveType) {
         switch grooveType {
         case .Cute:
-            self = .Cute
+            self = .cute
         case .Cool:
-            self = .Cool
+            self = .cool
         case .Passion:
-            self = .Passion
+            self = .passion
         }
     }
 }
 
 public enum CGSSAttributeFilterType: UInt {
-    case Vocal = 1
-    case Dance = 2
-    case Visual = 4
-    case None = 8
+    case vocal = 1
+    case dance = 2
+    case visual = 4
+    case none = 8
     init? (attributeType: Int) {
         self.init(rawValue: 1 << UInt(attributeType))
     }
 }
 
 public enum CGSSCardRarityFilterType: UInt {
-    case N = 1
-    case NP = 2
-    case R = 4
-    case RP = 8
-    case SR = 16
-    case SRP = 32
-    case SSR = 64
-    case SSRP = 128
+    case n = 1
+    case np = 2
+    case r = 4
+    case rp = 8
+    case sr = 16
+    case srp = 32
+    case ssr = 64
+    case ssrp = 128
     
     public init? (rarity: Int) {
         self.init(rawValue: 1 << UInt(rarity))
@@ -106,19 +106,19 @@ public enum CGSSCardRarityFilterType: UInt {
 }
 
 public enum CGSSFavoriteFilterType: UInt {
-    case InFavorite = 1
-    case NotInFavorite = 2
+    case inFavorite = 1
+    case notInFavorite = 2
     
     public init? (rawValue: UInt) {
         if rawValue == 1 {
-            self = .InFavorite
+            self = .inFavorite
         } else {
-            self = .NotInFavorite
+            self = .notInFavorite
         }
     }
 }
 
-public class CGSSCardFilter {
+open class CGSSCardFilter {
     
     var cardFilterTypes = [CGSSCardFilterType]()
     var attributeFilterTypes = [CGSSAttributeFilterType]()
@@ -160,66 +160,66 @@ public class CGSSCardFilter {
         }
     }
     
-    func addCardFilterType(filterType: CGSSCardFilterType) {
+    func addCardFilterType(_ filterType: CGSSCardFilterType) {
         self.cardFilterTypes.append(filterType)
     }
-    func addCardRarityFilterType(filterType: CGSSCardRarityFilterType) {
+    func addCardRarityFilterType(_ filterType: CGSSCardRarityFilterType) {
         self.rarityFilterTypes.append(filterType)
     }
-    func addAttributeFilterType(filterType: CGSSAttributeFilterType) {
+    func addAttributeFilterType(_ filterType: CGSSAttributeFilterType) {
         self.attributeFilterTypes.append(filterType)
     }
-    func addFavoriteFilterType(filterType: CGSSFavoriteFilterType) {
+    func addFavoriteFilterType(_ filterType: CGSSFavoriteFilterType) {
         self.favoriteFilterTypes.append(filterType)
     }
-    func addSkillFilterType(filterType: CGSSSkillFilterType) {
+    func addSkillFilterType(_ filterType: CGSSSkillFilterType) {
         self.skillFilterTypes.append(filterType)
     }
     
-    func removeCardFilterType(filterType: CGSSCardFilterType) {
-        if let index = self.cardFilterTypes.indexOf(filterType) {
-            self.cardFilterTypes.removeAtIndex(index)
+    func removeCardFilterType(_ filterType: CGSSCardFilterType) {
+        if let index = self.cardFilterTypes.index(of: filterType) {
+            self.cardFilterTypes.remove(at: index)
         }
     }
-    func removeAttributeFilterType(filterType: CGSSAttributeFilterType) {
-        if let index = self.attributeFilterTypes.indexOf(filterType) {
-            self.attributeFilterTypes.removeAtIndex(index)
+    func removeAttributeFilterType(_ filterType: CGSSAttributeFilterType) {
+        if let index = self.attributeFilterTypes.index(of: filterType) {
+            self.attributeFilterTypes.remove(at: index)
         }
     }
-    func removeCardRarityFilterType(filterType: CGSSCardRarityFilterType) {
-        if let index = self.rarityFilterTypes.indexOf(filterType) {
-            self.rarityFilterTypes.removeAtIndex(index)
+    func removeCardRarityFilterType(_ filterType: CGSSCardRarityFilterType) {
+        if let index = self.rarityFilterTypes.index(of: filterType) {
+            self.rarityFilterTypes.remove(at: index)
         }
     }
-    func removeFavoriteFilterType(filterType: CGSSFavoriteFilterType) {
-        if let index = self.favoriteFilterTypes.indexOf(filterType) {
-            self.favoriteFilterTypes.removeAtIndex(index)
-        }
-    }
-    
-    func removeSkillFilterType(filterType: CGSSSkillFilterType) {
-        if let index = self.skillFilterTypes.indexOf(filterType) {
-            self.skillFilterTypes.removeAtIndex(index)
+    func removeFavoriteFilterType(_ filterType: CGSSFavoriteFilterType) {
+        if let index = self.favoriteFilterTypes.index(of: filterType) {
+            self.favoriteFilterTypes.remove(at: index)
         }
     }
     
-    func hasCardFilterType(cardFilterType: CGSSCardFilterType) -> Bool {
+    func removeSkillFilterType(_ filterType: CGSSSkillFilterType) {
+        if let index = self.skillFilterTypes.index(of: filterType) {
+            self.skillFilterTypes.remove(at: index)
+        }
+    }
+    
+    func hasCardFilterType(_ cardFilterType: CGSSCardFilterType) -> Bool {
         return self.cardFilterTypes.contains(cardFilterType)
     }
-    func hasAttributeFilterType(attributeFilterType: CGSSAttributeFilterType) -> Bool {
+    func hasAttributeFilterType(_ attributeFilterType: CGSSAttributeFilterType) -> Bool {
         return self.attributeFilterTypes.contains(attributeFilterType)
     }
-    func hasCardRarityFilterType(cardRarityFilterType: CGSSCardRarityFilterType) -> Bool {
+    func hasCardRarityFilterType(_ cardRarityFilterType: CGSSCardRarityFilterType) -> Bool {
         return self.rarityFilterTypes.contains(cardRarityFilterType)
     }
-    func hasFavoriteFilterType(favoriteFilterType: CGSSFavoriteFilterType) -> Bool {
+    func hasFavoriteFilterType(_ favoriteFilterType: CGSSFavoriteFilterType) -> Bool {
         return self.favoriteFilterTypes.contains(favoriteFilterType)
     }
-    func hasSkillFilterType(filterType: CGSSSkillFilterType) -> Bool {
+    func hasSkillFilterType(_ filterType: CGSSSkillFilterType) -> Bool {
         return self.skillFilterTypes.contains(filterType)
     }
     
-    func filterCardList(cardList: [CGSSCard]) -> [CGSSCard] {
+    func filterCardList(_ cardList: [CGSSCard]) -> [CGSSCard] {
         let result = cardList.filter { (v: CGSSCard) -> Bool in
             if cardFilterTypes.contains(v.cardFilterType) && attributeFilterTypes.contains(v.attributeFilterType) && rarityFilterTypes.contains(v.rarityFilterType) && favoriteFilterTypes.contains(v.favoriteFilterType) && skillFilterTypes.contains(v.skillFilterType) {
                 return true
@@ -229,7 +229,7 @@ public class CGSSCardFilter {
         return result
     }
     
-    func writeToFile(path: String) {
+    func writeToFile(_ path: String) {
         var cardMask: UInt = 0
         for type in cardFilterTypes {
             cardMask += type.rawValue
@@ -252,12 +252,12 @@ public class CGSSCardFilter {
         }
         
         let dict = ["cardMask": cardMask, "attributeMask": attributeMask, "rarityMask": rarityMask, "favoriteMask": favoriteMask, "skillMask": skillMask] as NSDictionary
-        dict.writeToFile(path, atomically: true)
+        dict.write(toFile: path, atomically: true)
     }
     
-    static func readFromFile(path: String) -> CGSSCardFilter? {
+    static func readFromFile(_ path: String) -> CGSSCardFilter? {
         if let dict = NSDictionary.init(contentsOfFile: path) {
-            if let cardMask = dict.objectForKey("cardMask") as? UInt, attributeMask = dict.objectForKey("attributeMask") as? UInt, rarityMask = dict.objectForKey("rarityMask") as? UInt, favoriteMask = dict.objectForKey("favoriteMask") as? UInt, skillMask = dict.objectForKey("skillMask") as? UInt {
+            if let cardMask = dict.object(forKey: "cardMask") as? UInt, let attributeMask = dict.object(forKey: "attributeMask") as? UInt, let rarityMask = dict.object(forKey: "rarityMask") as? UInt, let favoriteMask = dict.object(forKey: "favoriteMask") as? UInt, let skillMask = dict.object(forKey: "skillMask") as? UInt {
                 return CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask,skillMask: skillMask, favoriteMask: favoriteMask)
             }
         }

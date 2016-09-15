@@ -24,19 +24,19 @@ class CharInfoTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    private func prepare() {
+    fileprivate func prepare() {
         
-        charIconView = CGSSCharIconView(frame: CGRectMake(10, 10, 48, 48))
-        kanaSpacedLabel = UILabel.init(frame: CGRectMake(68, 10, CGSSGlobal.width - 78, 10))
-        kanaSpacedLabel.font = UIFont.systemFontOfSize(10)
+        charIconView = CGSSCharIconView(frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        kanaSpacedLabel = UILabel.init(frame: CGRect(x: 68, y: 10, width: CGSSGlobal.width - 78, height: 10))
+        kanaSpacedLabel.font = UIFont.systemFont(ofSize: 10)
         
         charNameLabel = UILabel()
-        charNameLabel.frame = CGRectMake(68, 25, CGSSGlobal.width - 78, 16)
-        charNameLabel.font = UIFont.systemFontOfSize(16)
+        charNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
+        charNameLabel.font = UIFont.systemFont(ofSize: 16)
         charNameLabel.adjustsFontSizeToFitWidth = true
         
-        charCVLabel = UILabel.init(frame: CGRectMake(68, 46, CGSSGlobal.width - 78, 12))
-        charCVLabel.font = UIFont.systemFontOfSize(12)
+        charCVLabel = UILabel.init(frame: CGRect(x: 68, y: 46, width: CGSSGlobal.width - 78, height: 12))
+        charCVLabel.font = UIFont.systemFont(ofSize: 12)
         
         contentView.addSubview(kanaSpacedLabel)
         contentView.addSubview(charNameLabel)
@@ -44,18 +44,18 @@ class CharInfoTableViewCell: UITableViewCell {
         contentView.addSubview(charIconView)
     }
     
-    func setup(char: CGSSChar) {
-        charNameLabel.text = "\(char.kanjiSpaced)  \(char.conventional)"
+    func setup(_ char: CGSSChar) {
+        charNameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
         if char.voice == "" {
             charCVLabel.text = "CV: 未付声"
         } else {
-            charCVLabel.text = "CV: \(char.voice)"
+            charCVLabel.text = "CV: \(char.voice!)"
         }
         charIconView.setWithCharId(char.charaId)
-        kanaSpacedLabel.text = "\(char.kanaSpaced)"
+        kanaSpacedLabel.text = "\(char.kanaSpaced!)"
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

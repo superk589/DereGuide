@@ -23,7 +23,7 @@ extension CGSSChar {
         }
     }
     var charFilterType: CGSSCharFilterType {
-        return CGSSCharFilterType.init(typeString: type) ?? CGSSCharFilterType.Office
+        return CGSSCharFilterType.init(typeString: type) ?? CGSSCharFilterType.office
     }
     var charAgeFilterType: CGSSCharAgeFilterType {
         return CGSSCharAgeFilterType.init(age: age)
@@ -32,10 +32,10 @@ extension CGSSChar {
         return CGSSCharBloodFilterType.init(bloodType: bloodType)
     }
     var charCVFilterType: CGSSCharCVTypeFilter {
-        return voice == "" ? CGSSCharCVTypeFilter.NO : CGSSCharCVTypeFilter.YES
+        return voice == "" ? CGSSCharCVTypeFilter.no : CGSSCharCVTypeFilter.yes
     }
     var favoriteFilterType: CGSSFavoriteFilterType {
-        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? CGSSFavoriteFilterType.InFavorite : CGSSFavoriteFilterType.NotInFavorite
+        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? CGSSFavoriteFilterType.inFavorite : CGSSFavoriteFilterType.notInFavorite
     }
     
     // 用于排序的动态属性
@@ -121,36 +121,27 @@ extension CGSSChar {
         }
     }
     
+    var homeTownToString:String {
+        return CGSSGameResource.sharedResource.getTextData(category: 2, index: homeTown)
+    }
+    
     var threeSizeToString: String {
         return "\(getSizeString(bodySize1))/\(getSizeString(bodySize2))/\(getSizeString(bodySize3))"
     }
     
-    func getSizeString(size: Int) -> String {
-        switch size {
-        case 5004:
-            return "?"
-        case 5005:
-            return "ぼんっ"
-        case 5006:
-            return "きゅっ"
-        case 5007:
-            return "ぼんっ♪"
-        case 5001:
-            return "おっきい"
-        case 5002:
-            return "ふつう"
-        case 5003:
-            return "まぁまぁ"
-        default:
+    func getSizeString(_ size: Int) -> String {
+        if size - 5000 > 0 {
+            return CGSSGameResource.sharedResource.getTextData(category: 6, index: size - 5000)
+        } else {
             return String(size)
         }
     }
     
     var ageToString: String {
-        if age == 5009 {
-            return "永远の17岁"
+        if age - 5000 > 0  {
+            return "\(CGSSGameResource.sharedResource.getTextData(category: 6, index: age - 5000))岁"
         } else {
-            return "\(age)岁"
+            return "\(age!)岁"
         }
     }
     
@@ -230,7 +221,7 @@ class CGSSChar: CGSSBaseModel {
         valist = [AnyObject]()
         let valistArray = json["valist"].arrayValue
         for valistJson in valistArray {
-            valist.append(valistJson.stringValue)
+            valist.append(valistJson.stringValue as AnyObject)
         }
         voice = json["voice"].stringValue
         weight = json["weight"].intValue
@@ -244,138 +235,138 @@ class CGSSChar: CGSSBaseModel {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        age = aDecoder.decodeObjectForKey("age") as? Int
-        birthDay = aDecoder.decodeObjectForKey("birth_day") as? Int
-        birthMonth = aDecoder.decodeObjectForKey("birth_month") as? Int
-        bloodType = aDecoder.decodeObjectForKey("blood_type") as? Int
-        bodySize1 = aDecoder.decodeObjectForKey("body_size_1") as? Int
-        bodySize2 = aDecoder.decodeObjectForKey("body_size_2") as? Int
-        bodySize3 = aDecoder.decodeObjectForKey("body_size_3") as? Int
-        charaId = aDecoder.decodeObjectForKey("chara_id") as? Int
-        constellation = aDecoder.decodeObjectForKey("constellation") as? Int
-        conventional = aDecoder.decodeObjectForKey("conventional") as? String
-        favorite = aDecoder.decodeObjectForKey("favorite") as? String
-        hand = aDecoder.decodeObjectForKey("hand") as? Int
-        height = aDecoder.decodeObjectForKey("height") as? Int
-        homeTown = aDecoder.decodeObjectForKey("home_town") as? Int
-        iconImageRef = aDecoder.decodeObjectForKey("icon_image_ref") as? String
-        kanaSpaced = aDecoder.decodeObjectForKey("kana_spaced") as? String
-        kanjiSpaced = aDecoder.decodeObjectForKey("kanji_spaced") as? String
-        modelBustId = aDecoder.decodeObjectForKey("model_bust_id") as? Int
-        modelHeightId = aDecoder.decodeObjectForKey("model_height_id") as? Int
-        modelSkinId = aDecoder.decodeObjectForKey("model_skin_id") as? Int
-        modelWeightId = aDecoder.decodeObjectForKey("model_weight_id") as? Int
-        name = aDecoder.decodeObjectForKey("name") as? String
-        nameKana = aDecoder.decodeObjectForKey("name_kana") as? String
-        personality = aDecoder.decodeObjectForKey("personality") as? Int
-        spineSize = aDecoder.decodeObjectForKey("spine_size") as? Int
-        translated = aDecoder.decodeObjectForKey("translated") as? String
-        translatedCht = aDecoder.decodeObjectForKey("translated_cht") as? String
-        type = aDecoder.decodeObjectForKey("type") as? String
-        valist = aDecoder.decodeObjectForKey("valist") as? [AnyObject]
-        voice = aDecoder.decodeObjectForKey("voice") as? String
-        weight = aDecoder.decodeObjectForKey("weight") as? Int
+        age = aDecoder.decodeObject(forKey: "age") as? Int
+        birthDay = aDecoder.decodeObject(forKey: "birth_day") as? Int
+        birthMonth = aDecoder.decodeObject(forKey: "birth_month") as? Int
+        bloodType = aDecoder.decodeObject(forKey: "blood_type") as? Int
+        bodySize1 = aDecoder.decodeObject(forKey: "body_size_1") as? Int
+        bodySize2 = aDecoder.decodeObject(forKey: "body_size_2") as? Int
+        bodySize3 = aDecoder.decodeObject(forKey: "body_size_3") as? Int
+        charaId = aDecoder.decodeObject(forKey: "chara_id") as? Int
+        constellation = aDecoder.decodeObject(forKey: "constellation") as? Int
+        conventional = aDecoder.decodeObject(forKey: "conventional") as? String
+        favorite = aDecoder.decodeObject(forKey: "favorite") as? String
+        hand = aDecoder.decodeObject(forKey: "hand") as? Int
+        height = aDecoder.decodeObject(forKey: "height") as? Int
+        homeTown = aDecoder.decodeObject(forKey: "home_town") as? Int
+        iconImageRef = aDecoder.decodeObject(forKey: "icon_image_ref") as? String
+        kanaSpaced = aDecoder.decodeObject(forKey: "kana_spaced") as? String
+        kanjiSpaced = aDecoder.decodeObject(forKey: "kanji_spaced") as? String
+        modelBustId = aDecoder.decodeObject(forKey: "model_bust_id") as? Int
+        modelHeightId = aDecoder.decodeObject(forKey: "model_height_id") as? Int
+        modelSkinId = aDecoder.decodeObject(forKey: "model_skin_id") as? Int
+        modelWeightId = aDecoder.decodeObject(forKey: "model_weight_id") as? Int
+        name = aDecoder.decodeObject(forKey: "name") as? String
+        nameKana = aDecoder.decodeObject(forKey: "name_kana") as? String
+        personality = aDecoder.decodeObject(forKey: "personality") as? Int
+        spineSize = aDecoder.decodeObject(forKey: "spine_size") as? Int
+        translated = aDecoder.decodeObject(forKey: "translated") as? String
+        translatedCht = aDecoder.decodeObject(forKey: "translated_cht") as? String
+        type = aDecoder.decodeObject(forKey: "type") as? String
+        valist = aDecoder.decodeObject(forKey: "valist") as? [AnyObject]
+        voice = aDecoder.decodeObject(forKey: "voice") as? String
+        weight = aDecoder.decodeObject(forKey: "weight") as? Int
     }
     
     /**
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if age != nil {
-            aCoder.encodeObject(age, forKey: "age")
+            aCoder.encode(age, forKey: "age")
         }
         if birthDay != nil {
-            aCoder.encodeObject(birthDay, forKey: "birth_day")
+            aCoder.encode(birthDay, forKey: "birth_day")
         }
         if birthMonth != nil {
-            aCoder.encodeObject(birthMonth, forKey: "birth_month")
+            aCoder.encode(birthMonth, forKey: "birth_month")
         }
         if bloodType != nil {
-            aCoder.encodeObject(bloodType, forKey: "blood_type")
+            aCoder.encode(bloodType, forKey: "blood_type")
         }
         if bodySize1 != nil {
-            aCoder.encodeObject(bodySize1, forKey: "body_size_1")
+            aCoder.encode(bodySize1, forKey: "body_size_1")
         }
         if bodySize2 != nil {
-            aCoder.encodeObject(bodySize2, forKey: "body_size_2")
+            aCoder.encode(bodySize2, forKey: "body_size_2")
         }
         if bodySize3 != nil {
-            aCoder.encodeObject(bodySize3, forKey: "body_size_3")
+            aCoder.encode(bodySize3, forKey: "body_size_3")
         }
         if charaId != nil {
-            aCoder.encodeObject(charaId, forKey: "chara_id")
+            aCoder.encode(charaId, forKey: "chara_id")
         }
         if constellation != nil {
-            aCoder.encodeObject(constellation, forKey: "constellation")
+            aCoder.encode(constellation, forKey: "constellation")
         }
         if conventional != nil {
-            aCoder.encodeObject(conventional, forKey: "conventional")
+            aCoder.encode(conventional, forKey: "conventional")
         }
         if favorite != nil {
-            aCoder.encodeObject(favorite, forKey: "favorite")
+            aCoder.encode(favorite, forKey: "favorite")
         }
         if hand != nil {
-            aCoder.encodeObject(hand, forKey: "hand")
+            aCoder.encode(hand, forKey: "hand")
         }
         if height != nil {
-            aCoder.encodeObject(height, forKey: "height")
+            aCoder.encode(height, forKey: "height")
         }
         if homeTown != nil {
-            aCoder.encodeObject(homeTown, forKey: "home_town")
+            aCoder.encode(homeTown, forKey: "home_town")
         }
         if iconImageRef != nil {
-            aCoder.encodeObject(iconImageRef, forKey: "icon_image_ref")
+            aCoder.encode(iconImageRef, forKey: "icon_image_ref")
         }
         if kanaSpaced != nil {
-            aCoder.encodeObject(kanaSpaced, forKey: "kana_spaced")
+            aCoder.encode(kanaSpaced, forKey: "kana_spaced")
         }
         if kanjiSpaced != nil {
-            aCoder.encodeObject(kanjiSpaced, forKey: "kanji_spaced")
+            aCoder.encode(kanjiSpaced, forKey: "kanji_spaced")
         }
         if modelBustId != nil {
-            aCoder.encodeObject(modelBustId, forKey: "model_bust_id")
+            aCoder.encode(modelBustId, forKey: "model_bust_id")
         }
         if modelHeightId != nil {
-            aCoder.encodeObject(modelHeightId, forKey: "model_height_id")
+            aCoder.encode(modelHeightId, forKey: "model_height_id")
         }
         if modelSkinId != nil {
-            aCoder.encodeObject(modelSkinId, forKey: "model_skin_id")
+            aCoder.encode(modelSkinId, forKey: "model_skin_id")
         }
         if modelWeightId != nil {
-            aCoder.encodeObject(modelWeightId, forKey: "model_weight_id")
+            aCoder.encode(modelWeightId, forKey: "model_weight_id")
         }
         if name != nil {
-            aCoder.encodeObject(name, forKey: "name")
+            aCoder.encode(name, forKey: "name")
         }
         if nameKana != nil {
-            aCoder.encodeObject(nameKana, forKey: "name_kana")
+            aCoder.encode(nameKana, forKey: "name_kana")
         }
         if personality != nil {
-            aCoder.encodeObject(personality, forKey: "personality")
+            aCoder.encode(personality, forKey: "personality")
         }
         if spineSize != nil {
-            aCoder.encodeObject(spineSize, forKey: "spine_size")
+            aCoder.encode(spineSize, forKey: "spine_size")
         }
         if translated != nil {
-            aCoder.encodeObject(translated, forKey: "translated")
+            aCoder.encode(translated, forKey: "translated")
         }
         if translatedCht != nil {
-            aCoder.encodeObject(translatedCht, forKey: "translated_cht")
+            aCoder.encode(translatedCht, forKey: "translated_cht")
         }
         if type != nil {
-            aCoder.encodeObject(type, forKey: "type")
+            aCoder.encode(type, forKey: "type")
         }
         if valist != nil {
-            aCoder.encodeObject(valist, forKey: "valist")
+            aCoder.encode(valist, forKey: "valist")
         }
         if voice != nil {
-            aCoder.encodeObject(voice, forKey: "voice")
+            aCoder.encode(voice, forKey: "voice")
         }
         if weight != nil {
-            aCoder.encodeObject(weight, forKey: "weight")
+            aCoder.encode(weight, forKey: "weight")
         }
         
     }

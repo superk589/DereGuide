@@ -55,19 +55,19 @@ class CGSSLeaderSkill: CGSSBaseModel {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        explain = aDecoder.decodeObjectForKey("explain") as? String
-        explainEn = aDecoder.decodeObjectForKey("explain_en") as? String
-        id = aDecoder.decodeObjectForKey("id") as? Int
-        name = aDecoder.decodeObjectForKey("name") as? String
-        needCool = aDecoder.decodeObjectForKey("need_cool") as? Int
-        needCute = aDecoder.decodeObjectForKey("need_cute") as? Int
-        needPassion = aDecoder.decodeObjectForKey("need_passion") as? Int
-        specialId = aDecoder.decodeObjectForKey("special_id") as? Int
-        targetAttribute = aDecoder.decodeObjectForKey("target_attribute") as? String
-        targetParam = aDecoder.decodeObjectForKey("target_param") as? String
-        type = aDecoder.decodeObjectForKey("type") as? Int
-        upType = aDecoder.decodeObjectForKey("up_type") as? Int
-        upValue = aDecoder.decodeObjectForKey("up_value") as? Int
+        explain = aDecoder.decodeObject(forKey: "explain") as? String
+        explainEn = aDecoder.decodeObject(forKey: "explain_en") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        name = aDecoder.decodeObject(forKey: "name") as? String
+        needCool = aDecoder.decodeObject(forKey: "need_cool") as? Int
+        needCute = aDecoder.decodeObject(forKey: "need_cute") as? Int
+        needPassion = aDecoder.decodeObject(forKey: "need_passion") as? Int
+        specialId = aDecoder.decodeObject(forKey: "special_id") as? Int
+        targetAttribute = aDecoder.decodeObject(forKey: "target_attribute") as? String
+        targetParam = aDecoder.decodeObject(forKey: "target_param") as? String
+        type = aDecoder.decodeObject(forKey: "type") as? Int
+        upType = aDecoder.decodeObject(forKey: "up_type") as? Int
+        upValue = aDecoder.decodeObject(forKey: "up_value") as? Int
         
     }
     
@@ -75,47 +75,47 @@ class CGSSLeaderSkill: CGSSBaseModel {
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if explain != nil {
-            aCoder.encodeObject(explain, forKey: "explain")
+            aCoder.encode(explain, forKey: "explain")
         }
         if explainEn != nil {
-            aCoder.encodeObject(explainEn, forKey: "explain_en")
+            aCoder.encode(explainEn, forKey: "explain_en")
         }
         if id != nil {
-            aCoder.encodeObject(id, forKey: "id")
+            aCoder.encode(id, forKey: "id")
         }
         if name != nil {
-            aCoder.encodeObject(name, forKey: "name")
+            aCoder.encode(name, forKey: "name")
         }
         if needCool != nil {
-            aCoder.encodeObject(needCool, forKey: "need_cool")
+            aCoder.encode(needCool, forKey: "need_cool")
         }
         if needCute != nil {
-            aCoder.encodeObject(needCute, forKey: "need_cute")
+            aCoder.encode(needCute, forKey: "need_cute")
         }
         if needPassion != nil {
-            aCoder.encodeObject(needPassion, forKey: "need_passion")
+            aCoder.encode(needPassion, forKey: "need_passion")
         }
         if specialId != nil {
-            aCoder.encodeObject(specialId, forKey: "special_id")
+            aCoder.encode(specialId, forKey: "special_id")
         }
         if targetAttribute != nil {
-            aCoder.encodeObject(targetAttribute, forKey: "target_attribute")
+            aCoder.encode(targetAttribute, forKey: "target_attribute")
         }
         if targetParam != nil {
-            aCoder.encodeObject(targetParam, forKey: "target_param")
+            aCoder.encode(targetParam, forKey: "target_param")
         }
         if type != nil {
-            aCoder.encodeObject(type, forKey: "type")
+            aCoder.encode(type, forKey: "type")
         }
         if upType != nil {
-            aCoder.encodeObject(upType, forKey: "up_type")
+            aCoder.encode(upType, forKey: "up_type")
         }
         if upValue != nil {
-            aCoder.encodeObject(upValue, forKey: "up_value")
+            aCoder.encode(upValue, forKey: "up_value")
         }
         
     }

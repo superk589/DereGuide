@@ -8,23 +8,23 @@
 
 import Foundation
 
-public class CGSSNotificationCenter: NSObject {
+open class CGSSNotificationCenter: NSObject {
 
-    public static func post( name:String, object: AnyObject?) {
+    open static func post( _ name:String, object: AnyObject?) {
         let prefixdedName = "CGSS_" + name
-        NSNotificationCenter.defaultCenter().postNotificationName(prefixdedName, object: object)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: prefixdedName), object: object)
     }
     
-    public static func add(observer: AnyObject, selector: Selector, name: String, object: AnyObject?) {
+    open static func add(_ observer: AnyObject, selector: Selector, name: String, object: AnyObject?) {
         let prefixdedName = "CGSS_" + name
-        NSNotificationCenter.defaultCenter().addObserver(observer, selector: selector, name: prefixdedName, object: object)
+        NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: prefixdedName), object: object)
     }
-    public static func removeAll(observer:AnyObject) {
-        NSNotificationCenter.defaultCenter().removeObserver(observer)
+    open static func removeAll(_ observer:AnyObject) {
+        NotificationCenter.default.removeObserver(observer)
     }
     
-    public static func remove(observer:AnyObject, name: String, object: AnyObject?) {
+    open static func remove(_ observer:AnyObject, name: String, object: AnyObject?) {
         let prefixdedName = "CGSS_" + name
-        NSNotificationCenter.defaultCenter().removeObserver(observer, name: prefixdedName, object: object)
+        NotificationCenter.default.removeObserver(observer, name: NSNotification.Name(rawValue: prefixdedName), object: object)
     }
 }

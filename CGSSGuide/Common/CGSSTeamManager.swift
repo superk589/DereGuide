@@ -21,51 +21,51 @@ class CGSSTeamManager: NSObject {
     }
     
     func initTeams() {
-        if let theData = NSData(contentsOfFile: CGSSTeamManager.teamsFilePath) {
-            let achiver = NSKeyedUnarchiver(forReadingWithData: theData)
-                self.teams = achiver.decodeObjectForKey("team") as? [CGSSTeam] ?? [CGSSTeam]()
+        if let theData = try? Data(contentsOf: URL(fileURLWithPath: CGSSTeamManager.teamsFilePath)) {
+            let achiver = NSKeyedUnarchiver(forReadingWith: theData)
+                self.teams = achiver.decodeObject(forKey: "team") as? [CGSSTeam] ?? [CGSSTeam]()
         } else {
             self.teams = [CGSSTeam]()
         }
     }
-    func writeToFile(complete:(()->Void)?) {
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+    func writeToFile(_ complete:(()->Void)?) {
+        DispatchQueue.global(qos: .userInitiated).async {
             let path = CGSSTeamManager.teamsFilePath
             let theData = NSMutableData()
-            let achiver = NSKeyedArchiver(forWritingWithMutableData: theData)
-            achiver.encodeObject(self.teams , forKey: "team")
+            let achiver = NSKeyedArchiver(forWritingWith: theData)
+            achiver.encode(self.teams , forKey: "team")
             achiver.finishEncoding()
-            theData.writeToFile(path, atomically: true)
-            dispatch_async(dispatch_get_main_queue(), {
+            theData.write(toFile: path, atomically: true)
+            DispatchQueue.main.async(execute: {
                 complete?()
             })
         }
     }
     
-    func addATeam(team:CGSSTeam) {
+    func addATeam(_ team:CGSSTeam) {
         addATeam(team, complete: nil)
     }
-    private func addATeam(team:CGSSTeam, complete:(()->Void)?) {
-        teams.insert(team, atIndex: 0)
+    fileprivate func addATeam(_ team:CGSSTeam, complete:(()->Void)?) {
+        teams.insert(team, at: 0)
         writeToFile(complete)
     }
-    func removeATeamAtIndex(index:Int) {
+    func removeATeamAtIndex(_ index:Int) {
         removeATeamAtIndex(index, complete: nil)
     }
-    private func removeATeamAtIndex(index:Int, complete:(()->Void)?) {
-        teams.removeAtIndex(index)
+    fileprivate func removeATeamAtIndex(_ index:Int, complete:(()->Void)?) {
+        teams.remove(at: index)
         writeToFile(complete)
     }
-    private func removeATeam(team:CGSSTeam, complete:(()->Void)?) {
-        if let index = teams.indexOf(team) {
-            teams.removeAtIndex(index)
+    fileprivate func removeATeam(_ team:CGSSTeam, complete:(()->Void)?) {
+        if let index = teams.index(of: team) {
+            teams.remove(at: index)
             writeToFile(complete)
         }
     }
-    func removeATeam(team:CGSSTeam) {
+    func removeATeam(_ team:CGSSTeam) {
         removeATeam(team, complete: nil)
     }
-    func getTeamByIndex(index:Int) -> CGSSTeam {
+    func getTeamByIndex(_ index:Int) -> CGSSTeam {
         return self.teams[index]
     }
  

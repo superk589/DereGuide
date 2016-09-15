@@ -11,22 +11,22 @@ import ZYCornerRadius
 
 //带描边的Label
 class CharProfileDescLabel: UILabel {
-    override func drawTextInRect(rect: CGRect) {
+    override func drawText(in rect: CGRect) {
         
         let offset = self.shadowOffset
         let color = self.textColor
         let ctx = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(ctx, 2)
-        CGContextSetLineJoin(ctx, .Round)
+        ctx?.setLineWidth(2)
+        ctx?.setLineJoin(.round)
         
-        CGContextSetTextDrawingMode(ctx, .Stroke)
-        self.textColor = UIColor.darkGrayColor()
-        super.drawTextInRect(rect)
+        ctx?.setTextDrawingMode(.stroke)
+        self.textColor = UIColor.darkGray
+        super.drawText(in: rect)
         
-        CGContextSetTextDrawingMode(ctx, .Fill)
+        ctx?.setTextDrawingMode(.fill)
         self.textColor = color
-        self.shadowOffset = CGSizeMake(0, 0)
-        super.drawTextInRect(rect)
+        self.shadowOffset = CGSize(width: 0, height: 0)
+        super.drawText(in: rect)
         
         self.shadowOffset = offset
         
@@ -48,14 +48,14 @@ class CharProfileDescView: UIView {
         super.init(frame: frame)
         iv = UIImageView.init(frame: self.bounds)
         addSubview(iv)
-        label = CharProfileDescLabel.init(frame: CGRectMake(5, 0, frame.size.width - 10, frame.size.height))
-        label.font = UIFont.boldSystemFontOfSize(16)
+        label = CharProfileDescLabel.init(frame: CGRect(x: 5, y: 0, width: frame.size.width - 10, height: frame.size.height))
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         addSubview(label)
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = .Center
+        label.textColor = UIColor.white
+        label.textAlignment = .center
         
-        iv.zy_cornerRadiusAdvance(6, rectCornerType: .AllCorners)
+        iv.zy_cornerRadiusAdvance(6, rectCornerType: .allCorners)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,11 +69,11 @@ class CharProfileContentLabel: UILabel {
         super.init(frame: frame)
         
         let border = CAShapeLayer()
-        border.strokeColor = UIColor.darkGrayColor().CGColor
+        border.strokeColor = UIColor.darkGray.cgColor
         let path = UIBezierPath()
-        path.moveToPoint(CGPointMake(0, frame.size.height))
-        path.addLineToPoint(CGPointMake(frame.size.width, frame.size.height))
-        border.path = path.CGPath
+        path.move(to: CGPoint(x: 0, y: frame.size.height))
+        path.addLine(to: CGPoint(x: frame.size.width, y: frame.size.height))
+        border.path = path.cgPath
         border.frame = self.bounds
         border.lineWidth = 1
         border.lineCap = "square"
@@ -81,7 +81,7 @@ class CharProfileContentLabel: UILabel {
         layer.addSublayer(border)
         
         self.adjustsFontSizeToFitWidth = true
-        self.textColor = UIColor.darkGrayColor()
+        self.textColor = UIColor.darkGray
         
     }
     
@@ -95,13 +95,13 @@ class CharProfileViewCell: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        descLabel = CharProfileDescView.init(frame: CGRectMake(0, 0, 60, 30))
-        contentLabel = CharProfileContentLabel.init(frame: CGRectMake(65, 0, frame.size.width - 65, 30))
+        descLabel = CharProfileDescView.init(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        contentLabel = CharProfileContentLabel.init(frame: CGRect(x: 65, y: 0, width: frame.size.width - 65, height: 30))
         addSubview(descLabel)
         addSubview(contentLabel)
     }
     
-    func setup(desc: String, content: String) {
+    func setup(_ desc: String, content: String) {
         descLabel.text = desc
         contentLabel.text = content
         
@@ -132,26 +132,26 @@ class CharProfileView: UIView {
         let height: CGFloat = 30
         let space: CGFloat = 10
         var originY: CGFloat = 0
-        nameKanaCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
+        nameKanaCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
         originY += height + space
-        heightCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width / 2, height))
-        ageCell = CharProfileViewCell.init(frame: CGRectMake(width / 2, originY, width / 2, height))
+        heightCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
+        ageCell = CharProfileViewCell.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
         originY += height + space
-        weightCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width / 2, height))
-        birthdayCell = CharProfileViewCell.init(frame: CGRectMake(width / 2, originY, width / 2, height))
+        weightCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
+        birthdayCell = CharProfileViewCell.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
         originY += height + space
-        bloodCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width / 2, height))
-        handCell = CharProfileViewCell.init(frame: CGRectMake(width / 2, originY, width / 2, height))
+        bloodCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
+        handCell = CharProfileViewCell.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
         originY += height + space
-        threeSizeCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
+        threeSizeCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
         originY += height + space
-        constellationCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
+        constellationCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
         originY += height + space
-//        homeTownCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
-//        originY += height
-        favoriteCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
+        homeTownCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
         originY += height + space
-        voiceCell = CharProfileViewCell.init(frame: CGRectMake(0, originY, width, height))
+        favoriteCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        originY += height + space
+        voiceCell = CharProfileViewCell.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
         
         fheight = voiceCell.fheight + voiceCell.fy
         
@@ -164,28 +164,28 @@ class CharProfileView: UIView {
         addSubview(handCell)
         addSubview(threeSizeCell)
         addSubview(constellationCell)
-        // addSubview(homeTownCell)
+        addSubview(homeTownCell)
         addSubview(favoriteCell)
         addSubview(voiceCell)
     }
     
-    func setup(char: CGSSChar) {
-        nameKanaCell.setup("姓名假名", content: char.kanaSpaced)
-        heightCell.setup("身高", content: "\(char.height)cm")
+    func setup(_ char: CGSSChar) {
+        nameKanaCell.setup("姓名假名", content: char.kanaSpaced!)
+        heightCell.setup("身高", content: "\(char.height!)cm")
         ageCell.setup("年龄", content: char.ageToString)
-        weightCell.setup("体重", content: "\(char.weight)kg")
-        birthdayCell.setup("生日", content: "\(char.birthMonth)月\(char.birthDay)日")
+        weightCell.setup("体重", content: "\(char.weight!)kg")
+        birthdayCell.setup("生日", content: "\(char.birthMonth!)月\(char.birthDay!)日")
         bloodCell.setup("血型", content: char.bloodTypeToString)
         handCell.setup("习惯用手", content: char.handToString)
         threeSizeCell.setup("三围", content: char.threeSizeToString)
         constellationCell.setup("星座", content: char.constellationToString)
-        // homeTownCell.setup("出生地", content: String)
+        homeTownCell.setup("出生地", content: char.homeTownToString)
         favoriteCell.setup("兴趣", content: char.favorite)
         voiceCell.setup("CV", content: char.voice)
         for subView in subviews {
             let iv = (subView as! CharProfileViewCell).descLabel.iv
-            iv.tintColor = char.attColor.colorWithAlphaComponent(0.5)
-            iv.image = UIImage.init(named: "icon_placeholder")?.imageWithRenderingMode(.AlwaysTemplate)
+            iv?.tintColor = char.attColor.withAlphaComponent(0.5)
+            iv?.image = UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate)
         }
     }
     

@@ -46,12 +46,12 @@ class CGSSStoryEpisode: CGSSBaseModel {
      required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        cleaned = aDecoder.decodeObjectForKey("cleaned") as? String
-        id = aDecoder.decodeObjectForKey("id") as? Int
-        story = aDecoder.decodeObjectForKey("story") as? [CGSSStory]
-        subtitle = aDecoder.decodeObjectForKey("subtitle") as? String
-        title = aDecoder.decodeObjectForKey("title") as? String
-        type = aDecoder.decodeObjectForKey("type") as? Int
+        cleaned = aDecoder.decodeObject(forKey: "cleaned") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        story = aDecoder.decodeObject(forKey: "story") as? [CGSSStory]
+        subtitle = aDecoder.decodeObject(forKey: "subtitle") as? String
+        title = aDecoder.decodeObject(forKey: "title") as? String
+        type = aDecoder.decodeObject(forKey: "type") as? Int
         
     }
     
@@ -59,26 +59,26 @@ class CGSSStoryEpisode: CGSSBaseModel {
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-     override func encodeWithCoder(aCoder: NSCoder)
+     override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if cleaned != nil {
-            aCoder.encodeObject(cleaned, forKey: "cleaned")
+            aCoder.encode(cleaned, forKey: "cleaned")
         }
         if id != nil {
-            aCoder.encodeObject(id, forKey: "id")
+            aCoder.encode(id, forKey: "id")
         }
         if story != nil {
-            aCoder.encodeObject(story, forKey: "story")
+            aCoder.encode(story, forKey: "story")
         }
         if subtitle != nil {
-            aCoder.encodeObject(subtitle, forKey: "subtitle")
+            aCoder.encode(subtitle, forKey: "subtitle")
         }
         if title != nil {
-            aCoder.encodeObject(title, forKey: "title")
+            aCoder.encode(title, forKey: "title")
         }
         if type != nil {
-            aCoder.encodeObject(type, forKey: "type")
+            aCoder.encode(type, forKey: "type")
         }
         
     }

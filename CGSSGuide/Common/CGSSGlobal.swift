@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import Alamofire
+import ReachabilitySwift
 
 public class CGSSGlobal: NSObject {
     
     // 当前屏幕的宽度和高度常量
-    public static let width = UIScreen.mainScreen().bounds.width
-    public static let height = UIScreen.mainScreen().bounds.height
+    public static let width = UIScreen.main.bounds.width
+    public static let height = UIScreen.main.bounds.height
     // 当前屏幕1坐标的像素点数量
-    public static let scale = UIScreen.mainScreen().scale
+    public static let scale = UIScreen.main.scale
     // 常用颜色
     public static let vocalColor = UIColor.init(red: 1.0 * 236 / 255, green: 1.0 * 87 / 255, blue: 1.0 * 105 / 255, alpha: 1)
     public static let danceColor = UIColor.init(red: 1.0 * 89 / 255, green: 1.0 * 187 / 255, blue: 1.0 * 219 / 255, alpha: 1)
@@ -32,21 +32,21 @@ public class CGSSGlobal: NSObject {
     public static let coolColor = UIColor.init(red: 1.0 * 42 / 255, green: 1.0 * 113 / 255, blue: 1.0 * 247 / 255, alpha: 1)
     public static let passionColor = UIColor.init(red: 1.0 * 250 / 255, green: 1.0 * 168 / 255, blue: 1.0 * 57 / 255, alpha: 1)
     // public static let allTypeColor = UIColor.init(red: 1.0*255/255, green: 1.0*253/255, blue: 1.0*114/255, alpha: 1)
-    public static let allTypeColor = UIColor.darkGrayColor()
+    public static let allTypeColor = UIColor.darkGray
     
     // 用于GridView的字体
     public static let numberFont = UIFont.init(name: "menlo", size: 14)
-    public static let alphabetFont = UIFont.systemFontOfSize(14)
+    public static let alphabetFont = UIFont.systemFont(ofSize: 14)
     
     public static let fullImageWidth: CGFloat = 1280
     public static let fullImageHeight: CGFloat = 824
     
     public static func getStringByPattern(str: String, pattern: String) -> [NSString] {
-        let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive)
-        let res = regex!.matchesInString(str, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))
+        let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+        let res = regex!.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))
         var arr = Array<NSString>()
         for checkingRes in res {
-            arr.append((str as NSString).substringWithRange(checkingRes.range))
+            arr.append((str as NSString).substring(with: checkingRes.range) as NSString)
         }
         return arr
     }
@@ -117,31 +117,31 @@ public class CGSSGlobal: NSObject {
     
     // 时区转换
     static func getDateFrom(oldDate: NSDate, timeZone: NSTimeZone) -> NSDate {
-        let inv = timeZone.secondsFromGMTForDate(oldDate)
-        let timeInv = NSTimeInterval(inv)
-        let newDate = oldDate.dateByAddingTimeInterval(timeInv)
+        let inv = timeZone.secondsFromGMT(for: oldDate as Date)
+        let timeInv = TimeInterval(inv)
+        let newDate = oldDate.addingTimeInterval(timeInv)
         return newDate
         
     }
     
     static func isWifi() -> Bool {
-        let manager = NetworkReachabilityManager()
-        if manager!.isReachableOnEthernetOrWiFi {
-            return true
-        } else {
-            return false
+        if let reachability = Reachability() {
+            if reachability.isReachableViaWiFi{
+                return true
+            }
         }
+        return false
     }
     
     static func isMobileNet() -> Bool {
-        let manager = NetworkReachabilityManager()
-        if manager!.isReachableOnWWAN {
-            return true
-        } else {
-            return false
+        if let reachability = Reachability() {
+            if reachability.isReachableViaWWAN {
+                return true
+            }
         }
+        return false
+        
     }
-    
     static let presetBackValue = 103463
     
 }

@@ -9,41 +9,54 @@
 import Foundation
 import SwiftyJSON
 
-public class CGSSBeatmap: CGSSBaseModel {
-    class Note: NSObject, NSCoding {
-        var id: Int?
-        var sec: Float?
-        var type: Int?
-        var startPos: Int?
-        var finishPos: Int?
-        var status: Int?
-        var sync: Int?
-        var groupId: Int?
-        override init() {
-            super.init()
-        }
-        required init?(coder aDecoder: NSCoder) {
-            self.id = aDecoder.decodeObjectForKey("id") as? Int
-            self.sec = aDecoder.decodeObjectForKey("sec") as? Float
-            self.type = aDecoder.decodeObjectForKey("type") as? Int
-            self.startPos = aDecoder.decodeObjectForKey("startPos") as? Int
-            self.finishPos = aDecoder.decodeObjectForKey("finishPos") as? Int
-            self.status = aDecoder.decodeObjectForKey("status") as? Int
-            self.sync = aDecoder.decodeObjectForKey("sync") as? Int
-            self.groupId = aDecoder.decodeObjectForKey("groupId") as? Int
-        }
-        func encodeWithCoder(aCoder: NSCoder) {
-            aCoder.encodeObject(self.id, forKey: "id")
-            aCoder.encodeObject(self.sec, forKey: "sec")
-            aCoder.encodeObject(self.type, forKey: "type")
-            aCoder.encodeObject(self.startPos, forKey: "startPos")
-            aCoder.encodeObject(self.finishPos, forKey: "finishPos")
-            aCoder.encodeObject(self.status, forKey: "status")
-            aCoder.encodeObject(self.sync, forKey: "sync")
-            aCoder.encodeObject(self.groupId, forKey: "groupId")
-        }
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+class CGSSBeatmapNote: NSObject, NSCoding {
+    var id: Int?
+    var sec: Float?
+    var type: Int?
+    var startPos: Int?
+    var finishPos: Int?
+    var status: Int?
+    var sync: Int?
+    var groupId: Int?
+    override init() {
+        super.init()
     }
-    var notes: [Note]
+    required init?(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeObject(forKey: "id") as? Int
+        self.sec = aDecoder.decodeObject(forKey: "sec") as? Float
+        self.type = aDecoder.decodeObject(forKey: "type") as? Int
+        self.startPos = aDecoder.decodeObject(forKey: "startPos") as? Int
+        self.finishPos = aDecoder.decodeObject(forKey: "finishPos") as? Int
+        self.status = aDecoder.decodeObject(forKey: "status") as? Int
+        self.sync = aDecoder.decodeObject(forKey: "sync") as? Int
+        self.groupId = aDecoder.decodeObject(forKey: "groupId") as? Int
+    }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.sec, forKey: "sec")
+        aCoder.encode(self.type, forKey: "type")
+        aCoder.encode(self.startPos, forKey: "startPos")
+        aCoder.encode(self.finishPos, forKey: "finishPos")
+        aCoder.encode(self.status, forKey: "status")
+        aCoder.encode(self.sync, forKey: "sync")
+        aCoder.encode(self.groupId, forKey: "groupId")
+    }
+}
+
+class CGSSBeatmap: CGSSBaseModel {
+    
+    var notes: [CGSSBeatmapNote]
     
     var numberOfNotes: Int {
         if let note = notes.first {
@@ -52,7 +65,7 @@ public class CGSSBeatmap: CGSSBaseModel {
         return 0
     }
     
-    var firstNote: Note? {
+    var firstNote: CGSSBeatmapNote? {
         for i in 0...notes.count - 1 {
             if notes[i].finishPos != 0 {
                 return notes[i]
@@ -61,7 +74,7 @@ public class CGSSBeatmap: CGSSBaseModel {
         return nil
     }
     
-    var lastNote: Note? {
+    var lastNote: CGSSBeatmapNote? {
         for i in 0...notes.count - 1 {
             if notes[notes.count - i - 1].finishPos != 0 {
                 return notes[notes.count - i - 1]
@@ -88,8 +101,8 @@ public class CGSSBeatmap: CGSSBaseModel {
 //        return 0
 //    }
     
-    lazy var validNotes: [Note] = {
-        var arr = [Note]()
+    lazy var validNotes: [CGSSBeatmapNote] = {
+        var arr = [CGSSBeatmapNote]()
         for i in 0...self.notes.count - 1 {
             if self.notes[i].finishPos != 0 {
                 arr.append(self.notes[i])
@@ -138,7 +151,7 @@ public class CGSSBeatmap: CGSSBaseModel {
     }
     
     // 折半查找指定秒数对应的combo数
-    func comboForSec(sec: Float) -> Int {
+    func comboForSec(_ sec: Float) -> Int {
         // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
         let newSec = sec + preSeconds! + 0.0001
         var end = numberOfNotes - 1
@@ -155,19 +168,19 @@ public class CGSSBeatmap: CGSSBaseModel {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        self.notes = aDecoder.decodeObjectForKey("notes") as? [Note] ?? [Note]()
+        self.notes = aDecoder.decodeObject(forKey: "notes") as? [CGSSBeatmapNote] ?? [CGSSBeatmapNote]()
         super.init(coder: aDecoder)
         
     }
-    override public func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(self.notes, forKey: "notes")
+    override open func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(self.notes, forKey: "notes")
     }
     init?(json: JSON) {
-        self.notes = [Note]()
+        self.notes = [CGSSBeatmapNote]()
         let array = json.arrayValue
         for sub in array {
-            let note = Note()
+            let note = CGSSBeatmapNote()
             note.id = sub["id"].intValue
             note.sec = sub["sec"].floatValue
             note.type = sub["type"].intValue

@@ -24,16 +24,16 @@ class SongDiffView: UIView {
         super.init(frame: frame)
         iv = UIImageView.init(frame: self.bounds)
         addSubview(iv)
-        label = UILabel.init(frame: CGRectMake(5, 0, frame.size.width - 10, frame.size.height))
+        label = UILabel.init(frame: CGRect(x: 5, y: 0, width: frame.size.width - 10, height: frame.size.height))
         addSubview(label)
-        label.font = UIFont.boldSystemFontOfSize(14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = .Center
-        iv.zy_cornerRadiusAdvance(8, rectCornerType: .AllCorners)
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        iv.zy_cornerRadiusAdvance(8, rectCornerType: .allCorners)
     }
     
-    func addTarget(target: AnyObject?, action: Selector) {
+    func addTarget(_ target: AnyObject?, action: Selector) {
         let tap = UITapGestureRecognizer.init(target: target, action: action)
         self.addGestureRecognizer(tap)
     }
@@ -44,7 +44,7 @@ class SongDiffView: UIView {
 }
 
 protocol SongTableViewCellDelegate: class {
-    func diffSelected(live: CGSSLive, diff: Int)
+    func diffSelected(_ live: CGSSLive, diff: Int)
 }
 
 class SongTableViewCell: UITableViewCell {
@@ -60,18 +60,18 @@ class SongTableViewCell: UITableViewCell {
         prepare()
     }
     
-    private func prepare() {
+    fileprivate func prepare() {
         jacketImageView = UIImageView()
-        jacketImageView.frame = CGRectMake(10, 10, 66, 66)
+        jacketImageView.frame = CGRect(x: 10, y: 10, width: 66, height: 66)
         
-        typeIcon = UIImageView.init(frame: CGRectMake(86, 10, 20, 20))
+        typeIcon = UIImageView.init(frame: CGRect(x: 86, y: 10, width: 20, height: 20))
         nameLabel = UILabel()
-        nameLabel.frame = CGRectMake(111, 10, CGSSGlobal.width - 121, 20)
-        nameLabel.font = UIFont.boldSystemFontOfSize(18)
+        nameLabel.frame = CGRect(x: 111, y: 10, width: CGSSGlobal.width - 121, height: 20)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.adjustsFontSizeToFitWidth = true
         
         descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRectMake(86, 35, CGSSGlobal.width - 96, 16)
+        descriptionLabel.frame = CGRect(x: 86, y: 35, width: CGSSGlobal.width - 96, height: 16)
         descriptionLabel.font = CGSSGlobal.alphabetFont
         
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
@@ -89,11 +89,11 @@ class SongTableViewCell: UITableViewCell {
         let colors = [CGSSGlobal.debutColor, CGSSGlobal.regularColor, CGSSGlobal.proColor, CGSSGlobal.masterColor, CGSSGlobal.masterPlusColor]
         diffViews = [SongDiffView]()
         for i in 0...4 {
-            let diffView = SongDiffView.init(frame: CGRectMake(originX + (space + width) * CGFloat(i), originY, width, height))
+            let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
             // diffView.label.font = UIFont.init(name: "menlo", size: fontSize)
             diffView.iv.tintColor = colors[i]
-            diffView.iv.image = UIImage.init(named: "icon_placeholder")?.imageWithRenderingMode(.AlwaysTemplate)
-            diffView.label.textColor = UIColor.darkGrayColor()
+            diffView.iv.image = UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate)
+            diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))
             diffViews.append(diffView)
@@ -111,12 +111,12 @@ class SongTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func diffClick(tap: UITapGestureRecognizer) {
+    func diffClick(_ tap: UITapGestureRecognizer) {
         delegate?.diffSelected(live, diff: tap.view!.tag)
     }
     
     var live: CGSSLive!
-    func initWith(live: CGSSLive) {
+    func initWith(_ live: CGSSLive) {
         self.live = live
         let dao = CGSSDAO.sharedDAO
         if let song = dao.findSongById(live.musicId!) {
@@ -136,17 +136,17 @@ class SongTableViewCell: UITableViewCell {
                 self.diffViews[i].text = "\(diffStars[i])"
             }
             if live.masterPlus != 0 {
-                self.diffViews[4].hidden = false
+                self.diffViews[4].isHidden = false
             } else {
-                self.diffViews[4].hidden = true
+                self.diffViews[4].isHidden = true
             }
             
             let url = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song.id!).png"
-            self.jacketImageView.sd_setImageWithURL(NSURL.init(string: url))
+            self.jacketImageView.sd_setImage(with: URL.init(string: url))
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

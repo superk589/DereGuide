@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CharFilterAndSorterTableViewControllerDelegate: class {
-    func doneAndReturn(filter: CGSSCharFilter, sorter: CGSSSorter)
+    func doneAndReturn(_ filter: CGSSCharFilter, sorter: CGSSSorter)
 }
 
 class CharFilterAndSorterTableViewController: UITableViewController {
@@ -42,10 +42,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem.init(title: "完成", style: .Plain, target: self, action: #selector(doneAction))
+        let backButton = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
         
-        let resetButton = UIBarButtonItem.init(title: "重置", style: .Plain, target: self, action: #selector(resetAction))
+        let resetButton = UIBarButtonItem.init(title: "重置", style: .plain, target: self, action: #selector(resetAction))
         self.navigationItem.rightBarButtonItem = resetButton
         
         prepare()
@@ -56,51 +56,51 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...2 {
             let button = charTypeStackView.subviews[i] as! UIButton
-            button.selected = filter.hasCharFilterType(CGSSCharFilterType.init(cardType: i)!)
+            button.isSelected = filter.hasCharFilterType(CGSSCharFilterType.init(cardType: i)!)
         }
         
         for i in 0...4 {
             let button = charAgeView.subviews[i] as! UIButton
-            button.selected = filter.hasCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.hasCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << i)!)
         }
         for i in 0...3 {
             let button = charBloodTypeView.subviews[i] as! UIButton
-            button.selected = filter.hasCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.hasCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << i)!)
         }
         
         for i in 0...1 {
             let button = cvTypeView.subviews[i] as! UIButton
-            button.selected = filter.hasCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << i)!)
+            button.isSelected = filter.hasCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << i)!)
         }
         for i in 0...1 {
             let button = favoriteStackView.subviews[i] as! UIButton
-            button.selected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
+            button.isSelected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
-        ascendingbutton.selected = sorter.ascending
+        ascendingbutton.isSelected = sorter.ascending
         
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
-        descendingButton.selected = !sorter.ascending
+        descendingButton.isSelected = !sorter.ascending
         
         for i in 0...2 {
             let button = basicStackView.subviews[i] as! UIButton
-            let index = sorterString.indexOf(sorter.att)
-            button.selected = (index == i)
+            let index = sorterString.index(of: sorter.att)
+            button.isSelected = (index == i)
             
         }
         
         for i in 0...2 {
             let button = threeSizeStackView.subviews[i] as! UIButton
-            let index = sorterString.indexOf(sorter.att)
-            button.selected = (index == i + 3)
+            let index = sorterString.index(of: sorter.att)
+            button.isSelected = (index == i + 3)
             
         }
         
         for i in 0...1 {
             let button = otherSortingStackView.subviews[i] as! UIButton
-            let index = sorterString.indexOf(sorter.att)
-            button.selected = (index == i + 6)
+            let index = sorterString.index(of: sorter.att)
+            button.isSelected = (index == i + 6)
         }
         
     }
@@ -108,23 +108,23 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     func prepare() {
         for i in 0...2 {
             let button = charTypeStackView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(charTypeButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(charTypeButtonClick), for: .touchUpInside)
             // button.setTitleColor(UIColor.redColor(), forState: .Highlighted)
             button.tag = 1000 + i
         }
         for i in 0...4 {
             let button = charAgeView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(charAgeButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(charAgeButtonClick), for: .touchUpInside)
             button.tag = 2000 + i
         }
         for i in 0...3 {
             let button = charBloodTypeView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(charBloodButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(charBloodButtonClick), for: .touchUpInside)
             button.tag = 3000 + i
         }
         for i in 0...1 {
             let button = cvTypeView.subviews[i] as! UIButton
-            button.addTarget(self, action: #selector(charCVButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(charCVButtonClick), for: .touchUpInside)
             button.tag = 4000 + i
         }
         for i in 0...1 {
@@ -132,135 +132,135 @@ class CharFilterAndSorterTableViewController: UITableViewController {
             // button.layer.borderWidth = 1
             // button.layer.borderColor = UIColor.blueColor().CGColor
             // button.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
-            button.addTarget(self, action: #selector(favoriteButtonClick), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(favoriteButtonClick), for: .touchUpInside)
             button.tag = 5000 + i
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
-        ascendingbutton.addTarget(self, action: #selector(ascendingAction), forControlEvents: .TouchUpInside)
+        ascendingbutton.addTarget(self, action: #selector(ascendingAction), for: .touchUpInside)
         
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
-        descendingButton.addTarget(self, action: #selector(descendingAction), forControlEvents: .TouchUpInside)
+        descendingButton.addTarget(self, action: #selector(descendingAction), for: .touchUpInside)
         
         sortingButtons = [UIButton]()
         for i in 0...2 {
             let button = basicStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 1000 + i
-            button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(sortingButtonsAction), for: .touchUpInside)
         }
         
         for i in 0...2 {
             let button = threeSizeStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 2000 + i
-            button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(sortingButtonsAction), for: .touchUpInside)
         }
         
         for i in 0...1 {
             let button = otherSortingStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 3000 + i
-            button.addTarget(self, action: #selector(sortingButtonsAction), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(sortingButtonsAction), for: .touchUpInside)
         }
         
     }
     
-    func charTypeButtonClick(sender: UIButton) {
+    func charTypeButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 1000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeCharFilterType(CGSSCharFilterType.init(cardType: tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addCharFilterType(CGSSCharFilterType.init(cardType: tag)!)
         }
         
     }
     
-    func charCVButtonClick(sender: UIButton) {
+    func charCVButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 4000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << tag)!)
         }
         
     }
     
-    func charAgeButtonClick(sender: UIButton) {
+    func charAgeButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 2000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << tag)!)
         }
         
     }
     
-    func charBloodButtonClick(sender: UIButton) {
+    func charBloodButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 3000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             filter.removeCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << tag)!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             filter.addCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << tag)!)
         }
         
     }
     
-    func favoriteButtonClick(sender: UIButton) {
+    func favoriteButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 5000
-        if sender.selected {
-            sender.selected = false
+        if sender.isSelected {
+            sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
             filter.removeFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
         } else {
-            sender.selected = true
+            sender.isSelected = true
             // sender.backgroundColor = color
             filter.addFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
         }
         
     }
     
-    func ascendingAction(sender: UIButton) {
-        if !sender.selected {
-            sender.selected = true
+    func ascendingAction(_ sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = true
             let descendingButton = ascendingStackView.subviews[0] as! UIButton
-            descendingButton.selected = false
+            descendingButton.isSelected = false
             sorter.ascending = true
         }
     }
-    func descendingAction(sender: UIButton) {
-        if !sender.selected {
-            sender.selected = true
+    func descendingAction(_ sender: UIButton) {
+        if !sender.isSelected {
+            sender.isSelected = true
             let ascendingButton = ascendingStackView.subviews[1] as! UIButton
-            ascendingButton.selected = false
+            ascendingButton.isSelected = false
             sorter.ascending = false
         }
     }
     
-    func sortingButtonsAction(sender: UIButton) {
-        if !sender.selected {
+    func sortingButtonsAction(_ sender: UIButton) {
+        if !sender.isSelected {
             for btn in sortingButtons {
-                if btn.selected {
-                    btn.selected = false
+                if btn.isSelected {
+                    btn.isSelected = false
                 }
             }
-            sender.selected = true
-            let index = sortingButtons.indexOf(sender)
+            sender.isSelected = true
+            let index = sortingButtons.index(of: sender)
             sorter.att = sorterString[index!]
         }
     }
     
     func doneAction() {
         delegate?.doneAndReturn(filter, sorter: sorter)
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
         // 使用自定义动画效果
         /*let transition = CATransition()
          transition.duration = 0.3
@@ -282,12 +282,12 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
             return 5

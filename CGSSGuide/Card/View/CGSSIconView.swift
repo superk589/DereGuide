@@ -10,7 +10,7 @@ import UIKit
 import ZYCornerRadius
 
 protocol CGSSIconViewDelegate: class {
-    func iconClick(iv: CGSSIconView)
+    func iconClick(_ iv: CGSSIconView)
 }
 
 class CGSSIconView: UIImageView {
@@ -27,20 +27,20 @@ class CGSSIconView: UIImageView {
     }
     
     func prepare() {
-        zy_cornerRadiusAdvance(self.fheight / 8, rectCornerType: .AllCorners)
+        zy_cornerRadiusAdvance(self.fheight / 8, rectCornerType: .allCorners)
 //        layer.cornerRadius = 6
 //        layer.masksToBounds = true
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
         addGestureRecognizer(tap!)
     }
     
-    func setIconImage(urlStr: String) {
-        sd_setImageWithURL(NSURL.init(string: urlStr)!, placeholderImage: UIImage.init(named: "icon_placeholder")?.imageWithRenderingMode(.AlwaysTemplate))
+    func setIconImage(_ urlStr: String) {
+        sd_setImage(with: URL.init(string: urlStr)!, placeholderImage: UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate))
         // sd_setImageWithURL(NSURL.init(string: urlStr)!)
     }
     
-    func setAction(target: AnyObject, action: Selector) {
+    func setAction(_ target: AnyObject, action: Selector) {
         self.action = action
         self.target = target
     }
@@ -48,7 +48,7 @@ class CGSSIconView: UIImageView {
     func onClick() {
         delegate?.iconClick(self)
         if action != nil {
-            self.target?.performSelector(action!, withObject: self)
+            _ = self.target?.perform(action!, with: self)
         }
     }
     

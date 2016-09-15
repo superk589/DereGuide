@@ -8,25 +8,25 @@
 
 import Foundation
 
-public class CGSSBaseModel: NSObject, NSCoding {
+open class CGSSBaseModel: NSObject, NSCoding {
     var major:String!
     var minor:String!
-    var updateTime:NSDate!
+    var updateTime:Date!
     public override init() {
         super.init()
         self.major = CGSSUpdater.defaultUpdater.checkNewestDataVersion().0
         self.minor = CGSSUpdater.defaultUpdater.checkNewestDataVersion().1
-        self.updateTime = NSDate()
+        self.updateTime = Date()
     }
     public required init?(coder aDecoder: NSCoder) {
-        self.major = aDecoder.decodeObjectForKey("major") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().0
-        self.minor = aDecoder.decodeObjectForKey("minor") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().1
-        self.updateTime = aDecoder.decodeObjectForKey("update_time") as? NSDate ?? NSDate()
+        self.major = aDecoder.decodeObject(forKey: "major") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().0
+        self.minor = aDecoder.decodeObject(forKey: "minor") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().1
+        self.updateTime = aDecoder.decodeObject(forKey: "update_time") as? Date ?? Date()
     }
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.major, forKey: "major")
-        aCoder.encodeObject(self.minor, forKey: "minor")
-        aCoder.encodeObject(self.updateTime, forKey: "update_time")
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.major, forKey: "major")
+        aCoder.encode(self.minor, forKey: "minor")
+        aCoder.encode(self.updateTime, forKey: "update_time")
     }
     var isOldVersion: Bool {
         if self.major < CGSSUpdater.defaultUpdater.checkNewestDataVersion().0 {

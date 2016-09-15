@@ -35,10 +35,10 @@ class CGSSStory: CGSSBaseModel {
          */
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        cleaned = aDecoder.decodeObjectForKey("cleaned") as? String
-        id = aDecoder.decodeObjectForKey("id") as? Int
-        subtitle = aDecoder.decodeObjectForKey("subtitle") as? String
-        title = aDecoder.decodeObjectForKey("title") as? String
+        cleaned = aDecoder.decodeObject(forKey: "cleaned") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        subtitle = aDecoder.decodeObject(forKey: "subtitle") as? String
+        title = aDecoder.decodeObject(forKey: "title") as? String
         
     }
     
@@ -46,20 +46,20 @@ class CGSSStory: CGSSBaseModel {
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if cleaned != nil {
-            aCoder.encodeObject(cleaned, forKey: "cleaned")
+            aCoder.encode(cleaned, forKey: "cleaned")
         }
         if id != nil {
-            aCoder.encodeObject(id, forKey: "id")
+            aCoder.encode(id, forKey: "id")
         }
         if subtitle != nil {
-            aCoder.encodeObject(subtitle, forKey: "subtitle")
+            aCoder.encode(subtitle, forKey: "subtitle")
         }
         if title != nil {
-            aCoder.encodeObject(title, forKey: "title")
+            aCoder.encode(title, forKey: "title")
         }
         
     }

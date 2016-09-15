@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TeamEditViewControllerDelegate: class {
-    func save(team: CGSSTeam)
+    func save(_ team: CGSSTeam)
 }
 
 class TeamEditViewController: BaseTableViewController {
@@ -36,27 +36,27 @@ class TeamEditViewController: BaseTableViewController {
      }*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Save, target: self, action: #selector(saveTeam))
+        view.backgroundColor = UIColor.white
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTeam))
         
-        hv.frame = CGRectMake(0, 0, CGSSGlobal.width, 100)
+        hv.frame = CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 100)
         for i in 0...5 {
             let cell = TeamMemberTableViewCell()
             cell.iconView.delegate = self
             if i == 0 {
                 cell.title.text = "队长"
                 if let leader = self.leader {
-                    cell.initWith(leader, type: .Leader)
+                    cell.initWith(leader, type: .leader)
                 }
             } else if i < 5 {
                 cell.title.text = "队员\(i)"
                 if let sub = subs[i - 1] {
-                    cell.initWith(sub, type: .Sub)
+                    cell.initWith(sub, type: .sub)
                 }
             } else {
                 cell.title.text = "好友"
                 if let fLeader = self.friendLeader {
-                    cell.initWith(fLeader, type: .Friend)
+                    cell.initWith(fLeader, type: .friend)
                 }
             }
             cell.tag = 100 + i
@@ -71,9 +71,9 @@ class TeamEditViewController: BaseTableViewController {
         } else {
             // Fallback on earlier versions
         }
-        tableView.tableFooterView = UIView.init(frame: CGRectZero)
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
-        swipe.direction = .Right
+        swipe.direction = .right
         self.view.addGestureRecognizer(swipe)
     }
     
@@ -82,7 +82,7 @@ class TeamEditViewController: BaseTableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func initWith(team: CGSSTeam) {
+    func initWith(_ team: CGSSTeam) {
         self.leader = team.leader
         self.friendLeader = team.friendLeader
         for i in 0...3 {
@@ -91,7 +91,7 @@ class TeamEditViewController: BaseTableViewController {
         self.backValue = team.backSupportValue
     }
     
-    func getMemberByIndex(index: Int) -> CGSSTeamMember? {
+    func getMemberByIndex(_ index: Int) -> CGSSTeamMember? {
         if index == 0 {
             return leader
         } else if index < 5 {
@@ -101,44 +101,44 @@ class TeamEditViewController: BaseTableViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tableView.endEditing(true)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // print(indexPath.row, cells[indexPath.row].contentView.fheight)
         // 如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
-        return max(cells[indexPath.row].contentView.fheight, 96) + 1 / UIScreen.mainScreen().scale
+        return max(cells[(indexPath as NSIndexPath).row].contentView.fheight, 96) + 1 / UIScreen.main.scale
     }
     
     func saveTeam() {
-        if let leader = self.leader, friendLeader = self.friendLeader where subs.count == 4 {
+        if let leader = self.leader, let friendLeader = self.friendLeader , subs.count == 4 {
             let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? CGSSGlobal.presetBackValue, friendLeader: friendLeader)
             delegate?.save(team)
-            self.navigationController?.popViewControllerAnimated(true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
     
     func cancel() {
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = cells[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = cells[(indexPath as NSIndexPath).row]
         return cell
     }
     
     var teamCardVC: TeamCardSelectTableViewController?
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        lastIndex = indexPath.row
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        lastIndex = (indexPath as NSIndexPath).row
         if teamCardVC == nil {
             teamCardVC = TeamCardSelectTableViewController()
             teamCardVC!.delegate = self
@@ -154,7 +154,7 @@ class TeamEditViewController: BaseTableViewController {
          navigationController?.pushViewController(teamCardVC!, animated: false)*/
         
         // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
@@ -171,9 +171,9 @@ class TeamEditViewController: BaseTableViewController {
 }
 extension TeamEditViewController: TeamMemberTableViewCellDelegate {
     
-    func skillLevelDidChange(cell: TeamMemberTableViewCell, lv: String) {
-        UIView.animateWithDuration(0.25, animations: {
-            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPointMake(0, -64)
+    func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPoint(x: 0, y: -64)
         })
         let member = getMemberByIndex(cell.tag - 100)
         var newLevel = Int(lv) ?? 10
@@ -184,15 +184,15 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
         cell.setupSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
     }
     
-    func skillLevelDidBeginEditing(cell: TeamMemberTableViewCell) {
+    func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell) {
         lastScrollViewOffset = tableView.contentOffset
         if cell.tag - 100 >= 2 {
             var height: CGFloat = 0
             for i in 0...cell.tag - 100 {
-                height += cells[i].contentView.fheight + 1 / UIScreen.mainScreen().scale
+                height += cells[i].contentView.fheight + 1 / UIScreen.main.scale
             }
-            UIView.animateWithDuration(0.25, animations: {
-                self.tableView.contentOffset = CGPointMake(0, max(self.keyBoardHeigt + height - CGSSGlobal.height, -64))
+            UIView.animate(withDuration: 0.25, animations: {
+                self.tableView.contentOffset = CGPoint(x: 0, y: max(self.keyBoardHeigt + height - CGSSGlobal.height, -64))
             })
             
         }
@@ -200,21 +200,21 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate {
 }
 
 extension TeamEditViewController: BaseCardTableViewControllerDelegate {
-    func selectCard(card: CGSSCard) {
+    func selectCard(_ card: CGSSCard) {
         let cell = cells[lastIndex]
         if lastIndex == 0 {
             self.leader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
-            cell.initWith(leader!, type: .Leader)
+            cell.initWith(leader!, type: .leader)
             if self.friendLeader == nil {
                 self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
-                cells.last!.initWith(friendLeader!, type: .Friend)
+                cells.last!.initWith(friendLeader!, type: .friend)
             }
         } else if lastIndex < 5 {
             self.subs[lastIndex - 1] = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
-            cell.initWith(subs[lastIndex - 1]!, type: .Sub)
+            cell.initWith(subs[lastIndex - 1]!, type: .sub)
         } else {
             self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
-            cell.initWith(friendLeader!, type: .Friend)
+            cell.initWith(friendLeader!, type: .friend)
         }
         tableView.reloadData()
     }
@@ -222,14 +222,14 @@ extension TeamEditViewController: BaseCardTableViewControllerDelegate {
 
 //MARK: UIScrollView代理方法
 extension TeamEditViewController {
-    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         tableView.endEditing(true)
     }
 }
 
 //MARK: CGSSIconViewDelegate
 extension TeamEditViewController: CGSSIconViewDelegate {
-    func iconClick(iv: CGSSIconView) {
+    func iconClick(_ iv: CGSSIconView) {
         let cardIcon = iv as! CGSSCardIconView
         if let id = cardIcon.cardId {
             if let card = CGSSDAO.sharedDAO.findCardById(id) {

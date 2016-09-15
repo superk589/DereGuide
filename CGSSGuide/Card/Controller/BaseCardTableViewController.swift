@@ -8,7 +8,7 @@
 
 import UIKit
 protocol BaseCardTableViewControllerDelegate {
-    func selectCard(card: CGSSCard)
+    func selectCard(_ card: CGSSCard)
 }
 
 class BaseCardTableViewController: RefreshableTableViewController, CardFilterAndSorterTableViewControllerDelegate {
@@ -30,16 +30,16 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
             }
         }
         self.navigationItem.titleView = searchBar
-        searchBar.returnKeyType = .Done
+        searchBar.returnKeyType = .done
         // searchBar.showsCancelButton = true
         searchBar.placeholder = "日文名/罗马字/技能/稀有度"
-        searchBar.autocapitalizationType = .None
-        searchBar.autocorrectionType = .No
+        searchBar.autocapitalizationType = .none
+        searchBar.autocorrectionType = .no
         searchBar.delegate = self
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
         
-        self.tableView.registerClass(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
+        self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
         
     }
     
@@ -68,7 +68,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     
     func filterAction() {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
+        let filterVC = sb.instantiateViewController(withIdentifier: "CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.hidesBottomBarWhenPushed = true
@@ -79,7 +79,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = kCATransitionFade
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
         navigationController?.pushViewController(filterVC, animated: false)
     }
     
@@ -95,7 +95,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
@@ -103,27 +103,27 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     }
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return cardList?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CardCell", forIndexPath: indexPath) as! CardTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardTableViewCell
         
-        let row = indexPath.row
+        let row = (indexPath as NSIndexPath).row
         let card = cardList[row]
         if let name = card.chara?.name, let conventional = card.chara?.conventional {
             cell.cardNameLabel.text = name + "  " + conventional
         }
         
         cell.cardIconView?.setWithCardId(card.id!)
-        cell.cardIconView?.userInteractionEnabled = false
+        cell.cardIconView?.isUserInteractionEnabled = false
         
         // textLabel?.text = self.cardList[row] as? String
         
@@ -143,9 +143,9 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         // 显示主动技能类型
         if let skill = card.skill {
             if CGSSGlobal.width > 360 {
-                cell.skillLabel.text = "\(skill.condition)s/\(skill.procTypeShort)/\(skill.skillType)"
+                cell.skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillType!)"
             } else {
-                cell.skillLabel.text = "\(skill.skillType)"
+                cell.skillLabel.text = "\(skill.skillType!)"
             }
         } else {
             cell.skillLabel.text = ""
@@ -156,15 +156,15 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 68
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        delegate?.selectCard(cardList[indexPath.row])
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.selectCard(cardList[(indexPath as NSIndexPath).row])
     }
     
-    func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+    func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.defaultManager.cardfilter = filter
         CGSSSorterFilterManager.defaultManager.cardSorter = sorter
         CGSSSorterFilterManager.defaultManager.saveForCard()
@@ -176,20 +176,20 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
 extension BaseCardTableViewController: UISearchBarDelegate {
     
     // 文字改变时
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         refresh()
     }
     // 开始编辑时
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
         return true
     }
     // 点击搜索按钮时
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         refresh()
     }
@@ -197,7 +197,7 @@ extension BaseCardTableViewController: UISearchBarDelegate {
 
 //MARK: scrollView的协议方法
 extension BaseCardTableViewController {
-    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 向下滑动时取消输入框的第一响应者
         searchBar.resignFirstResponder()
     }

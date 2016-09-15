@@ -12,30 +12,30 @@ class CardTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // print(NSHomeDirectory())
+        print(NSHomeDirectory())
         // 作为工具启动的第一个页面 在此页面做自动更新检查
         let updater = CGSSUpdater.defaultUpdater
         // 如果数据Major版本号过低强制删除旧数据 再更新 没有取消按钮
         if updater.checkNewestDataVersion().0 > updater.checkCurrentDataVersion().0 {
             let dao = CGSSDAO.sharedDAO
             dao.removeAllData()
-            let alert = UIAlertController.init(title: "数据需要更新", message: "数据主版本过低，请点击确定开始更新", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
+            let alert = UIAlertController.init(title: "数据需要更新", message: "数据主版本过低，请点击确定开始更新", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (alertAction) in
                 self.check(0b1001111)
                 }))
-            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            self.tabBarController?.present(alert, animated: true, completion: nil)
         }
         // 如果数据Minor版本号过低 不管用户有没有设置自动更新 都提示更新 但是可以取消
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
-            let alert = UIAlertController.init(title: "数据需要更新", message: "数据存在新版本，推荐进行更新，请点击确定开始更新", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: { (alertAction) in
+            let alert = UIAlertController.init(title: "数据需要更新", message: "数据存在新版本，推荐进行更新，请点击确定开始更新", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (alertAction) in
                 self.check(0b1001111)
                 }))
-            alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
-            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+            self.tabBarController?.present(alert, animated: true, completion: nil)
         }
         // 启动时根据用户设置检查常规更新
-        else if NSUserDefaults.standardUserDefaults().valueForKey("DownloadAtStart") as? Bool ?? true {
+        else if UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true {
             check(0b1001111)
         }
     }
@@ -45,14 +45,14 @@ class CardTableViewController: BaseCardTableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = cardList[indexPath.row]
+        cardDetailVC.card = cardList[(indexPath as NSIndexPath).row]
         // 打开谱面时 隐藏tabbar
         cardDetailVC.hidesBottomBarWhenPushed = true
         

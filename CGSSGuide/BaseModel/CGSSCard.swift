@@ -11,7 +11,7 @@ import SwiftyJSON
 
 extension CGSSCard {
     
-    var attShort: String! {
+    var attShort: String {
         switch attribute {
         case "cute":
             return "Cu"
@@ -75,33 +75,33 @@ extension CGSSCard {
     
     //
     dynamic var dance: Int {
-        if let base = danceMax, bonus = bonusDance {
+        if let base = danceMax, let bonus = bonusDance {
             return base + bonus
         }
         return 0
     }
     
     dynamic var vocal: Int {
-        if let base = vocalMax, bonus = bonusVocal {
+        if let base = vocalMax, let bonus = bonusVocal {
             return base + bonus
         }
         return 0
     }
     dynamic var visual: Int {
-        if let base = visualMax, bonus = bonusVisual {
+        if let base = visualMax, let bonus = bonusVisual {
             return base + bonus
         }
         return 0
     }
     dynamic var life: Int {
-        if let base = hpMax, bonus = bonusHp {
+        if let base = hpMax, let bonus = bonusHp {
             return base + bonus
         }
         return 0
     }
     
     dynamic var overall: Int {
-        if let base = overallMax, bonus = overallBonus {
+        if let base = overallMax, let bonus = overallBonus {
             return base + bonus
         }
         return 0
@@ -109,10 +109,10 @@ extension CGSSCard {
     
     // 用于filter的部分属性
     var rarityFilterType: CGSSCardRarityFilterType {
-        return CGSSCardRarityFilterType.init(rarity: rarity.rarity - 1) ?? CGSSCardRarityFilterType.N
+        return CGSSCardRarityFilterType.init(rarity: rarity.rarity - 1) ?? CGSSCardRarityFilterType.n
     }
     var skillFilterType: CGSSSkillFilterType {
-        return skill?.skillFilterType ?? CGSSSkillFilterType.None
+        return skill?.skillFilterType ?? CGSSSkillFilterType.none
     }
     var cardFilterType: CGSSCardFilterType {
         return CGSSCardFilterType.init(typeString: attribute)!
@@ -120,17 +120,17 @@ extension CGSSCard {
     var attributeFilterType: CGSSAttributeFilterType {
         if let da = danceMax, let vo = vocalMax, let vi = visualMax {
             if da >= vo && da >= vi {
-                return CGSSAttributeFilterType.Dance
+                return CGSSAttributeFilterType.dance
             } else if vo >= vi && vo >= da {
-                return CGSSAttributeFilterType.Vocal
+                return CGSSAttributeFilterType.vocal
             } else {
-                return CGSSAttributeFilterType.Visual
+                return CGSSAttributeFilterType.visual
             }
         }
-        return CGSSAttributeFilterType.None
+        return CGSSAttributeFilterType.none
     }
     var favoriteFilterType: CGSSFavoriteFilterType {
-        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteFilterType.InFavorite : CGSSFavoriteFilterType.NotInFavorite
+        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteFilterType.inFavorite : CGSSFavoriteFilterType.notInFavorite
     }
     
 }
@@ -235,7 +235,7 @@ class CGSSCard: CGSSBaseModel {
         valist = [AnyObject]()
         let valistArray = json["valist"].arrayValue
         for valistJson in valistArray {
-            valist.append(valistJson.stringValue)
+            valist.append(valistJson.stringValue as AnyObject)
         }
         visualMax = json["visual_max"].intValue
         visualMin = json["visual_min"].intValue
@@ -268,50 +268,50 @@ class CGSSCard: CGSSBaseModel {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        albumId = aDecoder.decodeObjectForKey("album_id") as? Int
-        attribute = aDecoder.decodeObjectForKey("attribute") as? String
-        bestStat = aDecoder.decodeObjectForKey("best_stat") as? Int
-        bonusDance = aDecoder.decodeObjectForKey("bonus_dance") as? Int
-        bonusHp = aDecoder.decodeObjectForKey("bonus_hp") as? Int
-        bonusVisual = aDecoder.decodeObjectForKey("bonus_visual") as? Int
-        bonusVocal = aDecoder.decodeObjectForKey("bonus_vocal") as? Int
-        cardImageRef = aDecoder.decodeObjectForKey("card_image_ref") as? String
-        charaId = aDecoder.decodeObjectForKey("chara_id") as? Int
-        danceMax = aDecoder.decodeObjectForKey("dance_max") as? Int
-        danceMin = aDecoder.decodeObjectForKey("dance_min") as? Int
-        evolutionId = aDecoder.decodeObjectForKey("evolution_id") as? Int
-        evolutionType = aDecoder.decodeObjectForKey("evolution_type") as? Int
-        growType = aDecoder.decodeObjectForKey("grow_type") as? Int
-        hasSign = aDecoder.decodeObjectForKey("has_sign") as? Bool
-        hasSpread = aDecoder.decodeObjectForKey("has_spread") as? Bool
-        hpMax = aDecoder.decodeObjectForKey("hp_max") as? Int
-        hpMin = aDecoder.decodeObjectForKey("hp_min") as? Int
-        iconImageRef = aDecoder.decodeObjectForKey("icon_image_ref") as? String
-        id = aDecoder.decodeObjectForKey("id") as? Int
-        leaderSkillId = aDecoder.decodeObjectForKey("leader_skill_id") as? Int
-        name = aDecoder.decodeObjectForKey("name") as? String
-        nameOnly = aDecoder.decodeObjectForKey("name_only") as? String
-        openDressId = aDecoder.decodeObjectForKey("open_dress_id") as? Int
-        openStoryId = aDecoder.decodeObjectForKey("open_story_id") as? Int
-        overallBonus = aDecoder.decodeObjectForKey("overall_bonus") as? Int
-        overallMax = aDecoder.decodeObjectForKey("overall_max") as? Int
-        overallMin = aDecoder.decodeObjectForKey("overall_min") as? Int
-        place = aDecoder.decodeObjectForKey("place") as? Int
-        pose = aDecoder.decodeObjectForKey("pose") as? Int
-        rarity = aDecoder.decodeObjectForKey("rarity") as? CGSSCardRarity
-        seriesId = aDecoder.decodeObjectForKey("series_id") as? Int
-        skillId = aDecoder.decodeObjectForKey("skill_id") as? Int
-        soloLive = aDecoder.decodeObjectForKey("solo_live") as? Int
-        spreadImageRef = aDecoder.decodeObjectForKey("spread_image_ref") as? String
-        spriteImageRef = aDecoder.decodeObjectForKey("sprite_image_ref") as? String
-        starLessonType = aDecoder.decodeObjectForKey("star_lesson_type") as? Int
-        title = aDecoder.decodeObjectForKey("title") as? String
-        titleFlag = aDecoder.decodeObjectForKey("title_flag") as? Int
-        valist = aDecoder.decodeObjectForKey("valist") as? [AnyObject]
-        visualMax = aDecoder.decodeObjectForKey("visual_max") as? Int
-        visualMin = aDecoder.decodeObjectForKey("visual_min") as? Int
-        vocalMax = aDecoder.decodeObjectForKey("vocal_max") as? Int
-        vocalMin = aDecoder.decodeObjectForKey("vocal_min") as? Int
+        albumId = aDecoder.decodeObject(forKey: "album_id") as? Int
+        attribute = aDecoder.decodeObject(forKey: "attribute") as? String
+        bestStat = aDecoder.decodeObject(forKey: "best_stat") as? Int
+        bonusDance = aDecoder.decodeObject(forKey: "bonus_dance") as? Int
+        bonusHp = aDecoder.decodeObject(forKey: "bonus_hp") as? Int
+        bonusVisual = aDecoder.decodeObject(forKey: "bonus_visual") as? Int
+        bonusVocal = aDecoder.decodeObject(forKey: "bonus_vocal") as? Int
+        cardImageRef = aDecoder.decodeObject(forKey: "card_image_ref") as? String
+        charaId = aDecoder.decodeObject(forKey: "chara_id") as? Int
+        danceMax = aDecoder.decodeObject(forKey: "dance_max") as? Int
+        danceMin = aDecoder.decodeObject(forKey: "dance_min") as? Int
+        evolutionId = aDecoder.decodeObject(forKey: "evolution_id") as? Int
+        evolutionType = aDecoder.decodeObject(forKey: "evolution_type") as? Int
+        growType = aDecoder.decodeObject(forKey: "grow_type") as? Int
+        hasSign = aDecoder.decodeObject(forKey: "has_sign") as? Bool
+        hasSpread = aDecoder.decodeObject(forKey: "has_spread") as? Bool
+        hpMax = aDecoder.decodeObject(forKey: "hp_max") as? Int
+        hpMin = aDecoder.decodeObject(forKey: "hp_min") as? Int
+        iconImageRef = aDecoder.decodeObject(forKey: "icon_image_ref") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        leaderSkillId = aDecoder.decodeObject(forKey: "leader_skill_id") as? Int
+        name = aDecoder.decodeObject(forKey: "name") as? String
+        nameOnly = aDecoder.decodeObject(forKey: "name_only") as? String
+        openDressId = aDecoder.decodeObject(forKey: "open_dress_id") as? Int
+        openStoryId = aDecoder.decodeObject(forKey: "open_story_id") as? Int
+        overallBonus = aDecoder.decodeObject(forKey: "overall_bonus") as? Int
+        overallMax = aDecoder.decodeObject(forKey: "overall_max") as? Int
+        overallMin = aDecoder.decodeObject(forKey: "overall_min") as? Int
+        place = aDecoder.decodeObject(forKey: "place") as? Int
+        pose = aDecoder.decodeObject(forKey: "pose") as? Int
+        rarity = aDecoder.decodeObject(forKey: "rarity") as? CGSSCardRarity
+        seriesId = aDecoder.decodeObject(forKey: "series_id") as? Int
+        skillId = aDecoder.decodeObject(forKey: "skill_id") as? Int
+        soloLive = aDecoder.decodeObject(forKey: "solo_live") as? Int
+        spreadImageRef = aDecoder.decodeObject(forKey: "spread_image_ref") as? String
+        spriteImageRef = aDecoder.decodeObject(forKey: "sprite_image_ref") as? String
+        starLessonType = aDecoder.decodeObject(forKey: "star_lesson_type") as? Int
+        title = aDecoder.decodeObject(forKey: "title") as? String
+        titleFlag = aDecoder.decodeObject(forKey: "title_flag") as? Int
+        valist = aDecoder.decodeObject(forKey: "valist") as? [AnyObject]
+        visualMax = aDecoder.decodeObject(forKey: "visual_max") as? Int
+        visualMin = aDecoder.decodeObject(forKey: "visual_min") as? Int
+        vocalMax = aDecoder.decodeObject(forKey: "vocal_max") as? Int
+        vocalMin = aDecoder.decodeObject(forKey: "vocal_min") as? Int
         
     }
     
@@ -319,140 +319,140 @@ class CGSSCard: CGSSBaseModel {
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if albumId != nil {
-            aCoder.encodeObject(albumId, forKey: "album_id")
+            aCoder.encode(albumId, forKey: "album_id")
         }
         if attribute != nil {
-            aCoder.encodeObject(attribute, forKey: "attribute")
+            aCoder.encode(attribute, forKey: "attribute")
         }
         if bestStat != nil {
-            aCoder.encodeObject(bestStat, forKey: "best_stat")
+            aCoder.encode(bestStat, forKey: "best_stat")
         }
         if bonusDance != nil {
-            aCoder.encodeObject(bonusDance, forKey: "bonus_dance")
+            aCoder.encode(bonusDance, forKey: "bonus_dance")
         }
         if bonusHp != nil {
-            aCoder.encodeObject(bonusHp, forKey: "bonus_hp")
+            aCoder.encode(bonusHp, forKey: "bonus_hp")
         }
         if bonusVisual != nil {
-            aCoder.encodeObject(bonusVisual, forKey: "bonus_visual")
+            aCoder.encode(bonusVisual, forKey: "bonus_visual")
         }
         if bonusVocal != nil {
-            aCoder.encodeObject(bonusVocal, forKey: "bonus_vocal")
+            aCoder.encode(bonusVocal, forKey: "bonus_vocal")
         }
         if cardImageRef != nil {
-            aCoder.encodeObject(cardImageRef, forKey: "card_image_ref")
+            aCoder.encode(cardImageRef, forKey: "card_image_ref")
         }
         if charaId != nil {
-            aCoder.encodeObject(charaId, forKey: "chara_id")
+            aCoder.encode(charaId, forKey: "chara_id")
         }
         if danceMax != nil {
-            aCoder.encodeObject(danceMax, forKey: "dance_max")
+            aCoder.encode(danceMax, forKey: "dance_max")
         }
         if danceMin != nil {
-            aCoder.encodeObject(danceMin, forKey: "dance_min")
+            aCoder.encode(danceMin, forKey: "dance_min")
         }
         if evolutionId != nil {
-            aCoder.encodeObject(evolutionId, forKey: "evolution_id")
+            aCoder.encode(evolutionId, forKey: "evolution_id")
         }
         if evolutionType != nil {
-            aCoder.encodeObject(evolutionType, forKey: "evolution_type")
+            aCoder.encode(evolutionType, forKey: "evolution_type")
         }
         if growType != nil {
-            aCoder.encodeObject(growType, forKey: "grow_type")
+            aCoder.encode(growType, forKey: "grow_type")
         }
         if hasSign != nil {
-            aCoder.encodeObject(hasSign, forKey: "has_sign")
+            aCoder.encode(hasSign, forKey: "has_sign")
         }
         if hasSpread != nil {
-            aCoder.encodeObject(hasSpread, forKey: "has_spread")
+            aCoder.encode(hasSpread, forKey: "has_spread")
         }
         if hpMax != nil {
-            aCoder.encodeObject(hpMax, forKey: "hp_max")
+            aCoder.encode(hpMax, forKey: "hp_max")
         }
         if hpMin != nil {
-            aCoder.encodeObject(hpMin, forKey: "hp_min")
+            aCoder.encode(hpMin, forKey: "hp_min")
         }
         if iconImageRef != nil {
-            aCoder.encodeObject(iconImageRef, forKey: "icon_image_ref")
+            aCoder.encode(iconImageRef, forKey: "icon_image_ref")
         }
         if id != nil {
-            aCoder.encodeObject(id, forKey: "id")
+            aCoder.encode(id, forKey: "id")
         }
         if leaderSkillId != nil {
-            aCoder.encodeObject(leaderSkillId, forKey: "leader_skill_id")
+            aCoder.encode(leaderSkillId, forKey: "leader_skill_id")
         }
         if name != nil {
-            aCoder.encodeObject(name, forKey: "name")
+            aCoder.encode(name, forKey: "name")
         }
         if nameOnly != nil {
-            aCoder.encodeObject(nameOnly, forKey: "name_only")
+            aCoder.encode(nameOnly, forKey: "name_only")
         }
         if openDressId != nil {
-            aCoder.encodeObject(openDressId, forKey: "open_dress_id")
+            aCoder.encode(openDressId, forKey: "open_dress_id")
         }
         if openStoryId != nil {
-            aCoder.encodeObject(openStoryId, forKey: "open_story_id")
+            aCoder.encode(openStoryId, forKey: "open_story_id")
         }
         if overallBonus != nil {
-            aCoder.encodeObject(overallBonus, forKey: "overall_bonus")
+            aCoder.encode(overallBonus, forKey: "overall_bonus")
         }
         if overallMax != nil {
-            aCoder.encodeObject(overallMax, forKey: "overall_max")
+            aCoder.encode(overallMax, forKey: "overall_max")
         }
         if overallMin != nil {
-            aCoder.encodeObject(overallMin, forKey: "overall_min")
+            aCoder.encode(overallMin, forKey: "overall_min")
         }
         if place != nil {
-            aCoder.encodeObject(place, forKey: "place")
+            aCoder.encode(place, forKey: "place")
         }
         if pose != nil {
-            aCoder.encodeObject(pose, forKey: "pose")
+            aCoder.encode(pose, forKey: "pose")
         }
         if rarity != nil {
-            aCoder.encodeObject(rarity, forKey: "rarity")
+            aCoder.encode(rarity, forKey: "rarity")
         }
         if seriesId != nil {
-            aCoder.encodeObject(seriesId, forKey: "series_id")
+            aCoder.encode(seriesId, forKey: "series_id")
         }
         if skillId != nil {
-            aCoder.encodeObject(skillId, forKey: "skill_id")
+            aCoder.encode(skillId, forKey: "skill_id")
         }
         if soloLive != nil {
-            aCoder.encodeObject(soloLive, forKey: "solo_live")
+            aCoder.encode(soloLive, forKey: "solo_live")
         }
         if spreadImageRef != nil {
-            aCoder.encodeObject(spreadImageRef, forKey: "spread_image_ref")
+            aCoder.encode(spreadImageRef, forKey: "spread_image_ref")
         }
         if spriteImageRef != nil {
-            aCoder.encodeObject(spriteImageRef, forKey: "sprite_image_ref")
+            aCoder.encode(spriteImageRef, forKey: "sprite_image_ref")
         }
         if starLessonType != nil {
-            aCoder.encodeObject(starLessonType, forKey: "star_lesson_type")
+            aCoder.encode(starLessonType, forKey: "star_lesson_type")
         }
         if title != nil {
-            aCoder.encodeObject(title, forKey: "title")
+            aCoder.encode(title, forKey: "title")
         }
         if titleFlag != nil {
-            aCoder.encodeObject(titleFlag, forKey: "title_flag")
+            aCoder.encode(titleFlag, forKey: "title_flag")
         }
         if valist != nil {
-            aCoder.encodeObject(valist, forKey: "valist")
+            aCoder.encode(valist, forKey: "valist")
         }
         if visualMax != nil {
-            aCoder.encodeObject(visualMax, forKey: "visual_max")
+            aCoder.encode(visualMax, forKey: "visual_max")
         }
         if visualMin != nil {
-            aCoder.encodeObject(visualMin, forKey: "visual_min")
+            aCoder.encode(visualMin, forKey: "visual_min")
         }
         if vocalMax != nil {
-            aCoder.encodeObject(vocalMax, forKey: "vocal_max")
+            aCoder.encode(vocalMax, forKey: "vocal_max")
         }
         if vocalMin != nil {
-            aCoder.encodeObject(vocalMin, forKey: "vocal_min")
+            aCoder.encode(vocalMin, forKey: "vocal_min")
         }
         
     }

@@ -32,12 +32,12 @@ class BaseTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
@@ -45,12 +45,12 @@ class BaseTableViewController: UITableViewController {
     // 下面这两个方法可以让分割线左侧顶格显示 不再留15像素
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.separatorInset = UIEdgeInsetsZero
-        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.layoutMargins = UIEdgeInsets.zero
     }
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
     }
     
     /*

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol BaseSongTableViewControllerDelegate: class {
-    func selectSong(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int)
+    func selectSong(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int)
 }
 class BaseSongTableViewController: RefreshableTableViewController {
     weak var delegate: BaseSongTableViewControllerDelegate?
@@ -62,7 +62,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         check(0b11100)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
     }
@@ -85,16 +85,16 @@ class BaseSongTableViewController: RefreshableTableViewController {
             }
         }
         self.navigationItem.titleView = searchBar
-        searchBar.returnKeyType = .Done
+        searchBar.returnKeyType = .done
         // searchBar.showsCancelButton = true
         searchBar.placeholder = "歌曲名"
-        searchBar.autocapitalizationType = .None
-        searchBar.autocorrectionType = .No
+        searchBar.autocapitalizationType = .none
+        searchBar.autocorrectionType = .no
         searchBar.delegate = self
         // self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Stop, target: self, action: #selector(cancelAction))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-        self.tableView.registerClass(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        self.tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
         self.tableView.rowHeight = 86
         sorter = CGSSSorter.init(att: "updateId")
         dao.sortListInPlace(&liveList!, sorter: sorter)
@@ -102,7 +102,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
     
     func filterAction() {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewControllerWithIdentifier("SongFilterAndSorterTableViewController") as! SongFilterAndSorterTableViewController
+        let filterVC = sb.instantiateViewController(withIdentifier: "SongFilterAndSorterTableViewController") as! SongFilterAndSorterTableViewController
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.hidesBottomBarWhenPushed = true
@@ -113,7 +113,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = kCATransitionFade
-        navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
         navigationController?.pushViewController(filterVC, animated: false)
     }
     
@@ -124,44 +124,44 @@ class BaseSongTableViewController: RefreshableTableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return liveList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SongCell", forIndexPath: indexPath) as! SongTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
-        cell.initWith(liveList[indexPath.row])
+        cell.initWith(liveList[(indexPath as NSIndexPath).row])
         cell.delegate = self
         // Configure the cell...
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let live = liveList[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let live = liveList[(indexPath as NSIndexPath).row]
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
         if let beatmaps = checkBeatmapData(live) {
             selectLive(live, beatmaps: beatmaps, diff: maxDiff)
         } else {
             // 手动取消选中状态
-            tableView.cellForRowAtIndexPath(indexPath)?.selected = false
+            tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
     
     // 此方法应该被override或者通过代理来响应
-    func selectLive(live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+    func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         searchBar.resignFirstResponder()
         delegate?.selectSong(live, beatmaps: beatmaps, diff: diff)
     }
     
-    func checkBeatmapData(live: CGSSLive) -> [CGSSBeatmap]? {
+    func checkBeatmapData(_ live: CGSSLive) -> [CGSSBeatmap]? {
         var beatmaps = [CGSSBeatmap]()
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
         let dao = CGSSDAO.sharedDAO
@@ -169,9 +169,9 @@ class BaseSongTableViewController: RefreshableTableViewController {
             if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
                 beatmaps.append(beatmap)
             } else {
-                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(CGSSGlobal.diffStringFromInt(i))的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-                self.navigationController?.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(CGSSGlobal.diffStringFromInt(i: i))的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                self.navigationController?.present(alert, animated: true, completion: nil)
                 return nil
             }
         }
@@ -227,7 +227,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
 
 //MARK: SongTableViewCell的协议方法
 extension BaseSongTableViewController: SongTableViewCellDelegate {
-    func diffSelected(live: CGSSLive, diff: Int) {
+    func diffSelected(_ live: CGSSLive, diff: Int) {
         if let beatmaps = checkBeatmapData(live) {
             selectLive(live, beatmaps: beatmaps, diff: diff)
         }
@@ -238,20 +238,20 @@ extension BaseSongTableViewController: SongTableViewCellDelegate {
 extension BaseSongTableViewController: UISearchBarDelegate {
     
     // 文字改变时
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         refresh()
     }
     // 开始编辑时
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
         return true
     }
     // 点击搜索按钮时
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         refresh()
     }
@@ -259,14 +259,14 @@ extension BaseSongTableViewController: UISearchBarDelegate {
 
 //MARK: scrollView的协议方法
 extension BaseSongTableViewController {
-    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 向下滑动时取消输入框的第一响应者
         searchBar.resignFirstResponder()
     }
 }
 
 extension BaseSongTableViewController: SongFilterAndSorterTableViewControllerDelegate {
-    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter) {
+    func doneAndReturn(_ filter: CGSSSongFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.defaultManager.songFilter = filter
         CGSSSorterFilterManager.defaultManager.songSorter = sorter
         CGSSSorterFilterManager.defaultManager.saveForSong()

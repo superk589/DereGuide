@@ -19,7 +19,7 @@ class BeatmapViewController: UIViewController {
         didSet {
             let dao = CGSSDAO.sharedDAO
             let song = dao.findSongById(live.musicId!)
-            titleLabel.text = "\(song!.title!)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(currentDiff)) bpm: \(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
+            titleLabel.text = "\(song!.title!)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(song!.bpm!) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
             bv?.initWith(beatmaps[currentDiff - 1], bpm: (song?.bpm)!, type: live.type!)
             bv?.setNeedsDisplay()
         }
@@ -30,7 +30,7 @@ class BeatmapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bv = BeatmapView()
-        bv.frame = CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height - 64)
+        bv.frame = CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64)
         
         // 自定义descLabel
 //        descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
@@ -39,22 +39,22 @@ class BeatmapViewController: UIViewController {
         
         // 自定义title描述歌曲信息
         titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(0, 0, 0, 44)
+        titleLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
         titleLabel.numberOfLines = 2
-        titleLabel.font = UIFont.systemFontOfSize(12)
-        titleLabel.textAlignment = .Center
+        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         navigationItem.titleView = titleLabel
         
         // 如果没有指定难度 则初始化难度为最高难度
         currentDiff = preSetDiff ?? live.maxDiff
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .Plain, target: self, action: #selector(self.selectDiff))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .plain, target: self, action: #selector(self.selectDiff))
         
         self.view.addSubview(bv)
         // self.view.addSubview(descLabel)
         self.automaticallyAdjustsScrollViewInsets = false
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
 //
 //        for v in beatmaps[3].notes! {
 //            let note = v as! CGSSBeatmap.Note
@@ -64,15 +64,15 @@ class BeatmapViewController: UIViewController {
     }
     
     func selectDiff() {
-        let alert = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .ActionSheet)
+        let alert = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         for i in 1...live.maxDiff {
-            alert.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i), style: .Default, handler: { (a) in
+            alert.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i: i), style: .default, handler: { (a) in
                 self.currentDiff = i
                 }))
         }
-        alert.addAction(UIAlertAction.init(title: "取消", style: .Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,7 +80,7 @@ class BeatmapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func initWithLive(live: CGSSLive, beatmaps: [CGSSBeatmap]) -> Bool {
+    func initWithLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap]) -> Bool {
         // 打开谱面时 隐藏tabbar
         self.hidesBottomBarWhenPushed = true
         self.beatmaps = beatmaps

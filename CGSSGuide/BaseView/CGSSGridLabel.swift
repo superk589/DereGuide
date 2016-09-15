@@ -22,7 +22,7 @@ class CGSSGridLabel: CGSSGridView {
         }
     }
     
-    init(frame: CGRect, rows: Int, columns: Int, textAligment: NSTextAlignment = .Center) {
+    init(frame: CGRect, rows: Int, columns: Int, textAligment: NSTextAlignment = .center) {
         
         var views = [UILabel]()
         for _ in 0...rows * columns - 1 {
@@ -44,7 +44,7 @@ class CGSSGridLabel: CGSSGridView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setGridContent(content: [[String]]) {
+    func setGridContent(_ content: [[String]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
                 self[j, i].text = content[j][i]
@@ -52,7 +52,7 @@ class CGSSGridLabel: CGSSGridView {
         }
     }
     
-    func setGridColor(content: [[UIColor]]) {
+    func setGridColor(_ content: [[UIColor]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
                 self[j, i].textColor = content[j][i]
@@ -60,7 +60,7 @@ class CGSSGridLabel: CGSSGridView {
         }
     }
     
-    func setGridFont(content: [[UIFont]]) {
+    func setGridFont(_ content: [[UIFont]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
                 self[j, i].font = content[j][i]

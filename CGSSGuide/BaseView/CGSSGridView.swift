@@ -25,7 +25,7 @@ class CGSSGridView: UIView {
         self.rows = rows
         self.columns = columns
         self.grid = views
-        let borderWidth = 1 / UIScreen.mainScreen().scale
+        let borderWidth = 1 / UIScreen.main.scale
         let gridWidth = frame.width / CGFloat(columns)
         let gridHeight = frame.height / CGFloat(rows)
         
@@ -33,9 +33,9 @@ class CGSSGridView: UIView {
         
         for i in 0...rows * columns - 1 {
             let view = views[i]
-            view.frame = CGRectMake(CGFloat(i % columns) * gridWidth, CGFloat(i / columns) * gridHeight, gridWidth + borderWidth, gridHeight + borderWidth)
+            view.frame = CGRect(x: CGFloat(i % columns) * gridWidth, y: CGFloat(i / columns) * gridHeight, width: gridWidth + borderWidth, height: gridHeight + borderWidth)
             view.layer.borderWidth = borderWidth
-            view.layer.borderColor = UIColor.blackColor().CGColor
+            view.layer.borderColor = UIColor.black.cgColor
             self.addSubview(view)
         }
     }

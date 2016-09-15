@@ -10,25 +10,25 @@ import Foundation
 import SwiftyJSON
 
 enum SongType {
-    case All
-    case Cool
-    case Passion
-    case Cute
+    case all
+    case cool
+    case passion
+    case cute
     init? (type: CGSSGrooveType) {
         switch type {
         case .Cute:
-            self = .Cute
+            self = .cute
         case .Cool:
-            self = .Cool
+            self = .cool
         case .Passion:
-            self = .Passion
+            self = .passion
         }
     }
 }
 
 
 
-public class CGSSSong: CGSSBaseModel {
+open class CGSSSong: CGSSBaseModel {
     var id:Int?
     var bpm:Int?
     var title:String?
@@ -39,22 +39,22 @@ public class CGSSSong: CGSSBaseModel {
         return CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(id!).png"
     }
     
-    override public func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(id, forKey: "id")
-        aCoder.encodeObject(bpm, forKey: "bpm")
-        aCoder.encodeObject(title, forKey: "title")
-        aCoder.encodeObject(composer, forKey: "composer")
-        aCoder.encodeObject(lyricist, forKey: "lyricist")
+    override open func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(bpm, forKey: "bpm")
+        aCoder.encode(title, forKey: "title")
+        aCoder.encode(composer, forKey: "composer")
+        aCoder.encode(lyricist, forKey: "lyricist")
         
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.id = aDecoder.decodeObjectForKey("id") as? Int
-        self.bpm = aDecoder.decodeObjectForKey("bpm") as? Int
-        self.title = aDecoder.decodeObjectForKey("title") as? String
-        self.composer = aDecoder.decodeObjectForKey("composer") as? String
-        self.lyricist = aDecoder.decodeObjectForKey("lyricist") as? String
+        self.id = aDecoder.decodeObject(forKey: "id") as? Int
+        self.bpm = aDecoder.decodeObject(forKey: "bpm") as? Int
+        self.title = aDecoder.decodeObject(forKey: "title") as? String
+        self.composer = aDecoder.decodeObject(forKey: "composer") as? String
+        self.lyricist = aDecoder.decodeObject(forKey: "lyricist") as? String
     }
     init?(id:Int, bpm:Int, title:String, composer:String, lyricist:String) {
         self.id = id

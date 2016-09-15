@@ -9,9 +9,9 @@
 import UIKit
 
 enum CGSSTeamMemberType {
-	case Leader
-	case Sub
-	case Friend
+	case leader
+	case sub
+	case friend
 }
 
 class CGSSTeamMember: NSObject, NSCoding {
@@ -26,11 +26,11 @@ class CGSSTeamMember: NSObject, NSCoding {
 		self.skillLevel = skillLevel
 	}
 	required init?(coder aDecoder: NSCoder) {
-		self.id = aDecoder.decodeObjectForKey("id") as? Int
-		self.skillLevel = aDecoder.decodeObjectForKey("skillLevel") as? Int
+		self.id = aDecoder.decodeObject(forKey: "id") as? Int
+		self.skillLevel = aDecoder.decodeObject(forKey: "skillLevel") as? Int
 	}
-	func encodeWithCoder(aCoder: NSCoder) {
-		aCoder.encodeObject(id, forKey: "id")
-		aCoder.encodeObject(skillLevel, forKey: "skillLevel")
+	func encode(with aCoder: NSCoder) {
+		aCoder.encode(id, forKey: "id")
+		aCoder.encode(skillLevel, forKey: "skillLevel")
 	}
 }

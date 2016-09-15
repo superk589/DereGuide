@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class CGSSCardIcon: CGSSBaseModel {
-    public var card_id:Int?
-    public var file_name:String?
-    public var url:String?
-    public var xoffset:Int?
-    public var yoffset:Int?
-    public var row:Int? {
+open class CGSSCardIcon: CGSSBaseModel {
+    open var card_id:Int?
+    open var file_name:String?
+    open var url:String?
+    open var xoffset:Int?
+    open var yoffset:Int?
+    open var row:Int? {
         if let value = yoffset {
             return value / 48
         }
@@ -22,7 +22,7 @@ public class CGSSCardIcon: CGSSBaseModel {
             return nil
         }
     }
-    public var col:Int? {
+    open var col:Int? {
         if let value = xoffset {
             return value / 48
         }
@@ -38,21 +38,21 @@ public class CGSSCardIcon: CGSSBaseModel {
         self.xoffset = xoffset
         self.yoffset = yoffset
     }
-    public override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(xoffset, forKey: "xoffset")
-        aCoder.encodeObject(yoffset, forKey: "yoffset")
-        aCoder.encodeObject(card_id, forKey: "card_id")
-        aCoder.encodeObject(file_name, forKey: "file_name")
-        aCoder.encodeObject(url, forKey: "url")
+    open override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(xoffset, forKey: "xoffset")
+        aCoder.encode(yoffset, forKey: "yoffset")
+        aCoder.encode(card_id, forKey: "card_id")
+        aCoder.encode(file_name, forKey: "file_name")
+        aCoder.encode(url, forKey: "url")
     }
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.xoffset = aDecoder.decodeObjectForKey("xoffset") as? Int
-        self.yoffset = aDecoder.decodeObjectForKey("yoffset") as? Int
-        self.file_name = aDecoder.decodeObjectForKey("file_name") as? String
-        self.card_id = aDecoder.decodeObjectForKey("card_id") as? Int
-        self.url = aDecoder.decodeObjectForKey("url") as? String
+        self.xoffset = aDecoder.decodeObject(forKey: "xoffset") as? Int
+        self.yoffset = aDecoder.decodeObject(forKey: "yoffset") as? Int
+        self.file_name = aDecoder.decodeObject(forKey: "file_name") as? String
+        self.card_id = aDecoder.decodeObject(forKey: "card_id") as? Int
+        self.url = aDecoder.decodeObject(forKey: "url") as? String
         
     }
 }

@@ -14,19 +14,19 @@ class CharDetailViewController: UIViewController {
     var sv: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
-        sv = UIScrollView.init(frame: CGRectMake(0, 64, CGSSGlobal.width, CGSSGlobal.height -
+        view.backgroundColor = UIColor.white
+        sv = UIScrollView.init(frame: CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height -
                 64))
         automaticallyAdjustsScrollViewInsets = false
-        detailView = CharDetailView.init(frame: CGRectMake(0, 0, CGSSGlobal.width, 0))
+        detailView = CharDetailView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
         detailView.setup(char)
         detailView.delegate = self
         sv.contentSize = detailView.frame.size
         sv.addSubview(detailView)
         view.addSubview(sv)
         
-        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.containsChar(char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
-        rightItem.tintColor = UIColor.redColor()
+        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.containsChar(char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
+        rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
 
         
@@ -66,7 +66,7 @@ class CharDetailViewController: UIViewController {
 }
 
 extension CharDetailViewController: CharDetailViewDelegate {
-    func cardIconClick(icon: CGSSCardIconView) {
+    func cardIconClick(_ icon: CGSSCardIconView) {
         let cardDetailVC = CardDetailViewController()
         let dao = CGSSDAO.sharedDAO
         cardDetailVC.card = dao.findCardById(icon.cardId!)

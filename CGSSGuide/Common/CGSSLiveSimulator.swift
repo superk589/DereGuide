@@ -7,6 +7,35 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 enum ScoreUpType: String {
     case Combo = "COMBO加成"
@@ -43,8 +72,8 @@ class CGSSLiveSimulator: NSObject {
         self.grooveType = grooveType
     }
     
-    func simulateOnce(procMax: Bool, callBack: ((Int) -> Void)?) {
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+    func simulateOnce(_ procMax: Bool, callBack: ((Int) -> Void)?) {
+        DispatchQueue.global(qos: .userInitiated).async {
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
             let diffStars = self.live.getStarsForDiff(self.diff)
             // 此时不对小数部分进行取舍 保留浮点部分
@@ -72,20 +101,20 @@ class CGSSLiveSimulator: NSObject {
             /*if procMax == true {
              (log as NSArray).writeToFile("/Users/zzk/Desktop/aaa.plist", atomically: true)
              }*/
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 callBack?(Int(sum))
             })
         }
     }
     
-    func simulate(times: Int, callBack: ((scores: [Int], avg: Int) -> Void)?) {
+    func simulate(_ times: Int, callBack: ((_ scores: [Int], _ avg: Int) -> Void)?) {
         var arr = [Int]()
         var sum = 0
-        func completeInside(score: Int) {
+        func completeInside(_ score: Int) {
             arr.append(score)
             sum += score
             if arr.count == times {
-                callBack?(scores: arr, avg: sum / times)
+                callBack?(arr, sum / times)
             }
         }
         for _ in 0..<times {
@@ -94,7 +123,7 @@ class CGSSLiveSimulator: NSObject {
             }
         }
     }
-    func getSkillFactorFor(note: CGSSBeatmap.Note, schedules: [ScoreUpType: [ScoreUpSchedule]]) -> Float {
+    func getSkillFactorFor(_ note: CGSSBeatmapNote, schedules: [ScoreUpType: [ScoreUpSchedule]]) -> Float {
         var skillFactor: Float = 1
         for sub in schedules.values {
             var maxFactor: Float = 1
@@ -110,7 +139,7 @@ class CGSSLiveSimulator: NSObject {
         return skillFactor
     }
     
-    private func getSimulateSchedules(procMax: Bool) -> [ScoreUpType: [ScoreUpSchedule]] {
+    fileprivate func getSimulateSchedules(_ procMax: Bool) -> [ScoreUpType: [ScoreUpSchedule]] {
         var scheduleDic = [ScoreUpType: [ScoreUpSchedule]]()
         scheduleDic[.Bonus] = [ScoreUpSchedule]()
         scheduleDic[.Combo] = [ScoreUpSchedule]()
@@ -130,7 +159,7 @@ class CGSSLiveSimulator: NSObject {
                             upValue = 30
                         }
                     } else {
-                        if member!.cardRef!.cardFilterType == live.songType || live.songType == .Office {
+                        if member!.cardRef!.cardFilterType == live.songType || live.songType == .office {
                             upValue = 30
                         }
                     }

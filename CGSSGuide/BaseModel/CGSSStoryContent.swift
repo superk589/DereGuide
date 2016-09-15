@@ -37,8 +37,8 @@ class CGSSStoryContent: CGSSBaseModel {
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        args = aDecoder.decodeObjectForKey("args") as? [String]
-        name = aDecoder.decodeObjectForKey("name") as? String
+        args = aDecoder.decodeObject(forKey: "args") as? [String]
+        name = aDecoder.decodeObject(forKey: "name") as? String
         
     }
     
@@ -46,14 +46,14 @@ class CGSSStoryContent: CGSSBaseModel {
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-    override func encodeWithCoder(aCoder: NSCoder)
+    override func encode(with aCoder: NSCoder)
     {
-        super.encodeWithCoder(aCoder)
+        super.encode(with: aCoder)
         if args != nil {
-            aCoder.encodeObject(args, forKey: "args")
+            aCoder.encode(args, forKey: "args")
         }
         if name != nil {
-            aCoder.encodeObject(name, forKey: "name")
+            aCoder.encode(name, forKey: "name")
         }
         
     }

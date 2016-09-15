@@ -10,19 +10,19 @@ import UIKit
 
 typealias CGSSCharFilterType = CGSSCardFilterType
 enum CGSSCharAgeFilterType: UInt {
-    case Ten = 1
-    case Twenty = 2
-    case Thirty = 4
-    case ThirtyPlus = 8
-    case Unknown = 16
+    case ten = 1
+    case twenty = 2
+    case thirty = 4
+    case thirtyPlus = 8
+    case unknown = 16
     init(age: Int) {
         // 5009安部菜菜
-        if [5009].contains(age) { self = .Unknown }
-        else if age < 10 { self = .Ten }
-        else if age < 20 { self = .Twenty }
-        else if age < 30 { self = .Thirty }
-        else if age >= 30 { self = .ThirtyPlus }
-        else { self = .Unknown }
+        if [5009].contains(age) { self = .unknown }
+        else if age < 10 { self = .ten }
+        else if age < 20 { self = .twenty }
+        else if age < 30 { self = .thirty }
+        else if age >= 30 { self = .thirtyPlus }
+        else { self = .unknown }
     }
     init? (raw: Int) {
         self.init(rawValue: UInt(raw))
@@ -30,34 +30,34 @@ enum CGSSCharAgeFilterType: UInt {
 }
 
 enum CGSSCharBloodFilterType: UInt {
-    case A = 1
-    case B = 2
-    case AB = 4
-    case O = 8
-    case Other = 16
+    case a = 1
+    case b = 2
+    case ab = 4
+    case o = 8
+    case other = 16
     init? (raw: Int) {
         self.init(rawValue: UInt(raw))
     }
     init (bloodType: Int) {
         switch bloodType {
-        case 2001: self = .A
-        case 2002: self = .B
-        case 2003: self = .AB
-        case 2004: self = .O
-        default: self = .Other
+        case 2001: self = .a
+        case 2002: self = .b
+        case 2003: self = .ab
+        case 2004: self = .o
+        default: self = .other
         }
     }
 }
 
 enum CGSSCharCVTypeFilter: UInt {
-    case YES = 1
-    case NO = 2
+    case yes = 1
+    case no = 2
     init? (raw: Int) {
         self.init(rawValue: UInt(raw))
     }
 }
 
-public class CGSSCharFilter {
+open class CGSSCharFilter {
     
     var charFilterTypes = [CGSSCharFilterType]()
     var charAgeFilterTypes = [CGSSCharAgeFilterType]()
@@ -91,72 +91,72 @@ public class CGSSCharFilter {
             }
         }
         for i: UInt in 0...1 {
-            let mask = (favoriteMask ?? 0b11) >> i
+            let mask = favoriteMask >> i
             if mask % 2 == 1 {
                 favoriteFilterTypes.append(CGSSFavoriteFilterType.init(rawValue: 1 << i)!)
             }
         }
     }
     
-    func addCharFilterType(filterType: CGSSCharFilterType) {
+    func addCharFilterType(_ filterType: CGSSCharFilterType) {
         self.charFilterTypes.append(filterType)
     }
-    func addCharAgeFilterType(filterType: CGSSCharAgeFilterType) {
+    func addCharAgeFilterType(_ filterType: CGSSCharAgeFilterType) {
         charAgeFilterTypes.append(filterType)
     }
-    func addCharBloodFilterType(filterType: CGSSCharBloodFilterType) {
+    func addCharBloodFilterType(_ filterType: CGSSCharBloodFilterType) {
         charBloodTypeFilterTypes.append(filterType)
     }
-    func addCharCVFilterType(filterType: CGSSCharCVTypeFilter) {
+    func addCharCVFilterType(_ filterType: CGSSCharCVTypeFilter) {
         charCVFilterTypes.append(filterType)
     }
-    func addFavoriteFilterType(filterType: CGSSFavoriteFilterType) {
+    func addFavoriteFilterType(_ filterType: CGSSFavoriteFilterType) {
         self.favoriteFilterTypes.append(filterType)
     }
     
-    func removeCharFilterType(filterType: CGSSCharFilterType) {
-        if let index = self.charFilterTypes.indexOf(filterType) {
-            self.charFilterTypes.removeAtIndex(index)
+    func removeCharFilterType(_ filterType: CGSSCharFilterType) {
+        if let index = self.charFilterTypes.index(of: filterType) {
+            self.charFilterTypes.remove(at: index)
         }
     }
-    func removeCharAgeFilterType(filterType: CGSSCharAgeFilterType) {
-        if let index = self.charAgeFilterTypes.indexOf(filterType) {
-            self.charAgeFilterTypes.removeAtIndex(index)
+    func removeCharAgeFilterType(_ filterType: CGSSCharAgeFilterType) {
+        if let index = self.charAgeFilterTypes.index(of: filterType) {
+            self.charAgeFilterTypes.remove(at: index)
         }
     }
-    func removeCharBloodFilterType(filterType: CGSSCharBloodFilterType) {
-        if let index = self.charBloodTypeFilterTypes.indexOf(filterType) {
-            self.charBloodTypeFilterTypes.removeAtIndex(index)
+    func removeCharBloodFilterType(_ filterType: CGSSCharBloodFilterType) {
+        if let index = self.charBloodTypeFilterTypes.index(of: filterType) {
+            self.charBloodTypeFilterTypes.remove(at: index)
         }
     }
-    func removeCharCVFilterType(filterType: CGSSCharCVTypeFilter) {
-        if let index = self.charCVFilterTypes.indexOf(filterType) {
-            self.charCVFilterTypes.removeAtIndex(index)
+    func removeCharCVFilterType(_ filterType: CGSSCharCVTypeFilter) {
+        if let index = self.charCVFilterTypes.index(of: filterType) {
+            self.charCVFilterTypes.remove(at: index)
         }
     }
-    func removeFavoriteFilterType(filterType: CGSSFavoriteFilterType) {
-        if let index = self.favoriteFilterTypes.indexOf(filterType) {
-            self.favoriteFilterTypes.removeAtIndex(index)
+    func removeFavoriteFilterType(_ filterType: CGSSFavoriteFilterType) {
+        if let index = self.favoriteFilterTypes.index(of: filterType) {
+            self.favoriteFilterTypes.remove(at: index)
         }
     }
     
-    func hasCharFilterType(filterType: CGSSCharFilterType) -> Bool {
+    func hasCharFilterType(_ filterType: CGSSCharFilterType) -> Bool {
         return self.charFilterTypes.contains(filterType)
     }
-    func hasCharAgeFilterType(filterType: CGSSCharAgeFilterType) -> Bool {
+    func hasCharAgeFilterType(_ filterType: CGSSCharAgeFilterType) -> Bool {
         return self.charAgeFilterTypes.contains(filterType)
     }
-    func hasCharBloodFilterType(filterType: CGSSCharBloodFilterType) -> Bool {
+    func hasCharBloodFilterType(_ filterType: CGSSCharBloodFilterType) -> Bool {
         return self.charBloodTypeFilterTypes.contains(filterType)
     }
-    func hasCharCVFilterType(filterType: CGSSCharCVTypeFilter) -> Bool {
+    func hasCharCVFilterType(_ filterType: CGSSCharCVTypeFilter) -> Bool {
         return self.charCVFilterTypes.contains(filterType)
     }
-    func hasFavoriteFilterType(favoriteFilterType: CGSSFavoriteFilterType) -> Bool {
+    func hasFavoriteFilterType(_ favoriteFilterType: CGSSFavoriteFilterType) -> Bool {
         return self.favoriteFilterTypes.contains(favoriteFilterType)
     }
     
-    func filterCharList(charList: [CGSSChar]) -> [CGSSChar] {
+    func filterCharList(_ charList: [CGSSChar]) -> [CGSSChar] {
         let result = charList.filter { (v: CGSSChar) -> Bool in
             if charFilterTypes.contains(v.charFilterType) && charAgeFilterTypes.contains(v.charAgeFilterType) && charBloodTypeFilterTypes.contains(v.charBloodFilterType) && charCVFilterTypes.contains(v.charCVFilterType) && favoriteFilterTypes.contains(v.favoriteFilterType) {
                 return true
@@ -166,7 +166,7 @@ public class CGSSCharFilter {
         return result
     }
     
-    func writeToFile(path: String) {
+    func writeToFile(_ path: String) {
         var typeMask: UInt = 0
         for type in charFilterTypes {
             typeMask += type.rawValue
@@ -189,12 +189,12 @@ public class CGSSCharFilter {
         }
         
         let dict = ["typeMask": typeMask, "ageMask": ageMask, "bloodMask": bloodMask, "cvMask": cvMask, "favoriteMask": favoriteMask] as NSDictionary
-        dict.writeToFile(path, atomically: true)
+        dict.write(toFile: path, atomically: true)
     }
     
-    static func readFromFile(path: String) -> CGSSCharFilter? {
+    static func readFromFile(_ path: String) -> CGSSCharFilter? {
         if let dict = NSDictionary.init(contentsOfFile: path) {
-            if let typeMask = dict.objectForKey("typeMask") as? UInt, ageMask = dict.objectForKey("ageMask") as? UInt, bloodMask = dict.objectForKey("bloodMask") as? UInt, cvMask = dict.objectForKey("cvMask") as? UInt, favoriteMask = dict.objectForKey("favoriteMask") as? UInt {
+            if let typeMask = dict.object(forKey: "typeMask") as? UInt, let ageMask = dict.object(forKey: "ageMask") as? UInt, let bloodMask = dict.object(forKey: "bloodMask") as? UInt, let cvMask = dict.object(forKey: "cvMask") as? UInt, let favoriteMask = dict.object(forKey: "favoriteMask") as? UInt {
                 return CGSSCharFilter.init(typeMask: typeMask, ageMask: ageMask, bloodMask: bloodMask, cvMask: cvMask, favoriteMask: favoriteMask)
             }
         }

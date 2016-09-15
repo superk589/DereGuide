@@ -23,17 +23,31 @@ class Master: FMDatabase {
 //        }
 //        return nil
 //    }
+    
+    func selectTextBy(category:Int, index:Int) -> String {
+        let selectSql = "select * from text_data where category = '\(category)' and \"index\" = '\(index)'"
+        var result = ""
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            set.next()
+            result = set.string(forColumn: "text")
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        
+        return result
+    }
 }
 
 class Manifest: FMDatabase {
     
-    func selectByName(string: String) -> [String] {
+    func selectByName(_ string: String) -> [String] {
         let selectSql = "select * from manifests where name = \"\(string)\""
         var hashTable = [String]()
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
-                hashTable.append(set.stringForColumn("hash"))
+                hashTable.append(set.string(forColumn: "hash"))
             }
         } catch {
             print(self.lastErrorMessage())
@@ -47,7 +61,7 @@ class CGSSGameResource: NSObject {
     
     static let sharedResource = CGSSGameResource()
     
-    static let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).first! + "/GameResource"
+    static let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first! + "/GameResource"
     
     static let masterPath = path + "/master.db"
     
@@ -55,24 +69,24 @@ class CGSSGameResource: NSObject {
     
     lazy var master: Master = {
         let db = Master.init(path: CGSSGameResource.masterPath)
-        return db
+        return db!
     }()
     
     lazy var manifest: Manifest = {
         let db = Manifest.init(path: CGSSGameResource.manifestPath)
-        return db
+        return db!
     }()
     
-    private override init() {
+    fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
         // self.loadAllDataFromFile()
     }
     
     func prepareFileDirectory() {
-        if !NSFileManager.defaultManager().fileExistsAtPath(CGSSGameResource.path) {
+        if !FileManager.default.fileExists(atPath: CGSSGameResource.path) {
             do {
-                try NSFileManager.defaultManager().createDirectoryAtPath(CGSSGameResource.path, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath: CGSSGameResource.path, withIntermediateDirectories: true, attributes: nil)
                 
             } catch {
                 // print(error)
@@ -80,15 +94,17 @@ class CGSSGameResource: NSObject {
         }
     }
     
-    func saveManifest(data: NSData) {
-        data.writeToFile(CGSSGameResource.manifestPath, atomically: true)
+    func saveManifest(_ data: Data) {
+        prepareFileDirectory()
+        try? data.write(to: URL(fileURLWithPath: CGSSGameResource.manifestPath), options: [.atomic])
     }
-    func saveMaster(data: NSData) {
-        data.writeToFile(CGSSGameResource.masterPath, atomically: true)
+    func saveMaster(_ data: Data) {
+        prepareFileDirectory()
+        try? data.write(to: URL(fileURLWithPath: CGSSGameResource.masterPath), options: [.atomic])
     }
     
     func checkMaster() -> Bool {
-        return NSFileManager.defaultManager().fileExistsAtPath(CGSSGameResource.masterPath)
+        return FileManager.default.fileExists(atPath: CGSSGameResource.masterPath)
     }
     
     func getMasterHash() -> String? {
@@ -99,5 +115,15 @@ class CGSSGameResource: NSObject {
             manifest.close()
         }
         return manifest.selectByName("master.mdb").first
+    }
+    
+    func getTextData(category:Int, index:Int) -> String {
+        guard master.open() else {
+            return ""
+        }
+        defer {
+            master.close()
+        }
+        return master.selectTextBy(category: category, index: index)
     }
 }

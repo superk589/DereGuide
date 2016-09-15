@@ -8,23 +8,23 @@
 
 import UIKit
 
-extension NSUserDefaults {
+extension UserDefaults {
     
-    var birthdayTimeZone: NSTimeZone {
-        let timeZoneString = self.valueForKey("BirthdayTimeZone") as? String ?? "Asia/Tokyo"
+    var birthdayTimeZone: TimeZone {
+        let timeZoneString = self.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
         switch timeZoneString {
         case "System":
-            return NSTimeZone.systemTimeZone()
+            return TimeZone.current
         default:
-            return NSTimeZone.init(name: timeZoneString)!
+            return TimeZone.init(identifier: timeZoneString)!
         }
         
     }
     
     var shouldPostBirthdayNotice: Bool {
-        return NSUserDefaults.standardUserDefaults().valueForKey("BirthdayNotice") as? Bool ?? false
+        return UserDefaults.standard.value(forKey: "BirthdayNotice") as? Bool ?? false
     }
     var shouldCacheFullImage: Bool {
-        return NSUserDefaults.standardUserDefaults().valueForKey("FullImageCache") as? Bool ?? true
+        return UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
     }
 }

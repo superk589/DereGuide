@@ -29,13 +29,13 @@ class TeamTableViewCell: UITableViewCell {
         icons = [CGSSCardIconView]()
         skillLvLabels = [UILabel]()
         for index in 0...5 {
-            let icon = CGSSCardIconView.init(frame: CGRectMake(leftSpace + (btnW + space) * CGFloat(index), 10, btnW, btnW))
-            icon.userInteractionEnabled = false
-            let label = UILabel.init(frame: CGRectMake(icon.frame.origin.x, icon.frame.origin.y + icon.frame.size.height, icon.frame.size.width, 21))
+            let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + space) * CGFloat(index), y: 10, width: btnW, height: btnW))
+            icon.isUserInteractionEnabled = false
+            let label = UILabel.init(frame: CGRect(x: icon.frame.origin.x, y: icon.frame.origin.y + icon.frame.size.height, width: icon.frame.size.width, height: 21))
             label.adjustsFontSizeToFitWidth = true
-            label.textAlignment = .Center
-            label.font = UIFont.systemFontOfSize(12)
-            label.textColor = UIColor.darkGrayColor()
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.textColor = UIColor.darkGray
             contentView.addSubview(label)
             skillLvLabels.append(label)
             
@@ -50,34 +50,34 @@ class TeamTableViewCell: UITableViewCell {
         let originX: CGFloat = 20
         
         lifeLabel = UILabel()
-        lifeLabel.frame = CGRectMake(originX, originY, width, height)
+        lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
         lifeLabel.textColor = CGSSGlobal.lifeColor
-        lifeLabel.textAlignment = .Right
+        lifeLabel.textAlignment = .right
         
         vocalLabel = UILabel()
-        vocalLabel.frame = CGRectMake(originX + width, originY, width, height)
+        vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
         vocalLabel.textColor = CGSSGlobal.vocalColor
-        vocalLabel.textAlignment = .Right
+        vocalLabel.textAlignment = .right
         
         danceLabel = UILabel()
-        danceLabel.frame = CGRectMake(originX + 2 * width, originY, width, height)
+        danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
         danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
         danceLabel.textColor = CGSSGlobal.danceColor
-        danceLabel.textAlignment = .Right
+        danceLabel.textAlignment = .right
         
         visualLabel = UILabel()
-        visualLabel.frame = CGRectMake(originX + 3 * width, originY, width, height)
+        visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
         visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
         visualLabel.textColor = CGSSGlobal.visualColor
-        visualLabel.textAlignment = .Right
+        visualLabel.textAlignment = .right
         
         totalLabel = UILabel()
-        totalLabel.frame = CGRectMake(originX + 4 * width, originY, width, height)
+        totalLabel.frame = CGRect(x: originX + 4 * width, y: originY, width: width, height: height)
         totalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        totalLabel.textColor = UIColor.darkGrayColor()
-        totalLabel.textAlignment = .Right
+        totalLabel.textColor = UIColor.darkGray
+        totalLabel.textAlignment = .right
         
         contentView.addSubview(vocalLabel)
         contentView.addSubview(lifeLabel)
@@ -85,16 +85,16 @@ class TeamTableViewCell: UITableViewCell {
         contentView.addSubview(visualLabel)
         contentView.addSubview(totalLabel)
         
-        let asView = UIImageView.init(frame: CGRectMake(0, 0, 10, 20))
-        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)
-        asView.tintColor = UIColor.lightGrayColor()
+        let asView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate)
+        asView.tintColor = UIColor.lightGray
         
         self.accessoryView = asView
         
         // Initialization code
     }
     
-    func initWith(team: CGSSTeam) {
+    func initWith(_ team: CGSSTeam) {
         for i in 0...5 {
             let tm = team[i]
             if let card = tm?.cardRef {
@@ -116,7 +116,7 @@ class TeamTableViewCell: UITableViewCell {
         totalLabel.text = String(team.rawPresentValue.total)
         lifeLabel.text = String(team.rawHP)
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

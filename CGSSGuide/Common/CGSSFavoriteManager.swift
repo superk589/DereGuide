@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class CGSSFavoriteManager: NSObject {
-    public static let defaultManager = CGSSFavoriteManager()
+open class CGSSFavoriteManager: NSObject {
+    open static let defaultManager = CGSSFavoriteManager()
     static let favoriteCardsFilePath = NSHomeDirectory() + "/Documents/favoriteCards.plist"
     static let favoriteCharsFilePath = NSHomeDirectory() + "/Documents/favoriteChars.plist"
     var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
@@ -23,38 +23,38 @@ public class CGSSFavoriteManager: NSObject {
         }
     }
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
     func writeFavoriteCardsToFile() {
-        (favoriteCards as NSArray).writeToFile(CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
+        (favoriteCards as NSArray).write(toFile: CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }
     func writeFavoriteCharsToFile() {
-        (favoriteChars as NSArray).writeToFile(CGSSFavoriteManager.favoriteCharsFilePath, atomically: true)
+        (favoriteChars as NSArray).write(toFile: CGSSFavoriteManager.favoriteCharsFilePath, atomically: true)
     }
     
-    func addFavoriteCard(card: CGSSCard) {
+    func addFavoriteCard(_ card: CGSSCard) {
         self.favoriteCards.append(card.id!)
     }
-    func removeFavoriteCard(card: CGSSCard) {
-        if let index = favoriteCards.indexOf(card.id!) {
-            self.favoriteCards.removeAtIndex(index)
+    func removeFavoriteCard(_ card: CGSSCard) {
+        if let index = favoriteCards.index(of: card.id!) {
+            self.favoriteCards.remove(at: index)
         }
     }
-    public func containsCard(cardId: Int) -> Bool {
+    open func containsCard(_ cardId: Int) -> Bool {
         return favoriteCards.contains(cardId)
     }
     
-    func addFavoriteChar(char: CGSSChar) {
+    func addFavoriteChar(_ char: CGSSChar) {
         self.favoriteChars.append(char.charaId)
     }
-    func removeFavoriteChar(char: CGSSChar) {
-        if let index = favoriteChars.indexOf(char.charaId!) {
-            self.favoriteChars.removeAtIndex(index)
+    func removeFavoriteChar(_ char: CGSSChar) {
+        if let index = favoriteChars.index(of: char.charaId!) {
+            self.favoriteChars.remove(at: index)
         }
     }
-    public func containsChar(charId: Int) -> Bool {
+    open func containsChar(_ charId: Int) -> Bool {
         return favoriteChars.contains(charId)
     }
 }

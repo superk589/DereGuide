@@ -31,28 +31,28 @@ class CardTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    private func prepare() {
+    fileprivate func prepare() {
         
-        cardIconView = CGSSCardIconView(frame: CGRectMake(10, 10, 48, 48))
+        cardIconView = CGSSCardIconView(frame: CGRect(x: 10, y: 10, width: 48, height: 48))
         
         rarityLabel = UILabel()
-        rarityLabel.frame = CGRectMake(68, 10, 30, 10)
-        rarityLabel.textAlignment = .Left
-        rarityLabel.font = UIFont.systemFontOfSize(10)
+        rarityLabel.frame = CGRect(x: 68, y: 10, width: 30, height: 10)
+        rarityLabel.textAlignment = .left
+        rarityLabel.font = UIFont.systemFont(ofSize: 10)
         
         skillLabel = UILabel()
-        skillLabel.frame = CGRectMake(CGSSGlobal.width - 150, 10, 140, 10)
-        skillLabel.font = UIFont.systemFontOfSize(10)
-        skillLabel.textAlignment = .Right
+        skillLabel.frame = CGRect(x: CGSSGlobal.width - 150, y: 10, width: 140, height: 10)
+        skillLabel.font = UIFont.systemFont(ofSize: 10)
+        skillLabel.textAlignment = .right
         
         cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRectMake(68, 25, CGSSGlobal.width - 78, 16)
-        cardNameLabel.font = UIFont.systemFontOfSize(16)
+        cardNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
+        cardNameLabel.font = UIFont.systemFont(ofSize: 16)
         cardNameLabel.adjustsFontSizeToFitWidth = true
         
         titleLabel = UILabel()
-        titleLabel.frame = CGRectMake(98, 10, CGSSGlobal.width - 150, 10)
-        titleLabel.font = UIFont.systemFontOfSize(10)
+        titleLabel.frame = CGRect(x: 98, y: 10, width: CGSSGlobal.width - 150, height: 10)
+        titleLabel.font = UIFont.systemFont(ofSize: 10)
         
         let width = (CGSSGlobal.width - 78) / 5
         let fontSize: CGFloat = 12
@@ -61,34 +61,34 @@ class CardTableViewCell: UITableViewCell {
         let originY: CGFloat = 46
         
         lifeLabel = UILabel()
-        lifeLabel.frame = CGRectMake(originX, originY, width, height)
+        lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
         lifeLabel.textColor = CGSSGlobal.lifeColor
-        lifeLabel.textAlignment = .Right
+        lifeLabel.textAlignment = .right
         
         vocalLabel = UILabel()
-        vocalLabel.frame = CGRectMake(originX + width, originY, width, height)
+        vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
         vocalLabel.textColor = CGSSGlobal.vocalColor
-        vocalLabel.textAlignment = .Right
+        vocalLabel.textAlignment = .right
         
         danceLabel = UILabel()
-        danceLabel.frame = CGRectMake(originX + 2 * width, originY, width, height)
+        danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
         danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
         danceLabel.textColor = CGSSGlobal.danceColor
-        danceLabel.textAlignment = .Right
+        danceLabel.textAlignment = .right
         
         visualLabel = UILabel()
-        visualLabel.frame = CGRectMake(originX + 3 * width, originY, width, height)
+        visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
         visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
         visualLabel.textColor = CGSSGlobal.visualColor
-        visualLabel.textAlignment = .Right
+        visualLabel.textAlignment = .right
         
         totalLabel = UILabel()
-        totalLabel.frame = CGRectMake(originX + 4 * width, originY, width, height)
+        totalLabel.frame = CGRect(x: originX + 4 * width, y: originY, width: width, height: height)
         totalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        totalLabel.textColor = UIColor.darkGrayColor()
-        totalLabel.textAlignment = .Right
+        totalLabel.textColor = UIColor.darkGray
+        totalLabel.textAlignment = .right
         
         contentView.addSubview(cardNameLabel)
         contentView.addSubview(cardIconView)
@@ -107,7 +107,7 @@ class CardTableViewCell: UITableViewCell {
         prepare()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
