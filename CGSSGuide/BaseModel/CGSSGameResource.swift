@@ -12,7 +12,7 @@ import FMDB
 class Master: FMDatabase {
     
     func isTimeLimitGachaAvailable(cardId:Int) -> Bool {
-        let selectSql = "select exists (select a.id, a.dicription, b.reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and reward_id = \(cardId))"
+        let selectSql = "select exists (select a.id, a.dicription, b.reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%限定%' and reward_id = \(cardId))"
         
         do {
             let set = try self.executeQuery(selectSql, values: nil)
