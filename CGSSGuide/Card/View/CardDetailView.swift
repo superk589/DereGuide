@@ -256,6 +256,18 @@ class CardDetailView: UIView {
         }
         relatedCardsContentView.fy = evolutionContentView.fy + evolutionContentView.fheight
         
+        
+        // 设置获取来源
+        if card.rarityFilterType == .sr || card.rarityFilterType == .ssr {
+            prepareAvailableInfoContentView()
+            setupAvailableInfoContentView(card: card)
+        } else {
+            prepareAvailableInfoContentView()
+            availableInfoContentView.fheight = 0
+        }
+        availableInfoContentView.fy = relatedCardsContentView.fy + relatedCardsContentView.fheight
+        
+        
         // 设置技能升级信息
         
         // 设置推荐组队信息
@@ -264,7 +276,7 @@ class CardDetailView: UIView {
         
         // 设置饲料经验信息
         
-        self.fheight = relatedCardsContentView.fy + relatedCardsContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
+        self.fheight = availableInfoContentView.fy + availableInfoContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
     }
     
     func iconClick(_ icon: CGSSCardIconView) {
@@ -529,6 +541,67 @@ class CardDetailView: UIView {
         relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 34 + topSpace
         
     }
+    
+    
+    // 获得途径
+    var availableInfoContentView: UIView!
+    var availableEvent: CGSSCheckBox!
+    var availableGacha: CGSSCheckBox!
+    var availableLimit: CGSSCheckBox!
+    func prepareAvailableInfoContentView() {
+        if availableInfoContentView != nil {
+            return
+        }
+        availableInfoContentView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
+        availableInfoContentView.clipsToBounds = true
+        availableInfoContentView.drawSectionLine(0)
+        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
+        var insideY: CGFloat = topSpace
+        let descLabel = UILabel()
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 14)
+        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.text = "获得途径:"
+        descLabel.textColor = UIColor.black
+        
+        insideY += topSpace + 14
+        
+        availableEvent = CGSSCheckBox.init(frame: CGRect(x: 10, y: insideY, width: 60, height: 14))
+        availableGacha = CGSSCheckBox.init(frame: CGRect(x: 80, y: insideY, width: 60, height: 14))
+        availableLimit = CGSSCheckBox.init(frame: CGRect(x: 150, y: insideY, width: 60, height: 14))
+        
+        availableEvent.tintColor = CGSSGlobal.coolColor
+        availableGacha.tintColor = CGSSGlobal.coolColor
+        availableLimit.tintColor = CGSSGlobal.coolColor
+        
+        availableEvent.descLabel.textColor = UIColor.darkGray
+        availableGacha.descLabel.textColor = UIColor.darkGray
+        availableLimit.descLabel.textColor = UIColor.darkGray
+        
+        availableEvent.text = "活动"
+        availableGacha.text = "普池"
+        availableLimit.text = "限定"
+        
+        availableInfoContentView.addSubview(descLabel)
+        availableInfoContentView.addSubview(availableEvent)
+        availableInfoContentView.addSubview(availableGacha)
+        availableInfoContentView.addSubview(availableLimit)
+        insideY += topSpace + 14
+        availableInfoContentView.fheight = insideY
+        addSubview(availableInfoContentView)
+        
+    }
+    func setupAvailableInfoContentView(card:CGSSCard) {
+        let tuple = card.available
+        availableEvent.isChecked = tuple.0
+        availableLimit.isChecked = tuple.2
+        if tuple.2 {
+            availableGacha.isChecked = false
+        } else {
+            availableGacha.isChecked = tuple.1
+        }
+    }
+
+    
     
     func charInfoClick() {
         delegate?.charInfoClick()

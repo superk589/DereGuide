@@ -41,7 +41,7 @@ class GachaSimulateView: UIView {
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
-        descLabel.text = "* 当期新SSR占全部SSR的40%的概率\n* 当期新SR、R没有计算概率提高的因素"
+        descLabel.text = "* 当期新SSR占全部SSR的40%的概率\n* 当期新SR、R不考虑概率提高的因素"
         descLabel.isHidden = true
         descLabel.sizeToFit()
         

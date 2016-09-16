@@ -11,6 +11,54 @@ import FMDB
 
 class Master: FMDatabase {
     
+    func isTimeLimitGachaAvailable(cardId:Int) -> Bool {
+        let selectSql = "select exists (select a.id, a.dicription, b.reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and reward_id = \(cardId))"
+        
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            if set.next() {
+                if set.int(forColumnIndex: 0) == 1 {
+                    return true
+                }
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return false
+    }
+    
+    func isGachaAvailable(cardId:Int) -> Bool {
+        let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and reward_id = \(cardId))"
+        
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            if set.next() {
+                if set.int(forColumnIndex: 0) == 1 {
+                    return true
+                }
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return false
+    }
+    
+    func isEventAvailable(cardId:Int) -> Bool {
+        let selectSql = "select exists (select reward_id from gacha_data a, event_available b where reward_id = \(cardId))"
+        
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            if set.next() {
+                if set.int(forColumnIndex: 0) == 1 {
+                    return true
+                }
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return false
+    }
+    
     func getValidGacha() -> [GachaPool] {
         //    {
         //
@@ -180,5 +228,15 @@ class CGSSGameResource: NSObject {
             master.close()
         }
         return master.getValidGacha()
+    }
+    
+    func getCardAvailable(cardId:Int) -> (Bool, Bool, Bool) {
+        guard master.open() else {
+            return (false, false, false)
+        }
+        defer {
+            master.close()
+        }
+        return (master.isEventAvailable(cardId: cardId), master.isGachaAvailable(cardId: cardId), master.isTimeLimitGachaAvailable(cardId: cardId))
     }
 }

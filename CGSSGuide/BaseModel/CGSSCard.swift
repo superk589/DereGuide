@@ -36,6 +36,10 @@ extension CGSSCard {
         }
     }
     
+    var available:(Bool, Bool, Bool) {
+        return CGSSGameResource.sharedResource.getCardAvailable(cardId: self.id)
+    }
+    
     var chara: CGSSChar? {
         if let id = charaId {
             return CGSSDAO.sharedDAO.findCharById(id)

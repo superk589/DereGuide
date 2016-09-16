@@ -55,7 +55,7 @@ class GachaViewController: RefreshableTableViewController {
                 let pool = pools[i]
                 let y:CGFloat = i > 0 ? gachaViews[i - 1].fy + gachaViews[i - 1].fheight : 0
                 let gachaView = GachaView.init(frame: CGRect(x: 0, y: y, width: CGSSGlobal.width, height: 0))
-                gachaView.tag = i
+                gachaView.tag = 1000 + i
                 gachaView.delegate = self
                 headerView.addSubview(gachaView)
                 gachaView.setupWith(pool: pool)
@@ -64,7 +64,7 @@ class GachaViewController: RefreshableTableViewController {
             poolIndex = 0
         } else {
             let gachaView = GachaView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-            gachaView.tag = 0
+            gachaView.tag = -1
             gachaView.delegate = self
             headerView.addSubview(gachaView)
             gachaViews.append(gachaView)
@@ -120,11 +120,13 @@ extension GachaViewController : GachaViewDelegate, GachaSimulateViewDelegate {
     }
     
     func didSelect(gachaView: GachaView) {
-        poolIndex = gachaView.tag
+        if gachaView.tag >= 1000 {
+            poolIndex = gachaView.tag - 1000
+        }
     }
     
     func seeMoreCard(gachaView: GachaView) {
-        let pool = gachaPools[gachaView.tag]
+        let pool = gachaPools[gachaView.tag - 1000]
         let gachaCardListVC = GachaCardTableViewController()
         gachaCardListVC.defaultCardList = pool.cardList
         self.navigationController?.pushViewController(gachaCardListVC, animated: true)
