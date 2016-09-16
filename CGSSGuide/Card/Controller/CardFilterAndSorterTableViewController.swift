@@ -297,7 +297,8 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
         } else {
-            
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
+            sorter = CGSSSorter.init(att: "sRarity")
         }
         setup()
     }

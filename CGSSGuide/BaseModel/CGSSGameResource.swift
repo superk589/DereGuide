@@ -10,27 +10,72 @@ import UIKit
 import FMDB
 
 class Master: FMDatabase {
-//    func getRecentGacha() -> GachaPool? {
-//        let selectSql = "select * from gacha_data a, gacha_rate b where a.id = b.id order by end_date DESC"
-//        do {
-//            let set = try self.executeQuery(selectSql, values: nil)
-//            if set.next() {
-//                let gachaPool = GachaPool.init(fromJson: <#T##JSON!#>)
-//                hashTable.append(set.stringForColumn("hash"))
-//            }
-//        } catch {
-//            print(self.lastErrorMessage())
-//        }
-//        return nil
-//    }
+    
+    func getValidGacha() -> [GachaPool] {
+        //    {
+        //
+        //    "dicription" : "新SSレア堀裕子登場 ! 10連ガシャはSレア以上のアイドル1人が確定で出現 ! ! ※アイドルの所属上限を超える場合、プレゼントに送られます。",
+        //    "end_date" : "2016-09-14 14:59:59",
+        //    "id" : "30067",
+        //    "name" : "プラチナオーディションガシャ",
+        //    "rare_ratio" : "8850",
+        //    "sr_ratio" : "1000",
+        //    "ssr_ratio" : "150",
+        //    "start_date" : "2016-09-09 15:00:00",
+        //    }
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = CGSSGlobal.timeZoneOfTyoko
+        
+        let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id order by end_date DESC"
+
+        var pools = [GachaPool]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let endDate = set.string(forColumn: "end_date")
+                if let date = dateFormatter.date(from: endDate!) {
+                    if now > date && pools.count > 0 {
+                        break
+                    }
+                }
+                let id = Int(set.int(forColumn: "id"))
+                let name = set.string(forColumn: "name")
+                let dicription = set.string(forColumn: "dicription")
+                let startDate = set.string(forColumn: "start_date")
+                
+                let rareRatio = Int(set.int(forColumn: "rare_ratio"))
+                let srRatio = Int(set.int(forColumn: "sr_ratio"))
+                let ssrRatio = Int(set.int(forColumn: "ssr_ratio"))
+                
+                let rewardSql = "select * from gacha_available where gacha_id = \(id)"
+                var rewards = [(Int, Int)]()
+                let subSet = try self.executeQuery(rewardSql, values: nil)
+                while subSet.next() {
+                    let rewardId = Int(subSet.int(forColumn: "reward_id"))
+                    let recommend_order = Int(subSet.int(forColumn: "recommend_order"))
+                    rewards.append((rewardId, recommend_order))
+                }
+                
+                
+                let gachaPool = GachaPool.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
+                pools.append(gachaPool)
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return pools
+    }
     
     func selectTextBy(category:Int, index:Int) -> String {
-        let selectSql = "select * from text_data where category = '\(category)' and \"index\" = '\(index)'"
+        let selectSql = "select * from text_data where category = \(category) and \"index\" = \(index)"
         var result = ""
         do {
             let set = try self.executeQuery(selectSql, values: nil)
-            set.next()
-            result = set.string(forColumn: "text")
+            if set.next() {
+                result = set.string(forColumn: "text")
+            }
         } catch {
             print(self.lastErrorMessage())
         }
@@ -125,5 +170,15 @@ class CGSSGameResource: NSObject {
             master.close()
         }
         return master.selectTextBy(category: category, index: index)
+    }
+    
+    func getGachaPool() -> [GachaPool]? {
+        guard master.open() else {
+            return nil
+        }
+        defer {
+            master.close()
+        }
+        return master.getValidGacha()
     }
 }

@@ -9,92 +9,157 @@
 import UIKit
 import SwiftyJSON
 
+extension Array {
+    func random() -> Element? {
+        if count >= 0 {
+            let rand = arc4random_uniform(UInt32(self.count))
+            return self[Int(rand)]
+        } else {
+            return nil
+        }
+    }
+}
+
+extension GachaPool {
+    var cardList: [CGSSCard] {
+        get {
+            var list = [CGSSCard]()
+            let dao = CGSSDAO.sharedDAO
+            for rew in self.rewards {
+                if let card = dao.findCardById(rew.cardId) {
+                    list.append(card)
+                }
+            }
+            return list
+        }
+    }
+}
+
 struct Reward {
-    var cardId: String!
+    var cardId: Int!
     var rewardRecommand: Int!
 }
 
 class GachaPool {
     
-    var baseId: String!
-    var costNumMulti: String!
-    var costNumSingle: String!
-    var dicription: String!
-    var drawGuaranteeNum: String!
-    var drawLimitMulti: String!
-    var drawLimitSingle: String!
-    var drawNum: String!
-    var endDate: String!
-    var extendId: String!
-    var firstCostNumMulti: String!
-    var firstCostNumSingle: String!
-    var id: String!
-    var loopNum: String!
-    var maxStep: String!
-    var messageId: String!
-    var name: String!
-    var name2: String!
-    var nomalRatio: String!
-    var nomalRatio2: String!
-    var rareRatio: String!
-    var rareRatio2: String!
-    var resetTime: String!
-    var source: String!
-    var sourceGuarantee: String!
-    var srRatio: String!
-    var srRatio2: String!
-    var ssrRatio: String!
-    var ssrRatio2: String!
-    var startDate: String!
-    var step: String!
-    var stepId: String!
-    var type: String!
-    var typeDetail: String!
+//    {
+//
+//    "dicription" : "新SSレア堀裕子登場 ! 10連ガシャはSレア以上のアイドル1人が確定で出現 ! ! ※アイドルの所属上限を超える場合、プレゼントに送られます。",
+//    "end_date" : "2016-09-14 14:59:59",
+//    "id" : "30067",
+//    "name" : "プラチナオーディションガシャ",
+//    "rare_ratio" : "8850",
+//    "sr_ratio" : "1000",
+//    "ssr_ratio" : "150",
+//    "start_date" : "2016-09-09 15:00:00",
+//    }
+
+    var dicription: String
+    var endDate: String
+    var id: Int
+    var name: String
+    var rareRatio: Int
+    var srRatio: Int
+    var ssrRatio: Int
+    var startDate: String
     
-    var rewards: [Reward]!
+    var rewards = [Reward]()
+    var sr = [Reward]()
+    var ssr = [Reward]()
+    var r = [Reward]()
+    var new = [Reward]()
+    var newssr = [Reward]()
     
-    /**
-     * Instantiate the instance using the passed json values to set the properties values
-     */
-    init(fromJson json: JSON!) {
-        if json == nil {
-            return
+    init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[(Int, Int)]) {
+        self.id = id
+        self.name = name
+        self.dicription = dicription
+        self.startDate = start_date
+        self.endDate = end_date
+        self.rareRatio = rare_ratio
+        self.srRatio = sr_ratio
+        self.ssrRatio = ssr_ratio
+        self.rewards = [Reward]()
+        let dao = CGSSDAO.sharedDAO
+        for reward in rewards {
+            let rew = Reward.init(cardId: reward.0 , rewardRecommand: reward.1)
+            if let card = dao.findCardById(rew.cardId) {
+                if rew.rewardRecommand > 0 {
+                    new.append(rew)
+                }
+                switch card.rarityFilterType {
+                case .ssr:
+                    if rew.rewardRecommand > 0 {
+                        newssr.append(rew)
+                    } else {
+                        ssr.append(rew)
+                    }
+                case .sr:
+                    sr.append(rew)
+                case .r:
+                    r.append(rew)
+                default:
+                    break
+                }
+                self.rewards.append(rew)
+            }
         }
-        baseId = json["base_id"].stringValue
-        costNumMulti = json["cost_num_multi"].stringValue
-        costNumSingle = json["cost_num_single"].stringValue
-        dicription = json["dicription"].stringValue
-        drawGuaranteeNum = json["draw_guarantee_num"].stringValue
-        drawLimitMulti = json["draw_limit_multi"].stringValue
-        drawLimitSingle = json["draw_limit_single"].stringValue
-        drawNum = json["draw_num"].stringValue
-        endDate = json["end_date"].stringValue
-        extendId = json["extend_id"].stringValue
-        firstCostNumMulti = json["first_cost_num_multi"].stringValue
-        firstCostNumSingle = json["first_cost_num_single"].stringValue
-        id = json["id"].stringValue
-        loopNum = json["loop_num"].stringValue
-        maxStep = json["max_step"].stringValue
-        messageId = json["message_id"].stringValue
-        name = json["name"].stringValue
-        name2 = json["name2"].stringValue
-        nomalRatio = json["nomal_ratio"].stringValue
-        nomalRatio2 = json["nomal_ratio2"].stringValue
-        rareRatio = json["rare_ratio"].stringValue
-        rareRatio2 = json["rare_ratio2"].stringValue
-        resetTime = json["reset_time"].stringValue
-        
-        source = json["source"].stringValue
-        sourceGuarantee = json["source_guarantee"].stringValue
-        srRatio = json["sr_ratio"].stringValue
-        srRatio2 = json["sr_ratio2"].stringValue
-        ssrRatio = json["ssr_ratio"].stringValue
-        ssrRatio2 = json["ssr_ratio2"].stringValue
-        startDate = json["start_date"].stringValue
-        step = json["step"].stringValue
-        stepId = json["step_id"].stringValue
-        type = json["type"].stringValue
-        typeDetail = json["type_detail"].stringValue
     }
     
+    func simulateOnce(srGuarantee: Bool) -> Int {
+        let rand = arc4random_uniform(10000)
+        var rarity: CGSSCardRarityFilterType
+        switch rand {
+        case UInt32(rareRatio + srRatio)..<10000:
+            rarity = .ssr
+        case UInt32(rareRatio)..<UInt32(rareRatio + srRatio):
+            rarity = .sr
+        default:
+            rarity = .r
+        }
+        
+        if srGuarantee && rarity == .r {
+            rarity = .sr
+        }
+        
+        switch rarity {
+        case .ssr:
+            //目前只有ssr考虑新卡的几率加成(新卡共享40%总的ssr概率)
+            //TODO: 如果有sr和r的新卡几率加成具体数据 再添加
+            if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
+                return newssr.random()!.cardId
+            } else if ssr.count > 0 {
+                return ssr.random()!.cardId
+            } else {
+                return 0
+            }
+        case .sr:
+            if sr.count > 0 {
+                return sr.random()!.cardId
+            } else {
+                return 0
+            }
+        case .r:
+            if r.count > 0 {
+                return r.random()!.cardId
+            } else {
+                return 0
+            }
+        default:
+            return 0
+        }
+    }
+
+    func simulate(times:Int) -> [Int] {
+        var result = [Int]()
+        let rand = arc4random_uniform(10)
+        for i:UInt32 in 0...9 {
+            if i == rand {
+                result.append(simulateOnce(srGuarantee: true))
+            } else {
+                result.append(simulateOnce(srGuarantee: false))
+            }
+        }
+        return result
+    }
 }

@@ -207,7 +207,7 @@ class TeamDetailView: UIView {
         liveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
         liveTypeButton.addTarget(self, action: #selector(liveTypeButtonClick), for: .touchUpInside)
         
-        originY += 21 + topSpace
+        originY += 21 + topSpace / 2
         
         grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 0))
         grooveTypeDescLable.text = "Groove类别: "
@@ -221,15 +221,14 @@ class TeamDetailView: UIView {
         grooveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
         grooveTypeButton.addTarget(self, action: #selector(grooveTypeButtonClick), for: .touchUpInside)
         
-//        originY += topSpace
+        originY += topSpace / 2
         
-        startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 25))
+        startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 30))
         startCalcButton.setTitle("开始计算", for: UIControlState())
         startCalcButton.backgroundColor = CGSSGlobal.danceColor
-        startCalcButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
-        originY += 25 + topSpace
+        originY += 30 + topSpace
         scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 28), rows: 2, columns: 3)
         scoreGrid.isHidden = true
         
@@ -457,7 +456,7 @@ class TeamDetailView: UIView {
     
     func updateGrooveSelectButton() {
         if grooveTypeButton.fheight == 0 {
-            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight
+            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace / 2
         } else {
             startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace
         }
