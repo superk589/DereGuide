@@ -20,6 +20,7 @@ class TeamEditViewController: BaseTableViewController {
     var subs = [Int: CGSSTeamMember]()
     var friendLeader: CGSSTeamMember?
     var backValue: Int?
+    var manualValue: Int?
     var hv = UIView()
     var lastIndex = 0
     var lastScrollViewOffset: CGPoint?
@@ -89,6 +90,7 @@ class TeamEditViewController: BaseTableViewController {
             self.subs[i] = team.subs[i]
         }
         self.backValue = team.backSupportValue
+        self.manualValue = team.manualValue
     }
     
     func getMemberByIndex(_ index: Int) -> CGSSTeamMember? {
@@ -115,6 +117,7 @@ class TeamEditViewController: BaseTableViewController {
     func saveTeam() {
         if let leader = self.leader, let friendLeader = self.friendLeader , subs.count == 4 {
             let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? CGSSGlobal.presetBackValue, friendLeader: friendLeader)
+            team.manualValue = manualValue ?? 0
             delegate?.save(team)
             _ = self.navigationController?.popViewController(animated: true)
         }
