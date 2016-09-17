@@ -36,18 +36,18 @@ class GachaView: UIView {
         checkButton.tintColor = CGSSGlobal.coolColor
         checkButton.setImage(UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate), for: .normal)
         
-        let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 4, width: 40, height: 14))
+        let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 2.5, width: 40, height: 17))
         descLabel.text = "卡池: "
         descLabel.textAlignment = .left
-        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.font = UIFont.systemFont(ofSize: 16)
         
-        nameLabel = UILabel.init(frame: CGRect.init(x: space + 72, y: originY + 4, width: CGSSGlobal.width - 40 - space, height: 14))
+        nameLabel = UILabel.init(frame: CGRect.init(x: space + 72, y: originY + 2.5, width: CGSSGlobal.width - 40 - space, height: 17))
         
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.textAlignment = .left
-        nameLabel.font = UIFont.systemFont(ofSize: 14)
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
         
-        originY += space + 17
+        originY += space + 20
         
         detailLabel = UILabel.init(frame: CGRect.init(x: space, y: originY, width: CGSSGlobal.width - 2 * space, height: 0))
         detailLabel.font = UIFont.systemFont(ofSize: 12)
@@ -150,14 +150,14 @@ class GachaView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let insideY: CGFloat = space
         let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 14)
-        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 17)
+        descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.text = "新卡列表:"
         descLabel.textColor = UIColor.black
         
-        let moreCardLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 14))
+        let moreCardLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 17))
         moreCardLabel.text = "查看完整卡池 >"
-        moreCardLabel.font = UIFont.systemFont(ofSize: 14)
+        moreCardLabel.font = UIFont.systemFont(ofSize: 16)
         moreCardLabel.textColor = UIColor.lightGray
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(seeMoreCard))
         moreCardLabel.addGestureRecognizer(tap)
@@ -175,16 +175,16 @@ class GachaView: UIView {
         let spaceTotal = CGSSGlobal.width - 2 * space - column * 48
         let interSpace = spaceTotal / (column - 1)
         for i in 0..<cards.count {
-            let y = CGFloat(i / Int(column)) * (48 + interSpace) + 34
+            let y = CGFloat(i / Int(column)) * (48 + interSpace) + 37
             let x = CGFloat(i % Int(column)) * (48 + interSpace) + space
             let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
             icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
             cardListView.addSubview(icon)
         }
         if cards.count > 0 {
-            cardListView.fheight = ceil(CGFloat(cards.count) / column) * (48 + interSpace) - interSpace + 34 + space
+            cardListView.fheight = ceil(CGFloat(cards.count) / column) * (48 + interSpace) - interSpace + 37 + space
         } else {
-            cardListView.fheight = 34
+            cardListView.fheight = 37
         }
         
     }

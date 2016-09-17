@@ -84,9 +84,9 @@ class CharDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let insideY: CGFloat = topSpace
         let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 14)
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 17)
         descLabel.textColor = UIColor.black
-        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.text = "角色所有卡片:"
         descLabel.textColor = UIColor.black
         relatedCardsContentView.addSubview(descLabel)
@@ -101,13 +101,13 @@ class CharDetailView: UIView {
         let space = spaceTotal / (column - 1)
         
         for i in 0..<cards.count {
-            let y = CGFloat(i / Int(column)) * (48 + space) + 34
+            let y = CGFloat(i / Int(column)) * (48 + space) + 37
             let x = CGFloat(i % Int(column)) * (48 + space) + topSpace
             let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
             icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
             relatedCardsContentView.addSubview(icon)
         }
-        relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 34 + topSpace
+        relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 37 + topSpace
         
     }
     
