@@ -76,6 +76,16 @@ class GachaViewController: RefreshableTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(renewAnimation), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        renewAnimation()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func renewAnimation() {
         for sub in simulateView.resultView.subviews {
             if sub.subviews.count > 0 {
                 sub.addGlowAnimateAlongBorder(clockwise: true, imageName: "star", count: 3, cornerRadius: sub.fheight / 8)

@@ -237,7 +237,7 @@ class CardDetailView: UIView {
         leaderSkillContentView.fy = skillContentView.fy + skillContentView.fheight
         
         // 设置进化信息
-        if let evolution_id = card.evolutionId , evolution_id > 0 {
+        if (card.evolutionId) != nil {
             prepareEvolutionContentView()
             setupEvolutionContentView(card)
         } else {
@@ -258,7 +258,7 @@ class CardDetailView: UIView {
         
         
         // 设置获取来源
-        if card.rarityFilterType == .sr || card.rarityFilterType == .ssr {
+        if [.sr, .ssr, .ssrp, .srp].contains(card.rarityFilterType) {
             prepareAvailableInfoContentView()
             setupAvailableInfoContentView(card: card)
         } else {
@@ -488,8 +488,13 @@ class CardDetailView: UIView {
     
     // 设置进化信息视图
     func setupEvolutionContentView(_ card: CGSSCard) {
-        evolutionFromImageView.setWithCardId(card.id)
-        evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
+        if card.evolutionId == 0{
+            evolutionToImageView.setWithCardId(card.id)
+            evolutionFromImageView.setWithCardId(card.id - 1, target: self, action: #selector(iconClick))
+        } else {
+            evolutionFromImageView.setWithCardId(card.id)
+            evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
+        }
         evolutionContentView.fheight = evolutionFromImageView.fy + evolutionFromImageView.fheight + topSpace
     }
     
@@ -548,6 +553,7 @@ class CardDetailView: UIView {
     var availableEvent: CGSSCheckBox!
     var availableGacha: CGSSCheckBox!
     var availableLimit: CGSSCheckBox!
+    var availableDescLabel:UILabel!
     func prepareAvailableInfoContentView() {
         if availableInfoContentView != nil {
             return
@@ -557,11 +563,11 @@ class CardDetailView: UIView {
         availableInfoContentView.drawSectionLine(0)
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         var insideY: CGFloat = topSpace
-        let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
-        descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = "获得途径:"
-        descLabel.textColor = UIColor.black
+        availableDescLabel = UILabel()
+        availableDescLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
+        availableDescLabel.font = UIFont.systemFont(ofSize: 16)
+        availableDescLabel.text = "获得途径:"
+        availableDescLabel.textColor = UIColor.black
         
         insideY += topSpace + 16
         
@@ -581,7 +587,7 @@ class CardDetailView: UIView {
         availableGacha.text = "普池"
         availableLimit.text = "限定"
         
-        availableInfoContentView.addSubview(descLabel)
+        availableInfoContentView.addSubview(availableDescLabel)
         availableInfoContentView.addSubview(availableEvent)
         availableInfoContentView.addSubview(availableGacha)
         availableInfoContentView.addSubview(availableLimit)
@@ -591,7 +597,15 @@ class CardDetailView: UIView {
         
     }
     func setupAvailableInfoContentView(card:CGSSCard) {
-        let tuple = card.available
+        var tuple = (false, false, false)
+        if card.evolutionId == 0 {
+            availableDescLabel.text = "获得途径(进化前):"
+            if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
+                tuple = cardFrom.available
+            }
+        } else {
+            tuple = card.available
+        }
         availableEvent.isChecked = tuple.0
         availableLimit.isChecked = tuple.2
         if tuple.2 {
