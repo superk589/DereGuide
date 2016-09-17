@@ -72,12 +72,12 @@ class CGSSLiveSimulator: NSObject {
         self.grooveType = grooveType
     }
     
-    func simulateOnce(_ procMax: Bool, callBack: ((Int) -> Void)?) {
+    func simulateOnce(_ procMax: Bool, manualValue:Int?, callBack: ((Int) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             let beatmap = self.live.getBeatmapByDiff(self.diff)!
             let diffStars = self.live.getStarsForDiff(self.diff)
             // 此时不对小数部分进行取舍 保留浮点部分
-            let scorePerNote = Float(self.presentTotal) * CGSSGlobal.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
+            let scorePerNote = Float((manualValue == nil) ? self.presentTotal : manualValue!) * CGSSGlobal.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
             let criticalPoints = beatmap.getCriticalPointNoteIndexes()
             let schedule = self.getSimulateSchedules(procMax)
             var criticalIndex = 0
@@ -107,7 +107,7 @@ class CGSSLiveSimulator: NSObject {
         }
     }
     
-    func simulate(_ times: Int, callBack: ((_ scores: [Int], _ avg: Int) -> Void)?) {
+    func simulate(_ times: Int, manualValue:Int?, callBack: ((_ scores: [Int], _ avg: Int) -> Void)?) {
         var arr = [Int]()
         var sum = 0
         func completeInside(_ score: Int) {
@@ -118,7 +118,7 @@ class CGSSLiveSimulator: NSObject {
             }
         }
         for _ in 0..<times {
-            simulateOnce(false) { (score) in
+            simulateOnce(false, manualValue: manualValue) { (score) in
                 completeInside(score)
             }
         }

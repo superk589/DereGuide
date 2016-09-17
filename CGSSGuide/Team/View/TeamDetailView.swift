@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+private class LeaderSkillLabel: UILabel {
+    override func drawText(in rect: CGRect) {
+        let inset = UIEdgeInsetsMake(0, 10, 0, 10)
+        super.drawText(in:UIEdgeInsetsInsetRect(rect, inset))
+    }
+}
 protocol TeamDetailViewDelegate: class {
     func editTeam()
     func skillShowOrHide()
@@ -17,16 +24,20 @@ protocol TeamDetailViewDelegate: class {
     func selectSong()
     func liveTypeButtonClick()
     func grooveTypeButtonClick()
+    func manualValueChanged(_ value: Int)
+    func usingManualValue(using:Bool)
+    func manualFieldBegin()
+    func manualFieldDone()
 }
 
 class TeamDetailView: UIView {
     var leftSpace: CGFloat = 10
     var topSpace: CGFloat = 10
     weak var delegate: TeamDetailViewDelegate?
-    var selfLeaderLabel: UILabel!
+    private var selfLeaderLabel: LeaderSkillLabel!
     var icons: [CGSSCardIconView]!
     var editTeamButton: UIButton!
-    var friendLeaderLabel: UILabel!
+    private var friendLeaderLabel: LeaderSkillLabel!
     
     var leaderSkillGrid: CGSSGridLabel!
     
@@ -45,10 +56,14 @@ class TeamDetailView: UIView {
     var songNameLabel: UILabel!
     var songDiffLabel: UILabel!
     var songLengthLabel: UILabel!
+    var manualValueTF: UITextField!
+    var manualValueBox: CGSSCheckBox!
+    
     var liveTypeButton: UIButton!
     var liveTypeDescLable: UILabel!
     var grooveTypeButton: UIButton!
     var grooveTypeDescLable: UILabel!
+    var grooveTypeContentView: UIView!
     
     var bottomView: UIView!
     var startCalcButton: UIButton!
@@ -60,10 +75,12 @@ class TeamDetailView: UIView {
         super.init(frame: frame)
         var originY: CGFloat = topSpace
         let width = CGSSGlobal.width - 2 * leftSpace
-        selfLeaderLabel = UILabel.init(frame: CGRect(x: leftSpace, y: topSpace, width: width, height: 55))
+        selfLeaderLabel = LeaderSkillLabel.init(frame: CGRect(x: leftSpace, y: topSpace, width: width, height: 55))
         selfLeaderLabel.numberOfLines = 3
         selfLeaderLabel.font = UIFont.systemFont(ofSize: 14)
-        selfLeaderLabel.textColor = UIColor.darkGray
+        selfLeaderLabel.textColor = UIColor.black
+        selfLeaderLabel.layer.cornerRadius = 8
+        selfLeaderLabel.layer.masksToBounds = true
         originY += 55 + topSpace
         
         let btnW = (width - 30 - 6 * leftSpace) / 6
@@ -80,35 +97,37 @@ class TeamDetailView: UIView {
         editTeamButton.addTarget(self, action: #selector(editTeam), for: .touchUpInside)
         originY += btnW + topSpace
         
-        friendLeaderLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 55))
+        friendLeaderLabel = LeaderSkillLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 55))
         friendLeaderLabel.numberOfLines = 3
         friendLeaderLabel.font = UIFont.systemFont(ofSize: 14)
-        friendLeaderLabel.textColor = UIColor.darkGray
+        friendLeaderLabel.textColor = UIColor.black
         friendLeaderLabel.textAlignment = .right
+        friendLeaderLabel.layer.cornerRadius = 8
+        friendLeaderLabel.layer.masksToBounds = true
         originY += 55 + topSpace
         
         let descLabel1 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
         descLabel1.text = "队长加成: "
-        descLabel1.font = UIFont.systemFont(ofSize: 14)
+        descLabel1.font = UIFont.systemFont(ofSize: 16)
         descLabel1.textAlignment = .left
         
         originY += 17 + topSpace
         
-        leaderSkillGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 56), rows: 4, columns: 6)
+        leaderSkillGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 64), rows: 4, columns: 6)
         
-        originY += 56 + topSpace
+        originY += 64 + topSpace
         drawSectionLine(originY)
         originY += topSpace
         
         let descLabel2 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
         descLabel2.text = "表现值: "
-        descLabel2.font = UIFont.systemFont(ofSize: 14)
+        descLabel2.font = UIFont.systemFont(ofSize: 16)
         descLabel2.textAlignment = .left
         
         originY += 17 + topSpace
         
         backSupportLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 17))
-        backSupportLabel.font = UIFont.systemFont(ofSize: 14)
+        backSupportLabel.font = UIFont.systemFont(ofSize: 16)
         // backSupportLabel.textColor = UIColor.lightGrayColor()
         backSupportLabel.text = "后援数值: "
         backSupportLabel.textColor = UIColor.darkGray
@@ -125,26 +144,31 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        presentValueGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 70), rows: 5, columns: 5)
+        presentValueGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 80), rows: 5, columns: 5)
         
-        originY += 70 + topSpace
-        drawSectionLine(originY)
-        originY += topSpace
+        originY += 80 + topSpace
+        let skillListContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 42))
+        skillListContentView.drawSectionLine(0)
         
-        skillListDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 22))
+        skillListDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: 10, width: 100, height: 22))
         skillListDescLabel.text = "特技列表: "
-        skillListDescLabel.font = UIFont.systemFont(ofSize: 14)
+        skillListDescLabel.font = UIFont.systemFont(ofSize: 16)
         skillListDescLabel.textColor = UIColor.black
         
-        skillShowOrHideButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: originY - 4, width: 30, height: 30))
+        skillShowOrHideButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: 6, width: 30, height: 30))
         // 让图片总是可以被染色影响
         let image = UIImage.init(named: "764-arrow-down-toolbar-selected")!.withRenderingMode(.alwaysTemplate)
         skillShowOrHideButton.setImage(image, for: UIControlState())
         skillShowOrHideButton.tintColor = UIColor.lightGray
-        skillShowOrHideButton.addTarget(self, action: #selector(skillShowOrHide), for: .touchUpInside)
-        originY += 22 + topSpace
         
-        skillListGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 225), rows: 5, columns: 1, textAligment: .left)
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(skillShowOrHide))
+        skillListContentView.addGestureRecognizer(tap2)
+        skillListContentView.addSubview(skillListDescLabel)
+        skillListContentView.addSubview(skillShowOrHideButton)
+        
+        originY += 42
+        
+        skillListGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 235), rows: 5, columns: 1, textAligment: .left)
         
         bottomView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
         bottomView.backgroundColor = UIColor.white
@@ -158,68 +182,112 @@ class TeamDetailView: UIView {
         
         let descLabel3 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
         descLabel3.text = "得分计算: "
-        descLabel3.font = UIFont.systemFont(ofSize: 14)
+        descLabel3.font = UIFont.systemFont(ofSize: 16)
         descLabel3.textAlignment = .left
         
         originY += topSpace + 17
         
-        selectSongLabel = UILabel.init(frame: CGRect(x: 40, y: originY + 9, width: CGSSGlobal.width - 80, height: 30))
+        let selectSongContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
+        
+        selectSongLabel = UILabel.init(frame: CGRect(x: 40, y: 7, width: CGSSGlobal.width - 80, height: 30))
         selectSongLabel.textColor = UIColor.lightGray
         selectSongLabel.text = "请选择歌曲"
         selectSongLabel.textAlignment = .center
         selectSongLabel.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectSong))
-        selectSongLabel.addGestureRecognizer(tap)
         selectSongLabel.font = UIFont.systemFont(ofSize: 18)
-        selectSongButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: originY + 7, width: 30, height: 30))
+        selectSongButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: 7, width: 30, height: 30))
         selectSongButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate), for: UIControlState())
         selectSongButton.tintColor = UIColor.lightGray
-        selectSongButton.addTarget(self, action: #selector(selectSong), for: .touchUpInside)
+        // selectSongButton.addTarget(self, action: #selector(selectSong), for: .touchUpInside)
         // originY += 30 + topSpace
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectSong))
+        selectSongContentView.addGestureRecognizer(tap)
         
-        songJacket = UIImageView.init(frame: CGRect(x: leftSpace, y: originY, width: 48, height: 48))
+        songJacket = UIImageView.init(frame: CGRect(x: leftSpace, y: 0, width: 48, height: 48))
         
-        songNameLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: originY, width: width - 48 - 40, height: 21))
+        songNameLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: 0, width: width - 48 - 40, height: 21))
         songNameLabel.adjustsFontSizeToFitWidth = true
-        originY += 21 + topSpace
         
-        songDiffLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: originY, width: width - 48 - 40, height: 18))
+        songDiffLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: 21 + topSpace, width: width - 48 - 40, height: 18))
         songDiffLabel.textColor = UIColor.darkGray
         songDiffLabel.textAlignment = .left
         songDiffLabel.font = UIFont.systemFont(ofSize: 12)
         songDiffLabel.adjustsFontSizeToFitWidth = true
         
-//        songLengthLabel = UILabel.init(frame: CGRectMake(CGSSGlobal.width / 2 + leftSpace, originY, width / 2, 18))
-//        songLengthLabel.textColor = UIColor.darkGrayColor()
-//        songLengthLabel.textAlignment = .Left
-//        songLengthLabel.font = UIFont.systemFontOfSize(12)
-        originY += 18 + topSpace
+        selectSongContentView.fheight = songDiffLabel.fy + songDiffLabel.fheight
+        selectSongContentView.addSubview(selectSongLabel)
+        selectSongContentView.addSubview(selectSongButton)
+        selectSongContentView.addSubview(songJacket)
+        selectSongContentView.addSubview(songNameLabel)
+        selectSongContentView.addSubview(songDiffLabel)
         
-        liveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 21))
-        liveTypeDescLable.text = "歌曲模式: "
-        liveTypeDescLable.font = UIFont.systemFont(ofSize: 14)
-        liveTypeDescLable.textColor = UIColor.darkGray
+        originY += selectSongContentView.fheight + topSpace
         
-        liveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 150, y: originY, width: 140, height: 21))
-        liveTypeButton.setTitle("< 常规模式 >", for: UIControlState())
-        liveTypeButton.contentHorizontalAlignment = .right
-        liveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        liveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
-        liveTypeButton.addTarget(self, action: #selector(liveTypeButtonClick), for: .touchUpInside)
+        manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 120, height: 21))
+        manualValueBox.text = "使用固定值: "
+        manualValueBox.descLabel.font = UIFont.systemFont(ofSize: 16)
+        manualValueBox.tintColor = CGSSGlobal.coolColor
+        manualValueBox.descLabel.textColor = UIColor.darkGray
+        manualValueBox.isChecked = false
+        let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(manualValueCheckBoxClick))
+        manualValueBox.addGestureRecognizer(tap4)
+        manualValueTF = UITextField.init(frame: CGRect(x: CGSSGlobal.width - 150, y: originY - 3, width: 140, height: 27))
+        manualValueTF.autocorrectionType = .no
+        manualValueTF.autocapitalizationType = .none
+        manualValueTF.borderStyle = .roundedRect
+        manualValueTF.textAlignment = .right
+        manualValueTF.addTarget(self, action: #selector(manualValueChanged), for: .editingDidEnd)
+        manualValueTF.addTarget(self, action: #selector(manualValueChanged), for: .editingDidEndOnExit)
+        manualValueTF.keyboardType = .numbersAndPunctuation
+        manualValueTF.returnKeyType = .done
+        manualValueTF.font = UIFont.systemFont(ofSize: 14)
+        manualValueTF.isEnabled = false
+        manualValueTF.addTarget(self, action: #selector(manualFieldBegin), for: .editingDidBegin)
+        manualValueTF.addTarget(self, action: #selector(manualFieldDone), for: .editingDidEndOnExit)
+        manualValueTF.addTarget(self, action: #selector(manualFieldDone), for: .editingDidEnd)
+        bottomView.addSubview(manualValueBox)
+        bottomView.addSubview(manualValueTF)
         
         originY += 21 + topSpace / 2
         
-        grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 0))
+        let liveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 31))
+        liveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
+        liveTypeDescLable.text = "歌曲模式: "
+        liveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
+        liveTypeDescLable.textColor = UIColor.darkGray
+        
+        liveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 150, y: 5, width: 140, height: 21))
+        liveTypeButton.setTitle("< 常规模式 >", for: UIControlState())
+        liveTypeButton.contentHorizontalAlignment = .right
+        liveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        liveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
+        liveTypeButton.isUserInteractionEnabled = false
+
+        let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(liveTypeButtonClick))
+        liveTypeContentView.addGestureRecognizer(tap1)
+        liveTypeContentView.addSubview(liveTypeDescLable)
+        liveTypeContentView.addSubview(liveTypeButton)
+        
+        originY += 31
+        
+        grooveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
+        
+        grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
         grooveTypeDescLable.text = "Groove类别: "
-        grooveTypeDescLable.font = UIFont.systemFont(ofSize: 14)
+        grooveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
         grooveTypeDescLable.textColor = UIColor.darkGray
         
-        grooveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 150, y: originY, width: 140, height: 0))
+        grooveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 170, y: 5, width: 160, height: 21))
         grooveTypeButton.setTitle("", for: UIControlState())
         grooveTypeButton.contentHorizontalAlignment = .right
-        grooveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        grooveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         grooveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
-        grooveTypeButton.addTarget(self, action: #selector(grooveTypeButtonClick), for: .touchUpInside)
+        grooveTypeButton.isUserInteractionEnabled = false
+    
+        let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(grooveTypeButtonClick))
+        grooveTypeContentView.addGestureRecognizer(tap3)
+        grooveTypeContentView.addSubview(grooveTypeDescLable)
+        grooveTypeContentView.addSubview(grooveTypeButton)
         
         originY += topSpace / 2
         
@@ -229,10 +297,10 @@ class TeamDetailView: UIView {
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
         originY += 30 + topSpace
-        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 28), rows: 2, columns: 3)
+        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 32), rows: 2, columns: 3)
         scoreGrid.isHidden = true
         
-        originY += 28 + topSpace
+        originY += 32 + topSpace
         
         scoreDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 80))
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
@@ -246,16 +314,9 @@ class TeamDetailView: UIView {
         bottomView.frame.size.height = originY
         
         bottomView.addSubview(descLabel3)
-        bottomView.addSubview(selectSongLabel)
-        bottomView.addSubview(selectSongButton)
-        bottomView.addSubview(songNameLabel)
-        bottomView.addSubview(songDiffLabel)
-        // bottomView.addSubview(songLengthLabel)
-        bottomView.addSubview(songJacket)
-        bottomView.addSubview(liveTypeDescLable)
-        bottomView.addSubview(liveTypeButton)
-        bottomView.addSubview(grooveTypeButton)
-        bottomView.addSubview(grooveTypeDescLable)
+        bottomView.addSubview(selectSongContentView)
+        bottomView.addSubview(liveTypeContentView)
+        bottomView.addSubview(grooveTypeContentView)
         bottomView.addSubview(startCalcButton)
         bottomView.addSubview(scoreGrid)
         bottomView.addSubview(scoreDescLabel)
@@ -269,8 +330,7 @@ class TeamDetailView: UIView {
         addSubview(backSupportTF)
         addSubview(backSupportLabel)
         addSubview(presentValueGrid)
-        addSubview(skillListDescLabel)
-        addSubview(skillShowOrHideButton)
+        addSubview(skillListContentView)
         addSubview(skillListGrid)
         addSubview(bottomView)
         
@@ -327,9 +387,15 @@ class TeamDetailView: UIView {
         }
         if let selfLeaderRef = team.leader.cardRef {
             selfLeaderLabel.text = "队长技能: \(selfLeaderRef.leaderSkill?.name ?? "无")\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
+            selfLeaderLabel.backgroundColor = selfLeaderRef.attColor.withAlphaComponent(0.5)
+        } else {
+            selfLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
             friendLeaderLabel.text = "好友技能: \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.explainEn ?? "")"
+            friendLeaderLabel.backgroundColor = friendLeaderRef.attColor.withAlphaComponent(0.5)
+        } else {
+            friendLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
         }
         
         var upValueStrings = [[String]]()
@@ -384,6 +450,7 @@ class TeamDetailView: UIView {
         
         updatePresentValueGrid(team)
         backSupportTF.text = String(team.backSupportValue!)
+        manualValueTF.text = String(team.manualValue!)
         
         var skillListStrings = [[String]]()
         let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
@@ -443,23 +510,17 @@ class TeamDetailView: UIView {
     }
     
     func showGrooveSelectButton() {
-        grooveTypeButton.fheight = 21
-        grooveTypeDescLable.fheight = 21
+        grooveTypeContentView.fheight = 31
         updateGrooveSelectButton()
         
     }
     func hideGrooveSelectButton() {
-        grooveTypeButton.fheight = 0
-        grooveTypeDescLable.fheight = 0
+        grooveTypeContentView.fheight = 0
         updateGrooveSelectButton()
     }
     
     func updateGrooveSelectButton() {
-        if grooveTypeButton.fheight == 0 {
-            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace / 2
-        } else {
-            startCalcButton.fy = grooveTypeDescLable.fy + grooveTypeDescLable.fheight + topSpace
-        }
+        startCalcButton.fy = grooveTypeContentView.fy + grooveTypeContentView.fheight + topSpace / 2
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
         scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
@@ -492,6 +553,10 @@ class TeamDetailView: UIView {
         scoreGrid[1, 0].text = String(value)
     }
     
+    func clearScoreGrid() {
+        scoreGrid[1, 2].text = ""
+    }
+    
     func setupScoreGrid() {
         scoreGrid.isHidden = false
         scoreDescLabel.isHidden = false
@@ -504,6 +569,11 @@ class TeamDetailView: UIView {
         let value = Int(backSupportTF.text!) ?? CGSSGlobal.presetBackValue
         backSupportTF.text = String(value)
         delegate?.backValueChanged(value)
+    }
+    func manualValueChanged() {
+        let value = Int(manualValueTF.text!) ?? 0
+        manualValueTF.text = String(value)
+        delegate?.manualValueChanged(value)
     }
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
@@ -551,5 +621,21 @@ class TeamDetailView: UIView {
      // Drawing code
      }
      */
+    func manualValueCheckBoxClick() {
+        manualValueBox.isChecked = !manualValueBox.isChecked
+        delegate?.usingManualValue(using: manualValueBox.isChecked)
+        if manualValueBox.isChecked {
+            manualValueTF.isEnabled = true
+        } else {
+            manualValueTF.isEnabled = false
+        }
+    }
     
+    func manualFieldBegin() {
+        delegate?.manualFieldBegin()
+    }
+    
+    func manualFieldDone() {
+        delegate?.manualFieldDone()
+    }
 }

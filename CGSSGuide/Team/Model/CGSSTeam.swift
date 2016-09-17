@@ -27,6 +27,7 @@ class CGSSTeam: NSObject, NSCoding {
     var subs: [CGSSTeamMember]!
     var friendLeader: CGSSTeamMember!
     // 队伍总表现值
+    var manualValue: Int!
     var backSupportValue: Int!
     var testLive: CGSSLive? {
         if let id = testLiveId {
@@ -312,6 +313,7 @@ class CGSSTeam: NSObject, NSCoding {
         self.friendLeader = aDecoder.decodeObject(forKey: "friendLeader") as? CGSSTeamMember
         self.testDiff = aDecoder.decodeObject(forKey: "testDiff") as? Int
         self.testLiveId = aDecoder.decodeObject(forKey: "testLiveId") as? Int
+        self.manualValue = aDecoder.decodeObject(forKey: "manualValue") as? Int ?? 0
     }
     
     func encode(with aCoder: NSCoder) {
@@ -321,6 +323,7 @@ class CGSSTeam: NSObject, NSCoding {
         aCoder.encode(friendLeader, forKey: "friendLeader")
         aCoder.encode(testLiveId, forKey: "testLiveId")
         aCoder.encode(testDiff, forKey: "testDiff")
+        aCoder.encode(manualValue, forKey: "manualValue")
     }
     
 }

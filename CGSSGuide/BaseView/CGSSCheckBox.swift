@@ -7,11 +7,15 @@
 //
 
 import UIKit
+//protocol CGSSCheckBoxDelegate: class {
+//    func checkValueChanged(checkBox: CGSSCheckBox)
+//}
 
 class CGSSCheckBox: UIView {
 
     var checkBox: UIImageView!
     var descLabel: UILabel!
+    // weak var delegate: CGSSCheckBoxDelegate?
     var isChecked = false {
         didSet {
             if isChecked {
@@ -40,9 +44,11 @@ class CGSSCheckBox: UIView {
     }
     
     func check() {
+        //delegate?.checkValueChanged(checkBox: self)
         checkBox.image = UIImage.init(named: "888-checkmark-toolbar-selected")?.withRenderingMode(.alwaysTemplate)
     }
     func uncheck() {
+        //delegate?.checkValueChanged(checkBox: self)
         checkBox.image = UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate)
     }
     

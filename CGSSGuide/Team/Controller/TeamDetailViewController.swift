@@ -17,7 +17,7 @@ class TeamDetailViewController: UIViewController {
     var live: CGSSLive?
     var beatmaps: [CGSSBeatmap]?
     var diff: Int?
-    
+    var usingManualValue: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -66,6 +66,29 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 
 //MARK: TeamDetailViewDelegate 协议方法
 extension TeamDetailViewController: TeamDetailViewDelegate {
+  
+    func manualFieldBegin() {
+        let offset = teamDV.bottomView.fy + teamDV.manualValueTF.fy + teamDV.manualValueTF.fheight - sv.contentOffset.y + 258 - sv.fheight
+        if offset > 0 {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.sv.contentOffset.y += offset
+            })
+        }
+    }
+
+    func manualFieldDone() {
+        
+    }
+    
+    func manualValueChanged(_ value: Int) {
+        team.manualValue = value
+        CGSSTeamManager.defaultManager.writeToFile(nil)
+    }
+    
+    func usingManualValue(using: Bool) {
+        usingManualValue = using
+    }
+
     func skillShowOrHide() {
         UIView.animate(withDuration: 0.25, animations: {
             self.sv.contentSize = self.teamDV.frame.size
@@ -104,14 +127,25 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     func startCalc() {
         if let live = self.live, let diff = self.diff {
+            self.teamDV.clearScoreGrid()
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff)
-            self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
-            simulator.simulateOnce(true, callBack: { [weak self](score) in
-                self?.teamDV.updateScoreGridMaxScore(score)
-            })
-            simulator.simulate(100, callBack: { [weak self](scores, avg) in
-                self?.teamDV.updateScoreGridAvgScore(avg)
-            })
+            if usingManualValue {
+                self.teamDV.updateSimulatorPresentValue(team.manualValue)
+                simulator.simulateOnce(true, manualValue: team.manualValue, callBack: { [weak self](score) in
+                    self?.teamDV.updateScoreGridMaxScore(score)
+                    })
+                simulator.simulate(100, manualValue: team.manualValue, callBack: { [weak self](scores, avg) in
+                    self?.teamDV.updateScoreGridAvgScore(avg)
+                    })
+            } else {
+                self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
+                simulator.simulateOnce(true, manualValue: nil, callBack: { [weak self](score) in
+                    self?.teamDV.updateScoreGridMaxScore(score)
+                })
+                simulator.simulate(100, manualValue: nil, callBack: { [weak self](scores, avg) in
+                    self?.teamDV.updateScoreGridAvgScore(avg)
+                })
+            }
             
         } else {
             let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .alert)

@@ -7,12 +7,13 @@
 //
 
 import UIKit
-//private class Label: UILabel {
-//    private override func drawTextInRect(rect: CGRect) {
-//        let inset = UIEdgeInsetsMake(0, 5, 0, 5)
-//        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, inset))
-//    }
-//}
+
+private class Label: UILabel {
+    private override func drawText(in rect: CGRect) {
+        let inset = UIEdgeInsetsMake(1, 2, 1, 2)
+        super.drawText(in:UIEdgeInsetsInsetRect(rect, inset))
+    }
+}
 
 class CGSSGridLabel: CGSSGridView {
     
@@ -21,12 +22,13 @@ class CGSSGridLabel: CGSSGridView {
             return grid[r * columns + c] as! UILabel
         }
     }
+
     
     init(frame: CGRect, rows: Int, columns: Int, textAligment: NSTextAlignment = .center) {
         
-        var views = [UILabel]()
+        var views = [Label]()
         for _ in 0...rows * columns - 1 {
-            let view = UILabel()
+            let view = Label()
             view.textAlignment = textAligment
             // view.font = UIFont.systemFontOfSize(gridHeight-2)
             view.numberOfLines = 0
