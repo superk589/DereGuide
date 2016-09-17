@@ -56,8 +56,12 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         detail.font = UIFont.systemFont(ofSize: 16)
         detail.textColor = UIColor.lightGray
         
-        originY += 18 + topSpace
+        originY += 18
         
+        //let potentialContentView = UIView.init(frame: CGRect(x: 48, y: originY, width: CGSSGlobal.width, height: 30))
+        
+        
+        originY += topSpace
         iconView = CGSSCardIconView.init(frame: CGRect(x: 10, y: originY, width: 48, height: 48))
         
         contentView.addSubview(iconView)

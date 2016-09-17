@@ -70,7 +70,7 @@ public class CGSSGlobal: NSObject {
         }
     }
     
-    public static var diffFactor: [Int: Float] = [
+    static let diffFactor: [Int: Float] = [
         5: 1.0,
         6: 1.025,
         7: 1.05,
@@ -99,11 +99,21 @@ public class CGSSGlobal: NSObject {
         30: 2.2,
     ]
     
-    static var comboFactor: [Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
+    static let comboFactor: [Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
     
-    static var criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
+    static let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
     
-    static var rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
+    static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
+    
+    static let potentialOfLevel: [CGSSCardRarityFilterType:[Int]] = [
+        .n : [80, 160, 250, 340, 440, 540, 650, 760, 880, 1000],
+        .r : [60, 120, 180, 255, 330, 405, 480, 570, 660, 750],
+        .sr : [60, 120, 180, 250, 320, 390, 460, 540, 620, 700],
+        .ssr : [40, 80, 120, 170, 220, 270, 320, 380, 440, 500]
+    ]
+    
+    static let maxPotentialTotal = 25
+    static let maxPotentialSingle = 10
     
     // 传入0-99999的rate 判断是否触发
     static func isProc(rate: Int) -> Bool {
@@ -142,8 +152,8 @@ public class CGSSGlobal: NSObject {
             }
         }
         return false
-        
     }
+    
     static let presetBackValue = 103463
     
 }

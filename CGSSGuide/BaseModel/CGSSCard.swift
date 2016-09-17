@@ -115,6 +115,20 @@ extension CGSSCard {
     var rarityFilterType: CGSSCardRarityFilterType {
         return CGSSCardRarityFilterType.init(rarity: rarity.rarity - 1) ?? CGSSCardRarityFilterType.n
     }
+    var rarityFilterTypeSimple : CGSSCardRarityFilterType {
+        switch rarityFilterType {
+        case .np:
+            return .n
+        case .rp:
+            return .r
+        case .srp:
+            return .sr
+        case .ssrp:
+            return .ssr
+        default:
+            return rarityFilterType
+        }
+    }
     var skillFilterType: CGSSSkillFilterType {
         return skill?.skillFilterType ?? CGSSSkillFilterType.none
     }
@@ -135,6 +149,10 @@ extension CGSSCard {
     }
     var favoriteFilterType: CGSSFavoriteFilterType {
         return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteFilterType.inFavorite : CGSSFavoriteFilterType.notInFavorite
+    }
+    
+    func attByPotential(lv:Int) -> Int {
+        return CGSSGlobal.potentialOfLevel[rarityFilterTypeSimple]![lv]
     }
     
 }

@@ -70,6 +70,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.vocal) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.vocalLevel ?? 0)) ?? 0
         }
         return sum
     }
@@ -77,6 +78,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.vocal) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.vocalLevel ?? 0)) ?? 0
         }
         return sum
     }
@@ -84,6 +86,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.dance) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.danceLevel ?? 0)) ?? 0
         }
         return sum
     }
@@ -91,6 +94,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.dance) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.danceLevel ?? 0)) ?? 0
         }
         return sum
     }
@@ -98,6 +102,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...5 {
             sum += (self[i]?.cardRef?.visual) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.visualLevel ?? 0)) ?? 0
         }
         return sum
     }
@@ -105,6 +110,7 @@ class CGSSTeam: NSObject, NSCoding {
         var sum = 0
         for i in 0...4 {
             sum += (self[i]?.cardRef?.visual) ?? 0
+            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.visualLevel ?? 0)) ?? 0
         }
         return sum
     }
