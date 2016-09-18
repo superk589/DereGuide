@@ -25,24 +25,24 @@ class GachaSimulateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         drawSectionLine(0)
-        singleButton = UIButton.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        singleButton = UIButton.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         singleButton.setTitle("单抽", for: .normal)
         singleButton.backgroundColor = CGSSGlobal.passionColor
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
         
-        tenButton = UIButton.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 10, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        tenButton = UIButton.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         tenButton.setTitle("十连", for: .normal)
         tenButton.backgroundColor = CGSSGlobal.cuteColor
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
         
-        resultView = UIView.init(frame: CGRect.init(x: space, y: 50, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
+        resultView = UIView.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
         
-        descLabel = UILabel.init(frame: CGRect(x: space, y: resultView.fy + resultView.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
+        descLabel = UILabel.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
         descLabel.text = "* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素"
-        descLabel.isHidden = true
+        //descLabel.isHidden = true
         descLabel.sizeToFit()
         
         
@@ -85,7 +85,7 @@ class GachaSimulateView: UIView {
             resultView.addSubview(btn)
             resultView.sendSubview(toBack: btn)
         }
-        descLabel.isHidden = false
+        //descLabel.isHidden = false
     }
     
     func iconClick(iv:CGSSCardIconView) {

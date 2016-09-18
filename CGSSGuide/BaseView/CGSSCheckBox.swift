@@ -37,7 +37,7 @@ class CGSSCheckBox: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         checkBox = UIImageView.init(frame: CGRect(x: 0, y: 0, width: self.fheight, height: self.fheight))
-        descLabel = UILabel.init(frame: CGRect(x: self.fheight + 5, y: 0, width: self.fwidth - fheight, height: self.fheight))
+        descLabel = UILabel.init(frame: CGRect(x: self.fheight + 5, y: 0, width: self.fwidth - fheight - 5, height: self.fheight))
         descLabel.adjustsFontSizeToFitWidth = true
         addSubview(checkBox)
         addSubview(descLabel)

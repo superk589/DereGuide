@@ -12,9 +12,10 @@ class TeamTableViewCell: UITableViewCell {
     
     var icons: [CGSSCardIconView]!
     var skillLvLabels: [UILabel]!
-    var leftSpace: CGFloat = 20
-    var rightSpace: CGFloat = 50
-    var space: CGFloat = 10
+    var leftSpace: CGFloat = 10
+    var rightSpace: CGFloat = 48
+    var space: CGFloat = 5
+    static let btnW: CGFloat = (CGSSGlobal.width - 10 - 48 + 5) / 6 - 5
     var rawValueLabels: [UILabel]!
     
     var lifeLabel: UILabel!
@@ -22,12 +23,12 @@ class TeamTableViewCell: UITableViewCell {
     var danceLabel: UILabel!
     var visualLabel: UILabel!
     var totalLabel: UILabel!
-    static var btnW: CGFloat = (CGSSGlobal.width - 50 - 20 + 10) / 6 - 10
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        let btnW = (CGSSGlobal.width - rightSpace - leftSpace + space) / 6 - space
         icons = [CGSSCardIconView]()
         skillLvLabels = [UILabel]()
+        let btnW = TeamTableViewCell.btnW
         for index in 0...5 {
             let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + space) * CGFloat(index), y: 10, width: btnW, height: btnW))
             icon.isUserInteractionEnabled = false
@@ -44,10 +45,10 @@ class TeamTableViewCell: UITableViewCell {
         }
         let originY = 10 + btnW + 23
         
-        let width = (CGSSGlobal.width - leftSpace - rightSpace - 4) / 5
+        let width = (CGSSGlobal.width - leftSpace - rightSpace - 2) / 5
         let fontSize: CGFloat = 12
         let height: CGFloat = 12
-        let originX: CGFloat = 20
+        let originX: CGFloat = 10
         
         lifeLabel = UILabel()
         lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)

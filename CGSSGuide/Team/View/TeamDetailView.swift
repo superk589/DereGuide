@@ -83,10 +83,10 @@ class TeamDetailView: UIView {
         selfLeaderLabel.layer.masksToBounds = true
         originY += 55 + topSpace
         
-        let btnW = (width - 30 - 6 * leftSpace) / 6
+        let btnW = (width - 30 - 4 * leftSpace) / 6
         icons = [CGSSCardIconView]()
         for i in 0...5 {
-            let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + leftSpace) * CGFloat(i), y: originY, width: btnW, height: btnW))
+            let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + leftSpace / 2) * CGFloat(i), y: originY, width: btnW, height: btnW))
             addSubview(icon)
             icons.append(icon)
         }
@@ -113,9 +113,9 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        leaderSkillGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 64), rows: 4, columns: 6)
+        leaderSkillGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 72), rows: 4, columns: 6)
         
-        originY += 64 + topSpace
+        originY += 72 + topSpace
         drawSectionLine(originY)
         originY += topSpace
         
@@ -144,9 +144,9 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        presentValueGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 80), rows: 5, columns: 5)
+        presentValueGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 90), rows: 5, columns: 5)
         
-        originY += 80 + topSpace
+        originY += 90 + topSpace
         let skillListContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 42))
         skillListContentView.drawSectionLine(0)
         
@@ -168,7 +168,7 @@ class TeamDetailView: UIView {
         
         originY += 42
         
-        skillListGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 235), rows: 5, columns: 1, textAligment: .left)
+        skillListGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 245), rows: 5, columns: 1, textAligment: .left)
         
         bottomView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
         bottomView.backgroundColor = UIColor.white
@@ -205,10 +205,10 @@ class TeamDetailView: UIView {
         
         songJacket = UIImageView.init(frame: CGRect(x: leftSpace, y: 0, width: 48, height: 48))
         
-        songNameLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: 0, width: width - 48 - 40, height: 21))
+        songNameLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: topSpace * 0.25, width: width - 48 - 40, height: 21))
         songNameLabel.adjustsFontSizeToFitWidth = true
         
-        songDiffLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: 21 + topSpace, width: width - 48 - 40, height: 18))
+        songDiffLabel = UILabel.init(frame: CGRect(x: 48 + 2 * leftSpace, y: 21 + topSpace * 0.75, width: width - 48 - 40, height: 18))
         songDiffLabel.textColor = UIColor.darkGray
         songDiffLabel.textAlignment = .left
         songDiffLabel.font = UIFont.systemFont(ofSize: 12)
@@ -221,7 +221,7 @@ class TeamDetailView: UIView {
         selectSongContentView.addSubview(songNameLabel)
         selectSongContentView.addSubview(songDiffLabel)
         
-        originY += selectSongContentView.fheight + topSpace
+        originY += selectSongContentView.fheight + topSpace * 1.5
         
         manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 120, height: 21))
         manualValueBox.text = "使用固定值: "
@@ -248,7 +248,7 @@ class TeamDetailView: UIView {
         bottomView.addSubview(manualValueBox)
         bottomView.addSubview(manualValueTF)
         
-        originY += 21 + topSpace / 2
+        originY += 21 + topSpace / 2 + 3
         
         let liveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 31))
         liveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
@@ -288,8 +288,9 @@ class TeamDetailView: UIView {
         grooveTypeContentView.addGestureRecognizer(tap3)
         grooveTypeContentView.addSubview(grooveTypeDescLable)
         grooveTypeContentView.addSubview(grooveTypeButton)
+        grooveTypeContentView.clipsToBounds = true
         
-        originY += topSpace / 2
+        originY += topSpace / 2 + 3
         
         startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 30))
         startCalcButton.setTitle("开始计算", for: UIControlState())
@@ -297,10 +298,10 @@ class TeamDetailView: UIView {
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
         originY += 30 + topSpace
-        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 32), rows: 2, columns: 3)
+        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 3)
         scoreGrid.isHidden = true
         
-        originY += 32 + topSpace
+        originY += 36 + topSpace
         
         scoreDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 80))
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
@@ -520,7 +521,7 @@ class TeamDetailView: UIView {
     }
     
     func updateGrooveSelectButton() {
-        startCalcButton.fy = grooveTypeContentView.fy + grooveTypeContentView.fheight + topSpace / 2
+        startCalcButton.fy = grooveTypeContentView.fy + grooveTypeContentView.fheight + topSpace / 2 + 3
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
         scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace

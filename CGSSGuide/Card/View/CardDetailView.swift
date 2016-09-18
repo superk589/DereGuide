@@ -106,7 +106,7 @@ class CardDetailView: UIView {
         
         originY = originY + topSpace + 16
         
-        attGridView = CGSSGridLabel(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 80), rows: 5, columns: 6)
+        attGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 90), rows: 5, columns: 6)
         // attGridView.layer.borderColor = UIColor.blackColor().CGColor
         // attGridView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // attContentView.addSubview(attGridView)
@@ -115,7 +115,7 @@ class CardDetailView: UIView {
         // attContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // addSubview(attContentView)
         
-        originY = originY + topSpace + 80
+        originY = originY + topSpace + 90
         drawSectionLine(originY)
         originY = originY + topSpace
         
@@ -132,7 +132,7 @@ class CardDetailView: UIView {
         addSubview(descLabel2)
         originY = originY + topSpace + 16
         
-        rankGridView = CGSSGridLabel(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 48), rows: 3, columns: 5)
+        rankGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 54), rows: 3, columns: 5)
         // rankContentView.addSubview(rankGridView)
         addSubview(rankGridView)
         
@@ -140,7 +140,7 @@ class CardDetailView: UIView {
         // rankContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
         // addSubview(rankContentView)
         
-        originY = originY + topSpace + 48
+        originY = originY + topSpace + 54
         
         prepareSkillContentView()
         prepareLeaderSkillContentView()
@@ -342,7 +342,7 @@ class CardDetailView: UIView {
         skillContentView.addSubview(skillDescriptionLabel)
         
         insideY += topSpace + skillDescriptionLabel.frame.height
-        skillProcGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 48), rows: 3, columns: 5)
+        skillProcGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 54), rows: 3, columns: 5)
         // skillContentView.addSubview(skillProcGridView)
         // skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         // skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
