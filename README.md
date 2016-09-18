@@ -13,6 +13,11 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Team simulation/Live score calculation
 * Birthday notification and other small tools in the future
 
+## Requirements
+* iOS 8.0+
+* Xcode 8+
+* Swift 3.0+
+
 ## Acknowledgement
 ### [sparklebox](https://github.com/summertriangle-dev/sparklebox) 
 * Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev) 
