@@ -49,4 +49,9 @@ class CGSSTeamMember: NSObject, NSCoding {
         aCoder.encode(danceLevel, forKey: "danceLevel")
         aCoder.encode(visualLevel, forKey: "visualLevel")
 	}
+
+    class func initWithAnother(teamMember:CGSSTeamMember) -> CGSSTeamMember {
+        let model = CGSSTeamMember.init(id: teamMember.id!, skillLevel: teamMember.skillLevel!, vocalLevel: teamMember.vocalLevel!, danceLevel: teamMember.danceLevel!, visualLevel: teamMember.visualLevel!)
+        return model
+    }
 }

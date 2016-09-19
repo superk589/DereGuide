@@ -84,10 +84,10 @@ class TeamEditViewController: BaseTableViewController {
     }
     
     func initWith(_ team: CGSSTeam) {
-        self.leader = team.leader
-        self.friendLeader = team.friendLeader
+        self.leader = CGSSTeamMember.initWithAnother(teamMember: team.leader)
+        self.friendLeader = CGSSTeamMember.initWithAnother(teamMember: team.friendLeader)
         for i in 0...3 {
-            self.subs[i] = team.subs[i]
+            self.subs[i] = CGSSTeamMember.initWithAnother(teamMember: team.subs[i])
         }
         self.backValue = team.backSupportValue
         self.manualValue = team.manualValue
@@ -100,6 +100,16 @@ class TeamEditViewController: BaseTableViewController {
             return subs[index - 1]
         } else {
             return friendLeader
+        }
+    }
+    
+    func getTypeByIndex(_ index:Int) -> CGSSTeamMemberType {
+        if index == 0 {
+            return .leader
+        } else if index < 5 {
+           return .sub
+        } else {
+           return .friend
         }
     }
     
@@ -141,24 +151,25 @@ class TeamEditViewController: BaseTableViewController {
     
     var teamCardVC: TeamCardSelectTableViewController?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        lastIndex = (indexPath as NSIndexPath).row
-        if teamCardVC == nil {
-            teamCardVC = TeamCardSelectTableViewController()
-            teamCardVC!.delegate = self
+        if subs[indexPath.row] == nil {
+            
+            lastIndex = (indexPath as NSIndexPath).row
+            if teamCardVC == nil {
+                teamCardVC = TeamCardSelectTableViewController()
+                teamCardVC!.delegate = self
+            }
+            self.navigationController?.pushViewController(teamCardVC!, animated: true)
+            
+            /* // 使用自定义动画效果
+             let transition = CATransition()
+             transition.duration = 0.3
+             transition.type = kCATransitionFade
+             // transition.subtype = kCATransitionFromRight
+             navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+             navigationController?.pushViewController(teamCardVC!, animated: false)*/
         }
-        self.navigationController?.pushViewController(teamCardVC!, animated: true)
-        
-        /* // 使用自定义动画效果
-         let transition = CATransition()
-         transition.duration = 0.3
-         transition.type = kCATransitionFade
-         // transition.subtype = kCATransitionFromRight
-         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-         navigationController?.pushViewController(teamCardVC!, animated: false)*/
-        
         // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     /*
@@ -172,7 +183,53 @@ class TeamEditViewController: BaseTableViewController {
      */
     
 }
-extension TeamEditViewController: TeamMemberTableViewCellDelegate {
+extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPresentationControllerDelegate {
+    func replaceMember(cell: TeamMemberTableViewCell) {
+        lastIndex = cell.tag
+        if teamCardVC == nil {
+            teamCardVC = TeamCardSelectTableViewController()
+            teamCardVC!.delegate = self
+        }
+        self.navigationController?.pushViewController(teamCardVC!, animated: true)
+    }
+
+    func endEdit(cell: TeamMemberTableViewCell) {
+        
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        let vc = popoverPresentationController.presentedViewController as! TeamMemberEditingViewController
+        if let member = getMemberByIndex(lastIndex) {
+            member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+            member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
+            member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
+            member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
+            let cell = cells[lastIndex]
+            cell.initWith(member, type: getTypeByIndex(lastIndex))
+        }
+    }
+    
+    func beginEdit(cell: TeamMemberTableViewCell) {
+        lastIndex = cell.tag - 100
+        let tevc = TeamMemberEditingViewController()
+        tevc.modalPresentationStyle = .popover
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
+        if let member = getMemberByIndex(lastIndex) {
+            tevc.setup(model: member)
+        }
+        let pc = tevc.popoverPresentationController
+        
+        pc?.delegate = self
+        pc?.permittedArrowDirections = .any
+        pc?.sourceView = cell.editButton
+        pc?.sourceRect = CGRect.init(x: cell.editButton.fwidth / 2, y: cell.editButton.fheight / 2, width: 0, height: 0)
+        self.present(tevc, animated: true, completion: nil)
+    
+    }
     
     func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String) {
         UIView.animate(withDuration: 0.25, animations: {

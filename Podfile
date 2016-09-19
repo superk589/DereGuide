@@ -7,4 +7,5 @@ target 'CGSSGuide' do
   pod 'ZYCornerRadius'
   pod 'FMDB'
   pod 'lz4'
+  pod 'ASValueTrackingSlider'
 end

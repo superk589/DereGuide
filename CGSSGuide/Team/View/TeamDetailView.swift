@@ -83,7 +83,7 @@ class TeamDetailView: UIView {
         selfLeaderLabel.layer.masksToBounds = true
         originY += 55 + topSpace
         
-        let btnW = (width - 30 - 4 * leftSpace) / 6
+        let btnW = (width - 30 - 3.5 * leftSpace) / 6
         icons = [CGSSCardIconView]()
         for i in 0...5 {
             let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + leftSpace / 2) * CGFloat(i), y: originY, width: btnW, height: btnW))
@@ -91,7 +91,7 @@ class TeamDetailView: UIView {
             icons.append(icon)
         }
         
-        editTeamButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: originY, width: 30, height: btnW))
+        editTeamButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 50, y: originY, width: 50, height: btnW))
         editTeamButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate), for: UIControlState())
         editTeamButton.tintColor = UIColor.lightGray
         editTeamButton.addTarget(self, action: #selector(editTeam), for: .touchUpInside)

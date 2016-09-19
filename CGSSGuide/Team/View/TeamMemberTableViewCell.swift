@@ -10,6 +10,9 @@ import UIKit
 protocol TeamMemberTableViewCellDelegate: class {
     func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String)
     func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell)
+    func beginEdit(cell: TeamMemberTableViewCell)
+    func endEdit(cell: TeamMemberTableViewCell)
+    func replaceMember(cell: TeamMemberTableViewCell)
 }
 class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     
@@ -20,6 +23,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     var skillDesc: UILabel!
     var iconView: CGSSCardIconView!
     var title: UILabel!
+
+    var replaceButton: UILabel!
+    var editButton: UILabel!
+    var potentialLabel: UILabel!
     
     var cardName: UILabel!
     var skillName: UILabel!
@@ -47,14 +54,24 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         title.textColor = UIColor.lightGray
         title.textAlignment = .left
         
-        cardName = UILabel.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 90, height: 18))
+        replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
+        replaceButton.text = "替换 >"
+        replaceButton.isUserInteractionEnabled = true
+        replaceButton.textAlignment = .right
+        replaceButton.font = UIFont.systemFont(ofSize: 16)
+        replaceButton.textColor = UIColor.lightGray
+        let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(replaceMemeber))
+        replaceButton.addGestureRecognizer(tap1)
+        
+        
+        cardName = UILabel.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 138, height: 18))
         cardName.font = UIFont.systemFont(ofSize: 16)
         cardName.textAlignment = .left
         
-        let detail = UILabel.init(frame: CGRect(x: CGSSGlobal.width - 22, y: originY, width: 12, height: 18))
-        detail.text = ">"
-        detail.font = UIFont.systemFont(ofSize: 16)
-        detail.textColor = UIColor.lightGray
+//        let detail = UILabel.init(frame: CGRect(x: CGSSGlobal.width - 22, y: originY, width: 12, height: 18))
+//        detail.text = ">"
+//        detail.font = UIFont.systemFont(ofSize: 16)
+//        detail.textColor = UIColor.lightGray
         
         originY += 18
         
@@ -64,10 +81,28 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         originY += topSpace
         iconView = CGSSCardIconView.init(frame: CGRect(x: 10, y: originY, width: 48, height: 48))
         
+        potentialLabel = UILabel.init(frame: CGRect.init(x: 68, y: originY, width: CGSSGlobal.width - 138, height: 18))
+        potentialLabel.font = UIFont.systemFont(ofSize: 14)
+        potentialLabel.adjustsFontSizeToFitWidth = true
+        
+        
+        editButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
+        editButton.text = "编辑"
+        editButton.isUserInteractionEnabled = true
+        editButton.textAlignment = .right
+        editButton.font = UIFont.systemFont(ofSize: 16)
+        editButton.textColor = UIColor.lightGray
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(editButtonClick))
+        editButton.addGestureRecognizer(tap2)
+        
+        
+        
         contentView.addSubview(iconView)
         contentView.addSubview(title)
         contentView.addSubview(cardName)
-        contentView.addSubview(detail)
+        contentView.addSubview(editButton)
+        contentView.addSubview(potentialLabel)
+        contentView.addSubview(replaceButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -122,9 +157,9 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillDesc.textColor = UIColor.darkGray
         
         skillView.addSubview(skillStaticDesc)
-        skillView.addSubview(skillLevelStaticDesc)
+        //skillView.addSubview(skillLevelStaticDesc)
         skillView.addSubview(skillName)
-        skillView.addSubview(skillLevelTF)
+        //skillView.addSubview(skillLevelTF)
         skillView.addSubview(skillDesc)
         
         skillView.clipsToBounds = true
@@ -178,7 +213,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func setupSkillViewWith(_ skill: CGSSSkill?, skillLevel: Int?) {
-        originY = cardName.fy + cardName.fheight + 5
+        originY = potentialLabel.fy + potentialLabel.fheight + 5
         skillView.fy = originY
         if skill != nil {
             skillLevelTF.isHidden = false
@@ -221,7 +256,19 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         let card = model.cardRef!
         self.iconView.setWithCardId(card.id!)
         self.cardName.text = card.chara?.name
-        originY = cardName.fy + cardName.fheight + 5
+        let strSkill = NSAttributedString.init(string: "技能等级: \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+        let strVocal = NSAttributedString.init(string: "Vo: +\(model.vocalLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.vocalColor])
+        let strDance = NSAttributedString.init(string: "Da: +\(model.danceLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.danceColor])
+        let strVisual = NSAttributedString.init(string: "Vi: +\(model.visualLevel!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.visualColor])
+    
+        let att = NSMutableAttributedString.init(attributedString: strSkill)
+        att.append(strVocal)
+        att.append(strDance)
+        att.append(strVisual)
+        
+        potentialLabel.attributedText = att
+        
+        originY = potentialLabel.fy + potentialLabel.fheight + 5
         skillView?.fheight = 0
         leaderSkillView?.fheight = 0
         switch type {
@@ -264,4 +311,13 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillLevelTF.resignFirstResponder()
         delegate?.skillLevelDidChange(self, lv: skillLevelTF.text!)
     }
+    
+    func editButtonClick() {
+        delegate?.beginEdit(cell: self)
+    }
+    
+    func replaceMemeber() {
+        delegate?.replaceMember(cell: self)
+    }
+    
 }

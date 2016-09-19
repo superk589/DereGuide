@@ -132,7 +132,7 @@ class CGSSTeam: NSObject, NSCoding {
     func getPresentValue(_ type: CGSSCardFilterType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...5 {
-            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContent())
+            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContent(), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
         }
         return attValue
     }
@@ -140,7 +140,7 @@ class CGSSTeam: NSObject, NSCoding {
     func getPresentValueInGroove(_ type: CGSSCardFilterType, burstType: LeaderSkillUpType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...4 {
-            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(burstType))
+            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(burstType), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
         }
         return attValue
     }
@@ -336,8 +336,8 @@ class CGSSTeam: NSObject, NSCoding {
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getPresentValue(_ songType: CGSSCardFilterType, roomUpValue: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]]) -> CGSSAttributeValue {
-        var attValue = CGSSAttributeValue.init(visual: visual, vocal: vocal, dance: dance, life: life)
+    func getPresentValue(_ songType: CGSSCardFilterType, roomUpValue: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]], vocalLevel:Int, danceLevel:Int, visualLevel:Int) -> CGSSAttributeValue {
+        var attValue = CGSSAttributeValue.init(visual: visual + attByPotential(lv: visualLevel), vocal: vocal + attByPotential(lv: vocalLevel), dance: dance + attByPotential(lv: danceLevel), life: life)
         var factor = 100 + (roomUpValue ?? 10)
         if songType == cardFilterType || songType == .office {
             factor += 30
