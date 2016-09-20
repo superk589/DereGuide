@@ -143,10 +143,14 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
             BirthdayCenter.defaultCenter.removeNotification()
         }
         
+        refreshUI()
+        
+    }
+    
+    func refreshUI() {
         prepareChars()
         tableView.reloadData()
         (headerCells[0].accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? "未开启" : "已开启"
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -157,7 +161,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(refreshData), name: "UPDATE_END", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(refreshUI), name: "UPDATE_END", object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
