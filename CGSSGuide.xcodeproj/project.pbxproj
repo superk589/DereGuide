@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1201D8031D90C8E1007BFE8F /* 750-home-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1201D8001D90C8E1007BFE8F /* 750-home-toolbar.png */; };
+		1201D8041D90C8E1007BFE8F /* 750-home-toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1201D8011D90C8E1007BFE8F /* 750-home-toolbar@2x.png */; };
+		1201D8051D90C8E1007BFE8F /* 750-home-toolbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1201D8021D90C8E1007BFE8F /* 750-home-toolbar@3x.png */; };
 		1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */; };
 		120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */; };
 		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
@@ -187,6 +190,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1201D8001D90C8E1007BFE8F /* 750-home-toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750-home-toolbar.png"; sourceTree = "<group>"; };
+		1201D8011D90C8E1007BFE8F /* 750-home-toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750-home-toolbar@2x.png"; sourceTree = "<group>"; };
+		1201D8021D90C8E1007BFE8F /* 750-home-toolbar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750-home-toolbar@3x.png"; sourceTree = "<group>"; };
 		1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharFilter.swift; sourceTree = "<group>"; };
 		120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
@@ -511,6 +517,9 @@
 				1269E9401D5209A40071AD7F /* 748-heart-toolbar.png */,
 				1269E9411D5209A40071AD7F /* 748-heart-toolbar@2x.png */,
 				1269E9421D5209A40071AD7F /* 748-heart-toolbar@3x.png */,
+				1201D8001D90C8E1007BFE8F /* 750-home-toolbar.png */,
+				1201D8011D90C8E1007BFE8F /* 750-home-toolbar@2x.png */,
+				1201D8021D90C8E1007BFE8F /* 750-home-toolbar@3x.png */,
 				1269E9431D5209A40071AD7F /* 765-arrow-left-toolbar.png */,
 				1269E9441D5209A40071AD7F /* 765-arrow-left-toolbar@2x.png */,
 				1269E9451D5209A40071AD7F /* 765-arrow-left-toolbar@3x.png */,
@@ -867,10 +876,12 @@
 				1269E9981D520A840071AD7F /* 726-star-selected@2x.png in Resources */,
 				1269E9991D520A840071AD7F /* 726-star-selected@3x.png in Resources */,
 				1269E9B11D520AA10071AD7F /* 779-users-selected@3x.png in Resources */,
+				1201D8041D90C8E1007BFE8F /* 750-home-toolbar@2x.png in Resources */,
 				1269E9B01D520AA10071AD7F /* 779-users-selected@2x.png in Resources */,
 				12D89A301D713054009E7D44 /* icon_placeholder.png in Resources */,
 				125164B21D5A0422001D66FC /* song_all.png in Resources */,
 				122EED0E1D6171B6008ADE08 /* 921-toolbox.png in Resources */,
+				1201D8031D90C8E1007BFE8F /* 750-home-toolbar.png in Resources */,
 				125164B41D5A0422001D66FC /* song_cute.png in Resources */,
 				1269E9BF1D520AAE0071AD7F /* 898-music-note@2x.png in Resources */,
 				12A71D671D8B977D0021320D /* 888-checkmark-toolbar.png in Resources */,
@@ -905,6 +916,7 @@
 				1269E94F1D5209A40071AD7F /* 765-arrow-left-toolbar.png in Resources */,
 				1269E9A41D520A960071AD7F /* 740-gear-selected@2x.png in Resources */,
 				1269E94E1D5209A40071AD7F /* 748-heart-toolbar@3x.png in Resources */,
+				1201D8051D90C8E1007BFE8F /* 750-home-toolbar@3x.png in Resources */,
 				12A71D6F1D8BDCA30021320D /* star@2x.png in Resources */,
 				12A71D661D8B977D0021320D /* 888-checkmark-toolbar-selected@3x.png in Resources */,
 				1269E9541D5209A40071AD7F /* 889-sort-descending-toolbar@3x.png in Resources */,

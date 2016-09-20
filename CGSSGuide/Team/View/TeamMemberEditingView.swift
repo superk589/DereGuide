@@ -115,8 +115,15 @@ class TeamMemberEditingView: UIView {
     }
     
     func setupWith(model:CGSSTeamMember) {
-        skillItem.slider.value = Float(model.skillLevel!)
-        skillItem.numLabel.text = String(model.skillLevel!)
+        if model.cardRef?.skill == nil {
+            skillItem.slider.value = 0
+            skillItem.isUserInteractionEnabled = false
+            skillItem.slider.isEnabled = false
+            skillItem.numLabel.text = "n/a"
+        } else {
+            skillItem.slider.value = Float(model.skillLevel!)
+            skillItem.numLabel.text = String(model.skillLevel!)
+        }
         
         vocalItem.slider.value = Float(model.vocalLevel!)
         vocalItem.numLabel.text = String(model.vocalLevel!)

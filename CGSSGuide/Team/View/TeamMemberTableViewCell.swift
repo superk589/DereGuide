@@ -8,8 +8,8 @@
 
 import UIKit
 protocol TeamMemberTableViewCellDelegate: class {
-    func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String)
-    func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell)
+//    func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String)
+//    func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell)
     func beginEdit(cell: TeamMemberTableViewCell)
     func endEdit(cell: TeamMemberTableViewCell)
     func replaceMember(cell: TeamMemberTableViewCell)
@@ -62,7 +62,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         replaceButton.textColor = UIColor.lightGray
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(replaceMemeber))
         replaceButton.addGestureRecognizer(tap1)
-        
+        replaceButton.isHidden = true
         
         cardName = UILabel.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 138, height: 18))
         cardName.font = UIFont.systemFont(ofSize: 16)
@@ -94,6 +94,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         editButton.textColor = UIColor.lightGray
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(editButtonClick))
         editButton.addGestureRecognizer(tap2)
+        editButton.isHidden = true
         
         
         
@@ -129,26 +130,26 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillName.adjustsFontSizeToFitWidth = true
         skillName.font = UIFont.systemFont(ofSize: 14)
         
-        skillLevelStaticDesc = UILabel.init(frame: CGRect(x: skillView.fwidth - 75, y: 5, width: 35, height: 17))
-        skillLevelStaticDesc.text = "SLv."
-        skillLevelStaticDesc.font = UIFont.systemFont(ofSize: 14)
-        skillLevelStaticDesc.textAlignment = .left
-        skillLevelStaticDesc.textColor = UIColor.black
-        
-        skillLevelTF = UITextField.init(frame: CGRect(x: skillView.fwidth - 40, y: 0, width: 40, height: 27))
-        skillLevelTF.borderStyle = .roundedRect
-        skillLevelTF.font = UIFont.systemFont(ofSize: 14)
-        skillLevelTF.delegate = self
-        skillLevelTF.textAlignment = .right
-        skillLevelTF.autocorrectionType = .no
-        skillLevelTF.autocapitalizationType = .none
-        skillLevelTF.autocapitalizationType = .none
-        skillLevelTF.returnKeyType = .done
-        // 因为还不会给数字键盘加完成按钮 暂时采用这个键盘
-        skillLevelTF.keyboardType = .numbersAndPunctuation
-        skillLevelTF.addTarget(self, action: #selector(levelFieldBegin), for: .editingDidBegin)
-        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), for: .editingDidEndOnExit)
-        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), for: .editingDidEnd)
+//        skillLevelStaticDesc = UILabel.init(frame: CGRect(x: skillView.fwidth - 75, y: 5, width: 35, height: 17))
+//        skillLevelStaticDesc.text = "SLv."
+//        skillLevelStaticDesc.font = UIFont.systemFont(ofSize: 14)
+//        skillLevelStaticDesc.textAlignment = .left
+//        skillLevelStaticDesc.textColor = UIColor.black
+//        
+//        skillLevelTF = UITextField.init(frame: CGRect(x: skillView.fwidth - 40, y: 0, width: 40, height: 27))
+//        skillLevelTF.borderStyle = .roundedRect
+//        skillLevelTF.font = UIFont.systemFont(ofSize: 14)
+//        skillLevelTF.delegate = self
+//        skillLevelTF.textAlignment = .right
+//        skillLevelTF.autocorrectionType = .no
+//        skillLevelTF.autocapitalizationType = .none
+//        skillLevelTF.autocapitalizationType = .none
+//        skillLevelTF.returnKeyType = .done
+//        // 因为还不会给数字键盘加完成按钮 暂时采用这个键盘
+//        skillLevelTF.keyboardType = .numbersAndPunctuation
+//        skillLevelTF.addTarget(self, action: #selector(levelFieldBegin), for: .editingDidBegin)
+//        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), for: .editingDidEndOnExit)
+//        skillLevelTF.addTarget(self, action: #selector(levelFieldDone), for: .editingDidEnd)
         
         skillDesc = UILabel.init(frame: CGRect(x: 0, y: 26, width: skillView.fwidth, height: 0))
         skillDesc.numberOfLines = 0
@@ -166,20 +167,20 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         contentView.addSubview(skillView)
     }
     
-    // 当点击的位置是编辑技能等级的周围部分时 也触发编辑效果
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let view = super.hitTest(point, with: event)
-        if view == nil {
-            return nil
-        }
-        if let sView = skillView , view == sView && !skillLevelTF.isHidden {
-            let newPoint = convert(point, to: sView)
-            if newPoint.x >= sView.fwidth - 85 && newPoint.y <= 50 {
-                return skillLevelTF
-            }
-        }
-        return view
-    }
+//    // 当点击的位置是编辑技能等级的周围部分时 也触发编辑效果
+//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+//        let view = super.hitTest(point, with: event)
+//        if view == nil {
+//            return nil
+//        }
+//        if let sView = skillView , view == sView && !skillLevelTF.isHidden {
+//            let newPoint = convert(point, to: sView)
+//            if newPoint.x >= sView.fwidth - 85 && newPoint.y <= 50 {
+//                return skillLevelTF
+//            }
+//        }
+//        return view
+//    }
     
     func prepareLeaderSkillView() {
         if leaderSkillView != nil {
@@ -216,17 +217,17 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         originY = potentialLabel.fy + potentialLabel.fheight + 5
         skillView.fy = originY
         if skill != nil {
-            skillLevelTF.isHidden = false
-            skillLevelStaticDesc.isHidden = false
-            skillLevelTF.text = String(skillLevel!)
+            //skillLevelTF.isHidden = false
+            //skillLevelStaticDesc.isHidden = false
+            //skillLevelTF.text = String(skillLevel!)
             skillName.text = skill!.skillName
             skillDesc.fwidth = skillView.fwidth
             skillDesc.text = skill!.getExplainByLevel(skillLevel!)
             skillDesc.sizeToFit()
             skillView.fheight = skillDesc.fheight + skillDesc.fy
         } else {
-            skillLevelTF.isHidden = true
-            skillLevelStaticDesc.isHidden = true
+            //skillLevelTF.isHidden = true
+            //skillLevelStaticDesc.isHidden = true
             skillName.text = "无"
             skillDesc.fheight = 0
             skillView.fheight = skillName.fheight + skillName.fy
@@ -256,7 +257,12 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         let card = model.cardRef!
         self.iconView.setWithCardId(card.id!)
         self.cardName.text = card.chara?.name
-        let strSkill = NSAttributedString.init(string: "技能等级: \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+        var strSkill:NSAttributedString
+        if  card.skill != nil {
+            strSkill = NSAttributedString.init(string: "技能等级: \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+        } else {
+            strSkill = NSAttributedString.init(string: "技能等级: n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+        }
         let strVocal = NSAttributedString.init(string: "Vo: +\(model.vocalLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.vocalColor])
         let strDance = NSAttributedString.init(string: "Da: +\(model.danceLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.danceColor])
         let strVisual = NSAttributedString.init(string: "Vi: +\(model.visualLevel!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.visualColor])
@@ -267,6 +273,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         att.append(strVisual)
         
         potentialLabel.attributedText = att
+        
+        replaceButton.isHidden = false
+        editButton.isHidden = false
+        
         
         originY = potentialLabel.fy + potentialLabel.fheight + 5
         skillView?.fheight = 0
@@ -303,14 +313,14 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
 //        delegate?.skillLevelDidChange(self, lv: skilllevel.text!)
 //        print("aaa")
 //    }
-    func levelFieldBegin(_ sender: UITextField) {
-        delegate?.skillLevelDidBeginEditing(self)
-    }
-    // 此方法同时处理did end on exit 和 editing did end
-    func levelFieldDone(_ sender: UITextField) {
-        skillLevelTF.resignFirstResponder()
-        delegate?.skillLevelDidChange(self, lv: skillLevelTF.text!)
-    }
+//    func levelFieldBegin(_ sender: UITextField) {
+//        delegate?.skillLevelDidBeginEditing(self)
+//    }
+//    // 此方法同时处理did end on exit 和 editing did end
+//    func levelFieldDone(_ sender: UITextField) {
+//        skillLevelTF.resignFirstResponder()
+//        delegate?.skillLevelDidChange(self, lv: skillLevelTF.text!)
+//    }
     
     func editButtonClick() {
         delegate?.beginEdit(cell: self)

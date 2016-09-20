@@ -130,6 +130,10 @@ class TeamEditViewController: BaseTableViewController {
             team.manualValue = manualValue ?? 0
             delegate?.save(team)
             _ = self.navigationController?.popViewController(animated: true)
+        } else {
+            let alvc = UIAlertController.init(title: "队伍不完整", message: "请完善队伍后，再点击存储", preferredStyle: .alert)
+            alvc.addAction(UIAlertAction.init(title: "确定", style: .cancel, handler: nil))
+            self.tabBarController?.present(alvc, animated: true, completion: nil)
         }
     }
     
@@ -151,8 +155,7 @@ class TeamEditViewController: BaseTableViewController {
     
     var teamCardVC: TeamCardSelectTableViewController?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if subs[indexPath.row] == nil {
-            
+        if getMemberByIndex(indexPath.row) == nil {
             lastIndex = (indexPath as NSIndexPath).row
             if teamCardVC == nil {
                 teamCardVC = TeamCardSelectTableViewController()
@@ -185,7 +188,7 @@ class TeamEditViewController: BaseTableViewController {
 }
 extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPresentationControllerDelegate {
     func replaceMember(cell: TeamMemberTableViewCell) {
-        lastIndex = cell.tag
+        lastIndex = cell.tag - 100
         if teamCardVC == nil {
             teamCardVC = TeamCardSelectTableViewController()
             teamCardVC!.delegate = self
@@ -231,32 +234,32 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPres
     
     }
     
-    func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String) {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPoint(x: 0, y: -64)
-        })
-        let member = getMemberByIndex(cell.tag - 100)
-        var newLevel = Int(lv) ?? 10
-        if newLevel > 10 || newLevel < 1 {
-            newLevel = 10
-        }
-        member?.skillLevel = newLevel
-        cell.setupSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
-    }
+//    func skillLevelDidChange(_ cell: TeamMemberTableViewCell, lv: String) {
+//        UIView.animate(withDuration: 0.25, animations: {
+//            self.tableView.contentOffset = self.lastScrollViewOffset ?? CGPoint(x: 0, y: -64)
+//        })
+//        let member = getMemberByIndex(cell.tag - 100)
+//        var newLevel = Int(lv) ?? 10
+//        if newLevel > 10 || newLevel < 1 {
+//            newLevel = 10
+//        }
+//        member?.skillLevel = newLevel
+//        cell.setupSkillViewWith((getMemberByIndex(cell.tag - 100)?.cardRef?.skill)!, skillLevel: getMemberByIndex(cell.tag - 100)?.skillLevel)
+//    }
     
-    func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell) {
-        lastScrollViewOffset = tableView.contentOffset
-        if cell.tag - 100 >= 2 {
-            var height: CGFloat = 0
-            for i in 0...cell.tag - 100 {
-                height += cells[i].contentView.fheight + 1 / UIScreen.main.scale
-            }
-            UIView.animate(withDuration: 0.25, animations: {
-                self.tableView.contentOffset = CGPoint(x: 0, y: max(self.keyBoardHeigt + height - CGSSGlobal.height, -64))
-            })
-            
-        }
-    }
+//    func skillLevelDidBeginEditing(_ cell: TeamMemberTableViewCell) {
+//        lastScrollViewOffset = tableView.contentOffset
+//        if cell.tag - 100 >= 2 {
+//            var height: CGFloat = 0
+//            for i in 0...cell.tag - 100 {
+//                height += cells[i].contentView.fheight + 1 / UIScreen.main.scale
+//            }
+//            UIView.animate(withDuration: 0.25, animations: {
+//                self.tableView.contentOffset = CGPoint(x: 0, y: max(self.keyBoardHeigt + height - CGSSGlobal.height, -64))
+//            })
+//            
+//        }
+//    }
 }
 
 extension TeamEditViewController: BaseCardTableViewControllerDelegate {

@@ -14,8 +14,9 @@ class GachaCardTableViewController: BaseCardTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
-        
+    
         toolbarItems = [backItem]
+
         prepareFilterAndSorter()
     }
     

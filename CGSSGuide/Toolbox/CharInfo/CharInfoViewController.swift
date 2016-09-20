@@ -40,7 +40,9 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         
         // tb.items = [backItem]
         
+
         toolbarItems = [backItem]
+
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

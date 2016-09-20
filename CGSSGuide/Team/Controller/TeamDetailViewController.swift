@@ -68,7 +68,8 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 extension TeamDetailViewController: TeamDetailViewDelegate {
   
     func manualFieldBegin() {
-        let offset = teamDV.bottomView.fy + teamDV.manualValueTF.fy + teamDV.manualValueTF.fheight - sv.contentOffset.y + 258 - sv.fheight
+        var offset = teamDV.bottomView.fy + teamDV.manualValueTF.fy + teamDV.manualValueTF.fheight - sv.contentOffset.y + 258 - sv.fheight
+        offset += UIApplication.shared.statusBarFrame.size.height - 20
         if offset > 0 {
             UIView.animate(withDuration: 0.25, animations: {
                 self.sv.contentOffset.y += offset
@@ -76,14 +77,11 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         }
     }
 
-    func manualFieldDone() {
-        
-    }
-    
-    func manualValueChanged(_ value: Int) {
+    func manualFieldDone(_ value: Int) {
         team.manualValue = value
         CGSSTeamManager.defaultManager.writeToFile(nil)
     }
+
     
     func usingManualValue(using: Bool) {
         usingManualValue = using
@@ -111,10 +109,20 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         navigationController?.pushViewController(songSelectVC, animated: true)
     }
     
-    func backValueChanged(_ value: Int) {
+    func backFieldDone(_ value: Int) {
         team.backSupportValue = value
         teamDV.updatePresentValueGrid(team)
         CGSSTeamManager.defaultManager.writeToFile(nil)
+    }
+    
+    func backFieldBegin() {
+        var offset = teamDV.backSupportTF.fy + teamDV.backSupportTF.fheight - sv.contentOffset.y + 258 - sv.fheight
+        offset += UIApplication.shared.statusBarFrame.size.height - 20
+        if offset > 0 {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.sv.contentOffset.y += offset
+            })
+        }
     }
     
     func editTeam() {

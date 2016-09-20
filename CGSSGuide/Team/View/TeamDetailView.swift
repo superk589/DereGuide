@@ -20,14 +20,14 @@ protocol TeamDetailViewDelegate: class {
     func skillShowOrHide()
     func startCalc()
     func cardIconClick(_ id: Int)
-    func backValueChanged(_ value: Int)
+    func backFieldBegin()
+    func backFieldDone(_ value: Int)
     func selectSong()
     func liveTypeButtonClick()
     func grooveTypeButtonClick()
-    func manualValueChanged(_ value: Int)
     func usingManualValue(using:Bool)
     func manualFieldBegin()
-    func manualFieldDone()
+    func manualFieldDone(_ value: Int)
 }
 
 class TeamDetailView: UIView {
@@ -136,8 +136,9 @@ class TeamDetailView: UIView {
         backSupportTF.autocapitalizationType = .none
         backSupportTF.borderStyle = .roundedRect
         backSupportTF.textAlignment = .right
-        backSupportTF.addTarget(self, action: #selector(backValueChanged), for: .editingDidEnd)
-        backSupportTF.addTarget(self, action: #selector(backValueChanged), for: .editingDidEndOnExit)
+        backSupportTF.addTarget(self, action: #selector(backFieldBegin), for: .editingDidBegin)
+        backSupportTF.addTarget(self, action: #selector(backFieldDone), for: .editingDidEnd)
+        backSupportTF.addTarget(self, action: #selector(backFieldDone), for: .editingDidEndOnExit)
         backSupportTF.keyboardType = .numbersAndPunctuation
         backSupportTF.returnKeyType = .done
         backSupportTF.font = UIFont.systemFont(ofSize: 14)
@@ -236,8 +237,6 @@ class TeamDetailView: UIView {
         manualValueTF.autocapitalizationType = .none
         manualValueTF.borderStyle = .roundedRect
         manualValueTF.textAlignment = .right
-        manualValueTF.addTarget(self, action: #selector(manualValueChanged), for: .editingDidEnd)
-        manualValueTF.addTarget(self, action: #selector(manualValueChanged), for: .editingDidEndOnExit)
         manualValueTF.keyboardType = .numbersAndPunctuation
         manualValueTF.returnKeyType = .done
         manualValueTF.font = UIFont.systemFont(ofSize: 14)
@@ -566,15 +565,13 @@ class TeamDetailView: UIView {
         scoreString.append(["", "", ""])
         scoreGrid.setGridContent(scoreString)
     }
-    func backValueChanged() {
+    func backFieldBegin() {
+        delegate?.backFieldBegin()
+    }
+    func backFieldDone() {
         let value = Int(backSupportTF.text!) ?? CGSSGlobal.presetBackValue
         backSupportTF.text = String(value)
-        delegate?.backValueChanged(value)
-    }
-    func manualValueChanged() {
-        let value = Int(manualValueTF.text!) ?? 0
-        manualValueTF.text = String(value)
-        delegate?.manualValueChanged(value)
+        delegate?.backFieldDone(value)
     }
     var currentLiveType: CGSSLiveType = .Normal {
         didSet {
@@ -637,6 +634,8 @@ class TeamDetailView: UIView {
     }
     
     func manualFieldDone() {
-        delegate?.manualFieldDone()
+        let value = Int(manualValueTF.text!) ?? 0
+        manualValueTF.text = String(value)
+        delegate?.manualFieldDone(value)
     }
 }
