@@ -209,7 +209,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                         let alert = UIAlertController.init(title: "缓存图片完成", message: "成功\(a - b),失败\(b)", preferredStyle: .alert)
                         alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
                         self.tabBarController?.present(alert, animated: true, completion: nil)
-                        self.updateCacheSize()
                         self.updateStatusView.isHidden = true
                     })
                     CGSSUpdater.defaultUpdater.isUpdating = false
@@ -227,7 +226,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         let alvc = UIAlertController.init(title: "缓存图片取消", message: "缓存图片已被中止", preferredStyle: .alert)
         alvc.addAction(UIAlertAction.init(title: "确定", style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)
-        updateCacheSize()
+        //updateCacheSize()
     }
     
     func refresh() {
@@ -238,6 +237,12 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
+        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: "UPDATE_END", object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CGSSNotificationCenter.removeAll(self)
     }
     
     @IBOutlet weak var reviewCell: UITableViewCell! {
@@ -301,6 +306,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 // MARK: - Table view data source
     

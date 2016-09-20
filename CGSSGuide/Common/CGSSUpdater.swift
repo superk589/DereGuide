@@ -49,6 +49,13 @@ open class CGSSUpdater: NSObject {
     var isUpdating = false {
         didSet {
             UIApplication.shared.isNetworkActivityIndicatorVisible = isUpdating
+            DispatchQueue.main.async {
+                if self.isUpdating {
+                    CGSSNotificationCenter.post("UPDATE_START", object: nil)
+                } else {
+                    CGSSNotificationCenter.post("UPDATE_END", object: nil)
+                }
+            }
         }
     }
     var dataSession: URLSession!

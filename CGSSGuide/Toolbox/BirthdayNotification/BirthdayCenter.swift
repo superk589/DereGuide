@@ -13,9 +13,8 @@ class BirthdayCenter: NSObject {
     var sortedChars: [CGSSChar]!
     fileprivate override init() {
         super.init()
-        let dao = CGSSDAO.sharedDAO
-        sortedChars = dao.charDict.allValues as! [CGSSChar]
-        sortInside()
+        prepare()
+        CGSSNotificationCenter.add(self, selector: #selector(prepare), name: "UPDATE_END", object: nil)
     }
     
     var tempChar: CGSSChar!
@@ -25,6 +24,11 @@ class BirthdayCenter: NSObject {
         } else {
             return sortedChars.index(of: tempChar)
         }
+    }
+    func prepare() {
+        let dao = CGSSDAO.sharedDAO
+        sortedChars = dao.charDict.allValues as! [CGSSChar]
+        sortInside()
     }
     
     func sortInside() {
