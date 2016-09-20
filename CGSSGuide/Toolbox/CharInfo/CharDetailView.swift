@@ -10,7 +10,7 @@ import UIKit
 
 private let topSpace: CGFloat = 10
 private let leftSpace: CGFloat = 10
-private let bottomInset: CGFloat = 30
+private let bottomInset: CGFloat = 50
 
 protocol CharDetailViewDelegate: class {
     func cardIconClick(_ icon: CGSSCardIconView)
@@ -69,7 +69,7 @@ class CharDetailView: UIView {
         }
         relatedCardsContentView.fy = profileView.fy + profileView.fheight + topSpace
         
-        fheight = relatedCardsContentView.fheight + relatedCardsContentView.fy
+        fheight = relatedCardsContentView.fheight + relatedCardsContentView.fy + bottomInset
     }
     
     // 相关卡片

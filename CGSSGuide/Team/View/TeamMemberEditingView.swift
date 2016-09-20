@@ -114,8 +114,8 @@ class TeamMemberEditingView: UIView {
         
     }
     
-    func setupWith(model:CGSSTeamMember) {
-        if model.cardRef?.skill == nil {
+    func setupWith(model:CGSSTeamMember, type: CGSSTeamMemberType) {
+        if model.cardRef?.skill == nil || type == .friend {
             skillItem.slider.value = 0
             skillItem.isUserInteractionEnabled = false
             skillItem.slider.isEnabled = false

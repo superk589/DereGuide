@@ -161,6 +161,7 @@ class TeamDetailView: UIView {
         let image = UIImage.init(named: "764-arrow-down-toolbar-selected")!.withRenderingMode(.alwaysTemplate)
         skillShowOrHideButton.setImage(image, for: UIControlState())
         skillShowOrHideButton.tintColor = UIColor.lightGray
+        skillShowOrHideButton.isUserInteractionEnabled = false
         
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(skillShowOrHide))
         skillListContentView.addGestureRecognizer(tap2)
@@ -199,6 +200,7 @@ class TeamDetailView: UIView {
         selectSongButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 40, y: 7, width: 30, height: 30))
         selectSongButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate), for: UIControlState())
         selectSongButton.tintColor = UIColor.lightGray
+        selectSongButton.isUserInteractionEnabled = false
         // selectSongButton.addTarget(self, action: #selector(selectSong), for: .touchUpInside)
         // originY += 30 + topSpace
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectSong))

@@ -19,12 +19,12 @@ class TeamMemberEditingViewController: UIViewController {
     }
 
     
-    func setup(model:CGSSTeamMember) {
+    func setup(model:CGSSTeamMember, type:CGSSTeamMemberType) {
         if editView == nil {
             editView = TeamMemberEditingView.init(frame: CGRect.init(x: 0, y: 0, width: 240, height: 290))
         }
         self.view.addSubview(editView)
-        editView.setupWith(model: model)
+        editView.setupWith(model: model, type: type)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

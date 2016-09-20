@@ -144,6 +144,7 @@ extension CardDetailViewController: CGSSImageViewDelegate {
             iv.frame.origin.y = 0
             self.navigationController?.navigationBar.alpha = 1
             self.tabBarController?.tabBar.alpha = 1
+            self.navigationController?.toolbar.alpha = 1
         }) 
         // self.navigationController?.setNavigationBarHidden(false, animated: true)
         // self.tabBarController?.tabBar.hidden = false
@@ -162,6 +163,7 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             UIApplication.shared.isStatusBarHidden = true
             self.navigationController?.navigationBar.alpha = 0
+            self.navigationController?.toolbar.alpha = 0
             self.tabBarController?.tabBar.alpha = 0
             self.fullScreenView?.bounds.origin.y = 0
         }) 

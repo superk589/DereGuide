@@ -48,7 +48,9 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        let titleContentView = UIView.init(frame: CGRect.init(x: 0, y: originY, width: CGSSGlobal.width, height: 33))
         originY += topSpace
+
         title = UILabel.init(frame: CGRect(x: 10, y: originY, width: 48, height: 18))
         title.font = UIFont.systemFont(ofSize: 16)
         title.textColor = UIColor.lightGray
@@ -56,17 +58,21 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
         replaceButton.text = "替换 >"
-        replaceButton.isUserInteractionEnabled = true
+        replaceButton.isUserInteractionEnabled = false
         replaceButton.textAlignment = .right
         replaceButton.font = UIFont.systemFont(ofSize: 16)
         replaceButton.textColor = UIColor.lightGray
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(replaceMemeber))
-        replaceButton.addGestureRecognizer(tap1)
+        titleContentView.addGestureRecognizer(tap1)
         replaceButton.isHidden = true
         
         cardName = UILabel.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 138, height: 18))
         cardName.font = UIFont.systemFont(ofSize: 16)
         cardName.textAlignment = .left
+        
+        titleContentView.addSubview(title)
+        titleContentView.addSubview(replaceButton)
+        titleContentView.addSubview(cardName)
         
 //        let detail = UILabel.init(frame: CGRect(x: CGSSGlobal.width - 22, y: originY, width: 12, height: 18))
 //        detail.text = ">"
@@ -98,12 +104,10 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         
         
-        contentView.addSubview(iconView)
-        contentView.addSubview(title)
-        contentView.addSubview(cardName)
+        contentView.addSubview(titleContentView)
         contentView.addSubview(editButton)
         contentView.addSubview(potentialLabel)
-        contentView.addSubview(replaceButton)
+        contentView.addSubview(iconView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -258,7 +262,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.iconView.setWithCardId(card.id!)
         self.cardName.text = card.chara?.name
         var strSkill:NSAttributedString
-        if  card.skill != nil {
+        if  card.skill != nil && type != .friend {
             strSkill = NSAttributedString.init(string: "技能等级: \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
         } else {
             strSkill = NSAttributedString.init(string: "技能等级: n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])

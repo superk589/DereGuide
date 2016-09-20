@@ -150,6 +150,11 @@ class TeamEditViewController: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cells[(indexPath as NSIndexPath).row]
+        if getMemberByIndex(indexPath.row) != nil {
+            cell.selectionStyle = .none
+        } else {
+            cell.selectionStyle = .default
+        }
         return cell
     }
     
@@ -222,7 +227,7 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPres
         tevc.modalPresentationStyle = .popover
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
         if let member = getMemberByIndex(lastIndex) {
-            tevc.setup(model: member)
+            tevc.setup(model: member, type: getTypeByIndex(lastIndex))
         }
         let pc = tevc.popoverPresentationController
         

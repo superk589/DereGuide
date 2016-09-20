@@ -167,6 +167,8 @@
 		12A71D6E1D8BDCA30021320D /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D6C1D8BDCA30021320D /* star.png */; };
 		12A71D6F1D8BDCA30021320D /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D6D1D8BDCA30021320D /* star@2x.png */; };
 		12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D921D8C2D280021320D /* CGSSCheckBox.swift */; };
+		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
+		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
@@ -353,6 +355,8 @@
 		12A71D6D1D8BDCA30021320D /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		12A71D911D8C20260021320D /* CGSSGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CGSSGuide.entitlements; sourceTree = "<group>"; };
 		12A71D921D8C2D280021320D /* CGSSCheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCheckBox.swift; sourceTree = "<group>"; };
+		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
+		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
@@ -623,6 +627,8 @@
 			isa = PBXGroup;
 			children = (
 				1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */,
+				12ACD5A91D9128250054D9CD /* LicenseViewController.swift */,
+				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1036,7 +1042,9 @@
 				12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */,
+				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
+				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
 				12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,

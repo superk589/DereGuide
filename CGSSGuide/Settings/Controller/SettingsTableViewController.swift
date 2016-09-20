@@ -253,6 +253,33 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     var updateStatusView: UpdateStatusView!
     
+    
+    @IBOutlet weak var ackCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showAck))
+            ackCell.addGestureRecognizer(tap)
+        }
+    }
+    
+    @IBOutlet weak var licenseCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showLicense))
+            licenseCell.addGestureRecognizer(tap)
+        }
+    }
+    func showAck() {
+        let ackVC = AcknowledgementViewController()
+        ackVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(ackVC, animated: true)
+    }
+    
+    func showLicense() {
+        let licenseVC = LicenseViewController()
+        licenseVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(licenseVC, animated: true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
