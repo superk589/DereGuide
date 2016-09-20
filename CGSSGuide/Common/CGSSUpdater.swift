@@ -314,7 +314,7 @@ open class CGSSUpdater: NSObject {
                     } else {
                         let json = JSON.init(data: data!)
                         let info = CGSSGameInfo.init(fromJson: json)
-                        if (Int(info.truthVersion)! > UserDefaults.standard.integer(forKey: "truthVersion")) || !CGSSGameResource.sharedResource.checkMaster() {
+                        if let truthVersion = Int(info.truthVersion), (truthVersion > UserDefaults.standard.integer(forKey: "truthVersion")) || !CGSSGameResource.sharedResource.checkMaster() {
                             let item = CGSSUpdateItem.init(dataType: .resource, id: info.truthVersion)
                             items.append(item)
                         }

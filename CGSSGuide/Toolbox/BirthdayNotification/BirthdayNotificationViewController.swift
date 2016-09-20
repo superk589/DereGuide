@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BirthdayNotificationViewController: UITableViewController {
+class BirthdayNotificationViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     var headerView: UITableView!
     var headerCells: [UITableViewCell]!
@@ -39,11 +39,18 @@ class BirthdayNotificationViewController: UITableViewController {
             // Fallback on earlier versions
         }
         
+        
+        self.popoverPresentationController?.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        let cell = headerCells[0]
+        (cell.accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? "未开启" : "已开启"
     }
     
 //    init() {
@@ -150,7 +157,7 @@ class BirthdayNotificationViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        
+        CGSSNotificationCenter.add(self, selector: #selector(refreshData), name: "UPDATE_END", object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
