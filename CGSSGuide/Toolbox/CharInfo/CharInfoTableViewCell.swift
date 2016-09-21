@@ -27,6 +27,7 @@ class CharInfoTableViewCell: UITableViewCell {
     fileprivate func prepare() {
         
         charIconView = CGSSCharIconView(frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        charIconView.isUserInteractionEnabled = false
         kanaSpacedLabel = UILabel.init(frame: CGRect(x: 68, y: 10, width: CGSSGlobal.width - 78, height: 10))
         kanaSpacedLabel.font = UIFont.systemFont(ofSize: 10)
         

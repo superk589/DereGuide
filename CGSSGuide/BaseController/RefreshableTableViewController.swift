@@ -32,10 +32,11 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
                     self.updateStatusView.activityIndicator.stopAnimating()
                     UIView.animate(withDuration: 2.5, animations: {
+                        // 当一个控件的alpha = 0 之后 就不会响应任何事件了 不需要再置为hidden
                         self.updateStatusView.alpha = 0
-                        }, completion: { (b) in
-                        self.updateStatusView.isHidden = true
-                        self.updateStatusView.alpha = 1
+//                        }, completion: { (b) in
+//                        self.updateStatusView.isHidden = true
+//                        self.updateStatusView.alpha = 1
                     })
                     return
                 }

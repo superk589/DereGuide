@@ -108,11 +108,14 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
     
     // 点击卡片小图标时的响应方法
     func iconClick(_ iv: CGSSCardIconView) {
-        let cardDetailVC = CardDetailViewController()
         let dao = CGSSDAO.sharedDAO
-        cardDetailVC.card = dao.findCardById(iv.cardId!)
-        // cardDetailVC.modalTransitionStyle = .CoverVertical
-        self.navigationController?.pushViewController(cardDetailVC, animated: true)
+        // 如果因为数据更新导致未查找到指定的卡片, 则不弹出新页面
+        if let card = dao.findCardById(iv.cardId!) {
+            let cardDetailVC = CardDetailViewController()
+            cardDetailVC.card = card
+            // cardDetailVC.modalTransitionStyle = .CoverVertical
+            self.navigationController?.pushViewController(cardDetailVC, animated: true)
+        }
     }
     
     func charInfoClick() {

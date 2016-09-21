@@ -48,12 +48,22 @@ open class CGSSUpdater: NSObject {
     
     var isUpdating = false {
         didSet {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = isUpdating
-            DispatchQueue.main.async {
+            // 此处确保当前如果在主线程则,在主线程同步发送消息,当前不在主线程则通过DispatchQueue.main.async发送
+            if Thread.isMainThread {
                 if self.isUpdating {
                     CGSSNotificationCenter.post("UPDATE_START", object: nil)
                 } else {
                     CGSSNotificationCenter.post("UPDATE_END", object: nil)
+                }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isUpdating
+            } else {
+                DispatchQueue.main.async {
+                    if self.isUpdating {
+                        CGSSNotificationCenter.post("UPDATE_START", object: nil)
+                    } else {
+                        CGSSNotificationCenter.post("UPDATE_END", object: nil)
+                    }
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = self.isUpdating
                 }
             }
         }

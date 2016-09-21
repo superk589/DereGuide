@@ -112,17 +112,18 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     }
     
     func selectTimeZone() {
+        let timeZoneCell = headerCells[2]
         let alvc = UIAlertController.init(title: "选择提醒时区", message: nil, preferredStyle: .actionSheet)
-        alvc.popoverPresentationController?.sourceView = headerCells[1].detailTextLabel
-        alvc.popoverPresentationController?.sourceRect = CGRect(x: headerCells[1].detailTextLabel!.fwidth / 2, y: headerCells[1].detailTextLabel!.fheight, width: 0, height: 0)
+        alvc.popoverPresentationController?.sourceView = timeZoneCell.detailTextLabel
+        alvc.popoverPresentationController?.sourceRect = CGRect(x: timeZoneCell.detailTextLabel!.fwidth / 2, y: timeZoneCell.detailTextLabel!.fheight, width: 0, height: 0)
         alvc.addAction(UIAlertAction.init(title: "System", style: .default, handler: { (a) in
             UserDefaults.standard.setValue("System", forKey: "BirthdayTimeZone")
-            self.headerCells[1].detailTextLabel?.text = "System"
+            timeZoneCell.detailTextLabel?.text = "System"
             self.refreshData()
             }))
         alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .default, handler: { (a) in
             UserDefaults.standard.setValue("Asia/Tokyo", forKey: "BirthdayTimeZone")
-            self.headerCells[1].detailTextLabel?.text = "Asia/Tokyo"
+            timeZoneCell.detailTextLabel?.text = "Asia/Tokyo"
             self.refreshData()
             }))
         alvc.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))

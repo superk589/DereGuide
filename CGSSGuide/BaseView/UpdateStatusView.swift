@@ -62,6 +62,8 @@ class UpdateStatusView: UIView {
     }
     
     func setContent(_ s: String, hasProgress: Bool) {
+        self.layer.removeAllAnimations()
+        self.alpha = 1
         self.isHidden = false
         descriptionLabel.text = s
         if !hasProgress {
@@ -80,6 +82,8 @@ class UpdateStatusView: UIView {
     }
     
     func updateProgress(_ a: Int, b: Int) {
+        self.layer.removeAllAnimations()
+        self.alpha = 1
         statusLabel.isHidden = false
         progressView.isHidden = false
         statusLabel.text = "\(a)/\(b)"
