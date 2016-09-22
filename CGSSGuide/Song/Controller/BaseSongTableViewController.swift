@@ -29,7 +29,11 @@ class BaseSongTableViewController: RefreshableTableViewController {
         prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
         liveList = filter.filterSongList(Array(dao.validLiveDict.values))
-        
+//        for live in liveList {
+//            if CGSSShiftingBPMLive.checkIsShifting(live) {
+//                print(live.musicRef?.title, CGSSShiftingBPMLive.checkIsShifting(live))
+//            }
+//        }
         if searchBar.text != "" {
             liveList = dao.getLiveListByName(liveList, string: searchBar.text!)
         }

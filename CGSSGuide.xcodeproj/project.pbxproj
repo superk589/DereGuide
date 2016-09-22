@@ -163,7 +163,6 @@
 		12A71D671D8B977D0021320D /* 888-checkmark-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D611D8B977D0021320D /* 888-checkmark-toolbar.png */; };
 		12A71D681D8B977D0021320D /* 888-checkmark-toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D621D8B977D0021320D /* 888-checkmark-toolbar@2x.png */; };
 		12A71D691D8B977D0021320D /* 888-checkmark-toolbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D631D8B977D0021320D /* 888-checkmark-toolbar@3x.png */; };
-		12A71D6B1D8BC4BE0021320D /* CGSSPotentialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D6A1D8BC4BE0021320D /* CGSSPotentialManager.swift */; };
 		12A71D6E1D8BDCA30021320D /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D6C1D8BDCA30021320D /* star.png */; };
 		12A71D6F1D8BDCA30021320D /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A71D6D1D8BDCA30021320D /* star@2x.png */; };
 		12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D921D8C2D280021320D /* CGSSCheckBox.swift */; };
@@ -350,7 +349,6 @@
 		12A71D611D8B977D0021320D /* 888-checkmark-toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "888-checkmark-toolbar.png"; sourceTree = "<group>"; };
 		12A71D621D8B977D0021320D /* 888-checkmark-toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "888-checkmark-toolbar@2x.png"; sourceTree = "<group>"; };
 		12A71D631D8B977D0021320D /* 888-checkmark-toolbar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "888-checkmark-toolbar@3x.png"; sourceTree = "<group>"; };
-		12A71D6A1D8BC4BE0021320D /* CGSSPotentialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSPotentialManager.swift; sourceTree = "<group>"; };
 		12A71D6C1D8BDCA30021320D /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		12A71D6D1D8BDCA30021320D /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		12A71D911D8C20260021320D /* CGSSGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CGSSGuide.entitlements; sourceTree = "<group>"; };
@@ -556,7 +554,6 @@
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
 				129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */,
 				1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */,
-				12A71D6A1D8BC4BE0021320D /* CGSSPotentialManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1072,7 +1069,6 @@
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */,
-				12A71D6B1D8BC4BE0021320D /* CGSSPotentialManager.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,

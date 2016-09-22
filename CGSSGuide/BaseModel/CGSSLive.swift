@@ -81,8 +81,9 @@ extension CGSSLive {
         return CGSSDAO.sharedDAO.findSongById(musicId!)
     }
     
-    var barSec: Float {
-        return 1 / Float(bpm) / 60
+    // 每小节占用的秒数
+    var beatSec: Float {
+        return 1 / Float(bpm) * 60
     }
     
     func getLiveColor() -> UIColor {
