@@ -258,7 +258,8 @@ class CardDetailView: UIView {
         
         
         // 设置获取来源
-        if [.sr, .ssr, .ssrp, .srp].contains(card.rarityFilterType) {
+        let rarityTypes:CGSSRarityTypes = [.sr, .ssr, .ssrp, .srp]
+        if rarityTypes.contains(card.rarityType) {
             prepareAvailableInfoContentView()
             setupAvailableInfoContentView(card: card)
         } else {

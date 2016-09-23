@@ -53,7 +53,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         rarityButtons.append(contentsOf: rarityStackView2.subviews as! [UIButton])
         for i in 0...7 {
             let button = rarityButtons[i]
-            button.isSelected = filter.hasCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - i))!)
+            button.isSelected = filter.rarityTypes.contains(CGSSRarityTypes.init(rarity: 7 - i))
         }
         
         var skillTypeButtons = [UIButton]()
@@ -61,22 +61,22 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         skillTypeButtons.append(contentsOf: skillTypeView2.subviews as! [UIButton])
         for i in 0...8 {
             let button = skillTypeButtons[i]
-            button.isSelected = filter.hasSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(i))!)
+            button.isSelected = filter.skillTypes.contains(CGSSSkillTypes.init(rawValue: 1 << UInt(i)))
         }
         
         for i in 0...2 {
             let button = cardTypeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasCardFilterType(CGSSCardFilterType.init(cardType: Int(i))!)
+            button.isSelected = filter.cardTypes.contains(CGSSCardTypes.init(type: i))
         }
         
         for i in 0...2 {
             let button = attributeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(i))!)
+            button.isSelected = filter.attributeTypes.contains(CGSSAttributeTypes.init(type: i))
         }
         
         for i in 0...1 {
             let button = favoriteStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
+            button.isSelected = filter.favoriteTypes.contains(CGSSFavoriteTypes.init(rawValue: 1 << UInt(i)))
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -183,11 +183,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - tag))!)
+            filter.rarityTypes.remove(CGSSRarityTypes.init(rarity: 7 - tag))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addCardRarityFilterType(CGSSCardRarityFilterType.init(rarity: Int(7 - tag))!)
+            filter.rarityTypes.insert(CGSSRarityTypes.init(rarity: 7 - tag))
         }
         
     }
@@ -197,11 +197,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(tag))!)
+            filter.skillTypes.remove(CGSSSkillTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addSkillFilterType(CGSSSkillFilterType.init(raw: 1 << UInt(tag))!)
+            filter.skillTypes.insert(CGSSSkillTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -211,11 +211,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(tag))!)
+            filter.attributeTypes.remove(CGSSAttributeTypes.init(type: tag))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addAttributeFilterType(CGSSAttributeFilterType.init(attributeType: Int(tag))!)
+            filter.attributeTypes.insert(CGSSAttributeTypes.init(type: tag))
         }
         
     }
@@ -225,11 +225,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+            filter.favoriteTypes.remove(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+            filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -239,11 +239,11 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeCardFilterType(CGSSCardFilterType.init(cardType: Int(tag))!)
+            filter.cardTypes.remove(CGSSCardTypes.init(type: tag))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addCardFilterType(CGSSCardFilterType.init(cardType: Int(tag))!)
+            filter.cardTypes.insert(CGSSCardTypes.init(type: tag))
         }
         
     }

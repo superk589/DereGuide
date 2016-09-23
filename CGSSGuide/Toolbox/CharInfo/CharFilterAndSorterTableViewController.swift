@@ -56,25 +56,25 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...2 {
             let button = charTypeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasCharFilterType(CGSSCharFilterType.init(cardType: i)!)
+            button.isSelected = filter.charTypes.contains(CGSSCharTypes.init(type: i))
         }
         
         for i in 0...4 {
             let button = charAgeView.subviews[i] as! UIButton
-            button.isSelected = filter.hasCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.charAgeTypes.contains(CGSSCharAgeTypes.init(rawValue: 1 << UInt(i)))
         }
         for i in 0...3 {
             let button = charBloodTypeView.subviews[i] as! UIButton
-            button.isSelected = filter.hasCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.charBloodTypes.contains(CGSSCharBloodTypes.init(rawValue: 1 << UInt(i)))
         }
         
         for i in 0...1 {
             let button = cvTypeView.subviews[i] as! UIButton
-            button.isSelected = filter.hasCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << i)!)
+            button.isSelected = filter.charCVTypes.contains(CGSSCharCVTypes.init(rawValue: 1 << UInt(i)))
         }
         for i in 0...1 {
             let button = favoriteStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(i))!)
+            button.isSelected = filter.favoriteTypes.contains(CGSSFavoriteTypes.init(rawValue: 1 << UInt(i)))
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -170,10 +170,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 1000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeCharFilterType(CGSSCharFilterType.init(cardType: tag)!)
+            filter.charTypes.remove(CGSSCharTypes.init(type: tag))
         } else {
             sender.isSelected = true
-            filter.addCharFilterType(CGSSCharFilterType.init(cardType: tag)!)
+            filter.charTypes.insert(CGSSCharTypes.init(type: tag))
         }
         
     }
@@ -182,10 +182,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 4000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << tag)!)
+            filter.charCVTypes.remove(CGSSCharCVTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.addCharCVFilterType(CGSSCharCVTypeFilter.init(raw: 1 << tag)!)
+            filter.charCVTypes.insert(CGSSCharCVTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -194,10 +194,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 2000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << tag)!)
+            filter.charAgeTypes.remove(CGSSCharAgeTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.addCharAgeFilterType(CGSSCharAgeFilterType.init(raw: 1 << tag)!)
+            filter.charAgeTypes.insert(CGSSCharAgeTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -206,10 +206,10 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 3000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << tag)!)
+            filter.charBloodTypes.remove(CGSSCharBloodTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.addCharBloodFilterType(CGSSCharBloodFilterType.init(raw: 1 << tag)!)
+            filter.charBloodTypes.insert(CGSSCharBloodTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -219,11 +219,11 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.removeFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+            filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color
-            filter.addFavoriteFilterType(CGSSFavoriteFilterType.init(rawValue: 1 << UInt(tag))!)
+            filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }

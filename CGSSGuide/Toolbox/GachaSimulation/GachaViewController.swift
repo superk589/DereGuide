@@ -120,7 +120,7 @@ extension GachaViewController : GachaViewDelegate, GachaSimulateViewDelegate {
         navigationController?.pushViewController(cardDV, animated: true)
     }
     func tenGacha() {
-        if let arr = currentPool?.simulate(times: 10) {
+        if let arr = currentPool?.simulate(times: 10, srGuaranteeCount: 1) {
             simulateView.setupResultView(cardIds: arr)
         }
     }

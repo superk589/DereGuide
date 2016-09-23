@@ -11,8 +11,8 @@ import SwiftyJSON
 
 extension CGSSSkill {
     
-    var skillFilterType: CGSSSkillFilterType {
-        return CGSSSkillFilterType.init(type: skillType)
+    var skillFilterType: CGSSSkillTypes {
+        return CGSSSkillTypes.init(typeString: skillType)
     }
     
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整

@@ -58,7 +58,7 @@ class CGSSLiveSimulator: NSObject {
     var grooveType: CGSSGrooveType?
     var presentTotal: Int {
         if grooveType != nil {
-            return team.getPresentValueByType(liveType, songType: CGSSCardFilterType.init(grooveType: grooveType!)!).total + team.backSupportValue
+            return team.getPresentValueByType(liveType, songType: CGSSCardTypes.init(grooveType: grooveType!)).total + team.backSupportValue
         } else {
             return team.getPresentValueByType(liveType, songType: live.songType).total + team.backSupportValue
         }
@@ -155,11 +155,11 @@ class CGSSLiveSimulator: NSObject {
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var upValue = 0
                     if grooveType != nil {
-                        if member!.cardRef!.cardFilterType == CGSSCardFilterType.init(grooveType: grooveType!) {
+                        if member!.cardRef!.cardType == CGSSCardTypes.init(grooveType: grooveType!) {
                             upValue = 30
                         }
                     } else {
-                        if member!.cardRef!.cardFilterType == live.songType || live.songType == .office {
+                        if member!.cardRef!.cardType == live.songType || live.songType == .office {
                             upValue = 30
                         }
                     }

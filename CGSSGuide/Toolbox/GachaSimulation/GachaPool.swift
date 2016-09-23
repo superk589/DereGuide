@@ -87,16 +87,16 @@ class GachaPool {
                 if rew.rewardRecommand > 0 {
                     new.append(rew)
                 }
-                switch card.rarityFilterType {
-                case .ssr:
+                switch card.rarityType {
+                case CGSSRarityTypes.ssr:
                     if rew.rewardRecommand > 0 {
                         newssr.append(rew)
                     } else {
                         ssr.append(rew)
                     }
-                case .sr:
+                case CGSSRarityTypes.sr:
                     sr.append(rew)
-                case .r:
+                case CGSSRarityTypes.r:
                     r.append(rew)
                 default:
                     break
@@ -108,7 +108,7 @@ class GachaPool {
     
     func simulateOnce(srGuarantee: Bool) -> Int {
         let rand = arc4random_uniform(10000)
-        var rarity: CGSSCardRarityFilterType
+        var rarity: CGSSRarityTypes
         switch rand {
         case UInt32(rareRatio + srRatio)..<10000:
             rarity = .ssr
@@ -123,7 +123,7 @@ class GachaPool {
         }
         
         switch rarity {
-        case .ssr:
+        case CGSSRarityTypes.ssr:
             //目前只有ssr考虑新卡的几率加成(新卡共享40%总的ssr概率)
             //TODO: 如果有sr和r的新卡几率加成具体数据 再添加
             if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
@@ -133,13 +133,13 @@ class GachaPool {
             } else {
                 return 0
             }
-        case .sr:
+        case CGSSRarityTypes.sr:
             if sr.count > 0 {
                 return sr.random()!.cardId
             } else {
                 return 0
             }
-        case .r:
+        case CGSSRarityTypes.r:
             if r.count > 0 {
                 return r.random()!.cardId
             } else {
@@ -150,11 +150,19 @@ class GachaPool {
         }
     }
 
-    func simulate(times:Int) -> [Int] {
+    func simulate(times:UInt32, srGuaranteeCount:Int) -> [Int] {
         var result = [Int]()
-        let rand = arc4random_uniform(10)
-        for i:UInt32 in 0...9 {
-            if i == rand {
+        var rands = [UInt32]()
+        for _ in 0..<srGuaranteeCount {
+            var rand:UInt32
+            // !!!当sr低保数和总抽卡数相近时 可能存在效率问题 
+            repeat {
+                rand = arc4random_uniform(times)
+            } while rands.contains(rand)
+            rands.append(rand)
+        }
+        for i:UInt32 in 0...times - 1 {
+            if rands.contains(i) {
                 result.append(simulateOnce(srGuarantee: true))
             } else {
                 result.append(simulateOnce(srGuarantee: false))

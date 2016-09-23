@@ -22,20 +22,20 @@ extension CGSSChar {
             return CGSSGlobal.allTypeColor
         }
     }
-    var charFilterType: CGSSCharFilterType {
-        return CGSSCharFilterType.init(typeString: type) ?? CGSSCharFilterType.office
+    var charType: CGSSCharTypes {
+        return CGSSCharTypes.init(typeString: type)
     }
-    var charAgeFilterType: CGSSCharAgeFilterType {
-        return CGSSCharAgeFilterType.init(age: age)
+    var charAgeType: CGSSCharAgeTypes {
+        return CGSSCharAgeTypes.init(age: age)
     }
-    var charBloodFilterType: CGSSCharBloodFilterType {
-        return CGSSCharBloodFilterType.init(bloodType: bloodType)
+    var charBloodType: CGSSCharBloodTypes {
+        return CGSSCharBloodTypes.init(bloodType: bloodType)
     }
-    var charCVFilterType: CGSSCharCVTypeFilter {
-        return voice == "" ? CGSSCharCVTypeFilter.no : CGSSCharCVTypeFilter.yes
+    var charCVType: CGSSCharCVTypes {
+        return voice == "" ? .no : .yes
     }
-    var favoriteFilterType: CGSSFavoriteFilterType {
-        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? CGSSFavoriteFilterType.inFavorite : CGSSFavoriteFilterType.notInFavorite
+    var favoriteType: CGSSFavoriteTypes {
+        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? .inFavorite : .notInFavorite
     }
     
     // 用于排序的动态属性

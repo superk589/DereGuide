@@ -45,12 +45,12 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...3 {
             let button = songTypeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.hasSongFilterType(CGSSSongFilterType.init(cardType: i)!)
+            button.isSelected = filter.songTypes.contains(CGSSSongTypes.init(type: i))
         }
         
         for i in 0...2 {
             let button = eventTypeView.subviews[i] as! UIButton
-            button.isSelected = filter.hasEventFilterType(CGSSSongEventFilterType.init(raw: 1 << i)!)
+            button.isSelected = filter.eventTypes.contains(CGSSSongEventTypes.init(rawValue: 1 << UInt(i)))
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -98,22 +98,21 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 1000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeSongFilterType(CGSSSongFilterType.init(cardType: tag)!)
+            filter.songTypes.remove(CGSSSongTypes.init(type: tag))
         } else {
             sender.isSelected = true
-            filter.addSongFilterType(CGSSSongFilterType.init(cardType: tag)!)
+            filter.songTypes.insert(CGSSSongTypes.init(type: tag))
         }
-        
     }
     
     func eventTypeButtonClick(_ sender: UIButton) {
         let tag = sender.tag - 2000
         if sender.isSelected {
             sender.isSelected = false
-            filter.removeEventFilterType(CGSSSongEventFilterType.init(raw: 1 << tag)!)
+            filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.addEventFilterType(CGSSSongEventFilterType.init(raw: 1 << tag)!)
+            filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }

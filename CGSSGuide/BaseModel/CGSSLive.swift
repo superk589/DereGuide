@@ -10,54 +10,54 @@ import UIKit
 import SwiftyJSON
 
 enum CGSSLiveType: String {
-    case Normal = "常规模式"
-    case VocalBurstGroove = "Vocal Burst"
-    case DanceBurstGroove = "Dance Burst"
-    case VisualBurstGroove = "Visual Burst"
+    case normal = "常规模式"
+    case vocal = "Vocal Burst"
+    case dance = "Dance Burst"
+    case visual = "Visual Burst"
     static func getAll() -> [CGSSLiveType] {
-        return [.Normal, .VocalBurstGroove, .DanceBurstGroove, .VisualBurstGroove]
+        return [.normal, .vocal, .dance, .visual]
     }
     func typeColor() -> UIColor {
         switch self {
-        case .Normal:
+        case .normal:
             return CGSSGlobal.allTypeColor
-        case .VocalBurstGroove:
+        case .vocal:
             return CGSSGlobal.vocalColor
-        case .DanceBurstGroove:
+        case .dance:
             return CGSSGlobal.danceColor
-        case .VisualBurstGroove:
+        case .visual:
             return CGSSGlobal.passionColor
         }
     }
 }
 
 enum CGSSGrooveType: String {
-    case Cute = "Cute Groove"
-    case Cool = "Cool Groove"
-    case Passion = "Passion Groove"
+    case cute = "Cute Groove"
+    case cool = "Cool Groove"
+    case passion = "Passion Groove"
     static func getAll() -> [CGSSGrooveType] {
-        return [.Cute, .Cool, .Passion]
-    }
-    init? (type: CGSSCardFilterType) {
-        switch type {
-        case .cute:
-            self = .Cute
-        case .cool:
-            self = .Cool
-        case .passion:
-            self = .Passion
-        case .office:
-            return nil
-        }
+        return [.cute, .cool, .passion]
     }
     func typeColor() -> UIColor {
         switch self {
-        case .Cute:
+        case .cute:
             return CGSSGlobal.cuteColor
-        case .Cool:
+        case .cool:
             return CGSSGlobal.coolColor
-        case .Passion:
+        case .passion:
             return CGSSGlobal.passionColor
+        }
+    }
+    init? (cardType: CGSSCardTypes) {
+        switch cardType {
+        case CGSSCardTypes.cute:
+            self = .cute
+        case CGSSCardTypes.cool:
+            self = .cool
+        case CGSSCardTypes.passion:
+            self = .passion
+        default:
+            return nil
         }
     }
 }
@@ -112,7 +112,7 @@ extension CGSSLive {
         
     }
     
-    var songType: CGSSCardFilterType {
+    var songType: CGSSCardTypes {
         switch type! {
         case 1:
             return .cute
@@ -125,8 +125,8 @@ extension CGSSLive {
         }
     }
     
-    var eventFilterType: CGSSSongEventFilterType {
-        return CGSSSongEventFilterType.init(eventType: eventType!)
+    var eventFilterType: CGSSSongEventTypes {
+        return CGSSSongEventTypes.init(eventType: eventType!)
     }
     
     func getStarsForDiff(_ diff: Int) -> Int {

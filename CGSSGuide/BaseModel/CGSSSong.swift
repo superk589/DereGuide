@@ -16,11 +16,11 @@ enum SongType {
     case cute
     init? (type: CGSSGrooveType) {
         switch type {
-        case .Cute:
+        case .cute:
             self = .cute
-        case .Cool:
+        case .cool:
             self = .cool
-        case .Passion:
+        case .passion:
             self = .passion
         }
     }

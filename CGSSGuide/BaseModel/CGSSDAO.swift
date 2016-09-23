@@ -388,7 +388,7 @@ open class CGSSDAO: NSObject {
     
     func getRankInType(_ card: CGSSCard) -> [Int] {
         var rank = [1, 1, 1, 1]
-        let filter = CGSSCardFilter.init(cardMask: card.cardFilterType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
+        let filter = CGSSCardFilter.init(cardMask: card.cardType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
         let filteredCardDict = getCardListByMask(filter)
         for cardx in filteredCardDict {
             if cardx.vocal > card.vocal {

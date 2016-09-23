@@ -112,47 +112,47 @@ extension CGSSCard {
     }
     
     // 用于filter的部分属性
-    var rarityFilterType: CGSSCardRarityFilterType {
-        return CGSSCardRarityFilterType.init(rarity: rarity.rarity - 1) ?? CGSSCardRarityFilterType.n
+    var rarityType: CGSSRarityTypes {
+        return CGSSRarityTypes.init(rarity: rarity.rarity - 1)
     }
-    var rarityFilterTypeSimple : CGSSCardRarityFilterType {
-        switch rarityFilterType {
-        case .np:
+    var rarityTypeSimple : CGSSRarityTypes {
+        switch rarityType {
+        case CGSSRarityTypes.np:
             return .n
-        case .rp:
+        case CGSSRarityTypes.rp:
             return .r
-        case .srp:
+        case CGSSRarityTypes.srp:
             return .sr
-        case .ssrp:
+        case CGSSRarityTypes.ssrp:
             return .ssr
         default:
-            return rarityFilterType
+            return rarityType
         }
     }
-    var skillFilterType: CGSSSkillFilterType {
-        return skill?.skillFilterType ?? CGSSSkillFilterType.none
+    var skillType: CGSSSkillTypes {
+        return skill?.skillFilterType ?? .none
     }
-    var cardFilterType: CGSSCardFilterType {
-        return CGSSCardFilterType.init(typeString: attribute)!
+    var cardType: CGSSCardTypes {
+        return CGSSCardTypes.init(typeString: attribute)
     }
-    var attributeFilterType: CGSSAttributeFilterType {
+    var attributeType: CGSSAttributeTypes {
         if let da = danceMax, let vo = vocalMax, let vi = visualMax {
             if da >= vo && da >= vi {
-                return CGSSAttributeFilterType.dance
+                return .dance
             } else if vo >= vi && vo >= da {
-                return CGSSAttributeFilterType.vocal
+                return .vocal
             } else {
-                return CGSSAttributeFilterType.visual
+                return .visual
             }
         }
-        return CGSSAttributeFilterType.none
+        return .none
     }
-    var favoriteFilterType: CGSSFavoriteFilterType {
-        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteFilterType.inFavorite : CGSSFavoriteFilterType.notInFavorite
+    var favoriteType: CGSSFavoriteTypes {
+        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
     }
     
     func attByPotential(lv:Int) -> Int {
-        return CGSSGlobal.potentialOfLevel[rarityFilterTypeSimple]![lv]
+        return CGSSGlobal.potentialOfLevel[rarityTypeSimple]![lv]
     }
     
 }

@@ -105,7 +105,7 @@ public class CGSSGlobal: NSObject {
     
     static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
     
-    static let potentialOfLevel: [CGSSCardRarityFilterType:[Int]] = [
+    static let potentialOfLevel: [CGSSRarityTypes:[Int]] = [
         .n : [0, 80, 160, 250, 340, 440, 540, 650, 760, 880, 1000],
         .r : [0, 60, 120, 180, 255, 330, 405, 480, 570, 660, 750],
         .sr : [0, 60, 120, 180, 250, 320, 390, 460, 540, 620, 700],

@@ -575,7 +575,7 @@ class TeamDetailView: UIView {
         backSupportTF.text = String(value)
         delegate?.backFieldDone(value)
     }
-    var currentLiveType: CGSSLiveType = .Normal {
+    var currentLiveType: CGSSLiveType = .normal {
         didSet {
             self.liveTypeButton.setTitle("< \(currentLiveType.rawValue) >", for: UIControlState())
             self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), for: UIControlState())

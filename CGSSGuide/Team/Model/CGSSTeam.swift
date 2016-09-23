@@ -18,7 +18,7 @@ enum LeaderSkillUpType {
 
 struct LeaderSkillUpContent {
     var upType: LeaderSkillUpType
-    var upTarget: CGSSCardFilterType
+    var upTarget: CGSSCardTypes
     var upValue: Int
 }
 
@@ -129,7 +129,7 @@ class CGSSTeam: NSObject, NSCoding {
         return sum
     }
     
-    func getPresentValue(_ type: CGSSCardFilterType) -> CGSSAttributeValue {
+    func getPresentValue(_ type: CGSSCardTypes) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...5 {
             attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContent(), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
@@ -137,7 +137,7 @@ class CGSSTeam: NSObject, NSCoding {
         return attValue
     }
     
-    func getPresentValueInGroove(_ type: CGSSCardFilterType, burstType: LeaderSkillUpType) -> CGSSAttributeValue {
+    func getPresentValueInGroove(_ type: CGSSCardTypes, burstType: LeaderSkillUpType) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...4 {
             attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(burstType), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
@@ -145,27 +145,27 @@ class CGSSTeam: NSObject, NSCoding {
         return attValue
     }
     
-    func getPresentValueByType(_ liveType: CGSSLiveType, songType: CGSSCardFilterType) -> CGSSAttributeValue {
+    func getPresentValueByType(_ liveType: CGSSLiveType, songType: CGSSSongTypes) -> CGSSAttributeValue {
         switch liveType {
-        case .Normal:
+        case .normal:
             return getPresentValue(songType)
-        case .VisualBurstGroove:
+        case .visual:
             return getPresentValueInGroove(songType, burstType: .visual)
-        case .DanceBurstGroove:
+        case .dance:
             return getPresentValueInGroove(songType, burstType: .dance)
-        case .VocalBurstGroove:
+        case .vocal:
             return getPresentValueInGroove(songType, burstType: .vocal)
         }
     }
     
     // 判断需要的指定颜色的队员是否满足条件
-    func hasType(_ type: CGSSCardFilterType, count: Int?) -> Bool {
+    func hasType(_ type: CGSSCardTypes, count: Int?) -> Bool {
         if count == 0 {
             return true
         }
         var c = 0
         for i in 0...5 {
-            if self[i]?.cardRef?.cardFilterType == type {
+            if self[i]?.cardRef?.cardType == type {
                 c += 1
             }
         }
@@ -213,7 +213,7 @@ class CGSSTeam: NSObject, NSCoding {
     }
     
     // 获取队长技能对队伍的加成效果
-    func getUpContent() -> [CGSSCardFilterType: [LeaderSkillUpType: Int]] {
+    func getUpContent() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
@@ -225,7 +225,7 @@ class CGSSTeam: NSObject, NSCoding {
         }
         
         // 合并同类型
-        var newContents = [CGSSCardFilterType: [LeaderSkillUpType: Int]]()
+        var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
         for content in contents {
             if newContents.keys.contains(content.upTarget) {
                 if newContents[content.upTarget]!.keys.contains(content.upType) {
@@ -242,7 +242,7 @@ class CGSSTeam: NSObject, NSCoding {
         return newContents
     }
     
-    func getUpContentInGroove(_ burstType: LeaderSkillUpType) -> [CGSSCardFilterType: [LeaderSkillUpType: Int]] {
+    func getUpContentInGroove(_ burstType: LeaderSkillUpType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
@@ -254,7 +254,7 @@ class CGSSTeam: NSObject, NSCoding {
         contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .passion, upValue: 150))
         
         // 合并同类型
-        var newContents = [CGSSCardFilterType: [LeaderSkillUpType: Int]]()
+        var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
         for content in contents {
             if newContents.keys.contains(content.upTarget) {
                 if newContents[content.upTarget]!.keys.contains(content.upType) {
@@ -336,17 +336,17 @@ class CGSSTeam: NSObject, NSCoding {
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getPresentValue(_ songType: CGSSCardFilterType, roomUpValue: Int?, contents: [CGSSCardFilterType: [LeaderSkillUpType: Int]], vocalLevel:Int, danceLevel:Int, visualLevel:Int) -> CGSSAttributeValue {
+    func getPresentValue(_ songType: CGSSCardTypes, roomUpValue: Int?, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], vocalLevel:Int, danceLevel:Int, visualLevel:Int) -> CGSSAttributeValue {
         var attValue = CGSSAttributeValue.init(visual: visual + attByPotential(lv: visualLevel), vocal: vocal + attByPotential(lv: vocalLevel), dance: dance + attByPotential(lv: danceLevel), life: life)
         var factor = 100 + (roomUpValue ?? 10)
-        if songType == cardFilterType || songType == .office {
+        if songType == cardType || songType == .office {
             factor += 30
         }
         
-        attValue.vocal = Int(ceil(Float(attValue.vocal * (factor + (contents[cardFilterType]?[.vocal] ?? 0))) / 100))
-        attValue.dance = Int(ceil(Float(attValue.dance * (factor + (contents[cardFilterType]?[.dance] ?? 0))) / 100))
-        attValue.visual = Int(ceil(Float(attValue.visual * (factor + (contents[cardFilterType]?[.visual] ?? 0))) / 100))
-        attValue.life = Int(ceil(Float(attValue.visual * (100 + (contents[cardFilterType]?[.life] ?? 0))) / 100))
+        attValue.vocal = Int(ceil(Float(attValue.vocal * (factor + (contents[cardType]?[.vocal] ?? 0))) / 100))
+        attValue.dance = Int(ceil(Float(attValue.dance * (factor + (contents[cardType]?[.dance] ?? 0))) / 100))
+        attValue.visual = Int(ceil(Float(attValue.visual * (factor + (contents[cardType]?[.visual] ?? 0))) / 100))
+        attValue.life = Int(ceil(Float(attValue.visual * (100 + (contents[cardType]?[.life] ?? 0))) / 100))
         return attValue
     }
 }
