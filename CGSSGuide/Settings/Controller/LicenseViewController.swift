@@ -17,7 +17,7 @@ class LicenseViewController: UIViewController {
         tv.font = UIFont.systemFont(ofSize: 17)
         tv.dataDetectorTypes = .link
         self.view.backgroundColor = UIColor.white
-        tv.text = "本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\n株式会社 万代 (BANDAI Co., Ltd)\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n"
+        tv.text = "本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n"
         // Do any additional setup after loading the view.
         self.view.addSubview(tv)
     }
