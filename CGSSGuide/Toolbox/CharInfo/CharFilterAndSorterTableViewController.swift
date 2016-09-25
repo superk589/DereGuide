@@ -219,7 +219,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         if sender.isSelected {
             sender.isSelected = false
             // sender.backgroundColor = UIColor.clearColor()
-            filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
+            filter.favoriteTypes.remove(CGSSFavoriteTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
             // sender.backgroundColor = color

@@ -407,27 +407,101 @@ class TeamDetailView: UIView {
         
         var upCuteString = [String]()
         upCuteString.append("Cu")
-        upCuteString.append(contents[.cute]?[.vocal] != nil ? "+\(String(contents[.cute]![.vocal]!))%" : "")
-        upCuteString.append(contents[.cute]?[.dance] != nil ? "+\(String(contents[.cute]![.dance]!))%" : "")
-        upCuteString.append(contents[.cute]?[.visual] != nil ? "+\(String(contents[.cute]![.visual]!))%" : "")
-        upCuteString.append(contents[.cute]?[.proc] != nil ? "+\(String(contents[.cute]![.proc]!))%" : "")
-        upCuteString.append(contents[.cute]?[.life] != nil ? "+\(String(contents[.cute]![.life]!))%" : "")
+        if let cute = contents[.cute] {
+            if let vocal = cute[.vocal] {
+                upCuteString.append("+\(vocal)%")
+            } else {
+                upCuteString.append("")
+            }
+            if let dance = cute[.dance] {
+                upCuteString.append("+\(dance)%")
+            } else {
+                upCuteString.append("")
+            }
+            if let visual = cute[.visual] {
+                upCuteString.append("+\(visual)%")
+            } else {
+                upCuteString.append("")
+            }
+            if let proc = cute[.proc] {
+                upCuteString.append("+\(proc)%")
+            } else {
+                upCuteString.append("")
+            }
+            if let life = cute[.life] {
+                upCuteString.append("+\(life)%")
+            } else {
+                upCuteString.append("")
+            }
+        } else {
+            upCuteString.append(contentsOf: [String].init(repeating: "", count: 5))
+        }
         
         var upCoolString = [String]()
         upCoolString.append("Co")
-        upCoolString.append(contents[.cool]?[.vocal] != nil ? "+\(String(contents[.cool]![.vocal]!))%" : "")
-        upCoolString.append(contents[.cool]?[.dance] != nil ? "+\(String(contents[.cool]![.dance]!))%" : "")
-        upCoolString.append(contents[.cool]?[.visual] != nil ? "+\(String(contents[.cool]![.visual]!))%" : "")
-        upCoolString.append(contents[.cool]?[.proc] != nil ? "+\(String(contents[.cool]![.proc]!))%" : "")
-        upCoolString.append(contents[.cool]?[.life] != nil ? "+\(String(contents[.cool]![.life]!))%" : "")
+        if let cool = contents[.cool] {
+            if let vocal = cool[.vocal] {
+                upCoolString.append("+\(vocal)%")
+            } else {
+                upCoolString.append("")
+            }
+            if let dance = cool[.dance] {
+                upCoolString.append("+\(dance)%")
+            } else {
+                upCoolString.append("")
+            }
+            if let visual = cool[.visual] {
+                upCoolString.append("+\(visual)%")
+            } else {
+                upCoolString.append("")
+            }
+            if let proc = cool[.proc] {
+                upCoolString.append("+\(proc)%")
+            } else {
+                upCoolString.append("")
+            }
+            if let life = cool[.life] {
+                upCoolString.append("+\(life)%")
+            } else {
+                upCoolString.append("")
+            }
+        } else {
+            upCoolString.append(contentsOf: [String].init(repeating: "", count: 5))
+        }
+
         
         var upPassionString = [String]()
         upPassionString.append("Pa")
-        upPassionString.append(contents[.passion]?[.vocal] != nil ? "+\(String(contents[.passion]![.vocal]!))%" : "")
-        upPassionString.append(contents[.passion]?[.dance] != nil ? "+\(String(contents[.passion]![.dance]!))%" : "")
-        upPassionString.append(contents[.passion]?[.visual] != nil ? "+\(String(contents[.passion]![.visual]!))%" : "")
-        upPassionString.append(contents[.passion]?[.proc] != nil ? "+\(String(contents[.passion]![.proc]!))%" : "")
-        upPassionString.append(contents[.passion]?[.life] != nil ? "+\(String(contents[.passion]![.life]!))%" : "")
+        if let passion = contents[.passion] {
+            if let vocal = passion[.vocal] {
+                upPassionString.append("+\(vocal)%")
+            } else {
+                upPassionString.append("")
+            }
+            if let dance = passion[.dance] {
+                upPassionString.append("+\(dance)%")
+            } else {
+                upPassionString.append("")
+            }
+            if let visual = passion[.visual] {
+                upPassionString.append("+\(visual)%")
+            } else {
+                upPassionString.append("")
+            }
+            if let proc = passion[.proc] {
+                upPassionString.append("+\(proc)%")
+            } else {
+                upPassionString.append("")
+            }
+            if let life = passion[.life] {
+                upPassionString.append("+\(life)%")
+            } else {
+                upPassionString.append("")
+            }
+        } else {
+            upPassionString.append(contentsOf: [String].init(repeating: "", count: 5))
+        }
+
         
         upValueStrings.append(upCuteString)
         upValueStrings.append(upCoolString)
