@@ -87,7 +87,7 @@ class CharDetailView: UIView {
         descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 17)
         descLabel.textColor = UIColor.black
         descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = "角色所有卡片:"
+        descLabel.text = NSLocalizedString("角色所有卡片", comment: "角色信息页面") + ":"
         descLabel.textColor = UIColor.black
         relatedCardsContentView.addSubview(descLabel)
         addSubview(relatedCardsContentView)

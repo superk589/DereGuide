@@ -59,7 +59,8 @@ class BirthdayCenter: NSObject {
             for char in self.getRecent(1, endDays: 30) {
                 let localNotification = UILocalNotification()
                 localNotification.fireDate = self.getNextBirthday(char)
-                localNotification.alertBody = "今天是\(char.name!)的生日(\(char.birthMonth!)月\(char.birthDay!)日)"
+                let body = NSLocalizedString("今天是%@的生日(%d月%d日)", comment: "生日通知正文")
+                localNotification.alertBody = String.init(format: body, char.name!, char.birthMonth!, char.birthDay!)
                 localNotification.category = "Birthday"
                 UIApplication.shared.scheduleLocalNotification(localNotification)
             }

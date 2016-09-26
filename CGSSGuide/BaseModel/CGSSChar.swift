@@ -73,7 +73,7 @@ extension CGSSChar {
         } else if hand == 3003 {
             return "两手"
         } else {
-            return "不明"
+            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
         }
     }
     
@@ -107,7 +107,7 @@ extension CGSSChar {
         case 1013:
             return "花も恥じらう乙女座"  //双叶杏的特殊星座
         default:
-            return "不明"
+            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
         }
     }
     
@@ -117,7 +117,7 @@ extension CGSSChar {
         case 2002: return "B"
         case 2003: return "AB"
         case 2004: return "O"
-        default: return "不明"
+        default: return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
         }
     }
     
@@ -139,9 +139,9 @@ extension CGSSChar {
     
     var ageToString: String {
         if age - 5000 > 0  {
-            return "\(CGSSGameResource.sharedResource.getTextData(category: 6, index: age - 5000))岁"
+            return "\(CGSSGameResource.sharedResource.getTextData(category: 6, index: age - 5000))\(NSLocalizedString("岁", comment: "角色年龄"))"
         } else {
-            return "\(age!)岁"
+            return "\(age!)\(NSLocalizedString("岁", comment: "角色年龄"))"
         }
     }
     

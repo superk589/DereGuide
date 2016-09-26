@@ -32,7 +32,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .done
         // searchBar.showsCancelButton = true
-        searchBar.placeholder = "日文名/罗马字/技能/稀有度"
+        searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.delegate = self

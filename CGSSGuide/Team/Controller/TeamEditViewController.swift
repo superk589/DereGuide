@@ -45,17 +45,17 @@ class TeamEditViewController: BaseTableViewController {
             let cell = TeamMemberTableViewCell()
             cell.iconView.delegate = self
             if i == 0 {
-                cell.title.text = "队长"
+                cell.title.text = NSLocalizedString("队长", comment: "队伍编辑页面")
                 if let leader = self.leader {
                     cell.initWith(leader, type: .leader)
                 }
             } else if i < 5 {
-                cell.title.text = "队员\(i)"
+                cell.title.text = NSLocalizedString("队员", comment: "队伍编辑页面") + "\(i)"
                 if let sub = subs[i - 1] {
                     cell.initWith(sub, type: .sub)
                 }
             } else {
-                cell.title.text = "好友"
+                cell.title.text = NSLocalizedString("好友", comment: "队伍编辑页面")
                 if let fLeader = self.friendLeader {
                     cell.initWith(fLeader, type: .friend)
                 }
@@ -131,8 +131,8 @@ class TeamEditViewController: BaseTableViewController {
             delegate?.save(team)
             _ = self.navigationController?.popViewController(animated: true)
         } else {
-            let alvc = UIAlertController.init(title: "队伍不完整", message: "请完善队伍后，再点击存储", preferredStyle: .alert)
-            alvc.addAction(UIAlertAction.init(title: "确定", style: .cancel, handler: nil))
+            let alvc = UIAlertController.init(title: NSLocalizedString("队伍不完整", comment: "弹出框标题"), message: NSLocalizedString("请完善队伍后，再点击存储", comment: "弹出框正文"), preferredStyle: .alert)
+            alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .cancel, handler: nil))
             self.tabBarController?.present(alvc, animated: true, completion: nil)
         }
     }

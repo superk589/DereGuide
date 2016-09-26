@@ -170,17 +170,17 @@ class CharProfileView: UIView {
     }
     
     func setup(_ char: CGSSChar) {
-        nameKanaCell.setup("姓名假名", content: char.kanaSpaced!)
-        heightCell.setup("身高", content: "\(char.height!)cm")
-        ageCell.setup("年龄", content: char.ageToString)
-        weightCell.setup("体重", content: "\(char.weight!)kg")
-        birthdayCell.setup("生日", content: "\(char.birthMonth!)月\(char.birthDay!)日")
-        bloodCell.setup("血型", content: char.bloodTypeToString)
-        handCell.setup("习惯用手", content: char.handToString)
-        threeSizeCell.setup("三围", content: char.threeSizeToString)
-        constellationCell.setup("星座", content: char.constellationToString)
-        homeTownCell.setup("出生地", content: char.homeTownToString)
-        favoriteCell.setup("兴趣", content: char.favorite)
+        nameKanaCell.setup(NSLocalizedString("姓名假名", comment: "角色信息页面"), content: char.kanaSpaced!)
+        heightCell.setup(NSLocalizedString("身高", comment: "角色信息页面"), content: "\(char.height!)cm")
+        ageCell.setup(NSLocalizedString("年龄", comment: "角色信息页面"), content: char.ageToString)
+        weightCell.setup(NSLocalizedString("体重", comment: "角色信息页面"), content: "\(char.weight!)kg")
+        birthdayCell.setup(NSLocalizedString("生日", comment: "角色信息页面"), content: String.init(format: NSLocalizedString("%d月%d日", comment: "角色信息页面"), char.birthMonth!, char.birthDay!))
+        bloodCell.setup(NSLocalizedString("血型", comment: "角色信息页面"), content: char.bloodTypeToString)
+        handCell.setup(NSLocalizedString("习惯用手", comment: "角色信息页面"), content: char.handToString)
+        threeSizeCell.setup(NSLocalizedString("三围", comment: "角色信息页面"), content: char.threeSizeToString)
+        constellationCell.setup(NSLocalizedString("星座", comment: "角色信息页面"), content: char.constellationToString)
+        homeTownCell.setup(NSLocalizedString("出生地", comment: "角色信息页面"), content: char.homeTownToString)
+        favoriteCell.setup(NSLocalizedString("兴趣", comment: "角色信息页面"), content: char.favorite)
         voiceCell.setup("CV", content: char.voice)
         for subView in subviews {
             let iv = (subView as! CharProfileViewCell).descLabel.iv

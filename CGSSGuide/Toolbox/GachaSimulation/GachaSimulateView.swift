@@ -26,12 +26,12 @@ class GachaSimulateView: UIView {
         super.init(frame: frame)
         drawSectionLine(0)
         singleButton = UIButton.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
-        singleButton.setTitle("单抽", for: .normal)
+        singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = CGSSGlobal.passionColor
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
         
         tenButton = UIButton.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
-        tenButton.setTitle("十连", for: .normal)
+        tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
         tenButton.backgroundColor = CGSSGlobal.cuteColor
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
         
@@ -41,7 +41,7 @@ class GachaSimulateView: UIView {
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
-        descLabel.text = "* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素"
+        descLabel.text = NSLocalizedString("* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素", comment: "模拟抽卡页面")
         //descLabel.isHidden = true
         descLabel.sizeToFit()
         

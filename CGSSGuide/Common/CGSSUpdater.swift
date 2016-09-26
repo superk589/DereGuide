@@ -201,7 +201,7 @@ open class CGSSUpdater: NSObject {
                                 
                             }
                         } else {
-                            completeInside("获取到的卡片数据异常")
+                            completeInside(NSLocalizedString("获取到的卡数据异常", comment: "弹出框正文"))
                         }
                         completeInside(nil)
                     }
@@ -230,7 +230,7 @@ open class CGSSUpdater: NSObject {
                                 }
                             }
                         } else {
-                            completeInside("获取到的歌曲数据异常")
+                            completeInside(NSLocalizedString("获取到的歌曲数据异常", comment: "弹出框正文"))
                         }
                         completeInside(nil)
                     }
@@ -274,7 +274,7 @@ open class CGSSUpdater: NSObject {
                                 }
                             }
                         } else {
-                            completeInside("获取到的live数据异常")
+                            completeInside(NSLocalizedString("获取到的live数据异常", comment: "弹出框正文"))
                         }
                         completeInside(nil)
                     }
@@ -395,7 +395,7 @@ open class CGSSUpdater: NSObject {
                             dao.cardDict.setObject(card, forKey: item.id as NSCopying)
                             insideComplete(nil)
                         } else {
-                            insideComplete("获取到的卡数据异常")
+                            insideComplete(NSLocalizedString("获取到的卡数据异常", comment: "弹出框正文"))
                         }
                     }
                 })
@@ -428,7 +428,7 @@ open class CGSSUpdater: NSObject {
                             }
                             insideComplete(nil)
                         } else {
-                            insideComplete("获取到的谱面数据异常")
+                            insideComplete(NSLocalizedString("获取到的谱面数据异常", comment: "弹出框正文"))
                         }
                     }
                 })
@@ -455,7 +455,7 @@ open class CGSSUpdater: NSObject {
                             })
                             subTask.resume()
                         } else {
-                            insideComplete("无法获取master.mdb")
+                            insideComplete(NSLocalizedString("无法获取游戏原始数据", comment: "弹出框正文"))
                         }
                     }
                 })

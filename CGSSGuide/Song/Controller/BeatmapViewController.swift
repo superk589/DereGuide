@@ -49,7 +49,7 @@ class BeatmapViewController: UIViewController {
         // 如果没有指定难度 则初始化难度为最高难度
         currentDiff = preSetDiff ?? live.maxDiff
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "难度", style: .plain, target: self, action: #selector(self.selectDiff))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
         
         self.view.addSubview(bv)
         // self.view.addSubview(descLabel)
@@ -64,14 +64,14 @@ class BeatmapViewController: UIViewController {
     }
     
     func selectDiff() {
-        let alert = UIAlertController.init(title: "选择难度", message: "", preferredStyle: .actionSheet)
+        let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: "", preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         for i in 1...live.maxDiff {
             alert.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i: i), style: .default, handler: { (a) in
                 self.currentDiff = i
                 }))
         }
-        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     

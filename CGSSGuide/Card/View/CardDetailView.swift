@@ -99,7 +99,7 @@ class CardDetailView: UIView {
         descLabel1.frame = CGRect(x: 10, y: originY, width: 80, height: 16)
         descLabel1.textColor = UIColor.black
         descLabel1.font = UIFont.systemFont(ofSize: 16)
-        descLabel1.text = "卡片属性:"
+        descLabel1.text = NSLocalizedString("卡片属性", comment: "卡片详情页") + ":" 
         descLabel1.textColor = UIColor.black
         // attContentView.addSubview(descLabel1)
         addSubview(descLabel1)
@@ -126,7 +126,7 @@ class CardDetailView: UIView {
         descLabel2.frame = CGRect(x: 10, y: originY, width: 80, height: 16)
         descLabel2.textColor = UIColor.black
         descLabel2.font = UIFont.systemFont(ofSize: 16)
-        descLabel2.text = "属性排名:"
+        descLabel2.text = NSLocalizedString("属性排名", comment: "卡片详情页") + ":"
         descLabel2.textColor = UIColor.black
         // rankContentView.addSubview(descLabel2)
         addSubview(descLabel2)
@@ -309,7 +309,7 @@ class CardDetailView: UIView {
         descLabel3.frame = CGRect(x: 10, y: insideY, width: 50, height: 16)
         descLabel3.textColor = UIColor.black
         descLabel3.font = UIFont.systemFont(ofSize: 16)
-        descLabel3.text = "特技:"
+        descLabel3.text = NSLocalizedString("特技", comment: "通用") + ":"
         descLabel3.textColor = UIColor.black
         // skillContentView.addSubview(descLabel3)
         skillContentView.addSubview(descLabel3)
@@ -364,7 +364,7 @@ class CardDetailView: UIView {
         let procChanceMin: Float! = skill.procChanceOfLevel(1)
         let durationMax: Float! = skill.effectLengthOfLevel(10)
         let durationMin: Float! = skill.effectLengthOfLevel(1)
-        procGridStrings.append(["  ", "触发几率%", "持续时间s", "最大覆盖率%", "平均覆盖率%"])
+        procGridStrings.append(["  ", NSLocalizedString("触发几率%", comment: "卡片详情页"), NSLocalizedString("持续时间s", comment: "卡片详情页"), NSLocalizedString("最大覆盖率%", comment: "卡片详情页"), NSLocalizedString("平均覆盖率%", comment: "卡片详情页")])
         procGridStrings.append(["Lv.1", String(format: "%.2f", procChanceMin), String(format: "%.2f", durationMin)
             , String(format: "%.2f", durationMin / Float(skill.condition!) * 100), String(format: "%.2f", durationMin / Float(skill.condition!) * procChanceMin)])
         procGridStrings.append(["Lv.10", String(format: "%.2f", procChanceMax), String(format: "%.2f", durationMax)
@@ -389,7 +389,7 @@ class CardDetailView: UIView {
         descLabel4.frame = CGRect(x: 10, y: insideY, width: 80, height: 16)
         descLabel4.textColor = UIColor.black
         descLabel4.font = UIFont.systemFont(ofSize: 16)
-        descLabel4.text = "队长技能:"
+        descLabel4.text = NSLocalizedString("队长技能", comment: "通用") + ":"
         descLabel4.textColor = UIColor.black
         // leaderSkillContentView.addSubview(descLabel4)
         leaderSkillContentView.addSubview(descLabel4)
@@ -452,7 +452,7 @@ class CardDetailView: UIView {
         descLabel4.frame = CGRect(x: 10, y: insideY, width: 80, height: 16)
         descLabel4.textColor = UIColor.black
         descLabel4.font = UIFont.systemFont(ofSize: 16)
-        descLabel4.text = "进化信息:"
+        descLabel4.text = NSLocalizedString("进化信息", comment: "卡片详情页") + ":"
         descLabel4.textColor = UIColor.black
         // evolutionContentView.addSubview(descLabel4)
         evolutionContentView.addSubview(descLabel4)
@@ -513,11 +513,11 @@ class CardDetailView: UIView {
         let descLabel = UILabel()
         descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
         descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = "角色所有卡片:"
+        descLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页") + ":"
         descLabel.textColor = UIColor.black
         
         let charInfoLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 16))
-        charInfoLabel.text = "查看角色详情 >"
+        charInfoLabel.text = NSLocalizedString("查看角色详情", comment: "卡片详情页") + " >"
         charInfoLabel.font = UIFont.systemFont(ofSize: 16)
         charInfoLabel.textColor = UIColor.lightGray
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(charInfoClick))
@@ -567,7 +567,7 @@ class CardDetailView: UIView {
         availableDescLabel = UILabel()
         availableDescLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
         availableDescLabel.font = UIFont.systemFont(ofSize: 16)
-        availableDescLabel.text = "获得途径:"
+        availableDescLabel.text = NSLocalizedString("获得途径", comment: "卡片详情页") + ":"
         availableDescLabel.textColor = UIColor.black
         
         insideY += topSpace + 16
@@ -584,9 +584,9 @@ class CardDetailView: UIView {
         availableGacha.descLabel.textColor = UIColor.darkGray
         availableLimit.descLabel.textColor = UIColor.darkGray
         
-        availableEvent.text = "活动"
-        availableGacha.text = "普池"
-        availableLimit.text = "限定"
+        availableEvent.text = NSLocalizedString("活动", comment: "卡片详情页")
+        availableGacha.text = NSLocalizedString("普池", comment: "卡片详情页")
+        availableLimit.text = NSLocalizedString("限定", comment: "卡片详情页")
         
         availableInfoContentView.addSubview(availableDescLabel)
         availableInfoContentView.addSubview(availableEvent)
@@ -600,7 +600,7 @@ class CardDetailView: UIView {
     func setupAvailableInfoContentView(card:CGSSCard) {
         var tuple = (false, false, false)
         if card.evolutionId == 0 {
-            availableDescLabel.text = "获得途径(进化前):"
+            availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
             if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
                 tuple = cardFrom.available
             }

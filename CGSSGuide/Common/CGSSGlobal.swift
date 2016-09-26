@@ -154,7 +154,30 @@ public class CGSSGlobal: NSObject {
         return false
     }
     
+    func getCurrentLanguageType() -> LanguageType {
+        return LanguageType.init(identifier: Locale.current.identifier)
+    }
+    
     static let presetBackValue = 103463
     
+}
+
+enum LanguageType {
+    case en
+    case zh
+    case ja
+    case other
+    init(identifier:String) {
+        switch identifier {
+        case let x where x.hasPrefix("en"):
+            self = .en
+        case let x where x.hasPrefix("zh"):
+            self = .zh
+        case let x where x.hasPrefix("ja"):
+            self = .ja
+        default:
+            self = .other
+        }
+    }
 }
 

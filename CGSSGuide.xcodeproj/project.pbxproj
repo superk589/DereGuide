@@ -41,6 +41,9 @@
 		122EED1A1D617307008ADE08 /* 921-toolbox-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED171D617307008ADE08 /* 921-toolbox-selected.png */; };
 		122EED1B1D617307008ADE08 /* 921-toolbox-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */; };
 		122EED1C1D617307008ADE08 /* 921-toolbox-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */; };
+		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
+		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
+		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
 		1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */; };
 		1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */; };
 		124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791801D87F4FD00ED8EA6 /* GachaViewController.swift */; };
@@ -55,7 +58,6 @@
 		124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */; };
 		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
-		124E471B1D654C9A00DD0399 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 124E471A1D654C9A00DD0399 /* ToolboxList.plist */; };
 		125164B21D5A0422001D66FC /* song_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AE1D5A0422001D66FC /* song_all.png */; };
 		125164B31D5A0422001D66FC /* song_cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164AF1D5A0422001D66FC /* song_cool.png */; };
 		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
@@ -226,6 +228,20 @@
 		122EED171D617307008ADE08 /* 921-toolbox-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected.png"; path = "Resource/921-toolbox-selected.png"; sourceTree = "<group>"; };
 		122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@2x.png"; path = "Resource/921-toolbox-selected@2x.png"; sourceTree = "<group>"; };
 		122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@3x.png"; path = "Resource/921-toolbox-selected@3x.png"; sourceTree = "<group>"; };
+		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		1244F5A31D9814750021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		1244F5AB1D981CBD0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		1244F5AC1D981CBE0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		1244F5AD1D981CBE0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1244F5D81D98E4EC0021E4B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1244F5DF1D98E51B0021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1244F5E11D98E5220021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		1244F5E21D98E5230021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1244F5E61D98E6210021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ToolboxList.plist; sourceTree = "<group>"; };
+		1244F5E81D98E6230021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/ToolboxList.plist"; sourceTree = "<group>"; };
+		1244F5E91D98E6250021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/ToolboxList.plist; sourceTree = "<group>"; };
 		1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameInfo.swift; sourceTree = "<group>"; };
 		1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameResource.swift; sourceTree = "<group>"; };
 		124791801D87F4FD00ED8EA6 /* GachaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaViewController.swift; sourceTree = "<group>"; };
@@ -240,7 +256,6 @@
 		124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewCell.swift; sourceTree = "<group>"; };
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
-		124E471A1D654C9A00DD0399 /* ToolboxList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ToolboxList.plist; sourceTree = "<group>"; };
 		125164AE1D5A0422001D66FC /* song_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_all.png; sourceTree = "<group>"; };
 		125164AF1D5A0422001D66FC /* song_cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cool.png; sourceTree = "<group>"; };
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
@@ -340,7 +355,6 @@
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1282EE711D011A8F0024318C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
@@ -397,7 +411,6 @@
 				124E47091D654AB700DD0399 /* CharInfo */,
 				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
 				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
-				124E471A1D654C9A00DD0399 /* ToolboxList.plist */,
 			);
 			path = Toolbox;
 			sourceTree = "<group>";
@@ -748,8 +761,11 @@
 				1282EE6C1D011A8F0024318C /* Assets.xcassets */,
 				12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */,
 				12F3761D1D5C96A8003A358C /* Main.storyboard */,
+				1244F59E1D9814350021E4B1 /* Localizable.strings */,
+				1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */,
 				12A71D911D8C20260021320D /* CGSSGuide.entitlements */,
-				1282EE711D011A8F0024318C /* Info.plist */,
+				1244F5E71D98E6210021E4B1 /* ToolboxList.plist */,
+				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
 			);
 			path = CGSSGuide;
 			sourceTree = "<group>";
@@ -862,6 +878,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				"zh-Hant",
+				"zh-Hans",
+				ja,
 			);
 			mainGroup = 1282EE561D011A8F0024318C;
 			productRefGroup = 1282EE601D011A8F0024318C /* Products */;
@@ -925,13 +944,14 @@
 				1201D8051D90C8E1007BFE8F /* 750-home-toolbar@3x.png in Resources */,
 				12A71D6F1D8BDCA30021320D /* star@2x.png in Resources */,
 				12A71D661D8B977D0021320D /* 888-checkmark-toolbar-selected@3x.png in Resources */,
+				1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */,
 				1269E9541D5209A40071AD7F /* 889-sort-descending-toolbar@3x.png in Resources */,
 				127713311D633D0E00B65473 /* 433-x@2x.png in Resources */,
 				1269E9491D5209A40071AD7F /* 748-heart-toolbar-selected.png in Resources */,
 				1269E9521D5209A40071AD7F /* 889-sort-descending-toolbar.png in Resources */,
-				124E471B1D654C9A00DD0399 /* ToolboxList.plist in Resources */,
 				1269E9A81D520A960071AD7F /* 740-gear@3x.png in Resources */,
 				1269E9A61D520A960071AD7F /* 740-gear.png in Resources */,
+				1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */,
 				12A71D6E1D8BDCA30021320D /* star.png in Resources */,
 				12A71D691D8B977D0021320D /* 888-checkmark-toolbar@3x.png in Resources */,
 				121C78DF1D5729A600D0B636 /* 766-arrow-right-toolbar-selected@2x.png in Resources */,
@@ -951,6 +971,7 @@
 				1269E94C1D5209A40071AD7F /* 748-heart-toolbar.png in Resources */,
 				12A71D651D8B977D0021320D /* 888-checkmark-toolbar-selected@2x.png in Resources */,
 				1269E9B31D520AA10071AD7F /* 779-users@2x.png in Resources */,
+				1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */,
 				121C78D91D57203C00D0B636 /* 764-arrow-down-toolbar-selected.png in Resources */,
 				122EED1A1D617307008ADE08 /* 921-toolbox-selected.png in Resources */,
 			);
@@ -1110,10 +1131,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1244F59E1D9814350021E4B1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1244F59D1D9814350021E4B1 /* Base */,
+				1244F5A31D9814750021E4B1 /* zh-Hant */,
+				1244F5AD1D981CBE0021E4B1 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1244F5DF1D98E51B0021E4B1 /* Base */,
+				1244F5E11D98E5220021E4B1 /* zh-Hant */,
+				1244F5E21D98E5230021E4B1 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1244F5E71D98E6210021E4B1 /* ToolboxList.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1244F5E61D98E6210021E4B1 /* Base */,
+				1244F5E81D98E6230021E4B1 /* zh-Hant */,
+				1244F5E91D98E6250021E4B1 /* ja */,
+			);
+			name = ToolboxList.plist;
+			sourceTree = "<group>";
+		};
 		12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				12F3761C1D5C96A8003A358C /* Base */,
+				1244F5A11D9814740021E4B1 /* zh-Hant */,
+				1244F5AB1D981CBD0021E4B1 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1122,6 +1175,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				12F3761E1D5C96A8003A358C /* Base */,
+				1244F5A21D9814740021E4B1 /* zh-Hant */,
+				1244F5AC1D981CBE0021E4B1 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1133,6 +1188,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1183,6 +1239,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

@@ -28,7 +28,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .done
         // searchBar.showsCancelButton = true
-        searchBar.placeholder = "日文名/罗马字/CV"
+        searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.delegate = self

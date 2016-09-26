@@ -57,14 +57,14 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         // 首先要判断设备具不具备发送邮件功能
         if MFMailComposeViewController.canSendMail() {
             let controller = MFMailComposeViewController()
-            controller.setSubject("CGSSGuide问题反馈")
+            controller.setSubject(NSLocalizedString("CGSSGuide问题反馈", comment: "设置页面"))
             controller.mailComposeDelegate = self
             controller.setToRecipients(["superk589@vip.qq.com"])
             controller.setMessageBody("app v\(appVersionLabel.text!)\ndata v\(dataVersionLabel.text!)\n", isHTML: false)
             self.present(controller, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController.init(title: "打开邮箱失败", message: "未设置邮箱账户", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+            let alert = UIAlertController.init(title: NSLocalizedString("打开邮箱失败", comment: "设置页面"), message: NSLocalizedString("未设置邮箱账户", comment: "设置页面"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -128,15 +128,15 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         if CGSSUpdater.defaultUpdater.isUpdating {
             return
         }
-        let alert = UIAlertController.init(title: "确定要清空数据吗？", message: "将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (alert) in
+        let alert = UIAlertController.init(title: NSLocalizedString("确定要清空数据吗？", comment: "设置页面"), message: NSLocalizedString("将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", comment: "设置页面"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
             CGSSDAO.sharedDAO.removeAllData()
             SDImageCache.shared().clearDisk()
             self.deleteAllCacheFiles()
             CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
             self.refresh()
             }))
-        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -144,8 +144,8 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         if CGSSUpdater.defaultUpdater.isUpdating {
             return
         }
-        let alert = UIAlertController.init(title: "确定要缓存所有图片吗？", message: "所有图片总计超过300MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "确定", style: .destructive, handler: { (alert) in
+        let alert = UIAlertController.init(title: NSLocalizedString("确定要缓存所有图片吗？", comment: "设置页面"), message: NSLocalizedString("所有图片总计超过300MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", comment: "设置页面"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
             DispatchQueue.global(qos: .userInitiated).async {
                 let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
                 var urls = [URL]()
@@ -184,15 +184,15 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                 
                 if urls.count == 0 {
                     DispatchQueue.main.async(execute: {
-                        let alert = UIAlertController.init(title: "提示", message: "暂无需要缓存的图片，请先尝试更新其他数据。", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "设置页面"), message: NSLocalizedString("暂无需要缓存的图片，请先尝试更新其他数据。", comment: "设置页面"), preferredStyle: .alert)
+                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
                         self.tabBarController?.present(alert, animated: true, completion: nil)
                     })
                     return
                 }
                 
                 DispatchQueue.main.async(execute: {
-                    self.updateStatusView.setContent("缓存所有图片", total: urls.count)
+                    self.updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
                 })
                 CGSSUpdater.defaultUpdater.isUpdating = true
                 // SDWebImagePrefetcher默认在主线程, 此处改为子线程
@@ -206,8 +206,8 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                     })
                     }, completed: { (a, b) in
                     DispatchQueue.main.async(execute: {
-                        let alert = UIAlertController.init(title: "缓存图片完成", message: "成功\(a - b),失败\(b)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                        let alert = UIAlertController.init(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面"))\(a - b),\(NSLocalizedString("失败", comment: "设置页面"))\(b)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
                         self.tabBarController?.present(alert, animated: true, completion: nil)
                         self.updateStatusView.isHidden = true
                     })
@@ -216,15 +216,15 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                 
             }
             }))
-        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     func cancelUpdate() {
         SDWebImagePrefetcher.shared().cancelPrefetching()
         CGSSUpdater.defaultUpdater.isUpdating = false
-        let alvc = UIAlertController.init(title: "缓存图片取消", message: "缓存图片已被中止", preferredStyle: .alert)
-        alvc.addAction(UIAlertAction.init(title: "确定", style: .cancel, handler: nil))
+        let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
+        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)
         //updateCacheSize()
     }

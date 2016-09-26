@@ -57,7 +57,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         title.textAlignment = .left
         
         replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
-        replaceButton.text = "替换 >"
+        replaceButton.text = NSLocalizedString("替换 >", comment: "队伍编辑页面")
         replaceButton.isUserInteractionEnabled = false
         replaceButton.textAlignment = .right
         replaceButton.font = UIFont.systemFont(ofSize: 16)
@@ -93,7 +93,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         
         editButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
-        editButton.text = "编辑"
+        editButton.text = NSLocalizedString("编辑", comment: "队伍编辑页面")
         editButton.isUserInteractionEnabled = true
         editButton.textAlignment = .right
         editButton.font = UIFont.systemFont(ofSize: 16)
@@ -122,7 +122,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         skillView = UIView.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 78, height: 0))
         
         let skillStaticDesc = UILabel.init(frame: CGRect(x: 0, y: 5, width: 35, height: 17))
-        skillStaticDesc.text = "特技:"
+        skillStaticDesc.text = NSLocalizedString("特技", comment: "通用") + ":"
         skillStaticDesc.font = UIFont.systemFont(ofSize: 14)
         skillStaticDesc.textAlignment = .left
         skillStaticDesc.textColor = UIColor.black
@@ -192,7 +192,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
         leaderSkillView = UIView.init(frame: CGRect(x: 68, y: originY, width: CGSSGlobal.width - 78, height: 0))
         let leaderSkillStaticDesc = UILabel.init(frame: CGRect(x: 0, y: 5, width: 65, height: 17))
-        leaderSkillStaticDesc.text = "队长技能:"
+        leaderSkillStaticDesc.text = NSLocalizedString("队长技能", comment: "通用") + ":"
         leaderSkillStaticDesc.font = UIFont.systemFont(ofSize: 14)
         leaderSkillStaticDesc.textAlignment = .left
         leaderSkillStaticDesc.textColor = UIColor.black
@@ -232,7 +232,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         } else {
             //skillLevelTF.isHidden = true
             //skillLevelStaticDesc.isHidden = true
-            skillName.text = "无"
+            skillName.text = NSLocalizedString("无", comment: "空字符串说明文字")
             skillDesc.fheight = 0
             skillView.fheight = skillName.fheight + skillName.fy
         }
@@ -251,7 +251,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             leaderSkillDesc.sizeToFit()
             leaderSkillView.fheight = leaderSkillDesc.fheight + leaderSkillDesc.fy
         } else {
-            leaderSkillName.text = "无"
+            leaderSkillName.text = NSLocalizedString("无", comment: "")
             leaderSkillDesc.fheight = 0
             leaderSkillView.fheight = leaderSkillName.fheight + leaderSkillName.fy
         }
@@ -263,9 +263,9 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.cardName.text = card.chara?.name
         var strSkill:NSAttributedString
         if  card.skill != nil && type != .friend {
-            strSkill = NSAttributedString.init(string: "技能等级: \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
         } else {
-            strSkill = NSAttributedString.init(string: "技能等级: n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
         }
         let strVocal = NSAttributedString.init(string: "Vo: +\(model.vocalLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.vocalColor])
         let strDance = NSAttributedString.init(string: "Da: +\(model.danceLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.danceColor])

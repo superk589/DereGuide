@@ -37,7 +37,7 @@ class GachaView: UIView {
         checkButton.setImage(UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate), for: .normal)
         
         let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 2.5, width: 40, height: 17))
-        descLabel.text = "卡池: "
+        descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")  + ": "
         descLabel.textAlignment = .left
         descLabel.font = UIFont.systemFont(ofSize: 16)
         
@@ -126,7 +126,7 @@ class GachaView: UIView {
         self.addSubview(gachaInfoView)
         nameLabel.text = ""
         detailLabel.fwidth = CGSSGlobal.width - 2 * space
-        detailLabel.text = "未找到有效的卡池数据，请尝试下拉刷新"
+        detailLabel.text = NSLocalizedString("未找到有效的卡池数据，请尝试下拉刷新", comment: "模拟抽卡页面")
         detailLabel.sizeToFit()
         gachaInfoView.fheight = detailLabel.fy + detailLabel.fheight
         self.fheight = gachaInfoView.fheight + gachaInfoView.fy + space
@@ -152,11 +152,11 @@ class GachaView: UIView {
         let descLabel = UILabel()
         descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 17)
         descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = "新卡列表:"
+        descLabel.text = NSLocalizedString("新卡列表", comment: "模拟抽卡页面") + ":"
         descLabel.textColor = UIColor.black
         
         let moreCardLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 17))
-        moreCardLabel.text = "查看完整卡池 >"
+        moreCardLabel.text = NSLocalizedString("查看完整卡池", comment: "模拟抽卡页面") + " >"
         moreCardLabel.font = UIFont.systemFont(ofSize: 16)
         moreCardLabel.textColor = UIColor.lightGray
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(seeMoreCard))

@@ -36,10 +36,10 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem.init(title: "完成", style: .plain, target: self, action: #selector(doneAction))
+        let backButton = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(doneAction))
         self.navigationItem.leftBarButtonItem = backButton
         
-        let resetButton = UIBarButtonItem.init(title: "重置", style: .plain, target: self, action: #selector(resetAction))
+        let resetButton = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
         self.navigationItem.rightBarButtonItem = resetButton
         
         prepare()

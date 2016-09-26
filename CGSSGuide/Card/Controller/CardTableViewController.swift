@@ -19,19 +19,19 @@ class CardTableViewController: BaseCardTableViewController {
         if updater.checkNewestDataVersion().0 > updater.checkCurrentDataVersion().0 {
             let dao = CGSSDAO.sharedDAO
             dao.removeAllData()
-            let alert = UIAlertController.init(title: "数据需要更新", message: "数据主版本过低，请点击确定开始更新", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (alertAction) in
+            let alert = UIAlertController.init(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
                 self.check(0b1001111)
                 }))
             self.tabBarController?.present(alert, animated: true, completion: nil)
         }
         // 如果数据Minor版本号过低 不管用户有没有设置自动更新 都提示更新 但是可以取消
         else if updater.checkNewestDataVersion().1 > updater.checkCurrentDataVersion().1 {
-            let alert = UIAlertController.init(title: "数据需要更新", message: "数据存在新版本，推荐进行更新，请点击确定开始更新", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: { (alertAction) in
+            let alert = UIAlertController.init(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
                 self.check(0b1001111)
                 }))
-            alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
             self.tabBarController?.present(alert, animated: true, completion: nil)
         }
         // 启动时根据用户设置检查常规更新

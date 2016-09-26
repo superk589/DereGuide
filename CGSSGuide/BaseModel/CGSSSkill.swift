@@ -60,13 +60,13 @@ extension CGSSSkill {
     var procTypeShort: String {
         switch maxChance {
         case 6000:
-            return "高"
+            return NSLocalizedString("高", comment: "技能触发几率的简写")
         case 5250:
-            return "中"
+            return NSLocalizedString("中", comment: "技能触发几率的简写")
         case 4500:
-            return "低"
+            return NSLocalizedString("低", comment: "技能触发几率的简写")
         default:
-            return "其他"
+            return NSLocalizedString("其他", comment: "通用, 通常不会出现, 为未知字符预留")
         }
     }
     

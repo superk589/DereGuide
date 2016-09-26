@@ -93,8 +93,8 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             teamDVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(teamDVC, animated: true)
         } else {
-            let alert = UIAlertController.init(title: "数据缺失", message: "因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+            let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
             self.navigationController?.present(alert, animated: true, completion: nil)
             // 这种情况下 cell不会自动去除选中状态 故手动置为非选中状态
             tableView.cellForRow(at: indexPath)?.isSelected = false

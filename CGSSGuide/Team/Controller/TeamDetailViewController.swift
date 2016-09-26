@@ -156,8 +156,8 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             }
             
         } else {
-            let alert = UIAlertController.init(title: "提示", message: "请先选择歌曲", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "弹出框标题"), message: NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             teamDV.resetCalcButton()
         }
@@ -171,7 +171,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         }
     }
     func liveTypeButtonClick() {
-        let alvc = UIAlertController.init(title: "选择歌曲模式", message: nil, preferredStyle: .actionSheet)
+        let alvc = UIAlertController.init(title: NSLocalizedString("选择歌曲模式", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = teamDV.liveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.liveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
@@ -190,12 +190,12 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 self.sv.contentSize = self.teamDV.frame.size
                 }))
         }
-        alvc.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
         self.present(alvc, animated: true, completion: nil)
     }
     
     func grooveTypeButtonClick() {
-        let alvc = UIAlertController.init(title: "选择Groove类别", message: nil, preferredStyle: .actionSheet)
+        let alvc = UIAlertController.init(title: NSLocalizedString("选择Groove类别", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = teamDV.grooveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.grooveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
@@ -204,7 +204,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 self.teamDV.currentGrooveType = grooveType
                 }))
         }
-        alvc.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
         self.present(alvc, animated: true, completion: nil)
         
     }

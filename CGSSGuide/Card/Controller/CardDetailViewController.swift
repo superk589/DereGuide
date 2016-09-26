@@ -101,8 +101,8 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
     // 保存成功的回调方法
     func imageDidFinishingSaving(_ image: UIImage, didFinishSavingWithError: NSError?, contextInfo: AnyObject) {
         
-        let alVC = UIAlertController(title: didFinishSavingWithError?.localizedFailureReason ?? "保存成功", message: nil, preferredStyle: .alert)
-        alVC.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+        let alVC = UIAlertController(title: didFinishSavingWithError?.localizedFailureReason ?? NSLocalizedString("保存成功", comment: "弹出框标题"), message: nil, preferredStyle: .alert)
+        alVC.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
         present(alVC, animated: true, completion: nil)
     }
     
@@ -198,7 +198,7 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         let location = press.location(in: fullScreenView)
         alert.popoverPresentationController?.sourceView = fullScreenView
         alert.popoverPresentationController?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
-        alert.addAction(UIAlertAction.init(title: "保存到相册", style: .default, handler: { (_: UIAlertAction) in
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("保存到相册", comment: "底部弹出选项"), style: .default, handler: { (_: UIAlertAction) in
             if let image = iv.image {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.imageDidFinishingSaving), nil)
             }
@@ -206,7 +206,7 @@ extension CardDetailViewController: CGSSImageViewDelegate {
         // alVC.addAction(UIAlertAction.init(title: "分享", style: .Default, handler: { (_:UIAlertAction) in
         // //todo
         // }))
-        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "通用"), style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
         
     }

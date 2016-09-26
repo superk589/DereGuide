@@ -17,7 +17,7 @@ class AcknowledgementViewController: UIViewController {
         tv.isEditable = false
         tv.font = UIFont.systemFont(ofSize: 17)
         tv.dataDetectorTypes = .link
-        tv.text = "数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n"
+        tv.text = NSLocalizedString("数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n", comment: "致谢页面")
         view.addSubview(tv)
         // Do any additional setup after loading the view.
     }

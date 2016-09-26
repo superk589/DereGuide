@@ -19,17 +19,18 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
             refresher.endRefreshing()
             return
         }
-        self.updateStatusView.setContent("检查更新中", hasProgress: false)
+        self.updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
         updater.checkUpdate(mask, complete: { (items, errors) in
             if !errors.isEmpty && items.count == 0 {
                 self.updateStatusView.isHidden = true
-                let alert = UIAlertController.init(title: "检查更新失败", message: errors.joined(separator: "\n"), preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
+                    , message: errors.joined(separator: "\n"), preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                 // 使用tabBarController来展现UIAlertController的原因是, 该方法处于异步子线程中,当执行时可能这个ViewController已经不在前台,会造成不必要的警告(虽然不会崩溃,但是官方不建议这样)
                 self.tabBarController?.present(alert, animated: true, completion: nil)
             } else {
                 if items.count == 0 {
-                    self.updateStatusView.setContent("数据是最新版本", hasProgress: false)
+                    self.updateStatusView.setContent(NSLocalizedString("数据是最新版本", comment: "更新框"), hasProgress: false)
                     self.updateStatusView.activityIndicator.stopAnimating()
                     UIView.animate(withDuration: 2.5, animations: {
                         // 当一个控件的alpha = 0 之后 就不会响应任何事件了 不需要再置为hidden
@@ -40,12 +41,12 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     })
                     return
                 }
-                self.updateStatusView.setContent("更新数据中", total: items.count)
+                self.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
                 updater.updateItems(items, progress: { (process, total) in
                     self.updateStatusView.updateProgress(process, b: total)
                     }, complete: { (success, total) in
-                    let alert = UIAlertController.init(title: "更新完成", message: "成功\(success),失败\(total-success)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用"))\(success),\(NSLocalizedString("失败", comment: "通用"))\(total-success)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                     self.tabBarController?.present(alert, animated: true, completion: nil)
                     self.updateStatusView.isHidden = true
                     self.refresh()
@@ -62,7 +63,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         refreshControl = refresher
         
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: "下拉检查更新")
+        refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         refreshControl = refresher
         refresher.addTarget(self, action: #selector(refresherValueChanged), for: .valueChanged)
         

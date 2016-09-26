@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 enum CGSSLiveType: String {
-    case normal = "常规模式"
+    case normal = "常规模式" //!!!无法被本地化 注意使用时本地化
     case vocal = "Vocal Burst"
     case dance = "Dance Burst"
     case visual = "Visual Burst"
@@ -27,6 +27,14 @@ enum CGSSLiveType: String {
             return CGSSGlobal.danceColor
         case .visual:
             return CGSSGlobal.passionColor
+        }
+    }
+    func toString() -> String {
+        switch self {
+        case .normal:
+            return NSLocalizedString("常规模式", comment: "")
+        default:
+            return self.rawValue
         }
     }
 }

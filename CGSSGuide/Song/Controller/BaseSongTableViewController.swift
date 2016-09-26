@@ -91,7 +91,7 @@ class BaseSongTableViewController: RefreshableTableViewController {
         self.navigationItem.titleView = searchBar
         searchBar.returnKeyType = .done
         // searchBar.showsCancelButton = true
-        searchBar.placeholder = "歌曲名"
+        searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.delegate = self
@@ -173,8 +173,9 @@ class BaseSongTableViewController: RefreshableTableViewController {
             if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
                 beatmaps.append(beatmap)
             } else {
-                let alert = UIAlertController.init(title: "数据缺失", message: "缺少难度为\(CGSSGlobal.diffStringFromInt(i: i))的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: "确定", style: .default, handler: nil))
+                let msg = NSLocalizedString("缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文")
+                let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: String.init(format: msg, CGSSGlobal.diffStringFromInt(i: i)), preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                 self.navigationController?.present(alert, animated: true, completion: nil)
                 return nil
             }

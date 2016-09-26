@@ -107,7 +107,7 @@ class TeamDetailView: UIView {
         originY += 55 + topSpace
         
         let descLabel1 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
-        descLabel1.text = "队长加成: "
+        descLabel1.text = NSLocalizedString("队长加成", comment: "队伍详情页面") + ": "
         descLabel1.font = UIFont.systemFont(ofSize: 16)
         descLabel1.textAlignment = .left
         
@@ -120,7 +120,7 @@ class TeamDetailView: UIView {
         originY += topSpace
         
         let descLabel2 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
-        descLabel2.text = "表现值: "
+        descLabel2.text = NSLocalizedString("表现值", comment: "队伍详情页面") + ": "
         descLabel2.font = UIFont.systemFont(ofSize: 16)
         descLabel2.textAlignment = .left
         
@@ -129,7 +129,7 @@ class TeamDetailView: UIView {
         backSupportLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 17))
         backSupportLabel.font = UIFont.systemFont(ofSize: 16)
         // backSupportLabel.textColor = UIColor.lightGrayColor()
-        backSupportLabel.text = "后援数值: "
+        backSupportLabel.text = NSLocalizedString("后援数值", comment: "队伍详情页面") + ": "
         backSupportLabel.textColor = UIColor.darkGray
         backSupportTF = UITextField.init(frame: CGRect(x: CGSSGlobal.width - 150, y: originY - 5, width: 140, height: 27))
         backSupportTF.autocorrectionType = .no
@@ -152,7 +152,7 @@ class TeamDetailView: UIView {
         skillListContentView.drawSectionLine(0)
         
         skillListDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: 10, width: 100, height: 22))
-        skillListDescLabel.text = "特技列表: "
+        skillListDescLabel.text = NSLocalizedString("特技列表", comment: "队伍详情页面") + ": "
         skillListDescLabel.font = UIFont.systemFont(ofSize: 16)
         skillListDescLabel.textColor = UIColor.black
         
@@ -183,7 +183,7 @@ class TeamDetailView: UIView {
         originY = topSpace
         
         let descLabel3 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
-        descLabel3.text = "得分计算: "
+        descLabel3.text = NSLocalizedString("得分计算", comment: "队伍详情页面") + ": "
         descLabel3.font = UIFont.systemFont(ofSize: 16)
         descLabel3.textAlignment = .left
         
@@ -193,7 +193,7 @@ class TeamDetailView: UIView {
         
         selectSongLabel = UILabel.init(frame: CGRect(x: 40, y: 7, width: CGSSGlobal.width - 80, height: 30))
         selectSongLabel.textColor = UIColor.lightGray
-        selectSongLabel.text = "请选择歌曲"
+        selectSongLabel.text = NSLocalizedString("请选择歌曲", comment: "队伍详情页面")
         selectSongLabel.textAlignment = .center
         selectSongLabel.isUserInteractionEnabled = true
         selectSongLabel.font = UIFont.systemFont(ofSize: 18)
@@ -227,7 +227,7 @@ class TeamDetailView: UIView {
         originY += selectSongContentView.fheight + topSpace * 1.5
         
         manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 120, height: 21))
-        manualValueBox.text = "使用固定值: "
+        manualValueBox.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
         manualValueBox.descLabel.font = UIFont.systemFont(ofSize: 16)
         manualValueBox.tintColor = CGSSGlobal.coolColor
         manualValueBox.descLabel.textColor = UIColor.darkGray
@@ -253,15 +253,15 @@ class TeamDetailView: UIView {
         
         let liveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 31))
         liveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
-        liveTypeDescLable.text = "歌曲模式: "
+        liveTypeDescLable.text = NSLocalizedString("歌曲模式", comment: "队伍详情页面") + ": "
         liveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
         liveTypeDescLable.textColor = UIColor.darkGray
         
         liveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 150, y: 5, width: 140, height: 21))
-        liveTypeButton.setTitle("< 常规模式 >", for: UIControlState())
+        liveTypeButton.setTitle("< " + NSLocalizedString("常规模式", comment: "队伍详情页面") + " >", for: .normal)
         liveTypeButton.contentHorizontalAlignment = .right
         liveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        liveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
+        liveTypeButton.setTitleColor(UIColor.darkGray, for: .normal)
         liveTypeButton.isUserInteractionEnabled = false
 
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(liveTypeButtonClick))
@@ -274,15 +274,15 @@ class TeamDetailView: UIView {
         grooveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
         
         grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
-        grooveTypeDescLable.text = "Groove类别: "
+        grooveTypeDescLable.text = NSLocalizedString("Groove类别", comment: "队伍详情页面") + ": "
         grooveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
         grooveTypeDescLable.textColor = UIColor.darkGray
         
         grooveTypeButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 170, y: 5, width: 160, height: 21))
-        grooveTypeButton.setTitle("", for: UIControlState())
+        grooveTypeButton.setTitle("", for: .normal)
         grooveTypeButton.contentHorizontalAlignment = .right
         grooveTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        grooveTypeButton.setTitleColor(UIColor.darkGray, for: UIControlState())
+        grooveTypeButton.setTitleColor(UIColor.darkGray, for: .normal)
         grooveTypeButton.isUserInteractionEnabled = false
     
         let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(grooveTypeButtonClick))
@@ -294,7 +294,7 @@ class TeamDetailView: UIView {
         originY += topSpace / 2 + 3
         
         startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 30))
-        startCalcButton.setTitle("开始计算", for: UIControlState())
+        startCalcButton.setTitle(NSLocalizedString("开始计算", comment: "队伍详情页面"), for: .normal)
         startCalcButton.backgroundColor = CGSSGlobal.danceColor
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
@@ -308,7 +308,7 @@ class TeamDetailView: UIView {
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
         scoreDescLabel.textColor = UIColor.darkGray
         scoreDescLabel.numberOfLines = 0
-        scoreDescLabel.text = "* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响"
+        scoreDescLabel.text = NSLocalizedString("* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响", comment: "队伍详情页面")
         scoreDescLabel.sizeToFit()
         scoreDescLabel.isHidden = true
         originY += topSpace + scoreDescLabel.fheight + topSpace
@@ -346,7 +346,7 @@ class TeamDetailView: UIView {
         delegate?.editTeam()
     }
     func startCalc() {
-        startCalcButton.setTitle("计算中...", for: UIControlState())
+        startCalcButton.setTitle(NSLocalizedString("计算中...", comment: "队伍详情页面"), for: .normal)
         startCalcButton.isUserInteractionEnabled = false
         delegate?.startCalc()
     }
@@ -388,13 +388,13 @@ class TeamDetailView: UIView {
             }
         }
         if let selfLeaderRef = team.leader.cardRef {
-            selfLeaderLabel.text = "队长技能: \(selfLeaderRef.leaderSkill?.name ?? "无")\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
+            selfLeaderLabel.text = "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
             selfLeaderLabel.backgroundColor = selfLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
             selfLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
-            friendLeaderLabel.text = "好友技能: \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.explainEn ?? "")"
+            friendLeaderLabel.text = "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.explainEn ?? "")"
             friendLeaderLabel.backgroundColor = friendLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
             friendLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
@@ -403,7 +403,7 @@ class TeamDetailView: UIView {
         var upValueStrings = [[String]]()
         
         let contents = team.getUpContent()
-        upValueStrings.append(["  ", "Vocal", "Dance", "Visual", "技能触发", "HP"])
+        upValueStrings.append(["  ", "Vocal", "Dance", "Visual", NSLocalizedString("技能触发", comment: "队伍详情页面"), "HP"])
         
         var upCuteString = [String]()
         upCuteString.append("Cu")
@@ -553,13 +553,13 @@ class TeamDetailView: UIView {
         var presentColor = [[UIColor]]()
         
         presentValueString.append([" ", "Total", "Vocal", "Dance", "Visual"])
-        var presentSub1 = ["彩色曲"]
+        var presentSub1 = [NSLocalizedString("彩色曲", comment: "队伍详情页面")]
         presentSub1.append(contentsOf: team.getPresentValue(.office).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub2 = ["Cu曲"]
+        var presentSub2 = [NSLocalizedString("Cu曲", comment: "队伍详情页面")]
         presentSub2.append(contentsOf: team.getPresentValue(.cute).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub3 = ["Co曲"]
+        var presentSub3 = [NSLocalizedString("Co曲", comment: "队伍详情页面")]
         presentSub3.append(contentsOf: team.getPresentValue(.cool).toStringArrayWithBackValue(team.backSupportValue))
-        var presentSub4 = ["Pa曲"]
+        var presentSub4 = [NSLocalizedString("Pa曲", comment: "队伍详情页面")]
         presentSub4.append(contentsOf: team.getPresentValue(.passion).toStringArrayWithBackValue(team.backSupportValue))
         
         presentValueString.append(presentSub1)
@@ -604,7 +604,7 @@ class TeamDetailView: UIView {
     }
     
     func resetCalcButton() {
-        startCalcButton.setTitle("开始计算", for: UIControlState())
+        startCalcButton.setTitle(NSLocalizedString("开始计算", comment: ""), for: .normal)
         startCalcButton.isUserInteractionEnabled = true
     }
     
@@ -637,7 +637,7 @@ class TeamDetailView: UIView {
         scoreGrid.isHidden = false
         scoreDescLabel.isHidden = false
         var scoreString = [[String]]()
-        scoreString.append(["表现值", "极限分数", "平均分数(模拟)"])
+        scoreString.append([NSLocalizedString("表现值", comment: "队伍详情页面"), NSLocalizedString("极限分数", comment: "队伍详情页面"), NSLocalizedString("平均分数(模拟)", comment: "队伍详情页面")])
         scoreString.append(["", "", ""])
         scoreGrid.setGridContent(scoreString)
     }
@@ -651,17 +651,17 @@ class TeamDetailView: UIView {
     }
     var currentLiveType: CGSSLiveType = .normal {
         didSet {
-            self.liveTypeButton.setTitle("< \(currentLiveType.rawValue) >", for: UIControlState())
-            self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), for: UIControlState())
+            self.liveTypeButton.setTitle("< \(currentLiveType.toString()) >", for: .normal)
+            self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), for: .normal)
         }
     }
     var currentGrooveType: CGSSGrooveType? {
         didSet {
             if let type = currentGrooveType {
-                self.grooveTypeButton.setTitle("< \(type.rawValue) >", for: UIControlState())
-                self.grooveTypeButton.setTitleColor(type.typeColor(), for: UIControlState())
+                self.grooveTypeButton.setTitle("< \(type.rawValue) >", for: .normal)
+                self.grooveTypeButton.setTitleColor(type.typeColor(), for: .normal)
             } else {
-                self.grooveTypeButton.setTitle("", for: UIControlState())
+                self.grooveTypeButton.setTitle("", for: .normal)
             }
         }
     }
@@ -679,7 +679,7 @@ class TeamDetailView: UIView {
         // selectSongLabel.hidden = true
         selectSongLabel.text = ""
         let song = live.musicRef!
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) 时长: \(Int(beatmaps[diff - 1].totalSeconds))秒"
+        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[diff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
         songNameLabel.text = live.musicRef?.title

@@ -48,7 +48,7 @@ class CharInfoTableViewCell: UITableViewCell {
     func setup(_ char: CGSSChar) {
         charNameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
         if char.voice == "" {
-            charCVLabel.text = "CV: 未付声"
+            charCVLabel.text = "CV: \(NSLocalizedString("未付声", comment: "角色信息页面"))"
         } else {
             charCVLabel.text = "CV: \(char.voice!)"
         }
