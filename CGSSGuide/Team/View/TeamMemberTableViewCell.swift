@@ -57,7 +57,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         title.textAlignment = .left
         
         replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
-        replaceButton.text = NSLocalizedString("替换 >", comment: "队伍编辑页面")
+        replaceButton.text = NSLocalizedString("替换", comment: "队伍编辑页面") + " >"
         replaceButton.isUserInteractionEnabled = false
         replaceButton.textAlignment = .right
         replaceButton.font = UIFont.systemFont(ofSize: 16)
