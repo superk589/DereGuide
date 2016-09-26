@@ -8,7 +8,7 @@
 		<key>iconId</key>
 		<string>200247</string>
 		<key>title</key>
-		<string>偶像生日提醒</string>
+		<string>アイドル誕生日通知</string>
 	</dict>
 	<dict>
 		<key>cName</key>
@@ -16,7 +16,7 @@
 		<key>iconId</key>
 		<string>300151</string>
 		<key>title</key>
-		<string>角色信息查询</string>
+		<string>キャラ情報を見る</string>
 	</dict>
 	<dict>
 		<key>cName</key>
@@ -24,7 +24,7 @@
 		<key>iconId</key>
 		<string>100282</string>
 		<key>title</key>
-		<string>模拟抽卡</string>
+		<string>ガシャシミュレーター</string>
 	</dict>
 </array>
 </plist>
