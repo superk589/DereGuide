@@ -13,6 +13,10 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Team simulation/Live score calculation
 * Birthday notification and other small tools in the future
 
+## Localization
+CGSSGuide now provide files of localizable strings for other languages
+[How to localize CGSSGuide](https://github.com/superk589/CGSSGuide/wiki)
+
 ## Requirements
 * iOS 8.0+
 * Xcode 8+
