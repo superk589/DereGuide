@@ -6,4 +6,4 @@
   Copyright © 2016年 zzk. All rights reserved.
 */
 
-NSPhotoLibraryUsageDescription = "请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。";
+NSPhotoLibraryUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
