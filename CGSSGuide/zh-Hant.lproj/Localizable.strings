@@ -96,7 +96,7 @@
 "后援数值" = "後援數值";
 
 /* 弹出框正文 */
-"因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。" = "因資料更新導致隊伍資料不完整，建議等待當前更新完成，或嘗試在卡片頁面下拉更新資料。";
+"因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。" = "因數據更新導致隊伍資料不完整，建議等待當前更新完成，或嘗試在卡片頁面下拉更新數據。";
 
 /* 设置页面
  通用 */
@@ -116,7 +116,7 @@
 "完成" = "完成";
 
 /* 设置页面 */
-"将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。" = "將會清除所有快取的圖片、卡片、歌曲資料。除非資料出現問題，不建議使用此選項。";
+"将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。" = "將會清除所有快取的圖片、卡片、歌曲資料。除非數據出現問題，不建議使用此選項。";
 
 /* 卡片详情页 */
 "属性排名" = "屬性排名";
@@ -172,16 +172,16 @@
 "提示" = "提示";
 
 /* 弹出框正文 */
-"数据主版本过低，请点击确定开始更新" = "資料主版本過低，請點選確定開始更新";
+"数据主版本过低，请点击确定开始更新" = "數據主版本過低，請點選確定開始更新";
 
 /* 弹出框正文 */
-"数据存在新版本，推荐进行更新，请点击确定开始更新" = "資料存在新版本，推薦進行更新，請點選確定開始更新";
+"数据存在新版本，推荐进行更新，请点击确定开始更新" = "數據存在新版本，推薦進行更新，請點選確定開始更新";
 
 /* 更新框 */
 "数据是最新版本" = "資料是最新版本";
 
 /* 致谢页面 */
-"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "資料來源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技術支援：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面設計：\nZXQ\n\n";
+"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "數據來源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技術支援：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面設計：\nZXQ\n\n";
 
 /* 弹出框标题 */
 "数据缺失" = "資料缺失";
@@ -196,7 +196,7 @@
 "无" = "無";
 
 /* 弹出框正文 */
-"无法获取游戏原始数据" = "無法獲取遊戲原始資料";
+"无法获取游戏原始数据" = "無法獲取遊戲原始數據";
 
 /* 角色信息页面 */
 "日文名/罗马音/CV" = "日文名/羅馬音/CV";
@@ -220,7 +220,7 @@
 "普池" = "普池";
 
 /* 设置页面 */
-"暂无需要缓存的图片，请先尝试更新其他数据。" = "暫無需要快取的圖片，請先嚐試更新其他資料。";
+"暂无需要缓存的图片，请先尝试更新其他数据。" = "暫無需要快取的圖片，請先嘗試更新其他數據。";
 
 /* 弹出框标题 */
 "更新完成" = "更新完成";
@@ -241,13 +241,13 @@
 "未开启" = "未開啟";
 
 /* 模拟抽卡页面 */
-"未找到有效的卡池数据，请尝试下拉刷新" = "未找到有效的卡池資料，請嘗試下拉重新整理";
+"未找到有效的卡池数据，请尝试下拉刷新" = "未找到有效的卡池數據，請嘗試下拉重新整理";
 
 /* 设置页面 */
 "未设置邮箱账户" = "未設定郵箱賬戶";
 
 /* 版权声明页面 */
-"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "本程式是非官方程式，所有本程式中使用的遊戲相關資料版權所屬為：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程式所使用的卡片、歌曲等資料來源於網路，其版權在不違反官方版權的前提下遵循提供者的版權聲明。\n----------------------------------------\n本程式使用的第三方庫\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程式的所有介面、圖示、非官方資源資料、程式碼基於MIT協議。\n如果對此項目感興趣，請訪問：\nhttps://github.com/superk589/CGSSGuide\n\n";
+"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "本程式是非官方程式，所有本程式中使用的遊戲相關資料版權所屬為：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程式所使用的卡片、歌曲等資料來源於網路，其版權在不違反官方版權的前提下遵循提供者的版權聲明。\n----------------------------------------\n本程式使用的第三方庫\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程式的所有介面、圖示、非官方資源數據、程式碼基於MIT協議。\n如果對此項目感興趣，請訪問：\nhttps://github.com/superk589/CGSSGuide\n\n";
 
 /* 队伍详情页面 */
 "极限分数" = "極限分數";
@@ -317,16 +317,16 @@
 "编辑" = "編輯";
 
 /* 弹出框正文 */
-"缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。" = "缺少難度為%@的歌曲,建議等待當前更新完成，或嘗試下拉歌曲列表手動更新資料。";
+"缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。" = "缺少難度為%@的歌曲,建議等待當前更新完成，或嘗試下拉歌曲列表手動更新數據。";
 
 /* 弹出框正文 */
-"获取到的live数据异常" = "獲取到的live資料異常";
+"获取到的live数据异常" = "獲取到的live數據異常";
 
 /* 弹出框正文 */
-"获取到的卡数据异常" = "獲取到的卡資料異常";
+"获取到的卡数据异常" = "獲取到的卡牌數據異常";
 
 /* 弹出框正文 */
-"获取到的歌曲数据异常" = "獲取到的歌曲資料異常";
+"获取到的歌曲数据异常" = "獲取到的歌曲數據異常";
 
 /* 弹出框正文 */
 "获取到的谱面数据异常" = "獲取到的譜面數據異常";
@@ -335,7 +335,7 @@
 "获得途径" = "獲得途徑";
 
 /* 卡片详情页 */
-"获得途径(进化前)" = "獲得途徑(進化前)";
+"获得途径(进化前)" = "獲得途徑(特訓前)";
 
 /* 角色信息页面 */
 "血型" = "血型";
