@@ -226,7 +226,7 @@ class TeamDetailView: UIView {
         
         originY += selectSongContentView.fheight + topSpace * 1.5
         
-        manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 120, height: 21))
+        manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 150, height: 21))
         manualValueBox.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
         manualValueBox.descLabel.font = UIFont.systemFont(ofSize: 16)
         manualValueBox.tintColor = CGSSGlobal.coolColor
