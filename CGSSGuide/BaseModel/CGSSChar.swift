@@ -66,49 +66,51 @@ extension CGSSChar {
     
     // 一些属性的特殊转换
     var handToString: String {
-        if hand == 3001 {
-            return "右"
-        } else if hand == 3002 {
-            return "左"
-        } else if hand == 3003 {
-            return "两手"
-        } else {
-            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
-        }
+        return CGSSGameResource.sharedResource.getTextData(category: 5, index: constellation - 3000)
+//        if hand == 3001 {
+//            return "右"
+//        } else if hand == 3002 {
+//            return "左"
+//        } else if hand == 3003 {
+//            return "两手"
+//        } else {
+//            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
+//        }
     }
     
     var constellationToString: String {
-        switch constellation {
-            
-        case 1001:
-            return "金牛座"
-        case 1002:
-            return "白羊座"
-        case 1003:
-            return "天秤座"
-        case 1004:
-            return "水瓶座"
-        case 1005:
-            return "双鱼座"
-        case 1006:
-            return "处女座"
-        case 1007:
-            return "魔羯座"
-        case 1008:
-            return "双子座"
-        case 1009:
-            return "天蝎座"
-        case 1010:
-            return "射手座"
-        case 1011:
-            return "狮子座"
-        case 1012:
-            return "巨蟹座"
-        case 1013:
-            return "花も恥じらう乙女座"  //双叶杏的特殊星座
-        default:
-            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
-        }
+        return CGSSGameResource.sharedResource.getTextData(category: 4, index: constellation - 1000)
+//        switch constellation {
+//            
+//        case 1001:
+//            return "金牛座"
+//        case 1002:
+//            return "白羊座"
+//        case 1003:
+//            return "天秤座"
+//        case 1004:
+//            return "水瓶座"
+//        case 1005:
+//            return "双鱼座"
+//        case 1006:
+//            return "处女座"
+//        case 1007:
+//            return "魔羯座"
+//        case 1008:
+//            return "双子座"
+//        case 1009:
+//            return "天蝎座"
+//        case 1010:
+//            return "射手座"
+//        case 1011:
+//            return "狮子座"
+//        case 1012:
+//            return "巨蟹座"
+//        case 1013:
+//            return "花も恥じらう乙女座"  //双叶杏的特殊星座
+//        default:
+//            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
+//        }
     }
     
     var bloodTypeToString: String {
