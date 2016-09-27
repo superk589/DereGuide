@@ -66,7 +66,7 @@ extension CGSSChar {
     
     // 一些属性的特殊转换
     var handToString: String {
-        return CGSSGameResource.sharedResource.getTextData(category: 5, index: constellation - 3000)
+        return CGSSGameResource.sharedResource.getTextData(category: 5, index: hand - 3000)
 //        if hand == 3001 {
 //            return "右"
 //        } else if hand == 3002 {
