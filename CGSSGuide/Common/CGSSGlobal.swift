@@ -154,7 +154,7 @@ public class CGSSGlobal: NSObject {
         return false
     }
     
-    func getCurrentLanguageType() -> LanguageType {
+    static var languageType: LanguageType {
         return LanguageType.init(identifier: Locale.current.identifier)
     }
     

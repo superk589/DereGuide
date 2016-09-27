@@ -186,7 +186,7 @@
 "Zys-WZ-9cy.title" = "組隊";
 
 /* Class = "UIButton"; normalTitle = "Combo加分"; ObjectID = "a2o-Af-Vg4"; */
-"a2o-Af-Vg4.normalTitle" = "Combo加分";
+"a2o-Af-Vg4.normalTitle" = "Combo加成";
 
 /* Class = "UIButton"; normalTitle = "Cute"; ObjectID = "aKa-Mv-vUQ"; */
 "aKa-Mv-vUQ.normalTitle" = "Cute";
@@ -252,7 +252,7 @@
 "l5E-7h-pBd.normalTitle" = "  W  ";
 
 /* Class = "UIButton"; normalTitle = "Perfect加分"; ObjectID = "lKk-N6-D9t"; */
-"lKk-N6-D9t.normalTitle" = "Perfect加分";
+"lKk-N6-D9t.normalTitle" = "分数加成";
 
 /* Class = "UIButton"; normalTitle = "五十音"; ObjectID = "lPK-N5-pwy"; */
 "lPK-N5-pwy.normalTitle" = "五十音";
@@ -315,7 +315,7 @@
 "xi1-wF-saE.normalTitle" = "  B  ";
 
 /* Class = "UILabel"; text = "傳送郵件"; ObjectID = "xrP-YC-gLm"; */
-"xrP-YC-gLm.text" = "傳送郵件";
+"xrP-YC-gLm.text" = "發送郵件";
 
 /* Class = "UILabel"; text = "快取所有圖片"; ObjectID = "yF0-cl-Say"; */
 "yF0-cl-Say.text" = "快取所有圖片";

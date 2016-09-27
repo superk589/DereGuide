@@ -55,8 +55,9 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         title.font = UIFont.systemFont(ofSize: 16)
         title.textColor = UIColor.lightGray
         title.textAlignment = .left
+        title.adjustsFontSizeToFitWidth = true
         
-        replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
+        replaceButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 90, y: originY - 5, width: 80, height: 28))
         replaceButton.text = NSLocalizedString("替换", comment: "队伍编辑页面") + " >"
         replaceButton.isUserInteractionEnabled = false
         replaceButton.textAlignment = .right
@@ -226,7 +227,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
             //skillLevelTF.text = String(skillLevel!)
             skillName.text = skill!.skillName
             skillDesc.fwidth = skillView.fwidth
-            skillDesc.text = skill!.getExplainByLevel(skillLevel!)
+            skillDesc.text = skill!.getExplainByLevel(skillLevel!, languageType: CGSSGlobal.languageType)
             skillDesc.sizeToFit()
             skillView.fheight = skillDesc.fheight + skillDesc.fy
         } else {
@@ -246,7 +247,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         leaderSkillView.fy = originY
         if leaderSkill != nil {
             leaderSkillName.text = leaderSkill!.name
-            leaderSkillDesc.text = leaderSkill!.explainEn
+            leaderSkillDesc.text = leaderSkill!.getLocalizedExplain(languageType: CGSSGlobal.languageType)
             leaderSkillDesc.fwidth = leaderSkillView.fwidth
             leaderSkillDesc.sizeToFit()
             leaderSkillView.fheight = leaderSkillDesc.fheight + leaderSkillDesc.fy

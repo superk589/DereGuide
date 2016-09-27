@@ -9,6 +9,17 @@
 import Foundation
 import SwiftyJSON
 
+extension CGSSLeaderSkill {
+    func getLocalizedExplain(languageType: LanguageType) -> String {
+        switch languageType {
+        case .zh:
+            return explainEn
+        default:
+            return explain
+        }
+    }
+}
+
 class CGSSLeaderSkill: CGSSBaseModel {
     
     var explain: String!

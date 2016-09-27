@@ -253,7 +253,7 @@ class TeamDetailView: UIView {
         
         let liveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 31))
         liveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
-        liveTypeDescLable.text = NSLocalizedString("歌曲模式", comment: "队伍详情页面") + ": "
+        liveTypeDescLable.text = NSLocalizedString("歌曲模式", comment: "队伍详情页面") + ":"
         liveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
         liveTypeDescLable.textColor = UIColor.darkGray
         
@@ -273,8 +273,8 @@ class TeamDetailView: UIView {
         
         grooveTypeContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
         
-        grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 100, height: 21))
-        grooveTypeDescLable.text = NSLocalizedString("Groove类别", comment: "队伍详情页面") + ": "
+        grooveTypeDescLable = UILabel.init(frame: CGRect(x: leftSpace, y: 5, width: 120, height: 21))
+        grooveTypeDescLable.text = NSLocalizedString("Groove类别", comment: "队伍详情页面") + ":"
         grooveTypeDescLable.font = UIFont.systemFont(ofSize: 16)
         grooveTypeDescLable.textColor = UIColor.darkGray
         
@@ -388,13 +388,13 @@ class TeamDetailView: UIView {
             }
         }
         if let selfLeaderRef = team.leader.cardRef {
-            selfLeaderLabel.text = "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.explainEn ?? "")"
+            selfLeaderLabel.text = "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
             selfLeaderLabel.backgroundColor = selfLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
             selfLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
-            friendLeaderLabel.text = "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.explainEn ?? "")"
+            friendLeaderLabel.text = "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
             friendLeaderLabel.backgroundColor = friendLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
             friendLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
@@ -532,7 +532,7 @@ class TeamDetailView: UIView {
         let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
         for i in 0...4 {
             if let skill = team[i]?.cardRef?.skill {
-                let str = "\(skill.skillName!): Lv.\(team[i]!.skillLevel!)\n\(skill.getExplainByLevel(team[i]!.skillLevel!))"
+                let str = "\(skill.skillName!): Lv.\(team[i]!.skillLevel!)\n\(skill.getExplainByLevel(team[i]!.skillLevel!, languageType: CGSSGlobal.languageType))"
                 let arr = [str]
                 skillListStrings.append(arr)
             } else {

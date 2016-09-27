@@ -32,8 +32,16 @@ extension CGSSSkill {
         }
         return nil
     }
-    func getExplainByLevel(_ lv: Int) -> String {
-        var explain = explainEn ?? ""
+    func getExplainByLevel(_ lv: Int, languageType: LanguageType = .ja) -> String {
+        var explain:String
+        switch languageType {
+        case .zh:
+            explain = explainEn
+        case .ja:
+            return self.explain
+        default:
+            return self.explain
+        }
         let pattern = "[0-9.]+ ~ [0-9.]+"
         let subs = CGSSGlobal.getStringByPattern(str: explain, pattern: pattern)
         let sub1 = subs[0]
@@ -44,8 +52,16 @@ extension CGSSSkill {
         explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)!))
         return explain
     }
-    func getExplainByLevelRange(_ start: Int, end: Int) -> String {
-        var explain = explainEn ?? ""
+    func getExplainByLevelRange(_ start: Int, end: Int, languageType: LanguageType = .ja) -> String {
+        var explain:String
+        switch languageType {
+        case .zh:
+            explain = explainEn
+        case .ja:
+            return self.explain
+        default:
+            return self.explain
+        }
         let pattern = "[0-9.]+ ~ [0-9.]+"
         let subs = CGSSGlobal.getStringByPattern(str: explain, pattern: pattern)
         let sub1 = subs[0]

@@ -354,7 +354,7 @@ class CardDetailView: UIView {
     
     func setupSkillContentView(_ skill: CGSSSkill) {
         skillNameLabel.text = NSLocalizedString("特技", comment: "通用") + ": " + skill.skillName
-        skillDescriptionLabel.text = skill.getExplainByLevelRange(1, end: 10)
+        skillDescriptionLabel.text = skill.getExplainByLevelRange(1, end: 10, languageType: CGSSGlobal.languageType)
         skillDescriptionLabel.fwidth = CGSSGlobal.width - 20
         skillDescriptionLabel.sizeToFit()
         skillProcGridView.fy = skillDescriptionLabel.fheight + skillDescriptionLabel.fy + topSpace
@@ -430,7 +430,7 @@ class CardDetailView: UIView {
         
         leaderSkillNameLabel.text = NSLocalizedString("队长技能", comment: "通用") + ": " + leaderSkill.name
         
-        leaderSkillDescriptionLabel.text = leaderSkill.explainEn
+        leaderSkillDescriptionLabel.text = leaderSkill.getLocalizedExplain(languageType: CGSSGlobal.languageType)
         leaderSkillDescriptionLabel.fwidth = CGSSGlobal.width - 20
         leaderSkillDescriptionLabel.sizeToFit()
         
@@ -572,9 +572,9 @@ class CardDetailView: UIView {
         
         insideY += topSpace + 16
         
-        availableEvent = CGSSCheckBox.init(frame: CGRect(x: 10, y: insideY, width: 60, height: 14))
-        availableGacha = CGSSCheckBox.init(frame: CGRect(x: 80, y: insideY, width: 60, height: 14))
-        availableLimit = CGSSCheckBox.init(frame: CGRect(x: 150, y: insideY, width: 60, height: 14))
+        availableEvent = CGSSCheckBox.init(frame: CGRect(x: 10, y: insideY, width: 80, height: 14))
+        availableGacha = CGSSCheckBox.init(frame: CGRect(x: 100, y: insideY, width: 80, height: 14))
+        availableLimit = CGSSCheckBox.init(frame: CGRect(x: 190, y: insideY, width: 80, height: 14))
         
         availableEvent.tintColor = CGSSGlobal.coolColor
         availableGacha.tintColor = CGSSGlobal.coolColor
