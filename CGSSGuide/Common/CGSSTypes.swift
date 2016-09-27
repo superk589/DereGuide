@@ -40,6 +40,26 @@ struct CGSSSkillTypes:OptionSet, RawRepresentable {
             self = .other
         }
     }
+    func toString() -> String {
+        switch self {
+        case CGSSSkillTypes.comboBonus:
+            return NSLocalizedString("Combo加成", comment: "")
+        case CGSSSkillTypes.perfectBonus:
+            return NSLocalizedString("分数加成", comment: "")
+        case CGSSSkillTypes.perfectLock:
+            return NSLocalizedString("强判", comment: "")
+        case CGSSSkillTypes.comboContinue:
+            return NSLocalizedString("COMBO保护", comment: "")
+        case CGSSSkillTypes.heal:
+            return NSLocalizedString("恢复生命", comment: "")
+        case CGSSSkillTypes.guard:
+            return NSLocalizedString("锁血", comment: "")
+        case CGSSSkillTypes.overload:
+            return NSLocalizedString("过载", comment: "")
+        default:
+            return NSLocalizedString("其他", comment: "")
+        }
+    }
 }
 
 struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {

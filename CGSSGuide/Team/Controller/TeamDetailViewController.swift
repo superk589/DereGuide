@@ -176,7 +176,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.liveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
         for liveType in CGSSLiveType.getAll() {
-            alvc.addAction(UIAlertAction.init(title: liveType.rawValue, style: .default, handler: { (a) in
+            alvc.addAction(UIAlertAction.init(title: liveType.toString(), style: .default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType
                 if liveType != .normal {
                     self.teamDV.showGrooveSelectButton()

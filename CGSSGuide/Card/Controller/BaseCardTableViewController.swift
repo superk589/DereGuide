@@ -143,7 +143,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         // 显示主动技能类型
         if let skill = card.skill {
             if CGSSGlobal.width > 360 {
-                cell.skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillType!)"
+                cell.skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillFilterType.toString())"
             } else {
                 cell.skillLabel.text = "\(skill.skillType!)"
             }

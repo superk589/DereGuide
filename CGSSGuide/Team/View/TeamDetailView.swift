@@ -126,7 +126,7 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        backSupportLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 100, height: 17))
+        backSupportLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: 140, height: 17))
         backSupportLabel.font = UIFont.systemFont(ofSize: 16)
         // backSupportLabel.textColor = UIColor.lightGrayColor()
         backSupportLabel.text = NSLocalizedString("后援数值", comment: "队伍详情页面") + ": "

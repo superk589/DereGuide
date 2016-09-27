@@ -36,8 +36,9 @@ class UpdateStatusView: UIView {
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
         descriptionLabel = UILabel()
         descriptionLabel.textColor = UIColor.white
-        descriptionLabel.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height / 2)
+        descriptionLabel.frame = CGRect(x: 20, y: 0, width: frame.size.width - 40, height: frame.size.height / 2)
         descriptionLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.textAlignment = .center
         activityIndicator = UIActivityIndicatorView()
         activityIndicator.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)

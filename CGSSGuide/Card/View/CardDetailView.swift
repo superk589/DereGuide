@@ -96,7 +96,7 @@ class CardDetailView: UIView {
         // let attContentView = UIView()
         // attContentView.frame = CGRectMake(-1, originY, CGSSGlobal.width+2, 109)
         let descLabel1 = UILabel()
-        descLabel1.frame = CGRect(x: 10, y: originY, width: 80, height: 16)
+        descLabel1.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 16)
         descLabel1.textColor = UIColor.black
         descLabel1.font = UIFont.systemFont(ofSize: 16)
         descLabel1.text = NSLocalizedString("卡片属性", comment: "卡片详情页") + ":" 
@@ -123,7 +123,7 @@ class CardDetailView: UIView {
         // let rankContentView = UIView()
         // rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 81 + (1 / UIScreen.mainScreen().scale))
         let descLabel2 = UILabel()
-        descLabel2.frame = CGRect(x: 10, y: originY, width: 80, height: 16)
+        descLabel2.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 16)
         descLabel2.textColor = UIColor.black
         descLabel2.font = UIFont.systemFont(ofSize: 16)
         descLabel2.text = NSLocalizedString("属性排名", comment: "卡片详情页") + ":"
@@ -309,10 +309,10 @@ class CardDetailView: UIView {
         descLabel3.frame = CGRect(x: 10, y: insideY, width: 50, height: 16)
         descLabel3.textColor = UIColor.black
         descLabel3.font = UIFont.systemFont(ofSize: 16)
-        descLabel3.text = NSLocalizedString("特技", comment: "通用") + ":"
+        //descLabel3.text = NSLocalizedString("特技", comment: "通用") + ":"
         descLabel3.textColor = UIColor.black
         // skillContentView.addSubview(descLabel3)
-        skillContentView.addSubview(descLabel3)
+        //skillContentView.addSubview(descLabel3)
         // let descLabel4 = UILabel()
         // descLabel4.frame = CGRectMake(10, 19, 40, 10)
         // descLabel4.textColor = UIColor.blackColor()
@@ -321,7 +321,7 @@ class CardDetailView: UIView {
         // skillContentView.addSubview(descLabel4)
         
         skillNameLabel = UILabel()
-        skillNameLabel.frame = CGRect(x: 60, y: insideY, width: CGSSGlobal.width - 70, height: 16)
+        skillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
         skillNameLabel.font = UIFont.systemFont(ofSize: 16)
         skillNameLabel.adjustsFontSizeToFitWidth = true
         // skillContentView.addSubview(skillNameLabel)
@@ -353,7 +353,7 @@ class CardDetailView: UIView {
     }
     
     func setupSkillContentView(_ skill: CGSSSkill) {
-        skillNameLabel.text = skill.skillName
+        skillNameLabel.text = NSLocalizedString("特技", comment: "通用") + ": " + skill.skillName
         skillDescriptionLabel.text = skill.getExplainByLevelRange(1, end: 10)
         skillDescriptionLabel.fwidth = CGSSGlobal.width - 20
         skillDescriptionLabel.sizeToFit()
@@ -389,10 +389,10 @@ class CardDetailView: UIView {
         descLabel4.frame = CGRect(x: 10, y: insideY, width: 80, height: 16)
         descLabel4.textColor = UIColor.black
         descLabel4.font = UIFont.systemFont(ofSize: 16)
-        descLabel4.text = NSLocalizedString("队长技能", comment: "通用") + ":"
+        //descLabel4.text = NSLocalizedString("队长技能", comment: "通用") + ":"
         descLabel4.textColor = UIColor.black
         // leaderSkillContentView.addSubview(descLabel4)
-        leaderSkillContentView.addSubview(descLabel4)
+        //leaderSkillContentView.addSubview(descLabel4)
         
         // let descLabel4 = UILabel()
         // descLabel4.frame = CGRectMake(10, 19, 40, 10)
@@ -402,7 +402,7 @@ class CardDetailView: UIView {
         // skillContentView.addSubview(descLabel4)
         
         leaderSkillNameLabel = UILabel()
-        leaderSkillNameLabel.frame = CGRect(x: 90, y: insideY, width: CGSSGlobal.width - 100, height: 16)
+        leaderSkillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
         leaderSkillNameLabel.adjustsFontSizeToFitWidth = true
         leaderSkillNameLabel.font = UIFont.systemFont(ofSize: 16)
         
@@ -428,7 +428,7 @@ class CardDetailView: UIView {
     
     func setupLeaderSkillContentView(_ leaderSkill: CGSSLeaderSkill) {
         
-        leaderSkillNameLabel.text = leaderSkill.name
+        leaderSkillNameLabel.text = NSLocalizedString("队长技能", comment: "通用") + ": " + leaderSkill.name
         
         leaderSkillDescriptionLabel.text = leaderSkill.explainEn
         leaderSkillDescriptionLabel.fwidth = CGSSGlobal.width - 20
@@ -449,7 +449,7 @@ class CardDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         var insideY: CGFloat = topSpace
         let descLabel4 = UILabel()
-        descLabel4.frame = CGRect(x: 10, y: insideY, width: 80, height: 16)
+        descLabel4.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
         descLabel4.textColor = UIColor.black
         descLabel4.font = UIFont.systemFont(ofSize: 16)
         descLabel4.text = NSLocalizedString("进化信息", comment: "卡片详情页") + ":"
@@ -511,7 +511,7 @@ class CardDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let insideY: CGFloat = topSpace
         let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 16)
         descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页") + ":"
         descLabel.textColor = UIColor.black

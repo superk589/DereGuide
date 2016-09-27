@@ -84,7 +84,7 @@ class CharDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let insideY: CGFloat = topSpace
         let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 17)
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 17)
         descLabel.textColor = UIColor.black
         descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.text = NSLocalizedString("角色所有卡片", comment: "角色信息页面") + ":"
