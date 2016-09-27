@@ -344,8 +344,18 @@ open class CGSSUpdater: NSObject {
         
         // 为了让较老的数据早更新 做一次排序
         let sortedItems = items.sorted { (item1, item2) -> Bool in
-            let index1 = Int(item1.id) ?? 9999999
-            let index2 = Int(item2.id) ?? 9999999
+            var index1: Int
+            var index2: Int
+            if item1.dataType == .card {
+                index1 = Int(item1.id)! % 1000
+            } else {
+                index1 = Int(item1.id) ?? 9999999
+            }
+            if item2.dataType == .card {
+                index2 = Int(item2.id)! % 1000
+            } else {
+                index2 = Int(item2.id) ?? 9999999
+            }
             if index1 <= index2 {
                 return true
             } else {
