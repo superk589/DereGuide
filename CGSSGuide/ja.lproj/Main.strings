@@ -21,7 +21,7 @@
 "2yB-7S-JxI.title" = "楽曲のフィルタ・ソート";
 
 /* Class = "UIButton"; normalTitle = "Groove活动"; ObjectID = "3ui-02-uWZ"; */
-"3ui-02-uWZ.normalTitle" = "Grooveイベント";
+"3ui-02-uWZ.normalTitle" = "Grooveｲﾍﾞﾝﾄ";
 
 /* Class = "UIButton"; normalTitle = "  AB  "; ObjectID = "4Lk-o2-12q"; */
 "4Lk-o2-12q.normalTitle" = "  AB  ";
@@ -33,7 +33,7 @@
 "5Tw-SW-h31.normalTitle" = "判定強化";
 
 /* Class = "UIButton"; normalTitle = "不断连"; ObjectID = "5UY-VC-aGN"; */
-"5UY-VC-aGN.normalTitle" = "コンボ継続";
+"5UY-VC-aGN.normalTitle" = "ｺﾝﾎﾞ継続";
 
 /* Class = "UIButton"; normalTitle = "20~29"; ObjectID = "5u8-dv-dFO"; */
 "5u8-dv-dFO.normalTitle" = "20~29";
@@ -69,7 +69,7 @@
 "Cde-v7-eat.normalTitle" = "Visual";
 
 /* Class = "UIButton"; normalTitle = "过载"; ObjectID = "Cxe-2I-TMr"; */
-"Cxe-2I-TMr.normalTitle" = "オーバーロード";
+"Cxe-2I-TMr.normalTitle" = "ｵｰﾊﾞｰﾛｰﾄﾞ";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "D6I-uh-wTP"; */
 "D6I-uh-wTP.headerTitle" = "ソート";
@@ -78,7 +78,7 @@
 "D80-A7-QVe.normalTitle" = "ＣＶなし";
 
 /* Class = "UIButton"; normalTitle = "传统活动"; ObjectID = "DHK-oa-5HG"; */
-"DHK-oa-5HG.normalTitle" = "アタポン形式イベント";
+"DHK-oa-5HG.normalTitle" = "ｱﾀﾎﾟﾝ形式ｲﾍﾞﾝﾄ";
 
 /* Class = "UIButton"; normalTitle = "稀有度"; ObjectID = "Dyg-Og-4GD"; */
 "Dyg-Og-4GD.normalTitle" = "レア度";
@@ -99,7 +99,7 @@
 "HIM-42-iDe.normalTitle" = "Vocal";
 
 /* Class = "UIButton"; normalTitle = "锁血"; ObjectID = "In1-C8-p0v"; */
-"In1-C8-p0v.normalTitle" = "ライフガード";
+"In1-C8-p0v.normalTitle" = "ﾗｲﾌｶﾞｰﾄﾞ";
 
 /* Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn"; */
 "IyO-O4-iMn.title" = "ユニットナビ";
@@ -123,7 +123,7 @@
 "MNn-WX-05k.normalTitle" = " SR+ ";
 
 /* Class = "UIButton"; normalTitle = "加血"; ObjectID = "OOC-vj-xF5"; */
-"OOC-vj-xF5.normalTitle" = "ライフ回復";
+"OOC-vj-xF5.normalTitle" = "ﾗｲﾌ回復";
 
 /* Class = "UINavigationItem"; title = "歌曲"; ObjectID = "OeQ-8h-gYQ"; */
 "OeQ-8h-gYQ.title" = "楽曲";
@@ -153,7 +153,7 @@
 "Wbd-ym-a55.normalTitle" = "Dance";
 
 /* Class = "UIButton"; normalTitle = "无技能"; ObjectID = "Wv5-vc-Mbq"; */
-"Wv5-vc-Mbq.normalTitle" = "スキルなし";
+"Wv5-vc-Mbq.normalTitle" = "ｽｷﾙなし";
 
 /* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "X7i-JU-TUQ"; */
 "X7i-JU-TUQ.normalTitle" = "Passion";
@@ -186,7 +186,7 @@
 "Zys-WZ-9cy.title" = "ユニット";
 
 /* Class = "UIButton"; normalTitle = "Combo加分"; ObjectID = "a2o-Af-Vg4"; */
-"a2o-Af-Vg4.normalTitle" = "コンボボーナス";
+"a2o-Af-Vg4.normalTitle" = "ｺﾝﾎﾞﾎﾞｰﾅｽ";
 
 /* Class = "UIButton"; normalTitle = "Cute"; ObjectID = "aKa-Mv-vUQ"; */
 "aKa-Mv-vUQ.normalTitle" = "Cute";
@@ -207,7 +207,7 @@
 "db8-xK-u51.normalTitle" = "Total";
 
 /* Class = "UIButton"; normalTitle = "常规歌曲"; ObjectID = "ddL-tZ-2ME"; */
-"ddL-tZ-2ME.normalTitle" = "ノーマル曲";
+"ddL-tZ-2ME.normalTitle" = "ﾉｰﾏﾙ曲";
 
 /* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "dfb-tZ-B9F"; */
 "dfb-tZ-B9F.normalTitle" = "Cool";
@@ -252,7 +252,7 @@
 "l5E-7h-pBd.normalTitle" = "  W  ";
 
 /* Class = "UIButton"; normalTitle = "Perfect加分"; ObjectID = "lKk-N6-D9t"; */
-"lKk-N6-D9t.normalTitle" = "スコアアップ";
+"lKk-N6-D9t.normalTitle" = "ｽｺｱｱｯﾌﾟ";
 
 /* Class = "UIButton"; normalTitle = "五十音"; ObjectID = "lPK-N5-pwy"; */
 "lPK-N5-pwy.normalTitle" = "五十音";
@@ -294,7 +294,7 @@
 "teG-01-FuT.normalTitle" = "          △          ";
 
 /* Class = "UILabel"; text = "移动网络下加载卡片大图"; ObjectID = "u1E-LY-NTo"; */
-"u1E-LY-NTo.text" = "モバイルデータ回線でフルサイズ画像を読み込む";
+"u1E-LY-NTo.text" = "モバイル回線でﾌﾙｻｲｽﾞ画像を読み込む";
 
 /* Class = "UIButton"; normalTitle = "未收藏"; ObjectID = "uLj-NT-Pgo"; */
 "uLj-NT-Pgo.normalTitle" = "ブクマしない";
