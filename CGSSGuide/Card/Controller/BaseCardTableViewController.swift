@@ -63,7 +63,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         // tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     override func refresherValueChanged() {
-        check(0b11)
+        check(0b1000011)
     }
     
     func filterAction() {

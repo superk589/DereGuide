@@ -31,7 +31,6 @@ class BeatmapViewController: UIViewController {
         super.viewDidLoad()
         bv = BeatmapView()
         bv.frame = CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64)
-        
         // 自定义descLabel
 //        descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
 //        descLabel.textAlignment = .Center
@@ -55,12 +54,9 @@ class BeatmapViewController: UIViewController {
         // self.view.addSubview(descLabel)
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
-//
-//        for v in beatmaps[3].notes! {
-//            let note = v as! CGSSBeatmap.Note
-//            print(note.sec)
-//        }
-        // Do any additional setup after loading the view.
+
+        // 设置toolbar
+        prepareToolbar()
     }
     
     func selectDiff() {
@@ -80,6 +76,14 @@ class BeatmapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func prepareToolbar() {
+        //let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
+        //let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
+        //spaceItem.width = 40
+        self.toolbarItems = [shareItem]
+    }
+    
     func initWithLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap]) -> Bool {
         // 打开谱面时 隐藏tabbar
         self.hidesBottomBarWhenPushed = true
@@ -87,15 +91,79 @@ class BeatmapViewController: UIViewController {
         self.live = live
         return true
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
     
-    /*
-     // MARK: - Navigation
+    func getImageTitle() -> String {
+        return "\(live.musicRef?.title ?? "") \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmaps[currentDiff - 1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[currentDiff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面")) powered by CGSSGuide"
+    }
+    func enterImageView() {
+        bv.exportImageAsync(title: getImageTitle()) { (image) in
+            let data = UIImagePNGRepresentation(image)
+            try? data?.write(to: URL.init(fileURLWithPath: "/Users/zzk/Desktop/aaa.png"))
+        }
+    }
+    
+    func share() {
+        bv.exportImageAsync(title: getImageTitle()) { (image) in
+            let urlArray = [image];
+            let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
+            // 需要屏蔽的模块
+            let cludeActivitys:[UIActivityType] = [
+                // 保存到本地相册
+                //UIActivityType.saveToCameraRoll,
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+                // 拷贝 复制
+                //UIActivityType.copyToPasteboard,
+
+                // 打印
+                //UIActivityType.print,
+
+                // 指定联系人
+                //UIActivityTypeAssignToContact,
+
+                // Facebook
+                //UIActivityType.postToFacebook,
+
+                // 微博
+                //UIActivityType.postToWeibo,
+
+                // 短信
+                //UIActivityType.message,
+
+                // 邮箱
+                //UIActivityType.mail,
+
+                // 腾讯微博
+                //UIActivityType.postToTencentWeibo,
+
+                // twitter
+                //UIActivityTypePostToTwitter,
+
+                // vimeo
+                //UIActivityTypePostToVimeo,
+
+                // airDrop
+                //UIActivityTypeAirDrop,
+
+                //UIActivityTypeAddToReadingList,
+                //UIActivityTypePostToFlickr,
+                //UIActivityTypeOpenInIBooks, // 9.0
+            ]
+            // 排除活动类型
+            activityVC.excludedActivityTypes = cludeActivitys
+            
+            // 呈现分享界面
+            self.present(activityVC, animated: true, completion: { 
+                
+            })
+        }
+    }
     
 }

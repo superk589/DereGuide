@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -57,7 +58,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         return contentSize.height - CGFloat(sec - self.beatmap.preSeconds!) * secScale - BeatmapView.heightInset
     }
     
-    override func draw(_ rect: CGRect) {
+    func drawIn(rect:CGRect) {
         typealias Note = CGSSBeatmapNote
         // 画纵向辅助线
         for i in 1...5 {
@@ -68,7 +69,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         
         // 画小节线
         let halfquadSectionMax = Int(((contentSize.height - rect.origin.y - BeatmapView.heightInset) / BeatmapView.sectionHeight * 8))
-        let rectMin = contentSize.height - frame.size.height - rect.origin.y - BeatmapView.heightInset
+        let rectMin = contentSize.height - rect.size.height - rect.origin.y - BeatmapView.heightInset
         let halfquadSectionMin = Int(rectMin / BeatmapView.sectionHeight * 8)
         for i in halfquadSectionMin...halfquadSectionMax {
             let pointY = contentSize.height - BeatmapView.heightInset - CGFloat(i) * BeatmapView.sectionHeight / 8
@@ -265,6 +266,10 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    override func draw(_ rect: CGRect) {
+        drawIn(rect: rect)
+    }
+    
     func initWith(_ beatmap: CGSSBeatmap, bpm: Int, type: Int) {
         self.beatmap = beatmap
         self.notes = beatmap.notes
@@ -391,5 +396,96 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         setNeedsDisplay()
     }
     
+    
+    // MARK: 生成整张谱面图片的方法
+    func exportImageAsync(title:String, callBack: @escaping (UIImage) -> Void) {
+        // TODO: 目前不同设备生成的图片尺寸不统一, 应统一化
+        // TODO: 图片上下边界处模糊处理
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            let sectionPerColumn = 8
+            let textHeight:CGFloat = 50
+            let contentSize = self.contentSize
+            // 一列的原始高度
+            let beatmapH = CGFloat(sectionPerColumn) * BeatmapView.sectionHeight
+            // 一列含上下边界的高度
+            let columnH = beatmapH + 2 * BeatmapView.heightInset
+            // 生成的图片总高度
+            let imageH = columnH + textHeight
+            // 总列数
+            let columns = ceil(contentSize.height / beatmapH)
+            // 生成的图片总宽度
+            let imageW = columns * CGSSGlobal.width
+            UIGraphicsBeginImageContext(contentSize)
+            var context:CGContext! = UIGraphicsGetCurrentContext()
+            let rect = CGRect.init(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
+            self.drawIn(rect: rect)
+            let image = UIImage.init(cgImage: context.makeImage()!)
+            UIGraphicsEndImageContext()
+            
+           
+            UIGraphicsBeginImageContext(CGSize.init(width: imageW, height: imageH))
+            let path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: imageW, height: imageH + textHeight))
+            UIColor.white.set()
+            path.fill()
+            context = UIGraphicsGetCurrentContext()
+            // 画标题
+            UIColor.darkGray.set()
+            let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 24), NSForegroundColorAttributeName: UIColor.darkGray]
+            (title as NSString).draw(at: CGPoint.init(x: 30, y: 10), withAttributes: attDict)
+            for i in 0..<Int(columns) {
+            
+                let subImage:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: contentSize.height - columnH * CGFloat(i + 1) + CGFloat(i) * 2 * BeatmapView.heightInset, width: CGSSGlobal.width, height: columnH))
+    
+                // 最后一列特殊处理
+                if i == Int(columns) - 1 {
+                    let offset = (contentSize.height - 2 * BeatmapView.heightInset).truncatingRemainder(dividingBy: beatmapH)
+                    UIImage.init(cgImage: subImage).draw(in: CGRect.init(x: CGFloat(i) * CGSSGlobal.width, y: imageH - 2 * BeatmapView.heightInset - offset, width: CGSSGlobal.width, height: offset + BeatmapView.heightInset * 2))
+                } else {
+                    // 这样的画法不会上下颠倒
+                    UIImage.init(cgImage: subImage).draw(in: CGRect.init(x: CGFloat(i) * CGSSGlobal.width, y: textHeight, width: CGSSGlobal.width, height: columnH))
+                }
+                
+                // CGImage坐标系Y轴和UIImage的相反, 画出的图是上下颠倒的
+                //context.draw(subImage, in: CGRect.init(x: CGFloat(i) * CGSSGlobal.width, y: 50, width: CGSSGlobal.width, height: columnH))
+                
+                //let bottomSide:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: contentSize.height - columnH * CGFloat(i) + CGFloat(i) * 2 * BeatmapView.heightInset - BeatmapView.heightInset, width: CGSSGlobal.width, height: BeatmapView.heightInset))
+                
+                // 边界渐变透明度
+//                let vector0 = CIVector.init(x: 0, y: 0)
+//                let vector1 = CIVector.init(x: CGSSGlobal.width, y: BeatmapView.heightInset)
+//                
+//                let params = ["inputPoint0": vector0, "inputPoint1": vector1, "inputColor0": UIColor.white.ciColor, "inputColor1": UIColor.clear.ciColor]
+//                let ciFilter = CIFilter.init(name: "CILinearGradient", withInputParameters: params)
+//    
+//                let ciImage = ciFilter?.outputImage
+//                UIImage.init(ciImage: ciImage!).draw(in: CGRect.init(x: 0, y: imageH - BeatmapView.heightInset, width: CGSSGlobal.width, height: BeatmapView.heightInset))
+     
+//                let colorSpace = CGColorSpaceCreateDeviceRGB()
+//                let locations:[CGFloat] = [0, 1]
+//                let colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+//                let gradient = CGGradient.init(colorsSpace: colorSpace, colors: colors as CFArray, locations: locations)
+//                
+//                let startPoint = CGPoint.init(x: CGFloat(i) * CGSSGlobal.width, y: textHeight)
+//                let endPoint = CGPoint.init(x: CGFloat(i + 1) * CGSSGlobal.width, y: textHeight )
+//                context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions(rawValue: UInt32(0)))
+
+                
+            }
+            
+            //另一种思路处理上下颠倒, 翻转180度
+            //context.translateBy(x: imageW, y: imageH + 50)
+            //context.concatenate(CGAffineTransform.init(rotationAngle: CGFloat(M_PI)))
+        
+            let newImage = UIImage.init(cgImage: context.makeImage()!)
+            UIGraphicsEndImageContext()
+            
+            DispatchQueue.main.async {
+                callBack(newImage)
+            }
+            
+        }
+     
+    }
+
 }
 

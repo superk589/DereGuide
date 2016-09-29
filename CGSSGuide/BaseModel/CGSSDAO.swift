@@ -142,8 +142,8 @@ open class CGSSDAO: NSObject {
     }
     
     // 根据掩码筛选
-    func getCardListByMask(_ cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
-        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask, favoriteMask: favoriteMask)
+    func getCardListByMask(_ cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, gachaMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
+        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask ,gachaMask: gachaMask, favoriteMask: favoriteMask)
         return filter.filterCardList(cardDict.allValues as! [CGSSCard])
     }
     func getCardListByMask(_ filter: CGSSCardFilter) -> [CGSSCard] {
@@ -388,7 +388,7 @@ open class CGSSDAO: NSObject {
     
     func getRankInType(_ card: CGSSCard) -> [Int] {
         var rank = [1, 1, 1, 1]
-        let filter = CGSSCardFilter.init(cardMask: card.cardType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
+        let filter = CGSSCardFilter.init(cardMask: card.cardType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask:0b1111, favoriteMask: nil)
         let filteredCardDict = getCardListByMask(filter)
         for cardx in filteredCardDict {
             if cardx.vocal > card.vocal {

@@ -18,6 +18,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     @IBOutlet weak var skillTypeView: UIView!
     @IBOutlet weak var skillTypeView2: UIView!
     @IBOutlet weak var attributeStackView: UIView!
+    //@IBOutlet weak var gachaStackView: UIView!
     @IBOutlet weak var favoriteStackView: UIView!
     
     @IBOutlet weak var ascendingStackView: UIView!
@@ -291,13 +292,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     
     func resetAction() {
         if delegate is CardTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, favoriteMask: nil)
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
         } else if delegate is TeamCardSelectTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, favoriteMask: nil)
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
         } else {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, favoriteMask: nil)
+            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "sRarity")
         }
         setup()

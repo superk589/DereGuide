@@ -125,6 +125,7 @@ class CGSSBeatmap: CGSSBaseModel {
         return postSeconds! - preSeconds!
     }
     
+    
 //    func comboForSec(sec:Float) -> Int {
 //        func findnear(sec:Float, start:Int, end:Int) -> Int {
 //            if start == end {

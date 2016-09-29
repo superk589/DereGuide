@@ -11,8 +11,23 @@ import FMDB
 
 class Master: FMDatabase {
     
+    func isFesGachaAvailable(cardId:Int) -> Bool {
+        let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0 and reward_id = \(cardId))"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            if set.next() {
+                if set.int(forColumnIndex: 0) == 1 {
+                    return true
+                }
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return false
+    }
+    
     func isTimeLimitGachaAvailable(cardId:Int) -> Bool {
-        let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%限定%' and recommend_order > 0 and reward_id = \(cardId))"
+        let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0 and reward_id = \(cardId))"
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             if set.next() {
@@ -43,7 +58,7 @@ class Master: FMDatabase {
     }
     
     func isEventAvailable(cardId:Int) -> Bool {
-        let selectSql = "select exists (select reward_id from gacha_data a, event_available b where reward_id = \(cardId))"
+        let selectSql = "select exists (select reward_id from event_available where reward_id = \(cardId))"
         
         do {
             let set = try self.executeQuery(selectSql, values: nil)
@@ -56,6 +71,63 @@ class Master: FMDatabase {
             print(self.lastErrorMessage())
         }
         return false
+    }
+    
+    func getEventAvailableList() -> [Int] {
+        let selectSql = "select reward_id from event_available"
+        var result = [Int]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let rewardId = set.int(forColumnIndex: 0)
+                result.append(Int(rewardId))
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return result
+    }
+    func getGachaAvailableList() -> [Int] {
+        let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id"
+        var result = [Int]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let rewardId = set.int(forColumnIndex: 0)
+                result.append(Int(rewardId))
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return result
+    }
+    func getTimeLimitAvailableList() -> [Int] {
+        let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0"
+        var result = [Int]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let rewardId = set.int(forColumnIndex: 0)
+                result.append(Int(rewardId))
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return result
+    }
+    func getFesAvailableList() -> [Int] {
+        let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0"
+        var result = [Int]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let rewardId = set.int(forColumnIndex: 0)
+                result.append(Int(rewardId))
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return result
     }
     
     func getValidGacha() -> [GachaPool] {
@@ -172,6 +244,8 @@ class CGSSGameResource: NSObject {
     fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
+        // self.prepareGachaList()
+        // CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: "UPDATE_END", object: nil)
         // self.loadAllDataFromFile()
     }
     
@@ -229,13 +303,42 @@ class CGSSGameResource: NSObject {
         return master.getValidGacha()
     }
     
-    func getCardAvailable(cardId:Int) -> (Bool, Bool, Bool) {
+    func getCardAvailable(cardId:Int) -> (Bool, Bool, Bool, Bool) {
         guard master.open() else {
-            return (false, false, false)
+            return (false, false, false, false)
         }
         defer {
             master.close()
         }
-        return (master.isEventAvailable(cardId: cardId), master.isGachaAvailable(cardId: cardId), master.isTimeLimitGachaAvailable(cardId: cardId))
+        return (master.isEventAvailable(cardId: cardId), master.isGachaAvailable(cardId: cardId), master.isTimeLimitGachaAvailable(cardId: cardId), master.isFesGachaAvailable(cardId: cardId))
     }
+    
+    
+    func updateEnd() {
+        prepareGachaList()
+    }
+    
+    // MARK: 卡池数据部分
+    var eventAvailabelList:[Int]!
+    var gachaAvailabelList:[Int]!
+    var timeLimitAvailableList:[Int]!
+    var fesAvailabelList:[Int]!
+    func prepareGachaList() {
+        guard self.master.open() else {
+            eventAvailabelList = [Int]()
+            gachaAvailabelList = [Int]()
+            timeLimitAvailableList = [Int]()
+            fesAvailabelList = [Int]()
+            return
+        }
+        defer {
+            self.master.close()
+        }
+
+        eventAvailabelList = self.master.getEventAvailableList()
+        gachaAvailabelList = self.master.getGachaAvailableList()
+        timeLimitAvailableList = self.master.getTimeLimitAvailableList()
+        fesAvailabelList = self.master.getFesAvailableList()
+    }
+    
 }

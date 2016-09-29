@@ -19,6 +19,7 @@ class GachaView: UIView {
     var gachaInfoView: UIView!
     var nameLabel:UILabel!
     var detailLabel:UILabel!
+    var ratioLabel:UILabel!
     var timeLabel:UILabel!
     var timeStatusIndicator:UIImageView!
     
@@ -49,6 +50,14 @@ class GachaView: UIView {
         
         originY += space + 20
         
+        ratioLabel = UILabel.init(frame: CGRect.init(x: space, y: originY, width: fwidth - 2 * space, height: 12))
+        ratioLabel.font = UIFont.systemFont(ofSize: 12)
+        ratioLabel.textAlignment = .left
+        ratioLabel.textColor = CGSSGlobal.vocalColor
+        
+        originY += space + 9.5
+        
+        
         detailLabel = UILabel.init(frame: CGRect.init(x: space, y: originY, width: CGSSGlobal.width - 2 * space, height: 0))
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.numberOfLines = 0
@@ -70,6 +79,7 @@ class GachaView: UIView {
         gachaInfoView.addSubview(checkButton)
         gachaInfoView.addSubview(descLabel)
         gachaInfoView.addSubview(nameLabel)
+        gachaInfoView.addSubview(ratioLabel)
         gachaInfoView.addSubview(detailLabel)
         gachaInfoView.addSubview(timeLabel)
         gachaInfoView.addSubview(timeStatusIndicator)
@@ -84,6 +94,7 @@ class GachaView: UIView {
     
     func setupWith(pool: GachaPool) {
         nameLabel.text = pool.name
+        ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription
         timeLabel.text = "\(pool.startDate) ~ \(pool.endDate)"
         detailLabel.fwidth = CGSSGlobal.width - 2 * space

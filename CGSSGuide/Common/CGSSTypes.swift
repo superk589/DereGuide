@@ -102,6 +102,15 @@ struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
     }
 }
 
+struct CGSSGachaTypes: OptionSet, RawRepresentable {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let normal = CGSSGachaTypes.init(rawValue: 1 << 0)
+    static let event = CGSSGachaTypes.init(rawValue: 1 << 1)
+    static let limit = CGSSGachaTypes.init(rawValue: 1 << 2)
+    static let fes = CGSSGachaTypes.init(rawValue: 1 << 3)
+}
+
 struct CGSSAttributeTypes: OptionSet, RawRepresentable {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }

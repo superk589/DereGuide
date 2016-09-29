@@ -159,12 +159,12 @@ class CGSSTeam: NSObject, NSCoding {
     }
     
     // 判断需要的指定颜色的队员是否满足条件
-    func hasType(_ type: CGSSCardTypes, count: Int?) -> Bool {
+    func hasType(_ type: CGSSCardTypes, count: Int?, inGroove:Bool) -> Bool {
         if count == 0 {
             return true
         }
         var c = 0
-        for i in 0...5 {
+        for i in 0...(inGroove ? 4 : 5) {
             if self[i]?.cardRef?.cardType == type {
                 c += 1
             }
@@ -176,9 +176,9 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
-    func getContentFor(_ leaderSkill: CGSSLeaderSkill) -> [LeaderSkillUpContent] {
+    func getContentFor(_ leaderSkill: CGSSLeaderSkill, inGroove:Bool) -> [LeaderSkillUpContent] {
         var contents = [LeaderSkillUpContent]()
-        if hasType(.cute, count: leaderSkill.needCute) && hasType(.cool, count: leaderSkill.needCool) && hasType(.passion, count: leaderSkill.needPassion) {
+        if hasType(.cute, count: leaderSkill.needCute, inGroove: inGroove) && hasType(.cool, count: leaderSkill.needCool, inGroove: inGroove) && hasType(.passion, count: leaderSkill.needPassion, inGroove: inGroove) {
             switch leaderSkill.targetAttribute! {
             case "cute":
                 for upType in getUpType(leaderSkill) {
@@ -217,11 +217,11 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill))
+            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: false))
         }
         // 队友的队长技能
         if let leaderSkill = friendLeader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill))
+            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: false))
         }
         
         // 合并同类型
@@ -246,7 +246,7 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill))
+            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: true))
         }
         // 设定Groove中的up值
         contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .cool, upValue: 150))

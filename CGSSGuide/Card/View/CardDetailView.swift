@@ -554,6 +554,7 @@ class CardDetailView: UIView {
     var availableEvent: CGSSCheckBox!
     var availableGacha: CGSSCheckBox!
     var availableLimit: CGSSCheckBox!
+    var availableFes: CGSSCheckBox!
     var availableDescLabel:UILabel!
     func prepareAvailableInfoContentView() {
         if availableInfoContentView != nil {
@@ -572,33 +573,38 @@ class CardDetailView: UIView {
         
         insideY += topSpace + 16
         
-        availableEvent = CGSSCheckBox.init(frame: CGRect(x: 10, y: insideY, width: 80, height: 14))
-        availableGacha = CGSSCheckBox.init(frame: CGRect(x: 100, y: insideY, width: 80, height: 14))
-        availableLimit = CGSSCheckBox.init(frame: CGRect(x: 190, y: insideY, width: 80, height: 14))
+        availableEvent = CGSSCheckBox.init(frame: CGRect(x: 10, y: insideY, width: 70, height: 14))
+        availableGacha = CGSSCheckBox.init(frame: CGRect(x: 85, y: insideY, width: 70, height: 14))
+        availableLimit = CGSSCheckBox.init(frame: CGRect(x: 160, y: insideY, width: 70, height: 14))
+        availableFes = CGSSCheckBox.init(frame: CGRect(x: 235, y: insideY, width: 70, height: 14))
         
         availableEvent.tintColor = CGSSGlobal.coolColor
         availableGacha.tintColor = CGSSGlobal.coolColor
         availableLimit.tintColor = CGSSGlobal.coolColor
+        availableFes.tintColor = CGSSGlobal.coolColor
         
         availableEvent.descLabel.textColor = UIColor.darkGray
         availableGacha.descLabel.textColor = UIColor.darkGray
         availableLimit.descLabel.textColor = UIColor.darkGray
+        availableFes.descLabel.textColor = UIColor.darkGray
         
         availableEvent.text = NSLocalizedString("活动", comment: "卡片详情页")
         availableGacha.text = NSLocalizedString("普池", comment: "卡片详情页")
         availableLimit.text = NSLocalizedString("限定", comment: "卡片详情页")
+        availableFes.text = NSLocalizedString("FES限定", comment: "卡片详情页")
         
         availableInfoContentView.addSubview(availableDescLabel)
         availableInfoContentView.addSubview(availableEvent)
         availableInfoContentView.addSubview(availableGacha)
         availableInfoContentView.addSubview(availableLimit)
+        availableInfoContentView.addSubview(availableFes)
         insideY += topSpace + 14
         availableInfoContentView.fheight = insideY
         addSubview(availableInfoContentView)
         
     }
     func setupAvailableInfoContentView(card:CGSSCard) {
-        var tuple = (false, false, false)
+        var tuple = (false, false, false, false)
         if card.evolutionId == 0 {
             availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
             if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
@@ -608,8 +614,9 @@ class CardDetailView: UIView {
             tuple = card.available
         }
         availableEvent.isChecked = tuple.0
+        availableFes.isChecked = tuple.3
         availableLimit.isChecked = tuple.2
-        if tuple.2 {
+        if tuple.2 || tuple.3 {
             availableGacha.isChecked = false
         } else {
             availableGacha.isChecked = tuple.1
