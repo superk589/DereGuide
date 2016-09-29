@@ -9,6 +9,23 @@
 import Foundation
 import SwiftyJSON
 
+// TODO: 根据type
+fileprivate let leaderSkillTarget:[Int:String] = [
+    1: NSLocalizedString("所有Cute", comment: "队长技能描述"),
+    2: NSLocalizedString("所有Cool", comment: "队长技能描述"),
+    3: NSLocalizedString("所有Passion", comment: "队长技能描述"),
+    4: NSLocalizedString("所有", comment: "队长技能描述")
+]
+
+fileprivate let leaderSkillParam = [
+    1: NSLocalizedString("Vocal表现值", comment: "队长技能描述"),
+    2: NSLocalizedString("Visual表现值", comment: "队长技能描述"),
+    3: NSLocalizedString("Dance表现值", comment: "队长技能描述"),
+    4: NSLocalizedString("所有表现值", comment: "队长技能描述"),
+    5: NSLocalizedString("生命", comment: "队长技能描述"),
+    6: NSLocalizedString("特技发动几率", comment: "队长技能描述")
+]
+
 extension CGSSLeaderSkill {
     func getLocalizedExplain(languageType: LanguageType) -> String {
         switch languageType {

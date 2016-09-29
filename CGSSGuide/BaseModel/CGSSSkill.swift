@@ -9,6 +9,27 @@
 import Foundation
 import SwiftyJSON
 
+fileprivate let skillDescriptions = [
+    1: NSLocalizedString("使所有PERFECT音符获得 %d 的分数加成", comment: "技能描述"),
+    2: NSLocalizedString("使所有PERFECT/GREAT音符获得 d% 的分数加成", comment: "技能描述"),
+    3: NSLocalizedString("使所有PERFECT/GREAT/NICE音符获得 d% 的分数加成", comment: "技能描述"),
+    4: NSLocalizedString("获得额外的 d% 的COMBO加成", comment: "技能描述"),
+    5: NSLocalizedString("使所有GREAT音符改判为PERFECT", comment: "技能描述"),
+    6: NSLocalizedString("使所有GREAT/NICE音符改判为PERFECT", comment: "技能描述"),
+    7: NSLocalizedString("使所有GREAT/NICE/BAD音符改判为PERFECT", comment: "技能描述"),
+    8: NSLocalizedString("所有音符改判为PERFECT", comment: "技能描述"),
+    9: NSLocalizedString("使NICE音符不会中断COMBO", comment: "技能描述"),
+    10: NSLocalizedString("使BAD/NICE音符不会中断COMBO", comment: "技能描述"),
+    11: NSLocalizedString("使你的COMBO不会中断", comment: "技能描述"),
+    12: NSLocalizedString("使你的生命不会减少", comment: "技能描述"),
+    13: NSLocalizedString("使所有音符恢复你 %d 点生命", comment: "技能描述"),
+    14: NSLocalizedString("消耗 %d 生命，PERFECT音符获得 d% 的分数加成，并且NICE/BAD音符不会中断COMBO", comment: "技能描述"),
+    17: NSLocalizedString("使所有PERFECT音符恢复你 d% 点生命", comment: "技能描述"),
+    18: NSLocalizedString("使所有PERFECT/GREAT音符恢复你 d% 点生命", comment: "技能描述"),
+    19: NSLocalizedString("使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命", comment: "技能描述")
+]
+
+
 extension CGSSSkill {
     
     var skillFilterType: CGSSSkillTypes {

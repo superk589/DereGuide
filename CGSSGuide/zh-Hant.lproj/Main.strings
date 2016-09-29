@@ -315,7 +315,7 @@
 "xi1-wF-saE.normalTitle" = "  B  ";
 
 /* Class = "UILabel"; text = "傳送郵件"; ObjectID = "xrP-YC-gLm"; */
-"xrP-YC-gLm.text" = "發送郵件";
+"xrP-YC-gLm.text" = "傳送郵件";
 
 /* Class = "UILabel"; text = "快取所有圖片"; ObjectID = "yF0-cl-Say"; */
 "yF0-cl-Say.text" = "快取所有圖片";
