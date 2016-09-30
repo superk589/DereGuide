@@ -145,6 +145,14 @@ class CGSSTeam: NSObject, NSCoding {
         return attValue
     }
     
+    func getPresentValueInParade(_ type: CGSSSongTypes) -> CGSSAttributeValue {
+        var attValue = CGSSAttributeValue.init(visual: 0, vocal: 0, dance: 0, life: 0)
+        for i in 0...4 {
+            attValue += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInParade(), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
+        }
+        return attValue
+    }
+    
     func getPresentValueByType(_ liveType: CGSSLiveType, songType: CGSSSongTypes) -> CGSSAttributeValue {
         switch liveType {
         case .normal:
@@ -155,6 +163,8 @@ class CGSSTeam: NSObject, NSCoding {
             return getPresentValueInGroove(songType, burstType: .dance)
         case .vocal:
             return getPresentValueInGroove(songType, burstType: .vocal)
+        case .parade:
+            return getPresentValueInParade(songType)
         }
     }
     
@@ -267,6 +277,20 @@ class CGSSTeam: NSObject, NSCoding {
                 newContents[content.upTarget]![content.upType] = content.upValue
             }
             
+        }
+        return newContents
+    }
+    
+    func getUpContentInParade() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+        var contents = [LeaderSkillUpContent]()
+        // 自己的队长技能
+        if let leaderSkill = leader.cardRef?.leaderSkill {
+            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: true))
+        }
+        var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
+        for content in contents {
+            newContents[content.upTarget] = [LeaderSkillUpType: Int]()
+            newContents[content.upTarget]![content.upType] = content.upValue
         }
         return newContents
     }

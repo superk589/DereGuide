@@ -178,7 +178,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         for liveType in CGSSLiveType.getAll() {
             alvc.addAction(UIAlertAction.init(title: liveType.toString(), style: .default, handler: { (a) in
                 self.teamDV.currentLiveType = liveType
-                if liveType != .normal {
+                if ![.normal, .parade].contains(liveType) {
                     self.teamDV.showGrooveSelectButton()
                     if self.teamDV.currentGrooveType == nil {
                         self.teamDV.currentGrooveType = CGSSGrooveType.init(cardType: (self.team.leader.cardRef?.cardType)!)!
