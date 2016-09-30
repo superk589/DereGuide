@@ -47,11 +47,18 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         return BeatmapView.sectionHeight * (CGFloat(bpm) / 60 / 4)
     }
     
+    // 是否镜像翻转
+    var mirrorFlip:Bool = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     var strokeColor: UIColor!
     
     fileprivate var lineWidth: CGFloat = 1
     func getPointX(_ position: Int) -> CGFloat {
-        return BeatmapView.widthInset + interval * (CGFloat(position) - 1)
+        return BeatmapView.widthInset + interval * (CGFloat(mirrorFlip ? 6 - position : position) - 1)
     }
     
     func getPointY(_ sec: Float) -> CGFloat {

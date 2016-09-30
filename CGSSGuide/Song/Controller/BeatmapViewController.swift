@@ -14,6 +14,7 @@ class BeatmapViewController: UIViewController {
     var beatmaps: [CGSSBeatmap]!
     var bv: BeatmapView!
     var descLabel: UILabel!
+    var flipItem:UIBarButtonItem!
     var preSetDiff: Int?
     var currentDiff: Int! {
         didSet {
@@ -78,10 +79,11 @@ class BeatmapViewController: UIViewController {
     
     private func prepareToolbar() {
         //let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
-        //let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
-        //spaceItem.width = 40
-        self.toolbarItems = [shareItem]
+        spaceItem.width = 40
+        flipItem = UIBarButtonItem.init(image: UIImage.init(named: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
+        self.toolbarItems = [shareItem, spaceItem, flipItem]
     }
     
     func initWithLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap]) -> Bool {
@@ -101,7 +103,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(live.musicRef?.title ?? "") \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmaps[currentDiff - 1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[currentDiff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面")) powered by CGSSGuide"
+        return "\(live.musicRef?.title ?? "") \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmaps[currentDiff - 1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[currentDiff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))\(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in
@@ -163,6 +165,15 @@ class BeatmapViewController: UIViewController {
             self.present(activityVC, animated: true, completion: { 
                 
             })
+        }
+    }
+    
+    func flip() {
+        bv.mirrorFlip = !bv.mirrorFlip
+        if bv.mirrorFlip {
+            flipItem.image = UIImage.init(named: "1110-rotate-toolbar-selected")
+        } else {
+            flipItem.image = UIImage.init(named: "1110-rotate-toolbar")
         }
     }
     
