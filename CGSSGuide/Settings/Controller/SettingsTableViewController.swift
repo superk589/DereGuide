@@ -144,7 +144,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         if CGSSUpdater.defaultUpdater.isUpdating {
             return
         }
-        let alert = UIAlertController.init(title: NSLocalizedString("确定要缓存所有图片吗？", comment: "设置页面"), message: NSLocalizedString("所有图片总计超过300MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", comment: "设置页面"), preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("确定要缓存所有图片吗？", comment: "设置页面"), message: NSLocalizedString("所有图片总计超过400MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", comment: "设置页面"), preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
             DispatchQueue.global(qos: .userInitiated).async {
                 let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]

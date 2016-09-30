@@ -9,7 +9,6 @@
 import Foundation
 import SwiftyJSON
 
-// TODO: 根据type
 fileprivate let leaderSkillTarget:[Int:String] = [
     1: NSLocalizedString("所有Cute", comment: "队长技能描述"),
     2: NSLocalizedString("所有Cool", comment: "队长技能描述"),
