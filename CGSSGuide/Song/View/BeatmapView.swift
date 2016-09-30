@@ -232,7 +232,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 }
                 
                 // 箭头向左
-                if note.status == 1 {
+                if (note.status == 1 && !mirrorFlip) || (note.status == 2 && mirrorFlip) {
                     let center = CGPoint(x: getPointX(note.finishPos!), y: getPointY(note.sec!))
                     let point1 = CGPoint(x: center.x - BeatmapView.noteRadius + 1, y: center.y)
                     let point2 = CGPoint(x: center.x - 1, y: center.y - BeatmapView.noteRadius + 2)
@@ -251,7 +251,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 }
                 
                 // 箭头向右
-                if note.status == 2 {
+                if (note.status == 2 && !mirrorFlip) || (note.status == 1 && mirrorFlip) {
                     let center = CGPoint(x: getPointX(note.finishPos!), y: getPointY(note.sec!))
                     let point1 = CGPoint(x: center.x + BeatmapView.noteRadius - 1, y: center.y)
                     let point2 = CGPoint(x: center.x + 1, y: center.y - BeatmapView.noteRadius + 2)
