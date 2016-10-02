@@ -303,7 +303,7 @@
 "uiM-RA-fhT.normalTitle" = "Dance";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "vSe-a1-0gm"; */
-"vSe-a1-0gm.headerTitle" = "ソート";
+"vSe-a1-0gm.headerTitle" = "フィルタ";
 
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "ツール";
