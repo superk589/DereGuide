@@ -1569,12 +1569,42 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vbp-ob-C9R">
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vbp-ob-C9R" id="ftp-og-L51">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSa-Zp-pSF">
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRJ-kj-tNl">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <state key="normal" title="Live Parade"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="cRJ-kj-tNl" secondAttribute="bottom" id="4rw-5x-oai"/>
+                                                        <constraint firstItem="cRJ-kj-tNl" firstAttribute="leading" secondItem="cSa-Zp-pSF" secondAttribute="leading" constant="8" id="dLq-Ye-ZVk"/>
+                                                        <constraint firstItem="cRJ-kj-tNl" firstAttribute="top" secondItem="cSa-Zp-pSF" secondAttribute="top" id="hWz-eA-fxn"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cSa-Zp-pSF" firstAttribute="leading" secondItem="ftp-og-L51" secondAttribute="leadingMargin" id="1a6-Ee-7YC"/>
+                                                <constraint firstItem="cSa-Zp-pSF" firstAttribute="top" secondItem="ftp-og-L51" secondAttribute="topMargin" id="LE6-I4-haa"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="cSa-Zp-pSF" secondAttribute="bottom" id="uDs-Q1-T3G"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cSa-Zp-pSF" secondAttribute="trailing" id="vqB-Kp-zW1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="排序" id="D6I-uh-wTP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NWG-Ei-fWv">
-                                        <rect key="frame" x="0.0" y="144" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="188" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NWG-Ei-fWv" id="TP3-nN-xsB">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1611,7 +1641,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="p0f-bh-pHp">
-                                        <rect key="frame" x="0.0" y="188" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="232" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0f-bh-pHp" id="Ka3-0a-wLO">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1667,6 +1697,7 @@
                         <outlet property="ascendingStackView" destination="VDn-Uc-wxa" id="FbY-tq-jEj"/>
                         <outlet property="basicStackView" destination="ugw-ty-zKp" id="NBE-Lr-Caa"/>
                         <outlet property="eventTypeView" destination="glN-uC-WT0" id="rUB-Ur-BGc"/>
+                        <outlet property="eventTypeView2" destination="cSa-Zp-pSF" id="ObV-td-APk"/>
                         <outlet property="songTypeStackView" destination="pnt-f9-qX3" id="iDy-QA-2wU"/>
                     </connections>
                 </tableViewController>

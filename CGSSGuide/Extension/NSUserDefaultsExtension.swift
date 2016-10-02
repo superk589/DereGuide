@@ -27,4 +27,15 @@ extension UserDefaults {
     var shouldCacheFullImage: Bool {
         return UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
     }
+    
+    func executeDocumentReset(reset:(()->Void)) {
+        defer {
+            UserDefaults.standard.set(documentVersion, forKey: "LastDocumentVersion")
+        }
+        let documentVersion = Bundle.main.infoDictionary?["Document Version"] as? Int ?? 1
+        let lastVersion = UserDefaults.standard.value(forKey: "LastDocumentVersion") as? Int ?? 0
+        if documentVersion > lastVersion {
+            reset()
+        }
+    }
 }

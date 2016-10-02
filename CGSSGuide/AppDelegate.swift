@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 处理一系列启动任务
+        // 更新时清理过期的文档数据
+        UserDefaults.standard.executeDocumentReset {
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.songFilterPath)
+        }
         // 规划近期偶像生日
         if UserDefaults.standard.shouldPostBirthdayNotice {
             BirthdayCenter.defaultCenter.scheduleNotifications()

@@ -334,3 +334,6 @@
 
 /* Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78"; */
 "zkd-c8-p78.title" = "設定";
+
+/* Class = "UIButton"; normalTitle = "Live Parade"; ObjectID = "cRJ-kj-tNl"; */
+"cRJ-kj-tNl.normalTitle" = "Live Parade";

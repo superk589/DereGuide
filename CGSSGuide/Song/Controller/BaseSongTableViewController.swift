@@ -144,7 +144,6 @@ class BaseSongTableViewController: RefreshableTableViewController {
         cell.initWith(liveList[(indexPath as NSIndexPath).row])
         cell.delegate = self
         // Configure the cell...
-        
         return cell
     }
     

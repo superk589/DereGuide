@@ -212,6 +212,7 @@ struct CGSSSongEventTypes: OptionSet, RawRepresentable {
     static let normal = CGSSSongEventTypes.init(rawValue: 1 << 0)
     static let tradition = CGSSSongEventTypes.init(rawValue: 1 << 1)
     static let groove = CGSSSongEventTypes.init(rawValue: 1 << 2)
+    static let parade = CGSSSongEventTypes.init(rawValue: 1 << 3)
     init (eventType: Int) {
         switch eventType {
         case 0:
@@ -220,6 +221,8 @@ struct CGSSSongEventTypes: OptionSet, RawRepresentable {
             self = .tradition
         case 3:
             self = .groove
+        case 5:
+            self = .parade
         default:
             self = .normal
         }

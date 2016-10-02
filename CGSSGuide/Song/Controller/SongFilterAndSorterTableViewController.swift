@@ -17,6 +17,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     
     @IBOutlet weak var eventTypeView: UIView!
     
+    @IBOutlet weak var eventTypeView2: UIView!
     @IBOutlet weak var ascendingStackView: UIView!
     
     @IBOutlet weak var basicStackView: UIView!
@@ -48,8 +49,11 @@ class SongFilterAndSorterTableViewController: UITableViewController {
             button.isSelected = filter.songTypes.contains(CGSSSongTypes.init(type: i))
         }
         
-        for i in 0...2 {
-            let button = eventTypeView.subviews[i] as! UIButton
+        var eventButtons = [UIButton]()
+        eventButtons.append(contentsOf: eventTypeView.subviews as! [UIButton])
+        eventButtons.append(contentsOf: eventTypeView2.subviews as! [UIButton])
+        for i in 0...3 {
+            let button = eventButtons[i]
             button.isSelected = filter.eventTypes.contains(CGSSSongEventTypes.init(rawValue: 1 << UInt(i)))
         }
         
@@ -77,6 +81,11 @@ class SongFilterAndSorterTableViewController: UITableViewController {
             let button = eventTypeView.subviews[i] as! UIButton
             button.addTarget(self, action: #selector(eventTypeButtonClick), for: .touchUpInside)
             button.tag = 2000 + i
+        }
+        for i in 0...0 {
+            let button = eventTypeView2.subviews[i] as! UIButton
+            button.addTarget(self, action: #selector(eventTypeButtonClick), for: .touchUpInside)
+            button.tag = 2000 + i + 3
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -112,7 +121,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
             filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
+            filter.eventTypes.insert(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -159,7 +168,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     }
     
     func resetAction() {
-        filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b111)
+        filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
         sorter = CGSSSorter.init(att: "updateId")
         setup()
     }
@@ -179,7 +188,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 2
+            return 3
         } else {
             return 2
         }

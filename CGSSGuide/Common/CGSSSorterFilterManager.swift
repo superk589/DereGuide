@@ -25,7 +25,7 @@ class CGSSSorterFilterManager: NSObject {
     lazy var teamCardfilter = CGSSCardFilter.readFromFile(teamCardFilterPath) ?? CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
     lazy var charFilter = CGSSCharFilter.readFromFile(charFilterPath) ?? CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
     lazy var charSorter = CGSSSorter.readFromFile(charSorterPath) ?? CGSSSorter.init(att: "sName", ascending: true)
-    lazy var songFilter = CGSSSongFilter.readFromFile(songFilterPath) ?? CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b111)
+    lazy var songFilter = CGSSSongFilter.readFromFile(songFilterPath) ?? CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
     lazy var songSorter = CGSSSorter.readFromFile(songSorterPath) ?? CGSSSorter.init(att: "updateId")
     
     func saveForTeam() {
