@@ -60,6 +60,9 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
             controller.setSubject(NSLocalizedString("CGSSGuide问题反馈", comment: "设置页面"))
             controller.mailComposeDelegate = self
             controller.setToRecipients(["superk589@vip.qq.com"])
+            if CGSSGlobal.languageType == .ja {
+                controller.setCcRecipients(["gaiban@poketb.com"])
+            }
             controller.setMessageBody("app v\(appVersionLabel.text!)\ndata v\(dataVersionLabel.text!)\n", isHTML: false)
             self.present(controller, animated: true, completion: nil)
         } else {
