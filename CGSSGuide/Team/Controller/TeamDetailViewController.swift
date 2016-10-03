@@ -14,6 +14,7 @@ class TeamDetailViewController: UIViewController {
     var teamDV: TeamDetailView!
     var sv: UIScrollView!
     
+    //var hud: CGSSLoadingHUD!
     var live: CGSSLive?
     var beatmaps: [CGSSBeatmap]?
     var diff: Int?
@@ -27,7 +28,8 @@ class TeamDetailViewController: UIViewController {
         // teamDV.initWith(team)
         teamDV.delegate = self
         sv.addSubview(teamDV)
-        
+        //hud = CGSSLoadingHUD()
+        //view.addSubview(hud)
         view.addSubview(sv)
         // Do any additional setup after loading the view.
     }
@@ -150,7 +152,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 simulator.simulateOnce(true, manualValue: nil, callBack: { [weak self](score) in
                     self?.teamDV.updateScoreGridMaxScore(score)
                 })
+                //hud.startAnimate()
                 simulator.simulate(100, manualValue: nil, callBack: { [weak self](scores, avg) in
+                    //self?.hud.stopAnimate()
                     self?.teamDV.updateScoreGridAvgScore(avg)
                 })
             }

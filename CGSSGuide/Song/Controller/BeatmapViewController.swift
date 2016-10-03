@@ -13,6 +13,7 @@ class BeatmapViewController: UIViewController {
     var live: CGSSLive!
     var beatmaps: [CGSSBeatmap]!
     var bv: BeatmapView!
+    var hud: CGSSLoadingHUD!
     var descLabel: UILabel!
     var flipItem:UIBarButtonItem!
     var preSetDiff: Int?
@@ -46,6 +47,8 @@ class BeatmapViewController: UIViewController {
         titleLabel.adjustsFontSizeToFitWidth = true
         navigationItem.titleView = titleLabel
         
+        hud = CGSSLoadingHUD()
+        self.view.addSubview(hud)
         // 如果没有指定难度 则初始化难度为最高难度
         currentDiff = preSetDiff ?? live.maxDiff
         
@@ -113,7 +116,9 @@ class BeatmapViewController: UIViewController {
     }
     
     func share() {
+        hud.startAnimate()
         bv.exportImageAsync(title: getImageTitle()) { (image) in
+            self.hud.stopAnimate()
             let urlArray = [image];
             let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
             // 需要屏蔽的模块

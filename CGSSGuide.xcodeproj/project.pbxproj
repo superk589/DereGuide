@@ -179,6 +179,7 @@
 		12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D921D8C2D280021320D /* CGSSCheckBox.swift */; };
 		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
 		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
+		12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */; };
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
@@ -393,6 +394,7 @@
 		12A71D921D8C2D280021320D /* CGSSCheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCheckBox.swift; sourceTree = "<group>"; };
 		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
+		12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLoadingHUD.swift; sourceTree = "<group>"; };
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
@@ -672,6 +674,7 @@
 				1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */,
 				1269E9E81D520B750071AD7F /* CGSSImageView.swift */,
 				12A71D921D8C2D280021320D /* CGSSCheckBox.swift */,
+				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
+				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
