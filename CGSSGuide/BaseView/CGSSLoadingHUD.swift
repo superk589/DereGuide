@@ -16,18 +16,20 @@ class CGSSLoadingHUD: UIView {
     
     init() {
         super.init(frame: UIScreen.main.bounds)
-        self.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         self.isUserInteractionEnabled = true
         let contentView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 120))
         contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         contentView.center = self.center
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         self.addSubview(contentView)
         iv = UIImageView.init(frame: CGRect.init(x: 35, y: 20, width: 50, height: 50))
         titleLable = UILabel.init(frame: CGRect.init(x: 0, y: 75, width: 120, height: 25))
         titleLable.textAlignment = .center
         titleLable.adjustsFontSizeToFitWidth = true
+        titleLable.font = UIFont.boldSystemFont(ofSize: 17)
+        titleLable.textColor = UIColor.white
         titleLable.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
         iv.image = UIImage.init(named: "loading")
         contentView.addSubview(iv)
@@ -47,7 +49,7 @@ class CGSSLoadingHUD: UIView {
     }
     
     func startAnimate() {
-        superview?.bringSubview(toFront: self)
+        //superview?.bringSubview(toFront: self)
         self.alpha = 1
         let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
         rotateAni.fromValue = 0
@@ -76,4 +78,27 @@ class CGSSLoadingHUD: UIView {
     }
     */
 
+}
+
+
+class CGSSLoadingHUDManager {
+    static let `default` = CGSSLoadingHUDManager()
+    var hud: CGSSLoadingHUD!
+    private init () {
+        hud = CGSSLoadingHUD()
+        UIApplication.shared.keyWindow?.addSubview(hud)
+    }
+    func show() {
+        let window = UIApplication.shared.keyWindow
+        window?.bringSubview(toFront: hud)
+        for subview in window?.subviews ?? [UIView]() {
+            if subview is UpdateStatusView {
+                window?.bringSubview(toFront: subview)
+            }
+        }
+        hud.startAnimate()
+    }
+    func hide() {
+        hud.stopAnimate()
+    }
 }
