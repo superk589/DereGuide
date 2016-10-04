@@ -16,7 +16,7 @@ class CGSSLoadingHUD: UIView {
     
     init() {
         super.init(frame: UIScreen.main.bounds)
-        self.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        self.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         self.isUserInteractionEnabled = true
         let contentView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 120))
         contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)

@@ -14,7 +14,7 @@ enum CGSSLiveType: String {
     case vocal = "Vocal Burst"
     case dance = "Dance Burst"
     case visual = "Visual Burst"
-    case parade = "Live Parade"
+    case parade = "LIVE Parade"
     static func getAll() -> [CGSSLiveType] {
         return [.normal, .vocal, .dance, .visual, .parade]
     }

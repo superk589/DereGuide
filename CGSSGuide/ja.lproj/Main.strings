@@ -207,7 +207,7 @@
 "db8-xK-u51.normalTitle" = "Total";
 
 /* Class = "UIButton"; normalTitle = "常规歌曲"; ObjectID = "ddL-tZ-2ME"; */
-"ddL-tZ-2ME.normalTitle" = "ﾉｰﾏﾙ曲";
+"ddL-tZ-2ME.normalTitle" = "通常曲";
 
 /* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "dfb-tZ-B9F"; */
 "dfb-tZ-B9F.normalTitle" = "Cool";
@@ -336,4 +336,4 @@
 "zkd-c8-p78.title" = "設定";
 
 /* Class = "UIButton"; normalTitle = "Live Parade"; ObjectID = "cRJ-kj-tNl"; */
-"cRJ-kj-tNl.normalTitle" = "Live Parade";
+"cRJ-kj-tNl.normalTitle" = "LIVE Parade";
