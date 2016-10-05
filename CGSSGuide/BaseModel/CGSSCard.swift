@@ -47,12 +47,12 @@ extension CGSSCard {
     }
     
     // 效率问题 暂时弃用
-    var gachaType:CGSSGachaTypes {
+    var gachaType:CGSSAvailableTypes {
         if CGSSGameResource.sharedResource.fesAvailabelList.contains(id) { return .fes }
         else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(id) { return .limit }
         else if CGSSGameResource.sharedResource.gachaAvailabelList.contains(id) { return .normal }
         else if CGSSGameResource.sharedResource.eventAvailabelList.contains(id) { return .event }
-        else { return CGSSGachaTypes.init(rawValue: 0)}
+        else { return CGSSAvailableTypes.init(rawValue: 0)}
     }
     
     var chara: CGSSChar? {

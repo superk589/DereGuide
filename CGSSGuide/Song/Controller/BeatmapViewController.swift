@@ -103,7 +103,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(live.musicRef?.title ?? "") \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmaps[currentDiff - 1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[currentDiff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面")) \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
+        return "\(live.musicRef?.title ?? "") \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmaps[currentDiff - 1].numberOfNotes) length:\(Int(beatmaps[currentDiff - 1].totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in
@@ -113,6 +113,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func share() {
+        //enterImageView()
         CGSSLoadingHUDManager.default.show()
         bv.exportImageAsync(title: getImageTitle()) { (image) in
             CGSSLoadingHUDManager.default.hide()

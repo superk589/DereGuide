@@ -245,7 +245,7 @@ class CGSSGameResource: NSObject {
         super.init()
         self.prepareFileDirectory()
         // self.prepareGachaList()
-        CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: "UPDATE_END", object: nil)
+        // CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: "UPDATE_END", object: nil)
         // self.loadAllDataFromFile()
     }
     
