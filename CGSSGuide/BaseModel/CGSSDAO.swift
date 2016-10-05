@@ -20,17 +20,17 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 public enum CGSSDataKey: String {
-    case Skill = "skill"
-    case Card = "card"
-    case Char = "char"
-    case LeaderSkill = "leader_skill"
-    case CardIcon = "card_icon"
-    case Live = "live"
-    case Song = "song"
-    case Beatmap = "beatmap"
-    case StoryEpisode = "story_episode"
-    case StoryContent = "story_content"
-    static let allValues = [Skill, Card, Char, LeaderSkill, CardIcon, Live, Song, Beatmap, StoryEpisode, StoryContent]
+    case skill = "skill"
+    case card = "card"
+    case char = "char"
+    case leaderSkill = "leader_skill"
+    case cardIcon = "card_icon"
+    case live = "live"
+    case song = "song"
+    case beatmap = "beatmap"
+    case storyEpisode = "story_episode"
+    case storyContent = "story_content"
+    static let allValues = [skill, card, char, leaderSkill, cardIcon, live, song, beatmap, storyEpisode, storyContent]
 }
 
 open class CGSSDAO: NSObject {
@@ -38,15 +38,15 @@ open class CGSSDAO: NSObject {
     open static let sharedDAO = CGSSDAO()
     
     // 主数据 采用懒加载
-    open lazy var skillDict = CGSSDAO.loadDataFromFile(.Skill)
-    open lazy var cardDict = CGSSDAO.loadDataFromFile(.Card)
-    open lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.LeaderSkill)
-    open lazy var charDict = CGSSDAO.loadDataFromFile(.Char)
-    open lazy var cardIconDict = CGSSDAO.loadDataFromFile(.CardIcon)
-    open lazy var songDict = CGSSDAO.loadDataFromFile(.Song)
-    open lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.StoryEpisode)
-    open lazy var storyContentDict = CGSSDAO.loadDataFromFile(.StoryContent)
-    open lazy var liveDict = CGSSDAO.loadDataFromFile(.Live)
+    open lazy var skillDict = CGSSDAO.loadDataFromFile(.skill)
+    open lazy var cardDict = CGSSDAO.loadDataFromFile(.card)
+    open lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.leaderSkill)
+    open lazy var charDict = CGSSDAO.loadDataFromFile(.char)
+    open lazy var cardIconDict = CGSSDAO.loadDataFromFile(.cardIcon)
+    open lazy var songDict = CGSSDAO.loadDataFromFile(.song)
+    open lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.storyEpisode)
+    open lazy var storyContentDict = CGSSDAO.loadDataFromFile(.storyContent)
+    open lazy var liveDict = CGSSDAO.loadDataFromFile(.live)
     
     // beatmap采用分歌曲单独存储
     open var beatmapDict = NSMutableDictionary()
@@ -76,25 +76,25 @@ open class CGSSDAO: NSObject {
     }
     func getDictForKey(_ key: CGSSDataKey) -> NSMutableDictionary {
         switch key {
-        case .Skill:
+        case .skill:
             return self.skillDict
-        case .Card:
+        case .card:
             return self.cardDict
-        case .Char:
+        case .char:
             return self.charDict
-        case .LeaderSkill:
+        case .leaderSkill:
             return self.leaderSkillDict
-        case .Song:
+        case .song:
             return self.songDict
-        case .Live:
+        case .live:
             return self.liveDict
-        case .StoryEpisode:
+        case .storyEpisode:
             return self.storyEpisodeDict
-        case .Beatmap:
+        case .beatmap:
             return self.beatmapDict
-        case .CardIcon:
+        case .cardIcon:
             return self.cardIconDict
-        case .StoryContent:
+        case .storyContent:
             return self.storyContentDict
         }
     }
@@ -104,7 +104,7 @@ open class CGSSDAO: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             self.prepareFileDirectory()
             
-            if key == .Beatmap {
+            if key == .beatmap {
                 let path = CGSSDAO.path + "/Data/Beatmap/"
                 for (k, v) in self.beatmapDict {
                     let id = k as! String
@@ -338,7 +338,7 @@ open class CGSSDAO: NSObject {
         let path = CGSSDAO.path + "/Data/Beatmap/\(itemId)_\(diffId)" + ".plist"
         if let theData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
             let achiver = NSKeyedUnarchiver(forReadingWith: theData)
-            if let beatmap = achiver.decodeObject(forKey: CGSSDataKey.Beatmap.rawValue) as? CGSSBeatmap {
+            if let beatmap = achiver.decodeObject(forKey: CGSSDataKey.beatmap.rawValue) as? CGSSBeatmap {
                 return beatmap
             }
         }

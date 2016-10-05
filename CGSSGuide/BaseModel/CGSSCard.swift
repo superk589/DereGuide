@@ -169,7 +169,6 @@ extension CGSSCard {
     func attByPotential(lv:Int) -> Int {
         return CGSSGlobal.potentialOfLevel[rarityTypeSimple]![lv]
     }
-    
 }
 
 class CGSSCard: CGSSBaseModel {
@@ -218,6 +217,9 @@ class CGSSCard: CGSSBaseModel {
     var visualMin: Int!
     var vocalMax: Int!
     var vocalMin: Int!
+    
+    // 非JSON获取
+    var availableTypes: CGSSAvailableTypes!
     
     /**
          * Instantiate the instance using the passed json values to set the properties values
@@ -349,6 +351,9 @@ class CGSSCard: CGSSBaseModel {
         visualMin = aDecoder.decodeObject(forKey: "visual_min") as? Int
         vocalMax = aDecoder.decodeObject(forKey: "vocal_max") as? Int
         vocalMin = aDecoder.decodeObject(forKey: "vocal_min") as? Int
+        
+        // added in 1.1.3
+        availableTypes = aDecoder.decodeObject(forKey: "availableTypes") as? CGSSAvailableTypes ?? CGSSAvailableTypes.init(rawValue: 0)
         
     }
     
@@ -490,6 +495,11 @@ class CGSSCard: CGSSBaseModel {
         }
         if vocalMin != nil {
             aCoder.encode(vocalMin, forKey: "vocal_min")
+        }
+        
+        // added in 1.1.3
+        if availableTypes != nil {
+            aCoder.encode(availableTypes, forKey: "availableTypes")
         }
         
     }

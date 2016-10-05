@@ -15,14 +15,14 @@ class CGSSCardFilter {
     var attributeTypes: CGSSAttributeTypes
     var rarityTypes: CGSSRarityTypes
     var skillTypes: CGSSSkillTypes
-    var gachaTypes: CGSSGachaTypes
+    var gachaTypes: CGSSAvailableTypes
     var favoriteTypes: CGSSFavoriteTypes
     init(cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, gachaMask:UInt, favoriteMask: UInt?) {
         cardTypes = CGSSCardTypes.init(rawValue: cardMask)
         attributeTypes = CGSSAttributeTypes.init(rawValue: attributeMask)
         rarityTypes = CGSSRarityTypes.init(rawValue: rarityMask)
         skillTypes = CGSSSkillTypes.init(rawValue: skillMask)
-        gachaTypes = CGSSGachaTypes.init(rawValue: gachaMask)
+        gachaTypes = CGSSAvailableTypes.init(rawValue: gachaMask)
         favoriteTypes = CGSSFavoriteTypes.init(rawValue: favoriteMask ?? 0b11)
     }
   
