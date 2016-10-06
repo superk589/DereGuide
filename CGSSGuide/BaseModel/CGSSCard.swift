@@ -353,7 +353,7 @@ class CGSSCard: CGSSBaseModel {
         vocalMin = aDecoder.decodeObject(forKey: "vocal_min") as? Int
         
         // added in 1.1.3
-        availableTypes = aDecoder.decodeObject(forKey: "availableTypes") as? CGSSAvailableTypes ?? CGSSAvailableTypes.init(rawValue: 0)
+        availableTypes = CGSSAvailableTypes.init(rawValue: aDecoder.decodeObject(forKey: "availableTypes") as? UInt ?? 0)
         
     }
     
@@ -499,7 +499,7 @@ class CGSSCard: CGSSBaseModel {
         
         // added in 1.1.3
         if availableTypes != nil {
-            aCoder.encode(availableTypes, forKey: "availableTypes")
+            aCoder.encode(availableTypes.rawValue, forKey: "availableTypes")
         }
         
     }

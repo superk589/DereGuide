@@ -41,6 +41,7 @@
 		122EED1A1D617307008ADE08 /* 921-toolbox-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED171D617307008ADE08 /* 921-toolbox-selected.png */; };
 		122EED1B1D617307008ADE08 /* 921-toolbox-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */; };
 		122EED1C1D617307008ADE08 /* 921-toolbox-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */; };
+		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
@@ -238,6 +239,7 @@
 		122EED171D617307008ADE08 /* 921-toolbox-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected.png"; path = "Resource/921-toolbox-selected.png"; sourceTree = "<group>"; };
 		122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@2x.png"; path = "Resource/921-toolbox-selected@2x.png"; sourceTree = "<group>"; };
 		122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@3x.png"; path = "Resource/921-toolbox-selected@3x.png"; sourceTree = "<group>"; };
+		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */,
+				12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +866,7 @@
 		C670F2DE7E4FDF80136AB4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12312E4E1DA527820088FE27 /* StoreKit.framework */,
 				22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */,
 			);
 			name = Frameworks;
@@ -908,6 +912,9 @@
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
