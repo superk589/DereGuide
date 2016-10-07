@@ -14,7 +14,8 @@ class WipeTableViewController: UITableViewController {
 
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("图片", comment: ""),
-                     NSLocalizedString("卡片和歌曲", comment: ""),
+                     NSLocalizedString("卡片", comment: ""),
+                     NSLocalizedString("歌曲", comment: ""),
                      NSLocalizedString("用户配置", comment: ""),
                      NSLocalizedString("其他", comment: "")]
 
@@ -23,6 +24,7 @@ class WipeTableViewController: UITableViewController {
 
         tableView.allowsMultipleSelection = true
         tableView.setEditing(true, animated: true)
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
         // Uncomment the following line to preserve selection between presentations
@@ -40,13 +42,25 @@ class WipeTableViewController: UITableViewController {
                 for indexPath in selectedIndexPaths {
                     switch indexPath.row {
                     case 1:
-                        SDImageCache.shared().clearDisk()
+                        self.wipeImage()
                     case 2:
-                        self.wipeCardAndSong()
-                        CGSSDAO.sharedDAO.removeAllData()
+                        self.wipeCard()
+                        let dao = CGSSDAO.sharedDAO
+                        dao.getDictForKey(.card).removeAllObjects()
+                        dao.getDictForKey(.cardIcon).removeAllObjects()
+                        dao.getDictForKey(.char).removeAllObjects()
+                        dao.getDictForKey(.storyContent).removeAllObjects()
+                        dao.getDictForKey(.storyEpisode).removeAllObjects()
+                        dao.getDictForKey(.leaderSkill).removeAllObjects()
+                        dao.getDictForKey(.skill).removeAllObjects()
                     case 3:
-                        self.wipeUserDocuments()
+                        self.wipeSong()
+                        let dao = CGSSDAO.sharedDAO
+                        dao.getDictForKey(.live).removeAllObjects()
+                        dao.getDictForKey(.song).removeAllObjects()
                     case 4:
+                        self.wipeUserDocuments()
+                    case 5:
                         self.wipeOther()
                     default:
                         break
@@ -62,19 +76,39 @@ class WipeTableViewController: UITableViewController {
         
     }
 
-    func wipeCardAndSong() {
+    func wipeImage() {
+        SDImageCache.shared().clearDisk()
         if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
-            let subPath = cachePath + "/Data"
-            if let files = FileManager.default.subpaths(atPath: subPath) {
-                for file in files {
-                    let path = subPath.appendingFormat("/\(file)")
-                    if (FileManager.default.fileExists(atPath: path)) {
-                        do {
-                            try FileManager.default.removeItem(atPath: path)
-                        } catch {
-                            
-                        }
-                    }
+            let subPath = cachePath + "/default"
+            if (FileManager.default.fileExists(atPath: subPath)) {
+                do {
+                    try FileManager.default.removeItem(atPath: subPath)
+                } catch {
+                    
+                }
+            }
+        }
+    }
+    
+    func wipeCard() {
+        for path in getCardFiles() {
+            if (FileManager.default.fileExists(atPath: path)) {
+                do {
+                    try FileManager.default.removeItem(atPath: path)
+                } catch {
+                    
+                }
+            }
+        }
+    }
+    
+    func wipeSong() {
+        for path in getSongFiles() {
+            if (FileManager.default.fileExists(atPath: path)) {
+                do {
+                    try FileManager.default.removeItem(atPath: path)
+                } catch {
+                    
                 }
             }
         }
@@ -116,28 +150,103 @@ class WipeTableViewController: UITableViewController {
         }
     }
     
+    func sizeToString(size:Int) -> String {
+        var postString = "KB"
+        var newSize = size
+        if size > 1024 * 1024 {
+            newSize /= 1024 * 1024
+            postString = "MB"
+        } else if size > 1024 {
+            newSize /= 1024
+        } else {
+            // 小于1KB 忽略
+            newSize = 0
+        }
+        return String(newSize) + postString
+    }
+    
+    func getCardFiles() -> [String] {
+        var filePaths = [String]()
+        if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
+            let subPath = cachePath + "/Data"
+            let files = ["card_icon.plist",
+                         "card.plist",
+                         "char.plist",
+                         "leader_skill.plist",
+                         "skill.plist",
+                         "story_content.plist",
+                         "story_episode.plist"]
+            for file in files {
+                let path = subPath.appendingFormat("/\(file)")
+                filePaths.append(path)
+            }
+        }
+        return filePaths
+    }
+    
+    func getSongFiles() -> [String] {
+        var filePaths = [String]()
+        if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
+            let subPath = cachePath + "/Data"
+            let files = ["live.plist",
+                         "song.plist"]
+            
+            for file in files {
+                let path = subPath.appendingFormat("/\(file)")
+                filePaths.append(path)
+            }
+            
+            let subPath2 = cachePath + "/Data/Beatmap"
+            if let files = FileManager.default.subpaths(atPath: subPath2) {
+                for file in files {
+                    let path = subPath2.appendingFormat("/\(file)")
+                    filePaths.append(path)
+                }
+            }
+        }
+        return filePaths
+    }
+    func getCacheSizeOfCard(complete:((String)->Void)?) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var size = 0
+            for path in self.getCardFiles() {
+                if let attributes = try? FileManager.default.attributesOfItem(atPath: path) {
+                    size += (attributes[FileAttributeKey.size] as! NSNumber).intValue
+                }
+            }
+            DispatchQueue.main.async(execute: {
+                complete?(self.sizeToString(size: size))
+            })
+        }
+    }
+    
+
+    func getCacheSizeOfSong(complete:((String)->Void)?) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var size = 0
+            for path in self.getSongFiles() {
+                if let attributes = try? FileManager.default.attributesOfItem(atPath: path) {
+                    size += (attributes[FileAttributeKey.size] as! NSNumber).intValue
+                }
+            }
+            DispatchQueue.main.async(execute: {
+                complete?(self.sizeToString(size: size))
+            })
+        }
+    }
+
     func getCacheSizeAt(path:String, complete:((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let files = FileManager.default.subpaths(atPath: path) {
                 var size = 0
-                var postString = "KB"
                 for file in files {
                     let path = path.appendingFormat("/\(file)")
                     if let attributes = try? FileManager.default.attributesOfItem(atPath: path) {
                         size += (attributes[FileAttributeKey.size] as! NSNumber).intValue
                     }
                 }
-                if size > 1024 * 1024 {
-                    size /= 1024 * 1024
-                    postString = "MB"
-                } else if size > 1024 {
-                    size /= 1024
-                } else {
-                    // 小于1KB 忽略
-                    size = 0
-                }
                 DispatchQueue.main.async(execute: {
-                    complete?(String(size) + postString)
+                    complete?(self.sizeToString(size: size))
                 })
             }
         }
@@ -148,7 +257,6 @@ class WipeTableViewController: UITableViewController {
             if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
                 if let files = FileManager.default.subpaths(atPath: cachePath) {
                     var size = 0
-                    var postString = "KB"
                     for file in files {
                         let path = cachePath.appendingFormat("/\(file)")
                         if file.contains("default") || file.contains("Data") {
@@ -158,17 +266,8 @@ class WipeTableViewController: UITableViewController {
                             size += (attributes[FileAttributeKey.size] as! NSNumber).intValue
                         }
                     }
-                    if size > 1024 * 1024 {
-                        size /= 1024 * 1024
-                        postString = "MB"
-                    } else if size > 1024 {
-                        size /= 1024
-                    } else {
-                        // 小于1KB 忽略
-                        size = 0
-                    }
                     DispatchQueue.main.async(execute: {
-                        complete?(String(size) + postString)
+                        complete?(self.sizeToString(size: size))
                     })
                 }
             }
@@ -217,14 +316,18 @@ class WipeTableViewController: UITableViewController {
                 cell?.detailTextLabel?.text = sizeString
             })
         case 2:
-            getCacheSizeAt(path: (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first ?? "") + "/Data", complete: { (sizeString) in
+            getCacheSizeOfCard(complete: { (sizeString) in
                 cell?.detailTextLabel?.text = sizeString
             })
         case 3:
-            getCacheSizeAt(path: NSHomeDirectory() + "/Documents", complete: { (sizeString) in
+            getCacheSizeOfSong(complete: { (sizeString) in
                 cell?.detailTextLabel?.text = sizeString
             })
         case 4:
+            getCacheSizeAt(path: NSHomeDirectory() + "/Documents", complete: { (sizeString) in
+                cell?.detailTextLabel?.text = sizeString
+            })
+        case 5:
             getOtherSize(complete: { (sizeString) in
                 cell?.detailTextLabel?.text = sizeString
             })
