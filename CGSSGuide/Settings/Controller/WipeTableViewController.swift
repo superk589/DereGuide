@@ -16,7 +16,7 @@ class WipeTableViewController: UITableViewController {
                      NSLocalizedString("图片", comment: ""),
                      NSLocalizedString("卡片", comment: ""),
                      NSLocalizedString("歌曲", comment: ""),
-                     NSLocalizedString("用户配置", comment: ""),
+                     NSLocalizedString("用户配置", comment: "") + "（" + NSLocalizedString("需重启应用", comment: "") + "）",
                      NSLocalizedString("其他", comment: "")]
 
     override func viewDidLoad() {
@@ -67,7 +67,6 @@ class WipeTableViewController: UITableViewController {
                     }
                 }
             }
-            CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
                 self.tableView.reloadData()
