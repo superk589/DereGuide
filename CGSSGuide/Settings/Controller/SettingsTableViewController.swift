@@ -110,37 +110,29 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     
-    fileprivate func deleteAllCacheFiles() {
-        if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
-            if let files = FileManager.default.subpaths(atPath: cachePath) {
-                for file in files {
-                    let path = cachePath.appendingFormat("/\(file)")
-                    if (FileManager.default.fileExists(atPath: path)) {
-                        do {
-                            try FileManager.default.removeItem(atPath: path)
-                        } catch {
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
     
     func wipeData() {
         if CGSSUpdater.defaultUpdater.isUpdating {
-            return
+            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试清除数据。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let wipeVC = WipeTableViewController()
+            wipeVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(wipeVC, animated: true)
         }
-        let alert = UIAlertController.init(title: NSLocalizedString("确定要清空数据吗？", comment: "设置页面"), message: NSLocalizedString("将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", comment: "设置页面"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
-            CGSSDAO.sharedDAO.removeAllData()
-            SDImageCache.shared().clearDisk()
-            self.deleteAllCacheFiles()
-            CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
-            self.refresh()
-            }))
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
+//        let alert = UIAlertController.init(title: NSLocalizedString("确定要清空数据吗？", comment: "设置页面"), message: NSLocalizedString("将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", comment: "设置页面"), preferredStyle: .alert)
+//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
+//            CGSSDAO.sharedDAO.removeAllData()
+//            SDImageCache.shared().clearDisk()
+//            self.deleteAllCacheFiles()
+//            CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
+//            self.refresh()
+//            }))
+//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
     }
     
     func cacheImage() {

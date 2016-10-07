@@ -88,7 +88,7 @@ open class CGSSUpdater: NSObject {
         
         // 初始化用于检查更新的checkSession
         let checkSessionConfig = URLSessionConfiguration.ephemeral
-        checkSessionConfig.timeoutIntervalForRequest = 30
+        checkSessionConfig.timeoutIntervalForRequest = 60
         // sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
         // 因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
         checkSession = URLSession.init(configuration: checkSessionConfig, delegate: self, delegateQueue: nil)

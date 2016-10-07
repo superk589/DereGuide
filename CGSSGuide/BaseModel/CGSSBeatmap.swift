@@ -58,6 +58,9 @@ class CGSSBeatmap: CGSSBaseModel {
     
     var notes: [CGSSBeatmapNote]
     
+    var isValid: Bool {
+        return notes.count > 0
+    }
     var numberOfNotes: Int {
         if let note = notes.first {
             return note.status ?? 0
@@ -66,6 +69,9 @@ class CGSSBeatmap: CGSSBaseModel {
     }
     
     var firstNote: CGSSBeatmapNote? {
+        if notes.count == 0 {
+            return nil
+        }
         for i in 0...notes.count - 1 {
             if notes[i].finishPos != 0 {
                 return notes[i]
@@ -75,6 +81,9 @@ class CGSSBeatmap: CGSSBaseModel {
     }
     
     var lastNote: CGSSBeatmapNote? {
+        if notes.count == 0 {
+            return nil
+        }
         for i in 0...notes.count - 1 {
             if notes[notes.count - i - 1].finishPos != 0 {
                 return notes[notes.count - i - 1]
@@ -111,18 +120,18 @@ class CGSSBeatmap: CGSSBaseModel {
         return arr
     }()
     
-    var preSeconds: Float? {
-        return firstNote?.sec
+    var preSeconds: Float! {
+        return firstNote?.sec ?? 0
     }
-    var postSeconds: Float? {
-        return lastNote?.sec
+    var postSeconds: Float {
+        return lastNote?.sec ?? 0
     }
     var totalSeconds: Float {
-        return notes.last!.sec!
+        return notes.last?.sec ?? 0
     }
     
     var validSeconds: Float {
-        return postSeconds! - preSeconds!
+        return postSeconds - preSeconds
     }
     
     
@@ -180,6 +189,10 @@ class CGSSBeatmap: CGSSBaseModel {
     init?(json: JSON) {
         self.notes = [CGSSBeatmapNote]()
         let array = json.arrayValue
+        // 如果当返回的note为0时 暂时不返回nil 而是一个空的beatmap 防止重复更新一些非常规歌曲的谱面
+//        if array.count == 0 {
+//            return nil
+//        }
         for sub in array {
             let note = CGSSBeatmapNote()
             note.id = sub["id"].intValue

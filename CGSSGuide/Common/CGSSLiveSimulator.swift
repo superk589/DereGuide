@@ -163,7 +163,7 @@ class CGSSLiveSimulator: NSObject {
                             upValue = 30
                         }
                     }
-                    let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.postSeconds!, procMax: procMax, upValue: upValue)
+                    let tuples = rankedSkill.getRangesOfProc(live.getBeatmapByDiff(diff)!.postSeconds, procMax: procMax, upValue: upValue)
                     for tuple in tuples {
                         let schedule = ScoreUpSchedule.init(begin: tuple.0, end: tuple.1, upValue: rankedSkill.skill.value!)
                         scheduleDic[type]?.append(schedule)

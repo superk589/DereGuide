@@ -73,6 +73,7 @@
 		125164B41D5A0422001D66FC /* song_cute.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B01D5A0422001D66FC /* song_cute.png */; };
 		125164B51D5A0422001D66FC /* song_passion.png in Resources */ = {isa = PBXBuildFile; fileRef = 125164B11D5A0422001D66FC /* song_passion.png */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
+		12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */; };
 		126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */; };
 		126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSSongFilter.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
@@ -287,6 +288,7 @@
 		125164B01D5A0422001D66FC /* song_cute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cute.png; sourceTree = "<group>"; };
 		125164B11D5A0422001D66FC /* song_passion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_passion.png; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
+		12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WipeTableViewController.swift; sourceTree = "<group>"; };
 		126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		126666231D7D70F70022348E /* CGSSSongFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSongFilter.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
@@ -530,7 +532,6 @@
 		1269E90E1D52085C0071AD7F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				1269E9EC1D520BAB0071AD7F /* View */,
 				1269E9EB1D520BA40071AD7F /* Controller */,
 			);
 			path = Settings;
@@ -688,15 +689,9 @@
 				1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */,
 				12ACD5A91D9128250054D9CD /* LicenseViewController.swift */,
 				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
+				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		1269E9EC1D520BAB0071AD7F /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		1269E9EF1D520C3E0071AD7F /* Controller */ = {
@@ -1098,6 +1093,7 @@
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
+				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
