@@ -194,20 +194,34 @@ extension CardDetailViewController: CGSSImageViewDelegate {
     }
     func longPress(_ press: UILongPressGestureRecognizer, iv: CGSSImageView) {
         // 长按实现更多操作 保存/分享等
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let location = press.location(in: fullScreenView)
-        alert.popoverPresentationController?.sourceView = fullScreenView
-        alert.popoverPresentationController?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("保存到相册", comment: "底部弹出选项"), style: .default, handler: { (_: UIAlertAction) in
-            if let image = iv.image {
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.imageDidFinishingSaving), nil)
-            }
-            }))
-        // alVC.addAction(UIAlertAction.init(title: "分享", style: .Default, handler: { (_:UIAlertAction) in
-        // //todo
-        // }))
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "通用"), style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        if let image = iv.image {
+            // 作为被分享的内容 不能是可选类型 否则分享项不显示
+            let urlArray = [image]
+            let location = press.location(in: fullScreenView)
+            let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
+            let excludeActivitys:[UIActivityType] = []
+            activityVC.excludedActivityTypes = excludeActivitys
+            activityVC.popoverPresentationController?.sourceView = fullScreenView
+            activityVC.popoverPresentationController?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
+            // 呈现分享界面
+            self.present(activityVC, animated: true, completion: nil)
+        }
+
+        // 弹出菜单保存 暂时弃用
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//        let location = press.location(in: fullScreenView)
+//        alert.popoverPresentationController?.sourceView = fullScreenView
+//        alert.popoverPresentationController?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)
+//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("保存到相册", comment: "底部弹出选项"), style: .default, handler: { (_: UIAlertAction) in
+//            if let image = iv.image {
+//                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.imageDidFinishingSaving), nil)
+//            }
+//            }))
+//        // alVC.addAction(UIAlertAction.init(title: "分享", style: .Default, handler: { (_:UIAlertAction) in
+//        // //todo
+//        // }))
+//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "通用"), style: .cancel, handler: nil))
+//        present(alert, animated: true, completion: nil)
         
     }
 }

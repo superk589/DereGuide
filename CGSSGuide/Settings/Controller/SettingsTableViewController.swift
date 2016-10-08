@@ -232,7 +232,8 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refresh()
-        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: "UPDATE_END", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.saveEnd, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

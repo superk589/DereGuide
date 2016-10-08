@@ -77,7 +77,7 @@ class GachaViewController: RefreshableTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(renewAnimation), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: "UPDATE_END", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
         renewAnimation()
     }
 

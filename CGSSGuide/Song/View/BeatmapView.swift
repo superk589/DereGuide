@@ -405,7 +405,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
     
     // MARK: 生成整张谱面图片的方法
-    func exportImageAsync(title:String, callBack: @escaping (UIImage) -> Void) {
+    func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
 
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             let adBeatmap = AdvanceBeatmap.init(sectionHeight: 240, columnWidth: 175, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 6, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.strokeColor, lineWidth: self.lineWidth)
@@ -478,7 +478,7 @@ class AdvanceBeatmap {
         return beatmap.notes
     }
     
-    func export(sectionPerColumn:CGFloat, title:String) -> UIImage {
+    func export(sectionPerColumn:CGFloat, title:String) -> UIImage? {
         let textHeight:CGFloat = 50
         // 一列的原始高度
         let beatmapH = sectionPerColumn * sectionHeight
@@ -492,6 +492,9 @@ class AdvanceBeatmap {
         let imageW = columns * columnWidth
         UIGraphicsBeginImageContext(CGSize.init(width: columnWidth, height: totalHeight))
         var context:CGContext! = UIGraphicsGetCurrentContext()
+        guard context != nil else {
+            return nil
+        }
         let rect = CGRect.init(x: 0, y: 0, width: columnWidth, height: totalHeight)
         self.drawIn(rect: rect)
         let image = UIImage.init(cgImage: context.makeImage()!)
@@ -499,10 +502,13 @@ class AdvanceBeatmap {
         
         
         UIGraphicsBeginImageContext(CGSize.init(width: imageW, height: imageH))
+        context = UIGraphicsGetCurrentContext()
+        guard context != nil else {
+            return nil
+        }
         let path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: imageW, height: imageH))
         UIColor.white.set()
         path.fill()
-        context = UIGraphicsGetCurrentContext()
         // 画标题
         UIColor.darkGray.set()
         let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 24), NSForegroundColorAttributeName: UIColor.darkGray]

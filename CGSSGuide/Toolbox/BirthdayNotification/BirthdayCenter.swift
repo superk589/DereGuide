@@ -14,7 +14,7 @@ class BirthdayCenter: NSObject {
     fileprivate override init() {
         super.init()
         prepare()
-        CGSSNotificationCenter.add(self, selector: #selector(prepare), name: "UPDATE_END", object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(prepare), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
     
     var tempChar: CGSSChar!

@@ -107,18 +107,23 @@ class BeatmapViewController: UIViewController {
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in
-            let data = UIImagePNGRepresentation(image)
+            let data = UIImagePNGRepresentation(image!)
             try? data?.write(to: URL.init(fileURLWithPath: "/Users/zzk/Desktop/aaa.png"))
         }
     }
     
-    func share() {
+    func share(item: UIBarButtonItem) {
         //enterImageView()
         CGSSLoadingHUDManager.default.show()
         bv.exportImageAsync(title: getImageTitle()) { (image) in
             CGSSLoadingHUDManager.default.hide()
-            let urlArray = [image];
+            if image == nil {
+                return
+            }
+            let urlArray = [image!]
             let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
+            activityVC.popoverPresentationController?.barButtonItem = item
+            //activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
             // 需要屏蔽的模块
             let cludeActivitys:[UIActivityType] = [
                 // 保存到本地相册

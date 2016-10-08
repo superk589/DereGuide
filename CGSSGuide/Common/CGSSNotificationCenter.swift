@@ -10,6 +10,9 @@ import Foundation
 
 open class CGSSNotificationCenter: NSObject {
 
+    static let updateEnd = "UPDATE_END"
+    static let saveEnd = "SAVE_END"
+    
     open static func post( _ name:String, object: AnyObject?) {
         let prefixedName = "CGSS_" + name
         NotificationCenter.default.post(name: Notification.Name(rawValue: prefixedName), object: object)
