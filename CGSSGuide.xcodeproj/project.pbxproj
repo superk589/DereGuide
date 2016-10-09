@@ -42,6 +42,10 @@
 		122EED1B1D617307008ADE08 /* 921-toolbox-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */; };
 		122EED1C1D617307008ADE08 /* 921-toolbox-selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */; };
 		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
+		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
+		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
+		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
+		123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A21DAA44C6007361CF /* EventBannerView.swift */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
@@ -241,6 +245,10 @@
 		122EED181D617307008ADE08 /* 921-toolbox-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@2x.png"; path = "Resource/921-toolbox-selected@2x.png"; sourceTree = "<group>"; };
 		122EED191D617307008ADE08 /* 921-toolbox-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "921-toolbox-selected@3x.png"; path = "Resource/921-toolbox-selected@3x.png"; sourceTree = "<group>"; };
 		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
+		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		123805A21DAA44C6007361CF /* EventBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBannerView.swift; sourceTree = "<group>"; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -439,10 +447,22 @@
 				1247917F1D87F4E500ED8EA6 /* GachaSimulation */,
 				124E47041D654AB700DD0399 /* BirthdayNotification */,
 				124E47091D654AB700DD0399 /* CharInfo */,
+				1238059B1DAA1582007361CF /* EventInfo */,
 				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
 				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
 			);
 			path = Toolbox;
+			sourceTree = "<group>";
+		};
+		1238059B1DAA1582007361CF /* EventInfo */ = {
+			isa = PBXGroup;
+			children = (
+				1238059C1DAA15B9007361CF /* EventViewController.swift */,
+				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
+				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
+				123805A21DAA44C6007361CF /* EventBannerView.swift */,
+			);
+			path = EventInfo;
 			sourceTree = "<group>";
 		};
 		1247917F1D87F4E500ED8EA6 /* GachaSimulation */ = {
@@ -1101,6 +1121,7 @@
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
+				123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
@@ -1136,10 +1157,12 @@
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,
+				1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
 				1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */,
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
+				1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */,
 				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
@@ -1173,6 +1196,7 @@
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
+				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
 				1269E91B1D5209610071AD7F /* CardFilterAndSorterTableViewController.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,

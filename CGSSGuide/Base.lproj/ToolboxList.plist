@@ -26,5 +26,13 @@
 		<key>title</key>
 		<string>模拟抽卡</string>
 	</dict>
+	<dict>
+		<key>cName</key>
+		<string>EventViewController</string>
+		<key>iconId</key>
+		<string>200206</string>
+		<key>title</key>
+		<string>活动信息查询</string>
+	</dict>
 </array>
 </plist>

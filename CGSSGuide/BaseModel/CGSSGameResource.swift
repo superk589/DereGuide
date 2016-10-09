@@ -201,6 +201,56 @@ class Master: FMDatabase {
         
         return result
     }
+    
+    
+    func getEvents() -> [CGSSEvent] {
+        var events = [CGSSEvent]()
+        let selectSql = "select * from event_data order by event_start desc"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                
+                let id = Int(set.int(forColumn: "id"))
+                let type = Int(set.int(forColumn: "type"))
+                let name = set.string(forColumn: "name")
+                let startDate = set.string(forColumn: "event_start")
+                let endDate = set.string(forColumn: "event_end")
+                let secondHalfStartDate = set.string(forColumn: "second_half_start")
+                
+                let rewardSql = "select * from event_available where event_id = \(id)"
+                var rewards = [Reward]()
+                let subSet = try self.executeQuery(rewardSql, values: nil)
+                while subSet.next() {
+                    let rewardId = Int(subSet.int(forColumn: "reward_id"))
+                    let recommend_order = Int(subSet.int(forColumn: "recommend_order"))
+                    let reward = Reward.init(cardId: rewardId, rewardRecommand: recommend_order)
+                    rewards.append(reward)
+                }
+                
+                let event = CGSSEvent.init(id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards)
+               
+                events.append(event)
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return events
+        
+    }
+    
+    func getMusicIdBy(eventId:Int) -> Int? {
+        let selectSql = "select a.music_data_id, b.id from live_data a, event_data b where b.id = a.sort and b.id = \(eventId)"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let musicId = set.int(forColumn: "music_data_id")
+                return Int(musicId)
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return nil
+    }
 }
 
 class Manifest: FMDatabase {
@@ -303,6 +353,19 @@ class CGSSGameResource: NSObject {
         return master.getValidGacha()
     }
     
+    func getEvent() -> [CGSSEvent]? {
+        guard master.open() else {
+            return nil
+        }
+        defer {
+            master.close()
+        }
+        return master.getEvents()
+        
+    }
+    
+    
+    
     func getCardAvailable(cardId:Int) -> (Bool, Bool, Bool, Bool) {
         guard master.open() else {
             return (false, false, false, false)
@@ -359,5 +422,16 @@ class CGSSGameResource: NSObject {
             }
             dao.saveDataToFile(.card, complete: nil)
         }
+    }
+    
+    
+    func getMusicIdBy(eventId:Int) -> Int? {
+        guard self.master.open() else {
+            return nil
+        }
+        defer {
+            self.master.close()
+        }
+        return master.getMusicIdBy(eventId: eventId)
     }
 }

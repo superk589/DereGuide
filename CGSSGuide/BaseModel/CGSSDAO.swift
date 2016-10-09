@@ -51,6 +51,7 @@ open class CGSSDAO: NSObject {
     // beatmap采用分歌曲单独存储
     open var beatmapDict = NSMutableDictionary()
     
+    // 以musicId为key, 有效的live为值的字典
     open var validLiveDict: [String: CGSSLive] {
         var lives = [String: CGSSLive]()
         for live in liveDict.allValues as! [CGSSLive] {

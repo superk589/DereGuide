@@ -228,3 +228,35 @@ struct CGSSSongEventTypes: OptionSet, RawRepresentable {
         }
     }
 }
+
+
+
+struct CGSSEventTypes: OptionSet, RawRepresentable {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let none = CGSSEventTypes.init(rawValue: 1 << 0)
+    static let tradition = CGSSEventTypes.init(rawValue: 1 << 1)
+    static let groove = CGSSEventTypes.init(rawValue: 1 << 2)
+    static let parade = CGSSEventTypes.init(rawValue: 1 << 3)
+    static let kyalapon = CGSSEventTypes.init(rawValue: 1 << 4)
+    static let party = CGSSEventTypes.init(rawValue: 1 << 5)
+    init (eventType: Int) {
+        switch eventType {
+        case 0:
+            self = .none
+        case 1:
+            self = .tradition
+        case 2:
+            self = .kyalapon
+        case 3:
+            self = .groove
+        case 4:
+            self = .party
+        case 5:
+            self = .parade
+        default:
+            self = .none
+        }
+    }
+}
+
