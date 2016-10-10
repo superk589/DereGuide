@@ -5,7 +5,7 @@
 "* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素" = "* 当期新SSRはすべてSSRの40%であります\n* 当期新SR、Rの確率アップはみなされません";
 
 /* 队伍详情页面 */
-"* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响" = "* 極限・平均スコアは全PERFECTとして計算しています\n* 極限スコアはスキル100%発動として計算しています\n* 平均スコアは100回真実シミュレートして平均値を計算します、毎回の結果は異なります\n* 平均スコアは発動確率アップしたセンター効果の影響をみなされません";
+"* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响" = "* 極限・平均スコアは全PERFECTとして計算しています\n* 極限スコアはスキル100%発動として計算しています\n* 平均スコアは100回真実シミュレートして平均値を計算します、毎回の結果は異なります\n* 平均スコアはセンター効果による特技発動確率アップをみなされません";
 
 /* 设置页面 */
 "CGSSGuide问题反馈" = "CGSSGuideに関するフィードバック";
@@ -59,10 +59,10 @@
 "使用固定值" = "固定アピールを使用";
 
 /* 底部弹出选项 */
-"保存到相册" = "アルバムへセーブ";
+"保存到相册" = "アルバムに保存";
 
 /* 弹出框标题 */
-"保存成功" = "セーブ成功";
+"保存成功" = "保存成功";
 
 /* 角色信息页面 */
 "兴趣" = "興味";
@@ -181,7 +181,7 @@
 "数据是最新版本" = "データは最新バージョンです";
 
 /* 致谢页面 */
-"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "データソース：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\nテックサポート：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\nカバーデザイン：\nZXQ\n\n";
+"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "データソース：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\nテクニカルサポート：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\nランディングカバーデザイン：\nZXQ\n\n";
 
 /* 弹出框标题 */
 "数据缺失" = "データは不完全です";
@@ -440,10 +440,10 @@
 "处理中..." = "プロセス中";
 
 /* 清除缓存时 选择具体的清除项 */
-"请等待更新完成或手动取消更新后，再尝试清除数据。" = "请等待更新完成或手动取消更新后，再尝试清除数据。";
-"全选" = "全选";
-"图片" = "图片";
-"卡片" = "卡片";
-"歌曲" = "歌曲";
-"用户配置" = "用户配置";
-"需重启应用" = "需重启应用";
+"请等待更新完成或手动取消更新后，再尝试清除数据。" = "現在進行中のアップデートをしばらくお待ちください、または手動でアップデートをキャンセルの後で、再びデータをクリアしてください";
+"全选" = "全選択";
+"图片" = "画像";
+"卡片" = "カード";
+"歌曲" = "楽曲";
+"用户配置" = "ユーザープロファイル";
+"需重启应用" = "アプリ再起動が必要";
