@@ -36,7 +36,7 @@ open class CGSSSong: CGSSBaseModel {
     var lyricist:String?
     
     var imageURLString: String {
-        return CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(id!).png"
+        return DataURL.Deresute + "/image/jacket_\(id!).png"
     }
     
     override open func encode(with aCoder: NSCoder) {

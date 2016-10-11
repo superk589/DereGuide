@@ -45,7 +45,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                 updater.updateItems(items, progress: { (process, total) in
                     self.updateStatusView.updateProgress(process, b: total)
                     }, complete: { (success, total) in
-                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用"))\(success),\(NSLocalizedString("失败", comment: "通用"))\(total-success)", preferredStyle: .alert)
+                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                     self.tabBarController?.present(alert, animated: true, completion: nil)
                     self.updateStatusView.isHidden = true

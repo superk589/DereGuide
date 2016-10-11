@@ -28,21 +28,19 @@ fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
+struct DataURL {
+    static let EnglishDatabase = "https://starlight.kirara.ca"
+    static let ChineseDatabase = "http://starlight.hyspace.io"
+    static let Images = "https://hoshimoriuta.kirara.ca"
+    // static let Wiki = "http://imascg-slstage-wiki.gamerch.com"
+    // static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
+    static let Deresute = "https://apiv2.deresute.info"
+    static let manifest = "http://storage.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
+    static let master = "http://storage.game.starlight-stage.jp/dl/resources/Generic//%@"
+}
 
 open class CGSSUpdater: NSObject {
-    
-    static let URLOfEnglishDatabase = "https://starlight.kirara.ca"
-    static let URLOfChineseDatabase = "http://starlight.hyspace.io"
-    static let URLOfImages = "https://hoshimoriuta.kirara.ca"
-    static let URLOfWiki = "http://imascg-slstage-wiki.gamerch.com"
-    static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
-    static let URLOfDeresuteApi = "https://apiv2.deresute.info"
-    
-    // 官方游戏数据
-    fileprivate struct URLOfGameResource {
-        static let manifest = "http://storage.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
-        static let master = "http://storage.game.starlight-stage.jp/dl/resources/Generic//%@"
-    }
+  
     
     static let defaultUpdater = CGSSUpdater()
     
@@ -167,7 +165,7 @@ open class CGSSUpdater: NSObject {
         for dataType in dataTypes {
             switch dataType {
             case .card:
-                let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
+                let url = DataURL.ChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
                 let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         // print("检查卡片更新失败: \(e.localizedDescription)")
@@ -209,7 +207,7 @@ open class CGSSUpdater: NSObject {
                 task.resume()
                 
             case .song:
-                let url = CGSSUpdater.URLOfDeresuteApi + "/data/music"
+                let url = DataURL.Deresute + "/data/music"
                 let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         // print("检查歌曲更新失败: \(e.localizedDescription)")
@@ -237,7 +235,7 @@ open class CGSSUpdater: NSObject {
                 })
                 task.resume()
             case .live:
-                let url = CGSSUpdater.URLOfDeresuteApi + "/data/live"
+                let url = DataURL.Deresute + "/data/live"
                 let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         // print("检查live更新失败: \(e.localizedDescription)")
@@ -285,7 +283,7 @@ open class CGSSUpdater: NSObject {
                 completeInside(nil)
                 break
             case .story:
-                let url = CGSSUpdater.URLOfDeresuteApi + "/data/story"
+                let url = DataURL.Deresute + "/data/story"
                 let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         // print("检查故事章节更新失败: \(e.localizedDescription)")
@@ -316,7 +314,7 @@ open class CGSSUpdater: NSObject {
                 completeInside(nil)
                 break
             case .resource:
-                let url = CGSSUpdater.URLOfChineseDatabase + "/api/v1/info"
+                let url = DataURL.ChineseDatabase + "/api/v1/info"
                 let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if let e = error {
                         // print("检查游戏资源更新失败: \(e.localizedDescription)")
@@ -387,7 +385,7 @@ open class CGSSUpdater: NSObject {
         for item in sortedItems {
             switch item.dataType {
             case .card:
-                let strURL = CGSSUpdater.URLOfChineseDatabase + "/api/v1/card_t/\(item.id)"
+                let strURL = DataURL.ChineseDatabase + "/api/v1/card_t/\(item.id)"
                 let url = URL(string: strURL as String)!
                 let task = dataSession.dataTask(with: url, completionHandler: { (data, response, error) in
                     if error != nil {
@@ -419,7 +417,7 @@ open class CGSSUpdater: NSObject {
             case .story:
                 break
             case .beatmap:
-                let strURL = CGSSUpdater.URLOfDeresuteApi + "/pattern/\(item.id)"
+                let strURL = DataURL.Deresute + "/pattern/\(item.id)"
                 let url = URL(string: strURL as String)!
                 let task = dataSession.dataTask(with: url, completionHandler: { (data, response, error) in
                     if error != nil {
@@ -444,7 +442,7 @@ open class CGSSUpdater: NSObject {
                 })
                 task.resume()
             case .resource:
-                let url = String.init(format: URLOfGameResource.manifest, item.id)
+                let url = String.init(format: DataURL.manifest, item.id)
                 let task = dataSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                     if error != nil {
                         insideComplete(error?.localizedDescription)
@@ -452,7 +450,7 @@ open class CGSSUpdater: NSObject {
                         let manifestData = LZ4Decompressor.decompress(data!)
                         CGSSGameResource.sharedResource.saveManifest(manifestData)
                         if let hash = CGSSGameResource.sharedResource.getMasterHash() {
-                            let masterUrl = String.init(format: URLOfGameResource.master, hash)
+                            let masterUrl = String.init(format: DataURL.master, hash)
                             let subTask = self.dataSession.dataTask(with: URL.init(string: masterUrl)!, completionHandler: { (data, response, error) in
                                 if error != nil {
                                     insideComplete(error?.localizedDescription)

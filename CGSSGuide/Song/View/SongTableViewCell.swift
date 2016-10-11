@@ -141,7 +141,7 @@ class SongTableViewCell: UITableViewCell {
                 self.diffViews[4].isHidden = true
             }
             
-            let url = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song.id!).png"
+            let url = DataURL.Deresute + "/image/jacket_\(song.id!).png"
             self.jacketImageView.sd_setImage(with: URL.init(string: url))
         }
     }

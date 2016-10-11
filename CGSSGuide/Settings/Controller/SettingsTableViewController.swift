@@ -155,12 +155,12 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                         }
                     }
                     // 卡头像图
-                    let url = URL.init(string: CGSSUpdater.URLOfImages + "/icon_card/\(card.id!).png")
+                    let url = URL.init(string: DataURL.Images + "/icon_card/\(card.id!).png")
                     if !SDWebImageManager.shared().cachedImageExists(for: url) {
                         urls.append(url!)
                     }
                     // 角色头像图
-                    let url2 = URL.init(string: CGSSUpdater.URLOfImages + "/icon_char/\(card.charaId!).png")
+                    let url2 = URL.init(string: DataURL.Images + "/icon_char/\(card.charaId!).png")
                     if !SDWebImageManager.shared().cachedImageExists(for: url2) && !urls.contains(url2!) {
                         urls.append(url2!)
                     }
@@ -170,7 +170,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
                 let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
                 for live in lives {
                     let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
-                    let urlStr = CGSSUpdater.URLOfDeresuteApi + "/image/jacket_\(song!.id!).png"
+                    let urlStr = DataURL.Deresute + "/image/jacket_\(song!.id!).png"
                     let url = URL.init(string: urlStr)
                     if !SDWebImageManager.shared().cachedImageExists(for: url) {
                         urls.append(url!)

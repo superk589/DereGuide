@@ -13,6 +13,13 @@
 3. iPadで譜面画像の保存時クラッシュする問題を修正した
 4. 一部のプロセスがポップアップボックスを付いています
 
+##### English version
+1. Add English localization(thanks to summertriangle-dev).
+2. Add category for data wiping. You can use this feature to remove wrong data manually and download again.
+3. Improve beatmap exporting feature, and export the same image on different devices.
+4. Fix crash when exporting beatmap on iPad.
+5. Add a "please wait" hud when processing background.
+
 ### v1.1.2
 2016-10-4
 

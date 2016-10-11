@@ -25,6 +25,8 @@ class WipeTableViewController: UITableViewController {
         tableView.allowsMultipleSelection = true
         tableView.setEditing(true, animated: true)
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.register(WipeTableViewCell.self, forCellReuseIdentifier: "WipeCell")
+        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
         // Uncomment the following line to preserve selection between presentations
@@ -295,48 +297,45 @@ class WipeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "WipeCell")
-        if cell == nil {
-            cell = UITableViewCell.init(style: .value1, reuseIdentifier: "WipeCell")
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WipeCell", for: indexPath) as! WipeTableViewCell
         if indexPath.row > 0 {
             //let indicator = UIActivityIndicatorView.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
             //cell?.accessoryView = indicator
             //indicator.startAnimating()
-            cell?.detailTextLabel?.text = "...."
+            cell.detailTextLabel?.text = "...."
         } else {
             //cell?.accessoryView = nil
-            cell?.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = ""
         }
         
         switch indexPath.row {
         case 1:
             getCacheSizeAt(path: (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first ?? "") + "/default", complete: { (sizeString) in
-                cell?.detailTextLabel?.text = sizeString
+                cell.detailTextLabel?.text = sizeString
             })
         case 2:
             getCacheSizeOfCard(complete: { (sizeString) in
-                cell?.detailTextLabel?.text = sizeString
+                cell.detailTextLabel?.text = sizeString
             })
         case 3:
             getCacheSizeOfSong(complete: { (sizeString) in
-                cell?.detailTextLabel?.text = sizeString
+                cell.detailTextLabel?.text = sizeString
             })
         case 4:
             getCacheSizeAt(path: NSHomeDirectory() + "/Documents", complete: { (sizeString) in
-                cell?.detailTextLabel?.text = sizeString
+                cell.detailTextLabel?.text = sizeString
             })
         case 5:
             getOtherSize(complete: { (sizeString) in
-                cell?.detailTextLabel?.text = sizeString
+                cell.detailTextLabel?.text = sizeString
             })
         default:
             break
         }
 
-        cell?.textLabel?.text = dataTypes[indexPath.row]
+        cell.textLabel?.text = dataTypes[indexPath.row]
         // Configure the cell...
-        return cell!
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

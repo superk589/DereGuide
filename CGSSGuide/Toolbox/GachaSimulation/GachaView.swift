@@ -37,12 +37,13 @@ class GachaView: UIView {
         checkButton.tintColor = CGSSGlobal.coolColor
         checkButton.setImage(UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate), for: .normal)
         
-        let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 2.5, width: 40, height: 17))
+        let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 2.5, width: 40, height: 19.5))
         descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")  + ": "
         descLabel.textAlignment = .left
         descLabel.font = UIFont.systemFont(ofSize: 16)
+        descLabel.sizeToFit()
         
-        nameLabel = UILabel.init(frame: CGRect.init(x: space + 72, y: originY + 2.5, width: CGSSGlobal.width - 40 - space, height: 17))
+        nameLabel = UILabel.init(frame: CGRect.init(x: descLabel.frame.maxX + space, y: originY + 2.5, width: CGSSGlobal.width - descLabel.frame.maxX - 2 * space, height: 19.5))
         
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.textAlignment = .left

@@ -23,7 +23,7 @@ class CGSSCardIconView: CGSSIconView {
         self.cardId = id
         self.tintColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.withAlphaComponent(0.5)
         // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
-        let url = CGSSUpdater.URLOfImages + "/icon_card/\(id).png"
+        let url = DataURL.Images + "/icon_card/\(id).png"
         self.setIconImage(url)
     }
     
