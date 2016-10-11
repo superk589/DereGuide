@@ -947,6 +947,7 @@
 				"zh-Hans",
 				ja,
 				"zh-Hant-TW",
+				en,
 			);
 			mainGroup = 1282EE561D011A8F0024318C;
 			productRefGroup = 1282EE601D011A8F0024318C /* Products */;
@@ -1219,6 +1220,7 @@
 				1244F5AD1D981CBE0021E4B1 /* ja */,
 				124CF52C1DA0D77000ACF6F8 /* zh-Hant */,
 				124CF5321DA0DA7600ACF6F8 /* zh-Hant-TW */,
+				F57C42EC1DAB070F007CCFC7 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1230,6 +1232,7 @@
 				1244F5E11D98E5220021E4B1 /* zh-Hant */,
 				1244F5E21D98E5230021E4B1 /* ja */,
 				124CF5301DA0D96000ACF6F8 /* zh-Hant-TW */,
+				F57C42ED1DAB070F007CCFC7 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1241,6 +1244,7 @@
 				1244F5E81D98E6230021E4B1 /* zh-Hant */,
 				1244F5E91D98E6250021E4B1 /* ja */,
 				124CF5311DA0D96100ACF6F8 /* zh-Hant-TW */,
+				F57C42EE1DAB070F007CCFC7 /* en */,
 			);
 			name = ToolboxList.plist;
 			sourceTree = "<group>";
@@ -1252,6 +1256,7 @@
 				1244F5A11D9814740021E4B1 /* zh-Hant */,
 				1244F5AB1D981CBD0021E4B1 /* ja */,
 				124CF52D1DA0D96000ACF6F8 /* zh-Hant-TW */,
+				F57C42EA1DAB070F007CCFC7 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1263,6 +1268,7 @@
 				1244F5A21D9814740021E4B1 /* zh-Hant */,
 				1244F5AC1D981CBE0021E4B1 /* ja */,
 				124CF52E1DA0D96000ACF6F8 /* zh-Hant-TW */,
+				F57C42EB1DAB070F007CCFC7 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
