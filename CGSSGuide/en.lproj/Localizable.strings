@@ -1,0 +1,449 @@
+
+/* 角色信息页面 */
+"%d月%d日" = "%1$d/%2$d";
+
+/* 模拟抽卡页面 */
+"* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素" = "* Featured SSRs have a 40% chance to be picked\n* Increased rates are not taken into account for SR/Rs";
+
+/* 队伍详情页面 */
+"* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响" = "* Simulation assumes all notes are Perfect.\n* Optimistic score assumes that skills always activate.\n* The average score is taken from 100 real simulations. Results will vary between calculations.\n* Center skills that affect the skill activation rate are not accounted for in the average score.";
+
+/* 设置页面 */
+"CGSSGuide问题反馈" = "CGSSGuide Feedback";
+
+/* 队伍详情页面 */
+"Co曲" = "Cool-type";
+
+/* 队伍详情页面 */
+"Cu曲" = "Cute-type";
+
+/* 队伍详情页面 */
+"Groove类别" = "Groove Type";
+
+/* 队伍详情页面 */
+"Pa曲" = "Passion-type";
+
+/* 生日提醒页面 */
+"一个月内" = "This Month";
+
+/* 生日提醒页面 */
+"七天内" = "This Week";
+
+/* 角色信息页面 */
+"三围" = "B/W/H";
+
+/* 下拉刷新文字 */
+"下拉检查更新" = "Pull Down to Refresh";
+
+/* 通用, 通常不会出现, 为一些未知字符串预留 */
+"不明" = "??";
+
+/* 技能触发几率的简写 */
+"中" = "Med.";
+
+/* 角色信息页面 */
+"习惯用手" = "Hand";
+
+/* 生日提醒页面 */
+"今天" = "Today";
+
+/* 生日通知正文 */
+"今天是%@的生日(%d月%d日)" = "Today is %1$@'s birthday (%2$d/%3$d)";
+
+/* 技能触发几率的简写 */
+"低" = "Low";
+
+/* 角色信息页面 */
+"体重" = "Weight";
+
+/* 队伍详情页面 */
+"使用固定值" = "Use Custom Appeal";
+
+/* 底部弹出选项 */
+"保存到相册" = "Save to Camera Roll";
+
+/* 弹出框标题 */
+"保存成功" = "Saved successfully";
+
+/* 角色信息页面 */
+"兴趣" = "Hobby";
+
+/* 通用, 通常不会出现, 为未知字符预留 */
+"其他" = "Other";
+
+/* 角色信息页面 */
+"出生地" = "Hometown";
+
+/* 模拟抽卡页面 */
+"十连" = "10-pull";
+
+/* 模拟抽卡页面 */
+"单抽" = "Single-pull";
+
+/* 模拟抽卡页面 */
+"卡池" = "Gacha";
+
+/* 卡片详情页 */
+"卡片属性" = "Card Stats";
+
+/* 弹出框按钮
+ 底部弹出框按钮
+ 设置页面
+ 生日提醒页面
+ 通用 */
+"取消" = "Cancel";
+
+/* 队伍详情页面 */
+"后援数值" = "Support Appeal";
+
+/* 弹出框正文 */
+"因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。" = "Some card data is currently unavailable. If an update is in progress, please wait for it to complete, or pull down from the Cards page to update manually.";
+
+/* 设置页面
+ 通用 */
+"失败" = "Failed";
+
+/* 队伍编辑页面 */
+"好友" = "Guest";
+
+/* 队伍详情页面 */
+"好友技能" = "Guest Center Skill";
+
+/* 角色信息页面 */
+"姓名假名" = "Kana";
+
+/* 导航栏按钮
+ 角色信息页面 */
+"完成" = "Done";
+
+/* 设置页面 */
+"将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。" = "All cached card, image, and song data will be deleted. Don't use this option unless you are having issues with the app.";
+
+/* 卡片详情页 */
+"属性排名" = "Relative Strength";
+
+/* 角色年龄 */
+"岁" = " years";
+
+/* 生日提醒页面 */
+"已开启" = "Yes";
+
+/* 队伍详情页面 */
+"常规模式" = "Regular";
+
+/* 队伍详情页面 */
+"平均分数(模拟)" = "Avg. Score (sim.)";
+
+/* 卡片详情页 */
+"平均覆盖率%" = "Avg. cover. %";
+
+/* 角色信息页面 */
+"年龄" = "Age";
+
+/* 生日提醒页面 */
+"开启生日通知提醒" = "Enable Birthday Notifications";
+
+/* 队伍详情页面 */
+"开始计算" = "Calculate";
+
+/* 队伍详情页面 */
+"彩色曲" = "All-type";
+
+/* 队伍详情页面 */
+"得分计算" = "Live Simulator";
+
+/* 设置页面
+ 通用 */
+"成功" = "Success";
+
+/* 设置页面 */
+"所有图片总计超过400MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。" = "This will require a download of over 400 MB. Please make sure you're not on a limited Internet connection, then press OK to continue.";
+
+/* 设置页面 */
+"打开邮箱失败" = "Unable to open Mail";
+
+/* 队伍详情页面 */
+"技能触发" = "Skill chance";
+
+/* 卡片详情页 */
+"持续时间s" = "Dur. (sec)";
+
+/* 弹出框标题
+ 设置页面 */
+"提示" = "Error";
+
+/* 弹出框正文 */
+"数据主版本过低，请点击确定开始更新" = "Local data needs to be updated. Press OK to update.";
+
+/* 弹出框正文 */
+"数据存在新版本，推荐进行更新，请点击确定开始更新" = "An update is available for the local data. Press OK to update now, or Cancel to update later.";
+
+/* 更新框 */
+"数据是最新版本" = "Up to date!";
+
+/* 致谢页面 */
+"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "Data sources:\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\nTechnical support:\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\nIcon:\nZXQ\n\n";
+
+/* 弹出框标题 */
+"数据缺失" = "Missing Data";
+
+/* 弹出框标题 */
+"数据需要更新" = "The data needs to be updated.";
+
+/* 模拟抽卡页面 */
+"新卡列表" = "New cards";
+
+/* 空字符串说明文字 */
+"无" = "None";
+
+/* 弹出框正文 */
+"无法获取游戏原始数据" = "Unable to download the master database.";
+
+/* 角色信息页面 */
+"日文名/罗马音/CV" = "Name, CV";
+
+/* 搜索框文字, 不宜过长 */
+"日文名/罗马音/技能/稀有度" = "Name, Skill, Rarity";
+
+/* 生日提醒页面 */
+"时区" = "Time zone";
+
+/* 队伍详情页面 */
+"时长" = "Duration";
+
+/* 生日提醒页面 */
+"明天" = "Tomorrow";
+
+/* 角色信息页面 */
+"星座" = "Sign";
+
+/* 卡片详情页 */
+"普池" = "Gacha";
+
+/* 设置页面 */
+"暂无需要缓存的图片，请先尝试更新其他数据。" = "There's nothing new to cache. Please try again when new data is available.";
+
+/* 弹出框标题 */
+"更新完成" = "Update Complete";
+
+/* 更新框 */
+"更新数据中" = "Updating...";
+
+/* 队伍编辑页面 */
+"替换" = "Change";
+
+/* 卡片详情页 */
+"最大覆盖率%" = "Max. cover. %";
+
+/* 角色信息页面 */
+"未付声" = "Unvoiced";
+
+/* 生日提醒页面 */
+"未开启" = "No";
+
+/* 模拟抽卡页面 */
+"未找到有效的卡池数据，请尝试下拉刷新" = "Can't find the availability list. Try again after updating.";
+
+/* 设置页面 */
+"未设置邮箱账户" = "There aren't any Mail accounts";
+
+/* 版权声明页面 */
+"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "This is not an official app. All game data used belongs to the original publisher: BANDAI NAMCO Entertainment Inc.\n----------------------------------------\nThis app uses card, song, and other data fetched from Internet sources. Such data is used in compliance with their original sources' copyright policies.\n----------------------------------------\nThis app uses the following third-party libraries:\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\nThe source code of this app is made available under the terms of the MIT license.\nFor more information, please visit the app's GitHub page:\nhttps://github.com/superk589/CGSSGuide\n\n";
+
+/* 队伍详情页面 */
+"极限分数" = "Optimistic Score";
+
+/* 模拟抽卡页面 */
+"查看完整卡池" = "Full availability list";
+
+/* 卡片详情页 */
+"查看角色详情" = "Idol information";
+
+/* 更新框 */
+"检查更新中" = "Checking...";
+
+/* 更新框 */
+"检查更新失败" = "Failed to check for updates.";
+
+/* No comment provided by engineer. */
+"歌曲名" = "Songs";
+
+/* 队伍详情页面 */
+"歌曲模式" = "Live Mode";
+
+/* 卡片详情页 */
+"活动" = "Event";
+
+/* 通用 */
+"特技" = "Skill";
+
+/* 队伍详情页面 */
+"特技列表" = "Skill List";
+
+/* 队伍编辑页面 */
+"特技等级" = "Skill Level";
+
+/* 角色信息页面 */
+"生日" = "Birthday";
+
+/* 弹出框按钮
+ 设置页面 */
+"确定" = "OK";
+
+/* 设置页面 */
+"确定要清空数据吗？" = "Clear All Data?";
+
+/* 设置页面 */
+"确定要缓存所有图片吗？" = "Download All Images?";
+
+/* 队伍详情页面 */
+"秒" = "sec.";
+
+/* 生日提醒页面 */
+"系统通知设置" = "Notifications Allowed";
+
+/* 设置页面 */
+"缓存图片取消" = "Canceled";
+
+/* 设置页面 */
+"缓存图片完成" = "Complete";
+
+/* 设置页面 */
+"缓存图片已被中止" = "The image download was canceled.";
+
+/* 设置页面 */
+"缓存所有图片" = "Downloading...";
+
+/* 队伍编辑页面 */
+"编辑" = "Edit";
+
+/* 弹出框正文 */
+"缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。" = "Can't find the beatmap for the %@ difficulty. If an update is in progress, please wait for it to complete, or pull down to update manually.";
+
+/* 弹出框正文 */
+"获取到的live数据异常" = "Unable to download beatmap data.";
+
+/* 弹出框正文 */
+"获取到的卡数据异常" = "The card data could not be parsed.";
+
+/* 弹出框正文 */
+"获取到的歌曲数据异常" = "The song data could not be parsed.";
+
+/* 弹出框正文 */
+"获取到的谱面数据异常" = "The beatmap data could not be parsed.";
+
+/* 卡片详情页 */
+"获得途径" = "Source";
+
+/* 卡片详情页 */
+"获得途径(进化前)" = "Source";
+
+/* 角色信息页面 */
+"血型" = "Blood Type";
+
+/* 队伍详情页面 */
+"表现值" = "Total Appeal";
+
+/* 角色信息页面
+ 卡片详情页 */
+"角色所有卡片" = "All Cards for This Idol";
+
+/* 卡片详情页 */
+"触发几率%" = "Proc. (%)";
+
+/* 队伍详情页面 */
+"计算中..." = "Calculating...";
+
+/* 弹出框正文 */
+"请先选择歌曲" = "Please select a song.";
+
+/* 弹出框正文 */
+"请完善队伍后，再点击存储" = "Please fill all the member slots before saving.";
+
+/* 队伍详情页面 */
+"请选择歌曲" = "Select Song";
+
+/* 角色信息页面 */
+"身高" = "Height";
+
+/* 卡片详情页 */
+"进化信息" = "Awakening";
+
+/* 弹出框标题 */
+"选择Groove类别" = "Select a Groove type...";
+
+/* 生日提醒页面 */
+"选择提醒时区" = "Select the time zone to use for notifications...";
+
+/* 弹出框标题 */
+"选择歌曲模式" = "Select a live type...";
+
+/* 底部弹出框标题 */
+"选择难度" = "Select a beatmap to view...";
+
+/* 导航栏按钮
+ 角色信息页面 */
+"重置" = "Reset";
+
+/* 弹出框标题 */
+"队伍不完整" = "Incomplete Unit";
+
+/* 队伍编辑页面 */
+"队员" = "Member ";
+
+/* 队伍编辑页面 */
+"队长" = "Center";
+
+/* 队伍详情页面 */
+"队长加成" = "Center Bonus";
+
+/* 队伍详情页面
+ 通用 */
+"队长技能" = "Center Skill";
+
+/* 卡片详情页 */
+"限定" = "Limited";
+
+"FES限定" = "CinFes";
+
+/* 谱面页面导航按钮 */
+"难度" = "Difficulty";
+
+/* 技能触发几率的简写 */
+"高" = "High";
+
+/* 技能类型 */
+"强判" = "Perfect Lock";
+
+/* 技能类型 */
+"COMBO保护" = "Combo Guard";
+
+/* 技能类型 */
+"过载" = "Overload";
+
+/* 技能类型 */
+"锁血" = "Life Guard";
+
+/* 技能类型 */
+"Combo加成" = "Combo Bonus";
+
+/* 技能类型 */
+"无技能" = "No Skill";
+
+/* 技能类型 */
+"分数加成" = "Score Up";
+
+/* 技能类型 */
+"恢复生命" = "Healer";
+
+/* 耗时任务处理过程提示框 */
+"处理中..." = "Please wait...";
+
+/* 清除缓存时 选择具体的清除项 */
+"请等待更新完成或手动取消更新后，再尝试清除数据。" = "Please wait for the update to complete before clearing the cache.";
+"全选" = "Everything";
+"图片" = "Images";
+"卡片" = "Cards";
+"歌曲" = "Songs";
+"用户配置" = "Settings";
+"需重启应用" = "restart required";

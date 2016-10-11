@@ -1,0 +1,339 @@
+
+/* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "01W-pF-8cM"; */
+"01W-pF-8cM.normalTitle" = "Passion";
+
+/* Class = "UIButton"; normalTitle = "未收藏"; ObjectID = "07k-ho-sBa"; */
+"07k-ho-sBa.normalTitle" = "Not Favorited";
+
+/* Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx"; */
+"08b-yF-FVx.title" = "Tools";
+
+/* Class = "UINavigationItem"; title = "我的隊伍"; ObjectID = "1N5-JG-Kjr"; */
+"1N5-JG-Kjr.title" = "Units";
+
+/* Class = "UITableViewSection"; headerTitle = "反饋"; ObjectID = "1cN-eL-xzi"; */
+"1cN-eL-xzi.headerTitle" = "Feedback";
+
+/* Class = "UITableViewController"; title = "角色排序和篩選"; ObjectID = "1ey-jy-bHg"; */
+"1ey-jy-bHg.title" = "Idol Sorting/Filtering Table View Controller";
+
+/* Class = "UITableViewController"; title = "歌曲篩選和排序"; ObjectID = "2yB-7S-JxI"; */
+"2yB-7S-JxI.title" = "Song Sorting/Filtering Table View Controller";
+
+/* Class = "UIButton"; normalTitle = "Groove活動"; ObjectID = "3ui-02-uWZ"; */
+"3ui-02-uWZ.normalTitle" = "Groove Songs";
+
+/* Class = "UIButton"; normalTitle = "  AB  "; ObjectID = "4Lk-o2-12q"; */
+"4Lk-o2-12q.normalTitle" = "  AB  ";
+
+/* Class = "UINavigationController"; title = "卡片導航"; ObjectID = "5Hs-jz-swe"; */
+"5Hs-jz-swe.title" = "Cards Nav Controller";
+
+/* Class = "UIButton"; normalTitle = "強判"; ObjectID = "5Tw-SW-h31"; */
+"5Tw-SW-h31.normalTitle" = "Perfect Lock";
+
+/* Class = "UIButton"; normalTitle = "不斷連"; ObjectID = "5UY-VC-aGN"; */
+"5UY-VC-aGN.normalTitle" = "Combo Guard";
+
+/* Class = "UIButton"; normalTitle = "20~29"; ObjectID = "5u8-dv-dFO"; */
+"5u8-dv-dFO.normalTitle" = "20~29";
+
+/* Class = "UIButton"; normalTitle = "年齡"; ObjectID = "6Jq-AO-gGy"; */
+"6Jq-AO-gGy.normalTitle" = "Age";
+
+/* Class = "UIButton"; normalTitle = "年齡<10"; ObjectID = "6Mg-Kf-75T"; */
+"6Mg-Kf-75T.normalTitle" = "Age < 10";
+
+/* Class = "UIButton"; normalTitle = "已付聲"; ObjectID = "6oo-pW-kHa"; */
+"6oo-pW-kHa.normalTitle" = "Voiced";
+
+/* Class = "UIButton"; normalTitle = "更新時間"; ObjectID = "7lt-cg-VIJ"; */
+"7lt-cg-VIJ.normalTitle" = "Update Time";
+
+/* Class = "UIButton"; normalTitle = "已收藏"; ObjectID = "88G-Qa-pCH"; */
+"88G-Qa-pCH.normalTitle" = "Favorited";
+
+/* Class = "UITabBarItem"; title = "卡片"; ObjectID = "8Lu-2l-B9T"; */
+"8Lu-2l-B9T.title" = "Cards";
+
+/* Class = "UIButton"; normalTitle = "  N  "; ObjectID = "8rf-MJ-QQY"; */
+"8rf-MJ-QQY.normalTitle" = "  N  ";
+
+/* Class = "UIButton"; normalTitle = " SSR "; ObjectID = "9r5-JT-QLk"; */
+"9r5-JT-QLk.normalTitle" = " SSR ";
+
+/* Class = "UIButton"; normalTitle = "10~19"; ObjectID = "C8G-sx-jq7"; */
+"C8G-sx-jq7.normalTitle" = "10~19";
+
+/* Class = "UIButton"; normalTitle = "Visual"; ObjectID = "Cde-v7-eat"; */
+"Cde-v7-eat.normalTitle" = "Visual";
+
+/* Class = "UIButton"; normalTitle = "過載"; ObjectID = "Cxe-2I-TMr"; */
+"Cxe-2I-TMr.normalTitle" = "Overload";
+
+/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "D6I-uh-wTP"; */
+"D6I-uh-wTP.headerTitle" = "Sort";
+
+/* Class = "UIButton"; normalTitle = "未付聲"; ObjectID = "D80-A7-QVe"; */
+"D80-A7-QVe.normalTitle" = "Unvoiced";
+
+/* Class = "UIButton"; normalTitle = "傳統活動"; ObjectID = "DHK-oa-5HG"; */
+"DHK-oa-5HG.normalTitle" = "Token Event Songs";
+
+/* Class = "UIButton"; normalTitle = "稀有度"; ObjectID = "Dyg-Og-4GD"; */
+"Dyg-Og-4GD.normalTitle" = "Rarity";
+
+/* Class = "UITabBarController"; title = "根標籤欄"; ObjectID = "Eme-MZ-6LK"; */
+"Eme-MZ-6LK.title" = "Root Tab Bar Controller";
+
+/* Class = "UILabel"; text = "版權聲明"; ObjectID = "FGJ-uD-iwy"; */
+"FGJ-uD-iwy.text" = "Copyright";
+
+/* Class = "UIButton"; normalTitle = "  H  "; ObjectID = "FLW-Yl-Ihn"; */
+"FLW-Yl-Ihn.normalTitle" = "  H  ";
+
+/* Class = "UIButton"; normalTitle = "體重"; ObjectID = "HHI-xd-BPp"; */
+"HHI-xd-BPp.normalTitle" = "Weight";
+
+/* Class = "UIButton"; normalTitle = "Vocal"; ObjectID = "HIM-42-iDe"; */
+"HIM-42-iDe.normalTitle" = "Vocal";
+
+/* Class = "UIButton"; normalTitle = "鎖血"; ObjectID = "In1-C8-p0v"; */
+"In1-C8-p0v.normalTitle" = "Life Guard";
+
+/* Class = "UINavigationController"; title = "組隊導航"; ObjectID = "IyO-O4-iMn"; */
+"IyO-O4-iMn.title" = "Unit Nav Controller";
+
+/* Class = "UITabBarItem"; title = "組隊"; ObjectID = "Ji2-5n-2Mz"; */
+"Ji2-5n-2Mz.title" = "Units";
+
+/* Class = "UIButton"; normalTitle = "已收藏"; ObjectID = "Kob-rj-znb"; */
+"Kob-rj-znb.normalTitle" = "Favorited";
+
+/* Class = "UINavigationController"; title = "歌曲導航"; ObjectID = "KxG-H5-NIc"; */
+"KxG-H5-NIc.title" = "Song Nav Controller";
+
+/* Class = "UILabel"; text = "清除快取資料"; ObjectID = "L0F-L7-4EY"; */
+"L0F-L7-4EY.text" = "Clear Cached Data";
+
+/* Class = "UINavigationController"; title = "設定導航"; ObjectID = "Lc3-lA-ZOL"; */
+"Lc3-lA-ZOL.title" = "Settings Nav Controller";
+
+/* Class = "UIButton"; normalTitle = " SR+ "; ObjectID = "MNn-WX-05k"; */
+"MNn-WX-05k.normalTitle" = " SR+ ";
+
+/* Class = "UIButton"; normalTitle = "加血"; ObjectID = "OOC-vj-xF5"; */
+"OOC-vj-xF5.normalTitle" = "Healer";
+
+/* Class = "UINavigationItem"; title = "歌曲"; ObjectID = "OeQ-8h-gYQ"; */
+"OeQ-8h-gYQ.title" = "Songs";
+
+/* Class = "UIButton"; normalTitle = "  R+  "; ObjectID = "Oka-sB-Xx6"; */
+"Oka-sB-Xx6.normalTitle" = "  R+  ";
+
+/* Class = "UIButton"; normalTitle = "          △          "; ObjectID = "Pe0-mA-ubp"; */
+"Pe0-mA-ubp.normalTitle" = "          △          ";
+
+/* Class = "UIButton"; normalTitle = "血型A"; ObjectID = "RSG-ef-P8k"; */
+"RSG-ef-P8k.normalTitle" = "Blood type: A";
+
+/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
+"S9a-oB-UoS.headerTitle" = "Sort";
+
+/* Class = "UITableViewSection"; headerTitle = "關於"; ObjectID = "Sc7-uC-obv"; */
+"Sc7-uC-obv.headerTitle" = "About";
+
+/* Class = "UIButton"; normalTitle = "          △          "; ObjectID = "UCU-PC-phX"; */
+"UCU-PC-phX.normalTitle" = "          △          ";
+
+/* Class = "UILabel"; text = "當前版本"; ObjectID = "UuG-iS-uix"; */
+"UuG-iS-uix.text" = "Current Version";
+
+/* Class = "UIButton"; normalTitle = "Dance"; ObjectID = "Wbd-ym-a55"; */
+"Wbd-ym-a55.normalTitle" = "Dance";
+
+/* Class = "UIButton"; normalTitle = "無技能"; ObjectID = "Wv5-vc-Mbq"; */
+"Wv5-vc-Mbq.normalTitle" = "No Skill";
+
+/* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "X7i-JU-TUQ"; */
+"X7i-JU-TUQ.normalTitle" = "Passion";
+
+/* Class = "UITableViewController"; title = "卡片篩選和排序"; ObjectID = "XB8-jt-AiW"; */
+"XB8-jt-AiW.title" = "Card Sorting/Filtering Table View Controller";
+
+/* Class = "UITableViewController"; title = "卡片"; ObjectID = "XEw-Y1-ITn"; */
+"XEw-Y1-ITn.title" = "Cards";
+
+/* Class = "UIButton"; normalTitle = "遊戲編號"; ObjectID = "XW8-kK-Q8N"; */
+"XW8-kK-Q8N.normalTitle" = "Card ID";
+
+/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "XrL-IG-AMC"; */
+"XrL-IG-AMC.headerTitle" = "Filter";
+
+/* Class = "UIButton"; normalTitle = "Vocal"; ObjectID = "YOt-Q0-8lA"; */
+"YOt-Q0-8lA.normalTitle" = "Vocal";
+
+/* Class = "UIButton"; normalTitle = "身高"; ObjectID = "YRu-Ua-N5X"; */
+"YRu-Ua-N5X.normalTitle" = "Height";
+
+/* Class = "UIButton"; normalTitle = "Cute"; ObjectID = "ZPt-aB-fDS"; */
+"ZPt-aB-fDS.normalTitle" = "Cute";
+
+/* Class = "UIButton"; normalTitle = "其他"; ObjectID = "ZmN-V1-KQc"; */
+"ZmN-V1-KQc.normalTitle" = "Other";
+
+/* Class = "UITableViewController"; title = "組隊"; ObjectID = "Zys-WZ-9cy"; */
+"Zys-WZ-9cy.title" = "Team";
+
+/* Class = "UIButton"; normalTitle = "Combo加分"; ObjectID = "a2o-Af-Vg4"; */
+"a2o-Af-Vg4.normalTitle" = "Combo Bonus";
+
+/* Class = "UIButton"; normalTitle = "Cute"; ObjectID = "aKa-Mv-vUQ"; */
+"aKa-Mv-vUQ.normalTitle" = "Cute";
+
+/* Class = "UIButton"; normalTitle = "          ▽          "; ObjectID = "aqw-JW-K8r"; */
+"aqw-JW-K8r.normalTitle" = "          ▽          ";
+
+/* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "atA-dw-aDc"; */
+"atA-dw-aDc.normalTitle" = "Cool";
+
+/* Class = "UIButton"; normalTitle = " SR "; ObjectID = "b0K-W1-Xqm"; */
+"b0K-W1-Xqm.normalTitle" = " SR ";
+
+/* Class = "UIButton"; normalTitle = "未知"; ObjectID = "d8t-m0-Pn8"; */
+"d8t-m0-Pn8.normalTitle" = "Unknown";
+
+/* Class = "UIButton"; normalTitle = "Total"; ObjectID = "db8-xK-u51"; */
+"db8-xK-u51.normalTitle" = "Total";
+
+/* Class = "UIButton"; normalTitle = "常規歌曲"; ObjectID = "ddL-tZ-2ME"; */
+"ddL-tZ-2ME.normalTitle" = "Regular Songs";
+
+/* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "dfb-tZ-B9F"; */
+"dfb-tZ-B9F.normalTitle" = "Cool";
+
+/* Class = "UIButton"; normalTitle = "  O  "; ObjectID = "efw-R2-QEc"; */
+"efw-R2-QEc.normalTitle" = "  O  ";
+
+/* Class = "UILabel"; text = "致謝"; ObjectID = "fQd-50-rlt"; */
+"fQd-50-rlt.text" = "Acknowledgements";
+
+/* Class = "UILabel"; text = "啟動時自動檢查更新"; ObjectID = "fhG-RG-Edf"; */
+"fhG-RG-Edf.text" = "Check for Updates at Launch";
+
+/* Class = "UITabBarItem"; title = "歌曲"; ObjectID = "gE2-j0-zef"; */
+"gE2-j0-zef.title" = "Songs";
+
+/* Class = "UITabBarItem"; title = "設定"; ObjectID = "gI8-ss-NS6"; */
+"gI8-ss-NS6.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "SSR+"; ObjectID = "gvK-S0-WhK"; */
+"gvK-S0-WhK.normalTitle" = "SSR+";
+
+/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "hJn-41-ekr"; */
+"hJn-41-ekr.headerTitle" = "Filter";
+
+/* Class = "UIButton"; normalTitle = "Visual"; ObjectID = "ipj-ta-j3r"; */
+"ipj-ta-j3r.normalTitle" = "Visual";
+
+/* Class = "UIButton"; normalTitle = "          ▽          "; ObjectID = "jfI-Mv-ukR"; */
+"jfI-Mv-ukR.normalTitle" = "          ▽          ";
+
+/* Class = "UIButton"; normalTitle = "  R  "; ObjectID = "jn3-X6-5GL"; */
+"jn3-X6-5GL.normalTitle" = "  R  ";
+
+/* Class = "UIButton"; normalTitle = " All "; ObjectID = "kUy-IE-dVt"; */
+"kUy-IE-dVt.normalTitle" = " All ";
+
+/* Class = "UIButton"; normalTitle = "相簿編號"; ObjectID = "l5B-2M-8yE"; */
+"l5B-2M-8yE.normalTitle" = "Album Order";
+
+/* Class = "UIButton"; normalTitle = "  W  "; ObjectID = "l5E-7h-pBd"; */
+"l5E-7h-pBd.normalTitle" = "  W  ";
+
+/* Class = "UIButton"; normalTitle = "Perfect加分"; ObjectID = "lKk-N6-D9t"; */
+"lKk-N6-D9t.normalTitle" = "Score Up";
+
+/* Class = "UIButton"; normalTitle = "五十音"; ObjectID = "lPK-N5-pwy"; */
+"lPK-N5-pwy.normalTitle" = "Alphabetically";
+
+/* Class = "UIButton"; normalTitle = "  N+  "; ObjectID = "mQn-gU-gqO"; */
+"mQn-gU-gqO.normalTitle" = "  N+  ";
+
+/* Class = "UIButton"; normalTitle = "最大難度"; ObjectID = "mUG-qN-sIm"; */
+"mUG-qN-sIm.normalTitle" = "Maximum Difficulty";
+
+/* Class = "UIButton"; normalTitle = "bpm"; ObjectID = "mdx-WU-uGO"; */
+"mdx-WU-uGO.normalTitle" = "bpm";
+
+/* Class = "UIButton"; normalTitle = "Cute"; ObjectID = "njF-7c-Q8a"; */
+"njF-7c-Q8a.normalTitle" = "Cute";
+
+/* Class = "UIButton"; normalTitle = "更新時間"; ObjectID = "pWn-aV-e5X"; */
+"pWn-aV-e5X.normalTitle" = "Update Time";
+
+/* Class = "UIButton"; normalTitle = "          ▽          "; ObjectID = "qt5-t2-e2v"; */
+"qt5-t2-e2v.normalTitle" = "          ▽          ";
+
+/* Class = "UILabel"; text = "評價"; ObjectID = "r3b-gr-oUP"; */
+"r3b-gr-oUP.text" = "Review in App Store";
+
+/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
+"rD2-JL-rj6.headerTitle" = "Sort";
+
+/* Class = "UINavigationController"; title = "工具導航"; ObjectID = "sAv-Q2-aG8"; */
+"sAv-Q2-aG8.title" = "Tools Nav Controller";
+
+/* Class = "UIButton"; normalTitle = "Passion"; ObjectID = "sGN-vw-0uS"; */
+"sGN-vw-0uS.normalTitle" = "Passion";
+
+/* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "tIo-hA-bJp"; */
+"tIo-hA-bJp.normalTitle" = "Cool";
+
+/* Class = "UIButton"; normalTitle = "          △          "; ObjectID = "teG-01-FuT"; */
+"teG-01-FuT.normalTitle" = "          △          ";
+
+/* Class = "UILabel"; text = "行動網路下載入卡片大圖"; ObjectID = "u1E-LY-NTo"; */
+"u1E-LY-NTo.text" = "Use Cellular Data for Downloads";
+
+/* Class = "UIButton"; normalTitle = "未收藏"; ObjectID = "uLj-NT-Pgo"; */
+"uLj-NT-Pgo.normalTitle" = "Not Favorited";
+
+/* Class = "UIButton"; normalTitle = "Dance"; ObjectID = "uiM-RA-fhT"; */
+"uiM-RA-fhT.normalTitle" = "Dance";
+
+/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "vSe-a1-0gm"; */
+"vSe-a1-0gm.headerTitle" = "Filter";
+
+/* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
+"wJt-PI-tVQ.title" = "Tools";
+
+/* Class = "UILabel"; text = "當前資料版本"; ObjectID = "we8-dY-w1C"; */
+"we8-dY-w1C.text" = "Current Data Version";
+
+/* Class = "UIButton"; normalTitle = "  B  "; ObjectID = "xi1-wF-saE"; */
+"xi1-wF-saE.normalTitle" = "  B  ";
+
+/* Class = "UILabel"; text = "傳送郵件"; ObjectID = "xrP-YC-gLm"; */
+"xrP-YC-gLm.text" = "E-mail";
+
+/* Class = "UILabel"; text = "快取所有圖片"; ObjectID = "yF0-cl-Say"; */
+"yF0-cl-Say.text" = "Download All Images";
+
+/* Class = "UIButton"; normalTitle = "30~"; ObjectID = "ywN-8C-fgd"; */
+"ywN-8C-fgd.normalTitle" = "30+";
+
+/* Class = "UITableViewSection"; headerTitle = "資料"; ObjectID = "zA8-n9-zYp"; */
+"zA8-n9-zYp.headerTitle" = "Data";
+
+/* Class = "UINavigationItem"; title = "實用工具"; ObjectID = "zeC-Rh-4X6"; */
+"zeC-Rh-4X6.title" = "Tools";
+
+/* Class = "UIButton"; normalTitle = "  B  "; ObjectID = "zjg-Tp-oRL"; */
+"zjg-Tp-oRL.normalTitle" = "  B  ";
+
+/* Class = "UINavigationItem"; title = "設定"; ObjectID = "zkd-c8-p78"; */
+"zkd-c8-p78.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Live Parade"; ObjectID = "cRJ-kj-tNl"; */
+"cRJ-kj-tNl.normalTitle" = "LIVE Parade";
