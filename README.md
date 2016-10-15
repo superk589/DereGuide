@@ -22,19 +22,19 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Swift 3.0+
 
 ## How to build
-1. Clone the repository
+##### Clone the repository
 ```
 $ git clone https://github.com/superk589/CGSSGuide.git
 ```
-2. Install dependencies with CocoaPods
+##### Install dependencies with CocoaPods
 ```
 $ pod install
 ```
-3. Open the workspace in Xcode
+##### Open the workspace in Xcode
 ```
 $ open "CGSSGuide.xcworkspace"
 ```
-4. Compile and run the app
+##### Compile and run the app
 
 ## Localization
 CGSSGuide now provide files of localizable strings for other languages
