@@ -29,6 +29,10 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     var status: Int?
     var sync: Int?
     var groupId: Int?
+    
+    // 0 no press, 1 start, 2 end
+    var longPressType = 0
+    
     override init() {
         super.init()
     }
@@ -119,6 +123,27 @@ class CGSSBeatmap: CGSSBaseModel {
         }
         return arr
     }()
+    
+    
+    func contextFreeAllNotes() {
+        var positionPressed = [Bool].init(repeating: false, count: 5)
+        for note in self.notes {
+            if note.finishPos! == 0 {
+                continue
+            }
+            if note.type == 2 {
+                if !positionPressed[note.finishPos! - 1] {
+                    note.longPressType = 1
+                } else {
+                    note.longPressType = 2
+                }
+                positionPressed[note.finishPos! - 1] = !positionPressed[note.finishPos! - 1]
+            } else if positionPressed[note.finishPos! - 1] {
+                positionPressed[note.finishPos! - 1] = false
+                note.longPressType = 2
+            }
+        }
+    }
     
     var preSeconds: Float! {
         return firstNote?.sec ?? 0

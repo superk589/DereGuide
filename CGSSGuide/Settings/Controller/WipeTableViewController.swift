@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 
-class WipeTableViewController: UITableViewController {
+class WipeTableViewController: BaseTableViewController {
 
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("图片", comment: ""),
@@ -26,7 +26,6 @@ class WipeTableViewController: UITableViewController {
         tableView.setEditing(true, animated: true)
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         tableView.register(WipeTableViewCell.self, forCellReuseIdentifier: "WipeCell")
-        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
         // Uncomment the following line to preserve selection between presentations

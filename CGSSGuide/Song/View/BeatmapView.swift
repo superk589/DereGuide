@@ -62,8 +62,13 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     }
     
     func getPointY(_ sec: Float) -> CGFloat {
-        return contentSize.height - CGFloat(sec - self.beatmap.preSeconds!) * secScale - BeatmapView.heightInset
+        return contentSize.height - CGFloat(sec - self.beatmap.preSeconds) * secScale - BeatmapView.heightInset
     }
+    
+    func getSecOffset(y: CGFloat) -> Float {
+        return Float((contentSize.height - y - BeatmapView.heightInset) / secScale)
+    }
+    
     
     func drawIn(rect:CGRect) {
         typealias Note = CGSSBeatmapNote
@@ -99,69 +104,43 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         var positionPressed = [Float].init(repeating: 0, count: 5)
         var sync: Note?
         
-        for note in notes {
-            if note.finishPos != 0 {
-                let pointY = getPointY(note.sec!)
-                // 未到达显示区域时 continue
-                if pointY > rect.origin.y + rect.size.height + BeatmapView.sectionHeight {
-                    if note.type == 2 {
-                        if positionPressed[note.finishPos! - 1] == 0 {
-                            positionPressed[note.finishPos! - 1] = note.sec!
-                        } else {
-                            positionPressed[note.finishPos! - 1] = 0
-                        }
-                    }
-                    if note.status > 0 && positionPressed[note.finishPos! - 1] != 0 {
-                        positionPressed[note.finishPos! - 1] = 0
-                    }
-                    continue
-                }
-                // 超出当前显示区域时 退出循环
-                if pointY < rect.origin.y - BeatmapView.sectionHeight { break }
-                
-                // 画滑条
-                if note.groupId != 0 {
-                    if (sliders[note.groupId!] != nil) {
-                        let path = pathForSlider(sliders[note.groupId!]!, note2: note)
-                        sliders[note.groupId!] = note
-                        UIColor.white.set()
-                        path?.fill()
-                        strokeColor.withAlphaComponent(0.25).set()
-                        path?.fill()
-                    } else {
-                        sliders[note.groupId!] = note
-                    }
-                }
-                
-                // 简单长按类型
-                // 部分歌曲存在长按结束时但是结束type != 2的情况(Nation Blue) 手工修改
-                if positionPressed[note.finishPos! - 1] != 0 && note.type != 2 {
-                    note.type = 2
-                }
-                if note.type == 2 {
-                    if positionPressed[note.finishPos! - 1] == 0 {
-                        positionPressed[note.finishPos! - 1] = note.sec!
-                    } else {
-                        let path = pathForLongPress(note.finishPos!, sec1: positionPressed[note.finishPos! - 1], sec2: note.sec!)
-                        positionPressed[note.finishPos! - 1] = 0
-                        UIColor.white.set()
-                        path.fill()
-                        strokeColor.withAlphaComponent(0.25).set()
-                        // path.stroke()
-                        path.fill()
-                    }
-                }
-                // 长按以滑动结束的情况
-                if note.status > 0 && positionPressed[note.finishPos! - 1] != 0 {
-                    let path = pathForLongPress(note.finishPos!, sec1: positionPressed[note.finishPos! - 1], sec2: note.sec!)
-                    positionPressed[note.finishPos! - 1] = 0
+        
+//        let datef = DateFormatter()
+//        datef.dateFormat = "SSSS"
+//        print(1)
+//        print(datef.string(from: Date()))
+        
+        let maxY = rect.maxY + BeatmapView.sectionHeight
+        let minY = rect.minY - BeatmapView.sectionHeight
+        let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
+        let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
+        for i in minIndex..<maxIndex{
+            let note = notes[i]
+            // 画滑条
+            if note.groupId != 0 {
+                if (sliders[note.groupId!] != nil) {
+                    let path = pathForSlider(sliders[note.groupId!]!, note2: note)
+                    sliders[note.groupId!] = note
                     UIColor.white.set()
-                    path.fill()
+                    path?.fill()
                     strokeColor.withAlphaComponent(0.25).set()
-                    // path.stroke()
-                    path.fill()
+                    path?.fill()
+                } else {
+                    sliders[note.groupId!] = note
                 }
-                
+            }
+            
+            // 简单长按类型
+            if note.longPressType == 1 {
+                positionPressed[note.finishPos! - 1] = note.sec!
+            } else if note.longPressType == 2 {
+                let path = pathForLongPress(note.finishPos!, sec1: positionPressed[note.finishPos! - 1], sec2: note.sec!)
+                positionPressed[note.finishPos! - 1] = 0
+                UIColor.white.set()
+                path.fill()
+                strokeColor.withAlphaComponent(0.25).set()
+                // path.stroke()
+                path.fill()
             }
         }
         // 处理上方未显示完全的长按部分
@@ -178,16 +157,9 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         }
         
         // 画同步线
-        for note in notes {
+        for i in minIndex..<maxIndex {
+            let note = notes[i]
             if note.finishPos != 0 {
-                let pointY = getPointY(note.sec!)
-                // 未到达显示区域时 continue
-                if pointY > rect.origin.y + rect.size.height + BeatmapView.noteRadius {
-                    continue
-                }
-                // 超出当前显示区域时 退出循环
-                if pointY < rect.origin.y - BeatmapView.noteRadius { break }
-                
                 // 画同步线
                 if note.sync == 1 {
                     if sync != nil {
@@ -203,21 +175,14 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                     } else {
                         sync = note
                     }
-                    
                 }
             }
         }
         
         // 画点
-        for note in notes {
+        for i in minIndex..<maxIndex {
+            let note = notes[i]
             if note.finishPos != 0 {
-                let pointY = getPointY(note.sec!)
-                // 未到达显示区域时 continue
-                if pointY > rect.origin.y + rect.size.height + BeatmapView.noteRadius {
-                    continue
-                }
-                // 超出当前显示区域时 退出循环
-                if pointY < rect.origin.y - BeatmapView.noteRadius { break }
                 // 点
                 let path = pathForPoint(note.finishPos!, sec: note.sec!)
                 strokeColor.set()
@@ -279,7 +244,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
     func initWith(_ beatmap: CGSSBeatmap, bpm: Int, type: Int) {
         self.beatmap = beatmap
-        self.notes = beatmap.notes
+        beatmap.contextFreeAllNotes()
+        self.notes = beatmap.validNotes
         self.bpm = bpm
         switch type {
         case 1:
