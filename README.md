@@ -13,7 +13,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Team simulation/Live score calculation
 * Birthday notification and other small tools in the future
 
-## Download
+## Download at App Store
 <https://itunes.apple.com/app/cgssguide/id1131934691>
 
 ## Requirements
@@ -22,19 +22,19 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Swift 3.0+
 
 ## How to build
-##### Clone the repository
+1. Clone the repository
 ```
 $ git clone https://github.com/superk589/CGSSGuide.git
 ```
-##### Install dependencies with CocoaPods
+2. Install dependencies with CocoaPods
 ```
 $ pod install
 ```
-##### Open the workspace in Xcode
+3. Open the workspace in Xcode
 ```
 $ open "CGSSGuide.xcworkspace"
 ```
-##### Compile and run the app
+4. Compile and run the app
 
 ## Localization
 CGSSGuide now provide files of localizable strings for other languages
