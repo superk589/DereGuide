@@ -125,21 +125,27 @@ class CGSSBeatmap: CGSSBaseModel {
     }()
     
     
+    var maxLongPressInterval:Float = 0
     func contextFreeAllNotes() {
-        var positionPressed = [Bool].init(repeating: false, count: 5)
+        var positionPressed = [Float].init(repeating: 0, count: 5)
         for note in self.notes {
             if note.finishPos! == 0 {
                 continue
             }
             if note.type == 2 {
-                if !positionPressed[note.finishPos! - 1] {
+                if positionPressed[note.finishPos! - 1] == 0 {
                     note.longPressType = 1
+                    positionPressed[note.finishPos! - 1] = note.sec ?? 0
                 } else {
                     note.longPressType = 2
+                    let interval = (note.sec ?? 0) - positionPressed[note.finishPos! - 1]
+                    if interval > maxLongPressInterval {
+                        maxLongPressInterval = interval
+                    }
+                    positionPressed[note.finishPos! - 1] = 0
                 }
-                positionPressed[note.finishPos! - 1] = !positionPressed[note.finishPos! - 1]
-            } else if positionPressed[note.finishPos! - 1] {
-                positionPressed[note.finishPos! - 1] = false
+            } else if positionPressed[note.finishPos! - 1] > 0 {
+                positionPressed[note.finishPos! - 1] = 0
                 note.longPressType = 2
             }
         }

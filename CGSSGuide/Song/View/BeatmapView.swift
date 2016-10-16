@@ -47,6 +47,9 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         return BeatmapView.sectionHeight * (CGFloat(bpm) / 60 / 4)
     }
     
+    // 对于长按范围过大的歌曲 扩大一定范围的上下区间
+    var expand:CGFloat = 0
+    
     // 是否镜像翻转
     var mirrorFlip:Bool = false {
         didSet {
@@ -109,9 +112,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
 //        datef.dateFormat = "SSSS"
 //        print(1)
 //        print(datef.string(from: Date()))
-        
-        let maxY = rect.maxY + BeatmapView.sectionHeight
-        let minY = rect.minY - BeatmapView.sectionHeight
+        let maxY = rect.maxY + BeatmapView.sectionHeight + expand
+        let minY = rect.minY - BeatmapView.sectionHeight - expand
         let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
         let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
         for i in minIndex..<maxIndex{
@@ -247,6 +249,12 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         beatmap.contextFreeAllNotes()
         self.notes = beatmap.validNotes
         self.bpm = bpm
+        // 设置上下边界扩大的范围
+        let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
+        let drawHeight = self.frame.size.height + 2 * BeatmapView.sectionHeight
+        if maxInterval - drawHeight > 0 {
+            expand = (maxInterval - drawHeight) / 2 + 1
+        }
         switch type {
         case 1:
             self.strokeColor = CGSSGlobal.cuteColor
