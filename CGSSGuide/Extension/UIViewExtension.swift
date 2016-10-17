@@ -42,6 +42,18 @@ extension UIView {
 		}
 	}
     
+    var fbottom: CGFloat {
+        get {
+            return self.frame.maxY
+        }
+    }
+    
+    var fright: CGFloat {
+        get {
+            return self.frame.maxX
+        }
+    }
+    
     func drawSectionLine(_ positionY: CGFloat) {
         let view = UIView.init(frame: CGRect(x: 0, y: positionY, width: CGSSGlobal.width, height: 1 / UIScreen.main.scale))
         view.layer.borderWidth = 1 / UIScreen.main.scale

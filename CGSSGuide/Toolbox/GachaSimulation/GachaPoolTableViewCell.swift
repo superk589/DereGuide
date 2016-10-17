@@ -1,20 +1,21 @@
 //
-//  GachaView.swift
+//  GachaPoolTableViewCell.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2016/9/13.
+//  Created by zzk on 2016/10/16.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
 import UIKit
 
-protocol GachaViewDelegate: class {
+protocol GachaPoolTableViewCellDelegate: class {
     func iconClick(iv:CGSSCardIconView)
-    func didSelect(gachaView: GachaView)
-    func seeMoreCard(gachaView: GachaView)
+    func didSelect(cell:GachaPoolTableViewCell)
+    func seeMoreCard(cell:GachaPoolTableViewCell)
 }
 
-class GachaView: UIView {
+class GachaPoolTableViewCell: UITableViewCell {
+    
     var checkButton: UIButton!
     var gachaInfoView: UIView!
     var nameLabel:UILabel!
@@ -23,19 +24,20 @@ class GachaView: UIView {
     var timeLabel:UILabel!
     var timeStatusIndicator:UIImageView!
     
-    weak var delegate: GachaViewDelegate?
+    weak var delegate: GachaPoolTableViewCellDelegate?
     var cardListView: UIView!
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         prepare()
     }
+    
     private let space:CGFloat = 10
     func prepare() {
-        drawSectionLine(0)
         var originY:CGFloat = 10
         checkButton = UIButton.init(frame: CGRect(x: space, y: originY, width: 22, height: 22))
         checkButton.tintColor = CGSSGlobal.coolColor
         checkButton.setImage(UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        checkButton.isUserInteractionEnabled = false
         
         let  descLabel = UILabel.init(frame: CGRect.init(x: space + 27, y: originY + 2.5, width: 40, height: 19.5))
         descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")  + ": "
@@ -90,7 +92,7 @@ class GachaView: UIView {
     }
     
     func selectAction() {
-        delegate?.didSelect(gachaView: self)
+        delegate?.didSelect(cell: self)
     }
     
     func setupWith(pool: GachaPool) {
@@ -129,19 +131,23 @@ class GachaView: UIView {
         sorter.sortList(&cards)
         prepareCardListView()
         setupCardListView(cards)
-        self.addSubview(cardListView)
+        self.contentView.addSubview(cardListView)
         cardListView.fy = gachaInfoView.fy + gachaInfoView.fheight
-        self.fheight = cardListView.fy + cardListView.fheight
+        self.contentView.fheight = cardListView.fy + cardListView.fheight
     }
     
-    func setupWithNoPool() {
+    func setupWithoutPool() {
         self.addSubview(gachaInfoView)
         nameLabel.text = ""
         detailLabel.fwidth = CGSSGlobal.width - 2 * space
         detailLabel.text = NSLocalizedString("未找到有效的卡池数据，请尝试下拉刷新", comment: "模拟抽卡页面")
         detailLabel.sizeToFit()
         gachaInfoView.fheight = detailLabel.fy + detailLabel.fheight
-        self.fheight = gachaInfoView.fheight + gachaInfoView.fy + space
+        self.contentView.fheight = gachaInfoView.fheight + gachaInfoView.fy + space
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize.init(width: CGSSGlobal.width, height: self.contentView.fheight + 1 / CGSSGlobal.scale)
     }
     
     func setSelect() {
@@ -181,8 +187,13 @@ class GachaView: UIView {
         addSubview(cardListView)
         
     }
-
+    
+    var cardIcons = [CGSSCardIconView]()
     func setupCardListView(_ cards: [CGSSCard]) {
+        for icon in cardIcons {
+            icon.removeFromSuperview()
+        }
+        cardIcons.removeAll()
         let column = floor((CGSSGlobal.width - 2 * space) / 50)
         let spaceTotal = CGSSGlobal.width - 2 * space - column * 48
         let interSpace = spaceTotal / (column - 1)
@@ -192,6 +203,7 @@ class GachaView: UIView {
             let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
             icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
             cardListView.addSubview(icon)
+            cardIcons.append(icon)
         }
         if cards.count > 0 {
             cardListView.fheight = ceil(CGFloat(cards.count) / column) * (48 + interSpace) - interSpace + 37 + space
@@ -200,17 +212,28 @@ class GachaView: UIView {
         }
         
     }
-
+    
     func iconClick(iv:CGSSCardIconView) {
         delegate?.iconClick(iv: iv)
     }
     
     func seeMoreCard() {
-        delegate?.seeMoreCard(gachaView: self)
+        delegate?.seeMoreCard(cell: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
     }
     
     /*

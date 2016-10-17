@@ -155,7 +155,7 @@ class Master: FMDatabase {
             while set.next() {
                 let endDate = set.string(forColumn: "end_date")
                 if let date = dateFormatter.date(from: endDate!) {
-                    if now > date && pools.count > 0 {
+                    if now > date && pools.count > 9 {
                         break
                     }
                 }

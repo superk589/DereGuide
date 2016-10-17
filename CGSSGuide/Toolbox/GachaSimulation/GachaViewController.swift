@@ -10,18 +10,28 @@ import UIKit
 
 class GachaViewController: RefreshableTableViewController {
     
-    var gachaViews = [GachaView]()
+    // var gachaViews = [GachaView]()
     var simulateView: GachaSimulateView!
     var gachaPools = [GachaPool]()
     var headerView: UIView!
+    lazy var fixedView: UIView = {
+        let view = UIView.init(frame: self.headerView.bounds)
+        self.tableView.addSubview(view)
+        return view
+    }()
     
-    var poolIndex : Int! {
+    
+    var poolIndex: Int! {
         didSet {
-            gachaViews[poolIndex].setSelect()
+            if let cell = tableView.cellForRow(at: IndexPath.init(row: poolIndex, section: 0)) as? GachaPoolTableViewCell {
+                cell.setSelect()
+            }
         }
         willSet {
             if poolIndex != nil {
-                gachaViews[poolIndex].setDeselect()
+                if let cell = tableView.cellForRow(at: IndexPath.init(row: poolIndex, section: 0)) as? GachaPoolTableViewCell {
+                    cell.setDeselect()
+                }
             }
         }
     }
@@ -40,38 +50,38 @@ class GachaViewController: RefreshableTableViewController {
         simulateView = GachaSimulateView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
         simulateView.delegate = self
         headerView.addSubview(simulateView)
-        
-        tableView.tableHeaderView = headerView
+        headerView.fheight = simulateView.fbottom
+        if let pools = CGSSGameResource.sharedResource.getGachaPool(), pools.count > 0 {
+            self.gachaPools.append(contentsOf: pools)
+            poolIndex = 0
+        }
+        tableView.register(GachaPoolTableViewCell.self, forCellReuseIdentifier: "GachaCell")
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        refresh()
+        tableView.estimatedRowHeight = 225
+        //tableView.tableHeaderView = headerView
+        tableView.tableHeaderView = UIView.init(frame: headerView.bounds)
+        fixedView.addSubview(headerView)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png"), style: .plain, target: self, action: #selector(showOrHideHeader))
         // Do any additional setup after loading the view.
     }
     
+    func showOrHideHeader(barItem: UIBarButtonItem) {
+        headerHidden = !headerHidden
+        if headerHidden {
+            barItem.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png")
+        } else {
+            barItem.image = #imageLiteral(resourceName: "763-arrow-up-toolbar-selected.png")
+        }
+    }
+    
     override func refresh() {
-        wipe()
+        gachaPools.removeAll()
         if let pools = CGSSGameResource.sharedResource.getGachaPool(), pools.count > 0 {
             self.gachaPools.append(contentsOf: pools)
-            for i in 0..<pools.count {
-                let pool = pools[i]
-                let y:CGFloat = i > 0 ? gachaViews[i - 1].fy + gachaViews[i - 1].fheight : 0
-                let gachaView = GachaView.init(frame: CGRect(x: 0, y: y, width: CGSSGlobal.width, height: 0))
-                gachaView.tag = 1000 + i
-                gachaView.delegate = self
-                headerView.addSubview(gachaView)
-                gachaView.setupWith(pool: pool)
-                gachaViews.append(gachaView)
-            }
             poolIndex = 0
-        } else {
-            let gachaView = GachaView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-            gachaView.tag = -1
-            gachaView.delegate = self
-            headerView.addSubview(gachaView)
-            gachaViews.append(gachaView)
-            gachaView.setupWithNoPool()
         }
-        simulateView.fy = gachaViews.last!.fy + gachaViews.last!.fheight
-        headerView.fheight = simulateView.fy + simulateView.fheight + 30
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,12 +104,38 @@ class GachaViewController: RefreshableTableViewController {
         }
     }
     
-    func wipe() {
-        gachaPools.removeAll()
-        for subView in gachaViews {
-            subView.removeFromSuperview()
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return max(gachaPools.count, 1)
+    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return headerView.fheight
+//    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return headerView
+//    }
+//    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GachaCell", for: indexPath) as! GachaPoolTableViewCell
+        if gachaPools.count == 0 {
+            cell.tag = -1
+            cell.delegate = self
+            cell.setupWithoutPool()
+        } else {
+            let pool = gachaPools[indexPath.row]
+            cell.tag = 1000 + indexPath.row
+            cell.delegate = self
+            cell.setupWith(pool: pool)
+            if poolIndex == indexPath.row {
+                cell.setSelect()
+            } else {
+                cell.setDeselect()
+            }
         }
-        gachaViews.removeAll()
+        return cell
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,10 +146,34 @@ class GachaViewController: RefreshableTableViewController {
     override func refresherValueChanged() {
         check(0b1000001)
     }
-
+    
+    // var lastContentOffsetY: CGFloat = 0
+    var headerHidden:Bool = true {
+        didSet {
+            if oldValue != headerHidden {
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.headerView.fy = self.headerHidden ? max(-self.fixedView.fy, -self.headerView.fheight) : max(-self.fixedView.fy, 0)
+                    self.fixedView.fheight = max(self.headerView.fbottom, 0)
+                })
+            }
+        }
+    }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        fixedView.fy = tableView.contentOffset.y + tableView.contentInset.top
+        if !headerHidden {
+            if fixedView.fy < 0 {
+                headerView.fy = -fixedView.fy
+            } else {
+                headerView.fy = 0
+            }
+        } else {
+            headerView.fy = max(-fixedView.fy, -headerView.fheight)
+        }
+        fixedView.fheight = max(headerView.fbottom, 0)
+    }
 }
 
-extension GachaViewController : GachaViewDelegate, GachaSimulateViewDelegate {
+extension GachaViewController : GachaPoolTableViewCellDelegate, GachaSimulateViewDelegate {
     func iconClick(iv: CGSSCardIconView) {
         let cardDV = CardDetailViewController()
         cardDV.card = CGSSDAO.sharedDAO.findCardById(iv.cardId!)
@@ -130,16 +190,17 @@ extension GachaViewController : GachaViewDelegate, GachaSimulateViewDelegate {
         }
     }
     
-    func didSelect(gachaView: GachaView) {
-        if gachaView.tag >= 1000 {
-            poolIndex = gachaView.tag - 1000
+    func didSelect(cell: GachaPoolTableViewCell) {
+        if cell.tag >= 1000 {
+            poolIndex = cell.tag - 1000
         }
     }
     
-    func seeMoreCard(gachaView: GachaView) {
-        let pool = gachaPools[gachaView.tag - 1000]
+    func seeMoreCard(cell: GachaPoolTableViewCell) {
+        let pool = gachaPools[cell.tag - 1000]
         let gachaCardListVC = GachaCardTableViewController()
         gachaCardListVC.defaultCardList = pool.cardList
         self.navigationController?.pushViewController(gachaCardListVC, animated: true)
     }
 }
+

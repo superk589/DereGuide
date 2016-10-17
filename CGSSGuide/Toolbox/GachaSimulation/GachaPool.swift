@@ -69,6 +69,8 @@ class GachaPool {
     var r = [Reward]()
     var new = [Reward]()
     var newssr = [Reward]()
+    var newsr = [Reward]()
+    var newr = [Reward]()
     
     init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[(Int, Int)]) {
         self.id = id
@@ -95,9 +97,17 @@ class GachaPool {
                         ssr.append(rew)
                     }
                 case CGSSRarityTypes.sr:
-                    sr.append(rew)
+                    if rew.rewardRecommand > 0 {
+                        newsr.append(rew)
+                    } else {
+                        sr.append(rew)
+                    }
                 case CGSSRarityTypes.r:
-                    r.append(rew)
+                    if rew.rewardRecommand > 0 {
+                        newr.append(rew)
+                    } else {
+                        r.append(rew)
+                    }
                 default:
                     break
                 }
@@ -124,8 +134,7 @@ class GachaPool {
         
         switch rarity {
         case CGSSRarityTypes.ssr:
-            //目前只有ssr考虑新卡的几率加成(新卡共享40%总的ssr概率)
-            //TODO: 如果有sr和r的新卡几率加成具体数据 再添加
+            //目前ssr新卡占40% sr新卡占20% r新卡占12%
             if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
                 return newssr.random()!.cardId
             } else if ssr.count > 0 {
@@ -134,13 +143,17 @@ class GachaPool {
                 return 0
             }
         case CGSSRarityTypes.sr:
-            if sr.count > 0 {
+            if newsr.count > 0 && CGSSGlobal.isProc(rate: 20000) {
+                return newsr.random()!.cardId
+            } else if sr.count > 0 {
                 return sr.random()!.cardId
             } else {
                 return 0
             }
         case CGSSRarityTypes.r:
-            if r.count > 0 {
+            if newr.count > 0 && CGSSGlobal.isProc(rate: 12000) {
+                return newr.random()!.cardId
+            } else if r.count > 0 {
                 return r.random()!.cardId
             } else {
                 return 0

@@ -37,20 +37,22 @@ class GachaSimulateView: UIView {
         
         resultView = UIView.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
         
-        descLabel = UILabel.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
-        descLabel.font = UIFont.systemFont(ofSize: 14)
-        descLabel.textColor = UIColor.darkGray
-        descLabel.numberOfLines = 0
-        descLabel.text = NSLocalizedString("* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素", comment: "模拟抽卡页面")
-        //descLabel.isHidden = true
-        descLabel.sizeToFit()
+//        descLabel = UILabel.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
+//        descLabel.font = UIFont.systemFont(ofSize: 14)
+//        descLabel.textColor = UIColor.darkGray
+//        descLabel.numberOfLines = 0
+//        descLabel.text = NSLocalizedString("* 当期新SSR占全部SSR的40%\n* 未计算当期新SR、R的概率提高因素", comment: "模拟抽卡页面")
+//        //descLabel.isHidden = true
+//        descLabel.sizeToFit()
         
         
         self.addSubview(singleButton)
         self.addSubview(tenButton)
         self.addSubview(resultView)
-        self.addSubview(descLabel)
-        self.fheight = descLabel.fy + descLabel.fheight
+        //self.addSubview(descLabel)
+        //self.fheight = descLabel.fy + descLabel.fheight + space
+        self.fheight = tenButton.fbottom + space
+        self.backgroundColor = CGSSGlobal.coolColor.withAlphaComponent(0.1)
     }
     
     func clickTen() {
