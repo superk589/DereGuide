@@ -25,6 +25,7 @@ class GachaViewController: RefreshableTableViewController {
         didSet {
             if let cell = tableView.cellForRow(at: IndexPath.init(row: poolIndex, section: 0)) as? GachaPoolTableViewCell {
                 cell.setSelect()
+                headerHidden = false
             }
         }
         willSet {
@@ -68,11 +69,6 @@ class GachaViewController: RefreshableTableViewController {
     
     func showOrHideHeader(barItem: UIBarButtonItem) {
         headerHidden = !headerHidden
-        if headerHidden {
-            barItem.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png")
-        } else {
-            barItem.image = #imageLiteral(resourceName: "763-arrow-up-toolbar-selected.png")
-        }
     }
     
     override func refresh() {
@@ -86,9 +82,9 @@ class GachaViewController: RefreshableTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(renewAnimation), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(renewAnimation), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
-        renewAnimation()
+        //renewAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,7 +146,13 @@ class GachaViewController: RefreshableTableViewController {
     // var lastContentOffsetY: CGFloat = 0
     var headerHidden:Bool = true {
         didSet {
+            lastOffsetY = tableView.contentOffset.y
             if oldValue != headerHidden {
+                if headerHidden {
+                    navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png")
+                } else {
+                    navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "763-arrow-up-toolbar-selected.png")
+                }
                 UIView.animate(withDuration: 0.25, animations: {
                     self.headerView.fy = self.headerHidden ? max(-self.fixedView.fy, -self.headerView.fheight) : max(-self.fixedView.fy, 0)
                     self.fixedView.fheight = max(self.headerView.fbottom, 0)
@@ -158,8 +160,12 @@ class GachaViewController: RefreshableTableViewController {
             }
         }
     }
+    var lastOffsetY:CGFloat = 0
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         fixedView.fy = tableView.contentOffset.y + tableView.contentInset.top
+        if abs(lastOffsetY - tableView.contentOffset.y) > headerView.fheight {
+            headerHidden = true
+        }
         if !headerHidden {
             if fixedView.fy < 0 {
                 headerView.fy = -fixedView.fy
@@ -191,8 +197,14 @@ extension GachaViewController : GachaPoolTableViewCellDelegate, GachaSimulateVie
     }
     
     func didSelect(cell: GachaPoolTableViewCell) {
-        if cell.tag >= 1000 {
-            poolIndex = cell.tag - 1000
+        let index = cell.tag - 1000
+        if index >= 0 {
+            poolIndex = index
+            
+            let rect = tableView.rectForRow(at: IndexPath.init(row: index, section: 0))
+            if  rect.origin.y <= fixedView.fbottom {
+                tableView.setContentOffset(CGPoint.init(x: 0, y: rect.origin.y - fixedView.fheight - tableView.contentInset.top), animated: true)
+            }
         }
     }
     

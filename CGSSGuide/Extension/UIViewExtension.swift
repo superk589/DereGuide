@@ -103,6 +103,7 @@ extension UIView {
         moveAni.duration = 8
         moveAni.repeatCount = 1e50
         moveAni.calculationMode = "cubicPaced"
+        moveAni.isRemovedOnCompletion = false
 
         let opacityAni = CABasicAnimation.init(keyPath: "opacity")
         opacityAni.fromValue = 1
@@ -110,6 +111,7 @@ extension UIView {
         opacityAni.duration = 4
         opacityAni.repeatCount = 1e50
         opacityAni.autoreverses = true
+        opacityAni.isRemovedOnCompletion = false
         
         let scaleAni = CABasicAnimation.init(keyPath: "transform.scale")
         scaleAni.fromValue = scale * 0.6
@@ -117,6 +119,7 @@ extension UIView {
         scaleAni.duration = 4
         scaleAni.repeatCount = 1e50
         scaleAni.autoreverses = true
+        scaleAni.isRemovedOnCompletion = false
         
         for i in 0..<glowLayers.count {
             let glowLayer = glowLayers[i]

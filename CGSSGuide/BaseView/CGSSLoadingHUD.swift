@@ -8,10 +8,49 @@
 
 import UIKit
 
+class LoadingImageView: UIImageView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        image = UIImage.init(named: "loading")
+        startAnimating()
+    }
+    
+    var isRotating = false
+    var hideWhenStopped = false
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func startAnimating() {
+        if isRotating {
+            return
+        }
+        let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
+        rotateAni.fromValue = 0
+        rotateAni.toValue = M_PI * 2
+        rotateAni.duration = 4
+        rotateAni.repeatCount = 1e50
+        rotateAni.isRemovedOnCompletion = false
+        self.layer.add(rotateAni, forKey: "rotate")
+        isRotating = true
+        isHidden = false
+    }
+    
+    override func stopAnimating() {
+        super.stopAnimating()
+        if hideWhenStopped {
+            self.isHidden = true
+        }
+        self.layer.removeAnimation(forKey: "rotate")
+        isRotating = false
+    }
+}
+
 
 class CGSSLoadingHUD: UIView {
 
-    var iv: UIImageView!
+    var iv: LoadingImageView!
     var titleLable:UILabel!
     
     init() {
@@ -24,7 +63,7 @@ class CGSSLoadingHUD: UIView {
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         self.addSubview(contentView)
-        iv = UIImageView.init(frame: CGRect.init(x: 35, y: 20, width: 50, height: 50))
+        iv = LoadingImageView.init(frame: CGRect.init(x: 35, y: 20, width: 50, height: 50))
         titleLable = UILabel.init(frame: CGRect.init(x: 0, y: 75, width: 120, height: 25))
         titleLable.textAlignment = .center
         titleLable.adjustsFontSizeToFitWidth = true
@@ -35,34 +74,35 @@ class CGSSLoadingHUD: UIView {
         contentView.addSubview(iv)
         contentView.addSubview(titleLable)
         self.alpha = 0
-        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    func becomeActive() {
-        if self.alpha == 1 {
-            iv.layer.removeAnimation(forKey: "rotate")
-            self.startAnimate()
-        }
-    }
-    
-    func startAnimate() {
-        //superview?.bringSubview(toFront: self)
-        self.alpha = 1
-        let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
-        rotateAni.fromValue = 0
-        rotateAni.toValue = M_PI * 2
-        rotateAni.duration = 4
-        rotateAni.repeatCount = 1e50
-        iv.layer.add(rotateAni, forKey: "rotate")
-        
-    }
-    func stopAnimate() {
-        self.alpha = 0
-        iv.layer.removeAnimation(forKey: "rotate")
-    }
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
+//    func becomeActive() {
+//        if self.alpha == 1 {
+//            iv.layer.removeAnimation(forKey: "rotate")
+//            self.startAnimate()
+//        }
+//    }
+//    
+//    func startAnimate() {
+//        //superview?.bringSubview(toFront: self)
+//        self.alpha = 1
+//        let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
+//        rotateAni.fromValue = 0
+//        rotateAni.toValue = M_PI * 2
+//        rotateAni.duration = 4
+//        rotateAni.repeatCount = 1e50
+//        iv.layer.add(rotateAni, forKey: "rotate")
+//        rotateAni.isRemovedOnCompletion = false
+//        
+//    }
+//    func stopAnimate() {
+//        self.alpha = 0
+//        iv.layer.removeAnimation(forKey: "rotate")
+//    }
     
     func setTitle(title:String) {
         self.titleLable.text = title
@@ -96,9 +136,9 @@ class CGSSLoadingHUDManager {
                 window?.bringSubview(toFront: subview)
             }
         }
-        hud.startAnimate()
+        hud.alpha = 1
     }
     func hide() {
-        hud.stopAnimate()
+        hud.alpha = 0
     }
 }
