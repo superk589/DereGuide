@@ -54,8 +54,8 @@ class BirthdayCenter: NSObject {
     }
     
     func scheduleNotifications() {
-        self.removeNotification()
         DispatchQueue.global(qos: .userInitiated).async {
+            self.removeNotification()
             for char in self.getRecent(1, endDays: 30) {
                 let localNotification = UILocalNotification()
                 localNotification.fireDate = self.getNextBirthday(char)
@@ -128,12 +128,10 @@ class BirthdayCenter: NSObject {
     }
     
     func removeNotification() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let notifications = UIApplication.shared.scheduledLocalNotifications {
-                for notification in notifications {
-                    if notification.category == "Birthday" {
-                        UIApplication.shared.cancelLocalNotification(notification)
-                    }
+        if let notifications = UIApplication.shared.scheduledLocalNotifications {
+            for notification in notifications {
+                if notification.category == "Birthday" {
+                    UIApplication.shared.cancelLocalNotification(notification)
                 }
             }
         }

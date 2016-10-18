@@ -101,7 +101,7 @@ extension UIView {
         let moveAni = CAKeyframeAnimation.init(keyPath: "position")
         moveAni.path = movePath.cgPath
         moveAni.duration = 8
-        moveAni.repeatCount = 1e50
+        moveAni.repeatCount = .infinity
         moveAni.calculationMode = "cubicPaced"
         moveAni.isRemovedOnCompletion = false
 
@@ -109,7 +109,7 @@ extension UIView {
         opacityAni.fromValue = 1
         opacityAni.toValue = 0.3
         opacityAni.duration = 4
-        opacityAni.repeatCount = 1e50
+        opacityAni.repeatCount = .infinity
         opacityAni.autoreverses = true
         opacityAni.isRemovedOnCompletion = false
         
@@ -117,7 +117,7 @@ extension UIView {
         scaleAni.fromValue = scale * 0.6
         scaleAni.toValue = scale * 0.4
         scaleAni.duration = 4
-        scaleAni.repeatCount = 1e50
+        scaleAni.repeatCount = .infinity
         scaleAni.autoreverses = true
         scaleAni.isRemovedOnCompletion = false
         

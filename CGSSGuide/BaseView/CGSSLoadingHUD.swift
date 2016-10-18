@@ -30,7 +30,7 @@ class LoadingImageView: UIImageView {
         rotateAni.fromValue = 0
         rotateAni.toValue = M_PI * 2
         rotateAni.duration = 4
-        rotateAni.repeatCount = 1e50
+        rotateAni.repeatCount = .infinity
         rotateAni.isRemovedOnCompletion = false
         self.layer.add(rotateAni, forKey: "rotate")
         isRotating = true

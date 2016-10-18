@@ -200,7 +200,6 @@ extension GachaViewController : GachaPoolTableViewCellDelegate, GachaSimulateVie
         let index = cell.tag - 1000
         if index >= 0 {
             poolIndex = index
-            
             let rect = tableView.rectForRow(at: IndexPath.init(row: index, section: 0))
             if  rect.origin.y <= fixedView.fbottom {
                 tableView.setContentOffset(CGPoint.init(x: 0, y: rect.origin.y - fixedView.fheight - tableView.contentInset.top), animated: true)
