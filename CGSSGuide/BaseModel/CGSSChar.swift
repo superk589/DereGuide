@@ -64,6 +64,10 @@ extension CGSSChar {
         return charaId
     }
     
+    dynamic var sBirthday: Int {
+        return birthMonth * 100 + birthDay
+    }
+    
     // 一些属性的特殊转换
     var handToString: String {
         return CGSSGameResource.sharedResource.getTextData(category: 5, index: hand - 3000)

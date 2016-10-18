@@ -37,7 +37,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     var filter: CGSSCharFilter!
     var sorter: CGSSSorter!
     // let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
-    var sorterString = ["sHeight", "sWeight", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId"]
+    var sorterString = ["sHeight", "sWeight", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId", "sBirthday"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +97,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
             
         }
         
-        for i in 0...1 {
+        for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
             let index = sorterString.index(of: sorter.att)
             button.isSelected = (index == i + 6)
@@ -157,7 +157,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
             button.addTarget(self, action: #selector(sortingButtonsAction), for: .touchUpInside)
         }
         
-        for i in 0...1 {
+        for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 3000 + i
