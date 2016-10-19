@@ -8,16 +8,16 @@
 
 import UIKit
 import SDWebImage
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
+//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l < r
+//  case (nil, _?):
+//    return true
+//  default:
+//    return false
+//  }
+//}
 
 
 protocol CGSSImageViewDelegate: class {
@@ -34,8 +34,8 @@ class CGSSImageView: UIImageView {
     var isTapped: Bool
     // 为了两次点击之后能恢复到原始大小 需要保存原始frame
     var originFrame: CGRect!
-    var progressIndicator: UIProgressView?
-    var activityIndicator: UIActivityIndicatorView?
+    var progressIndicator: UIProgressView!
+    var activityIndicator: UIActivityIndicatorView!
     // var retryButton:UIButton?
     var isFinishedLoading: Bool = false
     // var isFailed = false
@@ -60,11 +60,11 @@ class CGSSImageView: UIImageView {
     
     func setIndicator() {
         activityIndicator = UIActivityIndicatorView()
-        activityIndicator?.center = self.center
-        activityIndicator?.hidesWhenStopped = true
+        activityIndicator.center = self.center
+        activityIndicator.hidesWhenStopped = true
         
         progressIndicator = UIProgressView()
-        progressIndicator?.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 0)
+        progressIndicator.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 0)
         
 //        retryButton = UIButton()
 //        retryButton?.setTitle("加载失败 请点击重试", forState: .Normal)
@@ -88,16 +88,16 @@ class CGSSImageView: UIImageView {
         
     }
     func hideIndicator() {
-        progressIndicator?.isHidden = true
-        activityIndicator?.isHidden = true
+        progressIndicator.isHidden = true
+        activityIndicator.isHidden = true
         // retryButton?.hidden = true
     }
     func showIndicator() {
-        if progressIndicator?.progress < 1 && !isFinishedLoading {
-            progressIndicator?.isHidden = false
+        if progressIndicator.progress < 1 && !isFinishedLoading {
+            progressIndicator.isHidden = false
         }
-        if let x = activityIndicator?.isAnimating , x {
-            activityIndicator?.isHidden = false
+        if activityIndicator.isAnimating {
+            activityIndicator.isHidden = false
         }
 //        if isFailed {
 //            retryButton?.hidden = false

@@ -160,7 +160,9 @@ public class CGSSGlobal: NSObject {
         return LanguageType.init(identifier: Locale.current.identifier)
     }
     
-    static let presetBackValue = 103463
+    // max = 15921 + 500 + 500 + 220 
+    // ceil(0.5 × max × 1.3) * 10
+    static let presetBackValue = 111420
     
 }
 

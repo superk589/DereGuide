@@ -9,26 +9,26 @@
 import Foundation
 import SwiftyJSON
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
+//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l < r
+//  case (nil, _?):
+//    return true
+//  default:
+//    return false
+//  }
+//}
 
 class CGSSBeatmapNote: NSObject, NSCoding {
-    var id: Int?
-    var sec: Float?
-    var type: Int?
-    var startPos: Int?
-    var finishPos: Int?
-    var status: Int?
-    var sync: Int?
-    var groupId: Int?
+    var id: Int!
+    var sec: Float!
+    var type: Int!
+    var startPos: Int!
+    var finishPos: Int!
+    var status: Int!
+    var sync: Int!
+    var groupId: Int!
     
     // 0 no press, 1 start, 2 end
     var longPressType = 0

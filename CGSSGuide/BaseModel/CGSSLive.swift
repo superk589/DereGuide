@@ -164,17 +164,17 @@ extension CGSSLive {
 }
 
 open class CGSSLive: CGSSBaseModel {
-    var id: Int?
-    var musicId: Int?
-    var musicTitle: String?
-    var type: Int?
-    var liveDetailId: [Int]?
-    var eventType: Int?
-    var debut: Int?
-    var regular: Int?
-    var pro: Int?
-    var master: Int?
-    var masterPlus: Int?
+    var id: Int!
+    var musicId: Int!
+    var musicTitle: String!
+    var type: Int!
+    var liveDetailId: [Int]!
+    var eventType: Int!
+    var debut: Int!
+    var regular: Int!
+    var pro: Int!
+    var master: Int!
+    var masterPlus: Int!
     
     func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {
         return CGSSDAO.sharedDAO.findBeatmapById(self.id!, diffId: diff)
@@ -208,21 +208,20 @@ open class CGSSLive: CGSSBaseModel {
         
     }
     init(json: JSON) {
-        self.id = json["id"].int
-        self.musicId = json["musicId"].int
-        self.musicTitle = json["musicTitle"].string
-        self.type = json["type"].int
+        self.id = json["id"].intValue
+        self.musicId = json["musicId"].intValue
+        self.musicTitle = json["musicTitle"].stringValue
+        self.type = json["type"].intValue
         self.liveDetailId = [Int]()
         for i in json["liveDetailId"].arrayValue {
             self.liveDetailId?.append(i.intValue)
         }
-        self.eventType = json["eventType"].int
-        self.debut = json["debut"].int
-        self.regular = json["regular"].int
-        self.pro = json["pro"].int
-        self.master = json["master"].int
-        self.masterPlus = json["masterPlus"].int
-        
+        self.eventType = json["eventType"].intValue
+        self.debut = json["debut"].intValue
+        self.regular = json["regular"].intValue
+        self.pro = json["pro"].intValue
+        self.master = json["master"].intValue
+        self.masterPlus = json["masterPlus"].intValue
         super.init()
     }
     
