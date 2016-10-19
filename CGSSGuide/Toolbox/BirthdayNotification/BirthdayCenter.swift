@@ -83,7 +83,8 @@ class BirthdayCenter: NSObject {
             }
             let newdate = getNowDateTruncateHours()
             let date = getNextBirthday(sortedChars[index])
-            let result = (gregorian as NSCalendar).components(NSCalendar.Unit.day, from: newdate!, to: date, options: NSCalendar.Options(rawValue: 0))
+            let result = gregorian.dateComponents([Calendar.Component.day], from: newdate!, to: date)
+            //let result = (gregorian as NSCalendar).components(NSCalendar.Unit.day, from: newdate!, to: date, options: NSCalendar.Options(rawValue: 0))
             if result.day! < startDays {
                 continue
             } else if result.day! >= startDays && result.day! <= endDays {
@@ -100,7 +101,8 @@ class BirthdayCenter: NSObject {
         let timeZone = UserDefaults.standard.birthdayTimeZone
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         gregorian.timeZone = timeZone
-        let nowComp = (gregorian as NSCalendar).components(NSCalendar.Unit.init(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue), from: nowDate)
+        let nowComp = gregorian.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: nowDate)
+        //let nowComp = (gregorian as NSCalendar).components(NSCalendar.Unit.init(rawValue: NSCalendar.Unit.year.rawValue | NSCalendar.Unit.month.rawValue | NSCalendar.Unit.day.rawValue), from: nowDate)
         return nowComp
     }
     
