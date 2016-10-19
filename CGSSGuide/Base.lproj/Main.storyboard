@@ -1330,6 +1330,10 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="体重"/>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUU-3X-kbj">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <state key="normal" title="BMI"/>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-AO-gGy">
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="年龄"/>
@@ -1338,14 +1342,17 @@
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="YRu-Ua-N5X" secondAttribute="bottom" id="B36-Zh-28j"/>
+                                                        <constraint firstAttribute="bottom" secondItem="IUU-3X-kbj" secondAttribute="bottom" id="HVQ-oC-Jk0"/>
+                                                        <constraint firstItem="IUU-3X-kbj" firstAttribute="leading" secondItem="HHI-xd-BPp" secondAttribute="trailing" constant="15" id="JEw-tS-GzG"/>
                                                         <constraint firstAttribute="bottom" secondItem="6Jq-AO-gGy" secondAttribute="bottom" id="MqP-jB-lDB"/>
                                                         <constraint firstItem="YRu-Ua-N5X" firstAttribute="leading" secondItem="QsK-up-LXd" secondAttribute="leading" constant="8" id="RRB-8E-0Cd"/>
                                                         <constraint firstItem="6Jq-AO-gGy" firstAttribute="top" secondItem="QsK-up-LXd" secondAttribute="top" id="UXS-MQ-u7U"/>
                                                         <constraint firstAttribute="bottom" secondItem="HHI-xd-BPp" secondAttribute="bottom" id="YBp-XL-n6o"/>
                                                         <constraint firstItem="YRu-Ua-N5X" firstAttribute="top" secondItem="QsK-up-LXd" secondAttribute="top" id="dsB-r1-Tj1"/>
+                                                        <constraint firstItem="6Jq-AO-gGy" firstAttribute="leading" secondItem="IUU-3X-kbj" secondAttribute="trailing" constant="15" id="gQg-yN-FXH"/>
                                                         <constraint firstItem="HHI-xd-BPp" firstAttribute="leading" secondItem="YRu-Ua-N5X" secondAttribute="trailing" constant="15" id="gkj-XL-WeV"/>
                                                         <constraint firstItem="HHI-xd-BPp" firstAttribute="top" secondItem="QsK-up-LXd" secondAttribute="top" id="jtG-cv-FyY"/>
-                                                        <constraint firstItem="6Jq-AO-gGy" firstAttribute="leading" secondItem="HHI-xd-BPp" secondAttribute="trailing" constant="15" id="lvb-cH-yQF"/>
+                                                        <constraint firstItem="IUU-3X-kbj" firstAttribute="top" secondItem="QsK-up-LXd" secondAttribute="top" id="w2g-g0-BdH"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

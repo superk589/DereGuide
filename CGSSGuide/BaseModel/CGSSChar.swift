@@ -45,6 +45,11 @@ extension CGSSChar {
     dynamic var sWeight: Int {
         return weight
     }
+    dynamic var BMI: Float {
+        let fw = Float(weight)
+        let fh = Float(height) / 100
+        return fw / fh / fh
+    }
     dynamic var sAge: Int {
         return age
     }

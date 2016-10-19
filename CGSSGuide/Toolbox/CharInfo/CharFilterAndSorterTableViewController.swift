@@ -37,7 +37,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     var filter: CGSSCharFilter!
     var sorter: CGSSSorter!
     // let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
-    var sorterString = ["sHeight", "sWeight", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId", "sBirthday"]
+    var sorterString = ["sHeight", "sWeight", "BMI", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId", "sBirthday"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         let descendingButton = ascendingStackView.subviews[0] as! UIButton
         descendingButton.isSelected = !sorter.ascending
         
-        for i in 0...2 {
+        for i in 0...3 {
             let button = basicStackView.subviews[i] as! UIButton
             let index = sorterString.index(of: sorter.att)
             button.isSelected = (index == i)
@@ -93,14 +93,14 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         for i in 0...2 {
             let button = threeSizeStackView.subviews[i] as! UIButton
             let index = sorterString.index(of: sorter.att)
-            button.isSelected = (index == i + 3)
+            button.isSelected = (index == i + 4)
             
         }
         
         for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
             let index = sorterString.index(of: sorter.att)
-            button.isSelected = (index == i + 6)
+            button.isSelected = (index == i + 7)
         }
         
     }
@@ -143,7 +143,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         descendingButton.addTarget(self, action: #selector(descendingAction), for: .touchUpInside)
         
         sortingButtons = [UIButton]()
-        for i in 0...2 {
+        for i in 0...3 {
             let button = basicStackView.subviews[i] as! UIButton
             sortingButtons.append(button)
             button.tag = 1000 + i
