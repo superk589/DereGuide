@@ -113,13 +113,13 @@ extension CGSSLive {
     func getLiveIconName() -> String {
         switch type! {
         case 1:
-            return "song_cute"
+            return "song-cute"
         case 2:
-            return "song_cool"
+            return "song-cool"
         case 3:
-            return "song_passion"
+            return "song-passion"
         default:
-            return "song_all"
+            return "song-all"
         }
         
     }
