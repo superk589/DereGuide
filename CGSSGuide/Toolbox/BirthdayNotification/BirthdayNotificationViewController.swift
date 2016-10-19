@@ -185,7 +185,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         if tableView == headerView {
             return 44
         } else {
-            return presentChars[(indexPath as NSIndexPath).section].count > 0 ? 89 : 0
+            return presentChars[indexPath.section].count > 0 ? 89 : 0
         }
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -207,11 +207,11 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == headerView {
-            return headerCells[(indexPath as NSIndexPath).row]
+            return headerCells[indexPath.row]
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "BirthdayNotificationCell", for: indexPath) as! BirthdayNotificationTableViewCell
-            cell.initWith(presentChars[(indexPath as NSIndexPath).section])
+            cell.initWith(presentChars[indexPath.section])
             cell.cv.contentInset.left = cell.layoutMargins.left - 10
             cell.cv.reloadData()
             cell.delegate = self

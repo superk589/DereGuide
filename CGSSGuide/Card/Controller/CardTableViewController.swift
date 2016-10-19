@@ -53,7 +53,7 @@ class CardTableViewController: BaseCardTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = cardList[(indexPath as NSIndexPath).row]
+        cardDetailVC.card = cardList[indexPath.row]
         // 打开谱面时 隐藏tabbar
         cardDetailVC.hidesBottomBarWhenPushed = true
         

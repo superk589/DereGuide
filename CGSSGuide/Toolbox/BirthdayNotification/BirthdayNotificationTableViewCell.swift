@@ -65,7 +65,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BirthdayCollectionViewCell", for: indexPath) as! BirthdayCollectionViewCell
-        cell.initWithChar(chars[(indexPath as NSIndexPath).item])
+        cell.initWithChar(chars[indexPath.item])
         cell.delegate = self
         return cell
     }

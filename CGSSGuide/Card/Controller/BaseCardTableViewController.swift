@@ -60,7 +60,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         dao.sortListInPlace(&self.cardList!, sorter: sorter)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
-        // tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     override func refresherValueChanged() {
         check(0b1000011)
@@ -116,7 +116,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardTableViewCell
         
-        let row = (indexPath as NSIndexPath).row
+        let row = indexPath.row
         let card = cardList[row]
         if let name = card.chara?.name, let conventional = card.chara?.conventional {
             cell.cardNameLabel.text = name + "  " + conventional
@@ -161,7 +161,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.selectCard(cardList[(indexPath as NSIndexPath).row])
+        delegate?.selectCard(cardList[indexPath.row])
     }
     
     func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {

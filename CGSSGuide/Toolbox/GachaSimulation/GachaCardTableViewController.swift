@@ -36,7 +36,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
         dao.sortListInPlace(&self.cardList!, sorter: sorter)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
-        // tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = cardList[(indexPath as NSIndexPath).row]
+        cardDetailVC.card = cardList[indexPath.row]
         cardDetailVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }

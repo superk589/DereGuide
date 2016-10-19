@@ -57,17 +57,9 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamTableViewCell
-        cell.initWith(teams[(indexPath as NSIndexPath).row])
+        cell.initWith(teams[indexPath.row])
         return cell
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .delete
@@ -76,7 +68,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            CGSSTeamManager.defaultManager.removeATeamAtIndex((indexPath as NSIndexPath).row)
+            CGSSTeamManager.defaultManager.removeATeamAtIndex(indexPath.row)
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -86,7 +78,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
-        let team = teams[(indexPath as NSIndexPath).row]
+        let team = teams[indexPath.row]
         if team.validateCardRef() {
             let teamDVC = TeamDetailViewController()
             teamDVC.team = team
@@ -106,29 +98,4 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     func save(_ team: CGSSTeam) {
         CGSSTeamManager.defaultManager.addATeam(team)
     }
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

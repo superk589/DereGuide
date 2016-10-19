@@ -72,7 +72,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         dao.sortListInPlace(&charList!, sorter: sorter)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
-        // tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     
     func filterAction() {
@@ -117,7 +117,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharCell", for: indexPath) as! CharInfoTableViewCell
-        cell.setup(charList[(indexPath as NSIndexPath).row])
+        cell.setup(charList[indexPath.row])
         return cell
     }
     
@@ -133,7 +133,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let CharDVC = CharDetailViewController()
-        CharDVC.char = charList[(indexPath as NSIndexPath).row]
+        CharDVC.char = charList[indexPath.row]
         CharDVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(CharDVC, animated: true)
     }

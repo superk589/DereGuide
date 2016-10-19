@@ -149,7 +149,7 @@ class GachaViewController: RefreshableTableViewController {
             lastOffsetY = tableView.contentOffset.y
             if oldValue != headerHidden {
                 if headerHidden {
-                    navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png")
+                    navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected")
                 } else {
                     navigationItem.rightBarButtonItem?.image = #imageLiteral(resourceName: "763-arrow-up-toolbar-selected.png")
                 }

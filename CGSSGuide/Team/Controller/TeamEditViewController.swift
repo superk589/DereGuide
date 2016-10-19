@@ -121,7 +121,7 @@ class TeamEditViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // print(indexPath.row, cells[indexPath.row].contentView.fheight)
         // 如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
-        return max(cells[(indexPath as NSIndexPath).row].contentView.fheight, 96) + 1 / UIScreen.main.scale
+        return max(cells[indexPath.row].contentView.fheight, 96) + 1 / UIScreen.main.scale
     }
     
     func saveTeam() {
@@ -149,7 +149,7 @@ class TeamEditViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = cells[(indexPath as NSIndexPath).row]
+        let cell = cells[indexPath.row]
         if getMemberByIndex(indexPath.row) != nil {
             cell.selectionStyle = .none
         } else {
@@ -161,7 +161,7 @@ class TeamEditViewController: BaseTableViewController {
     var teamCardVC: TeamCardSelectTableViewController?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if getMemberByIndex(indexPath.row) == nil {
-            lastIndex = (indexPath as NSIndexPath).row
+            lastIndex = indexPath.row
             if teamCardVC == nil {
                 teamCardVC = TeamCardSelectTableViewController()
                 teamCardVC!.delegate = self
