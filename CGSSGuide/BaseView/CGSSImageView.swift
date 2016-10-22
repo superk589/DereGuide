@@ -35,7 +35,9 @@ class CGSSImageView: UIImageView {
     // 为了两次点击之后能恢复到原始大小 需要保存原始frame
     var originFrame: CGRect!
     var progressIndicator: UIProgressView!
-    var activityIndicator: UIActivityIndicatorView!
+    
+    // !!! activityIndicatorView will be nil after stopAnimating()
+    var activityIndicator: UIActivityIndicatorView?
     // var retryButton:UIButton?
     var isFinishedLoading: Bool = false
     // var isFailed = false
@@ -60,8 +62,8 @@ class CGSSImageView: UIImageView {
     
     func setIndicator() {
         activityIndicator = UIActivityIndicatorView()
-        activityIndicator.center = self.center
-        activityIndicator.hidesWhenStopped = true
+        activityIndicator?.center = self.center
+        activityIndicator?.hidesWhenStopped = true
         
         progressIndicator = UIProgressView()
         progressIndicator.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 0)
@@ -89,15 +91,15 @@ class CGSSImageView: UIImageView {
     }
     func hideIndicator() {
         progressIndicator.isHidden = true
-        activityIndicator.isHidden = true
+        activityIndicator?.isHidden = true
         // retryButton?.hidden = true
     }
     func showIndicator() {
         if progressIndicator.progress < 1 && !isFinishedLoading {
             progressIndicator.isHidden = false
         }
-        if activityIndicator.isAnimating {
-            activityIndicator.isHidden = false
+        if activityIndicator?.isAnimating ?? false {
+            activityIndicator?.isHidden = false
         }
 //        if isFailed {
 //            retryButton?.hidden = false
