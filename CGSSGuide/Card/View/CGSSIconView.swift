@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import ZYCornerRadius
+import ZKCornerRadiusView
 
 protocol CGSSIconViewDelegate: class {
     func iconClick(_ iv: CGSSIconView)
 }
 
-class CGSSIconView: UIImageView {
+class CGSSIconView: ZKCornerRadiusView {
     
     var tap: UITapGestureRecognizer?
     var action: Selector?
@@ -27,7 +27,7 @@ class CGSSIconView: UIImageView {
     }
     
     func prepare() {
-        zy_cornerRadiusAdvance(self.fheight / 8, rectCornerType: .allCorners)
+        zk_cornerRadius = self.fheight / 8
 //        layer.cornerRadius = 6
 //        layer.masksToBounds = true
         isUserInteractionEnabled = true

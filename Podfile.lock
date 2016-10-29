@@ -1,5 +1,5 @@
 PODS:
-  - ASValueTrackingSlider (0.11.2)
+  - ASValueTrackingSlider (0.12.1)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -8,41 +8,27 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SwiftyJSON (2.3.2)
-  - ZYCornerRadius (1.0.1)
+  - SwiftyJSON (3.1.1)
+  - ZKCornerRadiusView (0.0.3)
 
 DEPENDENCIES:
   - ASValueTrackingSlider
   - FMDB
   - lz4
-  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift.git`)
+  - ReachabilitySwift
   - SDWebImage
-  - SwiftyJSON (from `https://github.com/IBM-Swift/SwiftyJSON.git`)
-  - ZYCornerRadius
-
-EXTERNAL SOURCES:
-  ReachabilitySwift:
-    :git: https://github.com/ashleymills/Reachability.swift.git
-  SwiftyJSON:
-    :git: https://github.com/IBM-Swift/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  ReachabilitySwift:
-    :commit: 330a52b5c54523422bf3c280df01b2b635fc2188
-    :git: https://github.com/ashleymills/Reachability.swift.git
-  SwiftyJSON:
-    :commit: 73b523a107b798021ca9af74b5f7c20e435c8809
-    :git: https://github.com/IBM-Swift/SwiftyJSON.git
+  - SwiftyJSON
+  - ZKCornerRadiusView
 
 SPEC CHECKSUMS:
-  ASValueTrackingSlider: 45c9f78252da60de01d8f2afe869aaf90dd978d9
+  ASValueTrackingSlider: 5261de3fcf00adb339efc93885e8f0bc99e703cd
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  ZYCornerRadius: 94720e8722acf30de5b73ae185ffe56a2240f6a3
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  ZKCornerRadiusView: e8093858984406cb5ade2e09e1bc25254f20647d
 
-PODFILE CHECKSUM: 4521d8f87e2f47e410f6d713e649e54929780d7d
+PODFILE CHECKSUM: de45219059281d4af034db35c1d0052e9f5a4ac1
 
-COCOAPODS: 1.1.0.beta.2
+COCOAPODS: 1.1.1

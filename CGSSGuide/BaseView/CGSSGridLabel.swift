@@ -9,7 +9,7 @@
 import UIKit
 
 private class Label: UILabel {
-    private override func drawText(in rect: CGRect) {
+    override func drawText(in rect: CGRect) {
         let inset = UIEdgeInsetsMake(1, 2, 1, 2)
         super.drawText(in:UIEdgeInsetsInsetRect(rect, inset))
     }

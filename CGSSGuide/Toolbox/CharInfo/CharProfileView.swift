@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ZYCornerRadius
+import ZKCornerRadiusView
 
 //带描边的Label
 class CharProfileDescLabel: UILabel {
@@ -35,7 +35,7 @@ class CharProfileDescLabel: UILabel {
 
 class CharProfileDescView: UIView {
     var label: CharProfileDescLabel!
-    var iv: UIImageView!
+    var iv: ZKCornerRadiusView!
     var text: String? {
         get {
             return self.label.text
@@ -46,7 +46,7 @@ class CharProfileDescView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        iv = UIImageView.init(frame: self.bounds)
+        iv = ZKCornerRadiusView.init(frame: self.bounds)
         addSubview(iv)
         label = CharProfileDescLabel.init(frame: CGRect(x: 5, y: 0, width: frame.size.width - 10, height: frame.size.height))
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -55,7 +55,7 @@ class CharProfileDescView: UIView {
         label.textColor = UIColor.white
         label.textAlignment = .center
         
-        iv.zy_cornerRadiusAdvance(6, rectCornerType: .allCorners)
+        iv.zk_cornerRadius = 6
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -800,7 +800,7 @@ class AdvanceBeatmap {
         let path = UIBezierPath.init(rect: CGRect(x: x - r, y: y, width: r * 2, height: y1 - y))
         return path
     }
-    
+
     private func pathForSectionLine(_ positionY: CGFloat) -> UIBezierPath
     {
         let path = UIBezierPath()
@@ -839,8 +839,6 @@ class AdvanceBeatmap {
     func getPointY(_ sec: Float) -> CGFloat {
         return totalHeight - CGFloat(sec - self.beatmap.preSeconds!) * secScale - heightInset
     }
-
-    
 }
 
 

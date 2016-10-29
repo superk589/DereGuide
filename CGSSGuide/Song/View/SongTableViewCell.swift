@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import ZYCornerRadius
+import ZKCornerRadiusView
 
 class SongDiffView: UIView {
     var label: UILabel!
-    var iv: UIImageView!
+    var iv: ZKCornerRadiusView!
     var text: String? {
         get {
             return self.label.text
@@ -22,7 +22,7 @@ class SongDiffView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        iv = UIImageView.init(frame: self.bounds)
+        iv = ZKCornerRadiusView.init(frame: self.bounds)
         addSubview(iv)
         label = UILabel.init(frame: CGRect(x: 5, y: 0, width: frame.size.width - 10, height: frame.size.height))
         addSubview(label)
@@ -30,7 +30,7 @@ class SongDiffView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
         label.textAlignment = .center
-        iv.zy_cornerRadiusAdvance(8, rectCornerType: .allCorners)
+        iv.zk_cornerRadius = 8
     }
     
     func addTarget(_ target: AnyObject?, action: Selector) {

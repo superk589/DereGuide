@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZKCornerRadiusView
 
 protocol GachaPoolTableViewCellDelegate: class {
     func iconClick(iv:CGSSCardIconView)
@@ -22,7 +23,7 @@ class GachaPoolTableViewCell: UITableViewCell {
     var detailLabel:UILabel!
     var ratioLabel:UILabel!
     var timeLabel:UILabel!
-    var timeStatusIndicator:UIImageView!
+    var timeStatusIndicator:ZKCornerRadiusView!
     
     weak var delegate: GachaPoolTableViewCellDelegate?
     var cardListView: UIView!
@@ -68,8 +69,8 @@ class GachaPoolTableViewCell: UITableViewCell {
         
         originY += space
         
-        timeStatusIndicator = UIImageView.init(frame: CGRect(x: space, y: originY, width: 12, height: 12))
-        timeStatusIndicator.zy_cornerRadiusAdvance(6, rectCornerType: .allCorners)
+        timeStatusIndicator = ZKCornerRadiusView.init(frame: CGRect(x: space, y: originY, width: 12, height: 12))
+        timeStatusIndicator.zk_cornerRadius = 6
         
         timeLabel = UILabel.init(frame: CGRect.init(x: space + 22, y: originY, width: CGSSGlobal.width - space * 2 - 22, height: 12))
         timeLabel.font = UIFont.systemFont(ofSize: 12)
