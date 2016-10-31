@@ -2,15 +2,19 @@
 
 ### v1.1.4
 
-1. 优化谱面页面的fps
+1. 优化谱面页面的FPS
 2. 模拟抽卡中所有卡的概率改为和官方公布的概率一致
 3. 角色可以按照生日和BMI排序
 
 ##### Japanese version
-
+1. 譜面ページの流暢さ（FPS）を改善
+2. ガシャシミュレーターで提供割合は公式の数値を採用
+3. アイドル検索で二つのフィルタを追加：誕生日・BMI値
 
 ##### English version
-
+1. Improve fps performance when scrolling beatmap.
+2. Gacha simulation now have the same rate for each card as the formal data.
+3. Character can be sorted by birthday and BMI.
 
 ### v1.1.3
 2016-10-12
