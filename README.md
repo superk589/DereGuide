@@ -18,7 +18,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 
 ## Requirements
 * iOS 8.0+
-* Xcode 8+
+* Xcode 8.1+
 * Swift 3.0+
 
 ## How to build
