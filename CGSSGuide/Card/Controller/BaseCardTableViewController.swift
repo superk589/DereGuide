@@ -161,6 +161,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         delegate?.selectCard(cardList[indexPath.row])
     }
     

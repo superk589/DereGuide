@@ -132,6 +132,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         let CharDVC = CharDetailViewController()
         CharDVC.char = charList[indexPath.row]
         CharDVC.hidesBottomBarWhenPushed = true
