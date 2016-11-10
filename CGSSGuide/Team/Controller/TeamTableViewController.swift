@@ -13,6 +13,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     var addItem: UIBarButtonItem!
     var deleteItem: UIBarButtonItem!
     var selectItem: UIBarButtonItem!
+    var deselectItem: UIBarButtonItem!
     var copyItem: UIBarButtonItem!
     var spaceItem: UIBarButtonItem!
     
@@ -30,10 +31,10 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
         selectItem = UIBarButtonItem.init(title: NSLocalizedString("全选", comment: ""), style: .plain, target: self, action: #selector(selectAllAction))
+        deselectItem = UIBarButtonItem.init(title: NSLocalizedString("全部取消", comment: ""), style: .plain, target: self, action: #selector(deselectAllAction))
         copyItem = UIBarButtonItem.init(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
         
-        spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spaceItem.width = 40
+        spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         // toolbarItems = [selectItem, copyItem]
      
         // navigationController?.setToolbarHidden(true, animated: true)
@@ -85,6 +86,14 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
     
+    func deselectAllAction() {
+        if isEditing {
+            for i in 0..<teams.count {
+                tableView.deselectRow(at: IndexPath.init(row: i, section: 0), animated: false)
+            }
+        }
+    }
+    
     func copyAction() {
         if isEditing {
             for indexPath in tableView.indexPathsForSelectedRows ?? [IndexPath]() {
@@ -112,7 +121,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         if isEditing {
             navigationItem.rightBarButtonItem = deleteItem
             navigationController?.setToolbarHidden(false, animated: true)
-            toolbarItems = [selectItem, spaceItem, copyItem]
+            toolbarItems = [selectItem, spaceItem, deselectItem, spaceItem, copyItem]
         } else {
             navigationItem.rightBarButtonItem = addItem
             navigationController?.setToolbarHidden(true, animated: true)

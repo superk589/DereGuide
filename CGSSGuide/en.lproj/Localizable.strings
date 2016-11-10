@@ -4,7 +4,6 @@
 
 /* 模拟抽卡页面 */
 "* 每张卡片的获取几率和官方公布数据一致" = "* Featured SSRs have a 40% chance to be picked\n* Increased rates are not taken into account for SR/Rs";
- */
 
 /* 队伍详情页面 */
 "* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响" = "* Simulation assumes all notes are Perfect.\n* Optimistic score assumes that skills always activate.\n* The average score is taken from 100 real simulations. Results will vary between calculations.\n* Center skills that affect the skill activation rate are not accounted for in the average score.";
@@ -442,7 +441,7 @@
 
 /* 清除缓存时 选择具体的清除项 */
 "请等待更新完成或手动取消更新后，再尝试清除数据。" = "Please wait for the update to complete before clearing the cache.";
-"全选" = "Everything";
+"全选" = "Select All";
 "图片" = "Images";
 "卡片" = "Cards";
 "歌曲" = "Songs";
@@ -451,3 +450,6 @@
 
 /* new in v1.1.5 */
 "复制" = "Copy";
+
+/* 全选的反义 */
+"全部取消" = "Deselect All";
