@@ -14,6 +14,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     var deleteItem: UIBarButtonItem!
     var selectItem: UIBarButtonItem!
     var copyItem: UIBarButtonItem!
+    var spaceItem: UIBarButtonItem!
     
     var teams: [CGSSTeam] {
         let manager = CGSSTeamManager.defaultManager
@@ -28,8 +29,11 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         self.navigationItem.rightBarButtonItem = addItem
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
-        selectItem = UIBarButtonItem.init(title: "全选", style: .plain, target: self, action: #selector(selectAllAction))
-        copyItem = UIBarButtonItem.init(title: "复制", style: .plain, target: self, action: #selector(copyAction))
+        selectItem = UIBarButtonItem.init(title: NSLocalizedString("全选", comment: ""), style: .plain, target: self, action: #selector(selectAllAction))
+        copyItem = UIBarButtonItem.init(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
+        
+        spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spaceItem.width = 40
         // toolbarItems = [selectItem, copyItem]
      
         // navigationController?.setToolbarHidden(true, animated: true)
@@ -108,7 +112,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         if isEditing {
             navigationItem.rightBarButtonItem = deleteItem
             navigationController?.setToolbarHidden(false, animated: true)
-            toolbarItems = [selectItem, copyItem]
+            toolbarItems = [selectItem, spaceItem, copyItem]
         } else {
             navigationItem.rightBarButtonItem = addItem
             navigationController?.setToolbarHidden(true, animated: true)
