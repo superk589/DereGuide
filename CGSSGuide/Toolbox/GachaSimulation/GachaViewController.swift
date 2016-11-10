@@ -16,6 +16,7 @@ class GachaViewController: RefreshableTableViewController {
     var headerView: UIView!
     lazy var fixedView: UIView = {
         let view = UIView.init(frame: self.headerView.bounds)
+        view.layer.masksToBounds = true
         self.tableView.addSubview(view)
         return view
     }()
