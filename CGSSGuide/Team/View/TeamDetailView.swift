@@ -308,7 +308,7 @@ class TeamDetailView: UIView {
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
         scoreDescLabel.textColor = UIColor.darkGray
         scoreDescLabel.numberOfLines = 0
-        scoreDescLabel.text = NSLocalizedString("* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响", comment: "队伍详情页面")
+        scoreDescLabel.text = NSLocalizedString("* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
         scoreDescLabel.sizeToFit()
         scoreDescLabel.isHidden = true
         originY += topSpace + scoreDescLabel.fheight + topSpace
