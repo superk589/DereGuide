@@ -10,6 +10,11 @@ import UIKit
 
 class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate, TeamEditViewControllerDelegate {
     
+    var addItem: UIBarButtonItem!
+    var deleteItem: UIBarButtonItem!
+    var selectItem: UIBarButtonItem!
+    var copyItem: UIBarButtonItem!
+    
     var teams: [CGSSTeam] {
         let manager = CGSSTeamManager.defaultManager
         return manager.teams
@@ -18,8 +23,16 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         super.viewDidLoad()
 
         tableView.rowHeight = TeamTableViewCell.btnW + 55
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTeam))
+        addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTeam))
+        deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
+        self.navigationItem.rightBarButtonItem = addItem
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+        selectItem = UIBarButtonItem.init(title: "全选", style: .plain, target: self, action: #selector(selectAllAction))
+        copyItem = UIBarButtonItem.init(title: "复制", style: .plain, target: self, action: #selector(copyAction))
+        // toolbarItems = [selectItem, copyItem]
+     
+        // navigationController?.setToolbarHidden(true, animated: true)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -34,14 +47,49 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func commitDeletion() {
+        // 采用倒序删除法
+        for indexPath in (tableView.indexPathsForSelectedRows ?? [IndexPath]()).sorted(by: { $0.row > $1.row }) {
+        // for indexPath in (tableView.indexPathsForSelectedRows?.reversed() ?? [IndexPath]()) {
+            CGSSTeamManager.defaultManager.removeATeamAtIndex(indexPath.row)
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setEditing(false, animated: true)
         self.tableView.reloadData()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: animated)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func selectAllAction() {
+        if isEditing {
+            for i in 0..<teams.count {
+                tableView.selectRow(at: IndexPath.init(row: i, section: 0), animated: false, scrollPosition: .none)
+            }
+        }
+    }
+    
+    func copyAction() {
+        if isEditing {
+            for indexPath in tableView.indexPathsForSelectedRows ?? [IndexPath]() {
+                CGSSTeamManager.defaultManager.teams.append(teams[indexPath.row])
+                
+            }
+            CGSSTeamManager.defaultManager.writeToFile(nil)
+            tableView.reloadData()
+        }
     }
     
     // MARK: - Table view data source
@@ -55,6 +103,19 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         return teams.count
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if isEditing {
+            navigationItem.rightBarButtonItem = deleteItem
+            navigationController?.setToolbarHidden(false, animated: true)
+            toolbarItems = [selectItem, copyItem]
+        } else {
+            navigationItem.rightBarButtonItem = addItem
+            navigationController?.setToolbarHidden(true, animated: true)
+            setToolbarItems(nil, animated: true)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamTableViewCell
         cell.initWith(teams[indexPath.row])
@@ -62,7 +123,13 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
+        if isEditing {
+            // 编辑状态时 为多选删除模式
+            return UITableViewCellEditingStyle.init(rawValue: 0b11)!
+        } else {
+            // 非编辑状态时 为左滑删除模式
+            return .delete
+        }
     }
     
     // Override to support editing the table view.
@@ -77,6 +144,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing { return }
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
         let team = teams[indexPath.row]
         if team.validateCardRef() {

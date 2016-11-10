@@ -29,7 +29,6 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     
     private var showHomeButtonCount = 3
     
-    
     func popToRoot() {
         self.popToRootViewController(animated: true)
         setToolbarHidden(true, animated: true)
