@@ -170,6 +170,8 @@ open class CGSSUpdater: NSObject {
                     if let e = error {
                         // print("检查卡片更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
+                    } else if (response as! HTTPURLResponse).statusCode != 200 {
+                        completeInside(NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     } else {
                         let json = JSON.init(data: data!)
                         if let cards = json["result"].array {
@@ -212,6 +214,8 @@ open class CGSSUpdater: NSObject {
                     if let e = error {
                         // print("检查歌曲更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
+                    } else if (response as! HTTPURLResponse).statusCode != 200 {
+                        completeInside(NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     } else {
                         let json = JSON.init(data: data!)
                         if let songs = json.array {
@@ -240,6 +244,8 @@ open class CGSSUpdater: NSObject {
                     if let e = error {
                         // print("检查live更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
+                    } else if (response as! HTTPURLResponse).statusCode != 200 {
+                        completeInside(NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     } else {
                         let json = JSON.init(data: data!)
                         if let lives = json.array {
@@ -288,6 +294,8 @@ open class CGSSUpdater: NSObject {
                     if let e = error {
                         // print("检查故事章节更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
+                    } else if (response as! HTTPURLResponse).statusCode != 200 {
+                        completeInside(NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     } else {
                         let json = JSON.init(data: data!)
                         if let storyEpisodes = json.array {
@@ -319,6 +327,8 @@ open class CGSSUpdater: NSObject {
                     if let e = error {
                         // print("检查游戏资源更新失败: \(e.localizedDescription)")
                         completeInside(e.localizedDescription)
+                    } else if (response as! HTTPURLResponse).statusCode != 200 {
+                        completeInside(NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     } else {
                         let json = JSON.init(data: data!)
                         let info = CGSSGameInfo.init(fromJson: json)
