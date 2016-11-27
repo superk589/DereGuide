@@ -226,7 +226,7 @@ class CGSSCard: CGSSBaseModel {
          */
     init(fromJson json: JSON!) {
         super.init()
-        if json == nil {
+        if json == JSON.null {
             return
         }
         albumId = json["album_id"].intValue

@@ -20,7 +20,7 @@ class CGSSStory: CGSSBaseModel {
          */
     init(fromJson json: JSON!) {
         super.init()
-        if json == nil {
+        if json == JSON.null {
             return
         }
         cleaned = json["cleaned"].stringValue

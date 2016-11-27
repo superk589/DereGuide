@@ -8,4 +8,5 @@ target 'CGSSGuide' do
   pod 'lz4'
   pod 'ASValueTrackingSlider'
   pod 'ZKCornerRadiusView'
+  pod 'SnapKit'
 end

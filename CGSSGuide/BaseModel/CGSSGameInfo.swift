@@ -16,7 +16,7 @@ class CGSSGameInfo {
     var truthVersion: String!
     
     init(fromJson json: JSON!) {
-        if json == nil {
+        if json == JSON.null {
             return
         }
         apiMajor = json["api_major"].intValue
