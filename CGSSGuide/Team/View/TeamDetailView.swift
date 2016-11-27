@@ -300,7 +300,7 @@ class TeamDetailView: UIView {
         
         originY += 30 + topSpace
         scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 3)
-        scoreGrid.isHidden = true
+//        scoreGrid.isHidden = true
         
         originY += 36 + topSpace
         
@@ -310,8 +310,8 @@ class TeamDetailView: UIView {
         scoreDescLabel.numberOfLines = 0
         scoreDescLabel.text = NSLocalizedString("* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
         scoreDescLabel.sizeToFit()
-        scoreDescLabel.isHidden = true
         originY += topSpace + scoreDescLabel.fheight + topSpace
+        setupScoreGrid()
         
         bottomView.frame.size.height = originY
         
@@ -609,23 +609,14 @@ class TeamDetailView: UIView {
     }
     
     func updateScoreGridMaxScore(_ score: Int) {
-        if scoreGrid.isHidden {
-            setupScoreGrid()
-        }
         scoreGrid[1, 1].text = String(score)
     }
     func updateScoreGridAvgScore(_ score: Int) {
-        if scoreGrid.isHidden {
-            setupScoreGrid()
-        }
         scoreGrid[1, 2].text = String(score)
         resetCalcButton()
     }
     
     func updateSimulatorPresentValue(_ value: Int) {
-        if scoreGrid.isHidden {
-            setupScoreGrid()
-        }
         scoreGrid[1, 0].text = String(value)
     }
     

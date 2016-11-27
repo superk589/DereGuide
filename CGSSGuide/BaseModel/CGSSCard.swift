@@ -283,21 +283,32 @@ class CGSSCard: CGSSBaseModel {
         
         let dao = CGSSDAO.sharedDAO
         let skillJson = json["skill"]
-        if skillJson != JSON.null && dao.findSkillById(skillId) == nil {
-            let skill = CGSSSkill(fromJson: skillJson)
-            dao.skillDict.setValue(skill, forKey: String(skillId))
+        if skillJson != JSON.null {
+            if let skill = dao.findSkillById(skillId), !skill.isOldVersion {
+                // skill 存在且不是老版本 则不做任何处理
+            } else {
+                let skill = CGSSSkill.init(fromJson: skillJson)
+                dao.skillDict.setValue(skill, forKey: String(skillId))
+            }
         }
         let charaJson = json["chara"]
-        if charaJson != JSON.null && dao.findCharById(charaId) == nil {
-            let chara = CGSSChar(fromJson: charaJson)
-            dao.charDict.setValue(chara, forKey: String(charaId))
+        if charaJson != JSON.null {
+            if let chara = dao.findCharById(charaId), !chara.isOldVersion {
+             
+            } else {
+                let chara = CGSSChar(fromJson: charaJson)
+                dao.charDict.setValue(chara, forKey: String(charaId))
+            }
         }
         let leadSkillJson = json["lead_skill"]
-        if leadSkillJson != JSON.null && dao.findLeaderSkillById(leaderSkillId) == nil {
-            let leadSkill = CGSSLeaderSkill(fromJson: leadSkillJson)
-            dao.leaderSkillDict.setValue(leadSkill, forKey: String(leaderSkillId))
+        if leadSkillJson != JSON.null {
+            if let leaderSkill = dao.findLeaderSkillById(leaderSkillId), leaderSkill.isOldVersion {
+                
+            } else {
+                let leadSkill = CGSSLeaderSkill(fromJson: leadSkillJson)
+                dao.leaderSkillDict.setValue(leadSkill, forKey: String(leaderSkillId))
+            }
         }
-        
     }
     
     /**
