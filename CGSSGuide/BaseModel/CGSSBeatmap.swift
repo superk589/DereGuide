@@ -116,7 +116,7 @@ class CGSSBeatmap: CGSSBaseModel {
     
     lazy var validNotes: [CGSSBeatmapNote] = {
         var arr = [CGSSBeatmapNote]()
-        for i in 0...self.notes.count - 1 {
+        for i in 0..<self.notes.count {
             if self.notes[i].finishPos != 0 {
                 arr.append(self.notes[i])
             }
