@@ -5,7 +5,20 @@
 1. 组队页面增加批量删除和复制功能
 2. 完善模拟队伍算分和模拟抽卡的说明文字
 3. 修复查看歌曲闪退的问题。如果某些谱面为空，请您尝试清除歌曲缓存后再重新下载。
-4. 修复新付声角色在更新后仍然无法显示cv的问题
+4. 修复新付声角色在更新后仍然无法显示CV的问题
+
+##### Japanese version
+1. マイユニットのタブでバッチ削除・コピーができるになりました
+2. スコア計算とガシャシミュの説明テキストを補足します
+3. 譜面を確認した時アプルをクラッシュするバグを修正しました（互換性のため、一度楽曲のキャッシュをクリアしてください。）
+4. CV実装したキャラが更新した後、CVが表示されないのバグが修正しました
+5. 日本語翻訳の語彙を調整（[データを]アップデート→更新）
+
+##### English version
+1. Add mass copy and delete for team editing.
+2. Add addition description for gacha simulation and team simulation.
+3. Fix crash problem while entering beatmap page. If some beatmaps are still empty, please remove cache data and download again.
+4. Fix the problem that characters with newly added cv cannot be updated to display the cv name.
 
 
 ### v1.1.4
