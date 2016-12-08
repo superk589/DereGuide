@@ -85,10 +85,10 @@ class CGSSLiveSimulator: NSObject {
             
             // var log = [[Float]]()
             let validNotes = beatmap.validNotes
-            for i in 1...validNotes.count {
-                let note = validNotes[i - 1]
+            for i in 0..<validNotes.count {
+                let note = validNotes[i]
                 if criticalIndex < criticalPoints.count - 1 {
-                    if i >= criticalPoints[criticalIndex + 1] {
+                    if i + 1 >= criticalPoints[criticalIndex + 1] {
                         criticalIndex += 1
                     }
                 }

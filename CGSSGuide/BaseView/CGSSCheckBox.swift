@@ -39,6 +39,7 @@ class CGSSCheckBox: UIView {
         checkBox = UIImageView.init(frame: CGRect(x: 0, y: 0, width: self.fheight, height: self.fheight))
         descLabel = UILabel.init(frame: CGRect(x: self.fheight + 5, y: 0, width: self.fwidth - fheight - 5, height: self.fheight))
         descLabel.adjustsFontSizeToFitWidth = true
+        descLabel.baselineAdjustment = .alignCenters
         addSubview(checkBox)
         addSubview(descLabel)
     }

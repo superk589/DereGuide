@@ -41,7 +41,9 @@ class CGSSRankedSkill: NSObject {
         // 最后一个note的前三秒不再触发新的技能
         let count = Int(ceil((sec - 3) / Float(skill.condition!)))
         var procArr = [(Float, Float)]()
-        for i in 1..<count {
+        for i in 0..<count {
+            // 第一个触发区间内不触发技能
+            if i == 0 { continue }
             if CGSSGlobal.isProc(rate: procMax ? 100000 : Int(round(procChance! * Float(100 + upValue) * 10))) {
                 procArr.append((Float(i * skill.condition!), Float(i * skill.condition!) + effectLength!))
             }
