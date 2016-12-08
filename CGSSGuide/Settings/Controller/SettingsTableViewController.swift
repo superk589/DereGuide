@@ -284,7 +284,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
         updateStatusView.center = view.center
         updateStatusView.center.y = view.center.y - 100
         updateStatusView.isHidden = true

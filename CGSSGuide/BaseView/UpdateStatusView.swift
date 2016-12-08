@@ -32,9 +32,10 @@ class UpdateStatusView: UIView {
         progressView.frame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 0)
         statusLabel = UILabel()
         statusLabel.textColor = UIColor.white
-        statusLabel.frame = CGRect(x: 0, y: frame.size.height / 2, width: frame.size.width, height: frame.size.height / 2)
+        statusLabel.frame = CGRect(x: fheight * 0.8, y: 0, width: fwidth - fheight * 0.8 * 2, height: fheight)
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        statusLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel = UILabel()
         descriptionLabel.textColor = UIColor.white
         descriptionLabel.frame = CGRect(x: 20, y: 0, width: frame.size.width - 40, height: frame.size.height / 2)
@@ -42,9 +43,9 @@ class UpdateStatusView: UIView {
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.textAlignment = .center
         
-        loadingView = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.fheight / 2, height: self.fheight / 2))
+        loadingView = LoadingImageView.init(frame: CGRect.init(x: 0, y: self.fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
         loadingView.hideWhenStopped = true
-        loadingView.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
+//        wloadingView.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
 //        activityIndicator = UIActivityIndicatorView()
 //        activityIndicator.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
 //        activityIndicator.hidesWhenStopped = true
@@ -60,7 +61,7 @@ class UpdateStatusView: UIView {
         cancelButton.layer.masksToBounds = true
         cancelButton.addTarget(self, action: #selector(cancelUpdate), for: .touchUpInside)
         self.addSubview(statusLabel)
-        self.addSubview(descriptionLabel)
+        // self.addSubview(descriptionLabel)
         // 暂时取消进度条
         // self.addSubview(progressView)
         // self.addSubview(activityIndicator)
@@ -68,27 +69,27 @@ class UpdateStatusView: UIView {
         self.addSubview(cancelButton)
     }
     
-    func setContent(_ s: String, hasProgress: Bool) {
+    func setContent(_ text: String, hasProgress: Bool) {
         self.layer.removeAllAnimations()
         self.alpha = 1
         self.isHidden = false
-        descriptionLabel.text = s
+        statusLabel.text = text
         loadingView.startAnimating()
-        if !hasProgress {
-            // activityIndicator.startAnimating()
-            loadingView.fx = (fwidth - loadingView.fwidth) / 2
-        } else {
-            loadingView.fx = 5
-            // activityIndicator.stopAnimating()
-            // loadingView.stopAnimating()
-        }
-        statusLabel.text = ""
-        statusLabel.isHidden = !hasProgress
+//        if !hasProgress {
+//            // activityIndicator.startAnimating()
+//            loadingView.fx = (fwidth - loadingView.fwidth) / 2
+//        } else {
+//            loadingView.fx = 5
+//            // activityIndicator.stopAnimating()
+//            // loadingView.stopAnimating()
+//        }
+        // statusLabel.text = ""
+        // statusLabel.isHidden = !hasProgress
         progressView.isHidden = !hasProgress
     }
     
-    func setContent(_ s: String, total: Int) {
-        setContent(s, hasProgress: true)
+    func setContent(_ text: String, total: Int) {
+        setContent(text, hasProgress: true)
         statusLabel.text = "0/\(total)"
     }
     

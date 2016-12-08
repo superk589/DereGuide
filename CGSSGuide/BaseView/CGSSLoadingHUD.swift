@@ -11,7 +11,7 @@ import UIKit
 class LoadingImageView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        image = UIImage.init(named: "loading")
+        image = #imageLiteral(resourceName: "loading")
         startAnimating()
     }
     

@@ -67,7 +67,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         refreshControl = refresher
         refresher.addTarget(self, action: #selector(refresherValueChanged), for: .valueChanged)
         
-        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 160, height: 50))
+        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
         updateStatusView.center = view.center
         updateStatusView.center.y = view.center.y - 120
         updateStatusView.isHidden = true
