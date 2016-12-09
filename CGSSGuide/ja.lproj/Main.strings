@@ -219,7 +219,7 @@
 "fQd-50-rlt.text" = "クレジット";
 
 /* Class = "UILabel"; text = "启动时自动检查更新"; ObjectID = "fhG-RG-Edf"; */
-"fhG-RG-Edf.text" = "アプリ起動時にアップデートの確認を行う";
+"fhG-RG-Edf.text" = "アプリ起動時に更新の確認を行う";
 
 /* Class = "UITabBarItem"; title = "歌曲"; ObjectID = "gE2-j0-zef"; */
 "gE2-j0-zef.title" = "楽曲";
