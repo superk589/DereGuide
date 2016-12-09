@@ -40,14 +40,19 @@ $ open "CGSSGuide.xcworkspace"
 CGSSGuide now provide files of localizable strings for other languages
 [How to localize CGSSGuide](https://github.com/superk589/CGSSGuide/wiki)
 
-##### Contributors of other languages
-* English: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev) 
-* Japanese: [CaiMiao](https://github.com/CaiMiao) 
+## Contributors of other languages
+##### English:
+* [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
+
+##### Japanese:
+* [CaiMiao](https://github.com/CaiMiao)
+* [suzutan](https://github.com/suzutan)
+
 
 ## Acknowledgement
-### [sparklebox](https://github.com/summertriangle-dev/sparklebox) 
-* Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev) 
+### [sparklebox](https://github.com/summertriangle-dev/sparklebox)
+* Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
 * Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
 
-### [deresute.info](https://deresute.info) 
+### [deresute.info](https://deresute.info)
 * Author: [Snack-X](https://github.com/Snack-X)
