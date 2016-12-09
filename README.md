@@ -4,14 +4,15 @@
 This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on data/api from   
 * English version of card data api <https://starlight.kirara.ca>
 * Chinese version of card data api <http://starlight.hyspace.io>
-* Beatmap & story api <https://deresute.info>
+* Beatmap api <https://deresute.info>
 * Image data <https://hoshimoriuta.kirara.ca>
 
 ## Features
-* Card/Character information
-* Music information and Beatmap
-* Team simulation/Live score calculation
-* Birthday notification and other small tools in the future
+* Card, beatmap and character information
+* Team simulation
+* Live score calculation
+* Birthday notification
+* Gacha simulation
 
 ## Download at App Store
 <https://itunes.apple.com/app/cgssguide/id1131934691>
@@ -32,9 +33,8 @@ $ pod install
 ```
 ##### Open the workspace in Xcode
 ```
-$ open "CGSSGuide.xcworkspace"
+$ open CGSSGuide.xcworkspace
 ```
-##### Compile and run the app
 
 ## Localization
 CGSSGuide now provide files of localizable strings for other languages
@@ -50,9 +50,9 @@ CGSSGuide now provide files of localizable strings for other languages
 
 
 ## Acknowledgement
-### [sparklebox](https://github.com/summertriangle-dev/sparklebox)
+##### [sparklebox](https://github.com/summertriangle-dev/sparklebox)
 * Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
 * Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
 
-### [deresute.info](https://deresute.info)
+##### [deresute.info](https://deresute.info)
 * Author: [Snack-X](https://github.com/Snack-X)
