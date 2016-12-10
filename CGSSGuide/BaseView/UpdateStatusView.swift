@@ -43,18 +43,18 @@ class UpdateStatusView: UIView {
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.textAlignment = .center
         
-        loadingView = LoadingImageView.init(frame: CGRect.init(x: 0, y: self.fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
+        loadingView = LoadingImageView.init(frame: CGRect.init(x: self.fheight * 0.1, y: self.fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
         loadingView.hideWhenStopped = true
 //        wloadingView.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
 //        activityIndicator = UIActivityIndicatorView()
 //        activityIndicator.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
 //        activityIndicator.hidesWhenStopped = true
         
-        cancelButton = UIButton.init(frame: CGRect(x: frame.size.width - 20, y: 0, width: 20, height: 20))
-        cancelButton.imageEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
+        cancelButton = UIButton.init(frame: CGRect(x: frame.size.width - self.fheight * 0.9, y: fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
+        cancelButton.imageEdgeInsets = UIEdgeInsetsMake(self.fheight * 0.2, self.fheight * 0.2, self.fheight * 0.2, self.fheight * 0.2)
         cancelButton.setImage(UIImage.init(named: "433-x")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
         cancelButton.tintColor = UIColor.white
-        cancelButton.backgroundColor = UIColor.black.withAlphaComponent(0.25)
+        // cancelButton.backgroundColor = UIColor.black.withAlphaComponent(0.25)
         // cancelButton.layer.borderColor = UIColor.whiteColor().CGColor
         // cancelButton.layer.borderWidth = 1
         cancelButton.layer.cornerRadius = 10
