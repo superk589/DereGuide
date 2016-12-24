@@ -25,6 +25,8 @@
 		122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */; };
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
 		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
+		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
+		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
 		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
 		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
@@ -149,6 +151,8 @@
 		122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharIconView.swift; sourceTree = "<group>"; };
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
 		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		123679031E0E6B1300622114 /* DeviceInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManager.swift; sourceTree = "<group>"; };
+		123679051E0E6C3600622114 /* CGSSVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSVersionManager.swift; sourceTree = "<group>"; };
 		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 				129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */,
 				1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */,
 				12F590301D9555CF00E004ED /* CGSSTypes.swift */,
+				123679031E0E6B1300622114 /* DeviceInformationManager.swift */,
+				123679051E0E6C3600622114 /* CGSSVersionManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -646,7 +652,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = zzk;
 				TargetAttributes = {
 					1282EE5E1D011A8F0024318C = {
@@ -763,6 +769,7 @@
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */,
+				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
@@ -843,6 +850,7 @@
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
+				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,

@@ -100,37 +100,6 @@ open class CGSSUpdater: NSObject {
         configSession()
     }
     
-    // 检查最新的数据版本号
-    func checkNewestDataVersion() -> (String, String) {
-        let major = (Bundle.main.infoDictionary!["Data Version"] as! [String:String])["Major"]!
-        let minor = (Bundle.main.infoDictionary!["Data Version"] as! [String:String])["Minor"]!
-        return (major, minor)
-    }
-    
-    // 检查当前的数据版本号
-    func checkCurrentDataVersion() -> (String, String) {
-        let major = UserDefaults.standard.object(forKey: "Major") as? String ?? "0"
-        let minor = UserDefaults.standard.object(forKey: "Minor") as? String ?? "0"
-        return (major, minor)
-    }
-    
-    // 设置当前的数据版本号
-    func setCurrentDataVersion(_ major: String, minor: String) {
-        UserDefaults.standard.set(major, forKey: "Major")
-        UserDefaults.standard.set(minor, forKey: "Minor")
-    }
-    
-    // 设置当前数据版本号为最新版本
-    func setVersionToNewest() {
-        UserDefaults.standard.set(checkNewestDataVersion().0, forKey: "Major")
-        UserDefaults.standard.set(checkNewestDataVersion().1, forKey: "Minor")
-    }
-    
-    // 获取当前数据版本字符串
-    func getCurrentVersionString() -> String {
-        return checkCurrentDataVersion().0 + "." + checkCurrentDataVersion().1
-    }
-    
     // 检查指定类型的数据是否存在更新
     func checkUpdate(_ typeMask: UInt, complete: @escaping ([CGSSUpdateItem], [String]) -> Void) {
         isUpdating = true
@@ -383,7 +352,7 @@ open class CGSSUpdater: NSObject {
                 let dao = CGSSDAO.sharedDAO
                 dao.saveAll({
                     // 保存成功后 将版本置为最新版
-                    self.setVersionToNewest()
+                    CGSSVersionManager.default.setVersionToNewest()
                 })
                 isUpdating = false
                 DispatchQueue.main.async(execute: {

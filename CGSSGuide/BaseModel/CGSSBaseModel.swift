@@ -14,13 +14,13 @@ open class CGSSBaseModel: NSObject, NSCoding {
     var updateTime:Date!
     public override init() {
         super.init()
-        self.major = CGSSUpdater.defaultUpdater.checkNewestDataVersion().0
-        self.minor = CGSSUpdater.defaultUpdater.checkNewestDataVersion().1
+        self.major = CGSSVersionManager.default.newestDataVersion.0
+        self.minor = CGSSVersionManager.default.newestDataVersion.1
         self.updateTime = Date()
     }
     public required init?(coder aDecoder: NSCoder) {
-        self.major = aDecoder.decodeObject(forKey: "major") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().0
-        self.minor = aDecoder.decodeObject(forKey: "minor") as? String ?? CGSSUpdater.defaultUpdater.checkCurrentDataVersion().1
+        self.major = aDecoder.decodeObject(forKey: "major") as? String ?? CGSSVersionManager.default.currentDataVersion.0
+        self.minor = aDecoder.decodeObject(forKey: "minor") as? String ?? CGSSVersionManager.default.currentDataVersion.1
         self.updateTime = aDecoder.decodeObject(forKey: "update_time") as? Date ?? Date()
     }
     open func encode(with aCoder: NSCoder) {
@@ -29,9 +29,9 @@ open class CGSSBaseModel: NSObject, NSCoding {
         aCoder.encode(self.updateTime, forKey: "update_time")
     }
     var isOldVersion: Bool {
-        if self.major < CGSSUpdater.defaultUpdater.checkNewestDataVersion().0 {
+        if self.major < CGSSVersionManager.default.newestDataVersion.0 {
             return true
-        } else if self.minor < CGSSUpdater.defaultUpdater.checkNewestDataVersion().1 {
+        } else if self.minor < CGSSVersionManager.default.newestDataVersion.1 {
             return true
         }
         return false

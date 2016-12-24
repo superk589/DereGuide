@@ -63,7 +63,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
             if CGSSGlobal.languageType == .ja {
                 controller.setCcRecipients(["gaiban@poketb.com"])
             }
-            controller.setMessageBody("app v\(appVersionLabel.text!)\ndata v\(dataVersionLabel.text!)\n", isHTML: false)
+            controller.addAttachmentData(DeviceInformationManager.default.toString().data(using: .utf8)!, mimeType: "text/plain", fileName: "device_information.txt")
             self.present(controller, animated: true, completion: nil)
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("打开邮箱失败", comment: "设置页面"), message: NSLocalizedString("未设置邮箱账户", comment: "设置页面"), preferredStyle: .alert)
@@ -225,7 +225,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     }
     
     func refresh() {
-        dataVersionLabel.text = CGSSUpdater.defaultUpdater.getCurrentVersionString()
+        dataVersionLabel.text = CGSSVersionManager.default.currentDataVersionString
         updateCacheSize()
     }
     
