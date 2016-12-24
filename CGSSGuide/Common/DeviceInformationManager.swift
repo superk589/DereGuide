@@ -14,14 +14,23 @@ class DeviceInformationManager {
     
     static let `default` = DeviceInformationManager()
     
-    
     let appName = "CGSSGuide"
 
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     
     let dataVersion = CGSSVersionManager.default.currentDataVersionString
     
-    let device = UIDevice.current.model
+    var device: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
+    }
+
     
     let osVersion = UIDevice.current.systemVersion
     
