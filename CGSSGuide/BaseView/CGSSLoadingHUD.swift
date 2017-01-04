@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class LoadingImageView: UIImageView {
     override init(frame: CGRect) {
@@ -45,6 +46,20 @@ class LoadingImageView: UIImageView {
         self.layer.removeAnimation(forKey: "rotate")
         isRotating = false
     }
+    
+    func show(to view: UIView) {
+        view.addSubview(self)
+        self.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.height.equalTo(self.fheight)
+            make.width.equalTo(self.fwidth)
+        }
+    }
+    
+    func hide() {
+        self.removeFromSuperview()
+    }
+
 }
 
 

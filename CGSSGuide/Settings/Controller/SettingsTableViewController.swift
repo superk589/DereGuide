@@ -35,7 +35,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         UserDefaults.standard.set(sender.isOn, forKey: "FullImageCache")
     }
     
-    @IBOutlet weak var dataVersionLabel: UILabel!
+//    @IBOutlet weak var dataVersionLabel: UILabel!
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
             let infoDic = Bundle.main.infoDictionary
@@ -225,7 +225,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     }
     
     func refresh() {
-        dataVersionLabel.text = CGSSVersionManager.default.currentDataVersionString
+//        dataVersionLabel.text = CGSSVersionManager.default.currentDataVersionString
         updateCacheSize()
     }
     
@@ -262,6 +262,12 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     
+    @IBOutlet weak var donateCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showDonate))
+            donateCell.addGestureRecognizer(tap)
+        }
+    }
     @IBOutlet weak var licenseCell: UITableViewCell! {
         didSet {
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(showLicense))
@@ -280,6 +286,11 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         self.navigationController?.pushViewController(licenseVC, animated: true)
     }
     
+    func showDonate() {
+        let donationVC = DonationViewController()
+        donationVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(donationVC, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

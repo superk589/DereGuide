@@ -9,4 +9,6 @@ target 'CGSSGuide' do
   pod 'ASValueTrackingSlider'
   pod 'ZKCornerRadiusView'
   pod 'SnapKit'
+  pod 'Firebase/Core'
+  pod 'Firebase/AdMob'
 end

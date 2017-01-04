@@ -113,6 +113,12 @@
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
+		12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AC1E1BCD780064991E /* DonationViewController.swift */; };
+		12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */; };
+		12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B01E1CAB330064991E /* DonationCell.swift */; };
+		12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */; };
+		12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B61E1CB0800064991E /* UIColorExtension.swift */; };
+		12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B81E1CCF880064991E /* BaseViewController.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -257,6 +263,12 @@
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
+		12D4F8AC1E1BCD780064991E /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationQAView.swift; sourceTree = "<group>"; };
+		12D4F8B01E1CAB330064991E /* DonationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
+		12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtenstion.swift; sourceTree = "<group>"; };
+		12D4F8B61E1CB0800064991E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		12D4F8B81E1CCF880064991E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -287,6 +299,8 @@
 			isa = PBXGroup;
 			children = (
 				1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */,
+				12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */,
+				12D4F8B01E1CAB330064991E /* DonationCell.swift */,
 			);
 			name = View;
 			path = Controller/View;
@@ -297,6 +311,8 @@
 			children = (
 				122EECC81D5DC516008ADE08 /* UIViewExtension.swift */,
 				124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */,
+				12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */,
+				12D4F8B61E1CB0800064991E /* UIColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -491,6 +507,7 @@
 				12ACD5A91D9128250054D9CD /* LicenseViewController.swift */,
 				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
 				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
+				12D4F8AC1E1BCD780064991E /* DonationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -543,6 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				1269EA081D520CD50071AD7F /* BaseNavigationController.swift */,
+				12D4F8B81E1CCF880064991E /* BaseViewController.swift */,
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
@@ -767,6 +785,8 @@
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
+				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
+				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
@@ -806,9 +826,11 @@
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				122EECCB1D5DE5CB008ADE08 /* CGSSGridLabel.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
+				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
+				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
@@ -846,11 +868,13 @@
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
+				12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
+				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
@@ -1033,7 +1057,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAC08E5FCC707441E3BB3424 /* Pods-CGSSGuide.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CGSSGuide/CGSSGuide.entitlements;
@@ -1064,7 +1088,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B37A71CAFCD8386385BCF8B2 /* Pods-CGSSGuide.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CGSSGuide/CGSSGuide.entitlements;

@@ -257,11 +257,11 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         }
         switch type {
         case 1:
-            self.strokeColor = CGSSGlobal.cuteColor
+            self.strokeColor = Color.cute
         case 2:
-            self.strokeColor = CGSSGlobal.coolColor
+            self.strokeColor = Color.cool
         case 3:
-            self.strokeColor = CGSSGlobal.passionColor
+            self.strokeColor = Color.passion
         case 4:
             self.strokeColor = UIColor.darkGray
         default:

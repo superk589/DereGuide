@@ -63,25 +63,25 @@ class CardTableViewCell: UITableViewCell {
         lifeLabel = UILabel()
         lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        lifeLabel.textColor = CGSSGlobal.lifeColor
+        lifeLabel.textColor = Color.life
         lifeLabel.textAlignment = .right
         
         vocalLabel = UILabel()
         vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        vocalLabel.textColor = CGSSGlobal.vocalColor
+        vocalLabel.textColor = Color.vocal
         vocalLabel.textAlignment = .right
         
         danceLabel = UILabel()
         danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
         danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        danceLabel.textColor = CGSSGlobal.danceColor
+        danceLabel.textColor = Color.dance
         danceLabel.textAlignment = .right
         
         visualLabel = UILabel()
         visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
         visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        visualLabel.textColor = CGSSGlobal.visualColor
+        visualLabel.textColor = Color.visual
         visualLabel.textAlignment = .right
         
         totalLabel = UILabel()

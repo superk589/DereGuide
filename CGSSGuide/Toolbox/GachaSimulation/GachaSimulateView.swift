@@ -27,12 +27,12 @@ class GachaSimulateView: UIView {
         drawSectionLine(0)
         singleButton = UIButton.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
-        singleButton.backgroundColor = CGSSGlobal.passionColor
+        singleButton.backgroundColor = Color.passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
         
         tenButton = UIButton.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
-        tenButton.backgroundColor = CGSSGlobal.cuteColor
+        tenButton.backgroundColor = Color.cute
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
         
         resultView = UIView.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
@@ -52,7 +52,7 @@ class GachaSimulateView: UIView {
         self.addSubview(descLabel)
         self.fheight = descLabel.fy + descLabel.fheight + space
         //self.fheight = tenButton.fbottom + space
-        self.backgroundColor = CGSSGlobal.coolColor.withAlphaComponent(0.1)
+        self.backgroundColor = Color.cool.withAlphaComponent(0.1)
     }
     
     func clickTen() {

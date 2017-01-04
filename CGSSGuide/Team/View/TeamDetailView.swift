@@ -229,7 +229,7 @@ class TeamDetailView: UIView {
         manualValueBox = CGSSCheckBox.init(frame: CGRect.init(x: leftSpace, y: originY, width: 150, height: 21))
         manualValueBox.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
         manualValueBox.descLabel.font = UIFont.systemFont(ofSize: 16)
-        manualValueBox.tintColor = CGSSGlobal.coolColor
+        manualValueBox.tintColor = Color.cool
         manualValueBox.descLabel.textColor = UIColor.darkGray
         manualValueBox.isChecked = false
         let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(manualValueCheckBoxClick))
@@ -295,7 +295,7 @@ class TeamDetailView: UIView {
         
         startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 30))
         startCalcButton.setTitle(NSLocalizedString("开始计算", comment: "队伍详情页面"), for: .normal)
-        startCalcButton.backgroundColor = CGSSGlobal.danceColor
+        startCalcButton.backgroundColor = Color.dance
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
         originY += 30 + topSpace
@@ -391,13 +391,13 @@ class TeamDetailView: UIView {
             selfLeaderLabel.text = "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
             selfLeaderLabel.backgroundColor = selfLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
-            selfLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
+            selfLeaderLabel.backgroundColor = Color.allType.withAlphaComponent(0.5)
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
             friendLeaderLabel.text = "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
             friendLeaderLabel.backgroundColor = friendLeaderRef.attColor.withAlphaComponent(0.5)
         } else {
-            friendLeaderLabel.backgroundColor = CGSSGlobal.allTypeColor.withAlphaComponent(0.5)
+            friendLeaderLabel.backgroundColor = Color.allType.withAlphaComponent(0.5)
         }
         
         var upValueStrings = [[String]]()
@@ -508,11 +508,11 @@ class TeamDetailView: UIView {
         upValueStrings.append(upPassionString)
         
         var upValueColors = [[UIColor]]()
-        let colorArray = [UIColor.black, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, UIColor.darkGray, CGSSGlobal.lifeColor]
+        let colorArray = [UIColor.black, Color.vocal, Color.dance, Color.visual, UIColor.darkGray, Color.life]
         upValueColors.append(contentsOf: Array.init(repeating: colorArray, count: 4))
-        upValueColors[1][0] = CGSSGlobal.cuteColor
-        upValueColors[2][0] = CGSSGlobal.coolColor
-        upValueColors[3][0] = CGSSGlobal.passionColor
+        upValueColors[1][0] = Color.cute
+        upValueColors[2][0] = Color.cool
+        upValueColors[3][0] = Color.passion
         
         leaderSkillGrid.setGridContent(upValueStrings)
         leaderSkillGrid.setGridColor(upValueColors)
@@ -567,11 +567,11 @@ class TeamDetailView: UIView {
         presentValueString.append(presentSub3)
         presentValueString.append(presentSub4)
         
-        let colorArray2 = [UIColor.darkGray, CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor]
+        let colorArray2 = [UIColor.darkGray, Color.allType, Color.vocal, Color.dance, Color.visual]
         presentColor.append(contentsOf: Array.init(repeating: colorArray2, count: 5))
-        presentColor[2][0] = CGSSGlobal.cuteColor
-        presentColor[3][0] = CGSSGlobal.coolColor
-        presentColor[4][0] = CGSSGlobal.passionColor
+        presentColor[2][0] = Color.cute
+        presentColor[3][0] = Color.cool
+        presentColor[4][0] = Color.passion
         
         presentValueGrid.setGridContent(presentValueString)
         presentValueGrid.setGridColor(presentColor)

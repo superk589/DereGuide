@@ -86,7 +86,7 @@ class SongTableViewCell: UITableViewCell {
         contentView.addSubview(typeIcon)
         // contentView.addSubview(descriptionLabel)
         
-        let colors = [CGSSGlobal.debutColor, CGSSGlobal.regularColor, CGSSGlobal.proColor, CGSSGlobal.masterColor, CGSSGlobal.masterPlusColor]
+        let colors = [Color.debut, Color.regular, Color.pro, Color.master, Color.masterPlus]
         diffViews = [SongDiffView]()
         for i in 0...4 {
             let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))

@@ -13,13 +13,13 @@ extension CGSSChar {
     var attColor: UIColor {
         switch type {
         case "cute":
-            return CGSSGlobal.cuteColor
+            return Color.cute
         case "cool":
-            return CGSSGlobal.coolColor
+            return Color.cool
         case "passion":
-            return CGSSGlobal.passionColor
+            return Color.passion
         default:
-            return CGSSGlobal.allTypeColor
+            return Color.allType
         }
     }
     var charType: CGSSCharTypes {

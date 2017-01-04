@@ -21,15 +21,15 @@ enum CGSSLiveType: String {
     func typeColor() -> UIColor {
         switch self {
         case .normal:
-            return CGSSGlobal.allTypeColor
+            return Color.allType
         case .vocal:
-            return CGSSGlobal.vocalColor
+            return Color.vocal
         case .dance:
-            return CGSSGlobal.danceColor
+            return Color.dance
         case .visual:
-            return CGSSGlobal.passionColor
+            return Color.passion
         case .parade:
-            return CGSSGlobal.paradeColor
+            return Color.parade
         }
     }
     func toString() -> String {
@@ -52,11 +52,11 @@ enum CGSSGrooveType: String {
     func typeColor() -> UIColor {
         switch self {
         case .cute:
-            return CGSSGlobal.cuteColor
+            return Color.cute
         case .cool:
-            return CGSSGlobal.coolColor
+            return Color.cool
         case .passion:
-            return CGSSGlobal.passionColor
+            return Color.passion
         }
     }
     init? (cardType: CGSSCardTypes) {
@@ -101,11 +101,11 @@ extension CGSSLive {
     func getLiveColor() -> UIColor {
         switch type! {
         case 1:
-            return CGSSGlobal.cuteColor
+            return Color.cute
         case 2:
-            return CGSSGlobal.coolColor
+            return Color.cool
         case 3:
-            return CGSSGlobal.passionColor
+            return Color.passion
         default:
             return UIColor.darkText
         }

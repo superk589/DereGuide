@@ -175,7 +175,7 @@ class CardDetailView: UIView {
         
         attGridView.setGridContent(attGridStrings)
         
-        let colorArray = [CGSSGlobal.allTypeColor, CGSSGlobal.lifeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
+        let colorArray = [Color.allType, Color.life, Color.vocal, Color.dance, Color.visual, Color.allType]
         let colors = [[UIColor]].init(repeating: colorArray, count: 6)
         attGridView.setGridColor(colors)
         
@@ -201,8 +201,8 @@ class CardDetailView: UIView {
         rankGridView.setGridContent(rankGridStrings)
         
         var colors2 = [[UIColor]]()
-        let colorArray2 = [card.attColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
-        let colorArray3 = [CGSSGlobal.allTypeColor, CGSSGlobal.vocalColor, CGSSGlobal.danceColor, CGSSGlobal.visualColor, CGSSGlobal.allTypeColor]
+        let colorArray2 = [card.attColor, Color.vocal, Color.dance, Color.visual, Color.allType]
+        let colorArray3 = [Color.allType, Color.vocal, Color.dance, Color.visual, Color.allType]
         
         colors2.append(colorArray3)
         colors2.append(colorArray2)
@@ -578,10 +578,10 @@ class CardDetailView: UIView {
         availableLimit = CGSSCheckBox.init(frame: CGRect(x: 160, y: insideY, width: 70, height: 14))
         availableFes = CGSSCheckBox.init(frame: CGRect(x: 235, y: insideY, width: 70, height: 14))
         
-        availableEvent.tintColor = CGSSGlobal.coolColor
-        availableGacha.tintColor = CGSSGlobal.coolColor
-        availableLimit.tintColor = CGSSGlobal.coolColor
-        availableFes.tintColor = CGSSGlobal.coolColor
+        availableEvent.tintColor = Color.cool
+        availableGacha.tintColor = Color.cool
+        availableLimit.tintColor = Color.cool
+        availableFes.tintColor = Color.cool
         
         availableEvent.descLabel.textColor = UIColor.darkGray
         availableGacha.descLabel.textColor = UIColor.darkGray

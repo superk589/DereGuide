@@ -36,7 +36,7 @@ class GachaPoolTableViewCell: UITableViewCell {
     func prepare() {
         var originY:CGFloat = 10
         checkButton = UIButton.init(frame: CGRect(x: space, y: originY, width: 22, height: 22))
-        checkButton.tintColor = CGSSGlobal.coolColor
+        checkButton.tintColor = Color.cool
         checkButton.setImage(UIImage.init(named: "888-checkmark-toolbar")?.withRenderingMode(.alwaysTemplate), for: .normal)
         checkButton.isUserInteractionEnabled = false
         
@@ -57,7 +57,7 @@ class GachaPoolTableViewCell: UITableViewCell {
         ratioLabel = UILabel.init(frame: CGRect.init(x: space, y: originY, width: fwidth - 2 * space, height: 12))
         ratioLabel.font = UIFont.systemFont(ofSize: 12)
         ratioLabel.textAlignment = .left
-        ratioLabel.textColor = CGSSGlobal.vocalColor
+        ratioLabel.textColor = Color.vocal
         
         originY += space + 9.5
         

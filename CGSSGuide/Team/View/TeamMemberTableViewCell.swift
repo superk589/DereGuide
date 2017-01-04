@@ -264,13 +264,13 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.cardName.text = card.chara?.name
         var strSkill:NSAttributedString
         if  card.skill != nil && type != .friend {
-            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): \(model.skillLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:Color.allType])
         } else {
-            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.allTypeColor])
+            strSkill = NSAttributedString.init(string: "\(NSLocalizedString("特技等级", comment: "队伍编辑页面")): n/a  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:Color.allType])
         }
-        let strVocal = NSAttributedString.init(string: "Vo: +\(model.vocalLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.vocalColor])
-        let strDance = NSAttributedString.init(string: "Da: +\(model.danceLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.danceColor])
-        let strVisual = NSAttributedString.init(string: "Vi: +\(model.visualLevel!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:CGSSGlobal.visualColor])
+        let strVocal = NSAttributedString.init(string: "Vo: +\(model.vocalLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:Color.vocal])
+        let strDance = NSAttributedString.init(string: "Da: +\(model.danceLevel!)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:Color.dance])
+        let strVisual = NSAttributedString.init(string: "Vi: +\(model.visualLevel!)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName:Color.visual])
     
         let att = NSMutableAttributedString.init(attributedString: strSkill)
         att.append(strVocal)

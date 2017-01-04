@@ -79,33 +79,33 @@ class TeamMemberEditingView: UIView {
         skillItem.slider.maximumValue = 10
         skillItem.slider.minimumValue = 1
         skillItem.slider.value = 10
-        skillItem.slider.popUpViewColor = CGSSGlobal.allTypeColor
+        skillItem.slider.popUpViewColor = Color.allType
         skillItem.descLabel.text = "SLv."
-        skillItem.numLabel.textColor = CGSSGlobal.allTypeColor
+        skillItem.numLabel.textColor = Color.allType
         
         vocalItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 2 + height, width: fwidth, height: height))
         vocalItem.slider.maximumValue = 10
         vocalItem.slider.minimumValue = 0
         vocalItem.slider.value = 0
-        vocalItem.slider.popUpViewColor = CGSSGlobal.vocalColor
+        vocalItem.slider.popUpViewColor = Color.vocal
         vocalItem.descLabel.text = "Vo+"
-        vocalItem.numLabel.textColor = CGSSGlobal.vocalColor
+        vocalItem.numLabel.textColor = Color.vocal
         
         danceItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 3 + height * 2, width: self.fwidth, height: height))
         danceItem.slider.maximumValue = 10
         danceItem.slider.minimumValue = 0
         danceItem.slider.value = 0
-        danceItem.slider.popUpViewColor = CGSSGlobal.danceColor
+        danceItem.slider.popUpViewColor = Color.dance
         danceItem.descLabel.text = "Da+"
-        danceItem.numLabel.textColor = CGSSGlobal.danceColor
+        danceItem.numLabel.textColor = Color.dance
         
         visualItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 4 + height * 3, width: self.fwidth, height: height))
         visualItem.slider.maximumValue = 10
         visualItem.slider.minimumValue = 0
         visualItem.slider.value = 0
-        visualItem.slider.popUpViewColor = CGSSGlobal.visualColor
+        visualItem.slider.popUpViewColor = Color.visual
         visualItem.descLabel.text = "Vi+"
-        visualItem.numLabel.textColor = CGSSGlobal.visualColor
+        visualItem.numLabel.textColor = Color.visual
         
         addSubview(skillItem)
         addSubview(vocalItem)
