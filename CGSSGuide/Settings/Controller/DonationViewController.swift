@@ -20,14 +20,32 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     var products = [SKProduct]()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        SKPaymentQueue.default().add(self)
+    }
+    
+    deinit {
+        SKPaymentQueue.default().remove(self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareUI()
-        requestData()
+        // requestData()
         // Do any additional setup after loading the view.
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        requestData()
+    }
     
     func prepareUI() {
         
@@ -95,10 +113,10 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.right.equalTo(-10)
         }
         bannerDescLabel.textColor = UIColor.darkGray
-        bannerDescLabel.font = UIFont.light(size: 12)
+        bannerDescLabel.font = UIFont.light(size: 14)
         bannerDescLabel.numberOfLines = 0
         bannerDescLabel.textAlignment = .center
-        bannerDescLabel.text = NSLocalizedString("如果您不便于捐赠，也可以通过点击下方的广告来支持我们。", comment: "")
+        bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
     }
     
     var hud: LoadingImageView?
@@ -152,6 +170,21 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = products[indexPath.item]
+        
+        if SKPaymentQueue.canMakePayments() {
+            CGSSLoadingHUDManager.default.show()
+            SKPaymentQueue.default().add(SKPayment.init(product: product))
+        } else {
+            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("您的设备未开启应用内购买。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            self.tabBarController?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -177,5 +210,51 @@ extension DonationViewController: SKProductsRequestDelegate {
     }
     
 }
+
+
+// MARK: StoreKitTransactionObserver
+extension DonationViewController: SKPaymentTransactionObserver {
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                completeTransaction(transaction)
+                finishTransaction(transaction)
+            case .failed:
+                failedTransaction(transaction)
+                finishTransaction(transaction)
+            case .restored:
+                restoreTransaction(transaction)
+                finishTransaction(transaction)
+                break
+            case .deferred:
+                break
+            case .purchasing:
+                break
+            }
+        }
+    }
+    
+    
+    func completeTransaction(_ transaction: SKPaymentTransaction) {
+        
+    }
+    
+    func failedTransaction(_ transaction: SKPaymentTransaction) {
+        
+    }
+    
+    func restoreTransaction(_ transaction: SKPaymentTransaction) {
+        
+    }
+    
+    func finishTransaction(_ transaction: SKPaymentTransaction) {
+        CGSSLoadingHUDManager.default.hide()
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+}
+
 
 
