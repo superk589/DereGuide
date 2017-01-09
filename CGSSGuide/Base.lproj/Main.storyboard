@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eme-MZ-6LK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,38 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--卡片-->
-        <scene sceneID="KCR-Q9-PSW">
-            <objects>
-                <tableViewController title="卡片" id="XEw-Y1-ITn" customClass="CardTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="5" sectionFooterHeight="5" id="IPd-c3-lQ2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" id="hZ0-ct-x4I" customClass="CardTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="5" width="375" height="68"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hZ0-ct-x4I" id="JPc-Ge-958">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </tableViewCellContentView>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="XEw-Y1-ITn" id="ylD-iz-mFo"/>
-                            <outlet property="delegate" destination="XEw-Y1-ITn" id="Hqe-Ua-13K"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="hWU-i2-gC2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fyQ-LR-rgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2782" y="-565.99999999999989"/>
-        </scene>
         <!--设置-->
         <scene sceneID="s4U-8z-nuO">
             <objects>
@@ -347,7 +315,7 @@
         <!--根标签栏-->
         <scene sceneID="6Yg-Ih-m8u">
             <objects>
-                <tabBarController title="根标签栏" automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="RootTabBarViewController" title="根标签栏" automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1055,12 +1023,41 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="XEw-Y1-ITn" kind="relationship" relationship="rootViewController" id="rdA-Ve-ldW"/>
+                        <segue destination="hop-gk-wsV" kind="relationship" relationship="rootViewController" id="MmV-tx-OLQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Whv-b0-gNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3594" y="-565.99999999999989"/>
+        </scene>
+        <!--卡片-->
+        <scene sceneID="wNd-5k-mcB">
+            <objects>
+                <tableViewController title="卡片" id="hop-gk-wsV" customClass="CardTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YO4-wT-KNm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Xa-LB-GsV">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xa-LB-GsV" id="aLB-ga-YZV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hop-gk-wsV" id="hh8-Pc-QAa"/>
+                            <outlet property="delegate" destination="hop-gk-wsV" id="EVY-nZ-7bI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="g0Z-NG-74c"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y61-0Z-B5w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2865" y="-566"/>
         </scene>
         <!--工具导航-->
         <scene sceneID="x9V-Lw-SAR">

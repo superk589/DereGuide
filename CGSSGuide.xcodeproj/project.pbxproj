@@ -31,6 +31,11 @@
 		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
 		123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A21DAA44C6007361CF /* EventBannerView.swift */; };
+		123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EA1E2374260016A07F /* CGSSClient.swift */; };
+		123AC6F11E237CA50016A07F /* DrawerCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */; };
+		123AC6F21E237CA50016A07F /* DrawerScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */; };
+		123AC6F31E237CA50016A07F /* DrawerShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */; };
+		123AC6F41E237CA50016A07F /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6F01E237CA50016A07F /* DrawerController.swift */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
@@ -119,6 +124,13 @@
 		12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */; };
 		12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B61E1CB0800064991E /* UIColorExtension.swift */; };
 		12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B81E1CCF880064991E /* BaseViewController.swift */; };
+		12D4F8BD1E1E667D0064991E /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8BC1E1E667D0064991E /* FilterView.swift */; };
+		12D4F8C01E1E8E200064991E /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8BF1E1E8E200064991E /* FilterCell.swift */; };
+		12D4F8C41E1E99B20064991E /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C31E1E99B20064991E /* SortView.swift */; };
+		12D4F8C61E1E99CE0064991E /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C51E1E99CE0064991E /* SortCell.swift */; };
+		12D4F8C81E1E9F1E0064991E /* CardFilterSorterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C71E1E9F1E0064991E /* CardFilterSorterController.swift */; };
+		12D4F8CA1E1EA0410064991E /* SortOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C91E1EA0410064991E /* SortOrderView.swift */; };
+		12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -163,6 +175,11 @@
 		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		123805A21DAA44C6007361CF /* EventBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBannerView.swift; sourceTree = "<group>"; };
+		123AC6EA1E2374260016A07F /* CGSSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSClient.swift; sourceTree = "<group>"; };
+		123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerCoverView.swift; sourceTree = "<group>"; };
+		123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerScrollView.swift; sourceTree = "<group>"; };
+		123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerShadowView.swift; sourceTree = "<group>"; };
+		123AC6F01E237CA50016A07F /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -269,6 +286,13 @@
 		12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtenstion.swift; sourceTree = "<group>"; };
 		12D4F8B61E1CB0800064991E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		12D4F8B81E1CCF880064991E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		12D4F8BC1E1E667D0064991E /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		12D4F8BF1E1E8E200064991E /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		12D4F8C31E1E99B20064991E /* SortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
+		12D4F8C51E1E99CE0064991E /* SortCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortCell.swift; sourceTree = "<group>"; };
+		12D4F8C71E1E9F1E0064991E /* CardFilterSorterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterSorterController.swift; sourceTree = "<group>"; };
+		12D4F8C91E1EA0410064991E /* SortOrderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortOrderView.swift; sourceTree = "<group>"; };
+		12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -339,6 +363,17 @@
 				123805A21DAA44C6007361CF /* EventBannerView.swift */,
 			);
 			path = EventInfo;
+			sourceTree = "<group>";
+		};
+		123AC6EC1E237CA50016A07F /* DrawerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */,
+				123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */,
+				123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */,
+				123AC6F01E237CA50016A07F /* DrawerController.swift */,
+			);
+			path = DrawerViewController;
 			sourceTree = "<group>";
 		};
 		1247917F1D87F4E500ED8EA6 /* GachaSimulation */ = {
@@ -433,6 +468,7 @@
 				12F590301D9555CF00E004ED /* CGSSTypes.swift */,
 				123679031E0E6B1300622114 /* DeviceInformationManager.swift */,
 				123679051E0E6C3600622114 /* CGSSVersionManager.swift */,
+				123AC6EA1E2374260016A07F /* CGSSClient.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -455,6 +491,7 @@
 				1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */,
 				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
 				1269E9171D5209610071AD7F /* CardFilterAndSorterTableViewController.swift */,
+				12D4F8C71E1E9F1E0064991E /* CardFilterSorterController.swift */,
 				1269E9181D5209610071AD7F /* CardTableViewController.swift */,
 			);
 			path = Controller;
@@ -496,6 +533,7 @@
 				1269E9E81D520B750071AD7F /* CGSSImageView.swift */,
 				12A71D921D8C2D280021320D /* CGSSCheckBox.swift */,
 				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
+				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -564,6 +602,7 @@
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
+				123AC6EC1E237CA50016A07F /* DrawerViewController */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -619,6 +658,19 @@
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
 			);
 			path = CGSSGuide;
+			sourceTree = "<group>";
+		};
+		12D4F8BE1E1E66840064991E /* FilterAndSorting */ = {
+			isa = PBXGroup;
+			children = (
+				12D4F8BC1E1E667D0064991E /* FilterView.swift */,
+				12D4F8BF1E1E8E200064991E /* FilterCell.swift */,
+				12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */,
+				12D4F8C31E1E99B20064991E /* SortView.swift */,
+				12D4F8C51E1E99CE0064991E /* SortCell.swift */,
+				12D4F8C91E1EA0410064991E /* SortOrderView.swift */,
+			);
+			name = FilterAndSorting;
 			sourceTree = "<group>";
 		};
 		B944DE078DA419AC45D4315A /* Pods */ = {
@@ -794,8 +846,10 @@
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
+				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
+				123AC6F41E237CA50016A07F /* DrawerController.swift in Sources */,
 				123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
@@ -817,6 +871,7 @@
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
+				12D4F8C81E1E9F1E0064991E /* CardFilterSorterController.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
 				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
@@ -830,6 +885,7 @@
 				1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
+				12D4F8C41E1E99B20064991E /* SortView.swift in Sources */,
 				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
@@ -845,8 +901,10 @@
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
+				123AC6F21E237CA50016A07F /* DrawerScrollView.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
+				12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */,
@@ -858,7 +916,9 @@
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
+				123AC6F31E237CA50016A07F /* DrawerShadowView.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
+				12D4F8C01E1E8E200064991E /* FilterCell.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
@@ -870,10 +930,12 @@
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
+				12D4F8BD1E1E667D0064991E /* FilterView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
+				12D4F8CA1E1EA0410064991E /* SortOrderView.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
@@ -882,7 +944,9 @@
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
+				123AC6F11E237CA50016A07F /* DrawerCoverView.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
+				12D4F8C61E1E99CE0064991E /* SortCell.swift in Sources */,
 				1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
 				120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */,

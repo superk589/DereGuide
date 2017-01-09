@@ -9,7 +9,7 @@
 import UIKit
 
 class CGSSSorterFilterManager: NSObject {
-    static let defaultManager = CGSSSorterFilterManager()
+    static let `default` = CGSSSorterFilterManager()
     static let cardSorterPath = NSHomeDirectory() + "/Documents/cardSorter.plist"
     static let teamCardSorterPath = NSHomeDirectory() + "/Documents/teamCardSorter.plist"
     static let cardFilterPath = NSHomeDirectory() + "/Documents/cardFilter.plist"

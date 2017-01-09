@@ -19,9 +19,9 @@ class BaseSongTableViewController: RefreshableTableViewController {
     
     func prepareFilterAndSorter() {
         // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.defaultManager.songFilter
+        filter = CGSSSorterFilterManager.default.songFilter
         // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.defaultManager.songSorter
+        sorter = CGSSSorterFilterManager.default.songSorter
     }
     
     // 根据设定的筛选和排序方法重新展现数据
@@ -225,8 +225,8 @@ extension BaseSongTableViewController {
 
 extension BaseSongTableViewController: SongFilterAndSorterTableViewControllerDelegate {
     func doneAndReturn(_ filter: CGSSSongFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.defaultManager.songFilter = filter
-        CGSSSorterFilterManager.defaultManager.songSorter = sorter
-        CGSSSorterFilterManager.defaultManager.saveForSong()
+        CGSSSorterFilterManager.default.songFilter = filter
+        CGSSSorterFilterManager.default.songSorter = sorter
+        CGSSSorterFilterManager.default.saveForSong()
     }
 }

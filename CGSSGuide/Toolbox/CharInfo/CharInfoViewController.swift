@@ -57,9 +57,9 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     func prepareFilterAndSorter() {
         // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.defaultManager.charFilter
+        filter = CGSSSorterFilterManager.default.charFilter
         // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.defaultManager.charSorter
+        sorter = CGSSSorterFilterManager.default.charSorter
     }
     // 根据设定的筛选和排序方法重新展现数据
     func refresh() {
@@ -140,9 +140,9 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     }
     
     func doneAndReturn(_ filter: CGSSCharFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.defaultManager.charFilter = filter
-        CGSSSorterFilterManager.defaultManager.charSorter = sorter
-        CGSSSorterFilterManager.defaultManager.saveForChar()
+        CGSSSorterFilterManager.default.charFilter = filter
+        CGSSSorterFilterManager.default.charSorter = sorter
+        CGSSSorterFilterManager.default.saveForChar()
     }
     
     /*

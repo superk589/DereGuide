@@ -11,16 +11,21 @@ protocol BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard)
 }
 
-class BaseCardTableViewController: RefreshableTableViewController, CardFilterAndSorterTableViewControllerDelegate {
+class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate {
     
     var cardList: [CGSSCard]!
     var searchBar: UISearchBar!
-    var filter: CGSSCardFilter!
-    var sorter: CGSSSorter!
+    var filter: CGSSCardFilter {
+        return CGSSSorterFilterManager.default.cardfilter
+    }
+    var sorter: CGSSSorter {
+        return CGSSSorterFilterManager.default.cardSorter
+    }
     var delegate: BaseCardTableViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // 初始化导航栏的搜索条
         searchBar = UISearchBar()
         // 为了避免push/pop时闪烁,searchBar的背景图设置为透明的
@@ -36,22 +41,12 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.delegate = self
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
-        
     }
     
-    func prepareFilterAndSorter() {
-        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.defaultManager.cardfilter
-        // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.defaultManager.cardSorter
-    }
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
-        prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
         self.cardList = dao.getCardListByMask(filter)
         if searchBar.text != "" {
@@ -67,27 +62,24 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     }
     
     func filterAction() {
-        let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewController(withIdentifier: "CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
-        filterVC.hidesBottomBarWhenPushed = true
-        filterVC.delegate = self
-        // navigationController?.pushViewController(filterVC, animated: true)
+        CGSSClient.shared.drawerController?.showRightSide(animated: true)
         
-        // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.25
-        transition.type = kCATransitionFade
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        navigationController?.pushViewController(filterVC, animated: false)
+//        let sb = UIStoryboard.init(name: "Main", bundle: nil)
+//        let filterVC = sb.instantiateViewController(withIdentifier: "CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
+//        filterVC.filter = self.filter
+//        filterVC.sorter = self.sorter
+//        filterVC.hidesBottomBarWhenPushed = true
+//        filterVC.delegate = self
+//        // navigationController?.pushViewController(filterVC, animated: true)
+//        
+//        // 使用自定义动画效果
+//        let transition = CATransition()
+//        transition.duration = 0.25
+//        transition.type = kCATransitionFade
+//        navigationController?.view.layer.add(transition, forKey: kCATransition)
+//        navigationController?.pushViewController(filterVC, animated: false)
     }
     
-    func cancelAction() {
-        searchBar.resignFirstResponder()
-        searchBar.text = ""
-        refresh()
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -97,9 +89,21 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let filterVC = CardFilterSortController()
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        CGSSClient.shared.drawerController?.rightSideVC = filterVC
+        
+        
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        CGSSClient.shared.drawerController?.rightSideVC = nil
+        
     }
     // MARK: - Table view data source
     
@@ -165,10 +169,10 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterAnd
         delegate?.selectCard(cardList[indexPath.row])
     }
     
-    func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.defaultManager.cardfilter = filter
-        CGSSSorterFilterManager.defaultManager.cardSorter = sorter
-        CGSSSorterFilterManager.defaultManager.saveForCard()
+    func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.cardfilter = filter
+        CGSSSorterFilterManager.default.cardSorter = sorter
+        CGSSSorterFilterManager.default.saveForCard()
     }
     
 }

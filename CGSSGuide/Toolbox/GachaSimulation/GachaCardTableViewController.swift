@@ -10,14 +10,31 @@ import UIKit
 
 class GachaCardTableViewController: BaseCardTableViewController {
     
+    var _filter: CGSSCardFilter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
+    var _sorter: CGSSSorter = CGSSSorter.init(att: "sRarity")
+    
+    override var filter: CGSSCardFilter {
+        get {
+            return _filter
+        }
+        set {
+            _filter = newValue
+        }
+    }
+    override var sorter: CGSSSorter {
+        get {
+            return _sorter
+        }
+        set {
+            _sorter = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
     
         toolbarItems = [backItem]
-
-        prepareFilterAndSorter()
     }
     
     func tbBack() {
@@ -49,12 +66,6 @@ class GachaCardTableViewController: BaseCardTableViewController {
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    override func prepareFilterAndSorter() {
-        // 设置初始顺序和筛选
-        filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-        sorter = CGSSSorter.init(att: "sRarity")
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,8 +78,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
         cardDetailVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }
-    
-    override func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {
+    override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
         self.filter = filter
         self.sorter = sorter
     }

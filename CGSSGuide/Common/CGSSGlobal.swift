@@ -43,6 +43,7 @@ struct Color {
     public static let parade = UIColor.init(red: 1.0 * 22 / 255, green: 1.0 * 87 / 255, blue: 1.0 * 250 / 255, alpha: 1)
 
     public static let allType = UIColor.darkGray
+
 }
 
 public class CGSSGlobal: NSObject {

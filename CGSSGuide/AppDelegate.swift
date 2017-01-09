@@ -18,17 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 处理一系列启动任务
+        
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset {
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.songFilterPath)
         }
+        
         // 规划近期偶像生日
         if UserDefaults.standard.shouldPostBirthdayNotice {
             BirthdayCenter.defaultCenter.scheduleNotifications()
         }
+        
         // 设置SDWebImage过期时间
         SDImageCache.shared().maxCacheAge = 60 * 60 * 24 * 365 * 10 // 10年缓存时间
         
+        // 初始化DrawerController和TabBarController
+        let sb = UIStoryboard.init(name: "Main", bundle: nil)
+        let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
+        window = UIWindow()
+        let drawerController = DrawerController.init(main: baseTabBarController, rightSide: nil, leftSide: nil)
+        drawerController.rightSideWidth = Screen.width - 68
+        drawerController.drawerStyle = .cover
+        window?.rootViewController = drawerController
+        window?.makeKeyAndVisible()
+        CGSSClient.shared.drawerController = drawerController
         return true
     }
     

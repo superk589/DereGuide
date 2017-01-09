@@ -228,9 +228,8 @@ extension DonationViewController: SKPaymentTransactionObserver {
             case .restored:
                 restoreTransaction(transaction)
                 finishTransaction(transaction)
-                break
             case .deferred:
-                break
+                finishTransaction(transaction)
             case .purchasing:
                 break
             }

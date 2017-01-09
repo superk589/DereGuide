@@ -10,6 +10,13 @@ import UIKit
 
 class TeamCardSelectTableViewController: BaseCardTableViewController {
     
+    override var filter: CGSSCardFilter {
+        return CGSSSorterFilterManager.default.teamCardfilter
+    }
+    override var sorter: CGSSSorter {
+        return CGSSSorterFilterManager.default.teamCardSorter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
@@ -37,13 +44,6 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    override func prepareFilterAndSorter() {
-        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.defaultManager.teamCardfilter
-        // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.defaultManager.teamCardSorter
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,9 +56,9 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    override func doneAndReturn(_ filter: CGSSCardFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.defaultManager.teamCardfilter = filter
-        CGSSSorterFilterManager.defaultManager.teamCardSorter = sorter
-        CGSSSorterFilterManager.defaultManager.saveForTeam()
+    override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.teamCardfilter = filter
+        CGSSSorterFilterManager.default.teamCardSorter = sorter
+        CGSSSorterFilterManager.default.saveForTeam()
     }
 }
