@@ -78,6 +78,9 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
         tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: "FilterCell")
         tableView.delegate = self
         tableView.dataSource = self
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width, height: 20))
+        tableView.tableHeaderView = headerView
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

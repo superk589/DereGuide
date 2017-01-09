@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
         window = UIWindow()
         let drawerController = DrawerController.init(main: baseTabBarController, rightSide: nil, leftSide: nil)
-        drawerController.rightSideWidth = Screen.width - 68
         drawerController.drawerStyle = .cover
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()

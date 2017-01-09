@@ -41,6 +41,7 @@ class FilterView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
         cv.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        cv.backgroundColor = UIColor.white
         cv.allowsMultipleSelection = true
         cv.delegate = self
         cv.dataSource = self

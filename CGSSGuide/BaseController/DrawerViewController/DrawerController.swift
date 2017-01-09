@@ -6,6 +6,7 @@
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
+
 import UIKit
 import SnapKit
 
@@ -44,7 +45,7 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
         }
     }
     
-
+    
     /// 主视图控制器
     open var mainVC: UIViewController! {
         didSet {
@@ -78,6 +79,8 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
                 })
                 containerView.bringSubview(toFront: leftShadowView)
                 containerView.bringSubview(toFront: rightShadowView)
+            } else {
+                containerView.rightSideWidth = 0
             }
             
         }
@@ -92,7 +95,7 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
                 containerView.addSubview(leftView)
                 leftView.snp.makeConstraints({ (make) in
                     make.top.left.bottom.equalToSuperview()
-                    make.height.equalTo(mainVC.view)
+                    make.height.equalToSuperview()
                     make.width.equalTo(leftSideWidth)
                 })
                 mainVC.view.snp.updateConstraints({ (update) in
@@ -101,6 +104,8 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
                 containerView.contentOffset.x = leftSideWidth
                 containerView.bringSubview(toFront: leftShadowView)
                 containerView.bringSubview(toFront: rightShadowView)
+            } else {
+                containerView.leftSideWidth = 0
             }
         }
     }
@@ -129,9 +134,10 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
         if let leftView = leftSide?.view {
             containerView.addSubview(leftView)
             leftView.snp.makeConstraints({ (make) in
-                make.top.left.bottom.equalToSuperview()
+                make.top.bottom.equalToSuperview()
                 make.height.equalToSuperview()
                 make.width.equalTo(leftSideWidth)
+                make.right.equalTo(main.view.snp.left)
             })
         } else {
             containerView.leftSideWidth = 0
@@ -140,9 +146,10 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
         if let rightView = rightSide?.view {
             containerView.addSubview(rightView)
             rightView.snp.makeConstraints({ (make) in
-                make.top.right.bottom.equalToSuperview()
+                make.top.bottom.equalToSuperview()
                 make.height.equalToSuperview()
                 make.width.equalTo(rightSideWidth)
+                make.left.equalTo(main.view.snp.right)
             })
         } else {
             containerView.rightSideWidth = 0
@@ -152,7 +159,7 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
             make.top.bottom.equalToSuperview()
             make.height.equalToSuperview()
             make.left.equalTo(leftSideWidth)
-            make.right.equalTo(rightSideWidth)
+            make.right.equalTo(-rightSideWidth)
             make.width.equalToSuperview()
         }
         
@@ -185,13 +192,13 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
         rightShadowView.alpha = 0
         
         containerView.contentOffset.x = leftSideWidth
-    
+        
         // 导航手势失败才可以执行左侧菜单手势
         if let gesture = main.navigationController?.interactivePopGestureRecognizer {
             containerView.panGestureRecognizer.require(toFail: gesture)
         }
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -204,7 +211,7 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
             self.hideLeftSide(animated: true)
         }
     }
-
+    
     
     /// 弹出预先设定好的右侧抽屉ViewController
     ///
@@ -266,7 +273,7 @@ open class DrawerController: UIViewController, DrawerCoverViewDelegate {
     open func hideLeftSide(animated: Bool) {
         hideRightSide(animated: animated)
     }
-
+    
     
 }
 
@@ -274,7 +281,7 @@ extension DrawerController: UIScrollViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = scrollView.frame.size.width
         let offsetX = scrollView.contentOffset.x
-    
+        
         let percent: CGFloat = {
             if isLeftShowing {
                 return (leftSideWidth - offsetX) / leftSideWidth
@@ -296,6 +303,7 @@ extension DrawerController: UIScrollViewDelegate {
         mainVC.view.transform = CGAffineTransform.init(scaleX: scale, y: scale)
         mainCoverView.alpha = percent
         containerView.endEditing(true)
+        
         if isLeftShowing {
             switch drawerStyle {
             case .plain:
@@ -429,7 +437,7 @@ extension DrawerController {
         if containerView.contentOffset.x > leftSideWidth {
             return true
         } else {
-           return false
+            return false
         }
     }
     

@@ -93,8 +93,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         CGSSClient.shared.drawerController?.rightSideVC = filterVC
-        
-        
+        CGSSClient.shared.drawerController?.rightSideWidth = Screen.width - 68
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
