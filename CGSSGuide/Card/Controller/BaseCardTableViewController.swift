@@ -100,7 +100,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         CGSSClient.shared.drawerController?.rightVC = nil
         
     }
