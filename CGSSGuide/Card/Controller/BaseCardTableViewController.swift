@@ -62,7 +62,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     }
     
     func filterAction() {
-        CGSSClient.shared.drawerController?.showRightSide(animated: true)
+        CGSSClient.shared.drawerController?.showRight(animated: true)
         
 //        let sb = UIStoryboard.init(name: "Main", bundle: nil)
 //        let filterVC = sb.instantiateViewController(withIdentifier: "CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
@@ -92,8 +92,8 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         let filterVC = CardFilterSortController()
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
-        CGSSClient.shared.drawerController?.rightSideVC = filterVC
-        CGSSClient.shared.drawerController?.rightSideWidth = Screen.width - 68
+        CGSSClient.shared.drawerController?.rightVC = filterVC
+        CGSSClient.shared.drawerController?.defaultRightWidth = Screen.width - 68
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
@@ -101,7 +101,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        CGSSClient.shared.drawerController?.rightSideVC = nil
+        CGSSClient.shared.drawerController?.rightVC = nil
         
     }
     // MARK: - Table view data source

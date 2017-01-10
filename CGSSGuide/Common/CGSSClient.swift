@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import ZKDrawerController
 
 class CGSSClient {
 
     static let shared = CGSSClient()
     
-    var drawerController: DrawerController?
+    var drawerController: ZKDrawerController?
     
 }

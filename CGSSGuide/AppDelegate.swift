@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import ZKDrawerController
 
 @UIApplicationMain
 
@@ -36,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
         let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
         window = UIWindow()
-        let drawerController = DrawerController.init(main: baseTabBarController, rightSide: nil, leftSide: nil)
+        let drawerController = ZKDrawerController.init(main: baseTabBarController, right: nil, left: nil)
         drawerController.drawerStyle = .cover
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()

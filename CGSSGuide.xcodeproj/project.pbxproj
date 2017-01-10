@@ -32,10 +32,6 @@
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
 		123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A21DAA44C6007361CF /* EventBannerView.swift */; };
 		123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EA1E2374260016A07F /* CGSSClient.swift */; };
-		123AC6F11E237CA50016A07F /* DrawerCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */; };
-		123AC6F21E237CA50016A07F /* DrawerScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */; };
-		123AC6F31E237CA50016A07F /* DrawerShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */; };
-		123AC6F41E237CA50016A07F /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6F01E237CA50016A07F /* DrawerController.swift */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
@@ -176,10 +172,6 @@
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		123805A21DAA44C6007361CF /* EventBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBannerView.swift; sourceTree = "<group>"; };
 		123AC6EA1E2374260016A07F /* CGSSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSClient.swift; sourceTree = "<group>"; };
-		123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerCoverView.swift; sourceTree = "<group>"; };
-		123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerScrollView.swift; sourceTree = "<group>"; };
-		123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerShadowView.swift; sourceTree = "<group>"; };
-		123AC6F01E237CA50016A07F /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -363,17 +355,6 @@
 				123805A21DAA44C6007361CF /* EventBannerView.swift */,
 			);
 			path = EventInfo;
-			sourceTree = "<group>";
-		};
-		123AC6EC1E237CA50016A07F /* DrawerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				123AC6ED1E237CA50016A07F /* DrawerCoverView.swift */,
-				123AC6EE1E237CA50016A07F /* DrawerScrollView.swift */,
-				123AC6EF1E237CA50016A07F /* DrawerShadowView.swift */,
-				123AC6F01E237CA50016A07F /* DrawerController.swift */,
-			);
-			path = DrawerViewController;
 			sourceTree = "<group>";
 		};
 		1247917F1D87F4E500ED8EA6 /* GachaSimulation */ = {
@@ -602,7 +583,6 @@
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
-				123AC6EC1E237CA50016A07F /* DrawerViewController */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -849,7 +829,6 @@
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
-				123AC6F41E237CA50016A07F /* DrawerController.swift in Sources */,
 				123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
@@ -901,7 +880,6 @@
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
-				123AC6F21E237CA50016A07F /* DrawerScrollView.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
 				12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */,
@@ -916,7 +894,6 @@
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
-				123AC6F31E237CA50016A07F /* DrawerShadowView.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				12D4F8C01E1E8E200064991E /* FilterCell.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
@@ -944,7 +921,6 @@
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
-				123AC6F11E237CA50016A07F /* DrawerCoverView.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				12D4F8C61E1E99CE0064991E /* SortCell.swift in Sources */,
 				1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */,
