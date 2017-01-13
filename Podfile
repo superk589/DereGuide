@@ -12,4 +12,5 @@ target 'CGSSGuide' do
   pod 'SnapKit'
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
+  pod 'TTGTagCollectionView'
 end

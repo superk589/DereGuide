@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-class CGSSSongFilter {
+struct CGSSSongFilter {
     var songTypes: CGSSSongTypes
     var eventTypes: CGSSSongEventTypes
     

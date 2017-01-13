@@ -35,7 +35,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: true)
     }
     

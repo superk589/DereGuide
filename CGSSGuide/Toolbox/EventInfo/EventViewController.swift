@@ -32,8 +32,8 @@ class EventViewController: RefreshableTableViewController {
         super.viewWillAppear(animated)
         CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         CGSSNotificationCenter.removeAll(self)
     }
     

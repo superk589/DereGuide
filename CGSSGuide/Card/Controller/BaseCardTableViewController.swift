@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import ZKDrawerController
+
 protocol BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard)
 }
 
-class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate {
+class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var cardList: [CGSSCard]!
     var searchBar: UISearchBar!
@@ -22,6 +24,8 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         return CGSSSorterFilterManager.default.cardSorter
     }
     var delegate: BaseCardTableViewControllerDelegate?
+    
+    var filterVC: CardFilterSortController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,11 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         searchBar.delegate = self
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
+   
+        filterVC = CardFilterSortController()
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.delegate = self
     }
     
     // 根据设定的筛选和排序方法重新展现数据
@@ -62,22 +71,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     }
     
     func filterAction() {
-        CGSSClient.shared.drawerController?.showRight(animated: true)
-        
-//        let sb = UIStoryboard.init(name: "Main", bundle: nil)
-//        let filterVC = sb.instantiateViewController(withIdentifier: "CardFilterAndSorterTableViewController") as! CardFilterAndSorterTableViewController
-//        filterVC.filter = self.filter
-//        filterVC.sorter = self.sorter
-//        filterVC.hidesBottomBarWhenPushed = true
-//        filterVC.delegate = self
-//        // navigationController?.pushViewController(filterVC, animated: true)
-//        
-//        // 使用自定义动画效果
-//        let transition = CATransition()
-//        transition.duration = 0.25
-//        transition.type = kCATransitionFade
-//        navigationController?.view.layer.add(transition, forKey: kCATransition)
-//        navigationController?.pushViewController(filterVC, animated: false)
+        CGSSClient.shared.drawerController?.show(animated: true)
     }
     
     
@@ -89,11 +83,11 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let filterVC = CardFilterSortController()
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
-        CGSSClient.shared.drawerController?.rightVC = filterVC
-        CGSSClient.shared.drawerController?.defaultRightWidth = Screen.width - 68
+        
+        let drawer = CGSSClient.shared.drawerController
+        drawer?.rightVC = filterVC
+        drawer?.delegate = self
+        drawer?.defaultRightWidth = Screen.width - 68
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
@@ -103,6 +97,15 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         super.viewWillDisappear(animated)
         CGSSClient.shared.drawerController?.rightVC = nil
         
+    }
+    
+    func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
+        
+    }
+    func drawerController(_ drawerVC: ZKDrawerController, willShow vc: UIViewController) {
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.reloadData()
     }
     // MARK: - Table view data source
     
@@ -172,6 +175,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         CGSSSorterFilterManager.default.cardfilter = filter
         CGSSSorterFilterManager.default.cardSorter = sorter
         CGSSSorterFilterManager.default.saveForCard()
+        refresh()
     }
     
 }

@@ -31,7 +31,7 @@ class TeamEditViewController: BaseTableViewController {
      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setKeyboardHeight), name: UIKeyboardWillShowNotification, object: nil)
      }
 
-     override func viewDidDisappear(animated: Bool) {
+     override func viewWillDisappear(animated: Bool) {
      super.viewWillDisappear(animated)
      NSNotificationCenter.defaultCenter().removeObserver(self)
      }*/

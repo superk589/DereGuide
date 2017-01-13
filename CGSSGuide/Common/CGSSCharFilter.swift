@@ -8,15 +8,14 @@
 
 import UIKit
 
-
-open class CGSSCharFilter {
+struct CGSSCharFilter {
     
     var charTypes: CGSSCharTypes
     var charAgeTypes: CGSSCharAgeTypes
     var charBloodTypes: CGSSCharBloodTypes
     var charCVTypes: CGSSCharCVTypes
     var favoriteTypes: CGSSFavoriteTypes
-    public init(typeMask: UInt, ageMask: UInt, bloodMask: UInt, cvMask: UInt, favoriteMask: UInt) {
+    init(typeMask: UInt, ageMask: UInt, bloodMask: UInt, cvMask: UInt, favoriteMask: UInt) {
         charTypes = CGSSCharTypes.init(rawValue: typeMask)
         charAgeTypes = CGSSCharAgeTypes.init(rawValue: ageMask)
         charBloodTypes = CGSSCharBloodTypes.init(rawValue: bloodMask)

@@ -23,9 +23,9 @@ PODS:
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/Defines (2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - lz4 (128)
   - ReachabilitySwift (3)
   - SDWebImage (3.8.2):
@@ -33,8 +33,9 @@ PODS:
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.1.2)
   - SwiftyJSON (3.1.4)
+  - TTGTagCollectionView (1.3.0)
   - ZKCornerRadiusView (0.0.4)
-  - ZKDrawerController (0.0.3):
+  - ZKDrawerController (0.0.7):
     - SnapKit
 
 DEPENDENCIES:
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - SDWebImage
   - SnapKit
   - SwiftyJSON
+  - TTGTagCollectionView
   - ZKCornerRadiusView
   - ZKDrawerController
 
@@ -60,15 +62,16 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 92dff0e9ce1cfdfe640d9d80ab86d5e4371e478f
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TTGTagCollectionView: 8bbac8cf3a29356a6d0ee47350eb0a5454501f70
   ZKCornerRadiusView: 98ceb50e82494f97be5f163fa20d0e5b21749ebd
-  ZKDrawerController: 6a277d377fa531edfc8df62f948d70ff4351b42b
+  ZKDrawerController: 5fc87b16b8398a9eb48a251b95d74c33662c582a
 
-PODFILE CHECKSUM: e6b62017e89a5f33ce8071e1f9f39f59522f90cf
+PODFILE CHECKSUM: 562860a8c3ad45e3762173a16d897649d535f668
 
 COCOAPODS: 1.2.0.beta.3

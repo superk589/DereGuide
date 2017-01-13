@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset {
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.songFilterPath)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.cardFilterPath)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.teamCardFilterPath)
         }
         
         // 规划近期偶像生日
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
         let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
         window = UIWindow()
-        let drawerController = ZKDrawerController.init(main: baseTabBarController, right: nil, left: nil)
+        let drawerController = ZKDrawerController.init(main: baseTabBarController)
         drawerController.drawerStyle = .cover
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()

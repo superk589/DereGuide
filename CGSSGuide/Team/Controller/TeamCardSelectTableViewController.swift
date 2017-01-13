@@ -19,9 +19,10 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
-
-        toolbarItems = [backItem]
+        
+        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
+        
+        navigationItem.leftBarButtonItem = leftItem
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,18 +31,18 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func tbBack() {
+    func backAction() {
         _ = navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setToolbarHidden(false, animated: true)
+        //navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
+        super.viewWillDisappear(animated)
+        //navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,5 +61,6 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         CGSSSorterFilterManager.default.teamCardfilter = filter
         CGSSSorterFilterManager.default.teamCardSorter = sorter
         CGSSSorterFilterManager.default.saveForTeam()
+        refresh()
     }
 }

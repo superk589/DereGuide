@@ -9,7 +9,7 @@
 import Foundation
 
 
-class CGSSCardFilter {
+struct CGSSCardFilter {
     
     var cardTypes: CGSSCardTypes
     var attributeTypes: CGSSAttributeTypes

@@ -27,6 +27,7 @@ class CGSSIconView: ZKCornerRadiusView {
     }
     
     func prepare() {
+       
         zk_cornerRadius = self.fheight / 8
 //        layer.cornerRadius = 6
 //        layer.masksToBounds = true

@@ -11,28 +11,20 @@ protocol CardFilterSortControllerDelegate: class {
     func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter)
 }
 
-class CardFilterSortController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView: UITableView!
-    
-    var orderView: SortOrderView!
-    var attributeSorterView: SortView!
-    var otherSorterView: SortView!
     
     weak var delegate: CardFilterSortControllerDelegate?
     var filter: CGSSCardFilter!
     var sorter: CGSSSorter!
     
-    var rarityTitles = ["SSR+", "SSR", "SR+", "SR", "R+", "R", "N+", "N"]
-    var rarityColors = Array<UIColor>.init(repeating: Color.parade, count: 8)
-    
+    var rarityTitles = ["N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
+   
     var cardTypeTitles = ["Cute", "Cool", "Passion"]
-    var cardTypeColors = [Color.cute, Color.cool, Color.passion]
     
     var attributeTitles = ["Vocal", "Dance", "Visual"]
-    var attributeColors = [Color.vocal, Color.dance, Color.visual]
     
-    var skillTypeColors = Array<UIColor>.init(repeating: Color.parade, count: 8)
     var skillTypeTitles = [
         CGSSSkillTypes.comboBonus.toString(),
         CGSSSkillTypes.perfectBonus.toString(),
@@ -46,29 +38,15 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
     
     var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
                           NSLocalizedString("未收藏", comment: "")]
-    var favoriteColors = [Color.parade, Color.parade]
     
+    var sorterTitles = ["Total", "Vocal", "Dance", "Visual", NSLocalizedString("更新时间", comment: ""), NSLocalizedString("稀有度", comment: ""), NSLocalizedString("相册编号", comment: "")]
+    var sorterMethods = ["overall", "vocal", "dance", "visual", "update_id", "sRarity", "sAlbumId"]
     
-    var sorterTitles = ["vocal", "dance", "visual", "overall", "update_id", "sRarity", "sAlbumId"]
-    var sorterColors = [Color.vocal, Color.dance, Color.visual, Color.allType, Color.parade, Color.parade, Color.parade]
+    var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareNaviBar()
         prepareUI()
-        setupUI()
-        
-    }
-    
-    func prepareNaviBar() {
-        let backButton = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(doneAction))
-        self.navigationItem.leftBarButtonItem = backButton
-        
-        let resetButton = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
-        self.navigationItem.rightBarButtonItem = resetButton
-    }
-    
-    func setupUI() {
         
     }
     
@@ -76,27 +54,31 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
         
         tableView = UITableView()
         tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: "FilterCell")
+        tableView.register(SortTableViewCell.self, forCellReuseIdentifier: "SortCell")
         tableView.delegate = self
         tableView.dataSource = self
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width, height: 20))
-        tableView.tableHeaderView = headerView
+        
+        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 44, right: 0)
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.estimatedRowHeight = 50
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(20)
         }
+        
+        view.bringSubview(toFront: toolbar)
         
     }
     
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    func reloadData() {
+        self.tableView.reloadData()
     }
     
-    
-    func doneAction() {
+    override func doneAction() {
         delegate?.doneAndReturn(filter: filter, sorter: sorter)
-        _ = self.navigationController?.popViewController(animated: true)
+        CGSSClient.shared.drawerController?.hide(animated: true)
         // 使用自定义动画效果
         /*let transition = CATransition()
          transition.duration = 0.3
@@ -105,7 +87,7 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
          navigationController?.popViewControllerAnimated(false)*/
     }
     
-    func resetAction() {
+    override func resetAction() {
         if delegate is CardTableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "update_id")
@@ -116,7 +98,7 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
             sorter = CGSSSorter.init(att: "sRarity")
         }
-        setupUI()
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -145,7 +127,7 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
         if section == 0 {
             return 5
         } else {
-            return 1
+            return 2
         }
     }
 
@@ -154,26 +136,43 @@ class CardFilterSortController: BaseViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: rarityTitles, colors: rarityColors)
+                cell.setup(titles: rarityTitles)
                 cell.presetIndex(index: filter.rarityTypes.rawValue)
             case 1:
-                cell.setup(titles: cardTypeTitles, colors: cardTypeColors)
+                cell.setup(titles: cardTypeTitles)
                 cell.presetIndex(index: filter.cardTypes.rawValue)
             case 2:
-                cell.setup(titles: attributeTitles, colors: attributeColors)
+                cell.setup(titles: attributeTitles)
                 cell.presetIndex(index: filter.attributeTypes.rawValue)
             case 3:
-                cell.setup(titles: skillTypeTitles, colors: skillTypeColors)
+                cell.setup(titles: skillTypeTitles)
                 cell.presetIndex(index: filter.skillTypes.rawValue)
             case 4:
-                cell.setup(titles: favoriteTitles, colors: favoriteColors)
+                cell.setup(titles: favoriteTitles)
                 cell.presetIndex(index: filter.favoriteTypes.rawValue)
             default:
                 break
             }
+            cell.delegate = self
             return cell
         } else {
-            return UITableViewCell()
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
+            
+            switch indexPath.row {
+            case 0:
+                cell.setup(titles: sorterOrderTitles)
+                cell.presetIndex(index: sorter.ascending ? 1 : 0)
+            case 1:
+                cell.setup(titles: sorterTitles)
+                if let index = sorterMethods.index(of: sorter.att) {
+                    cell.presetIndex(index: UInt(index))
+                }
+            default:
+                break
+            }
+            cell.delegate = self
+            return cell
         }
     }
 
@@ -186,7 +185,7 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.rarityTypes.insert(CGSSRarityTypes.init(rarity: 7 - index))
+                    filter.rarityTypes.insert(CGSSRarityTypes.init(rarity: index))
                 case 1:
                     filter.cardTypes.insert(CGSSCardTypes.init(type: index))
                 case 2:
@@ -208,7 +207,7 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.rarityTypes.remove(CGSSRarityTypes.init(rarity: 7 - index))
+                    filter.rarityTypes.remove(CGSSRarityTypes.init(rarity: index))
                 case 1:
                     filter.cardTypes.remove(CGSSCardTypes.init(type: index))
                 case 2:
@@ -224,4 +223,21 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
         }
     }
     
+}
+
+extension CardFilterSortController: SortTableViewCellDelegate {
+    func sortTableViewCell(_ cell: SortTableViewCell, didSelect index: Int) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 1 {
+                switch indexPath.row {
+                case 0:
+                    sorter.ascending = (index == 1)
+                case 1:
+                    sorter.att = sorterMethods[index]
+                default:
+                    break
+                }
+            }
+        }
+    }
 }

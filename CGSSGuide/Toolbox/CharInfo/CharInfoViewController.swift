@@ -106,7 +106,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         refresh()
     }
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     

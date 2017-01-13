@@ -32,12 +32,13 @@ class GachaCardTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
-    
-        toolbarItems = [backItem]
+        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
+        leftItem.width = 44
+        navigationItem.leftBarButtonItem = leftItem
+
     }
     
-    func tbBack() {
+    func backAction() {
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -58,12 +59,12 @@ class GachaCardTableViewController: BaseCardTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setToolbarHidden(false, animated: true)
+        //navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
+        super.viewWillDisappear(animated)
+        //navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,5 +82,6 @@ class GachaCardTableViewController: BaseCardTableViewController {
     override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
         self.filter = filter
         self.sorter = sorter
+        refresh()
     }
 }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-open class CGSSSorter {
+struct CGSSSorter {
     var att: String
     var ascending: Bool
     init(att: String, ascending: Bool) {
         self.att = att
         self.ascending = ascending
     }
-    convenience init(att: String) {
+    init(att: String) {
         self.init(att: att, ascending: false)
     }
     
