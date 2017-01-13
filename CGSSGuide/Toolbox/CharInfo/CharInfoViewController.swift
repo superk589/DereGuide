@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import ZKDrawerController
 
-class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableViewControllerDelegate {
+class CharInfoViewController: BaseTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var charList: [CGSSChar]!
     var searchBar: UISearchBar!
-    var filter: CGSSCharFilter!
-    var sorter: CGSSSorter!
+    var filter: CGSSCharFilter {
+        return CGSSSorterFilterManager.default.charFilter
+    }
+    var sorter: CGSSSorter {
+        return CGSSSorterFilterManager.default.charSorter
+    }
     
+    var filterVC: CharFilterSortController!
     override func viewDidLoad() {
         super.viewDidLoad()
         // 初始化导航栏的搜索条
@@ -32,38 +38,26 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.delegate = self
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
+//        
         self.tableView.register(CharInfoTableViewCell.self, forCellReuseIdentifier: "CharCell")
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         
-        // tb.items = [backItem]
+        navigationItem.leftBarButtonItem = backItem
         
-
-        toolbarItems = [backItem]
-
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        filterVC = CharFilterSortController()
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.delegate = self
     }
     
-    func tbBack() {
+    func backAction() {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    func prepareFilterAndSorter() {
-        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.default.charFilter
-        // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.default.charSorter
-    }
     // 根据设定的筛选和排序方法重新展现数据
     func refresh() {
-        prepareFilterAndSorter()
         let dao = CGSSDAO.sharedDAO
         self.charList = dao.getCharListByFilter(filter)
         if searchBar.text != "" {
@@ -76,20 +70,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     }
     
     func filterAction() {
-        let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewController(withIdentifier: "CharFilterAndSorterTableViewController") as! CharFilterAndSorterTableViewController
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
-        filterVC.hidesBottomBarWhenPushed = true
-        filterVC.delegate = self
-        // navigationController?.pushViewController(filterVC, animated: true)
-        
-        // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.25
-        transition.type = kCATransitionFade
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        navigationController?.pushViewController(filterVC, animated: false)
+        CGSSClient.shared.drawerController?.show(animated: true)
     }
     
     func cancelAction() {
@@ -100,19 +81,39 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setToolbarHidden(false, animated: true)
+        // self.navigationController?.setToolbarHidden(false, animated: true)
         // 页面出现时根据设定刷新排序和搜索内容
         searchBar.resignFirstResponder()
         refresh()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let drawer = CGSSClient.shared.drawerController
+        drawer?.rightVC = filterVC
+        drawer?.defaultRightWidth = Screen.width - 68
+        drawer?.delegate = self
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setToolbarHidden(true, animated: true)
+        CGSSClient.shared.drawerController?.rightVC = nil
+        // self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
+        
+    }
+    
+    func drawerController(_ drawerVC: ZKDrawerController, willShow vc: UIViewController) {
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -139,10 +140,11 @@ class CharInfoViewController: BaseTableViewController, CharFilterAndSorterTableV
         navigationController?.pushViewController(CharDVC, animated: true)
     }
     
-    func doneAndReturn(_ filter: CGSSCharFilter, sorter: CGSSSorter) {
+    func doneAndReturn(filter: CGSSCharFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.default.charFilter = filter
         CGSSSorterFilterManager.default.charSorter = sorter
         CGSSSorterFilterManager.default.saveForChar()
+        self.refresh()
     }
     
     /*

@@ -70,16 +70,17 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let drawer = CGSSClient.shared.drawerController
-        drawer?.rightVC = filterVC
-        drawer?.delegate = self
-        drawer?.defaultRightWidth = Screen.width - 68
-
         refresh()
     }
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let drawer = CGSSClient.shared.drawerController
+        drawer?.rightVC = filterVC
+        drawer?.delegate = self
+        drawer?.defaultRightWidth = Screen.width - 86
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CGSSClient.shared.drawerController?.rightVC = nil
@@ -245,5 +246,6 @@ extension BaseSongTableViewController: SongFilterSortControllerDelegate {
         CGSSSorterFilterManager.default.songFilter = filter
         CGSSSorterFilterManager.default.songSorter = sorter
         CGSSSorterFilterManager.default.saveForSong()
+        refresh()
     }
 }

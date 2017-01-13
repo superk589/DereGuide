@@ -84,13 +84,17 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // 页面出现时根据设定刷新排序和搜索内容
+        searchBar.resignFirstResponder()
+        refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightVC = filterVC
         drawer?.delegate = self
         drawer?.defaultRightWidth = Screen.width - 68
-        // 页面出现时根据设定刷新排序和搜索内容
-        searchBar.resignFirstResponder()
-        refresh()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
