@@ -26,7 +26,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         selectionStyle = .none
         filterView = TTGTagCollectionView()
         filterView.delegate = self
-        filterView.delegate = self
+        filterView.dataSource = self
         contentView.addSubview(filterView)
         filterView.snp.makeConstraints { (make) in
             make.left.equalTo(15)
@@ -42,6 +42,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
             let tagView = FilterItemView()
             tagView.setSelected(selected: false)
             tagView.setTitle(title: title)
+            tagViews.append(tagView)
         }
         filterView.reload()
     }
@@ -59,7 +60,6 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         let tagView = tagViews[Int(index)]
         tagView.sizeToFit()
         return tagView.frame.size
-        
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, updateContentSize contentSize: CGSize) {
@@ -68,7 +68,9 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
     
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
-        if isSelected {
+        let tagView = tagViews[Int(index)]
+        tagView.isSelected = !tagView.isSelected
+        if tagView.isSelected {
             delegate?.filterTableViewCell(self, didSelect: Int(index))
         } else {
             delegate?.filterTableViewCell(self, didDeselect: Int(index))

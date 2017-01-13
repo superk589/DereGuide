@@ -13,6 +13,10 @@ class CGSSClient {
 
     static let shared = CGSSClient()
     
+    private init() {
+        
+    }
+    
     var drawerController: ZKDrawerController?
     
 }

@@ -7,26 +7,28 @@
 //
 
 import UIKit
+import ZKDrawerController
+
 protocol BaseSongTableViewControllerDelegate: class {
     func selectSong(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int)
 }
-class BaseSongTableViewController: RefreshableTableViewController {
+class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var liveList: [CGSSLive]!
-    var sorter: CGSSSorter!
-    var filter: CGSSSongFilter!
+    var sorter: CGSSSorter {
+        return CGSSSorterFilterManager.default.songSorter
+    }
+    var filter: CGSSSongFilter {
+        return CGSSSorterFilterManager.default.songFilter
+    }
+    var filterVC: SongFilterSortController!
+    
     var searchBar: UISearchBar!
     
-    func prepareFilterAndSorter() {
-        // 设置初始顺序和筛选 默认按album_id降序 只显示SSR SSR+ SR SR+
-        filter = CGSSSorterFilterManager.default.songFilter
-        // 按更新顺序排序
-        sorter = CGSSSorterFilterManager.default.songSorter
-    }
     
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
-        prepareFilterAndSorter()
+
         let dao = CGSSDAO.sharedDAO
         liveList = filter.filterSongList(Array(dao.validLiveDict.values))
 //        for live in liveList {
@@ -68,7 +70,19 @@ class BaseSongTableViewController: RefreshableTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        let drawer = CGSSClient.shared.drawerController
+        drawer?.rightVC = filterVC
+        drawer?.delegate = self
+        drawer?.defaultRightWidth = Screen.width - 68
+
         refresh()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CGSSClient.shared.drawerController?.rightVC = nil
     }
     
     override func viewDidLoad() {
@@ -96,29 +110,22 @@ class BaseSongTableViewController: RefreshableTableViewController {
         searchBar.autocorrectionType = .no
         searchBar.delegate = self
         // self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
         self.tableView.rowHeight = 86
-        sorter = CGSSSorter.init(att: "updateId")
-        dao.sortListInPlace(&liveList!, sorter: sorter)
+        
+        filterVC = SongFilterSortController()
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.delegate = self
+
     }
     
     func filterAction() {
-        let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let filterVC = sb.instantiateViewController(withIdentifier: "SongFilterAndSorterTableViewController") as! SongFilterAndSorterTableViewController
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
-        filterVC.hidesBottomBarWhenPushed = true
-        filterVC.delegate = self
+        CGSSClient.shared.drawerController?.show(animated: true)
         // navigationController?.pushViewController(filterVC, animated: true)
-        
-        // 使用自定义动画效果
-        let transition = CATransition()
-        transition.duration = 0.25
-        transition.type = kCATransitionFade
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        navigationController?.pushViewController(filterVC, animated: false)
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -157,6 +164,16 @@ class BaseSongTableViewController: RefreshableTableViewController {
             tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
+    
+    func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
+        
+    }
+    func drawerController(_ drawerVC: ZKDrawerController, willShow vc: UIViewController) {
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
+        filterVC.reloadData()
+    }
+
     
     // 此方法应该被override或者通过代理来响应
     func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
@@ -223,8 +240,8 @@ extension BaseSongTableViewController {
     }
 }
 
-extension BaseSongTableViewController: SongFilterAndSorterTableViewControllerDelegate {
-    func doneAndReturn(_ filter: CGSSSongFilter, sorter: CGSSSorter) {
+extension BaseSongTableViewController: SongFilterSortControllerDelegate {
+    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.default.songFilter = filter
         CGSSSorterFilterManager.default.songSorter = sorter
         CGSSSorterFilterManager.default.saveForSong()

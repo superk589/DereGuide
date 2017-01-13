@@ -1,46 +1,33 @@
 //
-//  CardFilterSortController.swift
+//  SongFilterSortController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2017/1/5.
+//  Created by zzk on 2017/1/13.
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
 import UIKit
-protocol CardFilterSortControllerDelegate: class {
-    func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter)
+
+protocol SongFilterSortControllerDelegate: class {
+    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter)
 }
 
-class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, UITableViewDataSource {
+class SongFilterSortController: BaseFilterSortController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView: UITableView!
     
-    weak var delegate: CardFilterSortControllerDelegate?
-    var filter: CGSSCardFilter!
+    weak var delegate: SongFilterSortControllerDelegate?
+    var filter: CGSSSongFilter!
     var sorter: CGSSSorter!
     
-    var rarityTitles = ["N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
-   
-    var cardTypeTitles = ["Cute", "Cool", "Passion"]
+    var songTypeTitles = ["Cute", "Cool", "Passion", "All"]
     
-    var attributeTitles = ["Vocal", "Dance", "Visual"]
+    var eventTypeTitles = [NSLocalizedString("常规歌曲", comment: ""), NSLocalizedString("传统活动", comment: ""), NSLocalizedString("Groove活动", comment: ""), NSLocalizedString("LIVE Parade", comment: "")]
     
-    var skillTypeTitles = [
-        CGSSSkillTypes.comboBonus.toString(),
-        CGSSSkillTypes.perfectBonus.toString(),
-        CGSSSkillTypes.overload.toString(),
-        CGSSSkillTypes.perfectLock.toString(),
-        CGSSSkillTypes.comboContinue.toString(),
-        CGSSSkillTypes.heal.toString(),
-        CGSSSkillTypes.guard.toString(),
-        CGSSSkillTypes.none.toString()
-    ]
     
-    var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
-                          NSLocalizedString("未收藏", comment: "")]
+    var sorterMethods = ["updateId", "bpm", "maxDiffStars"]
     
-    var sorterTitles = ["Total", "Vocal", "Dance", "Visual", NSLocalizedString("更新时间", comment: ""), NSLocalizedString("稀有度", comment: ""), NSLocalizedString("相册编号", comment: "")]
-    var sorterMethods = ["overall", "vocal", "dance", "visual", "update_id", "sRarity", "sAlbumId"]
+    var sorterTitles = [NSLocalizedString("更新时间", comment: ""), "bpm", NSLocalizedString("最大难度", comment: "")]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
@@ -88,16 +75,8 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     }
     
     override func resetAction() {
-        if delegate is CardTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
-        } else if delegate is TeamCardSelectTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
-        } else {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "sRarity")
-        }
+        filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
+        sorter = CGSSSorter.init(att: "updateId")
         tableView.reloadData()
     }
     
@@ -125,31 +104,22 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 5
+            return 2
         } else {
             return 2
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: rarityTitles)
-                cell.presetIndex(index: filter.rarityTypes.rawValue)
+                cell.setup(titles: songTypeTitles)
+                cell.presetIndex(index: filter.songTypes.rawValue)
             case 1:
-                cell.setup(titles: cardTypeTitles)
-                cell.presetIndex(index: filter.cardTypes.rawValue)
-            case 2:
-                cell.setup(titles: attributeTitles)
-                cell.presetIndex(index: filter.attributeTypes.rawValue)
-            case 3:
-                cell.setup(titles: skillTypeTitles)
-                cell.presetIndex(index: filter.skillTypes.rawValue)
-            case 4:
-                cell.setup(titles: favoriteTitles)
-                cell.presetIndex(index: filter.favoriteTypes.rawValue)
+                cell.setup(titles: eventTypeTitles)
+                cell.presetIndex(index: filter.eventTypes.rawValue)
             default:
                 break
             }
@@ -175,25 +145,19 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
             return cell
         }
     }
-
+    
 }
 
 
-extension CardFilterSortController: FilterTableViewCellDelegate {
+extension SongFilterSortController: FilterTableViewCellDelegate {
     func filterTableViewCell(_ cell: FilterTableViewCell, didSelect index: Int) {
         if let indexPath = tableView.indexPath(for: cell) {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.rarityTypes.insert(CGSSRarityTypes.init(rarity: index))
+                    filter.songTypes.insert(CGSSSongTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
-                    filter.cardTypes.insert(CGSSCardTypes.init(type: index))
-                case 2:
-                    filter.attributeTypes.insert(CGSSAttributeTypes.init(type: index))
-                case 3:
-                    filter.skillTypes.insert(CGSSSkillTypes.init(rawValue: 1 << UInt(index)))
-                case 4:
-                    filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
+                    filter.eventTypes.insert(CGSSSongEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -207,15 +171,9 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.rarityTypes.remove(CGSSRarityTypes.init(rarity: index))
+                    filter.songTypes.remove(CGSSSongTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
-                    filter.cardTypes.remove(CGSSCardTypes.init(type: index))
-                case 2:
-                    filter.attributeTypes.remove(CGSSAttributeTypes.init(type: index))
-                case 3:
-                    filter.skillTypes.remove(CGSSSkillTypes.init(rawValue: 1 << UInt(index)))
-                case 4:
-                    filter.favoriteTypes.remove(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
+                    filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -225,7 +183,7 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
     
 }
 
-extension CardFilterSortController: SortTableViewCellDelegate {
+extension SongFilterSortController: SortTableViewCellDelegate {
     func sortTableViewCell(_ cell: SortTableViewCell, didSelect index: Int) {
         if let indexPath = tableView.indexPath(for: cell) {
             if indexPath.section == 1 {

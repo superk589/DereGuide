@@ -14,18 +14,18 @@ protocol SortTableViewCellDelegate: class {
     func sortTableViewCell(_ cell: SortTableViewCell, didSelect index:Int)
 }
 
-class SortTableViewCell: UITableViewCell, TTGTextTagCollectionViewDelegate {
+class SortTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
     
-    var sortView: TTGTextTagCollectionView!
+    var sortView: TTGTagCollectionView!
+    var tagViews = [FilterItemView]()
     weak var delegate: SortTableViewCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        sortView = TTGTextTagCollectionView()
-        sortView.tagTextFont = UIFont.regular(size: 14)
+        sortView = TTGTagCollectionView()
         sortView.delegate = self
-        sortView.delegate = self
+        sortView.dataSource = self
         contentView.addSubview(sortView)
         sortView.snp.makeConstraints { (make) in
             make.left.equalTo(15)
@@ -36,34 +36,51 @@ class SortTableViewCell: UITableViewCell, TTGTextTagCollectionViewDelegate {
     }
     
     func setup(titles: [String]) {
-        sortView.removeAllTags()
-        sortView.addTags(titles)
-        sortView.tagTextColor = UIColor.darkText
-        sortView.tagSelectedTextColor = UIColor.white
-        sortView.tagBackgroundColor = UIColor.lightGray
-        sortView.tagSelectedBackgroundColor = Color.parade
+        tagViews.removeAll()
+        for title in titles {
+            let tagView = FilterItemView()
+            tagView.setSelected(selected: false)
+            tagView.setTitle(title: title)
+            tagViews.append(tagView)
+        }
+        sortView.reload()
+    }
+    
+    func numberOfTags(in tagCollectionView: TTGTagCollectionView!) -> UInt {
+        return UInt(tagViews.count)
+    }
+    
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
+        return tagViews[Int(index)]
+    }
+    
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, sizeForTagAt index: UInt) -> CGSize {
+        
+        let tagView = tagViews[Int(index)]
+        tagView.sizeToFit()
+        return tagView.frame.size
+    }
+    
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, updateContentSize contentSize: CGSize) {
+
     }
     
     
-    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTapTag tagText: String!, at index: UInt, selected: Bool) {
-        if selected {
-            for i in 0..<sortView.allTags().count {
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
+        let tagView = tagViews[Int(index)]
+        if !tagView.isSelected {
+            tagView.isSelected = true
+            for i in 0..<tagViews.count {
                 if index != UInt(i) {
-                    sortView.setTagAt(UInt(i), selected: false)
+                    tagViews[i].isSelected = false
                 }
             }
             delegate?.sortTableViewCell(self, didSelect: Int(index))
-        } else {
-            sortView.setTagAt(index, selected: true)
         }
     }
     
-    
-    
     func presetIndex(index: UInt) {
-        for i in 0..<sortView.allTags().count {
-            sortView.setTagAt(UInt(i), selected: index == UInt(i))
-        }
+        tagViews[Int(index)].isSelected = true
     }
     
     

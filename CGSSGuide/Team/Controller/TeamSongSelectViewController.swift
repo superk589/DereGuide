@@ -12,15 +12,12 @@ class TeamSongSelectViewController: BaseSongTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(tbBack))
-
-        toolbarItems = [backItem]
-        
+        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
+        navigationItem.leftBarButtonItem = leftItem
         // Do any additional setup after loading the view.
     }
     
-    func tbBack() {
+    func backAction() {
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -31,12 +28,12 @@ class TeamSongSelectViewController: BaseSongTableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setToolbarHidden(false, animated: true)
+        // navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
+        // navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
