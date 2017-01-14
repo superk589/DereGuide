@@ -11,7 +11,7 @@ import UIKit
 class GachaCardTableViewController: BaseCardTableViewController {
     
     var _filter: CGSSCardFilter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-    var _sorter: CGSSSorter = CGSSSorter.init(att: "sRarity")
+    var _sorter: CGSSSorter = CGSSSorter.init(property: "sRarity")
     
     override var filter: CGSSCardFilter {
         get {

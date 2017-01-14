@@ -90,13 +90,13 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     override func resetAction() {
         if delegate is CardTableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
+            sorter = CGSSSorter.init(property: "update_id")
         } else if delegate is TeamCardSelectTableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
+            sorter = CGSSSorter.init(property: "update_id")
         } else {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "sRarity")
+            sorter = CGSSSorter.init(property: "sRarity")
         }
         tableView.reloadData()
     }
@@ -165,7 +165,7 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
                 cell.presetIndex(index: sorter.ascending ? 1 : 0)
             case 1:
                 cell.setup(titles: sorterTitles)
-                if let index = sorterMethods.index(of: sorter.att) {
+                if let index = sorterMethods.index(of: sorter.property) {
                     cell.presetIndex(index: UInt(index))
                 }
             default:
@@ -233,7 +233,7 @@ extension CardFilterSortController: SortTableViewCellDelegate {
                 case 0:
                     sorter.ascending = (index == 1)
                 case 1:
-                    sorter.att = sorterMethods[index]
+                    sorter.property = sorterMethods[index]
                 default:
                     break
                 }

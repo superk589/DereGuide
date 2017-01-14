@@ -61,7 +61,7 @@ class CharDetailView: UIView {
         charIconView.setWithCharId(char.charaId)
         profileView.setup(char)
         var cards = CGSSDAO.sharedDAO.findCardsByCharId(char.charaId)
-        let sorter = CGSSSorter.init(att: "sAlbumId")
+        let sorter = CGSSSorter.init(property: "sAlbumId")
         sorter.sortList(&cards)
         if cards.count > 0 {
             prepareRelatedCardsContentView()

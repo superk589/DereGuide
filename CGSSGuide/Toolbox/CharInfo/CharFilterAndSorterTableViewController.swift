@@ -85,21 +85,21 @@ class CharFilterAndSorterTableViewController: UITableViewController {
         
         for i in 0...3 {
             let button = basicStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i)
             
         }
         
         for i in 0...2 {
             let button = threeSizeStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i + 4)
             
         }
         
         for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i + 7)
         }
         
@@ -254,7 +254,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
             }
             sender.isSelected = true
             let index = sortingButtons.index(of: sender)
-            sorter.att = sorterString[index!]
+            sorter.property = sorterString[index!]
         }
     }
     
@@ -271,7 +271,7 @@ class CharFilterAndSorterTableViewController: UITableViewController {
     
     func resetAction() {
         filter = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
-        sorter = CGSSSorter.init(att: "sName", ascending: true)
+        sorter = CGSSSorter.init(property: "sName", ascending: true)
         setup()
     }
     

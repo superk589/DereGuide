@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CGSSCharFilter {
+struct CGSSCharFilter: CGSSFilter {
     
     var charTypes: CGSSCharTypes
     var charAgeTypes: CGSSCharAgeTypes
@@ -33,16 +33,19 @@ struct CGSSCharFilter {
         return result
     }
     
-    func writeToFile(_ path: String) {
-        
-        let dict = ["typeMask": charTypes.rawValue, "ageMask": charAgeTypes, "bloodMask": charBloodTypes, "cvMask": charCVTypes, "favoriteMask": favoriteTypes] as NSDictionary
-        dict.write(toFile: path, atomically: true)
+    func save(to path: String) {
+        toDictionary().write(toFile: path, atomically: true)
     }
     
-    static func readFromFile(_ path: String) -> CGSSCharFilter? {
+    func toDictionary() -> NSDictionary {
+        let dict = ["typeMask": charTypes.rawValue, "ageMask": charAgeTypes, "bloodMask": charBloodTypes, "cvMask": charCVTypes, "favoriteMask": favoriteTypes] as NSDictionary
+        return dict
+    }
+    
+    init?(fromFile path: String) {
         if let dict = NSDictionary.init(contentsOfFile: path) {
             if let typeMask = dict.object(forKey: "typeMask") as? UInt, let ageMask = dict.object(forKey: "ageMask") as? UInt, let bloodMask = dict.object(forKey: "bloodMask") as? UInt, let cvMask = dict.object(forKey: "cvMask") as? UInt, let favoriteMask = dict.object(forKey: "favoriteMask") as? UInt {
-                return CGSSCharFilter.init(typeMask: typeMask, ageMask: ageMask, bloodMask: bloodMask, cvMask: cvMask, favoriteMask: favoriteMask)
+                self.init(typeMask: typeMask, ageMask: ageMask, bloodMask: bloodMask, cvMask: cvMask, favoriteMask: favoriteMask)
             }
         }
         return nil

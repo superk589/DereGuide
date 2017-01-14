@@ -12,7 +12,7 @@ class EventBannerView: UIImageView {
 
     var bannerId: Int! {
         didSet {
-            self.sd_setImage(with: URL.init(string: String.init(format: "http://game.starlight-stage.jp/image/announce/title/thumbnail_event_%04d.png", bannerId)))
+            self.sd_setImage(with: URL.init(string: String.init(format: "https://game.starlight-stage.jp/image/announce/title/thumbnail_event_%04d.png", bannerId)))
         }
     }
     

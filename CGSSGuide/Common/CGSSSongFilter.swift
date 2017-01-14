@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CGSSSongFilter {
+struct CGSSSongFilter: CGSSFilter {
     var songTypes: CGSSSongTypes
     var eventTypes: CGSSSongEventTypes
     
@@ -27,18 +27,21 @@ struct CGSSSongFilter {
         return result
     }
     
-    func writeToFile(_ path: String) {
-        let dict = ["typeMask": songTypes.rawValue, "eventMask": eventTypes.rawValue] as NSDictionary
-        dict.write(toFile: path, atomically: true)
+    func save(to path: String) {
+        toDictionary().write(toFile: path, atomically: true)
     }
     
-    static func readFromFile(_ path: String) -> CGSSSongFilter? {
+    func toDictionary() -> NSDictionary {
+        let dict = ["typeMask": songTypes.rawValue, "eventMask": eventTypes.rawValue] as NSDictionary
+        return dict
+    }
+    
+    init?(fromFile path: String) {
         if let dict = NSDictionary.init(contentsOfFile: path) {
             if let typeMask = dict.object(forKey: "typeMask") as? UInt, let eventMask = dict.object(forKey: "eventMask") as? UInt {
-                return CGSSSongFilter.init(typeMask: typeMask, eventMask: eventMask)
+                self.init(typeMask: typeMask, eventMask: eventMask)
             }
         }
         return nil
     }
-    
 }

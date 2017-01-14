@@ -212,8 +212,8 @@ open class CGSSDAO: NSObject {
     }
     
     // 排序指定的CGSSBaseModel的list
-    func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], att: String, ascending: Bool) {
-        let sorter = CGSSSorter.init(att: att, ascending: ascending)
+    func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], property: String, ascending: Bool) {
+        let sorter = CGSSSorter.init(property: property, ascending: ascending)
         sorter.sortList(&list)
     }
     func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], sorter: CGSSSorter) {

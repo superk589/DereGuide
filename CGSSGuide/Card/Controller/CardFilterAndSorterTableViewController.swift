@@ -88,13 +88,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
         
         for i in 0...3 {
             let button = attributeSortingStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i)
             
         }
         for i in 0...2 {
             let button = otherSortingStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i + 4)
         }
         
@@ -275,7 +275,7 @@ class CardFilterAndSorterTableViewController: UITableViewController {
             }
             sender.isSelected = true
             let index = sortingButtons.index(of: sender)
-            sorter.att = sorterString[index!]
+            sorter.property = sorterString[index!]
         }
     }
     
@@ -293,13 +293,13 @@ class CardFilterAndSorterTableViewController: UITableViewController {
     func resetAction() {
         if delegate is CardTableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
+            sorter = CGSSSorter.init(property: "update_id")
         } else if delegate is TeamCardSelectTableViewController {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "update_id")
+            sorter = CGSSSorter.init(property: "update_id")
         } else {
             filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(att: "sRarity")
+            sorter = CGSSSorter.init(property: "sRarity")
         }
         setup()
     }

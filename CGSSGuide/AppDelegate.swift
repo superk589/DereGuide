@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset {
-            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.songFilterPath)
-            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.cardFilterPath)
-            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.teamCardFilterPath)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.song)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
         }
         
         // 规划近期偶像生日

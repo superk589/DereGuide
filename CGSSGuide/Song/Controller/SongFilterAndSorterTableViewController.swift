@@ -65,7 +65,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         
         for i in 0...2 {
             let button = basicStackView.subviews[i] as! UIButton
-            let index = sorterString.index(of: sorter.att)
+            let index = sorterString.index(of: sorter.property)
             button.isSelected = (index == i)
         }
     }
@@ -152,7 +152,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
             }
             sender.isSelected = true
             let index = sortingButtons.index(of: sender)
-            sorter.att = sorterString[index!]
+            sorter.property = sorterString[index!]
         }
     }
     
@@ -169,7 +169,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     
     func resetAction() {
         filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
-        sorter = CGSSSorter.init(att: "updateId")
+        sorter = CGSSSorter.init(property: "updateId")
         setup()
     }
     

@@ -76,7 +76,7 @@ class SongFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     override func resetAction() {
         filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
-        sorter = CGSSSorter.init(att: "updateId")
+        sorter = CGSSSorter.init(property: "updateId")
         tableView.reloadData()
     }
     
@@ -135,7 +135,7 @@ class SongFilterSortController: BaseFilterSortController, UITableViewDelegate, U
                 cell.presetIndex(index: sorter.ascending ? 1 : 0)
             case 1:
                 cell.setup(titles: sorterTitles)
-                if let index = sorterMethods.index(of: sorter.att) {
+                if let index = sorterMethods.index(of: sorter.property) {
                     cell.presetIndex(index: UInt(index))
                 }
             default:
@@ -191,7 +191,7 @@ extension SongFilterSortController: SortTableViewCellDelegate {
                 case 0:
                     sorter.ascending = (index == 1)
                 case 1:
-                    sorter.att = sorterMethods[index]
+                    sorter.property = sorterMethods[index]
                 default:
                     break
                 }

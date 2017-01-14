@@ -128,7 +128,7 @@ class GachaPoolTableViewCell: UITableViewCell {
                 cards.append(card)
             }
         }
-        let sorter = CGSSSorter.init(att: "sRarity")
+        let sorter = CGSSSorter.init(property: "sRarity")
         sorter.sortList(&cards)
         prepareCardListView()
         setupCardListView(cards)

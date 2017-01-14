@@ -78,7 +78,7 @@ class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     override func resetAction() {
         filter = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
-        sorter = CGSSSorter.init(att: "sName", ascending: true)
+        sorter = CGSSSorter.init(property: "sName", ascending: true)
         tableView.reloadData()
     }
     
@@ -146,7 +146,7 @@ class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, U
                 cell.presetIndex(index: sorter.ascending ? 1 : 0)
             case 1:
                 cell.setup(titles: sorterTitles)
-                if let index = sorterMethods.index(of: sorter.att) {
+                if let index = sorterMethods.index(of: sorter.property) {
                     cell.presetIndex(index: UInt(index))
                 }
             default:
@@ -214,7 +214,7 @@ extension CharFilterSortController: SortTableViewCellDelegate {
                 case 0:
                     sorter.ascending = (index == 1)
                 case 1:
-                    sorter.att = sorterMethods[index]
+                    sorter.property = sorterMethods[index]
                 default:
                     break
                 }

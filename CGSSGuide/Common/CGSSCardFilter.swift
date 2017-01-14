@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct CGSSCardFilter {
+struct CGSSCardFilter: CGSSFilter {
     
     var cardTypes: CGSSCardTypes
     var attributeTypes: CGSSAttributeTypes
@@ -37,15 +37,20 @@ struct CGSSCardFilter {
         return result
     }
     
-    func writeToFile(_ path: String) {
+    
+    func toDictionary() -> NSDictionary {
         let dict = ["cardMask":cardTypes.rawValue, "attributeMask":attributeTypes.rawValue, "rarityMask":rarityTypes.rawValue, "favoriteMask":favoriteTypes.rawValue, "skillMask":skillTypes.rawValue, "gachaMask": gachaTypes.rawValue] as NSDictionary
-        dict.write(toFile: path, atomically: true)
+        return dict
     }
     
-    static func readFromFile(_ path: String) -> CGSSCardFilter? {
+    func save(to path: String) {
+        toDictionary().write(toFile: path, atomically: true)
+    }
+    
+    init?(fromFile path: String) {
         if let dict = NSDictionary.init(contentsOfFile: path) {
             if let cardMask = dict.object(forKey: "cardMask") as? UInt, let attributeMask = dict.object(forKey: "attributeMask") as? UInt, let rarityMask = dict.object(forKey: "rarityMask") as? UInt, let favoriteMask = dict.object(forKey: "favoriteMask") as? UInt, let skillMask = dict.object(forKey: "skillMask") as? UInt, let gachaMask = dict.object(forKey: "gachaMask") as? UInt{
-                return CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask,skillMask: skillMask, gachaMask: gachaMask, favoriteMask: favoriteMask)
+                self.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask,skillMask: skillMask, gachaMask: gachaMask, favoriteMask: favoriteMask)
             }
         }
         return nil
