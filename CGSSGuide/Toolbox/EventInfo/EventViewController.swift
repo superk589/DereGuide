@@ -107,7 +107,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     override func refresh() {
         filter.searchText = searchBar.text ?? ""
         eventList = filter.filter(defaultList)
-        sorter.sortList(&eventList!)
+        sorter.sortList(&eventList)
         tableView.reloadData()
     }
     
@@ -124,7 +124,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventList?.count ?? 0
+        return eventList.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

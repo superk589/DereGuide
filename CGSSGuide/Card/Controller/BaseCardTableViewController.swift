@@ -46,7 +46,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
         searchBar.delegate = self
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
         filterVC = CardFilterSortController()

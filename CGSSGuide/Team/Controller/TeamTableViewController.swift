@@ -21,6 +21,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         let manager = CGSSTeamManager.defaultManager
         return manager.teams
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -119,9 +120,14 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if isEditing {
-            navigationItem.rightBarButtonItem = deleteItem
-            navigationController?.setToolbarHidden(false, animated: true)
-            toolbarItems = [selectItem, spaceItem, deselectItem, spaceItem, copyItem]
+            // 只有全部表视图而不是某个单元格触发了左滑删除进入编辑状态才显示相关按钮
+            if let cell = tableView.visibleCells.first {
+                if cell.editingStyle == UITableViewCellEditingStyle.init(rawValue: 0b11)! {
+                    navigationItem.rightBarButtonItem = deleteItem
+                    navigationController?.setToolbarHidden(false, animated: true)
+                    toolbarItems = [selectItem, spaceItem, deselectItem, spaceItem, copyItem]
+                }
+            }
         } else {
             navigationItem.rightBarButtonItem = addItem
             navigationController?.setToolbarHidden(true, animated: true)

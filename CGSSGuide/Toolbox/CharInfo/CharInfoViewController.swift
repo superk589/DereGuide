@@ -37,7 +37,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
         self.navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
         searchBar.delegate = self
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
 //        
         self.tableView.register(CharInfoTableViewCell.self, forCellReuseIdentifier: "CharCell")

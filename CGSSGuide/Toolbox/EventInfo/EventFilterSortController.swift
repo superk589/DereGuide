@@ -81,8 +81,7 @@ class EventFilterSortController: BaseFilterSortController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: eventTypeTitles)
-                cell.presetIndex(index: filter.eventTypes.rawValue)
+                cell.setup(titles: eventTypeTitles, index: filter.eventTypes.rawValue, all: CGSSEventTypes.all.rawValue)
             default:
                 break
             }
@@ -141,10 +140,28 @@ extension EventFilterSortController: FilterTableViewCellDelegate {
     }
     
     func didSelectAll(filterTableViewCell cell: FilterTableViewCell) {
-        
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.eventTypes = .all
+                default:
+                    break
+                }
+            }
+        }
     }
     func didDeselectAll(filterTableViewCell cell: FilterTableViewCell) {
-        
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.eventTypes = CGSSEventTypes.init(rawValue: 0)
+                default:
+                    break
+                }
+            }
+        }
     }
     
 }
