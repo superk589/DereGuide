@@ -11,10 +11,20 @@ import UIKit
 class TeamCardSelectTableViewController: BaseCardTableViewController {
     
     override var filter: CGSSCardFilter {
-        return CGSSSorterFilterManager.default.teamCardfilter
+        set {
+            CGSSSorterFilterManager.default.teamCardfilter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.teamCardfilter
+        }
     }
     override var sorter: CGSSSorter {
-        return CGSSSorterFilterManager.default.teamCardSorter
+        set {
+            CGSSSorterFilterManager.default.teamCardSorter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.teamCardSorter
+        }
     }
     
     override func viewDidLoad() {

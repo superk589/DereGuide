@@ -12,31 +12,30 @@ import ZKDrawerController
 class CharInfoViewController: BaseTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var charList: [CGSSChar]!
-    var searchBar: UISearchBar!
+    var searchBar: CGSSSearchBar!
     var filter: CGSSCharFilter {
-        return CGSSSorterFilterManager.default.charFilter
+        set {
+            CGSSSorterFilterManager.default.charFilter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.charFilter
+        }
     }
     var sorter: CGSSSorter {
-        return CGSSSorterFilterManager.default.charSorter
+        set {
+            CGSSSorterFilterManager.default.charSorter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.charSorter
+        }
     }
     
     var filterVC: CharFilterSortController!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 初始化导航栏的搜索条
-        searchBar = UISearchBar()
-        // 为了避免push/pop时闪烁,searchBar的背景图设置为透明的
-        for sub in searchBar.subviews.first!.subviews {
-            if let iv = sub as? UIImageView {
-                iv.alpha = 0
-            }
-        }
+        searchBar = CGSSSearchBar()
         self.navigationItem.titleView = searchBar
-        searchBar.returnKeyType = .done
-        // searchBar.showsCancelButton = true
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
-        searchBar.autocapitalizationType = .none
-        searchBar.autocorrectionType = .no
         searchBar.delegate = self
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
@@ -58,12 +57,9 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
     
     // 根据设定的筛选和排序方法重新展现数据
     func refresh() {
-        let dao = CGSSDAO.sharedDAO
-        self.charList = dao.getCharListByFilter(filter)
-        if searchBar.text != "" {
-            self.charList = dao.getCharListByName(charList, string: searchBar.text!)
-        }
-        dao.sortListInPlace(&charList!, sorter: sorter)
+        filter.searchText = searchBar.text ?? ""
+        self.charList = filter.filter(CGSSDAO.sharedDAO.charDict.allValues as! [CGSSChar])
+        sorter.sortList(&self.charList!)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
@@ -91,7 +87,7 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
         super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightVC = filterVC
-        drawer?.defaultRightWidth = Screen.width - 68
+        drawer?.defaultRightWidth = min(Screen.width - 68, 400)
         drawer?.delegate = self
     }
     
@@ -174,6 +170,7 @@ extension CharInfoViewController: UISearchBarDelegate {
     // 点击搜索按钮时
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        refresh()
     }
     // 点击searchbar自带的取消按钮时
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

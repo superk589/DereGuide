@@ -11,9 +11,7 @@ protocol CardFilterSortControllerDelegate: class {
     func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter)
 }
 
-class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, UITableViewDataSource {
-    
-    var tableView: UITableView!
+class CardFilterSortController: BaseFilterSortController {
     
     weak var delegate: CardFilterSortControllerDelegate?
     var filter: CGSSCardFilter!
@@ -36,6 +34,25 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
         CGSSSkillTypes.none.toString()
     ]
     
+    var procTitles = [CGSSProcTypes.high.toString(),
+                     CGSSProcTypes.middle.toString(),
+                     CGSSProcTypes.low.toString(),
+                     CGSSProcTypes.none.toString()]
+    
+    var conditionTitles = [CGSSConditionTypes.c4.toString(),
+                           CGSSConditionTypes.c6.toString(),
+                           CGSSConditionTypes.c7.toString(),
+                           CGSSConditionTypes.c9.toString(),
+                           CGSSConditionTypes.c11.toString(),
+                           CGSSConditionTypes.c13.toString(),
+                           CGSSConditionTypes.other.toString()]
+    
+    var availableTitles = [CGSSAvailableTypes.fes.toString(),
+                           CGSSAvailableTypes.limit.toString(),
+                           CGSSAvailableTypes.normal.toString(),
+                           CGSSAvailableTypes.event.toString(),
+                           CGSSAvailableTypes.free.toString()]
+    
     var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
                           NSLocalizedString("未收藏", comment: "")]
     
@@ -46,30 +63,6 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
-        
-    }
-    
-    func prepareUI() {
-        
-        tableView = UITableView()
-        tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: "FilterCell")
-        tableView.register(SortTableViewCell.self, forCellReuseIdentifier: "SortCell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 44, right: 0)
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        tableView.estimatedRowHeight = 50
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(20)
-        }
-        
-        view.bringSubview(toFront: toolbar)
-        
     }
     
     func reloadData() {
@@ -89,14 +82,14 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     override func resetAction() {
         if delegate is CardTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(property: "update_id")
+            filter = CGSSSorterFilterManager.DefaultFilter.card
+            sorter = CGSSSorterFilterManager.DefaultSorter.card
         } else if delegate is TeamCardSelectTableViewController {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(property: "update_id")
+            filter = CGSSSorterFilterManager.DefaultFilter.teamCard
+            sorter = CGSSSorterFilterManager.DefaultSorter.teamCard
         } else {
-            filter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-            sorter = CGSSSorter.init(property: "sRarity")
+            filter = CGSSSorterFilterManager.DefaultFilter.gacha
+            sorter = CGSSSorterFilterManager.DefaultSorter.gacha
         }
         tableView.reloadData()
     }
@@ -107,49 +100,35 @@ class CardFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     }
     
     // MARK: - TableViewDelegate & DataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return NSLocalizedString("筛选", comment: "")
-        } else {
-            return NSLocalizedString("排序", comment: "")
-        }
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 5
+            return 8
         } else {
             return 2
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: rarityTitles)
-                cell.presetIndex(index: filter.rarityTypes.rawValue)
+                cell.setup(titles: rarityTitles, index: filter.rarityTypes.rawValue, all: CGSSRarityTypes.all.rawValue)
             case 1:
-                cell.setup(titles: cardTypeTitles)
-                cell.presetIndex(index: filter.cardTypes.rawValue)
+                cell.setup(titles: cardTypeTitles, index: filter.cardTypes.rawValue, all: CGSSCardTypes.all.rawValue)
             case 2:
-                cell.setup(titles: attributeTitles)
-                cell.presetIndex(index: filter.attributeTypes.rawValue)
+                cell.setup(titles: attributeTitles, index: filter.attributeTypes.rawValue, all: CGSSAttributeTypes.all.rawValue)
             case 3:
-                cell.setup(titles: skillTypeTitles)
-                cell.presetIndex(index: filter.skillTypes.rawValue)
+                cell.setup(titles: skillTypeTitles, index: filter.skillTypes.rawValue, all: CGSSSkillTypes.all.rawValue)
             case 4:
-                cell.setup(titles: favoriteTitles)
-                cell.presetIndex(index: filter.favoriteTypes.rawValue)
+                cell.setup(titles: procTitles, index: filter.procTypes.rawValue, all: CGSSProcTypes.all.rawValue)
+            case 5:
+                cell.setup(titles: conditionTitles, index: filter.conditionTypes.rawValue, all: CGSSConditionTypes.all.rawValue)
+            case 6:
+                cell.setup(titles: availableTitles, index: filter.gachaTypes.rawValue, all: CGSSAvailableTypes.all.rawValue)
+            case 7:
+                cell.setup(titles: favoriteTitles, index: filter.favoriteTypes.rawValue, all: CGSSFavoriteTypes.all.rawValue)
             default:
                 break
             }
@@ -193,6 +172,12 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
                 case 3:
                     filter.skillTypes.insert(CGSSSkillTypes.init(rawValue: 1 << UInt(index)))
                 case 4:
+                    filter.procTypes.insert(CGSSProcTypes.init(rawValue: 1 << UInt(index)))
+                case 5:
+                    filter.conditionTypes.insert(CGSSConditionTypes.init(rawValue: 1 << UInt(index)))
+                case 6:
+                    filter.gachaTypes.insert(CGSSAvailableTypes.init(rawValue: 1 << UInt(index)))
+                case 7:
                     filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
@@ -215,7 +200,67 @@ extension CardFilterSortController: FilterTableViewCellDelegate {
                 case 3:
                     filter.skillTypes.remove(CGSSSkillTypes.init(rawValue: 1 << UInt(index)))
                 case 4:
+                    filter.procTypes.remove(CGSSProcTypes.init(rawValue: 1 << UInt(index)))
+                case 5:
+                    filter.conditionTypes.remove(CGSSConditionTypes.init(rawValue: 1 << UInt(index)))
+                case 6:
+                    filter.gachaTypes.remove(CGSSAvailableTypes.init(rawValue: 1 << UInt(index)))
+                case 7:
                     filter.favoriteTypes.remove(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    func didSelectAll(filterTableViewCell cell: FilterTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.rarityTypes = CGSSRarityTypes.all
+                case 1:
+                    filter.cardTypes = CGSSCardTypes.all
+                case 2:
+                    filter.attributeTypes = CGSSAttributeTypes.all
+                case 3:
+                    filter.skillTypes = CGSSSkillTypes.all
+                case 4:
+                    filter.procTypes = CGSSProcTypes.all
+                case 5:
+                    filter.conditionTypes = CGSSConditionTypes.all
+                case 6:
+                    filter.gachaTypes = .all
+                case 7:
+                    filter.favoriteTypes = CGSSFavoriteTypes.all
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    func didDeselectAll(filterTableViewCell cell: FilterTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.rarityTypes = CGSSRarityTypes.init(rawValue: 0)
+                case 1:
+                    filter.cardTypes = CGSSCardTypes.init(rawValue: 0)
+                case 2:
+                    filter.attributeTypes = CGSSAttributeTypes.init(rawValue: 0)
+                case 3:
+                    filter.skillTypes = CGSSSkillTypes.init(rawValue: 0)
+                case 4:
+                    filter.procTypes = CGSSProcTypes.init(rawValue: 0)
+                case 5:
+                    filter.conditionTypes = CGSSConditionTypes.init(rawValue: 0)
+                case 6:
+                    filter.gachaTypes = CGSSAvailableTypes.init(rawValue: 0)
+                case 7:
+                    filter.favoriteTypes = CGSSFavoriteTypes.init(rawValue: 0)
                 default:
                     break
                 }

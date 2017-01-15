@@ -12,6 +12,8 @@ import TTGTagCollectionView
 
 protocol FilterTableViewCellDelegate: class {
     func filterTableViewCell(_ cell: FilterTableViewCell, didSelect index:Int)
+    func didSelectAll(filterTableViewCell cell: FilterTableViewCell)
+    func didDeselectAll(filterTableViewCell cell: FilterTableViewCell)
     func filterTableViewCell(_ cell: FilterTableViewCell, didDeselect index:Int)
 }
 
@@ -20,6 +22,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
     var filterView: TTGTagCollectionView!
     weak var delegate: FilterTableViewCellDelegate?
     var tagViews = [FilterItemView]()
+    var defaultTagView: FilterItemView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,10 +37,17 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
             make.bottom.equalTo(-10)
             make.right.equalTo(-15)
         }
+        
+        defaultTagView = FilterItemView()
+        defaultTagView.setTitle(title: NSLocalizedString("全部", comment: ""))
+        defaultTagView.iv.zk_backgroundColor = Color.regular
+        defaultTagView.isSelected = false
+        tagViews.append(defaultTagView)
     }
     
     func setup(titles: [String]) {
         tagViews.removeAll()
+        tagViews.append(defaultTagView)
         for title in titles {
             let tagView = FilterItemView()
             tagView.setSelected(selected: false)
@@ -69,22 +79,65 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
         let tagView = tagViews[Int(index)]
-        tagView.isSelected = !tagView.isSelected
-        if tagView.isSelected {
-            delegate?.filterTableViewCell(self, didSelect: Int(index))
+        if index == 0 {
+            tagView.isSelected = true
+            delegate?.didSelectAll(filterTableViewCell: self)
+            for i in 1..<tagViews.count {
+                tagViews[i].isSelected = false
+            }
         } else {
-            delegate?.filterTableViewCell(self, didDeselect: Int(index))
+            tagView.isSelected = !tagView.isSelected
+            if tagView.isSelected {
+                if tagViews[0].isSelected {
+                    delegate?.didDeselectAll(filterTableViewCell: self)
+                    tagViews[0].isSelected = false
+                }
+                delegate?.filterTableViewCell(self, didSelect: Int(index - 1))
+            } else {
+                delegate?.filterTableViewCell(self, didDeselect: Int(index - 1))
+                var isAllDeselected = true
+                for view in tagViews {
+                    if view.isSelected {
+                        isAllDeselected = false
+                    }
+                }
+                if isAllDeselected {
+                    delegate?.didSelectAll(filterTableViewCell: self)
+                    tagViews[0].isSelected = true
+                }
+            }
+
         }
     }
     
     
     func presetIndex(index: UInt) {
-        for i in 0..<tagViews.count {
-            let tagView = tagViews[i]
-            tagView.setSelected(selected: (index >> UInt(i)) % 2 == 1)
+        tagViews[0].isSelected = false
+        if tagViews.count >= 1 {
+            for i in 0..<tagViews.count - 1 {
+                let tagView = tagViews[i + 1]
+                tagView.setSelected(selected: (index >> UInt(i)) % 2 == 1)
+            }
         }
     }
     
+    func presetAll() {
+        let tagView = tagViews[0]
+        tagView.isSelected = true
+        for i in 1..<tagViews.count {
+            tagViews[i].isSelected = false
+        }
+    }
+    
+    
+    func setup(titles: [String], index: UInt, all: UInt) {
+        self.setup(titles: titles)
+        if index == all {
+            self.presetAll()
+        } else {
+            self.presetIndex(index: index)
+        }
+    }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         filterView.layoutIfNeeded()

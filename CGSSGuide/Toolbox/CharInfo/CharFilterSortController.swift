@@ -11,9 +11,7 @@ protocol CharFilterSortControllerDelegate: class {
     func doneAndReturn(filter: CGSSCharFilter, sorter: CGSSSorter)
 }
 
-class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, UITableViewDataSource {
-    
-    var tableView: UITableView!
+class CharFilterSortController: BaseFilterSortController {
     
     weak var delegate: CharFilterSortControllerDelegate?
     var filter: CGSSCharFilter!
@@ -35,30 +33,6 @@ class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareUI()
-        
-    }
-    
-    func prepareUI() {
-        
-        tableView = UITableView()
-        tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: "FilterCell")
-        tableView.register(SortTableViewCell.self, forCellReuseIdentifier: "SortCell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 44, right: 0)
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        tableView.estimatedRowHeight = 50
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(20)
-        }
-        
-        view.bringSubview(toFront: toolbar)
-        
     }
     
     func reloadData() {
@@ -89,21 +63,7 @@ class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, U
     
     // MARK: - TableViewDelegate & DataSource
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return NSLocalizedString("筛选", comment: "")
-        } else {
-            return NSLocalizedString("排序", comment: "")
-        }
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
             return 5
@@ -112,25 +72,20 @@ class CharFilterSortController: BaseFilterSortController, UITableViewDelegate, U
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: charTypeTitles)
-                cell.presetIndex(index: filter.charTypes.rawValue)
+                cell.setup(titles: charTypeTitles, index: filter.charTypes.rawValue, all: CGSSCharTypes.all.rawValue)
             case 1:
-                cell.setup(titles: charCVTitles)
-                cell.presetIndex(index: filter.charCVTypes.rawValue)
+                cell.setup(titles: charCVTitles, index: filter.charCVTypes.rawValue, all: CGSSCharCVTypes.all.rawValue)
             case 2:
-                cell.setup(titles: charAgeTitles)
-                cell.presetIndex(index: filter.charAgeTypes.rawValue)
+                cell.setup(titles: charAgeTitles, index: filter.charAgeTypes.rawValue, all: CGSSCharAgeTypes.all.rawValue)
             case 3:
-                cell.setup(titles: charBloodTitles)
-                cell.presetIndex(index: filter.charBloodTypes.rawValue)
+                cell.setup(titles: charBloodTitles, index: filter.charBloodTypes.rawValue, all: CGSSCharBloodTypes.all.rawValue)
             case 4:
-                cell.setup(titles: favoriteTitles)
-                cell.presetIndex(index: filter.favoriteTypes.rawValue)
+                cell.setup(titles: favoriteTitles, index: filter.favoriteTypes.rawValue, all: CGSSFavoriteTypes.all.rawValue)
             default:
                 break
             }
@@ -204,6 +159,48 @@ extension CharFilterSortController: FilterTableViewCellDelegate {
         }
     }
     
+    func didSelectAll(filterTableViewCell cell: FilterTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.charTypes = .all
+                case 1:
+                    filter.charCVTypes = .all
+                case 2:
+                    filter.charAgeTypes = .all
+                case 3:
+                    filter.charBloodTypes = .all
+                case 4:
+                    filter.favoriteTypes = .all
+                default:
+                    break
+                }
+
+            }
+        }
+    }
+    func didDeselectAll(filterTableViewCell cell: FilterTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            if indexPath.section == 0 {
+                switch indexPath.row {
+                case 0:
+                    filter.charTypes = CGSSCharTypes.init(rawValue: 0)
+                case 1:
+                    filter.charCVTypes = CGSSCharCVTypes.init(rawValue: 0)
+                case 2:
+                    filter.charAgeTypes = CGSSCharAgeTypes.init(rawValue: 0)
+                case 3:
+                    filter.charBloodTypes = CGSSCharBloodTypes.init(rawValue: 0)
+                case 4:
+                    filter.favoriteTypes = CGSSFavoriteTypes.init(rawValue: 0)
+                default:
+                    break
+                }
+                
+            }
+        }
+    }
 }
 
 extension CharFilterSortController: SortTableViewCellDelegate {

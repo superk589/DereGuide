@@ -15,13 +15,23 @@ protocol BaseCardTableViewControllerDelegate {
 
 class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
-    var cardList: [CGSSCard]!
-    var searchBar: UISearchBar!
+    var cardList = [CGSSCard]()
+    var searchBar: CGSSSearchBar!
     var filter: CGSSCardFilter {
-        return CGSSSorterFilterManager.default.cardfilter
+        set {
+            CGSSSorterFilterManager.default.cardfilter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.cardfilter
+        }
     }
     var sorter: CGSSSorter {
-        return CGSSSorterFilterManager.default.cardSorter
+        set {
+            CGSSSorterFilterManager.default.cardSorter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.cardSorter
+        }
     }
     var delegate: BaseCardTableViewControllerDelegate?
     
@@ -31,20 +41,11 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         super.viewDidLoad()
         
         // 初始化导航栏的搜索条
-        searchBar = UISearchBar()
-        // 为了避免push/pop时闪烁,searchBar的背景图设置为透明的
-        for sub in searchBar.subviews.first!.subviews {
-            if let iv = sub as? UIImageView {
-                iv.alpha = 0
-            }
-        }
+        searchBar = CGSSSearchBar()
         self.navigationItem.titleView = searchBar
-        searchBar.returnKeyType = .done
-        // searchBar.showsCancelButton = true
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
-        searchBar.autocapitalizationType = .none
-        searchBar.autocorrectionType = .no
         searchBar.delegate = self
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
@@ -52,17 +53,22 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
+        
+        refresh()
     }
     
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
-        let dao = CGSSDAO.sharedDAO
-        self.cardList = dao.getCardListByMask(filter)
-        if searchBar.text != "" {
-            self.cardList = dao.getCardListByName(self.cardList, string: searchBar.text!)
+        CGSSLoadingHUDManager.default.show()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.filter.searchText = self.searchBar.text ?? ""
+            self.cardList = self.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard])
+            self.sorter.sortList(&self.cardList)
+            DispatchQueue.main.async {
+                CGSSLoadingHUDManager.default.hide()
+                self.tableView.reloadData()
+            }
         }
-        dao.sortListInPlace(&self.cardList!, sorter: sorter)
-        tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
@@ -83,10 +89,6 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // 页面出现时根据设定刷新排序和搜索内容
-        searchBar.resignFirstResponder()
-        refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,7 +96,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightVC = filterVC
         drawer?.delegate = self
-        drawer?.defaultRightWidth = Screen.width - 68
+        drawer?.defaultRightWidth = min(Screen.width - 68, 400)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,7 +122,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cardList?.count ?? 0
+        return cardList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,28 +191,37 @@ extension BaseCardTableViewController: UISearchBarDelegate {
     
     // 文字改变时
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
+        
     }
     // 开始编辑时
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
         return true
     }
+    
     // 点击搜索按钮时
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        // 如果本次和上次一样 则不进行搜索
+        if filter.searchText != searchBar.text {
+            refresh()
+        }
     }
     // 点击searchbar自带的取消按钮时
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         refresh()
     }
+    
 }
 
 //MARK: scrollView的协议方法
 extension BaseCardTableViewController {
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 向下滑动时取消输入框的第一响应者
-        searchBar.resignFirstResponder()
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+            refresh()
+        }
     }
 }

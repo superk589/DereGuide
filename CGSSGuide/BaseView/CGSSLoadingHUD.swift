@@ -139,21 +139,31 @@ class CGSSLoadingHUD: UIView {
 class CGSSLoadingHUDManager {
     static let `default` = CGSSLoadingHUDManager()
     var hud: CGSSLoadingHUD!
+
+    // 小于0.1秒不显示
+    var debouncer: Debouncer!
+    
     private init () {
         hud = CGSSLoadingHUD()
+        debouncer = Debouncer.init(interval: 0.1)
         UIApplication.shared.keyWindow?.addSubview(hud)
     }
-    func show() {
+    private lazy var showClosure: (() -> Void)? = {
         let window = UIApplication.shared.keyWindow
-        window?.bringSubview(toFront: hud)
+        window?.bringSubview(toFront: self.hud)
         for subview in window?.subviews ?? [UIView]() {
             if subview is UpdateStatusView {
                 window?.bringSubview(toFront: subview)
             }
         }
-        hud.alpha = 1
+        self.hud.alpha = 1
+    }
+    func show() {
+        debouncer.callback = showClosure
+        debouncer.call()
     }
     func hide() {
+        debouncer.callback = nil
         hud.alpha = 0
     }
 }

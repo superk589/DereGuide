@@ -14,32 +14,33 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
-    var liveList: [CGSSLive]!
+    var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
-        return CGSSSorterFilterManager.default.songSorter
+        get {
+            return CGSSSorterFilterManager.default.songSorter
+        }
+        set {
+            CGSSSorterFilterManager.default.songSorter = newValue
+        }
     }
     var filter: CGSSSongFilter {
-        return CGSSSorterFilterManager.default.songFilter
+        get {
+            return CGSSSorterFilterManager.default.songFilter
+        }
+        set {
+            CGSSSorterFilterManager.default.songFilter = newValue
+        }
     }
     var filterVC: SongFilterSortController!
     
-    var searchBar: UISearchBar!
+    var searchBar: CGSSSearchBar!
     
     
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
-
-        let dao = CGSSDAO.sharedDAO
-        liveList = filter.filterSongList(Array(dao.validLiveDict.values))
-//        for live in liveList {
-//            if CGSSShiftingBPMLive.checkIsShifting(live) {
-//                print(live.musicRef?.title, CGSSShiftingBPMLive.checkIsShifting(live))
-//            }
-//        }
-        if searchBar.text != "" {
-            liveList = dao.getLiveListByName(liveList, string: searchBar.text!)
-        }
-        dao.sortListInPlace(&liveList!, sorter: sorter)
+        filter.searchText = searchBar.text ?? ""
+        liveList = filter.filter(Array(CGSSDAO.sharedDAO.validLiveDict.values))
+        sorter.sortList(&self.liveList)
         tableView.reloadData()
     }
     func cancelAction() {
@@ -79,7 +80,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightVC = filterVC
         drawer?.delegate = self
-        drawer?.defaultRightWidth = Screen.width - 86
+        drawer?.defaultRightWidth = min(Screen.width - 86, 400)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -97,18 +98,9 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         // 初始化导航栏的搜索条
-        searchBar = UISearchBar()
-        for sub in searchBar.subviews.first!.subviews {
-            if let iv = sub as? UIImageView {
-                iv.alpha = 0
-            }
-        }
+        searchBar = CGSSSearchBar()
         self.navigationItem.titleView = searchBar
-        searchBar.returnKeyType = .done
-        // searchBar.showsCancelButton = true
         searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
-        searchBar.autocapitalizationType = .none
-        searchBar.autocorrectionType = .no
         searchBar.delegate = self
         // self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
@@ -225,6 +217,7 @@ extension BaseSongTableViewController: UISearchBarDelegate {
     // 点击搜索按钮时
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        refresh()
     }
     // 点击searchbar自带的取消按钮时
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

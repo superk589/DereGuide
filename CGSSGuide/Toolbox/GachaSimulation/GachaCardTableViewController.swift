@@ -10,8 +10,8 @@ import UIKit
 
 class GachaCardTableViewController: BaseCardTableViewController {
     
-    var _filter: CGSSCardFilter = CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
-    var _sorter: CGSSSorter = CGSSSorter.init(property: "sRarity")
+    var _filter: CGSSCardFilter = CGSSSorterFilterManager.DefaultFilter.gacha
+    var _sorter: CGSSSorter = CGSSSorterFilterManager.DefaultSorter.gacha
     
     override var filter: CGSSCardFilter {
         get {
@@ -46,12 +46,10 @@ class GachaCardTableViewController: BaseCardTableViewController {
     var defaultCardList : [CGSSCard]!
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
-        let dao = CGSSDAO.sharedDAO
-        self.cardList = filter.filterCardList(defaultCardList)
-        if searchBar.text != "" {
-            self.cardList = dao.getCardListByName(self.cardList, string: searchBar.text!)
-        }
-        dao.sortListInPlace(&self.cardList!, sorter: sorter)
+        filter.searchText = searchBar.text ?? ""
+        self.cardList = filter.filter(defaultCardList)
+        sorter.sortList(&self.cardList)
+        
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)

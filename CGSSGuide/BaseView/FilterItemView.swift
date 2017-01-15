@@ -26,7 +26,6 @@ class FilterItemView: UIView {
         }
         iv.zk_cornerRadius = 3
         iv.zk_backgroundColor = Color.parade
-        iv.tintColor = Color.parade
         
         label = UILabel()
         addSubview(label)

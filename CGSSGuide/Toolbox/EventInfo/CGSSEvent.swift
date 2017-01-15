@@ -12,9 +12,12 @@ extension CGSSEvent {
     var eventType: CGSSEventTypes {
         return CGSSEventTypes.init(eventType: type)
     }
+    dynamic var updateDate: Date {
+        return startDate.toDate()
+    }
 }
 
-class CGSSEvent {
+class CGSSEvent: CGSSBaseModel {
     var id:Int
     var type:Int
     var startDate:String
@@ -31,8 +34,12 @@ class CGSSEvent {
         self.endDate = endDate
         self.name = name
         self.secondHalfStartDate = secondHalfStartDate
-        
         self.reward = reward
+        super.init()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

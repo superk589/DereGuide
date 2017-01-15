@@ -74,6 +74,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         updateStatusView.delegate = self
         UIApplication.shared.keyWindow?.addSubview(updateStatusView)
         
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

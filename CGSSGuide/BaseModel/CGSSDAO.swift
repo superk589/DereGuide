@@ -144,15 +144,15 @@ open class CGSSDAO: NSObject {
     
     // 根据掩码筛选
     func getCardListByMask(_ cardMask: UInt, attributeMask: UInt, rarityMask: UInt, skillMask: UInt, gachaMask: UInt, favoriteMask: UInt?) -> [CGSSCard] {
-        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask ,gachaMask: gachaMask, favoriteMask: favoriteMask)
-        return filter.filterCardList(cardDict.allValues as! [CGSSCard])
+        let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask ,gachaMask: gachaMask, conditionMask: 0b11111111, procMask: 0b1111, favoriteMask: favoriteMask)
+        return filter.filter(cardDict.allValues as! [CGSSCard])
     }
     func getCardListByMask(_ filter: CGSSCardFilter) -> [CGSSCard] {
-        return filter.filterCardList(self.cardDict.allValues as! [CGSSCard])
+        return filter.filter(self.cardDict.allValues as! [CGSSCard])
     }
     
     func getCharListByFilter(_ filter: CGSSCharFilter) -> [CGSSChar] {
-        return filter.filterCharList(self.charDict.allValues as! [CGSSChar])
+        return filter.filter(self.charDict.allValues as! [CGSSChar])
     }
     
     // 根据名字搜索
@@ -174,6 +174,7 @@ open class CGSSDAO: NSObject {
             return true
         })
     }
+    
     func getCharListByName(_ charList: [CGSSChar], string: String) -> [CGSSChar] {
         return charList.filter({ (v: CGSSChar) -> Bool in
             let comps = string.components(separatedBy: " ")
@@ -194,13 +195,29 @@ open class CGSSDAO: NSObject {
     }
     
     // 根据名字搜索live
-    open func getLiveListByName(_ liveList: [CGSSLive], string: String) -> [CGSSLive] {
+    func getLiveListByName(_ liveList: [CGSSLive], string: String) -> [CGSSLive] {
         return liveList.filter({ (v: CGSSLive) -> Bool in
             let song = findSongById(v.musicId!)
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
                 let b1 = song?.title?.lowercased().contains(comp.lowercased()) ?? false
+                if b1 {
+                    continue
+                } else {
+                    return false
+                }
+            }
+            return true
+        })
+    }
+    
+    func getEventListByName(_ eventList: [CGSSEvent], string: String) -> [CGSSEvent] {
+        return eventList.filter({ (v: CGSSEvent) -> Bool in
+            let comps = string.components(separatedBy: " ")
+            for comp in comps {
+                if comp == "" { continue }
+                let b1 = v.name.lowercased().contains(comp.lowercased())
                 if b1 {
                     continue
                 } else {
@@ -390,7 +407,7 @@ open class CGSSDAO: NSObject {
     
     func getRankInType(_ card: CGSSCard) -> [Int] {
         var rank = [1, 1, 1, 1]
-        let filter = CGSSCardFilter.init(cardMask: card.cardType.rawValue, attributeMask: 0b1111, rarityMask: 0b11111111, skillMask: 0b111111111, gachaMask:0b1111, favoriteMask: nil)
+        let filter = CGSSCardFilter.init(cardMask: card.cardType.rawValue, attributeMask: CGSSAttributeTypes.all.rawValue, rarityMask: CGSSRarityTypes.all.rawValue, skillMask: CGSSSkillTypes.all.rawValue, gachaMask: CGSSAvailableTypes.all.rawValue, conditionMask: CGSSConditionTypes.all.rawValue, procMask: CGSSProcTypes.all.rawValue, favoriteMask: CGSSFavoriteTypes.all.rawValue)
         let filteredCardDict = getCardListByMask(filter)
         for cardx in filteredCardDict {
             if cardx.vocal > card.vocal {

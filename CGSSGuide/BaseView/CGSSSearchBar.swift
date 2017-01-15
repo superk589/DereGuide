@@ -18,10 +18,16 @@ class CGSSSearchBar: UISearchBar {
                 iv.alpha = 0
             }
         }
-        returnKeyType = .done
-        // searchBar.showsCancelButton = true
         autocapitalizationType = .none
         autocorrectionType = .no
+        returnKeyType = .search
+        
+        enablesReturnKeyAutomatically = false
+//        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width, height: 30))
+//        let imageView = UIImageView.init(frame: CGRect.init(x: Screen.width - 22, y: 8, width: 22, height: 22))
+//        view.addSubview(imageView)
+//        imageView.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected")
+//        inputAccessoryView = view
     }
     
     required init?(coder aDecoder: NSCoder) {

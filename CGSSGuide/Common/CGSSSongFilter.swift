@@ -9,20 +9,38 @@
 import UIKit
 
 struct CGSSSongFilter: CGSSFilter {
+    
     var songTypes: CGSSSongTypes
     var eventTypes: CGSSSongEventTypes
-    
+    var searchText: String = ""
     init(typeMask: UInt, eventMask: UInt) {
         songTypes = CGSSSongTypes.init(rawValue: typeMask)
         eventTypes = CGSSSongEventTypes.init(rawValue: eventMask)
     }
     
-    func filterSongList(_ liveList: [CGSSLive]) -> [CGSSLive] {
-        let result = liveList.filter { (v: CGSSLive) -> Bool in
-            if songTypes.contains(v.songType) && eventTypes.contains(v.eventFilterType) {
+    func filter(_ list: [CGSSLive]) -> [CGSSLive] {
+        let result = list.filter { (v: CGSSLive) -> Bool in
+            let r1: Bool = searchText == "" ? true : {
+                let song = CGSSDAO.sharedDAO.findSongById(v.musicId!)
+                let comps = searchText.components(separatedBy: " ")
+                for comp in comps {
+                    if comp == "" { continue }
+                    let b1 = song?.title?.lowercased().contains(comp.lowercased()) ?? false
+                    if b1 {
+                        continue
+                    } else {
+                        return false
+                    }
+                }
                 return true
-            }
-            return false
+            }()
+            let r2: Bool = {
+                if songTypes.contains(v.songType) && eventTypes.contains(v.eventFilterType) {
+                    return true
+                }
+                return false
+            }()
+            return r1 && r2
         }
         return result
     }
@@ -40,6 +58,7 @@ struct CGSSSongFilter: CGSSFilter {
         if let dict = NSDictionary.init(contentsOfFile: path) {
             if let typeMask = dict.object(forKey: "typeMask") as? UInt, let eventMask = dict.object(forKey: "eventMask") as? UInt {
                 self.init(typeMask: typeMask, eventMask: eventMask)
+                return
             }
         }
         return nil

@@ -107,6 +107,39 @@ extension CGSSSkill {
         }
     }
     
+    var procType: CGSSProcTypes {
+        switch maxChance {
+        case 6000:
+            return .high
+        case 5250:
+            return .middle
+        case 4500:
+            return .low
+        default:
+            return .none
+        }
+    }
+    
+    var conditionType: CGSSConditionTypes {
+        switch condition {
+        case 4:
+            return .c4
+        case 6:
+            return .c6
+        case 7:
+            return .c7
+        case 9:
+            return .c9
+        case 11:
+            return .c11
+        case 13:
+            return .c13
+        default:
+            return .other
+        }
+
+    }
+    
 }
 
 class CGSSSkill: CGSSBaseModel {

@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.song)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.char)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.card)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.teamCard)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.song)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.char)
         }
         
         // 规划近期偶像生日

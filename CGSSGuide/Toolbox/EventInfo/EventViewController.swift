@@ -9,17 +9,33 @@
 import UIKit
 import ZKDrawerController
 
-class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
+class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate {
 
-    var eventList:[CGSSEvent]!
+    var defaultList = CGSSGameResource.sharedResource.getEvent()
+    var eventList = [CGSSEvent]()
     var searchBar: CGSSSearchBar!
-    var filterVC: EventFilterController!
-    
+    var filterVC: EventFilterSortController!
+    var filter: CGSSEventFilter {
+        set {
+            CGSSSorterFilterManager.default.eventFilter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.eventFilter
+        }
+    }
+    var sorter: CGSSSorter {
+        set {
+            CGSSSorterFilterManager.default.eventSorter = newValue
+        }
+        get {
+            return CGSSSorterFilterManager.default.eventSorter
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        eventList = CGSSGameResource.sharedResource.getEvent()
+        eventList = defaultList
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
         tableView.rowHeight = 66
         
@@ -34,8 +50,9 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("活动名", comment: "")
         
-        filterVC = EventFilterController()
-        
+        filterVC = EventFilterSortController()
+        filterVC.filter = self.filter
+        filterVC.sorter = self.sorter
         
     }
     
@@ -44,7 +61,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     func filterAction() {
-        
+        CGSSClient.shared.drawerController?.show(animated: true)
     }
 
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
@@ -52,7 +69,15 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     func drawerController(_ drawerVC: ZKDrawerController, willShow vc: UIViewController) {
-        
+        filterVC.filter = filter
+        filterVC.sorter = sorter
+        filterVC.reloadData()
+    }
+    
+    func doneAndReturn(filter: CGSSEventFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.eventFilter = filter
+        CGSSSorterFilterManager.default.eventSorter = sorter
+        self.refresh()
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,13 +88,26 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
+        CGSSClient.shared.drawerController?.rightVC = nil
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CGSSNotificationCenter.removeAll(self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let drawer = CGSSClient.shared.drawerController
+        drawer?.rightVC = filterVC
+        drawer?.defaultRightWidth = min(Screen.width - 68, 400)
+        drawer?.delegate = self
+    }
+    
     override func refresh() {
+        filter.searchText = searchBar.text ?? ""
+        eventList = filter.filter(defaultList)
+        sorter.sortList(&eventList!)
         tableView.reloadData()
     }
     

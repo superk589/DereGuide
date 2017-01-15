@@ -44,6 +44,7 @@ struct CGSSSorter {
         if let dict = NSDictionary.init(contentsOfFile: path) {
             if let property = dict.object(forKey: "property") as? String, let ascending = dict.object(forKey: "ascending") as? Bool {
                 self.init(property: property, ascending: ascending)
+                return
             }
         }
         return nil

@@ -154,6 +154,7 @@ class CardDetailView: UIView {
     }
     
     func initWith(_ card: CGSSCard) {
+        
         if card.hasSpread! {
             fullImageView?.setCustomImageWithURL(URL(string: card.spreadImageRef!)!)
         } else {
@@ -593,6 +594,11 @@ class CardDetailView: UIView {
         availableLimit.text = NSLocalizedString("限定", comment: "卡片详情页")
         availableFes.text = NSLocalizedString("FES限定", comment: "卡片详情页")
         
+        availableEvent.isChecked = false
+        availableLimit.isChecked = false
+        availableGacha.isChecked = false
+        availableFes.isChecked = false
+        
         availableInfoContentView.addSubview(availableDescLabel)
         availableInfoContentView.addSubview(availableEvent)
         availableInfoContentView.addSubview(availableGacha)
@@ -604,23 +610,44 @@ class CardDetailView: UIView {
         
     }
     func setupAvailableInfoContentView(card:CGSSCard) {
-        var tuple = (false, false, false, false)
+        var types: CGSSAvailableTypes = .free
         if card.evolutionId == 0 {
             availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
             if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
-                tuple = cardFrom.available
+                types = cardFrom.gachaType
             }
         } else {
-            tuple = card.available
+            types = card.gachaType
         }
-        availableEvent.isChecked = tuple.0
-        availableFes.isChecked = tuple.3
-        availableLimit.isChecked = tuple.2
-        if tuple.2 || tuple.3 {
-            availableGacha.isChecked = false
-        } else {
-            availableGacha.isChecked = tuple.1
+        switch types {
+        case CGSSAvailableTypes.fes:
+            availableFes.isChecked = true
+        case CGSSAvailableTypes.limit:
+            availableLimit.isChecked = true
+        case CGSSAvailableTypes.event:
+            availableEvent.isChecked = true
+        case CGSSAvailableTypes.normal:
+            availableGacha.isChecked = true
+        default:
+            break
         }
+//        var tuple = (false, false, false, false)
+//        if card.evolutionId == 0 {
+//            availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
+//            if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
+//                tuple = cardFrom.available
+//            }
+//        } else {
+//            tuple = card.available
+//        }
+//        availableEvent.isChecked =
+//        availableFes.isChecked = tuple.3
+//        availableLimit.isChecked = tuple.2
+//        if tuple.2 || tuple.3 {
+//            availableGacha.isChecked = false
+//        } else {
+//            availableGacha.isChecked = tuple.1
+//        }
     }
 
     

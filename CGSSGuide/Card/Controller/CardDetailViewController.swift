@@ -54,7 +54,6 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         
         cardDV.initWith(card)
         sv.contentSize = cardDV.frame.size
-        
     }
     
     // 添加当前卡到收藏

@@ -472,14 +472,12 @@
 "稀有度" = "Rarity";
 "相册编号" = "Album Order";
 
-"降序" = "Ascending";
-"升序" = "Descending";
+"降序" = "Descending";
+"升序" = "Ascending";
 "筛选" = "Filter";
 "排序" = "Sort";
 
 "常规歌曲" = "Regular Songs";
-"传统活动" = "Token Event Songs";
-"Groove活动" = "Groove Songs";
 "最大难度" = "Maximum Difficulty";
 
 "已付声" = "Voiced";
@@ -492,3 +490,15 @@
 "五十音" = "Alphabetically";
 "游戏编号" = "Character ID";
 "生日" = "Birthday";
+
+"活动名" = "Event name";
+"传统活动" = "Token Event Songs";
+"Groove活动" = "Groove Event";
+"巡演活动" = "LIVE Parade";
+"篷车活动" = "Kyalapon Event";
+"协力活动" = "LIVE Party";
+
+"全部" = "All";
+"低确率" = "Low";
+"中确率" = "Med.";
+"高确率" = "Hight";

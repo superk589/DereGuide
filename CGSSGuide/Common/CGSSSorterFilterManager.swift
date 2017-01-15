@@ -16,30 +16,53 @@ class CGSSSorterFilterManager {
         static let teamCard = NSHomeDirectory() + "/Documents/teamCardSorter.plist"
         static let song = NSHomeDirectory() + "/Documents/songSorter.plist"
         static let char = NSHomeDirectory() + "/Documents/charSorter.plist"
+        static let event = NSHomeDirectory() + "/Documents/eventSorter.plist"
     }
     struct FilterPath {
         static let card = NSHomeDirectory() + "/Documents/cardFilter.plist"
         static let teamCard = NSHomeDirectory() + "/Documents/teamCardFilter.plist"
         static let song = NSHomeDirectory() + "/Documents/songFilter.plist"
         static let char = NSHomeDirectory() + "/Documents/charFilter.plist"
+        static let event = NSHomeDirectory() + "/Documents/eventFilter.plist"
     }
     
-    lazy var cardSorter = CGSSSorter.init(fromFile: SorterPath.card) ?? CGSSSorter.init(property: "update_id")
+    struct DefaultFilter {
+        static let card = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b11110000, skillMask: 0b11111111, gachaMask: 0b11111, conditionMask: 0b1111111, procMask: 0b1111, favoriteMask: nil)
+        static let teamCard = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b10100000, skillMask: 0b00000111, gachaMask: 0b11111, conditionMask: 0b1111111, procMask: 0b1111,  favoriteMask: nil)
+        static let char = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
+        static let song = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
+        static let event = CGSSEventFilter.init(typeMask: 0b11111)
+        static let gacha = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b11111111, skillMask: 0b11111111, gachaMask: 0b11111,  conditionMask: 0b1111111, procMask: 0b1111, favoriteMask: nil)
+    }
     
-    lazy var teamCardSorter = CGSSSorter.init(fromFile: SorterPath.teamCard) ?? CGSSSorter.init(property: "update_id")
+    struct DefaultSorter {
+        static let card = CGSSSorter.init(property: "update_id")
+        static let teamCard = CGSSSorter.init(property: "update_id")
+        static let char = CGSSSorter.init(property: "sName", ascending: true)
+        static let song = CGSSSorter.init(property: "updateId")
+        static let event = CGSSSorter.init(property: "updateDate")
+        static let gacha = CGSSSorter.init(property: "sRarity")
+    }
     
-    lazy var cardfilter = CGSSCardFilter.init(fromFile: FilterPath.card) ?? CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b11110000, skillMask: 0b111111111, gachaMask: 0b1111, favoriteMask: nil)
+    lazy var cardSorter = CGSSSorter.init(fromFile: SorterPath.card) ?? DefaultSorter.card
     
-    lazy var teamCardfilter = CGSSCardFilter.init(fromFile: FilterPath.teamCard) ?? CGSSCardFilter.init(cardMask: 0b1111, attributeMask: 0b1111, rarityMask: 0b10100000, skillMask: 0b000000111, gachaMask: 0b1111, favoriteMask: nil)
+    lazy var teamCardSorter = CGSSSorter.init(fromFile: SorterPath.teamCard) ?? DefaultSorter.teamCard
     
-    lazy var charFilter = CGSSCharFilter.init(fromFile: FilterPath.char) ?? CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
+    lazy var cardfilter = CGSSCardFilter.init(fromFile: FilterPath.card) ?? DefaultFilter.card
+
+    lazy var teamCardfilter = CGSSCardFilter.init(fromFile: FilterPath.teamCard) ?? DefaultFilter.teamCard
     
-    lazy var charSorter = CGSSSorter.init(fromFile: SorterPath.char) ?? CGSSSorter.init(property: "sName", ascending: true)
+    lazy var charFilter = CGSSCharFilter.init(fromFile: FilterPath.char) ?? DefaultFilter.char
     
-    lazy var songFilter = CGSSSongFilter.init(fromFile: FilterPath.song) ?? CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
+    lazy var charSorter = CGSSSorter.init(fromFile: SorterPath.char) ?? DefaultSorter.char
     
-    lazy var songSorter = CGSSSorter.init(fromFile: SorterPath.song) ?? CGSSSorter.init(property: "updateId")
+    lazy var songFilter = CGSSSongFilter.init(fromFile: FilterPath.song) ?? DefaultFilter.song
     
+    lazy var songSorter = CGSSSorter.init(fromFile: SorterPath.song) ?? DefaultSorter.song
+    
+    lazy var eventFilter = CGSSEventFilter.init(fromFile: FilterPath.event) ?? DefaultFilter.event
+    
+    lazy var eventSorter = CGSSSorter.init(fromFile: SorterPath.event) ?? DefaultSorter.event
     
     func saveForTeam() {
         teamCardSorter.save(to: SorterPath.teamCard)
@@ -54,9 +77,15 @@ class CGSSSorterFilterManager {
         charFilter.save(to: FilterPath.char)
         charSorter.save(to: SorterPath.char)
     }
+    
     func saveForSong() {
         songFilter.save(to: FilterPath.song)
         songSorter.save(to: SorterPath.song)
+    }
+    
+    func saveForEvent() {
+        eventFilter.save(to: FilterPath.event)
+        eventSorter.save(to: SorterPath.event)
     }
     
     fileprivate init() {

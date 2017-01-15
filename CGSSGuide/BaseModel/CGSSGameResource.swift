@@ -88,7 +88,7 @@ class Master: FMDatabase {
         return result
     }
     func getGachaAvailableList() -> [Int] {
-        let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id"
+        let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription not like '%限定%'"
         var result = [Int]()
         do {
             let set = try self.executeQuery(selectSql, values: nil)
@@ -294,11 +294,14 @@ class CGSSGameResource: NSObject {
     fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
-        // self.prepareGachaList()
-        // CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: "UPDATE_END", object: nil)
+        self.prepareGachaList()
+        CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: CGSSNotificationCenter.updateEnd, object: nil)
         // self.loadAllDataFromFile()
     }
     
+    deinit {
+        CGSSNotificationCenter.removeAll(self)
+    }
     func prepareFileDirectory() {
         if !FileManager.default.fileExists(atPath: CGSSGameResource.path) {
             do {
@@ -353,9 +356,9 @@ class CGSSGameResource: NSObject {
         return master.getValidGacha()
     }
     
-    func getEvent() -> [CGSSEvent]? {
+    func getEvent() -> [CGSSEvent] {
         guard master.open() else {
-            return nil
+            return [CGSSEvent]()
         }
         defer {
             master.close()
@@ -379,7 +382,7 @@ class CGSSGameResource: NSObject {
     
     func updateEnd() {
         prepareGachaList()
-        updateCardData()
+        // updateCardData()
     }
     
     // MARK: 卡池数据部分

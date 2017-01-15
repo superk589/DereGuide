@@ -16,7 +16,7 @@ class CGSSClient {
     private init() {
         
     }
-    
+    var searchDebouncer = Debouncer(interval: 0.5)
     var drawerController: ZKDrawerController?
     
 }

@@ -47,16 +47,14 @@ class GachaViewController: RefreshableTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
         headerView.backgroundColor = UIColor.white
         simulateView = GachaSimulateView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
         simulateView.delegate = self
         headerView.addSubview(simulateView)
         headerView.fheight = simulateView.fbottom
-        if let pools = CGSSGameResource.sharedResource.getGachaPool(), pools.count > 0 {
-            self.gachaPools.append(contentsOf: pools)
-            poolIndex = 0
-        }
+        
         tableView.register(GachaPoolTableViewCell.self, forCellReuseIdentifier: "GachaCell")
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         tableView.estimatedRowHeight = 225
@@ -64,6 +62,11 @@ class GachaViewController: RefreshableTableViewController {
         tableView.tableHeaderView = UIView.init(frame: headerView.bounds)
         fixedView.addSubview(headerView)
         
+        if let pools = CGSSGameResource.sharedResource.getGachaPool(), pools.count > 0 {
+            self.gachaPools.append(contentsOf: pools)
+            poolIndex = 0
+        }
+
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "764-arrow-down-toolbar-selected.png"), style: .plain, target: self, action: #selector(showOrHideHeader))
         // Do any additional setup after loading the view.
     }
