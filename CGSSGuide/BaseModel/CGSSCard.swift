@@ -47,11 +47,17 @@ extension CGSSCard {
     }
     
     var gachaType:CGSSAvailableTypes {
-        if CGSSGameResource.sharedResource.gachaAvailabelList.contains(id) { return .normal }
-        else if CGSSGameResource.sharedResource.fesAvailabelList.contains(id) { return .fes }
-        else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(id) { return .limit }
-        else if CGSSGameResource.sharedResource.eventAvailabelList.contains(id) { return .event }
-        else { return .free }
+        var type: CGSSAvailableTypes
+        if availableTypes != nil {
+            type = availableTypes!
+        }
+        else if CGSSGameResource.sharedResource.gachaAvailabelList.contains(id) { type = .normal }
+        else if CGSSGameResource.sharedResource.fesAvailabelList.contains(id) { type = .fes }
+        else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(id) { type = .limit }
+        else if CGSSGameResource.sharedResource.eventAvailabelList.contains(id) { type = .event }
+        else { type = .free }
+        availableTypes = type
+        return type
     }
     
     var chara: CGSSChar? {
@@ -219,7 +225,7 @@ class CGSSCard: CGSSBaseModel {
     var vocalMin: Int!
     
     // 非JSON获取
-    var availableTypes: CGSSAvailableTypes!
+    var availableTypes: CGSSAvailableTypes?
     
     /**
          * Instantiate the instance using the passed json values to set the properties values
@@ -364,7 +370,7 @@ class CGSSCard: CGSSBaseModel {
         vocalMin = aDecoder.decodeObject(forKey: "vocal_min") as? Int
         
         // added in 1.1.3
-        availableTypes = CGSSAvailableTypes.init(rawValue: aDecoder.decodeObject(forKey: "availableTypes") as? UInt ?? 0)
+        // availableTypes = CGSSAvailableTypes.init(rawValue: aDecoder.decodeObject(forKey: "availableTypes") as? UInt ?? 0)
         
     }
     
@@ -509,9 +515,9 @@ class CGSSCard: CGSSBaseModel {
         }
         
         // added in 1.1.3
-        if availableTypes != nil {
-            aCoder.encode(availableTypes.rawValue, forKey: "availableTypes")
-        }
+//        if availableTypes != nil {
+//            aCoder.encode(availableTypes.rawValue, forKey: "availableTypes")
+//        }
         
     }
     

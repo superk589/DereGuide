@@ -410,7 +410,7 @@
 "强判" = "Perfect Lock";
 
 /* 技能类型 */
-"COMBO保护" = "Combo Guard";
+"Combo保护" = "Combo Guard";
 
 /* 技能类型 */
 "过载" = "Overload";
@@ -502,3 +502,9 @@
 "低确率" = "Low";
 "中确率" = "Med.";
 "高确率" = "Hight";
+
+"待定" = "TBD";
+"上位" = "Upper Card";
+"下位" = "Lower Card";
+"活动曲" = "Event Song";
+

@@ -53,8 +53,6 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
-        
-        refresh()
     }
     
     // 根据设定的筛选和排序方法重新展现数据
@@ -89,6 +87,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -130,41 +129,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         
         let row = indexPath.row
         let card = cardList[row]
-        if let name = card.chara?.name, let conventional = card.chara?.conventional {
-            cell.cardNameLabel.text = name + "  " + conventional
-        }
-        
-        cell.cardIconView?.setWithCardId(card.id!)
-        cell.cardIconView?.isUserInteractionEnabled = false
-        
-        // textLabel?.text = self.cardList[row] as? String
-        
-        // 显示数值
-        cell.lifeLabel.text = String(card.life)
-        cell.vocalLabel.text = String(card.vocal)
-        cell.danceLabel.text = String(card.dance)
-        cell.visualLabel.text = String(card.visual)
-        cell.totalLabel.text = String(card.overall)
-        
-        // 显示稀有度
-        cell.rarityLabel.text = card.rarity?.rarityString ?? ""
-        
-        // 显示title
-        cell.titleLabel.text = card.title ?? ""
-        
-        // 显示主动技能类型
-        if let skill = card.skill {
-            if CGSSGlobal.width > 360 {
-                cell.skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillFilterType.toString())"
-            } else {
-                cell.skillLabel.text = "\(skill.skillType!)"
-            }
-        } else {
-            cell.skillLabel.text = ""
-        }
-        
-        // Configure the cell...
-        
+        cell.setup(card: card)
         return cell
     }
     
@@ -191,7 +156,7 @@ extension BaseCardTableViewController: UISearchBarDelegate {
     
     // 文字改变时
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        refresh()
     }
     // 开始编辑时
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

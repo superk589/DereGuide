@@ -205,11 +205,14 @@ class Master: FMDatabase {
     
     func getEvents() -> [CGSSEvent] {
         var events = [CGSSEvent]()
-        let selectSql = "select * from event_data order by event_start desc"
+        let selectSql = "select * from event_data order by event_start asc"
         do {
+            var grooveOrParadeCount = 0
+            var count = 0
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
-                
+                count += 1
+                let sortId = count > 16 ? count + 2 : count + 1
                 let id = Int(set.int(forColumn: "id"))
                 let type = Int(set.int(forColumn: "type"))
                 let name = set.string(forColumn: "name")
@@ -227,14 +230,31 @@ class Master: FMDatabase {
                     rewards.append(reward)
                 }
                 
-                let event = CGSSEvent.init(id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards)
+                var liveId: Int = 0
+                if type == 5 || type == 3 {
+                    grooveOrParadeCount += 1
+                    let liveSql = "select * from live_data where sort = \(3000 + grooveOrParadeCount)"
+                    let subSet2 = try self.executeQuery(liveSql, values: nil)
+                    while subSet2.next() {
+                        liveId = Int(subSet2.int(forColumn: "id"))
+                        break
+                    }
+                } else {
+                    let liveSql = "select * from live_data where sort = \(id)"
+                    let subSet2 = try self.executeQuery(liveSql, values: nil)
+                    while subSet2.next() {
+                        liveId = Int(subSet2.int(forColumn: "id"))
+                        break
+                    }
+                }
+                let event = CGSSEvent.init(sortId: sortId, id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards, liveId: liveId)
                
                 events.append(event)
             }
         } catch {
             print(self.lastErrorMessage())
         }
-        return events
+        return events.reversed()
         
     }
     
@@ -411,7 +431,7 @@ class CGSSGameResource: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             let dao = CGSSDAO.sharedDAO
             for card in dao.cardDict.allValues as! [CGSSCard] {
-                if [.sr, .ssr].contains(card.rarityType) && card.availableTypes.rawValue == 0 {
+                if [.sr, .ssr].contains(card.rarityType) && card.availableTypes?.rawValue == 0 {
                     if self.eventAvailabelList.contains(card.id) {
                         card.availableTypes = .event
                     } else if self.fesAvailabelList.contains(card.id) {

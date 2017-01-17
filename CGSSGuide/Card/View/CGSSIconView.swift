@@ -23,22 +23,16 @@ class CGSSIconView: ZKCornerRadiusView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         prepare()
-        
     }
     
     func prepare() {
-       
-        zk_cornerRadius = self.fheight / 8
-//        layer.cornerRadius = 6
-//        layer.masksToBounds = true
         isUserInteractionEnabled = true
         tap = UITapGestureRecognizer(target: self, action: #selector(onClick))
         addGestureRecognizer(tap!)
     }
     
     func setIconImage(_ urlStr: String) {
-        sd_setImage(with: URL.init(string: urlStr)!, placeholderImage: UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate))
-        // sd_setImageWithURL(NSURL.init(string: urlStr)!)
+        sd_setImage(with: URL.init(string: urlStr)!, placeholderImage: #imageLiteral(resourceName: "icon_placeholder").withRenderingMode(.alwaysTemplate))
     }
     
     func setAction(_ target: AnyObject, action: Selector) {
@@ -52,7 +46,10 @@ class CGSSIconView: ZKCornerRadiusView {
             _ = self.target?.perform(action!, with: self)
         }
     }
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        zk_cornerRadius = self.fheight / 8
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepare()

@@ -40,7 +40,7 @@ class CGSSSorterFilterManager {
         static let teamCard = CGSSSorter.init(property: "update_id")
         static let char = CGSSSorter.init(property: "sName", ascending: true)
         static let song = CGSSSorter.init(property: "updateId")
-        static let event = CGSSSorter.init(property: "updateDate")
+        static let event = CGSSSorter.init(property: "sortId")
         static let gacha = CGSSSorter.init(property: "sRarity")
     }
     

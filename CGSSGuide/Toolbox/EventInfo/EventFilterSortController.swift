@@ -28,7 +28,7 @@ class EventFilterSortController: BaseFilterSortController {
                            CGSSEventTypes.parade.toString()]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
-    var sorterMethods = ["updateDate"]
+    var sorterMethods = ["sortId"]
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
     override func viewDidLoad() {

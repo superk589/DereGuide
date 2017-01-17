@@ -25,7 +25,7 @@ class EventTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        selectionStyle = .none
         statusIndicator = EventStatusIndicator()
         contentView.addSubview(statusIndicator)
         statusIndicator.snp.makeConstraints { (make) in
@@ -91,18 +91,28 @@ class EventTableViewCell: UITableViewCell {
         
     }
     
-    func setupWith(event:CGSSEvent, bannerId:Int) {
-        banner.bannerId = bannerId
+    func setup(event:CGSSEvent) {
         let now = Date()
         let start = event.startDate.toDate()
         let end = event.endDate.toDate()
         if now >= start && now <= end {
             statusIndicator.shinyColor = UIColor.green.withAlphaComponent(0.6)
+            banner.bannerId = event.sortId
         } else if now < start {
             statusIndicator.shinyColor = UIColor.orange.withAlphaComponent(0.6)
+            banner.preBannerId = event.id
         } else if now > end {
             statusIndicator.shinyColor = UIColor.red.withAlphaComponent(0.6)
+            banner.bannerId = event.sortId
         }
+        // 顺序id为21的的活动没有图 特殊处理
+        if event.sortId == 21 {
+             banner.preBannerId = 2003
+        }
+//        // 前两次篷车活动特殊处理
+//        if event.id == 2001 || event.id == 2002 {
+//            banner.preBannerId = 2003
+//        }
 //        startLabel.text = NSLocalizedString("开始时间：", comment: "") + event.startDate
 //        endLabel.text = NSLocalizedString("结束时间：", comment: "") + event.endDate
         eventNameLabel.text = event.name

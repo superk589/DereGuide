@@ -22,6 +22,16 @@ struct Screen {
     public static let scale = UIScreen.main.scale
 }
 
+struct Font {
+    static let title: UIFont! = UIFont.regular(size: 16)
+    static let content: UIFont! = UIFont.regular(size: 14)
+    static func number(of size: CGFloat) -> UIFont! {
+        return UIFont.init(name: "menlo", size: size)
+    }
+    static func courier(of size: CGFloat) -> UIFont! {
+        return UIFont.init(name: "Courier New", size: size)
+    }
+}
 
 struct Color {
     // 常用颜色
@@ -44,7 +54,10 @@ struct Color {
 
     public static let allType = UIColor.darkGray
 
+    static let separator = UIColor.init(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
 }
+
+
 
 public class CGSSGlobal: NSObject {
     

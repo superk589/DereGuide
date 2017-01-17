@@ -127,6 +127,12 @@
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
+		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
+		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
+		12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABA1E2CBADA0009986F /* EventSongView.swift */; };
+		12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */; };
+		12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC31E2E0D620009986F /* EventCardView.swift */; };
+		12D45AC61E2E26AD0009986F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC51E2E26AD0009986F /* CardView.swift */; };
 		12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AC1E1BCD780064991E /* DonationViewController.swift */; };
 		12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */; };
 		12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B01E1CAB330064991E /* DonationCell.swift */; };
@@ -293,6 +299,12 @@
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
+		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		12D45AB81E2CB5560009986F /* EventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
+		12D45ABA1E2CBADA0009986F /* EventSongView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSongView.swift; sourceTree = "<group>"; };
+		12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
+		12D45AC31E2E0D620009986F /* EventCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
+		12D45AC51E2E26AD0009986F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		12D4F8AC1E1BCD780064991E /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationQAView.swift; sourceTree = "<group>"; };
 		12D4F8B01E1CAB330064991E /* DonationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
@@ -367,13 +379,9 @@
 		1238059B1DAA1582007361CF /* EventInfo */ = {
 			isa = PBXGroup;
 			children = (
-				1238059C1DAA15B9007361CF /* EventViewController.swift */,
-				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
-				1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */,
-				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
-				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
-				123805A21DAA44C6007361CF /* EventBannerView.swift */,
-				1206F6D11E2A1C6D000FAC78 /* EventStatusIndicator.swift */,
+				12D45ABE1E2DFB640009986F /* Controller */,
+				12D45ABF1E2DFB6E0009986F /* View */,
+				12D45AC01E2DFB730009986F /* Model */,
 			);
 			path = EventInfo;
 			sourceTree = "<group>";
@@ -404,13 +412,8 @@
 		124E47091D654AB700DD0399 /* CharInfo */ = {
 			isa = PBXGroup;
 			children = (
-				124E470A1D654AB700DD0399 /* CharInfoViewController.swift */,
-				120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */,
-				1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */,
-				1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */,
-				1271C6B61D69816800DEF52B /* CharDetailViewController.swift */,
-				1271C6B81D69818E00DEF52B /* CharDetailView.swift */,
-				120541771D78289F0021F875 /* CharProfileView.swift */,
+				12D45AC11E2DFB8C0009986F /* Controller */,
+				12D45AC21E2DFB920009986F /* View */,
 			);
 			path = CharInfo;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */,
 				122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */,
 				1269E9C21D520B160071AD7F /* CardTableViewCell.swift */,
+				12D45AC51E2E26AD0009986F /* CardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -539,6 +543,7 @@
 				12A71D921D8C2D280021320D /* CGSSCheckBox.swift */,
 				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
 				1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */,
+				12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -665,6 +670,59 @@
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
 			);
 			path = CGSSGuide;
+			sourceTree = "<group>";
+		};
+		12D45ABE1E2DFB640009986F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1238059C1DAA15B9007361CF /* EventViewController.swift */,
+				1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */,
+				12D45AB81E2CB5560009986F /* EventDetailController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		12D45ABF1E2DFB6E0009986F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
+				123805A21DAA44C6007361CF /* EventBannerView.swift */,
+				1206F6D11E2A1C6D000FAC78 /* EventStatusIndicator.swift */,
+				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
+				12D45ABA1E2CBADA0009986F /* EventSongView.swift */,
+				12D45AC31E2E0D620009986F /* EventCardView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		12D45AC01E2DFB730009986F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
+				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		12D45AC11E2DFB8C0009986F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				124E470A1D654AB700DD0399 /* CharInfoViewController.swift */,
+				120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */,
+				1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */,
+				1271C6B61D69816800DEF52B /* CharDetailViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		12D45AC21E2DFB920009986F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */,
+				1271C6B81D69818E00DEF52B /* CharDetailView.swift */,
+				120541771D78289F0021F875 /* CharProfileView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		12D4F8BE1E1E66840064991E /* FilterAndSorting */ = {
@@ -867,6 +925,7 @@
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
+				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				124791851D882B2400ED8EA6 /* GachaPool.swift in Sources */,
 				1269E9DF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift in Sources */,
@@ -904,6 +963,7 @@
 				1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
+				12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */,
 				1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */,
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
 				1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */,
@@ -933,10 +993,12 @@
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				1206C0FB1E27742000185782 /* CardFilterAndSorterTableViewController.swift in Sources */,
+				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
+				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */,
@@ -946,6 +1008,7 @@
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
+				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
@@ -955,6 +1018,7 @@
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
+				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
 				1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
 				120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */,

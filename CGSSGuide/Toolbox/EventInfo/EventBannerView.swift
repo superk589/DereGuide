@@ -16,6 +16,18 @@ class EventBannerView: UIImageView {
         }
     }
     
+    var preBannerId: Int! {
+        didSet {
+            self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", preBannerId)))
+        }
+    }
+    
+    var detailBannerId: Int! {
+        didSet {
+            self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId)))
+        }
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

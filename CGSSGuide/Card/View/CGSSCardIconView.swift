@@ -11,6 +11,7 @@ import UIKit
 class CGSSCardIconView: CGSSIconView {
     
     var cardId: Int?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

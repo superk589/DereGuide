@@ -51,6 +51,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         searchBar.placeholder = NSLocalizedString("活动名", comment: "")
         
         filterVC = EventFilterSortController()
+        filterVC.delegate = self
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         
@@ -77,6 +78,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     func doneAndReturn(filter: CGSSEventFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.default.eventFilter = filter
         CGSSSorterFilterManager.default.eventSorter = sorter
+        CGSSSorterFilterManager.default.saveForEvent()
         self.refresh()
     }
 
@@ -88,12 +90,13 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
-        CGSSClient.shared.drawerController?.rightVC = nil
+        refresh()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CGSSNotificationCenter.removeAll(self)
+        CGSSClient.shared.drawerController?.rightVC = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,8 +121,8 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventTableViewCell
-        let bannerId = eventList.count - indexPath.row > 16 ? eventList.count - indexPath.row + 2 : eventList.count - indexPath.row + 1
-        cell.setupWith(event: eventList[indexPath.row], bannerId: bannerId)
+        let event = eventList[indexPath.row]
+        cell.setup(event: event)
         return cell
     }
     
@@ -129,6 +132,14 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bannerId = eventList.count - indexPath.row + 1
+        let vc = EventDetailController()
+        vc.bannerId = bannerId
+        vc.event = eventList[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     /*
     // MARK: - Navigation

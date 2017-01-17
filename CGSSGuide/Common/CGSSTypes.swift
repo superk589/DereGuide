@@ -49,7 +49,7 @@ struct CGSSSkillTypes:OptionSet {
         case CGSSSkillTypes.perfectLock:
             return NSLocalizedString("强判", comment: "")
         case CGSSSkillTypes.comboContinue:
-            return NSLocalizedString("COMBO保护", comment: "")
+            return NSLocalizedString("Combo保护", comment: "")
         case CGSSSkillTypes.heal:
             return NSLocalizedString("恢复生命", comment: "")
         case CGSSSkillTypes.guard:
