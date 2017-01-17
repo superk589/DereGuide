@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import ZKCornerRadiusView
 
 protocol EventDetailViewDelegate: class {
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView)
@@ -21,6 +22,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 //    var nameLabel: UILabel!
     
     var startToEndLabel: UILabel!
+    
+    var timeIndicator: ZKCornerRadiusView!
     
     var line1: UIView!
     
@@ -57,18 +60,25 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 //        }
 //        nameLabel.font = Font.title
         
-        
         startToEndLabel = UILabel()
         addSubview(startToEndLabel)
         startToEndLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.left.equalTo(10)
+            make.left.equalTo(22)
             make.top.equalTo(banner.snp.bottom).offset(8)
         }
         startToEndLabel.font = Font.title
         startToEndLabel.textAlignment = .center
         startToEndLabel.adjustsFontSizeToFitWidth = true
         
+        timeIndicator = ZKCornerRadiusView.init(frame: CGRect.init(x: 0, y: 0, width: 12, height: 12))
+        addSubview(timeIndicator)
+        timeIndicator.snp.makeConstraints { (make) in
+            make.height.width.equalTo(12)
+            make.left.equalTo(10)
+            make.centerY.equalTo(startToEndLabel)
+        }
+        timeIndicator.zk_cornerRadius = 6
         
         line1 = UIView()
         line1.backgroundColor = Color.separator
@@ -172,6 +182,14 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 //            })
 //        }
         
+        if event.startDate.toDate() > Date() {
+            timeIndicator.zk_backgroundColor = UIColor.orange.withAlphaComponent(0.6)
+        } else if event.endDate.toDate() < Date() {
+            timeIndicator.zk_backgroundColor = UIColor.red.withAlphaComponent(0.6)
+        } else {
+            timeIndicator.zk_backgroundColor = UIColor.green.withAlphaComponent(0.6)
+        }
+        timeIndicator.zk_render()
 //        if event.startDate.toDate() > Date() {
 //            banner.preBannerId = event.id
 //        } else {

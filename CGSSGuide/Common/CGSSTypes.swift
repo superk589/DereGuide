@@ -353,3 +353,23 @@ struct CGSSEventTypes: OptionSet, RawRepresentable {
     }
 }
 
+
+struct CGSSGachaTypes: OptionSet, RawRepresentable {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let normal = CGSSGachaTypes.init(rawValue: 1 << 0)
+    static let limit = CGSSGachaTypes.init(rawValue: 1 << 1)
+    static let fes = CGSSGachaTypes.init(rawValue: 1 << 2)
+    static let all = CGSSGachaTypes.init(rawValue: 0b111)
+    
+    func toString() -> String {
+        switch self {
+        case CGSSGachaTypes.limit:
+            return NSLocalizedString("限定", comment: "")
+        case CGSSGachaTypes.fes:
+            return NSLocalizedString("FES限定", comment: "")
+        default:
+            return NSLocalizedString("普池", comment: "")
+        }
+    }
+}

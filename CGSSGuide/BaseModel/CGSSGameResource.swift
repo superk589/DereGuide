@@ -130,7 +130,7 @@ class Master: FMDatabase {
         return result
     }
     
-    func getValidGacha() -> [GachaPool] {
+    func getValidGacha() -> [CGSSGachaPool] {
         //    {
         //
         //    "dicription" : "新SSレア堀裕子登場 ! 10連ガシャはSレア以上のアイドル1人が確定で出現 ! ! ※アイドルの所属上限を超える場合、プレゼントに送られます。",
@@ -142,23 +142,23 @@ class Master: FMDatabase {
         //    "ssr_ratio" : "150",
         //    "start_date" : "2016-09-09 15:00:00",
         //    }
-        let now = Date()
+//        let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.timeZone = CGSSGlobal.timeZoneOfTyoko
         
-        let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id order by end_date DESC"
+        let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and a.id like '3%' order by end_date DESC"
 
-        var pools = [GachaPool]()
+        var pools = [CGSSGachaPool]()
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
                 let endDate = set.string(forColumn: "end_date")
-                if let date = dateFormatter.date(from: endDate!) {
-                    if now > date && pools.count > 9 {
-                        break
-                    }
-                }
+//                if let date = dateFormatter.date(from: endDate!) {
+////                    if now > date && pools.count > 9 {
+////                        break
+////                    }
+//                }
                 let id = Int(set.int(forColumn: "id"))
                 let name = set.string(forColumn: "name")
                 let dicription = set.string(forColumn: "dicription")
@@ -178,7 +178,7 @@ class Master: FMDatabase {
                 }
                 
                 
-                let gachaPool = GachaPool.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
+                let gachaPool = CGSSGachaPool.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
                 pools.append(gachaPool)
             }
         } catch {
@@ -366,9 +366,9 @@ class CGSSGameResource: NSObject {
         return master.selectTextBy(category: category, index: index)
     }
     
-    func getGachaPool() -> [GachaPool]? {
+    func getGachaPool() -> [CGSSGachaPool] {
         guard master.open() else {
-            return nil
+            return [CGSSGachaPool]()
         }
         defer {
             master.close()

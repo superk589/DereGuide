@@ -96,7 +96,7 @@ class GachaPoolTableViewCell: UITableViewCell {
         delegate?.didSelect(cell: self)
     }
     
-    func setupWith(pool: GachaPool) {
+    func setupWith(pool: CGSSGachaPool) {
         nameLabel.text = pool.name
         ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription

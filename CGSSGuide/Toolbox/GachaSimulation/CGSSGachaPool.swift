@@ -1,5 +1,5 @@
 //
-//  GachaPool.swift
+//  CGSSGachaPool.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2016/9/13.
@@ -20,7 +20,7 @@ extension Array {
     }
 }
 
-extension GachaPool {
+extension CGSSGachaPool {
     var cardList: [CGSSCard] {
         get {
             var list = [CGSSCard]()
@@ -33,6 +33,25 @@ extension GachaPool {
             return list
         }
     }
+    var bannerId: Int {
+        var result = id - 30000
+        if dicription.contains("クールタイプ") || dicription.contains("パッションタイプ") || dicription.contains("キュートタイプ") {
+            result = 29
+        } else if id == 30001 {
+            // TODO: 初始卡池的图不存在 需要一个placeholder
+        }
+        return result
+    }
+    
+    var gachaType: CGSSGachaTypes {
+        if dicription.contains("フェス限定") {
+            return CGSSGachaTypes.fes
+        } else if dicription.contains("期間限定") {
+            return CGSSGachaTypes.limit
+        } else {
+            return CGSSGachaTypes.normal
+        }
+    }
 }
 
 struct Reward {
@@ -40,7 +59,7 @@ struct Reward {
     var rewardRecommand: Int!
 }
 
-class GachaPool {
+class CGSSGachaPool: CGSSBaseModel {
     
 //    {
 //
@@ -114,6 +133,11 @@ class GachaPool {
                 self.rewards.append(rew)
             }
         }
+        super.init()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func simulateOnce(srGuarantee: Bool) -> Int {

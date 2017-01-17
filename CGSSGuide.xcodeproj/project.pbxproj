@@ -50,7 +50,7 @@
 		1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */; };
 		1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */; };
 		124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791801D87F4FD00ED8EA6 /* GachaViewController.swift */; };
-		124791851D882B2400ED8EA6 /* GachaPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791841D882B2400ED8EA6 /* GachaPool.swift */; };
+		124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */; };
 		1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */; };
 		124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47051D654AB700DD0399 /* BirthdayCenter.swift */; };
 		124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */; };
@@ -117,6 +117,8 @@
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
+		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
+		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
 		129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
 		12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */; };
@@ -133,6 +135,10 @@
 		12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */; };
 		12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC31E2E0D620009986F /* EventCardView.swift */; };
 		12D45AC61E2E26AD0009986F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC51E2E26AD0009986F /* CardView.swift */; };
+		12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC71E2E44590009986F /* GachaTableViewCell.swift */; };
+		12D45ACD1E2E46030009986F /* GachaBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ACC1E2E46030009986F /* GachaBannerView.swift */; };
+		12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */; };
+		12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */; };
 		12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AC1E1BCD780064991E /* DonationViewController.swift */; };
 		12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */; };
 		12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B01E1CAB330064991E /* DonationCell.swift */; };
@@ -214,7 +220,7 @@
 		1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameInfo.swift; sourceTree = "<group>"; };
 		1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameResource.swift; sourceTree = "<group>"; };
 		124791801D87F4FD00ED8EA6 /* GachaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaViewController.swift; sourceTree = "<group>"; };
-		124791841D882B2400ED8EA6 /* GachaPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaPool.swift; sourceTree = "<group>"; };
+		124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGachaPool.swift; sourceTree = "<group>"; };
 		1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZ4Decompressor.swift; sourceTree = "<group>"; };
 		124CF52C1DA0D77000ACF6F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		124CF52D1DA0D96000ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -288,6 +294,8 @@
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaPoolTableViewCell.swift; sourceTree = "<group>"; };
+		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
+		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +313,10 @@
 		12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
 		12D45AC31E2E0D620009986F /* EventCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		12D45AC51E2E26AD0009986F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		12D45AC71E2E44590009986F /* GachaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaTableViewCell.swift; sourceTree = "<group>"; };
+		12D45ACC1E2E46030009986F /* GachaBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaBannerView.swift; sourceTree = "<group>"; };
+		12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaFilterSortController.swift; sourceTree = "<group>"; };
+		12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGSSGachaFilter.swift; path = ../../Common/CGSSGachaFilter.swift; sourceTree = "<group>"; };
 		12D4F8AC1E1BCD780064991E /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationQAView.swift; sourceTree = "<group>"; };
 		12D4F8B01E1CAB330064991E /* DonationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
@@ -389,11 +401,9 @@
 		1247917F1D87F4E500ED8EA6 /* GachaSimulation */ = {
 			isa = PBXGroup;
 			children = (
-				124791801D87F4FD00ED8EA6 /* GachaViewController.swift */,
-				128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */,
-				12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */,
-				12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */,
-				124791841D882B2400ED8EA6 /* GachaPool.swift */,
+				12D45ACB1E2E446E0009986F /* Controller */,
+				12D45ACA1E2E44670009986F /* View */,
+				12D45AC91E2E445E0009986F /* Model */,
 			);
 			path = GachaSimulation;
 			sourceTree = "<group>";
@@ -725,6 +735,38 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		12D45AC91E2E445E0009986F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */,
+				12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		12D45ACA1E2E44670009986F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */,
+				12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */,
+				12D45AC71E2E44590009986F /* GachaTableViewCell.swift */,
+				12D45ACC1E2E46030009986F /* GachaBannerView.swift */,
+				128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		12D45ACB1E2E446E0009986F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				124791801D87F4FD00ED8EA6 /* GachaViewController.swift */,
+				12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */,
+				12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */,
+				128E821F1E2E561700B2E626 /* GachaDetailController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		12D4F8BE1E1E66840064991E /* FilterAndSorting */ = {
 			isa = PBXGroup;
 			children = (
@@ -921,13 +963,15 @@
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */,
+				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
-				124791851D882B2400ED8EA6 /* GachaPool.swift in Sources */,
+				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
+				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
 				1269E9DF1D520B5D0071AD7F /* CGSSShiftingBeatmap.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */,
@@ -971,6 +1015,7 @@
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
+				12D45ACD1E2E46030009986F /* GachaBannerView.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
@@ -989,6 +1034,7 @@
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
+				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
@@ -1004,7 +1050,9 @@
 				12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
+				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
+				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
