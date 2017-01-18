@@ -360,16 +360,19 @@ struct CGSSGachaTypes: OptionSet, RawRepresentable {
     static let normal = CGSSGachaTypes.init(rawValue: 1 << 0)
     static let limit = CGSSGachaTypes.init(rawValue: 1 << 1)
     static let fes = CGSSGachaTypes.init(rawValue: 1 << 2)
-    static let all = CGSSGachaTypes.init(rawValue: 0b111)
+    static let singleType = CGSSGachaTypes.init(rawValue: 1 << 3)
+    static let all = CGSSGachaTypes.init(rawValue: 0b1111)
     
     func toString() -> String {
         switch self {
         case CGSSGachaTypes.limit:
-            return NSLocalizedString("限定", comment: "")
+            return NSLocalizedString("限定卡池", comment: "")
         case CGSSGachaTypes.fes:
-            return NSLocalizedString("FES限定", comment: "")
+            return NSLocalizedString("FES限定卡池", comment: "")
+        case CGSSGachaTypes.singleType:
+            return NSLocalizedString("单属性卡池", comment: "")
         default:
-            return NSLocalizedString("普池", comment: "")
+            return NSLocalizedString("普通卡池", comment: "")
         }
     }
 }

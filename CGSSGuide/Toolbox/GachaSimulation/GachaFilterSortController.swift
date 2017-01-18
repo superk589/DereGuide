@@ -23,7 +23,8 @@ class GachaFilterSortController: BaseFilterSortController {
     
     var gachaTypeTitles = [CGSSGachaTypes.normal.toString(),
                            CGSSGachaTypes.limit.toString(),
-                           CGSSGachaTypes.fes.toString()]
+                           CGSSGachaTypes.fes.toString(),
+                           CGSSGachaTypes.singleType.toString()]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
     var sorterMethods = ["id"]

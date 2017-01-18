@@ -492,10 +492,10 @@
 "生日" = "Birthday";
 
 "活动名" = "Event name";
-"传统活动" = "Token Event Songs";
+"传统活动" = "Token Event";
 "Groove活动" = "Groove Event";
 "巡演活动" = "LIVE Parade";
-"篷车活动" = "Kyalapon Event";
+"篷车活动" = "Caravan Event";
 "协力活动" = "LIVE Party";
 
 "全部" = "All";
@@ -509,3 +509,7 @@
 "活动曲" = "Event Song";
 
 "卡池名称或描述" = "Name, Description";
+"限定卡池" = "Limited Gacha";
+"FES限定卡池" = "CinFes Gacha";
+"单属性卡池" = "Type Select Gacha";
+"普通卡池" = "Normal Gacha";

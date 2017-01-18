@@ -48,6 +48,8 @@ extension CGSSGachaPool {
             return CGSSGachaTypes.fes
         } else if dicription.contains("期間限定") {
             return CGSSGachaTypes.limit
+        } else if dicription.contains("クールタイプ") || dicription.contains("パッションタイプ") || dicription.contains("キュートタイプ") {
+            return CGSSGachaTypes.singleType
         } else {
             return CGSSGachaTypes.normal
         }

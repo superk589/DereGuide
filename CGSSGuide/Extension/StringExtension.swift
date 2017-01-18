@@ -12,6 +12,7 @@ extension String {
     func toDate(format: String = "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone = CGSSGlobal.timeZoneOfTyoko) -> Date {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = timeZone
         let newDate = dateFormatter.date(from: self) ?? Date()
         return newDate
     }

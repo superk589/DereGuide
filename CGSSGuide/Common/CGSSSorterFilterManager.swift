@@ -35,7 +35,7 @@ class CGSSSorterFilterManager {
         static let song = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
         static let event = CGSSEventFilter.init(typeMask: 0b11111)
         static let gacha = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b11111111, skillMask: 0b11111111, gachaMask: 0b11111,  conditionMask: 0b1111111, procMask: 0b1111, favoriteMask: nil)
-        static let gachaPool = CGSSGachaFilter.init(typeMask: 0b111)
+        static let gachaPool = CGSSGachaFilter.init(typeMask: 0b1111)
     }
     
     struct DefaultSorter {
