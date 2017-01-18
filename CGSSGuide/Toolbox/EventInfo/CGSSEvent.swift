@@ -23,6 +23,20 @@ extension CGSSEvent {
         return nil
     }
     
+    var detailBannerId: Int {
+        //        // 前两次篷车活动特殊处理
+        //        if event.id == 2001 || event.id == 2002 {
+        //            banner.preBannerId = 2003
+        //        }
+        //        // 前两次传统活动特殊处理
+        //        if event.id == 1001 {
+        //            banner.detailBannerId = 1
+        //        } else if event.id == 1002 {
+        //            banner.detailBannerId = 3
+        //        }
+
+        return sortId - 1
+    }
 }
 
 class CGSSEvent: CGSSBaseModel {

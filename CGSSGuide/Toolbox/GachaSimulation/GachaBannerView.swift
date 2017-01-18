@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GachaBannerView: UIImageView {
+class GachaBannerView: BannerView {
     
     var bannerId: Int! {
         didSet {

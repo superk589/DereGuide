@@ -26,6 +26,7 @@ class GachaDetailView: UIView {
     var timeStatusIndicator:ZKCornerRadiusView!
     var cardListView: UIView!
     var line: UIView!
+    var simulationView: GachaSimulateView!
     
     weak var delegate: GachaDetailViewDelegate?
     
@@ -107,14 +108,13 @@ class GachaDetailView: UIView {
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.textColor = UIColor.darkGray
         
-        line = UIView()
+        line = LineView()
         addSubview(line)
         line.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(timeLabel.snp.bottom).offset(8)
             make.height.equalTo(1 / Screen.scale)
         }
-        line.backgroundColor = Color.separator
         
         let descLabel2 = UILabel()
         addSubview(descLabel2)
@@ -131,7 +131,7 @@ class GachaDetailView: UIView {
         addSubview(moreCardLabel)
         moreCardLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(descLabel)
+            make.top.equalTo(line.snp.bottom).offset(8)
         }
         moreCardLabel.text = NSLocalizedString("查看完整卡池", comment: "模拟抽卡页面") + " >"
         moreCardLabel.font = UIFont.systemFont(ofSize: 16)
@@ -147,11 +147,13 @@ class GachaDetailView: UIView {
             make.left.right.equalToSuperview()
             make.top.equalTo(moreCardLabel.snp.bottom).offset(8)
             make.height.equalTo(0)
+            make.bottom.equalToSuperview()
         }
         
     }
     
     func setupWith(pool: CGSSGachaPool) {
+        banner.detailBannerId = pool.detailBannerId
         nameLabel.text = pool.name
         ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription
@@ -196,7 +198,7 @@ class GachaDetailView: UIView {
         let spaceTotal = CGSSGlobal.width - 2 * 10 - column * 48
         let interSpace = spaceTotal / (column - 1)
         for i in 0..<cards.count {
-            let y = CGFloat(i / Int(column)) * (48 + interSpace) + 37
+            let y = CGFloat(i / Int(column)) * (48 + interSpace)
             let x = CGFloat(i % Int(column)) * (48 + interSpace) + 10
             let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
             icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))

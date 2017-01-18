@@ -80,8 +80,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         }
         timeIndicator.zk_cornerRadius = 6
         
-        line1 = UIView()
-        line1.backgroundColor = Color.separator
+        line1 = LineView()
         addSubview(line1)
         line1.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -109,8 +108,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
         card1View.addGestureRecognizer(tap1)
     
-        line3 = UIView()
-        line3.backgroundColor = Color.separator
+        line3 = LineView()
         addSubview(line3)
         line3.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -129,8 +127,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         card2View.addGestureRecognizer(tap2)
         
         
-        line2 = UIView()
-        line2.backgroundColor = Color.separator
+        line2 = LineView()
         addSubview(line2)
         line2.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -196,17 +193,24 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 //            banner.detailBannerId = bannerId
 //        }
 
-        banner.preBannerId = event.id
-        // 前两次篷车活动特殊处理
-        if event.id == 2001 || event.id == 2002 {
+//        banner.preBannerId = event.id
+        if event.detailBannerId == 20 {
             banner.preBannerId = 2003
+        } else if event.startDate.toDate() > Date() {
+            banner.preBannerId = event.id
+        } else {
+            banner.detailBannerId = event.detailBannerId
         }
-        // 前两次传统活动特殊处理
-        if event.id == 1001 {
-            banner.detailBannerId = 1
-        } else if event.id == 1002 {
-            banner.detailBannerId = 3
-        }
+//        // 前两次篷车活动特殊处理
+//        if event.id == 2001 || event.id == 2002 {
+//            banner.preBannerId = 2003
+//        }
+//        // 前两次传统活动特殊处理
+//        if event.id == 1001 {
+//            banner.detailBannerId = 1
+//        } else if event.id == 1002 {
+//            banner.detailBannerId = 3
+//        }
         
 //        nameLabel.text = event.name
         if event.startDate.toDate() > Date() {

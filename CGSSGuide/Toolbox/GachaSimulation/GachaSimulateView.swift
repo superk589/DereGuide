@@ -8,9 +8,9 @@
 
 import UIKit
 protocol GachaSimulateViewDelegate: class {
-    func singleGacha()
-    func tenGacha()
-    func iconClick(iv:CGSSCardIconView)
+    func singleGacha(gachaSimulateView: GachaSimulateView)
+    func tenGacha(gachaSimulateView: GachaSimulateView)
+    func gachaSimulateView(_ view: GachaSimulateView, didClick cardIcon:CGSSCardIconView)
 }
 
 class GachaSimulateView: UIView {
@@ -50,17 +50,18 @@ class GachaSimulateView: UIView {
         self.addSubview(tenButton)
         self.addSubview(resultView)
         self.addSubview(descLabel)
+        drawSectionLine(descLabel.fy + descLabel.fheight + space - 1 / Screen.scale)
         self.fheight = descLabel.fy + descLabel.fheight + space
         //self.fheight = tenButton.fbottom + space
         self.backgroundColor = Color.cool.withAlphaComponent(0.1)
     }
     
     func clickTen() {
-        delegate?.tenGacha()
+        delegate?.tenGacha(gachaSimulateView: self)
     }
     
     func clickSingle(){
-        delegate?.singleGacha()
+        delegate?.singleGacha(gachaSimulateView: self)
     }
     
     func wipeResultView() {
@@ -91,7 +92,7 @@ class GachaSimulateView: UIView {
     }
     
     func iconClick(iv:CGSSCardIconView) {
-        delegate?.iconClick(iv: iv)
+        delegate?.gachaSimulateView(self, didClick: iv)
     }
     
     required init?(coder aDecoder: NSCoder) {

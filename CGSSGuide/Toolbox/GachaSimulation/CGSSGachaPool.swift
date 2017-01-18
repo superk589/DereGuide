@@ -39,6 +39,20 @@ extension CGSSGachaPool {
             result = 29
         } else if id == 30001 {
             // TODO: 初始卡池的图不存在 需要一个placeholder
+        } else if id == 30013 {
+            result = 12
+        }
+        return result
+    }
+    
+    var detailBannerId: Int {
+        var result = id - 30000
+        if dicription.contains("クールタイプ") {
+            result -= 1
+        } else if dicription.contains("パッションタイプ") {
+            result -= 2
+        } else if id == 30013 {
+            result = 12
         }
         return result
     }

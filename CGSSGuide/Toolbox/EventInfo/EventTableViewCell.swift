@@ -103,12 +103,14 @@ class EventTableViewCell: UITableViewCell {
             banner.preBannerId = event.id
         } else if now > end {
             statusIndicator.shinyColor = UIColor.red.withAlphaComponent(0.6)
-            banner.bannerId = event.sortId
+            // 顺序id为21的的活动没有图 特殊处理
+            if event.sortId == 21 {
+                banner.preBannerId = 2003
+            } else {
+                banner.bannerId = event.sortId
+            }
         }
-        // 顺序id为21的的活动没有图 特殊处理
-        if event.sortId == 21 {
-             banner.preBannerId = 2003
-        }
+
 //        // 前两次篷车活动特殊处理
 //        if event.id == 2001 || event.id == 2002 {
 //            banner.preBannerId = 2003

@@ -43,6 +43,8 @@
 		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
 		123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A21DAA44C6007361CF /* EventBannerView.swift */; };
+		1239B0521E2FAAA600958849 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0511E2FAAA600958849 /* LineView.swift */; };
+		1239B0541E2FB41200958849 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0531E2FB41200958849 /* BannerView.swift */; };
 		123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EA1E2374260016A07F /* CGSSClient.swift */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
@@ -203,6 +205,8 @@
 		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		123805A21DAA44C6007361CF /* EventBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBannerView.swift; sourceTree = "<group>"; };
+		1239B0511E2FAAA600958849 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		1239B0531E2FB41200958849 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		123AC6EA1E2374260016A07F /* CGSSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSClient.swift; sourceTree = "<group>"; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -554,6 +558,8 @@
 				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
 				1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */,
 				12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */,
+				1239B0511E2FAAA600958849 /* LineView.swift */,
+				1239B0531E2FB41200958849 /* BannerView.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -1053,6 +1059,7 @@
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
+				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
+				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,

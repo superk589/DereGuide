@@ -168,7 +168,7 @@
 "XW8-kK-Q8N.normalTitle" = "ゲーム内番号";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "XrL-IG-AMC"; */
-"XrL-IG-AMC.headerTitle" = "フィルタ";
+"XrL-IG-AMC.headerTitle" = "スクリーニング";
 
 /* Class = "UIButton"; normalTitle = "Vocal"; ObjectID = "YOt-Q0-8lA"; */
 "YOt-Q0-8lA.normalTitle" = "Vocal";
@@ -231,7 +231,7 @@
 "gvK-S0-WhK.normalTitle" = "SSR+";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "hJn-41-ekr"; */
-"hJn-41-ekr.headerTitle" = "フィルタ";
+"hJn-41-ekr.headerTitle" = "スクリーニング";
 
 /* Class = "UIButton"; normalTitle = "Visual"; ObjectID = "ipj-ta-j3r"; */
 "ipj-ta-j3r.normalTitle" = "Visual";
@@ -303,7 +303,7 @@
 "uiM-RA-fhT.normalTitle" = "Dance";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "vSe-a1-0gm"; */
-"vSe-a1-0gm.headerTitle" = "フィルタ";
+"vSe-a1-0gm.headerTitle" = "スクリーニング";
 
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "ツール";

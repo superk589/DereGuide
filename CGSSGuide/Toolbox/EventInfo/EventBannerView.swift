@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventBannerView: UIImageView {
+class EventBannerView: BannerView {
 
     var bannerId: Int! {
         didSet {
@@ -27,6 +27,7 @@ class EventBannerView: UIImageView {
             self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId)))
         }
     }
+    
     
     /*
     // Only override draw() if you perform custom drawing.

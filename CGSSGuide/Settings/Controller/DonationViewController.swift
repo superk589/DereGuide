@@ -103,7 +103,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         cv.dataSource = self
         cv.backgroundColor = UIColor.white
         cv.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
-        
+    
         
         let bannerDescLabel = UILabel()
         view.addSubview(bannerDescLabel)
@@ -117,6 +117,21 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         bannerDescLabel.numberOfLines = 0
         bannerDescLabel.textAlignment = .center
         bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
+        bannerDescLabel.adjustsFontSizeToFitWidth = true
+        
+        let bannerDescLabel2 = UILabel()
+        view.addSubview(bannerDescLabel2)
+        bannerDescLabel2.snp.makeConstraints { (make) in
+            make.bottom.equalTo(bannerDescLabel.snp.top).offset(-5)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+        }
+        bannerDescLabel2.textColor = UIColor.darkGray
+        bannerDescLabel2.font = UIFont.light(size: 14)
+        bannerDescLabel2.numberOfLines = 0
+        bannerDescLabel2.textAlignment = .center
+        bannerDescLabel2.text = "(" + NSLocalizedString("无论您是否曾经捐赠，广告都仅存在于捐赠页面内。", comment: "") + ")"
+        bannerDescLabel2.adjustsFontSizeToFitWidth = true
     }
     
     var hud: LoadingImageView?
