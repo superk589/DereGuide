@@ -47,7 +47,7 @@ CGSSGuide now provide files of localizable strings for other languages
 ### Japanese:
 * [CaiMiao](https://github.com/CaiMiao)
 * [suzutan](https://github.com/suzutan)
-
+* ApricotSalt
 
 ## Acknowledgement
 ### [sparklebox](https://github.com/summertriangle-dev/sparklebox)
