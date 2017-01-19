@@ -21,7 +21,7 @@
 2. Add event information to tools tab.
 3. Add donation page, if you like this application, please support us by donation.
 4. Add skill interval, skill proc rate, source as card filter methods.
-5. Fix the problem that some normal SR card tagged as limited.
+5. Fix the problem that some normal SR cards tagged as limited.
 
 ### v1.1.5
 2016-12-11
