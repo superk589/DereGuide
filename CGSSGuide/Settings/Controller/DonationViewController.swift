@@ -130,7 +130,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
         bannerDescLabel2.numberOfLines = 0
         bannerDescLabel2.textAlignment = .center
-        bannerDescLabel2.text = "(" + NSLocalizedString("无论您是否曾经捐赠，广告都仅存在于捐赠页面内。", comment: "") + ")"
+        bannerDescLabel2.text = "(" + NSLocalizedString("广告仅存在于捐赠页面内。", comment: "") + ")"
         bannerDescLabel2.adjustsFontSizeToFitWidth = true
     }
     
