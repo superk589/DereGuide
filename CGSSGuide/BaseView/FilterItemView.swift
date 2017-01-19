@@ -21,9 +21,9 @@ class FilterItemView: UIView {
         
         iv = ZKCornerRadiusView()
         addSubview(iv)
-        iv.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+//        iv.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
         iv.zk_cornerRadius = 3
         iv.zk_backgroundColor = Color.parade
         
@@ -31,13 +31,13 @@ class FilterItemView: UIView {
         addSubview(label)
         label.font = UIFont.medium(size: 12)
         label.textAlignment = .center
-        label.snp.makeConstraints { (make) in
-            make.top.equalTo(6)
-            make.bottom.equalTo(-6)
-            make.left.equalTo(6)
-            make.right.equalTo(-6)
-            make.width.greaterThanOrEqualTo(26)
-        }
+//        label.snp.makeConstraints { (make) in
+//            make.top.equalTo(6)
+//            make.bottom.equalTo(-6)
+//            make.left.equalTo(6)
+//            make.right.equalTo(-6)
+//            make.width.greaterThanOrEqualTo(26)
+//        }
 
     }
     
@@ -70,7 +70,10 @@ class FilterItemView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        iv.frame = self.bounds
         iv.zk_render()
+        label.sizeToFit()
+        label.frame.origin = CGPoint.init(x: 6, y: 6)
     }
     
     required init?(coder aDecoder: NSCoder) {
