@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 初始化DrawerController和TabBarController
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
         let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
-        window = UIWindow()
+        window = UIWindow.init(frame: UIScreen.main.bounds)
         let drawerController = ZKDrawerController.init(main: baseTabBarController)
         drawerController.drawerStyle = .cover
         drawerController.gestureRecognizerWidth = 80
