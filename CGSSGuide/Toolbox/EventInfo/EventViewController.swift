@@ -37,7 +37,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
 
         eventList = defaultList
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
-        tableView.rowHeight = 66
+        tableView.estimatedRowHeight = 66
         
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = backItem

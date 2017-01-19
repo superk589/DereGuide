@@ -61,7 +61,7 @@ class SongTableViewCell: UITableViewCell {
     }
     
     fileprivate func prepare() {
-        jacketImageView = UIImageView()
+        jacketImageView = BannerView()
         jacketImageView.frame = CGRect(x: 10, y: 10, width: 66, height: 66)
         
         typeIcon = UIImageView.init(frame: CGRect(x: 86, y: 10, width: 20, height: 20))

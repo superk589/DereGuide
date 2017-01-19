@@ -113,7 +113,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.right.equalTo(-10)
         }
         bannerDescLabel.textColor = UIColor.darkGray
-        bannerDescLabel.font = UIFont.light(size: 14)
+        bannerDescLabel.font = UIFont.systemFont(ofSize: 14)
         bannerDescLabel.numberOfLines = 0
         bannerDescLabel.textAlignment = .center
         bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
@@ -127,7 +127,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.right.equalTo(-10)
         }
         bannerDescLabel2.textColor = UIColor.darkGray
-        bannerDescLabel2.font = UIFont.light(size: 14)
+        bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
         bannerDescLabel2.numberOfLines = 0
         bannerDescLabel2.textAlignment = .center
         bannerDescLabel2.text = "(" + NSLocalizedString("无论您是否曾经捐赠，广告都仅存在于捐赠页面内。", comment: "") + ")"

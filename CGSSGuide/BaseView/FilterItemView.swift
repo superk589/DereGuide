@@ -29,7 +29,7 @@ class FilterItemView: UIView {
         
         label = UILabel()
         addSubview(label)
-        label.font = UIFont.medium(size: 12)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .center
 //        label.snp.makeConstraints { (make) in
 //            make.top.equalTo(6)

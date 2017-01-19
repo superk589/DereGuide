@@ -42,18 +42,17 @@ class DonationCell: UICollectionViewCell {
         contentView.addSubview(amountLabel)
         amountLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(18)
+            make.top.equalTo(20)
         }
-        amountLabel.font = UIFont.medium(size: 16)
+        amountLabel.font = UIFont.systemFont(ofSize: 16)
         
         descLabel = UILabel()
         contentView.addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(amountLabel.snp.bottom)
+            make.bottom.equalTo(-20)
             make.centerX.equalToSuperview()
         }
-        descLabel.font = UIFont.regular(size: 14)
-
+        descLabel.font = UIFont.systemFont(ofSize: 14)
     }
     
     func setup(amount:String, desc:String) {

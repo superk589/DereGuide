@@ -106,8 +106,10 @@ extension GachaDetailController: GachaSimulateViewDelegate {
     }
     
     func gachaSimulateView(_ view: GachaSimulateView, didClick cardIcon: CGSSCardIconView) {
-        let vc = CardDetailViewController()
-        vc.card = CGSSDAO.sharedDAO.findCardById(cardIcon.cardId!)
-        navigationController?.pushViewController(vc, animated: true)
+        if let card = CGSSDAO.sharedDAO.findCardById(cardIcon.cardId!) {
+            let vc = CardDetailViewController()
+            vc.card = card
+            navigationController?.pushViewController(vc, animated: true)
+        }        
     }
 }

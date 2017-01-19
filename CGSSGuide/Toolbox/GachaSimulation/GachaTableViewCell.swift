@@ -48,7 +48,7 @@ class GachaTableViewCell: UITableViewCell {
         
         nameLabel = UILabel()
         contentView.addSubview(nameLabel)
-        nameLabel.font = UIFont.regular(size: 14)
+        nameLabel.font = UIFont.systemFont(ofSize: 14)
         nameLabel.textColor = UIColor.black
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(banner.snp.right).offset(10)

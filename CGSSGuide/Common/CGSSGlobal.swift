@@ -23,8 +23,8 @@ struct Screen {
 }
 
 struct Font {
-    static let title: UIFont! = UIFont.regular(size: 16)
-    static let content: UIFont! = UIFont.regular(size: 14)
+    static let title: UIFont! = UIFont.systemFont(ofSize: 16)
+    static let content: UIFont! = UIFont.systemFont(ofSize: 14)
     static func number(of size: CGFloat) -> UIFont! {
         return UIFont.init(name: "menlo", size: size)
     }

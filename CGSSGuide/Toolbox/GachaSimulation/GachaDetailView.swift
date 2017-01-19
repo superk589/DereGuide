@@ -220,7 +220,7 @@ class GachaDetailView: UIView {
     }
     
     func iconClick(iv: CGSSCardIconView) {
-        
+        delegate?.gachaDetailView(self, didClick: iv)
     }
 
     required init?(coder aDecoder: NSCoder) {

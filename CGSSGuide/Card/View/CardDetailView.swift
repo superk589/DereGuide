@@ -96,7 +96,7 @@ class CardDetailView: UIView {
         // let attContentView = UIView()
         // attContentView.frame = CGRectMake(-1, originY, CGSSGlobal.width+2, 109)
         let descLabel1 = UILabel()
-        descLabel1.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 16)
+        descLabel1.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 18)
         descLabel1.textColor = UIColor.black
         descLabel1.font = UIFont.systemFont(ofSize: 16)
         descLabel1.text = NSLocalizedString("卡片属性", comment: "卡片详情页") + ":" 
@@ -123,7 +123,7 @@ class CardDetailView: UIView {
         // let rankContentView = UIView()
         // rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 81 + (1 / UIScreen.mainScreen().scale))
         let descLabel2 = UILabel()
-        descLabel2.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 16)
+        descLabel2.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 18)
         descLabel2.textColor = UIColor.black
         descLabel2.font = UIFont.systemFont(ofSize: 16)
         descLabel2.text = NSLocalizedString("属性排名", comment: "卡片详情页") + ":"
@@ -322,7 +322,7 @@ class CardDetailView: UIView {
         // skillContentView.addSubview(descLabel4)
         
         skillNameLabel = UILabel()
-        skillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
+        skillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
         skillNameLabel.font = UIFont.systemFont(ofSize: 16)
         skillNameLabel.adjustsFontSizeToFitWidth = true
         // skillContentView.addSubview(skillNameLabel)
@@ -403,7 +403,7 @@ class CardDetailView: UIView {
         // skillContentView.addSubview(descLabel4)
         
         leaderSkillNameLabel = UILabel()
-        leaderSkillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
+        leaderSkillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
         leaderSkillNameLabel.adjustsFontSizeToFitWidth = true
         leaderSkillNameLabel.font = UIFont.systemFont(ofSize: 16)
         
@@ -450,7 +450,7 @@ class CardDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         var insideY: CGFloat = topSpace
         let descLabel4 = UILabel()
-        descLabel4.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 16)
+        descLabel4.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
         descLabel4.textColor = UIColor.black
         descLabel4.font = UIFont.systemFont(ofSize: 16)
         descLabel4.text = NSLocalizedString("进化信息", comment: "卡片详情页") + ":"
@@ -512,12 +512,12 @@ class CardDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         let insideY: CGFloat = topSpace
         let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 16)
+        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 18)
         descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页") + ":"
         descLabel.textColor = UIColor.black
         
-        let charInfoLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 16))
+        let charInfoLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 18))
         charInfoLabel.text = NSLocalizedString("查看角色详情", comment: "卡片详情页") + " >"
         charInfoLabel.font = UIFont.systemFont(ofSize: 16)
         charInfoLabel.textColor = UIColor.lightGray
@@ -567,7 +567,7 @@ class CardDetailView: UIView {
         // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
         var insideY: CGFloat = topSpace
         availableDescLabel = UILabel()
-        availableDescLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 16)
+        availableDescLabel.frame = CGRect(x: 10, y: insideY, width: 140, height: 18)
         availableDescLabel.font = UIFont.systemFont(ofSize: 16)
         availableDescLabel.text = NSLocalizedString("获得途径", comment: "卡片详情页") + ":"
         availableDescLabel.textColor = UIColor.black

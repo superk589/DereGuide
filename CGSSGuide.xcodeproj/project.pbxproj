@@ -144,7 +144,6 @@
 		12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AC1E1BCD780064991E /* DonationViewController.swift */; };
 		12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */; };
 		12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B01E1CAB330064991E /* DonationCell.swift */; };
-		12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */; };
 		12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B61E1CB0800064991E /* UIColorExtension.swift */; };
 		12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B81E1CCF880064991E /* BaseViewController.swift */; };
 		12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */; };
@@ -324,7 +323,6 @@
 		12D4F8AC1E1BCD780064991E /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationQAView.swift; sourceTree = "<group>"; };
 		12D4F8B01E1CAB330064991E /* DonationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
-		12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtenstion.swift; sourceTree = "<group>"; };
 		12D4F8B61E1CB0800064991E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		12D4F8B81E1CCF880064991E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterSortController.swift; sourceTree = "<group>"; };
@@ -371,7 +369,6 @@
 			children = (
 				122EECC81D5DC516008ADE08 /* UIViewExtension.swift */,
 				124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */,
-				12D4F8B21E1CABE40064991E /* UIFontExtenstion.swift */,
 				12D4F8B61E1CB0800064991E /* UIColorExtension.swift */,
 				1206F6D31E2A2586000FAC78 /* StringExtension.swift */,
 				12738EEC1E2B3C890040E413 /* DateExtension.swift */,
@@ -1053,7 +1050,6 @@
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
-				12D4F8B31E1CABE40064991E /* UIFontExtenstion.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,

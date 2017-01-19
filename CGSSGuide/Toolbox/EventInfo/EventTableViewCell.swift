@@ -47,17 +47,17 @@ class EventTableViewCell: UITableViewCell {
         
         eventNameLabel = UILabel()
         contentView.addSubview(eventNameLabel)
-        eventNameLabel.font = UIFont.regular(size: 14)
+        eventNameLabel.font = UIFont.systemFont(ofSize: 14)
         eventNameLabel.textColor = UIColor.black
+        eventNameLabel.adjustsFontSizeToFitWidth = true
         eventNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(banner.snp.right).offset(10)
             make.centerY.equalToSuperview()
             make.right.lessThanOrEqualTo(-10)
         }
-        
 //        startLabel = UILabel()
 //        contentView.addSubview(startLabel)
-//        startLabel.font = UIFont.regular(size: 12)
+//        startLabel.font = UIFont.systemFont(ofSize: 12)
 //        startLabel.textColor = UIColor.darkGray
 //        startLabel.snp.makeConstraints { (make) in
 //            make.left.equalTo(eventNameLabel.snp.left)
@@ -68,7 +68,7 @@ class EventTableViewCell: UITableViewCell {
 //        
 //        endLabel = UILabel()
 //        contentView.addSubview(endLabel)
-//        endLabel.font = UIFont.regular(size: 12)
+//        endLabel.font = UIFont.systemFont(ofSize: 12)
 //        endLabel.textColor = UIColor.darkGray
 //        endLabel.snp.makeConstraints { (make) in
 //            make.left.equalTo(startLabel.snp.left)

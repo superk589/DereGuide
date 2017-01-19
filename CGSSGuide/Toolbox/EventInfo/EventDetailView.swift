@@ -103,7 +103,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         card1View.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(line1.snp.bottom)
-            make.height.equalTo(94)
+            make.height.equalTo(91)
         }
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
         card1View.addGestureRecognizer(tap1)
@@ -121,7 +121,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         card2View.snp.makeConstraints { (make) in
             make.right.left.equalToSuperview()
             make.top.equalTo(line3.snp.bottom)
-            make.height.equalTo(94)
+            make.height.equalTo(91)
         }
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
         card2View.addGestureRecognizer(tap2)

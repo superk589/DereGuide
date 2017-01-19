@@ -50,6 +50,7 @@ class BeatmapViewController: UIViewController {
         currentDiff = preSetDiff ?? live.maxDiff
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         
         self.view.addSubview(bv)
         // self.view.addSubview(descLabel)
@@ -58,6 +59,10 @@ class BeatmapViewController: UIViewController {
 
         // 设置toolbar
         prepareToolbar()
+    }
+    
+    func backAction() {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func selectDiff() {

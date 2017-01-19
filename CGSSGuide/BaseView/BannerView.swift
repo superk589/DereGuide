@@ -10,13 +10,14 @@ import UIKit
 import SDWebImage
 import SnapKit
 
+// 用于SDWebImage加载时显示Indicator的ImageView
 class BannerView: UIImageView {
 
     var indicator: UIActivityIndicatorView?
     
     override func sd_setImage(with url: URL!) {
         indicator = UIActivityIndicatorView.init()
-        indicator?.tintColor = UIColor.lightGray
+        indicator?.activityIndicatorViewStyle = .gray
         addSubview(indicator!)
         indicator?.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()

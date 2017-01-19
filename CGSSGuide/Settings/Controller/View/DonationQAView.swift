@@ -24,7 +24,7 @@ class DonationQAView: UIView {
             make.top.left.equalToSuperview()
             make.height.equalTo(16)
         }
-        questionLabel.font = UIFont.regular(size: 14)
+        questionLabel.font = UIFont.systemFont(ofSize: 14)
         
         
         answerLabel = UILabel()
@@ -35,7 +35,7 @@ class DonationQAView: UIView {
             make.top.equalTo(questionLabel.snp.bottom).offset(6)
         }
         answerLabel.textColor = UIColor.darkGray
-        answerLabel.font = UIFont.light(size: 12)
+        answerLabel.font = UIFont.systemFont(ofSize: 12)
         answerLabel.numberOfLines = 0
         
         let line = UIView()
