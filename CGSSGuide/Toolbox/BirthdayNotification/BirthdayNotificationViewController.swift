@@ -85,6 +85,9 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         label.textAlignment = .right
         cell0.accessoryView = label
         label.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(gotoSystemNotificationSettings))
+        cell0.addGestureRecognizer(tap2)
+        cell0.isUserInteractionEnabled = true
         headerCells.append(cell0)
         
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "BirthDaySettingCell")
@@ -108,6 +111,13 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     func valueChanged(_ sw: UISwitch) {
         UserDefaults.standard.setValue(sw.isOn, forKey: "BirthdayNotice")
         refreshData()
+    }
+    
+    func gotoSystemNotificationSettings() {
+        let url = URL.init(string: UIApplicationOpenSettingsURLString)!
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
+        }
     }
     
     func selectTimeZone() {
