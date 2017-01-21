@@ -33,9 +33,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     }
     var filterVC: SongFilterSortController!
     
-    var searchBar: CGSSSearchBar!
-    
-    
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
         filter.searchText = searchBar.text ?? ""
@@ -91,19 +88,12 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         super.viewDidLoad()
         let dao = CGSSDAO.sharedDAO
         liveList = Array(dao.validLiveDict.values)
+       
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         // 初始化导航栏的搜索条
-        searchBar = CGSSSearchBar()
         self.navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
-        searchBar.delegate = self
-        // self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "889-sort-descending-toolbar"), style: .Plain, target: self, action: #selector(filterAction))
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
         self.tableView.rowHeight = 86
@@ -202,37 +192,6 @@ extension BaseSongTableViewController: SongTableViewCellDelegate {
     }
 }
 
-//MARK: searchBar的协议方法
-extension BaseSongTableViewController: UISearchBarDelegate {
-    
-    // 文字改变时
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
-    }
-    // 开始编辑时
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        return true
-    }
-    // 点击搜索按钮时
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-    // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-}
-
-//MARK: scrollView的协议方法
-extension BaseSongTableViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 向下滑动时取消输入框的第一响应者
-        searchBar.resignFirstResponder()
-    }
-}
 
 extension BaseSongTableViewController: SongFilterSortControllerDelegate {
     func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter) {

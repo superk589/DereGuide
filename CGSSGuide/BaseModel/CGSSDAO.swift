@@ -237,6 +237,14 @@ open class CGSSDAO: NSObject {
         sorter.sortList(&list)
     }
     
+    
+    
+    func getCardDataBy(filter: CGSSCardFilter, sorter: CGSSSorter) -> [CGSSCard] {
+        var cardList = filter.filter(cardDict.allValues as! [CGSSCard])
+        sorter.sortList(&cardList)
+        return cardList
+    }
+    
     func removeAllData() {
         for dataKey in CGSSDataKey.allValues {
             self.getDictForKey(dataKey).removeAllObjects()

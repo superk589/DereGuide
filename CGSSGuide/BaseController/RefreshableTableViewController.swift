@@ -12,6 +12,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     
     var refresher: UIRefreshControl!
     var updateStatusView: UpdateStatusView!
+    var searchBar: CGSSSearchBar!
     
     func check(_ mask: UInt) {
         let updater = CGSSUpdater.defaultUpdater
@@ -56,6 +57,11 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         refresher.endRefreshing()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.searchBar.resignFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,6 +81,9 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         UIApplication.shared.keyWindow?.addSubview(updateStatusView)
         
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        
+        searchBar = CGSSSearchBar()
+        searchBar.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -123,3 +132,39 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     
     
 }
+
+//MARK: searchBar的协议方法
+extension RefreshableTableViewController: UISearchBarDelegate {
+    
+    // 文字改变时
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        refresh()
+    }
+    // 开始编辑时
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
+    
+    // 点击搜索按钮时
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        refresh()
+    }
+    // 点击searchbar自带的取消按钮时
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+}
+
+
+//MARK: scrollView的协议方法
+extension RefreshableTableViewController {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // 向下滑动时取消输入框的第一响应者
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
+    }
+}
+

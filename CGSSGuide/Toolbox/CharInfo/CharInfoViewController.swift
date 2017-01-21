@@ -9,10 +9,9 @@
 import UIKit
 import ZKDrawerController
 
-class CharInfoViewController: BaseTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
+class CharInfoViewController: RefreshableTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var charList: [CGSSChar]!
-    var searchBar: CGSSSearchBar!
     var filter: CGSSCharFilter {
         set {
             CGSSSorterFilterManager.default.charFilter = newValue
@@ -33,10 +32,10 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
     var filterVC: CharFilterSortController!
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar = CGSSSearchBar()
+        
         self.navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
-        searchBar.delegate = self
+    
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
 //        
@@ -56,13 +55,17 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
     }
     
     // 根据设定的筛选和排序方法重新展现数据
-    func refresh() {
+    override func refresh() {
         filter.searchText = searchBar.text ?? ""
         self.charList = filter.filter(CGSSDAO.sharedDAO.charDict.allValues as! [CGSSChar])
         sorter.sortList(&self.charList!)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+    }
+    
+    override func refresherValueChanged() {
+        check(0b1000001)
     }
     
     func filterAction() {
@@ -153,36 +156,4 @@ class CharInfoViewController: BaseTableViewController, CharFilterSortControllerD
      }
      */
     
-}
-
-//MARK: searchBar的协议方法
-extension CharInfoViewController: UISearchBarDelegate {
-    
-    // 文字改变时
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
-    }
-    // 开始编辑时
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        return true
-    }
-    // 点击搜索按钮时
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-    // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-}
-
-//MARK: scrollView的协议方法
-extension CharInfoViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 向下滑动时取消输入框的第一响应者
-        searchBar.resignFirstResponder()
-    }
 }

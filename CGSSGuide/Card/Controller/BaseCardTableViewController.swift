@@ -16,7 +16,6 @@ protocol BaseCardTableViewControllerDelegate {
 class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var cardList = [CGSSCard]()
-    var searchBar: CGSSSearchBar!
     var filter: CGSSCardFilter {
         set {
             CGSSSorterFilterManager.default.cardfilter = newValue
@@ -41,10 +40,8 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         super.viewDidLoad()
         
         // 初始化导航栏的搜索条
-        searchBar = CGSSSearchBar()
         self.navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
-        searchBar.delegate = self
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
@@ -60,15 +57,15 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async {
             self.filter.searchText = self.searchBar.text ?? ""
-            self.cardList = self.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard])
-            self.sorter.sortList(&self.cardList)
+            var newList = self.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard])
+            self.sorter.sortList(&newList)
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
+                //确保cardList在主线程中改变的原子性, 防止筛选过程中tableView滑动崩溃
+                self.cardList = newList
                 self.tableView.reloadData()
             }
         }
-        // 滑至tableView的顶部 暂时不需要
-        // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     override func refresherValueChanged() {
         check(0b1000011)
@@ -149,44 +146,4 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         refresh()
     }
     
-}
-
-//MARK: searchBar的协议方法
-extension BaseCardTableViewController: UISearchBarDelegate {
-    
-    // 文字改变时
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
-    }
-    // 开始编辑时
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        return true
-    }
-    
-    // 点击搜索按钮时
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        // 如果本次和上次一样 则不进行搜索
-        if filter.searchText != searchBar.text {
-            refresh()
-        }
-    }
-    // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-    
-}
-
-//MARK: scrollView的协议方法
-extension BaseCardTableViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 向下滑动时取消输入框的第一响应者
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-            refresh()
-        }
-    }
 }

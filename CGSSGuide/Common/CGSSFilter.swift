@@ -10,10 +10,12 @@ import UIKit
 
 protocol CGSSFilter {
 
+    var searchText: String { set get }
+    
     func toDictionary() -> NSDictionary
     
     func save(to path: String)
     
     init?(fromFile path: String)
-    
+
 }

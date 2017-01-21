@@ -9,7 +9,6 @@
 import UIKit
 
 struct CGSSSongFilter: CGSSFilter {
-    
     var songTypes: CGSSSongTypes
     var eventTypes: CGSSSongEventTypes
     var searchText: String = ""

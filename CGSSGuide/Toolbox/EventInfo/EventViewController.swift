@@ -13,7 +13,6 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
 
     var defaultList = CGSSGameResource.sharedResource.getEvent()
     var eventList = [CGSSEvent]()
-    var searchBar: CGSSSearchBar!
     var filterVC: EventFilterSortController!
     var filter: CGSSEventFilter {
         set {
@@ -45,9 +44,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         let filterItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = filterItem
         
-        searchBar = CGSSSearchBar()
         navigationItem.titleView = searchBar
-        searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("活动名", comment: "")
         
         filterVC = EventFilterSortController()
@@ -151,36 +148,4 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     */
 
-}
-
-
-//MARK: searchBar的协议方法
-extension EventViewController: UISearchBarDelegate {
-    
-    // 文字改变时
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
-    }
-    // 开始编辑时
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        return true
-    }
-    // 点击搜索按钮时
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-}
-
-//MARK: scrollView的协议方法
-extension EventViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 向下滑动时取消输入框的第一响应者
-        searchBar.resignFirstResponder()
-    }
 }
