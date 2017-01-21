@@ -79,7 +79,7 @@ class CGSSLiveSimulator: NSObject {
             // 此时不对小数部分进行取舍 保留浮点部分
             let scorePerNote = Float((manualValue == nil) ? self.presentTotal : manualValue!) * CGSSGlobal.diffFactor[diffStars]! / Float(beatmap.numberOfNotes)
             let criticalPoints = beatmap.getCriticalPointNoteIndexes()
-            let schedule = self.getSimulateSchedules(procMax)
+            let schedules = self.getSimulateSchedules(procMax)
             var criticalIndex = 0
             var sum: Float = 0
             
@@ -93,7 +93,7 @@ class CGSSLiveSimulator: NSObject {
                     }
                 }
                 let comboFactor = CGSSGlobal.comboFactor[criticalIndex]
-                let skillFactor = self.getSkillFactorFor(note, schedules: schedule)
+                let skillFactor = self.getSkillFactorFor(procMax: procMax, note: note, schedules: schedules)
                 // 默认全P 不需要判定的因子 此处需要四舍五入
                 sum += round (scorePerNote * comboFactor * skillFactor)
                 // log.append([Float(i), sum, scorePerNote, comboFactor, skillFactor])
@@ -123,14 +123,23 @@ class CGSSLiveSimulator: NSObject {
             }
         }
     }
-    func getSkillFactorFor(_ note: CGSSBeatmapNote, schedules: [ScoreUpType: [ScoreUpSchedule]]) -> Float {
+    func getSkillFactorFor(procMax: Bool, note: CGSSBeatmapNote, schedules: [ScoreUpType: [ScoreUpSchedule]]) -> Float {
         var skillFactor: Float = 1
         for sub in schedules.values {
             var maxFactor: Float = 1
             for schedule in sub {
-                if note.sec >= schedule.begin && note.sec <= schedule.end {
-                    if Float(schedule.upValue) / 100 > maxFactor {
-                        maxFactor = Float(schedule.upValue) / 100
+                if procMax {
+                    // 极限分数计算时Perfect点取正负0.06秒
+                    if note.sec >= schedule.begin - 0.06 && note.sec <= schedule.end + 0.06 {
+                        if Float(schedule.upValue) / 100 > maxFactor {
+                            maxFactor = Float(schedule.upValue) / 100
+                        }
+                    }
+                } else {
+                    if note.sec >= schedule.begin && note.sec <= schedule.end {
+                        if Float(schedule.upValue) / 100 > maxFactor {
+                            maxFactor = Float(schedule.upValue) / 100
+                        }
                     }
                 }
             }

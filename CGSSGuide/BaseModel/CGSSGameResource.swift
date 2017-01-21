@@ -427,25 +427,25 @@ class CGSSGameResource: NSObject {
         timeLimitAvailableList = self.master.getTimeLimitAvailableList()
         fesAvailabelList = self.master.getFesAvailableList()
     }
-    func updateCardData() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let dao = CGSSDAO.sharedDAO
-            for card in dao.cardDict.allValues as! [CGSSCard] {
-                if [.sr, .ssr].contains(card.rarityType) && card.availableTypes?.rawValue == 0 {
-                    if self.eventAvailabelList.contains(card.id) {
-                        card.availableTypes = .event
-                    } else if self.fesAvailabelList.contains(card.id) {
-                        card.availableTypes = .fes
-                    } else if self.timeLimitAvailableList.contains(card.id) {
-                        card.availableTypes = .limit
-                    } else if self.gachaAvailabelList.contains(card.id) {
-                        card.availableTypes = .normal
-                    }
-                }
-            }
-            dao.saveDataToFile(.card, complete: nil)
-        }
-    }
+//    func updateCardData() {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            let dao = CGSSDAO.sharedDAO
+//            for card in dao.cardDict.allValues as! [CGSSCard] {
+//                if [.sr, .ssr].contains(card.rarityType) && card.availableTypes?.rawValue == 0 {
+//                    if self.eventAvailabelList.contains(card.id) {
+//                        card.availableTypes = .event
+//                    } else if self.fesAvailabelList.contains(card.id) {
+//                        card.availableTypes = .fes
+//                    } else if self.timeLimitAvailableList.contains(card.id) {
+//                        card.availableTypes = .limit
+//                    } else if self.gachaAvailabelList.contains(card.id) {
+//                        card.availableTypes = .normal
+//                    }
+//                }
+//            }
+//            dao.saveDataToFile(.card, complete: nil)
+//        }
+//    }
     
     
     func getMusicIdBy(eventId:Int) -> Int? {

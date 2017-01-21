@@ -48,15 +48,15 @@ extension CGSSCard {
     
     var gachaType:CGSSAvailableTypes {
         var type: CGSSAvailableTypes
-        if availableTypes != nil {
-            type = availableTypes!
+        if availableType != nil {
+            type = availableType!
         }
-        else if CGSSGameResource.sharedResource.gachaAvailabelList.contains(id) { type = .normal }
-        else if CGSSGameResource.sharedResource.fesAvailabelList.contains(id) { type = .fes }
-        else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(id) { type = .limit }
-        else if CGSSGameResource.sharedResource.eventAvailabelList.contains(id) { type = .event }
+        else if CGSSGameResource.sharedResource.gachaAvailabelList.contains(seriesId) { type = .normal }
+        else if CGSSGameResource.sharedResource.fesAvailabelList.contains(seriesId) { type = .fes }
+        else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(seriesId) { type = .limit }
+        else if CGSSGameResource.sharedResource.eventAvailabelList.contains(seriesId) { type = .event }
         else { type = .free }
-        availableTypes = type
+        availableType = type
         return type
     }
     
@@ -225,7 +225,7 @@ class CGSSCard: CGSSBaseModel {
     var vocalMin: Int!
     
     // 非JSON获取
-    var availableTypes: CGSSAvailableTypes?
+    var availableType: CGSSAvailableTypes?
     
     /**
          * Instantiate the instance using the passed json values to set the properties values
