@@ -11,6 +11,10 @@ import UIKit
 protocol CardDetailViewDelegate: class {
     func iconClick(_ icon: CGSSCardIconView)
     func charInfoClick()
+    
+//    func show3DModel(cardDetailView: CardDetailView)
+//    func showCardImage(cardDetailView: CardDetailView)
+//    func showSignImage(cardDetailView: CardDetailView)
 }
 
 class CardDetailView: UIView {
@@ -20,6 +24,8 @@ class CardDetailView: UIView {
     
     var fullImageView: CGSSImageView?
     
+    var imageToolbar: UIToolbar!
+    
     var cardIconView: CGSSCardIconView!
     var cardNameLabel: UILabel!
     var rarityLabel: UILabel!
@@ -27,7 +33,7 @@ class CardDetailView: UIView {
     var attGridView: CGSSGridLabel!
     var rankGridView: CGSSGridLabel!
     
-    var originY: CGFloat!
+    var originY: CGFloat = 0
     
     var skillNameLabel: UILabel!
     var skillDescriptionLabel: UILabel!
@@ -61,8 +67,21 @@ class CardDetailView: UIView {
         fullImageView?.isUserInteractionEnabled = true
         addSubview(fullImageView!)
         
+        originY = fullImageHeigth
+//        imageToolbar = UIToolbar.init(frame: CGRect.init(x: 0, y: originY, width: CGSSGlobal.width, height: 44))
+//        imageToolbar.isTranslucent = false
+//        addSubview(imageToolbar)
+//        
+//        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
+//        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let item2 = UIBarButtonItem.init(title: NSLocalizedString("角色卡图", comment: ""), style: .plain, target: self, action: #selector(showCardImageAction))
+//        let spaceItem2 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let item3 = UIBarButtonItem.init(title: NSLocalizedString("签名图", comment: ""), style: .plain, target: self, action: #selector(showSignImageAction))
+//        
+//        imageToolbar.items = [item1, spaceItem1, item2, spaceItem2, item3]
+//        
         // 人物名称 图标视图
-        originY = fullImageHeigth + topSpace
+        originY += topSpace
         cardIconView = CGSSCardIconView.init(frame: CGRect(x: 10, y: originY, width: 48, height: 48))
         
         rarityLabel = UILabel()

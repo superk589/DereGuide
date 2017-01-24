@@ -35,8 +35,8 @@ struct DataURL {
     // static let Wiki = "http://imascg-slstage-wiki.gamerch.com"
     // static let URLOfIcons = "https://hoshimoriuta.kirara.ca/icons2"
     static let Deresute = "https://apiv2.deresute.info"
-    static let manifest = "http://storage.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
-    static let master = "http://storage.game.starlight-stage.jp/dl/resources/Generic//%@"
+    static let manifest = "https://storages.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
+    static let master = "https://storages.game.starlight-stage.jp/dl/resources/Generic//%@"
 }
 
 open class CGSSUpdater: NSObject {

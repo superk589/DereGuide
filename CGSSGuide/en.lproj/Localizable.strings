@@ -514,3 +514,11 @@
 "FES限定卡池" = "CinFes Gacha";
 "单属性卡池" = "Type Select Gacha";
 "普通卡池" = "Normal Gacha";
+
+/* new in v1.2.1 */
+"3D模型" = "3D Model";
+"卡片图" = "Card Image";
+"签名图" = "Sign Image";
+"服装" = "Dress";
+"SSR服装" = "SSR Dress";
+

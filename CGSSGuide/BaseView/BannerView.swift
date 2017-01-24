@@ -16,6 +16,13 @@ class BannerView: UIImageView {
     var indicator: UIActivityIndicatorView?
     
     override func sd_setImage(with url: URL!) {
+        showIndicator()
+        super.sd_setImage(with: url) { [weak indicator = self.indicator] (image, error, cacheType, url) in
+            indicator?.stopAnimating()
+        }
+    }
+    
+    private func showIndicator() {
         indicator = UIActivityIndicatorView.init()
         indicator?.activityIndicatorViewStyle = .gray
         addSubview(indicator!)
@@ -23,9 +30,15 @@ class BannerView: UIImageView {
             make.center.equalToSuperview()
         })
         indicator?.startAnimating()
-        sd_setImage(with: url) { [weak indicator = self.indicator] (image, error, cacheType, url) in
+        
+    }
+    override func sd_setImage(with url: URL!, completed completedBlock: SDWebImageCompletionBlock!) {
+        showIndicator()
+        super.sd_setImage(with: url) { [weak indicator = self.indicator] (image, error, cacheType, url) in
             indicator?.stopAnimating()
+            completedBlock(image, error, cacheType, url)
         }
+
     }
     /*
     // Only override draw() if you perform custom drawing.

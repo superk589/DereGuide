@@ -63,12 +63,13 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         startToEndLabel = UILabel()
         addSubview(startToEndLabel)
         startToEndLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
-            make.left.equalTo(22)
+            make.right.lessThanOrEqualTo(-10)
+            make.left.equalTo(32 )
             make.top.equalTo(banner.snp.bottom).offset(8)
         }
-        startToEndLabel.font = Font.title
-        startToEndLabel.textAlignment = .center
+        startToEndLabel.font = UIFont.systemFont(ofSize: 12)
+        startToEndLabel.textColor = UIColor.darkGray
+        startToEndLabel.textAlignment = .left
         startToEndLabel.adjustsFontSizeToFitWidth = true
         
         timeIndicator = ZKCornerRadiusView.init(frame: CGRect.init(x: 0, y: 0, width: 12, height: 12))

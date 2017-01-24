@@ -61,8 +61,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
                         return
                     }
                 }
-                let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-                spaceItem.width = 40
+                let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
                 spaceItem.tag = 1003
                 viewController.toolbarItems?.append(spaceItem)
                 viewController.toolbarItems?.append(item)

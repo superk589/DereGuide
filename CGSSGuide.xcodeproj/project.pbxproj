@@ -116,6 +116,9 @@
 		1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B81D69818E00DEF52B /* CharDetailView.swift */; };
 		12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEC1E2B3C890040E413 /* DateExtension.swift */; };
 		12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEE1E2B6C150040E413 /* Debouncer.swift */; };
+		127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A01E34FD8D0006627B /* Card3DModelController.swift */; };
+		127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A21E34FDEC0006627B /* SignImageController.swift */; };
+		127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A41E34FDF80006627B /* CardImageController.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
@@ -293,6 +296,9 @@
 		1271C6B81D69818E00DEF52B /* CharDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailView.swift; sourceTree = "<group>"; };
 		12738EEC1E2B3C890040E413 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		12738EEE1E2B6C150040E413 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		127AA1A01E34FD8D0006627B /* Card3DModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card3DModelController.swift; sourceTree = "<group>"; };
+		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
+		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -513,6 +519,9 @@
 				1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */,
 				12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */,
 				1269E9181D5209610071AD7F /* CardTableViewController.swift */,
+				127AA1A01E34FD8D0006627B /* Card3DModelController.swift */,
+				127AA1A21E34FDEC0006627B /* SignImageController.swift */,
+				127AA1A41E34FDF80006627B /* CardImageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -944,6 +953,7 @@
 				1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */,
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
+				127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
@@ -961,6 +971,7 @@
 				123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
+				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
@@ -997,6 +1008,7 @@
 				122EECCB1D5DE5CB008ADE08 /* CGSSGridLabel.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
+				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,

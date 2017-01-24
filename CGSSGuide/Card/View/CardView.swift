@@ -132,7 +132,7 @@ class CardView: UIView {
             if CGSSGlobal.width > 360 {
                 skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillFilterType.toString())"
             } else {
-                skillLabel.text = "\(skill.skillType!)"
+                skillLabel.text = "\(skill.skillFilterType.toString())"
             }
         } else {
             skillLabel.text = ""

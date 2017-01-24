@@ -54,6 +54,9 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         
         cardDV.initWith(card)
         sv.contentSize = cardDV.frame.size
+        
+    
+        prepareToolbar()
     }
     
     // 添加当前卡到收藏
@@ -66,6 +69,20 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
             fm.removeFavoriteCard(self.card)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
+        
+    }
+    
+    func prepareToolbar() {
+        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
+        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let item2 = UIBarButtonItem.init(title: NSLocalizedString("卡片图", comment: ""), style: .plain, target: self, action: #selector(showCardImageAction))
+        let spaceItem2 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let item3 = UIBarButtonItem.init(title: NSLocalizedString("签名图", comment: ""), style: .plain, target: self, action: #selector(showSignImageAction))
+
+        if card.signImageURL == nil {
+            item3.isEnabled = false
+        }
+        toolbarItems = [item1, spaceItem1, item2, spaceItem2, item3]
         
     }
     func backAction() {
@@ -82,6 +99,26 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
          }*/
         
     }
+    
+    func show3DModelAction() {
+        let vc = Card3DModelController()
+        vc.card = self.card
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showCardImageAction() {
+        let vc = CardImageController()
+        vc.card = self.card
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showSignImageAction() {
+        let vc = CardSignImageController()
+        vc.card = self.card
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -123,6 +160,7 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         self.navigationController?.pushViewController(charDetailVC, animated: true)
     }
     
+
     /*
      // MARK: - Navigation
 
