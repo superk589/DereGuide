@@ -23,6 +23,14 @@ extension CGSSEvent {
         return nil
     }
     
+    var isOnGoing: Bool {
+        if Date().timeIntervalSince(endDate.toDate(format: "yyyy-MM-dd HH:mm:ss")) < 15 * 3600 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var detailBannerId: Int {
         //        // 前两次篷车活动特殊处理
         //        if event.id == 2001 || event.id == 2002 {

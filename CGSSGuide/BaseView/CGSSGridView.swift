@@ -40,6 +40,10 @@ class CGSSGridView: UIView {
         }
     }
     
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize.init(width: Screen.width - 20, height: CGFloat(rows) * 18)
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

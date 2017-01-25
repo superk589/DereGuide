@@ -16,6 +16,9 @@ class EventDetailController: BaseViewController {
     var event: CGSSEvent!
     var bannerId: Int!
     
+    var ptList: EventPtRankingList?
+    var scoreList: EventScoreRankingList?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,9 +44,43 @@ class EventDetailController: BaseViewController {
         }
         eventDetailView.setup(event: event, bannerId: bannerId)
         eventDetailView.delegate = self
+        
+        requestData()
         // Do any additional setup after loading the view.
     }
-
+    
+    func requestData() {
+        
+        if CGSSEventTypes.ptRankingExists.contains(event.eventType) {
+            requestPtData()
+        }
+        if CGSSEventTypes.scoreRankingExists.contains(event.eventType) {
+            requestScoreData()
+        }
+    }
+    
+    func requestPtData() {
+        EventPtDataRequest.requestPtData(event: event) { (list) in
+            self.ptList = list
+            if list != nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.eventDetailView.setup(ptList: list!, onGoing: self?.event.isOnGoing ?? false)
+                }
+            }
+        }
+    }
+    
+    func requestScoreData() {
+        EventPtDataRequest.requestHighScoreData(event: event) { (list) in
+            self.scoreList = list
+            if list != nil {
+                DispatchQueue.main.async { [weak self] in
+                     self?.eventDetailView.setup(scoreList: list!, onGoing: self?.event.isOnGoing ?? false)
+                }
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,6 +104,30 @@ class EventDetailController: BaseViewController {
 }
 
 extension EventDetailController: EventDetailViewDelegate {
+    func refreshPtView(eventDetailView: EventDetailView) {
+        requestPtData()
+    }
+    
+    func refreshScoreView(eventDetailView: EventDetailView) {
+        requestScoreData()
+    }
+
+    func gotoPtChartView(eventDetailView: EventDetailView) {
+        if let list = self.ptList {
+            let vc = EventChartController()
+            vc.rankingList = list
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func gotoScoreChartView(eventDetailView: EventDetailView) {
+        if let list = self.scoreList {
+            let vc = EventChartController()
+            vc.rankingList = list
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView) {
         if let id = icon.cardId {
             if let card = CGSSDAO.sharedDAO.findCardById(id) {

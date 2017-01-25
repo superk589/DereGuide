@@ -332,6 +332,8 @@ struct CGSSEventTypes: OptionSet, RawRepresentable {
     static let kyalapon = CGSSEventTypes.init(rawValue: 1 << 1)
     static let party = CGSSEventTypes.init(rawValue: 1 << 3)
     static let all = CGSSEventTypes.init(rawValue: 0b11111)
+    static let ptRankingExists: CGSSEventTypes = [.groove, .tradition]
+    static let scoreRankingExists: CGSSEventTypes = [.groove, .tradition, .parade]
     init (eventType: Int) {
         self.rawValue = 1 << UInt(eventType - 1)
     }

@@ -515,10 +515,26 @@
 "单属性卡池" = "Type Select Gacha";
 "普通卡池" = "Normal Gacha";
 
-/* new in v1.2.1 */
+/* new in v1.2.0(7+) */
 "3D模型" = "3D Model";
 "卡片图" = "Card Image";
 "签名图" = "Sign Image";
 "服装" = "Dress";
 "SSR服装" = "SSR Dress";
+
+"活动pt档位" = "Event Pt. Ranking";
+"歌曲分数档位" = "Event Song Score Ranking";
+"查看完整图表" = "Full ranking chart";
+
+"最后更新时间：" = "Last updated time:";
+"当前Pt" = "Current Pt.";
+"增速(/h)" = "Speed(/h)";
+"最终Pt" = "Final Pt.";
+"当前分数" = "Current Score";
+"最终分数" = "Final Score";
+
+// 图表中点击某点后出现的描述文字 后面跟着分数或pt值
+"%d日%d时%d分" = "%1$d,%2$d:%3$d ";
+// 图表的x轴文字要尽可能短
+"%d日%d时" = "%1$d,%2$d";
 

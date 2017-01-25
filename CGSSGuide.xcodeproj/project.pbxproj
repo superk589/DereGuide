@@ -63,6 +63,9 @@
 		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
+		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
+		12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventPtRanking.swift */; };
+		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
 		12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */; };
 		126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */; };
 		126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSSongFilter.swift */; };
@@ -151,6 +154,15 @@
 		12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8B81E1CCF880064991E /* BaseViewController.swift */; };
 		12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */; };
 		12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */; };
+		12D975CC1E3795A2005E932B /* EventScoreRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CB1E3795A2005E932B /* EventScoreRanking.swift */; };
+		12D975CE1E379619005E932B /* EventScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CD1E379619005E932B /* EventScoreView.swift */; };
+		12D975D01E379DF7005E932B /* EventPtRankingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CF1E379DF7005E932B /* EventPtRankingList.swift */; };
+		12D975D21E379EF0005E932B /* EventScoreRankingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D11E379EF0005E932B /* EventScoreRankingList.swift */; };
+		12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */; };
+		12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */; };
+		12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D71E386FB0005E932B /* EventPtDataRequest.swift */; };
+		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
+		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -243,6 +255,9 @@
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
+		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
+		12636EC71E375DA900E3C833 /* EventPtRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtRanking.swift; sourceTree = "<group>"; };
+		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
 		12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WipeTableViewController.swift; sourceTree = "<group>"; };
 		126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		126666231D7D70F70022348E /* CGSSSongFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSongFilter.swift; sourceTree = "<group>"; };
@@ -333,6 +348,15 @@
 		12D4F8B81E1CCF880064991E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterSortController.swift; sourceTree = "<group>"; };
 		12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		12D975CB1E3795A2005E932B /* EventScoreRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreRanking.swift; sourceTree = "<group>"; };
+		12D975CD1E379619005E932B /* EventScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreView.swift; sourceTree = "<group>"; };
+		12D975CF1E379DF7005E932B /* EventPtRankingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtRankingList.swift; sourceTree = "<group>"; };
+		12D975D11E379EF0005E932B /* EventScoreRankingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreRankingList.swift; sourceTree = "<group>"; };
+		12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtRankingSpeed.swift; sourceTree = "<group>"; };
+		12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreRankingSpeed.swift; sourceTree = "<group>"; };
+		12D975D71E386FB0005E932B /* EventPtDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtDataRequest.swift; sourceTree = "<group>"; };
+		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -487,6 +511,8 @@
 				1269EA101D520D370071AD7F /* CGSSGlobal.swift */,
 				1269EA111D520D370071AD7F /* CGSSUpdateItem.swift */,
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
+				12D975D91E38716F005E932B /* BaseRequest.swift */,
+				12D975DB1E3871CD005E932B /* BaseSession.swift */,
 				129D6EBB1D5883D80071BC4D /* CGSSLiveSimulator.swift */,
 				1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */,
 				12F590301D9555CF00E004ED /* CGSSTypes.swift */,
@@ -700,6 +726,7 @@
 				1238059C1DAA15B9007361CF /* EventViewController.swift */,
 				1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */,
 				12D45AB81E2CB5560009986F /* EventDetailController.swift */,
+				12636EC51E37429C00E3C833 /* EventChartController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -713,6 +740,8 @@
 				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
 				12D45ABA1E2CBADA0009986F /* EventSongView.swift */,
 				12D45AC31E2E0D620009986F /* EventCardView.swift */,
+				12636EC91E375E9900E3C833 /* EventPtView.swift */,
+				12D975CD1E379619005E932B /* EventScoreView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -721,7 +750,14 @@
 			isa = PBXGroup;
 			children = (
 				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
+				12D975D71E386FB0005E932B /* EventPtDataRequest.swift */,
 				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
+				12636EC71E375DA900E3C833 /* EventPtRanking.swift */,
+				12D975CB1E3795A2005E932B /* EventScoreRanking.swift */,
+				12D975CF1E379DF7005E932B /* EventPtRankingList.swift */,
+				12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */,
+				12D975D11E379EF0005E932B /* EventScoreRankingList.swift */,
+				12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -972,8 +1008,10 @@
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
+				12D975D21E379EF0005E932B /* EventScoreRankingList.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
+				12D975CC1E3795A2005E932B /* EventScoreRanking.swift in Sources */,
 				1269E9E21D520B5D0071AD7F /* CGSSSong.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */,
@@ -982,6 +1020,7 @@
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
+				12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
@@ -1011,9 +1050,11 @@
 				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
+				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
 				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
+				12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */,
 				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
@@ -1026,10 +1067,12 @@
 				1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */,
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
 				1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */,
+				12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */,
 				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
+				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
 				12D45ACD1E2E46030009986F /* GachaBannerView.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
@@ -1041,11 +1084,14 @@
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,
+				12D975D01E379DF7005E932B /* EventPtRankingList.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
+				12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
 				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
+				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
@@ -1061,8 +1107,10 @@
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
+				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
+				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,

@@ -13,4 +13,5 @@ target 'CGSSGuide' do
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   pod 'TTGTagCollectionView'
+  pod 'Charts'
 end

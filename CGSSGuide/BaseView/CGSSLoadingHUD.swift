@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class LoadingImageView: UIImageView {
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         image = #imageLiteral(resourceName: "loading")
@@ -17,7 +19,7 @@ class LoadingImageView: UIImageView {
     }
     
     var isRotating = false
-    var hideWhenStopped = false
+    var hideWhenStopped = true
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -47,13 +49,16 @@ class LoadingImageView: UIImageView {
         isRotating = false
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize.init(width: 50, height: 50)
+    }
+    
     func show(to view: UIView) {
         view.addSubview(self)
         self.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.height.equalTo(self.fheight)
-            make.width.equalTo(self.fwidth)
         }
+        startAnimating()
     }
     
     func hide() {

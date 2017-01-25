@@ -38,6 +38,7 @@ class CardSignImageController: BaseViewController {
             make.height.equalTo(Screen.width * 504 / 630)
             make.center.equalToSuperview()
         }
+        imageView.style = .custom
         
         prepareToolbar()
         if let url = card.signImageURL {

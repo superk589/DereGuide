@@ -6,6 +6,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Chinese version of card data api <http://starlight.hyspace.io>
 * Beatmap api <https://deresute.info>
 * Image data <https://hoshimoriuta.kirara.ca>
+* Event data <https://starlight.tachibana.cool>
 
 ## Features
 * Card, beatmap and character information
@@ -13,6 +14,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Live score calculation
 * Birthday notification
 * Gacha simulation
+* Event information
 
 ## Download at App Store
 <https://itunes.apple.com/app/cgssguide/id1131934691>
@@ -56,3 +58,6 @@ CGSSGuide now provide files of localizable strings for other languages
 
 ### [deresute.info](https://deresute.info)
 * Author: [Snack-X](https://github.com/Snack-X)
+
+### [starlight.tachibana.cool](https://starlight.tachibana.cool)
+* Author: StarlightDeck

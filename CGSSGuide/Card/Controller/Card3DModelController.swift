@@ -45,7 +45,7 @@ class Card3DModelController: BaseViewController {
     
     var progressIndicator: UIProgressView!
     
-    var indicator: UIActivityIndicatorView!
+    var indicator: LoadingImageView!
     
     var currentModelType: ModelType = .bright {
         didSet {
@@ -70,11 +70,11 @@ class Card3DModelController: BaseViewController {
             make.left.right.equalToSuperview()
         }
         
-        indicator = UIActivityIndicatorView()
-        indicator.activityIndicatorViewStyle = .gray
+        indicator = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
         view.addSubview(indicator)
         indicator.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
+            make.height.width.equalTo(50)
         }
         
         

@@ -83,7 +83,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID, "105debdd40b3a6aa8e160e0f2cb4997f"]
-        
         gadBanner.load(request)
         
         
@@ -132,6 +131,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         bannerDescLabel2.textAlignment = .center
         bannerDescLabel2.text = "(" + NSLocalizedString("广告仅存在于捐赠页面内。", comment: "") + ")"
         bannerDescLabel2.adjustsFontSizeToFitWidth = true
+        
     }
     
     var hud: LoadingImageView?
@@ -269,6 +269,3 @@ extension DonationViewController: SKPaymentTransactionObserver {
         SKPaymentQueue.default().finishTransaction(transaction)
     }
 }
-
-
-

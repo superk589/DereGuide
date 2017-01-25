@@ -26,6 +26,9 @@ class CardImageController: BaseViewController {
 //            make.height.equalTo(Screen.width * 340 / 272)
             make.center.equalToSuperview()
         }
+        imageView.style = .custom
+        
+        
         prepareToolbar()
         if let url = URL.init(string: card.cardImageRef) {
             imageView.sd_setImage(with: url, completed: { (image, error, cache, url) in
