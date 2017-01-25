@@ -39,7 +39,7 @@
 "KxG-H5-NIc.title" = "楽曲ナビ";
 
 /* Class = "UILabel"; text = "清除缓存数据"; ObjectID = "L0F-L7-4EY"; */
-"L0F-L7-4EY.text" = "キャッシュクリア";
+"L0F-L7-4EY.text" = "キャッシュ削除";
 
 /* Class = "UINavigationController"; title = "设置导航"; ObjectID = "Lc3-lA-ZOL"; */
 "Lc3-lA-ZOL.title" = "設定ナビ";
@@ -108,7 +108,7 @@
 "xrP-YC-gLm.text" = "メール";
 
 /* Class = "UILabel"; text = "缓存所有图片"; ObjectID = "yF0-cl-Say"; */
-"yF0-cl-Say.text" = "すべて画像をキャッシュする";
+"yF0-cl-Say.text" = "すべての画像をキャッシュする";
 
 /* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "zA8-n9-zYp"; */
 "zA8-n9-zYp.headerTitle" = "データ";
