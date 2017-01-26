@@ -51,7 +51,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
-            let string = "\(comp.day!)\(NSLocalizedString("日", comment: ""))\(comp.hour!)\(NSLocalizedString("时", comment: ""))"
+            let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
             strings.append(string)
         }
         return strings
@@ -66,7 +66,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
-            let string = "\(comp.day!)\(NSLocalizedString("日", comment: ""))\(comp.hour!)\(NSLocalizedString("时", comment: ""))\(comp.minute!)\(NSLocalizedString("分", comment: ""))"
+            let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
             strings.append(string)
         }
         return strings
@@ -164,8 +164,7 @@ class EventChartController: BaseViewController {
             set.lineWidth = 2
             dataSets.append(set)
         }
-        
-       
+    
         let data = LineChartData.init(dataSets: dataSets)
     
         chartView.data = data

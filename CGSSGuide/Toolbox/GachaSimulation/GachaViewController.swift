@@ -36,7 +36,7 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
         super.viewDidLoad()
         
         tableView.register(GachaTableViewCell.self, forCellReuseIdentifier: "GachaCell")
-        tableView.estimatedRowHeight = 66
+        tableView.estimatedRowHeight = GachaTableViewCell.estimatedHeight
         
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = backItem
@@ -151,14 +151,12 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
         vc.pool = poolList[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
+    }
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
+    }
 }

@@ -17,13 +17,13 @@ protocol GachaDetailViewDelegate: class {
 
 class GachaDetailView: UIView {
     
-    var banner: GachaBannerView!
+    var banner: BannerView!
     var gachaInfoView: UIView!
     var nameLabel:UILabel!
     var detailLabel:UILabel!
     var ratioLabel:UILabel!
     var timeLabel:UILabel!
-    var timeStatusIndicator:ZKCornerRadiusView!
+    var timeStatusIndicator: TimeStatusIndicator!
     var cardListView: UIView!
     var line: UIView!
     var simulationView: GachaSimulateView!
@@ -33,7 +33,7 @@ class GachaDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        banner = GachaBannerView()
+        banner = BannerView()
         addSubview(banner)
         banner.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
@@ -86,15 +86,13 @@ class GachaDetailView: UIView {
         detailLabel.textColor = UIColor.darkGray
         
         
-        timeStatusIndicator = ZKCornerRadiusView.init(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
-        timeStatusIndicator.zk_cornerRadius = 6
+        timeStatusIndicator = TimeStatusIndicator()
         addSubview(timeStatusIndicator)
         timeStatusIndicator.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.height.width.equalTo(12)
             make.top.equalTo(detailLabel.snp.bottom).offset(6)
         }
-        
         
         timeLabel = UILabel()
             //.init(frame: CGRect.init(x: space + 22, y: originY, width: CGSSGlobal.width - space * 2 - 22, height: 12))
@@ -153,7 +151,7 @@ class GachaDetailView: UIView {
     }
     
     func setupWith(pool: CGSSGachaPool) {
-        banner.detailBannerId = pool.detailBannerId
+        banner.sd_setImage(with: pool.detailBannerURL)
         nameLabel.text = pool.name
         ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription
@@ -163,13 +161,12 @@ class GachaDetailView: UIView {
         let end = pool.endDate.toDate()
         let now = Date()
         if now >= start && now <= end {
-            timeStatusIndicator.zk_backgroundColor = UIColor.green.withAlphaComponent(0.6)
+            timeStatusIndicator.style = .now
         } else if now < start {
-            timeStatusIndicator.zk_backgroundColor = UIColor.orange.withAlphaComponent(0.6)
+            timeStatusIndicator.style = .future
         } else if now > end {
-            timeStatusIndicator.zk_backgroundColor = UIColor.red.withAlphaComponent(0.6)
+            timeStatusIndicator.style = .past
         }
-        timeStatusIndicator.zk_render()
         
         let dao = CGSSDAO.sharedDAO
         var cards = [CGSSCard]()

@@ -12,7 +12,7 @@ class EventBannerView: BannerView {
 
     var bannerId: Int! {
         didSet {
-            self.sd_setImage(with: URL.init(string: String.init(format: "https://game.starlight-stage.jp/image/announce/title/thumbnail_event_%04d.png", bannerId)))
+            self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/title/thumbnail_event_%04d.png", bannerId)))
         }
     }
     
@@ -25,6 +25,12 @@ class EventBannerView: BannerView {
     var detailBannerId: Int! {
         didSet {
             self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId)))
+        }
+    }
+    
+    var detailBannerId2: String! {
+        didSet {
+            self.sd_setImage(with: URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%@.png", detailBannerId2)))
         }
     }
     

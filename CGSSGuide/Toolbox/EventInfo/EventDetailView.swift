@@ -17,7 +17,6 @@ protocol EventDetailViewDelegate: class {
     func gotoScoreChartView(eventDetailView: EventDetailView)
     func refreshPtView(eventDetailView: EventDetailView)
     func refreshScoreView(eventDetailView: EventDetailView)
-    
 }
 
 class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
@@ -28,7 +27,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     
     var startToEndLabel: UILabel!
     
-    var timeIndicator: ZKCornerRadiusView!
+    var timeIndicator: TimeStatusIndicator!
     
     var line1: UIView!
     
@@ -94,14 +93,13 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         startToEndLabel.textAlignment = .left
         startToEndLabel.adjustsFontSizeToFitWidth = true
         
-        timeIndicator = ZKCornerRadiusView.init(frame: CGRect.init(x: 0, y: 0, width: 12, height: 12))
+        timeIndicator = TimeStatusIndicator()
         addSubview(timeIndicator)
         timeIndicator.snp.makeConstraints { (make) in
             make.height.width.equalTo(12)
             make.left.equalTo(10)
             make.centerY.equalTo(startToEndLabel)
         }
-        timeIndicator.zk_cornerRadius = 6
         
         line1 = LineView()
         addSubview(line1)
@@ -214,7 +212,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             make.top.equalTo(eventPtDescLabel)
         }
         gotoPtChartLabel.font = Font.content
-        gotoPtChartLabel.textColor = UIColor.darkGray
+        gotoPtChartLabel.textColor = UIColor.lightGray
         gotoPtChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
         let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(gotoPtChartAction))
         gotoPtChartLabel.addGestureRecognizer(tap3)
@@ -266,7 +264,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             make.top.equalTo(eventScoreDescLabel)
         }
         gotoScoreChartLabel.font = Font.content
-        gotoScoreChartLabel.textColor = UIColor.darkGray
+        gotoScoreChartLabel.textColor = UIColor.lightGray
         gotoScoreChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
         let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(gotoScoreChartAction))
         gotoScoreChartLabel.isUserInteractionEnabled = true
@@ -318,39 +316,22 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 //        }
         
         if event.startDate.toDate() > Date() {
-            timeIndicator.zk_backgroundColor = UIColor.orange.withAlphaComponent(0.6)
+            timeIndicator.style = .future
         } else if event.endDate.toDate() < Date() {
-            timeIndicator.zk_backgroundColor = UIColor.red.withAlphaComponent(0.6)
+            timeIndicator.style = .past
         } else {
-            timeIndicator.zk_backgroundColor = UIColor.green.withAlphaComponent(0.6)
+            timeIndicator.style = .now
         }
-        timeIndicator.zk_render()
-//        if event.startDate.toDate() > Date() {
-//            banner.preBannerId = event.id
-//        } else {
-//            banner.detailBannerId = bannerId
-//        }
-
-//        banner.preBannerId = event.id
+                
         if event.detailBannerId == 20 {
-            banner.preBannerId = 2003
+            banner.detailBannerId2 = "0020_2"
         } else if event.startDate.toDate() > Date() {
             banner.preBannerId = event.id
         } else {
             banner.detailBannerId = event.detailBannerId
         }
-//        // 前两次篷车活动特殊处理
-//        if event.id == 2001 || event.id == 2002 {
-//            banner.preBannerId = 2003
-//        }
-//        // 前两次传统活动特殊处理
-//        if event.id == 1001 {
-//            banner.detailBannerId = 1
-//        } else if event.id == 1002 {
-//            banner.detailBannerId = 3
-//        }
+
         
-//        nameLabel.text = event.name
         if event.startDate.toDate() > Date() {
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true

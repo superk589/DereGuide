@@ -36,8 +36,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
 
         eventList = defaultList
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
-        tableView.estimatedRowHeight = 66
-        
+        tableView.estimatedRowHeight = EventTableViewCell.estimatedHeight
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = backItem
         
@@ -148,4 +147,11 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     */
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
+    }
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
+    }
 }

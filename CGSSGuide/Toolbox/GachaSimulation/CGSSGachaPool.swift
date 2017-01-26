@@ -57,6 +57,15 @@ extension CGSSGachaPool {
         return result
     }
     
+    var bannerURL: URL! {
+        return URL.init(string: String.init(format: "https://game.starlight-stage.jp/image/announce/title/thumbnail_gacha_%04d.png", bannerId))
+    }
+    
+    var detailBannerURL: URL! {
+        return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))
+    }
+
+    
     var gachaType: CGSSGachaTypes {
         if dicription.contains("フェス限定") {
             return CGSSGachaTypes.fes
@@ -66,6 +75,19 @@ extension CGSSGachaPool {
             return CGSSGachaTypes.singleType
         } else {
             return CGSSGachaTypes.normal
+        }
+    }
+    
+    var gachaColor: UIColor {
+        switch gachaType {
+        case CGSSGachaTypes.normal:
+            return Color.normalGacha
+        case CGSSGachaTypes.limit:
+            return Color.limitedGacha
+        case CGSSGachaTypes.fes:
+            return Color.cinFesGacha
+        default:
+            return Color.allType
         }
     }
 }

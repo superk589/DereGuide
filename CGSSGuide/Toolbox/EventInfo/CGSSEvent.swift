@@ -12,6 +12,21 @@ extension CGSSEvent {
     var eventType: CGSSEventTypes {
         return CGSSEventTypes.init(eventType: type)
     }
+    
+    var eventColor: UIColor {
+        switch eventType {
+        case CGSSEventTypes.tradition:
+            return Color.tradition
+        case CGSSEventTypes.kyalapon:
+            return Color.kyalapon
+        case CGSSEventTypes.party:
+            return Color.party
+        case CGSSEventTypes.groove:
+            return Color.groove
+        default:
+            return Color.parade
+        }
+    }
     var live: CGSSLive? {
         let dao = CGSSDAO.sharedDAO
         let lives = Array(dao.validLiveDict.values)
@@ -32,19 +47,21 @@ extension CGSSEvent {
     }
     
     var detailBannerId: Int {
-        //        // 前两次篷车活动特殊处理
-        //        if event.id == 2001 || event.id == 2002 {
-        //            banner.preBannerId = 2003
-        //        }
-        //        // 前两次传统活动特殊处理
-        //        if event.id == 1001 {
-        //            banner.detailBannerId = 1
-        //        } else if event.id == 1002 {
-        //            banner.detailBannerId = 3
-        //        }
-
         return sortId - 1
     }
+    
+    var detailBannerURL: URL! {
+        if startDate.toDate() > Date() {
+            return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", id))
+        } else {
+            if detailBannerId == 20 {
+                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%d_2.png", detailBannerId))
+            } else {
+                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId))
+            }
+        }
+    }
+    
 }
 
 class CGSSEvent: CGSSBaseModel {

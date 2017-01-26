@@ -51,7 +51,16 @@ struct Color {
     public static let passion = UIColor.init(red: 1.0 * 250 / 255, green: 1.0 * 168 / 255, blue: 1.0 * 57 / 255, alpha: 1)
     
     public static let parade = UIColor.init(red: 1.0 * 22 / 255, green: 1.0 * 87 / 255, blue: 1.0 * 250 / 255, alpha: 1)
+    public static let kyalapon = UIColor.init(red: 1.0 * 252 / 255, green: 1.0 * 60 / 255, blue: 1.0 * 169 / 255, alpha: 1)
+    public static let groove = UIColor.init(red: 1.0 * 238 / 255, green: 1.0 * 175 / 255, blue: 1.0 * 50 / 255, alpha: 1)
 
+    public static let party = UIColor.init(red: 1.0 * 89 / 255, green: 1.0 * 192 / 255, blue: 1.0 * 50 / 255, alpha: 1)
+    public static let tradition = UIColor.init(red: 1.0 * 113 / 255, green: 1.0 * 80 / 255, blue: 1.0 * 69 / 255, alpha: 1)
+    
+    public static let normalGacha = UIColor.init(red: 1.0 * 253 / 255, green: 1.0 * 186 / 255, blue: 1.0 * 80 / 255, alpha: 1)
+    public static let limitedGacha = UIColor.init(red: 1.0 * 236 / 255, green: 1.0 * 103 / 255, blue: 1.0 * 105 / 255, alpha: 1)
+    public static let cinFesGacha = UIColor.init(red: 1.0 * 25 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 218 / 255, alpha: 1)
+    
     public static let allType = UIColor.darkGray
 
     static let separator = UIColor.init(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)

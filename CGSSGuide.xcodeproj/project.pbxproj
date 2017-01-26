@@ -134,6 +134,8 @@
 		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
 		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
 		12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */; };
+		12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C71E39A81C006A9653 /* StatusIndicator.swift */; };
+		12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */; };
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
@@ -328,6 +330,8 @@
 		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
 		12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLoadingHUD.swift; sourceTree = "<group>"; };
+		12AE77C71E39A81C006A9653 /* StatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusIndicator.swift; sourceTree = "<group>"; };
+		12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStatusIndicator.swift; sourceTree = "<group>"; };
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
@@ -592,6 +596,8 @@
 				12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */,
 				1239B0511E2FAAA600958849 /* LineView.swift */,
 				1239B0531E2FB41200958849 /* BannerView.swift */,
+				12AE77C71E39A81C006A9653 /* StatusIndicator.swift */,
+				12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -1032,6 +1038,7 @@
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				1206F6D21E2A1C6D000FAC78 /* EventStatusIndicator.swift in Sources */,
+				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
@@ -1113,6 +1120,7 @@
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
+				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,

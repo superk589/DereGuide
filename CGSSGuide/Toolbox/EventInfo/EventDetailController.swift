@@ -113,7 +113,7 @@ extension EventDetailController: EventDetailViewDelegate {
     }
 
     func gotoPtChartView(eventDetailView: EventDetailView) {
-        if let list = self.ptList {
+        if let list = self.ptList, list.list.count > 0 {
             let vc = EventChartController()
             vc.rankingList = list
             self.navigationController?.pushViewController(vc, animated: true)
@@ -121,7 +121,7 @@ extension EventDetailController: EventDetailViewDelegate {
     }
     
     func gotoScoreChartView(eventDetailView: EventDetailView) {
-        if let list = self.scoreList {
+        if let list = self.scoreList, list.list.count > 0 {
             let vc = EventChartController()
             vc.rankingList = list
             self.navigationController?.pushViewController(vc, animated: true)
