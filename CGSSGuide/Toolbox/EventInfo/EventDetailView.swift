@@ -21,7 +21,7 @@ protocol EventDetailViewDelegate: class {
 
 class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 
-    var banner: EventBannerView!
+    var banner: BannerView!
     
 //    var nameLabel: UILabel!
     
@@ -65,7 +65,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        banner = EventBannerView()
+        banner = BannerView()
         addSubview(banner)
         banner.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
@@ -304,17 +304,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     }
     
     func setup(event: CGSSEvent, bannerId: Int) {
-//        if let url = URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", bannerId)) {
-//            banner.sd_setImage(with: url)
-//            banner.snp.updateConstraints({ (update) in
-//                update.height.equalTo(Screen.width * 212 / 824)
-//            })
-//        } else {
-//            banner.snp.updateConstraints({ (update) in
-//                update.height.equalTo(0)
-//            })
-//        }
-        
         if event.startDate.toDate() > Date() {
             timeIndicator.style = .future
         } else if event.endDate.toDate() < Date() {
@@ -322,16 +311,9 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         } else {
             timeIndicator.style = .now
         }
-                
-        if event.detailBannerId == 20 {
-            banner.detailBannerId2 = "0020_2"
-        } else if event.startDate.toDate() > Date() {
-            banner.preBannerId = event.id
-        } else {
-            banner.detailBannerId = event.detailBannerId
-        }
-
         
+        banner.sd_setImage(with: event.detailBannerURL)
+
         if event.startDate.toDate() > Date() {
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true

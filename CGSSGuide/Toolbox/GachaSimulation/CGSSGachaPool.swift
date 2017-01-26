@@ -47,6 +47,9 @@ extension CGSSGachaPool {
     
     var detailBannerId: Int {
         var result = id - 30000
+        if [30032, 30033, 30034].contains(id) {
+            result -= 3
+        }
         if dicription.contains("クールタイプ") {
             result -= 1
         } else if dicription.contains("パッションタイプ") {
@@ -54,6 +57,7 @@ extension CGSSGachaPool {
         } else if id == 30013 {
             result = 12
         }
+        
         return result
     }
     

@@ -17,7 +17,6 @@
 		1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */; };
 		1206F6CE1E28D6CA000FAC78 /* SongFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */; };
 		1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */; };
-		1206F6D21E2A1C6D000FAC78 /* EventStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D11E2A1C6D000FAC78 /* EventStatusIndicator.swift */; };
 		1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D31E2A2586000FAC78 /* StringExtension.swift */; };
 		1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */; };
 		1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */; };
@@ -42,7 +41,6 @@
 		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
 		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
-		123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A21DAA44C6007361CF /* EventBannerView.swift */; };
 		1239B0521E2FAAA600958849 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0511E2FAAA600958849 /* LineView.swift */; };
 		1239B0541E2FB41200958849 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0531E2FB41200958849 /* BannerView.swift */; };
 		123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EA1E2374260016A07F /* CGSSClient.swift */; };
@@ -146,7 +144,6 @@
 		12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC31E2E0D620009986F /* EventCardView.swift */; };
 		12D45AC61E2E26AD0009986F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC51E2E26AD0009986F /* CardView.swift */; };
 		12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC71E2E44590009986F /* GachaTableViewCell.swift */; };
-		12D45ACD1E2E46030009986F /* GachaBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ACC1E2E46030009986F /* GachaBannerView.swift */; };
 		12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */; };
 		12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */; };
 		12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D4F8AC1E1BCD780064991E /* DonationViewController.swift */; };
@@ -195,7 +192,6 @@
 		1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WipeTableViewCell.swift; path = ../WipeTableViewCell.swift; sourceTree = "<group>"; };
 		1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterSortController.swift; sourceTree = "<group>"; };
 		1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterSortController.swift; sourceTree = "<group>"; };
-		1206F6D11E2A1C6D000FAC78 /* EventStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStatusIndicator.swift; sourceTree = "<group>"; };
 		1206F6D31E2A2586000FAC78 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSearchBar.swift; sourceTree = "<group>"; };
 		1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFilterSortController.swift; sourceTree = "<group>"; };
@@ -220,7 +216,6 @@
 		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
-		123805A21DAA44C6007361CF /* EventBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBannerView.swift; sourceTree = "<group>"; };
 		1239B0511E2FAAA600958849 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		1239B0531E2FB41200958849 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		123AC6EA1E2374260016A07F /* CGSSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSClient.swift; sourceTree = "<group>"; };
@@ -342,7 +337,6 @@
 		12D45AC31E2E0D620009986F /* EventCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		12D45AC51E2E26AD0009986F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		12D45AC71E2E44590009986F /* GachaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaTableViewCell.swift; sourceTree = "<group>"; };
-		12D45ACC1E2E46030009986F /* GachaBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaBannerView.swift; sourceTree = "<group>"; };
 		12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaFilterSortController.swift; sourceTree = "<group>"; };
 		12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGSSGachaFilter.swift; path = ../../Common/CGSSGachaFilter.swift; sourceTree = "<group>"; };
 		12D4F8AC1E1BCD780064991E /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
@@ -741,8 +735,6 @@
 			isa = PBXGroup;
 			children = (
 				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
-				123805A21DAA44C6007361CF /* EventBannerView.swift */,
-				1206F6D11E2A1C6D000FAC78 /* EventStatusIndicator.swift */,
 				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
 				12D45ABA1E2CBADA0009986F /* EventSongView.swift */,
 				12D45AC31E2E0D620009986F /* EventCardView.swift */,
@@ -804,7 +796,6 @@
 				128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */,
 				12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */,
 				12D45AC71E2E44590009986F /* GachaTableViewCell.swift */,
-				12D45ACC1E2E46030009986F /* GachaBannerView.swift */,
 				128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */,
 			);
 			name = View;
@@ -1010,7 +1001,6 @@
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
-				123805A31DAA44C6007361CF /* EventBannerView.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
@@ -1037,7 +1027,6 @@
 				12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
-				1206F6D21E2A1C6D000FAC78 /* EventStatusIndicator.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* CGSSLiveSimulator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
@@ -1080,7 +1069,6 @@
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
-				12D45ACD1E2E46030009986F /* GachaBannerView.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
