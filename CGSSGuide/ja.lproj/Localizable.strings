@@ -242,7 +242,7 @@
 "未设置邮箱账户" = "メールアカウントが設定されていません";
 
 /* 版权声明页面 */
-"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "このアプリは公式のものではありません。利用している全てのデータの著作権は以下の持ち主のものです。：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\nアプリに利用したカード、楽曲などのデータはインターネットから取得しています。公式の著作権に違反しない限り、ソースコードの著作権を保有します。\n----------------------------------------\nサードパーティーライブラリーの権利表記\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\nアプリのすべてのインターフェイス、アイコン、非公式データ、コードはMITライセンスでライセンスされています。\nソースコード：\nhttps://github.com/superk589/CGSSGuide\n\n";
+"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "このアプリは公式のものではありません。利用している全てのデータの著作権は以下の持ち主に帰属します：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\nアプリに利用したカード、楽曲などのデータはインターネットから取得しています。公式の著作権に違反しない限り、取得ソースの著作権表記を従います。\n----------------------------------------\nサードパーティーライブラリーの権利表記\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\nアプリのすべてのインターフェイス、アイコン、非公式データ、コードはMITライセンスでライセンスされています。\nソースコード：\nhttps://github.com/superk589/CGSSGuide\n\n";
 
 /* 队伍详情页面 */
 "极限分数" = "極限スコア";
@@ -286,7 +286,7 @@
 "确定" = "OK";
 
 /* 设置页面 */
-"确定要清空数据吗？" = "データをクリアしますか？";
+"确定要清空数据吗？" = "データを削除しますか？";
 
 /* 设置页面 */
 "确定要缓存所有图片吗？" = "すべての画像をキャッシュしますか？";
@@ -433,7 +433,7 @@
 
 /* new in 1.1.3 */
 /* 耗时任务处理过程提示框 */
-"处理中..." = "処理中";
+"处理中..." = "処理中...";
 
 /* 清除缓存时 选择具体的清除项 */
 "请等待更新完成或手动取消更新后，再尝试清除数据。" = "現在進行中の更新が終わるまでお待ち下さい。または、手動で更新をキャンセルした後、再びデータを削除してください";
@@ -506,7 +506,7 @@
 "中确率" = "中確率";
 "高确率" = "高確率";
 
-"待定" = "待定";
+"待定" = "未定";
 "上位" = "上位";
 "下位" = "下位";
 "活动曲" = "イベント曲";
@@ -519,24 +519,24 @@
 
 
 /* new in v1.2.0(7+) */
-"3D模型" = "3D模型";
-"卡片图" = "卡片图";
-"签名图" = "签名图";
-"服装" = "服装";
-"SSR服装" = "SSR服装";
+"3D模型" = "3Dモデル";
+"卡片图" = "カード画像";
+"签名图" = "サイン画像";
+"服装" = "衣装";
+"SSR服装" = "SSR衣装";
 
-"活动pt档位" = "活动pt档位";
-"歌曲分数档位" = "歌曲分数档位";
-"查看完整图表" = "查看完整图表";
+"活动pt档位" = "イベントptランキング";
+"歌曲分数档位" = "ハイスコアランキング";
+"查看完整图表" = "チャートを見る";
 
-"最后更新时间：" = "最后更新时间：";
-"当前Pt" = "当前Pt";
-"增速(/h)" = "增速(/h)";
-"最终Pt" = "最终Pt";
-"当前分数" = "当前分数";
-"最终分数" = "最终分数";
+"最后更新时间：" = "最後アップデート時間：";
+"当前Pt" = "現在pt";
+"增速(/h)" = "増速(/h)";
+"最终Pt" = "最終pt";
+"当前分数" = "現在スコア";
+"最终分数" = "最終スコア";
 
 // 图表中点击某点后出现的描述文字 后面跟着分数或pt值
-"%d日%d时%d分" = "%1$d日%2$d时%3$d分";
+"%d日%d时%d分" = "%1$d日%2$d時%3$d分";
 // 图表的x轴文字要尽可能短
-"%d日%d时" = "%1$d日%2$d时";
+"%d日%d时" = "%1$d日%2$d時";
