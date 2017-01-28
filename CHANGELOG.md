@@ -4,10 +4,11 @@
 
 
 1. 优化筛选和排序页面，现在可以通过手势从右侧滑出
-2. 新增工具->活动信息查询
-3. 新增捐赠页面，如果您喜欢这款应用，可以通过捐赠来支持我们
+2. 新增工具->活动信息查询，包含活动卡、歌曲、活动实时档位等信息
+3. 新增“支持我们”页面，如果您喜欢这款应用，请支持我们
 4. 新增技能发动间隔、技能触发几率、来源等卡片筛选条件
-5. 修复一部分非限定SR卡被标记为限定卡的问题
+5. 新增人物3D模型、签名图、卡片图的查看功能
+6. 修复一部分非限定SR卡被标记为限定卡的问题
 
 ##### Japanese version
 1. フィルタとソートにおける機能向上、画面右側からのスワイプでスクリーニングメニューを呼び出せるようになりました。
@@ -18,10 +19,11 @@
 
 ##### English version
 1. Improve sort and filter page, now it can be slid from the right side.
-2. Add event information to tools tab.
-3. Add donation page, if you like this application, please support us by donation.
+2. Add event information to tools tab, including event cards, song, ranking information.
+3. Add "support us" page, if you like this application, please support us.
 4. Add skill interval, skill proc rate, source as card filter methods.
-5. Fix the problem that some normal SR cards tagged as limited.
+5. Add 3D model, sign image, card image viewing page.
+6. Fix the problem that some normal SR cards tagged as limited.
 
 ### v1.1.5
 2016-12-11

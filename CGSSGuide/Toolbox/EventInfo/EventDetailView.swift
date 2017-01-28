@@ -315,17 +315,22 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         banner.sd_setImage(with: event.detailBannerURL)
 
         if event.startDate.toDate() > Date() {
-            startToEndLabel.text = NSLocalizedString("待定", comment: "")
+            if let preStartDateString = event.preStartDate?.toString(), let preEndDateString = event.preEndDate?.toString() {
+                startToEndLabel.text = "\(preStartDateString) ~ \(preEndDateString)"
+            }
+            //startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
+            //startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true
             card2View.isHidden = true
             songView.isHidden = true
             songDescLabel.isHidden = true
-            eventPtDescLabel.isHidden = true
-            eventPtView.isHidden = true
+            
             line1.isHidden = true
             line2.isHidden = true
             line3.isHidden = true
-            line4.isHidden = true
+            
+            eventPtContentView.isHidden = true
+            eventScoreContentView.isHidden = true
             
         } else {
             startToEndLabel.text = "\(event.startDate) ~ \(event.endDate)"

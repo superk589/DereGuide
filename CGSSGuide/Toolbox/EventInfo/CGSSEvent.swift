@@ -62,6 +62,35 @@ extension CGSSEvent {
         }
     }
     
+    var preStartDate: Date? {
+        let now = Date()
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+        let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
+        var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startDate.toDate())
+        preDate.year = nowDate.year
+        if let date1 = preDate.date, let date2 = nowDate.date {
+            if date1 < date2 {
+                preDate.year = preDate.year! + 1
+            }
+        }
+        return gregorian.date(from: preDate)
+    }
+    
+    var preEndDate: Date? {
+        let now = Date()
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+        let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
+        var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: endDate.toDate())
+        preDate.year = nowDate.year
+        if let date1 = preDate.date, let date2 = nowDate.date {
+            if date1 < date2 {
+                preDate.year = preDate.year! + 1
+            }
+        }
+        return gregorian.date(from: preDate)
+    }
 }
 
 class CGSSEvent: CGSSBaseModel {

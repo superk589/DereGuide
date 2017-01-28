@@ -17,6 +17,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
 
     var cv: UICollectionView!
     var gadBanner: GADBannerView!
+    var bannerDescLabel2: UILabel!
     
     var products = [SKProduct]()
     
@@ -49,7 +50,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     func prepareUI() {
         
-        self.navigationItem.title = NSLocalizedString("捐赠", comment: "")
+        self.navigationItem.title = NSLocalizedString("支持作者", comment: "")
         
         questionView1 = DonationQAView()
         view.addSubview(questionView1)
@@ -66,9 +67,9 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.top.equalTo(questionView1.snp.bottom).offset(10)
         }
         
-        questionView1.setup(question: NSLocalizedString("为什么会有这个页面？", comment: ""), answer: NSLocalizedString("CGSSGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会加入任何影响您使用的广告。CGSSGuide的开发和后端服务器的维护需要您的支持，如果您喜欢这款应用，请支持我们。", comment: ""))
+        questionView1.setup(question: NSLocalizedString("为什么会有这个页面？", comment: ""), answer: NSLocalizedString("CGSSGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用常驻广告进行盈利。但是CGSSGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。", comment: ""))
         
-        questionView2.setup(question: NSLocalizedString("捐赠的钱款将用在什么地方？", comment: ""), answer: NSLocalizedString("您的捐赠将用于CGSSGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。", comment: ""))
+        questionView2.setup(question: NSLocalizedString("如何支持我们？", comment: ""), answer: NSLocalizedString("您可以通过购买下面的两个商品来支持本程序，购买任何一个商品都将移除本页面下方的广告。", comment: ""))
         
         gadBanner = GADBannerView()
         view.addSubview(gadBanner)
@@ -84,7 +85,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID, "105debdd40b3a6aa8e160e0f2cb4997f"]
         gadBanner.load(request)
-        
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -104,24 +104,24 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         cv.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
     
         
-        let bannerDescLabel = UILabel()
-        view.addSubview(bannerDescLabel)
-        bannerDescLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(gadBanner.snp.top).offset(-10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-        }
-        bannerDescLabel.textColor = UIColor.darkGray
-        bannerDescLabel.font = UIFont.systemFont(ofSize: 14)
-        bannerDescLabel.numberOfLines = 0
-        bannerDescLabel.textAlignment = .center
-        bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
-        bannerDescLabel.adjustsFontSizeToFitWidth = true
-        
-        let bannerDescLabel2 = UILabel()
+//        let bannerDescLabel = UILabel()
+//        view.addSubview(bannerDescLabel)
+//        bannerDescLabel.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(gadBanner.snp.top).offset(-10)
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//        }
+//        bannerDescLabel.textColor = UIColor.darkGray
+//        bannerDescLabel.font = UIFont.systemFont(ofSize: 14)
+//        bannerDescLabel.numberOfLines = 0
+//        bannerDescLabel.textAlignment = .center
+//        bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
+//        bannerDescLabel.adjustsFontSizeToFitWidth = true
+//        
+        bannerDescLabel2 = UILabel()
         view.addSubview(bannerDescLabel2)
         bannerDescLabel2.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bannerDescLabel.snp.top).offset(-5)
+            make.bottom.equalTo(gadBanner.snp.top).offset(-10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
         }
@@ -129,8 +129,12 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
         bannerDescLabel2.numberOfLines = 0
         bannerDescLabel2.textAlignment = .center
-        bannerDescLabel2.text = "(" + NSLocalizedString("广告仅存在于捐赠页面内。", comment: "") + ")"
+        bannerDescLabel2.text = NSLocalizedString("广告仅存在于本页面内。", comment: "")
         bannerDescLabel2.adjustsFontSizeToFitWidth = true
+        
+        if !UserDefaults.standard.shouldShowAd {
+            removeAd()
+        }
         
     }
     
@@ -146,6 +150,15 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     func reloadData() {
         self.cv.reloadData()
+    }
+    
+    func removeAd() {
+        if UserDefaults.standard.shouldShowAd {
+            UserDefaults.standard.shouldShowAd = false
+        }
+        gadBanner.isHidden = true
+        bannerDescLabel2.text = NSLocalizedString("感谢您的购买，广告已经被移除。", comment: "")
+        
     }
 
 
@@ -191,6 +204,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         if SKPaymentQueue.canMakePayments() {
             CGSSLoadingHUDManager.default.show()
             SKPaymentQueue.default().add(SKPayment.init(product: product))
+            SKPaymentQueue.default().restoreCompletedTransactions()
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("您的设备未开启应用内购买。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
@@ -253,7 +267,7 @@ extension DonationViewController: SKPaymentTransactionObserver {
     
     
     func completeTransaction(_ transaction: SKPaymentTransaction) {
-        
+        removeAd()
     }
     
     func failedTransaction(_ transaction: SKPaymentTransaction) {
@@ -261,7 +275,7 @@ extension DonationViewController: SKPaymentTransactionObserver {
     }
     
     func restoreTransaction(_ transaction: SKPaymentTransaction) {
-        
+        removeAd()
     }
     
     func finishTransaction(_ transaction: SKPaymentTransaction) {

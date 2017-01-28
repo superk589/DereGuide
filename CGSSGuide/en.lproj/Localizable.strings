@@ -458,14 +458,14 @@
 "* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响" = "* Simulation assumes all notes are Perfect.\n* Optimistic score assumes that skills always activate.\n* The average score is taken from 100 real simulations. Results will vary between calculations.\n* Center skills that affect the skill activation rate are not accounted for in the average score.\n* In Groove or LIVE Parade mode, the partner's leader is ignored automatically.";
 
 /* new in v1.2.0 */
-"捐赠" = "Donation";
+"支持作者" = "Support us";
 "为什么会有这个页面？" = "What is this?";
-"CGSSGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会加入任何影响您使用的广告。CGSSGuide的开发和后端服务器的维护需要您的支持，如果您喜欢这款应用，请支持我们。" = "CGSSGuide is a free application, and will not add any paid feature or annoyed advertisement. CGSSGuide needs your supporting for the future development and server costs. If you like this application, please support us.";
-"捐赠的钱款将用在什么地方？" = "What is the donation for?";
-"您的捐赠将用于CGSSGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。" = "The donation will be used at server costs, domain name costs, developer account costs, and server updating costs.";
-"广告仅存在于捐赠页面内。" = "The ad. is only within this page.";
-"您也可以通过点击下方的广告来支持我们。" = "Click the ad. to support us.";
-"您的设备未开启应用内购买。" = "Your device do not allow in-app purchasing";
+"CGSSGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用常驻广告进行盈利。但是CGSSGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。" = "CGSSGuide is a free application, and will neither add any paid feature nor any permanent advertisement. However, CGSSGuide is short of funds for the future development and server costs. If you like this application, please support us.";
+"如何支持我们？" = "How to do it?";
+"您可以通过购买下面的两个商品来支持本程序，购买任何一个商品都将移除本页面下方的广告。" = "You can purchase one of the item below to support us. Any one will remove the bottom advertisement.";
+"广告仅存在于本页面内。" = "The ad. is only within this page.";
+"感谢您的支持，广告已经被移除。" = "Thank you for supporting us, the ad. is removed.";
+"您的设备未开启应用内购买。" = "Your device do not allow in-app purchasing.";
 
 "已收藏" = "Favorited";
 "未收藏" = "Not Favorited";
@@ -534,7 +534,7 @@
 "最终分数" = "Final Score";
 
 // 图表中点击某点后出现的描述文字 后面跟着分数或pt值
-"%d日%d时%d分" = "%1$d(%2$d:%3$d) ";
+"%d日%d时%d分" = "%1$d(%2$02d:%3$02d) ";
 // 图表的x轴文字要尽可能短
-"%d日%d时" = "%1$d(%2$d)";
+"%d日%d时" = "%1$d(%2$02d)";
 

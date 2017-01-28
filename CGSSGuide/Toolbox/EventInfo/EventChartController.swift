@@ -45,8 +45,6 @@ extension EventScoreRankingList: RankingListChartPresentable {
     var xAxis: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let df = DateFormatter()
-            df.dateFormat = ""
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
@@ -60,8 +58,6 @@ extension EventScoreRankingList: RankingListChartPresentable {
     var xAxisDetail: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let df = DateFormatter()
-            df.dateFormat = ""
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
@@ -106,8 +102,6 @@ extension EventPtRankingList: RankingListChartPresentable {
     var xAxis: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let df = DateFormatter()
-            df.dateFormat = ""
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
@@ -121,8 +115,6 @@ extension EventPtRankingList: RankingListChartPresentable {
     var xAxisDetail: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let df = DateFormatter()
-            df.dateFormat = ""
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
             gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
@@ -170,6 +162,8 @@ class EventChartController: BaseViewController {
         chartView.data = data
         chartView.xAxis.valueFormatter = IndexAxisValueFormatter.init(values: rankingList.xAxis)
         chartView.chartDescription?.text = ""
+        chartView.chartDescription?.font = UIFont.systemFont(ofSize: 14)
+        chartView.chartDescription?.textColor = UIColor.darkGray
         chartView.xAxis.labelPosition = .bottom
         chartView.rightAxis.enabled = false
         chartView.xAxis.granularity = 1

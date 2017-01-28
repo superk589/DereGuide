@@ -28,6 +28,15 @@ extension UserDefaults {
         return UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
     }
     
+    var shouldShowAd: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "shouldShowAd")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "shouldShowAd") as? Bool ?? true
+        }
+    }
+    
     func executeDocumentReset(reset:(()->Void)) {
         defer {
             UserDefaults.standard.set(documentVersion, forKey: "LastDocumentVersion")

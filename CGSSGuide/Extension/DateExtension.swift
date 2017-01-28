@@ -9,9 +9,10 @@
 import UIKit
 
 extension Date {
-    func toString(format: String) -> String {
-        let dateFormmater = DateFormatter()
-        dateFormmater.dateFormat = format
-        return dateFormmater.string(from: self)
+    func toString(format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = CGSSGlobal.timeZoneOfTyoko
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }

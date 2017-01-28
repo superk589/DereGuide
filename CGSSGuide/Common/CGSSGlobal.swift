@@ -11,7 +11,7 @@ import ReachabilitySwift
 
 
 struct Config {
-    static let iAPProductId: Set<String> = ["cgssguide_small_donation", "cgssguide_medium_donation"]
+    static let iAPProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
 }
 
 struct Screen {

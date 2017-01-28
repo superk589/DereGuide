@@ -120,4 +120,5 @@
 "zkd-c8-p78.title" = "設定";
 
 // new in 1.2.0
-"MIJ-2r-FVJ.text" = "寄付する";
+//"MIJ-2r-FVJ.text" = "寄付する";
+"MIJ-2r-FVJ.text" = "支持作者";
