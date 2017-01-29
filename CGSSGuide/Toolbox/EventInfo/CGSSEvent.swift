@@ -91,6 +91,22 @@ extension CGSSEvent {
         }
         return gregorian.date(from: preDate)
     }
+    
+    var rankingPtLabels: [String] {
+        if startDate.toDate() > "2016-6-20".toDate(format: "yyyy-MM-dd") {
+            return ["2000", "10000", "20000", "60000", "120000"]
+        } else {
+            return ["2000", "10000", "20000", "50000", "100000"]
+        }
+    }
+    
+    var rankingHighScoreLabels: [String] {
+        if eventType == .tradition {
+            return ["5000", "10000", "40000"]
+        } else {
+            return ["5000", "10000", "50000"]
+        }
+    }
 }
 
 class CGSSEvent: CGSSBaseModel {

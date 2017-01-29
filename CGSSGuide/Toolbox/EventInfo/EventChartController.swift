@@ -35,9 +35,9 @@ extension EventScoreRankingList: RankingListChartPresentable {
             let entry3 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward3))
             reward3Entries.append(entry3)
         }
-        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: "5000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: "10000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: "40000"))
+        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: event.rankingHighScoreLabels[0]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: event.rankingHighScoreLabels[1]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: event.rankingHighScoreLabels[2]))
         return array
     }
     
@@ -90,11 +90,11 @@ extension EventPtRankingList: RankingListChartPresentable {
             let entry5 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward5))
             reward5Entries.append(entry5)
         }
-        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: "2000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: "10000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: "20000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward4Entries, label: "60000"))
-        array.append(ChartDataEntryWithLabel.init(entry: reward5Entries, label: "120000"))
+        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: event.rankingPtLabels[0]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: event.rankingPtLabels[1]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: event.rankingPtLabels[2]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward4Entries, label: event.rankingPtLabels[3]))
+        array.append(ChartDataEntryWithLabel.init(entry: reward5Entries, label: event.rankingPtLabels[4]))
         return array
     }
     

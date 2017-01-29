@@ -59,12 +59,18 @@ extension EventScoreRankingList {
         
         return EventScoreRankingSpeed(rank1: rank1Speed, rank2: rank2Speed, rank3: rank3Speed, reward1: reward1Speed, reward2: reward2Speed, reward3: reward3Speed)
     }
+    
+    
 }
 
 
 class EventScoreRankingList {
     
     var list: [EventScoreRanking]
+    
+    // not from json
+    var event: CGSSEvent!
+    
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */

@@ -16,6 +16,7 @@ class EventPtDataRequest {
             if error == nil {
                 let json = JSON.init(data: data!)
                 let list = EventPtRankingList.init(fromJson: json)
+                list.event = event
                 callback?(list)
             } else {
                 callback?(nil)
@@ -28,6 +29,7 @@ class EventPtDataRequest {
             if error == nil {
                 let json = JSON.init(data: data!)
                 let list = EventScoreRankingList.init(fromJson: json)
+                list.event = event
                 callback?(list)
             } else {
                 callback?(nil)

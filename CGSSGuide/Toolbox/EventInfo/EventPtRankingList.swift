@@ -64,6 +64,9 @@ extension EventPtRankingList {
 class EventPtRankingList {
     
     var list: [EventPtRanking]
+    
+    // not from json
+    var event: CGSSEvent!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
