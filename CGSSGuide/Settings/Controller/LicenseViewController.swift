@@ -8,18 +8,33 @@
 
 import UIKit
 
-class LicenseViewController: UIViewController {
+class LicenseViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let path = Bundle.main.path(forResource: "ThirdPartyLibraries", ofType: ".plist")
+    
+    var tableView: UITableView!
+    
+    var headerTitles = ["Copyright of Game Data", "Copyright of CGSSGuide", "Third-party Licenses"]
+    
+    lazy var thirdPartyLibraries: [[String: String]] = {
+        return NSArray.init(contentsOfFile: self.path!) as! [[String: String]]
+    }()
+    
     var tv = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: CGSSGlobal.width, height: CGSSGlobal.height))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tv.isEditable = false
-        tv.font = UIFont.systemFont(ofSize: 17)
-        tv.dataDetectorTypes = .link
-        self.view.backgroundColor = UIColor.white
-        tv.text = NSLocalizedString("本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n", comment: "版权声明页面")
-        // Do any additional setup after loading the view.
-        self.view.addSubview(tv)
+        
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 50
+        tableView.register(LicenseTableViewCell.self, forCellReuseIdentifier: "LicenseCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +42,43 @@ class LicenseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return headerTitles.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerTitles[section]
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 || section == 1 {
+            return 1
+        } else {
+            return thirdPartyLibraries.count
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as! LicenseTableViewCell
+        if indexPath.section == 0 {
+            cell.setup(title: NSLocalizedString("本程序是非官方程序，与官方应用没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。", comment: ""), site: "")
+        } else if indexPath.section == 1 {
+            cell.setup(title: NSLocalizedString("本程序基于MIT协议，详情请访问：", comment: ""), site: "https://github.com/superk589/CGSSGuide")
+        } else {
+            cell.setup(title: thirdPartyLibraries[indexPath.row]["name"]!, site: thirdPartyLibraries[indexPath.row]["site"]!)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if let cell = tableView.cellForRow(at: indexPath) as? LicenseTableViewCell {
+            if let url = URL.init(string: cell.siteLabel.text ?? "") {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

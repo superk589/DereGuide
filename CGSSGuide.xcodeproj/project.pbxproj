@@ -134,6 +134,8 @@
 		12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */; };
 		12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C71E39A81C006A9653 /* StatusIndicator.swift */; };
 		12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */; };
+		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
+		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
@@ -327,6 +329,8 @@
 		12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLoadingHUD.swift; sourceTree = "<group>"; };
 		12AE77C71E39A81C006A9653 /* StatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusIndicator.swift; sourceTree = "<group>"; };
 		12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStatusIndicator.swift; sourceTree = "<group>"; };
+		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
+		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 				1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */,
 				12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */,
 				12D4F8B01E1CAB330064991E /* DonationCell.swift */,
+				12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */,
 			);
 			name = View;
 			path = Controller/View;
@@ -471,6 +476,7 @@
 			children = (
 				1206DEAA1DACDD8600A5A69D /* View */,
 				1269E9EB1D520BA40071AD7F /* Controller */,
+				12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -920,6 +926,7 @@
 				12F376201D5C96A8003A358C /* Main.storyboard in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
 				12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */,
+				12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */,
 				1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */,
 				1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */,
 				1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */,
@@ -992,6 +999,7 @@
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSSongFilter.swift in Sources */,
+				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,

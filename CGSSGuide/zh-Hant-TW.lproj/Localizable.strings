@@ -247,9 +247,6 @@
 /* 设置页面 */
 "未设置邮箱账户" = "未設定郵箱賬戶";
 
-/* 版权声明页面 */
-"本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/CGSSGuide\n\n" = "本程式是非官方程式，所有本程式中使用的遊戲相關資料版權所屬為：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程式所使用的卡片、歌曲等資料來源於網路，其版權在不違反官方版權的前提下遵循提供者的版權聲明。\n----------------------------------------\n本程式使用的第三方庫\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程式的所有介面、圖示、非官方資源數據、程式碼基於MIT協議。\n如果對此項目感興趣，請訪問：\nhttps://github.com/superk589/CGSSGuide\n\n";
-
 /* 队伍详情页面 */
 "极限分数" = "極限分數";
 
@@ -542,3 +539,8 @@
 "%d日%d时" = "%1$d日%2$d時";
 
 "恢复" = "恢復";
+
+/* new in 1.2.1 */
+"本程序是非官方程序，与官方应用没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。" = "本程式是非官方程式，與官方應用沒有任何關聯。所有本程式中使用的遊戲相關資料版權所屬為：\nBANDAI NAMCO Entertainment Inc.\n\n本程式所使用的非官方資料來源於網路，其版權在不違反官方版權的前提下遵循資料提供者的版權宣告。\n\n本程式不能保證所提供的資料真實可靠，由此帶來的風險由使用者承擔。";
+"本程序基于MIT协议，详情请访问：" = "本程式基於MIT協議，詳情請訪問：";
+
