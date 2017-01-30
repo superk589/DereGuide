@@ -160,7 +160,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             UserDefaults.standard.shouldShowAd = false
         }
         gadBanner.isHidden = true
-        bannerDescLabel2.text = NSLocalizedString("感谢您的购买，广告已经被移除。", comment: "")
+        bannerDescLabel2.text = NSLocalizedString("感谢您的支持，广告已经被移除。", comment: "")
         
     }
 
