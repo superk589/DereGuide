@@ -51,6 +51,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     func prepareUI() {
         
         self.navigationItem.title = NSLocalizedString("支持作者", comment: "")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("恢复", comment: ""), style: .plain, target: self, action: #selector(restoreAction))
         
         questionView1 = DonationQAView()
         view.addSubview(questionView1)
@@ -103,7 +104,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         cv.backgroundColor = UIColor.white
         cv.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
     
-        
 //        let bannerDescLabel = UILabel()
 //        view.addSubview(bannerDescLabel)
 //        bannerDescLabel.snp.makeConstraints { (make) in
@@ -147,7 +147,10 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         request.start()
     }
     
-    
+    func restoreAction() {
+        CGSSLoadingHUDManager.default.show()
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
     func reloadData() {
         self.cv.reloadData()
     }
@@ -204,7 +207,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         if SKPaymentQueue.canMakePayments() {
             CGSSLoadingHUDManager.default.show()
             SKPaymentQueue.default().add(SKPayment.init(product: product))
-            SKPaymentQueue.default().restoreCompletedTransactions()
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("您的设备未开启应用内购买。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
