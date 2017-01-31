@@ -108,7 +108,7 @@ class GachaPoolTableViewCell: UITableViewCell {
         gachaInfoView.fheight = timeLabel.fy + timeLabel.fheight + space
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        df.timeZone = CGSSGlobal.timeZoneOfTyoko
+        df.timeZone = TimeZone.tokyo
         let start = df.date(from: pool.startDate)!
         let end = df.date(from: pool.endDate)!
         let now = Date()

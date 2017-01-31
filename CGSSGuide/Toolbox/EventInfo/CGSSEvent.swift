@@ -65,7 +65,7 @@ extension CGSSEvent {
     var preStartDate: Date? {
         let now = Date()
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-        gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+        gregorian.timeZone = TimeZone.tokyo
         let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
         var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startDate.toDate())
         preDate.year = nowDate.year
@@ -80,7 +80,7 @@ extension CGSSEvent {
     var preEndDate: Date? {
         let now = Date()
         var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-        gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+        gregorian.timeZone = TimeZone.tokyo
         let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
         var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: endDate.toDate())
         preDate.year = nowDate.year
@@ -107,6 +107,7 @@ extension CGSSEvent {
             return ["5000", "10000", "50000"]
         }
     }
+    
 }
 
 class CGSSEvent: CGSSBaseModel {

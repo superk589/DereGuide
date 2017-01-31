@@ -120,6 +120,7 @@
 		127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A01E34FD8D0006627B /* Card3DModelController.swift */; };
 		127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A21E34FDEC0006627B /* SignImageController.swift */; };
 		127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A41E34FDF80006627B /* CardImageController.swift */; };
+		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
@@ -313,6 +314,7 @@
 		127AA1A01E34FD8D0006627B /* Card3DModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card3DModelController.swift; sourceTree = "<group>"; };
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
+		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				12D4F8B61E1CB0800064991E /* UIColorExtension.swift */,
 				1206F6D31E2A2586000FAC78 /* StringExtension.swift */,
 				12738EEC1E2B3C890040E413 /* DateExtension.swift */,
+				1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1077,6 +1080,7 @@
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
+				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1269E9EA1D520B750071AD7F /* CGSSImageView.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,

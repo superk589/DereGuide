@@ -103,7 +103,7 @@ class EventPtView: UIView {
     
     
     func setup(rankingList: EventPtRankingList, onGoing: Bool) {
-        dateLabel.text = rankingList.lastDate?.toString(format: "yyyy-MM-dd HH:mm")
+        dateLabel.text = rankingList.lastDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
         setLoading(loading: false)
         if let last = rankingList.last {
             var gridStrings = [[String]]()

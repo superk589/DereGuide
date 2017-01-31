@@ -155,7 +155,7 @@ class GachaDetailView: UIView {
         nameLabel.text = pool.name
         ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription
-        timeLabel.text = "\(pool.startDate) ~ \(pool.endDate)"
+        timeLabel.text = "\(pool.startDate.toDate().toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)) ~ \(pool.endDate.toDate().toString(timeZone: TimeZone.current))"
         
         let start = pool.startDate.toDate()
         let end = pool.endDate.toDate()

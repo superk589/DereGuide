@@ -315,7 +315,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         banner.sd_setImage(with: event.detailBannerURL)
 
         if event.startDate.toDate() > Date() {
-            if let preStartDateString = event.preStartDate?.toString() {
+            if let preStartDateString = event.preStartDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current) {
                 startToEndLabel.text = "\(preStartDateString) ~ \(NSLocalizedString("待定", comment: ""))"
             }
             //startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
@@ -333,7 +333,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             eventScoreContentView.isHidden = true
             
         } else {
-            startToEndLabel.text = "\(event.startDate) ~ \(event.endDate)"
+            startToEndLabel.text = "\(event.startDate.toDate().toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)) ~ \(event.endDate.toDate().toString(timeZone: TimeZone.current))"
             if event.reward.count >= 2 {
                 var rewards = event.reward.sorted(by: { (r1, r2) -> Bool in
                     return r1.rewardRecommand < r2.rewardRecommand

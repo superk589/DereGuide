@@ -93,7 +93,9 @@ class EventTableViewCell: UITableViewCell {
         // 两个Label同行, setContentHuggingPriority优先级高的可以避免拉伸
         // 同理setContentCompressionResistancePriority 优先级高的可以避免被缩小
         startLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-
+        startLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        eventNameLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        eventNameLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
     }
     
     func setup(event:CGSSEvent) {

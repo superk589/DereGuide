@@ -145,7 +145,7 @@ class Master: FMDatabase {
 //        let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = CGSSGlobal.timeZoneOfTyoko
+        dateFormatter.timeZone = TimeZone.tokyo
         
         let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and a.id like '3%' order by end_date DESC"
 

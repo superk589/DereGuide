@@ -83,8 +83,6 @@ public class CGSSGlobal: NSObject {
     public static let fullImageWidth: CGFloat = 1280
     public static let fullImageHeight: CGFloat = 824
     
-    public static let timeZoneOfTyoko = TimeZone.init(identifier: "Asia/Tokyo")!
-    
     public static func getStringByPattern(str: String, pattern: String) -> [NSString] {
         let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
         let res = regex!.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))

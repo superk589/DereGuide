@@ -47,7 +47,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-            gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+            gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
             strings.append(string)
@@ -60,7 +60,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-            gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+            gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
             strings.append(string)
@@ -104,7 +104,7 @@ extension EventPtRankingList: RankingListChartPresentable {
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-            gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+            gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
             strings.append(string)
@@ -117,7 +117,7 @@ extension EventPtRankingList: RankingListChartPresentable {
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
             var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-            gregorian.timeZone = CGSSGlobal.timeZoneOfTyoko
+            gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
             strings.append(string)
