@@ -20,8 +20,6 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
         return NSArray.init(contentsOfFile: self.path!) as! [[String: String]]
     }()
     
-    var tv = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: CGSSGlobal.width, height: CGSSGlobal.height))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

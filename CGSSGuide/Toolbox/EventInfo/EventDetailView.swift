@@ -315,8 +315,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         banner.sd_setImage(with: event.detailBannerURL)
 
         if event.startDate.toDate() > Date() {
-            if let preStartDateString = event.preStartDate?.toString(), let preEndDateString = event.preEndDate?.toString() {
-                startToEndLabel.text = "\(preStartDateString) ~ \(preEndDateString)"
+            if let preStartDateString = event.preStartDate?.toString() {
+                startToEndLabel.text = "\(preStartDateString) ~ \(NSLocalizedString("待定", comment: ""))"
             }
             //startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
             //startToEndLabel.text = NSLocalizedString("待定", comment: "")
