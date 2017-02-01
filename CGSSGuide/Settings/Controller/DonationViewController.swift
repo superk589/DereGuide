@@ -140,7 +140,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     var hud: LoadingImageView?
     func requestData() {
-        let request = SKProductsRequest.init(productIdentifiers: Config.iAPProductId)
+        let request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductId)
         request.delegate = self
         hud = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
         hud?.show(to: self.cv)
@@ -247,7 +247,6 @@ extension DonationViewController: SKProductsRequestDelegate {
 extension DonationViewController: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
@@ -283,5 +282,25 @@ extension DonationViewController: SKPaymentTransactionObserver {
     func finishTransaction(_ transaction: SKPaymentTransaction) {
         CGSSLoadingHUDManager.default.hide()
         SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        CGSSLoadingHUDManager.default.hide()
+        var restored = false
+        label: for transaction in queue.transactions {
+            for id in Config.iAPRemoveADProductId {
+                if transaction.payment.productIdentifier == id {
+                    restored = true
+                    break label
+                }
+            }
+        }
+        if !restored {
+            let alert = UIAlertController.init(title: NSLocalizedString("恢复失败", comment: ""), message: NSLocalizedString("您的当前账号未曾购买过去除广告服务。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            self.tabBarController?.present(alert, animated: true, completion: nil)
+        }
     }
 }
