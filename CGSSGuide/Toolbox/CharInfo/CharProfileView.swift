@@ -173,7 +173,7 @@ class CharProfileView: UIView {
         nameKanaCell.setup(NSLocalizedString("姓名假名", comment: "角色信息页面"), content: char.kanaSpaced!)
         heightCell.setup(NSLocalizedString("身高", comment: "角色信息页面"), content: "\(char.height!)cm")
         ageCell.setup(NSLocalizedString("年龄", comment: "角色信息页面"), content: char.ageToString)
-        weightCell.setup(NSLocalizedString("体重", comment: "角色信息页面"), content: "\(char.weight!)kg")
+        weightCell.setup(NSLocalizedString("体重", comment: "角色信息页面"), content: "\(char.weightToString)")
         birthdayCell.setup(NSLocalizedString("生日", comment: "角色信息页面"), content: String.init(format: NSLocalizedString("%d月%d日", comment: "角色信息页面"), char.birthMonth!, char.birthDay!))
         bloodCell.setup(NSLocalizedString("血型", comment: "角色信息页面"), content: char.bloodTypeToString)
         handCell.setup(NSLocalizedString("习惯用手", comment: "角色信息页面"), content: char.handToString)

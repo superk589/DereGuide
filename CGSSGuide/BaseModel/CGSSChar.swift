@@ -132,6 +132,14 @@ extension CGSSChar {
         }
     }
     
+    var weightToString: String {
+        if weight > 5000 {
+            return CGSSGameResource.sharedResource.getTextData(category: 6, index: weight - 5000)
+        } else {
+            return String(weight) + "kg"
+        }
+    }
+    
     var homeTownToString:String {
         return CGSSGameResource.sharedResource.getTextData(category: 2, index: homeTown)
     }
