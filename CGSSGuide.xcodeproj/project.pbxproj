@@ -121,6 +121,8 @@
 		127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A21E34FDEC0006627B /* SignImageController.swift */; };
 		127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A41E34FDF80006627B /* CardImageController.swift */; };
 		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
+		1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB431E41C1CD00CEDE04 /* DataSource.plist */; };
+		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
@@ -315,6 +317,8 @@
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
 		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
+		1281CB431E41C1CD00CEDE04 /* DataSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataSource.plist; sourceTree = "<group>"; };
+		1281CB451E41C79300CEDE04 /* SpecialThanks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpecialThanks.plist; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -480,6 +484,8 @@
 				1206DEAA1DACDD8600A5A69D /* View */,
 				1269E9EB1D520BA40071AD7F /* Controller */,
 				12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */,
+				1281CB431E41C1CD00CEDE04 /* DataSource.plist */,
+				1281CB451E41C79300CEDE04 /* SpecialThanks.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -931,7 +937,9 @@
 				12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */,
 				12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */,
 				1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */,
+				1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */,
 				1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */,
+				1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */,
 				1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

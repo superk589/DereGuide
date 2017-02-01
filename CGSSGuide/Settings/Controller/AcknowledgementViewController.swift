@@ -7,26 +7,83 @@
 //
 
 import UIKit
+import SnapKit
 
-class AcknowledgementViewController: UIViewController {
+typealias AcknowledgementTableViewCell = LicenseTableViewCell
 
-    var tv = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: CGSSGlobal.width, height: CGSSGlobal.height))
+class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+
+    
+    let path1 = Bundle.main.path(forResource: "DataSource", ofType: ".plist")
+    
+    let path2 = Bundle.main.path(forResource: "SpecialThanks", ofType: ".plist")
+    
+    var tableView: UITableView!
+    
+    var headerTitles = [NSLocalizedString("Data Sources", comment: ""), NSLocalizedString("Special Thanks to", comment: "")]
+    
+    lazy var dataSources: [[String: String]] = {
+        return NSArray.init(contentsOfFile: self.path1!) as! [[String: String]]
+    }()
+    
+    lazy var supporters: [String] = {
+        return NSArray.init(contentsOfFile: self.path2!) as! [String]
+    }()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
-        tv.isEditable = false
-        tv.font = UIFont.systemFont(ofSize: 17)
-        tv.dataDetectorTypes = .link
-        tv.text = NSLocalizedString("数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n", comment: "致谢页面")
-        view.addSubview(tv)
+        
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 50
+        tableView.register(AcknowledgementTableViewCell.self, forCellReuseIdentifier: "AckCell")
+        
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return headerTitles.count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerTitles[section]
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return dataSources.count
+        } else {
+            return supporters.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AckCell", for: indexPath) as! AcknowledgementTableViewCell
+        if indexPath.section == 0 {
+            cell.setup(title: dataSources[indexPath.row]["name"]!, site: dataSources[indexPath.row]["site"]!)
+        } else {
+            cell.setup(title: supporters[indexPath.row], site: "")
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if let cell = tableView.cellForRow(at: indexPath) as? LicenseTableViewCell {
+            if let url = URL.init(string: cell.siteLabel.text ?? "") {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+
 
     /*
     // MARK: - Navigation

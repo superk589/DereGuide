@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   SpecialThanks.plist
+   CGSSGuide
+
+   Created by zzk on 2017/2/1.
+   Copyright (c) 2017年 zzk. All rights reserved.
+-->
+<plist version="1.0">
+    <array>
+        <string>CaiMiao</string>
+        <string>statementreply</string>
+        <string>Chieri</string>
+        <string>Snack-X</string>
+        <string>summertriangle-dev</string>
+        <string>StarlightDeck</string>
+        <string>suzutan</string>
+        <string>ApricotSalt</string>
+        <string>ZXQ</string>
+    </array>
+</plist>
+

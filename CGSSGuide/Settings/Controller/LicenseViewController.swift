@@ -14,7 +14,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     var tableView: UITableView!
     
-    var headerTitles = ["Copyright of Game Data", "Copyright of CGSSGuide", "Third-party Licenses"]
+    var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of CGSSGuide", comment: "") , NSLocalizedString("Third-party Libraries", comment: "")]
     
     lazy var thirdPartyLibraries: [[String: String]] = {
         return NSArray.init(contentsOfFile: self.path!) as! [[String: String]]
@@ -28,6 +28,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,7 +61,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as! LicenseTableViewCell
         if indexPath.section == 0 {
-            cell.setup(title: NSLocalizedString("本程序是非官方程序，与官方应用没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。", comment: ""), site: "")
+            cell.setup(title: NSLocalizedString("本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。", comment: ""), site: "")
         } else if indexPath.section == 1 {
             cell.setup(title: NSLocalizedString("本程序基于MIT协议，详情请访问：", comment: ""), site: "https://github.com/superk589/CGSSGuide")
         } else {
