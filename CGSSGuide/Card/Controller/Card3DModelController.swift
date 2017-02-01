@@ -56,10 +56,17 @@ class Card3DModelController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let container = UIView()
+        view.addSubview(container)
+        container.snp.makeConstraints { (make) in
+            make.top.bottom.right.equalToSuperview()
+            make.left.equalTo(35)
+        }
         webView = WKWebView()
-        view.addSubview(webView)
+        container.addSubview(webView)
         webView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.right.equalToSuperview()
+            make.left.equalTo(-35)
         }
         webView.navigationDelegate = self
         
@@ -168,7 +175,6 @@ class Card3DModelController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: true)
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

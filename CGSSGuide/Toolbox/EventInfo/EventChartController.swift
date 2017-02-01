@@ -127,6 +127,18 @@ extension EventPtRankingList: RankingListChartPresentable {
     
 }
 
+
+//class CustomChartView: LineChartView {
+//    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        let location = gestureRecognizer.location(in: self)
+//        if location.x <= 20 {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+//}
+
 class EventChartController: BaseViewController {
 
     var rankingList: RankingListChartPresentable!

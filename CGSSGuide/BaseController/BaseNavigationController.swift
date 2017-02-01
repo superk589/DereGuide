@@ -29,6 +29,11 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    // 解决当视图中存在其他手势时 特别是UIScrollView布满全屏时 导致返回手势失效的问题
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return gestureRecognizer == self.interactivePopGestureRecognizer
+    }
+    
     private var showHomeButtonCount = 3
     
     func popToRoot() {
