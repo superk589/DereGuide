@@ -55,7 +55,7 @@ extension CGSSEvent {
             return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", id))
         } else {
             if detailBannerId == 20 {
-                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%d_2.png", detailBannerId))
+                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d_2.png", detailBannerId))
             } else {
                 return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId))
             }

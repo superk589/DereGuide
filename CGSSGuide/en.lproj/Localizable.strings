@@ -151,7 +151,7 @@
 "成功" = "Success";
 
 /* 设置页面 */
-"所有图片总计超过400MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。" = "This will require a download of over 400 MB. Please make sure you're not on a limited Internet connection, then press OK to continue.";
+"所有图片总计超过500MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。" = "This will require a download of over 400 MB. Please make sure you're not on a limited Internet connection, then press OK to continue.";
 
 /* 设置页面 */
 "打开邮箱失败" = "Unable to open Mail";
@@ -428,7 +428,6 @@
 "处理中..." = "Please wait";
 
 /* 清除缓存时 选择具体的清除项 */
-"请等待更新完成或手动取消更新后，再尝试清除数据。" = "Please wait for the update to complete before clearing the cache.";
 "全选" = "Select All";
 "图片" = "Images";
 "卡片" = "Cards";
@@ -548,3 +547,14 @@
 "Copyright of Game Data" = "Copyright of Game Data";
 "Copyright of CGSSGuide" = "Copyright of CGSSGuide";
 "Third-party Libraries" = "Third-party Libraries";
+
+"请等待更新完成或手动取消更新后，再尝试缓存图片。" = "Please wait for the update to complete before caching the image.";
+"请等待更新完成或手动取消更新后，再尝试清除数据。" = "Please wait for the update to complete before clearing the cache.";
+
+"卡片大图" = "Card Spread Image";
+"卡片头像" = "Card Thumbnail";
+"角色头像" = "Character Thumbnail";
+"歌曲封面" = "Album Cover";
+"活动封面" = "Event Cover";
+"卡池封面" = "Gacha Cover";
+

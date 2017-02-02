@@ -20,8 +20,6 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         self.interactivePopGestureRecognizer?.isEnabled = true
         self.delegate = self
         // Do any additional setup after loading the view.
-        
-        CGSSClient.shared.drawerController?.resolveGestureConflict(vc: self)
     }
     
     override func didReceiveMemoryWarning() {

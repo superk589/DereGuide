@@ -5,7 +5,8 @@
 
 1. 活动和卡池页面的时间从日本时间改为本地时间
 2. 优化致谢和版权声明页面
-3. 其他Bug修复
+3. 优化缓存所有图片功能
+4. 其他Bug修复
 
 ##### Japanese version
 
@@ -13,7 +14,8 @@
 ##### English version
 1. Use local time instead of Tokyo time in event and gacha information page.
 2. Improve Acknowledgement and Copyright page
-3. Other bugs fixed
+3. Improve the feature of caching all images
+4. Other bugs fixed
 
 
 ### v1.2.0

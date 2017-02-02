@@ -137,82 +137,15 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     func cacheImage() {
         if CGSSUpdater.defaultUpdater.isUpdating {
-            return
+            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let vc = DownloadImageController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        let alert = UIAlertController.init(title: NSLocalizedString("确定要缓存所有图片吗？", comment: "设置页面"), message: NSLocalizedString("所有图片总计超过400MB，请检查您的网络环境或剩余流量，确认无误后再点击确定。", comment: "设置页面"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
-            DispatchQueue.global(qos: .userInitiated).async {
-                let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
-                var urls = [URL]()
-                
-                // 所有卡片大图和头像图
-                for card in cards {
-                    // 卡片大图
-                    if card.hasSpread! {
-                        let url = URL.init(string: card.spreadImageRef!)
-                        if !SDWebImageManager.shared().cachedImageExists(for: url) {
-                            urls.append(url!)
-                        }
-                    }
-                    // 卡头像图
-                    let url = URL.init(string: DataURL.Images + "/icon_card/\(card.id!).png")
-                    if !SDWebImageManager.shared().cachedImageExists(for: url) {
-                        urls.append(url!)
-                    }
-                    // 角色头像图
-                    let url2 = URL.init(string: DataURL.Images + "/icon_char/\(card.charaId!).png")
-                    if !SDWebImageManager.shared().cachedImageExists(for: url2) && !urls.contains(url2!) {
-                        urls.append(url2!)
-                    }
-                }
-                
-                // 所有歌曲封面图
-                let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
-                for live in lives {
-                    let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
-                    let urlStr = DataURL.Deresute + "/image/jacket_\(song!.id!).png"
-                    let url = URL.init(string: urlStr)
-                    if !SDWebImageManager.shared().cachedImageExists(for: url) {
-                        urls.append(url!)
-                    }
-                }
-                
-                if urls.count == 0 {
-                    DispatchQueue.main.async(execute: {
-                        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "设置页面"), message: NSLocalizedString("暂无需要缓存的图片，请先尝试更新其他数据。", comment: "设置页面"), preferredStyle: .alert)
-                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
-                        self.tabBarController?.present(alert, animated: true, completion: nil)
-                    })
-                    return
-                }
-                
-                DispatchQueue.main.async(execute: {
-                    self.updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
-                })
-                CGSSUpdater.defaultUpdater.isUpdating = true
-                // SDWebImagePrefetcher默认在主线程, 此处改为子线程
-                SDWebImagePrefetcher.shared().prefetcherQueue = DispatchQueue.global(qos: .userInitiated)
-                SDWebImagePrefetcher.shared().prefetchURLs(urls, progress: { (a, b) in
-                    DispatchQueue.main.async(execute: {
-                        self.updateStatusView.updateProgress(Int(a), b: Int(b))
-                        if a % 10 == 0 {
-                            self.updateCacheSize()
-                        }
-                    })
-                    }, completed: { (a, b) in
-                    DispatchQueue.main.async(execute: {
-                        let alert = UIAlertController.init(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面"))\(a - b),\(NSLocalizedString("失败", comment: "设置页面"))\(b)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
-                        self.tabBarController?.present(alert, animated: true, completion: nil)
-                        self.updateStatusView.isHidden = true
-                    })
-                    CGSSUpdater.defaultUpdater.isUpdating = false
-                })
-                
-            }
-            }))
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
     }
     
     func cancelUpdate() {
@@ -297,7 +230,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
         updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 100
+        updateStatusView.center.y = view.center.y - 120
         updateStatusView.isHidden = true
         updateStatusView.delegate = self
         UIApplication.shared.keyWindow?.addSubview(updateStatusView)

@@ -53,14 +53,14 @@ class BannerView: UIImageView {
             
         }
     }
-    override func sd_setImage(with url: URL!, completed completedBlock: SDWebImageCompletionBlock!) {
+    
+    override func sd_setImage(with url: URL?, completed completedBlock: SDExternalCompletionBlock? = nil) {
         showIndicator()
         super.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
             self?.indicator?.stopAnimating()
             self?.indicator2?.stopAnimating()
-            completedBlock(image, error, cacheType, url)
+            completedBlock?(image, error, cacheType, url)
         }
-
     }
     /*
     // Only override draw() if you perform custom drawing.

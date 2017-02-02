@@ -69,7 +69,7 @@ class UpdateStatusView: UIView {
         self.addSubview(cancelButton)
     }
     
-    func setContent(_ text: String, hasProgress: Bool) {
+    func setContent(_ text: String, hasProgress: Bool = false ) {
         self.layer.removeAllAnimations()
         self.alpha = 1
         self.isHidden = false

@@ -101,41 +101,31 @@ class CGSSImageView: UIImageView {
         if activityIndicator?.isAnimating ?? false {
             activityIndicator?.isHidden = false
         }
-//        if isFailed {
-//            retryButton?.hidden = false
-//        }
+    
     }
-//    func setRetryAction(callBack:(()->Void)) {
-//        self.retry = callBack
-//    }
-//    func retryAction() {
-//        retry?()
-//    }
     func setCustomImageWithURL(_ url: URL) {
-        if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !SDWebImageManager.shared().cachedImageExists(for: url) {
-            return
-        }
-        
-        self.reset()
-        self.activityIndicator?.startAnimating()
-        self.showIndicator()
-        self.sd_setImage(with: url, placeholderImage: nil, options: SDWebImageOptions.init(rawValue: 0b1001), progress: { [weak self](a, b) in
-            // print(a, b)
-            self?.progressIndicator?.progress = Float(a) / Float(b)
-            }, completed: { [weak self](image, error, sdImageCache, nsurl) in
-            /*if error != nil {
-             // print("加载大图时出错:\(error.localizedDescription)")
-             }
-             else {
-
-             }*/
-            self?.progressIndicator?.progress = 1
-            self?.isFinishedLoading = true
-            self?.activityIndicator?.stopAnimating()
-            self?.hideIndicator()
+        SDWebImageManager.shared().cachedImageExists(for: url) { (isInCache) in
+            if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !isInCache {
+                return
+            } else {
+                self.reset()
+                self.activityIndicator?.startAnimating()
+                self.showIndicator()
+                self.sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveDownload], progress: { [weak self] (a, b, url) in
+                    DispatchQueue.main.async {
+                        self?.progressIndicator?.progress = Float(a) / Float(b)
+                    }
+                }, completed: { [weak self] (image, error, cacheType, url) in
+                    DispatchQueue.main.async {
+                        self?.progressIndicator?.progress = 1
+                        self?.isFinishedLoading = true
+                        self?.activityIndicator?.stopAnimating()
+                        self?.hideIndicator()
+                    }
+                    
+                })
             }
-        )
-        
+        }
     }
     
     func reset() {
