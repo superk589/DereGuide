@@ -85,6 +85,10 @@ class Master: FMDatabase {
         } catch {
             print(self.lastErrorMessage())
         }
+        
+        // snow wings 两张活动卡数据库中遗失 做特殊处理
+        result.append(200129)
+        result.append(300135)
         return result
     }
     func getGachaAvailableList() -> [Int] {
