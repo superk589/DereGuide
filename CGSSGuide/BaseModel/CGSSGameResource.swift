@@ -293,11 +293,29 @@ class Manifest: FMDatabase {
         
         return hashTable
     }
+    
+    func getMusicScores() -> [String: String] {
+        let selectSql = "select * from manifests where name like \"musicscores_m%.bdb\""
+        var hashTable = [String: String]()
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                if let name = set.string(forColumn: "name").match(pattern: "m([0-9]*)\\.").first {
+                    let hash = set.string(forColumn: "hash")
+                    hashTable[name] = hash
+                }
+            }
+        }
+        catch {
+            print(self.lastErrorMessage())
+        }
+        return hashTable
+    }
 }
 
 class CGSSGameResource: NSObject {
     
-    static let sharedResource = CGSSGameResource()
+    static let shared = CGSSGameResource()
     
     static let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first! + "/GameResource"
     
@@ -346,8 +364,12 @@ class CGSSGameResource: NSObject {
         try? data.write(to: URL(fileURLWithPath: CGSSGameResource.masterPath), options: [.atomic])
     }
     
-    func checkMaster() -> Bool {
+    func checkMasterExistence() -> Bool {
         return FileManager.default.fileExists(atPath: CGSSGameResource.masterPath)
+    }
+    
+    func checkManifestExistence() -> Bool {
+        return FileManager.default.fileExists(atPath: CGSSGameResource.manifestPath)
     }
     
     func getMasterHash() -> String? {
@@ -358,6 +380,16 @@ class CGSSGameResource: NSObject {
             manifest.close()
         }
         return manifest.selectByName("master.mdb").first
+    }
+    
+    func getScoreHash() -> [String: String] {
+        guard manifest.open() else {
+            return [String: String]()
+        }
+        defer {
+            manifest.close()
+        }
+        return manifest.getMusicScores()
     }
     
     func getTextData(category:Int, index:Int) -> String {

@@ -68,7 +68,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         }
     }
     override func refresherValueChanged() {
-        check(0b1000011)
+        check([.card, .master])
     }
     
     func filterAction() {

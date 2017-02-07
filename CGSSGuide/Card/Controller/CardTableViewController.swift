@@ -22,7 +22,7 @@ class CardTableViewController: BaseCardTableViewController {
             dao.removeAllData()
             let alert = UIAlertController.init(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "弹出框正文"), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
-                self.check(0b1001111)
+                self.check(.all)
                 }))
             self.tabBarController?.present(alert, animated: true, completion: nil)
         }
@@ -30,14 +30,14 @@ class CardTableViewController: BaseCardTableViewController {
         else if versionManager.newestDataVersion.1 > versionManager.currentDataVersion.1 {
             let alert = UIAlertController.init(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "弹出框正文"), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
-                self.check(0b1001111)
+                self.check(.all)
                 }))
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
             self.tabBarController?.present(alert, animated: true, completion: nil)
         }
         // 启动时根据用户设置检查常规更新
         else if UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true {
-            check(0b1001111)
+            check(.all)
         }
     }
     

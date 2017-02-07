@@ -14,18 +14,22 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     var updateStatusView: UpdateStatusView!
     var searchBar: CGSSSearchBar!
     
-    func check(_ mask: UInt) {
+    func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.defaultUpdater
         if updater.isUpdating {
             refresher.endRefreshing()
             return
         }
         self.updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
-        updater.checkUpdate(mask, complete: { (items, errors) in
+        updater.checkUpdate(dataTypes: types, complete: { (items, errors) in
             if !errors.isEmpty && items.count == 0 {
                 self.updateStatusView.isHidden = true
+                var errorStrings = [String]()
+                for error in errors {
+                    errorStrings.append(error.localizedDescription)
+                }
                 let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
-                    , message: errors.joined(separator: "\n"), preferredStyle: .alert)
+                    , message: errorStrings.joined(separator: "\n"), preferredStyle: .alert)
                 alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                 // 使用tabBarController来展现UIAlertController的原因是, 该方法处于异步子线程中,当执行时可能这个ViewController已经不在前台,会造成不必要的警告(虽然不会崩溃,但是官方不建议这样)
                 self.tabBarController?.present(alert, animated: true, completion: nil)

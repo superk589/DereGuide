@@ -11,7 +11,7 @@ import ZKDrawerController
 
 class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, GachaFilterSortControllerDelegate {
     
-    lazy var defaultList = CGSSGameResource.sharedResource.getGachaPool()
+    lazy var defaultList = CGSSGameResource.shared.getGachaPool()
     var poolList = [CGSSGachaPool]()
     
     var filterVC: GachaFilterSortController!
@@ -82,7 +82,7 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     func updateData() {
         DispatchQueue.global(qos: .userInitiated).async {
-            self.defaultList = CGSSGameResource.sharedResource.getGachaPool()
+            self.defaultList = CGSSGameResource.shared.getGachaPool()
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
                 self.refresh()
@@ -127,7 +127,7 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     override func refresherValueChanged() {
-        check(0b1000001)
+        check([.card, .master])
     }
     
     

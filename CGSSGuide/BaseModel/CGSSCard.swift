@@ -39,7 +39,7 @@ extension CGSSCard {
     // 四个数值依次表示 活动 常规卡池 限定卡池 fes限定卡池
     // 效率问题 查单卡时使用
     var available:(Bool, Bool, Bool, Bool) {
-        var result = CGSSGameResource.sharedResource.getCardAvailable(cardId: self.id)
+        var result = CGSSGameResource.shared.getCardAvailable(cardId: self.id)
         if result.2 || result.3 {
             result.1 = false
         }
@@ -51,10 +51,10 @@ extension CGSSCard {
         if availableType != nil {
             type = availableType!
         }
-        else if CGSSGameResource.sharedResource.gachaAvailabelList.contains(seriesId) { type = .normal }
-        else if CGSSGameResource.sharedResource.fesAvailabelList.contains(seriesId) { type = .fes }
-        else if CGSSGameResource.sharedResource.timeLimitAvailableList.contains(seriesId) { type = .limit }
-        else if CGSSGameResource.sharedResource.eventAvailabelList.contains(seriesId) { type = .event }
+        else if CGSSGameResource.shared.gachaAvailabelList.contains(seriesId) { type = .normal }
+        else if CGSSGameResource.shared.fesAvailabelList.contains(seriesId) { type = .fes }
+        else if CGSSGameResource.shared.timeLimitAvailableList.contains(seriesId) { type = .limit }
+        else if CGSSGameResource.shared.eventAvailabelList.contains(seriesId) { type = .event }
         else { type = .free }
         availableType = type
         return type

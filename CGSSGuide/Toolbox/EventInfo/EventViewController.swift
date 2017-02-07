@@ -11,7 +11,7 @@ import ZKDrawerController
 
 class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate {
 
-    var defaultList = CGSSGameResource.sharedResource.getEvent()
+    var defaultList = CGSSGameResource.shared.getEvent()
     var eventList = [CGSSEvent]()
     var filterVC: EventFilterSortController!
     var filter: CGSSEventFilter {
@@ -111,7 +111,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     override func refresherValueChanged() {
-        check(0b1000001)
+        check([.master, .card])
     }
 
     

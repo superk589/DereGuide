@@ -113,7 +113,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     
     func wipeData() {
-        if CGSSUpdater.defaultUpdater.isUpdating {
+        if CGSSUpdater.defaultUpdater.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试清除数据。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -136,7 +136,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     }
     
     func cacheImage() {
-        if CGSSUpdater.defaultUpdater.isUpdating {
+        if CGSSUpdater.defaultUpdater.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)

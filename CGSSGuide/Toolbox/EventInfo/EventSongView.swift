@@ -99,8 +99,9 @@ class EventSongView: UIView {
                 self.diffViews[4].isHidden = true
             }
             
-            let url = DataURL.Deresute + "/image/jacket_\(song.id!).png"
-            self.jacketImageView.sd_setImage(with: URL.init(string: url))
+            if let url = live.musicRef?.jacketURL {
+                self.jacketImageView.sd_setImage(with: url)
+            }
         }
     }
 

@@ -16,4 +16,14 @@ extension String {
         let newDate = dateFormatter.date(from: self) ?? Date()
         return newDate
     }
+    
+    func match(pattern: String) -> [String] {
+        let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+        let res = regex!.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count))
+        var arr = Array<NSString>()
+        for checkingRes in res {
+            arr.append((self as NSString).substring(with: checkingRes.range) as NSString)
+        }
+        return arr as [String]
+    }
 }

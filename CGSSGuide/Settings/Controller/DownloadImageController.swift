@@ -262,8 +262,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
             for live in lives {
                 let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
-                let urlStr = DataURL.Deresute + "/image/jacket_\(song!.id!).png"
-                if let url = URL.init(string: urlStr) {
+                if let url = song?.jacketURL {
                     self.jacketTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
                         if !isInCache {
@@ -273,7 +272,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                 }
             }
             
-            let events = CGSSGameResource.sharedResource.getEvent()
+            let events = CGSSGameResource.shared.getEvent()
             for event in events {
                 if let url = event.detailBannerURL {
                     self.eventTotal.append(url)
@@ -286,7 +285,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                 }
             }
             
-            let gachaPools = CGSSGameResource.sharedResource.getGachaPool()
+            let gachaPools = CGSSGameResource.shared.getGachaPool()
             for gachaPool in gachaPools {
                 if let url = gachaPool.detailBannerURL {
                     self.gachaTotal.append(url)

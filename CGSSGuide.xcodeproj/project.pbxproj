@@ -104,7 +104,6 @@
 		1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */; };
 		1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0F1D520D370071AD7F /* CGSSSorter.swift */; };
 		1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA101D520D370071AD7F /* CGSSGlobal.swift */; };
-		1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA111D520D370071AD7F /* CGSSUpdateItem.swift */; };
 		1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA121D520D370071AD7F /* CGSSUpdater.swift */; };
 		1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA1F1D520DDB0071AD7F /* CGSSTeam.swift */; };
 		1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA201D520DDB0071AD7F /* CGSSTeamMember.swift */; };
@@ -301,7 +300,6 @@
 		1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
 		1269EA0F1D520D370071AD7F /* CGSSSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorter.swift; sourceTree = "<group>"; };
 		1269EA101D520D370071AD7F /* CGSSGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGlobal.swift; sourceTree = "<group>"; };
-		1269EA111D520D370071AD7F /* CGSSUpdateItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdateItem.swift; sourceTree = "<group>"; };
 		1269EA121D520D370071AD7F /* CGSSUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdater.swift; sourceTree = "<group>"; };
 		1269EA1F1D520DDB0071AD7F /* CGSSTeam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeam.swift; sourceTree = "<group>"; };
 		1269EA201D520DDB0071AD7F /* CGSSTeamMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamMember.swift; sourceTree = "<group>"; };
@@ -524,7 +522,6 @@
 				1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */,
 				1269EA0F1D520D370071AD7F /* CGSSSorter.swift */,
 				1269EA101D520D370071AD7F /* CGSSGlobal.swift */,
-				1269EA111D520D370071AD7F /* CGSSUpdateItem.swift */,
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
 				12D975D91E38716F005E932B /* BaseRequest.swift */,
 				12D975DB1E3871CD005E932B /* BaseSession.swift */,
@@ -1102,7 +1099,6 @@
 				121C78CA1D561E7900D0B636 /* CGSSAttributeValue.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
-				1269EA181D520D370071AD7F /* CGSSUpdateItem.swift in Sources */,
 				12D975D01E379DF7005E932B /* EventPtRankingList.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */,

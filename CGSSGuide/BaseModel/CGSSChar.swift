@@ -75,7 +75,7 @@ extension CGSSChar {
     
     // 一些属性的特殊转换
     var handToString: String {
-        return CGSSGameResource.sharedResource.getTextData(category: 5, index: hand - 3000)
+        return CGSSGameResource.shared.getTextData(category: 5, index: hand - 3000)
 //        if hand == 3001 {
 //            return "右"
 //        } else if hand == 3002 {
@@ -88,7 +88,7 @@ extension CGSSChar {
     }
     
     var constellationToString: String {
-        return CGSSGameResource.sharedResource.getTextData(category: 4, index: constellation - 1000)
+        return CGSSGameResource.shared.getTextData(category: 4, index: constellation - 1000)
 //        switch constellation {
 //            
 //        case 1001:
@@ -134,14 +134,14 @@ extension CGSSChar {
     
     var weightToString: String {
         if weight > 5000 {
-            return CGSSGameResource.sharedResource.getTextData(category: 6, index: weight - 5000)
+            return CGSSGameResource.shared.getTextData(category: 6, index: weight - 5000)
         } else {
             return String(weight) + "kg"
         }
     }
     
     var homeTownToString:String {
-        return CGSSGameResource.sharedResource.getTextData(category: 2, index: homeTown)
+        return CGSSGameResource.shared.getTextData(category: 2, index: homeTown)
     }
     
     var threeSizeToString: String {
@@ -150,7 +150,7 @@ extension CGSSChar {
     
     func getSizeString(_ size: Int) -> String {
         if size - 5000 > 0 {
-            return CGSSGameResource.sharedResource.getTextData(category: 6, index: size - 5000)
+            return CGSSGameResource.shared.getTextData(category: 6, index: size - 5000)
         } else {
             return String(size)
         }
@@ -158,7 +158,7 @@ extension CGSSChar {
     
     var ageToString: String {
         if age - 5000 > 0  {
-            return "\(CGSSGameResource.sharedResource.getTextData(category: 6, index: age - 5000))\(NSLocalizedString("岁", comment: "角色年龄"))"
+            return "\(CGSSGameResource.shared.getTextData(category: 6, index: age - 5000))\(NSLocalizedString("岁", comment: "角色年龄"))"
         } else {
             return "\(age!)\(NSLocalizedString("岁", comment: "角色年龄"))"
         }

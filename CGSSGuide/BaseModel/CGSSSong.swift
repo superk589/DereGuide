@@ -26,6 +26,11 @@ enum SongType {
     }
 }
 
+extension CGSSSong {
+    var jacketURL: URL? {
+        return URL.init(string: DataURL.Images + "/jacket/\(id!).png")
+    }
+}
 
 
 open class CGSSSong: CGSSBaseModel {
@@ -34,10 +39,6 @@ open class CGSSSong: CGSSBaseModel {
     var title:String?
     var composer:String?
     var lyricist:String?
-    
-    var imageURLString: String {
-        return DataURL.Deresute + "/image/jacket_\(id!).png"
-    }
     
     override open func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)

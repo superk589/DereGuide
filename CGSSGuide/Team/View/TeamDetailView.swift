@@ -676,7 +676,9 @@ class TeamDetailView: UIView {
         songNameLabel.text = live.musicRef?.title
         songNameLabel.textColor = live.getLiveColor()
         // songLengthLabel.text = String(Int(beatmaps[diff - 1].totalSeconds)) + "秒"
-        songJacket.sd_setImage(with: URL.init(string: live.musicRef!.imageURLString)!)
+        if let url = live.musicRef?.jacketURL {
+            songJacket.sd_setImage(with: url)
+        }
     }
     
     /*

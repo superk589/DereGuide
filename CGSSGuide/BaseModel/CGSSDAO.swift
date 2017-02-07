@@ -33,6 +33,11 @@ public enum CGSSDataKey: String {
     static let allValues = [skill, card, char, leaderSkill, cardIcon, live, song, beatmap, storyEpisode, storyContent]
 }
 
+struct DataPath {
+    static let root: String = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first! + "/Data"
+    static let beatmap: String = DataPath.root + "/Beatmap/%03d.bdb"
+}
+
 open class CGSSDAO: NSObject {
     
     open static let sharedDAO = CGSSDAO()
@@ -316,6 +321,11 @@ open class CGSSDAO: NSObject {
         }
     }
     
+    func saveBeatmapData(data: Data, liveId: Int) {
+        let url = URL.init(fileURLWithPath: String.init(format: DataPath.beatmap, liveId))
+        try? data.write(to: url, options: Data.WritingOptions.atomic)
+    }
+    
     func findDataBy(_ type: CGSSDataKey, id: Int) -> AnyObject? {
         return self.getDictForKey(type).object(forKey: String(id)) as AnyObject?
     }
@@ -371,6 +381,12 @@ open class CGSSDAO: NSObject {
         }
         
         return nil
+    }
+    
+    func checkExistenceOfBeatmap(_ liveId: Int) -> Bool {
+        let fm = FileManager.default
+        let path = CGSSDAO.path + String.init(format: "/Data/Beatmap/%03d" + ".bdb", liveId)
+        return fm.fileExists(atPath: path)
     }
     
     func findStoryEpisodeById(_ id: Int) -> CGSSStoryEpisode? {

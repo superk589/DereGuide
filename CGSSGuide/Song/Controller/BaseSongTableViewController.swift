@@ -63,7 +63,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     // }
     
     override func refresherValueChanged() {
-        check(0b11100)
+        check([.beatmap, .master])
     }
     
     override func viewWillAppear(_ animated: Bool) {

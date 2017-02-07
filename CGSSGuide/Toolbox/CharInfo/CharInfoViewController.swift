@@ -65,7 +65,7 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
     }
     
     override func refresherValueChanged() {
-        check(0b1000001)
+        check([.card, .master])
     }
     
     func filterAction() {
