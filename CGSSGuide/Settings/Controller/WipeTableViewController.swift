@@ -48,16 +48,11 @@ class WipeTableViewController: BaseTableViewController {
                         self.wipeCard()
                         let dao = CGSSDAO.sharedDAO
                         dao.getDictForKey(.card).removeAllObjects()
-                        dao.getDictForKey(.cardIcon).removeAllObjects()
                         dao.getDictForKey(.char).removeAllObjects()
-                        dao.getDictForKey(.storyContent).removeAllObjects()
-                        dao.getDictForKey(.storyEpisode).removeAllObjects()
                         dao.getDictForKey(.leaderSkill).removeAllObjects()
                         dao.getDictForKey(.skill).removeAllObjects()
                     case 3:
-                        self.wipeSong()
-                        let dao = CGSSDAO.sharedDAO
-                        dao.getDictForKey(.live).removeAllObjects()
+                        self.wipeLive()
                     case 4:
                         self.wipeUserDocuments()
                     case 5:
@@ -101,7 +96,7 @@ class WipeTableViewController: BaseTableViewController {
         }
     }
     
-    func wipeSong() {
+    func wipeLive() {
         for path in getSongFiles() {
             if (FileManager.default.fileExists(atPath: path)) {
                 do {

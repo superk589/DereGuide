@@ -158,7 +158,11 @@ extension CGSSLive {
     }
     
     func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {
-        return CGSSDAO.sharedDAO.findBeatmapById(self.id, diffId: diff)
+        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: id){
+            return beatmaps[diff - 1]
+        } else {
+            return nil
+        }
     }
     
     var jacketURL: URL? {

@@ -9,6 +9,27 @@
 import UIKit
 import FMDB
 
+class MusicScoreDB: FMDatabase {
+    func getBeatmaps() -> [CGSSBeatmap] {
+        var beatmaps = [CGSSBeatmap]()
+        let selectSql = "select * from blobs where name like '%_1.csv' or name like '%_2.csv' or name like '%_3.csv' or name like '%_4.csv' or name like '%_5.csv' order by name asc"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                if let data = set.data(forColumn: "data") {
+                    if let beatmap = CGSSBeatmap.init(data: data) {
+                        beatmaps.append(beatmap)
+                    }
+                }
+            }
+        }
+        catch {
+            print(self.lastErrorMessage())
+        }
+        return beatmaps
+    }
+}
+
 class Master: FMDatabase {
     
     func isFesGachaAvailable(cardId:Int) -> Bool {
@@ -262,9 +283,8 @@ class Master: FMDatabase {
         
     }
     
-    func getLives() -> [CGSSLive] {
-        var lives = [CGSSLive]()
-        let selectSql = "select * from live_data a, music_data b where a.music_data_id = b.id"
+    func getLiveBy(id: Int) -> CGSSLive? {
+        let selectSql = "select * from live_data a, music_data b where a.music_data_id = b.id and a.id = '\(id)'"
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
@@ -284,10 +304,57 @@ class Master: FMDatabase {
                 }
                 var levels = [Int: Int]()
                 for detaiId in liveDetailId {
-                    let subSql = "select * from live_detail_data where id = \(detaiId)"
+                    let subSql = "select * from live_detail where id = \(detaiId)"
                     let subSet = try self.executeQuery(subSql, values: nil)
                     while subSet.next() {
                         levels[detaiId] = Int(set.int(forColumn: "level_vocal"))
+                    }
+                }
+                let debut = levels[d1] ?? 0
+                let regular = levels[d2] ?? 0
+                let pro = levels[d3] ?? 0
+                let master = levels[d4] ?? 0
+                let masterPlus = levels[d5] ?? 0
+                
+                let eventType = Int(set.int(forColumn: "event_type"))
+                let bpm = Int(set.int(forColumn: "bpm"))
+                
+                let live = CGSSLive.init(id: id, musicId: musicId, musicTitle: musicTitle, type: type, liveDetailId: liveDetailId, eventType: eventType, debut: debut, regular: regular, pro: pro, master: master, masterPlus: masterPlus, bpm: bpm)
+                
+                return live
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return nil
+    }
+    
+    func getLives() -> [CGSSLive] {
+        var lives = [CGSSLive]()
+        let selectSql = "select a.*, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                
+                let id = Int(set.int(forColumn: "id"))
+                let musicId = Int(set.int(forColumn: "music_data_id"))
+                let musicTitle = set.string(forColumn: "name") ?? ""
+                let type = Int(set.int(forColumn: "type"))
+                let d1 = Int(set.int(forColumn: "difficulty_1"))
+                let d2 = Int(set.int(forColumn: "difficulty_2"))
+                let d3 = Int(set.int(forColumn: "difficulty_3"))
+                let d4 = Int(set.int(forColumn: "difficulty_4"))
+                let d5 = Int(set.int(forColumn: "difficulty_5"))
+                var liveDetailId = [d1, d2, d3, d4]
+                if d5 != 0 {
+                    liveDetailId.append(d5)
+                }
+                var levels = [Int: Int]()
+                for detaiId in liveDetailId {
+                    let subSql = "select * from live_detail where id = \(detaiId)"
+                    let subSet = try self.executeQuery(subSql, values: nil)
+                    while subSet.next() {
+                        levels[detaiId] = Int(subSet.int(forColumn: "level_vocal"))
                     }
                 }
                 let debut = levels[d1] ?? 0
@@ -469,7 +536,7 @@ class CGSSGameResource: NSObject {
         return master.getEvents()
     }
     
-    func getLive() -> [CGSSLive] {
+    func getLives() -> [CGSSLive] {
         guard master.open() else {
             return [CGSSLive]()
         }
@@ -477,6 +544,16 @@ class CGSSGameResource: NSObject {
             master.close()
         }
         return master.getLives()
+    }
+    
+    func getLiveBy(id: Int) -> CGSSLive? {
+        guard master.open() else {
+            return nil
+        }
+        defer {
+            master.close()
+        }
+        return master.getLiveBy(id: id)
     }
     
     
@@ -539,7 +616,7 @@ class CGSSGameResource: NSObject {
 //    }
     
     
-    func getMusicIdBy(eventId:Int) -> Int? {
+    func getMusicIdBy(eventId: Int) -> Int? {
         guard self.master.open() else {
             return nil
         }
@@ -547,5 +624,20 @@ class CGSSGameResource: NSObject {
             self.master.close()
         }
         return master.getMusicIdBy(eventId: eventId)
+    }
+    
+    func getBeatmaps(liveId: Int) -> [CGSSBeatmap]? {
+        let path = String.init(format: DataPath.beatmap, liveId)
+        if let fmdb = MusicScoreDB.init(path: path) {
+            guard fmdb.open() else {
+                return nil
+            }
+            defer {
+                fmdb.close()
+            }
+            return fmdb.getBeatmaps()
+        } else {
+            return nil
+        }
     }
 }

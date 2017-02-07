@@ -14,6 +14,7 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
+    var defualtLiveList = CGSSGameResource.shared.getLives()
     var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
         get {
@@ -36,7 +37,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
         filter.searchText = searchBar.text ?? ""
-        liveList = filter.filter(Array(CGSSDAO.sharedDAO.validLiveDict.values))
+        self.liveList = filter.filter(defualtLiveList)
         sorter.sortList(&self.liveList)
         tableView.reloadData()
     }
@@ -45,22 +46,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         searchBar.text = ""
         refresh()
     }
-    
-    // func filterAction() {
-    // let sb = self.storyboard!
-    // let filterVC = sb.instantiateViewControllerWithIdentifier("SongFilterTable") as! SongFilterTable
-    // filterVC.filter = self.filter
-    // //navigationController?.pushViewController(filterVC, animated: true)
-    //
-    //
-    // //使用自定义动画效果
-    // let transition = CATransition()
-    // transition.duration = 0.3
-    // transition.type = kCATransitionFade
-    // navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-    // navigationController?.pushViewController(filterVC, animated: false)
-    //
-    // }
     
     override func refresherValueChanged() {
         check([.beatmap, .master])
@@ -86,9 +71,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dao = CGSSDAO.sharedDAO
-        liveList = Array(dao.validLiveDict.values)
-       
         
         // 初始化导航栏的搜索条
         self.navigationItem.titleView = searchBar
@@ -165,21 +147,14 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     }
     
     func checkBeatmapData(_ live: CGSSLive) -> [CGSSBeatmap]? {
-        var beatmaps = [CGSSBeatmap]()
-        let maxDiff = (live.masterPlus == 0) ? 4 : 5
-        let dao = CGSSDAO.sharedDAO
-        for i in 1...maxDiff {
-            if let beatmap = dao.findBeatmapById(live.id, diffId: i) {
-                beatmaps.append(beatmap)
-            } else {
-                let msg = NSLocalizedString("缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文")
-                let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: String.init(format: msg, CGSSGlobal.diffStringFromInt(i: i)), preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                self.navigationController?.present(alert, animated: true, completion: nil)
-                return nil
-            }
+        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count == (live.maxDiff == 5 ? 5 : 4) {
+            return beatmaps
+        } else {
+            let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+            self.navigationController?.present(alert, animated: true, completion: nil)
+            return nil
         }
-        return beatmaps
     }
 }
 

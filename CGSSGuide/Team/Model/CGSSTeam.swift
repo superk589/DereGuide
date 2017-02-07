@@ -31,7 +31,7 @@ class CGSSTeam: NSObject, NSCoding {
     var backSupportValue: Int!
     var testLive: CGSSLive? {
         if let id = testLiveId {
-            return CGSSDAO.sharedDAO.findLiveById(id)
+            return CGSSGameResource.shared.getLiveBy(id: id)
         }
         return nil
     }

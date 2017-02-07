@@ -240,4 +240,36 @@ class CGSSBeatmap: CGSSBaseModel {
         super.init()
     }
     
+    
+    init?(data: Data) {
+        if let csv = String.init(data: data, encoding: .utf8) {
+            let lines = csv.components(separatedBy: "\n")
+            self.notes = [CGSSBeatmapNote]()
+            for i in 0..<lines.count {
+                let line = lines[i]
+                if i == 0 {
+                    continue
+                } else {
+                    let comps = line.components(separatedBy: ",")
+                    if comps.count < 8 {
+                        break
+                    }
+                    let note = CGSSBeatmapNote()
+                    note.id = Int(comps[0]) ?? 0
+                    note.sec = Float(comps[1]) ?? 0
+                    note.type = Int(comps[2]) ?? 0
+                    note.startPos = Int(comps[3]) ?? 0
+                    note.finishPos = Int(comps[4]) ?? 0
+                    note.status = Int(comps[5]) ?? 0
+                    note.sync = Int(comps[6]) ?? 0
+                    note.groupId = Int(comps[7]) ?? 0
+                    self.notes.append(note)
+                }
+            }
+            super.init()
+        } else {
+            return nil
+        }
+    }
+    
 }

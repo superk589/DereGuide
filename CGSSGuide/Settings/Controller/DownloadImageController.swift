@@ -259,7 +259,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             }
             
             // 所有歌曲封面图
-            let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
+            let lives = CGSSGameResource.shared.getLives()
             for live in lives {
                 if let url = live.jacketURL {
                     self.jacketTotal.append(url)

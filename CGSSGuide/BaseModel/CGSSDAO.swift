@@ -7,29 +7,14 @@
 //
 
 import UIKit
-//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l < r
-//  case (nil, _?):
-//    return true
-//  default:
-//    return false
-//  }
-//}
-
+import FMDB
 
 public enum CGSSDataKey: String {
     case skill = "skill"
     case card = "card"
     case char = "char"
     case leaderSkill = "leader_skill"
-    case cardIcon = "card_icon"
-    case live = "live"
-    case beatmap = "beatmap"
-    case storyEpisode = "story_episode"
-    case storyContent = "story_content"
-    static let allValues = [skill, card, char, leaderSkill, cardIcon, live, beatmap, storyEpisode, storyContent]
+    static let allValues = [skill, card, char, leaderSkill]
 }
 
 struct DataPath {
@@ -46,30 +31,26 @@ open class CGSSDAO: NSObject {
     open lazy var cardDict = CGSSDAO.loadDataFromFile(.card)
     open lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.leaderSkill)
     open lazy var charDict = CGSSDAO.loadDataFromFile(.char)
-    open lazy var cardIconDict = CGSSDAO.loadDataFromFile(.cardIcon)
-    open lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.storyEpisode)
-    open lazy var storyContentDict = CGSSDAO.loadDataFromFile(.storyContent)
-    open lazy var liveDict = CGSSDAO.loadDataFromFile(.live)
     
     // beatmap采用分歌曲单独存储
     open var beatmapDict = NSMutableDictionary()
     
     // 以musicId为key, 有效的live为值的字典
-    open var validLiveDict: [String: CGSSLive] {
-        var lives = [String: CGSSLive]()
-        for live in liveDict.allValues as! [CGSSLive] {
-            if [1018].contains(live.musicId) { continue }
-            if [514].contains(live.id) { continue }
-            if lives.keys.contains(String(live.musicId)) {
-                if lives[String(live.musicId)]!.eventType < live.eventType {
-                    lives[String(live.musicId)] = live
-                }
-            } else {
-                lives[String(live.musicId)] = live
-            }
-        }
-        return lives
-    }
+//    open var validLiveDict: [String: CGSSLive] {
+//        var lives = [String: CGSSLive]()
+//        for live in liveDict.allValues as! [CGSSLive] {
+//            if [1018].contains(live.musicId) { continue }
+//            if [514].contains(live.id) { continue }
+//            if lives.keys.contains(String(live.musicId)) {
+//                if lives[String(live.musicId)]!.eventType < live.eventType {
+//                    lives[String(live.musicId)] = live
+//                }
+//            } else {
+//                lives[String(live.musicId)] = live
+//            }
+//        }
+//        return lives
+//    }
     
     static let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
     
@@ -88,17 +69,7 @@ open class CGSSDAO: NSObject {
             return self.charDict
         case .leaderSkill:
             return self.leaderSkillDict
-        case .live:
-            return self.liveDict
-        case .storyEpisode:
-            return self.storyEpisodeDict
-        case .beatmap:
-            return self.beatmapDict
-        case .cardIcon:
-            return self.cardIconDict
-        case .storyContent:
-            return self.storyContentDict
-        }
+       }
     }
     
     func saveDataToFile(_ key: CGSSDataKey, complete: (() -> Void)?) {
@@ -106,28 +77,13 @@ open class CGSSDAO: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             self.prepareFileDirectory()
             
-            if key == .beatmap {
-                let path = CGSSDAO.path + "/Data/Beatmap/"
-                for (k, v) in self.beatmapDict {
-                    let id = k as! String
-                    let beatmaps = v as! [String: CGSSBeatmap]
-                    for (diff, beatmap) in beatmaps {
-                        let theData = NSMutableData()
-                        let achiver = NSKeyedArchiver(forWritingWith: theData)
-                        achiver.encode(beatmap, forKey: key.rawValue)
-                        achiver.finishEncoding()
-                        theData.write(toFile: path + "\(id)_\(diff).plist", atomically: true)
-                    }
-                }
-                
-            } else {
-                let path = CGSSDAO.getDataPath(key)
-                let theData = NSMutableData()
-                let achiver = NSKeyedArchiver(forWritingWith: theData)
-                achiver.encode(self.getDictForKey(key), forKey: key.rawValue)
-                achiver.finishEncoding()
-                theData.write(toFile: path!, atomically: true)
-            }
+            let path = CGSSDAO.getDataPath(key)
+            let theData = NSMutableData()
+            let achiver = NSKeyedArchiver(forWritingWith: theData)
+            achiver.encode(self.getDictForKey(key), forKey: key.rawValue)
+            achiver.finishEncoding()
+            theData.write(toFile: path!, atomically: true)
+        
             DispatchQueue.main.async(execute: {
                 complete?()
             })
@@ -336,29 +292,6 @@ open class CGSSDAO: NSObject {
             }
         }
         return cards
-    }
-    
-    open func findLiveById(_ id: Int) -> CGSSLive? {
-        return self.liveDict.object(forKey: String(id)) as? CGSSLive
-    }
-    
-    func findBeatmapById(_ liveId: Int, diffId: Int) -> CGSSBeatmap? {
-        var itemId: String
-        // 修复純情Midnight伝説master难度缺失的问题 重定位到非活动模式的master
-        if liveId == 519 && diffId == 4 {
-            itemId = String(format: "%03d", 306)
-        } else {
-            itemId = String(format: "%03d", liveId)
-        }
-        let path = CGSSDAO.path + "/Data/Beatmap/\(itemId)_\(diffId)" + ".plist"
-        if let theData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-            let achiver = NSKeyedUnarchiver(forReadingWith: theData)
-            if let beatmap = achiver.decodeObject(forKey: CGSSDataKey.beatmap.rawValue) as? CGSSBeatmap {
-                return beatmap
-            }
-        }
-        
-        return nil
     }
     
     func checkExistenceOfBeatmap(_ liveId: Int) -> Bool {

@@ -22,7 +22,10 @@ extension String {
         let res = regex!.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count))
         var arr = Array<NSString>()
         for checkingRes in res {
-            arr.append((self as NSString).substring(with: checkingRes.range) as NSString)
+            // has capture
+            arr.append((self as NSString).substring(with: checkingRes.rangeAt(1)) as NSString)
+            // no capture
+            //arr.append((self as NSString).substring(with: checkingRes.range) as NSString)
         }
         return arr as [String]
     }

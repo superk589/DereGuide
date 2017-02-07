@@ -28,14 +28,7 @@ extension CGSSEvent {
         }
     }
     var live: CGSSLive? {
-        let dao = CGSSDAO.sharedDAO
-        let lives = Array(dao.validLiveDict.values)
-        for live in lives {
-            if live.id == liveId {
-                return live
-            }
-        }
-        return nil
+        return CGSSGameResource.shared.getLiveBy(id: liveId)
     }
     
     var isOnGoing: Bool {
