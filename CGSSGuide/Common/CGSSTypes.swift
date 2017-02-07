@@ -295,16 +295,16 @@ struct CGSSCharCVTypes: OptionSet, RawRepresentable {
     static let all = CGSSCharCVTypes.init(rawValue: 0b11)
 }
 
-typealias CGSSSongTypes = CGSSCardTypes
+typealias CGSSLiveTypes = CGSSCardTypes
 
-struct CGSSSongEventTypes: OptionSet, RawRepresentable {
+struct CGSSLiveEventTypes: OptionSet, RawRepresentable {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
-    static let normal = CGSSSongEventTypes.init(rawValue: 1 << 0)
-    static let tradition = CGSSSongEventTypes.init(rawValue: 1 << 1)
-    static let groove = CGSSSongEventTypes.init(rawValue: 1 << 2)
-    static let parade = CGSSSongEventTypes.init(rawValue: 1 << 3)
-    static let all = CGSSSongEventTypes.init(rawValue: 0b1111)
+    static let normal = CGSSLiveEventTypes.init(rawValue: 1 << 0)
+    static let tradition = CGSSLiveEventTypes.init(rawValue: 1 << 1)
+    static let groove = CGSSLiveEventTypes.init(rawValue: 1 << 2)
+    static let parade = CGSSLiveEventTypes.init(rawValue: 1 << 3)
+    static let all = CGSSLiveEventTypes.init(rawValue: 0b1111)
     init (eventType: Int) {
         switch eventType {
         case 0:

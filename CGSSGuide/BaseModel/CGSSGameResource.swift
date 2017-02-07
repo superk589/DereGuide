@@ -262,6 +262,53 @@ class Master: FMDatabase {
         
     }
     
+    func getLives() -> [CGSSLive] {
+        var lives = [CGSSLive]()
+        let selectSql = "select * from live_data a, music_data b where a.music_data_id = b.id"
+        do {
+            let set = try self.executeQuery(selectSql, values: nil)
+            while set.next() {
+                
+                let id = Int(set.int(forColumn: "id"))
+                let musicId = Int(set.int(forColumn: "music_data_id"))
+                let musicTitle = set.string(forColumn: "name") ?? ""
+                let type = Int(set.int(forColumn: "type"))
+                let d1 = Int(set.int(forColumn: "difficulty_1"))
+                let d2 = Int(set.int(forColumn: "difficulty_2"))
+                let d3 = Int(set.int(forColumn: "difficulty_3"))
+                let d4 = Int(set.int(forColumn: "difficulty_4"))
+                let d5 = Int(set.int(forColumn: "difficulty_5"))
+                var liveDetailId = [d1, d2, d3, d4]
+                if d5 != 0 {
+                    liveDetailId.append(d5)
+                }
+                var levels = [Int: Int]()
+                for detaiId in liveDetailId {
+                    let subSql = "select * from live_detail_data where id = \(detaiId)"
+                    let subSet = try self.executeQuery(subSql, values: nil)
+                    while subSet.next() {
+                        levels[detaiId] = Int(set.int(forColumn: "level_vocal"))
+                    }
+                }
+                let debut = levels[d1] ?? 0
+                let regular = levels[d2] ?? 0
+                let pro = levels[d3] ?? 0
+                let master = levels[d4] ?? 0
+                let masterPlus = levels[d5] ?? 0
+                
+                let eventType = Int(set.int(forColumn: "event_type"))
+                let bpm = Int(set.int(forColumn: "bpm"))
+                
+                let live = CGSSLive.init(id: id, musicId: musicId, musicTitle: musicTitle, type: type, liveDetailId: liveDetailId, eventType: eventType, debut: debut, regular: regular, pro: pro, master: master, masterPlus: masterPlus, bpm: bpm)
+                
+                lives.append(live)
+            }
+        } catch {
+            print(self.lastErrorMessage())
+        }
+        return lives
+    }
+    
     func getMusicIdBy(eventId:Int) -> Int? {
         let selectSql = "select a.music_data_id, b.id from live_data a, event_data b where b.id = a.sort and b.id = \(eventId)"
         do {
@@ -420,9 +467,17 @@ class CGSSGameResource: NSObject {
             master.close()
         }
         return master.getEvents()
-        
     }
     
+    func getLive() -> [CGSSLive] {
+        guard master.open() else {
+            return [CGSSLive]()
+        }
+        defer {
+            master.close()
+        }
+        return master.getLives()
+    }
     
     
     func getCardAvailable(cardId:Int) -> (Bool, Bool, Bool, Bool) {

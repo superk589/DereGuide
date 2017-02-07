@@ -12,7 +12,7 @@ class CGSSShiftingBPMLive: CGSSLive {
     
     static func checkIsShifting(_ live:CGSSLive) -> Bool {
         let dao = CGSSDAO.sharedDAO
-        if let beatmap = dao.findBeatmapById(live.id!, diffId: live.maxDiff) {
+        if let beatmap = dao.findBeatmapById(live.id, diffId: live.maxDiff) {
             var noteIntervals = [Double]()
             for note in beatmap.validNotes {
                 var interval = Double(note.sec!.truncatingRemainder(dividingBy: live.beatSec))

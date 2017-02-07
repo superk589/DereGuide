@@ -9,13 +9,13 @@
 import UIKit
 
 protocol SongFilterSortControllerDelegate: class {
-    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter)
+    func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter)
 }
 
 class SongFilterSortController: BaseFilterSortController {
 
     weak var delegate: SongFilterSortControllerDelegate?
-    var filter: CGSSSongFilter!
+    var filter: CGSSLiveFilter!
     var sorter: CGSSSorter!
     
     var songTypeTitles = ["Cute", "Cool", "Passion", "All"]
@@ -49,8 +49,8 @@ class SongFilterSortController: BaseFilterSortController {
     }
     
     override func resetAction() {
-        filter = CGSSSorterFilterManager.DefaultFilter.song
-        sorter = CGSSSorterFilterManager.DefaultSorter.song
+        filter = CGSSSorterFilterManager.DefaultFilter.live
+        sorter = CGSSSorterFilterManager.DefaultSorter.live
         tableView.reloadData()
     }
     
@@ -75,9 +75,9 @@ class SongFilterSortController: BaseFilterSortController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: songTypeTitles, index: filter.songTypes.rawValue, all: CGSSSongTypes.allSong.rawValue)
+                cell.setup(titles: songTypeTitles, index: filter.songTypes.rawValue, all: CGSSLiveTypes.allSong.rawValue)
             case 1:
-                cell.setup(titles: eventTypeTitles, index: filter.eventTypes.rawValue, all: CGSSSongEventTypes.all.rawValue)
+                cell.setup(titles: eventTypeTitles, index: filter.eventTypes.rawValue, all: CGSSLiveEventTypes.all.rawValue)
             default:
                 break
             }
@@ -113,9 +113,9 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes.insert(CGSSSongTypes.init(rawValue: 1 << UInt(index)))
+                    filter.songTypes.insert(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
-                    filter.eventTypes.insert(CGSSSongEventTypes.init(rawValue: 1 << UInt(index)))
+                    filter.eventTypes.insert(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -129,9 +129,9 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes.remove(CGSSSongTypes.init(rawValue: 1 << UInt(index)))
+                    filter.songTypes.remove(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
-                    filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(index)))
+                    filter.eventTypes.remove(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -144,9 +144,9 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes = CGSSSongTypes.allSong
+                    filter.songTypes = CGSSLiveTypes.allSong
                 case 1:
-                    filter.eventTypes = CGSSSongEventTypes.all
+                    filter.eventTypes = CGSSLiveEventTypes.all
                 default:
                     break
                 }
@@ -158,9 +158,9 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes = CGSSSongTypes.init(rawValue: 0)
+                    filter.songTypes = CGSSLiveTypes.init(rawValue: 0)
                 case 1:
-                    filter.eventTypes = CGSSSongEventTypes.init(rawValue: 0)
+                    filter.eventTypes = CGSSLiveEventTypes.init(rawValue: 0)
                 default:
                     break
                 }

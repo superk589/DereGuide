@@ -22,13 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset {
-            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.song)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.char)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.card)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.teamCard)
-            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.song)
+            try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
             try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.char)
         }
         

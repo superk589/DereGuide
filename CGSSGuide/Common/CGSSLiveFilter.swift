@@ -1,5 +1,5 @@
 //
-//  CGSSSongFilter.swift
+//  CGSSLiveFilter.swift
 //  CGSSGuide
 //
 //  Created by zzk on 16/9/5.
@@ -8,23 +8,22 @@
 
 import UIKit
 
-struct CGSSSongFilter: CGSSFilter {
-    var songTypes: CGSSSongTypes
-    var eventTypes: CGSSSongEventTypes
+struct CGSSLiveFilter: CGSSFilter {
+    var songTypes: CGSSLiveTypes
+    var eventTypes: CGSSLiveEventTypes
     var searchText: String = ""
     init(typeMask: UInt, eventMask: UInt) {
-        songTypes = CGSSSongTypes.init(rawValue: typeMask)
-        eventTypes = CGSSSongEventTypes.init(rawValue: eventMask)
+        songTypes = CGSSLiveTypes.init(rawValue: typeMask)
+        eventTypes = CGSSLiveEventTypes.init(rawValue: eventMask)
     }
     
     func filter(_ list: [CGSSLive]) -> [CGSSLive] {
         let result = list.filter { (v: CGSSLive) -> Bool in
             let r1: Bool = searchText == "" ? true : {
-                let song = CGSSDAO.sharedDAO.findSongById(v.musicId!)
                 let comps = searchText.components(separatedBy: " ")
                 for comp in comps {
                     if comp == "" { continue }
-                    let b1 = song?.title?.lowercased().contains(comp.lowercased()) ?? false
+                    let b1 = v.musicTitle.lowercased().contains(comp.lowercased())
                     if b1 {
                         continue
                     } else {

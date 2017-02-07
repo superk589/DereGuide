@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SongFilterAndSorterTableViewControllerDelegate: class {
-    func doneAndReturn(_ filter: CGSSSongFilter, sorter: CGSSSorter)
+    func doneAndReturn(_ filter: CGSSLiveFilter, sorter: CGSSSorter)
 }
 
 class SongFilterAndSorterTableViewController: UITableViewController {
@@ -24,7 +24,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     
     var sortingButtons: [UIButton]!
     weak var delegate: SongFilterAndSorterTableViewControllerDelegate?
-    var filter: CGSSSongFilter!
+    var filter: CGSSLiveFilter!
     var sorter: CGSSSorter!
     // let color = UIColor.init(red: 13/255, green: 148/255, blue: 252/255, alpha: 1)
     var sorterString = ["updateId", "bpm", "maxDiffStars"]
@@ -46,7 +46,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...3 {
             let button = songTypeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.songTypes.contains(CGSSSongTypes.init(type: i))
+            button.isSelected = filter.songTypes.contains(CGSSLiveTypes.init(type: i))
         }
         
         var eventButtons = [UIButton]()
@@ -54,7 +54,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         eventButtons.append(contentsOf: eventTypeView2.subviews as! [UIButton])
         for i in 0...3 {
             let button = eventButtons[i]
-            button.isSelected = filter.eventTypes.contains(CGSSSongEventTypes.init(rawValue: 1 << UInt(i)))
+            button.isSelected = filter.eventTypes.contains(CGSSLiveEventTypes.init(rawValue: 1 << UInt(i)))
         }
         
         let ascendingbutton = ascendingStackView.subviews[1] as! UIButton
@@ -107,10 +107,10 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 1000
         if sender.isSelected {
             sender.isSelected = false
-            filter.songTypes.remove(CGSSSongTypes.init(type: tag))
+            filter.songTypes.remove(CGSSLiveTypes.init(type: tag))
         } else {
             sender.isSelected = true
-            filter.songTypes.insert(CGSSSongTypes.init(type: tag))
+            filter.songTypes.insert(CGSSLiveTypes.init(type: tag))
         }
     }
     
@@ -118,10 +118,10 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 2000
         if sender.isSelected {
             sender.isSelected = false
-            filter.eventTypes.remove(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
+            filter.eventTypes.remove(CGSSLiveEventTypes.init(rawValue: 1 << UInt(tag)))
         } else {
             sender.isSelected = true
-            filter.eventTypes.insert(CGSSSongEventTypes.init(rawValue: 1 << UInt(tag)))
+            filter.eventTypes.insert(CGSSLiveEventTypes.init(rawValue: 1 << UInt(tag)))
         }
         
     }
@@ -168,7 +168,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     }
     
     func resetAction() {
-        filter = CGSSSongFilter.init(typeMask: 0b1111, eventMask: 0b1111)
+        filter = CGSSLiveFilter.init(typeMask: 0b1111, eventMask: 0b1111)
         sorter = CGSSSorter.init(property: "updateId")
         setup()
     }

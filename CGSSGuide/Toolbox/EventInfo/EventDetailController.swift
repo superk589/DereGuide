@@ -145,7 +145,7 @@ extension EventDetailController: EventDetailViewDelegate {
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
         let dao = CGSSDAO.sharedDAO
         for i in 1...maxDiff {
-            if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
+            if let beatmap = dao.findBeatmapById(live.id, diffId: i) {
                 beatmaps.append(beatmap)
             } else {
                 let msg = NSLocalizedString("缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文")

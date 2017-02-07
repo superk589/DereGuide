@@ -76,32 +76,29 @@ class EventSongView: UIView {
     var live: CGSSLive!
     func setup(live: CGSSLive) {
         self.live = live
-        let dao = CGSSDAO.sharedDAO
-        if let song = dao.findSongById(live.musicId!) {
-            self.nameLabel.text = song.title
-            // self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
-            let descString = "bpm:\(song.bpm!)"
-            // 暂时去除时长的显示
-            //            if let beatmap = dao.findBeatmapById(live.id!, diffId: 1) {
-            //                descString += " 时长:\(Int(beatmap.totalSeconds))秒"
-            //            }
-            self.descriptionLabel.text = descString
-            self.nameLabel.textColor = live.getLiveColor()
-            self.typeIcon.image = UIImage.init(named: live.getLiveIconName())
-            
-            let diffStars = [live.debut!, live.regular!, live.pro!, live.master!, live.masterPlus!]
-            for i in 0...4 {
-                self.diffViews[i].text = "\(diffStars[i])"
-            }
-            if live.masterPlus != 0 {
-                self.diffViews[4].isHidden = false
-            } else {
-                self.diffViews[4].isHidden = true
-            }
-            
-            if let url = live.musicRef?.jacketURL {
-                self.jacketImageView.sd_setImage(with: url)
-            }
+        self.nameLabel.text = live.musicTitle
+        // self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
+        let descString = "bpm:\(live.bpm)"
+        // 暂时去除时长的显示
+        //            if let beatmap = dao.findBeatmapById(live.id!, diffId: 1) {
+        //                descString += " 时长:\(Int(beatmap.totalSeconds))秒"
+        //            }
+        self.descriptionLabel.text = descString
+        self.nameLabel.textColor = live.getLiveColor()
+        self.typeIcon.image = UIImage.init(named: live.getLiveIconName())
+        
+        let diffStars = [live.debut, live.regular, live.pro, live.master, live.masterPlus]
+        for i in 0...4 {
+            self.diffViews[i].text = "\(diffStars[i])"
+        }
+        if live.masterPlus != 0 {
+            self.diffViews[4].isHidden = false
+        } else {
+            self.diffViews[4].isHidden = true
+        }
+        
+        if let url = live.jacketURL {
+            self.jacketImageView.sd_setImage(with: url)
         }
     }
 

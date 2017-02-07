@@ -26,11 +26,10 @@ public enum CGSSDataKey: String {
     case leaderSkill = "leader_skill"
     case cardIcon = "card_icon"
     case live = "live"
-    case song = "song"
     case beatmap = "beatmap"
     case storyEpisode = "story_episode"
     case storyContent = "story_content"
-    static let allValues = [skill, card, char, leaderSkill, cardIcon, live, song, beatmap, storyEpisode, storyContent]
+    static let allValues = [skill, card, char, leaderSkill, cardIcon, live, beatmap, storyEpisode, storyContent]
 }
 
 struct DataPath {
@@ -48,7 +47,6 @@ open class CGSSDAO: NSObject {
     open lazy var leaderSkillDict = CGSSDAO.loadDataFromFile(.leaderSkill)
     open lazy var charDict = CGSSDAO.loadDataFromFile(.char)
     open lazy var cardIconDict = CGSSDAO.loadDataFromFile(.cardIcon)
-    open lazy var songDict = CGSSDAO.loadDataFromFile(.song)
     open lazy var storyEpisodeDict = CGSSDAO.loadDataFromFile(.storyEpisode)
     open lazy var storyContentDict = CGSSDAO.loadDataFromFile(.storyContent)
     open lazy var liveDict = CGSSDAO.loadDataFromFile(.live)
@@ -60,14 +58,14 @@ open class CGSSDAO: NSObject {
     open var validLiveDict: [String: CGSSLive] {
         var lives = [String: CGSSLive]()
         for live in liveDict.allValues as! [CGSSLive] {
-            if [1018].contains(live.musicId!) { continue }
-            if [514].contains(live.id!) { continue }
-            if lives.keys.contains(String(live.musicId!)) {
-                if lives[String(live.musicId!)]!.eventType < live.eventType! {
-                    lives[String(live.musicId!)] = live
+            if [1018].contains(live.musicId) { continue }
+            if [514].contains(live.id) { continue }
+            if lives.keys.contains(String(live.musicId)) {
+                if lives[String(live.musicId)]!.eventType < live.eventType {
+                    lives[String(live.musicId)] = live
                 }
             } else {
-                lives[String(live.musicId!)] = live
+                lives[String(live.musicId)] = live
             }
         }
         return lives
@@ -90,8 +88,6 @@ open class CGSSDAO: NSObject {
             return self.charDict
         case .leaderSkill:
             return self.leaderSkillDict
-        case .song:
-            return self.songDict
         case .live:
             return self.liveDict
         case .storyEpisode:
@@ -202,11 +198,10 @@ open class CGSSDAO: NSObject {
     // 根据名字搜索live
     func getLiveListByName(_ liveList: [CGSSLive], string: String) -> [CGSSLive] {
         return liveList.filter({ (v: CGSSLive) -> Bool in
-            let song = findSongById(v.musicId!)
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
-                let b1 = song?.title?.lowercased().contains(comp.lowercased()) ?? false
+                let b1 = v.musicTitle.lowercased().contains(comp.lowercased()) 
                 if b1 {
                     continue
                 } else {
@@ -288,19 +283,6 @@ open class CGSSDAO: NSObject {
         
     }
     
-    /*func prepareDefaultData() {
-     let nfd = NSFileManager.defaultManager()
-     for dataKey in CGSSDataKey.allValues {
-     if !nfd.fileExistsAtPath(CGSSDAO.path + "/Data/\(dataKey.rawValue).plist") {
-     do {
-     let srcPath = NSBundle.mainBundle().pathForResource(dataKey.rawValue, ofType: "plist")
-     try nfd.moveItemAtPath(srcPath!, toPath: CGSSDAO.path + "/Data/\(dataKey.rawValue).plist")
-     } catch {
-     // print(error)
-     }
-     }
-     }
-     }*/
     
     // 异步存储全部数据
     func saveAll(_ complete: (() -> Void)?) {
@@ -356,10 +338,6 @@ open class CGSSDAO: NSObject {
         return cards
     }
     
-    open func findSongById(_ id: Int) -> CGSSSong? {
-        return self.songDict.object(forKey: String(id)) as? CGSSSong
-    }
-    
     open func findLiveById(_ id: Int) -> CGSSLive? {
         return self.liveDict.object(forKey: String(id)) as? CGSSLive
     }
@@ -389,25 +367,6 @@ open class CGSSDAO: NSObject {
         return fm.fileExists(atPath: path)
     }
     
-    func findStoryEpisodeById(_ id: Int) -> CGSSStoryEpisode? {
-        return self.storyEpisodeDict.object(forKey: String(id)) as? CGSSStoryEpisode
-    }
-    
-    func findStoryContentById(_ id: Int) -> CGSSStoryContent? {
-        return self.storyContentDict.object(forKey: String(id)) as? CGSSStoryContent
-    }
-    
-//    public func findLivebySongId(id:Int) -> CGSSLive? {
-//        var result:CGSSLive?
-//        //如果同时有event版本和常规版本的歌曲 优先选择event版本
-//        for v in self.liveDict.allValues {
-//            let live = v as? CGSSLive
-//            if live?.musicId == id && ((live?.eventType ?? 0) >= (result?.eventType ?? 0)) {
-//                result = live
-//            }
-//        }
-//        return result
-//    }
     
     func getRankInAll(_ card: CGSSCard) -> [Int] {
         // let vocal = card.vocal
@@ -449,27 +408,5 @@ open class CGSSDAO: NSObject {
         }
         return rank
     }
-    
-//    func getIconFromCardId(id:Int) -> UIImage? {
-//        let dao = CGSSDAO.sharedDAO
-//        let cardIcon = dao.cardIconDict.objectForKey(String(id)) as? CGSSCardIcon
-//        if let iconFile = cardIcon?.file_name {
-//            let path = CGSSDAO.path + "/Icons/" + iconFile
-//            let image = UIImage(contentsOfFile: path)
-//            if let cgRef = image?.CGImage {
-//                let iconRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(96 * CGFloat(cardIcon!.col!), 96 * CGFloat(cardIcon!.row!) as CGFloat, 96, 96))
-//                let icon = UIImage.init(CGImage: iconRef!)
-//                return icon
-//            } else {
-//                let updater = CGSSUpdater.defaultUpdater
-//                updater.iconsNeedUpdate.append((cardIcon?.url)!)
-//                updater.updateIconImageData()
-//                return nil
-//            }
-//        } else {
-//            return nil
-//        }
-//    }
-    
 }
 

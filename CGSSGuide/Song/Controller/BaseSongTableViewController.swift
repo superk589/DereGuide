@@ -17,18 +17,18 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
         get {
-            return CGSSSorterFilterManager.default.songSorter
+            return CGSSSorterFilterManager.default.liveSorter
         }
         set {
-            CGSSSorterFilterManager.default.songSorter = newValue
+            CGSSSorterFilterManager.default.liveSorter = newValue
         }
     }
-    var filter: CGSSSongFilter {
+    var filter: CGSSLiveFilter {
         get {
-            return CGSSSorterFilterManager.default.songFilter
+            return CGSSSorterFilterManager.default.liveFilter
         }
         set {
-            CGSSSorterFilterManager.default.songFilter = newValue
+            CGSSSorterFilterManager.default.liveFilter = newValue
         }
     }
     var filterVC: SongFilterSortController!
@@ -169,7 +169,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
         let dao = CGSSDAO.sharedDAO
         for i in 1...maxDiff {
-            if let beatmap = dao.findBeatmapById(live.id!, diffId: i) {
+            if let beatmap = dao.findBeatmapById(live.id, diffId: i) {
                 beatmaps.append(beatmap)
             } else {
                 let msg = NSLocalizedString("缺少难度为%@的歌曲,建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文")
@@ -194,10 +194,10 @@ extension BaseSongTableViewController: SongTableViewCellDelegate {
 
 
 extension BaseSongTableViewController: SongFilterSortControllerDelegate {
-    func doneAndReturn(filter: CGSSSongFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.default.songFilter = filter
-        CGSSSorterFilterManager.default.songSorter = sorter
-        CGSSSorterFilterManager.default.saveForSong()
+    func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.liveFilter = filter
+        CGSSSorterFilterManager.default.liveSorter = sorter
+        CGSSSorterFilterManager.default.saveForLive()
         refresh()
     }
 }

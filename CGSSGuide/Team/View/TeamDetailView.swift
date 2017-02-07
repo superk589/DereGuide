@@ -669,14 +669,13 @@ class TeamDetailView: UIView {
     func updateSongInfo(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
         // selectSongLabel.hidden = true
         selectSongLabel.text = ""
-        let song = live.musicRef!
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(song.bpm!) notes: \(beatmaps[diff-1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[diff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
+        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(live.bpm) notes: \(beatmaps[diff-1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[diff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
-        songNameLabel.text = live.musicRef?.title
+        songNameLabel.text = live.musicTitle
         songNameLabel.textColor = live.getLiveColor()
         // songLengthLabel.text = String(Int(beatmaps[diff - 1].totalSeconds)) + "秒"
-        if let url = live.musicRef?.jacketURL {
+        if let url = live.jacketURL {
             songJacket.sd_setImage(with: url)
         }
     }

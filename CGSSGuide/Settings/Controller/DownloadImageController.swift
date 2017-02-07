@@ -261,8 +261,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             // 所有歌曲封面图
             let lives = Array(CGSSDAO.sharedDAO.validLiveDict.values)
             for live in lives {
-                let song = CGSSDAO.sharedDAO.findSongById(live.musicId!)
-                if let url = song?.jacketURL {
+                if let url = live.jacketURL {
                     self.jacketTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
                         if !isInCache {

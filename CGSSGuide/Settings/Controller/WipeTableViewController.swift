@@ -58,7 +58,6 @@ class WipeTableViewController: BaseTableViewController {
                         self.wipeSong()
                         let dao = CGSSDAO.sharedDAO
                         dao.getDictForKey(.live).removeAllObjects()
-                        dao.getDictForKey(.song).removeAllObjects()
                     case 4:
                         self.wipeUserDocuments()
                     case 5:
