@@ -14,7 +14,7 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
-    var defualtLiveList = CGSSGameResource.shared.getLives()
+    lazy var defualtLiveList = CGSSGameResource.shared.getLives()
     var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
         get {
@@ -41,6 +41,12 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         sorter.sortList(&self.liveList)
         tableView.reloadData()
     }
+    
+    func reloadData() {
+        defualtLiveList = CGSSGameResource.shared.getLives()
+        refresh()
+    }
+    
     func cancelAction() {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -84,7 +90,12 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
-
+        
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+    }
+    
+    deinit {
+        CGSSNotificationCenter.removeAll(self)
     }
     
     func filterAction() {

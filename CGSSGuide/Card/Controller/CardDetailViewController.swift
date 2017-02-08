@@ -73,8 +73,8 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
     }
     
     func prepareToolbar() {
-        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
-        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
+//        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let item2 = UIBarButtonItem.init(title: NSLocalizedString("卡片图", comment: ""), style: .plain, target: self, action: #selector(showCardImageAction))
         let spaceItem2 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let item3 = UIBarButtonItem.init(title: NSLocalizedString("签名图", comment: ""), style: .plain, target: self, action: #selector(showSignImageAction))
@@ -82,7 +82,7 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         if card.signImageURL == nil {
             item3.isEnabled = false
         }
-        toolbarItems = [item1, spaceItem1, item2, spaceItem2, item3]
+        toolbarItems = [item2, spaceItem2, item3]
         
     }
     func backAction() {

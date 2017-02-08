@@ -331,7 +331,7 @@ class Master: FMDatabase {
     
     func getLives() -> [CGSSLive] {
         var lives = [CGSSLive]()
-        let selectSql = "select a.*, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id"
+        let selectSql = "select a.id, max(a.event_type) event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, a.difficulty_5,a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id group by music_data_id"
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
@@ -365,6 +365,9 @@ class Master: FMDatabase {
                 
                 let eventType = Int(set.int(forColumn: "event_type"))
                 let bpm = Int(set.int(forColumn: "bpm"))
+                
+                // 去掉一些无效数据
+                if [1901].contains(musicId) { continue }
                 
                 let live = CGSSLive.init(id: id, musicId: musicId, musicTitle: musicTitle, type: type, liveDetailId: liveDetailId, eventType: eventType, debut: debut, regular: regular, pro: pro, master: master, masterPlus: masterPlus, bpm: bpm)
                 
@@ -479,11 +482,13 @@ class CGSSGameResource: NSObject {
     }
     
     func checkMasterExistence() -> Bool {
-        return FileManager.default.fileExists(atPath: CGSSGameResource.masterPath)
+        let fm = FileManager.default
+        return fm.fileExists(atPath: CGSSGameResource.masterPath) && (NSData.init(contentsOfFile: CGSSGameResource.masterPath)?.length ?? 0) > 0
     }
     
     func checkManifestExistence() -> Bool {
-        return FileManager.default.fileExists(atPath: CGSSGameResource.manifestPath)
+        let fm = FileManager.default
+        return fm.fileExists(atPath: CGSSGameResource.manifestPath) && (NSData.init(contentsOfFile: CGSSGameResource.manifestPath)?.length ?? 0) > 0
     }
     
     func getMasterHash() -> String? {
@@ -628,16 +633,18 @@ class CGSSGameResource: NSObject {
     
     func getBeatmaps(liveId: Int) -> [CGSSBeatmap]? {
         let path = String.init(format: DataPath.beatmap, liveId)
-        if let fmdb = MusicScoreDB.init(path: path) {
-            guard fmdb.open() else {
-                return nil
+        let fm = FileManager.default
+        if fm.fileExists(atPath: path) {
+            if let fmdb = MusicScoreDB.init(path: path) {
+                guard fmdb.open() else {
+                    return nil
+                }
+                defer {
+                    fmdb.close()
+                }
+                return fmdb.getBeatmaps()
             }
-            defer {
-                fmdb.close()
-            }
-            return fmdb.getBeatmaps()
-        } else {
-            return nil
         }
+        return nil
     }
 }

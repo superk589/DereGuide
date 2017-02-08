@@ -26,13 +26,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
-		<string>3</string>
+		<string>4</string>
 		<key>Minor</key>
-		<string>1</string>
+		<string>0</string>
 	</dict>
 	<key>Document Version</key>
 	<integer>2</integer>

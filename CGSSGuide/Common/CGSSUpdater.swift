@@ -13,7 +13,7 @@ struct DataURL {
     static let EnglishDatabase = "https://starlight.kirara.ca"
     static let ChineseDatabase = "http://starlight.346lab.org"
     static let Images = "https://hoshimoriuta.kirara.ca"
-    static let manifest = "https://storages.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
+    static let manifest = "https://storages.game.starlight-stage.jp/dl/%d/manifests/iOS_AHigh_SHigh"
     static let master = "https://storages.game.starlight-stage.jp/dl/resources/Generic//%@"
     static let musicScore = DataURL.master
 }
