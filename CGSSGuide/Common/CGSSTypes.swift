@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CGSSSkillTypes:OptionSet {
+struct CGSSSkillTypes: OptionSet {
     let rawValue:UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let comboBonus = CGSSSkillTypes.init(rawValue: 1 << 0)
@@ -18,8 +18,9 @@ struct CGSSSkillTypes:OptionSet {
     static let comboContinue = CGSSSkillTypes.init(rawValue: 1 << 4)
     static let heal = CGSSSkillTypes.init(rawValue: 1 << 5)
     static let `guard` = CGSSSkillTypes.init(rawValue: 1 << 6)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 7)
-    static let all = CGSSSkillTypes.init(rawValue: 0b11111111)
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 7)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 8)
+    static let all = CGSSSkillTypes.init(rawValue: 0b111111111)
     init (typeString: String) {
         switch typeString {
         case "COMBO加成":
@@ -36,8 +37,10 @@ struct CGSSSkillTypes:OptionSet {
             self = .guard
         case "过载":
             self = .overload
-        default:
+        case "":
             self = .none
+        default:
+            self = .unknown
         }
     }
     func toString() -> String {
@@ -58,8 +61,10 @@ struct CGSSSkillTypes:OptionSet {
             return NSLocalizedString("过载", comment: "")
         case CGSSSkillTypes.all:
             return NSLocalizedString("全部", comment: "")
-        default:
+        case CGSSSkillTypes.none:
             return NSLocalizedString("无", comment: "")
+        default:
+            return NSLocalizedString("未知", comment: "")
         }
     }
 }

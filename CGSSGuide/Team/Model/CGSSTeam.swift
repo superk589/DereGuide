@@ -57,6 +57,16 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
+    func hasUnknownSkills() -> Bool {
+        for i in 0...5 {
+            if let type = self[i]?.cardRef?.skillType, type == .unknown {
+                return true
+            }
+        }
+        return false
+    }
+
+    
     // 队伍原始值
     var rawPresentValue: CGSSAttributeValue {
         let attValue = CGSSAttributeValue.init(visual: rawVisual, vocal: rawVocal, dance: rawDance, life: rawHP)

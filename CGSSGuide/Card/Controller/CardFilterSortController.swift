@@ -31,6 +31,7 @@ class CardFilterSortController: BaseFilterSortController {
         CGSSSkillTypes.comboContinue.toString(),
         CGSSSkillTypes.heal.toString(),
         CGSSSkillTypes.guard.toString(),
+        CGSSSkillTypes.unknown.toString(),
         CGSSSkillTypes.none.toString()
     ]
     

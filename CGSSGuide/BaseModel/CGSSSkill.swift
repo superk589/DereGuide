@@ -190,6 +190,10 @@ class CGSSSkill: CGSSBaseModel {
         skillTriggerType = json["skill_trigger_type"].intValue
         skillTriggerValue = json["skill_trigger_value"].intValue
         skillType = json["skill_type"].stringValue
+        if skillType == "" {
+            skillType = NSLocalizedString("未知", comment: "")
+        }
+
         value = json["value"].intValue
     }
     
@@ -213,7 +217,7 @@ class CGSSSkill: CGSSBaseModel {
         skillName = aDecoder.decodeObject(forKey: "skill_name") as? String
         skillTriggerType = aDecoder.decodeObject(forKey: "skill_trigger_type") as? Int
         skillTriggerValue = aDecoder.decodeObject(forKey: "skill_trigger_value") as? Int
-        skillType = aDecoder.decodeObject(forKey: "skill_type") as? String
+        skillType = aDecoder.decodeObject(forKey: "skill_type") as? String ?? NSLocalizedString("未知", comment: "")
         value = aDecoder.decodeObject(forKey: "value") as? Int
         
     }

@@ -338,7 +338,7 @@ class Master: FMDatabase {
                 
                 let id = Int(set.int(forColumn: "id"))
                 let musicId = Int(set.int(forColumn: "music_data_id"))
-                let musicTitle = set.string(forColumn: "name") ?? ""
+                let musicTitle = set.string(forColumn: "name")?.replacingOccurrences(of: "\\n", with: "") ?? ""
                 let type = Int(set.int(forColumn: "type"))
                 let d1 = Int(set.int(forColumn: "difficulty_1"))
                 let d2 = Int(set.int(forColumn: "difficulty_2"))

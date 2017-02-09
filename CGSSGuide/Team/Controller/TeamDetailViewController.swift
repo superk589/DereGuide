@@ -138,6 +138,11 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     func startCalc() {
         if let live = self.live, let diff = self.diff {
             self.teamDV.clearScoreGrid()
+            if team.hasUnknownSkills() {
+                let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
             let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff)
             if usingManualValue {
                 self.teamDV.updateSimulatorPresentValue(team.manualValue)

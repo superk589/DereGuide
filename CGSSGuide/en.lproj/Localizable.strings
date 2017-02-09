@@ -164,7 +164,7 @@
 
 /* 弹出框标题
  设置页面 */
-"提示" = "Error";
+"提示" = "Attention";
 
 /* 弹出框正文 */
 "数据主版本过低，请点击确定开始更新" = "Local data needs to be updated. Press OK to update.";
@@ -556,4 +556,6 @@
 "卡池封面" = "Gacha Banner";
 
 "未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。" = "Can't find the beatmap. If an update is in progress, please wait for it to complete, or pull down to update manually.";
+
+"队伍中存在未知的技能类型，计算结果可能不准确。" = "There are unknown skills in the team, calculation results may not be accurate.";
 
