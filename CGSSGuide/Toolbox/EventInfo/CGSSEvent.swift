@@ -28,7 +28,14 @@ extension CGSSEvent {
         }
     }
     var live: CGSSLive? {
-        return CGSSGameResource.shared.getLiveBy(id: liveId)
+        let semaphore = DispatchSemaphore.init(value: 0)
+        var result: CGSSLive?
+        CGSSGameResource.shared.master.getLiveBy(id: liveId) { (returnValue) in
+            result = returnValue
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
     }
     
     var isOnGoing: Bool {

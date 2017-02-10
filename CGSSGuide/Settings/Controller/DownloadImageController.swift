@@ -259,44 +259,47 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             }
             
             // 所有歌曲封面图
-            let lives = CGSSGameResource.shared.getLives()
-            for live in lives {
-                if let url = live.jacketURL {
-                    self.jacketTotal.append(url)
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.jacketNeedToDownload.append(url)
-                        }
-                    })
+            CGSSGameResource.shared.master.getLives(callback: { (lives) in
+                for live in lives {
+                    if let url = live.jacketURL {
+                        self.jacketTotal.append(url)
+                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                            if !isInCache {
+                                self.jacketNeedToDownload.append(url)
+                            }
+                        })
+                    }
                 }
-            }
+            })
             
-            let events = CGSSGameResource.shared.getEvent()
-            for event in events {
-                if let url = event.detailBannerURL {
-                    self.eventTotal.append(url)
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.eventNeedToDownload.append(url)
-                        }
-                    })
-
-                }
-            }
             
-            let gachaPools = CGSSGameResource.shared.getGachaPool()
-            for gachaPool in gachaPools {
-                if let url = gachaPool.detailBannerURL {
-                    self.gachaTotal.append(url)
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.gachaNeedToDownload.append(url)
-                        }
-                    })
-                    
+            CGSSGameResource.shared.master.getEvents(callback: { (events) in
+                for event in events {
+                    if let url = event.detailBannerURL {
+                        self.eventTotal.append(url)
+                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                            if !isInCache {
+                                self.eventNeedToDownload.append(url)
+                            }
+                        })
+                        
+                    }
                 }
-            }
-
+            })
+            
+            CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
+                for gachaPool in pools {
+                    if let url = gachaPool.detailBannerURL {
+                        self.gachaTotal.append(url)
+                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                            if !isInCache {
+                                self.gachaNeedToDownload.append(url)
+                            }
+                        })
+                        
+                    }
+                }
+            })
         }
     }
     func removeAllURLs() {

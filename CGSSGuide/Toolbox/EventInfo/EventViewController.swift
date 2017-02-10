@@ -11,7 +11,7 @@ import ZKDrawerController
 
 class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate {
 
-    var defaultList = CGSSGameResource.shared.getEvent()
+    var defaultList: [CGSSEvent]!
     var eventList = [CGSSEvent]()
     var filterVC: EventFilterSortController!
     var filter: CGSSEventFilter {
@@ -34,7 +34,6 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        eventList = defaultList
         tableView.register(EventTableViewCell.self, forCellReuseIdentifier: "EventCell")
         tableView.estimatedRowHeight = EventTableViewCell.estimatedHeight
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
@@ -50,7 +49,20 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         filterVC.delegate = self
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
-        
+        self.reloadData()
+    }
+    
+    func reloadData() {
+        CGSSLoadingHUDManager.default.show()
+        DispatchQueue.global(qos: .userInitiated).async {
+            CGSSGameResource.shared.master.getEvents(callback: { (events) in
+                self.defaultList = events
+                DispatchQueue.main.async {
+                    CGSSLoadingHUDManager.default.hide()
+                    self.refresh()
+                }
+            })
+        }
     }
     
     func backAction() {
@@ -85,8 +97,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CGSSNotificationCenter.add(self, selector: #selector(refresh), name: CGSSNotificationCenter.updateEnd, object: nil)
-        refresh()
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

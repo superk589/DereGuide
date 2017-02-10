@@ -36,16 +36,6 @@ extension CGSSCard {
         }
     }
     
-    // 四个数值依次表示 活动 常规卡池 限定卡池 fes限定卡池
-    // 效率问题 查单卡时使用
-    var available:(Bool, Bool, Bool, Bool) {
-        var result = CGSSGameResource.shared.getCardAvailable(cardId: self.id)
-        if result.2 || result.3 {
-            result.1 = false
-        }
-        return result
-    }
-    
     var gachaType:CGSSAvailableTypes {
         var type: CGSSAvailableTypes
         if availableType != nil {

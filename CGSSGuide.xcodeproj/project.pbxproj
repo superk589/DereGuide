@@ -141,6 +141,7 @@
 		12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */; };
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
+		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
 		12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABA1E2CBADA0009986F /* EventSongView.swift */; };
@@ -338,6 +339,8 @@
 		12AF95311D65E445009058D5 /* CGSSStoryEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryEpisode.swift; sourceTree = "<group>"; };
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
+		12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		12D45AB81E2CB5560009986F /* EventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
 		12D45ABA1E2CBADA0009986F /* EventSongView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSongView.swift; sourceTree = "<group>"; };
@@ -381,6 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */,
 				323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */,
 				12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */,
 			);
@@ -726,6 +730,7 @@
 				1244F59E1D9814350021E4B1 /* Localizable.strings */,
 				1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */,
 				12A71D911D8C20260021320D /* CGSSGuide.entitlements */,
+				12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */,
 				1244F5E71D98E6210021E4B1 /* ToolboxList.plist */,
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
 			);
@@ -846,6 +851,7 @@
 		C670F2DE7E4FDF80136AB4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */,
 				12312E4E1DA527820088FE27 /* StoreKit.framework */,
 				22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */,
 			);
@@ -1338,7 +1344,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CGSSGuide/Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1369,7 +1375,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CGSSGuide/Bridge-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

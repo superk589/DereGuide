@@ -14,7 +14,16 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
-    lazy var defualtLiveList = CGSSGameResource.shared.getLives()
+    lazy var defualtLiveList: [CGSSLive] = {
+        var result = [CGSSLive]()
+        let semaphore = DispatchSemaphore.init(value: 0)
+        CGSSGameResource.shared.master.getLives(callback: { (lives) in
+            result = lives
+            semaphore.signal()
+        })
+        semaphore.wait()
+        return result
+    }()
     var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
         get {
@@ -43,8 +52,10 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     }
     
     func reloadData() {
-        defualtLiveList = CGSSGameResource.shared.getLives()
-        refresh()
+        CGSSGameResource.shared.master.getLives { (lives) in
+            self.defualtLiveList = lives
+            self.refresh()
+        }
     }
     
     func cancelAction() {

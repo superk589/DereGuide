@@ -30,10 +30,18 @@ class CGSSTeam: NSObject, NSCoding {
     var manualValue: Int!
     var backSupportValue: Int!
     var testLive: CGSSLive? {
+        var result: CGSSLive?
+        let semaphore = DispatchSemaphore.init(value: 0)
         if let id = testLiveId {
-            return CGSSGameResource.shared.getLiveBy(id: id)
+            CGSSGameResource.shared.master.getLiveBy(id: id, callback: { (live) in
+                result = live
+                semaphore.signal()
+            })
+        } else {
+            semaphore.signal()
         }
-        return nil
+        semaphore.wait()
+        return result
     }
     var testLiveId: Int?
     var testDiff: Int?

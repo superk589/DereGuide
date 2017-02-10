@@ -75,51 +75,25 @@ extension CGSSChar {
     
     // 一些属性的特殊转换
     var handToString: String {
-        return CGSSGameResource.shared.getTextData(category: 5, index: hand - 3000)
-//        if hand == 3001 {
-//            return "右"
-//        } else if hand == 3002 {
-//            return "左"
-//        } else if hand == 3003 {
-//            return "两手"
-//        } else {
-//            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
-//        }
+        let semaphore = DispatchSemaphore.init(value: 0)
+        var resultString = ""
+        CGSSGameResource.shared.master.selectTextBy(category: 5, index: hand - 3000) { (result) in
+            resultString = result
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return resultString
     }
     
     var constellationToString: String {
-        return CGSSGameResource.shared.getTextData(category: 4, index: constellation - 1000)
-//        switch constellation {
-//            
-//        case 1001:
-//            return "金牛座"
-//        case 1002:
-//            return "白羊座"
-//        case 1003:
-//            return "天秤座"
-//        case 1004:
-//            return "水瓶座"
-//        case 1005:
-//            return "双鱼座"
-//        case 1006:
-//            return "处女座"
-//        case 1007:
-//            return "魔羯座"
-//        case 1008:
-//            return "双子座"
-//        case 1009:
-//            return "天蝎座"
-//        case 1010:
-//            return "射手座"
-//        case 1011:
-//            return "狮子座"
-//        case 1012:
-//            return "巨蟹座"
-//        case 1013:
-//            return "花も恥じらう乙女座"  //双叶杏的特殊星座
-//        default:
-//            return NSLocalizedString("不明", comment: "通用, 通常不会出现, 为一些未知字符串预留")
-//        }
+        let semaphore = DispatchSemaphore.init(value: 0)
+        var resultString = ""
+        CGSSGameResource.shared.master.selectTextBy(category: 4, index: constellation - 1000) { (result) in
+            resultString = result
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return resultString
     }
     
     var bloodTypeToString: String {
@@ -134,14 +108,28 @@ extension CGSSChar {
     
     var weightToString: String {
         if weight > 5000 {
-            return CGSSGameResource.shared.getTextData(category: 6, index: weight - 5000)
+            var result = ""
+            let semaphore = DispatchSemaphore.init(value: 0)
+            CGSSGameResource.shared.master.selectTextBy(category: 6, index: weight - 5000, callback: { (text) in
+                result = text
+                semaphore.signal()
+            })
+            semaphore.wait()
+            return result
         } else {
             return String(weight) + "kg"
         }
     }
     
     var homeTownToString:String {
-        return CGSSGameResource.shared.getTextData(category: 2, index: homeTown)
+        var result = ""
+        let semaphore = DispatchSemaphore.init(value: 0)
+        CGSSGameResource.shared.master.selectTextBy(category: 2, index: homeTown) { (text) in
+            result = text
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
     }
     
     var threeSizeToString: String {
@@ -150,7 +138,14 @@ extension CGSSChar {
     
     func getSizeString(_ size: Int) -> String {
         if size - 5000 > 0 {
-            return CGSSGameResource.shared.getTextData(category: 6, index: size - 5000)
+            var result = ""
+            let semaphore = DispatchSemaphore.init(value: 0)
+            CGSSGameResource.shared.master.selectTextBy(category: 6, index: size - 5000, callback: { (text) in
+                result = text
+                semaphore.signal()
+            })
+            semaphore.wait()
+            return result
         } else {
             return String(size)
         }
@@ -158,7 +153,14 @@ extension CGSSChar {
     
     var ageToString: String {
         if age - 5000 > 0  {
-            return "\(CGSSGameResource.shared.getTextData(category: 6, index: age - 5000))\(NSLocalizedString("岁", comment: "角色年龄"))"
+            var result = ""
+            let semaphore = DispatchSemaphore.init(value: 0)
+            CGSSGameResource.shared.master.selectTextBy(category: 6, index: age - 5000, callback: { (text) in
+                result = text
+                semaphore.signal()
+            })
+            semaphore.wait()
+            return "\(result)\(NSLocalizedString("岁", comment: "角色年龄"))"
         } else {
             return "\(age!)\(NSLocalizedString("岁", comment: "角色年龄"))"
         }

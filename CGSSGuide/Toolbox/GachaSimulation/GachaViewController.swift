@@ -11,7 +11,8 @@ import ZKDrawerController
 
 class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, GachaFilterSortControllerDelegate {
     
-    lazy var defaultList = CGSSGameResource.shared.getGachaPool()
+    var defaultList: [CGSSGachaPool]!
+    
     var poolList = [CGSSGachaPool]()
     
     var filterVC: GachaFilterSortController!
@@ -51,7 +52,7 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
         filterVC.delegate = self
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
-        refresh()
+        reloadData()
         
     }
     
@@ -80,13 +81,16 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
         self.refresh()
     }
     
-    func updateData() {
+    func reloadData() {
+        CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async {
-            self.defaultList = CGSSGameResource.shared.getGachaPool()
-            DispatchQueue.main.async {
-                CGSSLoadingHUDManager.default.hide()
-                self.refresh()
-            }
+            CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
+                self.defaultList = pools
+                DispatchQueue.main.async {
+                    CGSSLoadingHUDManager.default.hide()
+                    self.refresh()
+                }
+            })
         }
     }
     override func didReceiveMemoryWarning() {
@@ -96,7 +100,7 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CGSSNotificationCenter.add(self, selector: #selector(updateData), name: CGSSNotificationCenter.updateEnd, object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,16 +118,10 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     }
     
     override func refresh() {
-        CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.filter.searchText = self.searchBar.text ?? ""
-            self.poolList = self.filter.filter(self.defaultList)
-            self.sorter.sortList(&self.poolList)
-            DispatchQueue.main.async {
-                CGSSLoadingHUDManager.default.hide()
-                self.tableView.reloadData()
-            }
-        }
+        self.filter.searchText = self.searchBar.text ?? ""
+        self.poolList = self.filter.filter(self.defaultList)
+        self.sorter.sortList(&self.poolList)
+        self.tableView.reloadData()
     }
     
     override func refresherValueChanged() {

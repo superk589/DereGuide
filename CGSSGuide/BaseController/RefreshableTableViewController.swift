@@ -54,7 +54,6 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                     self.tabBarController?.present(alert, animated: true, completion: nil)
                     self.updateStatusView.isHidden = true
-                    self.refresh()
                 })
             }
         })
@@ -100,6 +99,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         updater.cancelCurrentSession()
     }
     
+    /// called after search text changed
     func refresh() {
         // to override
     }
