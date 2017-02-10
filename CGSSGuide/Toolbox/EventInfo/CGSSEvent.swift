@@ -30,8 +30,8 @@ extension CGSSEvent {
     var live: CGSSLive? {
         let semaphore = DispatchSemaphore.init(value: 0)
         var result: CGSSLive?
-        CGSSGameResource.shared.master.getLiveBy(id: liveId) { (returnValue) in
-            result = returnValue
+        CGSSGameResource.shared.master.getLives(liveId: liveId) { (lives) in
+            result = lives.first
             semaphore.signal()
         }
         semaphore.wait()

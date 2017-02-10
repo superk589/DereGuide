@@ -33,8 +33,8 @@ class CGSSTeam: NSObject, NSCoding {
         var result: CGSSLive?
         let semaphore = DispatchSemaphore.init(value: 0)
         if let id = testLiveId {
-            CGSSGameResource.shared.master.getLiveBy(id: id, callback: { (live) in
-                result = live
+            CGSSGameResource.shared.master.getLives(liveId: id, callback: { (lives) in
+                result = lives.first
                 semaphore.signal()
             })
         } else {

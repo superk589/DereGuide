@@ -11,15 +11,15 @@ import FMDB
 typealias FMDBCallBackClosure<T> = (T) -> Void
 
 class MusicScoreDB: FMDatabaseQueue {
-
+    
     func getBeatmaps(callback: @escaping FMDBCallBackClosure<[CGSSBeatmap]>) {
         inDatabase { (fmdb) in
             var beatmaps = [CGSSBeatmap]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select * from blobs where name like '%_1.csv' or name like '%_2.csv' or name like '%_3.csv' or name like '%_4.csv' or name like '%_5.csv' order by name asc"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -43,117 +43,14 @@ class MusicScoreDB: FMDatabaseQueue {
 
 class Master: FMDatabaseQueue {
     
-    func isFesGachaAvailable(cardId: Int, callback: @escaping FMDBCallBackClosure<Bool>) {
-        inDatabase { (fmdb) in
-            var result = false
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0 and reward_id = \(cardId))"
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        if set.next() {
-                            if set.int(forColumnIndex: 0) == 1 {
-                                result = true
-                            }
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
-        }
-    }
-    
-    func isTimeLimitGachaAvailable(cardId: Int, callback: @escaping FMDBCallBackClosure<Bool>) {
-        inDatabase { (fmdb) in
-            var result = false
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0 and reward_id = \(cardId))"
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        if set.next() {
-                            if set.int(forColumnIndex: 0) == 1 {
-                                result = true
-                            }
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
-        }
-    }
-    
-    func isGachaAvailable(cardId: Int, callback: @escaping FMDBCallBackClosure<Bool>) {
-        inDatabase { (fmdb) in
-            var result = false
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    
-                    let selectSql = "select exists (select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and reward_id = \(cardId))"
-                    
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        if set.next() {
-                            if set.int(forColumnIndex: 0) == 1 {
-                                result = true
-                            }
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
-        }
-    }
-    
-    func isEventAvailable(cardId: Int, callback: @escaping FMDBCallBackClosure<Bool>) {
-        inDatabase { (fmdb) in
-            var result = false
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select exists (select reward_id from event_available where reward_id = \(cardId))"
-                    
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        if set.next() {
-                            if set.int(forColumnIndex: 0) == 1 {
-                                result = true
-                            }
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
-        }
-    }
-    
     func getEventAvailableList(callback: @escaping FMDBCallBackClosure<[Int]>) {
         inDatabase { (fmdb) in
             var list = [Int]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select reward_id from event_available"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -177,10 +74,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var list = [Int]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription not like '%限定%'"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -200,10 +97,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var list = [Int]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     
                     let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0"
                     do {
@@ -224,10 +121,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var list = [Int]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -248,10 +145,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var list = [CGSSGachaPool]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and a.id like '3%' order by end_date DESC"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -291,10 +188,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var result = ""
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select * from text_data where category = \(category) and \"index\" = \(index)"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
@@ -315,10 +212,10 @@ class Master: FMDatabaseQueue {
         inDatabase { (fmdb) in
             var list = [CGSSEvent]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
                     let selectSql = "select * from event_data order by event_start asc"
                     do {
                         var grooveOrParadeCount = 0
@@ -362,7 +259,7 @@ class Master: FMDatabaseQueue {
                                 }
                             }
                             let event = CGSSEvent.init(sortId: sortId, id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards, liveId: liveId)
-                           
+                            
                             list.append(event)
                         }
                     } catch {
@@ -374,71 +271,15 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func getLiveBy(id: Int, callback: @escaping FMDBCallBackClosure<CGSSLive?>) {
-        inDatabase { (fmdb) in
-            var result: CGSSLive?
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select * from live_data a, music_data b where a.music_data_id = b.id and a.id = '\(id)'"
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        while set.next() {
-                            
-                            let id = Int(set.int(forColumn: "id"))
-                            let musicId = Int(set.int(forColumn: "music_data_id"))
-                            let musicTitle = set.string(forColumn: "name") ?? ""
-                            let type = Int(set.int(forColumn: "type"))
-                            let d1 = Int(set.int(forColumn: "difficulty_1"))
-                            let d2 = Int(set.int(forColumn: "difficulty_2"))
-                            let d3 = Int(set.int(forColumn: "difficulty_3"))
-                            let d4 = Int(set.int(forColumn: "difficulty_4"))
-                            let d5 = Int(set.int(forColumn: "difficulty_5"))
-                            var liveDetailId = [d1, d2, d3, d4]
-                            if d5 != 0 {
-                                liveDetailId.append(d5)
-                            }
-                            var levels = [Int: Int]()
-                            for detaiId in liveDetailId {
-                                let subSql = "select * from live_detail where id = \(detaiId)"
-                                let subSet = try db.executeQuery(subSql, values: nil)
-                                while subSet.next() {
-                                    levels[detaiId] = Int(set.int(forColumn: "level_vocal"))
-                                }
-                            }
-                            let debut = levels[d1] ?? 0
-                            let regular = levels[d2] ?? 0
-                            let pro = levels[d3] ?? 0
-                            let master = levels[d4] ?? 0
-                            let masterPlus = levels[d5] ?? 0
-                            
-                            let eventType = Int(set.int(forColumn: "event_type"))
-                            let bpm = Int(set.int(forColumn: "bpm"))
-                            
-                            let live = CGSSLive.init(id: id, musicId: musicId, musicTitle: musicTitle, type: type, liveDetailId: liveDetailId, eventType: eventType, debut: debut, regular: regular, pro: pro, master: master, masterPlus: masterPlus, bpm: bpm)
-                            
-                            result = live
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
-        }
-    }
-    
-    func getLives(callback: @escaping FMDBCallBackClosure<[CGSSLive]>) {
+    func getLives(liveId: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSLive]>) {
         inDatabase { (fmdb) in
             var list = [CGSSLive]()
             if let db = fmdb {
+                defer {
+                    db.close()
+                }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select a.id, max(a.event_type) event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, a.difficulty_5,a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id group by music_data_id"
+                    let selectSql = "select a.id, max(a.event_type) event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, a.difficulty_5,a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)") group by music_data_id"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
                         while set.next() {
@@ -486,30 +327,6 @@ class Master: FMDatabaseQueue {
                 }
             }
             callback(list)
-        }
-    }
-    
-    func getMusicIdBy(eventId: Int, callback: @escaping FMDBCallBackClosure<Int?>) {
-        inDatabase { (fmdb) in
-            var result: Int?
-            if let db = fmdb {
-                if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    defer {
-                        db.close()
-                    }
-                    let selectSql = "select a.music_data_id, b.id from live_data a, event_data b where b.id = a.sort and b.id = \(eventId)"
-                    do {
-                        let set = try db.executeQuery(selectSql, values: nil)
-                        while set.next() {
-                            let musicId = set.int(forColumn: "music_data_id")
-                            result = Int(musicId)
-                        }
-                    } catch {
-                        print(db.lastErrorMessage())
-                    }
-                }
-            }
-            callback(result)
         }
     }
 }
@@ -561,8 +378,8 @@ class CGSSGameResource: NSObject {
     static let manifestPath = path + "/manifest.db"
     
     lazy var master: Master = {
-        let db = Master.init(path: CGSSGameResource.masterPath)
-        return db!
+        let dbQueue = Master.init(path: CGSSGameResource.masterPath)
+        return dbQueue!
     }()
     
     lazy var manifest: Manifest = {
@@ -647,7 +464,7 @@ class CGSSGameResource: NSObject {
         semaphore.wait()
         return result
     }
-
+    
     
     func updateEnd() {
         prepareGachaList()

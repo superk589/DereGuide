@@ -50,6 +50,16 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
+        
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+    }
+    
+    deinit {
+        CGSSNotificationCenter.removeAll(self)
+    }
+    
+    func reloadData() {
+        refresh()
     }
     
     // 根据设定的筛选和排序方法重新展现数据
