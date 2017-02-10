@@ -17,16 +17,20 @@ extension String {
         return newDate
     }
     
-    func match(pattern: String) -> [String] {
+    
+    /// 获取匹配的字符串
+    ///
+    /// - Parameters:
+    ///   - pattern: regular pattern
+    ///   - index: index = 0 no capture, index = 1 the first capture, ...
+    /// - Returns: matched strings
+    func match(pattern: String, index: Int = 0) -> [String] {
         let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
         let res = regex!.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count))
-        var arr = Array<NSString>()
+        var arr = [String]()
         for checkingRes in res {
-            // has capture
-            arr.append((self as NSString).substring(with: checkingRes.rangeAt(1)) as NSString)
-            // no capture
-            //arr.append((self as NSString).substring(with: checkingRes.range) as NSString)
+            arr.append((self as NSString).substring(with: checkingRes.rangeAt(index)))
         }
-        return arr as [String]
+        return arr
     }
 }

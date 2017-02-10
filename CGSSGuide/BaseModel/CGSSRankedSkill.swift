@@ -26,8 +26,7 @@ class CGSSRankedSkill: NSObject {
     
     var explainRanked: String {
         var explain = skill.explainEn!
-        let pattern = "[0-9.]+ ~ [0-9.]+"
-        let subs = CGSSGlobal.getStringByPattern(str: explain, pattern: pattern)
+        let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
         let sub1 = subs[0]
         let range1 = explain.range(of: sub1 as String)
         explain.replaceSubrange(range1!, with: String(format: "%.2f", skill.procChanceOfLevel(level)!))

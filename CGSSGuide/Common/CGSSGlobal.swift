@@ -83,16 +83,6 @@ public class CGSSGlobal: NSObject {
     public static let fullImageWidth: CGFloat = 1280
     public static let fullImageHeight: CGFloat = 824
     
-    public static func getStringByPattern(str: String, pattern: String) -> [NSString] {
-        let regex = try? NSRegularExpression.init(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
-        let res = regex!.matches(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.characters.count))
-        var arr = Array<NSString>()
-        for checkingRes in res {
-            arr.append((str as NSString).substring(with: checkingRes.range) as NSString)
-        }
-        return arr
-    }
-    
     public static func diffStringFromInt(i: Int) -> String {
         switch i {
         case 1:

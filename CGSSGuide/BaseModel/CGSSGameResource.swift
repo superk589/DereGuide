@@ -354,7 +354,7 @@ class Manifest: FMDatabase {
         do {
             let set = try self.executeQuery(selectSql, values: nil)
             while set.next() {
-                if let name = set.string(forColumn: "name").match(pattern: "m([0-9]*)\\.").first {
+                if let name = set.string(forColumn: "name").match(pattern: "m([0-9]*)\\.", index: 1).first {
                     let hash = set.string(forColumn: "hash")
                     hashTable[name] = hash
                 }
@@ -468,7 +468,6 @@ class CGSSGameResource: NSObject {
     
     func updateEnd() {
         prepareGachaList()
-        // updateCardData()
     }
     
     // MARK: 卡池数据部分
