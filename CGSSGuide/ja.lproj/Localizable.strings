@@ -551,12 +551,12 @@
 /* 致谢页面 */
 //"数据来源：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\n技术支持：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\n封面设计：\nZXQ\n\n" = "データソース：\nhttps://starlight.kirara.ca\nhttp://starlight.hyspace.io\nhttps://deresute.info\nhttps://hoshimoriuta.kirara.ca\nhttp://imascg-slstage-wiki.gamerch.com\n----------------------------------------\nテクニカルサポート：\nChieri\nCaiMiao\nstatementreply\nSnack-X\nsummertriangle-dev\n----------------------------------------\nランディングカバーデザイン：\nZXQ\n\n";
 
-"本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。" = "本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。";
-"本程序基于MIT协议，详情请访问：" = "本程序基于MIT协议，详情请访问：";
+"本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。" = "このアプリは公式のものではありません。公式アプリ「アイドルマスターシンデレラガールズ スターライトステージ」と一切の関係はありません。利用しているゲームデータの著作権は以下の持ち主に帰属します：\nBANDAI NAMCO Entertainment Inc.\n\nアプリに利用した非公式データはインターネットから取得しています。公式の著作権に違反しない限り、ソース提供者の著作権表記を従います。\n\n本アプリは提供しているデータの信頼性を保証できません。アプリのご利用におけるリスクは使用者自身に引き受けています。";
+"本程序基于MIT协议，详情请访问：" = "このアプリはMITライセンスでライセンスされています。";
 
 "恢复失败" = "復元失敗";
 "您的当前账号未曾购买过去除广告服务。" = "あなたのApple IDは課金アイテムを購入しておりませんでした。";
-"Data Sources" = "データソース";
+"Data Sources" = "Data Sources";
 "Special Thanks to" = "Special Thanks to";
 "Copyright of Game Data" = "Copyright of Game Data";
 "Copyright of CGSSGuide" = "Copyright of CGSSGuide";
