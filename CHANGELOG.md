@@ -9,7 +9,10 @@
 4. 其他Bug修复
 
 ##### Japanese version
-
+1. イベント・ガシャページにおける時間表記のローカライズ
+2. クレジット・権利表記ページの機能向上
+3. 画像キャッシュの機能向上
+4. 他のバグ修正
 
 ##### English version
 1. Use local time instead of Tokyo time in event and gacha information page.
