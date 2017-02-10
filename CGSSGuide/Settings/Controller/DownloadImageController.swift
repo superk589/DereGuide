@@ -289,9 +289,10 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             
             CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
                 for gachaPool in pools {
-                    if let url = gachaPool.detailBannerURL {
+                    if let url = gachaPool.detailBannerURL, ![30001, 30006].contains(gachaPool.id) {
                         self.gachaTotal.append(url)
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                            // 温泉旅行和初始卡池的图片目前缺失, 故不加入待下载列表
                             if !isInCache {
                                 self.gachaNeedToDownload.append(url)
                             }
