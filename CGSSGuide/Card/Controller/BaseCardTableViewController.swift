@@ -51,7 +51,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.sorter = self.sorter
         filterVC.delegate = self
         
-        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
     }
     
     deinit {

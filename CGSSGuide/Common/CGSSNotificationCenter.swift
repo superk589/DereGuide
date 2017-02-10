@@ -10,28 +10,25 @@ import Foundation
 
 open class CGSSNotificationCenter: NSObject {
 
-    static let updateEnd = "UPDATE_END"
-    static let saveEnd = "SAVE_END"
+    static let updateEnd = Notification.Name.init("CGSS_UPDATE_END")
+    static let gameResoureceProcessedEnd = Notification.Name.init("CGSS_PROCESS_END")
+    static let saveEnd = Notification.Name.init("CGSS_SAVE_END")
     
-    open static func post( _ name:String, object: AnyObject?) {
-        let prefixedName = "CGSS_" + name
-        NotificationCenter.default.post(name: Notification.Name(rawValue: prefixedName), object: object)
+    open static func post( _ name: Notification.Name, object: AnyObject?) {
+        NotificationCenter.default.post(name: name, object: object)
     }
     
-    open static func add(_ observer: AnyObject, selector: Selector, name: String, object: AnyObject?) {
-        let prefixedName = "CGSS_" + name
-        NotificationCenter.default.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: prefixedName), object: object)
+    open static func add(_ observer: AnyObject, selector: Selector, name: Notification.Name, object: AnyObject?) {
+        NotificationCenter.default.addObserver(observer, selector: selector, name: name, object: object)
     }
-    open static func add(_ observer: AnyObject, selector: Selector, name:String, object:AnyObject?, queue: OperationQueue, using:@escaping (Notification)->Void) {
-        let prefixedName = "CGSS_" + name
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.init(rawValue: prefixedName), object: object, queue: queue, using: using)
+    open static func add(_ observer: AnyObject, selector: Selector, name: Notification.Name, object:AnyObject?, queue: OperationQueue, using:@escaping (Notification)->Void) {
+        NotificationCenter.default.addObserver(forName: name, object: object, queue: queue, using: using)
     }
     open static func removeAll(_ observer:AnyObject) {
         NotificationCenter.default.removeObserver(observer)
     }
     
-    open static func remove(_ observer:AnyObject, name: String, object: AnyObject?) {
-        let prefixedName = "CGSS_" + name
-        NotificationCenter.default.removeObserver(observer, name: NSNotification.Name(rawValue: prefixedName), object: object)
+    open static func remove(_ observer:AnyObject, name: Notification.Name, object: AnyObject?) {
+        NotificationCenter.default.removeObserver(observer, name: name, object: object)
     }
 }

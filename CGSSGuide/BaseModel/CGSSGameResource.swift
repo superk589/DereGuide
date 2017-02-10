@@ -390,7 +390,7 @@ class CGSSGameResource: NSObject {
     fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
-        self.prepareGachaList()
+        self.prepareGachaList(callback: nil)
         CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: CGSSNotificationCenter.updateEnd, object: nil)
         // self.loadAllDataFromFile()
     }
@@ -467,7 +467,13 @@ class CGSSGameResource: NSObject {
     
     
     func updateEnd() {
-        prepareGachaList()
+        prepareGachaList {
+            let list = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
+            for item in list {
+                item.availableType = nil
+            }
+            CGSSNotificationCenter.post(CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
+        }
     }
     
     // MARK: 卡池数据部分
@@ -475,18 +481,30 @@ class CGSSGameResource: NSObject {
     var gachaAvailabelList = [Int]()
     var timeLimitAvailableList = [Int]()
     var fesAvailabelList = [Int]()
-    func prepareGachaList() {
+    func prepareGachaList(callback: (() -> Void)?) {
+        let group = DispatchGroup.init()
+        group.enter()
         master.getEventAvailableList { (result) in
             self.eventAvailabelList = result
+            group.leave()
         }
+        group.enter()
         master.getGachaAvailableList { (result) in
             self.gachaAvailabelList = result
+            group.leave()
         }
+        group.enter()
         master.getTimeLimitAvailableList { (result) in
             self.timeLimitAvailableList = result
+            group.leave()
         }
+        group.enter()
         master.getFesAvailableList { (result) in
             self.fesAvailabelList = result
+            group.leave()
         }
+        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { 
+            callback?()
+        }))
     }
 }
