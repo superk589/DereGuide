@@ -132,21 +132,18 @@ class CGSSBeatmap: CGSSBaseModel {
             if note.finishPos! == 0 {
                 continue
             }
-            if note.type == 2 {
-                if positionPressed[note.finishPos! - 1] == 0 {
-                    note.longPressType = 1
-                    positionPressed[note.finishPos! - 1] = note.sec ?? 0
-                } else {
-                    note.longPressType = 2
-                    let interval = (note.sec ?? 0) - positionPressed[note.finishPos! - 1]
-                    if interval > maxLongPressInterval {
-                        maxLongPressInterval = interval
-                    }
-                    positionPressed[note.finishPos! - 1] = 0
-                }
+            if note.type == 2 && positionPressed[note.finishPos! - 1] == 0 {
+                // 长按起始点
+                note.longPressType = 1
+                positionPressed[note.finishPos! - 1] = note.sec ?? 0
             } else if positionPressed[note.finishPos! - 1] > 0 {
-                positionPressed[note.finishPos! - 1] = 0
+                // 长按结束点
                 note.longPressType = 2
+                let interval = (note.sec ?? 0) - positionPressed[note.finishPos! - 1]
+                if interval > maxLongPressInterval {
+                    maxLongPressInterval = interval
+                }
+                positionPressed[note.finishPos! - 1] = 0
             }
         }
     }

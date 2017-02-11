@@ -10,7 +10,7 @@
 
 
 ##### English version
-1. Fix a bug of "cache all images" pages displaying wrong numbers.
+1. Fix a bug of "cache all images" page displaying wrong numbers.
 2. Fix crash caused by multi-thread accessing to database.
 3. Other bugs fixed
 
