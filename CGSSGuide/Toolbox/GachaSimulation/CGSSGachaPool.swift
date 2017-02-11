@@ -146,10 +146,11 @@ class CGSSGachaPool: CGSSBaseModel {
         let dao = CGSSDAO.sharedDAO
         for reward in rewards {
             let rew = Reward.init(cardId: reward.0 , rewardRecommand: reward.1)
+            if rew.rewardRecommand > 0 {
+                new.append(rew)
+            }
+            self.rewards.append(rew)
             if let card = dao.findCardById(rew.cardId) {
-                if rew.rewardRecommand > 0 {
-                    new.append(rew)
-                }
                 switch card.rarityType {
                 case CGSSRarityTypes.ssr:
                     if rew.rewardRecommand > 0 {
@@ -172,7 +173,6 @@ class CGSSGachaPool: CGSSBaseModel {
                 default:
                     break
                 }
-                self.rewards.append(rew)
             }
         }
         super.init()

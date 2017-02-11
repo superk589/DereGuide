@@ -323,6 +323,9 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
     }
     
     func cacheData() {
+        if CGSSUpdater.defaultUpdater.isWorking {
+            return
+        }
         var urls = [URL]()
         if let indexPaths = tableView.indexPathsForSelectedRows {
             for indexPath in indexPaths {
@@ -332,23 +335,19 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         
         self.updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
         
-        CGSSUpdater.defaultUpdater.isUpdating = true
-        // SDWebImagePrefetcher默认在主线程, 此处改为子线程
-        SDWebImagePrefetcher.shared().prefetcherQueue = DispatchQueue.global(qos: .userInitiated)
-        SDWebImagePrefetcher.shared().prefetchURLs(urls, progress: { (a, b) in
-            DispatchQueue.main.async(execute: {
-                self.updateStatusView.updateProgress(Int(a), b: Int(b))
-            })
-        }, completed: { (a, b) in
-            DispatchQueue.main.async(execute: {
-                let alert = UIAlertController.init(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面")) \(a - b), \(NSLocalizedString("失败", comment: "设置页面")) \(b)", preferredStyle: .alert)
+        CGSSUpdater.defaultUpdater.updateImages(urls: urls, progress: { (a, b) in
+            DispatchQueue.main.async {
+                self.updateStatusView.updateProgress(a, b: b)
+            }
+        }) { (a, b) in
+            DispatchQueue.main.async {
+                let alert = UIAlertController.init(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面")) \(a), \(NSLocalizedString("失败", comment: "设置页面")) \(b - a)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
                 self.tabBarController?.present(alert, animated: true, completion: nil)
                 self.updateStatusView.isHidden = true
                 self.calculate()
-            })
-            CGSSUpdater.defaultUpdater.isUpdating = false
-        })
+            }
+        }
     }
     
     

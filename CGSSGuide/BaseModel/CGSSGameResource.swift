@@ -391,8 +391,7 @@ class CGSSGameResource: NSObject {
         super.init()
         self.prepareFileDirectory()
         self.prepareGachaList(callback: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(updateEnd), name: CGSSNotificationCenter.updateEnd, object: nil)
-        // self.loadAllDataFromFile()
+        CGSSNotificationCenter.add(self, selector: #selector(updateEnd(notification:)), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
     
     deinit {
@@ -466,13 +465,16 @@ class CGSSGameResource: NSObject {
     }
     
     
-    func updateEnd() {
-        prepareGachaList {
-            let list = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
-            for item in list {
-                item.availableType = nil
+    func updateEnd(notification: Notification) {
+        let types = notification.object as! CGSSUpdateDataTypes
+        if types.contains(.master) || types.contains(.card) {
+            prepareGachaList {
+                let list = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
+                for item in list {
+                    item.availableType = nil
+                }
+                CGSSNotificationCenter.post(CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
             }
-            CGSSNotificationCenter.post(CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
         }
     }
     

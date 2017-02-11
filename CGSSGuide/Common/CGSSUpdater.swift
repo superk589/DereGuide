@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import SDWebImage
 
 struct DataURL {
     static let EnglishDatabase = "https://starlight.kirara.ca"
@@ -25,6 +26,7 @@ struct CGSSUpdateDataTypes: OptionSet, RawRepresentable {
     static let master = CGSSUpdateDataTypes.init(rawValue: 1 << 1)
     static let beatmap = CGSSUpdateDataTypes.init(rawValue: 1 << 2)
     static let all: CGSSUpdateDataTypes = [.card, .master, .beatmap]
+    static let image = CGSSUpdateDataTypes.init(rawValue: 1 << 3)
 }
 
 
@@ -63,6 +65,8 @@ typealias CGSSCheckCompletionClosure = ([CGSSUpdateItem]?, Error?) -> Void
 typealias CGSSFinishedClosure = (Bool, Error?) -> Void
 typealias CGSSCheckCompletionExternalClosure = ([CGSSUpdateItem], [Error]) -> Void
 typealias CGSSDownloadItemFinishedClosure = (CGSSUpdateItem, Data?, Error?) -> Void
+typealias CGSSProgressClosure = (_ progress: Int, _ total: Int) -> Void
+typealias CGSSProgressCompleteClosure = (_ success: Int, _ total: Int) -> Void
 
 open class CGSSUpdater: NSObject {
   
@@ -74,40 +78,26 @@ open class CGSSUpdater: NSObject {
     
     var isUpdating = false {
         didSet {
-            // 此处确保当前如果在主线程,则在主线程同步发送消息,当前不在主线程则通过DispatchQueue.main.async发送
-            if Thread.isMainThread {
-                if self.isUpdating {
-                    // CGSSNotificationCenter.post("UPDATE_START", object: nil)
-                } else {
-                    CGSSNotificationCenter.post(CGSSNotificationCenter.updateEnd, object: nil)
-                }
-                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isUpdating
-            } else {
-                DispatchQueue.main.async {
-                    if self.isUpdating {
-                        // CGSSNotificationCenter.post("UPDATE_START", object: nil)
-                    } else {
-                        CGSSNotificationCenter.post(CGSSNotificationCenter.updateEnd, object: nil)
-                    }
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = self.isUpdating
-                }
+            DispatchQueue.main.async {
+                UIApplication.shared
+                    .isNetworkActivityIndicatorVisible = self.isUpdating
             }
         }
     }
     
     var isChecking = false {
         didSet {
-            if Thread.isMainThread {
+            DispatchQueue.main.async {
                 UIApplication.shared
-            .isNetworkActivityIndicatorVisible = self.isChecking
-            } else {
-                DispatchQueue.main.async {
-                    UIApplication.shared
-                        .isNetworkActivityIndicatorVisible = self.isChecking
-                }
+                    .isNetworkActivityIndicatorVisible = self.isChecking
             }
         }
     }
+    
+    func postUpdateEndNotification(types: CGSSUpdateDataTypes) {
+        CGSSNotificationCenter.post(CGSSNotificationCenter.updateEnd, object: types)
+    }
+    
     var dataSession: URLSession!
     var checkSession: URLSession!
     
@@ -144,14 +134,14 @@ open class CGSSUpdater: NSObject {
         configSession()
     }
     
-    func checkManifest(callback: CGSSFinishedClosure?) {
+    func checkManifest(callback: @escaping CGSSFinishedClosure) {
         let url = DataURL.ChineseDatabase + "/api/v1/info"
         let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
             if error != nil {
-                callback?(false, error)
+                callback(false, error)
             } else if (response as! HTTPURLResponse).statusCode != 200 {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
-                callback?(false, error)
+                callback(false, error)
             } else {
                 let json = JSON.init(data: data!)
                 let info = CGSSGameInfo.init(fromJson: json)
@@ -160,31 +150,31 @@ open class CGSSUpdater: NSObject {
                     let url = String.init(format: DataURL.manifest, truthVersion)
                     let task = self.dataSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
                         if error != nil {
-                            callback?(false, error)
+                            callback(false, error)
                         } else {
                             let manifestData = LZ4Decompressor.decompress(data!)
                             CGSSGameResource.shared.saveManifest(manifestData)
                             UserDefaults.standard.set(truthVersion, forKey: "truthVersion")
-                            callback?(true, nil)
+                            callback(true, nil)
                         }
                     })
                     task.resume()
                 } else {
-                    callback?(true, nil)
+                    callback(true, nil)
                 }
             }
         })
         task.resume()
     }
     
-    func checkCards(callback: CGSSCheckCompletionClosure?) {
+    func checkCards(callback: @escaping CGSSCheckCompletionClosure) {
         let url = DataURL.ChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
         let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
             if let e = error {
-                callback?(nil, e)
+                callback(nil, e)
             } else if (response as! HTTPURLResponse).statusCode != 200 {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
-                callback?(nil, error)
+                callback(nil, error)
             } else {
                 let json = JSON.init(data: data!)
                 var items = [CGSSUpdateItem]()
@@ -212,34 +202,34 @@ open class CGSSUpdater: NSObject {
                             items.append(item)
                         }
                     }
-                    callback?(items, nil)
+                    callback(items, nil)
                 } else {
                     let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("获取到的卡数据异常", comment: "弹出框正文"))
-                    callback?(nil, error)
+                    callback(nil, error)
                 }
             }
         })
         task.resume()
     }
     
-    func checkMaster(callback: CGSSCheckCompletionClosure?) {
+    func checkMaster(callback: CGSSCheckCompletionClosure) {
         let masterTruthVersion = UserDefaults.standard.integer(forKey: "masterTruthVersion")
         let manifestTruthVersion = UserDefaults.standard.integer(forKey: "truthVersion")
         if masterTruthVersion < manifestTruthVersion || !CGSSGameResource.shared.checkMasterExistence() {
             if let hash = CGSSGameResource.shared.getMasterHash() {
                 let item = CGSSUpdateItem.init(dataType: .master, id: String(manifestTruthVersion), hash: hash)
-                callback?([item], nil)
+                callback([item], nil)
             } else {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("无法获取游戏原始数据", comment: "弹出框正文"))
-                callback?(nil, error)
+                callback(nil, error)
             }
         } else {
-            callback?(nil, nil)
+            callback(nil, nil)
         }
     }
     
     
-    func checkBeatmap(callback: CGSSCheckCompletionClosure?) {
+    func checkBeatmap(callback: CGSSCheckCompletionClosure) {
         var items = [CGSSUpdateItem]()
         for (key, value) in CGSSGameResource.shared.getScoreHash() {
             let liveId = Int(key) ?? 0
@@ -250,9 +240,8 @@ open class CGSSUpdater: NSObject {
                 items.append(item)
             }
         }
-        callback?(items, nil)
+        callback(items, nil)
     }
-
     
     // 检查指定类型的数据是否存在更新
     func checkUpdate(dataTypes: CGSSUpdateDataTypes, complete: @escaping CGSSCheckCompletionExternalClosure ) {
@@ -349,6 +338,7 @@ open class CGSSUpdater: NSObject {
             }
         }
         
+        var updateTypes = CGSSUpdateDataTypes.init(rawValue: 0)
         
         // 为了让较老的数据早更新 做一次排序
         let sortedItems = items.sorted { (item1, item2) -> Bool in
@@ -391,6 +381,7 @@ open class CGSSUpdater: NSObject {
                             }
                             dao.cardDict.setObject(card, forKey: item.id as NSCopying)
                             success += 1
+                            updateTypes.insert(.card)
                         }
                     }
                     process += 1
@@ -406,6 +397,7 @@ open class CGSSUpdater: NSObject {
                         let dao = CGSSDAO.sharedDAO
                         dao.saveBeatmapData(data: beatmapData, liveId: Int(item.id) ?? 0)
                         success += 1
+                        updateTypes.insert(.beatmap)
                     }
                     process += 1
                     group.leave()
@@ -420,6 +412,7 @@ open class CGSSUpdater: NSObject {
                         CGSSGameResource.shared.saveMaster(masterData)
                         UserDefaults.standard.set(Int(item.id)!, forKey: "masterTruthVersion")
                         success += 1
+                        updateTypes.insert(.master)
                     }
                     process += 1
                     group.leave()
@@ -437,8 +430,27 @@ open class CGSSUpdater: NSObject {
             self.isUpdating = false
             DispatchQueue.main.async(execute: {
                 complete(success, total)
+                self.postUpdateEndNotification(types: updateTypes)
             })
         }))
+    }
+    
+    
+    func updateImages(urls: [URL], progress: @escaping CGSSProgressClosure, complete: @escaping CGSSProgressClosure) {
+        
+        isUpdating = true
+        SDWebImagePrefetcher.shared().prefetcherQueue = DispatchQueue.global(qos: .userInitiated)
+        SDWebImagePrefetcher.shared().prefetchURLs(urls, progress: { (a, b) in
+            progress(Int(a), Int(b))
+        }, completed: { (a, b) in
+            complete(Int(a - b), Int(a))
+            DispatchQueue.main.async {
+                self.isUpdating = false
+                // self.postUpdateEndNotification(types: .image)
+            }
+        })
+
+        
     }
 }
 

@@ -1,8 +1,21 @@
 # ChangeLog
 
+### 1.2.2
+
+1. 修复缓存所有图片计数不准确的问题
+2. 修复多线程访问数据库导致崩溃的问题
+3. 其他bug修复
+
+##### Japanese version
+
+
+##### English version
+1. Fix a bug of "cache all images" pages displaying wrong numbers.
+2. Fix crash caused by multi-thread accessing to database.
+3. Other bugs fixed
 
 ### v1.2.1
-
+2017-2-9
 1. 活动和卡池页面的时间从日本时间改为本地时间
 2. 优化致谢和版权声明页面
 3. 优化缓存所有图片功能

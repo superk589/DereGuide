@@ -25,6 +25,7 @@ class BirthdayCenter: NSObject {
             return sortedChars.index(of: tempChar)
         }
     }
+    
     func prepare() {
         let dao = CGSSDAO.sharedDAO
         sortedChars = dao.charDict.allValues as! [CGSSChar]

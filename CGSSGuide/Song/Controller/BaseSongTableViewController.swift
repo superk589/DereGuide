@@ -51,13 +51,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         tableView.reloadData()
     }
     
-    func reloadData() {
-        CGSSGameResource.shared.master.getLives { (lives) in
-            self.defualtLiveList = lives
-            self.refresh()
-        }
-    }
-    
     func cancelAction() {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -102,11 +95,25 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         filterVC.sorter = self.sorter
         filterVC.delegate = self
         
-        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+        CGSSNotificationCenter.add(self, selector: #selector(updateEnd(notification:)), name: CGSSNotificationCenter.updateEnd, object: nil)
     }
     
     deinit {
         CGSSNotificationCenter.removeAll(self)
+    }
+    
+    func reloadData() {
+        CGSSGameResource.shared.master.getLives { (lives) in
+            self.defualtLiveList = lives
+            self.refresh()
+        }
+    }
+    
+    func updateEnd(notification: Notification) {
+        let types = notification.object as! CGSSUpdateDataTypes
+        if types.contains(.master) {
+            self.reloadData()
+        }
     }
     
     func filterAction() {
