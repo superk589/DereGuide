@@ -303,4 +303,8 @@ extension DonationViewController: SKPaymentTransactionObserver {
             self.tabBarController?.present(alert, animated: true, completion: nil)
         }
     }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        CGSSLoadingHUDManager.default.hide()
+    }
 }
