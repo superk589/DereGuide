@@ -16,7 +16,7 @@ class TeamDetailViewController: UIViewController {
     
     //var hud: CGSSLoadingHUD!
     var live: CGSSLive?
-    var beatmaps: [CGSSBeatmap]?
+    var beatmap: CGSSBeatmap?
     var diff: Int?
     var usingManualValue: Bool = false
     override func viewDidLoad() {
@@ -222,10 +222,10 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
 
 //MARK: BaseSongTableViewControllerDelegate的协议方法
 extension TeamDetailViewController: BaseSongTableViewControllerDelegate {
-    func selectSong(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
-        teamDV.updateSongInfo(live, beatmaps: beatmaps, diff: diff)
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
+        teamDV.updateSongInfo(live, beatmap: beatmap, diff: diff)
         self.live = live
-        self.beatmaps = beatmaps
+        self.beatmap = beatmap
         self.diff = diff
     }
 }

@@ -11,16 +11,19 @@ import UIKit
 class BeatmapViewController: UIViewController {
     
     var live: CGSSLive!
-    var beatmaps: [CGSSBeatmap]!
+    var beatmap: CGSSBeatmap!
     var bv: BeatmapView!
     var descLabel: UILabel!
     var flipItem:UIBarButtonItem!
     var preSetDiff: Int?
     var currentDiff: Int! {
         didSet {
-            titleLabel.text = "\(live.musicTitle)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmaps[currentDiff-1].numberOfNotes)"
-            bv?.initWith(beatmaps[currentDiff - 1], bpm: live.bpm, type: live.type)
-            bv?.setNeedsDisplay()
+            if let beatmap = checkBeatmapData(live, diff: currentDiff) {
+                self.beatmap = beatmap
+                titleLabel.text = "\(live.musicTitle)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
+                bv?.setup(beatmap: beatmap, bpm: live.bpm, type: live.type)
+                bv?.setNeedsDisplay()
+            }
         }
     }
     
@@ -30,10 +33,6 @@ class BeatmapViewController: UIViewController {
         super.viewDidLoad()
         bv = BeatmapView()
         bv.frame = CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64)
-        // 自定义descLabel
-//        descLabel = UILabel.init(frame: CGRectMake(0, 69, CGSSTool.width, 14))
-//        descLabel.textAlignment = .Center
-//        descLabel.font = UIFont.systemFontOfSize(12)
         
         // 自定义title描述歌曲信息
         titleLabel = UILabel()
@@ -75,6 +74,21 @@ class BeatmapViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func showBeatmapNotFoundAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func checkBeatmapData(_ live: CGSSLive, diff: Int) -> CGSSBeatmap? {
+        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= diff {
+            return beatmaps[diff - 1]
+        } else {
+            showBeatmapNotFoundAlert()
+            return nil
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -89,12 +103,9 @@ class BeatmapViewController: UIViewController {
         self.toolbarItems = [shareItem, spaceItem, flipItem]
     }
     
-    func initWithLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap]) -> Bool {
-        // 打开谱面时 隐藏tabbar
-        self.hidesBottomBarWhenPushed = true
-        self.beatmaps = beatmaps
+    func setup(_ live: CGSSLive, diff: Int) {
         self.live = live
-        return true
+        self.preSetDiff = diff
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -106,7 +117,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(live.musicTitle) \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmaps[currentDiff - 1].numberOfNotes) length:\(Int(beatmaps[currentDiff - 1].totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
+        return "\(live.musicTitle) \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in

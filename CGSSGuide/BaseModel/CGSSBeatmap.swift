@@ -162,24 +162,6 @@ class CGSSBeatmap: CGSSBaseModel {
         return postSeconds - preSeconds
     }
     
-    
-//    func comboForSec(sec:Float) -> Int {
-//        func findnear(sec:Float, start:Int, end:Int) -> Int {
-//            if start == end {
-//                return start - 2
-//            }
-//            let middle = (start + end) / 2
-//            if abs(sec - notes[middle].sec!) <= 0.01 {
-//                return middle - 1
-//            } else if sec < notes[middle].sec {
-//                return findnear(sec, start: start, end: middle)
-//            } else {
-//                return findnear(sec, start: middle + 1, end: end)
-//            }
-//        }
-//        return findnear(sec + preSeconds!, start: 2, end: notes.count - 1)
-//    }
-    
     func getCriticalPointNoteIndexes() -> [Int] {
         var arr = [Int]()
         for i in CGSSGlobal.criticalPercent {

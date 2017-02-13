@@ -10,7 +10,7 @@ import UIKit
 import ZKDrawerController
 
 protocol BaseSongTableViewControllerDelegate: class {
-    func selectSong(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int)
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int)
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
@@ -151,8 +151,8 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let live = liveList[indexPath.row]
         let maxDiff = (live.masterPlus == 0) ? 4 : 5
-        if let beatmaps = checkBeatmapData(live) {
-            selectLive(live, beatmaps: beatmaps, diff: maxDiff)
+        if let beatmap = checkBeatmapData(live, diff: maxDiff) {
+            selectLive(live, beatmap: beatmap, diff: maxDiff)
         } else {
             // 手动取消选中状态
             tableView.cellForRow(at: indexPath)?.isSelected = false
@@ -170,18 +170,22 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
 
     
     // 此方法应该被override或者通过代理来响应
-    func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
         searchBar.resignFirstResponder()
-        delegate?.selectSong(live, beatmaps: beatmaps, diff: diff)
+        delegate?.selectLive(live, beatmap: beatmap, diff: diff)
     }
     
-    func checkBeatmapData(_ live: CGSSLive) -> [CGSSBeatmap]? {
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count == (live.maxDiff == 5 ? 5 : 4) {
-            return beatmaps
+    func showBeatmapNotFoundAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func checkBeatmapData(_ live: CGSSLive, diff: Int) -> CGSSBeatmap? {
+        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= diff {
+            return beatmaps[diff - 1]
         } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-            self.navigationController?.present(alert, animated: true, completion: nil)
+            showBeatmapNotFoundAlert()
             return nil
         }
     }
@@ -190,8 +194,8 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
 //MARK: SongTableViewCell的协议方法
 extension BaseSongTableViewController: SongTableViewCellDelegate {
     func diffSelected(_ live: CGSSLive, diff: Int) {
-        if let beatmaps = checkBeatmapData(live) {
-            selectLive(live, beatmaps: beatmaps, diff: diff)
+        if let beatmap = checkBeatmapData(live, diff: diff) {
+            selectLive(live, beatmap: beatmap, diff: diff)
         }
     }
 }

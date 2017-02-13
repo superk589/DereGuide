@@ -21,12 +21,12 @@ class SongTableViewController: BaseSongTableViewController {
     }
 
     // MARK: - Table view data source
-    override func selectLive(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
-        super.selectLive(live, beatmaps: beatmaps, diff: diff)
-        let beatmapVC = BeatmapViewController()
-        _ = beatmapVC.initWithLive(live, beatmaps: beatmaps)
-        beatmapVC.preSetDiff = diff
-        navigationController?.pushViewController(beatmapVC, animated: true)
+    override func selectLive(_ live: CGSSLive, beatmap:CGSSBeatmap, diff: Int) {
+        super.selectLive(live, beatmap: beatmap, diff: diff)
+        let vc = BeatmapViewController()
+        vc.setup(live, diff: diff)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

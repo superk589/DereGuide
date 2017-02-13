@@ -666,10 +666,10 @@ class TeamDetailView: UIView {
         delegate?.selectSong()
     }
     
-    func updateSongInfo(_ live: CGSSLive, beatmaps: [CGSSBeatmap], diff: Int) {
+    func updateSongInfo(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
         // selectSongLabel.hidden = true
         selectSongLabel.text = ""
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(live.bpm) notes: \(beatmaps[diff-1].numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmaps[diff - 1].totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
+        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
         songNameLabel.text = live.musicTitle

@@ -138,11 +138,16 @@ extension EventDetailController: EventDetailViewDelegate {
         }
     }
     
+    func showBeatmapNotFoundAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
     func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: Int) {
-        let beatmapVC = BeatmapViewController()
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id) {
-            _ = beatmapVC.initWithLive(live, beatmaps: beatmaps)
-            beatmapVC.preSetDiff = difficulty
+        if let _ = CGSSGameResource.shared.getBeatmaps(liveId: live.id, of: difficulty) {
+            let beatmapVC = BeatmapViewController()
+            beatmapVC.setup(live, diff: difficulty)
             navigationController?.pushViewController(beatmapVC, animated: true)
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。", comment: "弹出框正文"), preferredStyle: .alert)

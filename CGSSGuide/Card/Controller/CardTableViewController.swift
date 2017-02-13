@@ -12,7 +12,7 @@ class CardTableViewController: BaseCardTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // print(NSHomeDirectory())
+        print(NSHomeDirectory())
         // print(Locale.current.identifier)
         // 作为工具启动的第一个页面 在此页面做自动更新检查
         let versionManager = CGSSVersionManager.default
