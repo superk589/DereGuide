@@ -555,7 +555,10 @@
 "活动封面" = "Event Banner";
 "卡池封面" = "Gacha Banner";
 
-"未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。" = "Can't find the beatmap. If an update is in progress, please wait for it to complete, or pull down to update manually.";
-
 "队伍中存在未知的技能类型，计算结果可能不准确。" = "There are unknown skills in the team, calculation results may not be accurate.";
+
+/* new in 1.2.3 */
+"变更时间" = "Last updated time";
+"首次出现时间" = "Created time";
+"未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。" = "Can't find the beatmap. If an update is in progress, please wait for it to complete, or pull down to update manually. If still not found, maybe the formal data is not updated.";
 

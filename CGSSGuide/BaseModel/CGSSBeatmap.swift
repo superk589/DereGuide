@@ -128,6 +128,7 @@ class CGSSBeatmap: CGSSBaseModel {
     var maxLongPressInterval:Float = 0
     func contextFreeAllNotes() {
         var positionPressed = [Float].init(repeating: 0, count: 5)
+        var sliders = [Int: Float]()
         for note in self.notes {
             if note.finishPos! == 0 {
                 continue
@@ -144,6 +145,20 @@ class CGSSBeatmap: CGSSBaseModel {
                     maxLongPressInterval = interval
                 }
                 positionPressed[note.finishPos! - 1] = 0
+            }
+            
+            if note.groupId != nil {
+                if sliders[note.groupId!] == nil {
+                    // 滑条起始点
+                    sliders[note.groupId!] = note.sec
+                } else {
+                    // 滑条中间点或结束点
+                    let interval = (note.sec ?? 0) - sliders[note.groupId!]!
+                    if interval > maxLongPressInterval {
+                        maxLongPressInterval = interval
+                    }
+                    sliders[note.groupId!] = note.sec
+                }
             }
         }
     }

@@ -56,7 +56,6 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
     override func draw(_ rect: CGRect) {
         beatmapDrawer.drawIn(rect: rect)
-        print("rect is ", rect)
     }
     
     
@@ -70,7 +69,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
 
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 180, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.strokeColor, lineWidth: 1)
+            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.strokeColor, lineWidth: 1)
             let newImage = adBeatmapDrawer.export(sectionPerColumn: 4, title: title)
             
             DispatchQueue.main.async {
@@ -255,15 +254,11 @@ class AdvanceBeatmapDrawer {
         var positionPressed = [Float].init(repeating: 0, count: 5)
         var sync: Note?
         
-        var expand: CGFloat = 0
         let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
-        let drawHeight = rect.size.height + 2 * sectionHeight
-        if maxInterval - drawHeight > 0 {
-            expand = (maxInterval - drawHeight) / 2 + 1
-        }
+        let expand = maxInterval
         
-        let maxY = rect.maxY + sectionHeight + expand
-        let minY = rect.minY - sectionHeight - expand
+        let maxY = rect.maxY + expand
+        let minY = rect.minY - expand
         let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
         let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
         
@@ -284,6 +279,8 @@ class AdvanceBeatmapDrawer {
                     }
                 }
                 
+                //
+                
                 // 简单长按类型
                 if note.longPressType == 1 {
                     positionPressed[note.finishPos! - 1] = note.sec!
@@ -299,18 +296,18 @@ class AdvanceBeatmapDrawer {
 
             }
         }
-        // 处理上方未显示完全的长按部分
-        for i in 1...5 {
-            if positionPressed[i - 1] != 0 {
-                let path = pathForLongPress(i, sec1: positionPressed[i - 1], y: rect.origin.y)
-                positionPressed[i - 1] = 0
-                UIColor.white.set()
-                path.fill()
-                strokeColor.withAlphaComponent(0.25).set()
-                // path.stroke()
-                path.fill()
-            }
-        }
+//        // 处理上方未显示完全的长按部分
+//        for i in 1...5 {
+//            if positionPressed[i - 1] != 0 {
+//                let path = pathForLongPress(i, sec1: positionPressed[i - 1], y: rect.origin.y)
+//                positionPressed[i - 1] = 0
+//                UIColor.white.set()
+//                path.fill()
+//                strokeColor.withAlphaComponent(0.25).set()
+//                // path.stroke()
+//                path.fill()
+//            }
+//        }
         
         // 画同步线
         for i in minIndex..<maxIndex {
@@ -412,7 +409,7 @@ class AdvanceBeatmapDrawer {
     }
     private func pathForPointSmall(_ position: Int, sec: Float) -> UIBezierPath
     {
-        let radius = noteRadius / 2
+        let radius = floor(noteRadius / 2)
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
@@ -451,7 +448,8 @@ class AdvanceBeatmapDrawer {
         let y1 = getPointY(note1.sec!)
         let y2 = getPointY(note2.sec!)
         // 个别情况下滑条的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
-        if y1 - y2 > sectionHeight {
+        // 但是要注意新类型slide会超过1个section故排除slide
+        if y1 - y2 > sectionHeight && note1.type != 3 && note2.type != 3 {
             return nil
         }
         
@@ -464,6 +462,23 @@ class AdvanceBeatmapDrawer {
         path.addLine(to: CGPoint(x: x2 - sin(t) * r, y: y2 - cos(t) * r))
         return path
     }
+    
+    private func pathForLongPressSlider(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
+        
+        let x1 = getPointX(note1.finishPos!)
+        let x2 = getPointX(note2.finishPos!)
+        let y1 = getPointY(note1.sec!)
+        let y2 = getPointY(note2.sec!)
+        let t = atan((y1 - y2) / (x2 - x1))
+        let r = (noteRadius + 1) / 2
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1 - sin(t) * r, y: y1 - cos(t) * r))
+        path.addLine(to: CGPoint(x: x1 + sin(t) * r, y: y1 + cos(t) * r))
+        path.addLine(to: CGPoint(x: x2 + sin(t) * r, y: y2 + cos(t) * r))
+        path.addLine(to: CGPoint(x: x2 - sin(t) * r, y: y2 - cos(t) * r))
+        return path
+    }
+
     
     private func pathForLongPress(_ position: Int, sec1: Float, y: CGFloat) -> UIBezierPath {
         let x = getPointX(position)

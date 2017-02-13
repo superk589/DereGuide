@@ -76,7 +76,11 @@ enum CGSSGrooveType: String {
 extension CGSSLive {
     // 用于排序的属性
     dynamic var updateId: Int {
-        return self.liveDetailId[0]
+        return self.liveDetailId.last ?? 0
+    }
+    
+    dynamic var createId: Int {
+        return self.liveDetailId.first ?? 0
     }
     
 //    dynamic var bpm: Int {
@@ -167,6 +171,14 @@ extension CGSSLive {
     
     var jacketURL: URL? {
         return URL.init(string: DataURL.Images + "/jacket/\(musicId).png")
+    }
+    
+    var title: String {
+        if eventType == 0 {
+            return musicTitle
+        } else {
+            return musicTitle + "(" + NSLocalizedString("活动", comment: "") + ")"
+        }
     }
 }
 

@@ -279,7 +279,7 @@ class Master: FMDatabaseQueue {
                     db.close()
                 }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    let selectSql = "select a.id, max(a.event_type) event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, max(a.difficulty_5) difficulty_5, a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)") group by music_data_id"
+                    let selectSql = "select a.id, a.event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, a.difficulty_5, a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
                         while set.next() {
@@ -464,7 +464,7 @@ class CGSSGameResource: NSObject {
         return result
     }
     
-    func getBeatmaps(liveId: Int, of diffculty: Int) -> CGSSBeatmap? {
+    func getBeatmap(liveId: Int, of diffculty: Int) -> CGSSBeatmap? {
         if let beatmaps = getBeatmaps(liveId: liveId), beatmaps.count >= diffculty {
             return beatmaps[diffculty - 1]
         } else {

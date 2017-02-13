@@ -118,7 +118,7 @@ class SongTableViewCell: UITableViewCell {
     var live: CGSSLive!
     func initWith(_ live: CGSSLive) {
         self.live = live
-        self.nameLabel.text = live.musicTitle
+        self.nameLabel.text = live.title
         // self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
         let descString = "bpm:\(live.bpm)"
         // 暂时去除时长的显示
