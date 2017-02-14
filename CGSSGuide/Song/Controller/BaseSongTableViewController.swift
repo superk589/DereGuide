@@ -111,7 +111,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     func updateEnd(notification: Notification) {
         let types = notification.object as! CGSSUpdateDataTypes
-        if types.contains(.master) {
+        if types.contains(.master) || types.contains(.beatmap) {
             self.reloadData()
         }
     }

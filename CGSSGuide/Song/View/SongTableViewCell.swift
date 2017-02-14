@@ -133,11 +133,9 @@ class SongTableViewCell: UITableViewCell {
         for i in 0...4 {
             self.diffViews[i].text = "\(diffStars[i])"
         }
-        if live.liveDetailId.count == 5 && live.masterPlus != 0 {
-            self.diffViews[4].isHidden = false
-        } else {
-            self.diffViews[4].isHidden = true
-        }
+        
+        self.diffViews[4].isHidden = !(live.maxDiff == 5)
+        
         if let url = live.jacketURL {
             self.jacketImageView.sd_setImage(with: url)
         }
