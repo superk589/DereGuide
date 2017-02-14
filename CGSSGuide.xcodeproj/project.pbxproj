@@ -168,6 +168,7 @@
 		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
+		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -368,6 +369,7 @@
 		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
+		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				126666231D7D70F70022348E /* CGSSLiveFilter.swift */,
 				1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */,
 				1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */,
+				12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */,
 				122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */,
 				1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */,
 				1269EA0F1D520D370071AD7F /* CGSSSorter.swift */,
@@ -1135,6 +1138,7 @@
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
+				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,

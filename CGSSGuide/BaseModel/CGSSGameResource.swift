@@ -564,8 +564,11 @@ class CGSSGameResource: NSObject {
         return result
     }
     
-    
-    
+    func checkExistenceOfBeatmap(liveId: Int) -> Bool {
+        let path = String.init(format: DataPath.beatmap, liveId)
+        let fm = FileManager.default
+        return fm.fileExists(atPath: path)
+    }
     
     func updateEnd(notification: Notification) {
         let types = notification.object as! CGSSUpdateDataTypes
