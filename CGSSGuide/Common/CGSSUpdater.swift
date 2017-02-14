@@ -232,14 +232,12 @@ open class CGSSUpdater: NSObject {
     func checkBeatmap(callback: CGSSCheckCompletionClosure) {
         var items = [CGSSUpdateItem]()
         for (key, value) in CGSSGameResource.shared.getScoreHash() {
-            let liveId = Int(key) ?? 0
-            let hash = value
-            if let savedHash = BeatmapHashManager.default.hashTable[liveId] {
-                if savedHash == hash && CGSSGameResource.shared.checkExistenceOfBeatmap(liveId: liveId) {
+            if let savedHash = BeatmapHashManager.default.hashTable[key] {
+                if savedHash == value && CGSSGameResource.shared.checkExistenceOfBeatmap(liveId: Int(key)!) {
                     continue
                 }
             }
-            let item = CGSSUpdateItem.init(dataType: .beatmap, id: String(liveId), hash: hash)
+            let item = CGSSUpdateItem.init(dataType: .beatmap, id: key, hash: value)
             items.append(item)
         }
         callback(items, nil)
@@ -398,7 +396,7 @@ open class CGSSUpdater: NSObject {
                         let beatmapData = LZ4Decompressor.decompress(data!)
                         let dao = CGSSDAO.sharedDAO
                         dao.saveBeatmapData(data: beatmapData, liveId: Int(item.id) ?? 0)
-                        BeatmapHashManager.default.hashTable[Int(item.id)!] = item.hashString
+                        BeatmapHashManager.default.hashTable[item.id] = item.hashString
                         success += 1
                         updateTypes.insert(.beatmap)
                     }

@@ -10,6 +10,11 @@
 1. 新しいノーツタイプをサポートします
 2. 楽曲ソートのデフォルト方式は最後の変更時間に変更します、元の「更新時間」は「初登場時間」に変更します
 
+##### English version
+
+1. add support to new type of note
+2. change the default songs sorting method from "Update time" to "Last updated time", and the old "Update time" now is "Created time".
+
 ### 1.2.2
 2017-2-13
 

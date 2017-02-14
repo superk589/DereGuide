@@ -15,14 +15,14 @@ class BeatmapHashManager {
     static let `default` = BeatmapHashManager()
     
     private init() {
-        if let array = NSDictionary.init(contentsOfFile: path) as? [Int: String] {
+        if let array = NSDictionary.init(contentsOfFile: path) as? [String: String] {
             hashTable = array
         } else {
-            hashTable = [Int: String]()
+            hashTable = [String: String]()
         }
     }
     
-    var hashTable: [Int: String] {
+    var hashTable: [String: String] {
         didSet {
             (hashTable as NSDictionary).write(toFile: path, atomically: true)
         }
