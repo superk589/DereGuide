@@ -108,9 +108,9 @@ class EventTableViewCell: UITableViewCell {
             statusIndicator.style = .now
         } else if now < start {
             statusIndicator.style = .future
-            if let preStartDateString = event.preStartDate?.toString(format: "yyyy-MM-dd") {
-                startLabel.text = preStartDateString
-            }
+//            if let preStartDateString = event.preStartDate?.toString(format: "yyyy-MM-dd") {
+//                startLabel.text = preStartDateString
+//            }
         } else if now > end {
             statusIndicator.style = .past
         }

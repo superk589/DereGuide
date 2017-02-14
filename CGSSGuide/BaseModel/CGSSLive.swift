@@ -157,8 +157,15 @@ extension CGSSLive {
             return 0
         }
     }
+    
+    // 最大难度, 只返回真是存在的难度
     var maxDiff: Int {
-        return (self.masterPlus == 0) ? 4 : 5
+        return self.liveDetailId.count
+    }
+    
+    // 合理的谱面数量, 包含官方还未发布的难度
+    var validBeatmapCount: Int {
+        return self.masterPlus == 0 ? 4 : 5
     }
     
     func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {

@@ -150,10 +150,11 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let live = liveList[indexPath.row]
-        let maxDiff = (live.masterPlus == 0) ? 4 : 5
+        let maxDiff = live.maxDiff
         if let beatmap = checkBeatmapData(live, diff: maxDiff) {
             selectLive(live, beatmap: beatmap, diff: maxDiff)
         } else {
+            showBeatmapNotFoundAlert()
             // 手动取消选中状态
             tableView.cellForRow(at: indexPath)?.isSelected = false
         }
@@ -185,7 +186,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= diff {
             return beatmaps[diff - 1]
         } else {
-            showBeatmapNotFoundAlert()
             return nil
         }
     }
@@ -196,6 +196,8 @@ extension BaseSongTableViewController: SongTableViewCellDelegate {
     func diffSelected(_ live: CGSSLive, diff: Int) {
         if let beatmap = checkBeatmapData(live, diff: diff) {
             selectLive(live, beatmap: beatmap, diff: diff)
+        } else {
+            showBeatmapNotFoundAlert()
         }
     }
 }

@@ -234,8 +234,7 @@ open class CGSSUpdater: NSObject {
         for (key, value) in CGSSGameResource.shared.getScoreHash() {
             let liveId = Int(key) ?? 0
             let hash = value
-            let dao = CGSSDAO.sharedDAO
-            if !dao.checkExistenceOfBeatmap(liveId) {
+            if !CGSSGameResource.shared.validateBeatmap(liveId: liveId) {
                 let item = CGSSUpdateItem.init(dataType: .beatmap, id: String(liveId), hash: hash)
                 items.append(item)
             }

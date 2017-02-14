@@ -133,7 +133,7 @@ class SongTableViewCell: UITableViewCell {
         for i in 0...4 {
             self.diffViews[i].text = "\(diffStars[i])"
         }
-        if live.masterPlus != 0 {
+        if live.liveDetailId.count == 5 && live.masterPlus != 0 {
             self.diffViews[4].isHidden = false
         } else {
             self.diffViews[4].isHidden = true

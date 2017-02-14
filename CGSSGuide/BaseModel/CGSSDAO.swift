@@ -294,12 +294,6 @@ open class CGSSDAO: NSObject {
         return cards
     }
     
-    func checkExistenceOfBeatmap(_ liveId: Int) -> Bool {
-        let fm = FileManager.default
-        let path = CGSSDAO.path + String.init(format: "/Data/Beatmap/%03d" + ".bdb", liveId)
-        return fm.fileExists(atPath: path)
-    }
-    
     
     func getRankInAll(_ card: CGSSCard) -> [Int] {
         // let vocal = card.vocal
