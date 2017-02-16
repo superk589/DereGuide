@@ -14,16 +14,7 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
-    lazy var defualtLiveList: [CGSSLive] = {
-        var result = [CGSSLive]()
-        let semaphore = DispatchSemaphore.init(value: 0)
-        CGSSGameResource.shared.master.getLives(callback: { (lives) in
-            result = lives
-            semaphore.signal()
-        })
-        semaphore.wait()
-        return result
-    }()
+    var defualtLiveList = [CGSSLive]()
     var liveList: [CGSSLive] = [CGSSLive]()
     var sorter: CGSSSorter {
         get {
@@ -63,7 +54,6 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refresh()
     }
     
     
@@ -96,6 +86,8 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         filterVC.delegate = self
         
         CGSSNotificationCenter.add(self, selector: #selector(updateEnd(notification:)), name: CGSSNotificationCenter.updateEnd, object: nil)
+        
+        reloadData()
     }
     
     deinit {
@@ -103,9 +95,15 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     }
     
     func reloadData() {
-        CGSSGameResource.shared.master.getLives { (lives) in
-            self.defualtLiveList = lives
-            self.refresh()
+        CGSSLoadingHUDManager.default.show()
+        DispatchQueue.global(qos: .userInitiated).async {
+            CGSSGameResource.shared.master.getLives { (lives) in
+                self.defualtLiveList = lives
+                DispatchQueue.main.async {
+                    CGSSLoadingHUDManager.default.hide()
+                    self.refresh()
+                }
+            }
         }
     }
     
