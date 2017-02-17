@@ -1,5 +1,5 @@
 //
-//  CGSSGameInfo.swift
+//  ApiInfo.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2016/9/13.
@@ -9,7 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-class CGSSGameInfo {
+extension ApiInfo {
+    var apiVersion: (Int, Int) {
+        return (apiMajor, apiRevision)
+    }
+}
+
+class ApiInfo {
     
     var apiMajor: Int!
     var apiRevision: Int!

@@ -158,7 +158,7 @@ extension CGSSLive {
         }
     }
     
-    // 最大难度, 只返回真是存在的难度
+    // 最大难度, 只返回真实存在的难度
     var maxDiff: Int {
         return self.liveDetailId.count
     }

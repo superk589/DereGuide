@@ -22,17 +22,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.3</string>
+	<string>1.2.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
-		<string>4</string>
+		<integer>4</integer>
 		<key>Minor</key>
-		<string>0</string>
+		<integer>1</integer>
 	</dict>
 	<key>Document Version</key>
 	<integer>3</integer>

@@ -14,7 +14,7 @@ struct DataURL {
     static let EnglishDatabase = "https://starlight.kirara.ca"
     static let ChineseDatabase = "http://starlight.346lab.org"
     static let Images = "https://hoshimoriuta.kirara.ca"
-    static let manifest = "https://storages.game.starlight-stage.jp/dl/%d/manifests/iOS_AHigh_SHigh"
+    static let manifest = "https://storages.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
     static let master = "https://storages.game.starlight-stage.jp/dl/resources/Generic//%@"
     static let musicScore = DataURL.master
 }
@@ -134,9 +134,10 @@ open class CGSSUpdater: NSObject {
         configSession()
     }
     
-    func checkManifest(callback: @escaping CGSSFinishedClosure) {
+    
+    func checkApiInfo(callback: @escaping CGSSFinishedClosure) {
         let url = DataURL.ChineseDatabase + "/api/v1/info"
-        let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
+        let task = checkSession.dataTask(with: URL.init(string: url)!) { (data, response, error) in
             if error != nil {
                 callback(false, error)
             } else if (response as! HTTPURLResponse).statusCode != 200 {
@@ -144,27 +145,31 @@ open class CGSSUpdater: NSObject {
                 callback(false, error)
             } else {
                 let json = JSON.init(data: data!)
-                let info = CGSSGameInfo.init(fromJson: json)
-                
-                if let truthVersion = Int(info.truthVersion), (truthVersion > UserDefaults.standard.integer(forKey: "truthVersion")) || !CGSSGameResource.shared.checkManifestExistence() {
-                    let url = String.init(format: DataURL.manifest, truthVersion)
-                    let task = self.dataSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
-                        if error != nil {
-                            callback(false, error)
-                        } else {
-                            let manifestData = LZ4Decompressor.decompress(data!)
-                            CGSSGameResource.shared.saveManifest(manifestData)
-                            UserDefaults.standard.set(truthVersion, forKey: "truthVersion")
-                            callback(true, nil)
-                        }
-                    })
-                    task.resume()
+                let info = ApiInfo.init(fromJson: json)
+                CGSSVersionManager.default.apiInfo = info
+                callback(true, nil)
+            }
+        }
+        task.resume()
+    }
+    
+    func checkManifest(callback: @escaping CGSSFinishedClosure) {
+        if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
+            let url = String.init(format: DataURL.manifest, truthVersion)
+            let task = self.dataSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
+                if error != nil {
+                    callback(false, error)
                 } else {
+                    let manifestData = LZ4Decompressor.decompress(data!)
+                    CGSSGameResource.shared.saveManifest(manifestData)
+                    CGSSVersionManager.default.setManifestTruthVersionToNewest()
                     callback(true, nil)
                 }
-            }
-        })
-        task.resume()
+            })
+            task.resume()
+        } else {
+            callback(true, nil)
+        }
     }
     
     func checkCards(callback: @escaping CGSSCheckCompletionClosure) {
@@ -213,11 +218,9 @@ open class CGSSUpdater: NSObject {
     }
     
     func checkMaster(callback: CGSSCheckCompletionClosure) {
-        let masterTruthVersion = UserDefaults.standard.integer(forKey: "masterTruthVersion")
-        let manifestTruthVersion = UserDefaults.standard.integer(forKey: "truthVersion")
-        if masterTruthVersion < manifestTruthVersion || !CGSSGameResource.shared.checkMasterExistence() {
+        if CGSSVersionManager.default.currentMasterTruthVersion < CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkMasterExistence() {
             if let hash = CGSSGameResource.shared.getMasterHash() {
-                let item = CGSSUpdateItem.init(dataType: .master, id: String(manifestTruthVersion), hash: hash)
+                let item = CGSSUpdateItem.init(dataType: .master, id: CGSSVersionManager.default.currentManifestTruthVersion, hash: hash)
                 callback([item], nil)
             } else {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("无法获取游戏原始数据", comment: "弹出框正文"))
@@ -251,66 +254,87 @@ open class CGSSUpdater: NSObject {
         // 初始化错误信息数组
         var errors = [Error]()
         
+        // 检查api版本号和game truthversion
+        let zeroCheckGroup = DispatchGroup()
+        
         // 检查卡数据和manifest
         let firstCheckGroup = DispatchGroup()
         
         // 检查master和beatmap, 因为需要先下载manifest, 故放在第二个组内检查
         let secondCheckGroup = DispatchGroup()
         
-        if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
-            firstCheckGroup.enter()
-            checkManifest(callback: { (finished, error) in
-                if let e = error {
-                    errors.append(e)
-                }
-                firstCheckGroup.leave()
-            })
+        
+        zeroCheckGroup.enter()
+        checkApiInfo { (finished, error) in
+            if let e = error {
+                errors.append(e)
+            }
+            zeroCheckGroup.leave()
         }
         
-        if dataTypes.contains(.card) {
-            firstCheckGroup.enter()
-            checkCards(callback: { (items, error) in
-                if let e = error {
-                    errors.append(e)
-                } else if items != nil {
-                    itemsNeedToUpdate.append(contentsOf: items!)
-                }
-                firstCheckGroup.leave()
-            })
-        }
-        
-        firstCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { 
-            
-            if dataTypes.contains(.master) {
-                secondCheckGroup.enter()
-                self.checkMaster(callback: { (items, error) in
-                    if let e = error {
-                        errors.append(e)
-                    } else if items != nil {
-                        itemsNeedToUpdate.append(contentsOf: items!)
-                    }
-                    secondCheckGroup.leave()
-                })
-            }
-            
-            if dataTypes.contains(.beatmap) {
-                secondCheckGroup.enter()
-                self.checkBeatmap(callback: { (items, error) in
-                    if let e = error {
-                        errors.append(e)
-                    } else if items != nil {
-                        itemsNeedToUpdate.append(contentsOf: items!)
-                    }
-                    secondCheckGroup.leave()
-                })
-            }
-            
-            secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: {
-                self.isChecking = false
+        zeroCheckGroup.notify(queue: DispatchQueue.main) { 
+            if errors.count > 0 {
                 complete(itemsNeedToUpdate, errors)
-            }))
+            } else {
+                if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
+                    firstCheckGroup.enter()
+                    self.checkManifest(callback: { (finished, error) in
+                        if let e = error {
+                            errors.append(e)
+                        }
+                        firstCheckGroup.leave()
+                    })
+                }
+                
+                if dataTypes.contains(.card) {
+                    firstCheckGroup.enter()
+                    self.checkCards(callback: { (items, error) in
+                        if let e = error {
+                            errors.append(e)
+                        } else if items != nil {
+                            itemsNeedToUpdate.append(contentsOf: items!)
+                        }
+                        firstCheckGroup.leave()
+                    })
+                }
+                
+                firstCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: {
+                    
+                    if dataTypes.contains(.master) {
+                        secondCheckGroup.enter()
+                        self.checkMaster(callback: { (items, error) in
+                            if let e = error {
+                                errors.append(e)
+                            } else if items != nil {
+                                itemsNeedToUpdate.append(contentsOf: items!)
+                            }
+                            secondCheckGroup.leave()
+                        })
+                    }
+                    
+                    if dataTypes.contains(.beatmap) {
+                        secondCheckGroup.enter()
+                        self.checkBeatmap(callback: { (items, error) in
+                            if let e = error {
+                                errors.append(e)
+                            } else if items != nil {
+                                itemsNeedToUpdate.append(contentsOf: items!)
+                            }
+                            secondCheckGroup.leave()
+                        })
+                    }
+                    
+                    secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: {
+                        self.isChecking = false
+                        complete(itemsNeedToUpdate, errors)
+                    }))
+                    
+                }))
+
+            }
             
-        }))
+        }
+        
     }
     
     private func updateItem(item: CGSSUpdateItem, callback: @escaping CGSSDownloadItemFinishedClosure) {
@@ -411,7 +435,7 @@ open class CGSSUpdater: NSObject {
                     } else {
                         let masterData = LZ4Decompressor.decompress(data!)
                         CGSSGameResource.shared.saveMaster(masterData)
-                        UserDefaults.standard.set(Int(item.id)!, forKey: "masterTruthVersion")
+                        CGSSVersionManager.default.setMasterTruthVersionToNewest()
                         success += 1
                         updateTypes.insert(.master)
                     }
@@ -426,7 +450,8 @@ open class CGSSUpdater: NSObject {
             let dao = CGSSDAO.sharedDAO
             dao.saveAll({
                 // 保存成功后 将版本置为最新版
-                CGSSVersionManager.default.setVersionToNewest()
+                CGSSVersionManager.default.setDataVersionToNewest()
+                CGSSVersionManager.default.setApiVersionToNewest()
             })
             self.isUpdating = false
             DispatchQueue.main.async(execute: {

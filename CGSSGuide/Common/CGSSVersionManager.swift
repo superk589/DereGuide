@@ -12,20 +12,20 @@ class CGSSVersionManager {
     
     static let `default` = CGSSVersionManager()
     
-    var newestDataVersion: (String, String) {
-        let major = (Bundle.main.infoDictionary!["Data Version"] as! [String:String])["Major"]!
-        let minor = (Bundle.main.infoDictionary!["Data Version"] as! [String:String])["Minor"]!
+    var newestDataVersion: (Int, Int) {
+        let major = (Bundle.main.infoDictionary!["Data Version"] as! [String: Int])["Major"]!
+        let minor = (Bundle.main.infoDictionary!["Data Version"] as! [String: Int])["Minor"]!
         return (major, minor)
     }
     
-    var currentDataVersion: (String, String) {
+    var currentDataVersion: (Int, Int) {
         set {
-            UserDefaults.standard.set(newValue.0, forKey: "Major")
-            UserDefaults.standard.set(newValue.1, forKey: "Minor")
+            UserDefaults.standard.set(newValue.0, forKey: "data_major")
+            UserDefaults.standard.set(newValue.1, forKey: "data_minor")
         }
         get {
-            let major = UserDefaults.standard.object(forKey: "Major") as? String ?? "0"
-            let minor = UserDefaults.standard.object(forKey: "Minor") as? String ?? "0"
+            let major = UserDefaults.standard.object(forKey: "data_major") as? Int ?? 0
+            let minor = UserDefaults.standard.object(forKey: "data_minor") as? Int ?? 0
             return (major, minor)
         }
     }
@@ -34,11 +34,65 @@ class CGSSVersionManager {
         return "\(currentDataVersion.0).\(currentDataVersion.1)"
     }
     
-    // 设置当前数据版本号为最新版本
-    func setVersionToNewest() {
-        UserDefaults.standard.set(newestDataVersion.0, forKey: "Major")
-        UserDefaults.standard.set(newestDataVersion.1, forKey: "Minor")
+    
+    var apiInfo: ApiInfo?
+    var currentApiVersion: (Int, Int) {
+        set {
+            UserDefaults.standard.set(newValue.0, forKey: "api_major")
+            UserDefaults.standard.set(newValue.1, forKey: "api_reversion")
+        }
+        get {
+            let major = UserDefaults.standard.object(forKey: "api_major") as? Int ?? 0
+            let reversion = UserDefaults.standard.object(forKey: "api_reversion") as? Int ?? 0
+            return (major, reversion)
+        }
+
     }
+    
+    var currentMasterTruthVersion: String {
+        set {
+            UserDefaults.standard.setValue(newValue, forKeyPath: "master_truth_version")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "master_truth_version") as? String ?? "0"
+        }
+    }
+    
+    
+    var currentManifestTruthVersion: String {
+        set {
+            UserDefaults.standard.setValue(newValue, forKeyPath: "manifest_truth_version")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "manifest_truth_version") as? String ?? "0"
+        }
+    }
+    
+    
+    // 设置当前版本号为最新版本
+    func setDataVersionToNewest() {
+        currentDataVersion = newestDataVersion
+    }
+    
+    
+    func setApiVersionToNewest() {
+        if let info = apiInfo {
+            currentApiVersion = info.apiVersion
+        }
+    }
+    
+    func setMasterTruthVersionToNewest() {
+        if let info = apiInfo {
+            currentMasterTruthVersion = info.truthVersion
+        }
+    }
+    
+    func setManifestTruthVersionToNewest() {
+        if let info = apiInfo {
+            currentManifestTruthVersion = info.truthVersion
+        }
+    }
+    
     
     
     

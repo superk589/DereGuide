@@ -47,7 +47,7 @@
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
-		1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */; };
+		1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */; };
 		1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */; };
 		124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791801D87F4FD00ED8EA6 /* GachaViewController.swift */; };
 		124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */; };
@@ -239,7 +239,7 @@
 		1244F5E61D98E6210021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ToolboxList.plist; sourceTree = "<group>"; };
 		1244F5E81D98E6230021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/ToolboxList.plist"; sourceTree = "<group>"; };
 		1244F5E91D98E6250021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/ToolboxList.plist; sourceTree = "<group>"; };
-		1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameInfo.swift; sourceTree = "<group>"; };
+		1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiInfo.swift; sourceTree = "<group>"; };
 		1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameResource.swift; sourceTree = "<group>"; };
 		124791801D87F4FD00ED8EA6 /* GachaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaViewController.swift; sourceTree = "<group>"; };
 		124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGachaPool.swift; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
-				1247917B1D87D8FC00ED8EA6 /* CGSSGameInfo.swift */,
+				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
 				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
 				1269E9C81D520B5D0071AD7F /* CGSSCard.swift */,
 				1269E9C91D520B5D0071AD7F /* CGSSCardIcon.swift */,
@@ -1073,7 +1073,7 @@
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
 				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
-				1247917C1D87D8FC00ED8EA6 /* CGSSGameInfo.swift in Sources */,
+				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
