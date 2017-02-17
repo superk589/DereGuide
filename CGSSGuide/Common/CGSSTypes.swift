@@ -18,27 +18,72 @@ struct CGSSSkillTypes: OptionSet {
     static let comboContinue = CGSSSkillTypes.init(rawValue: 1 << 4)
     static let heal = CGSSSkillTypes.init(rawValue: 1 << 5)
     static let `guard` = CGSSSkillTypes.init(rawValue: 1 << 6)
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 7)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 8)
-    static let all = CGSSSkillTypes.init(rawValue: 0b111111111)
-    init (typeString: String) {
-        switch typeString {
-        case "COMBO加成":
-            self = .comboBonus
-        case "分数加成", "PERFECT分数加成":
+    
+    static let concentration = CGSSSkillTypes.init(rawValue: 1 << 7)
+    static let mimic = CGSSSkillTypes.init(rawValue: 1 << 8)
+    static let boost = CGSSSkillTypes.init(rawValue: 1 << 9)
+    static let allRound = CGSSSkillTypes.init(rawValue: 1 << 10)
+    static let deepCute = CGSSSkillTypes.init(rawValue: 1 << 11)
+    static let deepCool = CGSSSkillTypes.init(rawValue: 1 << 12)
+    static let deepPassion = CGSSSkillTypes.init(rawValue: 1 << 13)
+    
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 14)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 15)
+
+    static let all = CGSSSkillTypes.init(rawValue: 0b1111_1111_1111_1111)
+//    init (typeString: String) {
+//        switch typeString {
+//        case "COMBO加成":
+//            self = .comboBonus
+//        case "分数加成", "PERFECT分数加成":
+//            self = .perfectBonus
+//        case "中级强判", "高级强判", "初级强判":
+//            self = .perfectLock
+//        case "COMBO保护":
+//            self = .comboContinue
+//        case "恢复生命":
+//            self = .heal
+//        case "锁血":
+//            self = .guard
+//        case "过载":
+//            self = .overload
+//        case "":
+//            self = .none
+//        default:
+//            self = .unknown
+//        }
+//    }
+    
+    init(typeId: Int) {
+        switch typeId {
+        case 1, 2, 3:
             self = .perfectBonus
-        case "中级强判", "高级强判", "初级强判":
+        case 4:
+            self = .comboBonus
+        case 5, 6, 7, 8:
             self = .perfectLock
-        case "COMBO保护":
+        case 9, 10, 11:
             self = .comboContinue
-        case "恢复生命":
-            self = .heal
-        case "锁血":
+        case 12:
             self = .guard
-        case "过载":
+        case 13, 17, 18, 19:
+            self = .heal
+        case 14:
             self = .overload
-        case "":
-            self = .none
+        case 15:
+            self = .concentration
+        case 16:
+            self = .mimic
+        case 20:
+            self = .boost
+        case 21:
+            self = .deepCute
+        case 22:
+            self = .deepCool
+        case 23:
+            self = .deepPassion
+        case 24:
+            self = .allRound
         default:
             self = .unknown
         }
@@ -63,6 +108,20 @@ struct CGSSSkillTypes: OptionSet {
             return NSLocalizedString("全部", comment: "")
         case CGSSSkillTypes.none:
             return NSLocalizedString("无", comment: "")
+        case CGSSSkillTypes.concentration:
+            return NSLocalizedString("专注", comment: "")
+        case CGSSSkillTypes.mimic:
+            return NSLocalizedString("模仿", comment: "")
+        case CGSSSkillTypes.allRound:
+            return NSLocalizedString("全才", comment: "")
+        case CGSSSkillTypes.deepCute:
+            return "Deep Cute"
+        case CGSSSkillTypes.deepCool:
+            return "Deep Cool"
+        case CGSSSkillTypes.deepPassion:
+            return "Deep Passion"
+        case CGSSSkillTypes.boost:
+            return "Skill Boost"
         default:
             return NSLocalizedString("未知", comment: "")
         }

@@ -562,3 +562,13 @@
 "首次出现时间" = "Created time";
 "未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。" = "Can't find the beatmap. If an update is in progress, please wait for it to complete, or pull down to update manually. If still not found, maybe the formal data is not updated.";
 
+
+/* new in 1.2.4 */
+// Skill Type: Concentration
+"专注" = "Concentration";
+
+// Skill Type: Mimic
+"模仿" = "Mimic";
+
+// Skill Type: All Round
+"全才" = "All Round";

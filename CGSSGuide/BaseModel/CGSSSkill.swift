@@ -33,7 +33,7 @@ fileprivate let skillDescriptions = [
 extension CGSSSkill {
     
     var skillFilterType: CGSSSkillTypes {
-        return CGSSSkillTypes.init(typeString: skillType)
+        return CGSSSkillTypes.init(typeId: skillTypeId)
     }
     
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
@@ -157,6 +157,8 @@ class CGSSSkill: CGSSBaseModel {
     var skillTriggerValue: Int!
     var skillType: String!
     var value: Int!
+    var skillTypeId: Int!
+    var value2: Int!
     
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -193,6 +195,8 @@ class CGSSSkill: CGSSBaseModel {
         }
 
         value = json["value"].intValue
+        value2 = json["value_2"].intValue
+        skillTypeId = json["skill_type_id"].intValue
     }
     
     /**
@@ -217,7 +221,8 @@ class CGSSSkill: CGSSBaseModel {
         skillTriggerValue = aDecoder.decodeObject(forKey: "skill_trigger_value") as? Int
         skillType = aDecoder.decodeObject(forKey: "skill_type") as? String ?? NSLocalizedString("未知", comment: "")
         value = aDecoder.decodeObject(forKey: "value") as? Int
-        
+        skillTypeId = aDecoder.decodeObject(forKey: "skill_type_id") as? Int
+        value2 = aDecoder.decodeObject(forKey: "value_2") as? Int
     }
     
     /**
@@ -272,7 +277,12 @@ class CGSSSkill: CGSSBaseModel {
         if value != nil {
             aCoder.encode(value, forKey: "value")
         }
-        
+        if skillTypeId != nil {
+            aCoder.encode(skillTypeId, forKey: "skill_type_id")
+        }
+        if value2 != nil {
+            aCoder.encode(value2, forKey: "value_2")
+        }
     }
     
 }
