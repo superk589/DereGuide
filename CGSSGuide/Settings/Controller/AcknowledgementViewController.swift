@@ -46,6 +46,12 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
         tableView.estimatedRowHeight = 50
         tableView.register(AcknowledgementTableViewCell.self, forCellReuseIdentifier: "AckCell")
         
+        if #available(iOS 9.0, *) {
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+            // Fallback on earlier versions
+        }
+        
         // Do any additional setup after loading the view.
     }
     

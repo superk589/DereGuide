@@ -363,7 +363,7 @@ class CardDetailView: UIView {
         skillContentView.addSubview(skillDescriptionLabel)
         
         insideY += topSpace + skillDescriptionLabel.frame.height
-        skillProcGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 54), rows: 3, columns: 5)
+        skillProcGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 72), rows: 4, columns: 5)
         // skillContentView.addSubview(skillProcGridView)
         // skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         // skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
@@ -380,15 +380,32 @@ class CardDetailView: UIView {
         skillProcGridView.fy = skillDescriptionLabel.fheight + skillDescriptionLabel.fy + topSpace
         
         var procGridStrings = [[String]]()
-        let procChanceMax: Float! = skill.procChanceOfLevel(10)
-        let procChanceMin: Float! = skill.procChanceOfLevel(1)
-        let durationMax: Float! = skill.effectLengthOfLevel(10)
-        let durationMin: Float! = skill.effectLengthOfLevel(1)
-        procGridStrings.append(["  ", NSLocalizedString("触发几率%", comment: "卡片详情页"), NSLocalizedString("持续时间s", comment: "卡片详情页"), NSLocalizedString("最大覆盖率%", comment: "卡片详情页"), NSLocalizedString("平均覆盖率%", comment: "卡片详情页")])
-        procGridStrings.append(["Lv.1", String(format: "%.2f", procChanceMin), String(format: "%.2f", durationMin)
-            , String(format: "%.2f", durationMin / Float(skill.condition!) * 100), String(format: "%.2f", durationMin / Float(skill.condition!) * procChanceMin)])
-        procGridStrings.append(["Lv.10", String(format: "%.2f", procChanceMax), String(format: "%.2f", durationMax)
-            , String(format: "%.2f", durationMax / Float(skill.condition!) * 100), String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax)])
+        let procChanceMax = skill.procChanceOfLevel(10)
+        let procChanceMin = skill.procChanceOfLevel(1)
+        let durationMax = skill.effectLengthOfLevel(10)
+        let durationMin = skill.effectLengthOfLevel(1)
+        
+        procGridStrings.append(["  ",
+                                NSLocalizedString("触发几率%", comment: "卡片详情页"),
+                                NSLocalizedString("持续时间s", comment: "卡片详情页"),
+                                NSLocalizedString("最大覆盖率%", comment: "卡片详情页"),
+                                NSLocalizedString("平均覆盖率%", comment: "卡片详情页")])
+        procGridStrings.append(["Lv.1",
+                                String(format: "%.2f", procChanceMin),
+                                String(format: "%.2f", durationMin),
+                                String(format: "%.2f", durationMin / Float(skill.condition!) * 100),
+                                String(format: "%.2f", durationMin / Float(skill.condition!) * procChanceMin)])
+        procGridStrings.append(["Lv.10",
+                                String(format: "%.2f", procChanceMax),
+                                String(format: "%.2f", durationMax),
+                                String(format: "%.2f", durationMax / Float(skill.condition!) * 100),
+                                String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax)])
+        procGridStrings.append(["Lv.10(+30%)",
+                                String(format: "%.3f", procChanceMax * 1.3),
+                                String(format: "%.2f", durationMax),
+                                String(format: "%.2f", durationMax / Float(skill.condition!) * 100),
+                                String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax * 1.3)])
+        
         skillProcGridView.setGridContent(procGridStrings)
         
         skillContentView.fheight = skillProcGridView.fheight + skillProcGridView.fy + topSpace

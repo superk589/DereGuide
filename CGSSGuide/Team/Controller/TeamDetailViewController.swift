@@ -69,6 +69,34 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 //MARK: TeamDetailViewDelegate 协议方法
 extension TeamDetailViewController: TeamDetailViewDelegate {
   
+    func advanceCalc() {
+        if let live = self.live, let diff = self.diff {
+            self.teamDV.clearAdScoreGrid()
+            if team.hasUnknownSkills() {
+                showUnknownSkillAlert()
+            }
+            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let simulator = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
+            DispatchQueue.global(qos: .userInitiated).async {
+                simulator.simulate(times: 1000, progress: { (a, b) in
+                    DispatchQueue.main.async {
+                        // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
+                        self.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
+                    }
+                }, callback: { (result) in
+                    DispatchQueue.main.async {
+                        self.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
+                        self.teamDV.resetAdCalcButton()
+                        self.teamDV.advanceProgress.progress = 0
+                    }
+                })
+            }
+        } else {
+            showNotSelectSongAlert()
+            teamDV.resetAdCalcButton()
+        }
+    }
+    
     func manualFieldBegin() {
         var offset = teamDV.bottomView.fy + teamDV.manualValueTF.fy + teamDV.manualValueTF.fheight - sv.contentOffset.y + 258 - sv.fheight
         offset += UIApplication.shared.statusBarFrame.size.height - 20
@@ -80,7 +108,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
 
     func manualFieldDone(_ value: Int) {
-        team.manualValue = value
+        team.customAppeal = value
         CGSSTeamManager.defaultManager.writeToFile(nil)
     }
 
@@ -93,16 +121,6 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             self.sv.contentSize = self.teamDV.frame.size
         })
-//        if sv.contentSize.height < teamDV.frame.size.height {
-//            UIView.animateWithDuration(0.25, animations: {
-//                self.sv.contentSize = self.teamDV.frame.size
-//            })
-//        } else {
-//            // 当收起时 不做任何动作 不改变scrollview的contentsize
-//            let offset = sv.contentOffset
-//            sv.contentSize = teamDV.frame.size
-//            sv.contentOffset = offset
-//        }
     }
     
     func selectSong() {
@@ -112,7 +130,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func backFieldDone(_ value: Int) {
-        team.backSupportValue = value
+        team.supportAppeal = value
         teamDV.updatePresentValueGrid(team)
         CGSSTeamManager.defaultManager.writeToFile(nil)
     }
@@ -135,39 +153,34 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         navigationController?.pushViewController(teamEditDVC, animated: true)
         
     }
+    
+    func showUnknownSkillAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showNotSelectSongAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "弹出框标题"), message: NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func startCalc() {
         if let live = self.live, let diff = self.diff {
             self.teamDV.clearScoreGrid()
             if team.hasUnknownSkills() {
-                let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                showUnknownSkillAlert()
             }
-            let simulator = CGSSLiveSimulator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff)
-            if usingManualValue {
-                self.teamDV.updateSimulatorPresentValue(team.manualValue)
-                simulator.simulateOnce(true, manualValue: team.manualValue, callBack: { [weak self](score) in
-                    self?.teamDV.updateScoreGridMaxScore(score)
-                    })
-                simulator.simulate(100, manualValue: team.manualValue, callBack: { [weak self](scores, avg) in
-                    self?.teamDV.updateScoreGridAvgScore(avg)
-                    })
-            } else {
-                self.teamDV.updateSimulatorPresentValue(simulator.presentTotal)
-                simulator.simulateOnce(true, manualValue: nil, callBack: { [weak self](score) in
-                    self?.teamDV.updateScoreGridMaxScore(score)
-                })
-                //hud.startAnimate()
-                simulator.simulate(100, manualValue: nil, callBack: { [weak self](scores, avg) in
-                    //self?.hud.stopAnimate()
-                    self?.teamDV.updateScoreGridAvgScore(avg)
-                })
-            }
+            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
+            self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
+            let simulator2 = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
             
+            self.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: simulator1.max, value3: simulator2.max, value4: simulator2.average)
+            self.teamDV.resetCalcButton()
         } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "弹出框标题"), message: NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            showNotSelectSongAlert()
             teamDV.resetCalcButton()
         }
     }

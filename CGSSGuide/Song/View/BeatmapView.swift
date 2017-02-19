@@ -524,7 +524,7 @@ class AdvanceBeatmapDrawer {
     }
     
     func getPointY(_ sec: Float) -> CGFloat {
-        return totalHeight - CGFloat(sec - self.beatmap.preSeconds!) * secScale - heightInset
+        return totalHeight - CGFloat(sec - self.beatmap.secondOfFirstNote) * secScale - heightInset
     }
     
     func getSecOffset(y: CGFloat) -> Float {

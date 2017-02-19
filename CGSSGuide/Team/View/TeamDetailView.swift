@@ -28,6 +28,7 @@ protocol TeamDetailViewDelegate: class {
     func usingManualValue(using:Bool)
     func manualFieldBegin()
     func manualFieldDone(_ value: Int)
+    func advanceCalc()
 }
 
 class TeamDetailView: UIView {
@@ -69,6 +70,12 @@ class TeamDetailView: UIView {
     var startCalcButton: UIButton!
     var skillProcGrid: CGSSGridLabel!
     var scoreGrid: CGSSGridLabel!
+    
+    var advanceCalculateButton: UIButton!
+    var advanceScoreGrid: CGSSGridLabel!
+    
+    var advanceProgress: UIProgressView!
+    
     var scoreDescLabel: UILabel!
     
     override init(frame: CGRect) {
@@ -294,13 +301,28 @@ class TeamDetailView: UIView {
         originY += topSpace / 2 + 3
         
         startCalcButton = UIButton.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 30))
-        startCalcButton.setTitle(NSLocalizedString("开始计算", comment: "队伍详情页面"), for: .normal)
+        startCalcButton.setTitle(NSLocalizedString("一般计算", comment: "队伍详情页面"), for: .normal)
         startCalcButton.backgroundColor = Color.dance
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
         originY += 30 + topSpace
-        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 3)
-//        scoreGrid.isHidden = true
+        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 4)
+        
+        originY += 36 + topSpace
+        
+        advanceCalculateButton = UIButton.init(frame: CGRect.init(x: leftSpace, y: originY, width: width, height: 30))
+        advanceCalculateButton.setTitle(NSLocalizedString("模拟计算", comment: "队伍详情页面"), for: .normal)
+        advanceCalculateButton.backgroundColor = Color.vocal
+        advanceCalculateButton.addTarget(self, action: #selector(advanceCalc), for: .touchUpInside)
+        
+        advanceProgress = UIProgressView.init(frame: CGRect.init(x: 0, y: 30 - 2, width: width, height: 2))
+        advanceCalculateButton.addSubview(advanceProgress)
+        advanceProgress.trackTintColor = UIColor.clear
+        advanceProgress.progressTintColor = Color.parade
+        
+        originY += 30 + topSpace
+        
+        advanceScoreGrid = CGSSGridLabel.init(frame: CGRect.init(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 4)
         
         originY += 36 + topSpace
         
@@ -308,7 +330,7 @@ class TeamDetailView: UIView {
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
         scoreDescLabel.textColor = UIColor.darkGray
         scoreDescLabel.numberOfLines = 0
-        scoreDescLabel.text = NSLocalizedString("* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
+        scoreDescLabel.text = NSLocalizedString("* 全部note为Perfect评价，小屋加成为10%\n* 极限分数中所有技能100%触发\n* 极限分数1中note取Perfect判定±0.06秒中的最优值，极限分数2和其他分数都不考虑此项因素\n* 忽略技能触发率提升的队长技能\n* 模拟计算结果是1000次模拟后取前x%内的最低分数得出，每次结果会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
         scoreDescLabel.sizeToFit()
         originY += topSpace + scoreDescLabel.fheight + topSpace
         setupScoreGrid()
@@ -321,6 +343,8 @@ class TeamDetailView: UIView {
         bottomView.addSubview(grooveTypeContentView)
         bottomView.addSubview(startCalcButton)
         bottomView.addSubview(scoreGrid)
+        bottomView.addSubview(advanceScoreGrid)
+        bottomView.addSubview(advanceCalculateButton)
         bottomView.addSubview(scoreDescLabel)
         
         addSubview(selfLeaderLabel)
@@ -349,6 +373,12 @@ class TeamDetailView: UIView {
         startCalcButton.setTitle(NSLocalizedString("计算中...", comment: "队伍详情页面"), for: .normal)
         startCalcButton.isUserInteractionEnabled = false
         delegate?.startCalc()
+    }
+    
+    func advanceCalc() {
+        advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: ""), for: .normal)
+        advanceCalculateButton.isUserInteractionEnabled = false
+        delegate?.advanceCalc()
     }
     var skillListIsShow = false
     func skillShowOrHide() {
@@ -525,8 +555,8 @@ class TeamDetailView: UIView {
         }
         
         updatePresentValueGrid(team)
-        backSupportTF.text = String(team.backSupportValue!)
-        manualValueTF.text = String(team.manualValue!)
+        backSupportTF.text = String(team.supportAppeal!)
+        manualValueTF.text = String(team.customAppeal!)
         
         var skillListStrings = [[String]]()
         let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
@@ -549,23 +579,23 @@ class TeamDetailView: UIView {
     }
     
     func updatePresentValueGrid(_ team: CGSSTeam) {
-        var presentValueString = [[String]]()
+        var appealStrings = [[String]]()
         var presentColor = [[UIColor]]()
         
-        presentValueString.append([" ", "Total", "Vocal", "Dance", "Visual"])
+        appealStrings.append([" ", "Total", "Vocal", "Dance", "Visual"])
         var presentSub1 = [NSLocalizedString("彩色曲", comment: "队伍详情页面")]
-        presentSub1.append(contentsOf: team.getPresentValue(.office).toStringArrayWithBackValue(team.backSupportValue))
+        presentSub1.append(contentsOf: team.getAppeal(.office).toStringArrayWithBackValue(team.supportAppeal))
         var presentSub2 = [NSLocalizedString("Cu曲", comment: "队伍详情页面")]
-        presentSub2.append(contentsOf: team.getPresentValue(.cute).toStringArrayWithBackValue(team.backSupportValue))
+        presentSub2.append(contentsOf: team.getAppeal(.cute).toStringArrayWithBackValue(team.supportAppeal))
         var presentSub3 = [NSLocalizedString("Co曲", comment: "队伍详情页面")]
-        presentSub3.append(contentsOf: team.getPresentValue(.cool).toStringArrayWithBackValue(team.backSupportValue))
+        presentSub3.append(contentsOf: team.getAppeal(.cool).toStringArrayWithBackValue(team.supportAppeal))
         var presentSub4 = [NSLocalizedString("Pa曲", comment: "队伍详情页面")]
-        presentSub4.append(contentsOf: team.getPresentValue(.passion).toStringArrayWithBackValue(team.backSupportValue))
+        presentSub4.append(contentsOf: team.getAppeal(.passion).toStringArrayWithBackValue(team.supportAppeal))
         
-        presentValueString.append(presentSub1)
-        presentValueString.append(presentSub2)
-        presentValueString.append(presentSub3)
-        presentValueString.append(presentSub4)
+        appealStrings.append(presentSub1)
+        appealStrings.append(presentSub2)
+        appealStrings.append(presentSub3)
+        appealStrings.append(presentSub4)
         
         let colorArray2 = [UIColor.darkGray, Color.allType, Color.vocal, Color.dance, Color.visual]
         presentColor.append(contentsOf: Array.init(repeating: colorArray2, count: 5))
@@ -573,7 +603,7 @@ class TeamDetailView: UIView {
         presentColor[3][0] = Color.cool
         presentColor[4][0] = Color.passion
         
-        presentValueGrid.setGridContent(presentValueString)
+        presentValueGrid.setGridContent(appealStrings)
         presentValueGrid.setGridColor(presentColor)
         
         for i in 0..<5 {
@@ -598,22 +628,36 @@ class TeamDetailView: UIView {
     func updateGrooveSelectButton() {
         startCalcButton.fy = grooveTypeContentView.fy + grooveTypeContentView.fheight + topSpace / 2 + 3
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
-        scoreDescLabel.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
+        advanceCalculateButton.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
+        advanceScoreGrid.fy = advanceCalculateButton.fbottom + topSpace
+        scoreDescLabel.fy = advanceScoreGrid.fbottom + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
         frame.size = CGSize(width: CGSSGlobal.width, height: bottomView.fheight + bottomView.fy + topSpace * 2)
     }
     
     func resetCalcButton() {
-        startCalcButton.setTitle(NSLocalizedString("开始计算", comment: ""), for: .normal)
+        startCalcButton.setTitle(NSLocalizedString("一般计算", comment: ""), for: .normal)
         startCalcButton.isUserInteractionEnabled = true
     }
     
-    func updateScoreGridMaxScore(_ score: Int) {
-        scoreGrid[1, 1].text = String(score)
+    func resetAdCalcButton() {
+        advanceCalculateButton.setTitle(NSLocalizedString("模拟计算", comment: ""), for: .normal)
+        advanceCalculateButton.isUserInteractionEnabled = true
     }
-    func updateScoreGridAvgScore(_ score: Int) {
-        scoreGrid[1, 2].text = String(score)
-        resetCalcButton()
+    
+    
+    func updateScoreGrid(value1: Int, value2: Int, value3: Int, value4: Int) {
+        scoreGrid[1, 0].text = String(value1)
+        scoreGrid[1, 1].text = String(value2)
+        scoreGrid[1, 2].text = String(value3)
+        scoreGrid[1, 3].text = String(value4)
+    }
+
+    func updateScoreGridSimulateResulte(result1: Int, result2: Int, result3: Int, result4: Int) {
+        advanceScoreGrid[1, 0].text = String(result1)
+        advanceScoreGrid[1, 1].text = String(result2)
+        advanceScoreGrid[1, 2].text = String(result3)
+        advanceScoreGrid[1, 3].text = String(result4)
     }
     
     func updateSimulatorPresentValue(_ value: Int) {
@@ -622,21 +666,38 @@ class TeamDetailView: UIView {
     
     func clearScoreGrid() {
         scoreGrid[1, 2].text = ""
+        scoreGrid[1, 1].text = ""
+        scoreGrid[1, 0].text = ""
+        scoreGrid[1, 3].text = ""
+    }
+    
+    func clearAdScoreGrid() {
+        advanceScoreGrid[1, 0].text = ""
+        advanceScoreGrid[1, 1].text = ""
+        advanceScoreGrid[1, 2].text = ""
+        advanceScoreGrid[1, 3].text = ""
     }
     
     func setupScoreGrid() {
         scoreGrid.isHidden = false
         scoreDescLabel.isHidden = false
         var scoreString = [[String]]()
-        scoreString.append([NSLocalizedString("表现值", comment: "队伍详情页面"), NSLocalizedString("极限分数", comment: "队伍详情页面"), NSLocalizedString("平均分数(模拟)", comment: "队伍详情页面")])
-        scoreString.append(["", "", ""])
+        scoreString.append([NSLocalizedString("表现值", comment: "队伍详情页面"), NSLocalizedString("极限分数", comment: "队伍详情页面") + "1", NSLocalizedString("极限分数", comment: "队伍详情页面") + "2", NSLocalizedString("平均分数", comment: "队伍详情页面")])
+        scoreString.append(["", "", "", ""])
         scoreGrid.setGridContent(scoreString)
+        
+        advanceScoreGrid.isHidden = false
+        var adStrings = [[String]]()
+        adStrings.append(["1%", "5%", "20%", "50%"])
+        adStrings.append(["", "", "", ""])
+        advanceScoreGrid.setGridContent(adStrings)
+        
     }
     func backFieldBegin() {
         delegate?.backFieldBegin()
     }
     func backFieldDone() {
-        let value = Int(backSupportTF.text!) ?? CGSSGlobal.presetBackValue
+        let value = Int(backSupportTF.text!) ?? CGSSGlobal.defaultSupportAppeal
         backSupportTF.text = String(value)
         delegate?.backFieldDone(value)
     }
@@ -644,6 +705,10 @@ class TeamDetailView: UIView {
         didSet {
             self.liveTypeButton.setTitle("< \(currentLiveType.toString()) >", for: .normal)
             self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), for: .normal)
+            if currentLiveType != oldValue {
+                self.clearScoreGrid()
+                self.clearAdScoreGrid()
+            }
         }
     }
     var currentGrooveType: CGSSGrooveType? {
@@ -653,6 +718,10 @@ class TeamDetailView: UIView {
                 self.grooveTypeButton.setTitleColor(type.typeColor(), for: .normal)
             } else {
                 self.grooveTypeButton.setTitle("", for: .normal)
+            }
+            if currentGrooveType != oldValue {
+                self.clearScoreGrid()
+                self.clearAdScoreGrid()
             }
         }
     }

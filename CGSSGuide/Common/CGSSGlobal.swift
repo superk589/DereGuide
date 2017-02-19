@@ -100,39 +100,6 @@ public class CGSSGlobal: NSObject {
         }
     }
     
-    static let diffFactor: [Int: Float] = [
-        5: 1.0,
-        6: 1.025,
-        7: 1.05,
-        8: 1.075,
-        9: 1.1,
-        10: 1.2,
-        11: 1.225,
-        12: 1.25,
-        13: 1.275,
-        14: 1.3,
-        15: 1.4,
-        16: 1.425,
-        17: 1.45,
-        18: 1.475,
-        19: 1.5,
-        20: 1.6,
-        21: 1.65,
-        22: 1.7,
-        23: 1.75,
-        24: 1.8,
-        25: 1.85,
-        26: 1.9,
-        27: 1.95,
-        28: 2,
-        29: 2.1,
-        30: 2.2,
-    ]
-    
-    static let comboFactor: [Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
-    
-    static let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
-    
     static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
     
     static let potentialOfLevel: [CGSSRarityTypes:[Int]] = [
@@ -190,7 +157,7 @@ public class CGSSGlobal: NSObject {
     
     // max = 15921 + 500 + 500 + 220 
     // ceil(0.5 × max × 1.3) * 10
-    static let presetBackValue = 111420
+    static let defaultSupportAppeal = 111420
     
 }
 

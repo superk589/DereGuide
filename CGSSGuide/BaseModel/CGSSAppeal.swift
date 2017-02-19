@@ -1,5 +1,5 @@
 //
-//  CGSSAttributeValue.swift
+//  CGSSAppeal.swift
 //  CGSSGuide
 //
 //  Created by zzk on 16/8/6.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CGSSAttributeValue {
+struct CGSSAppeal {
     var visual: Int
     var vocal: Int
     var dance: Int
@@ -24,10 +24,10 @@ struct CGSSAttributeValue {
     }
 }
 
-func + (a1: CGSSAttributeValue, a2: CGSSAttributeValue) -> CGSSAttributeValue {
-    return CGSSAttributeValue.init(visual: a1.visual + a2.visual, vocal: a1.vocal + a2.vocal, dance: a1.dance + a2.dance, life: a1.life + a2.life)
+func + (a1: CGSSAppeal, a2: CGSSAppeal) -> CGSSAppeal {
+    return CGSSAppeal.init(visual: a1.visual + a2.visual, vocal: a1.vocal + a2.vocal, dance: a1.dance + a2.dance, life: a1.life + a2.life)
 }
-func += (a1: inout CGSSAttributeValue, a2: CGSSAttributeValue) {
+func += (a1: inout CGSSAppeal, a2: CGSSAppeal) {
     a1 = a1 + a2
 }
 

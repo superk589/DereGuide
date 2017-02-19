@@ -19,8 +19,8 @@ class TeamEditViewController: BaseTableViewController {
     // 因为设置时可能存在不按1234的顺序设置的情况 故此处设置队员为int下标的字典
     var subs = [Int: CGSSTeamMember]()
     var friendLeader: CGSSTeamMember?
-    var backValue: Int?
-    var manualValue: Int?
+    var supportAppeal: Int?
+    var customAppeal: Int?
     var hv = UIView()
     var lastIndex = 0
     var lastScrollViewOffset: CGPoint?
@@ -89,8 +89,8 @@ class TeamEditViewController: BaseTableViewController {
         for i in 0...3 {
             self.subs[i] = CGSSTeamMember.initWithAnother(teamMember: team.subs[i])
         }
-        self.backValue = team.backSupportValue
-        self.manualValue = team.manualValue
+        self.supportAppeal = team.supportAppeal
+        self.customAppeal = team.customAppeal
     }
     
     func getMemberByIndex(_ index: Int) -> CGSSTeamMember? {
@@ -126,8 +126,8 @@ class TeamEditViewController: BaseTableViewController {
     
     func saveTeam() {
         if let leader = self.leader, let friendLeader = self.friendLeader , subs.count == 4 {
-            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), backSupportValue: backValue ?? CGSSGlobal.presetBackValue, friendLeader: friendLeader)
-            team.manualValue = manualValue ?? 0
+            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), supportAppeal: supportAppeal ?? CGSSGlobal.defaultSupportAppeal, friendLeader: friendLeader)
+            team.customAppeal = customAppeal ?? 0
             delegate?.save(team)
             _ = self.navigationController?.popViewController(animated: true)
         } else {

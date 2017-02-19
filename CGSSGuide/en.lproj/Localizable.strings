@@ -126,7 +126,7 @@
 "常规模式" = "Regular";
 
 /* 队伍详情页面 */
-"平均分数(模拟)" = "Avg. Score (sim.)";
+"平均分数" = "Avg. Score";
 
 /* 卡片详情页 */
 "平均覆盖率%" = "Avg. cover. %";
@@ -136,9 +136,6 @@
 
 /* 生日提醒页面 */
 "开启生日通知提醒" = "Enable Birthday Notifications";
-
-/* 队伍详情页面 */
-"开始计算" = "Calculate";
 
 /* 队伍详情页面 */
 "彩色曲" = "All-type";
@@ -239,7 +236,7 @@
 "未设置邮箱账户" = "There aren't any Mail accounts";
 
 /* 队伍详情页面 */
-"极限分数" = "Optimistic Score";
+"极限分数" = "Optimistic Score ";
 
 /* 模拟抽卡页面 */
 "查看完整卡池" = "Full availability list";
@@ -444,9 +441,6 @@
 /* 模拟抽卡页面 */
 "* 每张卡片的获取几率和官方公布数据一致" = "* The rate of each card is the same as the formal data.";
 
-/* 队伍详情页面 */
-"* 极限和平均分数中所有点为Perfect评价\n* 极限分数中所有技能100%触发\n* 平均分数采用100次真实模拟后求平均值的方法，每次计算会略有不同\n* 平均分数没有计算技能触发率提升的队长技能带来的影响\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响" = "* Simulation assumes all notes are Perfect.\n* Optimistic score assumes that skills always activate.\n* The average score is taken from 100 real simulations. Results will vary between calculations.\n* Center skills that affect the skill activation rate are not accounted for in the average score.\n* In Groove or LIVE Parade mode, the partner's leader is ignored automatically.";
-
 /* new in v1.2.0 */
 "支持作者" = "Support us";
 "为什么会有这个页面？" = "What is this?";
@@ -572,3 +566,10 @@
 
 // Skill Type: All Round
 "全才" = "All Round";
+
+"* 全部note为Perfect评价，小屋加成为10%\n* 极限分数中所有技能100%触发\n* 极限分数1中note取Perfect判定±0.06秒中的最优值，极限分数2和其他分数都不考虑此项因素\n* 忽略技能触发率提升的队长技能\n* 模拟计算结果是1000次模拟后取前x%内的最低分数得出，每次结果会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响" = "* Simulation assumes all notes are Perfect, room bonus is 10%.\n* Optimistic score assumes that skills always activate.\n* In optimistic score 1, it takes the best score of each note from Perfect ±0.06 sec. In optimistic score 2 and other results, this factor is ignored.\n* Center skills that affect the skill activation rate are not accounted for in the average score.\n* The simulation result is taken from 1000 real simulations. Results will vary between simulations.\n* In Groove or LIVE Parade mode, the partner's leader is ignored automatically.";
+
+"一般计算" = "Calculate";
+"模拟计算" = "Simualte";
+
+

@@ -163,32 +163,23 @@ class CGSSBeatmap: CGSSBaseModel {
         }
     }
     
-    var preSeconds: Float! {
+    var secondOfFirstNote: Float {
         return firstNote?.sec ?? 0
     }
-    var postSeconds: Float {
+    var secondOfLastNote: Float {
         return lastNote?.sec ?? 0
     }
     var totalSeconds: Float {
         return notes.last?.sec ?? 0
     }
-    
     var validSeconds: Float {
-        return postSeconds - preSeconds
-    }
-    
-    func getCriticalPointNoteIndexes() -> [Int] {
-        var arr = [Int]()
-        for i in CGSSGlobal.criticalPercent {
-            arr.append(Int(floor(Float(numberOfNotes * i) / 100)))
-        }
-        return arr
+        return secondOfLastNote - secondOfFirstNote
     }
     
     // 折半查找指定秒数对应的combo数
     func comboForSec(_ sec: Float) -> Int {
         // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
-        let newSec = sec + preSeconds! + 0.0001
+        let newSec = sec + secondOfFirstNote + 0.0001
         var end = numberOfNotes - 1
         var start = 0
         while start <= end {

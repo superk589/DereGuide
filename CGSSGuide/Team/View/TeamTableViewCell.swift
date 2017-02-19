@@ -114,7 +114,7 @@ class TeamTableViewCell: UITableViewCell {
         vocalLabel.text = String(team.rawVocal)
         visualLabel.text = String(team.rawVisual)
         danceLabel.text = String(team.rawDance)
-        totalLabel.text = String(team.rawPresentValue.total)
+        totalLabel.text = String(team.rawAppeal.total)
         lifeLabel.text = String(team.rawHP)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
