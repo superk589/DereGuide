@@ -66,9 +66,13 @@ class CGSSLiveSimulator {
         var sum = 0
         var procedContents = [ScoreUpContent]()
         for content in contents {
-            if CGSSGlobal.isProc(rate: Int(content.rate * 100000)) {
+            if CGSSGlobal.isProc(rate: Int(round(content.rate * 100000))) {
                 procedContents.append(content)
             }
+        }
+        
+        procedContents.sort { (c1, c2) -> Bool in
+            c1.range.begin < c2.range.begin
         }
         
         for i in 0..<notes.count {
@@ -78,9 +82,13 @@ class CGSSLiveSimulator {
             var comboBonus = 100
             var perfectBonus = 100
             var skillBoost = 1000
-
+            
             for content in procedContents {
-                if note.sec >= content.range.begin && note.sec <= content.range.end {
+                if note.sec > content.range.end {
+                    continue
+                } else if note.sec < content.range.begin {
+                    break
+                } else {
                     switch content.upType {
                     case ScoreUpTypes.comboBonus:
                         if content.upValue > comboBonus {
@@ -99,10 +107,18 @@ class CGSSLiveSimulator {
                     }
                 }
             }
+        
+            /* prepare for skill boost
+            if skillBoost > 1000 {
+                perfectBonus = 100 + Int(ceil(Float((perfectBonus - 100) * skillBoost) * 0.001))
+                comboBonus = 100 + Int(ceil(Float((comboBonus - 100) * skillBoost) * 0.001))
+            } */
+            
             sum += Int(round(baseScore * comboFactor * Float(perfectBonus * comboBonus) / 10000))
         }
         simulateResult.append(sum)
     }
+
     func simulate(times: UInt, callback: @escaping SimulateResultClosure) {
         for _ in 0..<times {
             simulateOnce()

@@ -20,18 +20,20 @@ struct Variable {
 
 
 struct Distribution {
+    var defaultValue: Int
+    
     var variables: [Variable]
     
     var average: Float {
-        var result: Float = 100
+        var result: Float = Float(defaultValue)
         for variable in variables {
-            result += variable.rate * Float(variable.upValue - 100)
+            result += variable.rate * Float(variable.upValue - defaultValue)
         }
         return result
     }
     
     var variance: Float {
-        var result: Float = 100
+        var result: Float = Float(defaultValue)
         let avg = average
         for variable in variables {
             result += variable.rate * (Float(variable.upValue) - avg) * (Float(variable.upValue) - avg)
@@ -43,11 +45,12 @@ struct Distribution {
         if let v = variables.first {
             return Float(v.upValue)
         } else {
-            return 100
+            return Float(defaultValue)
         }
     }
 
-    init(type: ScoreUpTypes, contents: [ScoreUpContent]) {
+    init(type: ScoreUpTypes, contents: [ScoreUpContent], defaultValue: Int = 100) {
+        self.defaultValue = defaultValue
         var subContents = contents.filter { (c) -> Bool in
             return c.upType == type
         }
@@ -63,6 +66,10 @@ struct Distribution {
             variables.append(v)
             leftRate -= v.rawRate
         }
+    }
+    
+    func addSkillBoostDistribution(_ skillBoost: Distribution) {
+        
     }
     
 }
