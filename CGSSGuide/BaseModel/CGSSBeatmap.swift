@@ -9,20 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l < r
-//  case (nil, _?):
-//    return true
-//  default:
-//    return false
-//  }
-//}
-
 class CGSSBeatmapNote: NSObject, NSCoding {
     var id: Int!
-    var sec: Float!
+    var sec: Double!
     var type: Int!
     var startPos: Int!
     var finishPos: Int!
@@ -32,13 +21,15 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     
     // 0 no press, 1 start, 2 end
     var longPressType = 0
+    // used in shifting bpm
+    var offset: Double = 0
     
     override init() {
         super.init()
     }
     required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as? Int
-        self.sec = aDecoder.decodeObject(forKey: "sec") as? Float
+        self.sec = aDecoder.decodeObject(forKey: "sec") as? Double
         self.type = aDecoder.decodeObject(forKey: "type") as? Int
         self.startPos = aDecoder.decodeObject(forKey: "startPos") as? Int
         self.finishPos = aDecoder.decodeObject(forKey: "finishPos") as? Int
@@ -61,7 +52,7 @@ class CGSSBeatmapNote: NSObject, NSCoding {
 class CGSSBeatmap: CGSSBaseModel {
     
     var notes: [CGSSBeatmapNote]
-    
+
     var isValid: Bool {
         return notes.count > 0
     }
@@ -95,25 +86,7 @@ class CGSSBeatmap: CGSSBaseModel {
         }
         return nil
     }
-    // 存在问题 官方加入了81 和 82两种type的标志性note 故此处不再采用起止位置的方式获得常规note
-//    var startNoteIndex: Int {
-//        for i in 0...notes.count - 1 {
-//            if notes[i].finishPos != 0 {
-//                return i
-//            }
-//        }
-//        return notes.count - 1
-//    }
-//
-//    var lastNoteIndex: Int {
-//        for i in 0...notes.count - 1 {
-//            if notes[notes.count - i - 1].finishPos != 0 {
-//                return notes.count - i - 1
-//            }
-//        }
-//        return 0
-//    }
-    
+ 
     lazy var validNotes: [CGSSBeatmapNote] = {
         var arr = [CGSSBeatmapNote]()
         for i in 0..<self.notes.count {
@@ -125,10 +98,10 @@ class CGSSBeatmap: CGSSBaseModel {
     }()
     
     
-    var maxLongPressInterval:Float = 0
+    var maxLongPressInterval: Double = 0
     func contextFreeAllNotes() {
-        var positionPressed = [Float].init(repeating: 0, count: 5)
-        var sliders = [Int: Float]()
+        var positionPressed = [Double].init(repeating: 0, count: 5)
+        var sliders = [Int: Double]()
         for note in self.notes {
             if note.finishPos! == 0 {
                 continue
@@ -136,11 +109,11 @@ class CGSSBeatmap: CGSSBaseModel {
             if note.type == 2 && positionPressed[note.finishPos! - 1] == 0 {
                 // 长按起始点
                 note.longPressType = 1
-                positionPressed[note.finishPos! - 1] = note.sec ?? 0
+                positionPressed[note.finishPos! - 1] = note.sec + note.offset
             } else if positionPressed[note.finishPos! - 1] > 0 {
                 // 长按结束点
                 note.longPressType = 2
-                let interval = (note.sec ?? 0) - positionPressed[note.finishPos! - 1]
+                let interval = (note.sec + note.offset) - positionPressed[note.finishPos! - 1]
                 if interval > maxLongPressInterval {
                     maxLongPressInterval = interval
                 }
@@ -150,41 +123,54 @@ class CGSSBeatmap: CGSSBaseModel {
             if note.groupId != nil {
                 if sliders[note.groupId!] == nil {
                     // 滑条起始点
-                    sliders[note.groupId!] = note.sec
+                    sliders[note.groupId!] = note.sec + note.offset
                 } else {
                     // 滑条中间点或结束点
-                    let interval = (note.sec ?? 0) - sliders[note.groupId!]!
+                    let interval = (note.sec + note.offset) - sliders[note.groupId!]!
                     if interval > maxLongPressInterval {
                         maxLongPressInterval = interval
                     }
-                    sliders[note.groupId!] = note.sec
+                    sliders[note.groupId!] = note.sec + note.offset
                 }
             }
         }
     }
     
-    var secondOfFirstNote: Float {
+    func addShiftingOffset(info: CGSSBeatmapShiftingInfo, rawBpm: Int) {
+        var offset: Double = 0
+        for range in info.shiftingRanges {
+            for note in validNotes {
+                if note.sec < range.start { continue }
+                if note.sec >= range.end { break }
+                note.offset = offset + (note.sec - range.start) * ((Double(range.bpm) / Double(rawBpm)) - 1)
+            }
+            offset += range.length * ((Double(range.bpm) / Double(rawBpm)) - 1)
+        }
+    }
+    
+    var secondOfFirstNote: Double {
         return firstNote?.sec ?? 0
     }
-    var secondOfLastNote: Float {
+    var secondOfLastNote: Double {
         return lastNote?.sec ?? 0
     }
-    var totalSeconds: Float {
+    var totalSeconds: Double {
         return notes.last?.sec ?? 0
     }
-    var validSeconds: Float {
+    var validSeconds: Double {
         return secondOfLastNote - secondOfFirstNote
     }
     
     // 折半查找指定秒数对应的combo数
-    func comboForSec(_ sec: Float) -> Int {
+    func comboForSec(_ sec: Double) -> Int {
         // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
         let newSec = sec + secondOfFirstNote + 0.0001
         var end = numberOfNotes - 1
         var start = 0
         while start <= end {
             let middle = (start + end) / 2
-            let middleSec = validNotes[middle].sec!
+            let middleNote = validNotes[middle]
+            let middleSec = middleNote.sec + middleNote.offset
             if newSec < middleSec {
                 end = middle - 1
             } else {
@@ -213,7 +199,7 @@ class CGSSBeatmap: CGSSBaseModel {
         for sub in array {
             let note = CGSSBeatmapNote()
             note.id = sub["id"].intValue
-            note.sec = sub["sec"].floatValue
+            note.sec = sub["sec"].doubleValue
             note.type = sub["type"].intValue
             note.startPos = sub["startPos"].intValue
             note.finishPos = sub["finishPos"].intValue
@@ -241,7 +227,7 @@ class CGSSBeatmap: CGSSBaseModel {
                     }
                     let note = CGSSBeatmapNote()
                     note.id = Int(comps[0]) ?? 0
-                    note.sec = Float(comps[1]) ?? 0
+                    note.sec = Double(comps[1]) ?? 0
                     note.type = Int(comps[2]) ?? 0
                     note.startPos = Int(comps[3]) ?? 0
                     note.finishPos = Int(comps[4]) ?? 0
@@ -257,4 +243,8 @@ class CGSSBeatmap: CGSSBaseModel {
         }
     }
     
+    override init() {
+        self.notes = [CGSSBeatmapNote]()
+        super.init()
+    }
 }

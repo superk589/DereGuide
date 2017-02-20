@@ -81,12 +81,29 @@ class BeatmapViewController: UIViewController {
     }
     
     func checkBeatmapData(_ live: CGSSLive, diff: Int) -> CGSSBeatmap? {
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= diff {
-            return beatmaps[diff - 1]
+        if let beatmap = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: diff) {
+            if let info = checkShiftingInfo() {
+                beatmap.addShiftingOffset(info: info, rawBpm: live.bpm)
+            }
+            return beatmap
         } else {
             showBeatmapNotFoundAlert()
             return nil
         }
+    }
+    
+    func checkShiftingInfo() -> CGSSBeatmapShiftingInfo? {
+        if let path = Bundle.main.path(forResource: "BpmShift", ofType: "plist"), let dict = NSDictionary.init(contentsOfFile: path) {
+            for (k, v) in dict {
+                let keys = (k as! String).components(separatedBy: ",")
+                for key in keys {
+                    if Int(key) == live.id {
+                        return CGSSBeatmapShiftingInfo.init(info: v as! NSDictionary)
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     override func didReceiveMemoryWarning() {

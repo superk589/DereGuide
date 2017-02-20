@@ -93,8 +93,8 @@ extension CGSSLive {
     }
     
     // 每beat占用的秒数
-    var beatSec: Float {
-        return 1 / Float(bpm) * 60
+    var beatSec: Double {
+        return 1 / Double(bpm) * 60
     }
 
     

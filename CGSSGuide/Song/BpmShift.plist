@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>60</key>
+	<dict>
+		<key>name</key>
+		<string>花簪 HANAKANZASHI</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,90</string>
+			<string>10.56,125</string>
+		</array>
+		<key>start</key>
+		<real>2.666667</real>
+	</dict>
+	<key>73</key>
+	<dict>
+		<key>name</key>
+		<string>気持ちいいよね 一等賞!</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,183</string>
+			<string>19.672131,172</string>
+			<string>43.393061,130</string>
+			<string>56.316138,150</string>
+			<string>59.516138,165</string>
+			<string>62.425229,180</string>
+			<string>65.4142,183</string>
+		</array>
+		<key>start</key>
+		<real>2.622951</real>
+	</dict>
+	<key>24</key>
+	<dict>
+		<key>name</key>
+		<string>-LEGNE- 仇なす剣 光の旋律</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,150</string>
+			<string>9.7,189</string>
+		</array>
+		<key>start</key>
+		<real>2.8</real>
+	</dict>
+	<key>35</key>
+	<dict>
+		<key>name</key>
+		<string>Trancing Pulse</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,113</string>
+			<string>18.318584,129</string>
+			<string>19.247788,149</string>
+			<string>20.857183,141</string>
+			<string>21.71748,143</string>
+		</array>
+		<key>start</key>
+		<real>1.59292</real>
+	</dict>
+	<key>55,509</key>
+	<dict>
+		<key>name</key>
+		<string>Snow Wings</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,160</string>
+			<string>12.75,167</string>
+		</array>
+		<key>start</key>
+		<real>2.25</real>
+	</dict>
+	<key>321,531</key>
+	<dict>
+		<key>name</key>
+		<string>命燃やして恋せよ乙女</string>
+		<key>timestamps</key>
+		<array>
+			<string>0,72</string>
+			<string>16.666666,112</string>
+		</array>
+		<key>start</key>
+		<real>3.333333</real>
+	</dict>
+</dict>
+</plist>
