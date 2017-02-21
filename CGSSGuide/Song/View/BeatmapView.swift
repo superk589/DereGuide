@@ -41,6 +41,12 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         self.bpm = bpm
         self.type = type
         
+        /* debug
+        beatmap.exportNote()
+        beatmap.exportIntervalToBpm()
+        beatmap.exportNoteWithOffset()
+        */
+        
         let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
         let innerWidthInset: CGFloat = widthInset
         let sectionHeight: CGFloat = 245
@@ -240,7 +246,7 @@ class AdvanceBeatmapDrawer {
                 let sectionNumber: NSString = NSString.init(format: "%03d", i / 8)
                 let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.darkGray]
                 sectionNumber.draw(at: CGPoint(x: widthInset - 25, y: pointY - 7), withAttributes: attDict)
-                let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Double(i / 8) / (Double(bpm) / 60 / 4)))
+                let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
                 comboNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: pointY - 7), withAttributes: attDict)
             }
             else if i % 2 == 0 { UIColor.lightGray.set() }
@@ -249,9 +255,51 @@ class AdvanceBeatmapDrawer {
             path.stroke()
         }
         
+        // 画 bpm 改变线
+        if let shiftingPoints = beatmap.shiftingPoints {
+            for i in 0..<shiftingPoints.count {
+                let point = shiftingPoints[i]
+                let y = getPointY(point.timestamp)
+                if y < rect.minX - sectionHeight { break }
+                if y > rect.maxY + sectionHeight { continue }
+                let path = pathForSectionLine(y)
+                Color.bpmShift.set()
+                path.stroke()
+                
+                var offset: CGFloat = 0
+                let remainder = (totalHeight - y - heightInset).truncatingRemainder(dividingBy: sectionHeight)
+                if remainder < 24 {
+                    offset = remainder - 24
+                } else if sectionHeight - remainder < 24 {
+                    offset = -24 - sectionHeight + remainder
+                }
+                
+                UIColor.red.set()
+                let bpmNumber = NSString.init(format: "%d", point.bpm)
+                let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: Color.bpmShift]
+                bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y - 14 + offset), withAttributes: attDict)
+                
+                if i > 0 {
+                    let lastPoint = shiftingPoints[i - 1]
+                    let bpmNumber = NSString.init(format: "%d", lastPoint.bpm)
+                    let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: Color.bpmShift]
+                    bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y + offset), withAttributes: attDict)
+                }
+                
+                let path2 = UIBezierPath.init()
+                path2.move(to: CGPoint(x: columnWidth - widthInset, y: y))
+                path2.addLine(to: CGPoint(x: columnWidth - widthInset + 1, y: y))
+                path2.addLine(to: CGPoint(x: columnWidth - widthInset + 1, y: y + offset))
+                let bpmLength = bpmNumber.boundingRect(with: CGSize.init(width: 999, height: 999), options: NSStringDrawingOptions.init(rawValue: 0), attributes: attDict, context: nil).size.width
+                path2.addLine(to: CGPoint(x: columnWidth - widthInset + bpmLength + 4, y: y + offset))
+                path2.lineWidth = 1
+                path2.stroke()
+            }
+        }
+        
         // 滑条 长按 同步线
         var sliders = [Int: Note]()
-        var positionPressed = [Double].init(repeating: 0, count: 5)
+        var positionPressed = [Float].init(repeating: 0, count: 5)
         var sync: Note?
         
         let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
@@ -401,19 +449,19 @@ class AdvanceBeatmapDrawer {
         }
     }
 
-    private func pathForPoint(_ position: Int, sec: Double) -> UIBezierPath
+    private func pathForPoint(_ position: Int, sec: Float) -> UIBezierPath
     {
         let radius = noteRadius
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    private func pathForPointSmall(_ position: Int, sec: Double) -> UIBezierPath
+    private func pathForPointSmall(_ position: Int, sec: Float) -> UIBezierPath
     {
         let radius = floor(noteRadius / 2)
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    fileprivate func pathForPointSlide(_ position: Int, sec: Double) -> UIBezierPath {
+    fileprivate func pathForPointSlide(_ position: Int, sec: Float) -> UIBezierPath {
         let path = UIBezierPath()
         let x = getPointX(position)
         let y = getPointY(sec)
@@ -436,7 +484,7 @@ class AdvanceBeatmapDrawer {
         
     }
     
-    private func pathForLongPress(_ position: Int, sec1: Double, sec2: Double) -> UIBezierPath {
+    private func pathForLongPress(_ position: Int, sec1: Float, sec2: Float) -> UIBezierPath {
         let y2 = getPointY(sec2)
         return pathForLongPress(position, sec1: sec1, y: y2)
     }
@@ -480,7 +528,7 @@ class AdvanceBeatmapDrawer {
     }
 
     
-    private func pathForLongPress(_ position: Int, sec1: Double, y: CGFloat) -> UIBezierPath {
+    private func pathForLongPress(_ position: Int, sec1: Float, y: CGFloat) -> UIBezierPath {
         let x = getPointX(position)
         let y1 = getPointY(sec1)
         let r = noteRadius - 1
@@ -523,12 +571,12 @@ class AdvanceBeatmapDrawer {
         return widthInset + innerWidthInset + interval * (CGFloat(mirrorFlip ? 6 - position : position) - 1)
     }
     
-    func getPointY(_ sec: Double) -> CGFloat {
+    func getPointY(_ sec: Float) -> CGFloat {
         return totalHeight - CGFloat(sec - self.beatmap.secondOfFirstNote) * secScale - heightInset
     }
     
-    func getSecOffset(y: CGFloat) -> Double {
-        return Double((totalHeight - y - heightInset) / secScale)
+    func getSecOffset(y: CGFloat) -> Float {
+        return Float((totalHeight - y - heightInset) / secScale)
     }
 }
 

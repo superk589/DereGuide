@@ -26,7 +26,9 @@
 			<string>56.316138,150</string>
 			<string>59.516138,165</string>
 			<string>62.425229,180</string>
-			<string>65.4142,183</string>
+			<string>63.758565,181</string>
+			<string>65.084528,182</string>
+			<string>67.72189,183</string>
 		</array>
 		<key>start</key>
 		<real>2.622951</real>
@@ -50,10 +52,9 @@
 		<key>timestamps</key>
 		<array>
 			<string>0,113</string>
-			<string>18.318584,129</string>
-			<string>19.247788,149</string>
-			<string>20.857183,141</string>
-			<string>21.71748,143</string>
+			<string>18.451328,130</string>
+			<string>20.411618,135</string>
+			<string>21.193005,143</string>
 		</array>
 		<key>start</key>
 		<real>1.59292</real>

@@ -36,15 +36,15 @@ class CGSSRankedSkill: NSObject {
         return explain
     }
     
-    func getUpRanges(lastNoteSec sec: Double) -> [ScoreUpRange] {
+    func getUpRanges(lastNoteSec sec: Float) -> [ScoreUpRange] {
         let condition: Int = skill.condition
         // 最后一个note的前三秒不再触发新的技能
-        let count = Int(ceil((sec - 3) / Double(condition)))
+        let count = Int(ceil((sec - 3) / Float(condition)))
         var ranges = [ScoreUpRange]()
         for i in 0..<count {
             // 第一个触发区间内不触发技能
             if i == 0 { continue }
-            let range = ScoreUpRange(begin: Double(i * condition), length: Double(effectLength))
+            let range = ScoreUpRange(begin: Float(i * condition), length: effectLength)
             ranges.append(range)
         }
         return ranges

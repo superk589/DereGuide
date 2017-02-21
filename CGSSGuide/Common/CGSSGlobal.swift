@@ -63,6 +63,8 @@ struct Color {
     
     public static let allType = UIColor.darkGray
 
+    public static let bpmShift = UIColor.init(red: 1.0 * 131 / 255, green: 1.0 * 108 / 255, blue: 1.0 * 251 / 255, alpha: 1)
+    
     static let separator = UIColor.init(red: 0.25, green: 0.25, blue: 0.25, alpha: 1)
 }
 

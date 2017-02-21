@@ -174,9 +174,9 @@ struct ScoreUpContent {
 }
 
 struct ScoreUpRange {
-    var begin: Double
-    var length: Double
-    var end: Double {
+    var begin: Float
+    var length: Float
+    var end: Float {
         return begin + length
     }
 }
