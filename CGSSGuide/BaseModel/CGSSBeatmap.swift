@@ -140,6 +140,15 @@ class CGSSBeatmap: CGSSBaseModel {
     
     func addShiftingOffset(info: CGSSBeatmapShiftingInfo, rawBpm: Int) {
         var offset: Float = 0
+        if let bpm = info.shiftingPoints.first?.bpm {
+            let bps = Float(bpm) / 60
+            let spb = 1 / bps
+            let remainder = secondOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
+            if remainder < 0.001 || 4 * spb - remainder < 0.001 { } else {
+                offset = remainder * Float(bpm) / Float(rawBpm)
+            }
+        }
+        
         shiftingPoints = [BpmShiftingPoint]()
         for range in info.shiftingRanges {
             for note in validNotes {
@@ -151,6 +160,17 @@ class CGSSBeatmap: CGSSBaseModel {
             point.timestamp += offset
             shiftingPoints?.append(point)
             offset += range.length * ((Float(range.bpm) / Float(rawBpm)) - 1)
+        }
+    }
+    
+    // 如果起始点不是整个小节的开端 添加偏移量(针对机器人29)
+    func addStartOffset(rawBpm: Int) {
+        let bps = Float(rawBpm) / 60
+        let spb = 1 / bps
+        let remainder = secondOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
+        if remainder < 0.001 || 4 * spb - remainder < 0.001 { return }
+        for note in validNotes {
+            note.offset = remainder
         }
     }
     

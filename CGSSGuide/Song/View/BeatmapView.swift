@@ -41,11 +41,10 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         self.bpm = bpm
         self.type = type
         
-        /* debug
-        beatmap.exportNote()
-        beatmap.exportIntervalToBpm()
-        beatmap.exportNoteWithOffset()
-        */
+        /* debug */
+//        beatmap.exportNote()
+//        beatmap.exportIntervalToBpm()
+//        beatmap.exportNoteWithOffset() 
         
         let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
         let innerWidthInset: CGFloat = widthInset

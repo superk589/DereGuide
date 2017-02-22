@@ -84,6 +84,8 @@ class BeatmapViewController: UIViewController {
         if let beatmap = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: diff) {
             if let info = checkShiftingInfo() {
                 beatmap.addShiftingOffset(info: info, rawBpm: live.bpm)
+            } else {
+                beatmap.addStartOffset(rawBpm: live.bpm)
             }
             return beatmap
         } else {
