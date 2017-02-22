@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow.init(frame: UIScreen.main.bounds)
         let drawerController = ZKDrawerController.init(main: baseTabBarController)
         drawerController.drawerStyle = .cover
-        drawerController.gestureRecognizerWidth = 80
+        drawerController.gestureRecognizerWidth = 120
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()
         CGSSClient.shared.drawerController = drawerController

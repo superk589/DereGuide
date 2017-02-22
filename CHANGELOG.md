@@ -3,7 +3,7 @@
 
 ### 1.2.4
 
-1. 卡片信息，卡片筛选和组队模拟中增加对All Round(全才)等新技能的支持。
+1. 卡片信息，卡片筛选和组队模拟中增加对All Round(全才)等新技能的支持
 2. 增强组队模拟中得分计算的功能，平均分计算不再使用模拟法
 3. 谱面中新增bpm改变信息，修复大部分未对齐的谱面
 
@@ -13,7 +13,14 @@
 2. マイユニットのスコア計算機能を改善します。平均スコアの計算はシミュレート法を使用しなくなりました
 3. 譜面ビューイングに変化bpmの情報を追加します。以前未対応の譜面も対応しています
 
+##### English version
+
+1. support for "All Round" and other new kinds of skill in card information, card filter and team simulation page.
+2. improve team simulation and calculation feature, average score use calculation instead of simulation algorithm.
+3. add bpm shifting information for some beatmaps, fix most not aligned beatmaps.
+
 ### 1.2.3
+2017-2-15
 
 1. 增加对新类型note的支持
 2. 歌曲列表排序方式改为默认按最后变更时间，原”更新时间“改为“首次出现时间”
