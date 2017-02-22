@@ -139,10 +139,10 @@ struct ScoreUpTypes: OptionSet, Hashable {
             self = .comboBonus
         case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.overload:
             self = .perfectBonus
-        case CGSSSkillTypes.deepCool, CGSSSkillTypes.deepCute, CGSSSkillTypes.deepPassion:
-            self = [.perfectBonus, .comboBonus]
-        case CGSSSkillTypes.boost:
-            self = .skillBoost
+//        case CGSSSkillTypes.deepCool, CGSSSkillTypes.deepCute, CGSSSkillTypes.deepPassion:
+//            self = [.perfectBonus, .comboBonus]
+//        case CGSSSkillTypes.boost:
+//            self = .skillBoost
         default:
             return nil
         }

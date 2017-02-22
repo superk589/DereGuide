@@ -32,12 +32,12 @@ class CardFilterSortController: BaseFilterSortController {
         CGSSSkillTypes.heal.toString(),
         CGSSSkillTypes.guard.toString(),
         CGSSSkillTypes.concentration.toString(),
-        CGSSSkillTypes.mimic.toString(),
-        CGSSSkillTypes.boost.toString(),
+//        CGSSSkillTypes.mimic.toString(),
+//        CGSSSkillTypes.boost.toString(),
         CGSSSkillTypes.allRound.toString(),
-        CGSSSkillTypes.deepCute.toString(),
-        CGSSSkillTypes.deepCool.toString(),
-        CGSSSkillTypes.deepPassion.toString(),
+//        CGSSSkillTypes.deepCute.toString(),
+//        CGSSSkillTypes.deepCool.toString(),
+//        CGSSSkillTypes.deepPassion.toString(),
         CGSSSkillTypes.unknown.toString(),
         CGSSSkillTypes.none.toString()
     ]
