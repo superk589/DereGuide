@@ -570,6 +570,6 @@
 "* 全部note为Perfect评价，小屋加成为10%\n* 极限分数中所有技能100%触发\n* 极限分数1中note取Perfect判定±0.06秒中的最优值，极限分数2和其他分数都不考虑此项因素\n* 忽略技能触发率提升的队长技能\n* 模拟计算结果是1000次模拟后取前x%内的最低分数得出，每次结果会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响" = "* Simulation assumes all notes are Perfect, room bonus is 10%.\n* Optimistic score assumes that skills always activate.\n* In optimistic score 1, it takes the best score of each note from Perfect ±0.06 sec. In optimistic score 2 and other results, this factor is ignored.\n* Center skills that affect the skill activation rate are not accounted for in the average score.\n* The simulation result is taken from 1000 real simulations. Results will vary between simulations.\n* In Groove or LIVE Parade mode, the partner's leader is ignored automatically.";
 
 "一般计算" = "Calculate";
-"模拟计算" = "Simualte";
+"模拟计算" = "Simulate";
 
 
