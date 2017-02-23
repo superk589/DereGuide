@@ -26,7 +26,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>6</string>
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
@@ -35,7 +35,7 @@
 		<integer>0</integer>
 	</dict>
 	<key>Document Version</key>
-	<integer>3</integer>
+	<integer>4</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>

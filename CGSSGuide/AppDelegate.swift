@@ -35,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 3 {
                 CGSSCacheManager.shared.wipeLive()
             }
+            if lastVersion < 4 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
+            }
         }
         
         // 规划近期偶像生日
