@@ -25,20 +25,12 @@ struct Distribution {
     var variables: [Variable]
     
     var average: Float {
-        var result: Float = Float(defaultValue)
-        for variable in variables {
-            result += variable.rate * Float(variable.upValue - defaultValue)
-        }
-        return result
+        return variables.reduce(Float(defaultValue), { $0 + $1.rate * Float($1.upValue - defaultValue) })
     }
     
     var variance: Float {
-        var result: Float = Float(defaultValue)
         let avg = average
-        for variable in variables {
-            result += variable.rate * (Float(variable.upValue) - avg) * (Float(variable.upValue) - avg)
-        }
-        return result
+        return variables.reduce(Float(defaultValue), { $0 + $1.rate * (Float($1.upValue) - avg) * (Float($1.upValue) - avg) })
     }
     
     var max: Float {
@@ -51,13 +43,9 @@ struct Distribution {
 
     init(type: ScoreUpTypes, contents: [ScoreUpContent], defaultValue: Int = 100) {
         self.defaultValue = defaultValue
-        var subContents = contents.filter { (c) -> Bool in
-            return c.upType == type
-        }
+        var subContents = contents.filter { $0.upType == type }
         
-        subContents.sort { (c1, c2) -> Bool in
-            c1.upValue > c2.upValue
-        }
+        subContents.sort { $0.upValue > $1.upValue }
         self.variables = [Variable]()
         var leftRate: Float = 100
         for i in 0..<subContents.count {

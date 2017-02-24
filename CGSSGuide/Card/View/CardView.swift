@@ -130,9 +130,9 @@ class CardView: UIView {
         // 显示主动技能类型
         if let skill = card.skill {
             if CGSSGlobal.width > 360 {
-                skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillFilterType.toString())"
+                skillLabel.text = "\(skill.condition!)s/\(skill.procTypeShort)/\(skill.skillFilterType.description)"
             } else {
-                skillLabel.text = "\(skill.skillFilterType.toString())"
+                skillLabel.text = "\(skill.skillFilterType.description)"
             }
         } else {
             skillLabel.text = ""

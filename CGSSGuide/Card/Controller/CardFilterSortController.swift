@@ -24,42 +24,42 @@ class CardFilterSortController: BaseFilterSortController {
     var attributeTitles = ["Vocal", "Dance", "Visual"]
     
     var skillTypeTitles = [
-        CGSSSkillTypes.comboBonus.toString(),
-        CGSSSkillTypes.perfectBonus.toString(),
-        CGSSSkillTypes.overload.toString(),
-        CGSSSkillTypes.perfectLock.toString(),
-        CGSSSkillTypes.comboContinue.toString(),
-        CGSSSkillTypes.heal.toString(),
-        CGSSSkillTypes.guard.toString(),
-        CGSSSkillTypes.concentration.toString(),
-//        CGSSSkillTypes.mimic.toString(),
-//        CGSSSkillTypes.boost.toString(),
-        CGSSSkillTypes.allRound.toString(),
-//        CGSSSkillTypes.deepCute.toString(),
-//        CGSSSkillTypes.deepCool.toString(),
-//        CGSSSkillTypes.deepPassion.toString(),
-        CGSSSkillTypes.unknown.toString(),
-        CGSSSkillTypes.none.toString()
+        CGSSSkillTypes.comboBonus.description,
+        CGSSSkillTypes.perfectBonus.description,
+        CGSSSkillTypes.overload.description,
+        CGSSSkillTypes.perfectLock.description,
+        CGSSSkillTypes.comboContinue.description,
+        CGSSSkillTypes.heal.description,
+        CGSSSkillTypes.guard.description,
+        CGSSSkillTypes.concentration.description,
+//        CGSSSkillTypes.mimic.description,
+//        CGSSSkillTypes.boost.description,
+        CGSSSkillTypes.allRound.description,
+//        CGSSSkillTypes.deepCute.description,
+//        CGSSSkillTypes.deepCool.description,
+//        CGSSSkillTypes.deepPassion.description,
+        CGSSSkillTypes.unknown.description,
+        CGSSSkillTypes.none.description
     ]
     
-    var procTitles = [CGSSProcTypes.high.toString(),
-                     CGSSProcTypes.middle.toString(),
-                     CGSSProcTypes.low.toString(),
-                     CGSSProcTypes.none.toString()]
+    var procTitles = [CGSSProcTypes.high.description,
+                     CGSSProcTypes.middle.description,
+                     CGSSProcTypes.low.description,
+                     CGSSProcTypes.none.description]
     
-    var conditionTitles = [CGSSConditionTypes.c4.toString(),
-                           CGSSConditionTypes.c6.toString(),
-                           CGSSConditionTypes.c7.toString(),
-                           CGSSConditionTypes.c9.toString(),
-                           CGSSConditionTypes.c11.toString(),
-                           CGSSConditionTypes.c13.toString(),
-                           CGSSConditionTypes.other.toString()]
+    var conditionTitles = [CGSSConditionTypes.c4.description,
+                           CGSSConditionTypes.c6.description,
+                           CGSSConditionTypes.c7.description,
+                           CGSSConditionTypes.c9.description,
+                           CGSSConditionTypes.c11.description,
+                           CGSSConditionTypes.c13.description,
+                           CGSSConditionTypes.other.description]
     
-    var availableTitles = [CGSSAvailableTypes.fes.toString(),
-                           CGSSAvailableTypes.limit.toString(),
-                           CGSSAvailableTypes.normal.toString(),
-                           CGSSAvailableTypes.event.toString(),
-                           CGSSAvailableTypes.free.toString()]
+    var availableTitles = [CGSSAvailableTypes.fes.description,
+                           CGSSAvailableTypes.limit.description,
+                           CGSSAvailableTypes.normal.description,
+                           CGSSAvailableTypes.event.description,
+                           CGSSAvailableTypes.free.description]
     
     var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
                           NSLocalizedString("未收藏", comment: "")]

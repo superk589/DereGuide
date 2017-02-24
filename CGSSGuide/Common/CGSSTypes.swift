@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CGSSSkillTypes: OptionSet {
+struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     let rawValue:UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let comboBonus = CGSSSkillTypes.init(rawValue: 1 << 0)
@@ -88,7 +88,8 @@ struct CGSSSkillTypes: OptionSet {
             self = .unknown
         }
     }
-    func toString() -> String {
+    
+    var description: String {
         switch self {
         case CGSSSkillTypes.comboBonus:
             return NSLocalizedString("Combo加成", comment: "")
@@ -110,18 +111,18 @@ struct CGSSSkillTypes: OptionSet {
             return NSLocalizedString("无", comment: "")
         case CGSSSkillTypes.concentration:
             return NSLocalizedString("专注", comment: "")
-//        case CGSSSkillTypes.mimic:
-//            return NSLocalizedString("模仿", comment: "")
+            //        case CGSSSkillTypes.mimic:
+        //            return NSLocalizedString("模仿", comment: "")
         case CGSSSkillTypes.allRound:
             return NSLocalizedString("全才", comment: "")
-//        case CGSSSkillTypes.deepCute:
-//            return "Deep Cute"
-//        case CGSSSkillTypes.deepCool:
-//            return "Deep Cool"
-//        case CGSSSkillTypes.deepPassion:
-//            return "Deep Passion"
-//        case CGSSSkillTypes.boost:
-//            return "Skill Boost"
+            //        case CGSSSkillTypes.deepCute:
+            //            return "Deep Cute"
+            //        case CGSSSkillTypes.deepCool:
+            //            return "Deep Cool"
+            //        case CGSSSkillTypes.deepPassion:
+            //            return "Deep Passion"
+            //        case CGSSSkillTypes.boost:
+        //            return "Skill Boost"
         default:
             return NSLocalizedString("未知", comment: "")
         }
@@ -172,7 +173,7 @@ struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
     
 }
 
-struct CGSSAvailableTypes: OptionSet, RawRepresentable {
+struct CGSSAvailableTypes: OptionSet, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let normal = CGSSAvailableTypes.init(rawValue: 1 << 2)
@@ -182,7 +183,7 @@ struct CGSSAvailableTypes: OptionSet, RawRepresentable {
     static let free = CGSSAvailableTypes.init(rawValue: 1 << 4)
     static let all = CGSSAvailableTypes.init(rawValue: 0b11111)
     
-    func toString() -> String {
+    var description: String {
         switch self {
         case CGSSAvailableTypes.normal:
             return NSLocalizedString("普池", comment: "")
@@ -198,7 +199,7 @@ struct CGSSAvailableTypes: OptionSet, RawRepresentable {
     }
 }
 
-struct CGSSAttributeTypes: OptionSet, RawRepresentable {
+struct CGSSAttributeTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let vocal = CGSSAttributeTypes.init(rawValue: 1 << 0)
@@ -212,7 +213,7 @@ struct CGSSAttributeTypes: OptionSet, RawRepresentable {
 }
 
 
-struct CGSSRarityTypes: OptionSet, RawRepresentable, Hashable {
+struct CGSSRarityTypes: OptionSet, Hashable {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let n = CGSSRarityTypes.init(rawValue: 1 << 0)
@@ -231,12 +232,9 @@ struct CGSSRarityTypes: OptionSet, RawRepresentable, Hashable {
     var hashValue: Int {
         return Int(self.rawValue)
     }
-//    static func == (lhs: CGSSRarityTypes, rhs: CGSSRarityTypes) -> Bool {
-//        return lhs.hashValue == rhs.hashValue
-//    }
 }
 
-struct CGSSFavoriteTypes: OptionSet, RawRepresentable {
+struct CGSSFavoriteTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let inFavorite = CGSSFavoriteTypes.init(rawValue: 1 << 0)
@@ -244,7 +242,7 @@ struct CGSSFavoriteTypes: OptionSet, RawRepresentable {
     static let all = CGSSFavoriteTypes.init(rawValue: 0b11)
 }
 
-struct CGSSProcTypes: OptionSet, RawRepresentable, Hashable {
+struct CGSSProcTypes: OptionSet, Hashable, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let low = CGSSProcTypes.init(rawValue: 1 << 2)
@@ -257,7 +255,7 @@ struct CGSSProcTypes: OptionSet, RawRepresentable, Hashable {
         return Int(self.rawValue)
     }
 
-    func toString() -> String {
+    var description: String {
         switch self {
         case CGSSProcTypes.low:
             return NSLocalizedString("低确率", comment: "")
@@ -268,10 +266,11 @@ struct CGSSProcTypes: OptionSet, RawRepresentable, Hashable {
         default:
             return NSLocalizedString("无", comment: "")
         }
+
     }
 }
 
-struct CGSSConditionTypes: OptionSet, RawRepresentable, Hashable {
+struct CGSSConditionTypes: OptionSet, Hashable, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let c4 = CGSSConditionTypes.init(rawValue: 1 << 0)
@@ -286,7 +285,7 @@ struct CGSSConditionTypes: OptionSet, RawRepresentable, Hashable {
         return Int(self.rawValue)
     }
     
-    func toString() -> String {
+    var description: String {
         switch self {
         case CGSSConditionTypes.c4:
             return "4" + NSLocalizedString("秒", comment: "")
@@ -310,7 +309,7 @@ struct CGSSConditionTypes: OptionSet, RawRepresentable, Hashable {
 
 typealias CGSSCharTypes = CGSSCardTypes
 
-struct CGSSCharAgeTypes: OptionSet, RawRepresentable {
+struct CGSSCharAgeTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let ten = CGSSCharAgeTypes.init(rawValue: 1 << 0)
@@ -330,7 +329,7 @@ struct CGSSCharAgeTypes: OptionSet, RawRepresentable {
     }
 }
 
-struct CGSSCharBloodTypes: OptionSet, RawRepresentable {
+struct CGSSCharBloodTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let a = CGSSCharBloodTypes.init(rawValue: 1 << 0)
@@ -351,7 +350,7 @@ struct CGSSCharBloodTypes: OptionSet, RawRepresentable {
 }
 
 
-struct CGSSCharCVTypes: OptionSet, RawRepresentable {
+struct CGSSCharCVTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let yes = CGSSCharCVTypes.init(rawValue: 1 << 0)
@@ -361,7 +360,7 @@ struct CGSSCharCVTypes: OptionSet, RawRepresentable {
 
 typealias CGSSLiveTypes = CGSSCardTypes
 
-struct CGSSLiveEventTypes: OptionSet, RawRepresentable {
+struct CGSSLiveEventTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let normal = CGSSLiveEventTypes.init(rawValue: 1 << 0)
@@ -387,7 +386,7 @@ struct CGSSLiveEventTypes: OptionSet, RawRepresentable {
 
 
 
-struct CGSSEventTypes: OptionSet, RawRepresentable {
+struct CGSSEventTypes: OptionSet, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let tradition = CGSSEventTypes.init(rawValue: 1 << 0)
@@ -401,7 +400,8 @@ struct CGSSEventTypes: OptionSet, RawRepresentable {
     init (eventType: Int) {
         self.rawValue = 1 << UInt(eventType - 1)
     }
-    func toString() -> String {
+    
+    var description: String {
         switch self {
         case CGSSEventTypes.tradition:
             return NSLocalizedString("传统活动", comment: "")
@@ -420,7 +420,7 @@ struct CGSSEventTypes: OptionSet, RawRepresentable {
 }
 
 
-struct CGSSGachaTypes: OptionSet, RawRepresentable {
+struct CGSSGachaTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let normal = CGSSGachaTypes.init(rawValue: 1 << 0)
@@ -429,7 +429,7 @@ struct CGSSGachaTypes: OptionSet, RawRepresentable {
     static let singleType = CGSSGachaTypes.init(rawValue: 1 << 3)
     static let all = CGSSGachaTypes.init(rawValue: 0b1111)
     
-    func toString() -> String {
+    var description: String {
         switch self {
         case CGSSGachaTypes.limit:
             return NSLocalizedString("限定卡池", comment: "")

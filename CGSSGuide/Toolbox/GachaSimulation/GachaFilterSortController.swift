@@ -21,10 +21,10 @@ class GachaFilterSortController: BaseFilterSortController {
     
     weak var delegate: GachaFilterSortControllerDelegate?
     
-    var gachaTypeTitles = [CGSSGachaTypes.normal.toString(),
-                           CGSSGachaTypes.limit.toString(),
-                           CGSSGachaTypes.fes.toString(),
-                           CGSSGachaTypes.singleType.toString()]
+    var gachaTypeTitles = [CGSSGachaTypes.normal.description,
+                           CGSSGachaTypes.limit.description,
+                           CGSSGachaTypes.fes.description,
+                           CGSSGachaTypes.singleType.description]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
     var sorterMethods = ["id"]

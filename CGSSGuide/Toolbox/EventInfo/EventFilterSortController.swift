@@ -21,11 +21,11 @@ class EventFilterSortController: BaseFilterSortController {
 
     weak var delegate: EventFilterSortControllerDelegate?
     
-    var eventTypeTitles = [CGSSEventTypes.tradition.toString(),
-                           CGSSEventTypes.kyalapon.toString(),
-                           CGSSEventTypes.groove.toString(),
-                           CGSSEventTypes.party.toString(),
-                           CGSSEventTypes.parade.toString()]
+    var eventTypeTitles = [CGSSEventTypes.tradition.description,
+                           CGSSEventTypes.kyalapon.description,
+                           CGSSEventTypes.groove.description,
+                           CGSSEventTypes.party.description,
+                           CGSSEventTypes.parade.description]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
     var sorterMethods = ["sortId"]

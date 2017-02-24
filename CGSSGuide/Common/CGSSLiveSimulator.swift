@@ -14,7 +14,7 @@ struct SimulateResult {
     var scores: [Int]
     
     var avg: Int {
-        return scores.reduce(0, { $0 + $1 }) / scores.count
+        return scores.reduce(0, +) / scores.count
     }
     
     init(scores: [Int]) {
@@ -40,19 +40,11 @@ class CGSSLiveSimulator {
     }
     
     var average: Int {
-        var sum = 0
-        for distribution in distributions {
-            sum += distribution.average
-        }
-        return sum
+        return distributions.reduce(0, { $0 + $1.average })
     }
     
     var max: Int {
-        var sum = 0
-        for distribution in distributions {
-            sum += distribution.max
-        }
-        return sum
+        return distributions.reduce(0, { $0 + $1.max })
     }
     
     
@@ -71,9 +63,7 @@ class CGSSLiveSimulator {
             }
         }
         
-        procedContents.sort { (c1, c2) -> Bool in
-            c1.range.begin < c2.range.begin
-        }
+        procedContents.sort { $0.range.begin < $1.range.begin }
         
         for i in 0..<notes.count {
             let note = notes[i]
