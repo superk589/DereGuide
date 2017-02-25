@@ -24,6 +24,7 @@ class ToolboxTableViewCell: UITableViewCell {
         descLabel = UILabel.init(frame: CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 18))
         descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.textAlignment = .left
+        descLabel.backgroundColor = UIColor.white
         
 //        let asView = UIImageView.init(frame: CGRectMake(0, 0, 10, 20))
 //        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.imageWithRenderingMode(.AlwaysTemplate)

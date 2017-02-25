@@ -52,7 +52,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         let heightInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
         beatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: sectionHeight, columnWidth: self.frame.size.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1)
         self.contentSize = CGSize.init(width: self.fwidth, height: beatmapDrawer.totalHeight)
         self.contentOffset = CGPoint(x: 0, y: self.contentSize.height - self.frame.size.height)

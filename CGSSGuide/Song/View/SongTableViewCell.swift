@@ -69,10 +69,12 @@ class SongTableViewCell: UITableViewCell {
         nameLabel.frame = CGRect(x: 111, y: 10, width: CGSSGlobal.width - 121, height: 20)
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.backgroundColor = UIColor.white
         
         descriptionLabel = UILabel()
         descriptionLabel.frame = CGRect(x: 86, y: 35, width: CGSSGlobal.width - 96, height: 16)
         descriptionLabel.font = CGSSGlobal.alphabetFont
+        descriptionLabel.backgroundColor = UIColor.white
         
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space: CGFloat = 10
@@ -90,9 +92,8 @@ class SongTableViewCell: UITableViewCell {
         diffViews = [SongDiffView]()
         for i in 0...4 {
             let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
-            // diffView.label.font = UIFont.init(name: "menlo", size: fontSize)
-            diffView.iv.tintColor = colors[i]
-            diffView.iv.image = UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate)
+            diffView.iv.zk_backgroundColor = colors[i]
+            diffView.iv.zk_render()
             diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))

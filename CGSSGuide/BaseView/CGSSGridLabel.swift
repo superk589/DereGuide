@@ -35,6 +35,7 @@ class CGSSGridLabel: CGSSGridView {
             view.font = UIFont.init(name: "menlo", size: 14)
             view.adjustsFontSizeToFitWidth = true
             view.textColor = Color.allType
+            view.backgroundColor = UIColor.white
             views.append(view)
         }
         
