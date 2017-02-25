@@ -23,7 +23,7 @@ struct SimulateResult {
     
     func get(percent: Int) -> Int {
         let index = percent * scores.count / 100
-        return scores[index]
+        return scores[index - 1]
     }
 }
 
@@ -110,13 +110,7 @@ class CGSSLiveSimulator {
     }
 
     func simulate(times: UInt, callback: @escaping SimulateResultClosure) {
-        for _ in 0..<times {
-            simulateOnce()
-        }
-        let result = SimulateResult.init(scores: simulateResult)
-        DispatchQueue.main.async {
-            callback(result)
-        }
+        simulate(times: times, progress: { _,_ in }, callback: callback)
     }
     
     func simulate(times: UInt, progress: CGSSProgressClosure, callback: @escaping SimulateResultClosure) {

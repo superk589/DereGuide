@@ -70,6 +70,22 @@ extension TeamDetailViewController: TeamEditViewControllerDelegate {
 extension TeamDetailViewController: TeamDetailViewDelegate {
   
     func advanceCalc() {
+        
+        func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
+            simulator.simulate(times: times, progress: { (a, b) in
+                DispatchQueue.main.async {
+                    // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
+                    self.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
+                }
+            }, callback: { (result) in
+                DispatchQueue.main.async {
+                    self.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
+                    self.teamDV.resetAdCalcButton()
+                    self.teamDV.advanceProgress.progress = 0
+                }
+            })
+        }
+        
         if let live = self.live, let diff = self.diff {
             self.teamDV.clearAdScoreGrid()
             if team.hasUnknownSkills() {
@@ -78,18 +94,11 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             let coordinator = CGSSLiveCoordinator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
             DispatchQueue.global(qos: .userInitiated).async {
-                simulator.simulate(times: 1000, progress: { (a, b) in
-                    DispatchQueue.main.async {
-                        // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
-                        self.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
-                    }
-                }, callback: { (result) in
-                    DispatchQueue.main.async {
-                        self.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
-                        self.teamDV.resetAdCalcButton()
-                        self.teamDV.advanceProgress.progress = 0
-                    }
-                })
+                #if DEBUG
+                    doSimulationBy(simulator: simulator, times: 1000)
+                #else
+                    doSimulationBy(simulator: simulator, times: 10000)
+                #endif
             }
         } else {
             showNotSelectSongAlert()
