@@ -65,15 +65,15 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.filter.searchText = self.searchBar.text ?? ""
-            var newList = self.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard])
-            self.sorter.sortList(&newList)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.filter.searchText = self?.searchBar.text ?? ""
+            var newList = self?.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]) ?? [CGSSCard]()
+            self?.sorter.sortList(&newList)
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
                 //确保cardList在主线程中改变的原子性, 防止筛选过程中tableView滑动崩溃
-                self.cardList = newList
-                self.tableView.reloadData()
+                self?.cardList = newList
+                self?.tableView.reloadData()
             }
         }
     }

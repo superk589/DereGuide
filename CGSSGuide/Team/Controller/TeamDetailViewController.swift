@@ -73,15 +73,15 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         
         func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
             simulator.simulate(times: times, progress: { (a, b) in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
-                    self.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
+                    self?.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
                 }
             }, callback: { (result) in
-                DispatchQueue.main.async {
-                    self.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
-                    self.teamDV.resetAdCalcButton()
-                    self.teamDV.advanceProgress.progress = 0
+                DispatchQueue.main.async { [weak self] in
+                    self?.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
+                    self?.teamDV.resetAdCalcButton()
+                    self?.teamDV.advanceProgress.progress = 0
                 }
             })
         }

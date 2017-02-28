@@ -83,12 +83,12 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     func reloadData() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
-                self.defaultList = pools
+                self?.defaultList = pools
                 DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
-                    self.refresh()
+                    self?.refresh()
                 }
             })
         }

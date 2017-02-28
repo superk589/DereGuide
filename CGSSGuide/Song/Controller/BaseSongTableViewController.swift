@@ -96,12 +96,12 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     
     func reloadData() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             CGSSGameResource.shared.master.getLives { (lives) in
-                self.defualtLiveList = lives
+                self?.defualtLiveList = lives
                 DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
-                    self.refresh()
+                    self?.refresh()
                 }
             }
         }

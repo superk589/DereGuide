@@ -21,9 +21,9 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
             return
         }
         self.updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
-        updater.checkUpdate(dataTypes: types, complete: { (items, errors) in
+        updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
             if !errors.isEmpty && items.count == 0 {
-                self.updateStatusView.isHidden = true
+                self?.updateStatusView.isHidden = true
                 var errorStr = ""
                 if let error = errors.first as? CGSSUpdaterError {
                     errorStr.append(error.localizedDescription)
@@ -32,28 +32,28 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     , message: errorStr, preferredStyle: .alert)
                 alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
                 // 使用tabBarController来展现UIAlertController的原因是, 该方法处于异步子线程中,当执行时可能这个ViewController已经不在前台,会造成不必要的警告(虽然不会崩溃,但是官方不建议这样)
-                self.tabBarController?.present(alert, animated: true, completion: nil)
+                self?.tabBarController?.present(alert, animated: true, completion: nil)
             } else {
                 if items.count == 0 {
-                    self.updateStatusView.setContent(NSLocalizedString("数据是最新版本", comment: "更新框"), hasProgress: false)
-                    self.updateStatusView.loadingView.stopAnimating()
+                    self?.updateStatusView.setContent(NSLocalizedString("数据是最新版本", comment: "更新框"), hasProgress: false)
+                    self?.updateStatusView.loadingView.stopAnimating()
                     UIView.animate(withDuration: 2.5, animations: {
                         // 当一个控件的alpha = 0 之后 就不会响应任何事件了 不需要再置为hidden
-                        self.updateStatusView.alpha = 0
+                        self?.updateStatusView.alpha = 0
 //                        }, completion: { (b) in
 //                        self.updateStatusView.isHidden = true
 //                        self.updateStatusView.alpha = 1
                     })
                     return
                 }
-                self.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
-                updater.updateItems(items, progress: { (process, total) in
-                    self.updateStatusView.updateProgress(process, b: total)
-                    }, complete: { (success, total) in
+                self?.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
+                updater.updateItems(items, progress: { [weak self] (process, total) in
+                    self?.updateStatusView.updateProgress(process, b: total)
+                    }, complete: { [weak self] (success, total) in
                     let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                    self.tabBarController?.present(alert, animated: true, completion: nil)
-                    self.updateStatusView.isHidden = true
+                    self?.tabBarController?.present(alert, animated: true, completion: nil)
+                    self?.updateStatusView.isHidden = true
                 })
             }
         })

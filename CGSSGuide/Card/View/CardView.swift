@@ -47,7 +47,6 @@ class CardView: UIView {
         skillLabel.frame = CGRect(x: CGSSGlobal.width - 150, y: 10, width: 140, height: 10)
         skillLabel.font = UIFont.systemFont(ofSize: 10)
         skillLabel.textAlignment = .right
-        skillLabel.backgroundColor = UIColor.white
         
         cardNameLabel = UILabel()
         cardNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
@@ -58,7 +57,6 @@ class CardView: UIView {
         titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 98, y: 10, width: CGSSGlobal.width - 150, height: 10)
         titleLabel.font = UIFont.systemFont(ofSize: 10)
-        titleLabel.backgroundColor = UIColor.white
         
         let width = (CGSSGlobal.width - 78) / 5
         let fontSize: CGFloat = 12

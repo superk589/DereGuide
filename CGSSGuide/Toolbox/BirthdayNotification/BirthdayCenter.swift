@@ -55,15 +55,17 @@ class BirthdayCenter: NSObject {
     }
     
     func scheduleNotifications() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.removeNotification()
-            for char in self.getRecent(1, endDays: 30) {
-                let localNotification = UILocalNotification()
-                localNotification.fireDate = self.getNextBirthday(char)
-                let body = NSLocalizedString("今天是%@的生日(%d月%d日)", comment: "生日通知正文")
-                localNotification.alertBody = String.init(format: body, char.name!, char.birthMonth!, char.birthDay!)
-                localNotification.category = "Birthday"
-                UIApplication.shared.scheduleLocalNotification(localNotification)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.removeNotification()
+                for char in strongSelf.getRecent(1, endDays: 30) {
+                    let localNotification = UILocalNotification()
+                    localNotification.fireDate = strongSelf.getNextBirthday(char)
+                    let body = NSLocalizedString("今天是%@的生日(%d月%d日)", comment: "生日通知正文")
+                    localNotification.alertBody = String.init(format: body, char.name!, char.birthMonth!, char.birthDay!)
+                    localNotification.category = "Birthday"
+                    UIApplication.shared.scheduleLocalNotification(localNotification)
+                }
             }
         }
     }

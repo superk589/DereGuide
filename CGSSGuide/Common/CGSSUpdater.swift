@@ -122,7 +122,6 @@ open class CGSSUpdater: NSObject {
         // sessionConfig.requestCachePolicy = .ReloadIgnoringLocalCacheData
         // 因为此处没有使用主线程来处理回调, 所以要处理ui时需要dispatch_async到主线程
         checkSession = URLSession.init(configuration: checkSessionConfig, delegate: self, delegateQueue: nil)
-        
     }
     
     // 废弃当前全部任务 重新开启新的session
@@ -272,13 +271,13 @@ open class CGSSUpdater: NSObject {
             zeroCheckGroup.leave()
         }
         
-        zeroCheckGroup.notify(queue: DispatchQueue.main) { 
+        zeroCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
             if errors.count > 0 {
                 complete(itemsNeedToUpdate, errors)
             } else {
                 if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
                     firstCheckGroup.enter()
-                    self.checkManifest(callback: { (finished, error) in
+                    self?.checkManifest(callback: { (finished, error) in
                         if let e = error {
                             errors.append(e)
                         }
@@ -288,7 +287,7 @@ open class CGSSUpdater: NSObject {
                 
                 if dataTypes.contains(.card) {
                     firstCheckGroup.enter()
-                    self.checkCards(callback: { (items, error) in
+                    self?.checkCards(callback: { (items, error) in
                         if let e = error {
                             errors.append(e)
                         } else if items != nil {
@@ -298,11 +297,10 @@ open class CGSSUpdater: NSObject {
                     })
                 }
                 
-                firstCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: {
-                    
+                firstCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
                     if dataTypes.contains(.master) {
                         secondCheckGroup.enter()
-                        self.checkMaster(callback: { (items, error) in
+                        self?.checkMaster(callback: { (items, error) in
                             if let e = error {
                                 errors.append(e)
                             } else if items != nil {
@@ -314,7 +312,7 @@ open class CGSSUpdater: NSObject {
                     
                     if dataTypes.contains(.beatmap) {
                         secondCheckGroup.enter()
-                        self.checkBeatmap(callback: { (items, error) in
+                        self?.checkBeatmap(callback: { (items, error) in
                             if let e = error {
                                 errors.append(e)
                             } else if items != nil {
@@ -324,8 +322,8 @@ open class CGSSUpdater: NSObject {
                         })
                     }
                     
-                    secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: {
-                        self.isChecking = false
+                    secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
+                        self?.isChecking = false
                         complete(itemsNeedToUpdate, errors)
                     }))
                     
@@ -446,17 +444,17 @@ open class CGSSUpdater: NSObject {
                 break
             }
         }
-        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { 
+        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
             let dao = CGSSDAO.sharedDAO
             dao.saveAll({
                 // 保存成功后 将版本置为最新版
                 CGSSVersionManager.default.setDataVersionToNewest()
                 CGSSVersionManager.default.setApiVersionToNewest()
             })
-            self.isUpdating = false
+            self?.isUpdating = false
             DispatchQueue.main.async(execute: {
                 complete(success, total)
-                self.postUpdateEndNotification(types: updateTypes)
+                self?.postUpdateEndNotification(types: updateTypes)
             })
         }))
     }
@@ -470,8 +468,8 @@ open class CGSSUpdater: NSObject {
             progress(Int(a), Int(b))
         }, completed: { (a, b) in
             complete(Int(a - b), Int(a))
-            DispatchQueue.main.async {
-                self.isUpdating = false
+            DispatchQueue.main.async { [weak self] in
+                self?.isUpdating = false
                 // self.postUpdateEndNotification(types: .image)
             }
         })

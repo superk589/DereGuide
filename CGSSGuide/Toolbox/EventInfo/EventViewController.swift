@@ -54,12 +54,12 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     func reloadData() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             CGSSGameResource.shared.master.getEvents(callback: { (events) in
-                self.defaultList = events
+                self?.defaultList = events
                 DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
-                    self.refresh()
+                    self?.refresh()
                 }
             })
         }

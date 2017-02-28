@@ -38,8 +38,8 @@ class WipeTableViewController: BaseTableViewController {
     
     func wipeData() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let selectedIndexPaths = self.tableView.indexPathsForSelectedRows {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            if let selectedIndexPaths = self?.tableView.indexPathsForSelectedRows {
                 for indexPath in selectedIndexPaths {
                     switch indexPath.row {
                     case 1:
@@ -64,7 +64,7 @@ class WipeTableViewController: BaseTableViewController {
             }
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
         
