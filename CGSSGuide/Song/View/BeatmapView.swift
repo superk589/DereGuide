@@ -225,16 +225,15 @@ class AdvanceBeatmapDrawer {
         return newImage
     }
     
-    func drawIn(rect:CGRect) {
-        typealias Note = CGSSBeatmapNote
-        // 画纵向辅助线
+    private func drawVerticalLine(_ rect: CGRect) {
         for i in 1...5 {
             let path = pathForVerticalLine(rect.origin.y, height: rect.size.height, positionX: getPointX(i))
             UIColor.lightGray.withAlphaComponent(0.5).set()
             path.stroke()
         }
-        
-        // 画小节线
+    }
+    
+    private func drawSectionLine(_ rect: CGRect) {
         let halfquadSectionMax = Int(((totalHeight - rect.origin.y - heightInset) / sectionHeight * 8))
         let rectMin = totalHeight - rect.size.height - rect.origin.y - heightInset
         let halfquadSectionMin = Int(rectMin / sectionHeight * 8)
@@ -253,8 +252,9 @@ class AdvanceBeatmapDrawer {
             let path = pathForSectionLine(pointY)
             path.stroke()
         }
-        
-        // 画 bpm 改变线
+    }
+    
+    private func drawBpmShiftLine(_ rect: CGRect) {
         if let shiftingPoints = beatmap.shiftingPoints {
             for i in 0..<shiftingPoints.count {
                 let point = shiftingPoints[i]
@@ -295,120 +295,39 @@ class AdvanceBeatmapDrawer {
                 path2.stroke()
             }
         }
-        
-        // 滑条 长按 同步线
-        var sliders = [Int: Note]()
-        var positionPressed = [Float].init(repeating: 0, count: 5)
-        var sync: Note?
-        
-        let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
-        let expand = maxInterval
-        
-        let maxY = rect.maxY + expand
-        let minY = rect.minY - expand
-        let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
-        let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
-        
-        for i in minIndex..<maxIndex {
-            let note = notes[i]
-            if note.finishPos != 0 {
-                // 画滑条
-                if note.groupId != 0 {
-                    if (sliders[note.groupId!] != nil) {
-                        let path = pathForSlider(sliders[note.groupId!]!, note2: note)
-                        sliders[note.groupId!] = note
-                        UIColor.white.set()
-                        path?.fill()
-                        strokeColor.withAlphaComponent(0.25).set()
-                        path?.fill()
-                    } else {
-                        sliders[note.groupId!] = note
-                    }
-                }
-                
-                //
-                
-                // 简单长按类型
-                if note.longPressType == 1 {
-                    positionPressed[note.finishPos! - 1] = note.sec + note.offset
-                } else if note.longPressType == 2 {
-                    let path = pathForLongPress(note.finishPos!, sec1: positionPressed[note.finishPos! - 1], sec2: note.sec + note.offset)
-                    positionPressed[note.finishPos! - 1] = 0
-                    UIColor.white.set()
-                    path.fill()
-                    strokeColor.withAlphaComponent(0.25).set()
-                    // path.stroke()
-                    path.fill()
-                }
+    }
+    
+    typealias Note = CGSSBeatmapNote
 
-            }
-        }
-//        // 处理上方未显示完全的长按部分
-//        for i in 1...5 {
-//            if positionPressed[i - 1] != 0 {
-//                let path = pathForLongPress(i, sec1: positionPressed[i - 1], y: rect.origin.y)
-//                positionPressed[i - 1] = 0
-//                UIColor.white.set()
-//                path.fill()
-//                strokeColor.withAlphaComponent(0.25).set()
-//                // path.stroke()
-//                path.fill()
-//            }
-//        }
-        
-        // 画同步线
+    private func drawNote(minIndex: Int, maxIndex: Int) {
         for i in minIndex..<maxIndex {
             let note = notes[i]
             if note.finishPos != 0 {
-                // 画同步线
-                if note.sync == 1 {
-                    if sync != nil {
-                        if sync!.sec + sync!.offset == note.sec + note.offset {
-                            let path = pathForSyncLine(sync!, note2: note)
-                            UIColor.white.set()
-                            path.stroke()
-                            strokeColor.withAlphaComponent(0.5).set()
-                            path.stroke()
-                        } else {
-                            sync = note
-                        }
-                    } else {
-                        sync = note
-                    }
-                    
-                }
-            }
-        }
-        
-        // 画点
-        for i in minIndex..<maxIndex {
-            let note = notes[i]
-            if note.finishPos != 0 {
-                // 点
-                let path = pathForPoint(note.finishPos!, sec: note.sec + note.offset)
+                // 常规点
+                let path = pathForPoint(note.finishPos, sec: note.sec + note.offset)
                 strokeColor.set()
                 // path.stroke()
                 path.fill()
                 
                 // 长按类型中间画一个小圆
                 if [1, 2].contains(note.longPressType) && (note.status < 1 || note.status > 2) {
-                    let path = pathForPointSmall(note.finishPos!, sec: note.sec + note.offset)
+                    let path = pathForSmallPoint(note.finishPos, sec: note.sec + note.offset)
                     UIColor.white.set()
                     path.fill()
                 }
                 
-                // slide 中间画一个小横线
+                // slider 中间画一个小横线
                 if note.type == 3 && (note.status < 1 || note.status > 2) {
-                    let path = pathForPointSmall(note.finishPos!, sec: note.sec + note.offset)
-                    let path2 = pathForPointSlide(note.finishPos!, sec: note.sec + note.offset)
+                    let path = pathForSmallPoint(note.finishPos, sec: note.sec + note.offset)
+                    let path2 = pathForSliderPoint(note.finishPos, sec: note.sec + note.offset)
                     UIColor.white.set()
                     path.fill()
                     path2.stroke()
                 }
                 
-                // 箭头向左
+                // flick 箭头向左
                 if (note.status == 1 && !mirrorFlip) || (note.status == 2 && mirrorFlip) {
-                    let center = CGPoint(x: getPointX(note.finishPos!), y: getPointY(note.sec + note.offset))
+                    let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.sec + note.offset))
                     let point1 = CGPoint(x: center.x - noteRadius + 1, y: center.y)
                     let point2 = CGPoint(x: center.x - 1, y: center.y - noteRadius + 2)
                     let point3 = CGPoint(x: center.x - 1, y: center.y + noteRadius - 2)
@@ -425,9 +344,9 @@ class AdvanceBeatmapDrawer {
                     path2.fill()
                 }
                 
-                // 箭头向右
+                // flick 箭头向右
                 if (note.status == 2 && !mirrorFlip) || (note.status == 1 && mirrorFlip) {
-                    let center = CGPoint(x: getPointX(note.finishPos!), y: getPointY(note.sec + note.offset))
+                    let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.sec + note.offset))
                     let point1 = CGPoint(x: center.x + noteRadius - 1, y: center.y)
                     let point2 = CGPoint(x: center.x + 1, y: center.y - noteRadius + 2)
                     let point3 = CGPoint(x: center.x + 1, y: center.y + noteRadius - 2)
@@ -447,6 +366,108 @@ class AdvanceBeatmapDrawer {
             }
         }
     }
+    
+    private func drawNoteSyncLine(minIndex: Int, maxIndex: Int) {
+        var syncNote: Note?
+        for i in minIndex..<maxIndex {
+            let note = notes[i]
+            if note.finishPos != 0 {
+                // 画同步线
+                if note.sync == 1 {
+                    if syncNote != nil {
+                        if syncNote!.sec + syncNote!.offset == note.sec + note.offset {
+                            let path = pathForSyncLine(syncNote!, note2: note)
+                            UIColor.white.set()
+                            path.stroke()
+                            strokeColor.withAlphaComponent(0.5).set()
+                            path.stroke()
+                        } else {
+                            syncNote = note
+                        }
+                    } else {
+                        syncNote = note
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    private func drawNoteLongPressLine(minIndex: Int, maxIndex: Int) {
+        var positionPressed = [Float].init(repeating: 0, count: 5)
+        for i in minIndex..<maxIndex {
+            let note = notes[i]
+            if note.finishPos != 0 {
+                // 简单长按类型
+                if note.longPressType == 1 {
+                    positionPressed[note.finishPos - 1] = note.sec + note.offset
+                } else if note.longPressType == 2 {
+                    let path = pathForLongPress(note.finishPos, sec1: positionPressed[note.finishPos - 1], sec2: note.sec + note.offset)
+                    positionPressed[note.finishPos - 1] = 0
+                    UIColor.white.set()
+                    path.fill()
+                    strokeColor.withAlphaComponent(0.25).set()
+                    // path.stroke()
+                    path.fill()
+                }
+                
+            }
+        }
+
+    }
+    
+    private func drawNoteGroupLine(minIndex: Int, maxIndex: Int) {
+        var slidersOrFlicks = [Int: Note]()
+        for i in minIndex..<maxIndex {
+            let note = notes[i]
+            if note.finishPos != 0 {
+                // 画滑条
+                if note.groupId != 0 {
+                    if (slidersOrFlicks[note.groupId!] != nil) {
+                        let path = pathForSlider(slidersOrFlicks[note.groupId!]!, note2: note)
+                        slidersOrFlicks[note.groupId!] = note
+                        UIColor.white.set()
+                        path?.fill()
+                        strokeColor.withAlphaComponent(0.25).set()
+                        path?.fill()
+                    } else {
+                        slidersOrFlicks[note.groupId!] = note
+                    }
+                }
+            }
+        }
+    }
+    
+    func drawIn(rect:CGRect) {
+        
+        // 画纵向辅助线
+        drawVerticalLine(rect)
+        
+        // 画小节线
+        drawSectionLine(rect)
+        
+        // 画 bpm 改变线
+        drawBpmShiftLine(rect)
+        
+        
+        // 滑条 长按 同步线
+        let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
+        let expand = maxInterval
+        
+        let maxY = rect.maxY + expand
+        let minY = rect.minY - expand
+        let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
+        let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
+        
+        drawNoteGroupLine(minIndex: minIndex, maxIndex: maxIndex)
+        
+        drawNoteLongPressLine(minIndex: minIndex, maxIndex: maxIndex)
+        
+        drawNoteSyncLine(minIndex: minIndex, maxIndex: maxIndex)
+
+        // 画点
+        drawNote(minIndex: minIndex, maxIndex: maxIndex)
+    }
 
     private func pathForPoint(_ position: Int, sec: Float) -> UIBezierPath
     {
@@ -454,13 +475,13 @@ class AdvanceBeatmapDrawer {
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    private func pathForPointSmall(_ position: Int, sec: Float) -> UIBezierPath
+    private func pathForSmallPoint(_ position: Int, sec: Float) -> UIBezierPath
     {
         let radius = floor(noteRadius / 2)
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    fileprivate func pathForPointSlide(_ position: Int, sec: Float) -> UIBezierPath {
+    fileprivate func pathForSliderPoint(_ position: Int, sec: Float) -> UIBezierPath {
         let path = UIBezierPath()
         let x = getPointX(position)
         let y = getPointY(sec)
@@ -471,8 +492,8 @@ class AdvanceBeatmapDrawer {
     }
     private func pathForSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath
     {
-        let x1 = getPointX(note1.finishPos!)
-        let x2 = getPointX(note2.finishPos!)
+        let x1 = getPointX(note1.finishPos)
+        let x2 = getPointX(note2.finishPos)
         let y = getPointY(note1.sec + note1.offset)
         
         let path = UIBezierPath()
@@ -488,10 +509,10 @@ class AdvanceBeatmapDrawer {
         return pathForLongPress(position, sec1: sec1, y: y2)
     }
     
-    private func pathForSlider(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
+    private func pathForFlick(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
         
-        let x1 = getPointX(note1.finishPos!)
-        let x2 = getPointX(note2.finishPos!)
+        let x1 = getPointX(note1.finishPos)
+        let x2 = getPointX(note2.finishPos)
         let y1 = getPointY(note1.sec + note1.offset)
         let y2 = getPointY(note2.sec + note2.offset)
         // 个别情况下滑条的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
@@ -510,10 +531,10 @@ class AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForLongPressSlider(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
+    private func pathForSlider(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
         
-        let x1 = getPointX(note1.finishPos!)
-        let x2 = getPointX(note2.finishPos!)
+        let x1 = getPointX(note1.finishPos)
+        let x2 = getPointX(note2.finishPos)
         let y1 = getPointY(note1.sec + note1.offset)
         let y2 = getPointY(note2.sec + note2.offset)
         let t = atan((y1 - y2) / (x2 - x1))
