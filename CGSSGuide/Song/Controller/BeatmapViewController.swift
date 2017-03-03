@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class BeatmapViewController: UIViewController {
     
@@ -32,7 +33,11 @@ class BeatmapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bv = BeatmapView()
-        bv.frame = CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64)
+        self.view.addSubview(bv)
+        bv.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        bv.contentMode = .redraw
         
         // 自定义title描述歌曲信息
         titleLabel = UILabel()
@@ -48,10 +53,6 @@ class BeatmapViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        
-        self.view.addSubview(bv)
-        // self.view.addSubview(descLabel)
-        self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
 
         // 设置toolbar

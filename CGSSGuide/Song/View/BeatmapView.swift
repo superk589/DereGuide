@@ -54,9 +54,14 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         
         self.backgroundColor = UIColor.white
         beatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: sectionHeight, columnWidth: self.frame.size.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1)
-        self.contentSize = CGSize.init(width: self.fwidth, height: beatmapDrawer.totalHeight)
+        self.contentSize.height = beatmapDrawer.totalHeight
         self.contentOffset = CGPoint(x: 0, y: self.contentSize.height - self.frame.size.height)
         self.delegate = self
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        beatmapDrawer.columnWidth = self.frame.size.width
     }
     
     override func draw(_ rect: CGRect) {
