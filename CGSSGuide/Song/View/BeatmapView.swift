@@ -321,10 +321,10 @@ class AdvanceBeatmapDrawer {
                     path.fill()
                 }
                 
-                // slider 中间画一个小横线
+                // slide 中间画一个小横线
                 if note.type == 3 && (note.status < 1 || note.status > 2) {
                     let path = pathForSmallPoint(note.finishPos, sec: note.sec + note.offset)
-                    let path2 = pathForSliderPoint(note.finishPos, sec: note.sec + note.offset)
+                    let path2 = pathForSlidePoint(note.finishPos, sec: note.sec + note.offset)
                     UIColor.white.set()
                     path.fill()
                     path2.stroke()
@@ -422,21 +422,21 @@ class AdvanceBeatmapDrawer {
     }
     
     private func drawNoteGroupLine(minIndex: Int, maxIndex: Int) {
-        var slidersOrFlicks = [Int: Note]()
+        var slidesAndFlicks = [Int: Note]()
         for i in minIndex..<maxIndex {
             let note = notes[i]
             if note.finishPos != 0 {
                 // 画滑条
                 if note.groupId != 0 {
-                    if (slidersOrFlicks[note.groupId!] != nil) {
-                        let path = pathForSlider(slidersOrFlicks[note.groupId!]!, note2: note)
-                        slidersOrFlicks[note.groupId!] = note
+                    if (slidesAndFlicks[note.groupId] != nil) {
+                        let path = (note.type == 3) ? pathForSlide(slidesAndFlicks[note.groupId]!, note2: note) : pathForFlick(slidesAndFlicks[note.groupId]!, note2: note)
+                        slidesAndFlicks[note.groupId] = note
                         UIColor.white.set()
                         path?.fill()
                         strokeColor.withAlphaComponent(0.25).set()
                         path?.fill()
                     } else {
-                        slidersOrFlicks[note.groupId!] = note
+                        slidesAndFlicks[note.groupId] = note
                     }
                 }
             }
@@ -456,8 +456,7 @@ class AdvanceBeatmapDrawer {
         
         
         // 滑条 长按 同步线
-        let maxInterval = CGFloat(beatmap.maxLongPressInterval) * secScale
-        let expand = maxInterval
+        let expand = CGFloat(beatmap.maxLongPressInterval) * secScale
         
         let maxY = rect.maxY + expand
         let minY = rect.minY - expand
@@ -486,7 +485,7 @@ class AdvanceBeatmapDrawer {
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    fileprivate func pathForSliderPoint(_ position: Int, sec: Float) -> UIBezierPath {
+    fileprivate func pathForSlidePoint(_ position: Int, sec: Float) -> UIBezierPath {
         let path = UIBezierPath()
         let x = getPointX(position)
         let y = getPointY(sec)
@@ -520,9 +519,9 @@ class AdvanceBeatmapDrawer {
         let x2 = getPointX(note2.finishPos)
         let y1 = getPointY(note1.sec + note1.offset)
         let y2 = getPointY(note2.sec + note2.offset)
-        // 个别情况下滑条的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
+        // 个别情况下flicks的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
         // 但是要注意新类型slide会超过1个section故排除slide
-        if y1 - y2 > sectionHeight && note1.type != 3 && note2.type != 3 {
+        if y1 - y2 > sectionHeight {
             return nil
         }
         
@@ -536,7 +535,7 @@ class AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForSlider(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
+    private func pathForSlide(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
         
         let x1 = getPointX(note1.finishPos)
         let x2 = getPointX(note2.finishPos)

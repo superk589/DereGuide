@@ -103,9 +103,9 @@ class CGSSBeatmap: CGSSBaseModel {
     var maxLongPressInterval: Float = 0
     func contextFreeAllNotes() {
         var positionPressed = [Float].init(repeating: 0, count: 5)
-        var sliders = [Int: Float]()
+        var slides = [Int: Float]()
         for note in self.notes {
-            if note.finishPos! == 0 {
+            if note.finishPos == 0 {
                 continue
             }
             if note.type == 2 && positionPressed[note.finishPos! - 1] == 0 {
@@ -122,17 +122,18 @@ class CGSSBeatmap: CGSSBaseModel {
                 positionPressed[note.finishPos! - 1] = 0
             }
             
-            if note.groupId != nil {
-                if sliders[note.groupId!] == nil {
+            if note.groupId != 0 {
+                if slides[note.groupId] == nil {
                     // 滑条起始点
-                    sliders[note.groupId!] = note.sec + note.offset
+                    slides[note.groupId] = note.sec + note.offset
                 } else {
                     // 滑条中间点或结束点
-                    let interval = (note.sec + note.offset) - sliders[note.groupId!]!
-                    if interval > maxLongPressInterval {
+                    let interval = (note.sec + note.offset) - slides[note.groupId]!
+                    // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
+                    if interval > maxLongPressInterval && !(note.type != 3 && interval > 4){
                         maxLongPressInterval = interval
                     }
-                    sliders[note.groupId!] = note.sec + note.offset
+                    slides[note.groupId] = note.sec + note.offset
                 }
             }
         }

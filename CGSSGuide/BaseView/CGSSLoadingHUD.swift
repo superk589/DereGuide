@@ -153,7 +153,7 @@ class CGSSLoadingHUDManager {
         debouncer = Debouncer.init(interval: 0.1)
         UIApplication.shared.keyWindow?.addSubview(hud)
     }
-    private lazy var showClosure: (() -> Void)? = {
+    private lazy var showClosure: (() -> Void)? = { [unowned self] in
         let window = UIApplication.shared.keyWindow
         window?.bringSubview(toFront: self.hud)
         for subview in window?.subviews ?? [UIView]() {
