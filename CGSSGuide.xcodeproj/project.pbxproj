@@ -10,6 +10,7 @@
 		1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */; };
 		120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */; };
 		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
+		120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */; };
 		1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */; };
 		1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F81E2760F900185782 /* SortTableViewCell.swift */; };
 		1206C0FB1E27742000185782 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */; };
@@ -194,6 +195,7 @@
 		1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharFilter.swift; sourceTree = "<group>"; };
 		120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
+		120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewIndicator.swift; sourceTree = "<group>"; };
 		1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilterSortController.swift; sourceTree = "<group>"; };
 		1206C0F81E2760F900185782 /* SortTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortTableViewCell.swift; sourceTree = "<group>"; };
 		1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				1239B0531E2FB41200958849 /* BannerView.swift */,
 				12AE77C71E39A81C006A9653 /* StatusIndicator.swift */,
 				12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */,
+				120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -1050,6 +1053,7 @@
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
+				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
 				12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,

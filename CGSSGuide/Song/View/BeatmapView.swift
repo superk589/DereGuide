@@ -14,6 +14,10 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     var beatmap: CGSSBeatmap!
     var bpm: Int!
     var type: Int!
+    
+    var indicator: ScrollViewIndicator!
+    var debouncer: Debouncer!
+    
     // 是否镜像翻转
     var mirrorFlip: Bool = false {
         didSet {
@@ -35,12 +39,31 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        showsVerticalScrollIndicator = false
+        indicator = ScrollViewIndicator(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        backgroundColor = UIColor.white
+        delaysContentTouches = false
+        debouncer = Debouncer.init(interval: 3, callback: { [weak self] in
+            if self?.indicator.panGesture.state == .possible {
+                self?.indicator.hide()
+            } else {
+                self?.debouncer.call()
+            }
+        })
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setup(beatmap: CGSSBeatmap, bpm: Int, type: Int) {
         self.beatmap = beatmap
         beatmap.contextFreeAllNotes()
         self.bpm = bpm
         self.type = type
-        
+        indicator.strokeColor = self.strokeColor
         /* debug */
 //        beatmap.exportNote()
 //        beatmap.exportIntervalToBpm()
@@ -52,7 +75,6 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         let heightInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        self.backgroundColor = UIColor.white
         beatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: sectionHeight, columnWidth: self.frame.size.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1)
         self.contentSize.height = beatmapDrawer.totalHeight
         self.contentOffset = CGPoint(x: 0, y: self.contentSize.height - self.frame.size.height)
@@ -68,12 +90,19 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         beatmapDrawer.drawIn(rect: rect)
     }
     
-    
     // MARK: scrollView的代理方法
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNeedsDisplay()
+        debouncer.call()
+        indicator.adjustFrameInScrollView()
     }
+
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        indicator.show(to: self)
+    }
+
     
     // MARK: 生成整张谱面图片的方法
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
@@ -85,11 +114,8 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
             DispatchQueue.main.async {
                 callBack(newImage)
             }
-            
         }
-     
     }
-    
 }
 
 class AdvanceBeatmapDrawer {

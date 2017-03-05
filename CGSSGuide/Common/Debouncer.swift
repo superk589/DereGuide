@@ -16,28 +16,23 @@ class Debouncer {
     
     private let interval: TimeInterval // Time interval of the debounce window
     
-    init(interval: TimeInterval) {
+    init(interval: TimeInterval, callback: (() -> Void)? = nil) {
         self.interval = interval
+        self.callback = callback
     }
     
-    private var timer: Timer?
+    private weak var timer: Timer?
     
     // Indicate that the callback should be called. Begins the debounce window.
     func call() {
         // Invalidate existing timer if there is one
         timer?.invalidate()
         // Begin a new timer from now
-        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: false)
     }
     
     @objc private func handleTimer(_ timer: Timer) {
-//        if callback == nil {
-//            NSLog("Debouncer timer fired, but callback was nil")
-//        } else {
-//            NSLog("Debouncer timer fired")
-//        }
         callback?()
-        callback = nil
     }
     
 }
