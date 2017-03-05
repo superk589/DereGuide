@@ -25,138 +25,88 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                      NSLocalizedString("活动封面", comment: ""),
                      NSLocalizedString("卡池封面", comment: "")]
     
-    var spreadTotal = [URL]() {
+    private struct ResourceURLs {
+        var inCache = [URL]()
+        var needToDownload = [URL]()
+        
+        var count: Int {
+            return inCache.count + needToDownload.count
+        }
+        
+        mutating func removeAll() {
+            inCache.removeAll()
+            needToDownload.removeAll()
+        }
+    }
+    
+    private var spreadURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(1)
         }
     }
-    var spreadNeedToDownload = [URL]() {
-        didSet {
-            setupCellAtIndex(1)
-        }
-    }
     
-    var cardImageTotal = [URL]() {
+    private var cardImageURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(2)
         }
     }
-    var cardImageNeedToDownload = [URL]() {
-        didSet {
-            setupCellAtIndex(2)
-        }
-    }
-
     
-    var cardIconTotal = [URL]() {
-        didSet {
-            setupCellAtIndex(3)
-        }
-    }
-    var cardIconNeedToDownload = [URL]() {
+    private var cardIconURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(3)
         }
     }
     
-    var cardSignTotal = [URL]() {
+    private var cardSignURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(4)
         }
     }
-    var cardSignNeedToDownload = [URL]() {
-        didSet {
-            setupCellAtIndex(4)
-        }
-    }
-    
-    var charIconTotal = [URL]() {
-        didSet {
-            setupCellAtIndex(5)
-        }
-    }
-    var charIconNeedToDownload = [URL]() {
+   
+    private var charIconURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(5)
         }
     }
     
-    var jacketTotal = [URL]() {
+    private var jacketURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(6)
         }
     }
-    var jacketNeedToDownload = [URL]() {
-        didSet {
-            setupCellAtIndex(6)
-        }
-    }
-    
-    var eventTotal = [URL]() {
+   
+    private var eventURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(7)
         }
     }
-    var eventNeedToDownload = [URL]() {
-        didSet {
-            setupCellAtIndex(7)
-        }
-    }
-    
-    var gachaTotal = [URL]() {
-        didSet {
-            setupCellAtIndex(8)
-        }
-    }
-    var gachaNeedToDownload = [URL]() {
+   
+    private var gachaURLs = ResourceURLs() {
         didSet {
             setupCellAtIndex(8)
         }
     }
     
-    func getURLsOfNeedToDownloadBy(index: Int) -> [URL] {
+    private func getURLsBy(index: Int) -> ResourceURLs {
         switch index {
         case 1:
-            return spreadNeedToDownload
+            return spreadURLs
         case 2:
-            return cardImageNeedToDownload
+            return cardImageURLs
         case 3:
-            return cardIconNeedToDownload
+            return cardIconURLs
         case 4:
-            return cardSignNeedToDownload
+            return cardSignURLs
         case 5:
-            return charIconNeedToDownload
+            return charIconURLs
         case 6:
-            return jacketNeedToDownload
+            return jacketURLs
         case 7:
-            return eventNeedToDownload
+            return eventURLs
         case 8:
-            return gachaNeedToDownload
+            return gachaURLs
         default:
-            return [URL]()
-        }
-    }
-
-    func getURLsBy(index: Int) -> [URL] {
-        switch index {
-        case 1:
-            return spreadTotal
-        case 2:
-            return cardImageTotal
-        case 3:
-            return cardIconTotal
-        case 4:
-            return cardSignTotal
-        case 5:
-            return charIconTotal
-        case 6:
-            return jacketTotal
-        case 7:
-            return eventTotal
-        case 8:
-            return gachaTotal
-        default:
-            return [URL]()
+            return ResourceURLs()
         }
 
     }
@@ -164,9 +114,8 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
     func setupCellAtIndex(_ index: Int) {
         DispatchQueue.main.async {
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0))
-            let total = self.getURLsBy(index: index).count
-            let needToDownload = self.getURLsOfNeedToDownloadBy(index: index).count
-            cell?.detailTextLabel?.text = "\(total - needToDownload)/\(total)"
+            let urls = self.getURLsBy(index: index)
+            cell?.detailTextLabel?.text = "\(urls.inCache.count)/\(urls.count)"
         }
     }
     
@@ -205,41 +154,44 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                 // 卡片大图
                 if card.hasSpread! {
                     if let url = URL.init(string: card.spreadImageRef!) {
-                        self.spreadTotal.append(url)
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                            if !isInCache {
-                                self.spreadNeedToDownload.append(url)
+                            if isInCache {
+                                self.spreadURLs.inCache.append(url)
+                            } else {
+                                self.spreadURLs.needToDownload.append(url)
                             }
                         })
                     }
                 }
                 // 卡头像图
                 if let url = URL.init(string: DataURL.Images + "/icon_card/\(card.id!).png") {
-                    self.cardIconTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.cardIconNeedToDownload.append(url)
+                        if isInCache {
+                            self.cardIconURLs.inCache.append(url)
+                        } else {
+                            self.cardIconURLs.needToDownload.append(url)
                         }
                     })
-                    
                 }
                 
                 // 卡签名图
                 if let url = card.signImageURL {
-                    self.cardSignTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.cardSignNeedToDownload.append(url)
+                        if isInCache {
+                            self.cardSignURLs.inCache.append(url)
+                        } else {
+                            self.cardSignURLs.needToDownload.append(url)
                         }
                     })
                 }
                 
                 // 卡片图
                 if let url = URL.init(string: card.cardImageRef) {
-                    self.cardImageTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.cardImageNeedToDownload.append(url)
+                        if isInCache {
+                            self.cardImageURLs.inCache.append(url)
+                        } else {
+                            self.cardImageURLs.needToDownload.append(url)
                         }
                     })
                 }
@@ -249,10 +201,11 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             for char in chars {
                 // 角色头像图
                 if let url = URL.init(string: DataURL.Images + "/icon_char/\(char.charaId!).png") {
-                    self.charIconTotal.append(url)
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if !isInCache {
-                            self.charIconNeedToDownload.append(url)
+                        if isInCache {
+                            self.charIconURLs.inCache.append(url)
+                        } else {
+                            self.charIconURLs.needToDownload.append(url)
                         }
                     })
                 }
@@ -262,10 +215,11 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             CGSSGameResource.shared.master.getLives(callback: { (lives) in
                 for live in lives {
                     if let url = live.jacketURL {
-                        self.jacketTotal.append(url)
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                            if !isInCache {
-                                self.jacketNeedToDownload.append(url)
+                            if isInCache {
+                                self.jacketURLs.inCache.append(url)
+                            } else {
+                                self.jacketURLs.needToDownload.append(url)
                             }
                         })
                     }
@@ -276,10 +230,11 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             CGSSGameResource.shared.master.getEvents(callback: { (events) in
                 for event in events {
                     if let url = event.detailBannerURL {
-                        self.eventTotal.append(url)
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                            if !isInCache {
-                                self.eventNeedToDownload.append(url)
+                            if isInCache {
+                                self.eventURLs.inCache.append(url)
+                            } else {
+                                self.eventURLs.needToDownload.append(url)
                             }
                         })
                         
@@ -290,11 +245,12 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
                 for gachaPool in pools {
                     if let url = gachaPool.detailBannerURL, ![30001, 30006].contains(gachaPool.id) {
-                        self.gachaTotal.append(url)
+                        // 温泉旅行和初始卡池的图片目前缺失, 故不加入待下载列表
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                            // 温泉旅行和初始卡池的图片目前缺失, 故不加入待下载列表
-                            if !isInCache {
-                                self.gachaNeedToDownload.append(url)
+                            if isInCache {
+                                self.gachaURLs.inCache.append(url)
+                            } else {
+                                self.gachaURLs.needToDownload.append(url)
                             }
                         })
                         
@@ -304,22 +260,14 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         }
     }
     func removeAllURLs() {
-        self.cardIconNeedToDownload.removeAll()
-        self.cardIconTotal.removeAll()
-        self.spreadTotal.removeAll()
-        self.spreadNeedToDownload.removeAll()
-        self.cardSignTotal.removeAll()
-        self.cardSignNeedToDownload.removeAll()
-        self.cardImageTotal.removeAll()
-        self.cardImageNeedToDownload.removeAll()
-        self.charIconTotal.removeAll()
-        self.charIconNeedToDownload.removeAll()
-        self.eventTotal.removeAll()
-        self.eventNeedToDownload.removeAll()
-        self.gachaTotal.removeAll()
-        self.gachaNeedToDownload.removeAll()
-        self.jacketTotal.removeAll()
-        self.jacketNeedToDownload.removeAll()
+        self.cardIconURLs.removeAll()
+        self.spreadURLs.removeAll()
+        self.cardImageURLs.removeAll()
+        self.cardSignURLs.removeAll()
+        self.charIconURLs.removeAll()
+        self.eventURLs.removeAll()
+        self.jacketURLs.removeAll()
+        self.gachaURLs.removeAll()
     }
     
     func cacheData() {
@@ -329,7 +277,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         var urls = [URL]()
         if let indexPaths = tableView.indexPathsForSelectedRows {
             for indexPath in indexPaths {
-                urls.append(contentsOf: getURLsOfNeedToDownloadBy(index: indexPath.row))
+                urls.append(contentsOf: getURLsBy(index: indexPath.row).needToDownload)
             }
         }
         

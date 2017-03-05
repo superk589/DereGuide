@@ -14,7 +14,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     var questionView1: DonationQAView!
     var questionView2: DonationQAView!
-
+    
     var cv: UICollectionView!
     var gadBanner: GADBannerView!
     var bannerDescLabel2: UILabel!
@@ -38,14 +38,8 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         
         prepareUI()
-        // requestData()
-        // Do any additional setup after loading the view.
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         requestData()
+        // Do any additional setup after loading the view.
     }
     
     func prepareUI() {
@@ -103,21 +97,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         cv.dataSource = self
         cv.backgroundColor = UIColor.white
         cv.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
-    
-//        let bannerDescLabel = UILabel()
-//        view.addSubview(bannerDescLabel)
-//        bannerDescLabel.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(gadBanner.snp.top).offset(-10)
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//        }
-//        bannerDescLabel.textColor = UIColor.darkGray
-//        bannerDescLabel.font = UIFont.systemFont(ofSize: 14)
-//        bannerDescLabel.numberOfLines = 0
-//        bannerDescLabel.textAlignment = .center
-//        bannerDescLabel.text = NSLocalizedString("您也可以通过点击下方的广告来支持我们。", comment: "")
-//        bannerDescLabel.adjustsFontSizeToFitWidth = true
-//        
+      
         bannerDescLabel2 = UILabel()
         view.addSubview(bannerDescLabel2)
         bannerDescLabel2.snp.makeConstraints { (make) in
@@ -135,7 +115,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         if !UserDefaults.standard.shouldShowAd {
             removeAd()
         }
-        
     }
     
     var hud: LoadingImageView?
@@ -161,16 +140,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         }
         gadBanner.isHidden = true
         bannerDescLabel2.text = NSLocalizedString("感谢您的支持，广告已经被移除。", comment: "")
-        
     }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     
     // MARK: UICollectionViewDelegate & DataSource
     
@@ -195,11 +165,8 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         default:
             break
         }
-        
         return cell
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = products[indexPath.item]
@@ -216,17 +183,16 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 // MARK: StoreKitDelegate
@@ -239,7 +205,6 @@ extension DonationViewController: SKProductsRequestDelegate {
             self.reloadData()
         }
     }
-    
 }
 
 
