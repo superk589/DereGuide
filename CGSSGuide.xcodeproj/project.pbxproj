@@ -98,7 +98,7 @@
 		1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA011D520C9F0071AD7F /* BeatmapView.swift */; };
 		1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA021D520C9F0071AD7F /* SongTableViewCell.swift */; };
 		1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA081D520CD50071AD7F /* BaseNavigationController.swift */; };
-		1269EA0B1D520CD50071AD7F /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */; };
+		1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA091D520CD50071AD7F /* RootTabBarController.swift */; };
 		1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */; };
 		1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */; };
 		1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */; };
@@ -299,7 +299,7 @@
 		1269EA011D520C9F0071AD7F /* BeatmapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapView.swift; sourceTree = "<group>"; };
 		1269EA021D520C9F0071AD7F /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		1269EA081D520CD50071AD7F /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
+		1269EA091D520CD50071AD7F /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardFilter.swift; sourceTree = "<group>"; };
 		1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
 		1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
@@ -691,7 +691,7 @@
 				1269EA081D520CD50071AD7F /* BaseNavigationController.swift */,
 				12D4F8B81E1CCF880064991E /* BaseViewController.swift */,
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
-				1269EA091D520CD50071AD7F /* RootTabBarViewController.swift */,
+				1269EA091D520CD50071AD7F /* RootTabBarController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
 				1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */,
 			);
@@ -1018,7 +1018,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1269EA0B1D520CD50071AD7F /* RootTabBarViewController.swift in Sources */,
+				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
 				1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */,
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,

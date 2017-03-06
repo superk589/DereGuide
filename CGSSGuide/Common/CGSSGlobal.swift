@@ -14,6 +14,10 @@ struct Config {
     static let iAPRemoveADProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
 }
 
+struct NotificationCategory {
+    static var birthday = "Birthday"
+}
+
 struct Screen {
     // 当前屏幕的宽度和高度常量
     public static let width = UIScreen.main.bounds.width

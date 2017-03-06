@@ -15,4 +15,11 @@ extension Date {
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
+    
+    func truncateHours(timeZone: TimeZone = TimeZone.tokyo) -> Date {
+        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        gregorian.timeZone = timeZone
+        let comps = gregorian.dateComponents([.day, .month, .year], from: self)
+        return gregorian.date(from: comps)!
+    }
 }

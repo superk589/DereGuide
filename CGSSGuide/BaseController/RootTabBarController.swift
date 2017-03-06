@@ -1,5 +1,5 @@
 //
-//  RootTabBarViewController.swift
+//  RootTabBarController.swift
 //  CGSSGuide
 //
 //  Created by zzk on 16/6/28.
@@ -8,12 +8,10 @@
 
 import UIKit
 
-class RootTabBarViewController: UITabBarController {
+class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
-    
     
 }

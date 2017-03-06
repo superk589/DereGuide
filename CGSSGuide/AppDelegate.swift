@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 规划近期偶像生日
         if UserDefaults.standard.shouldPostBirthdayNotice {
-            BirthdayCenter.defaultCenter.scheduleNotifications()
+            BirthdayCenter.default.scheduleNotifications()
         }
         
         // 设置SDWebImage过期时间
@@ -51,14 +51,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 初始化DrawerController和TabBarController
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let baseTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarViewController")
+        let rootTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarController") as! RootTabBarController
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        let drawerController = ZKDrawerController.init(main: baseTabBarController)
+        let drawerController = ZKDrawerController.init(main: rootTabBarController)
         drawerController.drawerStyle = .cover
         drawerController.gestureRecognizerWidth = 120
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()
         CGSSClient.shared.drawerController = drawerController
+        CGSSClient.shared.tabBarController = rootTabBarController
+        
+        // 判断是否通过本地消息进入, 如果是跳转到指定页面
+        if let notification = launchOptions?[.localNotification] as? UILocalNotification {
+            openSpecificPageWithLocalNotification(notification)
+        }
+        
         return true
     }
     
@@ -80,9 +87,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
     }
     
+    private func openSpecificPageWithLocalNotification(_ notification: UILocalNotification) {
+        if notification.category == NotificationCategory.birthday {
+            let tabBarController = CGSSClient.shared.tabBarController
+            if let nvc = tabBarController?.selectedViewController as? UINavigationController,
+                let charaId = notification.userInfo?["chara_id"] as? Int,
+                let char = CGSSDAO.sharedDAO.findCharById(charaId) {
+                let vc = CharDetailViewController()
+                vc.char = char
+                vc.hidesBottomBarWhenPushed = true
+                nvc.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
     // 接收到本地消息
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        
+        openSpecificPageWithLocalNotification(notification)
     }
     
     // 接收到远程消息
@@ -108,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         // 每次进入前台时 规划接下来一个月的偶像生日
         if UserDefaults.standard.shouldPostBirthdayNotice {
-            BirthdayCenter.defaultCenter.scheduleNotifications()
+            BirthdayCenter.default.scheduleNotifications()
         }
     }
     

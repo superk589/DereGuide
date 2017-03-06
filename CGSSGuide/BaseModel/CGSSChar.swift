@@ -165,7 +165,6 @@ extension CGSSChar {
             return "\(age!)\(NSLocalizedString("岁", comment: "角色年龄"))"
         }
     }
-    
 }
 class CGSSChar: CGSSBaseModel {
     

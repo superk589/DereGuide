@@ -16,7 +16,6 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareSettingCells()
-        prepareChars()
         headerView = UITableView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 132), style: .plain)
         headerView.delegate = self
         headerView.dataSource = self
@@ -38,7 +37,6 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
             // Fallback on earlier versions
         }
         
-        
         self.popoverPresentationController?.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,14 +50,6 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         (cell.accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
     }
     
-//    init() {
-//        super.init(style: .Grouped)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewWillLayoutSubviews() {
         // 对齐tableview和headerview的左边界
         tableView.layoutMargins = UIEdgeInsetsMake(0, 15, 0, 0)
@@ -68,7 +58,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         for i in 0...3 {
             presentChars[i].removeAll()
         }
-        let bc = BirthdayCenter.defaultCenter
+        let bc = BirthdayCenter.default
         presentChars[0].append(contentsOf: bc.getRecent(0, endDays: 0))
         presentChars[1].append(contentsOf: bc.getRecent(1, endDays: 1))
         presentChars[2].append(contentsOf: bc.getRecent(2, endDays: 6))
@@ -76,8 +66,8 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         
     }
     func prepareSettingCells() {
-        headerCells = [UITableViewCell]()
         
+        headerCells = [UITableViewCell]()
         let cell0 = UITableViewCell.init(style: .default, reuseIdentifier: "BirthDaySettingCell")
         cell0.textLabel?.text = NSLocalizedString("系统通知设置", comment: "生日提醒页面")
         let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
@@ -105,12 +95,12 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectTimeZone))
         cell2.addGestureRecognizer(tap)
         headerCells.append(cell2)
-        
     }
     
     func valueChanged(_ sw: UISwitch) {
         UserDefaults.standard.setValue(sw.isOn, forKey: "BirthdayNotice")
-        refreshData()
+        rescheduleBirthdayNotifications()
+        reloadData()
     }
     
     func gotoSystemNotificationSettings() {
@@ -125,39 +115,32 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         let alvc = UIAlertController.init(title: NSLocalizedString("选择提醒时区", comment: "生日提醒页面"), message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = timeZoneCell.detailTextLabel
         alvc.popoverPresentationController?.sourceRect = CGRect(x: timeZoneCell.detailTextLabel!.fwidth / 2, y: timeZoneCell.detailTextLabel!.fheight, width: 0, height: 0)
-        alvc.addAction(UIAlertAction.init(title: "System", style: .default, handler: { (a) in
+        alvc.addAction(UIAlertAction.init(title: "System", style: .default, handler: { [weak self] (a) in
             UserDefaults.standard.setValue("System", forKey: "BirthdayTimeZone")
             timeZoneCell.detailTextLabel?.text = "System"
-            self.refreshData()
+            self?.rescheduleBirthdayNotifications()
+            self?.reloadData()
             }))
-        alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .default, handler: { (a) in
+        alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .default, handler: { [weak self] (a) in
             UserDefaults.standard.setValue("Asia/Tokyo", forKey: "BirthdayTimeZone")
             timeZoneCell.detailTextLabel?.text = "Asia/Tokyo"
-            self.refreshData()
+            self?.rescheduleBirthdayNotifications()
+            self?.reloadData()
             }))
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "生日提醒页面"), style: .cancel, handler: nil))
         self.present(alvc, animated: true, completion: nil)
     }
     
-    func refreshData() {
+    func rescheduleBirthdayNotifications() {
         if UserDefaults.standard.shouldPostBirthdayNotice {
             (UIApplication.shared.delegate as! AppDelegate).registerAPNS()
-            /*if UIApplication.sharedApplication().currentUserNotificationSettings()?.types == nil || UIApplication.sharedApplication().currentUserNotificationSettings()?.types == UIUserNotificationType.None {
-             let alert = UIAlertController.init(title: "警告", message: "CGSSGuide的通知被禁用了，请前往手机设置中打开", preferredStyle: .Alert)
-             alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
-             self.presentViewController(alert, animated: true, completion: nil)
-             }*/
-            BirthdayCenter.defaultCenter.sortInside()
-            BirthdayCenter.defaultCenter.scheduleNotifications()
+            BirthdayCenter.default.scheduleNotifications()
         } else {
-            BirthdayCenter.defaultCenter.removeNotification()
+            BirthdayCenter.default.removeNotifications()
         }
-        
-        refreshUI()
-        
     }
     
-    func refreshUI() {
+    func reloadData() {
         prepareChars()
         tableView.reloadData()
         (headerCells[0].accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
@@ -170,14 +153,14 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(refreshUI), name: CGSSNotificationCenter.updateEnd, object: nil)
+        reloadData()
+        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        
     }
     
     // MARK: - Table view data source
