@@ -9,20 +9,16 @@
 import UIKit
 
 protocol CardDetailViewDelegate: class {
-    func iconClick(_ icon: CGSSCardIconView)
-    func charInfoClick()
-    
-//    func show3DModel(cardDetailView: CardDetailView)
-//    func showCardImage(cardDetailView: CardDetailView)
-//    func showSignImage(cardDetailView: CardDetailView)
+    func seeCharInfo(cardDetailView: CardDetailView)
+    func cardDetailView(_ cardDetailView: CardDetailView, didTapOn spreadImageView: SpreadImageView)
 }
 
 class CardDetailView: UIView {
-    weak var delegate: CardDetailViewDelegate?
+    weak var delegate: (CGSSIconViewDelegate & CardDetailViewDelegate)?
     // 滚动视图内容距底部边距
     static let bottomInset: CGFloat = 60
     
-    var fullImageView: CGSSImageView?
+    var spreadImageView: SpreadImageView!
     
     var imageToolbar: UIToolbar!
     
@@ -64,12 +60,14 @@ class CardDetailView: UIView {
         self.backgroundColor = UIColor.white
         // self.bounces = false
         // 全尺寸大图视图
-        let fullImageHeigth = CGSSGlobal.width / CGSSGlobal.fullImageWidth * CGSSGlobal.fullImageHeight
-        fullImageView = CGSSImageView(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: fullImageHeigth))
-        fullImageView?.isUserInteractionEnabled = true
-        addSubview(fullImageView!)
+        let spreadImageHeigth = CGSSGlobal.width / CGSSGlobal.fullImageWidth * CGSSGlobal.fullImageHeight
+        spreadImageView = SpreadImageView(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: spreadImageHeigth))
+        spreadImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(spreadImageTapAction(tap:)))
+        spreadImageView.addGestureRecognizer(tap)
+        addSubview(spreadImageView)
         
-        originY = fullImageHeigth
+        originY = spreadImageHeigth
         
         // 人物名称 图标视图
         originY += topSpace
@@ -120,6 +118,11 @@ class CardDetailView: UIView {
         
     }
     
+    
+    func spreadImageTapAction(tap: UITapGestureRecognizer) {
+        delegate?.cardDetailView(self, didTapOn: spreadImageView)
+    }
+    
     convenience init() {
         let frame = CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64)
         self.init(frame: frame)
@@ -128,7 +131,7 @@ class CardDetailView: UIView {
     func setup(with card: CGSSCard) {
         
         if card.hasSpread! {
-            fullImageView?.setCustomImageWithURL(URL(string: card.spreadImageRef!)!)
+            spreadImageView.setImage(with: (URL(string: card.spreadImageRef!))!)
         } else {
             setWithoutSpreadImage()
         }
@@ -205,14 +208,8 @@ class CardDetailView: UIView {
         self.fheight = availableInfoContentView.fy + availableInfoContentView.fheight + topSpace + CardDetailView.bottomInset - self.bounds.origin.y
     }
     
-    func iconClick(_ icon: CGSSCardIconView) {
-        delegate?.iconClick(icon)
-    }
-    
     func setWithoutSpreadImage() {
-        self.bounds = CGRect(x: 0, y: (fullImageView?.frame.size.height)!, width: CGSSGlobal.width, height: 0)
-        // self.bounds.origin.y += 1000 //CGSSGlobal.fullImageWidth/CGSSGlobal.width*CGSSGlobal.fullImageHeight
-        // self.contentSize
+        self.bounds = CGRect(x: 0, y: spreadImageView.frame.size.height, width: CGSSGlobal.width, height: 0)
     }
     
     func setWithSpreadImage() {
@@ -433,10 +430,12 @@ class CardDetailView: UIView {
     func setupEvolutionContentView(_ card: CGSSCard) {
         if card.evolutionId == 0{
             evolutionToImageView.cardId = card.id
-            evolutionFromImageView.setWithCardId(card.id - 1, target: self, action: #selector(iconClick))
+            evolutionFromImageView.cardId = card.id - 1
+            evolutionFromImageView.delegate = self.delegate
         } else {
             evolutionFromImageView.cardId = card.id
-            evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
+            evolutionToImageView.cardId = card.evolutionId
+            evolutionToImageView.delegate = self.delegate
         }
         evolutionContentView.fheight = evolutionFromImageView.fy + evolutionFromImageView.fheight + topSpace
     }
@@ -483,7 +482,8 @@ class CardDetailView: UIView {
             let y = CGFloat(i / Int(column)) * (48 + space) + 34
             let x = CGFloat(i % Int(column)) * (48 + space) + topSpace
             let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
-            icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
+            icon.cardId = cards[i].id
+            icon.delegate = self.delegate
             relatedCardsContentView.addSubview(icon)
         }
         relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 34 + topSpace
@@ -594,7 +594,7 @@ class CardDetailView: UIView {
     
     
     func charInfoClick() {
-        delegate?.charInfoClick()
+        delegate?.seeCharInfo(cardDetailView: self)
     }
     
     // 设置出售价格视图

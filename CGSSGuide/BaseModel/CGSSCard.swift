@@ -163,6 +163,10 @@ extension CGSSCard {
     func attByPotential(lv:Int) -> Int {
         return CGSSGlobal.potentialOfLevel[rarityTypeSimple]![lv]
     }
+    
+    var spreadImageURL: URL? {
+        return URL.init(string: spreadImageRef)
+    }
 }
 
 class CGSSCard: CGSSBaseModel {
