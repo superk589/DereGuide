@@ -116,7 +116,7 @@ class CardView: UIView {
             cardNameLabel.text = name + "  " + conventional
         }
         
-        cardIconView?.setWithCardId(card.id!)
+        cardIconView?.cardId = card.id
         cardIconView?.isUserInteractionEnabled = false
         
         // textLabel?.text = self.cardList[row] as? String

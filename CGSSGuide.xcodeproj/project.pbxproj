@@ -46,6 +46,8 @@
 		1239B0521E2FAAA600958849 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0511E2FAAA600958849 /* LineView.swift */; };
 		1239B0541E2FB41200958849 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0531E2FB41200958849 /* BannerView.swift */; };
 		123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123AC6EA1E2374260016A07F /* CGSSClient.swift */; };
+		123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F32001E6FC49700B69D26 /* CardAppealView.swift */; };
+		123F32031E6FC6F800B69D26 /* CardRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F32021E6FC6F800B69D26 /* CardRankingView.swift */; };
 		1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F59E1D9814350021E4B1 /* Localizable.strings */; };
 		1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */; };
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
@@ -77,7 +79,6 @@
 		1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */; };
 		1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */; };
 		1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9C81D520B5D0071AD7F /* CGSSCard.swift */; };
-		1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9C91D520B5D0071AD7F /* CGSSCardIcon.swift */; };
 		1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */; };
 		1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9CB1D520B5D0071AD7F /* CGSSChar.swift */; };
 		1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9CC1D520B5D0071AD7F /* CGSSDAO.swift */; };
@@ -231,6 +232,8 @@
 		1239B0511E2FAAA600958849 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		1239B0531E2FB41200958849 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		123AC6EA1E2374260016A07F /* CGSSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSClient.swift; sourceTree = "<group>"; };
+		123F32001E6FC49700B69D26 /* CardAppealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardAppealView.swift; sourceTree = "<group>"; };
+		123F32021E6FC6F800B69D26 /* CardRankingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRankingView.swift; sourceTree = "<group>"; };
 		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -278,7 +281,6 @@
 		1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBaseModel.swift; sourceTree = "<group>"; };
 		1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmap.swift; sourceTree = "<group>"; };
 		1269E9C81D520B5D0071AD7F /* CGSSCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCard.swift; sourceTree = "<group>"; };
-		1269E9C91D520B5D0071AD7F /* CGSSCardIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIcon.swift; sourceTree = "<group>"; };
 		1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardRarity.swift; sourceTree = "<group>"; };
 		1269E9CB1D520B5D0071AD7F /* CGSSChar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSChar.swift; sourceTree = "<group>"; };
 		1269E9CC1D520B5D0071AD7F /* CGSSDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSDAO.swift; sourceTree = "<group>"; };
@@ -561,6 +563,8 @@
 				122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */,
 				1269E9C21D520B160071AD7F /* CardTableViewCell.swift */,
 				12D45AC51E2E26AD0009986F /* CardView.swift */,
+				123F32001E6FC49700B69D26 /* CardAppealView.swift */,
+				123F32021E6FC6F800B69D26 /* CardRankingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -588,7 +592,6 @@
 				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
 				12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */,
 				1269E9C81D520B5D0071AD7F /* CGSSCard.swift */,
-				1269E9C91D520B5D0071AD7F /* CGSSCardIcon.swift */,
 				1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */,
 				1269E9CB1D520B5D0071AD7F /* CGSSChar.swift */,
 				1269E9CC1D520B5D0071AD7F /* CGSSDAO.swift */,
@@ -1107,6 +1110,7 @@
 				12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */,
 				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
+				123F32031E6FC6F800B69D26 /* CardRankingView.swift in Sources */,
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
@@ -1124,7 +1128,6 @@
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
-				1269E9D91D520B5D0071AD7F /* CGSSCardIcon.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
 				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
@@ -1155,6 +1158,7 @@
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
+				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,

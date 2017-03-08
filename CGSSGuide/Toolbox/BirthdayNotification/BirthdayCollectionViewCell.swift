@@ -29,7 +29,7 @@ class BirthdayCollectionViewCell: UICollectionViewCell {
     }
     
     func initWithChar(_ char: CGSSChar) {
-        charIcon.setWithCharId(char.charaId!)
+        charIcon.charId = char.charaId
         desc.text = "\(char.birthMonth!)-\(char.birthDay!)"
     }
     

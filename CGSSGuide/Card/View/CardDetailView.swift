@@ -30,8 +30,10 @@ class CardDetailView: UIView {
     var cardNameLabel: UILabel!
     var rarityLabel: UILabel!
     var titleLabel: UILabel!
-    var attGridView: CGSSGridLabel!
-    var rankGridView: CGSSGridLabel!
+    
+    var appealView: CardAppealView!
+    
+    var rankingView: CardRankingView!
     
     var originY: CGFloat = 0
     
@@ -68,18 +70,7 @@ class CardDetailView: UIView {
         addSubview(fullImageView!)
         
         originY = fullImageHeigth
-//        imageToolbar = UIToolbar.init(frame: CGRect.init(x: 0, y: originY, width: CGSSGlobal.width, height: 44))
-//        imageToolbar.isTranslucent = false
-//        addSubview(imageToolbar)
-//        
-//        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
-//        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let item2 = UIBarButtonItem.init(title: NSLocalizedString("角色卡图", comment: ""), style: .plain, target: self, action: #selector(showCardImageAction))
-//        let spaceItem2 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let item3 = UIBarButtonItem.init(title: NSLocalizedString("签名图", comment: ""), style: .plain, target: self, action: #selector(showSignImageAction))
-//        
-//        imageToolbar.items = [item1, spaceItem1, item2, spaceItem2, item3]
-//        
+        
         // 人物名称 图标视图
         originY += topSpace
         cardIconView = CGSSCardIconView.init(frame: CGRect(x: 10, y: originY, width: 48, height: 48))
@@ -88,11 +79,6 @@ class CardDetailView: UIView {
         rarityLabel.frame = CGRect(x: 68, y: originY + 5, width: 30, height: 10)
         rarityLabel.textAlignment = .left
         rarityLabel.font = UIFont.systemFont(ofSize: 10)
-        
-//        skillLabel = UILabel()
-//        skillLabel.frame = CGRectMake(CGSSGlobal.width - 150, 5, 140, 10)
-//        skillLabel.font = UIFont.systemFontOfSize(10)
-//        skillLabel.textAlignment = .Right
         
         cardNameLabel = UILabel()
         cardNameLabel.frame = CGRect(x: 68, y: originY + 27, width: CGSSGlobal.width - 78, height: 16)
@@ -112,59 +98,26 @@ class CardDetailView: UIView {
         // 属性表格
         originY = originY + topSpace + 48
         
-        // let attContentView = UIView()
-        // attContentView.frame = CGRectMake(-1, originY, CGSSGlobal.width+2, 109)
-        let descLabel1 = UILabel()
-        descLabel1.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 18)
-        descLabel1.textColor = UIColor.black
-        descLabel1.font = UIFont.systemFont(ofSize: 16)
-        descLabel1.text = NSLocalizedString("卡片属性", comment: "卡片详情页") + ":" 
-        descLabel1.textColor = UIColor.black
-        // attContentView.addSubview(descLabel1)
-        addSubview(descLabel1)
         
-        originY = originY + topSpace + 16
-        
-        attGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 90), rows: 5, columns: 6)
-        // attGridView.layer.borderColor = UIColor.blackColor().CGColor
-        // attGridView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        // attContentView.addSubview(attGridView)
-        addSubview(attGridView)
-        // attContentView.layer.borderColor = UIColor.blackColor().CGColor
-        // attContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        // addSubview(attContentView)
-        
-        originY = originY + topSpace + 90
+        appealView = CardAppealView()
+        addSubview(appealView)
+        appealView.snp.makeConstraints { (make) in
+            make.top.equalTo(cardIconView.snp.bottom)
+            make.left.right.equalToSuperview()
+        }
+        originY = appealView.fbottom
         drawSectionLine(originY)
         originY = originY + topSpace
         
-        // 属性排名表格
-        // let rankContentView = UIView()
-        // rankContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 81 + (1 / UIScreen.mainScreen().scale))
-        let descLabel2 = UILabel()
-        descLabel2.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 18)
-        descLabel2.textColor = UIColor.black
-        descLabel2.font = UIFont.systemFont(ofSize: 16)
-        descLabel2.text = NSLocalizedString("属性排名", comment: "卡片详情页") + ":"
-        descLabel2.textColor = UIColor.black
-        // rankContentView.addSubview(descLabel2)
-        addSubview(descLabel2)
-        originY = originY + topSpace + 16
+        rankingView = CardRankingView()
+        addSubview(rankingView)
+        rankingView.snp.makeConstraints { (make) in
+            make.top.equalTo(appealView.snp.bottom)
+            make.right.left.equalToSuperview()
+        }
         
-        rankGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 54), rows: 3, columns: 5)
-        // rankContentView.addSubview(rankGridView)
-        addSubview(rankGridView)
+        layoutIfNeeded()
         
-        // rankContentView.layer.borderColor = UIColor.blackColor().CGColor
-        // rankContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
-        // addSubview(rankContentView)
-        
-        originY = originY + topSpace + 54
-        
-        prepareSkillContentView()
-        prepareLeaderSkillContentView()
-        prepareEvolutionContentView()
-        //
     }
     
     convenience init() {
@@ -172,7 +125,7 @@ class CardDetailView: UIView {
         self.init(frame: frame)
     }
     
-    func initWith(_ card: CGSSCard) {
+    func setup(with card: CGSSCard) {
         
         if card.hasSpread! {
             fullImageView?.setCustomImageWithURL(URL(string: card.spreadImageRef!)!)
@@ -183,60 +136,12 @@ class CardDetailView: UIView {
         cardNameLabel.text = card.chara!.name + "  " + (card.chara?.conventional)!
         titleLabel.text = card.title
         rarityLabel.text = card.rarity?.rarityString
-        cardIconView?.setWithCardId(card.id!)
+        cardIconView.cardId = card.id
         
-        // 设置属性列表
-        var attGridStrings = [[String]]()
-        attGridStrings.append(["  ", "HP", "Vocal", "Dance", "Visual", "Total"])
-        attGridStrings.append(["Lv.1", String(card.hpMin), String(card.vocalMin), String(card.danceMin), String(card.visualMin), String(card.overallMin)])
-        attGridStrings.append(["Lv.\(card.rarity.baseMaxLevel!)", String(card.hpMax), String(card.vocalMax), String(card.danceMax), String(card.visualMax), String(card.overallMax)])
-        attGridStrings.append(["Bonus", String(card.bonusHp), String(card.bonusVocal), String(card.bonusDance), String(card.bonusVisual), String(card.overallBonus)])
-        attGridStrings.append(["Total", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
+        appealView.setup(with: card)
         
-        attGridView.setGridContent(attGridStrings)
-        
-        let colorArray = [Color.allType, Color.life, Color.vocal, Color.dance, Color.visual, Color.allType]
-        let colors = [[UIColor]].init(repeating: colorArray, count: 6)
-        attGridView.setGridColor(colors)
-        
-        var fonts = [[UIFont]]()
-        let fontArray = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 6)
-        var fontArray2 = [UIFont].init(repeating: CGSSGlobal.numberFont!, count: 6)
-        fontArray2[0] = CGSSGlobal.alphabetFont
-        fonts.append(fontArray)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        fonts.append(fontArray2)
-        attGridView.setGridFont(fonts)
-        
-        // 设置属性排名列表
-        let dao = CGSSDAO.sharedDAO
-        var rankGridStrings = [[String]]()
-        let rankInType = dao.getRankInType(card)
-        let rankInAll = dao.getRankInAll(card)
-        rankGridStrings.append(["  ", "Vocal", "Dance", "Visual", "Total"])
-        rankGridStrings.append(["In \(card.attShort)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
-        rankGridStrings.append(["In All", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
-        rankGridView.setGridContent(rankGridStrings)
-        
-        var colors2 = [[UIColor]]()
-        let colorArray2 = [card.attColor, Color.vocal, Color.dance, Color.visual, Color.allType]
-        let colorArray3 = [Color.allType, Color.vocal, Color.dance, Color.visual, Color.allType]
-        
-        colors2.append(colorArray3)
-        colors2.append(colorArray2)
-        colors2.append(colorArray3)
-        rankGridView.setGridColor(colors2)
-        
-        var fonts2 = [[UIFont]]()
-        let fontArray3 = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 5)
-        var fontArray4 = [UIFont].init(repeating: CGSSGlobal.numberFont!, count: 5)
-        fontArray4[0] = CGSSGlobal.alphabetFont
-        fonts2.append(fontArray3)
-        fonts2.append(fontArray4)
-        fonts2.append(fontArray4)
-        rankGridView.setGridFont(fonts2)
+        rankingView.setup(with: card)
+        layoutIfNeeded()
         
         // 设置主动技能
         if let skill = card.skill {
@@ -245,7 +150,7 @@ class CardDetailView: UIView {
         } else {
             skillContentView.fheight = 0
         }
-        skillContentView.fy = rankGridView.fy + rankGridView.fheight + topSpace
+        skillContentView.fy = rankingView.fbottom
         
         // 设置队长技能
         if let leaderSkill = card.leaderSkill {
@@ -527,10 +432,10 @@ class CardDetailView: UIView {
     // 设置进化信息视图
     func setupEvolutionContentView(_ card: CGSSCard) {
         if card.evolutionId == 0{
-            evolutionToImageView.setWithCardId(card.id)
+            evolutionToImageView.cardId = card.id
             evolutionFromImageView.setWithCardId(card.id - 1, target: self, action: #selector(iconClick))
         } else {
-            evolutionFromImageView.setWithCardId(card.id)
+            evolutionFromImageView.cardId = card.id
             evolutionToImageView.setWithCardId(card.evolutionId, target: self, action: #selector(iconClick))
         }
         evolutionContentView.fheight = evolutionFromImageView.fy + evolutionFromImageView.fheight + topSpace

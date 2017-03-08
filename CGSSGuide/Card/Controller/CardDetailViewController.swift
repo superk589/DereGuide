@@ -52,7 +52,7 @@ class CardDetailViewController: UIViewController, CardDetailViewDelegate {
         
         navigationItem.leftBarButtonItem = leftItem
         
-        cardDV.initWith(card)
+        cardDV.setup(with: card)
         sv.contentSize = cardDV.frame.size
         
     

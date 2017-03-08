@@ -260,7 +260,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     func initWith(_ model: CGSSTeamMember, type: CGSSTeamMemberType) {
         let card = model.cardRef!
-        self.iconView.setWithCardId(card.id!)
+        self.iconView.cardId = card.id
         self.cardName.text = card.chara?.name
         var strSkill:NSAttributedString
         if  card.skill != nil && type != .friend {

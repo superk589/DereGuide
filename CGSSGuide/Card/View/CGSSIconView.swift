@@ -20,6 +20,10 @@ class CGSSIconView: ZKCornerRadiusView {
     weak var target: AnyObject?
     weak var delegate: CGSSIconViewDelegate?
     
+    convenience init() {
+        self.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 48))
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         prepare()

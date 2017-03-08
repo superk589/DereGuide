@@ -58,7 +58,7 @@ class CharDetailView: UIView {
     
     func setup(_ char: CGSSChar) {
         charNameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
-        charIconView.setWithCharId(char.charaId)
+        charIconView.charId = char.charaId
         profileView.setup(char)
         var cards = CGSSDAO.sharedDAO.findCardsByCharId(char.charaId)
         let sorter = CGSSSorter.init(property: "sAlbumId")

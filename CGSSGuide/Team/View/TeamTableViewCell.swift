@@ -105,7 +105,7 @@ class TeamTableViewCell: UITableViewCell {
         for i in 0...5 {
             let tm = team[i]
             if let card = tm?.cardRef {
-                icons[i].setWithCardId(card.id!)
+                icons[i].cardId = card.id
                 if i != 5 {
                     if card.skill != nil {
                         skillLvLabels[i].text = "SLv.\((tm?.skillLevel)!)"

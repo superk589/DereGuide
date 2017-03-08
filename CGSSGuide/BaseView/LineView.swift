@@ -13,7 +13,11 @@ class LineView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.borderWidth = 1 / UIScreen.main.scale
-        self.layer.borderColor = UIColor.black.withAlphaComponent(0.25).cgColor
+        self.layer.borderColor = Color.separator.cgColor
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize.init(width: UIViewNoIntrinsicMetric, height: 1 / Screen.scale)
     }
     
     required init?(coder aDecoder: NSCoder) {

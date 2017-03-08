@@ -52,7 +52,7 @@ class CharInfoTableViewCell: UITableViewCell {
         } else {
             charCVLabel.text = "CV: \(char.voice!)"
         }
-        charIconView.setWithCharId(char.charaId)
+        charIconView.charId = char.charaId
         kanaSpacedLabel.text = "\(char.kanaSpaced!)"
     }
     

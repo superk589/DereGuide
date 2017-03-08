@@ -43,7 +43,7 @@ class ToolboxTableViewController: BaseTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToolboxCell", for: indexPath) as! ToolboxTableViewCell
         
         cell.descLabel.text = dataSource[indexPath.row]["title"]
-        cell.icon.setWithCardId(Int(dataSource[indexPath.row]["iconId"]!)!)
+        cell.icon.cardId = Int(dataSource[indexPath.row]["iconId"]!)
         
         return cell
     }
