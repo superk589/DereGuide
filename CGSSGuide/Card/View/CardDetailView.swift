@@ -60,7 +60,7 @@ class CardDetailView: UIView {
         self.backgroundColor = UIColor.white
         // self.bounces = false
         // 全尺寸大图视图
-        let spreadImageHeigth = CGSSGlobal.width / CGSSGlobal.fullImageWidth * CGSSGlobal.fullImageHeight
+        let spreadImageHeigth = CGSSGlobal.width / CGSSGlobal.spreadImageWidth * CGSSGlobal.spreadImageHeight
         spreadImageView = SpreadImageView(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: spreadImageHeigth))
         spreadImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(spreadImageTapAction(tap:)))

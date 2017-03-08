@@ -35,7 +35,7 @@ extension CGSSChar {
         return voice == "" ? .no : .yes
     }
     var favoriteType: CGSSFavoriteTypes {
-        return CGSSFavoriteManager.defaultManager.containsChar(self.charaId) ? .inFavorite : .notInFavorite
+        return CGSSFavoriteManager.default.contains(charId: self.charaId) ? .inFavorite : .notInFavorite
     }
     
     // 用于排序的动态属性

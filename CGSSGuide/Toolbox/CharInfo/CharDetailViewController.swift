@@ -25,7 +25,7 @@ class CharDetailViewController: UIViewController {
         sv.addSubview(detailView)
         view.addSubview(sv)
         
-        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.containsChar(char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
+        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.default.contains(charId: char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
         rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
 
@@ -42,12 +42,12 @@ class CharDetailViewController: UIViewController {
     
     // 添加当前角色到收藏
     func addOrRemoveFavorite() {
-        let fm = CGSSFavoriteManager.defaultManager
-        if !fm.containsChar(char.charaId) {
-            fm.addFavoriteChar(self.char)
+        let fm = CGSSFavoriteManager.default
+        if !fm.contains(charId: char.charaId) {
+            fm.add(self.char)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
         } else {
-            fm.removeFavoriteChar(self.char)
+            fm.remove(self.char)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
         

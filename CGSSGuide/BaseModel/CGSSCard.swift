@@ -157,7 +157,7 @@ extension CGSSCard {
     }
 
     var favoriteType: CGSSFavoriteTypes {
-        return CGSSFavoriteManager.defaultManager.containsCard(self.id!) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
+        return CGSSFavoriteManager.default.contains(cardId: self.id!) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
     }
     
     func attByPotential(lv:Int) -> Int {

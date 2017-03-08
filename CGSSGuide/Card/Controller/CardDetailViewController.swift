@@ -39,7 +39,7 @@ class CardDetailViewController: BaseViewController {
         navigationItem.titleView = titleView
         
         // let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
-        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.defaultManager.containsCard(card.id!) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
+        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.default.contains(cardId: card.id!) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
         rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
         
@@ -57,15 +57,35 @@ class CardDetailViewController: BaseViewController {
     
     // 添加当前卡到收藏
     func addOrRemoveFavorite() {
-        let fm = CGSSFavoriteManager.defaultManager
-        if !fm.containsCard(card.id!) {
-            fm.addFavoriteCard(self.card)
+        let fm = CGSSFavoriteManager.default
+        if !fm.contains(cardId: card.id!) {
+            fm.add(self.card)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
         } else {
-            fm.removeFavoriteCard(self.card)
+            fm.remove(self.card)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
         
+    }
+    
+    @available(iOS 9.0, *)
+    override var previewActionItems: [UIPreviewActionItem] {
+        var titleString = ""
+        if CGSSFavoriteManager.default.contains(cardId: card.id) {
+            titleString = NSLocalizedString("取消收藏", comment: "")
+        } else {
+            titleString = NSLocalizedString("收藏", comment: "")
+        }
+        let item3 = UIPreviewAction.init(title: titleString, style: .default, handler: { (action, vc) in
+            if let card = (vc as? CardDetailViewController)?.card {
+                if CGSSFavoriteManager.default.contains(cardId: card.id) {
+                    CGSSFavoriteManager.default.remove(card)
+                } else {
+                    CGSSFavoriteManager.default.add(card)
+                }
+            }
+        })
+        return [item3]
     }
     
     func prepareToolbar() {

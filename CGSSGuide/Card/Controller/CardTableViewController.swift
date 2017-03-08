@@ -39,6 +39,12 @@ class CardTableViewController: BaseCardTableViewController {
         else if UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true {
             check(.all)
         }
+        
+        if #available(iOS 9.0, *) {
+            registerForPreviewing(with: self, sourceView: view)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,4 +71,26 @@ class CardTableViewController: BaseCardTableViewController {
         
     }
     
+}
+
+@available(iOS 9.0, *)
+extension CardTableViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        viewControllerToCommit.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = tableView.indexPathForRow(at: location),
+            let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        
+        let vc = CardDetailViewController()
+        vc.card = cardList[indexPath.row]
+        vc.preferredContentSize = CGSize.init(width: 0, height: CGSSGlobal.spreadImageHeight * Screen.width / CGSSGlobal.spreadImageWidth + 68)
+        
+        previewingContext.sourceRect = cell.frame
+        
+        return vc
+    }
 }

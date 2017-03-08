@@ -567,3 +567,8 @@
 "模拟计算" = "Simulate";
 
 
+/* new in 1.2.5 */
+// used in 3d touch peek menu
+"收藏" = "Add to Favorites";
+"取消收藏" = "Remove from Favorites";
+

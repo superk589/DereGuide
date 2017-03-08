@@ -8,8 +8,10 @@
 
 import Foundation
 
-open class CGSSFavoriteManager: NSObject {
-    open static let defaultManager = CGSSFavoriteManager()
+class CGSSFavoriteManager {
+    
+    static let `default` = CGSSFavoriteManager()
+    
     static let favoriteCardsFilePath = NSHomeDirectory() + "/Documents/favoriteCards.plist"
     static let favoriteCharsFilePath = NSHomeDirectory() + "/Documents/favoriteChars.plist"
     var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
@@ -23,38 +25,38 @@ open class CGSSFavoriteManager: NSObject {
         }
     }
     
-    fileprivate override init() {
-        super.init()
+    private init() {
+        
     }
     
-    func writeFavoriteCardsToFile() {
+    private func writeFavoriteCardsToFile() {
         (favoriteCards as NSArray).write(toFile: CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }
-    func writeFavoriteCharsToFile() {
+    private func writeFavoriteCharsToFile() {
         (favoriteChars as NSArray).write(toFile: CGSSFavoriteManager.favoriteCharsFilePath, atomically: true)
     }
     
-    func addFavoriteCard(_ card: CGSSCard) {
+    func add(_ card: CGSSCard) {
         self.favoriteCards.append(card.id!)
     }
-    func removeFavoriteCard(_ card: CGSSCard) {
+    func remove(_ card: CGSSCard) {
         if let index = favoriteCards.index(of: card.id!) {
             self.favoriteCards.remove(at: index)
         }
     }
-    open func containsCard(_ cardId: Int) -> Bool {
+    func contains(cardId: Int) -> Bool {
         return favoriteCards.contains(cardId)
     }
     
-    func addFavoriteChar(_ char: CGSSChar) {
+    func add(_ char: CGSSChar) {
         self.favoriteChars.append(char.charaId)
     }
-    func removeFavoriteChar(_ char: CGSSChar) {
+    func remove(_ char: CGSSChar) {
         if let index = favoriteChars.index(of: char.charaId!) {
             self.favoriteChars.remove(at: index)
         }
     }
-    open func containsChar(_ charId: Int) -> Bool {
+    func contains(charId: Int) -> Bool {
         return favoriteChars.contains(charId)
     }
 }

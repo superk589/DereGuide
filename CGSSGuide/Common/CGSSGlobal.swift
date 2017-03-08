@@ -86,8 +86,8 @@ public class CGSSGlobal: NSObject {
     public static let numberFont = UIFont.init(name: "menlo", size: 14)
     public static let alphabetFont = UIFont.systemFont(ofSize: 14)
     
-    public static let fullImageWidth: CGFloat = 1280
-    public static let fullImageHeight: CGFloat = 824
+    public static let spreadImageWidth: CGFloat = 1280
+    public static let spreadImageHeight: CGFloat = 824
     
     public static func diffStringFromInt(i: Int) -> String {
         switch i {
