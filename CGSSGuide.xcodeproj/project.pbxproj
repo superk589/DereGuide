@@ -29,6 +29,8 @@
 		121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAppeal.swift */; };
 		121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */; };
 		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
+		121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23791E70F97700319519 /* BannerViewAnimator.swift */; };
+		121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23811E7198AE00319519 /* ToolboxNavigationController.swift */; };
 		122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */; };
 		122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */; };
 		122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */; };
@@ -217,6 +219,8 @@
 		121C78C91D561E7900D0B636 /* CGSSAppeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAppeal.swift; sourceTree = "<group>"; };
 		121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSongTableViewController.swift; sourceTree = "<group>"; };
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
+		121D23791E70F97700319519 /* BannerViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewAnimator.swift; sourceTree = "<group>"; };
+		121D23811E7198AE00319519 /* ToolboxNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxNavigationController.swift; sourceTree = "<group>"; };
 		122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingView.swift; sourceTree = "<group>"; };
 		122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingViewController.swift; sourceTree = "<group>"; };
 		122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorterFilterManager.swift; sourceTree = "<group>"; };
@@ -443,6 +447,8 @@
 				1238059B1DAA1582007361CF /* EventInfo */,
 				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
 				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
+				121D23811E7198AE00319519 /* ToolboxNavigationController.swift */,
+				121D23791E70F97700319519 /* BannerViewAnimator.swift */,
 			);
 			path = Toolbox;
 			sourceTree = "<group>";
@@ -1058,6 +1064,7 @@
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
+				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
@@ -1181,6 +1188,7 @@
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
+				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
 				120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */,

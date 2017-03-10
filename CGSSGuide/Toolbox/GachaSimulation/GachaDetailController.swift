@@ -15,6 +15,8 @@ class GachaDetailController: BaseViewController {
     
     var sv: UIScrollView!
     
+    var banner: BannerView!
+    
     var gachaDetailView: GachaDetailView!
     
     var simulationView: GachaSimulateView!
@@ -36,10 +38,19 @@ class GachaDetailController: BaseViewController {
             make.edges.equalToSuperview()
         }
         
+        banner = BannerView()
+        sv.addSubview(banner)
+        banner.snp.makeConstraints { (make) in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(Screen.width * 212 / 824)
+        }
+        banner.sd_setImage(with: pool.detailBannerURL)
+        
         gachaDetailView = GachaDetailView()
         sv.addSubview(gachaDetailView)
         gachaDetailView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(banner.snp.bottom)
             make.width.equalToSuperview()
         }
         gachaDetailView.setupWith(pool: pool)

@@ -17,7 +17,6 @@ protocol GachaDetailViewDelegate: class {
 
 class GachaDetailView: UIView {
     
-    var banner: BannerView!
     var gachaInfoView: UIView!
     var nameLabel:UILabel!
     var detailLabel:UILabel!
@@ -33,13 +32,6 @@ class GachaDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        banner = BannerView()
-        addSubview(banner)
-        banner.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(Screen.width * 212 / 824)
-        }
-        
         let descLabel = UILabel()
         descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")  + ": "
         descLabel.textAlignment = .left
@@ -48,7 +40,7 @@ class GachaDetailView: UIView {
         addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.top.equalTo(banner.snp.bottom).offset(8)
+            make.top.equalTo(8)
         }
         
         nameLabel = UILabel()
@@ -151,7 +143,7 @@ class GachaDetailView: UIView {
     }
     
     func setupWith(pool: CGSSGachaPool) {
-        banner.sd_setImage(with: pool.detailBannerURL)
+
         nameLabel.text = pool.name
         ratioLabel.text = "SSR: \(Float(pool.ssrRatio) / 100)%   SR: \(Float(pool.srRatio) / 100)%   R: \(Float(pool.rareRatio) / 100)%"
         detailLabel.text = pool.dicription

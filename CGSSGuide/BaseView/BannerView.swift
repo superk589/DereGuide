@@ -24,6 +24,19 @@ class BannerView: UIImageView {
     
     var indicator2: LoadingImageView?
     
+    convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.contentMode = .scaleAspectFit
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func sd_setImage(with url: URL!) {
         showIndicator()
         super.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in

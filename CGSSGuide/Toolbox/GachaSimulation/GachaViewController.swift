@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, GachaFilterSortControllerDelegate {
+class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, GachaFilterSortControllerDelegate, BannerViewAnimatorProvider {
     
     var defaultList: [CGSSGachaPool]!
     
@@ -32,6 +32,11 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
             return CGSSSorterFilterManager.default.gachaPoolSorter
         }
     }
+    
+    var bannerViewAnimator: BannerViewAnimator = {
+        let animator = BannerViewAnimator()
+        return animator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +152,8 @@ class GachaViewController: RefreshableTableViewController, ZKDrawerControllerDel
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GachaDetailController()
         vc.pool = poolList[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath) as? GachaTableViewCell
+        bannerViewAnimator.sourceBannerView = cell?.banner
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

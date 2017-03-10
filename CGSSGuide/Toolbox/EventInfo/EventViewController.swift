@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate {
+class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate, BannerViewAnimatorProvider {
 
     var defaultList: [CGSSEvent]!
     var eventList = [CGSSEvent]()
@@ -30,6 +30,11 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
             return CGSSSorterFilterManager.default.eventSorter
         }
     }
+    
+    lazy var bannerViewAnimator: BannerViewAnimator = {
+        let animator = BannerViewAnimator()
+        return animator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,22 +151,16 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         let vc = EventDetailController()
         vc.bannerId = bannerId
         vc.event = eventList[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath) as? EventTableViewCell
+        self.bannerViewAnimator.sourceBannerView = cell?.banner
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
     }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
     }

@@ -15,6 +15,7 @@ class EventDetailController: BaseViewController {
     var sv: UIScrollView!
     var event: CGSSEvent!
     var bannerId: Int!
+    var banner: BannerView!
     
     var ptList: EventPtRankingList?
     var scoreList: EventScoreRankingList?
@@ -35,11 +36,20 @@ class EventDetailController: BaseViewController {
         sv.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-
+        
+        banner = BannerView()
+        sv.addSubview(banner)
+        banner.snp.makeConstraints { (make) in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(Screen.width * 212 / 824)
+        }
+        banner.sd_setImage(with: event.detailBannerURL)
+        
         eventDetailView = EventDetailView()
         sv.addSubview(eventDetailView)
         eventDetailView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(banner.snp.bottom)
             make.width.equalToSuperview()
         }
         eventDetailView.setup(event: event, bannerId: bannerId)

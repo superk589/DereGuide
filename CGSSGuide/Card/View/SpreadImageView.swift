@@ -17,6 +17,7 @@ class SpreadImageView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentMode = .scaleAspectFit
+        clipsToBounds = true
         backgroundColor = UIColor.black
     
         progressIndicator = UIProgressView()

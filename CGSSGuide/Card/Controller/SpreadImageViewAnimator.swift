@@ -38,12 +38,14 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 let toFrame = toViewController.view.bounds
                 sourceNavigationController?.setToolbarHidden(true, animated: true)
                 sourceNavigationController?.setNavigationBarHidden(true, animated: true)
+                sourceImageView.isHidden = true
                 UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: { 
                     imageView.transform = imageView.transform.rotated(by: .pi / 2)
                     imageView.frame = toFrame
                     toView.backgroundColor = UIColor.black
-                }, completion: { (finished) in
+                }, completion: { [weak self] (finished) in
                     transitionContext.containerView.addSubview(toView)
+                    self?.sourceImageView.isHidden = false
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }
@@ -58,11 +60,13 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 let imageView = fromViewController.imageView
                 sourceNavigationController?.setToolbarHidden(false, animated: true)
                 sourceNavigationController?.setNavigationBarHidden(false, animated: true)
+                sourceImageView.isHidden = true
                 UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: { 
                     imageView.transform = imageView.transform.rotated(by: -.pi / 2)
                     imageView.frame = sourceImageFrame
                     fromView.backgroundColor = UIColor.clear
-                }, completion: { (finished) in
+                }, completion: { [weak self] (finished) in
+                    self?.sourceImageView.isHidden = false
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }

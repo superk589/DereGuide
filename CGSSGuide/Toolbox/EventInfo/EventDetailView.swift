@@ -21,10 +21,6 @@ protocol EventDetailViewDelegate: class {
 
 class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 
-    var banner: BannerView!
-    
-//    var nameLabel: UILabel!
-    
     var startToEndLabel: UILabel!
     
     var timeIndicator: TimeStatusIndicator!
@@ -65,13 +61,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        banner = BannerView()
-        addSubview(banner)
-        banner.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(Screen.width * 212 / 824)
-        }
-        
 //        nameLabel = UILabel()
 //        addSubview(nameLabel)
 //        nameLabel.snp.makeConstraints { (make) in
@@ -85,8 +74,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         addSubview(startToEndLabel)
         startToEndLabel.snp.makeConstraints { (make) in
             make.right.lessThanOrEqualTo(-10)
-            make.left.equalTo(32 )
-            make.top.equalTo(banner.snp.bottom).offset(8)
+            make.left.equalTo(32)
+            make.top.equalTo(8)
         }
         startToEndLabel.font = UIFont.systemFont(ofSize: 12)
         startToEndLabel.textColor = UIColor.darkGray
@@ -312,8 +301,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             timeIndicator.style = .now
         }
         
-        banner.sd_setImage(with: event.detailBannerURL)
-
         if event.startDate.toDate() > Date() {
 //            if let preStartDateString = event.preStartDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current) {
 //                startToEndLabel.text = "\(preStartDateString) ~ \(NSLocalizedString("待定", comment: ""))"
@@ -381,8 +368,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             }
 
         }
-        
-            
     }
     
     func setup(ptList: EventPtRankingList, onGoing: Bool) {

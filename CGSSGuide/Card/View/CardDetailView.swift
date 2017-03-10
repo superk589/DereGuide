@@ -116,6 +116,8 @@ class CardDetailView: UIView {
         
         layoutIfNeeded()
         
+        prepareSkillContentView()
+        prepareLeaderSkillContentView()
     }
     
     
@@ -148,7 +150,6 @@ class CardDetailView: UIView {
         
         // 设置主动技能
         if let skill = card.skill {
-            prepareSkillContentView()
             setupSkillContentView(skill)
         } else {
             skillContentView.fheight = 0
@@ -157,7 +158,6 @@ class CardDetailView: UIView {
         
         // 设置队长技能
         if let leaderSkill = card.leaderSkill {
-            prepareLeaderSkillContentView()
             setupLeaderSkillContentView(leaderSkill)
         } else {
             leaderSkillContentView.fheight = 0
@@ -210,6 +210,7 @@ class CardDetailView: UIView {
     
     func setWithoutSpreadImage() {
         self.bounds = CGRect(x: 0, y: spreadImageView.frame.size.height, width: CGSSGlobal.width, height: 0)
+        self.spreadImageView.backgroundColor = UIColor.white
     }
     
     func setWithSpreadImage() {
