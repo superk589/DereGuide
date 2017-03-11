@@ -39,15 +39,16 @@ class ToolboxNavigationController: BaseNavigationController {
         return nil
     }
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        if viewController is EventDetailController || viewController is GachaDetailController {
-            customGesture.isEnabled = true
-            interactivePopGestureRecognizer?.isEnabled = false
-        } else {
-            customGesture.isEnabled = false
-            interactivePopGestureRecognizer?.isEnabled = true
-        }
-    }
+    // 交互式转场效果不理想 暂时禁用
+//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+//        if viewController is EventDetailController || viewController is GachaDetailController {
+//            customGesture.isEnabled = true
+//            interactivePopGestureRecognizer?.isEnabled = false
+//        } else {
+//            customGesture.isEnabled = false
+//            interactivePopGestureRecognizer?.isEnabled = true
+//        }
+//    }
     
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return bannerViewInteractiveAnimator

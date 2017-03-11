@@ -36,6 +36,7 @@ class CardView: UIView {
     fileprivate func prepare() {
         
         cardIconView = CGSSCardIconView(frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        cardIconView.isUserInteractionEnabled = false
         
         rarityLabel = UILabel()
         rarityLabel.frame = CGRect(x: 68, y: 10, width: 30, height: 10)
@@ -117,9 +118,6 @@ class CardView: UIView {
         }
         
         cardIconView?.cardId = card.id
-        cardIconView?.isUserInteractionEnabled = false
-        
-        // textLabel?.text = self.cardList[row] as? String
         
         // 显示数值
         lifeLabel.text = String(card.life)
@@ -144,7 +142,5 @@ class CardView: UIView {
         } else {
             skillLabel.text = ""
         }
-        
-
     }
 }

@@ -32,6 +32,11 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         return gestureRecognizer == self.interactivePopGestureRecognizer
     }
     
+    // 如果不实现这个方法, 在根视图的左侧向右滑动几下再点击push新页面会卡死
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return childViewControllers.count > 1
+    }
+    
     private var showHomeButtonCount = 3
     
     func popToRoot() {
