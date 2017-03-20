@@ -29,10 +29,10 @@ class ToolboxNavigationController: BaseNavigationController {
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if let vc = fromVC as? BannerViewAnimatorProvider, operation == .push {
+        if let vc = fromVC as? BannerViewAnimatorProvider, toVC is BannerViewContainerViewController , operation == .push {
             vc.bannerViewAnimator.animatorType = .push
             return vc.bannerViewAnimator
-        } else if let vc = toVC as? BannerViewAnimatorProvider, operation == .pop {
+        } else if let vc = toVC as? BannerViewAnimatorProvider, fromVC is BannerViewContainerViewController, operation == .pop {
             vc.bannerViewAnimator.animatorType = .pop
             return vc.bannerViewAnimator
         }

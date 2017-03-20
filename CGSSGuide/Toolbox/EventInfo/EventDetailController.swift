@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class EventDetailController: BaseViewController {
+class EventDetailController: BaseViewController, BannerViewContainerViewController {
     
     var eventDetailView: EventDetailView!
     var sv: UIScrollView!

@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class GachaDetailController: BaseViewController {
+class GachaDetailController: BaseViewController, BannerViewContainerViewController {
 
     var pool: CGSSGachaPool!
     

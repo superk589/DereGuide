@@ -12,6 +12,10 @@ protocol BannerViewAnimatorProvider: class {
     var bannerViewAnimator: BannerViewAnimator { get set }
 }
 
+protocol BannerViewContainerViewController: class {
+    var banner: BannerView! { get set }
+}
+
 class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     enum AnimatorType {
         case pop, push
@@ -43,6 +47,12 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 destBanner = toViewController.banner
                 destDetailViews.append(toViewController.gachaDetailView)
                 destDetailViews.append(toViewController.simulationView)
+            } else {
+                if let toView = transitionContext.view(forKey: .to) {
+                    transitionContext.containerView.addSubview(toView)
+                }
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                return
             }
             
             if let destBanner = destBanner,
@@ -95,6 +105,12 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 destBanner = fromViewController.banner
                 destDetailViews.append(fromViewController.gachaDetailView)
                 destDetailViews.append(fromViewController.simulationView)
+            } else {
+                if let toView = transitionContext.view(forKey: .to) {
+                    transitionContext.containerView.addSubview(toView)
+                }
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                return
             }
             
             if let toView = transitionContext.view(forKey: .to),
