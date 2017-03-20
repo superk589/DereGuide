@@ -7,3 +7,7 @@
 */
 
 NSPhotoLibraryUsageDescription = "For saving images to the camera roll. This permission can be changed from the Settings app.";
+shortcutItemTitle1 = "Card";
+shortcutItemTitle2 = "Beatmap";
+shortcutItemTitle3 = "Event";
+shortcutItemTitle4 = "Gacha Simulation";

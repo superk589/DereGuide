@@ -7,3 +7,7 @@
 */
 
 NSPhotoLibraryUsageDescription = "请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。";
+shortcutItemTitle1 = "卡片";
+shortcutItemTitle2 = "谱面";
+shortcutItemTitle3 = "活动";
+shortcutItemTitle4 = "模拟抽卡";

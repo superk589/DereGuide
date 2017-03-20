@@ -62,14 +62,12 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.searchBar.resignFirstResponder()
+        // this will be called when tabbar selectindex changed after launching, in this case, the search bar is not initialized
+        self.searchBar?.resignFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refresher = UIRefreshControl()
-        refreshControl = refresher
         
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
@@ -133,8 +131,6 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-    
-    
 }
 
 //MARK: searchBar的协议方法

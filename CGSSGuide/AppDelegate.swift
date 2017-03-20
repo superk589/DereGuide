@@ -69,6 +69,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    enum ShortcutItemType: String {
+        case card = "com.zzk.cgssguide.First"
+        case beatmap = "com.zzk.cgssguide.Second"
+        case event = "com.zzk.cgssguide.Third"
+        case gacha = "com.zzk.cgssguide.Fourth"
+    }
+    
+    private func handleShortcutItem(_ item: ShortcutItemType) {
+        if let nvc = CGSSClient.shared.tabBarController?.selectedViewController as? UINavigationController {
+            switch item {
+            case .card:
+                CGSSClient.shared.tabBarController?.selectedIndex = 0
+                // make current navigation controller pop to root
+                nvc.popToRootViewController(animated: true)
+                // without this line the new selectedindex of tabbar controller's content(tableview) has a wrong content inset
+                CGSSClient.shared.tabBarController?.view.setNeedsLayout()
+            case .beatmap:
+                CGSSClient.shared.tabBarController?.selectedIndex = 1
+                nvc.popToRootViewController(animated: true)
+                CGSSClient.shared.tabBarController?.view.setNeedsLayout()
+            case .event:
+                CGSSClient.shared.tabBarController?.selectedIndex = 3
+                nvc.popToRootViewController(animated: true)
+                CGSSClient.shared.tabBarController?.view.setNeedsLayout()
+                if let nvc = CGSSClient.shared.tabBarController?.selectedViewController as? UINavigationController {
+                    let vc = EventViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    nvc.pushViewController(vc, animated: true)
+                }
+            case .gacha:
+                CGSSClient.shared.tabBarController?.selectedIndex = 3
+                nvc.popToRootViewController(animated: true)
+                CGSSClient.shared.tabBarController?.view.setNeedsLayout()
+                if let nvc = CGSSClient.shared.tabBarController?.selectedViewController as? UINavigationController {
+                    let vc = GachaViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    nvc.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if let type = ShortcutItemType.init(rawValue: shortcutItem.type) {
+            handleShortcutItem(type)
+        }
+    }
+    
     func registerAPNS() {
 //		let device = UIDevice.currentDevice().systemVersion
         let setting = UIUserNotificationSettings.init(types: [.sound, .alert, .badge], categories: nil)
