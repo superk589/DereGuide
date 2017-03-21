@@ -114,18 +114,19 @@ class BaseRequest {
     }
     
     func dataTask(with request:URLRequest, completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        // DEBUG
-        print("request the url: ", request.url?.absoluteString ?? "")
-        //
+
+        #if DEBUG
+            print("request the url: ", request.url?.absoluteString ?? "")
+        #endif
         
         let task = session?.dataTask(with: request) { (data, response, error) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error != nil {
                 
             } else {
-                // DEBUG
-                print("response code is ", (response as? HTTPURLResponse)?.statusCode ?? 0)
-                //
+                #if DEBUG
+                    print("response code is ", (response as? HTTPURLResponse)?.statusCode ?? 0)
+                #endif
             }
             completionHandler(data, response as? HTTPURLResponse, error)
         }

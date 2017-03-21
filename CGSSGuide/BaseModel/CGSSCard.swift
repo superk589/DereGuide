@@ -292,7 +292,7 @@ class CGSSCard: CGSSBaseModel {
         let charaJson = json["chara"]
         if charaJson != JSON.null {
             if let chara = dao.findCharById(charaId), !chara.isOldVersion {
-             
+                
             } else {
                 let chara = CGSSChar(fromJson: charaJson)
                 dao.charDict.setValue(chara, forKey: String(charaId))

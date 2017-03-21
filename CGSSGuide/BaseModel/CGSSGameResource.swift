@@ -8,6 +8,8 @@
 
 import UIKit
 import FMDB
+import SwiftyJSON
+
 typealias FMDBCallBackClosure<T> = (T) -> Void
 
 class MusicScoreDB: FMDatabaseQueue {
@@ -214,6 +216,32 @@ class Master: FMDatabaseQueue {
                 }
             }
             callback(list)
+        }
+    }
+    
+    func getChara(charaId: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSChar]>) {
+        inDatabase { (fmdb) in
+            var result = [CGSSChar]()
+            if let db = fmdb {
+                defer {
+                    db.close()
+                }
+                if db.open(withFlags: SQLITE_OPEN_READONLY) {
+                    let selectSql = "select * from chara_data\(charaId == nil ? "" : " where chara_id = \(charaId!)")"
+                    do {
+                        let set = try db.executeQuery(selectSql, values: nil)
+                        while set.next() {
+                            if let data = try? JSONSerialization.data(withJSONObject: set.resultDictionary(), options: []) {
+                                let chara = CGSSChar.init(fromJson: JSON.init(data: data))
+                                result.append(chara)
+                            }
+                        }
+                    } catch {
+                        print(db.lastErrorMessage())
+                    }
+                }
+            }
+            callback(result)
         }
     }
     

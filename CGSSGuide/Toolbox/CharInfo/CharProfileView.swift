@@ -181,7 +181,7 @@ class CharProfileView: UIView {
         constellationCell.setup(NSLocalizedString("星座", comment: "角色信息页面"), content: char.constellationToString)
         homeTownCell.setup(NSLocalizedString("出生地", comment: "角色信息页面"), content: char.homeTownToString)
         favoriteCell.setup(NSLocalizedString("兴趣", comment: "角色信息页面"), content: char.favorite)
-        voiceCell.setup("CV", content: char.voice)
+        voiceCell.setup("CV", content: char.voiceFromDB ?? "")
         for subView in subviews {
             let iv = (subView as! CharProfileViewCell).descLabel.iv
             iv?.tintColor = char.attColor.withAlphaComponent(0.5)

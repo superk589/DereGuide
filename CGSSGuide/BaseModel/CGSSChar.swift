@@ -165,6 +165,24 @@ extension CGSSChar {
             return "\(age!)\(NSLocalizedString("岁", comment: "角色年龄"))"
         }
     }
+    
+    // temporarily var for newly added cv characters
+    var voiceFromDB: String? {
+        let semaphore = DispatchSemaphore.init(value: 0)
+        var result: String? = nil
+        CGSSGameResource.shared.master.getChara(charaId: charaId) { (charas) in
+            if charas.count > 0 {
+                result = charas.first?.voice
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
+        if voice != result {
+            voice = result ?? ""
+            CGSSDAO.sharedDAO.saveDataToFile(.char, complete: nil)
+        }
+        return result
+    }
 }
 class CGSSChar: CGSSBaseModel {
     
