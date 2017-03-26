@@ -102,7 +102,7 @@ class Card3DModelController: BaseViewController {
         
         requestData()
         
-        addObserver(self, forKeyPath: "self.webView.estimatedProgress", options: [.new], context: nil)
+        addObserver(self, forKeyPath: #keyPath(webView.estimatedProgress), options: [.new], context: nil)
 
         
         prepareToolbar()
@@ -112,7 +112,7 @@ class Card3DModelController: BaseViewController {
     }
     
     deinit {
-        removeObserver(self, forKeyPath: "self.webView.estimatedProgress")
+        removeObserver(self, forKeyPath: #keyPath(webView.estimatedProgress))
     }
     
     func prepareToolbar() {
@@ -149,7 +149,7 @@ class Card3DModelController: BaseViewController {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "self.webView.estimatedProgress" {
+        if keyPath == #keyPath(webView.estimatedProgress) {
             if let newValue = change?[.newKey] as? Double {
                 DispatchQueue.main.async { [weak self] in
                     self?.progressIndicator.progress = Float(newValue)

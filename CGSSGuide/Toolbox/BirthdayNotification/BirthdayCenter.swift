@@ -11,7 +11,7 @@ import UIKit
 extension CGSSChar {
     var nextBirthday: Date! {
         let timeZone = UserDefaults.standard.birthdayTimeZone
-        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        var gregorian = Calendar(identifier: .gregorian)
         gregorian.timeZone = timeZone
         
         let now = Date()
@@ -67,7 +67,7 @@ class BirthdayCenter {
     
     func getRecent(_ startDays: Int, endDays: Int) -> [CGSSChar] {
         let timeZone = UserDefaults.standard.birthdayTimeZone
-        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        var gregorian = Calendar(identifier: .gregorian)
         gregorian.timeZone = timeZone
         
         let now = Date()

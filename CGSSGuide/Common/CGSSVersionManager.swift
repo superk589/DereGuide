@@ -51,7 +51,7 @@ class CGSSVersionManager {
     
     var currentMasterTruthVersion: String {
         set {
-            UserDefaults.standard.setValue(newValue, forKeyPath: "master_truth_version")
+            UserDefaults.standard.setValue(newValue, forKey: "master_truth_version")
         }
         get {
             return UserDefaults.standard.object(forKey: "master_truth_version") as? String ?? "0"
@@ -61,7 +61,7 @@ class CGSSVersionManager {
     
     var currentManifestTruthVersion: String {
         set {
-            UserDefaults.standard.setValue(newValue, forKeyPath: "manifest_truth_version")
+            UserDefaults.standard.setValue(newValue, forKey: "manifest_truth_version")
         }
         get {
             return UserDefaults.standard.object(forKey: "manifest_truth_version") as? String ?? "0"
@@ -92,10 +92,4 @@ class CGSSVersionManager {
             currentManifestTruthVersion = info.truthVersion
         }
     }
-    
-    
-    
-    
-
-    
 }

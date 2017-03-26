@@ -17,7 +17,7 @@ extension Date {
     }
     
     func truncateHours(timeZone: TimeZone = TimeZone.tokyo) -> Date {
-        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        var gregorian = Calendar(identifier: .gregorian)
         gregorian.timeZone = timeZone
         let comps = gregorian.dateComponents([.day, .month, .year], from: self)
         return gregorian.date(from: comps)!

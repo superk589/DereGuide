@@ -46,7 +46,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
         var strings = [String]()
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            var gregorian = Calendar(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
@@ -59,7 +59,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
         var strings = [String]()
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            var gregorian = Calendar(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
@@ -103,7 +103,7 @@ extension EventPtRankingList: RankingListChartPresentable {
         var strings = [String]()
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            var gregorian = Calendar(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
@@ -116,7 +116,7 @@ extension EventPtRankingList: RankingListChartPresentable {
         var strings = [String]()
         for i in 0..<list.count {
             let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+            var gregorian = Calendar.init(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
             let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
