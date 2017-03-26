@@ -67,6 +67,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 toView.layoutIfNeeded()
                 let destFrame = destBanner.frame
                 destBanner.frame = sourceFrame
+                destBanner.layoutIfNeeded()
                 toView.backgroundColor = UIColor.clear
                 
                 for view in destDetailViews {
@@ -81,6 +82,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 UIView.animate(withDuration: duration * 3 / 4, delay: 0, options: UIViewAnimationOptions.init(rawValue: 0), animations: {
                     destBanner.frame = destFrame
                     toView.backgroundColor = UIColor.white
+                    destBanner.layoutIfNeeded()
                 }, completion: { (finished) in
                     
                 })
@@ -132,6 +134,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 
                 UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: self.transitionDuration(using: transitionContext) / 4, options: UIViewAnimationOptions.init(rawValue: 0), animations: { 
                     destBanner.frame = toFrame
+                    destBanner.layoutIfNeeded()
                     fromView.backgroundColor = UIColor.clear
                 }, completion: { [weak self] (finished) in
                     self?.sourceBannerView.isHidden = false
@@ -206,6 +209,7 @@ class BannerViewInteractiveAnimator: NSObject, UIViewControllerInteractiveTransi
         let frame = destFrame * progress2 + sourceFrame * (1 - progress2)
         
         destBanner?.frame = frame
+        destBanner?.layoutIfNeeded()
         
         for view in destDetailViews {
             view.alpha = 1 - progress1

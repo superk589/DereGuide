@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import SnapKit
 
 enum BannerLoadingStyle {
     case system
@@ -50,20 +49,12 @@ class BannerView: UIImageView {
             indicator = UIActivityIndicatorView.init()
             indicator?.activityIndicatorViewStyle = .gray
             addSubview(indicator!)
-            indicator?.snp.makeConstraints({ (make) in
-                make.center.equalToSuperview()
-            })
             indicator?.startAnimating()
 
         } else {
             indicator2 = LoadingImageView(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
             addSubview(indicator2!)
-            indicator2?.snp.makeConstraints({ (make) in
-                make.center.equalToSuperview()
-                make.width.height.equalTo(50)
-            })
             indicator2?.startAnimating()
-            
         }
     }
     
@@ -75,12 +66,11 @@ class BannerView: UIImageView {
             completedBlock?(image, error, cacheType, url)
         }
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        indicator?.center = CGPoint.init(x: self.bounds.midX, y: self.bounds.midY)
+        indicator2?.center = CGPoint.init(x: self.bounds.midX, y: self.bounds.midY)
     }
-    */
-
 }

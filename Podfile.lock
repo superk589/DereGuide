@@ -3,23 +3,23 @@ PODS:
   - Charts (3.0.1):
     - Charts/Core (= 3.0.1)
   - Charts/Core (3.0.1)
-  - Firebase/AdMob (3.13.0):
+  - Firebase/AdMob (3.15.0):
     - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.17.0)
-  - Firebase/Core (3.13.0):
+    - Google-Mobile-Ads-SDK (= 7.19.0)
+  - Firebase/Core (3.15.0):
     - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.0)
+    - FirebaseCore (= 3.5.2)
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.0):
+  - FirebaseCore (3.5.2):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - Google-Mobile-Ads-SDK (7.17.0)
+  - Google-Mobile-Ads-SDK (7.19.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -30,8 +30,8 @@ PODS:
   - SDWebImage/Core (4.0.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
-  - TTGTagCollectionView (1.3.2)
-  - ZKCornerRadiusView (0.0.4)
+  - TTGTagCollectionView (1.5.0)
+  - ZKCornerRadiusView (0.0.5)
   - ZKDrawerController (0.1.0):
     - SnapKit
 
@@ -53,20 +53,20 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ASValueTrackingSlider: 5261de3fcf00adb339efc93885e8f0bc99e703cd
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
-  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  Google-Mobile-Ads-SDK: a8bf4211624999b73e4184be516f94770b139525
+  Google-Mobile-Ads-SDK: d1bcdbd8347a105a687345b8511701172a5074e9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  TTGTagCollectionView: ec52d52f94eb978fbbd3ea9b61be522da3c6abb3
-  ZKCornerRadiusView: 98ceb50e82494f97be5f163fa20d0e5b21749ebd
+  TTGTagCollectionView: 36769ac08e29e8ce37f7dab98014b373d2d005db
+  ZKCornerRadiusView: ba7d6d9b4f0227327dce493f7a8f4cddf5234efc
   ZKDrawerController: 4737d1696b6e051c936b52dbfbb95d4f47c996ae
 
 PODFILE CHECKSUM: da792f4b63ef28ddc122342f11acfec5223d1c75

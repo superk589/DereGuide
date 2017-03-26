@@ -24,8 +24,8 @@ class FilterItemView: UIView {
 //        iv.snp.makeConstraints { (make) in
 //            make.edges.equalToSuperview()
 //        }
-        iv.zk_cornerRadius = 3
-        iv.zk_backgroundColor = Color.parade
+        iv.zk.cornerRadius = 3
+        iv.zk.backgroundColor = Color.parade
         
         label = UILabel()
         addSubview(label)
@@ -71,7 +71,7 @@ class FilterItemView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         iv.frame = self.bounds
-        iv.zk_render()
+        iv.render()
         label.sizeToFit()
         label.frame.origin = CGPoint.init(x: 6, y: 6)
     }

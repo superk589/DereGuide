@@ -30,7 +30,7 @@ class SongDiffView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
         label.textAlignment = .center
-        iv.zk_cornerRadius = 8
+        iv.zk.cornerRadius = 8
     }
     
     func addTarget(_ target: AnyObject?, action: Selector) {
@@ -92,8 +92,8 @@ class SongTableViewCell: UITableViewCell {
         diffViews = [SongDiffView]()
         for i in 0...4 {
             let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
-            diffView.iv.zk_backgroundColor = colors[i]
-            diffView.iv.zk_render()
+            diffView.iv.zk.backgroundColor = colors[i]
+            diffView.iv.render()
             diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))

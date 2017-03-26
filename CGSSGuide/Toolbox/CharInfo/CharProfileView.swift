@@ -55,7 +55,7 @@ class CharProfileDescView: UIView {
         label.textColor = UIColor.white
         label.textAlignment = .center
         
-        iv.zk_cornerRadius = 6
+        iv.zk.cornerRadius = 6
     }
     
     required init?(coder aDecoder: NSCoder) {

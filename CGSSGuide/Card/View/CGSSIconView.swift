@@ -52,7 +52,7 @@ class CGSSIconView: ZKCornerRadiusView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        zk_cornerRadius = self.fheight / 8
+        zk.cornerRadius = self.fheight / 8
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

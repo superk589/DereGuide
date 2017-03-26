@@ -70,7 +70,7 @@ class GachaPoolTableViewCell: UITableViewCell {
         originY += space
         
         timeStatusIndicator = ZKCornerRadiusView.init(frame: CGRect(x: space, y: originY, width: 12, height: 12))
-        timeStatusIndicator.zk_cornerRadius = 6
+        timeStatusIndicator.zk.cornerRadius = 6
         
         timeLabel = UILabel.init(frame: CGRect.init(x: space + 22, y: originY, width: CGSSGlobal.width - space * 2 - 22, height: 12))
         timeLabel.font = UIFont.systemFont(ofSize: 12)
