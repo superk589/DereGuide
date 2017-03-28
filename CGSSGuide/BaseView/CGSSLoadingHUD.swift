@@ -31,7 +31,7 @@ class LoadingImageView: UIImageView {
         }
         let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
         rotateAni.fromValue = 0
-        rotateAni.toValue = M_PI * 2
+        rotateAni.toValue = .pi * 2.0
         rotateAni.duration = 2
         rotateAni.repeatCount = .infinity
         rotateAni.isRemovedOnCompletion = false

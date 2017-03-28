@@ -610,7 +610,7 @@ class AdvanceBeatmapDrawer {
             arcCenter: midPoint,
             radius: radius,
             startAngle: 0.0,
-            endAngle: CGFloat(2 * M_PI),
+            endAngle: CGFloat(2.0 * .pi),
             clockwise: false
         )
         path.lineWidth = lineWidth
