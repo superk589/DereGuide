@@ -25,7 +25,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
             if !errors.isEmpty && items.count == 0 {
                 self?.updateStatusView.isHidden = true
                 var errorStr = ""
-                if let error = errors.first as? CGSSUpdaterError {
+                if let error = errors.first {
                     errorStr.append(error.localizedDescription)
                 }
                 let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
