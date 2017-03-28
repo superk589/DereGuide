@@ -21,16 +21,16 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     
     static let concentration = CGSSSkillTypes.init(rawValue: 1 << 7)
 //    static let mimic = CGSSSkillTypes.init(rawValue: 1 << 8)
-//    static let boost = CGSSSkillTypes.init(rawValue: 1 << 9)
-    static let allRound = CGSSSkillTypes.init(rawValue: 1 << 8)
+    static let boost = CGSSSkillTypes.init(rawValue: 1 << 8)
+    static let allRound = CGSSSkillTypes.init(rawValue: 1 << 9)
 //    static let deepCute = CGSSSkillTypes.init(rawValue: 1 << 11)
 //    static let deepCool = CGSSSkillTypes.init(rawValue: 1 << 12)
 //    static let deepPassion = CGSSSkillTypes.init(rawValue: 1 << 13)
     
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 9)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 10)
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 10)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 11)
 
-    static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111)
+    static let all = CGSSSkillTypes.init(rawValue: 0b1111_1111_1111)
 //    init (typeString: String) {
 //        switch typeString {
 //        case "COMBO加成":
@@ -74,8 +74,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             self = .concentration
 //        case 16:
 //            self = .mimic
-//        case 20:
-//            self = .boost
+        case 20:
+            self = .boost
 //        case 21:
 //            self = .deepCute
 //        case 22:
@@ -121,8 +121,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             //            return "Deep Cool"
             //        case CGSSSkillTypes.deepPassion:
             //            return "Deep Passion"
-            //        case CGSSSkillTypes.boost:
-        //            return "Skill Boost"
+        case CGSSSkillTypes.boost:
+            return NSLocalizedString("Skill Boost", comment: "")
         default:
             return NSLocalizedString("未知", comment: "")
         }
