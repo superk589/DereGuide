@@ -28,6 +28,13 @@ struct SimulateResult {
     }
 }
 
+struct LiveSimulatorOptions: OptionSet {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let maxRate = LiveSimulatorOptions.init(rawValue: 1 << 0)
+    static let detailLog = LiveSimulatorOptions.init(rawValue: 1 << 1)
+}
+
 class CGSSLiveSimulator {
     
     var distributions: [ScoreDistribution]
@@ -55,47 +62,18 @@ class CGSSLiveSimulator {
     
     var simulateResult = [Int]()
     
-    func simulateOnce() {
+    func simulateOnce(options: LiveSimulatorOptions = [], callback: (([NoteScoreDetail]) -> Void)? = nil) {
         var sum = 0
         var procedContents = [ScoreUpContent]()
         for content in contents {
-            if CGSSGlobal.isProc(rate: Int(round(content.rate * 100000))) {
+            if options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round(content.rate * 100000))) {
                 procedContents.append(content)
             }
         }
         
         procedContents.sort { $0.range.begin < $1.range.begin }
         
-        #if DEBUG
-            struct ScoreDetail {
-                
-                /// 从1开始的Index
-                var noteIndex: Int
-                
-                var score: Int
-                var baseScore: Float
-                
-                /// 已经计算了skillBoost后的c分加成
-                var comboBonus: Int
-                
-                /// 已经计算了skillBoost后的p分加成
-                var perfectBonus: Int
-                
-                var comboFactor: Float
-                var skillBoost: Int
-                
-                var toDictionary: [String: Any] {
-                    return ["index": noteIndex,
-                    "score": score,
-                    "base_score": baseScore,
-                    "combo_bonus": comboBonus,
-                    "perfect_bonus": perfectBonus,
-                    "combo_factor": comboFactor,
-                    "skill_boost": skillBoost]
-                }
-            }
-            var scores = [ScoreDetail]()
-        #endif
+        var logs = [NoteScoreDetail]()
         
         for i in 0..<notes.count {
             let note = notes[i]
@@ -130,6 +108,9 @@ class CGSSLiveSimulator {
                 }
             }
         
+            let baseComboBonus = comboBonus
+            let basePerfectBonus = perfectBonus
+            
             if skillBoost > 1000 {
                 perfectBonus = 100 + Int(ceil(Float((perfectBonus - 100) * skillBoost) * 0.001))
                 comboBonus = 100 + Int(ceil(Float((comboBonus - 100) * skillBoost) * 0.001))
@@ -139,17 +120,23 @@ class CGSSLiveSimulator {
             
             sum += score
             
-            #if DEBUG
-                scores.append(ScoreDetail.init(noteIndex: i + 1, score: score, baseScore: baseScore, comboBonus: comboBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost))
-            #endif
+            if options.contains(.detailLog) {
+                let socreDetail = NoteScoreDetail.init(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: baseComboBonus, comboBonus: comboBonus, basePerfectBonus: basePerfectBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost)
+                logs.append(socreDetail)
+            }
         }
         simulateResult.append(sum)
+        callback?(logs)
         
 //        #if DEBUG
 //            let arr = scores.map { $0.toDictionary }
 //            let json = JSON(arr)
 //            try? json.rawString()?.write(toFile: NSHomeDirectory() + "/test.txt", atomically: true, encoding: .utf8)
 //        #endif
+    }
+    
+    func wipeSimulatorResults() {
+        simulateResult.removeAll()
     }
 
     func simulate(times: UInt, callback: @escaping SimulateResultClosure) {

@@ -29,6 +29,7 @@ protocol TeamDetailViewDelegate: class {
     func manualFieldBegin()
     func manualFieldDone(_ value: Int)
     func advanceCalc()
+    func viewScoreChart(_ teamDetailView: TeamDetailView)
 }
 
 class TeamDetailView: UIView {
@@ -75,6 +76,8 @@ class TeamDetailView: UIView {
     var advanceScoreGrid: CGSSGridLabel!
     
     var advanceProgress: UIProgressView!
+    
+    var viewScoreChartButton: UIButton!
     
     var scoreDescLabel: UILabel!
     
@@ -326,6 +329,13 @@ class TeamDetailView: UIView {
         
         originY += 36 + topSpace
         
+        viewScoreChartButton = UIButton.init(frame: CGRect.init(x: leftSpace, y: originY, width: width, height: 30))
+        viewScoreChartButton.setTitle("  " + NSLocalizedString("得分详情", comment: "") + " >", for: .normal)
+        viewScoreChartButton.backgroundColor = Color.visual
+        viewScoreChartButton.addTarget(self, action: #selector(viewScoreChart(sender:)), for: .touchUpInside)
+        
+        originY += 30 + topSpace
+        
         scoreDescLabel = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 80))
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
         scoreDescLabel.textColor = UIColor.darkGray
@@ -346,6 +356,7 @@ class TeamDetailView: UIView {
         bottomView.addSubview(scoreGrid)
         bottomView.addSubview(advanceScoreGrid)
         bottomView.addSubview(advanceCalculateButton)
+        bottomView.addSubview(viewScoreChartButton)
         bottomView.addSubview(scoreDescLabel)
         
         addSubview(selfLeaderLabel)
@@ -778,5 +789,9 @@ class TeamDetailView: UIView {
         let value = Int(manualValueTF.text!) ?? 0
         manualValueTF.text = String(value)
         delegate?.manualFieldDone(value)
+    }
+
+    func viewScoreChart(sender: UIButton) {
+        delegate?.viewScoreChart(self)
     }
 }

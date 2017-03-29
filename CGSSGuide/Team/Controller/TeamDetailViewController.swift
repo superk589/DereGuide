@@ -237,9 +237,21 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         }
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
         self.present(alvc, animated: true, completion: nil)
-        
     }
     
+    func viewScoreChart(_ teamDetailView: TeamDetailView) {
+        if let live = self.live, let diff = self.diff {
+            let vc = LiveSimulatorViewController.init(nibName: nil, bundle: nil)
+            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
+            let simulator2 = coordinator.generateLiveSimulator(options: [])
+            vc.simulator1 = simulator1
+            vc.simulator2 = simulator2
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showNotSelectSongAlert()
+        }
+    }
 }
 
 //MARK: BaseSongTableViewControllerDelegate的协议方法

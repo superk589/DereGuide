@@ -572,3 +572,10 @@
 "收藏" = "Add to Favorites";
 "取消收藏" = "Remove from Favorites";
 "Skill Boost" = "Skill Boost";
+
+/* new in 1.2.6 */
+// new controller for not detail
+"随机单次模拟" = "Random Simulation Result";
+"显示模式" = "Mode";
+"选择模式" = "Select Mode";
+"得分详情" = "Score Detail";
