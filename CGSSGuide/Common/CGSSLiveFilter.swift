@@ -9,11 +9,11 @@
 import UIKit
 
 struct CGSSLiveFilter: CGSSFilter {
-    var songTypes: CGSSLiveTypes
+    var liveTypes: CGSSLiveTypes
     var eventTypes: CGSSLiveEventTypes
     var searchText: String = ""
     init(typeMask: UInt, eventMask: UInt) {
-        songTypes = CGSSLiveTypes.init(rawValue: typeMask)
+        liveTypes = CGSSLiveTypes.init(rawValue: typeMask)
         eventTypes = CGSSLiveEventTypes.init(rawValue: eventMask)
     }
     
@@ -33,7 +33,7 @@ struct CGSSLiveFilter: CGSSFilter {
                 return true
             }()
             let r2: Bool = {
-                if songTypes.contains(v.songType) && eventTypes.contains(v.eventFilterType) {
+                if liveTypes.contains(v.filterType) && eventTypes.contains(v.eventFilterType) {
                     return true
                 }
                 return false
@@ -48,7 +48,7 @@ struct CGSSLiveFilter: CGSSFilter {
     }
     
     func toDictionary() -> NSDictionary {
-        let dict = ["typeMask": songTypes.rawValue, "eventMask": eventTypes.rawValue] as NSDictionary
+        let dict = ["typeMask": liveTypes.rawValue, "eventMask": eventTypes.rawValue] as NSDictionary
         return dict
     }
     

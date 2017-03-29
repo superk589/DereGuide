@@ -179,14 +179,14 @@ class CGSSLiveCoordinator {
     var team: CGSSTeam
     var live: CGSSLive
     var diff: Int
-    var liveType: CGSSLiveType
+    var simulatorType: CGSSLiveSimulatorType
     var grooveType: CGSSGrooveType?
     var fixedAppeal: Int?
     var appeal: Int {
         if grooveType != nil {
-            return team.getAppealByType(liveType, songType: CGSSCardTypes.init(grooveType: grooveType!)).total + team.supportAppeal
+            return team.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).total + team.supportAppeal
         } else {
-            return team.getAppealByType(liveType, songType: live.songType).total + team.supportAppeal
+            return team.getAppealBy(simulatorType: simulatorType, liveType: live.filterType).total + team.supportAppeal
         }
     }
     
@@ -194,11 +194,11 @@ class CGSSLiveCoordinator {
         return self.live.getBeatmapByDiff(self.diff)!
     }()
     
-    init(team: CGSSTeam, live: CGSSLive, liveType: CGSSLiveType, grooveType: CGSSGrooveType?, diff: Int, fixedAppeal: Int?) {
+    init(team: CGSSTeam, live: CGSSLive, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, diff: Int, fixedAppeal: Int?) {
         self.team = team
         self.live = live
         self.diff = diff
-        self.liveType = liveType
+        self.simulatorType = simulatorType
         self.grooveType = grooveType
         self.fixedAppeal = fixedAppeal
     }
@@ -266,21 +266,31 @@ class CGSSLiveCoordinator {
     
     fileprivate func generateScoreUpContents() -> [ScoreUpContent] {
         var result = [ScoreUpContent]()
+        
+        let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
+        
         for i in 0...4 {
             if let member = team[i], let skill = team[i]?.cardRef?.skill {
                 let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (member.skillLevel)!)
-                if let type = ScoreUpTypes.init(type: skill.skillFilterType) {
+                if let type = ScoreUpTypes.init(type: skill.skillFilterType),
+                    let cardType = member.cardRef?.cardType {
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var rateBonus = 0
                     if grooveType != nil {
                         if member.cardRef!.cardType == CGSSCardTypes.init(grooveType: grooveType!) {
-                            rateBonus = 30
+                            rateBonus += 30
                         }
                     } else {
-                        if member.cardRef!.cardType == live.songType || live.songType == .office {
-                            rateBonus = 30
+                        if member.cardRef!.cardType == live.filterType || live.filterType == .allType {
+                            rateBonus += 30
                         }
                     }
+                    // 计算触发几率提升类队长技
+                    if let leaderSkillBonus = leaderSkillUpContent[cardType]?[.proc] {
+                        rateBonus += leaderSkillBonus
+                    }
+                    
+                    // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
                     for range in ranges {
                         if type == .deep {

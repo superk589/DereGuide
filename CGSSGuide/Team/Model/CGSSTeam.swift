@@ -14,6 +14,19 @@ enum LeaderSkillUpType {
     case visual
     case life
     case proc
+    
+    init?(simulatorType: CGSSLiveSimulatorType) {
+        switch simulatorType {
+        case .dance:
+            self = .dance
+        case .visual:
+            self = .visual
+        case .vocal:
+            self = .vocal
+        default:
+            return nil
+        }
+    }
 }
 
 struct LeaderSkillUpContent {
@@ -158,7 +171,7 @@ class CGSSTeam: NSObject, NSCoding {
     func getAppealInGroove(_ type: CGSSCardTypes, burstType: LeaderSkillUpType) -> CGSSAppeal {
         var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
         for i in 0...4 {
-            appeal += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(burstType), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
+            appeal += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(by: burstType), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
         }
         return appeal
     }
@@ -171,28 +184,35 @@ class CGSSTeam: NSObject, NSCoding {
         return appeal
     }
     
-    func getAppealByType(_ liveType: CGSSLiveType, songType: CGSSLiveTypes) -> CGSSAppeal {
-        switch liveType {
+    func getAppealBy(simulatorType: CGSSLiveSimulatorType, liveType: CGSSLiveTypes) -> CGSSAppeal {
+        switch simulatorType {
         case .normal:
-            return getAppeal(songType)
-        case .visual:
-            return getAppealInGroove(songType, burstType: .visual)
-        case .dance:
-            return getAppealInGroove(songType, burstType: .dance)
-        case .vocal:
-            return getAppealInGroove(songType, burstType: .vocal)
+            return getAppeal(liveType)
+        case .visual, .dance, .vocal:
+            return getAppealInGroove(liveType, burstType: LeaderSkillUpType.init(simulatorType: simulatorType)!)
         case .parade:
-            return getAppealInParade(songType)
+            return getAppealInParade(liveType)
+        }
+    }
+    
+    func getLeaderSkillUpContentBy(simulatorType: CGSSLiveSimulatorType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+        switch simulatorType {
+        case .normal:
+            return getUpContent()
+        case .parade:
+            return getUpContentInParade()
+        case .vocal, .dance, .visual:
+            return getUpContentInGroove(by: LeaderSkillUpType.init(simulatorType: simulatorType)!)
         }
     }
     
     // 判断需要的指定颜色的队员是否满足条件
-    func hasType(_ type: CGSSCardTypes, count: Int?, inGroove:Bool) -> Bool {
+    private func hasType(_ type: CGSSCardTypes, count: Int?, isInGroove: Bool) -> Bool {
         if count == 0 {
             return true
         }
         var c = 0
-        for i in 0...(inGroove ? 4 : 5) {
+        for i in 0...(isInGroove ? 4 : 5) {
             if self[i]?.cardRef?.cardType == type {
                 c += 1
             }
@@ -204,9 +224,9 @@ class CGSSTeam: NSObject, NSCoding {
         }
     }
     
-    func getContentFor(_ leaderSkill: CGSSLeaderSkill, inGroove:Bool) -> [LeaderSkillUpContent] {
+    private func getContentFor(_ leaderSkill: CGSSLeaderSkill, isInGroove: Bool) -> [LeaderSkillUpContent] {
         var contents = [LeaderSkillUpContent]()
-        if hasType(.cute, count: leaderSkill.needCute, inGroove: inGroove) && hasType(.cool, count: leaderSkill.needCool, inGroove: inGroove) && hasType(.passion, count: leaderSkill.needPassion, inGroove: inGroove) {
+        if hasType(.cute, count: leaderSkill.needCute, isInGroove: isInGroove) && hasType(.cool, count: leaderSkill.needCool, isInGroove: isInGroove) && hasType(.passion, count: leaderSkill.needPassion, isInGroove: isInGroove) {
             switch leaderSkill.targetAttribute! {
             case "cute":
                 for upType in getUpType(leaderSkill) {
@@ -245,11 +265,11 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: false))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: false))
         }
         // 队友的队长技能
         if let leaderSkill = friendLeader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: false))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: false))
         }
         
         // 合并同类型
@@ -270,11 +290,11 @@ class CGSSTeam: NSObject, NSCoding {
         return newContents
     }
     
-    func getUpContentInGroove(_ burstType: LeaderSkillUpType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+    func getUpContentInGroove(by burstType: LeaderSkillUpType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: true))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: true))
         }
         // 设定Groove中的up值
         contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .cool, upValue: 150))
@@ -303,7 +323,7 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, inGroove: true))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: true))
         }
         var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
         for content in contents {

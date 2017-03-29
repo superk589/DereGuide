@@ -9,13 +9,13 @@
 import UIKit
 import SwiftyJSON
 
-enum CGSSLiveType: String {
+enum CGSSLiveSimulatorType: String {
     case normal = "常规模式" //!!!无法被本地化 注意使用时本地化
     case vocal = "Vocal Burst"
     case dance = "Dance Burst"
     case visual = "Visual Burst"
     case parade = "LIVE Parade"
-    static func getAll() -> [CGSSLiveType] {
+    static func getAll() -> [CGSSLiveSimulatorType] {
         return [.normal, .vocal, .dance, .visual, .parade]
     }
     func typeColor() -> UIColor {
@@ -124,7 +124,7 @@ extension CGSSLive {
         
     }
     
-    var songType: CGSSCardTypes {
+    var filterType: CGSSLiveTypes {
         switch type {
         case 1:
             return .cute

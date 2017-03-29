@@ -46,7 +46,7 @@ class SongFilterAndSorterTableViewController: UITableViewController {
     func setup() {
         for i in 0...3 {
             let button = songTypeStackView.subviews[i] as! UIButton
-            button.isSelected = filter.songTypes.contains(CGSSLiveTypes.init(type: i))
+            button.isSelected = filter.liveTypes.contains(CGSSLiveTypes.init(type: i))
         }
         
         var eventButtons = [UIButton]()
@@ -107,10 +107,10 @@ class SongFilterAndSorterTableViewController: UITableViewController {
         let tag = sender.tag - 1000
         if sender.isSelected {
             sender.isSelected = false
-            filter.songTypes.remove(CGSSLiveTypes.init(type: tag))
+            filter.liveTypes.remove(CGSSLiveTypes.init(type: tag))
         } else {
             sender.isSelected = true
-            filter.songTypes.insert(CGSSLiveTypes.init(type: tag))
+            filter.liveTypes.insert(CGSSLiveTypes.init(type: tag))
         }
     }
     

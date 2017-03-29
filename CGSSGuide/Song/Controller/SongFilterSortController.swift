@@ -75,7 +75,7 @@ class SongFilterSortController: BaseFilterSortController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: songTypeTitles, index: filter.songTypes.rawValue, all: CGSSLiveTypes.allSong.rawValue)
+                cell.setup(titles: songTypeTitles, index: filter.liveTypes.rawValue, all: CGSSLiveTypes.allLives.rawValue)
             case 1:
                 cell.setup(titles: eventTypeTitles, index: filter.eventTypes.rawValue, all: CGSSLiveEventTypes.all.rawValue)
             default:
@@ -113,7 +113,7 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes.insert(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
+                    filter.liveTypes.insert(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
                     filter.eventTypes.insert(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
@@ -129,7 +129,7 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes.remove(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
+                    filter.liveTypes.remove(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
                     filter.eventTypes.remove(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
@@ -144,7 +144,7 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes = CGSSLiveTypes.allSong
+                    filter.liveTypes = CGSSLiveTypes.allLives
                 case 1:
                     filter.eventTypes = CGSSLiveEventTypes.all
                 default:
@@ -158,7 +158,7 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.songTypes = CGSSLiveTypes.init(rawValue: 0)
+                    filter.liveTypes = CGSSLiveTypes.init(rawValue: 0)
                 case 1:
                     filter.eventTypes = CGSSLiveEventTypes.init(rawValue: 0)
                 default:

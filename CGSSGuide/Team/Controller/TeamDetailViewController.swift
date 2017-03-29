@@ -91,7 +91,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
@@ -181,7 +181,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, liveType: teamDV.currentLiveType, grooveType: teamDV.currentGrooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = CGSSLiveCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
             let simulator2 = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
@@ -206,16 +206,16 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         alvc.popoverPresentationController?.sourceView = teamDV.liveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.liveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
-        for liveType in CGSSLiveType.getAll() {
-            alvc.addAction(UIAlertAction.init(title: liveType.toString(), style: .default, handler: { (a) in
-                self.teamDV.currentLiveType = liveType
-                if ![.normal, .parade].contains(liveType) {
+        for simulatorType in CGSSLiveSimulatorType.getAll() {
+            alvc.addAction(UIAlertAction.init(title: simulatorType.toString(), style: .default, handler: { (a) in
+                self.teamDV.simulatorType = simulatorType
+                if ![.normal, .parade].contains(simulatorType) {
                     self.teamDV.showGrooveSelectButton()
-                    if self.teamDV.currentGrooveType == nil {
-                        self.teamDV.currentGrooveType = CGSSGrooveType.init(cardType: (self.team.leader.cardRef?.cardType)!)!
+                    if self.teamDV.grooveType == nil {
+                        self.teamDV.grooveType = CGSSGrooveType.init(cardType: (self.team.leader.cardRef?.cardType)!)!
                     }
                 } else {
-                    self.teamDV.currentGrooveType = nil
+                    self.teamDV.grooveType = nil
                     self.teamDV.hideGrooveSelectButton()
                 }
                 self.sv.contentSize = self.teamDV.frame.size
@@ -232,7 +232,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         alvc.popoverPresentationController?.permittedArrowDirections = .right
         for grooveType in CGSSGrooveType.getAll() {
             alvc.addAction(UIAlertAction.init(title: grooveType.rawValue, style: .default, handler: { (a) in
-                self.teamDV.currentGrooveType = grooveType
+                self.teamDV.grooveType = grooveType
                 }))
         }
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))

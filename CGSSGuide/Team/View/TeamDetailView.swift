@@ -330,7 +330,7 @@ class TeamDetailView: UIView {
         scoreDescLabel.font = UIFont.systemFont(ofSize: 14)
         scoreDescLabel.textColor = UIColor.darkGray
         scoreDescLabel.numberOfLines = 0
-        scoreDescLabel.text = NSLocalizedString("* 全部note为Perfect评价，小屋加成为10%\n* 极限分数中所有技能100%触发\n* 极限分数1中note取Perfect判定±0.06秒中的最优值，极限分数2和其他分数都不考虑此项因素\n* 忽略技能触发率提升的队长技能\n* 模拟计算结果是10000次模拟后取前x%内的最低分数得出，每次结果会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
+        scoreDescLabel.text = NSLocalizedString("* 全部note为Perfect评价，小屋加成为10%\n* 极限分数中所有技能100%触发\n* 极限分数1中note取Perfect判定±0.06秒中的最优值，极限分数2和其他分数都不考虑此项因素\n* 模拟计算结果是10000次模拟后取前x%内的最低分数得出，每次结果会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响", comment: "队伍详情页面")
         scoreDescLabel.sizeToFit()
         scoreDescLabel.backgroundColor = UIColor.white
         originY += topSpace + scoreDescLabel.fheight + topSpace
@@ -697,30 +697,33 @@ class TeamDetailView: UIView {
     func backFieldBegin() {
         delegate?.backFieldBegin()
     }
+    
     func backFieldDone() {
         let value = Int(backSupportTF.text!) ?? CGSSGlobal.defaultSupportAppeal
         backSupportTF.text = String(value)
         delegate?.backFieldDone(value)
     }
-    var currentLiveType: CGSSLiveType = .normal {
+    
+    var simulatorType: CGSSLiveSimulatorType = .normal {
         didSet {
-            self.liveTypeButton.setTitle("< \(currentLiveType.toString()) >", for: .normal)
-            self.liveTypeButton.setTitleColor(currentLiveType.typeColor(), for: .normal)
-            if currentLiveType != oldValue {
+            self.liveTypeButton.setTitle("< \(simulatorType.toString()) >", for: .normal)
+            self.liveTypeButton.setTitleColor(simulatorType.typeColor(), for: .normal)
+            if simulatorType != oldValue {
                 self.clearScoreGrid()
                 self.clearAdScoreGrid()
             }
         }
     }
-    var currentGrooveType: CGSSGrooveType? {
+    
+    var grooveType: CGSSGrooveType? {
         didSet {
-            if let type = currentGrooveType {
+            if let type = grooveType {
                 self.grooveTypeButton.setTitle("< \(type.rawValue) >", for: .normal)
                 self.grooveTypeButton.setTitleColor(type.typeColor(), for: .normal)
             } else {
                 self.grooveTypeButton.setTitle("", for: .normal)
             }
-            if currentGrooveType != oldValue {
+            if grooveType != oldValue {
                 self.clearScoreGrid()
                 self.clearAdScoreGrid()
             }

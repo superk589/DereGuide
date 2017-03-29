@@ -102,18 +102,6 @@ struct Reward {
 }
 
 class CGSSGachaPool: CGSSBaseModel {
-    
-//    {
-//
-//    "dicription" : "新SSレア堀裕子登場 ! 10連ガシャはSレア以上のアイドル1人が確定で出現 ! ! ※アイドルの所属上限を超える場合、プレゼントに送られます。",
-//    "end_date" : "2016-09-14 14:59:59",
-//    "id" : "30067",
-//    "name" : "プラチナオーディションガシャ",
-//    "rare_ratio" : "8850",
-//    "sr_ratio" : "1000",
-//    "ssr_ratio" : "150",
-//    "start_date" : "2016-09-09 15:00:00",
-//    }
 
     var dicription: String
     var endDate: String
@@ -200,7 +188,7 @@ class CGSSGachaPool: CGSSBaseModel {
         
         switch rarity {
         case CGSSRarityTypes.ssr:
-            //目前ssr新卡占40% sr新卡占20% r新卡占12%
+            //目前ssr新卡占40% sr新卡占20% r新卡占12% 
             if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
                 return newssr.random()!.cardId
             } else if ssr.count > 0 {

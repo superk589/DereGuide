@@ -137,11 +137,11 @@ struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
     static let passion = CGSSCardTypes.init(rawValue: 1 << 2)
     static let office = CGSSCardTypes.init(rawValue: 1 << 3)
     static let all = CGSSCardTypes.init(rawValue: 0b111)
-    static let allSong = CGSSCardTypes.init(rawValue: 0b1111)
     
     init (type: Int) {
         self.init(rawValue: 1 << UInt(type))
     }
+    
     init (typeString: String) {
         switch typeString {
         case "cute":
@@ -154,16 +154,6 @@ struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
             self = .office
         default:
             self = .office
-        }
-    }
-    init (grooveType: CGSSGrooveType) {
-        switch grooveType {
-        case .cute:
-            self = .cute
-        case .cool:
-            self = .cool
-        case .passion:
-            self = .passion
         }
     }
     
@@ -239,7 +229,7 @@ struct CGSSFavoriteTypes: OptionSet {
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let inFavorite = CGSSFavoriteTypes.init(rawValue: 1 << 0)
     static let notInFavorite = CGSSFavoriteTypes.init(rawValue: 1 << 1)
-    static let all = CGSSFavoriteTypes.init(rawValue: 0b11)
+    static let all: CGSSFavoriteTypes = [.inFavorite, .notInFavorite]
 }
 
 struct CGSSProcTypes: OptionSet, Hashable, CustomStringConvertible {
@@ -249,7 +239,7 @@ struct CGSSProcTypes: OptionSet, Hashable, CustomStringConvertible {
     static let middle = CGSSProcTypes.init(rawValue: 1 << 1)
     static let high = CGSSProcTypes.init(rawValue: 1 << 0)
     static let none = CGSSProcTypes.init(rawValue: 1 << 3)
-    static let all = CGSSProcTypes.init(rawValue: 0b1111)
+    static let all: CGSSProcTypes = [.low, .middle, .high, .none]
    
     var hashValue: Int {
         return Int(self.rawValue)
@@ -359,6 +349,21 @@ struct CGSSCharCVTypes: OptionSet {
 }
 
 typealias CGSSLiveTypes = CGSSCardTypes
+extension CGSSLiveTypes {
+    static let allType = CGSSLiveTypes.office
+    static let allLives: CGSSLiveTypes = [.cute, .cool, .passion, .allType]
+    
+    init (grooveType: CGSSGrooveType) {
+        switch grooveType {
+        case .cute:
+            self = .cute
+        case .cool:
+            self = .cool
+        case .passion:
+            self = .passion
+        }
+    }
+}
 
 struct CGSSLiveEventTypes: OptionSet {
     let rawValue: UInt
