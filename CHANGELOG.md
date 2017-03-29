@@ -18,6 +18,15 @@
 5. 追加：通知センターのアイドル誕生日の通知は、対応するキャラクターのページへ移動の操作を行います
 6. 細い機能向上とバグ修正
 
+##### English version
+
+1. add support for new skill type "Skill Boost".
+2. add support for proc chance leader skills in live simulator.
+3. add 3d touch for card page and home screen icon.
+4. add a slider in beatmap page.
+5. clicking on birthday notifications will navigate to the character page.
+6. other bug fix and improvements
+
 ### 1.2.4
 
 1. 卡片信息，卡片筛选和组队模拟中增加对All Round(全才)等新技能的支持
