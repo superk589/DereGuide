@@ -146,7 +146,7 @@ struct ScoreUpTypes: OptionSet, Hashable {
         switch type {
         case CGSSSkillTypes.comboBonus, CGSSSkillTypes.allRound:
             self = .comboBonus
-        case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.overload:
+        case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.overload, CGSSSkillTypes.concentration:
             self = .perfectBonus
 //        case CGSSSkillTypes.deepCool, CGSSSkillTypes.deepCute, CGSSSkillTypes.deepPassion:
 //            self = [.perfectBonus, .comboBonus]

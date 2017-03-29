@@ -94,7 +94,7 @@ class TeamMemberTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         
         editButton = UILabel.init(frame: CGRect.init(x: CGSSGlobal.width - 60, y: originY - 5, width: 50, height: 28))
-        editButton.text = NSLocalizedString("编辑", comment: "队伍编辑页面")
+        editButton.text = "< " + NSLocalizedString("编辑", comment: "队伍编辑页面")
         editButton.isUserInteractionEnabled = true
         editButton.textAlignment = .right
         editButton.font = UIFont.systemFont(ofSize: 16)

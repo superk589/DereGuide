@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 typealias SimulateResultClosure = (SimulateResult) -> Void
 
@@ -65,6 +66,37 @@ class CGSSLiveSimulator {
         
         procedContents.sort { $0.range.begin < $1.range.begin }
         
+        #if DEBUG
+            struct ScoreDetail {
+                
+                /// 从1开始的Index
+                var noteIndex: Int
+                
+                var score: Int
+                var baseScore: Float
+                
+                /// 已经计算了skillBoost后的c分加成
+                var comboBonus: Int
+                
+                /// 已经计算了skillBoost后的p分加成
+                var perfectBonus: Int
+                
+                var comboFactor: Float
+                var skillBoost: Int
+                
+                var toDictionary: [String: Any] {
+                    return ["index": noteIndex,
+                    "score": score,
+                    "base_score": baseScore,
+                    "combo_bonus": comboBonus,
+                    "perfect_bonus": perfectBonus,
+                    "combo_factor": comboFactor,
+                    "skill_boost": skillBoost]
+                }
+            }
+            var scores = [ScoreDetail]()
+        #endif
+        
         for i in 0..<notes.count {
             let note = notes[i]
             let baseScore = distributions[i].baseScore
@@ -103,9 +135,21 @@ class CGSSLiveSimulator {
                 comboBonus = 100 + Int(ceil(Float((comboBonus - 100) * skillBoost) * 0.001))
             }
             
-            sum += Int(round(baseScore * comboFactor * Float(perfectBonus * comboBonus) / 10000))
+            let score = Int(round(baseScore * comboFactor * Float(perfectBonus * comboBonus) / 10000))
+            
+            sum += score
+            
+            #if DEBUG
+                scores.append(ScoreDetail.init(noteIndex: i + 1, score: score, baseScore: baseScore, comboBonus: comboBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost))
+            #endif
         }
         simulateResult.append(sum)
+        
+//        #if DEBUG
+//            let arr = scores.map { $0.toDictionary }
+//            let json = JSON(arr)
+//            try? json.rawString()?.write(toFile: NSHomeDirectory() + "/test.txt", atomically: true, encoding: .utf8)
+//        #endif
     }
 
     func simulate(times: UInt, callback: @escaping SimulateResultClosure) {
