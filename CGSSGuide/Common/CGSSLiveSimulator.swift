@@ -98,11 +98,10 @@ class CGSSLiveSimulator {
                 }
             }
         
-            /* prepare for skill boost
             if skillBoost > 1000 {
                 perfectBonus = 100 + Int(ceil(Float((perfectBonus - 100) * skillBoost) * 0.001))
                 comboBonus = 100 + Int(ceil(Float((comboBonus - 100) * skillBoost) * 0.001))
-            } */
+            }
             
             sum += Int(round(baseScore * comboFactor * Float(perfectBonus * comboBonus) / 10000))
         }

@@ -50,16 +50,35 @@ struct Distribution {
         var leftRate: Float = 100
         for i in 0..<subContents.count {
             let c = subContents[i]
-            let v = Variable.init(rawRate: leftRate * c.rawRate * Float(100 + c.rateBonus) / 10000, upValue: c.upValue)
+            let v = Variable.init(rawRate: leftRate * c.rate, upValue: c.upValue)
             variables.append(v)
             leftRate -= v.rawRate
+            if leftRate <= 0 { break }
         }
     }
     
-    func addSkillBoostDistribution(_ skillBoost: Distribution) {
-        
+    init(variables: [Variable], defaultValue: Int = 100) {
+        self.variables = variables
+        self.defaultValue = defaultValue
     }
     
+    func addedSkillBoostDistribution(_ skillBoostDistribution: Distribution) -> Distribution {
+        guard skillBoostDistribution.variables.count > 0 else {
+            return self
+        }
+        var newVariables = [Variable]()
+        for v in variables {
+            var leftRate: Float = 100
+            for s in skillBoostDistribution.variables {
+                let upValue = defaultValue + Int(ceil(Float((v.upValue - 100) * s.upValue) * 0.001))
+                let rawRate = leftRate * s.rate * v.rate
+                newVariables.append(Variable.init(rawRate: rawRate, upValue: upValue))
+                leftRate -= leftRate * s.rate
+                if leftRate <= 0 { break }
+            }
+        }
+        return Distribution.init(variables: newVariables)
+    }
 }
 
 
@@ -71,11 +90,11 @@ struct ScoreDistribution {
     var baseScore: Float
     
     var average: Int {
-        return Int(round(baseScore * comboFactor * comboBonus.average * perfectBonus.average / 10000))
+        return Int(round(baseScore * comboFactor * comboBonus.addedSkillBoostDistribution(skillBoostBonus).average * perfectBonus.addedSkillBoostDistribution(skillBoostBonus).average / 10000))
     }
 
     var max: Int {
-        return Int(round(baseScore * comboFactor * comboBonus.max * perfectBonus.max / 10000))
+        return Int(round(baseScore * comboFactor * comboBonus.addedSkillBoostDistribution(skillBoostBonus).max * perfectBonus.addedSkillBoostDistribution(skillBoostBonus).max / 10000))
     }
 }
 
@@ -109,6 +128,8 @@ fileprivate let difficultyFactor: [Int: Float] = [
     30: 2.2,
 ]
 
+fileprivate let skillBoostValue = [1: 1200]
+
 fileprivate let comboFactor: [Float] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
 
 fileprivate let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
@@ -129,8 +150,8 @@ struct ScoreUpTypes: OptionSet, Hashable {
             self = .perfectBonus
 //        case CGSSSkillTypes.deepCool, CGSSSkillTypes.deepCute, CGSSSkillTypes.deepPassion:
 //            self = [.perfectBonus, .comboBonus]
-//        case CGSSSkillTypes.boost:
-//            self = .skillBoost
+        case CGSSSkillTypes.boost:
+            self = .skillBoost
         default:
             return nil
         }
@@ -150,14 +171,13 @@ struct ScoreUpContent {
     
     var upType: ScoreUpTypes
     
-    // rate plus 100
     var rawRate: Float
     
     // In percent, 30 means 0.3
     var rateBonus: Int
     
     var rate: Float {
-        return rawRate * Float(100 + rateBonus) / 10000
+        return min(1, rawRate * Float(100 + rateBonus) / 10000)
     }
 }
 
@@ -256,7 +276,7 @@ class CGSSLiveCoordinator {
            
             let comboBonus = Distribution.init(type: .comboBonus, contents: validContents)
             let perfectBonus = Distribution.init(type: .perfectBonus, contents: validContents)
-            let skillBoostBonus = Distribution.init(type: .skillBoost, contents: validContents)
+            let skillBoostBonus = Distribution.init(type: .skillBoost, contents: validContents, defaultValue: 1000)
             
             let scoreDistribution = ScoreDistribution.init(comboBonus: comboBonus, perfectBonus: perfectBonus, skillBoostBonus: skillBoostBonus, comboFactor: comboFactor, baseScore: baseScore)
             scoreDistributions.append(scoreDistribution)
@@ -293,12 +313,17 @@ class CGSSLiveCoordinator {
                     // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
                     for range in ranges {
-                        if type == .deep {
+                        
+                        switch type {
+                        case ScoreUpTypes.deep:
                             let content1 = ScoreUpContent.init(range: range, upValue: skill.value, upType: .perfectBonus, rawRate: rankedSkill.procChance, rateBonus: rateBonus)
                             let content2 = ScoreUpContent.init(range: range, upValue: skill.value2, upType: .comboBonus, rawRate: rankedSkill.procChance, rateBonus: rateBonus)
                             result.append(content1)
                             result.append(content2)
-                        } else {
+                        case ScoreUpTypes.skillBoost:
+                            let content = ScoreUpContent.init(range: range, upValue: skillBoostValue[skill.value] ?? 1000, upType: .skillBoost, rawRate: rankedSkill.procChance, rateBonus: rateBonus)
+                            result.append(content)
+                        default:
                             let content = ScoreUpContent.init(range: range, upValue: skill.value, upType: type, rawRate: rankedSkill.procChance, rateBonus: rateBonus)
                             result.append(content)
                         }

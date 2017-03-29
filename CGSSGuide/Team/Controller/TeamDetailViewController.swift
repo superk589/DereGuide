@@ -95,7 +95,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             let simulator = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
-                    doSimulationBy(simulator: simulator, times: 1000)
+                    doSimulationBy(simulator: simulator, times: 500)
                 #else
                     doSimulationBy(simulator: simulator, times: 10000)
                 #endif
