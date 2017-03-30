@@ -153,6 +153,7 @@
 		12C4083D1E8BC84C001373CF /* NoteScoreDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083C1E8BC84C001373CF /* NoteScoreDetail.swift */; };
 		12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */; };
 		12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */; };
+		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
 		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
@@ -365,6 +366,7 @@
 		12C4083C1E8BC84C001373CF /* NoteScoreDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreDetail.swift; sourceTree = "<group>"; };
 		12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
 		12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
+		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
 		12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 				12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */,
 				12D45AC71E2E44590009986F /* GachaTableViewCell.swift */,
 				128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */,
+				12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1179,6 +1182,7 @@
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
+				12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */,
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,

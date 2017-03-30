@@ -112,7 +112,7 @@ class CardView: UIView {
         addSubview(titleLabel)
     }
     
-    func setup(card: CGSSCard) {
+    func setup(with card: CGSSCard) {
         if let name = card.chara?.name, let conventional = card.chara?.conventional {
             cardNameLabel.text = name + "  " + conventional
         }

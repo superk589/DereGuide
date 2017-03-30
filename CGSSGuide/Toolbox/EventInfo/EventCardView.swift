@@ -42,6 +42,6 @@ class EventCardView: UIView {
     
     func setup(card: CGSSCard, desc:String) {
         self.descLabel.text = desc
-        self.cardView.setup(card: card)
+        self.cardView.setup(with: card)
     }
 }

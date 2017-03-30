@@ -199,12 +199,14 @@ class Master: FMDatabaseQueue {
                             let ssrRatio = Int(set.int(forColumn: "ssr_ratio"))
                             
                             let rewardSql = "select * from gacha_available where gacha_id = \(id)"
-                            var rewards = [(Int, Int)]()
+                            var rewards = [Reward]()
                             let subSet = try db.executeQuery(rewardSql, values: nil)
                             while subSet.next() {
                                 let rewardId = Int(subSet.int(forColumn: "reward_id"))
-                                let recommend_order = Int(subSet.int(forColumn: "recommend_order"))
-                                rewards.append((rewardId, recommend_order))
+                                let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
+                                let relativeOdds = Int(subSet.int(forColumn: "relative_odds"))
+                                let relativeSROdds = Int(subSet.int(forColumn: "relative_sr_odds"))
+                                rewards.append(Reward(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: relativeOdds, relativeSROdds: relativeSROdds))
                             }
                             
                             let gachaPool = CGSSGachaPool.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
@@ -297,8 +299,8 @@ class Master: FMDatabaseQueue {
                             let subSet = try db.executeQuery(rewardSql, values: nil)
                             while subSet.next() {
                                 let rewardId = Int(subSet.int(forColumn: "reward_id"))
-                                let recommend_order = Int(subSet.int(forColumn: "recommend_order"))
-                                let reward = Reward.init(cardId: rewardId, rewardRecommand: recommend_order)
+                                let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
+                                let reward = Reward.init(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0)
                                 rewards.append(reward)
                             }
                             

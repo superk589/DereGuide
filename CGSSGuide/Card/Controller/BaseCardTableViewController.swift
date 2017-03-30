@@ -135,7 +135,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         
         let row = indexPath.row
         let card = cardList[row]
-        cell.setup(card: card)
+        cell.setup(with: card)
         return cell
     }
     

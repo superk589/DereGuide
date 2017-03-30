@@ -95,7 +95,7 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
 extension GachaDetailController: GachaDetailViewDelegate {
     func seeModeCard(gachaDetailView view: GachaDetailView) {
         let vc = GachaCardTableViewController()
-        vc.defaultCardList = pool.cardList
+        vc.setup(with: pool)
         navigationController?.pushViewController(vc, animated: true)
     }
     func gachaDetailView(_ view: GachaDetailView, didClick cardIcon: CGSSCardIconView) {

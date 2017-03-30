@@ -22,7 +22,7 @@ class CardTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    fileprivate func prepare() {
+    func prepare() {
         
         cardView = CardView()
         contentView.addSubview(cardView)
@@ -36,8 +36,8 @@ class CardTableViewCell: UITableViewCell {
         prepare()
     }
     
-    func setup(card: CGSSCard) {
-        cardView.setup(card: card)
+    func setup(with card: CGSSCard) {
+        cardView.setup(with: card)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -25,8 +25,8 @@ extension CGSSGachaPool {
         get {
             var list = [CGSSCard]()
             let dao = CGSSDAO.sharedDAO
-            for rew in self.rewards {
-                if let card = dao.findCardById(rew.cardId) {
+            for reward in self.rewardTable.values {
+                if let card = dao.findCardById(reward.cardId) {
                     list.append(card)
                 }
             }
@@ -97,8 +97,10 @@ extension CGSSGachaPool {
 }
 
 struct Reward {
-    var cardId: Int!
-    var rewardRecommand: Int!
+    var cardId: Int
+    var recommandOrder: Int
+    var relativeOdds: Int
+    var relativeSROdds: Int
 }
 
 class CGSSGachaPool: CGSSBaseModel {
@@ -112,7 +114,7 @@ class CGSSGachaPool: CGSSBaseModel {
     var ssrRatio: Int
     var startDate: String
     
-    var rewards = [Reward]()
+    var rewardTable = [Int: Reward]()
     var sr = [Reward]()
     var ssr = [Reward]()
     var r = [Reward]()
@@ -121,7 +123,7 @@ class CGSSGachaPool: CGSSBaseModel {
     var newsr = [Reward]()
     var newr = [Reward]()
     
-    init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[(Int, Int)]) {
+    init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[Reward]) {
         self.id = id
         self.name = name
         self.dicription = dicription
@@ -130,33 +132,32 @@ class CGSSGachaPool: CGSSBaseModel {
         self.rareRatio = rare_ratio
         self.srRatio = sr_ratio
         self.ssrRatio = ssr_ratio
-        self.rewards = [Reward]()
+        self.rewardTable = [Int: Reward]()
         let dao = CGSSDAO.sharedDAO
         for reward in rewards {
-            let rew = Reward.init(cardId: reward.0 , rewardRecommand: reward.1)
-            if rew.rewardRecommand > 0 {
-                new.append(rew)
+            if reward.recommandOrder > 0 {
+                new.append(reward)
             }
-            self.rewards.append(rew)
-            if let card = dao.findCardById(rew.cardId) {
+            self.rewardTable[reward.cardId] = reward
+            if let card = dao.findCardById(reward.cardId) {
                 switch card.rarityType {
                 case CGSSRarityTypes.ssr:
-                    if rew.rewardRecommand > 0 {
-                        newssr.append(rew)
+                    if reward.recommandOrder > 0 {
+                        newssr.append(reward)
                     } else {
-                        ssr.append(rew)
+                        ssr.append(reward)
                     }
                 case CGSSRarityTypes.sr:
-                    if rew.rewardRecommand > 0 {
-                        newsr.append(rew)
+                    if reward.recommandOrder > 0 {
+                        newsr.append(reward)
                     } else {
-                        sr.append(rew)
+                        sr.append(reward)
                     }
                 case CGSSRarityTypes.r:
-                    if rew.rewardRecommand > 0 {
-                        newr.append(rew)
+                    if reward.recommandOrder > 0 {
+                        newr.append(reward)
                     } else {
-                        r.append(rew)
+                        r.append(reward)
                     }
                 default:
                     break
@@ -170,50 +171,102 @@ class CGSSGachaPool: CGSSBaseModel {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var hasOdds: Bool {
+        return id > 30075
+    }
+    
+    private struct RewardOdds {
+        
+        var reward: Reward
+        
+        /// included
+        var start: Int
+        
+        /// not included
+        var end: Int
+    }
+    
+    private var odds: [RewardOdds]!
+    private var srOdds: [RewardOdds]!
+    
+    private func generateOdds() {
+        
+        if odds == nil {
+            var start = 0
+            odds = [RewardOdds]()
+            for reward in rewardTable.values {
+                odds.append(RewardOdds.init(reward: reward, start: start, end: start + reward.relativeOdds))
+                start += reward.relativeOdds
+            }
+        }
+        
+        if srOdds == nil {
+            var start = 0
+            srOdds = [RewardOdds]()
+            for reward in rewardTable.values {
+                srOdds.append(RewardOdds.init(reward: reward, start: start, end: start + reward.relativeSROdds))
+                start += reward.relativeSROdds
+            }
+        }
+    }
+    
     func simulateOnce(srGuarantee: Bool) -> Int {
-        let rand = arc4random_uniform(10000)
-        var rarity: CGSSRarityTypes
-        switch rand {
-        case UInt32(rareRatio + srRatio)..<10000:
-            rarity = .ssr
-        case UInt32(rareRatio)..<UInt32(rareRatio + srRatio):
-            rarity = .sr
-        default:
-            rarity = .r
-        }
-        
-        if srGuarantee && rarity == .r {
-            rarity = .sr
-        }
-        
-        switch rarity {
-        case CGSSRarityTypes.ssr:
-            //目前ssr新卡占40% sr新卡占20% r新卡占12% 
-            if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
-                return newssr.random()!.cardId
-            } else if ssr.count > 0 {
-                return ssr.random()!.cardId
-            } else {
+        if hasOdds {
+            generateOdds()
+            guard let arr = srGuarantee ? srOdds : odds, arr.count > 0 else {
                 return 0
             }
-        case CGSSRarityTypes.sr:
-            if newsr.count > 0 && CGSSGlobal.isProc(rate: 20000) {
-                return newsr.random()!.cardId
-            } else if sr.count > 0 {
-                return sr.random()!.cardId
-            } else {
+            var index: Int?
+            repeat {
+                let rand = arc4random_uniform(UInt32(srGuarantee ? (srOdds.last?.end ?? 0) : (odds.last?.end ?? 0)))
+                index = arr.index { $0.start <= Int(rand) && $0.end > Int(rand) }
+            } while index == nil
+            return arr[index!].reward.cardId
+        } else {
+            let rand = arc4random_uniform(10000)
+            var rarity: CGSSRarityTypes
+            switch rand {
+            case UInt32(rareRatio + srRatio)..<10000:
+                rarity = .ssr
+            case UInt32(rareRatio)..<UInt32(rareRatio + srRatio):
+                rarity = .sr
+            default:
+                rarity = .r
+            }
+            
+            if srGuarantee && rarity == .r {
+                rarity = .sr
+            }
+            
+            switch rarity {
+            case CGSSRarityTypes.ssr:
+                //目前ssr新卡占40% sr新卡占20% r新卡占12% 
+                if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
+                    return newssr.random()!.cardId
+                } else if ssr.count > 0 {
+                    return ssr.random()!.cardId
+                } else {
+                    return 0
+                }
+            case CGSSRarityTypes.sr:
+                if newsr.count > 0 && CGSSGlobal.isProc(rate: 20000) {
+                    return newsr.random()!.cardId
+                } else if sr.count > 0 {
+                    return sr.random()!.cardId
+                } else {
+                    return 0
+                }
+            case CGSSRarityTypes.r:
+                if newr.count > 0 && CGSSGlobal.isProc(rate: 12000) {
+                    return newr.random()!.cardId
+                } else if r.count > 0 {
+                    return r.random()!.cardId
+                } else {
+                    return 0
+                }
+            default:
                 return 0
             }
-        case CGSSRarityTypes.r:
-            if newr.count > 0 && CGSSGlobal.isProc(rate: 12000) {
-                return newr.random()!.cardId
-            } else if r.count > 0 {
-                return r.random()!.cardId
-            } else {
-                return 0
-            }
-        default:
-            return 0
         }
     }
 
@@ -228,7 +281,7 @@ class CGSSGachaPool: CGSSBaseModel {
             } while rands.contains(rand)
             rands.append(rand)
         }
-        for i:UInt32 in 0...times - 1 {
+        for i:UInt32 in 0..<times {
             if rands.contains(i) {
                 result.append(simulateOnce(srGuarantee: true))
             } else {

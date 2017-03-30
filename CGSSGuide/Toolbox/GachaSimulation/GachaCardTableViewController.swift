@@ -36,6 +36,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
         leftItem.width = 44
         navigationItem.leftBarButtonItem = leftItem
 
+        self.tableView.register(GachaCardTableViewCell.self, forCellReuseIdentifier: GachaCardTableViewCell.description())
     }
     
     func backAction() {
@@ -44,6 +45,14 @@ class GachaCardTableViewController: BaseCardTableViewController {
     
     
     var defaultCardList : [CGSSCard]!
+    var rewardTable: [Int: Reward]!
+    var hasOdds = false
+    
+    func setup(with pool: CGSSGachaPool) {
+        self.defaultCardList = pool.cardList
+        self.rewardTable = pool.rewardTable
+        hasOdds = pool.hasOdds
+    }
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
         filter.searchText = searchBar.text ?? ""
@@ -81,5 +90,21 @@ class GachaCardTableViewController: BaseCardTableViewController {
         self.filter = filter
         self.sorter = sorter
         refresh()
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if hasOdds {
+            let cell = tableView.dequeueReusableCell(withIdentifier: GachaCardTableViewCell.description(), for: indexPath) as! GachaCardTableViewCell
+            let row = indexPath.row
+            let card = cardList[row]
+            if let odds = rewardTable[card.id]?.relativeOdds {
+                cell.setupWith(card, odds)
+            } else {
+                cell.setup(with: card)
+            }
+            return cell
+        } else {
+            return super.tableView(tableView, cellForRowAt: indexPath)
+        }
     }
 }

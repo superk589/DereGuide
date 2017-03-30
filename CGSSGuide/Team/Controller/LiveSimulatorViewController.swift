@@ -57,7 +57,7 @@ class LiveSimulatorViewController: BaseTableViewController {
     }
    
     private func prepareNavigationBar() {
-        let rightItem = UIBarButtonItem.init(title: NSLocalizedString("显示模式", comment: ""), style: .plain, target: self, action: #selector(selectDisplayMode))
+        let rightItem = UIBarButtonItem.init(title: NSLocalizedString("模式", comment: ""), style: .plain, target: self, action: #selector(selectDisplayMode))
         self.navigationItem.rightBarButtonItem = rightItem
     }
     
