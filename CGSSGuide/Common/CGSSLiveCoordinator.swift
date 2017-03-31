@@ -53,7 +53,6 @@ struct Distribution {
             let v = Variable.init(rawRate: leftRate * c.rate, upValue: c.upValue)
             variables.append(v)
             leftRate -= v.rawRate
-            if leftRate <= 0 { break }
         }
     }
     
@@ -74,8 +73,8 @@ struct Distribution {
                 let rawRate = leftRate * s.rate * v.rate
                 newVariables.append(Variable.init(rawRate: rawRate, upValue: upValue))
                 leftRate -= leftRate * s.rate
-                if leftRate <= 0 { break }
             }
+            newVariables.append(Variable.init(rawRate: leftRate * v.rate, upValue: v.upValue))
         }
         return Distribution.init(variables: newVariables)
     }

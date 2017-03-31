@@ -93,7 +93,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 showUnknownSkillAlert()
             }
             let coordinator = CGSSLiveCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
-            let simulator = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
+            let simulator = coordinator.generateLiveSimulator(options: [])
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
                     doSimulationBy(simulator: simulator, times: 500)
@@ -185,7 +185,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             let coordinator = CGSSLiveCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
-            let simulator2 = coordinator.generateLiveSimulator(options: .init(rawValue: 0))
+            let simulator2 = coordinator.generateLiveSimulator(options: [])
             
             self.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: simulator1.max, value3: simulator2.max, value4: simulator2.average)
             self.teamDV.resetCalcButton()
