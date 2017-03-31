@@ -91,13 +91,13 @@ class NoteScoreTableViewCell: UITableViewCell {
         if detail.perfectBonus == 100 {
             perfectBonusLabel.text = "-"
         } else {
-            perfectBonusLabel.text = String(Float(detail.perfectBonus) / 100)
+            perfectBonusLabel.text = "\(detail.perfectBonus - 100)%"
         }
         
         if detail.comboBonus == 100 {
             comboBonusLabel.text = "-"
         } else {
-            comboBonusLabel.text = String(Float(detail.comboBonus) / 100)
+            comboBonusLabel.text = "\(detail.comboBonus - 100)%"
         }
             //        } else {
 //            comboBonusLabel.text = "\(Float(detail.baseComboBonus) / 100)\n→\(Float(detail.comboBonus) / 100)"
@@ -106,7 +106,7 @@ class NoteScoreTableViewCell: UITableViewCell {
         if detail.skillBoost == 1000 {
             skillBoostLabel.text = "-"
         } else {
-            skillBoostLabel.text = String(Float(detail.skillBoost) / 1000)
+            skillBoostLabel.text = "\((detail.skillBoost - 1000) / 10)%"
         }
         
         finalScoreLabel.text = String.init(format: "%d", detail.score)

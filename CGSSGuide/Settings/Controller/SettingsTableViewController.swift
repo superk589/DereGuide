@@ -122,17 +122,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
             wipeVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(wipeVC, animated: true)
         }
-        
-//        let alert = UIAlertController.init(title: NSLocalizedString("确定要清空数据吗？", comment: "设置页面"), message: NSLocalizedString("将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。", comment: "设置页面"), preferredStyle: .alert)
-//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .destructive, handler: { (alert) in
-//            CGSSDAO.sharedDAO.removeAllData()
-//            SDImageCache.shared().clearDisk()
-//            self.deleteAllCacheFiles()
-//            CGSSUpdater.defaultUpdater.setCurrentDataVersion("0", minor: "0")
-//            self.refresh()
-//            }))
-//        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "设置页面"), style: .cancel, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
     }
     
     func cacheImage() {

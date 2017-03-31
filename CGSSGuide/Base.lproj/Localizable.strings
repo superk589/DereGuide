@@ -580,12 +580,23 @@
 "Skill Boost" = "技能增强";
 
 /* new in 1.2.6 */
-// new controller for not detail
+// new controller for score detail
 "随机单次模拟" = "随机单次模拟";
 "模式" = "模式";
 "选择模式" = "选择模式";
 "得分详情" = "得分详情";
 "出现率" = "出现率";
 
+// score detail table header (length sensitive)
+"Combo" = "Combo";
+"P分" = "P分";
+"C分" = "C分";
+"SB" = "SB";
+"得分" = "得分";
+"累计" = "累计";
+
+// score detail table footer
+"基础分" = "基础分";
+"总分" = "总分";
 
 

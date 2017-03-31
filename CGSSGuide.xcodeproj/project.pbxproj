@@ -154,6 +154,7 @@
 		12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */; };
 		12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
+		12C408451E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */; };
 		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
@@ -367,6 +368,7 @@
 		12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
 		12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
+		12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionFooter.swift; sourceTree = "<group>"; };
 		12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 				12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */,
 				12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */,
 				12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */,
+				12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1175,6 +1178,7 @@
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,
+				12C408451E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,

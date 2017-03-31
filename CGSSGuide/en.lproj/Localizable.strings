@@ -581,3 +581,14 @@
 "得分详情" = "Score Detail";
 "出现率" = "Ratio";
 
+// score detail table header (length sensitive)
+"Combo" = "Combo";
+"P分" = "S.up";
+"C分" = "C.up";
+"SB" = "SB.up";
+"得分" = "Score";
+"累计" = "Total";
+
+// score detail table footer
+"基础分" = "Base Score";
+"总分" = "Total Score";

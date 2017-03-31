@@ -13,9 +13,9 @@ class NoteScoreTableViewSectionHeader: UITableViewHeaderFooterView {
 
     var labelTitles = [
         NSLocalizedString("Combo", comment: ""),
-        NSLocalizedString("P↑", comment: ""),
-        NSLocalizedString("C↑", comment: ""),
-        NSLocalizedString("SB↑", comment: ""),
+        NSLocalizedString("P分", comment: ""),
+        NSLocalizedString("C分", comment: ""),
+        NSLocalizedString("SB", comment: ""),
         NSLocalizedString("得分", comment: ""),
         NSLocalizedString("累计", comment: "")
     ]

@@ -49,6 +49,7 @@ class LiveSimulatorViewController: BaseTableViewController {
         prepareNavigationBar()
         tableView.register(NoteScoreTableViewCell.self, forCellReuseIdentifier: "Note Cell")
         tableView.register(NoteScoreTableViewSectionHeader.self, forHeaderFooterViewReuseIdentifier: "Note Header")
+        tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
         tableView.separatorStyle = .none
     }
     
@@ -120,7 +121,19 @@ class LiveSimulatorViewController: BaseTableViewController {
         return header
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Note Footer") as! NoteScoreTableViewSectionFooter
+        if let baseScore = logs.first?.baseScore, let totalScore = logs.last?.sum {
+            footer.setupWith(baseScore: baseScore, totalScore: totalScore)
+        }
+        return footer
+    }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 30
     }
 }
