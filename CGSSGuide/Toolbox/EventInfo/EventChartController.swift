@@ -186,8 +186,6 @@ class EventChartController: BaseViewController {
         chartView.leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: nf)
         chartView.leftAxis.axisMinimum = 0
         chartView.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

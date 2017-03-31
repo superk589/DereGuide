@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class TeamDetailViewController: UIViewController {
     
@@ -188,6 +189,17 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             
             self.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: simulator1.max, value3: simulator2.max, value4: simulator2.average)
             self.teamDV.resetCalcButton()
+            
+            /// first time using calculator in team detail view controller, shows app store rating alert in app.
+            if #available(iOS 10.3, *) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                    if !UserDefaults.standard.hasRated {
+                        SKStoreReviewController.requestReview()
+                        UserDefaults.standard.hasRated = true
+                    }
+                })
+            }
+            
         } else {
             showNotSelectSongAlert()
             teamDV.resetCalcButton()

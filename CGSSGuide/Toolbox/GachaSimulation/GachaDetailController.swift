@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import StoreKit
 
 class GachaDetailController: BaseViewController, BannerViewContainerViewController {
 
@@ -110,6 +111,16 @@ extension GachaDetailController: GachaSimulateViewDelegate {
     func tenGacha(gachaSimulateView: GachaSimulateView) {
         let cardIds = pool.simulate(times: 10, srGuaranteeCount: 1)
         simulationView.setupResultView(cardIds: cardIds)
+        
+        /// first time using ten pull in gacha view controller, shows app store rating alert in app.
+        if #available(iOS 10.3, *) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                if !UserDefaults.standard.hasRated {
+                    SKStoreReviewController.requestReview()
+                    UserDefaults.standard.hasRated = true
+                }
+            })
+        }
     }
     func singleGacha(gachaSimulateView: GachaSimulateView) {
         let cardId = pool.simulateOnce(srGuarantee: false)

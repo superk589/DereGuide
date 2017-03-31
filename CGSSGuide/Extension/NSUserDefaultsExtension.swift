@@ -47,4 +47,13 @@ extension UserDefaults {
             UserDefaults.standard.set(documentVersion, forKey: "LastDocumentVersion")
         }
     }
+    
+    var hasRated: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasRated")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "hasRated") as? Bool ?? false
+        }
+    }
 }

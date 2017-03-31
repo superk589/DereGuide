@@ -170,8 +170,11 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         }
     }
     func postReview() {
-        let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
-        UIApplication.shared.openURL(URL.init(string: url)!)
+        // let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
+        guard let url = URL.init(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") else {
+            return
+        }
+        UIApplication.shared.openURL(url)
     }
     
     var updateStatusView: UpdateStatusView!
