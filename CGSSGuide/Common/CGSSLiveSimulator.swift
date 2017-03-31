@@ -9,50 +9,26 @@
 import UIKit
 import SwiftyJSON
 
-typealias SimulateResultClosure = (SimulateResult) -> Void
-
-struct SimulateResult {
-    var scores: [Int]
-    
-    var avg: Int {
-        return scores.reduce(0, +) / scores.count
-    }
-    
-    init(scores: [Int]) {
-        self.scores = scores.sorted(by: >)
-    }
-    
-    func get(percent: Int) -> Int {
-        let index = percent * scores.count / 100
-        return scores[index - 1]
-    }
-}
-
-struct LiveSimulatorOptions: OptionSet {
-    let rawValue: UInt
-    init(rawValue: UInt) { self.rawValue = rawValue }
-    static let maxRate = LiveSimulatorOptions.init(rawValue: 1 << 0)
-    static let detailLog = LiveSimulatorOptions.init(rawValue: 1 << 1)
-}
+typealias SimulateResultClosure = (LSResult) -> Void
 
 class CGSSLiveSimulator {
     
-    var distributions: [ScoreDistribution]
-    var contents: [ScoreUpContent]
+    var lsNotes: [LSNote]
+    var bonuses: [LSScoreBonus]
     var notes: [CGSSBeatmapNote]
     
-    init(distributions: [ScoreDistribution], contents: [ScoreUpContent], notes: [CGSSBeatmapNote]) {
-        self.distributions = distributions
-        self.contents = contents
+    init(distributions: [LSNote], bonuses: [LSScoreBonus], notes: [CGSSBeatmapNote]) {
+        self.lsNotes = distributions
+        self.bonuses = bonuses
         self.notes = notes
     }
     
     var average: Int {
-        return distributions.reduce(0, { $0 + $1.average })
+        return lsNotes.reduce(0, { $0 + $1.average })
     }
     
     var max: Int {
-        return distributions.reduce(0, { $0 + $1.max })
+        return lsNotes.reduce(0, { $0 + $1.max })
     }
     
     
@@ -62,45 +38,45 @@ class CGSSLiveSimulator {
     
     var simulateResult = [Int]()
     
-    func simulateOnce(options: LiveSimulatorOptions = [], callback: (([NoteScoreDetail]) -> Void)? = nil) {
+    func simulateOnce(options: LSOptions = [], callback: (([NoteScoreDetail]) -> Void)? = nil) {
         var sum = 0
-        var procedContents = [ScoreUpContent]()
-        for content in contents {
-            if options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round(content.rate * 100000))) {
-                procedContents.append(content)
+        var procedBonuses = [LSScoreBonus]()
+        for bonus in bonuses {
+            if options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round(bonus.rate * Double(100 + bonus.rateBonus) / 10))) {
+                procedBonuses.append(bonus)
             }
         }
         
-        procedContents.sort { $0.range.begin < $1.range.begin }
+        procedBonuses.sort { $0.range.begin < $1.range.begin }
         
         var logs = [NoteScoreDetail]()
         
         for i in 0..<notes.count {
             let note = notes[i]
-            let baseScore = distributions[i].baseScore
-            let comboFactor = distributions[i].comboFactor
+            let baseScore = lsNotes[i].baseScore
+            let comboFactor = lsNotes[i].comboFactor
             var comboBonus = 100
             var perfectBonus = 100
             var skillBoost = 1000
             
-            for content in procedContents {
-                if note.sec > content.range.end {
+            for bonus in procedBonuses {
+                if note.sec > bonus.range.end {
                     continue
-                } else if note.sec < content.range.begin {
+                } else if note.sec < bonus.range.begin {
                     break
                 } else {
-                    switch content.upType {
-                    case ScoreUpTypes.comboBonus:
-                        if content.upValue > comboBonus {
-                            comboBonus = content.upValue
+                    switch bonus.type {
+                    case LSScoreBonusTypes.comboBonus:
+                        if bonus.value > comboBonus {
+                            comboBonus = bonus.value
                         }
-                    case ScoreUpTypes.perfectBonus:
-                        if content.upValue > perfectBonus {
-                            perfectBonus = content.upValue
+                    case LSScoreBonusTypes.perfectBonus:
+                        if bonus.value > perfectBonus {
+                            perfectBonus = bonus.value
                         }
-                    case ScoreUpTypes.skillBoost:
-                        if content.upValue > skillBoost {
-                            skillBoost = content.upValue
+                    case LSScoreBonusTypes.skillBoost:
+                        if bonus.value > skillBoost {
+                            skillBoost = bonus.value
                         }
                     default:
                         break
@@ -112,11 +88,11 @@ class CGSSLiveSimulator {
             let basePerfectBonus = perfectBonus
             
             if skillBoost > 1000 {
-                perfectBonus = 100 + Int(ceil(Float((perfectBonus - 100) * skillBoost) * 0.001))
-                comboBonus = 100 + Int(ceil(Float((comboBonus - 100) * skillBoost) * 0.001))
+                perfectBonus = 100 + Int(ceil(Double((perfectBonus - 100) * skillBoost) * 0.001))
+                comboBonus = 100 + Int(ceil(Double((comboBonus - 100) * skillBoost) * 0.001))
             }
             
-            let score = Int(round(baseScore * comboFactor * Float(perfectBonus * comboBonus) / 10000))
+            let score = Int(round(baseScore * comboFactor * Double(perfectBonus * comboBonus) / 10000))
             
             sum += score
             
@@ -148,7 +124,7 @@ class CGSSLiveSimulator {
             simulateOnce()
             progress(Int(i + 1), Int(times))
         }
-        let result = SimulateResult.init(scores: simulateResult)
+        let result = LSResult.init(scores: simulateResult)
         callback(result)
     }
 }

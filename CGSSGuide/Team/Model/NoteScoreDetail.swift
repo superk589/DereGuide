@@ -21,7 +21,7 @@ struct NoteScoreDetail {
     var sum: Int
     
     /// 基础分
-    var baseScore: Float
+    var baseScore: Double
     
     /// 基础C分加成(SSR - 118, 115; SR - 112 etc.)
     var baseComboBonus: Int
@@ -36,7 +36,7 @@ struct NoteScoreDetail {
     var perfectBonus: Int
     
     /// 连击加成
-    var comboFactor: Float
+    var comboFactor: Double
     
     /// 技能增强数值(SSR - 1200)
     var skillBoost: Int

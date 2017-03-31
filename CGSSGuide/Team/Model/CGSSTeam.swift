@@ -207,26 +207,29 @@ class CGSSTeam: NSObject, NSCoding {
     }
     
     // 判断需要的指定颜色的队员是否满足条件
-    private func hasType(_ type: CGSSCardTypes, count: Int?, isInGroove: Bool) -> Bool {
+    private func hasType(_ type: CGSSCardTypes, count: Int, isInGrooveOrParade: Bool) -> Bool {
         if count == 0 {
             return true
         }
+        
         var c = 0
-        for i in 0...(isInGroove ? 4 : 5) {
+        for i in 0...(isInGrooveOrParade ? 4 : 5) {
             if self[i]?.cardRef?.cardType == type {
                 c += 1
             }
         }
-        if c >= count ?? 0 {
-            return true
+        
+        // 对于deep系列的技能 当在groove或parade中 要求队员数量降低为5
+        if count == 6 && isInGrooveOrParade {
+            return c >= 5
         } else {
-            return false
+            return c >= count
         }
     }
     
-    private func getContentFor(_ leaderSkill: CGSSLeaderSkill, isInGroove: Bool) -> [LeaderSkillUpContent] {
+    private func getContentFor(_ leaderSkill: CGSSLeaderSkill, isInGrooveOrParade: Bool) -> [LeaderSkillUpContent] {
         var contents = [LeaderSkillUpContent]()
-        if hasType(.cute, count: leaderSkill.needCute, isInGroove: isInGroove) && hasType(.cool, count: leaderSkill.needCool, isInGroove: isInGroove) && hasType(.passion, count: leaderSkill.needPassion, isInGroove: isInGroove) {
+        if hasType(.cute, count: leaderSkill.needCute, isInGrooveOrParade: isInGrooveOrParade) && hasType(.cool, count: leaderSkill.needCool, isInGrooveOrParade: isInGrooveOrParade) && hasType(.passion, count: leaderSkill.needPassion, isInGrooveOrParade: isInGrooveOrParade) {
             switch leaderSkill.targetAttribute! {
             case "cute":
                 for upType in getUpType(leaderSkill) {
@@ -265,11 +268,11 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: false))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGrooveOrParade: false))
         }
         // 队友的队长技能
         if let leaderSkill = friendLeader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: false))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGrooveOrParade: false))
         }
         
         // 合并同类型
@@ -294,7 +297,7 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: true))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGrooveOrParade: true))
         }
         // 设定Groove中的up值
         contents.append(LeaderSkillUpContent.init(upType: burstType, upTarget: .cool, upValue: 150))
@@ -323,7 +326,7 @@ class CGSSTeam: NSObject, NSCoding {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
-            contents.append(contentsOf: getContentFor(leaderSkill, isInGroove: true))
+            contents.append(contentsOf: getContentFor(leaderSkill, isInGrooveOrParade: true))
         }
         var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
         for content in contents {

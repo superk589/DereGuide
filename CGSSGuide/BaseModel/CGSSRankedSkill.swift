@@ -17,10 +17,10 @@ class CGSSRankedSkill: NSObject {
         self.level = level
         self.skill = skill
     }
-    var procChance: Float {
+    var procChance: Double {
         return skill.procChanceOfLevel(level)
     }
-    var effectLength: Float {
+    var effectLength: Double {
         return skill.effectLengthOfLevel(level)
     }
     
@@ -29,22 +29,22 @@ class CGSSRankedSkill: NSObject {
         let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
         let sub1 = subs[0]
         let range1 = explain.range(of: sub1 as String)
-        explain.replaceSubrange(range1!, with: String(format: "%.2f", skill.procChanceOfLevel(level)))
+        explain.replaceSubrange(range1!, with: String(format: "%.2f", skill.procChanceOfLevel(level) / 100))
         let sub2 = subs[1]
         let range2 = explain.range(of: sub2 as String)
-        explain.replaceSubrange(range2!, with: String(format: "%.2f", skill.effectLengthOfLevel(level)))
+        explain.replaceSubrange(range2!, with: String(format: "%.2f", skill.effectLengthOfLevel(level) / 100))
         return explain
     }
     
-    func getUpRanges(lastNoteSec sec: Float) -> [ScoreUpRange] {
+    func getUpRanges(lastNoteSec sec: Float) -> [LSRange] {
         let condition: Int = skill.condition
         // 最后一个note的前三秒不再触发新的技能
         let count = Int(ceil((sec - 3) / Float(condition)))
-        var ranges = [ScoreUpRange]()
+        var ranges = [LSRange]()
         for i in 0..<count {
             // 第一个触发区间内不触发技能
             if i == 0 { continue }
-            let range = ScoreUpRange(begin: Float(i * condition), length: effectLength)
+            let range = LSRange(begin: Float(i * condition), length: Float(effectLength) / 100)
             ranges.append(range)
         }
         return ranges

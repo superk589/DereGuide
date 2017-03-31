@@ -31,6 +31,14 @@
 		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
 		121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23791E70F97700319519 /* BannerViewAnimator.swift */; };
 		121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23811E7198AE00319519 /* ToolboxNavigationController.swift */; };
+		122497241E8E8582005C743C /* LSDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497231E8E8582005C743C /* LSDistribution.swift */; };
+		122497261E8E859C005C743C /* LSNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497251E8E859C005C743C /* LSNote.swift */; };
+		122497281E8E85C1005C743C /* LSScoreBonus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497271E8E85C1005C743C /* LSScoreBonus.swift */; };
+		1224972A1E8E85DD005C743C /* LSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497291E8E85DD005C743C /* LSRange.swift */; };
+		1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972B1E8E85FC005C743C /* LSOptions.swift */; };
+		1224972E1E8E8621005C743C /* LSCoordinatorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972D1E8E8621005C743C /* LSCoordinatorOptions.swift */; };
+		122497301E8E95D1005C743C /* LSSamplePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972F1E8E95D1005C743C /* LSSamplePoint.swift */; };
+		122497321E8E9B57005C743C /* LSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497311E8E9B57005C743C /* LSResult.swift */; };
 		122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */; };
 		122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */; };
 		122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */; };
@@ -132,7 +140,7 @@
 		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
-		129D6EBC1D5883D80071BC4D /* CGSSLiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* CGSSLiveCoordinator.swift */; };
+		129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
 		12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */; };
@@ -227,6 +235,14 @@
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		121D23791E70F97700319519 /* BannerViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewAnimator.swift; sourceTree = "<group>"; };
 		121D23811E7198AE00319519 /* ToolboxNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxNavigationController.swift; sourceTree = "<group>"; };
+		122497231E8E8582005C743C /* LSDistribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSDistribution.swift; sourceTree = "<group>"; };
+		122497251E8E859C005C743C /* LSNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSNote.swift; sourceTree = "<group>"; };
+		122497271E8E85C1005C743C /* LSScoreBonus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSScoreBonus.swift; sourceTree = "<group>"; };
+		122497291E8E85DD005C743C /* LSRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSRange.swift; sourceTree = "<group>"; };
+		1224972B1E8E85FC005C743C /* LSOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSOptions.swift; sourceTree = "<group>"; };
+		1224972D1E8E8621005C743C /* LSCoordinatorOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinatorOptions.swift; sourceTree = "<group>"; };
+		1224972F1E8E95D1005C743C /* LSSamplePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSSamplePoint.swift; sourceTree = "<group>"; };
+		122497311E8E9B57005C743C /* LSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSResult.swift; sourceTree = "<group>"; };
 		122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingView.swift; sourceTree = "<group>"; };
 		122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingViewController.swift; sourceTree = "<group>"; };
 		122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorterFilterManager.swift; sourceTree = "<group>"; };
@@ -345,7 +361,7 @@
 		128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaPoolTableViewCell.swift; sourceTree = "<group>"; };
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
-		129D6EBB1D5883D80071BC4D /* CGSSLiveCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveCoordinator.swift; sourceTree = "<group>"; };
+		129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		12A3F1691E5ADA96007B470E /* BpmShift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BpmShift.plist; sourceTree = "<group>"; };
 		12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapShiftingInfo.swift; sourceTree = "<group>"; };
@@ -435,6 +451,23 @@
 			);
 			name = View;
 			path = Controller/View;
+			sourceTree = "<group>";
+		};
+		122497201E8E848A005C743C /* CGSSLiveSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */,
+				129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */,
+				1224972F1E8E95D1005C743C /* LSSamplePoint.swift */,
+				122497231E8E8582005C743C /* LSDistribution.swift */,
+				122497251E8E859C005C743C /* LSNote.swift */,
+				122497271E8E85C1005C743C /* LSScoreBonus.swift */,
+				122497291E8E85DD005C743C /* LSRange.swift */,
+				1224972B1E8E85FC005C743C /* LSOptions.swift */,
+				1224972D1E8E8621005C743C /* LSCoordinatorOptions.swift */,
+				122497311E8E9B57005C743C /* LSResult.swift */,
+			);
+			name = CGSSLiveSimulator;
 			sourceTree = "<group>";
 		};
 		122EECC71D5DC4ED008ADE08 /* Extension */ = {
@@ -549,6 +582,7 @@
 		1269E9121D5208B80071AD7F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				122497201E8E848A005C743C /* CGSSLiveSimulator */,
 				121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */,
 				1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */,
 				1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */,
@@ -563,8 +597,6 @@
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
 				12D975D91E38716F005E932B /* BaseRequest.swift */,
 				12D975DB1E3871CD005E932B /* BaseSession.swift */,
-				129D6EBB1D5883D80071BC4D /* CGSSLiveCoordinator.swift */,
-				120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */,
 				1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */,
 				12F590301D9555CF00E004ED /* CGSSTypes.swift */,
 				123679031E0E6B1300622114 /* DeviceInformationManager.swift */,
@@ -1051,6 +1083,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
 				1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */,
@@ -1100,7 +1133,7 @@
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
-				129D6EBC1D5883D80071BC4D /* CGSSLiveCoordinator.swift in Sources */,
+				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
@@ -1113,6 +1146,7 @@
 				12AF95321D65E445009058D5 /* CGSSStoryEpisode.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
+				122497261E8E859C005C743C /* LSNote.swift in Sources */,
 				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				122EECCB1D5DE5CB008ADE08 /* CGSSGridLabel.swift in Sources */,
@@ -1134,6 +1168,7 @@
 				12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,
 				1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */,
+				122497281E8E85C1005C743C /* LSScoreBonus.swift in Sources */,
 				1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
@@ -1161,6 +1196,7 @@
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
+				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
 				12C4083D1E8BC84C001373CF /* NoteScoreDetail.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
@@ -1193,6 +1229,7 @@
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
+				122497301E8E95D1005C743C /* LSSamplePoint.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
 				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
@@ -1200,6 +1237,7 @@
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
+				1224972E1E8E8621005C743C /* LSCoordinatorOptions.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
@@ -1207,7 +1245,9 @@
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */,
+				1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */,
 				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
+				122497241E8E8582005C743C /* LSDistribution.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,

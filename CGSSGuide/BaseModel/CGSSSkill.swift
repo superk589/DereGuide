@@ -37,20 +37,20 @@ extension CGSSSkill {
     }
     
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
-    func procChanceOfLevel(_ lv: Int) -> Float {
+    func procChanceOfLevel(_ lv: Int) -> Double {
         if let p = procChance {
-            let p1 = Float(p[1])
-            let p0 = Float(p[0])
-            return (floor((p1 - p0) / 9) * (Float(lv) - 1) + p0) / 100
+            let p1 = Double(p[1])
+            let p0 = Double(p[0])
+            return (floor((p1 - p0) / 9) * (Double(lv) - 1) + p0)
         } else {
             return 0
         }
     }
-    func effectLengthOfLevel(_ lv: Int) -> Float {
+    func effectLengthOfLevel(_ lv: Int) -> Double {
         if let e = effectLength {
-            let e1 = Float(e[1])
-            let e0 = Float(e[0])
-            return (floor((e1 - e0) / 9) * (Float(lv) - 1) + e0) / 100
+            let e1 = Double(e[1])
+            let e0 = Double(e[0])
+            return (floor((e1 - e0) / 9) * (Double(lv) - 1) + e0)
         } else {
             return 0
         }
@@ -68,10 +68,10 @@ extension CGSSSkill {
         let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
         let sub1 = subs[0]
         let range1 = explain.range(of: sub1 as String)
-        explain.replaceSubrange(range1!, with: String(format: "%.2f", self.procChanceOfLevel(lv)))
+        explain.replaceSubrange(range1!, with: String(format: "%.2f", self.procChanceOfLevel(lv) / 100))
         let sub2 = subs[1]
         let range2 = explain.range(of: sub2 as String)
-        explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv)))
+        explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv) / 100))
         return explain
     }
     func getExplainByLevelRange(_ start: Int, end: Int, languageType: LanguageType = .ja) -> String {
@@ -87,10 +87,10 @@ extension CGSSSkill {
         let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
         let sub1 = subs[0]
         let range1 = explain.range(of: sub1 as String)
-        explain.replaceSubrange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start), self.procChanceOfLevel(end)))
+        explain.replaceSubrange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start) / 100, self.procChanceOfLevel(end) / 100))
         let sub2 = subs[1]
         let range2 = explain.range(of: sub2 as String)
-        explain.replaceSubrange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start), self.effectLengthOfLevel(end)))
+        explain.replaceSubrange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start) / 100, self.effectLengthOfLevel(end) / 100))
         return explain
     }
     

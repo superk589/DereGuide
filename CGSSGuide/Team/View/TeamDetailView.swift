@@ -642,7 +642,8 @@ class TeamDetailView: UIView {
         scoreGrid.fy = startCalcButton.fy + startCalcButton.fheight + topSpace
         advanceCalculateButton.fy = scoreGrid.fy + scoreGrid.fheight + topSpace
         advanceScoreGrid.fy = advanceCalculateButton.fbottom + topSpace
-        scoreDescLabel.fy = advanceScoreGrid.fbottom + topSpace
+        viewScoreChartButton.fy = advanceScoreGrid.fbottom + topSpace
+        scoreDescLabel.fy = viewScoreChartButton.fbottom + topSpace
         bottomView.fheight = topSpace + scoreDescLabel.fheight + scoreDescLabel.fy + topSpace
         frame.size = CGSize(width: CGSSGlobal.width, height: bottomView.fheight + bottomView.fy + topSpace * 2)
     }

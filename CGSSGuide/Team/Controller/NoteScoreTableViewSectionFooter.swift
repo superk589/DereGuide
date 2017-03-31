@@ -34,7 +34,7 @@ class NoteScoreTableViewSectionFooter: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupWith(baseScore: Float, totalScore: Int) {
+    func setupWith(baseScore: Double, totalScore: Int) {
         baseScoreLabel.text = NSLocalizedString("基础分", comment: "") + ": " + String.init(format: "%.2f", baseScore)
         let attStr = NSMutableAttributedString.init(string: NSLocalizedString("总分", comment: "") + ": ", attributes: nil)
         attStr.append(NSAttributedString.init(string: String(totalScore), attributes: [NSForegroundColorAttributeName: Color.cute]))

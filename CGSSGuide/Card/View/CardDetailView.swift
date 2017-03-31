@@ -294,20 +294,20 @@ class CardDetailView: UIView {
                                 NSLocalizedString("最大覆盖率%", comment: "卡片详情页"),
                                 NSLocalizedString("平均覆盖率%", comment: "卡片详情页")])
         procGridStrings.append(["Lv.1",
-                                String(format: "%.2f", procChanceMin),
-                                String(format: "%.2f", durationMin),
-                                String(format: "%.2f", durationMin / Float(skill.condition!) * 100),
-                                String(format: "%.2f", durationMin / Float(skill.condition!) * procChanceMin)])
+                                String(format: "%.2f", procChanceMin / 100),
+                                String(format: "%.2f", durationMin / 100),
+                                String(format: "%.2f", durationMin / Double(skill.condition!)),
+                                String(format: "%.2f", durationMin / Double(skill.condition!) * procChanceMin / 10000)])
         procGridStrings.append(["Lv.10",
-                                String(format: "%.2f", procChanceMax),
-                                String(format: "%.2f", durationMax),
-                                String(format: "%.2f", durationMax / Float(skill.condition!) * 100),
-                                String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax)])
+                                String(format: "%.2f", procChanceMax / 100),
+                                String(format: "%.2f", durationMax / 100),
+                                String(format: "%.2f", durationMax / Double(skill.condition!)),
+                                String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax / 10000)])
         procGridStrings.append(["Lv.10(+30%)",
-                                String(format: "%.3f", procChanceMax * 1.3),
-                                String(format: "%.2f", durationMax),
-                                String(format: "%.2f", durationMax / Float(skill.condition!) * 100),
-                                String(format: "%.2f", durationMax / Float(skill.condition!) * procChanceMax * 1.3)])
+                                String(format: "%.3f", procChanceMax * 1.3 / 100),
+                                String(format: "%.2f", durationMax / 100),
+                                String(format: "%.2f", durationMax / Double(skill.condition!)),
+                                String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax * 1.3 / 10000)])
         
         skillProcGridView.setGridContent(procGridStrings)
         

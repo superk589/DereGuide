@@ -23,36 +23,14 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 //    static let mimic = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let boost = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let allRound = CGSSSkillTypes.init(rawValue: 1 << 9)
-//    static let deepCute = CGSSSkillTypes.init(rawValue: 1 << 11)
-//    static let deepCool = CGSSSkillTypes.init(rawValue: 1 << 12)
-//    static let deepPassion = CGSSSkillTypes.init(rawValue: 1 << 13)
+    static let deepCute = CGSSSkillTypes.init(rawValue: 1 << 10)
+    static let deepCool = CGSSSkillTypes.init(rawValue: 1 << 11)
+    static let deepPassion = CGSSSkillTypes.init(rawValue: 1 << 12)
     
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 10)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 11)
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 13)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 14)
 
-    static let all = CGSSSkillTypes.init(rawValue: 0b1111_1111_1111)
-//    init (typeString: String) {
-//        switch typeString {
-//        case "COMBO加成":
-//            self = .comboBonus
-//        case "分数加成", "PERFECT分数加成":
-//            self = .perfectBonus
-//        case "中级强判", "高级强判", "初级强判":
-//            self = .perfectLock
-//        case "COMBO保护":
-//            self = .comboContinue
-//        case "恢复生命":
-//            self = .heal
-//        case "锁血":
-//            self = .guard
-//        case "过载":
-//            self = .overload
-//        case "":
-//            self = .none
-//        default:
-//            self = .unknown
-//        }
-//    }
+    static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111_1111)
     
     init(typeId: Int) {
         switch typeId {
@@ -76,12 +54,12 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 //            self = .mimic
         case 20:
             self = .boost
-//        case 21:
-//            self = .deepCute
-//        case 22:
-//            self = .deepCool
-//        case 23:
-//            self = .deepPassion
+        case 21:
+            self = .deepCute
+        case 22:
+            self = .deepCool
+        case 23:
+            self = .deepPassion
         case 24:
             self = .allRound
         default:
@@ -115,12 +93,12 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
         //            return NSLocalizedString("模仿", comment: "")
         case CGSSSkillTypes.allRound:
             return NSLocalizedString("全才", comment: "")
-            //        case CGSSSkillTypes.deepCute:
-            //            return "Deep Cute"
-            //        case CGSSSkillTypes.deepCool:
-            //            return "Deep Cool"
-            //        case CGSSSkillTypes.deepPassion:
-            //            return "Deep Passion"
+        case CGSSSkillTypes.deepCute:
+            return NSLocalizedString("Cute集中", comment: "")
+        case CGSSSkillTypes.deepCool:
+            return NSLocalizedString("Cool集中", comment: "")
+        case CGSSSkillTypes.deepPassion:
+            return NSLocalizedString("Passion集中", comment: "")
         case CGSSSkillTypes.boost:
             return NSLocalizedString("Skill Boost", comment: "")
         default:
