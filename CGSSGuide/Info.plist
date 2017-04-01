@@ -35,7 +35,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>Document Version</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>

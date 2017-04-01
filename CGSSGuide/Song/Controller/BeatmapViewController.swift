@@ -32,6 +32,11 @@ class BeatmapViewController: UIViewController {
     var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        #if DEBUG
+            print("Beatmap loaded, liveId: \(live.id) musicId: \(live.musicId)")
+        #endif
+        
         bv = BeatmapView()
         self.view.addSubview(bv)
         bv.snp.makeConstraints { (make) in

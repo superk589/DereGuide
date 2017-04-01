@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 2 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.char)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.teamCard)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
@@ -35,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 3 {
                 CGSSCacheManager.shared.wipeLive()
             }
-            if lastVersion < 4 {
+            if lastVersion < 5 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
             }

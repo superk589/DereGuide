@@ -38,7 +38,7 @@ class CGSSLiveSimulator {
     
     var simulateResult = [Int]()
     
-    func simulateOnce(options: LSOptions = [], callback: (([NoteScoreDetail]) -> Void)? = nil) {
+    func simulateOnce(options: LSOptions = [], callback: (([LSLog]) -> Void)? = nil) {
         var sum = 0
         var procedBonuses = [LSScoreBonus]()
         for bonus in bonuses {
@@ -49,7 +49,7 @@ class CGSSLiveSimulator {
         
         procedBonuses.sort { $0.range.begin < $1.range.begin }
         
-        var logs = [NoteScoreDetail]()
+        var logs = [LSLog]()
         
         var lastIndex = 0
         for i in 0..<notes.count {
@@ -104,8 +104,8 @@ class CGSSLiveSimulator {
             sum += score
             
             if options.contains(.detailLog) {
-                let socreDetail = NoteScoreDetail.init(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: baseComboBonus, comboBonus: comboBonus, basePerfectBonus: basePerfectBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost)
-                logs.append(socreDetail)
+                let log = LSLog.init(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: baseComboBonus, comboBonus: comboBonus, basePerfectBonus: basePerfectBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost)
+                logs.append(log)
             }
         }
         simulateResult.append(sum)

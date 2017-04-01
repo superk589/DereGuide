@@ -80,38 +80,38 @@ class NoteScoreTableViewCell: UITableViewCell {
     }
     
     
-    func setup(with detail: NoteScoreDetail) {
+    func setup(with log: LSLog) {
         
-        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", detail.noteIndex), attributes: [NSForegroundColorAttributeName: Color.allType])
-        if detail.comboFactor > 1 {
-            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", detail.comboFactor), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)]))
+        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", log.noteIndex), attributes: [NSForegroundColorAttributeName: Color.allType])
+        if log.comboFactor > 1 {
+            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", log.comboFactor), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)]))
         }
         comboIndexLabel.attributedText = attributeStr
         
-        if detail.perfectBonus == 100 {
+        if log.perfectBonus == 100 {
             perfectBonusLabel.text = "-"
         } else {
-            perfectBonusLabel.text = "\(detail.perfectBonus - 100)%"
+            perfectBonusLabel.text = "\(log.perfectBonus - 100)%"
         }
         
-        if detail.comboBonus == 100 {
+        if log.comboBonus == 100 {
             comboBonusLabel.text = "-"
         } else {
-            comboBonusLabel.text = "\(detail.comboBonus - 100)%"
+            comboBonusLabel.text = "\(log.comboBonus - 100)%"
         }
             //        } else {
 //            comboBonusLabel.text = "\(Float(detail.baseComboBonus) / 100)\n→\(Float(detail.comboBonus) / 100)"
 //        }
         
-        if detail.skillBoost == 1000 {
+        if log.skillBoost == 1000 {
             skillBoostLabel.text = "-"
         } else {
-            skillBoostLabel.text = "\((detail.skillBoost - 1000) / 10)%"
+            skillBoostLabel.text = "\((log.skillBoost - 1000) / 10)%"
         }
         
-        finalScoreLabel.text = String.init(format: "%d", detail.score)
+        finalScoreLabel.text = String.init(format: "%d", log.score)
         
-        totalScoreLabel.text = String(detail.sum)
+        totalScoreLabel.text = String(log.sum)
     }
 
 }

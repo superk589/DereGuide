@@ -44,7 +44,7 @@ class LiveSimulatorViewController: BaseTableViewController {
         }
     }
     
-    private var logs = [NoteScoreDetail]() {
+    private var logs = [LSLog]() {
         didSet {
             tableView.reloadData()
         }

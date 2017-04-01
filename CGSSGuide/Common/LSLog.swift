@@ -1,15 +1,14 @@
-
 //
-//  NoteScoreDetail.swift
+//  LSLog.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2017/3/29.
+//  Created by zzk on 2017/4/1.
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct NoteScoreDetail {
+struct LSLog {
     
     /// 从1开始的Index
     var noteIndex: Int

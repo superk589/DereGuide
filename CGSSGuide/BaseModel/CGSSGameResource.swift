@@ -350,8 +350,11 @@ class Master: FMDatabaseQueue {
                             let id = Int(set.int(forColumn: "id"))
                             let musicId = Int(set.int(forColumn: "music_data_id"))
                             
-                            // 去掉一些无效数据
-                            if [1901, 90001].contains(musicId) { continue }
+                            // 去掉一些无效数据 
+                            // 1901 - 2016-4-1 special live
+                            // 1902 - 2017-4-1 special live
+                            // 90001 - DJ Pinya live
+                            if [1901, 1902, 90001].contains(musicId) { continue }
                             
                             let musicTitle = set.string(forColumn: "name")?.replacingOccurrences(of: "\\n", with: "") ?? ""
                             let type = Int(set.int(forColumn: "type"))

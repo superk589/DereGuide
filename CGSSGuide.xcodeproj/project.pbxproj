@@ -68,6 +68,7 @@
 		124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */; };
 		1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */; };
 		124AB3B61E8F4DD700D94A48 /* LSCoordinatorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */; };
+		124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124AB3B71E8F708600D94A48 /* LSLog.swift */; };
 		124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47051D654AB700DD0399 /* BirthdayCenter.swift */; };
 		124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */; };
 		124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */; };
@@ -157,7 +158,6 @@
 		12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95331D65E50D009058D5 /* CGSSStory.swift */; };
 		12AF95361D65E6D1009058D5 /* CGSSStoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */; };
 		12C4083B1E8BC1F3001373CF /* LiveSimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */; };
-		12C4083D1E8BC84C001373CF /* NoteScoreDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083C1E8BC84C001373CF /* NoteScoreDetail.swift */; };
 		12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */; };
 		12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
@@ -281,6 +281,7 @@
 		124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGachaPool.swift; sourceTree = "<group>"; };
 		1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZ4Decompressor.swift; sourceTree = "<group>"; };
 		124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinatorOptions.swift; sourceTree = "<group>"; };
+		124AB3B71E8F708600D94A48 /* LSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSLog.swift; sourceTree = "<group>"; };
 		124CF52C1DA0D77000ACF6F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		124CF52D1DA0D96000ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		124CF52E1DA0D96000ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -378,7 +379,6 @@
 		12AF95331D65E50D009058D5 /* CGSSStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStory.swift; sourceTree = "<group>"; };
 		12AF95351D65E6D1009058D5 /* CGSSStoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSStoryContent.swift; sourceTree = "<group>"; };
 		12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorViewController.swift; sourceTree = "<group>"; };
-		12C4083C1E8BC84C001373CF /* NoteScoreDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreDetail.swift; sourceTree = "<group>"; };
 		12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
 		12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
@@ -464,6 +464,7 @@
 				1224972B1E8E85FC005C743C /* LSOptions.swift */,
 				124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */,
 				122497311E8E9B57005C743C /* LSResult.swift */,
+				124AB3B71E8F708600D94A48 /* LSLog.swift */,
 			);
 			name = CGSSLiveSimulator;
 			sourceTree = "<group>";
@@ -763,7 +764,6 @@
 			children = (
 				1269EA1F1D520DDB0071AD7F /* CGSSTeam.swift */,
 				1269EA201D520DDB0071AD7F /* CGSSTeamMember.swift */,
-				12C4083C1E8BC84C001373CF /* NoteScoreDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1194,7 +1194,6 @@
 				12636EC81E375DA900E3C833 /* EventPtRanking.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
-				12C4083D1E8BC84C001373CF /* NoteScoreDetail.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
 				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
@@ -1202,6 +1201,7 @@
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				12C4083B1E8BC1F3001373CF /* LiveSimulatorViewController.swift in Sources */,
+				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,
 				123F320B1E6FECC800B69D26 /* SpreadImageView.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
