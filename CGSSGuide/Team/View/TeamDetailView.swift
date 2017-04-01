@@ -8,13 +8,13 @@
 
 import UIKit
 
-
-private class LeaderSkillLabel: UILabel {
-    override func drawText(in rect: CGRect) {
-        let inset = UIEdgeInsetsMake(0, 10, 0, 10)
-        super.drawText(in:UIEdgeInsetsInsetRect(rect, inset))
-    }
-}
+//
+//private class LeaderSkillLabel: UILabel {
+//    override func drawText(in rect: CGRect) {
+//        let inset = UIEdgeInsetsMake(0, 10, 0, 10)
+//        super.drawText(in:UIEdgeInsetsInsetRect(rect, inset))
+//    }
+//}
 protocol TeamDetailViewDelegate: class {
     func editTeam()
     func skillShowOrHide()
@@ -36,11 +36,12 @@ class TeamDetailView: UIView {
     var leftSpace: CGFloat = 10
     var topSpace: CGFloat = 10
     weak var delegate: TeamDetailViewDelegate?
-    private var selfLeaderLabel: LeaderSkillLabel!
     var icons: [CGSSCardIconView]!
     var editTeamButton: UIButton!
-    private var friendLeaderLabel: LeaderSkillLabel!
     
+    var selfLeaderSkillView: TeamLeaderSkillView!
+    var friendLeaderSkillView: TeamLeaderSkillView!
+
     var leaderSkillGrid: CGSSGridLabel!
     
     var backSupportLabel: UILabel!
@@ -85,13 +86,10 @@ class TeamDetailView: UIView {
         super.init(frame: frame)
         var originY: CGFloat = topSpace
         let width = CGSSGlobal.width - 2 * leftSpace
-        selfLeaderLabel = LeaderSkillLabel.init(frame: CGRect(x: leftSpace, y: topSpace, width: width, height: 55))
-        selfLeaderLabel.numberOfLines = 3
-        selfLeaderLabel.font = UIFont.systemFont(ofSize: 14)
-        selfLeaderLabel.textColor = UIColor.black
-        selfLeaderLabel.layer.cornerRadius = 8
-        selfLeaderLabel.layer.masksToBounds = true
-        originY += 55 + topSpace
+        selfLeaderSkillView = TeamLeaderSkillView.init(frame: CGRect(x: leftSpace, y: topSpace, width: width, height: 65))
+        selfLeaderSkillView.arrowDirection = .down
+        
+        originY += 68
         
         let btnW = (width - 30 - 3.5 * leftSpace) / 6
         icons = [CGSSCardIconView]()
@@ -101,20 +99,19 @@ class TeamDetailView: UIView {
             icons.append(icon)
         }
         
+        selfLeaderSkillView.arrowOffset = CGPoint.init(x: btnW / 2, y: 0)
+        
+        
         editTeamButton = UIButton.init(frame: CGRect(x: CGSSGlobal.width - 50, y: originY, width: 50, height: btnW))
         editTeamButton.setImage(UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate), for: UIControlState())
         editTeamButton.tintColor = UIColor.lightGray
         editTeamButton.addTarget(self, action: #selector(editTeam), for: .touchUpInside)
-        originY += btnW + topSpace
+        originY += btnW + 3
         
-        friendLeaderLabel = LeaderSkillLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 55))
-        friendLeaderLabel.numberOfLines = 3
-        friendLeaderLabel.font = UIFont.systemFont(ofSize: 14)
-        friendLeaderLabel.textColor = UIColor.black
-        friendLeaderLabel.textAlignment = .right
-        friendLeaderLabel.layer.cornerRadius = 8
-        friendLeaderLabel.layer.masksToBounds = true
-        originY += 55 + topSpace
+        friendLeaderSkillView = TeamLeaderSkillView.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 65))
+        friendLeaderSkillView.arrowDirection = .up
+        friendLeaderSkillView.arrowOffset = CGPoint.init(x: btnW * 5.5 + 2.5 * leftSpace, y: 0)
+        originY += 65 + topSpace
         
         let descLabel1 = UILabel.init(frame: CGRect(x: leftSpace, y: originY, width: width - 2 * leftSpace, height: 17))
         descLabel1.text = NSLocalizedString("队长加成", comment: "队伍详情页面") + ": "
@@ -359,9 +356,9 @@ class TeamDetailView: UIView {
         bottomView.addSubview(viewScoreChartButton)
         bottomView.addSubview(scoreDescLabel)
         
-        addSubview(selfLeaderLabel)
+        addSubview(selfLeaderSkillView)
         addSubview(editTeamButton)
-        addSubview(friendLeaderLabel)
+        addSubview(friendLeaderSkillView)
         addSubview(descLabel1)
         addSubview(descLabel2)
         addSubview(leaderSkillGrid)
@@ -430,16 +427,14 @@ class TeamDetailView: UIView {
             }
         }
         if let selfLeaderRef = team.leader.cardRef {
-            selfLeaderLabel.text = "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
-            selfLeaderLabel.backgroundColor = selfLeaderRef.attColor.withAlphaComponent(0.5)
+            selfLeaderSkillView.setupWith(text: "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: selfLeaderRef.attColor.withAlphaComponent(0.5))
         } else {
-            selfLeaderLabel.backgroundColor = Color.allType.withAlphaComponent(0.5)
+            selfLeaderSkillView.setupWith(text: "", backgroundColor: Color.allType.withAlphaComponent(0.5))
         }
         if let friendLeaderRef = team.friendLeader.cardRef {
-            friendLeaderLabel.text = "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")"
-            friendLeaderLabel.backgroundColor = friendLeaderRef.attColor.withAlphaComponent(0.5)
+            friendLeaderSkillView.setupWith(text: "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: friendLeaderRef.attColor.withAlphaComponent(0.5))
         } else {
-            friendLeaderLabel.backgroundColor = Color.allType.withAlphaComponent(0.5)
+            friendLeaderSkillView.setupWith(text: "", backgroundColor: Color.allType.withAlphaComponent(0.5))
         }
         
         var upValueStrings = [[String]]()

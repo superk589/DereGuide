@@ -46,6 +46,8 @@
 		122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */; };
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
 		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
+		12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCA1E8FE94F005EEB7A /* TipView.swift */; };
+		12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */; };
 		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
 		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
 		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
@@ -249,6 +251,8 @@
 		122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharIconView.swift; sourceTree = "<group>"; };
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
 		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		12356BCA1E8FE94F005EEB7A /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamLeaderSkillView.swift; sourceTree = "<group>"; };
 		123679031E0E6B1300622114 /* DeviceInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManager.swift; sourceTree = "<group>"; };
 		123679051E0E6C3600622114 /* CGSSVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSVersionManager.swift; sourceTree = "<group>"; };
 		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -679,6 +683,7 @@
 				12AE77C71E39A81C006A9653 /* StatusIndicator.swift */,
 				12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */,
 				120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */,
+				12356BCA1E8FE94F005EEB7A /* TipView.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -721,6 +726,7 @@
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
 				122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */,
 				121C78C51D557B3900D0B636 /* TeamDetailView.swift */,
+				12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1114,6 +1120,7 @@
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
+				12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
@@ -1250,6 +1257,7 @@
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				1269E9E91D520B750071AD7F /* CGSSGridView.swift in Sources */,
+				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
 				120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */,
 				1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */,
