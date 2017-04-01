@@ -103,7 +103,7 @@ class LSCoordinator {
         return result
     }
     
-    fileprivate func generateScoreDistributions(notes: [CGSSBeatmapNote], contents: [LSScoreBonus], options: LSCoordinatorOptions) -> [LSNote] {
+    fileprivate func generateScoreDistributions(notes: [CGSSBeatmapNote], bonuses: [LSScoreBonus]) -> [LSNote] {
 
         var lsNotes = [LSNote]()
         
@@ -113,22 +113,16 @@ class LSCoordinator {
             let note = notes[i]
             let comboFactor = getComboFactor(of: i + 1, criticalPoints: criticalPoints)
             
-            var validContents = [LSScoreBonus]()
-            for content in contents {
-                if options.contains(.perfectTolerence) {
-                    if note.sec >= content.range.begin - 0.06 && note.sec <= content.range.end + 0.06 {
-                        validContents.append(content)
-                    }
-                } else {
-                    if note.sec >= content.range.begin && note.sec <= content.range.end {
-                        validContents.append(content)
-                    }
+            var validBonuses = [LSScoreBonus]()
+            for bonus in bonuses {
+                if note.sec >= bonus.range.begin && note.sec <= bonus.range.end {
+                    validBonuses.append(bonus)
                 }
             }
             
-            let comboBonusDistribution = LSDistribution.init(validContents.filter({ $0.type == .comboBonus }))
-            let perfectBonusDistribution = LSDistribution.init(validContents.filter({ $0.type == .perfectBonus }))
-            let skillBoostBonusDistribution = LSDistribution.init(validContents.filter({ $0.type == .skillBoost }), defaultValue: 1000)
+            let comboBonusDistribution = LSDistribution.init(validBonuses.filter({ $0.type == .comboBonus }))
+            let perfectBonusDistribution = LSDistribution.init(validBonuses.filter({ $0.type == .perfectBonus }))
+            let skillBoostBonusDistribution = LSDistribution.init(validBonuses.filter({ $0.type == .skillBoost }), defaultValue: 1000)
             
             let lsNote = LSNote.init(comboBonusDistribution: comboBonusDistribution, perfectBonusDistribution: perfectBonusDistribution, skillBoostDistribution: skillBoostBonusDistribution, comboFactor: comboFactor, baseScore: baseScore)
             
@@ -137,7 +131,7 @@ class LSCoordinator {
         return lsNotes
     }
     
-    fileprivate func generateScoreBonuses() -> [LSScoreBonus] {
+    fileprivate func generateScoreBonuses(options: LSCoordinatorOptions) -> [LSScoreBonus] {
         var result = [LSScoreBonus]()
         
         let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
@@ -165,8 +159,11 @@ class LSCoordinator {
                     
                     // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
-                    for range in ranges {
-                        
+                    for var range in ranges {
+                        if options.contains(.perfectTolerence) {
+                            range.begin -= 0.06
+                            range.length += 0.12
+                        }
                         switch type {
                         case LSScoreBonusTypes.deep:
                             let content1 = LSScoreBonus.init(range: range, value: skill.value, type: .perfectBonus, rate: rankedSkill.procChance, rateBonus: rateBonus)
@@ -188,8 +185,8 @@ class LSCoordinator {
     }
     
     func generateLiveSimulator(options: LSCoordinatorOptions) -> CGSSLiveSimulator {
-        let bonuses = self.generateScoreBonuses()
-        let scoreDistributions = self.generateScoreDistributions(notes: self.beatmap.validNotes, contents: bonuses, options: options)
+        let bonuses = self.generateScoreBonuses(options: options)
+        let scoreDistributions = self.generateScoreDistributions(notes: self.beatmap.validNotes, bonuses: bonuses)
         return CGSSLiveSimulator.init(distributions: scoreDistributions, bonuses: bonuses, notes: self.beatmap.validNotes)
     }
 }

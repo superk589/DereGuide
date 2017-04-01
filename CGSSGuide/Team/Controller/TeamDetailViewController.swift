@@ -253,12 +253,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     
     func viewScoreChart(_ teamDetailView: TeamDetailView) {
         if let live = self.live, let diff = self.diff {
-            let vc = LiveSimulatorViewController.init(nibName: nil, bundle: nil)
+            let vc = LiveSimulatorViewController()
             let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
-            let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
-            let simulator2 = coordinator.generateLiveSimulator(options: [])
-            vc.simulator1 = simulator1
-            vc.simulator2 = simulator2
+            vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             showNotSelectSongAlert()

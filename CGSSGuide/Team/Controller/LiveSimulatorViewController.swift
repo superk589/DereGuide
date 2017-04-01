@@ -29,8 +29,14 @@ class LiveSimulatorViewController: BaseTableViewController {
         }
     }
     
-    var simulator1: CGSSLiveSimulator!
-    var simulator2: CGSSLiveSimulator!
+    var coordinator: LSCoordinator!
+    lazy var simulator1: CGSSLiveSimulator = {
+        self.coordinator.generateLiveSimulator(options: [.perfectTolerence])
+    }()
+    
+    lazy var simulator2: CGSSLiveSimulator = {
+        self.coordinator.generateLiveSimulator(options: [])
+    }()
     
     private var displayType: DisplayType = .optimistic2 {
         didSet {
@@ -43,20 +49,16 @@ class LiveSimulatorViewController: BaseTableViewController {
             tableView.reloadData()
         }
     }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         prepareNavigationBar()
         tableView.register(NoteScoreTableViewCell.self, forCellReuseIdentifier: "Note Cell")
         tableView.register(NoteScoreTableViewSectionHeader.self, forHeaderFooterViewReuseIdentifier: "Note Header")
         tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
         tableView.separatorStyle = .none
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-   
+      
     private func prepareNavigationBar() {
         let rightItem = UIBarButtonItem.init(title: NSLocalizedString("模式", comment: ""), style: .plain, target: self, action: #selector(selectDisplayMode))
         self.navigationItem.rightBarButtonItem = rightItem

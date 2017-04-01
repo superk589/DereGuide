@@ -51,6 +51,7 @@ class CGSSLiveSimulator {
         
         var logs = [NoteScoreDetail]()
         
+        var lastIndex = 0
         for i in 0..<notes.count {
             let note = notes[i]
             let baseScore = lsNotes[i].baseScore
@@ -59,12 +60,18 @@ class CGSSLiveSimulator {
             var perfectBonus = 100
             var skillBoost = 1000
             
-            for bonus in procedBonuses {
+            var firstLoop = true
+            for j in lastIndex..<procedBonuses.count {
+                let bonus = procedBonuses[j]
                 if note.sec > bonus.range.end {
                     continue
                 } else if note.sec < bonus.range.begin {
                     break
                 } else {
+                    if firstLoop {
+                        lastIndex = j
+                        firstLoop = false
+                    }
                     switch bonus.type {
                     case LSScoreBonusTypes.comboBonus:
                         if bonus.value > comboBonus {
@@ -111,7 +118,7 @@ class CGSSLiveSimulator {
 //        #endif
     }
     
-    func wipeSimulatorResults() {
+    func wipeResults() {
         simulateResult.removeAll()
     }
 
