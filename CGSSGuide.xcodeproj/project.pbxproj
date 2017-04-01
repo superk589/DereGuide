@@ -13,7 +13,6 @@
 		120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */; };
 		1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */; };
 		1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F81E2760F900185782 /* SortTableViewCell.swift */; };
-		1206C0FB1E27742000185782 /* CardFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */; };
 		1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0FC1E278D6200185782 /* FilterItemView.swift */; };
 		1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */; };
 		1206F6CE1E28D6CA000FAC78 /* SongFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */; };
@@ -217,7 +216,6 @@
 		120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewIndicator.swift; sourceTree = "<group>"; };
 		1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilterSortController.swift; sourceTree = "<group>"; };
 		1206C0F81E2760F900185782 /* SortTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortTableViewCell.swift; sourceTree = "<group>"; };
-		1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		1206C0FC1E278D6200185782 /* FilterItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterItemView.swift; sourceTree = "<group>"; };
 		1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WipeTableViewCell.swift; path = ../WipeTableViewCell.swift; sourceTree = "<group>"; };
 		1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterSortController.swift; sourceTree = "<group>"; };
@@ -629,7 +627,6 @@
 			children = (
 				1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */,
 				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
-				1206C0FA1E27742000185782 /* CardFilterAndSorterTableViewController.swift */,
 				12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */,
 				1269E9181D5209610071AD7F /* CardTableViewController.swift */,
 				127AA1A01E34FD8D0006627B /* Card3DModelController.swift */,
@@ -1210,7 +1207,6 @@
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
-				1206C0FB1E27742000185782 /* CardFilterAndSorterTableViewController.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,

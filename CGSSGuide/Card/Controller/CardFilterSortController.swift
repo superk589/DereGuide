@@ -35,9 +35,7 @@ class CardFilterSortController: BaseFilterSortController {
 //        CGSSSkillTypes.mimic.description,
         CGSSSkillTypes.boost.description,
         CGSSSkillTypes.allRound.description,
-        CGSSSkillTypes.deepCute.description,
-        CGSSSkillTypes.deepCool.description,
-        CGSSSkillTypes.deepPassion.description,
+        CGSSSkillTypes.deep.description,
         CGSSSkillTypes.unknown.description,
         CGSSSkillTypes.none.description
     ]

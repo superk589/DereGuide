@@ -22,7 +22,7 @@ struct LSScoreBonusTypes: OptionSet, Hashable {
             self = .comboBonus
         case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.overload, CGSSSkillTypes.concentration:
             self = .perfectBonus
-        case CGSSSkillTypes.deepCool, CGSSSkillTypes.deepCute, CGSSSkillTypes.deepPassion:
+        case CGSSSkillTypes.deep:
             self = [.perfectBonus, .comboBonus]
         case CGSSSkillTypes.boost:
             self = .skillBoost

@@ -23,14 +23,12 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 //    static let mimic = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let boost = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let allRound = CGSSSkillTypes.init(rawValue: 1 << 9)
-    static let deepCute = CGSSSkillTypes.init(rawValue: 1 << 10)
-    static let deepCool = CGSSSkillTypes.init(rawValue: 1 << 11)
-    static let deepPassion = CGSSSkillTypes.init(rawValue: 1 << 12)
+    static let deep = CGSSSkillTypes.init(rawValue: 1 << 10)
     
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 13)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 14)
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 11)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 12)
 
-    static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111_1111)
+    static let all = CGSSSkillTypes.init(rawValue: 0b1_1111_1111_1111)
     
     init(typeId: Int) {
         switch typeId {
@@ -54,12 +52,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 //            self = .mimic
         case 20:
             self = .boost
-        case 21:
-            self = .deepCute
-        case 22:
-            self = .deepCool
-        case 23:
-            self = .deepPassion
+        case 21, 22, 23:
+            self = .deep
         case 24:
             self = .allRound
         default:
@@ -93,12 +87,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
         //            return NSLocalizedString("模仿", comment: "")
         case CGSSSkillTypes.allRound:
             return NSLocalizedString("全才", comment: "")
-        case CGSSSkillTypes.deepCute:
-            return NSLocalizedString("Cute集中", comment: "")
-        case CGSSSkillTypes.deepCool:
-            return NSLocalizedString("Cool集中", comment: "")
-        case CGSSSkillTypes.deepPassion:
-            return NSLocalizedString("Passion集中", comment: "")
+        case CGSSSkillTypes.deep:
+            return NSLocalizedString("集中", comment: "")
         case CGSSSkillTypes.boost:
             return NSLocalizedString("Skill Boost", comment: "")
         default:
