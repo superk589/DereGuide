@@ -4,9 +4,10 @@
 
 1. 增加对新技能类型"Cute/Cool/Passion集中"的支持
 2. 模拟算分增加查看得分详情的功能
-3. 针对官方提供准确几率的卡池，查看完整可抽列表页面现在也显示每张卡的实际几率，修复2017/3/28日的Fes卡池几率不准确问题
-4. 修复队伍中存在“技能增强”类特技时，直接计算的平均分数不准确的问题
-5. 新增app内评分的功能(iOS 10.3+)
+3. 针对官方提供准确几率的卡池，查看完整可抽列表页面现在也显示每张卡的实际几率
+4. 修复2017/3/28的Fes卡池几率不准确问题
+5. 修复队伍中存在“技能增强”类特技时，直接计算的平均分数不准确的问题
+6. 新增app内评分的功能(iOS 10.3+)
 
 ##### Japanese version
 
@@ -16,6 +17,15 @@
 4. ガシャシミュレーターに2017-3-28で開催されたfes限定ガシャの確率不具合を修正します
 5. スコア計算にユニットに「スキルブースト」などの特技を存在しているとき、通常計算で算出された平均スコアは誤りますのバグを修正します
 6. アプリ内評価の機能を追加します(iOS 10.3+)
+
+##### English version
+
+1. Support for new skill type series "Focus".
+2. Add score detail page for live simulator.
+3. For the gacha pools those have accurate rate of each card, full available list page now shows the rate.
+4. Fix 2017/3/28 CinFes gacha pool's wrong rate.
+5. Fix that in live simulator average score displays wrong result when has skill boost member in team.
+6. Add In-app rating feature(only for iOS 10.3+).
 
 ### 1.2.5
 
