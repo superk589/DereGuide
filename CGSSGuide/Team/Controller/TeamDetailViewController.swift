@@ -78,7 +78,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                     // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
                     self?.teamDV.advanceCalculateButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
                 }
-            }, callback: { (result) in
+            }, callback: { (result, logs) in
                 DispatchQueue.main.async { [weak self] in
                     self?.teamDV.updateScoreGridSimulateResulte(result1: result.get(percent: 1), result2: result.get(percent: 5), result3: result.get(percent: 20), result4: result.get(percent: 50))
                     self?.teamDV.resetAdCalcButton()
@@ -93,7 +93,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 showUnknownSkillAlert()
             }
             let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
-            let simulator = coordinator.generateLiveSimulator(options: [])
+            let simulator = coordinator.generateLiveSimulator()
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
                     doSimulationBy(simulator: simulator, times: 500)
@@ -183,13 +183,14 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 showUnknownSkillAlert()
             }
             let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
-            let simulator1 = coordinator.generateLiveSimulator(options: .perfectTolerence)
+            let simulator = coordinator.generateLiveSimulator()
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
-            let simulator2 = coordinator.generateLiveSimulator(options: [])
             
-            self.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: simulator1.max, value3: simulator2.max, value4: simulator2.average)
-            self.teamDV.resetCalcButton()
-            
+            simulator.simulateOptimistic1(options: [], callback: { [weak self] (result, logs) in
+                self?.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.max, value4: simulator.average)
+                self?.teamDV.resetCalcButton()
+            })
+
             /// first time using calculator in team detail view controller, shows app store rating alert in app.
             if #available(iOS 10.3, *) {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {

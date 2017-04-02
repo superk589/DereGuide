@@ -69,7 +69,6 @@
 		124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791801D87F4FD00ED8EA6 /* GachaViewController.swift */; };
 		124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */; };
 		1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */; };
-		124AB3B61E8F4DD700D94A48 /* LSCoordinatorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */; };
 		124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124AB3B71E8F708600D94A48 /* LSLog.swift */; };
 		124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47051D654AB700DD0399 /* BirthdayCenter.swift */; };
 		124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */; };
@@ -284,7 +283,6 @@
 		124791801D87F4FD00ED8EA6 /* GachaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaViewController.swift; sourceTree = "<group>"; };
 		124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGachaPool.swift; sourceTree = "<group>"; };
 		1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZ4Decompressor.swift; sourceTree = "<group>"; };
-		124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinatorOptions.swift; sourceTree = "<group>"; };
 		124AB3B71E8F708600D94A48 /* LSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSLog.swift; sourceTree = "<group>"; };
 		124CF52C1DA0D77000ACF6F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		124CF52D1DA0D96000ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -466,7 +464,6 @@
 				122497271E8E85C1005C743C /* LSScoreBonus.swift */,
 				122497291E8E85DD005C743C /* LSRange.swift */,
 				1224972B1E8E85FC005C743C /* LSOptions.swift */,
-				124AB3B51E8F4DD700D94A48 /* LSCoordinatorOptions.swift */,
 				122497311E8E9B57005C743C /* LSResult.swift */,
 				124AB3B71E8F708600D94A48 /* LSLog.swift */,
 			);
@@ -1239,7 +1236,6 @@
 				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
-				124AB3B61E8F4DD700D94A48 /* LSCoordinatorOptions.swift in Sources */,
 				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,

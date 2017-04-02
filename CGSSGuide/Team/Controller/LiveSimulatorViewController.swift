@@ -30,12 +30,8 @@ class LiveSimulatorViewController: BaseTableViewController {
     }
     
     var coordinator: LSCoordinator!
-    lazy var simulator1: CGSSLiveSimulator = {
-        self.coordinator.generateLiveSimulator(options: [.perfectTolerence])
-    }()
-    
-    lazy var simulator2: CGSSLiveSimulator = {
-        self.coordinator.generateLiveSimulator(options: [])
+    lazy var simulator: CGSSLiveSimulator = {
+        self.coordinator.generateLiveSimulator()
     }()
     
     private var displayType: DisplayType = .optimistic2 {
@@ -87,15 +83,15 @@ class LiveSimulatorViewController: BaseTableViewController {
         
         switch displayType {
         case .optimistic1:
-            simulator1.simulateOnce(options: [.maxRate, .detailLog], callback: { [weak self] (logs) in
+            simulator.simulateOptimistic1(options: [.detailLog, .maxRate], callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         case .optimistic2:
-            simulator2.simulateOnce(options: [.maxRate, .detailLog], callback: { [weak self] (logs) in
+            simulator.simulateOnce(options: [.maxRate, .detailLog], callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         case .simulation:
-            simulator2.simulateOnce(options: [.detailLog], callback: { [weak self] (logs) in
+            simulator.simulateOnce(options: [.detailLog], callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         }

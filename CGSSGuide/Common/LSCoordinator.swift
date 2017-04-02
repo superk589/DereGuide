@@ -115,7 +115,7 @@ class LSCoordinator {
             
             var validBonuses = [LSScoreBonus]()
             for bonus in bonuses {
-                if note.sec >= bonus.range.begin && note.sec <= bonus.range.end {
+                if bonus.range.contains(note.sec) {
                     validBonuses.append(bonus)
                 }
             }
@@ -131,7 +131,7 @@ class LSCoordinator {
         return lsNotes
     }
     
-    fileprivate func generateScoreBonuses(options: LSCoordinatorOptions) -> [LSScoreBonus] {
+    fileprivate func generateScoreBonuses() -> [LSScoreBonus] {
         var result = [LSScoreBonus]()
         
         let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
@@ -159,11 +159,7 @@ class LSCoordinator {
                     
                     // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
-                    for var range in ranges {
-                        if options.contains(.perfectTolerence) {
-                            range.begin -= 0.06
-                            range.length += 0.12
-                        }
+                    for range in ranges {
                         switch type {
                         case LSScoreBonusTypes.deep:
                             let content1 = LSScoreBonus.init(range: range, value: skill.value, type: .perfectBonus, rate: rankedSkill.procChance, rateBonus: rateBonus)
@@ -184,8 +180,8 @@ class LSCoordinator {
         return result
     }
     
-    func generateLiveSimulator(options: LSCoordinatorOptions) -> CGSSLiveSimulator {
-        let bonuses = self.generateScoreBonuses(options: options)
+    func generateLiveSimulator() -> CGSSLiveSimulator {
+        let bonuses = self.generateScoreBonuses()
         let scoreDistributions = self.generateScoreDistributions(notes: self.beatmap.validNotes, bonuses: bonuses)
         return CGSSLiveSimulator.init(distributions: scoreDistributions, bonuses: bonuses, notes: self.beatmap.validNotes)
     }

@@ -17,6 +17,7 @@ class TeamLeaderSkillView: TipView {
         descLabel = UILabel()
         descLabel.numberOfLines = 3
         descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(descLabel)
     }
     
