@@ -15,6 +15,7 @@ protocol EventDetailViewDelegate: class {
     func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: Int)
     func gotoPtChartView(eventDetailView: EventDetailView)
     func gotoScoreChartView(eventDetailView: EventDetailView)
+    func gotoLiveTrendView(eventDetailView: EventDetailView)
     func refreshPtView(eventDetailView: EventDetailView)
     func refreshScoreView(eventDetailView: EventDetailView)
 }
@@ -36,6 +37,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     var card2View: EventCardView!
     
     var songDescLabel: UILabel!
+    
+    var liveTrendLabel: UILabel!
     
     var songView: EventSongView!
     
@@ -155,6 +158,19 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             make.top.equalTo(line2.snp.bottom).offset(8)
         }
         
+        liveTrendLabel = UILabel()
+        addSubview(liveTrendLabel)
+        liveTrendLabel.textColor = UIColor.lightGray
+        liveTrendLabel.text = NSLocalizedString("流行曲", comment: "") + " >"
+        liveTrendLabel.font = Font.content
+        liveTrendLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(line2.snp.bottom).offset(8)
+            make.right.equalTo(-10)
+        }
+        liveTrendLabel.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
+        liveTrendLabel.addGestureRecognizer(tap)
+        
         songView = EventSongView()
         addSubview(songView)
         songView.snp.makeConstraints { (make) in
@@ -165,8 +181,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         songView.delegate = self
         songView.layer.masksToBounds = true
         
-        
-
         eventPtContentView = UIView()
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in
@@ -206,6 +220,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(gotoPtChartAction))
         gotoPtChartLabel.addGestureRecognizer(tap3)
         gotoPtChartLabel.isUserInteractionEnabled = true
+        gotoPtChartLabel.isHidden = true
+        
         
         eventPtView = EventPtView()
         eventPtContentView.addSubview(eventPtView)
@@ -258,6 +274,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(gotoScoreChartAction))
         gotoScoreChartLabel.isUserInteractionEnabled = true
         gotoScoreChartLabel.addGestureRecognizer(tap4)
+        gotoScoreChartLabel.isHidden = true
         
         eventScoreView = EventScoreView()
         eventScoreContentView.addSubview(eventScoreView)
@@ -290,6 +307,10 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     
     func gotoPtChartAction() {
         delegate?.gotoPtChartView(eventDetailView: self)
+    }
+    
+    func gotoLiveTrendViewAction(gesture: UITapGestureRecognizer) {
+        delegate?.gotoLiveTrendView(eventDetailView: self)
     }
     
     func setup(event: CGSSEvent, bannerId: Int) {
@@ -366,16 +387,23 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
                     update.height.equalTo(0)
                 })
             }
-
+            
+            liveTrendLabel.isHidden = !event.hasTrendLives
         }
     }
     
-    func setup(ptList: EventPtRankingList, onGoing: Bool) {
+    func setup(ptList: EventPtRanking, onGoing: Bool) {
         eventPtView.setup(rankingList: ptList, onGoing: onGoing)
+        if ptList.list.count > 0 {
+            gotoPtChartLabel.isHidden = false
+        }
     }
     
-    func setup(scoreList: EventScoreRankingList, onGoing: Bool) {
+    func setup(scoreList: EventScoreRanking, onGoing: Bool) {
         eventScoreView.setup(rankingList: scoreList, onGoing: onGoing)
+        if scoreList.list.count > 0 {
+            gotoScoreChartLabel.isHidden = false
+        }
     }
     
     func iconClick(_ iv: CGSSIconView) {
@@ -385,14 +413,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     func eventSongView(_ view: EventSongView, didSelect live: CGSSLive, of difficulty: Int) {
         delegate?.eventDetailView(self, didSelect: live, of: difficulty)
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
 
 extension EventDetailView: EventPtViewDelegate {

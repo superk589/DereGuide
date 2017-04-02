@@ -1,8 +1,8 @@
 PODS:
   - ASValueTrackingSlider (0.12.1)
-  - Charts (3.0.1):
-    - Charts/Core (= 3.0.1)
-  - Charts/Core (3.0.1)
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
   - Firebase/AdMob (3.15.0):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.19.0)
@@ -52,7 +52,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   ASValueTrackingSlider: 5261de3fcf00adb339efc93885e8f0bc99e703cd
-  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02

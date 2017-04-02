@@ -110,6 +110,13 @@ extension CGSSEvent {
     
 }
 
+extension CGSSEvent {
+    var hasTrendLives: Bool {
+        return eventType == .parade
+    }
+}
+
+
 class CGSSEvent: CGSSBaseModel {
     var sortId: Int
     var id:Int

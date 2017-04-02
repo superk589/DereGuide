@@ -101,7 +101,7 @@ class EventScoreView: UIView {
     }
     
     
-    func setup(rankingList: EventScoreRankingList ,onGoing: Bool) {
+    func setup(rankingList: EventScoreRanking ,onGoing: Bool) {
         dateLabel.text = rankingList.lastDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
         
         setLoading(loading: false)

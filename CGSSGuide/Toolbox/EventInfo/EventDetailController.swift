@@ -17,8 +17,8 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
     var bannerId: Int!
     var banner: BannerView!
     
-    var ptList: EventPtRankingList?
-    var scoreList: EventScoreRankingList?
+    var ptList: EventPtRanking?
+    var scoreList: EventScoreRanking?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +76,12 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
                 DispatchQueue.main.async { [weak self] in
                     self?.eventDetailView.setup(ptList: list!, onGoing: self?.event.isOnGoing ?? false)
                 }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.eventDetailView.eventPtView.setLoading(loading: false)
+                }
             }
+
         }
     }
     
@@ -86,6 +91,10 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
             if list != nil {
                 DispatchQueue.main.async { [weak self] in
                      self?.eventDetailView.setup(scoreList: list!, onGoing: self?.event.isOnGoing ?? false)
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.eventDetailView.eventScoreView.setLoading(loading: false)
                 }
             }
         }
@@ -114,6 +123,13 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
 }
 
 extension EventDetailController: EventDetailViewDelegate {
+    
+    func gotoLiveTrendView(eventDetailView: EventDetailView) {
+        let vc = EventTrendViewController()
+        vc.eventId = event.id
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     func refreshPtView(eventDetailView: EventDetailView) {
         requestPtData()
     }

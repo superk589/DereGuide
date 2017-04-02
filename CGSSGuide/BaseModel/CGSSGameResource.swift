@@ -334,6 +334,31 @@ class Master: FMDatabaseQueue {
         }
     }
     
+    func getLiveTrend(eventId: Int, callback: @escaping FMDBCallBackClosure<[EventTrend]>) {
+        inDatabase { (fmdb) in
+            var list = [EventTrend]()
+            if let db = fmdb {
+                defer {
+                    db.close()
+                }
+                if db.open(withFlags: SQLITE_OPEN_READONLY) {
+                    let selectSql = "select * from tour_trend_live where event_id = \(eventId)"
+                    do {
+                        let set = try db.executeQuery(selectSql, values: nil)
+                        while set.next() {
+                            let json = JSON(set.resultDictionary())
+                            let trend = EventTrend.init(fromJson: json)
+                            list.append(trend)
+                        }
+                    } catch {
+                        print(db.lastErrorMessage())
+                    }
+                }
+            }
+            callback(list)
+        }
+    }
+    
     func getLives(liveId: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSLive]>) {
         inDatabase { (fmdb) in
             var list = [CGSSLive]()

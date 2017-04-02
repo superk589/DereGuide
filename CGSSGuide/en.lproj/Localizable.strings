@@ -594,3 +594,6 @@
 "总分" = "Total Score";
 
 "集中" = "Focus";
+
+/* new in 1.2.7 */
+"流行曲" = "Bonus Song";

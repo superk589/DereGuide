@@ -98,7 +98,7 @@ class EventTableViewCell: UITableViewCell {
         eventNameLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
     }
     
-    func setup(event:CGSSEvent) {
+    func setup(event: CGSSEvent) {
         startLabel.text = event.startDate.toDate().toString(format: "yyyy-MM-dd")
         startDateView.backgroundColor = event.eventColor
         let now = Date()

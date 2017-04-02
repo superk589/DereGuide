@@ -6,37 +6,79 @@
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyJSON
 
-class EventPtRanking : NSObject, NSCoding{
+extension EventPtRanking {
+    var lastDate: Date? {
+        if let date = list.last?.date.toDate(format: "yyyy-MM-dd HH:mm") {
+            return date
+        } else {
+            return nil
+        }
+    }
+    var last: EventPtItem? {
+        return list.last
+    }
     
-    var date : String!
-    var rank1 : Int!
-    var rank2 : Int!
-    var rank3 : Int!
-    var reward1 : Int!
-    var reward2 : Int!
-    var reward3 : Int!
-    var reward4 : Int!
-    var reward5 : Int!
+    var speed: EventPtRankingSpeed {
+        var subList = [EventPtItem]()
+        var count = 0
+        for i in 0..<list.count {
+            let ranking = list[list.count - i - 1]
+            count += 1
+            subList.append(ranking)
+            if count >= 2 {
+                break
+            }
+        }
+        
+        var rank1Speed = 0
+        var rank2Speed = 0
+        var rank3Speed = 0
+        var reward1Speed = 0
+        var reward2Speed = 0
+        var reward3Speed = 0
+        var reward4Speed = 0
+        var reward5Speed = 0
+
+        if let first = subList.first, let last = subList.last {
+            let timeInterval = last.date.toDate(format: "yyyy-MM-dd HH:mm").timeIntervalSince(first.date.toDate(format: "yyyy-MM-dd HH:mm"))
+            let hourInterval = timeInterval / 3600
+            if hourInterval != 0 {
+                rank1Speed = Int(round(Double(last.rank1 - first.rank1) / hourInterval))
+                rank2Speed = Int(round(Double(last.rank2 - first.rank2) / hourInterval))
+                rank3Speed = Int(round(Double(last.rank3 - first.rank3) / hourInterval))
+                reward1Speed = Int(round(Double(last.reward1 - first.reward1) / hourInterval))
+                reward2Speed = Int(round(Double(last.reward2 - first.reward2) / hourInterval))
+                reward3Speed = Int(round(Double(last.reward3 - first.reward3) / hourInterval))
+                reward4Speed = Int(round(Double(last.reward4 - first.reward4) / hourInterval))
+                reward5Speed = Int(round(Double(last.reward5 - first.reward5) / hourInterval))
+            }
+        }
     
+        return EventPtRankingSpeed(rank1: rank1Speed, rank2: rank2Speed, rank3: rank3Speed, reward1: reward1Speed, reward2: reward2Speed, reward3: reward3Speed, reward4: reward4Speed, reward5: reward5Speed)
+    }
+}
+
+class EventPtRanking {
+    
+    var list: [EventPtItem]
+    
+    // not from json
+    var event: CGSSEvent!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
     init(fromJson json: JSON!){
-        if json.isEmpty{
-            return
+        list = [EventPtItem]()
+        for sub in json.arrayValue {
+            if sub.isEmpty {
+                continue
+            }
+            
+            list.append(EventPtItem.init(fromJson: sub))
         }
-        date = json["date"].stringValue
-        rank1 = json["rank1"].intValue
-        rank2 = json["rank2"].intValue
-        rank3 = json["rank3"].intValue
-        reward1 = json["reward1"].intValue
-        reward2 = json["reward2"].intValue
-        reward3 = json["reward3"].intValue
-        reward4 = json["reward4"].intValue
-        reward5 = json["reward5"].intValue
     }
     
     /**
@@ -45,33 +87,7 @@ class EventPtRanking : NSObject, NSCoding{
     func toDictionary() -> NSDictionary
     {
         let dictionary = NSMutableDictionary()
-        if date != nil{
-            dictionary["date"] = date
-        }
-        if rank1 != nil{
-            dictionary["rank1"] = rank1
-        }
-        if rank2 != nil{
-            dictionary["rank2"] = rank2
-        }
-        if rank3 != nil{
-            dictionary["rank3"] = rank3
-        }
-        if reward1 != nil{
-            dictionary["reward1"] = reward1
-        }
-        if reward2 != nil{
-            dictionary["reward2"] = reward2
-        }
-        if reward3 != nil{
-            dictionary["reward3"] = reward3
-        }
-        if reward4 != nil{
-            dictionary["reward4"] = reward4
-        }
-        if reward5 != nil{
-            dictionary["reward5"] = reward5
-        }
+        dictionary["list"] = list
         return dictionary
     }
     
@@ -81,16 +97,7 @@ class EventPtRanking : NSObject, NSCoding{
      */
     required init(coder aDecoder: NSCoder)
     {
-        date = aDecoder.decodeObject(forKey: "date") as? String
-        rank1 = aDecoder.decodeObject(forKey: "rank1") as? Int
-        rank2 = aDecoder.decodeObject(forKey: "rank2") as? Int
-        rank3 = aDecoder.decodeObject(forKey: "rank3") as? Int
-        reward1 = aDecoder.decodeObject(forKey: "reward1") as? Int
-        reward2 = aDecoder.decodeObject(forKey: "reward2") as? Int
-        reward3 = aDecoder.decodeObject(forKey: "reward3") as? Int
-        reward4 = aDecoder.decodeObject(forKey: "reward4") as? Int
-        reward5 = aDecoder.decodeObject(forKey: "reward5") as? Int
-        
+        list = aDecoder.decodeObject(forKey: "list") as? [EventPtItem] ?? [EventPtItem]()
     }
     
     /**
@@ -99,34 +106,7 @@ class EventPtRanking : NSObject, NSCoding{
      */
     func encode(with aCoder: NSCoder)
     {
-        if date != nil{
-            aCoder.encode(date, forKey: "date")
-        }
-        if rank1 != nil{
-            aCoder.encode(rank1, forKey: "rank1")
-        }
-        if rank2 != nil{
-            aCoder.encode(rank2, forKey: "rank2")
-        }
-        if rank3 != nil{
-            aCoder.encode(rank3, forKey: "rank3")
-        }
-        if reward1 != nil{
-            aCoder.encode(reward1, forKey: "reward1")
-        }
-        if reward2 != nil{
-            aCoder.encode(reward2, forKey: "reward2")
-        }
-        if reward3 != nil{
-            aCoder.encode(reward3, forKey: "reward3")
-        }
-        if reward4 != nil{
-            aCoder.encode(reward4, forKey: "reward4")
-        }
-        if reward5 != nil{
-            aCoder.encode(reward5, forKey: "reward5")
-        }
-        
+        aCoder.encode(list, forKey: "list")
     }
     
 }

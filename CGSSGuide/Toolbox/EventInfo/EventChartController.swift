@@ -21,7 +21,7 @@ protocol RankingListChartPresentable {
     var xAxisDetail: [String] { get }
 }
 
-extension EventScoreRankingList: RankingListChartPresentable {
+extension EventScoreRanking: RankingListChartPresentable {
     var chartEntries: [ChartDataEntryWithLabel] {
         var array = [ChartDataEntryWithLabel]()
         var reward1Entries = [ChartDataEntry]()
@@ -70,7 +70,7 @@ extension EventScoreRankingList: RankingListChartPresentable {
     
 }
 
-extension EventPtRankingList: RankingListChartPresentable {
+extension EventPtRanking: RankingListChartPresentable {
     var chartEntries: [ChartDataEntryWithLabel] {
         var array = [ChartDataEntryWithLabel]()
         var reward1Entries = [ChartDataEntry]()

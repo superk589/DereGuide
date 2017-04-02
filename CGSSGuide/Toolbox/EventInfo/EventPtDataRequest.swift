@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class EventPtDataRequest {
 
-    static func requestPtData(event: CGSSEvent, callback: ((EventPtRankingList?) -> Void)?) {
+    static func requestPtData(event: CGSSEvent, callback: ((EventPtRanking?) -> Void)?) {
         BaseRequest.default.getWith(urlString: "https://api.tachibana.cool/v1/starlight/event/\(event.id)/ranking_list.json") { (data, response, error) in
             if error == nil {
                 let json = JSON.init(data: data!)
-                let list = EventPtRankingList.init(fromJson: json)
+                let list = EventPtRanking.init(fromJson: json)
                 list.event = event
                 callback?(list)
             } else {
@@ -24,11 +24,11 @@ class EventPtDataRequest {
         }
     }
     
-    static func requestHighScoreData(event: CGSSEvent, callback: ((EventScoreRankingList?) -> Void)?) {
+    static func requestHighScoreData(event: CGSSEvent, callback: ((EventScoreRanking?) -> Void)?) {
         BaseRequest.default.getWith(urlString: "https://api.tachibana.cool/v1/starlight/event/\(event.id)/ranking_list_high.json") { (data, response, error) in
             if error == nil {
                 let json = JSON.init(data: data!)
-                let list = EventScoreRankingList.init(fromJson: json)
+                let list = EventScoreRanking.init(fromJson: json)
                 list.event = event
                 callback?(list)
             } else {
