@@ -32,7 +32,7 @@ PODS:
   - SwiftyJSON (3.1.4)
   - TTGTagCollectionView (1.5.0)
   - ZKCornerRadiusView (0.0.5)
-  - ZKDrawerController (0.1.0):
+  - ZKDrawerController (0.1.1):
     - SnapKit
 
 DEPENDENCIES:
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTGTagCollectionView: 36769ac08e29e8ce37f7dab98014b373d2d005db
   ZKCornerRadiusView: ba7d6d9b4f0227327dce493f7a8f4cddf5234efc
-  ZKDrawerController: 4737d1696b6e051c936b52dbfbb95d4f47c996ae
+  ZKDrawerController: c0df29bdb329ee48ac348ed54ea2d79bade9d0a6
 
 PODFILE CHECKSUM: da792f4b63ef28ddc122342f11acfec5223d1c75
 

@@ -106,7 +106,7 @@ extension GachaDetailController: GachaDetailViewDelegate {
     }
 }
 
-// MARK: Simual
+// MARK: GachaSimulateViewDelegate
 extension GachaDetailController: GachaSimulateViewDelegate {
     func tenGacha(gachaSimulateView: GachaSimulateView) {
         let cardIds = pool.simulate(times: 10, srGuaranteeCount: 1)
