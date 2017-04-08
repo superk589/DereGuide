@@ -30,19 +30,32 @@ class EventTrend : NSObject, NSCoding {
     var startDate : String!
     
     lazy var lives: [CGSSLive] = {
-        var results = [CGSSLive]()
-        let group = DispatchGroup.init()
-        for liveId in self.liveDataIds {
-            group.enter()
-            CGSSGameResource.shared.master.getLives(liveId: liveId, callback: { (lives) in
-                results.append(contentsOf: lives)
-                group.leave()
+        return self.liveDataIds.flatMap {
+            var result: CGSSLive?
+            let semaphore = DispatchSemaphore.init(value: 0)
+            CGSSGameResource.shared.master.getLives(liveId: $0, callback: { (lives) in
+                result = lives.first
+                semaphore.signal()
             })
+            semaphore.wait()
+            return result
         }
-        
-        group.wait()
-        return results
     }()
+//    lazy var lives: [CGSSLive] = {
+//        self.liveDataIds.
+//        var results = [CGSSLive]()
+//        let group = DispatchGroup.init()
+//        for liveId in self.liveDataIds {
+//            group.enter()
+//            CGSSGameResource.shared.master.getLives(liveId: liveId, callback: { (lives) in
+//                results.append(contentsOf: lives)
+//                group.leave()
+//            })
+//        }
+//        
+//        group.wait()
+//        return results
+//    }()
 
     /**
      * Instantiate the instance using the passed json values to set the properties values

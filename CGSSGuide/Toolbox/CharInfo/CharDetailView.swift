@@ -60,7 +60,7 @@ class CharDetailView: UIView {
         charNameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
         charIconView.charId = char.charaId
         profileView.setup(char)
-        var cards = CGSSDAO.sharedDAO.findCardsByCharId(char.charaId)
+        var cards = CGSSDAO.shared.findCardsByCharId(char.charaId)
         let sorter = CGSSSorter.init(property: "sAlbumId")
         sorter.sortList(&cards)
         if cards.count > 0 {

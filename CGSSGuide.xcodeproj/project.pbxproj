@@ -141,7 +141,6 @@
 		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
-		128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
 		129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */; };
@@ -365,7 +364,6 @@
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaPoolTableViewCell.swift; sourceTree = "<group>"; };
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinator.swift; sourceTree = "<group>"; };
@@ -898,7 +896,6 @@
 		12D45ACA1E2E44670009986F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				128836EA1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift */,
 				12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */,
 				12D45AC71E2E44590009986F /* GachaTableViewCell.swift */,
 				128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */,
@@ -1082,7 +1079,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1123,7 +1120,6 @@
 				124BA50D1E914ACD002E48FE /* EventTrend.swift in Sources */,
 				12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
-				128836EB1DB381AF002E9CD4 /* GachaPoolTableViewCell.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,

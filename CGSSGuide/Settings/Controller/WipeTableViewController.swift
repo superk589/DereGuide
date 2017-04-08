@@ -46,7 +46,7 @@ class WipeTableViewController: BaseTableViewController {
                         CGSSCacheManager.shared.wipeImage()
                     case 2:
                         CGSSCacheManager.shared.wipeCard()
-                        let dao = CGSSDAO.sharedDAO
+                        let dao = CGSSDAO.shared
                         dao.getDictForKey(.card).removeAllObjects()
                         dao.getDictForKey(.char).removeAllObjects()
                         dao.getDictForKey(.leaderSkill).removeAllObjects()

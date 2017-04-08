@@ -37,7 +37,6 @@ class TeamTableViewCell: UITableViewCell {
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 12)
             label.textColor = UIColor.darkGray
-            label.backgroundColor = UIColor.white
             contentView.addSubview(label)
             skillLvLabels.append(label)
             
@@ -56,35 +55,30 @@ class TeamTableViewCell: UITableViewCell {
         lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
         lifeLabel.textColor = Color.life
         lifeLabel.textAlignment = .right
-        lifeLabel.backgroundColor = UIColor.white
         
         vocalLabel = UILabel()
         vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
         vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
         vocalLabel.textColor = Color.vocal
         vocalLabel.textAlignment = .right
-        vocalLabel.backgroundColor = UIColor.white
         
         danceLabel = UILabel()
         danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
         danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
         danceLabel.textColor = Color.dance
         danceLabel.textAlignment = .right
-        danceLabel.backgroundColor = UIColor.white
         
         visualLabel = UILabel()
         visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
         visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
         visualLabel.textColor = Color.visual
         visualLabel.textAlignment = .right
-        visualLabel.backgroundColor = UIColor.white
         
         totalLabel = UILabel()
         totalLabel.frame = CGRect(x: originX + 4 * width, y: originY, width: width, height: height)
         totalLabel.font = UIFont.init(name: "menlo", size: fontSize)
         totalLabel.textColor = UIColor.darkGray
         totalLabel.textAlignment = .right
-        totalLabel.backgroundColor = UIColor.white
         
         contentView.addSubview(vocalLabel)
         contentView.addSubview(lifeLabel)
@@ -95,7 +89,6 @@ class TeamTableViewCell: UITableViewCell {
         let asView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate)
         asView.tintColor = UIColor.lightGray
-        asView.backgroundColor = UIColor.white
         self.accessoryView = asView
         
         // Initialization code

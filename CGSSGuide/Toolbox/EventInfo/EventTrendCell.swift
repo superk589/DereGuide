@@ -19,7 +19,15 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     var arrow: UIImageView!
     var collectionView: TTGTagCollectionView!
     
-    var tagViews = [BannerView]()
+    var trend: EventTrend? {
+        didSet {
+            needToReload = true
+        }
+    }
+    
+    private var needToReload = false
+    
+    var tagViewsCache = NSCache<NSNumber, UIView>()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,48 +100,70 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
         } else if now > end {
             statusIndicator.style = .past
         }
-        tagViews.removeAll()
-        for live in trend.lives {
-            let jacketView = BannerView.init(frame: CGRect.init(x: 0, y: 0, width: 66, height: 66))
-            tagViews.append(jacketView)
-            if let url = live.jacketURL {
-                jacketView.sd_setImage(with: url)
-            }
-        }
-        collectionView.reload()
+        self.trend = trend
+        setArrowSelected(isSelected, animated: false)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        UIView.animateKeyframes(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState], animations: { [weak self] in
+        if selected {
+            reloadIfNeeded()
+        }
+    }
+    
+    var indexPath: IndexPath?
+    
+     func reloadIfNeeded() {
+        if needToReload {
+            collectionView.reload()
+            needToReload = false
+        }
+    }
+    
+    func setArrowSelected(_ selected: Bool, animated: Bool) {
+        if animated {
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState], animations: { [weak self] in
+                if selected {
+                    self?.arrow.transform = CGAffineTransform.init(rotationAngle: .pi)
+                } else {
+                    self?.arrow.transform = .identity
+                }
+            }, completion: nil)
+        } else {
             if selected {
-                self?.arrow.transform = CGAffineTransform.init(rotationAngle: .pi)
+                arrow.transform = CGAffineTransform.init(rotationAngle: .pi)
             } else {
-                self?.arrow.transform = .identity
+                arrow.transform = .identity
             }
-        }, completion: nil)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func dequeueFromCachedTags(for index: UInt) -> UIView? {
+        return tagViewsCache.object(forKey: NSNumber.init(value: index))
+    }
+    
     func numberOfTags(in tagCollectionView: TTGTagCollectionView!) -> UInt {
-        return UInt(tagViews.count)
+        return isSelected ? UInt(trend?.lives.count ?? 0) : 0
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
-        return tagViews[Int(index)]
+        
+        let tagView = dequeueFromCachedTags(for: index) as? BannerView ?? BannerView.init(frame: CGRect.init(x: 0, y: 0, width: 132, height: 132))
+        
+        if let url = trend?.lives[Int(index)].jacketURL {
+            tagView.sd_setImage(with: url)
+        }
+        
+        tagViewsCache.setObject(tagView, forKey: NSNumber.init(value: index))
+        return tagView
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, sizeForTagAt index: UInt) -> CGSize {
-        
-        return CGSize.init(width: 66, height: 66)
+        return CGSize.init(width: 132, height: 132)
     }
-    
-    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, updateContentSize contentSize: CGSize) {
-        
-    }
-    
+
 }

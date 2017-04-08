@@ -184,8 +184,8 @@ class CharProfileView: UIView {
         voiceCell.setup("CV", content: char.voiceFromDB ?? "")
         for subView in subviews {
             let iv = (subView as! CharProfileViewCell).descLabel.iv
-            iv?.tintColor = char.attColor.withAlphaComponent(0.5)
-            iv?.image = UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate)
+            iv?.zk.backgroundColor = char.attColor.withAlphaComponent(0.5)
+            iv?.render()
         }
     }
     

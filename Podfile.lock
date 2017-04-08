@@ -31,7 +31,7 @@ PODS:
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - TTGTagCollectionView (1.5.0)
-  - ZKCornerRadiusView (0.0.5)
+  - ZKCornerRadiusView (0.0.6)
   - ZKDrawerController (0.1.1):
     - SnapKit
 
@@ -66,9 +66,9 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTGTagCollectionView: 36769ac08e29e8ce37f7dab98014b373d2d005db
-  ZKCornerRadiusView: ba7d6d9b4f0227327dce493f7a8f4cddf5234efc
+  ZKCornerRadiusView: d1018687c0c3bfcd321786b8c1cac81602ed95f2
   ZKDrawerController: c0df29bdb329ee48ac348ed54ea2d79bade9d0a6
 
 PODFILE CHECKSUM: da792f4b63ef28ddc122342f11acfec5223d1c75
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1.rc.1

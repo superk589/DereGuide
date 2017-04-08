@@ -25,7 +25,7 @@ class CGSSTeamMember: NSObject, NSCoding {
     var danceLevel: Int?
     var visualLevel:Int?
 	var cardRef: CGSSCard? {
-		let dao = CGSSDAO.sharedDAO
+		let dao = CGSSDAO.shared
 		return dao.findCardById(id!)
 	}
     init(id: Int, skillLevel: Int, vocalLevel:Int = 0, danceLevel:Int = 0 ,visualLevel:Int = 0) {

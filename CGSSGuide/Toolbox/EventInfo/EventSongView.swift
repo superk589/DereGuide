@@ -54,8 +54,8 @@ class EventSongView: UIView {
         for i in 0...4 {
             let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
             // diffView.label.font = UIFont.init(name: "menlo", size: fontSize)
-            diffView.iv.tintColor = colors[i]
-            diffView.iv.image = UIImage.init(named: "icon_placeholder")?.withRenderingMode(.alwaysTemplate)
+            diffView.iv.zk.backgroundColor = colors[i]
+            diffView.iv.render()
             diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))

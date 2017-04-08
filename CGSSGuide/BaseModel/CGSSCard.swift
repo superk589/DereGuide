@@ -52,19 +52,19 @@ extension CGSSCard {
     
     var chara: CGSSChar? {
         if let id = charaId {
-            return CGSSDAO.sharedDAO.findCharById(id)
+            return CGSSDAO.shared.findCharById(id)
         }
         return nil
     }
     var leaderSkill: CGSSLeaderSkill? {
         if let id = leaderSkillId {
-            return CGSSDAO.sharedDAO.findLeaderSkillById(id)
+            return CGSSDAO.shared.findLeaderSkillById(id)
         }
         return nil
     }
     var skill: CGSSSkill? {
         if let id = skillId {
-            return CGSSDAO.sharedDAO.findSkillById(id)
+            return CGSSDAO.shared.findSkillById(id)
         }
         return nil
     }
@@ -279,7 +279,7 @@ class CGSSCard: CGSSBaseModel {
         vocalMax = json["vocal_max"].intValue
         vocalMin = json["vocal_min"].intValue
         
-        let dao = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.shared
         let skillJson = json["skill"]
         if skillJson != JSON.null {
             if let skill = dao.findSkillById(skillId), !skill.isOldVersion {

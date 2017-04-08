@@ -153,7 +153,7 @@ extension CardDetailViewController: CardDetailViewDelegate {
 extension CardDetailViewController: CGSSIconViewDelegate {
     func iconClick(_ iv: CGSSIconView) {
         if let icon = iv as? CGSSCardIconView {
-            let dao = CGSSDAO.sharedDAO
+            let dao = CGSSDAO.shared
             // 如果因为数据更新导致未查找到指定的卡片, 则不弹出新页面
             if let card = dao.findCardById(icon.cardId!) {
                 let cardDetailVC = CardDetailViewController()

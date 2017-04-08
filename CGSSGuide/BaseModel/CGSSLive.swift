@@ -84,7 +84,7 @@ extension CGSSLive {
     }
     
 //    dynamic var bpm: Int {
-//        let dao = CGSSDAO.sharedDAO
+//        let dao = shared
 //        return dao.findSongById(self.musicId!)?.bpm ?? 0
 //    }
     

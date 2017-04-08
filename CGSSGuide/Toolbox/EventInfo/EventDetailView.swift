@@ -152,7 +152,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         addSubview(songDescLabel)
         songDescLabel.textColor = UIColor.darkGray
         songDescLabel.text = NSLocalizedString("活动曲", comment: "")
-        songDescLabel.font = Font.content
+        songDescLabel.font = Font.title
         songDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line2.snp.bottom).offset(8)
@@ -162,7 +162,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         addSubview(liveTrendLabel)
         liveTrendLabel.textColor = UIColor.lightGray
         liveTrendLabel.text = NSLocalizedString("流行曲", comment: "") + " >"
-        liveTrendLabel.font = Font.content
+        liveTrendLabel.font = Font.title
         liveTrendLabel.snp.makeConstraints { (make) in
             make.top.equalTo(line2.snp.bottom).offset(8)
             make.right.equalTo(-10)
@@ -202,7 +202,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         eventPtContentView.addSubview(eventPtDescLabel)
         eventPtDescLabel.textColor = UIColor.darkGray
         eventPtDescLabel.text = NSLocalizedString("活动pt档位", comment: "")
-        eventPtDescLabel.font = Font.content
+        eventPtDescLabel.font = Font.title
         eventPtDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line4.snp.bottom).offset(8)
@@ -214,7 +214,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             make.right.equalTo(-10)
             make.top.equalTo(eventPtDescLabel)
         }
-        gotoPtChartLabel.font = Font.content
+        gotoPtChartLabel.font = Font.title
         gotoPtChartLabel.textColor = UIColor.lightGray
         gotoPtChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
         let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(gotoPtChartAction))
@@ -256,7 +256,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         eventScoreContentView.addSubview(eventScoreDescLabel)
         eventScoreDescLabel.textColor = UIColor.darkGray
         eventScoreDescLabel.text = NSLocalizedString("歌曲分数档位", comment: "")
-        eventScoreDescLabel.font = Font.content
+        eventScoreDescLabel.font = Font.title
         eventScoreDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line5.snp.bottom).offset(8)
@@ -268,7 +268,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             make.right.equalTo(-10)
             make.top.equalTo(eventScoreDescLabel)
         }
-        gotoScoreChartLabel.font = Font.content
+        gotoScoreChartLabel.font = Font.title
         gotoScoreChartLabel.textColor = UIColor.lightGray
         gotoScoreChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
         let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(gotoScoreChartAction))
@@ -333,6 +333,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             card2View.isHidden = true
             songView.isHidden = true
             songDescLabel.isHidden = true
+            liveTrendLabel.isHidden = true
             
             line1.isHidden = true
             line2.isHidden = true
@@ -347,10 +348,10 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
                 var rewards = event.reward.sorted(by: { (r1, r2) -> Bool in
                     return r1.recommandOrder < r2.recommandOrder
                 })
-                if let card1 = CGSSDAO.sharedDAO.findCardById(rewards[0].cardId) {
+                if let card1 = CGSSDAO.shared.findCardById(rewards[0].cardId) {
                     card1View.setup(card: card1, desc: NSLocalizedString("上位", comment: ""))
                 }
-                if let card2 = CGSSDAO.sharedDAO.findCardById(rewards[1].cardId) {
+                if let card2 = CGSSDAO.shared.findCardById(rewards[1].cardId) {
                     card2View.setup(card: card2, desc: NSLocalizedString("下位", comment: ""))
                 }
             }

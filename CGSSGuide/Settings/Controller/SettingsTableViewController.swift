@@ -113,7 +113,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     
     func wipeData() {
-        if CGSSUpdater.defaultUpdater.isWorking {
+        if CGSSUpdater.default.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试清除数据。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -125,7 +125,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     }
     
     func cacheImage() {
-        if CGSSUpdater.defaultUpdater.isWorking {
+        if CGSSUpdater.default.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -139,7 +139,7 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     
     func cancelUpdate() {
         SDWebImagePrefetcher.shared().cancelPrefetching()
-        CGSSUpdater.defaultUpdater.isUpdating = false
+        CGSSUpdater.default.isUpdating = false
         let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)

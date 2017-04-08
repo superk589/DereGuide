@@ -15,7 +15,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     var searchBar: CGSSSearchBar!
     
     func check(_ types: CGSSUpdateDataTypes) {
-        let updater = CGSSUpdater.defaultUpdater
+        let updater = CGSSUpdater.default
         if updater.isUpdating {
             refresher.endRefreshing()
             return
@@ -95,7 +95,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     }
     
     func cancelUpdate() {
-        let updater = CGSSUpdater.defaultUpdater
+        let updater = CGSSUpdater.default
         updater.cancelCurrentSession()
     }
     
@@ -108,7 +108,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     deinit {
         if !self.updateStatusView.isHidden {
             updateStatusView.isHidden = true
-            let updater = CGSSUpdater.defaultUpdater
+            let updater = CGSSUpdater.default
             updater.cancelCurrentSession()
         }
     }

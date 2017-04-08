@@ -70,7 +70,7 @@ typealias CGSSProgressCompleteClosure = (_ success: Int, _ total: Int) -> Void
 
 open class CGSSUpdater: NSObject {
   
-    static let defaultUpdater = CGSSUpdater()
+    static let `default` = CGSSUpdater()
     
     var isWorking: Bool {
         return isUpdating || isChecking
@@ -184,7 +184,7 @@ open class CGSSUpdater: NSObject {
                 var items = [CGSSUpdateItem]()
                 if let cards = json["result"].array {
                     for card in cards {
-                        let dao = CGSSDAO.sharedDAO
+                        let dao = CGSSDAO.shared
                         if let oldCard = dao.findCardById(card["id"].intValue) {
                             if oldCard.isOldVersion {
                                 let item = CGSSUpdateItem.init(dataType: .card, id: card["id"].stringValue, hash: "")
@@ -396,7 +396,7 @@ open class CGSSUpdater: NSObject {
                         let json = JSON.init(data: data!)["result"][0]
                         if json != JSON.null {
                             let card = CGSSCard.init(fromJson: json)
-                            let dao = CGSSDAO.sharedDAO
+                            let dao = CGSSDAO.shared
                             if let oldCard = dao.cardDict.object(forKey: item.id) as? CGSSCard {
                                 let updateTime = oldCard.updateTime
                                 card.updateTime = updateTime
@@ -416,7 +416,7 @@ open class CGSSUpdater: NSObject {
                         // print("download beatmap item error")
                     } else {
                         let beatmapData = LZ4Decompressor.decompress(data!)
-                        let dao = CGSSDAO.sharedDAO
+                        let dao = CGSSDAO.shared
                         dao.saveBeatmapData(data: beatmapData, liveId: Int(item.id) ?? 0)
                         BeatmapHashManager.default.hashTable[item.id] = item.hashString
                         success += 1
@@ -445,7 +445,7 @@ open class CGSSUpdater: NSObject {
             }
         }
         group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
-            let dao = CGSSDAO.sharedDAO
+            let dao = CGSSDAO.shared
             dao.saveAll({
                 // 保存成功后 将版本置为最新版
                 CGSSVersionManager.default.setDataVersionToNewest()

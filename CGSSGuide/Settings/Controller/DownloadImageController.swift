@@ -146,9 +146,9 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             
             self.removeAllURLs()
             
-            let cards = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
+            let cards = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
         
-            let chars = CGSSDAO.sharedDAO.charDict.allValues as! [CGSSChar]
+            let chars = CGSSDAO.shared.charDict.allValues as! [CGSSChar]
             // 所有卡片大图和头像图
             for card in cards {
                 // 卡片大图
@@ -271,7 +271,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
     }
     
     func cacheData() {
-        if CGSSUpdater.defaultUpdater.isWorking {
+        if CGSSUpdater.default.isWorking {
             return
         }
         var urls = [URL]()
@@ -283,7 +283,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         
         self.updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
         
-        CGSSUpdater.defaultUpdater.updateImages(urls: urls, progress: { (a, b) in
+        CGSSUpdater.default.updateImages(urls: urls, progress: { (a, b) in
             DispatchQueue.main.async {
                 self.updateStatusView.updateProgress(a, b: b)
             }
@@ -352,7 +352,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
 
     func cancelUpdate() {
         SDWebImagePrefetcher.shared().cancelPrefetching()
-        CGSSUpdater.defaultUpdater.isUpdating = false
+        CGSSUpdater.default.isUpdating = false
         let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)

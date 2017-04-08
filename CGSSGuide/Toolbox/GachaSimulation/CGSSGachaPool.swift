@@ -24,7 +24,7 @@ extension CGSSGachaPool {
     var cardList: [CGSSCard] {
         get {
             var list = [CGSSCard]()
-            let dao = CGSSDAO.sharedDAO
+            let dao = CGSSDAO.shared
             for reward in self.rewardTable.values {
                 if let card = dao.findCardById(reward.cardId) {
                     list.append(card)
@@ -133,7 +133,7 @@ class CGSSGachaPool: CGSSBaseModel {
         self.srRatio = sr_ratio
         self.ssrRatio = ssr_ratio
         self.rewardTable = [Int: Reward]()
-        let dao = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.shared
         for reward in rewards {
             if reward.recommandOrder > 0 {
                 new.append(reward)

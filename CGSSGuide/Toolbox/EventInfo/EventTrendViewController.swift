@@ -34,7 +34,7 @@ class EventTrendViewController: BaseTableViewController {
                     for trend in trends {
                         if trend.startDate.toDate() <= now && trend.endDate.toDate() > now {
                             let index = trends.index(of: trend)!
-                            self.tableView.selectRow(at: IndexPath.init(row: index, section: 0), animated: true, scrollPosition: .none)
+                            self.tableView.selectRow(at: IndexPath.init(row: index, section: 0), animated: true, scrollPosition: .top)
                         }
                     }
                     CGSSLoadingHUDManager.default.hide()
@@ -48,12 +48,12 @@ class EventTrendViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView.indexPathsForSelectedRows?.contains(indexPath) ?? false {
             let count = trends[indexPath.row].lives.count
-            let itemsPerRow = floor((Screen.width - 15) / CGFloat(66 + 5))
+            let itemsPerRow = floor((Screen.width - 15) / CGFloat(132 + 5))
             let rows = ceil(CGFloat(count) / itemsPerRow)
             guard rows >= 1 else {
                 return 44
             }
-            return 44 + (rows * 66) + (rows - 1) * 5 + 10
+            return 44 + (rows * 132) + (rows - 1) * 5 + 10
         } else {
             return 44
         }
@@ -74,11 +74,17 @@ class EventTrendViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? EventTrendCell {
+            cell.setArrowSelected(true, animated: true)
+        }
         tableView.beginUpdates()
         tableView.endUpdates()
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? EventTrendCell {
+            cell.setArrowSelected(false, animated: true)
+        }
         tableView.beginUpdates()
         tableView.endUpdates()
     }

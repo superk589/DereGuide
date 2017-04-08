@@ -160,7 +160,7 @@ class GachaDetailView: UIView {
             timeStatusIndicator.style = .past
         }
         
-        let dao = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.shared
         var cards = [CGSSCard]()
         for reward in pool.new {
             if let card = dao.findCardById(reward.cardId) {

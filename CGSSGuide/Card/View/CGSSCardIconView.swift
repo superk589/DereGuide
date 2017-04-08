@@ -8,15 +8,18 @@
 
 import UIKit
 
+fileprivate extension CGSSCard {
+    var placeholderImage: UIImage {
+        return cardType.placeholder
+    }
+}
+
 class CGSSCardIconView: CGSSIconView {
     
     var cardId: Int? {
         didSet {
-            if let id = cardId {
-                self.tintColor = CGSSDAO.sharedDAO.findCardById(id)?.attColor.withAlphaComponent(0.5)
-                // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
-                let url = DataURL.Images + "/icon_card/\(id).png"
-                self.setIconImage(url)
+            if let id = cardId, let url = URL.init(string: DataURL.Images + "/icon_card/\(id).png") {
+                self.sd_setImage(with: url, placeholderImage: CGSSDAO.shared.findCardById(id)?.placeholderImage)
             }
         }
     }

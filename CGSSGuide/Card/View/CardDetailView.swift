@@ -175,7 +175,7 @@ class CardDetailView: UIView {
         
         // 设置角色和关联卡信息
         
-        var cards = CGSSDAO.sharedDAO.findCardsByCharId(card.charaId)
+        var cards = CGSSDAO.shared.findCardsByCharId(card.charaId)
         let sorter = CGSSSorter.init(property: "sAlbumId")
         sorter.sortList(&cards)
         if cards.count > 0 {
@@ -555,7 +555,7 @@ class CardDetailView: UIView {
         var types: CGSSAvailableTypes = .free
         if card.evolutionId == 0 {
             availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
-            if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
+            if let cardFrom = CGSSDAO.shared.findCardById(card.id - 1) {
                 types = cardFrom.gachaType
             }
         } else {
@@ -576,7 +576,7 @@ class CardDetailView: UIView {
 //        var tuple = (false, false, false, false)
 //        if card.evolutionId == 0 {
 //            availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
-//            if let cardFrom = CGSSDAO.sharedDAO.findCardById(card.id - 1) {
+//            if let cardFrom = shared.findCardById(card.id - 1) {
 //                tuple = cardFrom.available
 //            }
 //        } else {

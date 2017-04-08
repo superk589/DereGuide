@@ -78,7 +78,7 @@ class GachaSimulateView: UIView {
             let y = CGFloat(i / 5) * (btnW + space)
             let btn = CGSSCardIconView.init(frame: CGRect.init(x: x, y: y, width: btnW, height: btnW))
             btn.setWithCardId(cardIds[i], target: self, action: #selector(iconClick(iv:)))
-            if let card = CGSSDAO.sharedDAO.findCardById(cardIds[i]), card.rarityType == .ssr {
+            if let card = CGSSDAO.shared.findCardById(cardIds[i]), card.rarityType == .ssr {
                 let view = UIView.init(frame: btn.frame)
                 view.isUserInteractionEnabled = false
                 view.addGlowAnimateAlongBorder(clockwise: true, imageName: "star", count: 3, cornerRadius: btn.fheight / 8)

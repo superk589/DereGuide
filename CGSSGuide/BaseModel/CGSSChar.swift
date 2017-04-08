@@ -179,7 +179,7 @@ extension CGSSChar {
         semaphore.wait()
         if voice != result {
             voice = result ?? ""
-            CGSSDAO.sharedDAO.saveDataToFile(.char, complete: nil)
+            CGSSDAO.shared.saveDataToFile(.char, complete: nil)
         }
         return result
     }

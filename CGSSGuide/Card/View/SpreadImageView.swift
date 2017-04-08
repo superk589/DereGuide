@@ -37,17 +37,24 @@ class SpreadImageView: UIImageView {
     }
     
     func setImage(with url: URL, shouldShowIndicator: Bool = true) {
-        if shouldShowIndicator {
-            showIndicator()
-        }
-        sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveDownload], progress: { [weak self] (current, total, url) in
-            DispatchQueue.main.async {
-                self?.progressIndicator.progress = Float(current) / Float(total)
-            }
-        }) { (image, error, cacheType, url) in
-            DispatchQueue.main.async {
-                self.progressIndicator.progress = 1
-                self.hideIndicator()
+        
+        SDWebImageManager.shared().cachedImageExists(for: url) { [weak self] (isInCache) in
+            if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !isInCache {
+                return
+            } else {
+                if shouldShowIndicator {
+                    self?.showIndicator()
+                }
+                self?.sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveDownload], progress: { (current, total, url) in
+                    DispatchQueue.main.async {
+                        self?.progressIndicator.progress = Float(current) / Float(total)
+                    }
+                }) { (image, error, cacheType, url) in
+                    DispatchQueue.main.async {
+                        self?.progressIndicator.progress = 1
+                        self?.hideIndicator()
+                    }
+                }
             }
         }
     }

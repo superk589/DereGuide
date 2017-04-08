@@ -18,7 +18,7 @@ class CardTableViewController: BaseCardTableViewController {
         let versionManager = CGSSVersionManager.default
         // 如果数据Major版本号过低强制删除旧数据 再更新 没有取消按钮
         if versionManager.newestDataVersion.0 > versionManager.currentDataVersion.0 {
-            let dao = CGSSDAO.sharedDAO
+            let dao = CGSSDAO.shared
             dao.removeAllData()
             let alert = UIAlertController.init(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "弹出框正文"), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in

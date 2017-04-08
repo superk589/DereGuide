@@ -11,7 +11,7 @@ import UIKit
 class CGSSShiftingBPMLive: CGSSLive {
     
 //    static func checkIsShifting(_ live:CGSSLive) -> Bool {
-//        let dao = CGSSDAO.sharedDAO
+//        let dao = shared
 //        if let beatmap = dao.findBeatmapById(live.id, diffId: live.maxDiff) {
 //            var noteIntervals = [Double]()
 //            for note in beatmap.validNotes {

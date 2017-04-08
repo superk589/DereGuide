@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarController = CGSSClient.shared.tabBarController
             if let nvc = tabBarController?.selectedViewController as? UINavigationController,
                 let charaId = notification.userInfo?["chara_id"] as? Int,
-                let char = CGSSDAO.sharedDAO.findCharById(charaId) {
+                let char = CGSSDAO.shared.findCharById(charaId) {
                 let vc = CharDetailViewController()
                 vc.char = char
                 vc.hidesBottomBarWhenPushed = true

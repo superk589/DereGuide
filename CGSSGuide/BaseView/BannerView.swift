@@ -37,23 +37,29 @@ class BannerView: UIImageView {
     }
     
     override func sd_setImage(with url: URL!) {
-        showIndicator()
-        super.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
-            self?.indicator?.stopAnimating()
-            self?.indicator2?.stopAnimating()
+        sd_setImage(with: url, completed: nil)
+    }
+    
+    private func createIndicatorIfNeeded() {
+        if style == .system {
+            if indicator == nil {
+                indicator = UIActivityIndicatorView.init()
+                indicator?.activityIndicatorViewStyle = .gray
+                addSubview(indicator!)
+            }
+        } else {
+            if indicator2 == nil {
+                indicator2 = LoadingImageView(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
+                addSubview(indicator2!)
+            }
         }
     }
     
     private func showIndicator() {
+        createIndicatorIfNeeded()
         if style == .system {
-            indicator = UIActivityIndicatorView.init()
-            indicator?.activityIndicatorViewStyle = .gray
-            addSubview(indicator!)
             indicator?.startAnimating()
-
         } else {
-            indicator2 = LoadingImageView(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
-            addSubview(indicator2!)
             indicator2?.startAnimating()
         }
     }

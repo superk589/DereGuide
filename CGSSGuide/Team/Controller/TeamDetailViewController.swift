@@ -208,7 +208,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func cardIconClick(_ id: Int) {
-        if let card = CGSSDAO.sharedDAO.findCardById(id) {
+        if let card = CGSSDAO.shared.findCardById(id) {
             let cardDVC = CardDetailViewController()
             cardDVC.card = card
             navigationController?.pushViewController(cardDVC, animated: true)

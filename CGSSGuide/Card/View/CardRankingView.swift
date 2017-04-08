@@ -53,7 +53,7 @@ class CardRankingView: UIView {
 
     func setup(with card: CGSSCard) {
         // 设置属性排名列表
-        let dao = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.shared
         var rankGridStrings = [[String]]()
         let rankInType = dao.getRankInType(card)
         let rankInAll = dao.getRankInAll(card)

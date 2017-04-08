@@ -300,7 +300,7 @@ extension TeamEditViewController: CGSSIconViewDelegate {
     func iconClick(_ iv: CGSSIconView) {
         let cardIcon = iv as! CGSSCardIconView
         if let id = cardIcon.cardId {
-            if let card = CGSSDAO.sharedDAO.findCardById(id) {
+            if let card = CGSSDAO.shared.findCardById(id) {
                 let cardDVC = CardDetailViewController()
                 cardDVC.card = card
                 navigationController?.pushViewController(cardDVC, animated: true)

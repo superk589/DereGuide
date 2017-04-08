@@ -632,7 +632,7 @@ class CGSSGameResource: NSObject {
         let types = notification.object as! CGSSUpdateDataTypes
         if types.contains(.master) || types.contains(.card) {
             prepareGachaList {
-                let list = CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]
+                let list = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
                 for item in list {
                     item.availableType = nil
                 }

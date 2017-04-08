@@ -8,16 +8,33 @@
 
 import UIKit
 
+extension CGSSCharTypes {
+    var placeholder: UIImage {
+        switch self {
+        case CGSSCharTypes.cute:
+            return #imageLiteral(resourceName: "cute_placeholder")
+        case CGSSCharTypes.cool:
+            return #imageLiteral(resourceName: "cool-placeholder")
+        case CGSSCharTypes.passion:
+            return #imageLiteral(resourceName: "passtion-placeholder")
+        default:
+            return UIImage()
+        }
+    }
+}
+
+fileprivate extension CGSSChar {
+    var placeholderImage: UIImage {
+        return charType.placeholder
+    }
+}
+
 class CGSSCharIconView: CGSSIconView {
     
     var charId: Int? {
         didSet {
-            if let id = charId {
-                self.tintColor = CGSSDAO.sharedDAO.findCharById(id)?.attColor.withAlphaComponent(0.5)
-                // let url = NSURL.init(string: CGSSUpdater.URLOfDeresuteApi + "/image/card_\(id)_m.png")
-                // 修改图标数据地址服务器为https://hoshimoriuta.kirara.ca
-                let url = DataURL.Images + "/icon_char/\(id).png"
-                self.setIconImage(url)
+            if let id = charId, let url = URL.init(string: DataURL.Images + "/icon_char/\(id).png") {
+                self.sd_setImage(with: url, placeholderImage: CGSSDAO.shared.findCharById(id)?.placeholderImage)
             }
         }
     }

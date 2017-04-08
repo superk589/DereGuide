@@ -40,7 +40,7 @@ class BirthdayCenter {
     }
     
     @objc func prepare() {
-        let dao = CGSSDAO.sharedDAO
+        let dao = CGSSDAO.shared
         chars = dao.charDict.allValues as! [CGSSChar]
         chars.sort { (char1, char2) -> Bool in
             char1.nextBirthday < char2.nextBirthday

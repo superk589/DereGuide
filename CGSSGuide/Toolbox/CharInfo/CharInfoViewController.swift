@@ -57,7 +57,7 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
     // 根据设定的筛选和排序方法重新展现数据
     override func refresh() {
         filter.searchText = searchBar.text ?? ""
-        self.charList = filter.filter(CGSSDAO.sharedDAO.charDict.allValues as! [CGSSChar])
+        self.charList = filter.filter(CGSSDAO.shared.charDict.allValues as! [CGSSChar])
         sorter.sortList(&self.charList!)
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要

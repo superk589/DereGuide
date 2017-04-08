@@ -1,6 +1,23 @@
 # ChangeLog
 
+### 1.2.7
+
+1. 巡演活动页面中，增加了查看每日流行曲的功能
+2. 修复极限分数1有时会不准确的问题
+3. 多处性能优化
+
+
+##### Japanese version
+
+##### English version
+
+1. Add bonus song info in live parade event page.
+2. Fix that sometimes optimistic score 1 is not correct.
+3. Many other improvements.
+
+
 ### 1.2.6
+(released with 1.2.7)
 
 1. 增加对新技能类型"Cute/Cool/Passion集中"的支持
 2. 模拟算分增加查看得分详情的功能
@@ -28,6 +45,7 @@
 6. Add In-app rating feature(only for iOS 10.3+).
 
 ### 1.2.5
+2017-3-30
 
 1. 增加对“技能增强”类型特技的支持
 2. 模拟算分增加对技能发动几率提高类型队长技的支持
@@ -55,6 +73,7 @@
 6. other bug fix and improvements
 
 ### 1.2.4
+2017-2-24
 
 1. 卡片信息，卡片筛选和组队模拟中增加对All Round(全才)等新技能的支持
 2. 增强组队模拟中得分计算的功能，平均分计算不再使用模拟法

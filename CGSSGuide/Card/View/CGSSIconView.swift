@@ -13,7 +13,7 @@ protocol CGSSIconViewDelegate: class {
     func iconClick(_ iv: CGSSIconView)
 }
 
-class CGSSIconView: ZKCornerRadiusView {
+class CGSSIconView: UIImageView {
     
     var tap: UITapGestureRecognizer?
     var action: Selector?
@@ -35,10 +35,6 @@ class CGSSIconView: ZKCornerRadiusView {
         addGestureRecognizer(tap!)
     }
     
-    func setIconImage(_ urlStr: String) {
-        sd_setImage(with: URL.init(string: urlStr)!, placeholderImage: #imageLiteral(resourceName: "icon_placeholder").withRenderingMode(.alwaysTemplate))
-    }
-    
     func setAction(_ target: AnyObject, action: Selector) {
         self.action = action
         self.target = target
@@ -50,10 +46,7 @@ class CGSSIconView: ZKCornerRadiusView {
             _ = self.target?.perform(action!, with: self)
         }
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        zk.cornerRadius = self.fheight / 8
-    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepare()

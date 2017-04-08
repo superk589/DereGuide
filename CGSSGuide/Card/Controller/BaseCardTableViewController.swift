@@ -67,7 +67,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.filter.searchText = self?.searchBar.text ?? ""
-            var newList = self?.filter.filter(CGSSDAO.sharedDAO.cardDict.allValues as! [CGSSCard]) ?? [CGSSCard]()
+            var newList = self?.filter.filter(CGSSDAO.shared.cardDict.allValues as! [CGSSCard]) ?? [CGSSCard]()
             self?.sorter.sortList(&newList)
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
