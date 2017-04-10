@@ -373,6 +373,12 @@ class Master: FMDatabaseQueue {
                         while set.next() {
                             
                             let id = Int(set.int(forColumn: "id"))
+                            
+                            let beatmapCount = CGSSGameResource.shared.getBeatmapCount(liveId: id)
+                            
+                            // not valid if count == 0
+                            if beatmapCount == 0 { continue }
+
                             let musicId = Int(set.int(forColumn: "music_data_id"))
                             
                             // 去掉一些无效数据 
@@ -389,11 +395,8 @@ class Master: FMDatabaseQueue {
                             let d4 = Int(set.int(forColumn: "difficulty_4"))
                             let d5 = Int(set.int(forColumn: "difficulty_5"))
                             
-                            //
-                            let count = CGSSGameResource.shared.getBeatmapCount(liveId: id)
-                            
                             var liveDetailId = [d1, d2, d3, d4]
-                            if d5 != 0 && count == 5 {
+                            if d5 != 0 && beatmapCount == 5 {
                                 liveDetailId.append(d5)
                             }
                             
