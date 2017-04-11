@@ -29,7 +29,7 @@ class SpreadImageViewController: UIViewController {
         imageView.sd_setImage(with: imageURL)
         
         let longPress = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressGesture(_:)))
-        longPress.minimumPressDuration = 1
+        longPress.minimumPressDuration = 0.5
         imageView.addGestureRecognizer(longPress)
     }
     
