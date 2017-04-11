@@ -40,23 +40,20 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     self?.updateStatusView.setContent(NSLocalizedString("数据是最新版本", comment: "更新框"), hasProgress: false)
                     self?.updateStatusView.loadingView.stopAnimating()
                     UIView.animate(withDuration: 2.5, animations: {
-                        // 当一个控件的alpha = 0 之后 就不会响应任何事件了 不需要再置为hidden
                         self?.updateStatusView.alpha = 0
-//                        }, completion: { (b) in
-//                        self.updateStatusView.isHidden = true
-//                        self.updateStatusView.alpha = 1
                     })
-                    return
+                    updater.setVersionToNewest()
+                } else {
+                    self?.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
+                    updater.updateItems(items, progress: { [weak self] (process, total) in
+                        self?.updateStatusView.updateProgress(process, b: total)
+                        }, complete: { [weak self] (success, total) in
+                        let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                        self?.tabBarController?.present(alert, animated: true, completion: nil)
+                        self?.updateStatusView.isHidden = true
+                    })
                 }
-                self?.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
-                updater.updateItems(items, progress: { [weak self] (process, total) in
-                    self?.updateStatusView.updateProgress(process, b: total)
-                    }, complete: { [weak self] (success, total) in
-                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                    self?.tabBarController?.present(alert, animated: true, completion: nil)
-                    self?.updateStatusView.isHidden = true
-                })
             }
         })
         refresher.endRefreshing()

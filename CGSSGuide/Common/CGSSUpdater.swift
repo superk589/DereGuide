@@ -447,9 +447,7 @@ open class CGSSUpdater: NSObject {
         group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
             let dao = CGSSDAO.shared
             dao.saveAll({
-                // 保存成功后 将版本置为最新版
-                CGSSVersionManager.default.setDataVersionToNewest()
-                CGSSVersionManager.default.setApiVersionToNewest()
+                self?.setVersionToNewest()
             })
             self?.isUpdating = false
             DispatchQueue.main.async(execute: {
@@ -459,6 +457,11 @@ open class CGSSUpdater: NSObject {
         }))
     }
     
+    
+    func setVersionToNewest() {
+        CGSSVersionManager.default.setDataVersionToNewest()
+        CGSSVersionManager.default.setApiVersionToNewest()
+    }
     
     func updateImages(urls: [URL], progress: @escaping CGSSProgressClosure, complete: @escaping CGSSProgressClosure) {
         
