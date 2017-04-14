@@ -10,7 +10,7 @@ import UIKit
 
 class SpreadImageViewController: UIViewController {
 
-    var imageView = UIImageView()
+    var imageView = SpreadImageView(frame: CGRect.zero)
     
     var imageURL: URL!
     
@@ -26,7 +26,7 @@ class SpreadImageViewController: UIViewController {
         imageView.addGestureRecognizer(tap)
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
-        imageView.sd_setImage(with: imageURL)
+        imageView.setImage(with: imageURL)
         
         let longPress = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressGesture(_:)))
         longPress.minimumPressDuration = 0.5
