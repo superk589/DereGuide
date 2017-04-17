@@ -254,75 +254,75 @@ open class CGSSUpdater: NSObject {
         var errors = [Error]()
         
         // 检查api版本号和game truthversion
-        let zeroCheckGroup = DispatchGroup()
-        
-        // 检查卡数据和manifest
         let firstCheckGroup = DispatchGroup()
         
-        // 检查master和beatmap, 因为需要先下载manifest, 故放在第二个组内检查
+        // 检查卡数据和manifest
         let secondCheckGroup = DispatchGroup()
         
+        // 检查master和beatmap
+        let thirdCheckGroup = DispatchGroup()
         
-        zeroCheckGroup.enter()
+        
+        firstCheckGroup.enter()
         checkApiInfo { (finished, error) in
             if let e = error {
                 errors.append(e)
             }
-            zeroCheckGroup.leave()
+            firstCheckGroup.leave()
         }
         
-        zeroCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
+        firstCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
             if errors.count > 0 {
                 complete(itemsNeedToUpdate, errors)
             } else {
                 if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
-                    firstCheckGroup.enter()
+                    secondCheckGroup.enter()
                     self?.checkManifest(callback: { (finished, error) in
                         if let e = error {
                             errors.append(e)
                         }
-                        firstCheckGroup.leave()
+                        secondCheckGroup.leave()
                     })
                 }
                 
                 if dataTypes.contains(.card) {
-                    firstCheckGroup.enter()
+                    secondCheckGroup.enter()
                     self?.checkCards(callback: { (items, error) in
                         if let e = error {
                             errors.append(e)
                         } else if items != nil {
                             itemsNeedToUpdate.append(contentsOf: items!)
                         }
-                        firstCheckGroup.leave()
+                        secondCheckGroup.leave()
                     })
                 }
                 
-                firstCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
+                secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
                     if dataTypes.contains(.master) {
-                        secondCheckGroup.enter()
+                        thirdCheckGroup.enter()
                         self?.checkMaster(callback: { (items, error) in
                             if let e = error {
                                 errors.append(e)
                             } else if items != nil {
                                 itemsNeedToUpdate.append(contentsOf: items!)
                             }
-                            secondCheckGroup.leave()
+                            thirdCheckGroup.leave()
                         })
                     }
                     
                     if dataTypes.contains(.beatmap) {
-                        secondCheckGroup.enter()
+                        thirdCheckGroup.enter()
                         self?.checkBeatmap(callback: { (items, error) in
                             if let e = error {
                                 errors.append(e)
                             } else if items != nil {
                                 itemsNeedToUpdate.append(contentsOf: items!)
                             }
-                            secondCheckGroup.leave()
+                            thirdCheckGroup.leave()
                         })
                     }
                     
-                    secondCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
+                    thirdCheckGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
                         self?.isChecking = false
                         complete(itemsNeedToUpdate, errors)
                     }))
@@ -351,12 +351,13 @@ open class CGSSUpdater: NSObject {
     func updateItems(_ items: [CGSSUpdateItem], progress: @escaping (Int, Int) -> Void, complete: @escaping (Int, Int) -> Void) {
         isUpdating = true
         let total = items.count
+        let queue = DispatchQueue.init(label: "zzk.cgssguide.updater_queue_progress")
         var success = 0
         var process = 0 {
             didSet {
-                DispatchQueue.main.async(execute: {
+                DispatchQueue.main.async {
                     progress(process, total)
-                })
+                }
             }
         }
         
@@ -402,11 +403,15 @@ open class CGSSUpdater: NSObject {
                                 card.updateTime = updateTime
                             }
                             dao.cardDict.setObject(card, forKey: item.id as NSCopying)
-                            success += 1
+                            queue.sync {
+                                success += 1
+                            }
                             updateTypes.insert(.card)
                         }
                     }
-                    process += 1
+                    queue.sync {
+                        process += 1
+                    }
                     group.leave()
                 })
             case CGSSUpdateDataTypes.beatmap:
@@ -419,10 +424,14 @@ open class CGSSUpdater: NSObject {
                         let dao = CGSSDAO.shared
                         dao.saveBeatmapData(data: beatmapData, liveId: Int(item.id) ?? 0)
                         BeatmapHashManager.default.hashTable[item.id] = item.hashString
-                        success += 1
+                        queue.sync {
+                            success += 1
+                        }
                         updateTypes.insert(.beatmap)
                     }
-                    process += 1
+                    queue.sync {
+                        process += 1
+                    }
                     group.leave()
                 })
             case CGSSUpdateDataTypes.master:
@@ -434,10 +443,14 @@ open class CGSSUpdater: NSObject {
                         let masterData = LZ4Decompressor.decompress(data!)
                         CGSSGameResource.shared.saveMaster(masterData)
                         CGSSVersionManager.default.setMasterTruthVersionToNewest()
-                        success += 1
+                        queue.sync {
+                            success += 1
+                        }
                         updateTypes.insert(.master)
                     }
-                    process += 1
+                    queue.sync {
+                        process += 1
+                    }
                     group.leave()
                 })
             default:

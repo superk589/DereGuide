@@ -3,23 +3,24 @@ PODS:
   - Charts (3.0.2):
     - Charts/Core (= 3.0.2)
   - Charts/Core (3.0.2)
-  - Firebase/AdMob (3.15.0):
+  - Firebase/AdMob (3.16.0):
     - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.19.0)
-  - Firebase/Core (3.15.0):
-    - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.2)
-  - FirebaseAnalytics (3.7.0):
-    - FirebaseCore (~> 3.5)
+    - Google-Mobile-Ads-SDK (= 7.19.1)
+  - Firebase/Core (3.16.0):
+    - FirebaseAnalytics (= 3.8.0)
+    - FirebaseCore (= 3.6.0)
+  - FirebaseAnalytics (3.8.0):
+    - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.2):
+  - FirebaseCore (3.6.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (1.0.9)
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - Google-Mobile-Ads-SDK (7.19.0)
+  - Google-Mobile-Ads-SDK (7.19.1)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -53,12 +54,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ASValueTrackingSlider: 5261de3fcf00adb339efc93885e8f0bc99e703cd
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
-  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
-  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
+  FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  Google-Mobile-Ads-SDK: d1bcdbd8347a105a687345b8511701172a5074e9
+  Google-Mobile-Ads-SDK: 43ac87810e4961f5093024d3525bfe022f956da3
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64

@@ -216,28 +216,6 @@ class CGSSBeatmap: CGSSBaseModel {
         super.encode(with: aCoder)
         aCoder.encode(self.notes, forKey: "notes")
     }
-    init?(json: JSON) {
-        self.notes = [CGSSBeatmapNote]()
-        let array = json.arrayValue
-        // 如果当返回的note为0时 暂时不返回nil 而是一个空的beatmap 防止重复更新一些非常规歌曲的谱面
-//        if array.count == 0 {
-//            return nil
-//        }
-        for sub in array {
-            let note = CGSSBeatmapNote()
-            note.id = sub["id"].intValue
-            note.sec = sub["sec"].floatValue
-            note.type = sub["type"].intValue
-            note.startPos = sub["startPos"].intValue
-            note.finishPos = sub["finishPos"].intValue
-            note.status = sub["status"].intValue
-            note.sync = sub["sync"].intValue
-            note.groupId = sub["groupId"].intValue
-            self.notes.append(note)
-        }
-        super.init()
-    }
-    
     
     init?(data: Data) {
         if let csv = String.init(data: data, encoding: .utf8) {
@@ -275,9 +253,8 @@ class CGSSBeatmap: CGSSBaseModel {
         super.init()
     }
     
-    
     /* debug methods */
-    
+    #if DEBUG
     func exportIntervalToBpm() {
         let predict: Float = 1
         var arr = [Float]()
@@ -308,7 +285,7 @@ class CGSSBeatmap: CGSSBaseModel {
         }
         (arr as NSArray).write(toFile: NSHomeDirectory() + "/notes_with_offset.plist", atomically: true)
     }
- 
-    /* */
+    
+    #endif
     
 }

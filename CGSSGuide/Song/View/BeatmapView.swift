@@ -188,19 +188,16 @@ class AdvanceBeatmapDrawer {
         // 生成的图片总宽度
         let imageW = columns * columnWidth
         UIGraphicsBeginImageContext(CGSize.init(width: columnWidth, height: totalHeight))
-        var context:CGContext! = UIGraphicsGetCurrentContext()
-        guard context != nil else {
+        guard let imageContext = UIGraphicsGetCurrentContext() else {
             return nil
         }
         let rect = CGRect.init(x: 0, y: 0, width: columnWidth, height: totalHeight)
         self.drawIn(rect: rect)
-        let image = UIImage.init(cgImage: context.makeImage()!)
+        let image = UIImage.init(cgImage: imageContext.makeImage()!)
         UIGraphicsEndImageContext()
         
-        
         UIGraphicsBeginImageContext(CGSize.init(width: imageW, height: imageH))
-        context = UIGraphicsGetCurrentContext()
-        guard context != nil else {
+        guard let context = UIGraphicsGetCurrentContext() else {
             return nil
         }
         let path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: imageW, height: imageH))
