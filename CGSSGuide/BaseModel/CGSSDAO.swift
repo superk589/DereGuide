@@ -157,7 +157,7 @@ open class CGSSDAO: NSObject {
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
-                let b1 = v.musicTitle.lowercased().contains(comp.lowercased()) 
+                let b1 = v.name.lowercased().contains(comp.lowercased())
                 if b1 {
                     continue
                 } else {

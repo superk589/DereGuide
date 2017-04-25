@@ -21,7 +21,7 @@ class BeatmapViewController: UIViewController {
         didSet {
             if let beatmap = checkBeatmapData(live, diff: currentDiff) {
                 self.beatmap = beatmap
-                titleLabel.text = "\(live.musicTitle)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
+                titleLabel.text = "\(live.name)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
                 bv?.setup(beatmap: beatmap, bpm: live.bpm, type: live.type)
                 bv?.setNeedsDisplay()
             }
@@ -34,7 +34,7 @@ class BeatmapViewController: UIViewController {
         super.viewDidLoad()
         
         #if DEBUG
-            print("Beatmap loaded, liveId: \(live.id) musicId: \(live.musicId)")
+            print("Beatmap loaded, liveId: \(live.id) musicId: \(live.musicDataId)")
         #endif
         
         bv = BeatmapView()
@@ -142,7 +142,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(live.musicTitle) \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
+        return "\(live.name) \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in

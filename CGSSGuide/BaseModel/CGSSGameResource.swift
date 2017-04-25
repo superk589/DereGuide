@@ -12,7 +12,7 @@ import SwiftyJSON
 
 typealias FMDBCallBackClosure<T> = (T) -> Void
 
-class MusicScoreDB: FMDatabaseQueue {
+class MusicScoreDBQueue: FMDatabaseQueue {
     
     func getBeatmaps(callback: @escaping FMDBCallBackClosure<[CGSSBeatmap]>) {
         inDatabase { (fmdb) in
@@ -367,49 +367,22 @@ class Master: FMDatabaseQueue {
                     db.close()
                 }
                 if db.open(withFlags: SQLITE_OPEN_READONLY) {
-                    let selectSql = "select a.id, a.event_type, a.music_data_id, a.difficulty_1, a.difficulty_2, a.difficulty_3, a.difficulty_4, a.difficulty_5, a.type, b.bpm, b.name from live_data a, music_data b where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
+                    let selectSql = "select a.id, a.event_type, a.music_data_id, a.start_date, a.difficulty_1 debut_detail_id, (select level_vocal from live_detail where a.difficulty_1 = id) debut_difficulty,  a.difficulty_2 regular_detail_id, (select level_vocal from live_detail where a.difficulty_2 = id) regular_difficulty, a.difficulty_3 pro, (select level_vocal from live_detail where a.difficulty_3 = id) pro_difficulty, a.difficulty_4 master_detail_id, (select level_vocal from live_detail where a.difficulty_4 = id) master_difficulty, a.difficulty_5 master_plus_detail_id, (select level_vocal from live_detail where a.difficulty_5 = id) master_plus_difficulty, a.type, b.bpm, b.name, b.composer, b.lyricist, c.chara_position_1, c.chara_position_2, c.chara_position_3, c.chara_position_4, c.chara_position_5, c.position_num from live_data a, music_data b Left outer join live_data_position c on a.id = c.live_data_id where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
                     do {
                         let set = try db.executeQuery(selectSql, values: nil)
                         while set.next() {
+                            let json = JSON(set.resultDictionary())
                             
-                            let id = Int(set.int(forColumn: "id"))
-                            
-                            let beatmapCount = CGSSGameResource.shared.getBeatmapCount(liveId: id)
+                            guard let live = CGSSLive.init(fromJson: json) else { continue }
                             
                             // not valid if count == 0
-                            if beatmapCount == 0 { continue }
-
-                            let musicId = Int(set.int(forColumn: "music_data_id"))
+                            if live.beatmapCount == 0 { continue }
                             
-                            // 去掉一些无效数据 
+                            // 去掉一些无效数据
                             // 1901 - 2016-4-1 special live
                             // 1902 - 2017-4-1 special live
                             // 90001 - DJ Pinya live
-                            if [1901, 1902, 90001].contains(musicId) { continue }
-                            
-                            let musicTitle = set.string(forColumn: "name")?.replacingOccurrences(of: "\\n", with: "") ?? ""
-                            let type = Int(set.int(forColumn: "type"))
-                            let d1 = Int(set.int(forColumn: "difficulty_1"))
-                            let d2 = Int(set.int(forColumn: "difficulty_2"))
-                            let d3 = Int(set.int(forColumn: "difficulty_3"))
-                            let d4 = Int(set.int(forColumn: "difficulty_4"))
-                            let d5 = Int(set.int(forColumn: "difficulty_5"))
-                            
-                            var liveDetailId = [d1, d2, d3, d4]
-                            if d5 != 0 && beatmapCount == 5 {
-                                liveDetailId.append(d5)
-                            }
-                            
-                            let debut = self.mapToDifficultyStars(db: db, liveDetailId: d1)
-                            let regular = self.mapToDifficultyStars(db: db, liveDetailId: d2)
-                            let pro = self.mapToDifficultyStars(db: db, liveDetailId: d3)
-                            let master = self.mapToDifficultyStars(db: db, liveDetailId: d4)
-                            let masterPlus = self.mapToDifficultyStars(db: db, liveDetailId: d5)
-                            
-                            let eventType = Int(set.int(forColumn: "event_type"))
-                            let bpm = Int(set.int(forColumn: "bpm"))
-                            
-                            let live = CGSSLive.init(id: id, musicId: musicId, musicTitle: musicTitle, type: type, liveDetailId: liveDetailId, eventType: eventType, debut: debut, regular: regular, pro: pro, master: master, masterPlus: masterPlus, bpm: bpm)
+                            if [1901, 1902, 90001].contains(live.musicDataId) { continue }
                             
                             list.append(live)
                         }
@@ -561,8 +534,8 @@ class CGSSGameResource: NSObject {
         let fm = FileManager.default
         var result: [CGSSBeatmap]?
         let semaphore = DispatchSemaphore.init(value: 0)
-        if fm.fileExists(atPath: path), let fmdbQueue = MusicScoreDB.init(path: path) {
-            fmdbQueue.getBeatmaps(callback: { (beatmaps) in
+        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue.init(path: path) {
+            dbQueue.getBeatmaps(callback: { (beatmaps) in
                 result = beatmaps
                 semaphore.signal()
             })
@@ -587,14 +560,14 @@ class CGSSGameResource: NSObject {
         master.getLives(liveId: liveId) { (lives) in
             let path = String.init(format: DataPath.beatmap, liveId)
             let fm = FileManager.default
-            if fm.fileExists(atPath: path), let first = lives.first, let fmdbQueue = MusicScoreDB.init(path: path) {
+            if fm.fileExists(atPath: path), let first = lives.first, let dbQueue = MusicScoreDBQueue.init(path: path) {
                 // 对于只有4个难度的歌曲, 只要存在bdb文件就略过检查 返回合法
                 if first.validBeatmapCount == 4 {
                     result = true
                     semaphore.signal()
                 } else {
                     // 对于不是4个难度的歌曲进行合法性检查
-                    fmdbQueue.validateBeatmapCount(first.validBeatmapCount, callback: { (valid) in
+                    dbQueue.validateBeatmapCount(first.validBeatmapCount, callback: { (valid) in
                         result = valid
                         semaphore.signal()
                     })
@@ -613,8 +586,8 @@ class CGSSGameResource: NSObject {
         
         let path = String.init(format: DataPath.beatmap, liveId)
         let fm = FileManager.default
-        if fm.fileExists(atPath: path), let fmdbQueue = MusicScoreDB.init(path: path) {
-            fmdbQueue.getBeatmapCount(callback: { (count) in
+        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue.init(path: path) {
+            dbQueue.getBeatmapCount(callback: { (count) in
                 result = count
                 semaphore.signal()
             })

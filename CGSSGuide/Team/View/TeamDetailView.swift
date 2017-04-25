@@ -752,8 +752,8 @@ class TeamDetailView: UIView {
         songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
-        songNameLabel.text = live.musicTitle
-        songNameLabel.textColor = live.getLiveColor()
+        songNameLabel.text = live.name
+        songNameLabel.textColor = live.color
         // songLengthLabel.text = String(Int(beatmaps[diff - 1].totalSeconds)) + "秒"
         if let url = live.jacketURL {
             songJacket.sd_setImage(with: url)

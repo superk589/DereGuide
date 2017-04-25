@@ -76,7 +76,7 @@ class EventSongView: UIView {
     var live: CGSSLive!
     func setup(live: CGSSLive) {
         self.live = live
-        self.nameLabel.text = live.musicTitle
+        self.nameLabel.text = live.name
         // self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
         let descString = "bpm:\(live.bpm)"
         // 暂时去除时长的显示
@@ -84,14 +84,14 @@ class EventSongView: UIView {
         //                descString += " 时长:\(Int(beatmap.totalSeconds))秒"
         //            }
         self.descriptionLabel.text = descString
-        self.nameLabel.textColor = live.getLiveColor()
-        self.typeIcon.image = UIImage.init(named: live.getLiveIconName())
+        self.nameLabel.textColor = live.color
+        self.typeIcon.image = live.icon
         
-        let diffStars = [live.debut, live.regular, live.pro, live.master, live.masterPlus]
+        let diffStars = [live.debutDifficulty, live.regularDifficulty, live.proDifficulty, live.masterDifficulty, live.masterPlusDifficulty]
         for i in 0...4 {
             self.diffViews[i].text = "\(diffStars[i])"
         }
-        if live.masterPlus != 0 {
+        if live.masterPlusDetailId != 0 {
             self.diffViews[4].isHidden = false
         } else {
             self.diffViews[4].isHidden = true

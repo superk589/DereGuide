@@ -100,7 +100,6 @@ class SongTableViewCell: UITableViewCell {
             diffViews.append(diffView)
             addSubview(diffView)
         }
-        
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -127,10 +126,9 @@ class SongTableViewCell: UITableViewCell {
 //                descString += " 时长:\(Int(beatmap.totalSeconds))秒"
 //            }
         self.descriptionLabel.text = descString
-        self.nameLabel.textColor = live.getLiveColor()
-        self.typeIcon.image = UIImage.init(named: live.getLiveIconName())
-        
-        let diffStars = [live.debut, live.regular, live.pro, live.master, live.masterPlus]
+        self.nameLabel.textColor = live.color
+        self.typeIcon.image = live.icon
+        let diffStars = [live.debutDifficulty, live.regularDifficulty, live.proDifficulty, live.masterDifficulty, live.masterPlusDifficulty]
         for i in 0...4 {
             self.diffViews[i].text = "\(diffStars[i])"
         }

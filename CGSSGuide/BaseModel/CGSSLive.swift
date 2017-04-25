@@ -76,29 +76,23 @@ enum CGSSGrooveType: String {
 extension CGSSLive {
     // 用于排序的属性
     dynamic var updateId: Int {
-        return self.liveDetailId.last ?? 0
+        return beatmapCount == 5 ? masterPlusDetailId : masterDetailId
     }
     
     dynamic var createId: Int {
-        return self.liveDetailId.first ?? 0
+        return self.debutDetailId
     }
-    
-//    dynamic var bpm: Int {
-//        let dao = shared
-//        return dao.findSongById(self.musicId!)?.bpm ?? 0
-//    }
     
     dynamic var maxDiffStars: Int {
         return getStarsForDiff(maxDiff)
     }
     
     // 每beat占用的秒数
-    var beatSec: Double {
+    var barSecond: Double {
         return 1 / Double(bpm) * 60
     }
 
-    
-    func getLiveColor() -> UIColor {
+    var color: UIColor {
         switch type {
         case 1:
             return Color.cute
@@ -110,18 +104,18 @@ extension CGSSLive {
             return UIColor.darkText
         }
     }
-    func getLiveIconName() -> String {
+    
+    var icon: UIImage {
         switch type {
         case 1:
-            return "song-cute"
+            return #imageLiteral(resourceName: "song-cute")
         case 2:
-            return "song-cool"
+            return #imageLiteral(resourceName: "song-cool")
         case 3:
-            return "song-passion"
+            return #imageLiteral(resourceName: "song-passion")
         default:
-            return "song-all"
+            return #imageLiteral(resourceName: "song-all")
         }
-        
     }
     
     var filterType: CGSSLiveTypes {
@@ -144,15 +138,15 @@ extension CGSSLive {
     func getStarsForDiff(_ diff: Int) -> Int {
         switch diff {
         case 1:
-            return debut
+            return debutDifficulty
         case 2:
-            return regular
+            return regularDifficulty
         case 3:
-            return pro
+            return proDifficulty
         case 4:
-            return master
+            return masterDifficulty
         case 5:
-            return masterPlus
+            return masterPlusDifficulty
         default:
             return 0
         }
@@ -160,12 +154,12 @@ extension CGSSLive {
     
     // 最大难度, 只返回真实存在的难度
     var maxDiff: Int {
-        return self.liveDetailId.count
+        return beatmapCount
     }
     
     // 合理的谱面数量, 包含官方还未发布的难度
     var validBeatmapCount: Int {
-        return self.masterPlus == 0 ? 4 : 5
+        return self.masterPlusDetailId == 0 ? 4 : 5
     }
     
     func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {
@@ -177,56 +171,97 @@ extension CGSSLive {
     }
     
     var jacketURL: URL? {
-        return URL.init(string: DataURL.Images + "/jacket/\(musicId).png")
+        return URL.init(string: DataURL.Images + "/jacket/\(musicDataId).png")
     }
     
     var title: String {
         if eventType == 0 {
-            return musicTitle
+            return name
         } else {
-            return musicTitle + "(" + NSLocalizedString("活动", comment: "") + ")"
+            return name + "(" + NSLocalizedString("活动", comment: "") + ")"
         }
     }
 }
 
-open class CGSSLive: CGSSBaseModel {
-    var id: Int
-    var musicId: Int
-    var musicTitle: String
-    var type: Int
-    var liveDetailId: [Int]
-    var eventType: Int
-    var debut: Int
-    var regular: Int
-    var pro: Int
-    var master: Int
-    var masterPlus: Int
-    var bpm: Int
+
+class CGSSLive: CGSSBaseModel {
     
-    init(id: Int,
-         musicId: Int, musicTitle: String,
-         type: Int,
-         liveDetailId: [Int],
-         eventType: Int,
-         debut: Int,
-         regular: Int,
-         pro: Int,
-         master: Int,
-         masterPlus: Int,
-         bpm: Int) {
+    var bpm : Int
+    var charaPosition1 : Int
+    var charaPosition2 : Int
+    var charaPosition3 : Int
+    var charaPosition4 : Int
+    var charaPosition5 : Int
+    var composer : String
+    var debutDetailId : Int
+    var debutDifficulty : Int
+    var eventType : Int
+    var id : Int
+    var lyricist : String
+    var masterDetailId : Int
+    var masterDifficulty : Int
+    var masterPlusDetailId : Int
+    var masterPlusDifficulty : Int
+    var musicDataId : Int
+    var name : String
+    var positionNum : Int
+    var proDetailId : Int
+    var proDifficulty : Int
+    var regularDetailId : Int
+    var regularDifficulty : Int
+    var startDate : String
+    var type : Int
+
+    lazy var beatmapCount: Int = {
+        let semaphore = DispatchSemaphore.init(value: 0)
+        var result = 0
         
-        self.id = id
-        self.musicId = musicId
-        self.musicTitle = musicTitle
-        self.type = type
-        self.liveDetailId = liveDetailId
-        self.eventType = eventType
-        self.debut = debut
-        self.regular = regular
-        self.pro = pro
-        self.master = master
-        self.masterPlus = masterPlus
-        self.bpm = bpm
+        let path = String.init(format: DataPath.beatmap, self.id)
+        let fm = FileManager.default
+        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue.init(path: path) {
+            dbQueue.getBeatmapCount(callback: { (count) in
+                result = count
+                semaphore.signal()
+            })
+        } else {
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
+    }()
+    
+    /**
+     * Instantiate the instance using the passed json values to set the properties values
+     */
+    init? (fromJson json: JSON){
+        if json.isEmpty {
+            return nil
+        }
+        bpm = json["bpm"].intValue
+        charaPosition1 = json["chara_position_1"].intValue
+        charaPosition2 = json["chara_position_2"].intValue
+        charaPosition3 = json["chara_position_3"].intValue
+        charaPosition4 = json["chara_position_4"].intValue
+        charaPosition5 = json["chara_position_5"].intValue
+        composer = json["composer"].stringValue
+        debutDetailId = json["debut_detail_id"].intValue
+        debutDifficulty = json["debut_difficulty"].intValue
+        eventType = json["event_type"].intValue
+        id = json["id"].intValue
+        lyricist = json["lyricist"].stringValue
+        masterDetailId = json["master_detail_id"].intValue
+        masterDifficulty = json["master_difficulty"].intValue
+        masterPlusDetailId = json["master_plus_detail_id"].intValue
+        masterPlusDifficulty = json["master_plus_difficulty"].intValue
+        musicDataId = json["music_data_id"].intValue
+        name = json["name"].stringValue
+        positionNum = json["position_num"].intValue
+        proDetailId = json["pro"].intValue
+        proDifficulty = json["pro_difficulty"].intValue
+        regularDetailId = json["regular_detail_id"].intValue
+        regularDifficulty = json["regular_difficulty"].intValue
+        startDate = json["start_date"].stringValue
+        type = json["type"].intValue
         super.init()
     }
     
