@@ -230,6 +230,17 @@ class CGSSLive: CGSSBaseModel {
         return result
     }()
     
+    lazy var vocalists: [Int] = {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = [Int]()
+        CGSSGameResource.shared.master.getVocalistsBy(musicDataId: self.musicDataId, callback: { (list) in
+            result = list
+            semaphore.signal()
+        })
+        semaphore.wait()
+        return result
+    }()
+    
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */

@@ -13,7 +13,7 @@ protocol BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard)
 }
 
-class BaseCardTableViewController: RefreshableTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
+class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var cardList = [CGSSCard]()
     var filter: CGSSCardFilter {
@@ -51,19 +51,15 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         filterVC.sorter = self.sorter
         filterVC.delegate = self
         
-        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCardsChanged, object: nil)
     }
     
     deinit {
-        CGSSNotificationCenter.removeAll(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func reloadData() {
-        refresh()
-    }
-    
-    // 根据设定的筛选和排序方法重新展现数据
-    override func refresh() {
+    override func updateUI() {
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.filter.searchText = self?.searchBar.text ?? ""
@@ -76,25 +72,19 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
                 self?.tableView.reloadData()
             }
         }
+
     }
-    override func refresherValueChanged() {
+    
+    override func reloadData() {
+        updateUI()
+    }
+  
+    override func checkUpdate() {
         check([.card, .master])
     }
     
     func filterAction() {
         CGSSClient.shared.drawerController?.show(animated: true)
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        CGSSNotificationCenter.removeAll(self)
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,7 +142,7 @@ class BaseCardTableViewController: RefreshableTableViewController, CardFilterSor
         CGSSSorterFilterManager.default.cardfilter = filter
         CGSSSorterFilterManager.default.cardSorter = sorter
         CGSSSorterFilterManager.default.saveForCard()
-        refresh()
+        updateUI()
     }
     
 }

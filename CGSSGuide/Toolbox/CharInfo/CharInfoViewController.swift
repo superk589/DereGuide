@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class CharInfoViewController: RefreshableTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
+class CharInfoViewController: BaseModelTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var charList: [CGSSChar]!
     var filter: CGSSCharFilter {
@@ -48,6 +48,12 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCharasChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func backAction() {
@@ -55,7 +61,7 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
     }
     
     // 根据设定的筛选和排序方法重新展现数据
-    override func refresh() {
+    override func updateUI() {
         filter.searchText = searchBar.text ?? ""
         self.charList = filter.filter(CGSSDAO.shared.charDict.allValues as! [CGSSChar])
         sorter.sortList(&self.charList!)
@@ -64,7 +70,11 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     
-    override func refresherValueChanged() {
+    override func reloadData() {
+        updateUI()
+    }
+    
+    override func checkUpdate() {
         check([.card, .master])
     }
     
@@ -75,15 +85,7 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
     func cancelAction() {
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        refresh()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // self.navigationController?.setToolbarHidden(false, animated: true)
-        // 页面出现时根据设定刷新排序和搜索内容
-        searchBar.resignFirstResponder()
-        refresh()
+        updateUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -143,7 +145,7 @@ class CharInfoViewController: RefreshableTableViewController, CharFilterSortCont
         CGSSSorterFilterManager.default.charFilter = filter
         CGSSSorterFilterManager.default.charSorter = sorter
         CGSSSorterFilterManager.default.saveForChar()
-        self.refresh()
+        self.updateUI()
     }
     
     /*

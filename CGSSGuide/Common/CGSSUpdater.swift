@@ -95,7 +95,7 @@ open class CGSSUpdater: NSObject {
     }
     
     func postUpdateEndNotification(types: CGSSUpdateDataTypes) {
-        CGSSNotificationCenter.post(CGSSNotificationCenter.updateEnd, object: types)
+        NotificationCenter.default.post(name: .updateEnd, object: types)
     }
     
     var dataSession: URLSession!

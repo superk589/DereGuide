@@ -44,6 +44,8 @@ class SpreadImageView: UIImageView {
             } else {
                 if shouldShowIndicator {
                     self?.showIndicator()
+                } else {
+                    self?.hideIndicator()
                 }
                 self?.sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveDownload], progress: { (current, total, url) in
                     DispatchQueue.main.async {

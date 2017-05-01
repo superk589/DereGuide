@@ -32,11 +32,11 @@ class BirthdayCenter {
     
     private init() {
         prepare()
-        CGSSNotificationCenter.add(self, selector: #selector(prepare), name: CGSSNotificationCenter.updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(prepare), name: .updateEnd, object: nil)
     }
     
     deinit {
-        CGSSNotificationCenter.removeAll(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func prepare() {

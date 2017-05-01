@@ -54,7 +54,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
         hasOdds = pool.hasOdds
     }
     // 根据设定的筛选和排序方法重新展现数据
-    override func refresh() {
+    override func updateUI() {
         filter.searchText = searchBar.text ?? ""
         self.cardList = filter.filter(defaultCardList)
         sorter.sortList(&self.cardList)
@@ -89,7 +89,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
     override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
         self.filter = filter
         self.sorter = sorter
-        refresh()
+        updateUI()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

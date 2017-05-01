@@ -154,8 +154,8 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
-        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .UIApplicationDidBecomeActive, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

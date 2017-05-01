@@ -395,19 +395,28 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    
-    private func mapToDifficultyStars(db: FMDatabase, liveDetailId: Int) -> Int {
-        var result = 0
-        do {
-            let sql = "select * from live_detail where id = \(liveDetailId)"
-            let set = try db.executeQuery(sql, values: nil)
-            while set.next() {
-                result = Int(set.int(forColumn: "level_vocal"))
+    func getVocalistsBy(musicDataId: Int, callback: @escaping FMDBCallBackClosure<[Int]>) {
+        inDatabase { (fmdb) in
+            var list = [Int]()
+            if let db = fmdb {
+                defer {
+                    db.close()
+                }
+                if db.open(withFlags: SQLITE_OPEN_READONLY) {
+                    let selectSql = "select chara_id from music_vocalist where a.id = \(musicDataId)"
+                    do {
+                        let set = try db.executeQuery(selectSql, values: nil)
+                        while set.next() {
+                            let vocalist = Int(set.int(forColumn: "chara_id"))
+                            list.append(vocalist)
+                        }
+                    } catch {
+                        print(db.lastErrorMessage())
+                    }
+                }
             }
-        } catch {
-            print(db.lastErrorMessage())
+            callback(list)
         }
-        return result
     }
 }
 
@@ -473,11 +482,11 @@ class CGSSGameResource: NSObject {
         super.init()
         self.prepareFileDirectory()
         self.prepareGachaList(callback: nil)
-        CGSSNotificationCenter.add(self, selector: #selector(updateEnd(notification:)), name: CGSSNotificationCenter.updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEnd(notification:)), name: .updateEnd, object: nil)
     }
     
     deinit {
-        CGSSNotificationCenter.removeAll(self)
+        NotificationCenter.default.removeObserver(self)
     }
     func prepareFileDirectory() {
         if !FileManager.default.fileExists(atPath: CGSSGameResource.path) {
@@ -612,7 +621,7 @@ class CGSSGameResource: NSObject {
                 for item in list {
                     item.availableType = nil
                 }
-                CGSSNotificationCenter.post(CGSSNotificationCenter.gameResoureceProcessedEnd, object: nil)
+                NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: self)
             }
         }
     }

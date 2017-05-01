@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class EventViewController: RefreshableTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate, BannerViewAnimatorProvider {
+class EventViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate, BannerViewAnimatorProvider {
 
     var defaultList: [CGSSEvent]!
     var eventList = [CGSSEvent]()
@@ -54,17 +54,16 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         filterVC.delegate = self
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
-        self.reloadData()
     }
     
-    func reloadData() {
+    override func reloadData() {
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             CGSSGameResource.shared.master.getEvents(callback: { (events) in
                 self?.defaultList = events
                 DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
-                    self?.refresh()
+                    self?.updateUI()
                 }
             })
         }
@@ -92,7 +91,7 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         CGSSSorterFilterManager.default.eventFilter = filter
         CGSSSorterFilterManager.default.eventSorter = sorter
         CGSSSorterFilterManager.default.saveForEvent()
-        self.refresh()
+        self.updateUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,12 +101,12 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CGSSNotificationCenter.add(self, selector: #selector(reloadData), name: CGSSNotificationCenter.updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .updateEnd, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CGSSNotificationCenter.removeAll(self)
+        NotificationCenter.default.removeObserver(self)
         CGSSClient.shared.drawerController?.rightVC = nil
     }
     
@@ -119,14 +118,14 @@ class EventViewController: RefreshableTableViewController, ZKDrawerControllerDel
         drawer?.delegate = self
     }
     
-    override func refresh() {
+    override func updateUI() {
         filter.searchText = searchBar.text ?? ""
         eventList = filter.filter(defaultList)
         sorter.sortList(&eventList)
         tableView.reloadData()
     }
     
-    override func refresherValueChanged() {
+    override func checkUpdate() {
         check([.master, .card])
     }
 

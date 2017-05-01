@@ -71,6 +71,6 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         CGSSSorterFilterManager.default.teamCardfilter = filter
         CGSSSorterFilterManager.default.teamCardSorter = sorter
         CGSSSorterFilterManager.default.saveForTeam()
-        refresh()
+        updateUI()
     }
 }

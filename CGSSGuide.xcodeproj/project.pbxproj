@@ -23,6 +23,10 @@
 		1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */; };
 		1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */; };
 		120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */; };
+		1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */; };
+		1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */; };
+		121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82131EB7383600273F37 /* CGSSNotification.swift */; };
+		121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */; };
 		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAppeal.swift */; };
@@ -118,7 +122,6 @@
 		1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA091D520CD50071AD7F /* RootTabBarController.swift */; };
 		1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */; };
 		1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */; };
-		1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */; };
 		1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0F1D520D370071AD7F /* CGSSSorter.swift */; };
 		1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA101D520D370071AD7F /* CGSSGlobal.swift */; };
 		1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA121D520D370071AD7F /* CGSSUpdater.swift */; };
@@ -193,6 +196,7 @@
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
+		12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -229,6 +233,10 @@
 		1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFilter.swift; sourceTree = "<group>"; };
 		1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEventFilter.swift; sourceTree = "<group>"; };
 		120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
+		1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
+		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
+		121B82131EB7383600273F37 /* CGSSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotification.swift; sourceTree = "<group>"; };
+		121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelTableViewController.swift; sourceTree = "<group>"; };
 		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAppeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAppeal.swift; sourceTree = "<group>"; };
@@ -340,7 +348,6 @@
 		1269EA091D520CD50071AD7F /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardFilter.swift; sourceTree = "<group>"; };
 		1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
-		1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotificationCenter.swift; sourceTree = "<group>"; };
 		1269EA0F1D520D370071AD7F /* CGSSSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorter.swift; sourceTree = "<group>"; };
 		1269EA101D520D370071AD7F /* CGSSGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGlobal.swift; sourceTree = "<group>"; };
 		1269EA121D520D370071AD7F /* CGSSUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdater.swift; sourceTree = "<group>"; };
@@ -418,6 +425,7 @@
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
+		12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveJacketViewAnimator.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -593,9 +601,9 @@
 				126666231D7D70F70022348E /* CGSSLiveFilter.swift */,
 				1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */,
 				1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */,
+				121B82131EB7383600273F37 /* CGSSNotification.swift */,
 				12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */,
 				122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */,
-				1269EA0E1D520D370071AD7F /* CGSSNotificationCenter.swift */,
 				1269EA0F1D520D370071AD7F /* CGSSSorter.swift */,
 				1269EA101D520D370071AD7F /* CGSSGlobal.swift */,
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
@@ -740,6 +748,8 @@
 				1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */,
 				1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */,
 				126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */,
+				1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */,
+				12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -747,6 +757,7 @@
 		1269EA001D520C9F0071AD7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */,
 				1269EA011D520C9F0071AD7F /* BeatmapView.swift */,
 				1269EA021D520C9F0071AD7F /* SongTableViewCell.swift */,
 			);
@@ -760,6 +771,7 @@
 				12D4F8B81E1CCF880064991E /* BaseViewController.swift */,
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarController.swift */,
+				121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
 				1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */,
 			);
@@ -1100,6 +1112,7 @@
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
+				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */,
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
@@ -1114,6 +1127,7 @@
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
+				121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */,
 				12D975D21E379EF0005E932B /* EventScoreRanking.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
@@ -1125,6 +1139,7 @@
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
 				12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
+				1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
 				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
@@ -1170,8 +1185,8 @@
 				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */,
-				1269EA151D520D370071AD7F /* CGSSNotificationCenter.swift in Sources */,
 				1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */,
+				121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */,
 				123F320F1E6FED0F00B69D26 /* SpreadImageViewController.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
 				12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */,
@@ -1237,6 +1252,7 @@
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
+				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
 				122497301E8E95D1005C743C /* LSSamplePoint.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,

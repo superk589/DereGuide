@@ -249,7 +249,7 @@ open class CGSSDAO: NSObject {
             if count == CGSSDataKey.allValues.count {
                 // 因为saveDataToFile的回调已经是主线程了 所以此处没必要再dispatch_async到主线程
                 complete?()
-                CGSSNotificationCenter.post(CGSSNotificationCenter.saveEnd, object: nil)
+                NotificationCenter.default.post(name: .saveEnd, object: self)
             }
         }
         DispatchQueue.global(qos: .userInitiated).async {

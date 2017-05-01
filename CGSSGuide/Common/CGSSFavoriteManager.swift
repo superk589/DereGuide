@@ -17,11 +17,13 @@ class CGSSFavoriteManager {
     var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCardsToFile()
+            NotificationCenter.default.post(name: .favoriteCardsChanged, object: self)
         }
     }
     var favoriteChars: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCharsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCharsToFile()
+            NotificationCenter.default.post(name: .favoriteCharasChanged, object: self)
         }
     }
     

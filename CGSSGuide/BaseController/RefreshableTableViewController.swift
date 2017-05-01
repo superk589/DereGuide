@@ -8,11 +8,14 @@
 
 import UIKit
 
-class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate {
-    
-    var refresher: UIRefreshControl!
-    var updateStatusView: UpdateStatusView!
-    var searchBar: CGSSSearchBar!
+protocol Refreshable {
+    var refresher: UIRefreshControl { get set }
+    var updateStatusView: UpdateStatusView { get set }
+    func check(_ type: CGSSUpdateDataTypes)
+    func checkUpdate()
+}
+
+extension Refreshable where Self: UITableViewController {
     
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
@@ -48,30 +51,29 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
                     updater.updateItems(items, progress: { [weak self] (process, total) in
                         self?.updateStatusView.updateProgress(process, b: total)
                         }, complete: { [weak self] (success, total) in
-                        let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                        self?.tabBarController?.present(alert, animated: true, completion: nil)
-                        self?.updateStatusView.isHidden = true
+                            let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total-success)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                            self?.tabBarController?.present(alert, animated: true, completion: nil)
+                            self?.updateStatusView.isHidden = true
                     })
                 }
             }
         })
         refresher.endRefreshing()
     }
+}
+
+class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate, Refreshable {
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // this will be called when tabbar selectindex changed after launching, in this case, the search bar is not initialized
-        self.searchBar?.resignFirstResponder()
-    }
+    var refresher = UIRefreshControl()
+    var updateStatusView = UpdateStatusView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         refreshControl = refresher
-        refresher.addTarget(self, action: #selector(refresherValueChanged), for: .valueChanged)
+        refresher.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
         
         updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
         updateStatusView.center = view.center
@@ -79,91 +81,21 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         updateStatusView.isHidden = true
         updateStatusView.delegate = self
         UIApplication.shared.keyWindow?.addSubview(updateStatusView)
+    }
+    
+    func checkUpdate() {
         
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        
-        searchBar = CGSSSearchBar()
-        searchBar.delegate = self
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func cancelUpdate() {
-        let updater = CGSSUpdater.default
-        updater.cancelCurrentSession()
-    }
-    
-    /// called after search text changed
-    func refresh() {
-        // to override
+        CGSSUpdater.default.cancelCurrentSession()
     }
     
     // 当该页面作为二级页面被销毁时 仍有未完成的下载任务时 强行终止下载(作为tabbar的一级页面时 永远不会销毁 不会触发此方法)
     deinit {
         if !self.updateStatusView.isHidden {
             updateStatusView.isHidden = true
-            let updater = CGSSUpdater.default
-            updater.cancelCurrentSession()
-        }
-    }
-    
-    func refresherValueChanged() {
-        // to override
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-}
-
-//MARK: searchBar的协议方法
-extension RefreshableTableViewController: UISearchBarDelegate {
-    
-    // 文字改变时
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        refresh()
-    }
-    // 开始编辑时
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        return true
-    }
-    
-    // 点击搜索按钮时
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        refresh()
-    }
-    // 点击searchbar自带的取消按钮时
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-    }
-    
-}
-
-
-//MARK: scrollView的协议方法
-extension RefreshableTableViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 向下滑动时取消输入框的第一响应者
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
+            cancelUpdate()
         }
     }
 }
-

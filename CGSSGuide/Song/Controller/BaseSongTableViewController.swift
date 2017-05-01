@@ -12,7 +12,7 @@ import ZKDrawerController
 protocol BaseSongTableViewControllerDelegate: class {
     func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int)
 }
-class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerControllerDelegate {
+class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
     var liveList: [CGSSLive] = [CGSSLive]()
@@ -35,7 +35,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     var filterVC: SongFilterSortController!
     
     // 根据设定的筛选和排序方法重新展现数据
-    override func refresh() {
+    override func updateUI() {
         filter.searchText = searchBar.text ?? ""
         self.liveList = filter.filter(defualtLiveList)
         sorter.sortList(&self.liveList)
@@ -45,10 +45,10 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     func cancelAction() {
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        refresh()
+        updateUI()
     }
     
-    override func refresherValueChanged() {
+    override func checkUpdate() {
         check([.beatmap, .master])
     }
     
@@ -85,23 +85,23 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
         filterVC.sorter = self.sorter
         filterVC.delegate = self
         
-        CGSSNotificationCenter.add(self, selector: #selector(updateEnd(notification:)), name: CGSSNotificationCenter.updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEnd(notification:)), name: .updateEnd, object: nil)
         
         reloadData()
     }
     
     deinit {
-        CGSSNotificationCenter.removeAll(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func reloadData() {
+    override func reloadData() {
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             CGSSGameResource.shared.master.getLives { (lives) in
                 self?.defualtLiveList = lives
                 DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
-                    self?.refresh()
+                    self?.updateUI()
                 }
             }
         }
@@ -110,7 +110,7 @@ class BaseSongTableViewController: RefreshableTableViewController, ZKDrawerContr
     func updateEnd(notification: Notification) {
         let types = notification.object as! CGSSUpdateDataTypes
         if types.contains(.master) || types.contains(.beatmap) {
-            self.reloadData()
+            self.setNeedsReloadData()
         }
     }
     
@@ -206,6 +206,6 @@ extension BaseSongTableViewController: SongFilterSortControllerDelegate {
         CGSSSorterFilterManager.default.liveFilter = filter
         CGSSSorterFilterManager.default.liveSorter = sorter
         CGSSSorterFilterManager.default.saveForLive()
-        refresh()
+        reloadData()
     }
 }
