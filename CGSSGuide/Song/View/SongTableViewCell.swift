@@ -69,12 +69,11 @@ class SongTableViewCell: UITableViewCell {
         nameLabel.frame = CGRect(x: 111, y: 10, width: CGSSGlobal.width - 121, height: 20)
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.adjustsFontSizeToFitWidth = true
-        nameLabel.backgroundColor = UIColor.white
+        nameLabel.baselineAdjustment = .alignCenters
         
         descriptionLabel = UILabel()
         descriptionLabel.frame = CGRect(x: 86, y: 35, width: CGSSGlobal.width - 96, height: 16)
         descriptionLabel.font = CGSSGlobal.alphabetFont
-        descriptionLabel.backgroundColor = UIColor.white
         
         let width = floor((CGSSGlobal.width - 96 - 40) / 5)
         let space: CGFloat = 10

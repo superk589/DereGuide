@@ -269,7 +269,7 @@ class CGSSLive: CGSSBaseModel {
         masterPlusDetailId = json["master_plus_detail_id"].intValue
         masterPlusDifficulty = json["master_plus_difficulty"].intValue
         musicDataId = json["music_data_id"].intValue
-        name = json["name"].stringValue
+        name = json["name"].stringValue.replacingOccurrences(of: "\\n", with: "")
         positionNum = json["position_num"].intValue
         proDetailId = json["pro"].intValue
         proDifficulty = json["pro_difficulty"].intValue

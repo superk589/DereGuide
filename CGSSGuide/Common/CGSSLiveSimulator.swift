@@ -16,10 +16,12 @@ class CGSSLiveSimulator {
     var lsNotes: [LSNote]
     var bonuses: [LSScoreBonus]
     var notes: [CGSSBeatmapNote]
+    var totalLife: Int
     
-    init(distributions: [LSNote], bonuses: [LSScoreBonus], notes: [CGSSBeatmapNote]) {
+    init(distributions: [LSNote], bonuses: [LSScoreBonus], notes: [CGSSBeatmapNote], totalLife: Int) {
         self.lsNotes = distributions
         self.bonuses = bonuses
+        self.totalLife = totalLife
         self.notes = notes
     }
     
@@ -161,7 +163,9 @@ class CGSSLiveSimulator {
         
         var logs = [LSLog]()
     
-        // optimistic 2 and normal simulation
+        var life = totalLife
+        
+        // normal simulation
         var lastIndex = 0
         for i in 0..<notes.count {
             let note = notes[i]
@@ -170,6 +174,7 @@ class CGSSLiveSimulator {
             var comboBonus = 100
             var perfectBonus = 100
             var skillBoost = 1000
+            var restoreLife = 0
             
             var firstLoop = true
             for j in lastIndex..<procedBonuses.count {
@@ -190,24 +195,38 @@ class CGSSLiveSimulator {
                         }
                     case LSScoreBonusTypes.perfectBonus:
                         if bonus.value > perfectBonus {
-                            perfectBonus = bonus.value
+                            if bonus.triggerLife == 0 || life - bonus.triggerLife > 0 {
+                                perfectBonus = bonus.value
+                                life -= bonus.triggerLife
+                            }
                         }
                     case LSScoreBonusTypes.skillBoost:
                         if bonus.value > skillBoost {
                             skillBoost = bonus.value
+                        }
+                    case LSScoreBonusTypes.heal:
+                        if bonus.value > restoreLife {
+                            restoreLife = bonus.value
                         }
                     default:
                         break
                     }
                 }
             }
+            
+        
             let baseComboBonus = comboBonus
             let basePerfectBonus = perfectBonus
             
             if skillBoost > 1000 {
                 perfectBonus = addSkillBoost(skillBoost, to: perfectBonus)
                 comboBonus = addSkillBoost(skillBoost, to: comboBonus)
+                if restoreLife != 0 {
+                    restoreLife += 1
+                }
             }
+            
+            life += restoreLife
             
             let score = Int(round(baseScore * comboFactor * Double(perfectBonus * comboBonus) / 10000))
             
