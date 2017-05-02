@@ -90,7 +90,6 @@
 		12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventPtItem.swift */; };
 		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
 		12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */; };
-		126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */; };
 		126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSLiveFilter.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
@@ -316,7 +315,6 @@
 		12636EC71E375DA900E3C833 /* EventPtItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtItem.swift; sourceTree = "<group>"; };
 		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
 		12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WipeTableViewController.swift; sourceTree = "<group>"; };
-		126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		126666231D7D70F70022348E /* CGSSLiveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFilter.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
@@ -747,7 +745,6 @@
 				1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */,
 				1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */,
 				1269E9FF1D520C9F0071AD7F /* SongTableViewController.swift */,
-				126666211D7D70580022348E /* SongFilterAndSorterTableViewController.swift */,
 				1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */,
 				12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */,
 			);
@@ -1236,7 +1233,6 @@
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
-				126666221D7D70580022348E /* SongFilterAndSorterTableViewController.swift in Sources */,
 				12C408451E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,

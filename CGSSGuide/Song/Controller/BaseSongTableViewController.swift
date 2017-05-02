@@ -52,11 +52,6 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         check([.beatmap, .master])
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
@@ -85,7 +80,8 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         filterVC.sorter = self.sorter
         filterVC.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateEnd(notification:)), name: .updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataChanged(notification:)), name: .updateEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataChanged(notification:)), name: .dataRemoved, object: nil)
         
         reloadData()
     }
@@ -107,10 +103,11 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         }
     }
     
-    func updateEnd(notification: Notification) {
-        let types = notification.object as! CGSSUpdateDataTypes
-        if types.contains(.master) || types.contains(.beatmap) {
-            self.setNeedsReloadData()
+    func dataChanged(notification: Notification) {
+        if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
+            if types.contains(.master) || types.contains(.beatmap) {
+                self.setNeedsReloadData()
+            }
         }
     }
     

@@ -53,6 +53,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCardsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataChanged(notification:)), name: .dataRemoved, object: nil)
     }
     
     deinit {
@@ -81,6 +82,14 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
   
     override func checkUpdate() {
         check([.card, .master])
+    }
+    
+    func dataChanged(notification: Notification) {
+        if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
+            if types.contains(.master) || types.contains(.card) {
+                self.setNeedsReloadData()
+            }
+        }
     }
     
     func filterAction() {

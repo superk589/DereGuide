@@ -19,6 +19,9 @@ struct DataURL {
     static let musicScore = DataURL.master
 }
 
+// used in notification userinfo key name
+let CGSSUpdateDataTypesName = "CGSSUpdateDataTypesKey"
+
 struct CGSSUpdateDataTypes: OptionSet, RawRepresentable {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
@@ -95,7 +98,7 @@ open class CGSSUpdater: NSObject {
     }
     
     func postUpdateEndNotification(types: CGSSUpdateDataTypes) {
-        NotificationCenter.default.post(name: .updateEnd, object: types)
+        NotificationCenter.default.post(name: .updateEnd, object: self, userInfo: [CGSSUpdateDataTypesName: types])
     }
     
     var dataSession: URLSession!

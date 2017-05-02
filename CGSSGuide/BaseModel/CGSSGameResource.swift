@@ -614,14 +614,15 @@ class CGSSGameResource: NSObject {
     }
     
     func updateEnd(notification: Notification) {
-        let types = notification.object as! CGSSUpdateDataTypes
-        if types.contains(.master) || types.contains(.card) {
-            prepareGachaList {
-                let list = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
-                for item in list {
-                    item.availableType = nil
+        if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
+            if types.contains(.master) || types.contains(.card) {
+                prepareGachaList {
+                    let list = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
+                    for item in list {
+                        item.availableType = nil
+                    }
+                    NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: self)
                 }
-                NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: self)
             }
         }
     }

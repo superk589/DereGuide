@@ -51,12 +51,15 @@ class WipeTableViewController: BaseTableViewController {
                         dao.getDictForKey(.char).removeAllObjects()
                         dao.getDictForKey(.leaderSkill).removeAllObjects()
                         dao.getDictForKey(.skill).removeAllObjects()
+                        NotificationCenter.default.post(name: .dataRemoved, object: self, userInfo: [CGSSUpdateDataTypesName: CGSSUpdateDataTypes.card])
                     case 3:
                         CGSSCacheManager.shared.wipeLive()
+                        NotificationCenter.default.post(name: .dataRemoved, object: self, userInfo: [CGSSUpdateDataTypesName: CGSSUpdateDataTypes.beatmap])
                     case 4:
                         CGSSCacheManager.shared.wipeUserDocuments()
                     case 5:
                         CGSSCacheManager.shared.wipeOther()
+                        NotificationCenter.default.post(name: .dataRemoved, object: self, userInfo: [CGSSUpdateDataTypesName: CGSSUpdateDataTypes.master])
                     default:
                         break
                     }

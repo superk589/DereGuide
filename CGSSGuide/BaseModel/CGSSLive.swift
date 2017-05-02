@@ -241,6 +241,10 @@ class CGSSLive: CGSSBaseModel {
         return result
     }()
     
+    lazy dynamic var maxNumberOfNotes: Int = {
+        return self.getBeatmapByDiff(self.maxDiff)?.numberOfNotes ?? 0
+    }()
+    
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */

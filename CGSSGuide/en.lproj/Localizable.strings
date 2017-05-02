@@ -597,3 +597,8 @@
 
 /* new in 1.2.7 */
 "流行曲" = "Bonus Song";
+
+/* new in 1.2.8 */
+"最大Notes数" = "最大Notes数";
+
+
