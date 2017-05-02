@@ -218,6 +218,7 @@ class CGSSCard: CGSSBaseModel {
     
     // 非JSON获取
     var availableType: CGSSAvailableTypes?
+    dynamic var odds = 0
     
     /**
          * Instantiate the instance using the passed json values to set the properties values

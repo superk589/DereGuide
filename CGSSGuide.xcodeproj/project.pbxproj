@@ -27,6 +27,7 @@
 		1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */; };
 		121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82131EB7383600273F37 /* CGSSNotification.swift */; };
 		121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */; };
+		121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */; };
 		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAppeal.swift */; };
@@ -236,6 +237,7 @@
 		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
 		121B82131EB7383600273F37 /* CGSSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotification.swift; sourceTree = "<group>"; };
 		121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelTableViewController.swift; sourceTree = "<group>"; };
+		121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardFilterSortController.swift; sourceTree = "<group>"; };
 		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAppeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAppeal.swift; sourceTree = "<group>"; };
@@ -918,6 +920,7 @@
 			children = (
 				124791801D87F4FD00ED8EA6 /* GachaViewController.swift */,
 				12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */,
+				121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */,
 				12D45AD01E2E48CB0009986F /* GachaFilterSortController.swift */,
 				128E821F1E2E561700B2E626 /* GachaDetailController.swift */,
 			);
@@ -1224,6 +1227,7 @@
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
+				121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */,
 				12C4083B1E8BC1F3001373CF /* LiveSimulatorViewController.swift in Sources */,
 				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,

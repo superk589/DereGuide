@@ -34,7 +34,13 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     }
     var delegate: BaseCardTableViewControllerDelegate?
     
-    var filterVC: CardFilterSortController!
+    lazy var filterVC: CardFilterSortController = {
+        let vc = CardFilterSortController()
+        vc.filter = self.filter
+        vc.sorter = self.sorter
+        vc.delegate = self
+        return vc
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +52,6 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
-        filterVC = CardFilterSortController()
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
-        filterVC.delegate = self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCardsChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dataChanged(notification:)), name: .dataRemoved, object: nil)

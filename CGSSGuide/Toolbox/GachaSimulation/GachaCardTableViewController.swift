@@ -30,6 +30,23 @@ class GachaCardTableViewController: BaseCardTableViewController {
         }
     }
     
+    override var filterVC: CardFilterSortController {
+        set {
+            _filterVC = newValue as! GachaCardFilterSortController
+        }
+        get {
+            return _filterVC
+        }
+    }
+    
+    lazy var _filterVC: GachaCardFilterSortController = {
+        let vc = GachaCardFilterSortController()
+        vc.filter = self.filter
+        vc.sorter = self.sorter
+        vc.delegate = self
+        return vc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
@@ -49,10 +66,18 @@ class GachaCardTableViewController: BaseCardTableViewController {
     var hasOdds = false
     
     func setup(with pool: CGSSGachaPool) {
-        self.defaultCardList = pool.cardList
-        self.rewardTable = pool.rewardTable
+        if pool.hasOdds {
+            defaultCardList = pool.cardList.map {
+                $0.odds = pool.rewardTable[$0.id!]?.relativeOdds ?? 0
+                return $0
+            }
+        } else {
+            defaultCardList = [CGSSCard]()
+        }
+        rewardTable = pool.rewardTable
         hasOdds = pool.hasOdds
     }
+    
     // 根据设定的筛选和排序方法重新展现数据
     override func updateUI() {
         filter.searchText = searchBar.text ?? ""
@@ -62,21 +87,6 @@ class GachaCardTableViewController: BaseCardTableViewController {
         tableView.reloadData()
         // 滑至tableView的顶部 暂时不需要
         // tableView.scrollToRowAtIndexPath(IndexPath.init(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //navigationController?.setToolbarHidden(false, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //navigationController?.setToolbarHidden(true, animated: true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

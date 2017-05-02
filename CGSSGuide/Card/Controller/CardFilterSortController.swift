@@ -67,10 +67,6 @@ class CardFilterSortController: BaseFilterSortController {
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func reloadData() {
         self.tableView.reloadData()
     }
