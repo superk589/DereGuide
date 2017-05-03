@@ -411,7 +411,7 @@ extension CGSSCard {
         appeal.vocal = Int(ceil(Float(appeal.vocal * (factor + (contents[cardType]?[.vocal] ?? 0))) / 100))
         appeal.dance = Int(ceil(Float(appeal.dance * (factor + (contents[cardType]?[.dance] ?? 0))) / 100))
         appeal.visual = Int(ceil(Float(appeal.visual * (factor + (contents[cardType]?[.visual] ?? 0))) / 100))
-        appeal.life = Int(ceil(Float(appeal.visual * (100 + (contents[cardType]?[.life] ?? 0))) / 100))
+        appeal.life = Int(ceil(Float(appeal.life * (100 + (contents[cardType]?[.life] ?? 0))) / 100))
         return appeal
     }
 }

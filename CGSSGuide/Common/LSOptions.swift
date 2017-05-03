@@ -17,4 +17,6 @@ struct LSOptions: OptionSet {
     
     /// generate detail logs of each note in the format of LSLog
     static let detailLog = LSOptions.init(rawValue: 1 << 1)
+    
+    static let overloadLimitByLife = LSOptions.init(rawValue: 1 << 2)
 }

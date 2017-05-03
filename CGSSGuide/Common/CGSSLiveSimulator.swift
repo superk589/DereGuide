@@ -85,7 +85,7 @@ class CGSSLiveSimulator {
                 intersectedPoints = Array(Set(intersectedPoints))
                 intersectedPoints.sort()
                 
-                assert(intersectedPoints.count > 1)
+                // assert(intersectedPoints.count > 1)
                 var subRanges = [LSRange]()
                 for k in 0..<intersectedPoints.count - 1 {
                     let point = intersectedPoints[k]
@@ -152,21 +152,22 @@ class CGSSLiveSimulator {
     
     func simulateOnce(options: LSOptions = [], callback: LSResultClosure? = nil) {
         var sum = 0
-        var procedBonuses = [LSScoreBonus]()
-        for bonus in bonuses {
-            if options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round(bonus.rate * Double(100 + bonus.rateBonus) / 10))) {
-                procedBonuses.append(bonus)
-            }
+        
+        var life = totalLife
+
+        let procedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }.filter {
+            options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
         }
         
-        procedBonuses.sort { $0.range.begin < $1.range.begin }
-        
         var logs = [LSLog]()
-    
-        var life = totalLife
         
         // normal simulation
         var lastIndex = 0
+        
+        let overloadLimitByLife = options.contains(.overloadLimitByLife)
+        var overloadedIndexes = [Int]()
+        var missedIndexes = [Int]()
+    
         for i in 0..<notes.count {
             let note = notes[i]
             let baseScore = lsNotes[i].baseScore
@@ -194,12 +195,43 @@ class CGSSLiveSimulator {
                             comboBonus = bonus.value
                         }
                     case LSScoreBonusTypes.perfectBonus:
-                        if bonus.value > perfectBonus {
-                            if bonus.triggerLife == 0 || life - bonus.triggerLife > 0 {
+                        // overload skill
+                        if bonus.triggerLife > 0 && overloadLimitByLife {
+                            
+                            // not missed
+                            if !missedIndexes.contains(j) {
+                                
+                                // proc already
+                                if !missedIndexes.contains(j) && overloadedIndexes.contains(j) {
+                                    if bonus.value > perfectBonus {
+                                        perfectBonus = bonus.value
+                                    }
+                                    
+                                // first proc
+                                } else {
+                                    
+                                    // life enough
+                                    if life - bonus.triggerLife > 0 {
+                                        life -= bonus.triggerLife
+                                        if bonus.value > perfectBonus {
+                                            perfectBonus = bonus.value
+                                        }
+                                        overloadedIndexes.append(j)
+                                    
+                                    // life not enough
+                                    } else {
+                                        missedIndexes.append(j)
+                                    }
+                                }
+                            }
+                            
+                        // other skill
+                        } else {
+                            if bonus.value > perfectBonus {
                                 perfectBonus = bonus.value
-                                life -= bonus.triggerLife
                             }
                         }
+                        
                     case LSScoreBonusTypes.skillBoost:
                         if bonus.value > skillBoost {
                             skillBoost = bonus.value
@@ -263,7 +295,7 @@ class CGSSLiveSimulator {
     
     func simulate(times: UInt, progress: CGSSProgressClosure, callback: @escaping LSResultClosure) {
         for i in 0..<times {
-            simulateOnce()
+            simulateOnce(options: .overloadLimitByLife)
             progress(Int(i + 1), Int(times))
         }
         let result = LSResult.init(scores: simulateResult)

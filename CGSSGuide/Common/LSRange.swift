@@ -43,6 +43,9 @@ struct LSRange {
             end = otherRange.end
         }
         
-        return LSRange.init(begin: begin, length: end - begin)
+        let newRange = LSRange.init(begin: begin, length: end - begin)
+        
+        // notice that length may be zero, due to float accuracy problem, even though end != begin
+        return newRange
     }
 }
