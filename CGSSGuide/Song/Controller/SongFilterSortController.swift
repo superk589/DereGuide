@@ -25,7 +25,7 @@ class SongFilterSortController: BaseFilterSortController {
     
     var sorterMethods = ["updateId", "createId", "bpm", "maxDiffStars", "maxNumberOfNotes"]
     
-    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("最大难度", comment: ""), NSLocalizedString("最大Notes数", comment: "")]
+    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("最大难度", comment: ""), NSLocalizedString("最多Note数", comment: "")]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     

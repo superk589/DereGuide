@@ -15,6 +15,11 @@ class TeamDetailViewController: UIViewController {
     var teamDV: TeamDetailView!
     var sv: UIScrollView!
     
+    lazy var liveSelectionViewController: TeamSongSelectViewController = {
+        let vc = TeamSongSelectViewController()
+        vc.delegate = self
+        return vc
+    }()
     //var hud: CGSSLoadingHUD!
     var live: CGSSLive?
     var beatmap: CGSSBeatmap?
@@ -134,9 +139,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func selectSong() {
-        let songSelectVC = TeamSongSelectViewController()
-        songSelectVC.delegate = self
-        navigationController?.pushViewController(songSelectVC, animated: true)
+        navigationController?.pushViewController(liveSelectionViewController, animated: true)
     }
     
     func backFieldDone(_ value: Int) {

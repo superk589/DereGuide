@@ -26,15 +26,7 @@ class TeamEditViewController: BaseTableViewController {
     var lastScrollViewOffset: CGPoint?
     var keyBoardHeigt: CGFloat = 258
     var cells = [TeamMemberTableViewCell]()
-    /*override func viewWillAppear(animated: Bool) {
-     super.viewWillAppear(animated)
-     NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setKeyboardHeight), name: UIKeyboardWillShowNotification, object: nil)
-     }
-
-     override func viewWillDisappear(animated: Bool) {
-     super.viewWillDisappear(animated)
-     NSNotificationCenter.defaultCenter().removeObserver(self)
-     }*/
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -158,23 +150,16 @@ class TeamEditViewController: BaseTableViewController {
         return cell
     }
     
-    var teamCardVC: TeamCardSelectTableViewController?
+    lazy var cardSelectionViewController: TeamCardSelectTableViewController = {
+        let vc = TeamCardSelectTableViewController()
+        vc.delegate = self
+        return vc
+    }()
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if getMemberByIndex(indexPath.row) == nil {
             lastIndex = indexPath.row
-            if teamCardVC == nil {
-                teamCardVC = TeamCardSelectTableViewController()
-                teamCardVC!.delegate = self
-            }
-            self.navigationController?.pushViewController(teamCardVC!, animated: true)
-            
-            /* // 使用自定义动画效果
-             let transition = CATransition()
-             transition.duration = 0.3
-             transition.type = kCATransitionFade
-             // transition.subtype = kCATransitionFromRight
-             navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-             navigationController?.pushViewController(teamCardVC!, animated: false)*/
+            self.navigationController?.pushViewController(cardSelectionViewController, animated: true)
         }
         // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
         tableView.deselectRow(at: indexPath, animated: true)
@@ -194,11 +179,7 @@ class TeamEditViewController: BaseTableViewController {
 extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPresentationControllerDelegate {
     func replaceMember(cell: TeamMemberTableViewCell) {
         lastIndex = cell.tag - 100
-        if teamCardVC == nil {
-            teamCardVC = TeamCardSelectTableViewController()
-            teamCardVC!.delegate = self
-        }
-        self.navigationController?.pushViewController(teamCardVC!, animated: true)
+        self.navigationController?.pushViewController(cardSelectionViewController, animated: true)
     }
 
     func endEdit(cell: TeamMemberTableViewCell) {
