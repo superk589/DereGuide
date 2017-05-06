@@ -15,6 +15,7 @@ struct LSScoreBonusTypes: OptionSet, Hashable {
     static let perfectBonus = LSScoreBonusTypes.init(rawValue: 1 << 1)
     static let skillBoost = LSScoreBonusTypes.init(rawValue: 1 << 2)
     static let heal = LSScoreBonusTypes.init(rawValue: 1 << 3)
+    static let overload = LSScoreBonusTypes.init(rawValue: 1 << 4)
     static let deep: LSScoreBonusTypes = [.comboBonus, .perfectBonus]
     static let allRound: LSScoreBonusTypes = [.comboBonus, .heal]
     
@@ -24,8 +25,10 @@ struct LSScoreBonusTypes: OptionSet, Hashable {
             self = .comboBonus
         case CGSSSkillTypes.allRound:
             self = .allRound
-        case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.overload, CGSSSkillTypes.concentration:
+        case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.concentration:
             self = .perfectBonus
+        case  CGSSSkillTypes.overload:
+            self = .overload
         case CGSSSkillTypes.deep:
             self = .deep
         case CGSSSkillTypes.boost:

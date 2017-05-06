@@ -194,44 +194,36 @@ class CGSSLiveSimulator {
                         if bonus.value > comboBonus {
                             comboBonus = bonus.value
                         }
-                    case LSScoreBonusTypes.perfectBonus:
-                        // overload skill
-                        if bonus.triggerLife > 0 && overloadLimitByLife {
-                            
-                            // not missed
+                    case LSScoreBonusTypes.overload:
+                        if !overloadLimitByLife {
+                            fallthrough
+                        } else {
+                        // not missed
                             if !missedIndexes.contains(j) {
                                 
                                 // proc already
                                 if !missedIndexes.contains(j) && overloadedIndexes.contains(j) {
-                                    if bonus.value > perfectBonus {
-                                        perfectBonus = bonus.value
-                                    }
-                                    
-                                // first proc
+                                   fallthrough
+                                    // first proc
                                 } else {
                                     
                                     // life enough
                                     if life - bonus.triggerLife > 0 {
                                         life -= bonus.triggerLife
-                                        if bonus.value > perfectBonus {
-                                            perfectBonus = bonus.value
-                                        }
                                         overloadedIndexes.append(j)
-                                    
-                                    // life not enough
+                                        fallthrough
+                                        
+                                        // life not enough
                                     } else {
                                         missedIndexes.append(j)
                                     }
                                 }
                             }
-                            
-                        // other skill
-                        } else {
-                            if bonus.value > perfectBonus {
-                                perfectBonus = bonus.value
-                            }
                         }
-                        
+                    case LSScoreBonusTypes.perfectBonus:
+                        if bonus.value > perfectBonus {
+                            perfectBonus = bonus.value
+                        }
                     case LSScoreBonusTypes.skillBoost:
                         if bonus.value > skillBoost {
                             skillBoost = bonus.value
@@ -258,7 +250,7 @@ class CGSSLiveSimulator {
                 }
             }
             
-            life += restoreLife
+            life = min(totalLife, life + restoreLife)
             
             let score = Int(round(baseScore * comboFactor * Double(perfectBonus * comboBonus) / 10000))
             
