@@ -150,7 +150,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         
         songDescLabel = UILabel()
         addSubview(songDescLabel)
-        songDescLabel.textColor = UIColor.darkGray
+        songDescLabel.textColor = UIColor.black
         songDescLabel.text = NSLocalizedString("活动曲", comment: "")
         songDescLabel.font = Font.title
         songDescLabel.snp.makeConstraints { (make) in
@@ -200,7 +200,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
 
         eventPtDescLabel = UILabel()
         eventPtContentView.addSubview(eventPtDescLabel)
-        eventPtDescLabel.textColor = UIColor.darkGray
+        eventPtDescLabel.textColor = UIColor.black
         eventPtDescLabel.text = NSLocalizedString("活动pt档位", comment: "")
         eventPtDescLabel.font = Font.title
         eventPtDescLabel.snp.makeConstraints { (make) in
@@ -254,7 +254,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         
         eventScoreDescLabel = UILabel()
         eventScoreContentView.addSubview(eventScoreDescLabel)
-        eventScoreDescLabel.textColor = UIColor.darkGray
+        eventScoreDescLabel.textColor = UIColor.black
         eventScoreDescLabel.text = NSLocalizedString("歌曲分数档位", comment: "")
         eventScoreDescLabel.font = Font.title
         eventScoreDescLabel.snp.makeConstraints { (make) in

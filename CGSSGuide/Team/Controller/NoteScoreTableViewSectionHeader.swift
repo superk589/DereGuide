@@ -11,38 +11,51 @@ import SnapKit
 
 class NoteScoreTableViewSectionHeader: UITableViewHeaderFooterView {
 
-    var labelTitles = [
-        NSLocalizedString("Combo", comment: ""),
-        NSLocalizedString("P分", comment: ""),
-        NSLocalizedString("C分", comment: ""),
-        NSLocalizedString("SB", comment: ""),
-        NSLocalizedString("得分", comment: ""),
-        NSLocalizedString("累计", comment: "")
+    private enum Title {
+        case text(String)
+        case icon(UIImage)
+    }
+    
+    private let labelTitles: [Title] = [
+        .text(NSLocalizedString("Combo", comment: "")),
+        .icon(#imageLiteral(resourceName: "score-bonus")),
+        .icon(#imageLiteral(resourceName: "combo-bonus")),
+        .icon(#imageLiteral(resourceName: "skill-boost")),
+        .text(NSLocalizedString("得分", comment: "")),
+        .text(NSLocalizedString("累计", comment: ""))
     ]
     
-    var labels = [UILabel]()
+    var titleViews = [UIView]()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         for title in labelTitles {
-            let label = UILabel()
-            label.adjustsFontSizeToFitWidth = true
-            label.text = title
-            label.textAlignment = .center
-            label.baselineAdjustment = .alignCenters
-            contentView.addSubview(label)
-            labels.append(label)
+            switch title {
+            case .icon(let image):
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                contentView.addSubview(imageView)
+                titleViews.append(imageView)
+            case .text(let text):
+                let label = UILabel()
+                label.adjustsFontSizeToFitWidth = true
+                label.text = text
+                label.textAlignment = .center
+                label.baselineAdjustment = .alignCenters
+                contentView.addSubview(label)
+                titleViews.append(label)
+            }
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         let space: CGFloat = 5
-        for i in 0..<labels.count {
-            let label = labels[i]
-            let width = (bounds.size.width - CGFloat(labels.count + 1) * space) / CGFloat(labels.count)
+        for i in 0..<titleViews.count {
+            let view = titleViews[i]
+            let width = (bounds.size.width - CGFloat(titleViews.count + 1) * space) / CGFloat(titleViews.count)
             let height = bounds.size.height
-            label.frame = CGRect.init(x: CGFloat(i) * width + CGFloat(i + 1) * space, y: 0, width: width, height: height)
+            view.frame = CGRect.init(x: CGFloat(i) * width + CGFloat(i + 1) * space, y: 0, width: width, height: height)
         }
     }
     

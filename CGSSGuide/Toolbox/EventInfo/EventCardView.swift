@@ -25,7 +25,7 @@ class EventCardView: UIView {
             make.left.equalTo(10)
         }
         descLabel.font = Font.title
-        descLabel.textColor = UIColor.darkGray
+        descLabel.textColor = UIColor.black
         
         cardView = CardView()
         addSubview(cardView)
