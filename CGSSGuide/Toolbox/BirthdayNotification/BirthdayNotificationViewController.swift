@@ -30,12 +30,8 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         // 设置tableView的separatorStyle 在9.0版本之前会触发tableView的协议方法, 所以必须在这步之前注册tableView的cell
         tableView.separatorStyle = .none
         
-        if #available(iOS 9.0, *) {
-            headerView.cellLayoutMarginsFollowReadableWidth = false
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        } else {
-            // Fallback on earlier versions
-        }
+        headerView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         
         self.popoverPresentationController?.delegate = self
         // Uncomment the following line to preserve selection between presentations

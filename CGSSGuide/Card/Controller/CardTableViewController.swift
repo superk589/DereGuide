@@ -40,11 +40,7 @@ class CardTableViewController: BaseCardTableViewController {
             check(.all)
         }
         
-        if #available(iOS 9.0, *) {
-            registerForPreviewing(with: self, sourceView: view)
-        } else {
-            // Fallback on earlier versions
-        }
+        registerForPreviewing(with: self, sourceView: view)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

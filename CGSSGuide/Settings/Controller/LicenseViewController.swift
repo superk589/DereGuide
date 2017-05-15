@@ -35,11 +35,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableView.estimatedRowHeight = 50
         tableView.register(LicenseTableViewCell.self, forCellReuseIdentifier: "LicenseCell")
         
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        } else {
-            // Fallback on earlier versions
-        }
+        tableView.cellLayoutMarginsFollowReadableWidth = false
     }
 
     override func didReceiveMemoryWarning() {

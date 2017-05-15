@@ -12,11 +12,8 @@ class BaseTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 9.0, *) {
-            self.tableView.cellLayoutMarginsFollowReadableWidth = false
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = true

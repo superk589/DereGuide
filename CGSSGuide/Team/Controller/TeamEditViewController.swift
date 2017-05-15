@@ -59,11 +59,8 @@ class TeamEditViewController: BaseTableViewController {
         
         // 暂时去除header
         // tv.tableHeaderView = hv
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        } else {
-            // Fallback on earlier versions
-        }
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+        
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
         swipe.direction = .right

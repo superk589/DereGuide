@@ -18,14 +18,21 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     var spaceItem: UIBarButtonItem!
     
     var teams: [CGSSTeam] {
-        let manager = CGSSTeamManager.defaultManager
-        return manager.teams
+        get {
+            let manager = CGSSTeamManager.default
+            return manager.teams
+        }
+        set {
+            let manager = CGSSTeamManager.default
+            manager.teams = newValue
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.rowHeight = TeamTableViewCell.btnW + 55
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 79
+        
         addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTeam))
         deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
         self.navigationItem.rightBarButtonItem = addItem
@@ -57,7 +64,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         // 采用倒序删除法
         for indexPath in (tableView.indexPathsForSelectedRows ?? [IndexPath]()).sorted(by: { $0.row > $1.row }) {
         // for indexPath in (tableView.indexPathsForSelectedRows?.reversed() ?? [IndexPath]()) {
-            CGSSTeamManager.defaultManager.removeATeamAtIndex(indexPath.row)
+            teams.remove(at: indexPath.row)
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -65,7 +72,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setEditing(false, animated: true)
+        setEditing(false, animated: false)
         self.tableView.reloadData()
     }
 
@@ -96,12 +103,10 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     
     func copyAction() {
-        if isEditing {
-            for indexPath in tableView.indexPathsForSelectedRows ?? [IndexPath]() {
-                CGSSTeamManager.defaultManager.teams.append(teams[indexPath.row])
-                
+        if let selectedIndexPaths = tableView.indexPathsForSelectedRows, isEditing {
+            for indexPath in selectedIndexPaths {
+                teams.append(teams[indexPath.row])
             }
-            CGSSTeamManager.defaultManager.writeToFile(nil)
             tableView.reloadData()
         }
     }
@@ -120,14 +125,9 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if isEditing {
-            // 只有全部表视图而不是某个单元格触发了左滑删除进入编辑状态才显示相关按钮
-            if let cell = tableView.visibleCells.first {
-                if cell.editingStyle == UITableViewCellEditingStyle.init(rawValue: 0b11)! {
-                    navigationItem.rightBarButtonItem = deleteItem
-                    navigationController?.setToolbarHidden(false, animated: true)
-                    toolbarItems = [selectItem, spaceItem, deselectItem, spaceItem, copyItem]
-                }
-            }
+            navigationItem.rightBarButtonItem = deleteItem
+            navigationController?.setToolbarHidden(false, animated: true)
+            toolbarItems = [selectItem, spaceItem, deselectItem, spaceItem, copyItem]
         } else {
             navigationItem.rightBarButtonItem = addItem
             navigationController?.setToolbarHidden(true, animated: true)
@@ -135,9 +135,22 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
     
+    // 实现了这两个方法 delete 手势才不会调用 setediting
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+    }
+   
+    override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        navigationItem.leftBarButtonItem = self.editButtonItem
+    }
+    
+    func doneAction() {
+        self.tableView.setEditing(false, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamTableViewCell
-        cell.initWith(teams[indexPath.row])
+        cell.setup(with: teams[indexPath.row])
         return cell
     }
     
@@ -151,10 +164,24 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
     
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+//    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+//        return proposedDestinationIndexPath
+//    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let team = teams[sourceIndexPath.row]
+        teams.remove(at: sourceIndexPath.row)
+        teams.insert(team, at: destinationIndexPath.row)
+    }
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            CGSSTeamManager.defaultManager.removeATeamAtIndex(indexPath.row)
+            teams.remove(at: indexPath.row)
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -183,6 +210,6 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     // MARK: TeamEditViewController的协议方法
     
     func save(_ team: CGSSTeam) {
-        CGSSTeamManager.defaultManager.addATeam(team)
+        teams.insert(team, at: 0)
     }
 }

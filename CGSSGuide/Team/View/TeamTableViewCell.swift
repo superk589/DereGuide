@@ -7,119 +7,125 @@
 //
 
 import UIKit
+import SnapKit
+
+class TeamTableViewCellCardView: UIView {
+    var icon: CGSSCardIconView
+    var label: UILabel
+
+    override init(frame: CGRect) {
+        icon = CGSSCardIconView()
+        icon.isUserInteractionEnabled = false
+        label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+//        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.darkGray
+       
+        super.init(frame: frame)
+        addSubview(label)
+        addSubview(icon)
+        label.snp.makeConstraints { (make) in
+            make.centerX.bottom.equalToSuperview()
+            make.left.greaterThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+        }
+        
+        icon.snp.makeConstraints { (make) in
+            make.top.right.left.equalToSuperview()
+            make.height.equalTo(snp.width)
+            make.bottom.equalTo(label.snp.top)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 class TeamTableViewCell: UITableViewCell {
     
-    var icons: [CGSSCardIconView]!
-    var skillLvLabels: [UILabel]!
-    var leftSpace: CGFloat = 10
-    var rightSpace: CGFloat = 48
-    var space: CGFloat = 5
-    static let btnW: CGFloat = (CGSSGlobal.width - 10 - 48 + 5) / 6 - 5
-    var rawValueLabels: [UILabel]!
+    var iconStackView: UIStackView!
     
-    var lifeLabel: UILabel!
-    var vocalLabel: UILabel!
-    var danceLabel: UILabel!
-    var visualLabel: UILabel!
-    var totalLabel: UILabel!
+//    var appealStackView: UIStackView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        icons = [CGSSCardIconView]()
-        skillLvLabels = [UILabel]()
-        let btnW = TeamTableViewCell.btnW
-        for index in 0...5 {
-            let icon = CGSSCardIconView.init(frame: CGRect(x: leftSpace + (btnW + space) * CGFloat(index), y: 10, width: btnW, height: btnW))
-            icon.isUserInteractionEnabled = false
-            let label = UILabel.init(frame: CGRect(x: icon.frame.origin.x, y: icon.frame.origin.y + icon.frame.size.height, width: icon.frame.size.width, height: 21))
-            label.adjustsFontSizeToFitWidth = true
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 12)
-            label.textColor = UIColor.darkGray
-            contentView.addSubview(label)
-            skillLvLabels.append(label)
-            
-            contentView.addSubview(icon)
-            icons.append(icon)
-        }
-        let originY = 10 + btnW + 23
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        let width = (CGSSGlobal.width - leftSpace - rightSpace - 2) / 5
-        let fontSize: CGFloat = 12
-        let height: CGFloat = 12
-        let originX: CGFloat = 10
-        
-        lifeLabel = UILabel()
-        lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
-        lifeLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        lifeLabel.textColor = Color.life
-        lifeLabel.textAlignment = .right
-        
-        vocalLabel = UILabel()
-        vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
-        vocalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        vocalLabel.textColor = Color.vocal
-        vocalLabel.textAlignment = .right
-        
-        danceLabel = UILabel()
-        danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
-        danceLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        danceLabel.textColor = Color.dance
-        danceLabel.textAlignment = .right
-        
-        visualLabel = UILabel()
-        visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
-        visualLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        visualLabel.textColor = Color.visual
-        visualLabel.textAlignment = .right
-        
-        totalLabel = UILabel()
-        totalLabel.frame = CGRect(x: originX + 4 * width, y: originY, width: width, height: height)
-        totalLabel.font = UIFont.init(name: "menlo", size: fontSize)
-        totalLabel.textColor = UIColor.darkGray
-        totalLabel.textAlignment = .right
-        
-        contentView.addSubview(vocalLabel)
-        contentView.addSubview(lifeLabel)
-        contentView.addSubview(danceLabel)
-        contentView.addSubview(visualLabel)
-        contentView.addSubview(totalLabel)
-        
-        let asView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        asView.image = UIImage.init(named: "766-arrow-right-toolbar-selected")!.withRenderingMode(.alwaysTemplate)
-        asView.tintColor = UIColor.lightGray
-        self.accessoryView = asView
-        
-        // Initialization code
+        prepareUI()
+       
     }
     
-    func initWith(_ team: CGSSTeam) {
+    private func prepareUI() {
+        var views = [UIView]()
+        for _ in 0...5 {
+            let view = TeamTableViewCellCardView()
+            views.append(view)
+        }
+        iconStackView = UIStackView(arrangedSubviews: views)
+        iconStackView.spacing = 5
+        iconStackView.distribution = .fillEqually
+        
+        contentView.addSubview(iconStackView)
+        
+//        var labels = [UILabel]()
+//        let colors = [Color.life, Color.vocal, Color.dance, Color.visual, UIColor.darkGray]
+//        for i in 0...4 {
+//            let label = UILabel()
+//            label.font = UIFont.init(name: "menlo", size: 12)
+//            label.textColor = colors[i]
+//            labels.append(label)
+//        }
+//        
+//        appealStackView = UIStackView(arrangedSubviews: labels)
+//        appealStackView.spacing = 5
+//        appealStackView.distribution = .equalCentering
+//        contentView.addSubview(appealStackView)
+        
+        iconStackView.snp.makeConstraints { (make) in
+            make.top.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-5)
+        }
+        
+//        appealStackView.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.top.equalTo(iconStackView.snp.bottom)
+//            make.bottom.equalTo(-5)
+//        }
+        accessoryType = .disclosureIndicator
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepareUI()
+    }
+    
+    func setup(with team: CGSSTeam) {
         for i in 0...5 {
             let tm = team[i]
-            if let card = tm?.cardRef {
-                icons[i].cardId = card.id
+            if let card = tm?.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamTableViewCellCardView {
+                view.icon.cardId = card.id
                 if i != 5 {
                     if card.skill != nil {
-                        skillLvLabels[i].text = "SLv.\((tm?.skillLevel)!)"
+                        view.label.text = "SLv.\((tm?.skillLevel)!)"
                     } else {
-                        skillLvLabels[i].text = "n/a"
+                        view.label.text = "n/a"
                     }
                 } else {
-                    skillLvLabels[i].text = "n/a"
+                    view.label.text = "n/a"
                 }
             }
         }
-        vocalLabel.text = String(team.rawVocal)
-        visualLabel.text = String(team.rawVisual)
-        danceLabel.text = String(team.rawDance)
-        totalLabel.text = String(team.rawAppeal.total)
-        lifeLabel.text = String(team.rawHP)
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+//        let values = [team.rawHP, team.rawVocal, team.rawDance, team.rawVisual, team.rawAppeal.total]
+//        for i in 0...4 {
+//            if let label = appealStackView.arrangedSubviews[i] as? UILabel {
+//                label.text = String(values[i])
+//            }
+//        }
     }
     
 }

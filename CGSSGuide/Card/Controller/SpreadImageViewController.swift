@@ -9,10 +9,22 @@
 import UIKit
 
 class SpreadImageViewController: UIViewController {
-
+    
     var imageView = SpreadImageView(frame: CGRect.zero)
     
     var imageURL: URL!
+    
+    private var statusBarHidden = false
+    
+    override var prefersStatusBarHidden: Bool {
+        return statusBarHidden
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        statusBarHidden = true
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     fileprivate var customPresentAnimator: SpreadImageViewAnimator = SpreadImageViewAnimator()
     
@@ -37,16 +49,6 @@ class SpreadImageViewController: UIViewController {
         if tap.state == .ended {
             dismiss(animated: true, completion: nil)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.setStatusBarHidden(true, with: .slide)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.setStatusBarHidden(false, with: .slide)
     }
     
     func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {

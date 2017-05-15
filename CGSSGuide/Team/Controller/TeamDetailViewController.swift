@@ -66,9 +66,12 @@ class TeamDetailViewController: UIViewController {
 //MARK: TeamEditViewControllerDelegate协议方法
 extension TeamDetailViewController: TeamEditViewControllerDelegate {
     func save(_ team: CGSSTeam) {
-        CGSSTeamManager.defaultManager.removeATeam(self.team)
+        let manager = CGSSTeamManager.default
+        if let index = manager.teams.index(of: self.team) {
+            manager.teams.remove(at: index)
+        }
         self.team = team
-        CGSSTeamManager.defaultManager.addATeam(team)
+        manager.teams.insert(team, at: 0)
     }
 }
 
@@ -124,7 +127,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
 
     func manualFieldDone(_ value: Int) {
         team.customAppeal = value
-        CGSSTeamManager.defaultManager.writeToFile(nil)
+        CGSSTeamManager.default.save()
     }
 
     
@@ -145,7 +148,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     func backFieldDone(_ value: Int) {
         team.supportAppeal = value
         teamDV.updatePresentValueGrid(team)
-        CGSSTeamManager.defaultManager.writeToFile(nil)
+        CGSSTeamManager.default.save()
     }
     
     func backFieldBegin() {

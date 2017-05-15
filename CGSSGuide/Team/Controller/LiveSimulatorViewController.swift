@@ -54,7 +54,7 @@ class LiveSimulatorViewController: BaseTableViewController {
         tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
         tableView.separatorStyle = .none
     }
-      
+    
     private func prepareNavigationBar() {
         let rightItem = UIBarButtonItem.init(title: NSLocalizedString("模式", comment: ""), style: .plain, target: self, action: #selector(selectDisplayMode))
         self.navigationItem.rightBarButtonItem = rightItem

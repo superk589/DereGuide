@@ -146,6 +146,9 @@
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
+		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
+		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
+		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
 		129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
@@ -373,6 +376,9 @@
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
+		1296759D1EBF62400037827B /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
+		129675A41EBF62B20037827B /* PageCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionController.swift; sourceTree = "<group>"; };
+		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		12A3F1691E5ADA96007B470E /* BpmShift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BpmShift.plist; sourceTree = "<group>"; };
@@ -693,6 +699,7 @@
 				12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */,
 				120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */,
 				12356BCA1E8FE94F005EEB7A /* TipView.swift */,
+				1296759F1EBF62450037827B /* PageCollectionView */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = BaseView;
@@ -829,6 +836,16 @@
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
 			);
 			path = CGSSGuide;
+			sourceTree = "<group>";
+		};
+		1296759F1EBF62450037827B /* PageCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1296759D1EBF62400037827B /* PageTitleView.swift */,
+				129675A61EBFF3490037827B /* PageCollectionView.swift */,
+				129675A41EBF62B20037827B /* PageCollectionController.swift */,
+			);
+			name = PageCollectionView;
 			sourceTree = "<group>";
 		};
 		12D45ABE1E2DFB640009986F /* Controller */ = {
@@ -1135,6 +1152,8 @@
 				12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
+				129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */,
+				129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
 				12AF95341D65E50D009058D5 /* CGSSStory.swift in Sources */,
 				12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */,
@@ -1221,6 +1240,7 @@
 				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,
 				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
+				1296759E1EBF62400037827B /* PageTitleView.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
 				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
@@ -1391,7 +1411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1436,7 +1456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -1466,7 +1486,7 @@
 					"$(PROJECT_DIR)/CGSSGuide",
 				);
 				INFOPLIST_FILE = CGSSGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1498,7 +1518,7 @@
 					"$(PROJECT_DIR)/CGSSGuide",
 				);
 				INFOPLIST_FILE = CGSSGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
