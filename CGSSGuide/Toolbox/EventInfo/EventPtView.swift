@@ -19,7 +19,7 @@ class EventPtView: UIView {
     var dateLabel: UILabel!
     var refreshButton: UIButton!
     
-    var gridView: CGSSGridLabel!
+    var gridView: GridLabel!
     
     var loadingHUD: LoadingImageView!
     
@@ -57,13 +57,13 @@ class EventPtView: UIView {
         refreshButton.tintColor = Color.parade
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
-        gridView = CGSSGridLabel.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width - 20, height: 7 * 18), rows: 7, columns: 3)
-        
+        gridView = GridLabel.init(rows: 7, columns: 3)
         addSubview(gridView)
         gridView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(dateDescLabel.snp.bottom).offset(10)
+            make.height.equalTo(7 * 18)
         }
         
         loadingHUD = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
@@ -124,7 +124,7 @@ class EventPtView: UIView {
                 gridStrings.append([rankingList.event.rankingPtLabels[3], String(last.reward4), "-"])
                 gridStrings.append([rankingList.event.rankingPtLabels[4], String(last.reward5), "-"])
             }
-            gridView.setGridContent(gridStrings)
+            gridView.setContents(gridStrings)
         }
     }
     required init?(coder aDecoder: NSCoder) {

@@ -23,7 +23,7 @@ class TeamDetailViewController: UIViewController {
     //var hud: CGSSLoadingHUD!
     var live: CGSSLive?
     var beatmap: CGSSBeatmap?
-    var diff: Int?
+    var difficulty: CGSSLiveDifficulty?
     var usingManualValue: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +95,12 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             })
         }
         
-        if let live = self.live, let diff = self.diff {
+        if let live = self.live, let difficulty = self.difficulty {
             self.teamDV.clearAdScoreGrid()
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, difficulty: difficulty, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator()
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
@@ -183,12 +183,12 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func startCalc() {
-        if let live = self.live, let diff = self.diff {
+        if let live = self.live, let difficulty = self.difficulty {
             self.teamDV.clearScoreGrid()
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, difficulty: difficulty, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator()
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
             
@@ -259,9 +259,9 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     }
     
     func viewScoreChart(_ teamDetailView: TeamDetailView) {
-        if let live = self.live, let diff = self.diff {
+        if let live = self.live, let difficulty = self.difficulty {
             let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, diff: diff, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, difficulty: difficulty, fixedAppeal: usingManualValue ? team.customAppeal : nil)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -272,10 +272,10 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
 
 //MARK: BaseSongTableViewControllerDelegate的协议方法
 extension TeamDetailViewController: BaseSongTableViewControllerDelegate {
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
-        teamDV.updateSongInfo(live, beatmap: beatmap, diff: diff)
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
+        teamDV.updateSongInfo(live, beatmap: beatmap, difficulty: difficulty)
         self.live = live
         self.beatmap = beatmap
-        self.diff = diff
+        self.difficulty = difficulty
     }
 }

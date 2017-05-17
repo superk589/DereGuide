@@ -35,7 +35,7 @@ class CardDetailView: UIView {
     
     var skillNameLabel: UILabel!
     var skillDescriptionLabel: UILabel!
-    var skillProcGridView: CGSSGridLabel!
+    var skillProcGridView: GridLabel!
     
     var leaderSkillNameLabel: UILabel!
     var leaderSkillDescriptionLabel: UILabel!
@@ -266,7 +266,8 @@ class CardDetailView: UIView {
         skillContentView.addSubview(skillDescriptionLabel)
         
         insideY += topSpace + skillDescriptionLabel.frame.height
-        skillProcGridView = CGSSGridLabel.init(frame: CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 72), rows: 4, columns: 5)
+        skillProcGridView = GridLabel.init(rows: 4, columns: 5)
+        skillProcGridView.frame = CGRect(x: 10, y: originY, width: CGSSGlobal.width - 20, height: 72)
         // skillContentView.addSubview(skillProcGridView)
         // skillContentView.layer.borderColor = UIColor.blackColor().CGColor
         // skillContentView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
@@ -309,7 +310,7 @@ class CardDetailView: UIView {
                                 String(format: "%.2f", durationMax / Double(skill.condition!)),
                                 String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax * 1.3 / 10000)])
         
-        skillProcGridView.setGridContent(procGridStrings)
+        skillProcGridView.setContents(procGridStrings)
         
         skillContentView.fheight = skillProcGridView.fheight + skillProcGridView.fy + topSpace
     }

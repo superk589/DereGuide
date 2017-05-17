@@ -21,10 +21,10 @@ class SongTableViewController: BaseSongTableViewController {
     }
 
     // MARK: - Table view data source
-    override func selectLive(_ live: CGSSLive, beatmap:CGSSBeatmap, diff: Int) {
-        super.selectLive(live, beatmap: beatmap, diff: diff)
+    override func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
+        super.selectLive(live, beatmap: beatmap, difficulty: difficulty)
         let vc = BeatmapViewController()
-        vc.setup(live, diff: diff)
+        vc.setup(with: live, difficulty: difficulty)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

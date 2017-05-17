@@ -13,6 +13,8 @@ struct CGSSAppeal {
     var vocal: Int
     var dance: Int
     var life: Int
+    static let zero = CGSSAppeal(visual: 0, vocal: 0, dance: 0, life: 0)
+    
     var total: Int {
         return visual + dance + vocal
     }
@@ -21,6 +23,10 @@ struct CGSSAppeal {
     }
     func toStringArrayWithBackValue(_ backValue: Int) -> [String] {
         return [String(total + backValue), String(vocal), String(dance), String(visual)]
+    }
+    
+    func addBy(potential: CGSSPotential, rarity: CGSSRarityTypes) -> CGSSAppeal {
+        return potential.toAppeal(of: rarity) + self
     }
 }
 

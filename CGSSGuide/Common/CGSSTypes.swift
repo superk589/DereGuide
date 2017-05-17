@@ -190,6 +190,7 @@ struct CGSSRarityTypes: OptionSet, Hashable {
     var hashValue: Int {
         return Int(self.rawValue)
     }
+    
 }
 
 struct CGSSFavoriteTypes: OptionSet {

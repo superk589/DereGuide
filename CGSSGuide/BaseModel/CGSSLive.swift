@@ -135,26 +135,13 @@ extension CGSSLive {
         return CGSSLiveEventTypes.init(eventType: eventType)
     }
     
-    func getStarsForDiff(_ diff: Int) -> Int {
-        switch diff {
-        case 1:
-            return debutDifficulty
-        case 2:
-            return regularDifficulty
-        case 3:
-            return proDifficulty
-        case 4:
-            return masterDifficulty
-        case 5:
-            return masterPlusDifficulty
-        default:
-            return 0
-        }
+    func getStarsForDiff(_ difficulty: CGSSLiveDifficulty) -> Int {
+        return liveDetails[difficulty.rawValue - 1].stars
     }
     
     // 最大难度, 只返回真实存在的难度
-    var maxDiff: Int {
-        return beatmapCount
+    var maxDiff: CGSSLiveDifficulty {
+        return CGSSLiveDifficulty(rawValue: beatmapCount) ?? .masterPlus
     }
     
     // 合理的谱面数量, 包含官方还未发布的难度
@@ -162,9 +149,9 @@ extension CGSSLive {
         return self.masterPlusDetailId == 0 ? 4 : 5
     }
     
-    func getBeatmapByDiff(_ diff: Int) -> CGSSBeatmap? {
+    func getBeatmapByDifficulty(_ difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
         if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: id){
-            return beatmaps[diff - 1]
+            return beatmaps[difficulty.rawValue - 1]
         } else {
             return nil
         }
@@ -211,6 +198,8 @@ class CGSSLive: CGSSBaseModel {
     var regularDifficulty : Int
     var startDate : String
     var type : Int
+    
+    var liveDetails = [CGSSLiveDetail]()
 
     lazy var beatmapCount: Int = {
         let semaphore = DispatchSemaphore.init(value: 0)
@@ -242,7 +231,7 @@ class CGSSLive: CGSSBaseModel {
     }()
     
     lazy dynamic var maxNumberOfNotes: Int = {
-        return self.getBeatmapByDiff(self.maxDiff)?.numberOfNotes ?? 0
+        return self.getBeatmapByDifficulty(self.maxDiff)?.numberOfNotes ?? 0
     }()
     
     /**
@@ -278,6 +267,12 @@ class CGSSLive: CGSSBaseModel {
         startDate = json["start_date"].stringValue
         type = json["type"].intValue
         super.init()
+        
+        liveDetails.append(CGSSLiveDetail(live: self, detailId: debutDetailId, difficulty: .debut, stars: debutDifficulty))
+        liveDetails.append(CGSSLiveDetail(live: self, detailId: regularDetailId, difficulty: .regular, stars: regularDifficulty))
+        liveDetails.append(CGSSLiveDetail(live: self, detailId: proDetailId, difficulty: .pro, stars: proDifficulty))
+        liveDetails.append(CGSSLiveDetail(live: self, detailId: masterDetailId, difficulty: .master, stars: masterDifficulty))
+        liveDetails.append(CGSSLiveDetail(live: self, detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterDifficulty))
     }
     
     public required init?(coder aDecoder: NSCoder) {

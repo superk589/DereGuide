@@ -89,31 +89,9 @@ public class CGSSGlobal: NSObject {
     public static let spreadImageWidth: CGFloat = 1280
     public static let spreadImageHeight: CGFloat = 824
     
-    public static func diffStringFromInt(i: Int) -> String {
-        switch i {
-        case 1:
-            return "DEBUT"
-        case 2:
-            return "REGULAR"
-        case 3:
-            return "PRO"
-        case 4:
-            return "MASTER"
-        case 5:
-            return "MASTER+"
-        default:
-            return "UNKNOWN"
-        }
-    }
-    
     static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
     
-    static let potentialOfLevel: [CGSSRarityTypes:[Int]] = [
-        .n : [0, 80, 160, 250, 340, 440, 540, 650, 760, 880, 1000],
-        .r : [0, 60, 120, 180, 255, 330, 405, 480, 570, 660, 750],
-        .sr : [0, 60, 120, 180, 250, 320, 390, 460, 540, 620, 700],
-        .ssr : [0, 40, 80, 120, 170, 220, 270, 320, 380, 440, 500]
-    ]
+    
     
     static let maxPotentialTotal = 25
     static let maxPotentialSingle = 10

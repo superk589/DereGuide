@@ -64,13 +64,10 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     func prepareSettingCells() {
         
         headerCells = [UITableViewCell]()
-        let cell0 = UITableViewCell.init(style: .default, reuseIdentifier: "BirthDaySettingCell")
+        let cell0 = UITableViewCell.init(style: .value1, reuseIdentifier: "BirthDaySettingCell")
         cell0.textLabel?.text = NSLocalizedString("系统通知设置", comment: "生日提醒页面")
-        let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: 60, height: 20))
-        label.textColor = UIColor.lightGray
-        label.textAlignment = .right
-        cell0.accessoryView = label
-        label.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+        cell0.detailTextLabel?.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+        cell0.accessoryType = .disclosureIndicator
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(gotoSystemNotificationSettings))
         cell0.addGestureRecognizer(tap2)
         cell0.isUserInteractionEnabled = true
@@ -85,9 +82,11 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         swich1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         headerCells.append(cell)
         
-        let cell2 = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: "BirthDaySettingCell")
+        let cell2 = UITableViewCell.init(style: .value1, reuseIdentifier: "BirthDaySettingCell")
         cell2.textLabel?.text = NSLocalizedString("时区", comment: "生日提醒页面")
         cell2.detailTextLabel?.text = UserDefaults.standard.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
+        cell2.detailTextLabel?.textColor = Color.parade
+
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectTimeZone))
         cell2.addGestureRecognizer(tap)
         headerCells.append(cell2)
@@ -139,7 +138,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     func reloadData() {
         prepareChars()
         tableView.reloadData()
-        (headerCells[0].accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+        headerCells[0].detailTextLabel?.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
     }
     
     override func didReceiveMemoryWarning() {

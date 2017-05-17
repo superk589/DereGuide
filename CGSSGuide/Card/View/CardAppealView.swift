@@ -12,7 +12,7 @@ import SnapKit
 class CardAppealView: UIView {
 
     var titleLabel: UILabel!
-    var appealGridLabel: CGSSGridLabel!
+    var appealGridLabel: GridLabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +29,7 @@ class CardAppealView: UIView {
             make.top.equalTo(10)
         }
         
-        appealGridLabel = CGSSGridLabel.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width - 20, height: 90), rows: 5, columns: 6)
+        appealGridLabel = GridLabel.init(rows: 5, columns: 6)
         addSubview(appealGridLabel)
         appealGridLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -53,11 +53,11 @@ class CardAppealView: UIView {
         appealGridStrings.append(["Bonus", String(card.bonusHp), String(card.bonusVocal), String(card.bonusDance), String(card.bonusVisual), String(card.overallBonus)])
         appealGridStrings.append(["Total", String(card.life), String(card.vocal), String(card.dance), String(card.visual), String(card.overall)])
         
-        appealGridLabel.setGridContent(appealGridStrings)
+        appealGridLabel.setContents(appealGridStrings)
         
         let colorArray = [Color.allType, Color.life, Color.vocal, Color.dance, Color.visual, Color.allType]
         let colors = [[UIColor]].init(repeating: colorArray, count: 6)
-        appealGridLabel.setGridColor(colors)
+        appealGridLabel.setColors(colors)
         
         var fonts = [[UIFont]]()
         let fontArray = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 6)
@@ -68,7 +68,7 @@ class CardAppealView: UIView {
         fonts.append(fontArray2)
         fonts.append(fontArray2)
         fonts.append(fontArray2)
-        appealGridLabel.setGridFont(fonts)
+        appealGridLabel.setFonts(fonts)
     }
     
 }

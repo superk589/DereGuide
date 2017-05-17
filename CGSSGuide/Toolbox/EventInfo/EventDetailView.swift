@@ -12,7 +12,7 @@ import ZKCornerRadiusView
 
 protocol EventDetailViewDelegate: class {
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView)
-    func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: Int)
+    func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: CGSSLiveDifficulty)
     func gotoPtChartView(eventDetailView: EventDetailView)
     func gotoScoreChartView(eventDetailView: EventDetailView)
     func gotoLiveTrendView(eventDetailView: EventDetailView)
@@ -411,9 +411,10 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         delegate?.eventDetailView(self, didClick: iv as! CGSSCardIconView)
     }
     
-    func eventSongView(_ view: EventSongView, didSelect live: CGSSLive, of difficulty: Int) {
+    func eventSongView(_ view: EventSongView, didSelect live: CGSSLive, of difficulty: CGSSLiveDifficulty) {
         delegate?.eventDetailView(self, didSelect: live, of: difficulty)
     }
+    
 }
 
 extension EventDetailView: EventPtViewDelegate {

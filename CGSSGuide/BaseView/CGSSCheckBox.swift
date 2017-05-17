@@ -44,6 +44,12 @@ class CGSSCheckBox: UIView {
         addSubview(descLabel)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        checkBox.frame = CGRect(x: 0, y: 0, width: self.fheight, height: self.fheight)
+        descLabel.frame = CGRect(x: self.fheight + 5, y: 0, width: self.fwidth - fheight - 5, height: self.fheight)
+    }
+    
     func check() {
         //delegate?.checkValueChanged(checkBox: self)
         checkBox.image = UIImage.init(named: "888-checkmark-toolbar-selected")?.withRenderingMode(.alwaysTemplate)

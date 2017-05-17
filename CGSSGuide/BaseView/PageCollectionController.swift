@@ -13,6 +13,12 @@ protocol PageCollectionControllerContainable: class {
     weak var pageCollectionController: PageCollectionController? { get }
 }
 
+extension PageCollectionControllerContainable where Self: UIViewController {
+    weak var pageCollectionController: PageCollectionController? {
+        return self.parent as? PageCollectionController
+    }
+}
+
 protocol PageCollectionControllerDataSource: class {
     func numberOfPages(_ pageCollectionController: PageCollectionController) -> Int
     func pageCollectionController(_ pageCollectionController: PageCollectionController, viewControllerAt indexPath: IndexPath) -> UIViewController

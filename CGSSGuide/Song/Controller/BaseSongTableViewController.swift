@@ -10,7 +10,7 @@ import UIKit
 import ZKDrawerController
 
 protocol BaseSongTableViewControllerDelegate: class {
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int)
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty)
 }
 class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
@@ -137,7 +137,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
-        cell.initWith(liveList[indexPath.row])
+        cell.setup(with: liveList[indexPath.row])
         cell.delegate = self
         // Configure the cell...
         return cell
@@ -146,8 +146,8 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let live = liveList[indexPath.row]
         let maxDiff = live.maxDiff
-        if let beatmap = checkBeatmapData(live, diff: maxDiff) {
-            selectLive(live, beatmap: beatmap, diff: maxDiff)
+        if let beatmap = checkBeatmapData(live, difficulty: maxDiff) {
+            selectLive(live, beatmap: beatmap, difficulty: maxDiff)
         } else {
             showBeatmapNotFoundAlert()
             // 手动取消选中状态
@@ -166,9 +166,9 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
 
     
     // 此方法应该被override或者通过代理来响应
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
+    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
         searchBar.resignFirstResponder()
-        delegate?.selectLive(live, beatmap: beatmap, diff: diff)
+        delegate?.selectLive(live, beatmap: beatmap, difficulty: difficulty)
     }
     
     func showBeatmapNotFoundAlert() {
@@ -177,9 +177,9 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
     
-    func checkBeatmapData(_ live: CGSSLive, diff: Int) -> CGSSBeatmap? {
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= diff {
-            return beatmaps[diff - 1]
+    func checkBeatmapData(_ live: CGSSLive, difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
+        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= difficulty.rawValue {
+            return beatmaps[difficulty.rawValue - 1]
         } else {
             return nil
         }
@@ -188,9 +188,9 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
 
 //MARK: SongTableViewCell的协议方法
 extension BaseSongTableViewController: SongTableViewCellDelegate {
-    func diffSelected(_ live: CGSSLive, diff: Int) {
-        if let beatmap = checkBeatmapData(live, diff: diff) {
-            selectLive(live, beatmap: beatmap, diff: diff)
+    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect live: CGSSLive, difficulty: CGSSLiveDifficulty) {
+        if let beatmap = checkBeatmapData(live, difficulty: difficulty) {
+            selectLive(live, beatmap: beatmap, difficulty: difficulty)
         } else {
             showBeatmapNotFoundAlert()
         }

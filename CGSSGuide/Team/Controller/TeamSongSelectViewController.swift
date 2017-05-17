@@ -36,8 +36,8 @@ class TeamSongSelectViewController: BaseSongTableViewController {
         // navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    override func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
-        super.selectLive(live, beatmap: beatmap, diff: diff)
+    override func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
+        super.selectLive(live, beatmap: beatmap, difficulty: difficulty)
         _ = navigationController?.popViewController(animated: true)
     }
     

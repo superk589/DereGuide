@@ -15,7 +15,9 @@ enum CGSSTeamMemberType {
 }
 
 extension CGSSTeamMember {
-    
+    var potential: CGSSPotential {
+        return CGSSPotential(vocalLevel: vocalLevel ?? 0, danceLevel: danceLevel ?? 0, visualLevel: visualLevel ?? 0, lifeLevel: 0)
+    }
 }
 
 class CGSSTeamMember: NSObject, NSCoding {

@@ -31,9 +31,9 @@ PODS:
   - SDWebImage/Core (4.0.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
-  - TTGTagCollectionView (1.5.0)
+  - TTGTagCollectionView (1.6.0)
   - ZKCornerRadiusView (0.0.6)
-  - ZKDrawerController (0.1.1):
+  - ZKDrawerController (0.1.2):
     - SnapKit
 
 DEPENDENCIES:
@@ -66,10 +66,10 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  TTGTagCollectionView: 36769ac08e29e8ce37f7dab98014b373d2d005db
+  TTGTagCollectionView: ba35fb7dc284b368c86bf044bd889293a69114e8
   ZKCornerRadiusView: d1018687c0c3bfcd321786b8c1cac81602ed95f2
-  ZKDrawerController: c0df29bdb329ee48ac348ed54ea2d79bade9d0a6
+  ZKDrawerController: b4ff8694c9e06bee360affa71dc727ac29e2e1e7
 
 PODFILE CHECKSUM: da792f4b63ef28ddc122342f11acfec5223d1c75
 
-COCOAPODS: 1.2.1.rc.1
+COCOAPODS: 1.2.1

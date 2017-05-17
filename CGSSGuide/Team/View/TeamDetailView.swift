@@ -42,16 +42,16 @@ class TeamDetailView: UIView {
     var selfLeaderSkillView: TeamLeaderSkillView!
     var friendLeaderSkillView: TeamLeaderSkillView!
 
-    var leaderSkillGrid: CGSSGridLabel!
+    var leaderSkillGrid: GridLabel!
     
     var backSupportLabel: UILabel!
     var backSupportTF: UITextField!
     
-    var presentValueGrid: CGSSGridLabel!
+    var presentValueGrid: GridLabel!
     
     var skillListDescLabel: UILabel!
     var skillShowOrHideButton: UIButton!
-    var skillListGrid: CGSSGridLabel!
+    var skillListGrid: GridLabel!
     
     var selectSongLabel: UILabel!
     var selectSongButton: UIButton!
@@ -70,11 +70,11 @@ class TeamDetailView: UIView {
     
     var bottomView: UIView!
     var startCalcButton: UIButton!
-    var skillProcGrid: CGSSGridLabel!
-    var scoreGrid: CGSSGridLabel!
+    var skillProcGrid: GridLabel!
+    var scoreGrid: GridLabel!
     
     var advanceCalculateButton: UIButton!
-    var advanceScoreGrid: CGSSGridLabel!
+    var advanceScoreGrid: GridLabel!
     
     var advanceProgress: UIProgressView!
     
@@ -120,7 +120,8 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        leaderSkillGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 72), rows: 4, columns: 6)
+        leaderSkillGrid = GridLabel.init(rows: 4, columns: 6)
+        leaderSkillGrid.frame = CGRect(x: leftSpace, y: originY, width: width, height: 72)
         
         originY += 72 + topSpace
         drawSectionLine(originY)
@@ -152,7 +153,8 @@ class TeamDetailView: UIView {
         
         originY += 17 + topSpace
         
-        presentValueGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 90), rows: 5, columns: 5)
+        presentValueGrid = GridLabel.init(rows: 5, columns: 5)
+        presentValueGrid.frame = CGRect(x: leftSpace, y: originY, width: width, height: 90)
         
         originY += 90 + topSpace
         let skillListContentView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 42))
@@ -177,7 +179,8 @@ class TeamDetailView: UIView {
         
         originY += 42
         
-        skillListGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 245), rows: 5, columns: 1, textAligment: .left)
+        skillListGrid = GridLabel.init(rows: 5, columns: 1, textAligment: .left)
+        skillListGrid.frame = CGRect(x: leftSpace, y: originY, width: width, height: 245)
         
         bottomView = UIView.init(frame: CGRect(x: 0, y: originY, width: CGSSGlobal.width, height: 0))
         bottomView.backgroundColor = UIColor.white
@@ -306,7 +309,8 @@ class TeamDetailView: UIView {
         startCalcButton.addTarget(self, action: #selector(startCalc), for: .touchUpInside)
         
         originY += 30 + topSpace
-        scoreGrid = CGSSGridLabel.init(frame: CGRect(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 4)
+        scoreGrid = GridLabel.init(rows: 2, columns: 4)
+        scoreGrid.frame = CGRect(x: leftSpace, y: originY, width: width, height: 36)
         
         originY += 36 + topSpace
         
@@ -322,8 +326,8 @@ class TeamDetailView: UIView {
         
         originY += 30 + topSpace
         
-        advanceScoreGrid = CGSSGridLabel.init(frame: CGRect.init(x: leftSpace, y: originY, width: width, height: 36), rows: 2, columns: 4)
-        
+        advanceScoreGrid = GridLabel.init(rows: 2, columns: 4)
+        advanceScoreGrid.frame = CGRect.init(x: leftSpace, y: originY, width: width, height: 36)        
         originY += 36 + topSpace
         
         viewScoreChartButton = UIButton.init(frame: CGRect.init(x: leftSpace, y: originY, width: width, height: 30))
@@ -551,8 +555,8 @@ class TeamDetailView: UIView {
         upValueColors[2][0] = Color.cool
         upValueColors[3][0] = Color.passion
         
-        leaderSkillGrid.setGridContent(upValueStrings)
-        leaderSkillGrid.setGridColor(upValueColors)
+        leaderSkillGrid.setContents(upValueStrings)
+        leaderSkillGrid.setColors(upValueColors)
         
         for i in 0..<6 {
             leaderSkillGrid[0, i].font = CGSSGlobal.alphabetFont
@@ -577,8 +581,8 @@ class TeamDetailView: UIView {
             }
         }
         
-        skillListGrid.setGridContent(skillListStrings)
-        skillListGrid.setGridColor(skillListColor)
+        skillListGrid.setContents(skillListStrings)
+        skillListGrid.setColors(skillListColor)
         
         // skillProcGrid = CGSSGridView.init(frame: CGRectMake(leftSpace, scoreGrid.frame.size.height + scoreGrid.frame.origin.y + topSpace, CGSSGlobal.width - 2 * leftSpace, CGFloat(skillKind) * 14 + 1), rows: skillKind, columns: 3)
         // bottomView.frame.origin.y = skillListGrid.frame.size.height + skillListGrid.frame.origin.y
@@ -610,8 +614,8 @@ class TeamDetailView: UIView {
         presentColor[3][0] = Color.cool
         presentColor[4][0] = Color.passion
         
-        presentValueGrid.setGridContent(appealStrings)
-        presentValueGrid.setGridColor(presentColor)
+        presentValueGrid.setContents(appealStrings)
+        presentValueGrid.setColors(presentColor)
         
         for i in 0..<5 {
             presentValueGrid[0, i].font = CGSSGlobal.alphabetFont
@@ -692,13 +696,13 @@ class TeamDetailView: UIView {
         var scoreString = [[String]]()
         scoreString.append([NSLocalizedString("表现值", comment: "队伍详情页面"), NSLocalizedString("极限分数", comment: "队伍详情页面") + "1", NSLocalizedString("极限分数", comment: "队伍详情页面") + "2", NSLocalizedString("平均分数", comment: "队伍详情页面")])
         scoreString.append(["", "", "", ""])
-        scoreGrid.setGridContent(scoreString)
+        scoreGrid.setContents(scoreString)
         
         advanceScoreGrid.isHidden = false
         var adStrings = [[String]]()
         adStrings.append(["1%", "5%", "20%", "50%"])
         adStrings.append(["", "", "", ""])
-        advanceScoreGrid.setGridContent(adStrings)
+        advanceScoreGrid.setContents(adStrings)
         
     }
     func backFieldBegin() {
@@ -746,10 +750,10 @@ class TeamDetailView: UIView {
         delegate?.selectSong()
     }
     
-    func updateSongInfo(_ live: CGSSLive, beatmap: CGSSBeatmap, diff: Int) {
+    func updateSongInfo(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
         // selectSongLabel.hidden = true
         selectSongLabel.text = ""
-        songDiffLabel.text = "\(live.getStarsForDiff(diff))☆ \(CGSSGlobal.diffStringFromInt(i: diff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
+        songDiffLabel.text = "\(live.getStarsForDiff(difficulty))☆ \(difficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         // songDiffLabel.text = CGSSGlobal.diffStringFromInt(diff)
         songNameLabel.text = live.name

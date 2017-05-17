@@ -13,7 +13,7 @@ class CardRankingView: UIView {
 
     var titleLabel: UILabel!
     
-    var rangkingGridLabel: CGSSGridLabel!
+    var rangkingGridLabel: GridLabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,11 +36,13 @@ class CardRankingView: UIView {
             make.top.equalTo(10)
         }
         
-        rangkingGridLabel = CGSSGridLabel.init(frame: CGRect(x: 10, y: 0, width: CGSSGlobal.width - 20, height: 54), rows: 3, columns: 5)
+        rangkingGridLabel = GridLabel.init(rows: 3, columns: 5)
+        rangkingGridLabel.frame = CGRect(x: 10, y: 0, width: CGSSGlobal.width - 20, height: 54)
         addSubview(rangkingGridLabel)
         rangkingGridLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.right.equalTo(10)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.height.equalTo(54)
             make.bottom.equalTo(-10)
         }
@@ -60,7 +62,7 @@ class CardRankingView: UIView {
         rankGridStrings.append(["  ", "Vocal", "Dance", "Visual", "Total"])
         rankGridStrings.append(["In \(card.attShort)", "#\(rankInType[0])", "#\(rankInType[1])", "#\(rankInType[2])", "#\(rankInType[3])"])
         rankGridStrings.append(["In All", "#\(rankInAll[0])", "#\(rankInAll[1])", "#\(rankInAll[2])", "#\(rankInAll[3])"])
-        rangkingGridLabel.setGridContent(rankGridStrings)
+        rangkingGridLabel.setContents(rankGridStrings)
         
         var colors2 = [[UIColor]]()
         let colorArray2 = [card.attColor, Color.vocal, Color.dance, Color.visual, Color.allType]
@@ -69,7 +71,7 @@ class CardRankingView: UIView {
         colors2.append(colorArray3)
         colors2.append(colorArray2)
         colors2.append(colorArray3)
-        rangkingGridLabel.setGridColor(colors2)
+        rangkingGridLabel.setColors(colors2)
         
         var fonts2 = [[UIFont]]()
         let fontArray3 = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 5)
@@ -78,6 +80,6 @@ class CardRankingView: UIView {
         fonts2.append(fontArray3)
         fonts2.append(fontArray4)
         fonts2.append(fontArray4)
-        rangkingGridLabel.setGridFont(fonts2)
+        rangkingGridLabel.setFonts(fonts2)
     }
 }

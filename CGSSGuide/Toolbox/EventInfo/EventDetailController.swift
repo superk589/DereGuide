@@ -170,10 +170,10 @@ extension EventDetailController: EventDetailViewDelegate {
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
     
-    func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: Int) {
+    func eventDetailView(_ view: EventDetailView, didSelect live: CGSSLive, of difficulty: CGSSLiveDifficulty) {
         if let _ = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: difficulty) {
             let beatmapVC = BeatmapViewController()
-            beatmapVC.setup(live, diff: difficulty)
+            beatmapVC.setup(with: live, difficulty: difficulty)
             navigationController?.pushViewController(beatmapVC, animated: true)
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。", comment: "弹出框正文"), preferredStyle: .alert)

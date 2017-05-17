@@ -42,6 +42,9 @@ class CGSSTeam: NSObject, NSCoding {
     // 队伍总表现值
     var customAppeal: Int!
     var supportAppeal: Int!
+    
+    var usingCustomAppeal: Bool = false
+    
     var testLive: CGSSLive? {
         var result: CGSSLive?
         let semaphore = DispatchSemaphore.init(value: 0)
@@ -57,7 +60,7 @@ class CGSSTeam: NSObject, NSCoding {
         return result
     }
     var testLiveId: Int?
-    var testDiff: Int?
+    var testDifficulty: CGSSLiveDifficulty?
     var skills: [CGSSRankedSkill] {
         var arr = [CGSSRankedSkill]()
         for i in 0...4 {
@@ -90,96 +93,45 @@ class CGSSTeam: NSObject, NSCoding {
     
     // 队伍原始值
     var rawAppeal: CGSSAppeal {
-        let appeal = CGSSAppeal.init(visual: rawVisual, vocal: rawVocal, dance: rawDance, life: rawHP)
+        var appeal = rawAppealInGroove
+        if let member = self[5], let card = member.cardRef {
+            appeal += card.appeal.addBy(potential: member.potential, rarity: card.rarityType)
+        }
         return appeal
     }
     var rawAppealInGroove: CGSSAppeal {
-        let appeal = CGSSAppeal.init(visual: rawVisualInGroove, vocal: rawVocalInGroove, dance: rawDanceInGroove, life: rawHPInGroove)
+        var appeal = CGSSAppeal.zero
+        for i in 0...4 {
+            if let member = self[i], let card = member.cardRef {
+                appeal += card.appeal.addBy(potential: member.potential, rarity: card.rarityType)
+            }
+        }
         return appeal
-    }
-    var rawVocal: Int {
-        var sum = 0
-        for i in 0...5 {
-            sum += (self[i]?.cardRef?.vocal) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.vocalLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawVocalInGroove: Int {
-        var sum = 0
-        for i in 0...4 {
-            sum += (self[i]?.cardRef?.vocal) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.vocalLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawDance: Int {
-        var sum = 0
-        for i in 0...5 {
-            sum += (self[i]?.cardRef?.dance) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.danceLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawDanceInGroove: Int {
-        var sum = 0
-        for i in 0...4 {
-            sum += (self[i]?.cardRef?.dance) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.danceLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawVisual: Int {
-        var sum = 0
-        for i in 0...5 {
-            sum += (self[i]?.cardRef?.visual) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.visualLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawVisualInGroove: Int {
-        var sum = 0
-        for i in 0...4 {
-            sum += (self[i]?.cardRef?.visual) ?? 0
-            sum += (self[i]?.cardRef?.attByPotential(lv: self[i]?.visualLevel ?? 0)) ?? 0
-        }
-        return sum
-    }
-    var rawHP: Int {
-        var sum = 0
-        for i in 0...5 {
-            sum += (self[i]?.cardRef?.life) ?? 0
-        }
-        return sum
-    }
-    var rawHPInGroove: Int {
-        var sum = 0
-        for i in 0...5 {
-            sum += (self[i]?.cardRef?.life) ?? 0
-        }
-        return sum
     }
     
     func getAppeal(_ type: CGSSCardTypes) -> CGSSAppeal {
         var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+        let contents = getUpContent()
         for i in 0...5 {
-            appeal += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContent(), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
     
     func getAppealInGroove(_ type: CGSSCardTypes, burstType: LeaderSkillUpType) -> CGSSAppeal {
         var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+        let contents = getUpContentInGroove(by: burstType)
         for i in 0...4 {
-            appeal += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInGroove(by: burstType), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
     
     func getAppealInParade(_ type: CGSSLiveTypes) -> CGSSAppeal {
         var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+        let contents = getUpContentInParade()
         for i in 0...4 {
-            appeal += self[i]!.cardRef!.getPresentValue(type, roomUpValue: 10, contents: getUpContentInParade(), vocalLevel: self[i]?.vocalLevel ?? 0, danceLevel: self[i]?.danceLevel ?? 0, visualLevel: self[i]?.visualLevel ?? 0)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
@@ -382,9 +334,10 @@ class CGSSTeam: NSObject, NSCoding {
         self.subs = aDecoder.decodeObject(forKey: "subs") as? [CGSSTeamMember]
         self.supportAppeal = aDecoder.decodeObject(forKey: "supportAppeal") as? Int ?? CGSSGlobal.defaultSupportAppeal
         self.friendLeader = aDecoder.decodeObject(forKey: "friendLeader") as? CGSSTeamMember
-        self.testDiff = aDecoder.decodeObject(forKey: "testDiff") as? Int
+        self.testDifficulty = CGSSLiveDifficulty(rawValue: aDecoder.decodeObject(forKey: "testDifficulty") as? Int ?? 1)
         self.testLiveId = aDecoder.decodeObject(forKey: "testLiveId") as? Int
         self.customAppeal = aDecoder.decodeObject(forKey: "customAppeal") as? Int ?? 0
+        self.usingCustomAppeal = aDecoder.decodeBool(forKey: "usingCustomAppeal")
     }
     
     func encode(with aCoder: NSCoder) {
@@ -393,21 +346,21 @@ class CGSSTeam: NSObject, NSCoding {
         aCoder.encode(supportAppeal, forKey: "supportAppeal")
         aCoder.encode(friendLeader, forKey: "friendLeader")
         aCoder.encode(testLiveId, forKey: "testLiveId")
-        aCoder.encode(testDiff, forKey: "testDiff")
+        aCoder.encode(testDifficulty?.rawValue, forKey: "testDifficulty")
         aCoder.encode(customAppeal, forKey: "customAppeal")
+        aCoder.encode(usingCustomAppeal, forKey: "usingCustomAppeal")
     }
     
 }
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getPresentValue(_ songType: CGSSCardTypes, roomUpValue: Int?, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], vocalLevel:Int, danceLevel:Int, visualLevel:Int) -> CGSSAppeal {
-        var appeal = CGSSAppeal.init(visual: visual + attByPotential(lv: visualLevel), vocal: vocal + attByPotential(lv: vocalLevel), dance: dance + attByPotential(lv: danceLevel), life: life)
-        var factor = 100 + (roomUpValue ?? 10)
-        if songType == cardType || songType == .office {
+    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = 10, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
+        var appeal = self.appeal.addBy(potential: potential, rarity: self.rarityType)
+        var factor = 100 + roomUpValue
+        if liveType == cardType || liveType == .allLives {
             factor += 30
         }
-        
         appeal.vocal = Int(ceil(Float(appeal.vocal * (factor + (contents[cardType]?[.vocal] ?? 0))) / 100))
         appeal.dance = Int(ceil(Float(appeal.dance * (factor + (contents[cardType]?[.dance] ?? 0))) / 100))
         appeal.visual = Int(ceil(Float(appeal.visual * (factor + (contents[cardType]?[.visual] ?? 0))) / 100))

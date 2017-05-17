@@ -112,6 +112,10 @@ extension CGSSCard {
         return 0
     }
     
+    var appeal: CGSSAppeal {
+        return CGSSAppeal(visual: visual, vocal: vocal, dance: dance, life: life)
+    }
+    
     dynamic var overall: Int {
         if let base = overallMax, let bonus = overallBonus {
             return base + bonus
@@ -123,20 +127,7 @@ extension CGSSCard {
     var rarityType: CGSSRarityTypes {
         return CGSSRarityTypes.init(rarity: rarity.rarity - 1)
     }
-    var rarityTypeSimple : CGSSRarityTypes {
-        switch rarityType {
-        case CGSSRarityTypes.np:
-            return .n
-        case CGSSRarityTypes.rp:
-            return .r
-        case CGSSRarityTypes.srp:
-            return .sr
-        case CGSSRarityTypes.ssrp:
-            return .ssr
-        default:
-            return rarityType
-        }
-    }
+   
     var skillType: CGSSSkillTypes {
         return skill?.skillFilterType ?? .none
     }
@@ -158,10 +149,6 @@ extension CGSSCard {
 
     var favoriteType: CGSSFavoriteTypes {
         return CGSSFavoriteManager.default.contains(cardId: self.id!) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
-    }
-    
-    func attByPotential(lv:Int) -> Int {
-        return CGSSGlobal.potentialOfLevel[rarityTypeSimple]![lv]
     }
     
     var spreadImageURL: URL? {

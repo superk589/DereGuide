@@ -555,9 +555,9 @@ class CGSSGameResource: NSObject {
         return result
     }
     
-    func getBeatmap(liveId: Int, of diffculty: Int) -> CGSSBeatmap? {
-        if let beatmaps = getBeatmaps(liveId: liveId), beatmaps.count >= diffculty {
-            return beatmaps[diffculty - 1]
+    func getBeatmap(liveId: Int, of diffculty: CGSSLiveDifficulty) -> CGSSBeatmap? {
+        if let beatmaps = getBeatmaps(liveId: liveId), beatmaps.count >= diffculty.rawValue {
+            return beatmaps[diffculty.rawValue - 1]
         } else {
             return nil
         }

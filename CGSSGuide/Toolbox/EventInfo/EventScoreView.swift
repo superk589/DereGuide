@@ -18,7 +18,7 @@ class EventScoreView: UIView {
     var dateLabel: UILabel!
     var refreshButton: UIButton!
     
-    var gridView: CGSSGridLabel!
+    var gridView: GridLabel!
     
     var loadingHUD: LoadingImageView!
     
@@ -56,13 +56,14 @@ class EventScoreView: UIView {
         refreshButton.tintColor = Color.parade
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
-        gridView = CGSSGridLabel.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width - 20, height: 5 * 18), rows: 5, columns: 3)
+        gridView = GridLabel.init(rows: 5, columns: 3)
         
         addSubview(gridView)
         gridView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(dateDescLabel.snp.bottom).offset(10)
+            make.height.equalTo(5 * 18)
         }
         
         loadingHUD = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
@@ -120,7 +121,7 @@ class EventScoreView: UIView {
                 gridStrings.append([rankingList.event.rankingHighScoreLabels[1], String(last.reward2), "-"])
                 gridStrings.append([rankingList.event.rankingHighScoreLabels[2], String(last.reward3), "-"])
             }
-            gridView.setGridContent(gridStrings)
+            gridView.setContents(gridStrings)
         }
     }
     required init?(coder aDecoder: NSCoder) {

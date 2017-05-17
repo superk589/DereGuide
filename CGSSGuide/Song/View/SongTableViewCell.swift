@@ -44,7 +44,7 @@ class SongDiffView: UIView {
 }
 
 protocol SongTableViewCellDelegate: class {
-    func diffSelected(_ live: CGSSLive, diff: Int)
+    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect live: CGSSLive, difficulty: CGSSLiveDifficulty)
 }
 
 class SongTableViewCell: UITableViewCell {
@@ -111,19 +111,14 @@ class SongTableViewCell: UITableViewCell {
     }
     
     func diffClick(_ tap: UITapGestureRecognizer) {
-        delegate?.diffSelected(live, diff: tap.view!.tag)
+        delegate?.songTableViewCell(self, didSelect: live, difficulty: CGSSLiveDifficulty(rawValue: tap.view!.tag)!)
     }
     
     var live: CGSSLive!
-    func initWith(_ live: CGSSLive) {
+    func setup(with live: CGSSLive) {
         self.live = live
         self.nameLabel.text = live.title
-        // self.descriptionLabel.text = "bpm:\(song?.bpm ?? 0)  composer:\(song?.composer!)  lyricist:\(song.lyricist!)"
         let descString = "bpm:\(live.bpm)"
-        // 暂时去除时长的显示
-//            if let beatmap = dao.findBeatmapById(live.id!, diffId: 1) {
-//                descString += " 时长:\(Int(beatmap.totalSeconds))秒"
-//            }
         self.descriptionLabel.text = descString
         self.nameLabel.textColor = live.color
         self.typeIcon.image = live.icon
@@ -132,7 +127,7 @@ class SongTableViewCell: UITableViewCell {
             self.diffViews[i].text = "\(diffStars[i])"
         }
         
-        self.diffViews[4].isHidden = !(live.maxDiff == 5)
+        self.diffViews[4].isHidden = !(live.maxDiff.rawValue == 5)
         
         if let url = live.jacketURL {
             self.jacketImageView.sd_setImage(with: url)

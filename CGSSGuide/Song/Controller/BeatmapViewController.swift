@@ -16,12 +16,12 @@ class BeatmapViewController: UIViewController {
     var bv: BeatmapView!
     var descLabel: UILabel!
     var flipItem:UIBarButtonItem!
-    var preSetDiff: Int?
-    var currentDiff: Int! {
+    var preSetDifficulty: CGSSLiveDifficulty?
+    var currentDifficulty: CGSSLiveDifficulty! {
         didSet {
-            if let beatmap = checkBeatmapData(live, diff: currentDiff) {
+            if let beatmap = checkBeatmapData(live, difficulty: currentDifficulty) {
                 self.beatmap = beatmap
-                titleLabel.text = "\(live.name)\n\(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
+                titleLabel.text = "\(live.name)\n\(live.getStarsForDiff(currentDifficulty))☆ \(currentDifficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
                 bv?.setup(beatmap: beatmap, bpm: live.bpm, type: live.type)
                 bv?.setNeedsDisplay()
             }
@@ -54,7 +54,7 @@ class BeatmapViewController: UIViewController {
         navigationItem.titleView = titleLabel
         
         // 如果没有指定难度 则初始化难度为最高难度
-        currentDiff = preSetDiff ?? live.maxDiff
+        currentDifficulty = preSetDifficulty ?? live.maxDiff
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
@@ -71,10 +71,10 @@ class BeatmapViewController: UIViewController {
     func selectDiff() {
         let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-        for i in 1...live.maxDiff {
-            alert.addAction(UIAlertAction.init(title: CGSSGlobal.diffStringFromInt(i: i), style: .default, handler: { (a) in
-                self.currentDiff = i
-                }))
+        for i in 1...live.maxDiff.rawValue {
+            alert.addAction(UIAlertAction.init(title: CGSSLiveDifficulty(rawValue: i)?.description ?? "", style: .default, handler: { (a) in
+                self.currentDifficulty = CGSSLiveDifficulty(rawValue: i)!
+            }))
         }
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -86,8 +86,8 @@ class BeatmapViewController: UIViewController {
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
     
-    func checkBeatmapData(_ live: CGSSLive, diff: Int) -> CGSSBeatmap? {
-        if let beatmap = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: diff) {
+    func checkBeatmapData(_ live: CGSSLive, difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
+        if let beatmap = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: difficulty) {
             if let info = checkShiftingInfo() {
                 beatmap.addShiftingOffset(info: info, rawBpm: live.bpm)
             } else {
@@ -128,9 +128,9 @@ class BeatmapViewController: UIViewController {
         self.toolbarItems = [shareItem, spaceItem, flipItem]
     }
     
-    func setup(_ live: CGSSLive, diff: Int) {
+    func setup(with live: CGSSLive, difficulty: CGSSLiveDifficulty) {
         self.live = live
-        self.preSetDiff = diff
+        self.preSetDifficulty = difficulty
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -142,7 +142,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(live.name) \(live.getStarsForDiff(currentDiff))☆ \(CGSSGlobal.diffStringFromInt(i: currentDiff)) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
+        return "\(live.name) \(live.getStarsForDiff(currentDifficulty))☆ \(currentDifficulty.description) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in

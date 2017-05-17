@@ -48,7 +48,7 @@ fileprivate let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
 class LSCoordinator {
     var team: CGSSTeam
     var live: CGSSLive
-    var diff: Int
+    var difficulty: CGSSLiveDifficulty
     var simulatorType: CGSSLiveSimulatorType
     var grooveType: CGSSGrooveType?
     var fixedAppeal: Int?
@@ -69,20 +69,20 @@ class LSCoordinator {
     }
     
     lazy var beatmap: CGSSBeatmap = {
-        return self.live.getBeatmapByDiff(self.diff)!
+        return self.live.getBeatmapByDifficulty(self.difficulty)!
     }()
     
-    init(team: CGSSTeam, live: CGSSLive, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, diff: Int, fixedAppeal: Int?) {
+    init(team: CGSSTeam, live: CGSSLive, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, difficulty: CGSSLiveDifficulty, fixedAppeal: Int?) {
         self.team = team
         self.live = live
-        self.diff = diff
+        self.difficulty = difficulty
         self.simulatorType = simulatorType
         self.grooveType = grooveType
         self.fixedAppeal = fixedAppeal
     }
     
     func getBaseScorePerNote() -> Double {
-        let diffStars = self.live.getStarsForDiff(diff)
+        let diffStars = self.live.getStarsForDiff(difficulty)
         if let fixedAppeal = fixedAppeal {
             return Double(fixedAppeal / beatmap.numberOfNotes) * (difficultyFactor[diffStars] ?? 1)
         } else {
