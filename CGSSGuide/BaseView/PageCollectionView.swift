@@ -10,11 +10,10 @@ import UIKit
 
 class PageCollectionView: UICollectionView {
     
-    init(frame: CGRect) {
-        
+    convenience init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        super.init(frame: frame, collectionViewLayout: layout)
+        self.init(frame: CGRect.zero, collectionViewLayout: layout)
     
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -23,9 +22,4 @@ class PageCollectionView: UICollectionView {
         backgroundColor = UIColor.white
         isPagingEnabled = true
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

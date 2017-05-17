@@ -10,23 +10,21 @@ import UIKit
 import SnapKit
 
 class TeamSimulationDescriptionCell: UITableViewCell {
-
-    var leftLabel: UILabel!
     
     var descriptionLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        contentView.addSubview(leftLabel)
-        leftLabel.text = NSLocalizedString("得分说明", comment: "") + ": "
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+//        leftLabel = UILabel()
+//        contentView.addSubview(leftLabel)
+//        leftLabel.text = NSLocalizedString("得分说明", comment: "") + ": "
+//        leftLabel.font = UIFont.systemFont(ofSize: 16)
 
-        leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.top.equalTo(10)
-        }
+//        leftLabel.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.top.equalTo(10)
+//        }
         
         descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
@@ -36,10 +34,12 @@ class TeamSimulationDescriptionCell: UITableViewCell {
 
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(leftLabel)
-            make.top.equalTo(leftLabel.snp.bottom)
+            make.left.equalTo(10)
+            make.top.equalTo(10)
             make.right.equalTo(-10)
+            make.bottom.equalTo(-10)
         }
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TeamInfomationController: UIViewController {
+class TeamInfomationController: UIViewController, PageCollectionControllerContainable, TeamCollecetionPage {
 
+    var team: CGSSTeam!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

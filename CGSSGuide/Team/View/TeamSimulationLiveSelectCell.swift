@@ -24,13 +24,14 @@ class TeamSimulationLiveView: UIView {
         jacketImageView.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
             make.width.height.equalTo(48)
+            make.bottom.equalToSuperview()
         }
         
         typeIcon = UIImageView()
         addSubview(typeIcon)
         typeIcon.snp.makeConstraints { (make) in
             make.left.equalTo(jacketImageView.snp.right).offset(10)
-            make.top.equalTo(10)
+            make.top.equalTo(jacketImageView)
             make.width.height.equalTo(20)
         }
         
@@ -41,7 +42,7 @@ class TeamSimulationLiveView: UIView {
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(typeIcon.snp.right).offset(5)
-            make.centerX.equalTo(typeIcon)
+            make.centerY.equalTo(typeIcon)
             make.right.lessThanOrEqualToSuperview()
         }
         
@@ -67,15 +68,16 @@ class TeamSimulationLiveView: UIView {
         }
     }
     
-    func setup(with liveDetail: CGSSLiveDetail) {
+    func setupWith(live: CGSSLive, liveDetail: CGSSLiveDetail) {
         backgroundLabel.text = ""
-        guard let live = liveDetail.live, let beatmap = liveDetail.beatmap else {
+        guard let beatmap = liveDetail.beatmap else {
             return
         }
         descriptionLabel.text = "\(liveDetail.stars)☆ \(liveDetail.difficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         nameLabel.text = live.name
         nameLabel.textColor = live.color
+        typeIcon.image = live.icon
         
         if let url = live.jacketURL {
             jacketImageView.sd_setImage(with: url)
@@ -92,7 +94,7 @@ class TeamSimulationLiveView: UIView {
 class TeamSimulationLiveSelectCell: UITableViewCell {
     
     
-    var leftLabel: UILabel!
+    // var leftLabel: UILabel!
     
     // var rightLabel: UILabel!
     
@@ -100,29 +102,32 @@ class TeamSimulationLiveSelectCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
-        contentView.addSubview(leftLabel)
-        
-        leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.top.equalTo(10)
-        }
-        
-        leftLabel.text = NSLocalizedString("歌曲", comment: "")
+//        leftLabel = UILabel()
+//        leftLabel.font = UIFont.systemFont(ofSize: 16)
+//        contentView.addSubview(leftLabel)
+      
+//        leftLabel.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.top.equalTo(10)
+//        }
+//        
+//        leftLabel.text = NSLocalizedString("歌曲", comment: "") + ": "
         
         liveView = TeamSimulationLiveView()
         contentView.addSubview(liveView)
         liveView.snp.makeConstraints { (make) in
-            make.top.equalTo(leftLabel.snp.bottom)
-            make.left.equalTo(leftLabel)
+            make.top.equalTo(10)
+            make.left.equalTo(10)
             make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10)
         }
+        
+        selectionStyle = .none
+        accessoryType = .disclosureIndicator
     }
     
-    func setup(with liveDetail: CGSSLiveDetail) {
-        liveView.setup(with: liveDetail)
+    func setupWith(live: CGSSLive, liveDetail: CGSSLiveDetail) {
+        liveView.setupWith(live: live, liveDetail: liveDetail)
     }
     
     required init?(coder aDecoder: NSCoder) {

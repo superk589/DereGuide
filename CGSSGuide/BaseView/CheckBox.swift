@@ -21,14 +21,20 @@ class CheckBox: UIView {
     
     private func updateUI() {
         if isChecked {
-            icon.image = #imageLiteral(resourceName: "888-checkmark-toolbar-selected")
+            icon.image = #imageLiteral(resourceName: "888-checkmark-toolbar-selected").withRenderingMode(.alwaysTemplate)
         } else {
-            icon.image = #imageLiteral(resourceName: "888-checkmark-toolbar")
+            icon.image = #imageLiteral(resourceName: "888-checkmark-toolbar").withRenderingMode(.alwaysTemplate)
         }
     }
     
     func setChecked(_ checked: Bool) {
         isChecked = checked
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        var size = label.intrinsicContentSize
+        size.width += size.height + 5
+        return size
     }
     
     override init(frame: CGRect) {

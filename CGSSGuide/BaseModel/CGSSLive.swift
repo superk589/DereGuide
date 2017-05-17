@@ -9,16 +9,15 @@
 import UIKit
 import SwiftyJSON
 
-enum CGSSLiveSimulatorType: String {
+enum CGSSLiveSimulatorType: String, CustomStringConvertible, ColorRepresentable {
     case normal = "常规模式" //!!!无法被本地化 注意使用时本地化
     case vocal = "Vocal Burst"
     case dance = "Dance Burst"
     case visual = "Visual Burst"
     case parade = "LIVE Parade"
-    static func getAll() -> [CGSSLiveSimulatorType] {
-        return [.normal, .vocal, .dance, .visual, .parade]
-    }
-    func typeColor() -> UIColor {
+    static let all: [CGSSLiveSimulatorType] = [.normal, .vocal, .dance, .visual, .parade]
+    
+    var color: UIColor {
         switch self {
         case .normal:
             return Color.allType
@@ -32,7 +31,8 @@ enum CGSSLiveSimulatorType: String {
             return Color.parade
         }
     }
-    func toString() -> String {
+    
+    var description: String {
         switch self {
         case .normal:
             return NSLocalizedString("常规模式", comment: "")
@@ -42,14 +42,17 @@ enum CGSSLiveSimulatorType: String {
     }
 }
 
-enum CGSSGrooveType: String {
+enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
     case cute = "Cute Groove"
     case cool = "Cool Groove"
     case passion = "Passion Groove"
-    static func getAll() -> [CGSSGrooveType] {
-        return [.cute, .cool, .passion]
+    static let all: [CGSSGrooveType] = [.cute, .cool, .passion]
+    
+    var description: String {
+        return self.rawValue
     }
-    func typeColor() -> UIColor {
+    
+    var color: UIColor {
         switch self {
         case .cute:
             return Color.cute
@@ -268,11 +271,11 @@ class CGSSLive: CGSSBaseModel {
         type = json["type"].intValue
         super.init()
         
-        liveDetails.append(CGSSLiveDetail(live: self, detailId: debutDetailId, difficulty: .debut, stars: debutDifficulty))
-        liveDetails.append(CGSSLiveDetail(live: self, detailId: regularDetailId, difficulty: .regular, stars: regularDifficulty))
-        liveDetails.append(CGSSLiveDetail(live: self, detailId: proDetailId, difficulty: .pro, stars: proDifficulty))
-        liveDetails.append(CGSSLiveDetail(live: self, detailId: masterDetailId, difficulty: .master, stars: masterDifficulty))
-        liveDetails.append(CGSSLiveDetail(live: self, detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterDifficulty))
+        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: debutDetailId, difficulty: .debut, stars: debutDifficulty))
+        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: regularDetailId, difficulty: .regular, stars: regularDifficulty))
+        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: proDetailId, difficulty: .pro, stars: proDifficulty))
+        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: masterDetailId, difficulty: .master, stars: masterDifficulty))
+        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterPlusDifficulty))
     }
     
     public required init?(coder aDecoder: NSCoder) {

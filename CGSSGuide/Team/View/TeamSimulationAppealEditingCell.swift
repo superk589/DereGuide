@@ -15,6 +15,12 @@ protocol TeamSimulationAppealEditingCellDelegate: class {
     func teamSimulationAppealEditingCell(_ teamSimulationAppealEditingCell: TeamSimulationAppealEditingCell, beginEdit textField: UITextField)
 }
 
+extension TeamSimulationAppealEditingCellDelegate {
+    func teamSimulationAppealEditingCell(_ teamSimulationAppealEditingCell: TeamSimulationAppealEditingCell, beginEdit textField: UITextField) {
+        
+    }
+}
+
 class TeamSimulationAppealInputTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +40,7 @@ class TeamSimulationAppealInputTextField: UITextField {
 
 class TeamSimulationAppealEditingCell: UITableViewCell {
 
-    var leftLabel: UILabel!
+//    var leftLabel: UILabel!
     
     var supportAppealBox: CheckBox!
     
@@ -49,20 +55,21 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.text = NSLocalizedString("表现值", comment: "队伍详情页面") + ": "
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
-
-        contentView.addSubview(leftLabel)
-        leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.top.equalTo(10)
-        }
+//        leftLabel = UILabel()
+//        leftLabel.text = NSLocalizedString("表现值", comment: "队伍详情页面") + ": "
+//        leftLabel.font = UIFont.systemFont(ofSize: 16)
+//
+//        contentView.addSubview(leftLabel)
+//        leftLabel.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.top.equalTo(10)
+//        }
         
         
         supportAppealBox = CheckBox()
+        supportAppealBox.tintColor = Color.parade
         supportAppealBox.label.font = UIFont.systemFont(ofSize: 14)
-        supportAppealBox.label.text = NSLocalizedString("使用后援数值", comment: "队伍详情页面") + ": "
+        supportAppealBox.label.text = NSLocalizedString("使用后援值", comment: "队伍详情页面") + ": "
         supportAppealBox.label.textColor = UIColor.darkGray
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(checkBox(_:)))
         supportAppealBox.addGestureRecognizer(tap1)
@@ -73,22 +80,26 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         supportAppealTextField.addTarget(self, action: #selector(beginEditAppealTextField(sender:)), for: .editingDidBegin)
         supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEnd)
         supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEndOnExit)
+
         
         contentView.addSubview(supportAppealTextField)
         
         supportAppealTextField.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(leftLabel.snp.bottom).offset(5)
+//            make.top.equalTo(leftLabel.snp.bottom).offset(5)
+            make.top.equalTo(10)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
             make.height.greaterThanOrEqualTo(24)
         }
         supportAppealBox.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.centerY.equalTo(supportAppealBox)
+            make.centerY.equalTo(supportAppealTextField)
+            make.right.lessThanOrEqualTo(supportAppealTextField.snp.left)
         }
         
         
         customAppealBox = CheckBox()
+        customAppealBox.tintColor = Color.parade
         customAppealBox.label.font = UIFont.systemFont(ofSize: 14)
         customAppealBox.label.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
         customAppealBox.label.textColor = UIColor.darkGray
@@ -106,7 +117,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         
         customAppealTextField.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(customAppealTextField.snp.bottom).offset(5)
+            make.top.equalTo(supportAppealTextField.snp.bottom).offset(5)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
             make.height.greaterThanOrEqualTo(24)
             make.bottom.equalTo(-10)
@@ -114,7 +125,11 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         customAppealBox.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.centerY.equalTo(customAppealTextField)
+            make.right.lessThanOrEqualTo(customAppealTextField.snp.left)
         }
+        
+        selectionStyle = .none
+
     }
     
     
@@ -122,7 +137,19 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         delegate?.teamSimulationAppealEditingCell(self, beginEdit: sender)
     }
     
+    private func validteInputResult() {
+        let value1 = Int(supportAppealTextField.text ?? "")
+        if value1 == nil {
+            supportAppealTextField.text = String(CGSSGlobal.defaultSupportAppeal)
+        }
+        let value2 = Int(customAppealTextField.text ?? "")
+        if value2 == nil {
+            customAppealTextField.text = String(0)
+        }
+    }
+    
     func endEditAppeal() {
+        validteInputResult()
         delegate?.teamSimulationAppealEditingCell(self, didUpdateAt: supportAppealBox.isChecked ? 0 : 1, supportAppeal: Int(supportAppealTextField.text ?? "") ?? 0, customAppeal: Int(customAppealTextField.text ?? "") ?? 0)
     }
     
@@ -130,9 +157,20 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         endEditAppeal()
     }
     
+    func setup(with team: CGSSTeam) {
+        supportAppealBox.setChecked(!team.usingCustomAppeal)
+        supportAppealTextField.isEnabled = !team.usingCustomAppeal
+        supportAppealTextField.text = team.supportAppeal.description
+        customAppealBox.setChecked(team.usingCustomAppeal)
+        customAppealTextField.isEnabled = team.usingCustomAppeal
+        customAppealTextField.text = team.customAppeal.description
+    }
+    
     func checkBox(_ tap: UITapGestureRecognizer) {
         supportAppealBox.setChecked(tap.view == supportAppealBox)
         customAppealBox.setChecked(!(tap.view == supportAppealBox))
+        supportAppealTextField.isEnabled = (tap.view == supportAppealBox)
+        customAppealTextField.isEnabled = !(tap.view == supportAppealBox)
         endEditCheckBox()
     }
     

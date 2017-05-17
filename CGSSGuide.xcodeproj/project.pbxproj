@@ -86,6 +86,7 @@
 		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
+		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
 		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
 		12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventPtItem.swift */; };
 		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
@@ -163,6 +164,7 @@
 		129ECB211ECB35760010BC7F /* TeamSimulationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */; };
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
+		129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* TeamDetailController.swift */; };
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
 		12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */; };
 		12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */; };
@@ -324,6 +326,7 @@
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
+		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
 		12636EC71E375DA900E3C833 /* EventPtItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtItem.swift; sourceTree = "<group>"; };
 		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 		129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationDescriptionCell.swift; sourceTree = "<group>"; };
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
+		129ECB281ECBFB930010BC7F /* TeamDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailController.swift; sourceTree = "<group>"; };
 		12A3F1691E5ADA96007B470E /* BpmShift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BpmShift.plist; sourceTree = "<group>"; };
 		12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapShiftingInfo.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
@@ -641,6 +645,7 @@
 				123AC6EA1E2374260016A07F /* CGSSClient.swift */,
 				12738EEE1E2B6C150040E413 /* Debouncer.swift */,
 				12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */,
+				1262F4F31ECC4E8700AD6424 /* Protocols.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -749,6 +754,7 @@
 				12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */,
 				127CBEA71ECA891300C119F9 /* TeamSimulationController.swift */,
 				127CBEA91ECA8A6700C119F9 /* TeamInfomationController.swift */,
+				129ECB281ECBFB930010BC7F /* TeamDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1158,6 +1164,7 @@
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
+				129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */,
 				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */,
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
@@ -1317,6 +1324,7 @@
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
+				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,

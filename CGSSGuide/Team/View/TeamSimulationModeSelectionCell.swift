@@ -17,7 +17,6 @@ class TeamSimulationModeSelectionCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessoryType = .disclosureIndicator
         
         leftLabel = UILabel()
         leftLabel.font = UIFont.systemFont(ofSize: 16)
@@ -25,10 +24,11 @@ class TeamSimulationModeSelectionCell: UITableViewCell {
         leftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(10)
+            make.bottom.equalTo(-10)
         }
         
         rightLabel = UILabel()
-        rightLabel.font = UIFont.systemFont(ofSize: 14)
+        rightLabel.font = UIFont.systemFont(ofSize: 16)
         rightLabel.textColor = UIColor.darkGray
         
         contentView.addSubview(rightLabel)
@@ -36,7 +36,8 @@ class TeamSimulationModeSelectionCell: UITableViewCell {
             make.right.equalTo(-10)
             make.centerY.equalTo(leftLabel)
         }
-        
+        selectionStyle = .none
+
     }
     
     func setup(with title: String, rightDetail: String, rightColor: UIColor) {

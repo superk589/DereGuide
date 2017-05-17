@@ -15,12 +15,19 @@ protocol PageTitleViewDelegate: class {
     func pageTitleView(_ pageTitleView: PageTitleView, didSelectAtIndex index: Int)
 }
 
-class PageTitleLabel: UILabel {
+class PageTitleItemView: UIView {
+    
+    var label: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textColor = UIColor.lightGray
-        font = UIFont.systemFont(ofSize: 12)
+        label = UILabel()
+        addSubview(label)
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.lightGray
+        label.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,28 +38,10 @@ class PageTitleLabel: UILabel {
 /// 用于collectionview的可滚动可点击标题栏的视图
 class PageTitleView: UIView {
     
-    struct Space {
-        //static let left: CGFloat = 20
-        static let top: CGFloat = 2
-        static let `internal` :CGFloat = 51
-    }
-    struct Height {
-        static let btn: CGFloat = 28
-        static let slider: CGFloat = 1
-    }
-    
-    struct Width {
-        static let btn: CGFloat = 50
-    }
-    
     var titles: [String] = [String]() {
         didSet {
-            reloadSubviews()
+            reloadTitleItemViews()
         }
-    }
-    
-    var leftSpace: CGFloat {
-        return (fwidth - Space.internal * CGFloat(titles.count - 1) - Width.btn * CGFloat(titles.count)) / 2
     }
     
     var currentIndex: Int {
@@ -63,28 +52,6 @@ class PageTitleView: UIView {
             floatIndex = CGFloat(newValue)
         }
         
-    }
-    var floatIndex: CGFloat = 0 {
-        didSet {
-            let leftIndex = Int(floor(floatIndex))
-            let rightIndex = Int(ceil(floatIndex))
-            let leftLabel = titleLabels[leftIndex]
-            let rightLabel = titleLabels[rightIndex]
-            let currentLabel = titleLabels[currentIndex]
-            
-            currentLabel.textColor = UIColor.black
-            
-            let offset = floatIndex - floor(floatIndex)
-            let left1 = leftLabel.frame.minX + leftLabel.frame.minX
-            let left2 = rightLabel.frame.minX + rightLabel.frame.minX
-            
-            self.sliderView.frame.origin.x = left1 + (left2 - left1) * offset
-            self.sliderView.fwidth = leftLabel.fwidth + (rightLabel.fwidth - leftLabel.fwidth) * offset
-        }
-        willSet {
-            let label = titleLabels[currentIndex]
-            label.textColor = UIColor.lightGray
-        }
     }
     
     func setCurrentIndex(index: Int, animated: Bool) {
@@ -97,60 +64,78 @@ class PageTitleView: UIView {
         }
     }
     
+    var floatIndex: CGFloat = 0 {
+        didSet {
+            let items = titleStackView.arrangedSubviews as! [PageTitleItemView]
+            let leftIndex = Int(floor(floatIndex))
+            let rightIndex = Int(ceil(floatIndex))
+            let leftItem = items[leftIndex]
+            let rightItem = items[rightIndex]
+            let currentItem = items[currentIndex]
+            
+            currentItem.label.textColor = UIColor.black
+            
+            let offset = floatIndex - floor(floatIndex)
+            let left1 = leftItem.frame.minX + leftItem.label.frame.minX
+            let left2 = rightItem.frame.minX + rightItem.label.frame.minX
+            
+            self.sliderView.frame.origin.x = left1 + (left2 - left1) * offset
+            self.sliderView.fwidth = leftItem.label.fwidth + (rightItem.label.fwidth - leftItem.label.fwidth) * offset
+        }
+        willSet {
+            let item = titleStackView.arrangedSubviews[currentIndex] as! PageTitleItemView
+            item.label.textColor = UIColor.lightGray
+        }
+    }
     
     var sliderView: UIView!
-    
-    var titleLabels = [PageTitleLabel]()
+
+    var titleStackView: UIStackView!
     
     weak var delegate: PageTitleViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
+        titleStackView = UIStackView()
+        titleStackView.distribution = .fillEqually
+        titleStackView.spacing = 0
+        addSubview(titleStackView)
+        titleStackView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         
-        sliderView = UIView.init(frame: CGRect.init(x: 0, y: fheight / 2 + 12, width: 10, height: 1))
+        sliderView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 2))
         sliderView.backgroundColor = UIColor.black
         addSubview(sliderView)
     }
     
-    func wipeItemBtns() {
-        for subView in titleLabels {
-            subView.removeFromSuperview()
+    private func removeAllTitleItemViews() {
+        for subView in titleStackView.arrangedSubviews {
+            titleStackView.removeArrangedSubview(subView)
         }
-        titleLabels.removeAll()
     }
     
-    func reloadSubviews() {
-        wipeItemBtns()
-        guard titles.count > 0 else {
-            return
-        }
-        
-        for i in 0..<titles.count {
-            let width = Screen.width / CGFloat(titles.count)
-            let label = PageTitleLabel()
-            
-            label.text = titles[i]
-            addSubview(label)
-            label.snp.makeConstraints({ (make) in
-                make.left.equalToSuperview().offset(CGFloat(i) * width)
-                make.top.equalToSuperview().offset(5)
-                make.width.equalTo(width)
-                make.bottom.equalToSuperview().offset(-5)
-            })
-            titleLabels.append(label)
-            label.tag = 1000 + i
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        sliderView.frame.origin.y = self.bounds.maxY - 2
+    }
+    
+    private func reloadTitleItemViews() {
+        removeAllTitleItemViews()
+        for title in titles {
+            let view = PageTitleItemView()
+            view.label.text = title
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(clickAction(tap:)))
-            label.addGestureRecognizer(tap)
-            
+            view.addGestureRecognizer(tap)
+            titleStackView.addArrangedSubview(view)
         }
         layoutIfNeeded()
         setCurrentIndex(index: 0, animated: false)
     }
     
-    
     func clickAction(tap: UITapGestureRecognizer) {
-        if let view = tap.view {
-            setCurrentIndex(index: view.tag - 1000, animated: true)
-            delegate?.pageTitleView(self, didSelectAtIndex: view.tag - 1000)
+        if let view = tap.view, let index = titleStackView.arrangedSubviews.index(of: view) {
+            setCurrentIndex(index: index, animated: true)
+            delegate?.pageTitleView(self, didSelectAtIndex: index)
         }
     }
     

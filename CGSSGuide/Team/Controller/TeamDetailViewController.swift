@@ -225,8 +225,8 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         alvc.popoverPresentationController?.sourceView = teamDV.liveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.liveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
-        for simulatorType in CGSSLiveSimulatorType.getAll() {
-            alvc.addAction(UIAlertAction.init(title: simulatorType.toString(), style: .default, handler: { (a) in
+        for simulatorType in CGSSLiveSimulatorType.all {
+            alvc.addAction(UIAlertAction.init(title: simulatorType.description, style: .default, handler: { (a) in
                 self.teamDV.simulatorType = simulatorType
                 if ![.normal, .parade].contains(simulatorType) {
                     self.teamDV.showGrooveSelectButton()
@@ -249,7 +249,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
         alvc.popoverPresentationController?.sourceView = teamDV.grooveTypeButton
         alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: teamDV.grooveTypeButton.fheight / 2, width: 0, height: 0)
         alvc.popoverPresentationController?.permittedArrowDirections = .right
-        for grooveType in CGSSGrooveType.getAll() {
+        for grooveType in CGSSGrooveType.all {
             alvc.addAction(UIAlertAction.init(title: grooveType.rawValue, style: .default, handler: { (a) in
                 self.teamDV.grooveType = grooveType
                 }))

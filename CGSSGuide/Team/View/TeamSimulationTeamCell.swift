@@ -14,7 +14,7 @@ class PotentialLabel: UILabel {
         let vocal = NSAttributedString.init(string: String(potential.vocalLevel), attributes: [NSForegroundColorAttributeName: Color.vocal, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
         let dance = NSAttributedString.init(string: String(potential.danceLevel), attributes: [NSForegroundColorAttributeName: Color.dance, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
         let visual = NSAttributedString.init(string: String(potential.visualLevel), attributes: [NSForegroundColorAttributeName: Color.visual, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
-        let separator = NSAttributedString.init(string: "/", attributes: [NSForegroundColorAttributeName: Color.allType, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
+        let separator = NSAttributedString.init(string: "/", attributes: [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
         let plus = NSAttributedString.init(string: "+", attributes: [NSForegroundColorAttributeName: Color.allType, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
         
         self.attributedText = plus + vocal + separator + dance + separator + visual
@@ -68,9 +68,15 @@ class TeamSimulationCardView: UIView {
 }
 
 
-class TeamSimulationTeamCell: UITableViewCell {
+protocol TeamSimulationTeamCellDelegate: class {
+    func teamSimulationTeamCell(_ teamSimulationTeamCell: TeamSimulationTeamCell, didClick cardIcon: CGSSCardIconView)
+}
+
+class TeamSimulationTeamCell: UITableViewCell, CGSSIconViewDelegate {
     
     var iconStackView: UIStackView!
+    
+    weak var delegate: TeamSimulationTeamCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -78,6 +84,7 @@ class TeamSimulationTeamCell: UITableViewCell {
         var views = [UIView]()
         for _ in 0...5 {
             let view = TeamSimulationCardView()
+            view.icon.delegate = self
             views.append(view)
         }
         iconStackView = UIStackView(arrangedSubviews: views)
@@ -93,6 +100,7 @@ class TeamSimulationTeamCell: UITableViewCell {
         }
 
         accessoryType = .disclosureIndicator
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,4 +124,7 @@ class TeamSimulationTeamCell: UITableViewCell {
         
     }
 
+    func iconClick(_ iv: CGSSIconView) {
+        delegate?.teamSimulationTeamCell(self, didClick: iv as! CGSSCardIconView)
+    }
 }

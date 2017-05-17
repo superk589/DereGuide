@@ -25,13 +25,13 @@ protocol PageCollectionControllerDataSource: class {
     func titlesOfPages(_ pageCollectionController: PageCollectionController) -> [String]
 }
 
-class PageCollectionController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PageCollectionController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var titleView: PageTitleView!
-    var collectionView: PageCollectionView!
+    var titleView: PageTitleView = PageTitleView()
+    var collectionView: PageCollectionView = PageCollectionView()
     var titleHeight: CGFloat = 30 {
         didSet {
-            titleView?.snp.updateConstraints { (update) in
+            titleView.snp.updateConstraints { (update) in
                 update.height.equalTo(titleHeight)
             }
         }
@@ -41,7 +41,6 @@ class PageCollectionController: UIViewController, UICollectionViewDelegate, UICo
         didSet {
             collectionView.reloadData()
             titleView.titles = dataSource?.titlesOfPages(self) ?? [String]()
-            titleView.reloadSubviews()
         }
     }
 
@@ -54,38 +53,29 @@ class PageCollectionController: UIViewController, UICollectionViewDelegate, UICo
             return titleView.currentIndex
         }
     }
-
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        collectionView = PageCollectionView(frame: view.frame)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PageCell")
         view.addSubview(collectionView)
-        
-        titleView = PageTitleView()
         view.addSubview(titleView)
         
         titleView.snp.makeConstraints { (make) in
             make.height.equalTo(titleHeight)
-            make.top.left.right.equalToSuperview()
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.left.right.equalToSuperview()
         }
+        titleView.delegate = self
         
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(titleView.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        automaticallyAdjustsScrollViewInsets = false
     }
-    
-    func pageTitleView(_ pageTitleView: PageTitleView, didSelectAtIndex index: Int) {
-        self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
-//        UIView.animate(withDuration: 0.25, animations: {
-//            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth - (CGFloat(index) * self.collectionView.fwidth - self.collectionView.contentOffset.x) * 0.001
-//        }) { (finished) in
-//            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
-//        }
-    }
-
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.numberOfPages(self) ?? 0
@@ -124,9 +114,15 @@ class PageCollectionController: UIViewController, UICollectionViewDelegate, UICo
         let index = offsetX / scrollView.fwidth
         titleView.floatIndex = index
     }
+}
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+extension PageCollectionController: PageTitleViewDelegate {
+    func pageTitleView(_ pageTitleView: PageTitleView, didSelectAtIndex index: Int) {
+        self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
+        //        UIView.animate(withDuration: 0.25, animations: {
+        //            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth - (CGFloat(index) * self.collectionView.fwidth - self.collectionView.contentOffset.x) * 0.001
+        //        }) { (finished) in
+        //            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
+        //        }
     }
-
 }

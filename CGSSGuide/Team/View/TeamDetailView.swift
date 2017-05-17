@@ -717,8 +717,8 @@ class TeamDetailView: UIView {
     
     var simulatorType: CGSSLiveSimulatorType = .normal {
         didSet {
-            self.liveTypeButton.setTitle("< \(simulatorType.toString()) >", for: .normal)
-            self.liveTypeButton.setTitleColor(simulatorType.typeColor(), for: .normal)
+            self.liveTypeButton.setTitle("< \(simulatorType.description) >", for: .normal)
+            self.liveTypeButton.setTitleColor(simulatorType.color, for: .normal)
             if simulatorType != oldValue {
                 self.clearScoreGrid()
                 self.clearAdScoreGrid()
@@ -730,7 +730,7 @@ class TeamDetailView: UIView {
         didSet {
             if let type = grooveType {
                 self.grooveTypeButton.setTitle("< \(type.rawValue) >", for: .normal)
-                self.grooveTypeButton.setTitleColor(type.typeColor(), for: .normal)
+                self.grooveTypeButton.setTitleColor(type.color, for: .normal)
             } else {
                 self.grooveTypeButton.setTitle("", for: .normal)
             }
