@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamInfomationController: UIViewController, PageCollectionControllerContainable, TeamCollecetionPage {
+class TeamInfomationController: BaseTableViewController, PageCollectionControllerContainable, TeamCollecetionPage {
 
     var team: CGSSTeam!
     

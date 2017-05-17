@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit
 
-class TeamSimulationController: UITableViewController, PageCollectionControllerContainable, TeamCollecetionPage {
+class TeamSimulationController: BaseTableViewController, PageCollectionControllerContainable, TeamCollecetionPage {
     
     var team: CGSSTeam! {
         didSet {
@@ -124,11 +124,11 @@ class TeamSimulationController: UITableViewController, PageCollectionControllerC
             pageCollectionController?.navigationController?.pushViewController(liveSelectionViewController, animated: true)
         case 3:
             let cell = tableView.cellForRow(at: indexPath)
-            showActionSheetOfLiveModeSelection(at: cell)
+            showActionSheetOfLiveModeSelection(at: cell as? TeamSimulationModeSelectionCell)
         case 4:
             if self.grooveType != nil {
                 let cell = tableView.cellForRow(at: indexPath)
-                showActionSheetOfGrooveTypeSelection(at: cell)
+                showActionSheetOfGrooveTypeSelection(at: cell as? TeamSimulationModeSelectionCell)
             }
             
         default:
@@ -137,12 +137,12 @@ class TeamSimulationController: UITableViewController, PageCollectionControllerC
 
     }
     
-    private func showActionSheetOfLiveModeSelection(at cell: UITableViewCell?) {
+    private func showActionSheetOfLiveModeSelection(at cell: TeamSimulationModeSelectionCell?) {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择歌曲模式", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
         
         if let cell = cell {
-            alvc.popoverPresentationController?.sourceView = cell.detailTextLabel
-            alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: cell.fheight / 2, width: 0, height: 0)
+            alvc.popoverPresentationController?.sourceView = cell.rightLabel
+            alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: cell.rightLabel.bounds.maxY / 2, width: 0, height: 0)
         } else {
             alvc.popoverPresentationController?.sourceView = tableView
             alvc.popoverPresentationController?.sourceRect = CGRect(x: tableView.frame.maxX / 2, y: tableView.frame.maxY / 2, width: 0, height: 0)
@@ -162,12 +162,12 @@ class TeamSimulationController: UITableViewController, PageCollectionControllerC
         self.present(alvc, animated: true, completion: nil)
     }
     
-    func showActionSheetOfGrooveTypeSelection(at cell: UITableViewCell?) {
+    func showActionSheetOfGrooveTypeSelection(at cell: TeamSimulationModeSelectionCell?) {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择Groove类别", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
         
         if let cell = cell {
-            alvc.popoverPresentationController?.sourceView = cell.detailTextLabel
-            alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: cell.fheight / 2, width: 0, height: 0)
+            alvc.popoverPresentationController?.sourceView = cell.rightLabel
+            alvc.popoverPresentationController?.sourceRect = CGRect(x: 0, y: cell.rightLabel.bounds.maxY / 2, width: 0, height: 0)
         } else {
             alvc.popoverPresentationController?.sourceView = tableView
             alvc.popoverPresentationController?.sourceRect = CGRect(x: tableView.frame.maxX / 2, y: tableView.frame.maxY / 2, width: 0, height: 0)
@@ -183,16 +183,6 @@ class TeamSimulationController: UITableViewController, PageCollectionControllerC
         self.present(alvc, animated: true, completion: nil)
     }
        
-    // 下面这两个方法可以让分割线左侧顶格显示 不再留15像素
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableView.separatorInset = UIEdgeInsets.zero
-        self.tableView.layoutMargins = UIEdgeInsets.zero
-    }
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = UIEdgeInsets.zero
-    }
 }
 
 extension TeamSimulationController: TeamEditViewControllerDelegate {
