@@ -93,7 +93,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         supportSkillDetailButton = UIButton()
         supportSkillDetailButton.setTitle("  " + NSLocalizedString("辅助技能详情", comment: "") + " >", for: .normal)
         supportSkillDetailButton.backgroundColor = Color.life
-        supportSkillDetailButton.addTarget(self, action: #selector(checkScoreDetail), for: .touchUpInside)
+        supportSkillDetailButton.addTarget(self, action: #selector(checkSupportSkillDetail), for: .touchUpInside)
         contentView.addSubview(supportSkillDetailButton)
         supportSkillDetailButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)

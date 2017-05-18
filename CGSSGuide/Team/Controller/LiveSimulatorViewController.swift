@@ -34,13 +34,13 @@ class LiveSimulatorViewController: BaseTableViewController {
         self.coordinator.generateLiveSimulator()
     }()
     
-    private var displayType: DisplayType = .optimistic2 {
+    var displayType: DisplayType = .optimistic2 {
         didSet {
             reloadUI()
         }
     }
     
-    private var logs = [LSLog]() {
+    var logs = [LSLog]() {
         didSet {
             tableView.reloadData()
         }
@@ -78,7 +78,7 @@ class LiveSimulatorViewController: BaseTableViewController {
         reloadUI()
     }
     
-    private func reloadUI() {
+    func reloadUI() {
         navigationItem.title = displayType.description
         
         switch displayType {

@@ -47,8 +47,7 @@ fileprivate let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
 
 class LSCoordinator {
     var team: CGSSTeam
-    var live: CGSSLive
-    var difficulty: CGSSLiveDifficulty
+    var scene: CGSSLiveScene
     var simulatorType: CGSSLiveSimulatorType
     var grooveType: CGSSGrooveType?
     var fixedAppeal: Int?
@@ -56,7 +55,7 @@ class LSCoordinator {
         if grooveType != nil {
             return team.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).total + team.supportAppeal
         } else {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: live.filterType).total + team.supportAppeal
+            return team.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).total + team.supportAppeal
         }
     }
     
@@ -64,25 +63,24 @@ class LSCoordinator {
         if grooveType != nil {
             return team.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).life
         } else {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: live.filterType).life
+            return team.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).life
         }
     }
     
-    lazy var beatmap: CGSSBeatmap = {
-        return self.live.getBeatmapByDifficulty(self.difficulty)!
-    }()
+    var beatmap: CGSSBeatmap {
+        return self.scene.beatmap!
+    }
     
-    init(team: CGSSTeam, live: CGSSLive, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, difficulty: CGSSLiveDifficulty, fixedAppeal: Int?) {
+    init(team: CGSSTeam, scene: CGSSLiveScene, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, fixedAppeal: Int?) {
         self.team = team
-        self.live = live
-        self.difficulty = difficulty
+        self.scene = scene
         self.simulatorType = simulatorType
         self.grooveType = grooveType
         self.fixedAppeal = fixedAppeal
     }
     
     func getBaseScorePerNote() -> Double {
-        let diffStars = self.live.getStarsForDiff(difficulty)
+        let diffStars = scene.live.getStarsForDiff(scene.difficulty)
         if let fixedAppeal = fixedAppeal {
             return Double(fixedAppeal / beatmap.numberOfNotes) * (difficultyFactor[diffStars] ?? 1)
         } else {
@@ -138,15 +136,15 @@ class LSCoordinator {
         return lsNotes
     }
     
-    fileprivate func generateScoreBonuses() -> [LSScoreBonus] {
-        var result = [LSScoreBonus]()
-        
+    fileprivate func generateBonusesAndSupports() -> (bonuses: [LSScoreBonus], supports: [LSScoreBonus]) {
+        var bonuses = [LSScoreBonus]()
+        var supports = [LSScoreBonus]()
         let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
         
         for i in 0...4 {
             if let member = team[i], let skill = team[i]?.cardRef?.skill {
                 let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (member.skillLevel)!)
-                if let type = LSScoreBonusTypes.init(type: skill.skillFilterType),
+                if let type = LSScoreBonusType.init(type: skill.skillFilterType),
                     let cardType = member.cardRef?.cardType {
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var rateBonus = 0
@@ -155,7 +153,7 @@ class LSCoordinator {
                             rateBonus += 30
                         }
                     } else {
-                        if member.cardRef!.cardType == live.filterType || live.filterType == .allType {
+                        if member.cardRef!.cardType == scene.live.filterType || scene.live.filterType == .allType {
                             rateBonus += 30
                         }
                     }
@@ -168,33 +166,29 @@ class LSCoordinator {
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
                     for range in ranges {
                         switch type {
-                        case LSScoreBonusTypes.deep:
-                            let content1 = LSScoreBonus.init(range: range, value: skill.value, type: .perfectBonus, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            let content2 = LSScoreBonus.init(range: range, value: skill.value2, type: .comboBonus, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            result.append(content1)
-                            result.append(content2)
-                        case LSScoreBonusTypes.skillBoost:
-                            let content = LSScoreBonus.init(range: range, value: skillBoostValue[skill.value] ?? 1000, type: .skillBoost, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            result.append(content)
-                        case LSScoreBonusTypes.allRound:
-                            let content1 = LSScoreBonus.init(range: range, value: skill.value2, type: .heal, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            let content2 = LSScoreBonus.init(range: range, value: skill.value, type: .comboBonus, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            result.append(content1)
-                            result.append(content2)
+                        case .skillBoost:
+                            let bonus = LSScoreBonus.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            bonuses.append(bonus)
+                            supports.append(bonus)
                         default:
-                            let bonus = LSScoreBonus.init(range: range, value: skill.value, type: type, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            result.append(bonus)
+                            let bonus = LSScoreBonus.init(range: range, value: skill.value, value2: skill.value2, type: .deep, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            if bonus.type.isBonusSkills {
+                                bonuses.append(bonus)
+                            }
+                            if bonus.type.isSupportSkills {
+                                supports.append(bonus)
+                            }
                         }
                     }
                 }
             }
         }
-        return result
+        return (bonuses, supports)
     }
     
     func generateLiveSimulator() -> CGSSLiveSimulator {
-        let bonuses = self.generateScoreBonuses()
+        let (bonuses, supports) = self.generateBonusesAndSupports()
         let scoreDistributions = self.generateScoreDistributions(notes: self.beatmap.validNotes, bonuses: bonuses)
-        return CGSSLiveSimulator.init(distributions: scoreDistributions, bonuses: bonuses, notes: self.beatmap.validNotes, totalLife: life)
+        return CGSSLiveSimulator.init(distributions: scoreDistributions, bonuses: bonuses, supports: supports, notes: self.beatmap.validNotes, totalLife: life)
     }
 }

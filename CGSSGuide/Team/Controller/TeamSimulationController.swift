@@ -29,11 +29,7 @@ class TeamSimulationController: BaseTableViewController, PageCollectionControlle
         }
     }
     
-    var live: CGSSLive?
-//    var beatmap: CGSSBeatmap?
-//    var difficulty: CGSSLiveDifficulty?
-    
-    var liveDetail: CGSSLiveDetail? {
+    var scene: CGSSLiveScene? {
         didSet {
             tableView.reloadRows(at: [IndexPath.init(row: 1, section: 0)], with: .automatic)
         }
@@ -80,8 +76,8 @@ class TeamSimulationController: BaseTableViewController, PageCollectionControlle
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationLiveSelectCell.description(), for: indexPath) as! TeamSimulationLiveSelectCell
-            if let liveDetail = liveDetail, let live = live {
-                cell.setupWith(live: live, liveDetail: liveDetail)
+            if let scene = scene {
+                cell.setupWith(live: scene.live, difficulty: scene.difficulty)
             }
             return cell
         case 2:
@@ -208,9 +204,8 @@ extension TeamSimulationController: TeamSimulationTeamCellDelegate {
 }
 
 extension TeamSimulationController: BaseSongTableViewControllerDelegate {
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
-        self.liveDetail = live.liveDetails[difficulty.rawValue - 1]
-        self.live = live
+    func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene) {
+        self.scene = liveScene
     }
 }
 
@@ -238,23 +233,57 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     }
     
     func startSimulate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
+        
+        func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
+            simulator.simulate(times: times, progress: { (a, b) in
+                DispatchQueue.main.async {
+                    // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
+                    cell?.simulationButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
+                }
+            }, callback: { (result, logs) in
+                DispatchQueue.main.async {
+                    cell?.setupSimulationResult(value1: result.get(percent: 1), value2: result.get(percent: 5), value3: result.get(percent: 20), value4: result.get(percent: 50))
+                    cell?.resetSimulationButton()
+                }
+            })
+        }
+        
+        if let scene = self.scene {
+            cell?.clearSimulationGrid()
+            if team.hasUnknownSkills() {
+                showUnknownSkillAlert()
+            }
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let simulator = coordinator.generateLiveSimulator()
+            DispatchQueue.global(qos: .userInitiated).async {
+                #if DEBUG
+                    doSimulationBy(simulator: simulator, times: 500)
+                #else
+                    doSimulationBy(simulator: simulator, times: 10000)
+                #endif
+            }
+        } else {
+            showNotSelectSongAlert()
+            cell?.resetSimulationButton()
+        }
         
     }
     
     func startCalculate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
-        if let liveDetail = self.liveDetail, let live = self.live {
+        if let scene = self.scene {
             cell?.clearCalculationGrid()
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, live: live, simulatorType: simulatorType, grooveType: grooveType, difficulty: liveDetail.difficulty, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator()
             
             cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)
             
             simulator.simulateOptimistic1(options: [], callback: { (result, logs) in
-                cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.max, value4: simulator.average)
+                cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.maxScore, value4: simulator.averageScore)
                 cell?.resetCalculationButton()
             })
             
@@ -275,11 +304,25 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     }
     
     func checkScoreDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
-        
+        if let scene = self.scene {
+            let vc = LiveSimulatorViewController()
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            vc.coordinator = coordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showNotSelectSongAlert()
+        }
     }
     
     func checkSupportSkillDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
-        
+        if let scene = self.scene {
+            let vc = LiveSimulatorSupportSkillsViewController()
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            vc.coordinator = coordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showNotSelectSongAlert()
+        }
     }
 }
 

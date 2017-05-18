@@ -87,11 +87,11 @@ class EventSongView: UIView {
         self.nameLabel.textColor = live.color
         self.typeIcon.image = live.icon
         
-        let diffStars = [live.debutDifficulty, live.regularDifficulty, live.proDifficulty, live.masterDifficulty, live.masterPlusDifficulty]
+        let diffStars = live.liveDetails.map { $0.stars }
         for i in 0...4 {
             self.diffViews[i].text = "\(diffStars[i])"
         }
-        if live.masterPlusDetailId != 0 {
+        if live[.masterPlus].id != 0 {
             self.diffViews[4].isHidden = false
         } else {
             self.diffViews[4].isHidden = true

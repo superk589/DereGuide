@@ -40,6 +40,16 @@ struct LSLog {
     /// 技能增强数值(SSR - 1200)
     var skillBoost: Int
     
+    var lifeRestore: Int
+    
+    var currentLife: Int
+    
+    var perfectLock: Bool
+    
+    var comboContinue: Bool
+    
+    var `guard`: Bool
+    
     var toDictionary: [String: Any] {
         return [
             "note_index": noteIndex,

@@ -71,20 +71,11 @@ class CGSSLiveDetail: CGSSBaseModel {
     var difficulty: CGSSLiveDifficulty
     var id: Int
     var stars: Int
-    var liveId: Int
-    
-    lazy var beatmap: CGSSBeatmap? = {
-        guard let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: self.liveId) else {
-            return nil
-        }
-        return beatmaps[self.difficulty.rawValue - 1]
-    }()
-    
-    init(liveId: Int, detailId: Int, difficulty: CGSSLiveDifficulty, stars: Int) {
+        
+    init(detailId: Int, difficulty: CGSSLiveDifficulty, stars: Int) {
         
         self.difficulty = difficulty
         self.id = detailId
-        self.liveId = liveId
         self.stars = stars
         super.init()
     }

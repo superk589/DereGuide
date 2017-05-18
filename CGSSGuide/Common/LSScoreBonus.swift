@@ -8,17 +8,31 @@
 
 import Foundation
 
-struct LSScoreBonusTypes: OptionSet, Hashable {
-    let rawValue:UInt
-    init(rawValue: UInt) { self.rawValue = rawValue }
-    static let comboBonus = LSScoreBonusTypes.init(rawValue: 1 << 0)
-    static let perfectBonus = LSScoreBonusTypes.init(rawValue: 1 << 1)
-    static let skillBoost = LSScoreBonusTypes.init(rawValue: 1 << 2)
-    static let heal = LSScoreBonusTypes.init(rawValue: 1 << 3)
-    static let overload = LSScoreBonusTypes.init(rawValue: 1 << 4)
-    static let deep: LSScoreBonusTypes = [.comboBonus, .perfectBonus]
-    static let allRound: LSScoreBonusTypes = [.comboBonus, .heal]
+enum LSScoreBonusType {
+    case comboBonus
+    case perfectBonus
+    case skillBoost
+    case heal
+    case overload
+    case deep
+    case allRound
     
+    case `guard`
+    case comboContinue
+    case perfectLock
+    
+    static let allSupport: [LSScoreBonusType] = [LSScoreBonusType.guard, .skillBoost, .overload, .heal, .allRound, .comboContinue, .perfectLock]
+    static let allBonus: [LSScoreBonusType] = [LSScoreBonusType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound]
+    static let allPerfectBonus: [LSScoreBonusType] = [LSScoreBonusType.perfectBonus, .overload, ]
+    
+    var isSupportSkills: Bool {
+        return LSScoreBonusType.allSupport.contains(self)
+    }
+    
+    var isBonusSkills: Bool {
+        return LSScoreBonusType.allBonus.contains(self)
+    }
+        
     init?(type: CGSSSkillTypes) {
         switch type {
         case CGSSSkillTypes.comboBonus:
@@ -35,13 +49,15 @@ struct LSScoreBonusTypes: OptionSet, Hashable {
             self = .skillBoost
         case CGSSSkillTypes.heal:
             self = .heal
+        case CGSSSkillTypes.comboContinue:
+            self = .comboContinue
+        case CGSSSkillTypes.perfectLock:
+            self = .perfectLock
+        case CGSSSkillTypes.guard:
+            self = .guard
         default:
             return nil
         }
-    }
-    
-    var hashValue: Int {
-        return Int(self.rawValue)
     }
 }
 
@@ -52,7 +68,10 @@ struct LSScoreBonus {
     // In percent, 117 means 17%up
     var value: Int
     
-    var type: LSScoreBonusTypes
+    // heal of all round / combo bonus of deep 
+    var value2: Int
+    
+    var type: LSScoreBonusType
     
     // In 0 - 10000
     var rate: Double

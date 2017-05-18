@@ -20,7 +20,7 @@ enum CGSSLiveSimulatorType: String, CustomStringConvertible, ColorRepresentable 
     var color: UIColor {
         switch self {
         case .normal:
-            return Color.allType
+            return Color.parade
         case .vocal:
             return Color.vocal
         case .dance:
@@ -79,11 +79,11 @@ enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
 extension CGSSLive {
     // 用于排序的属性
     dynamic var updateId: Int {
-        return beatmapCount == 5 ? masterPlusDetailId : masterDetailId
+        return beatmapCount == 5 ? self[.masterPlus].id : self[.master].id
     }
     
     dynamic var createId: Int {
-        return self.debutDetailId
+        return self[.debut].id
     }
     
     dynamic var maxDiffStars: Int {
@@ -149,15 +149,23 @@ extension CGSSLive {
     
     // 合理的谱面数量, 包含官方还未发布的难度
     var validBeatmapCount: Int {
-        return self.masterPlusDetailId == 0 ? 4 : 5
+        return self.getLiveDetail(of: .masterPlus).id == 0 ? 4 : 5
     }
     
-    func getBeatmapByDifficulty(_ difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: id){
+    func getBeatmap(of difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
+        if beatmaps.count >= difficulty.rawValue {
             return beatmaps[difficulty.rawValue - 1]
         } else {
             return nil
         }
+    }
+    
+    func getLiveDetail(of difficulty: CGSSLiveDifficulty) -> CGSSLiveDetail {
+        return self.liveDetails[difficulty.rawValue - 1]
+    }
+    
+    dynamic var maxNumberOfNotes: Int {
+        return self.getBeatmap(of: self.maxDiff)?.numberOfNotes ?? 0
     }
     
     var jacketURL: URL? {
@@ -171,8 +179,13 @@ extension CGSSLive {
             return name + "(" + NSLocalizedString("活动", comment: "") + ")"
         }
     }
+    
+    subscript (difficulty: CGSSLiveDifficulty) -> CGSSLiveDetail {
+        get {
+            return getLiveDetail(of: difficulty)
+        }
+    }
 }
-
 
 class CGSSLive: CGSSBaseModel {
     
@@ -183,22 +196,22 @@ class CGSSLive: CGSSBaseModel {
     var charaPosition4 : Int
     var charaPosition5 : Int
     var composer : String
-    var debutDetailId : Int
-    var debutDifficulty : Int
+//    var debutDetailId : Int
+//    var debutDifficulty : Int
     var eventType : Int
     var id : Int
     var lyricist : String
-    var masterDetailId : Int
-    var masterDifficulty : Int
-    var masterPlusDetailId : Int
-    var masterPlusDifficulty : Int
+//    var masterDetailId : Int
+//    var masterDifficulty : Int
+//    var masterPlusDetailId : Int
+//    var masterPlusDifficulty : Int
     var musicDataId : Int
     var name : String
     var positionNum : Int
-    var proDetailId : Int
-    var proDifficulty : Int
-    var regularDetailId : Int
-    var regularDifficulty : Int
+//    var proDetailId : Int
+//    var proDifficulty : Int
+//    var regularDetailId : Int
+//    var regularDifficulty : Int
     var startDate : String
     var type : Int
     
@@ -233,9 +246,13 @@ class CGSSLive: CGSSBaseModel {
         return result
     }()
     
-    lazy dynamic var maxNumberOfNotes: Int = {
-        return self.getBeatmapByDifficulty(self.maxDiff)?.numberOfNotes ?? 0
+    lazy var beatmaps: [CGSSBeatmap] = {
+        guard let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: self.id) else {
+            return [CGSSBeatmap]()
+        }
+        return beatmaps
     }()
+
     
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -251,31 +268,31 @@ class CGSSLive: CGSSBaseModel {
         charaPosition4 = json["chara_position_4"].intValue
         charaPosition5 = json["chara_position_5"].intValue
         composer = json["composer"].stringValue
-        debutDetailId = json["debut_detail_id"].intValue
-        debutDifficulty = json["debut_difficulty"].intValue
+        let debutDetailId = json["debut_detail_id"].intValue
+        let debutStars = json["debut_difficulty"].intValue
         eventType = json["event_type"].intValue
         id = json["id"].intValue
         lyricist = json["lyricist"].stringValue
-        masterDetailId = json["master_detail_id"].intValue
-        masterDifficulty = json["master_difficulty"].intValue
-        masterPlusDetailId = json["master_plus_detail_id"].intValue
-        masterPlusDifficulty = json["master_plus_difficulty"].intValue
+        let masterDetailId = json["master_detail_id"].intValue
+        let masterStars = json["master_difficulty"].intValue
+        let masterPlusDetailId = json["master_plus_detail_id"].intValue
+        let masterPlusStars = json["master_plus_difficulty"].intValue
         musicDataId = json["music_data_id"].intValue
         name = json["name"].stringValue.replacingOccurrences(of: "\\n", with: "")
         positionNum = json["position_num"].intValue
-        proDetailId = json["pro"].intValue
-        proDifficulty = json["pro_difficulty"].intValue
-        regularDetailId = json["regular_detail_id"].intValue
-        regularDifficulty = json["regular_difficulty"].intValue
+        let proDetailId = json["pro"].intValue
+        let proStars = json["pro_difficulty"].intValue
+        let regularDetailId = json["regular_detail_id"].intValue
+        let regularStars = json["regular_difficulty"].intValue
         startDate = json["start_date"].stringValue
         type = json["type"].intValue
         super.init()
         
-        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: debutDetailId, difficulty: .debut, stars: debutDifficulty))
-        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: regularDetailId, difficulty: .regular, stars: regularDifficulty))
-        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: proDetailId, difficulty: .pro, stars: proDifficulty))
-        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: masterDetailId, difficulty: .master, stars: masterDifficulty))
-        liveDetails.append(CGSSLiveDetail(liveId: self.id, detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterPlusDifficulty))
+        liveDetails.append(CGSSLiveDetail(detailId: debutDetailId, difficulty: .debut, stars: debutStars))
+        liveDetails.append(CGSSLiveDetail(detailId: regularDetailId, difficulty: .regular, stars: regularStars))
+        liveDetails.append(CGSSLiveDetail(detailId: proDetailId, difficulty: .pro, stars: proStars))
+        liveDetails.append(CGSSLiveDetail(detailId: masterDetailId, difficulty: .master, stars: masterStars))
+        liveDetails.append(CGSSLiveDetail(detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterPlusStars))
     }
     
     public required init?(coder aDecoder: NSCoder) {

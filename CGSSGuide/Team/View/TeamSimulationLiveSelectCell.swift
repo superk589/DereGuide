@@ -68,12 +68,12 @@ class TeamSimulationLiveView: UIView {
         }
     }
     
-    func setupWith(live: CGSSLive, liveDetail: CGSSLiveDetail) {
+    func setupWith(live: CGSSLive, difficulty: CGSSLiveDifficulty) {
         backgroundLabel.text = ""
-        guard let beatmap = liveDetail.beatmap else {
+        guard let beatmap = live.getBeatmap(of: difficulty) else {
             return
         }
-        descriptionLabel.text = "\(liveDetail.stars)☆ \(liveDetail.difficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
+        descriptionLabel.text = "\(live[difficulty].stars)☆ \(live[difficulty].difficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
         nameLabel.text = live.name
         nameLabel.textColor = live.color
@@ -126,8 +126,8 @@ class TeamSimulationLiveSelectCell: UITableViewCell {
         accessoryType = .disclosureIndicator
     }
     
-    func setupWith(live: CGSSLive, liveDetail: CGSSLiveDetail) {
-        liveView.setupWith(live: live, liveDetail: liveDetail)
+    func setupWith(live: CGSSLive, difficulty: CGSSLiveDifficulty) {
+        liveView.setupWith(live: live, difficulty: difficulty)
     }
     
     required init?(coder aDecoder: NSCoder) {

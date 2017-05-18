@@ -87,6 +87,10 @@
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
 		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
+		1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */; };
+		1262F50F1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */; };
+		1262F5111ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */; };
+		1262F5131ECD740700AD6424 /* NoteSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */; };
 		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
 		12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventPtItem.swift */; };
 		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
@@ -327,6 +331,10 @@
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
 		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveScene.swift; sourceTree = "<group>"; };
+		1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorSupportSkillsViewController.swift; sourceTree = "<group>"; };
+		1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewHeader.swift; sourceTree = "<group>"; };
+		1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewCell.swift; sourceTree = "<group>"; };
 		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
 		12636EC71E375DA900E3C833 /* EventPtItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtItem.swift; sourceTree = "<group>"; };
 		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
@@ -697,6 +705,7 @@
 				1269E9CD1D520B5D0071AD7F /* CGSSLearderSkill.swift */,
 				1269E9CE1D520B5D0071AD7F /* CGSSLive.swift */,
 				127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */,
+				1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */,
 				1269E9D01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift */,
 				1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */,
 				129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */,
@@ -752,6 +761,7 @@
 				1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */,
 				1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */,
 				12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */,
+				1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */,
 				127CBEA71ECA891300C119F9 /* TeamSimulationController.swift */,
 				127CBEA91ECA8A6700C119F9 /* TeamInfomationController.swift */,
 				129ECB281ECBFB930010BC7F /* TeamDetailController.swift */,
@@ -770,6 +780,8 @@
 				12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */,
 				12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */,
 				12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */,
+				1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */,
+				1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */,
 				127CBEAF1ECA977800C119F9 /* TeamSimulationTeamCell.swift */,
 				127CBEB11ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift */,
 				129ECB181ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift */,
@@ -1163,6 +1175,7 @@
 				129ECB191ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
+				1262F5111ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */,
 				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
@@ -1206,6 +1219,7 @@
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */,
+				1262F50F1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
@@ -1244,6 +1258,7 @@
 				12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */,
 				1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */,
 				121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */,
+				1262F5131ECD740700AD6424 /* NoteSupportTableViewCell.swift in Sources */,
 				123F320F1E6FED0F00B69D26 /* SpreadImageViewController.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
 				12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */,
@@ -1271,6 +1286,7 @@
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
+				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,

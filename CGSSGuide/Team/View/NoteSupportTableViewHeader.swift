@@ -1,29 +1,27 @@
 //
-//  NoteScoreTableViewSectionHeader.swift
+//  NoteSupportTableViewHeader.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2017/3/29.
+//  Created by zzk on 2017/5/18.
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 
-class NoteScoreTableViewSectionHeader: UITableViewHeaderFooterView {
-
+class NoteSupportTableViewHeader: UITableViewHeaderFooterView {
+    
     enum Title {
         case text(String)
         case icon(UIImage)
     }
     
-    var labelTitles: [Title] = [
-        .text(NSLocalizedString("Combo", comment: "")),
-        .icon(#imageLiteral(resourceName: "score-bonus")),
-        .icon(#imageLiteral(resourceName: "combo-bonus")),
-        .icon(#imageLiteral(resourceName: "skill-boost")),
-        .text(NSLocalizedString("得分", comment: "")),
-        .text(NSLocalizedString("累计", comment: ""))
-    ]
+    var labelTitles: [Title] = [.text(NSLocalizedString("Combo", comment: "")),
+                                .icon(#imageLiteral(resourceName: "skill-boost")),
+                                .icon(#imageLiteral(resourceName: "perfect-lock")),
+                                .icon(#imageLiteral(resourceName: "combo-continue")),
+                                .icon(#imageLiteral(resourceName: "heal")),
+                                .icon(#imageLiteral(resourceName: "damage-guard")),
+                                .text(NSLocalizedString("HP", comment: ""))]
     
     var titleViews = [UIView]()
     

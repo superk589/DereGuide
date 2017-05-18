@@ -10,7 +10,7 @@ import UIKit
 import ZKDrawerController
 
 protocol BaseSongTableViewControllerDelegate: class {
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty)
+    func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene)
 }
 class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
@@ -168,7 +168,8 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     // 此方法应该被override或者通过代理来响应
     func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
         searchBar.resignFirstResponder()
-        delegate?.selectLive(live, beatmap: beatmap, difficulty: difficulty)
+        let scene = CGSSLiveScene(live: live, difficulty: difficulty)
+        delegate?.baseSongTableViewController(self, didSelect: scene)
     }
     
     func showBeatmapNotFoundAlert() {
