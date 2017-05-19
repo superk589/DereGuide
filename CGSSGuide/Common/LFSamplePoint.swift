@@ -1,5 +1,5 @@
 //
-//  LSSamplePoint.swift
+//  LFSamplePoint.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2017/3/31.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LSSamplePoint<T> {
+struct LFSamplePoint<T> {
     var probability: Double {
         didSet {
             assert(probability <= 1 || probability >= 0)

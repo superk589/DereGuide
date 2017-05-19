@@ -194,10 +194,10 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             let simulator = coordinator.generateLiveSimulator()
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
             
-            simulator.simulateOptimistic1(options: [], callback: { [weak self] (result, logs) in
-                self?.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.maxScore, value4: simulator.averageScore)
-                self?.teamDV.resetCalcButton()
-            })
+//            simulator.simulateOptimistic1(options: [], callback: { [weak self] (result, logs) in
+//                self?.teamDV.updateScoreGrid(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.maxScore, value4: simulator.averageScore)
+//                self?.teamDV.resetCalcButton()
+//            })
 
             /// first time using calculator in team detail view controller, shows app store rating alert in app.
             if #available(iOS 10.3, *) {

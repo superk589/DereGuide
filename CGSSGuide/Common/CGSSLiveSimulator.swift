@@ -13,28 +13,18 @@ typealias LSResultClosure = (LSResult, [LSLog]) -> Void
 
 class CGSSLiveSimulator {
     
-    var lsNotes: [LSNote]
-    var bonuses: [LSScoreBonus]
-    var supports: [LSScoreBonus]
-    var notes: [CGSSBeatmapNote]
+    var notes: [LSNote]
+    var bonuses: [LSSkill]
+    var supports: [LSSkill]
     var totalLife: Int
     
-    init(distributions: [LSNote], bonuses: [LSScoreBonus], supports: [LSScoreBonus], notes: [CGSSBeatmapNote], totalLife: Int) {
-        self.lsNotes = distributions
+    init(notes: [LSNote], bonuses: [LSSkill], supports: [LSSkill], totalLife: Int) {
+        self.notes = notes
         self.bonuses = bonuses
         self.supports = supports
         self.totalLife = totalLife
-        self.notes = notes
     }
-    
-    var averageScore: Int {
-        return lsNotes.reduce(0, { $0 + $1.average })
-    }
-    
-    var maxScore: Int {
-        return lsNotes.reduce(0, { $0 + $1.max })
-    }
-    
+
     var simulateResult = [Int]()
     
     
@@ -48,18 +38,14 @@ class CGSSLiveSimulator {
         var lastIndex = 0
         for i in 0..<notes.count {
             let note = notes[i]
-            let baseScore = lsNotes[i].baseScore
-            let comboFactor = lsNotes[i].comboFactor
-            var comboBonus = 100
-            var perfectBonus = 100
-            var skillBoost = 1000
-            var baseComboBonus = comboBonus
-            var basePerfectBonus = perfectBonus
+            let baseScore = note.baseScore
+            let comboFactor = note.comboFactor
+            var bonusGroup = LSScoreBonusGroup.basic
             let noteRange = LSRange(begin: note.sec - 0.06, length: 0.12)
             
             var firstLoop = true
             var intersectedRanges = [LSRange]()
-            var intersectedBonuses = [LSScoreBonus]()
+            var intersectedBonuses = [LSSkill]()
             for j in lastIndex..<sortedBonuses.count {
                 let bonus = sortedBonuses[j]
                 if note.sec - 0.06 > bonus.range.end {
@@ -98,51 +84,38 @@ class CGSSLiveSimulator {
                 }
                 
                 for range in subRanges {
-                    var subComboBonus = 100
-                    var subPerfectBonus = 100
-                    var subSkillBoost = 1000
-                    
+                    var subBonusGroup = LSScoreBonusGroup.basic
+                   
                     for bonus in intersectedBonuses {
                         if bonus.range.contains(range) {
                             switch bonus.type {
                             case .comboBonus, .allRound:
-                                subComboBonus = max(subComboBonus, bonus.value)
+                                subBonusGroup.baseComboBonus = max(subBonusGroup.baseComboBonus, bonus.value)
                             case .perfectBonus, .overload:
-                                subPerfectBonus = max(subPerfectBonus, bonus.value)
+                                subBonusGroup.basePerfectBonus = max(subBonusGroup.basePerfectBonus, bonus.value)
                             case .skillBoost:
-                                subSkillBoost = max(subSkillBoost, bonus.value)
+                                subBonusGroup.skillBoost = max(subBonusGroup.skillBoost, bonus.value)
                             case .deep:
-                                perfectBonus = Swift.max(perfectBonus, bonus.value)
-                                comboBonus = Swift.max(comboBonus, bonus.value2)
+                                subBonusGroup.basePerfectBonus = max(subBonusGroup.basePerfectBonus, bonus.value)
+                                subBonusGroup.baseComboBonus = max(subBonusGroup.baseComboBonus, bonus.value2)
                             default:
                                 break
                             }
                         }
                     }
-                    
-                    let subBasePerfectBonus = subPerfectBonus
-                    let subBaseComboBonus = subComboBonus
-                    
-                    if subSkillBoost > 1000 {
-                        subPerfectBonus = addSkillBoost(subSkillBoost, to: subPerfectBonus)
-                        subComboBonus = addSkillBoost(subSkillBoost, to: subComboBonus)
-                    }
-                    if (subPerfectBonus * subComboBonus, subSkillBoost) > (perfectBonus * comboBonus, skillBoost) {
-                        perfectBonus = subPerfectBonus
-                        comboBonus = subComboBonus
-                        skillBoost = subSkillBoost
-                        basePerfectBonus = subBasePerfectBonus
-                        baseComboBonus = subBaseComboBonus
+    
+                    if subBonusGroup.bonusValue > bonusGroup.bonusValue {
+                        bonusGroup = subBonusGroup
                     }
                 }
             }
             
-            let score = Int(round(baseScore * comboFactor * Double(perfectBonus * comboBonus) / 10000))
+            let score = Int(round(baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
             
             sum += score
             
             if options.contains(.detailLog) {
-                let log = LSLog.init(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: baseComboBonus, comboBonus: comboBonus, basePerfectBonus: basePerfectBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost, lifeRestore: 0, currentLife: 0, perfectLock: false, comboContinue: false, guard: false)
+                let log = LSLog.init(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: bonusGroup.baseComboBonus, comboBonus: bonusGroup.comboBonus, basePerfectBonus: bonusGroup.basePerfectBonus, perfectBonus: bonusGroup.perfectBonus, comboFactor: comboFactor, skillBoost: bonusGroup.skillBoost, lifeRestore: 0, currentLife: 0, perfectLock: false, comboContinue: false, guard: false)
                 logs.append(log)
             }
         }
@@ -155,7 +128,7 @@ class CGSSLiveSimulator {
         
         var life = totalLife
 
-        var procedBonuses: [LSScoreBonus]
+        var procedBonuses: [LSSkill]
         if options.contains(.supportSkills) {
             procedBonuses = supports.sorted { $0.range.begin < $1.range.begin }.filter {
                 options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
@@ -177,11 +150,9 @@ class CGSSLiveSimulator {
     
         for i in 0..<notes.count {
             let note = notes[i]
-            let baseScore = lsNotes[i].baseScore
-            let comboFactor = lsNotes[i].comboFactor
-            var comboBonus = 100
-            var perfectBonus = 100
-            var skillBoost = 1000
+            let baseScore = note.baseScore
+            let comboFactor = note.comboFactor
+            var bonusGroup = LSScoreBonusGroup.basic
             var restoreLife = 0
             
             var perfectLock = false
@@ -202,13 +173,13 @@ class CGSSLiveSimulator {
                     }
                     switch bonus.type {
                     case .comboBonus:
-                        comboBonus = Swift.max(comboBonus, bonus.value)
+                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
                     case .deep:
-                        perfectBonus = Swift.max(perfectBonus, bonus.value)
-                        comboBonus = Swift.max(comboBonus, bonus.value2)
+                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
+                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value2)
                     case .allRound:
-                        comboBonus = Swift.max(comboBonus, bonus.value)
-                        restoreLife += bonus.value2
+                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
+                        restoreLife = max(restoreLife, bonus.value2)
                     case .overload:
                         comboContinue = true
                         if !overloadLimitByLife {
@@ -238,11 +209,11 @@ class CGSSLiveSimulator {
                             }
                         }
                     case .perfectBonus:
-                        perfectBonus = Swift.max(perfectBonus, bonus.value)
+                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
                     case .skillBoost:
-                        skillBoost = Swift.max(skillBoost, bonus.value)
+                        bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)
                     case .heal:
-                        restoreLife = Swift.max(restoreLife, bonus.value)
+                        restoreLife = max(restoreLife, bonus.value)
                     case .comboContinue:
                         comboContinue = true
                     case .perfectLock:
@@ -253,13 +224,7 @@ class CGSSLiveSimulator {
                 }
             }
             
-        
-            let baseComboBonus = comboBonus
-            let basePerfectBonus = perfectBonus
-            
-            if skillBoost > 1000 {
-                perfectBonus = addSkillBoost(skillBoost, to: perfectBonus)
-                comboBonus = addSkillBoost(skillBoost, to: comboBonus)
+            if bonusGroup.skillBoost > 1000 {
                 if restoreLife != 0 {
                     restoreLife += 1
                 }
@@ -267,12 +232,24 @@ class CGSSLiveSimulator {
             
             life = min(totalLife, life + restoreLife)
             
-            let score = Int(round(baseScore * comboFactor * Double(perfectBonus * comboBonus) / 10000))
+            let score = Int(round(baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
             
             sum += score
             
             if options.contains(.detailLog) {
-                let log = LSLog(noteIndex: i + 1, score: score, sum: sum, baseScore: baseScore, baseComboBonus: baseComboBonus, comboBonus: comboBonus, basePerfectBonus: basePerfectBonus, perfectBonus: perfectBonus, comboFactor: comboFactor, skillBoost: skillBoost, lifeRestore: restoreLife, currentLife: life, perfectLock: perfectLock, comboContinue: comboContinue, guard: damageGuard)
+                let log = LSLog(noteIndex: i + 1, score: score, sum: sum,
+                                baseScore: baseScore,
+                                baseComboBonus: bonusGroup.baseComboBonus,
+                                comboBonus: bonusGroup.comboBonus,
+                                basePerfectBonus: bonusGroup.basePerfectBonus,
+                                perfectBonus: bonusGroup.perfectBonus,
+                                comboFactor: comboFactor,
+                                skillBoost: bonusGroup.skillBoost,
+                                lifeRestore: restoreLife,
+                                currentLife: life,
+                                perfectLock: perfectLock,
+                                comboContinue: comboContinue,
+                                guard: damageGuard)
                 logs.append(log)
             }
 
@@ -288,9 +265,7 @@ class CGSSLiveSimulator {
 //        #endif
     }
     
-    private func addSkillBoost(_ skillBoost: Int, to bonus: Int) -> Int {
-        return 100 + Int(ceil(Double((bonus - 100) * skillBoost) * 0.001))
-    }
+    
     
     func wipeResults() {
         simulateResult.removeAll()

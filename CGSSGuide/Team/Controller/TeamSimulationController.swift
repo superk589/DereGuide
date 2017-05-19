@@ -279,11 +279,11 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             }
             let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
             let simulator = coordinator.generateLiveSimulator()
-            
+            let formulator = coordinator.generateLiveFormulator()
             cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)
             
             simulator.simulateOptimistic1(options: [], callback: { (result, logs) in
-                cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: simulator.maxScore, value4: simulator.averageScore)
+                cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: formulator.maxScore, value4: formulator.averageScore)
                 cell?.resetCalculationButton()
             })
             

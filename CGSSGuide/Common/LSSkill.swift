@@ -1,5 +1,5 @@
 //
-//  LSScoreBonus.swift
+//  LSSkill.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2017/3/31.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum LSScoreBonusType {
+enum LSSkillType {
     case comboBonus
     case perfectBonus
     case skillBoost
@@ -21,16 +21,17 @@ enum LSScoreBonusType {
     case comboContinue
     case perfectLock
     
-    static let allSupport: [LSScoreBonusType] = [LSScoreBonusType.guard, .skillBoost, .overload, .heal, .allRound, .comboContinue, .perfectLock]
-    static let allBonus: [LSScoreBonusType] = [LSScoreBonusType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound]
-    static let allPerfectBonus: [LSScoreBonusType] = [LSScoreBonusType.perfectBonus, .overload, ]
+    static let allSupport: [LSSkillType] = [LSSkillType.guard, .skillBoost, .overload, .heal, .allRound, .comboContinue, .perfectLock]
+    static let allScoreBonus: [LSSkillType] = [LSSkillType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound]
+    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
     
-    var isSupportSkills: Bool {
-        return LSScoreBonusType.allSupport.contains(self)
+    var isSupport: Bool {
+        return LSSkillType.allSupport.contains(self)
     }
     
-    var isBonusSkills: Bool {
-        return LSScoreBonusType.allBonus.contains(self)
+    var isScoreBonus: Bool {
+        return LSSkillType.allScoreBonus.contains(self)
     }
         
     init?(type: CGSSSkillTypes) {
@@ -61,7 +62,7 @@ enum LSScoreBonusType {
     }
 }
 
-struct LSScoreBonus {
+struct LSSkill {
     
     var range: LSRange
     
@@ -71,7 +72,7 @@ struct LSScoreBonus {
     // heal of all round / combo bonus of deep 
     var value2: Int
     
-    var type: LSScoreBonusType
+    var type: LSSkillType
     
     // In 0 - 10000
     var rate: Double
