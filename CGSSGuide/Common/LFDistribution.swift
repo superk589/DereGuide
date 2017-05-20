@@ -22,10 +22,14 @@ struct LFDistribution {
     }
     
     var max: Int {
-        guard let v = samples.first else {
+        let max = samples.max {
+            $0.value.bonusValue < $1.value.bonusValue
+        }
+        if let max = max {
+            return max.value.bonusValue
+        } else {
             return LSScoreBonusGroup.basic.bonusValue
         }
-        return v.value.bonusValue
     }
 }
 

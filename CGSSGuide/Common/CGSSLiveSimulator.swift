@@ -141,9 +141,7 @@ class CGSSLiveSimulator {
         
         var logs = [LSLog]()
         
-        // normal simulation
         var lastIndex = 0
-        
         let overloadLimitByLife = options.contains(.overloadLimitByLife)
         var overloadedIndexes = [Int]()
         var missedIndexes = [Int]()

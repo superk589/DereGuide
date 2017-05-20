@@ -161,6 +161,12 @@ class LSCoordinator {
                             let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
                             bonuses.append(bonus)
                             supports.append(bonus)
+                        case .deep:
+                            if team.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
+                                fallthrough
+                            } else {
+                                break
+                            }
                         default:
                             let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
                             if bonus.type.isScoreBonus {
@@ -189,5 +195,20 @@ class LSCoordinator {
         let notes = generateLSNotes()
         let formulator = CGSSLiveFormulator(notes: notes, bonuses: bonuses)
         return formulator
+    }
+}
+
+fileprivate extension CGSSTeam {
+    func isAllOfType(_ type: CGSSCardTypes, isInGrooveOrParade: Bool) -> Bool {
+        let c = isInGrooveOrParade ? 5 : 6
+        var result = true
+        for i in 0..<c {
+            let member = self[i]
+            guard let cardType = member?.cardRef?.cardType, cardType == type else {
+                result = false
+                break
+            }
+        }
+        return result
     }
 }

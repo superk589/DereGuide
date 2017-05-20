@@ -244,6 +244,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             }, callback: { (result, logs) in
                 DispatchQueue.main.async {
                     cell?.setupSimulationResult(value1: result.get(percent: 1), value2: result.get(percent: 5), value3: result.get(percent: 20), value4: result.get(percent: 50))
+//                    print(result.average)
                     cell?.resetSimulationButton()
                 }
             })

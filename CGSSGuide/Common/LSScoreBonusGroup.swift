@@ -22,7 +22,7 @@ struct LSScoreBonusGroup {
             let c = add(skillBoost, to: baseComboBonus)
             return p * c
         } else {
-            return perfectBonus * comboBonus
+            return basePerfectBonus * baseComboBonus
         }
     }
     
