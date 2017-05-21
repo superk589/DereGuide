@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit
 
-class TeamSimulationController: BaseTableViewController, PageCollectionControllerContainable, TeamCollecetionPage {
+class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     
     var team: CGSSTeam! {
         didSet {
@@ -187,8 +187,11 @@ extension TeamSimulationController: TeamEditViewControllerDelegate {
         if let team = self.team, let index = manager.teams.index(of: team) {
             manager.teams.remove(at: index)
         }
-        self.team = team
         manager.teams.insert(team, at: 0)
+        
+        if let vc = pageCollectionController as? TeamDetailController {
+            vc.team = team
+        }
     }
 }
 

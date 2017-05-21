@@ -139,9 +139,9 @@ public class CGSSGlobal: NSObject {
         return LanguageType.init(identifier: Locale.current.identifier)
     }
     
-    // max = 15921 + 500 + 500 + 220 
+    // max = 15928 + 500 + 500 + 220 
     // ceil(0.5 × max × 1.3) * 10
-    static let defaultSupportAppeal = 111420
+    static let defaultSupportAppeal = 111462
     
 }
 

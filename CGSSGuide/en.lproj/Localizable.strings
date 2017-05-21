@@ -599,6 +599,10 @@
 "流行曲" = "Bonus Song";
 
 /* new in 1.3.0 */
-"最多Note数" = "最多Note数";
+"最多Note数" = "Max number of notes";
+"使用后援表现值" = "Use Support Appeal";
+"队伍信息" = "Team Information";
+"辅助技能详情" = "Support Skills Detail";
+"极限模式" = "Optimistic Mode";
 
 

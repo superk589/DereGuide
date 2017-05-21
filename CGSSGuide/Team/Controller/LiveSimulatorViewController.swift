@@ -53,6 +53,7 @@ class LiveSimulatorViewController: BaseTableViewController {
         tableView.register(NoteScoreTableViewSectionHeader.self, forHeaderFooterViewReuseIdentifier: "Note Header")
         tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
     }
     
     private func prepareNavigationBar() {

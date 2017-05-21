@@ -61,30 +61,57 @@ class TipView: UIView {
         addSubview(arrowView)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    private func updateUI() {
         switch arrowDirection {
         case .up:
-            arrowView.frame = CGRect.init(x: arrowOffset.x - arrowWidth / 2, y: 0, width: arrowWidth, height: arrowHeight)
-            contentView.frame = CGRect.init(x: 0, y: arrowHeight, width: bounds.size.width, height: bounds.size.height - arrowHeight)
+            arrowView.snp.remakeConstraints({ (make) in
+                make.left.equalTo(arrowOffset.x)
+                make.width.equalTo(arrowWidth)
+                make.height.equalTo(arrowHeight)
+                make.top.equalToSuperview()
+            })
+            contentView.snp.remakeConstraints({ (make) in
+                make.left.bottom.right.equalToSuperview()
+                make.top.equalTo(arrowView.snp.bottom)
+            })
             arrowView.transform = CGAffineTransform.identity
         case .down:
-            arrowView.frame = CGRect.init(x: arrowOffset.x - arrowWidth / 2, y: bounds.size.height - arrowHeight, width: arrowWidth, height: arrowHeight)
-            contentView.frame = CGRect.init(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height - arrowHeight)
+            arrowView.snp.remakeConstraints({ (make) in
+                make.left.equalTo(arrowOffset.x)
+                make.width.equalTo(arrowWidth)
+                make.height.equalTo(arrowHeight)
+                make.bottom.equalToSuperview()
+            })
+            contentView.snp.remakeConstraints({ (make) in
+                make.left.top.right.equalToSuperview()
+                make.bottom.equalTo(arrowView.snp.top)
+            })
             arrowView.transform = CGAffineTransform.init(rotationAngle: .pi)
         case .left:
-            arrowView.frame = CGRect.init(x: 0, y: arrowOffset.y - arrowHeight / 2, width: arrowWidth, height: arrowHeight)
-            contentView.frame = CGRect.init(x: arrowWidth, y: 0, width: bounds.size.width - arrowWidth, height: bounds.size.height)
+            arrowView.snp.remakeConstraints({ (make) in
+                make.left.equalToSuperview()
+                make.width.equalTo(arrowWidth)
+                make.height.equalTo(arrowHeight)
+                make.top.equalTo(arrowOffset.y)
+            })
+            contentView.snp.remakeConstraints({ (make) in
+                make.bottom.top.right.equalToSuperview()
+                make.left.equalTo(arrowView.snp.right)
+            })
             arrowView.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
         case .right:
-            arrowView.frame = CGRect.init(x: bounds.size.width - arrowWidth, y: arrowOffset.y - arrowHeight / 2, width: arrowWidth, height: arrowHeight)
-            contentView.frame = CGRect.init(x: 0, y: 0, width: bounds.size.width - arrowWidth, height: bounds.size.height)
+            arrowView.snp.remakeConstraints({ (make) in
+                make.right.equalToSuperview()
+                make.width.equalTo(arrowWidth)
+                make.height.equalTo(arrowHeight)
+                make.top.equalTo(arrowOffset.y)
+            })
+            contentView.snp.remakeConstraints({ (make) in
+                make.bottom.top.left.equalToSuperview()
+                make.right.equalTo(arrowView.snp.left)
+            })
             arrowView.transform = CGAffineTransform.init(rotationAngle: .pi / 2)
         }
-    }
-    
-    private func updateUI() {
         setNeedsLayout()
         setNeedsDisplay()
     }

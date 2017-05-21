@@ -17,6 +17,16 @@ class GridLabel: GridView {
         }
     }
 
+    var numberOfLines: Int = 0 {
+        didSet {
+            for r in 0..<rows {
+                for c in 0..<columns {
+                    self[r, c].numberOfLines = numberOfLines
+                }
+            }
+        }
+    }
+    
     convenience init(rows: Int, columns: Int, textAligment: NSTextAlignment = .center) {
         
         var views = [[UIView]]()
@@ -26,10 +36,10 @@ class GridLabel: GridView {
             for _ in 0..<columns {
                 let label = UILabel()
                 label.textAlignment = textAligment
-                label.numberOfLines = 0
                 label.font = UIFont.init(name: "menlo", size: 14)
                 label.adjustsFontSizeToFitWidth = true
                 label.textColor = Color.allType
+                label.baselineAdjustment = .alignCenters
                 let view = UIView()
                 view.layer.borderColor = UIColor.black.cgColor
                 view.layer.borderWidth = 1 / UIScreen.main.scale

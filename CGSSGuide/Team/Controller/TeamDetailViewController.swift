@@ -191,7 +191,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
                 showUnknownSkillAlert()
             }
             let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, fixedAppeal: usingManualValue ? team.customAppeal : nil)
-            let simulator = coordinator.generateLiveSimulator()
+            _ = coordinator.generateLiveSimulator()
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
             
 //            simulator.simulateOptimistic1(options: [], callback: { [weak self] (result, logs) in

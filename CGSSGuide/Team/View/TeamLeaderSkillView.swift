@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TeamLeaderSkillView: TipView {
     
@@ -15,15 +16,16 @@ class TeamLeaderSkillView: TipView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         descLabel = UILabel()
-        descLabel.numberOfLines = 3
+        descLabel.numberOfLines = 0
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(descLabel)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        descLabel.frame = self.contentView.bounds.insetBy(dx: 10, dy: 0)
+        descLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(5)
+            make.right.equalTo(-5)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
+        }
     }
     
     func setupWith(text: String, backgroundColor: UIColor) {

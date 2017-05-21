@@ -69,7 +69,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         supportAppealBox = CheckBox()
         supportAppealBox.tintColor = Color.parade
         supportAppealBox.label.font = UIFont.systemFont(ofSize: 14)
-        supportAppealBox.label.text = NSLocalizedString("使用后援值", comment: "队伍详情页面") + ": "
+        supportAppealBox.label.text = NSLocalizedString("使用后援表现值", comment: "队伍详情页面") + ": "
         supportAppealBox.label.textColor = UIColor.darkGray
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(checkBox(_:)))
         supportAppealBox.addGestureRecognizer(tap1)

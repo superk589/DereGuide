@@ -38,4 +38,18 @@ class GridView: UIStackView {
         distribution = .fillEqually
         axis = .vertical
     }
+    
+    override var distribution: UIStackViewDistribution {
+        set {
+            super.distribution = newValue
+            for stackView in arrangedSubviews {
+                if let stackView = stackView as? UIStackView {
+                    stackView.distribution = newValue
+                }
+            }
+        }
+        get {
+            return super.distribution
+        }
+    }
 }

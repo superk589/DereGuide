@@ -20,11 +20,13 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
     override func selectDisplayMode() {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择模式", comment: ""), message: nil, preferredStyle: .actionSheet)
         
-        for type in [DisplayType.optimistic1, DisplayType.simulation] {
-            alvc.addAction(UIAlertAction.init(title: type.description, style: .default, handler: { [weak self] (action) in
-                self?.displayType = type
-            }))
-        }
+        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("极限模式", comment: ""), style: .default, handler: { [weak self] (action) in
+            self?.displayType = .optimistic1
+        }))
+        
+        alvc.addAction(UIAlertAction.init(title: DisplayType.simulation.description, style: .default, handler: { [weak self] (action) in
+            self?.displayType = .simulation
+        }))
         
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: ""), style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)
@@ -73,6 +75,10 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
     
 }

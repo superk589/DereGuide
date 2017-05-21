@@ -94,7 +94,8 @@ class TeamSimulationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         contentView.addSubview(iconStackView)
         
         iconStackView.snp.makeConstraints { (make) in
-            make.top.left.equalTo(10)
+            make.top.equalTo(5)
+            make.left.equalTo(10)
             make.right.equalTo(-10)
             make.bottom.equalTo(-5)
         }

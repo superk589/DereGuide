@@ -25,6 +25,10 @@ protocol PageCollectionControllerDataSource: class {
     func titlesOfPages(_ pageCollectionController: PageCollectionController) -> [String]
 }
 
+protocol PageCollectionControllerDelegate: class {
+    func pageCollectionController(pageCollectionController: PageCollectionController, willShow viewController: UIViewController)
+}
+
 class PageCollectionController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var titleView: PageTitleView = PageTitleView()
@@ -37,6 +41,7 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         }
     }
 
+    weak var delegate: PageCollectionControllerDelegate?
     weak var dataSource: PageCollectionControllerDataSource? {
         didSet {
             collectionView.reloadData()
@@ -108,17 +113,38 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         let index = scrollView.contentOffset.x / scrollView.fwidth
         titleView.currentIndex = Int(index)
     }
-
+    
+//    private var isInTheMiddleOfPage = true
+//    private var lastIndex: CGFloat = 0
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         let index = offsetX / scrollView.fwidth
         titleView.floatIndex = index
+        
+//        if index == ceil(index) {
+//            isInTheMiddleOfPage = true
+//        } else {
+//            if isInTheMiddleOfPage {
+//                let newIndex = lastIndex > index ? floor(index) : ceil(index)
+//                let vc = self.childViewControllers[Int(newIndex)]
+////                    print("will show \(newIndex)")
+//                delegate?.pageCollectionController(pageCollectionController: self, willShow: vc)
+//            }
+//            isInTheMiddleOfPage = false
+//        }
+//        
+//        lastIndex = index
     }
 }
 
 extension PageCollectionController: PageTitleViewDelegate {
     func pageTitleView(_ pageTitleView: PageTitleView, didSelectAtIndex index: Int) {
         self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
+//        if let vc = dataSource?.pageCollectionController(self, viewControllerAt: IndexPath(item: index, section: 0)) {
+////            print("will show \(index)")
+//            delegate?.pageCollectionController(pageCollectionController: self, willShow: vc)
+//        }
         //        UIView.animate(withDuration: 0.25, animations: {
         //            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth - (CGFloat(index) * self.collectionView.fwidth - self.collectionView.contentOffset.x) * 0.001
         //        }) { (finished) in

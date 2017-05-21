@@ -8,15 +8,21 @@
 
 import UIKit
 
-protocol TeamCollecetionPage: class {
+protocol TeamCollectionPage: PageCollectionControllerContainable {
     var team: CGSSTeam! { set get }
 }
 
-class TeamDetailController: PageCollectionController, PageCollectionControllerDataSource {
+class TeamDetailController: PageCollectionController, PageCollectionControllerDataSource, PageCollectionControllerDelegate {
     
-    var team: CGSSTeam!
-
-    var vcs = [TeamSimulationController(), TeamInfomationController()]
+    var team: CGSSTeam! {
+        didSet {
+            for vc in vcs {
+                vc.team = team
+            }
+        }
+    }
+    
+    var vcs: [TeamCollectionPage] = [TeamSimulationController(), TeamInfomationController()]
     
     var titles = [NSLocalizedString("得分计算", comment: ""),
                   NSLocalizedString("队伍信息", comment: "")]
@@ -25,22 +31,16 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
         super.viewDidLoad()
 
         self.dataSource = self
+        self.delegate = self
         
         titleView.backgroundColor = UIColor.init(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func pageCollectionController(_ pageCollectionController: PageCollectionController, viewControllerAt indexPath: IndexPath) -> UIViewController {
         let vc = vcs[indexPath.item]
-        if let vc = vc as? TeamCollecetionPage {
-            vc.team = self.team
-        }
-        return vcs[indexPath.item]
+        vc.team = self.team
+        return vcs[indexPath.item] as! UIViewController
     }
     
     func titlesOfPages(_ pageCollectionController: PageCollectionController) -> [String] {
@@ -51,6 +51,9 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
         return titles.count
     }
 
+    func pageCollectionController(pageCollectionController: PageCollectionController, willShow viewController: UIViewController) {
+//        viewController.viewWillAppear(false)
+    }
     /*
     // MARK: - Navigation
 
