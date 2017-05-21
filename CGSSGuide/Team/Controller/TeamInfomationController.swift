@@ -21,6 +21,7 @@ class TeamInfomationController: BaseTableViewController, TeamCollectionPage {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.showsVerticalScrollIndicator = false
         tableView.tableFooterView = UIView()
         
         tableView.register(TeamInformationTeamCell.self, forCellReuseIdentifier: TeamInformationTeamCell.description())
@@ -45,7 +46,7 @@ class TeamInfomationController: BaseTableViewController, TeamCollectionPage {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+//        print("load cell \(indexPath.row)")
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamInformationTeamCell.description(), for: indexPath) as! TeamInformationTeamCell

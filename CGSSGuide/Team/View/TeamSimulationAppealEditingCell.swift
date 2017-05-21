@@ -138,13 +138,16 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
     }
     
     private func validteInputResult() {
-        let value1 = Int(supportAppealTextField.text ?? "")
-        if value1 == nil {
+        if let value = Double(supportAppealTextField.text ?? "") {
+            supportAppealTextField.text = String(Int(value))
+        } else {
             supportAppealTextField.text = String(CGSSGlobal.defaultSupportAppeal)
         }
-        let value2 = Int(customAppealTextField.text ?? "")
-        if value2 == nil {
-            customAppealTextField.text = String(0)
+       
+        if let value = Double(customAppealTextField.text ?? "") {
+            customAppealTextField.text = String(Int(value))
+        } else {
+            customAppealTextField.text = "0"
         }
     }
     

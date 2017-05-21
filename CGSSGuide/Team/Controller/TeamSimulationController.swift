@@ -46,6 +46,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.showsVerticalScrollIndicator = false
         tableView.tableFooterView = UIView()
 
         tableView.register(TeamSimulationTeamCell.self, forCellReuseIdentifier: TeamSimulationTeamCell.description())

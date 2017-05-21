@@ -73,6 +73,7 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        contentView.layoutIfNeeded()
         let frame = self.iconStackView.convert(self.iconStackView.arrangedSubviews.first?.frame ?? CGRect.zero, to: selfLeaderSkillLabel)
         let frame2 = self.iconStackView.convert(self.iconStackView.arrangedSubviews.last?.frame ?? CGRect.zero, to: friendLeaderSkillLabel)
         selfLeaderSkillLabel.arrowOffset = CGPoint(x: frame.midX - selfLeaderSkillLabel.arrowWidth / 2, y: 0)

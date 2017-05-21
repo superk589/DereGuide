@@ -29,7 +29,7 @@ protocol PageCollectionControllerDelegate: class {
     func pageCollectionController(pageCollectionController: PageCollectionController, willShow viewController: UIViewController)
 }
 
-class PageCollectionController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PageCollectionController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     
     var titleView: PageTitleView = PageTitleView()
     var collectionView: PageCollectionView = PageCollectionView()
@@ -79,6 +79,11 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         }
         collectionView.delegate = self
         collectionView.dataSource = self
+        if #available(iOS 10.0, *) {
+            collectionView.prefetchDataSource = self
+        } else {
+            // Fallback on earlier versions
+        }
         automaticallyAdjustsScrollViewInsets = false
     }
 
@@ -87,6 +92,7 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        print("load \(indexPath.item)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCell", for: indexPath)
         if let vc = dataSource?.pageCollectionController(self, viewControllerAt: indexPath) {
             cell.contentView.addSubview(vc.view)
@@ -119,6 +125,7 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
+//        print(offsetX)
         let index = offsetX / scrollView.fwidth
         titleView.floatIndex = index
         
@@ -136,15 +143,32 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
 //        
 //        lastIndex = index
     }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        print("preload \(indexPaths)")
+//        print(Thread.isMainThread)
+        for indexPath in indexPaths {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCell", for: indexPath)
+            if let vc = dataSource?.pageCollectionController(self, viewControllerAt: indexPath) {
+                cell.contentView.addSubview(vc.view)
+                vc.view.snp.remakeConstraints { (remake) in
+                    remake.edges.equalTo(cell.contentView)
+                }
+                self.addChildViewController(vc)
+            }
+            cell.layoutIfNeeded()
+        }
+    }
 }
 
 extension PageCollectionController: PageTitleViewDelegate {
     func pageTitleView(_ pageTitleView: PageTitleView, didSelectAtIndex index: Int) {
-        self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
+//        self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth
 //        if let vc = dataSource?.pageCollectionController(self, viewControllerAt: IndexPath(item: index, section: 0)) {
 ////            print("will show \(index)")
 //            delegate?.pageCollectionController(pageCollectionController: self, willShow: vc)
 //        }
+        collectionView.setContentOffset(CGPoint.init(x: CGFloat(index) * self.collectionView.fwidth, y: 0), animated: true)
         //        UIView.animate(withDuration: 0.25, animations: {
         //            self.collectionView.contentOffset.x = CGFloat(index) * self.collectionView.fwidth - (CGFloat(index) * self.collectionView.fwidth - self.collectionView.contentOffset.x) * 0.001
         //        }) { (finished) in

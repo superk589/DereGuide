@@ -38,9 +38,8 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
     }
 
     func pageCollectionController(_ pageCollectionController: PageCollectionController, viewControllerAt indexPath: IndexPath) -> UIViewController {
-        let vc = vcs[indexPath.item]
-        vc.team = self.team
-        return vcs[indexPath.item] as! UIViewController
+        let vc = vcs[indexPath.item] as! UIViewController
+        return vc
     }
     
     func titlesOfPages(_ pageCollectionController: PageCollectionController) -> [String] {

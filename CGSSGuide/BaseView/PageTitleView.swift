@@ -66,6 +66,7 @@ class PageTitleView: UIView {
     
     var floatIndex: CGFloat = 0 {
         didSet {
+//            print("float index is\(floatIndex)")
             let items = titleStackView.arrangedSubviews as! [PageTitleItemView]
             let leftIndex = Int(floor(floatIndex))
             let rightIndex = Int(ceil(floatIndex))
@@ -134,7 +135,7 @@ class PageTitleView: UIView {
     
     func clickAction(tap: UITapGestureRecognizer) {
         if let view = tap.view, let index = titleStackView.arrangedSubviews.index(of: view) {
-            setCurrentIndex(index: index, animated: true)
+            // setCurrentIndex(index: index, animated: true)
             delegate?.pageTitleView(self, didSelectAtIndex: index)
         }
     }
