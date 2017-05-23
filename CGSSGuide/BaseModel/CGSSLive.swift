@@ -76,8 +76,9 @@ enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
     }
 }
 
+
+// MARK: 用于排序的属性
 extension CGSSLive {
-    // 用于排序的属性
     dynamic var updateId: Int {
         return beatmapCount == 5 ? self[.masterPlus].id : self[.master].id
     }
@@ -87,8 +88,15 @@ extension CGSSLive {
     }
     
     dynamic var maxDiffStars: Int {
-        return getStarsForDiff(maxDiff)
+        return self[selectableMaxDifficulty].stars
     }
+    
+    dynamic var maxNumberOfNotes: Int {
+        return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
+    }
+}
+
+extension CGSSLive {
     
     // 每beat占用的秒数
     var barSecond: Double {
@@ -147,10 +155,20 @@ extension CGSSLive {
         return CGSSLiveDifficulty(rawValue: beatmapCount) ?? .masterPlus
     }
     
+    // filter 之后, 可以选择的最大难度
+    var selectableMaxDifficulty: CGSSLiveDifficulty {
+        guard let max = difficultyTypes.max,
+            let maxDifficulty = CGSSLiveDifficulty(rawValue: min(max.rawValue, maxDiff.rawValue)) else {
+                return maxDiff
+        }
+        return maxDifficulty
+    }
+    
     // 合理的谱面数量, 包含官方还未发布的难度
     var validBeatmapCount: Int {
         return self.getLiveDetail(of: .masterPlus).id == 0 ? 4 : 5
     }
+    
     
     func getBeatmap(of difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
         if beatmaps.count >= difficulty.rawValue {
@@ -162,10 +180,6 @@ extension CGSSLive {
     
     func getLiveDetail(of difficulty: CGSSLiveDifficulty) -> CGSSLiveDetail {
         return self.liveDetails[difficulty.rawValue - 1]
-    }
-    
-    dynamic var maxNumberOfNotes: Int {
-        return self.getBeatmap(of: self.maxDiff)?.numberOfNotes ?? 0
     }
     
     var jacketURL: URL? {
@@ -253,6 +267,9 @@ class CGSSLive: CGSSBaseModel {
         return beatmaps
     }()
 
+    
+    /// used in filter
+    var difficultyTypes: CGSSLiveDifficultyTypes = .all
     
     /**
      * Instantiate the instance using the passed json values to set the properties values

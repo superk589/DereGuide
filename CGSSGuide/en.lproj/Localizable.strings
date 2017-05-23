@@ -457,7 +457,6 @@
 "排序" = "Sort";
 
 "常规歌曲" = "Regular Songs";
-"最大难度" = "Maximum Difficulty";
 
 "已付声" = "Voiced";
 "未付声" = "Unvoiced";
@@ -599,7 +598,7 @@
 "流行曲" = "Bonus Song";
 
 /* new in 1.3.0 */
-"最多Note数" = "Max number of notes";
+"note数" = "Number of Notes";
 "使用后援表现值" = "Use Support Appeal";
 "队伍信息" = "Team Information";
 "辅助技能详情" = "Support Skills Detail";

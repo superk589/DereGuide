@@ -44,7 +44,7 @@ class SongDiffView: UIView {
 }
 
 protocol SongTableViewCellDelegate: class {
-    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect live: CGSSLive, difficulty: CGSSLiveDifficulty)
+    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene)
 }
 
 class SongTableViewCell: UITableViewCell {
@@ -87,18 +87,20 @@ class SongTableViewCell: UITableViewCell {
         contentView.addSubview(typeIcon)
         // contentView.addSubview(descriptionLabel)
         
-        let colors = [Color.debut, Color.regular, Color.pro, Color.master, Color.masterPlus]
+//        let colors = [Color.debut, Color.regular, Color.pro, Color.master, Color.masterPlus]
         diffViews = [SongDiffView]()
         for i in 0...4 {
             let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
-            diffView.iv.zk.backgroundColor = colors[i]
-            diffView.iv.render()
+//            diffView.iv.zk.backgroundColor = colors[i]
+//            diffView.iv.render()
             diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))
             diffViews.append(diffView)
             addSubview(diffView)
         }
+        
+        selectionStyle = .none
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -111,7 +113,10 @@ class SongTableViewCell: UITableViewCell {
     }
     
     func diffClick(_ tap: UITapGestureRecognizer) {
-        delegate?.songTableViewCell(self, didSelect: live, difficulty: CGSSLiveDifficulty(rawValue: tap.view!.tag)!)
+        let selectedDifficulty = CGSSLiveDifficulty(rawValue: tap.view!.tag)!
+        if live.difficultyTypes.contains(selectedDifficulty.difficultyTypes) {
+            delegate?.songTableViewCell(self, didSelect: CGSSLiveScene(live: live, difficulty: selectedDifficulty))
+        }
     }
     
     var live: CGSSLive!
@@ -124,8 +129,16 @@ class SongTableViewCell: UITableViewCell {
         self.typeIcon.image = live.icon
         let diffStars = live.liveDetails.map { $0.stars }
         
+        let difficulties = CGSSLiveDifficulty.all
         for i in 0...4 {
-            self.diffViews[i].text = "\(diffStars[i])"
+            let view = diffViews[i]
+            view.text = "\(diffStars[i])"
+            if !live.difficultyTypes.contains(difficulties[i].difficultyTypes) {
+                view.iv.zk.backgroundColor = UIColor.lightBackground
+            } else {
+                view.iv.zk.backgroundColor = difficulties[i].color
+            }
+            view.iv.render()
         }
         
         self.diffViews[4].isHidden = !(live.maxDiff.rawValue == 5)
@@ -133,6 +146,7 @@ class SongTableViewCell: UITableViewCell {
         if let url = live.jacketURL {
             self.jacketImageView.sd_setImage(with: url)
         }
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

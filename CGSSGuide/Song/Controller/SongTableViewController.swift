@@ -20,11 +20,10 @@ class SongTableViewController: BaseSongTableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-    override func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
-        super.selectLive(live, beatmap: beatmap, difficulty: difficulty)
+    override func selectScene(_ scene: CGSSLiveScene) {
+        super.selectScene(scene)
         let vc = BeatmapViewController()
-        vc.setup(with: live, difficulty: difficulty)
+        vc.setup(with: scene)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

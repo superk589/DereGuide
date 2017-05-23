@@ -11,30 +11,31 @@ import SnapKit
 
 class BeatmapViewController: UIViewController {
     
-    var live: CGSSLive!
-    var beatmap: CGSSBeatmap!
-    var bv: BeatmapView!
-    var descLabel: UILabel!
-    var flipItem:UIBarButtonItem!
-    var preSetDifficulty: CGSSLiveDifficulty?
-    var currentDifficulty: CGSSLiveDifficulty! {
+    var scene: CGSSLiveScene! {
         didSet {
-            if let beatmap = checkBeatmapData(live, difficulty: currentDifficulty) {
-                self.beatmap = beatmap
-                titleLabel.text = "\(live.name)\n\(live.getStarsForDiff(currentDifficulty))☆ \(currentDifficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes)"
-                bv?.setup(beatmap: beatmap, bpm: live.bpm, type: live.type)
-                bv?.setNeedsDisplay()
-            }
+            updateUI()
         }
     }
     
+    private func updateUI() {
+        if let beatmap = checkBeatmapData(scene) {
+            titleLabel?.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
+            bv?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type)
+            bv?.setNeedsDisplay()
+        }
+    }
+    
+    var bv: BeatmapView!
+    var descLabel: UILabel!
+    var flipItem:UIBarButtonItem!
+   
     var tv: UIToolbar!
     var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         #if DEBUG
-            print("Beatmap loaded, liveId: \(live.id) musicId: \(live.musicDataId)")
+            print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
         #endif
         
         bv = BeatmapView()
@@ -53,9 +54,6 @@ class BeatmapViewController: UIViewController {
         titleLabel.adjustsFontSizeToFitWidth = true
         navigationItem.titleView = titleLabel
         
-        // 如果没有指定难度 则初始化难度为最高难度
-        currentDifficulty = preSetDifficulty ?? live.maxDiff
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         self.view.backgroundColor = UIColor.white
@@ -71,9 +69,9 @@ class BeatmapViewController: UIViewController {
     func selectDiff() {
         let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-        for i in 1...live.maxDiff.rawValue {
+        for i in 1...scene.live.maxDiff.rawValue {
             alert.addAction(UIAlertAction.init(title: CGSSLiveDifficulty(rawValue: i)?.description ?? "", style: .default, handler: { (a) in
-                self.currentDifficulty = CGSSLiveDifficulty(rawValue: i)!
+                self.scene.difficulty = CGSSLiveDifficulty(rawValue: i)!
             }))
         }
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))
@@ -86,12 +84,12 @@ class BeatmapViewController: UIViewController {
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
     
-    func checkBeatmapData(_ live: CGSSLive, difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
-        if let beatmap = CGSSGameResource.shared.getBeatmap(liveId: live.id, of: difficulty) {
+    func checkBeatmapData(_ scene: CGSSLiveScene) -> CGSSBeatmap? {
+        if let beatmap = scene.beatmap {
             if let info = checkShiftingInfo() {
-                beatmap.addShiftingOffset(info: info, rawBpm: live.bpm)
+                beatmap.addShiftingOffset(info: info, rawBpm: scene.live.bpm)
             } else {
-                beatmap.addStartOffset(rawBpm: live.bpm)
+                beatmap.addStartOffset(rawBpm: scene.live.bpm)
             }
             return beatmap
         } else {
@@ -105,7 +103,7 @@ class BeatmapViewController: UIViewController {
             for (k, v) in dict {
                 let keys = (k as! String).components(separatedBy: ",")
                 for key in keys {
-                    if Int(key) == live.id {
+                    if Int(key) == scene.live.id {
                         return CGSSBeatmapShiftingInfo.init(info: v as! NSDictionary)
                     }
                 }
@@ -127,22 +125,24 @@ class BeatmapViewController: UIViewController {
         flipItem = UIBarButtonItem.init(image: UIImage.init(named: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
         self.toolbarItems = [shareItem, spaceItem, flipItem]
     }
-    
-    func setup(with live: CGSSLive, difficulty: CGSSLiveDifficulty) {
-        self.live = live
-        self.preSetDifficulty = difficulty
+  
+    func setup(with scene: CGSSLiveScene) {
+        self.scene = scene
     }
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateUI()
         navigationController?.setToolbarHidden(false, animated: true)
     }
+ 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func getImageTitle() -> String {
-        return "\(live.name) \(live.getStarsForDiff(currentDifficulty))☆ \(currentDifficulty.description) bpm:\(live.bpm) notes:\(beatmap.numberOfNotes) length:\(Int(beatmap.totalSeconds))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
+        return "\(scene.live.name) \(scene.stars)☆ \(scene.difficulty.description) bpm:\(scene.live.bpm) notes:\(scene.beatmap?.numberOfNotes ?? 0) length:\(Int(scene.beatmap?.totalSeconds ?? 0))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in

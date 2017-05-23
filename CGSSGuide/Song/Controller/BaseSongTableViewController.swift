@@ -36,10 +36,19 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     
     // 根据设定的筛选和排序方法重新展现数据
     override func updateUI() {
-        filter.searchText = searchBar.text ?? ""
-        self.liveList = filter.filter(defualtLiveList)
-        sorter.sortList(&self.liveList)
-        tableView.reloadData()
+        
+        CGSSLoadingHUDManager.default.show()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.filter.searchText = self?.searchBar.text ?? ""
+            var newList = self?.filter.filter(self?.defualtLiveList ?? [CGSSLive]()) ?? [CGSSLive]()
+            self?.sorter.sortList(&newList)
+            DispatchQueue.main.async {
+                CGSSLoadingHUDManager.default.hide()
+                //确保cardList在主线程中改变的原子性, 防止筛选过程中tableView滑动崩溃
+                self?.liveList = newList
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     func cancelAction() {
@@ -145,13 +154,13 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let live = liveList[indexPath.row]
-        let maxDiff = live.maxDiff
-        if let beatmap = checkBeatmapData(live, difficulty: maxDiff) {
-            selectLive(live, beatmap: beatmap, difficulty: maxDiff)
+        
+        let difficulty = live.selectableMaxDifficulty
+        let scene = CGSSLiveScene(live: live, difficulty: difficulty)
+        if scene.beatmap != nil {
+            selectScene(scene)
         } else {
             showBeatmapNotFoundAlert()
-            // 手动取消选中状态
-            tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
     
@@ -166,9 +175,8 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
 
     
     // 此方法应该被override或者通过代理来响应
-    func selectLive(_ live: CGSSLive, beatmap: CGSSBeatmap, difficulty: CGSSLiveDifficulty) {
+    func selectScene(_ scene: CGSSLiveScene) {
         searchBar.resignFirstResponder()
-        let scene = CGSSLiveScene(live: live, difficulty: difficulty)
         delegate?.baseSongTableViewController(self, didSelect: scene)
     }
     
@@ -177,21 +185,13 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
-    
-    func checkBeatmapData(_ live: CGSSLive, difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
-        if let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: live.id), beatmaps.count >= difficulty.rawValue {
-            return beatmaps[difficulty.rawValue - 1]
-        } else {
-            return nil
-        }
-    }
 }
 
 //MARK: SongTableViewCell的协议方法
 extension BaseSongTableViewController: SongTableViewCellDelegate {
-    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect live: CGSSLive, difficulty: CGSSLiveDifficulty) {
-        if let beatmap = checkBeatmapData(live, difficulty: difficulty) {
-            selectLive(live, beatmap: beatmap, difficulty: difficulty)
+    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene) {
+        if scene.beatmap != nil {
+            selectScene(scene)
         } else {
             showBeatmapNotFoundAlert()
         }
@@ -204,6 +204,6 @@ extension BaseSongTableViewController: SongFilterSortControllerDelegate {
         CGSSSorterFilterManager.default.liveFilter = filter
         CGSSSorterFilterManager.default.liveSorter = sorter
         CGSSSorterFilterManager.default.saveForLive()
-        reloadData()
+        updateUI()
     }
 }

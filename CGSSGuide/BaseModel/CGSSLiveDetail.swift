@@ -6,14 +6,16 @@
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-enum CGSSLiveDifficulty: Int, CustomStringConvertible {
+enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
     case debut = 1
     case regular
     case pro
     case master
     case masterPlus
+    
+    static let all: [CGSSLiveDifficulty] = [CGSSLiveDifficulty.debut, .regular, .pro, .master, .masterPlus]
     
     var description: String {
         
@@ -29,6 +31,25 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible {
         case .masterPlus:
             return "MASTER+"
         }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .debut:
+            return Color.debut
+        case .regular:
+            return Color.regular
+        case .pro:
+            return Color.pro
+        case .master:
+            return Color.master
+        case .masterPlus:
+            return Color.masterPlus
+        }
+    }
+    
+    var difficultyTypes: CGSSLiveDifficultyTypes {
+        return CGSSLiveDifficultyTypes.init(difficulty: self)
     }
 }
 
@@ -56,6 +77,22 @@ struct CGSSLiveDifficultyTypes: OptionSet {
             self = .master
         case .masterPlus:
             self = .masterPlus
+        }
+    }
+    
+    var max: CGSSLiveDifficulty? {
+        if self.contains(.masterPlus) {
+            return .masterPlus
+        } else if self.contains(.master) {
+            return .master
+        } else if self.contains(.pro) {
+            return .pro
+        } else if self.contains(.regular) {
+            return .regular
+        } else if self.contains(.debut) {
+            return .debut
+        } else {
+            return nil
         }
     }
 }

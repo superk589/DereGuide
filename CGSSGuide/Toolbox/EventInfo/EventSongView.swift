@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EventSongViewDelegate: class {
-    func eventSongView(_ view: EventSongView, didSelect live: CGSSLive, of difficulty: CGSSLiveDifficulty)
+    func eventSongView(_ view: EventSongView, didSelect scene: CGSSLiveScene)
 }
 
 class EventSongView: UIView {
@@ -70,7 +70,7 @@ class EventSongView: UIView {
     }
     
     func diffClick(_ tap: UITapGestureRecognizer) {
-        delegate?.eventSongView(self, didSelect: live, of: CGSSLiveDifficulty(rawValue: tap.view!.tag)!)
+        delegate?.eventSongView(self, didSelect: CGSSLiveScene(live: live, difficulty: CGSSLiveDifficulty(rawValue: tap.view!.tag)!))
     }
     
     var live: CGSSLive!

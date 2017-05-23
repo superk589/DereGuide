@@ -20,12 +20,15 @@ class SongFilterSortController: BaseFilterSortController {
     
     var songTypeTitles = ["Cute", "Cool", "Passion", "All"]
     
+    var difficultyTypeTitles = [CGSSLiveDifficulty.debut.description,
+                                CGSSLiveDifficulty.regular.description,CGSSLiveDifficulty.pro.description,CGSSLiveDifficulty.master.description,CGSSLiveDifficulty.masterPlus.description]
+    
     var eventTypeTitles = [NSLocalizedString("常规歌曲", comment: ""), NSLocalizedString("传统活动", comment: ""), NSLocalizedString("Groove活动", comment: ""), NSLocalizedString("巡演活动", comment: "")]
     
     
     var sorterMethods = ["updateId", "createId", "bpm", "maxDiffStars", "maxNumberOfNotes"]
     
-    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("最大难度", comment: ""), NSLocalizedString("最多Note数", comment: "")]
+    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("难度", comment: ""), NSLocalizedString("note数", comment: "")]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
@@ -64,7 +67,7 @@ class SongFilterSortController: BaseFilterSortController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 2
+            return 3
         } else {
             return 2
         }
@@ -77,6 +80,8 @@ class SongFilterSortController: BaseFilterSortController {
             case 0:
                 cell.setup(titles: songTypeTitles, index: filter.liveTypes.rawValue, all: CGSSLiveTypes.allLives.rawValue)
             case 1:
+                cell.setup(titles: difficultyTypeTitles, index: filter.difficultyTypes.rawValue, all: CGSSLiveDifficultyTypes.all.rawValue)
+            case 2:
                 cell.setup(titles: eventTypeTitles, index: filter.eventTypes.rawValue, all: CGSSLiveEventTypes.all.rawValue)
             default:
                 break
@@ -115,6 +120,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                 case 0:
                     filter.liveTypes.insert(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
+                    filter.difficultyTypes.insert(CGSSLiveDifficultyTypes.init(rawValue: 1 << UInt(index)))
+                case 2:
                     filter.eventTypes.insert(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
@@ -131,6 +138,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                 case 0:
                     filter.liveTypes.remove(CGSSLiveTypes.init(rawValue: 1 << UInt(index)))
                 case 1:
+                    filter.difficultyTypes.remove(CGSSLiveDifficultyTypes.init(rawValue: 1 << UInt(index)))
+                case 2:
                     filter.eventTypes.remove(CGSSLiveEventTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
@@ -146,6 +155,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                 case 0:
                     filter.liveTypes = CGSSLiveTypes.allLives
                 case 1:
+                    filter.difficultyTypes = CGSSLiveDifficultyTypes.all
+                case 2:
                     filter.eventTypes = CGSSLiveEventTypes.all
                 default:
                     break
@@ -158,9 +169,11 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.liveTypes = CGSSLiveTypes.init(rawValue: 0)
+                    filter.liveTypes = []
                 case 1:
-                    filter.eventTypes = CGSSLiveEventTypes.init(rawValue: 0)
+                    filter.difficultyTypes = []
+                case 2:
+                    filter.eventTypes = []
                 default:
                     break
                 }

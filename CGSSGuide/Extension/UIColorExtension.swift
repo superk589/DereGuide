@@ -26,4 +26,5 @@ extension UIColor {
 
 extension UIColor {
     static let lightSeparator: UIColor = UIColor.lightGray
+    static let lightBackground = UIColor.colorFrom(hexString: "E2E2E2")
 }
