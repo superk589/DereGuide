@@ -64,8 +64,8 @@ class CGSSTeam: NSObject, NSCoding {
     var skills: [CGSSRankedSkill] {
         var arr = [CGSSRankedSkill]()
         for i in 0...4 {
-            if let skill = self[i]?.cardRef?.skill {
-                let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (self[i]?.skillLevel)!)
+            if let skill = self[i]?.cardRef?.skill, let level = self[i]?.skillLevel {
+                let rankedSkill = CGSSRankedSkill(level: level, skill: skill)
                 arr.append(rankedSkill)
             }
         }

@@ -8,19 +8,15 @@
 
 import UIKit
 
-class CGSSRankedSkill: NSObject {
+struct CGSSRankedSkill {
     
-    var level: Int!
-    var skill: CGSSSkill!
+    var level: Int
+    var skill: CGSSSkill
     
-    init(skill: CGSSSkill, level: Int) {
-        self.level = level
-        self.skill = skill
-    }
-    var procChance: Double {
+    var chance: Double {
         return skill.procChanceOfLevel(level)
     }
-    var effectLength: Double {
+    var length: Double {
         return skill.effectLengthOfLevel(level)
     }
     
@@ -35,19 +31,4 @@ class CGSSRankedSkill: NSObject {
         explain.replaceSubrange(range2!, with: String(format: "%.2f", skill.effectLengthOfLevel(level) / 100))
         return explain
     }
-    
-    func getUpRanges(lastNoteSec sec: Float) -> [LSRange] {
-        let condition: Int = skill.condition
-        // 最后一个note的前三秒不再触发新的技能
-        let count = Int(ceil((sec - 3) / Float(condition)))
-        var ranges = [LSRange]()
-        for i in 0..<count {
-            // 第一个触发区间内不触发技能
-            if i == 0 { continue }
-            let range = LSRange(begin: Float(i * condition), length: Float(effectLength) / 100)
-            ranges.append(range)
-        }
-        return ranges
-    }
-    
 }

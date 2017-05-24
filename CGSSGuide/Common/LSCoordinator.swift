@@ -133,8 +133,8 @@ class LSCoordinator {
         let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
         
         for i in 0...4 {
-            if let member = team[i], let skill = team[i]?.cardRef?.skill {
-                let rankedSkill = CGSSRankedSkill.init(skill: skill, level: (member.skillLevel)!)
+            if let member = team[i], let skill = team[i]?.cardRef?.skill, let level = member.skillLevel {
+                let rankedSkill = CGSSRankedSkill(level: level, skill: skill)
                 if let type = LSSkillType.init(type: skill.skillFilterType),
                     let cardType = member.cardRef?.cardType {
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
@@ -158,7 +158,7 @@ class LSCoordinator {
                     for range in ranges {
                         switch type {
                         case .skillBoost:
-                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
                             bonuses.append(bonus)
                             supports.append(bonus)
                         case .deep:
@@ -168,7 +168,7 @@ class LSCoordinator {
                                 break
                             }
                         default:
-                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.procChance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
                             if bonus.type.isScoreBonus {
                                 bonuses.append(bonus)
                             }

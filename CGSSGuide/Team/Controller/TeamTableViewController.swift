@@ -23,15 +23,30 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             return manager.teams
         }
         set {
+            hintLabel?.isHidden = true
             let manager = CGSSTeamManager.default
             manager.teams = newValue
         }
     }
     
+    var hintLabel: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 79
+        tableView.tableFooterView = UIView()
+        
+        if teams.count == 0 {
+            hintLabel = UILabel()
+            hintLabel?.textColor = UIColor.darkGray
+            hintLabel?.text = NSLocalizedString("还没有队伍，点击右上＋创建一个吧", comment: "")
+            hintLabel?.sizeToFit()
+            var center = view.center
+            center.y -= 64
+            hintLabel?.center = center
+            view.addSubview(hintLabel!)
+        }
         
         addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTeam))
         deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))

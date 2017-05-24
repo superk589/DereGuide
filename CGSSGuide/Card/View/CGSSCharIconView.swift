@@ -12,7 +12,7 @@ extension CGSSCharTypes {
     var placeholder: UIImage {
         switch self {
         case CGSSCharTypes.cute:
-            return #imageLiteral(resourceName: "cute_placeholder")
+            return #imageLiteral(resourceName: "cute-placeholder")
         case CGSSCharTypes.cool:
             return #imageLiteral(resourceName: "cool-placeholder")
         case CGSSCharTypes.passion:

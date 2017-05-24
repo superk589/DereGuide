@@ -15,3 +15,7 @@ target 'CGSSGuide' do
   pod 'TTGTagCollectionView'
   pod 'Charts'
 end
+target 'NotificationContent' do
+  pod 'SDWebImage'
+  pod 'SnapKit'
+end

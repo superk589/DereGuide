@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import ZKDrawerController
+import UserNotifications
 
 @UIApplicationMain
 
@@ -19,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 处理一系列启动任务
+        
+        // 设置通知代理
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = NotificationHandler.default
+        } else {
+            // Fallback on earlier versions
+        }
         
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset { (lastVersion) in
@@ -116,11 +124,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func registerAPNS() {
-//		let device = UIDevice.currentDevice().systemVersion
-        let setting = UIUserNotificationSettings.init(types: [.sound, .alert, .badge], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(setting)
-        // UIApplication.sharedApplication().registerForRemoteNotifications()
+    func registerUserNotification() {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert]) { (granted, error) in
+                if error == nil {
+
+                }
+            }
+        } else {
+            let setting = UIUserNotificationSettings.init(types: [.badge, .alert], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(setting)
+        }
     }
     
     func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {

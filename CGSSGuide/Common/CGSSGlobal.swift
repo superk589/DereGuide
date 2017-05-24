@@ -12,12 +12,16 @@ import ReachabilitySwift
 
 struct Config {
     static let iAPRemoveADProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
+    static let bundlerId = "com.zzk.cgssguide"
 }
 
 struct NotificationCategory {
     static var birthday = "Birthday"
 }
 
+struct Path {
+    static let cache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first
+}
 struct Screen {
     // 当前屏幕的宽度和高度常量
     public static let width = UIScreen.main.bounds.width

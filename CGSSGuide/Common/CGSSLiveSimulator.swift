@@ -223,7 +223,7 @@ class CGSSLiveSimulator {
             }
             
             if bonusGroup.skillBoost > 1000 {
-                if restoreLife != 0 {
+                if restoreLife != 0 || damageGuard {
                     restoreLife += 1
                 }
             }

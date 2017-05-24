@@ -128,7 +128,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     
     func rescheduleBirthdayNotifications() {
         if UserDefaults.standard.shouldPostBirthdayNotice {
-            (UIApplication.shared.delegate as! AppDelegate).registerAPNS()
+            (UIApplication.shared.delegate as! AppDelegate).registerUserNotification()
             BirthdayCenter.default.scheduleNotifications()
         } else {
             BirthdayCenter.default.removeNotifications()
