@@ -14,11 +14,12 @@ import SnapKit
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     
-    var imageView: UIImageView!
+    var imageView: BannerView!
+    var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView = UIImageView()
+        imageView = BannerView()
         view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(imageView.snp.width).multipliedBy(429.0 / 614.0)
@@ -39,7 +40,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         if let spriteImageRef = notification.request.content.userInfo["cardSpriteImageRef"] as? String {
-            imageView.sd_setImage(with: URL.init(string: spriteImageRef)!, placeholderImage: nil, options: .progressiveDownload)
+            imageView.setImage(with: URL.init(string: spriteImageRef)!, options: .progressiveDownload)
         }
         
     }

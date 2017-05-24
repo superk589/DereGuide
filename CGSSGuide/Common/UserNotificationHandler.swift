@@ -34,7 +34,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
-        completionHandler([.badge])
+        completionHandler([.badge, .alert])
         
         // 如果不想显示某个通知，可以直接用空 options 调用 completionHandler:
         // completionHandler([])
