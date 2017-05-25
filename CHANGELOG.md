@@ -2,11 +2,11 @@
 
 ### 1.3.0
 
-**此版本起，不再支持低于 iOS 9.0 的用户**
+**此版本起，不再支持低于 iOS 9.0 的设备**
 1. 优化模拟组队页面布局
 2. 增加强判、护盾、回血等辅助技能的模拟详情页面
 3. 优化算法，提高平均分数计算的准确性
-4. 模拟计算中，考虑过载技能因生命不足无法发动的因素（一般计算中不考虑此因素）
+4. 增加高级选项，可以选择是否在模拟计算中考虑过载技能的发动条件
 5. 生日提醒通知内容中增加角色图标，并且支持3D Touch展开（iOS 10+）
 6. 歌曲页面可以对指定难度进行筛选，可以根据note数或难度星级排序
 7. 完整可抽列表中增加按照获取几率排序
@@ -14,7 +14,27 @@
 
 ##### Japanese version
 
+**このバージョンから、iOS 9.0以下はサポート対象外です**
+1. 模擬ユニット編成のレイアウト向上
+2. 判定強化などのサポート系特技の発動情報ページを追加します
+3. 平均スコアの精度について算法向上
+4. アドバンスオプションを追加：シミュレート計算にオーバーロードの発動条件の考えているかどうか、選択できるようになります
+5. 誕生日通知にキャラアイコンを追加、3D Touchの展開操作も対応します（iOS 10+）
+6. 楽曲ページに難易度のスクリーニング条件、及びnote数・難易度レベルのソート条件を追加します
+7. ガシャの出現アイドル一覧に排出率のソート条件を追加します
+8. マイユニットのページに、ユニットの順番は編集できるようになります
+
 ##### English version
+
+**Does not support devices below iOS 9.0 by this version**
+1. improve ui design of team simulation page
+2. add simulation detail for perfect lock, guard and heal skills
+3. improve algorithm of calculation, average score will be more accurate
+4. add advance option for simulation for considering overload skills trigger condition
+5. birthday notification now has a chara icon and can be 3d touched (only for iOS 10+)
+6. song page can be filtered by specific difficulties, and can be sorted by number of notes or difficulty stars
+7. full available list can be sorted by obtaining chance of card
+8. teams in team list page are movable now
 
 ### 1.2.7
 
