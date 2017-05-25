@@ -56,4 +56,13 @@ extension UserDefaults {
             return UserDefaults.standard.value(forKey: "hasRated") as? Bool ?? false
         }
     }
+    
+    var allowOverloadSkillsTriggerLifeCondition: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "allowOverloadSkillsTriggerLifeCondition")
+        }
+        get {
+            return UserDefaults.standard.bool(forKey: "allowOverloadSkillsTriggerLifeCondition")
+        }
+    }
 }

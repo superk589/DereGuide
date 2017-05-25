@@ -56,6 +56,7 @@ class TeamSimulationLiveView: UIView {
         descriptionLabel.snp.makeConstraints { (make) in
             make.left.equalTo(typeIcon)
             make.bottom.equalTo(jacketImageView)
+            make.right.lessThanOrEqualTo(-10)
         }
         
         backgroundLabel = UILabel()

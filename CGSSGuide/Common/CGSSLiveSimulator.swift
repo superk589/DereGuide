@@ -268,14 +268,10 @@ class CGSSLiveSimulator {
     func wipeResults() {
         simulateResult.removeAll()
     }
-
-    func simulate(times: UInt, callback: @escaping LSResultClosure) {
-        simulate(times: times, progress: { _,_ in }, callback: callback)
-    }
     
-    func simulate(times: UInt, progress: CGSSProgressClosure, callback: @escaping LSResultClosure) {
+    func simulate(times: UInt, options: LSOptions = [], progress: CGSSProgressClosure = { _,_ in }, callback: @escaping LSResultClosure) {
         for i in 0..<times {
-            simulateOnce(options: .overloadLimitByLife)
+            simulateOnce(options: options)
             progress(Int(i + 1), Int(times))
         }
         let result = LSResult.init(scores: simulateResult)

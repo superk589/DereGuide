@@ -41,7 +41,11 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
                 self?.logs = logs
             })
         case .simulation:
-            simulator.simulateOnce(options: [.detailLog, .overloadLimitByLife, .supportSkills], callback: { [weak self] (result, logs) in
+            var options: LSOptions = [.detailLog, .supportSkills]
+            if UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition {
+                options.insert(.overloadLimitByLife)
+            }
+            simulator.simulateOnce(options: options, callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         }

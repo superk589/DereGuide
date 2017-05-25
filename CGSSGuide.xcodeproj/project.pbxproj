@@ -229,6 +229,7 @@
 		12EECCD61ED57EFA0047666C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12EECCD41ED57EFA0047666C /* MainInterface.storyboard */; };
 		12EECCDA1ED57EFA0047666C /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 12EECCCE1ED57EF90047666C /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
+		12EECEC21ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
@@ -513,6 +514,7 @@
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12EECCD71ED57EFA0047666C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EECCDE1ED5DC460047666C /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAdvanceOptionCell.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 				129ECB1C1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift */,
 				129ECB1E1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift */,
 				129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */,
+				12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1485,6 +1488,7 @@
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
+				12EECEC21ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift in Sources */,
 				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,

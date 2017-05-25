@@ -56,6 +56,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         tableView.register(TeamSimulationModeSelectionCell.self, forCellReuseIdentifier: TeamSimulationModeSelectionCell.description())
         tableView.register(TeamSimulationMainBodyCell.self, forCellReuseIdentifier: TeamSimulationMainBodyCell.description())
         tableView.register(TeamSimulationDescriptionCell.self, forCellReuseIdentifier: TeamSimulationDescriptionCell.description())
+        tableView.register(TeamSimulationAdvanceOptionCell.self, forCellReuseIdentifier: TeamSimulationAdvanceOptionCell.description())
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
     
     }
@@ -65,7 +66,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,6 +100,11 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             cell.delegate = self
             return cell
         case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationAdvanceOptionCell.description(), for: indexPath) as! TeamSimulationAdvanceOptionCell
+            cell.delegate = self
+            cell.option1Switch.isOn = UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition
+            return cell
+        case 7:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationDescriptionCell.description(), for: indexPath) as! TeamSimulationDescriptionCell
             return cell
         default:
@@ -240,7 +246,11 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
         
         func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
-            simulator.simulate(times: times, progress: { (a, b) in
+            var options = LSOptions()
+            if UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition {
+                options.insert(.overloadLimitByLife)
+            }
+            simulator.simulate(times: times, options: options, progress: { (a, b) in
                 DispatchQueue.main.async {
                     // self.teamDV.advanceProgress.progress = Float(a) / Float(b)
                     cell?.simulationButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
@@ -331,3 +341,9 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     }
 }
 
+
+extension TeamSimulationController: TeamSimulationAdvanceOptionCellDelegate {
+    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetOverloadSkillLifeLimitation allowed: Bool) {
+        UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition = allowed
+    }
+}
