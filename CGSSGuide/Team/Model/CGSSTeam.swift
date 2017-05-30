@@ -110,7 +110,7 @@ class CGSSTeam: NSObject, NSCoding {
     }
     
     func getAppeal(_ type: CGSSCardTypes) -> CGSSAppeal {
-        var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+        var appeal = CGSSAppeal.zero
         let contents = getUpContent()
         for i in 0...5 {
             appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
@@ -358,7 +358,7 @@ extension CGSSCard {
     func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = 10, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
         var appeal = self.appeal.addBy(potential: potential, rarity: self.rarityType)
         var factor = 100 + roomUpValue
-        if liveType == cardType || liveType == .allLives {
+        if liveType == cardType || liveType == .allType {
             factor += 30
         }
         appeal.vocal = Int(ceil(Float(appeal.vocal * (factor + (contents[cardType]?[.vocal] ?? 0))) / 100))
