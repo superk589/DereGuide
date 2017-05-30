@@ -64,6 +64,7 @@ class LiveSimulatorViewController: BaseTableViewController {
     func selectDisplayMode() {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择模式", comment: ""), message: nil, preferredStyle: .actionSheet)
         
+        alvc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         for type in DisplayType.all {
             alvc.addAction(UIAlertAction.init(title: type.description, style: .default, handler: { [weak self] (action) in
                 self?.displayType = type
