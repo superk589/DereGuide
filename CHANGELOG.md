@@ -1,6 +1,26 @@
 # ChangeLog
 
+### 1.3.1
+
+1. 修复生日通知中没有角色头像的问题
+2. 修复队伍表现值在彩色歌曲下计算错误的问题
+3. 修复得分详情和辅助技能详情页面选择模式时崩溃的问题
+
+##### Japanese version
+
+1. 誕生日通知にキャラアイコンは表示しませんバグを修正します
+2. スコア計算にユニットの全タイプ曲アピールの加算に不具合が発生するバグを修正します
+3. スコア計算に得点情報と他の特技情報のページがモードを選択する時アプリが落ちるバグを修正します
+
+##### English version
+
+1. fix bug that birthday notification right side has no chara icon
+2. fix wrong team appeal in all-type songs
+3. fix score detail and support skills detail page mode selection button crashing in iPad
+
+
 ### 1.3.0
+2017-5-26
 
 **此版本起，不再支持低于 iOS 9.0 的设备**
 1. 优化模拟组队页面布局
@@ -37,6 +57,7 @@
 8. teams in team list page are movable now
 
 ### 1.2.7
+2017-4-11
 
 1. 巡演活动页面中，增加了查看每日流行曲的功能
 2. 修复极限分数1有时会不准确的问题
