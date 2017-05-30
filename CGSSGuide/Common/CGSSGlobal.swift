@@ -16,11 +16,15 @@ struct Config {
 }
 
 struct NotificationCategory {
-    static var birthday = "Birthday"
+    static let birthday = "Birthday"
 }
 
 struct Path {
-    static let cache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first
+    static let cache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first!
+    static let tmp = NSTemporaryDirectory()
+    static let document = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    static let library = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
+    static let home = NSHomeDirectory()
 }
 struct Screen {
     // 当前屏幕的宽度和高度常量

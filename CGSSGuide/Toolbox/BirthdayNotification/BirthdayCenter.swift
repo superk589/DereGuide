@@ -108,8 +108,12 @@ class BirthdayCenter {
                                 let imageURL = URL(fileURLWithPath: path)
                                 // by adding into a notification, the attachment will be moved to a new location so you need to copy it first
                                 let fileManager = FileManager.default
-                                let newURL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/temp.png")
-                                try? fileManager.copyItem(at: imageURL, to: newURL)
+                                let newURL = URL(fileURLWithPath: Path.tmp + "/\(char.charaId!).png")
+                                do {
+                                    try fileManager.copyItem(at: imageURL, to: newURL)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                                 if let attachment = try? UNNotificationAttachment(identifier: "imageAttachment", url: newURL, options: nil) {
                                     content.attachments = [attachment]
                                 }
