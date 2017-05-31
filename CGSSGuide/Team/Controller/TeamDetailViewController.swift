@@ -102,7 +102,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType)
             let simulator = coordinator.generateLiveSimulator()
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
@@ -190,7 +190,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType)
             _ = coordinator.generateLiveSimulator()
             self.teamDV.updateSimulatorPresentValue(coordinator.fixedAppeal ?? coordinator.appeal)
             
@@ -263,7 +263,7 @@ extension TeamDetailViewController: TeamDetailViewDelegate {
     func viewScoreChart(_ teamDetailView: TeamDetailView) {
         if let scene = self.scene {
             let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType, fixedAppeal: usingManualValue ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: teamDV.simulatorType, grooveType: teamDV.grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {

@@ -269,7 +269,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
@@ -292,7 +292,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             let formulator = coordinator.generateLiveFormulator()
             cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)
@@ -321,7 +321,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     func checkScoreDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
         if let scene = self.scene {
             let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -332,7 +332,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     func checkSupportSkillDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
         if let scene = self.scene {
             let vc = LiveSimulatorSupportSkillsViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType, fixedAppeal: team.usingCustomAppeal ? team.customAppeal : nil)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {

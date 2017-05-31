@@ -71,12 +71,12 @@ class LSCoordinator {
         return self.scene.beatmap!
     }
     
-    init(team: CGSSTeam, scene: CGSSLiveScene, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?, fixedAppeal: Int?) {
+    init(team: CGSSTeam, scene: CGSSLiveScene, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?) {
         self.team = team
         self.scene = scene
         self.simulatorType = simulatorType
         self.grooveType = grooveType
-        self.fixedAppeal = fixedAppeal
+        self.fixedAppeal = team.usingCustomAppeal ? team.customAppeal : nil
     }
     
     func getBaseScorePerNote() -> Double {

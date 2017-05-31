@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120479DD1ED0196600862266 /* TeamInformationTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120479DC1ED0196600862266 /* TeamInformationTeamCell.swift */; };
-		120479E11ED0230700862266 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120479E01ED0230700862266 /* TeamInformationLeaderSkillCell.swift */; };
-		120479E31ED026D600862266 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120479E21ED026D600862266 /* TeamInformationAppealCell.swift */; };
-		120479E51ED02BC700862266 /* TeamInformationSkillListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120479E41ED02BC700862266 /* TeamInformationSkillListCell.swift */; };
 		1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */; };
 		120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */; };
 		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
@@ -32,7 +28,6 @@
 		121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82131EB7383600273F37 /* CGSSNotification.swift */; };
 		121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */; };
 		121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */; };
-		121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C51D557B3900D0B636 /* TeamDetailView.swift */; };
 		121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */; };
 		121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78C91D561E7900D0B636 /* CGSSAppeal.swift */; };
 		121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */; };
@@ -55,7 +50,6 @@
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
 		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
 		12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCA1E8FE94F005EEB7A /* TipView.swift */; };
-		12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */; };
 		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
 		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
 		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
@@ -94,9 +88,6 @@
 		12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */; };
 		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
 		1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */; };
-		1262F50F1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */; };
-		1262F5111ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */; };
-		1262F5131ECD740700AD6424 /* NoteSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */; };
 		1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */; };
 		1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */; };
 		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
@@ -121,7 +112,6 @@
 		1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */; };
 		1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */; };
 		1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F01D520C3E0071AD7F /* TeamCardSelectTableViewController.swift */; };
-		1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */; };
 		1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */; };
 		1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */; };
 		1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */; };
@@ -151,12 +141,8 @@
 		127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A01E34FD8D0006627B /* Card3DModelController.swift */; };
 		127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A21E34FDEC0006627B /* SignImageController.swift */; };
 		127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A41E34FDF80006627B /* CardImageController.swift */; };
-		127CBEA81ECA891300C119F9 /* TeamSimulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEA71ECA891300C119F9 /* TeamSimulationController.swift */; };
-		127CBEAA1ECA8A6700C119F9 /* TeamInfomationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEA91ECA8A6700C119F9 /* TeamInfomationController.swift */; };
 		127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEAB1ECA8CDC00C119F9 /* CGSSPotential.swift */; };
 		127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */; };
-		127CBEB01ECA977800C119F9 /* TeamSimulationTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEAF1ECA977800C119F9 /* TeamSimulationTeamCell.swift */; };
-		127CBEB21ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEB11ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift */; };
 		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
 		1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB431E41C1CD00CEDE04 /* DataSource.plist */; };
 		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
@@ -169,11 +155,7 @@
 		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
 		129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
-		129ECB191ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB181ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift */; };
 		129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */; };
-		129ECB1D1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB1C1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift */; };
-		129ECB1F1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB1E1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift */; };
-		129ECB211ECB35760010BC7F /* TeamSimulationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */; };
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
 		129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* TeamDetailController.swift */; };
@@ -189,11 +171,7 @@
 		12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */; };
 		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
-		12C4083B1E8BC1F3001373CF /* LiveSimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */; };
-		12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */; };
-		12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
-		12C408451E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */; };
 		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
@@ -229,10 +207,30 @@
 		12EECCD61ED57EFA0047666C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12EECCD41ED57EFA0047666C /* MainInterface.storyboard */; };
 		12EECCDA1ED57EFA0047666C /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 12EECCCE1ED57EF90047666C /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
-		12EECEC21ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
+		12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */; };
+		12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */; };
+		12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B331EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift */; };
+		12FC8B391EDE6D93003CF3C3 /* TeamInformationTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B341EDE6D93003CF3C3 /* TeamInformationTeamCell.swift */; };
+		12FC8B3A1EDE6D93003CF3C3 /* TeamLeaderSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B351EDE6D93003CF3C3 /* TeamLeaderSkillView.swift */; };
+		12FC8B3C1EDE6DA7003CF3C3 /* TeamInfomationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B3B1EDE6DA7003CF3C3 /* TeamInfomationController.swift */; };
+		12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */; };
+		12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */; };
+		12FC8B4E1EDE6DEB003CF3C3 /* TeamSimulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */; };
+		12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */; };
+		12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */; };
+		12FC8B511EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */; };
+		12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */; };
+		12FC8B531EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */; };
+		12FC8B541EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */; };
+		12FC8B551EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B491EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift */; };
+		12FC8B561EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B4A1EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift */; };
+		12FC8B571EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B4B1EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift */; };
+		12FC8B5B1EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B581EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift */; };
+		12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B591EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift */; };
+		12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */; };
 		323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */; };
 		B2F3FBF1780F67512AD7E7A8 /* Pods_NotificationContent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6126794B14016D132081DCD9 /* Pods_NotificationContent.framework */; };
 /* End PBXBuildFile section */
@@ -272,10 +270,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		120479DC1ED0196600862266 /* TeamInformationTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInformationTeamCell.swift; sourceTree = "<group>"; };
-		120479E01ED0230700862266 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
-		120479E21ED026D600862266 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInformationAppealCell.swift; sourceTree = "<group>"; };
-		120479E41ED02BC700862266 /* TeamInformationSkillListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInformationSkillListCell.swift; sourceTree = "<group>"; };
 		1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharFilter.swift; sourceTree = "<group>"; };
 		120541751D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterAndSorterTableViewController.swift; sourceTree = "<group>"; };
 		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
@@ -297,7 +291,6 @@
 		121B82131EB7383600273F37 /* CGSSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotification.swift; sourceTree = "<group>"; };
 		121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelTableViewController.swift; sourceTree = "<group>"; };
 		121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardFilterSortController.swift; sourceTree = "<group>"; };
-		121C78C51D557B3900D0B636 /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		121C78C71D55F0F800D0B636 /* CGSSTeamManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTeamManager.swift; sourceTree = "<group>"; };
 		121C78C91D561E7900D0B636 /* CGSSAppeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSAppeal.swift; sourceTree = "<group>"; };
 		121C78E11D57364F00D0B636 /* BaseSongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSongTableViewController.swift; sourceTree = "<group>"; };
@@ -320,7 +313,6 @@
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
 		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		12356BCA1E8FE94F005EEB7A /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
-		12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamLeaderSkillView.swift; path = View/TeamLeaderSkillView.swift; sourceTree = "<group>"; };
 		123679031E0E6B1300622114 /* DeviceInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManager.swift; sourceTree = "<group>"; };
 		123679051E0E6C3600622114 /* CGSSVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSVersionManager.swift; sourceTree = "<group>"; };
 		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -377,9 +369,6 @@
 		12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveScene.swift; sourceTree = "<group>"; };
-		1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveSimulatorSupportSkillsViewController.swift; path = Controller/LiveSimulatorSupportSkillsViewController.swift; sourceTree = "<group>"; };
-		1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteSupportTableViewHeader.swift; path = View/NoteSupportTableViewHeader.swift; sourceTree = "<group>"; };
-		1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteSupportTableViewCell.swift; path = View/NoteSupportTableViewCell.swift; sourceTree = "<group>"; };
 		1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFormulator.swift; sourceTree = "<group>"; };
 		1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSScoreBonusGroup.swift; sourceTree = "<group>"; };
 		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
@@ -404,7 +393,6 @@
 		1269E9D11D520B5D0071AD7F /* CGSSSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSkill.swift; sourceTree = "<group>"; };
 		1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		1269E9F01D520C3E0071AD7F /* TeamCardSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCardSelectTableViewController.swift; sourceTree = "<group>"; };
-		1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEditViewController.swift; sourceTree = "<group>"; };
 		1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
 		1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
@@ -434,12 +422,8 @@
 		127AA1A01E34FD8D0006627B /* Card3DModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card3DModelController.swift; sourceTree = "<group>"; };
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
-		127CBEA71ECA891300C119F9 /* TeamSimulationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationController.swift; path = Controller/TeamSimulationController.swift; sourceTree = "<group>"; };
-		127CBEA91ECA8A6700C119F9 /* TeamInfomationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInfomationController.swift; path = Controller/TeamInfomationController.swift; sourceTree = "<group>"; };
 		127CBEAB1ECA8CDC00C119F9 /* CGSSPotential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSPotential.swift; sourceTree = "<group>"; };
 		127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAtributedStringExtension.swift; sourceTree = "<group>"; };
-		127CBEAF1ECA977800C119F9 /* TeamSimulationTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationTeamCell.swift; path = View/TeamSimulationTeamCell.swift; sourceTree = "<group>"; };
-		127CBEB11ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationLiveSelectCell.swift; path = View/TeamSimulationLiveSelectCell.swift; sourceTree = "<group>"; };
 		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
 		1281CB431E41C1CD00CEDE04 /* DataSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataSource.plist; sourceTree = "<group>"; };
 		1281CB451E41C79300CEDE04 /* SpecialThanks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpecialThanks.plist; sourceTree = "<group>"; };
@@ -453,11 +437,7 @@
 		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
 		129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
-		129ECB181ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationAppealEditingCell.swift; path = View/TeamSimulationAppealEditingCell.swift; sourceTree = "<group>"; };
 		129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
-		129ECB1C1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationModeSelectionCell.swift; path = View/TeamSimulationModeSelectionCell.swift; sourceTree = "<group>"; };
-		129ECB1E1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationMainBodyCell.swift; path = View/TeamSimulationMainBodyCell.swift; sourceTree = "<group>"; };
-		129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamSimulationDescriptionCell.swift; path = View/TeamSimulationDescriptionCell.swift; sourceTree = "<group>"; };
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
 		129ECB281ECBFB930010BC7F /* TeamDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailController.swift; sourceTree = "<group>"; };
@@ -474,11 +454,7 @@
 		12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStatusIndicator.swift; sourceTree = "<group>"; };
 		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
-		12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveSimulatorViewController.swift; path = Controller/LiveSimulatorViewController.swift; sourceTree = "<group>"; };
-		12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteScoreTableViewCell.swift; path = Controller/NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
-		12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteScoreTableViewSectionHeader.swift; path = Controller/NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
-		12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteScoreTableViewSectionFooter.swift; path = Controller/NoteScoreTableViewSectionFooter.swift; sourceTree = "<group>"; };
 		12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -514,10 +490,30 @@
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12EECCD71ED57EFA0047666C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EECCDE1ED5DC460047666C /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAdvanceOptionCell.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
+		12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationAppealCell.swift; path = Information/View/TeamInformationAppealCell.swift; sourceTree = "<group>"; };
+		12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationLeaderSkillCell.swift; path = Information/View/TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
+		12FC8B331EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationSkillListCell.swift; path = Information/View/TeamInformationSkillListCell.swift; sourceTree = "<group>"; };
+		12FC8B341EDE6D93003CF3C3 /* TeamInformationTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationTeamCell.swift; path = Information/View/TeamInformationTeamCell.swift; sourceTree = "<group>"; };
+		12FC8B351EDE6D93003CF3C3 /* TeamLeaderSkillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamLeaderSkillView.swift; path = Information/View/TeamLeaderSkillView.swift; sourceTree = "<group>"; };
+		12FC8B3B1EDE6DA7003CF3C3 /* TeamInfomationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInfomationController.swift; path = Information/Controller/TeamInfomationController.swift; sourceTree = "<group>"; };
+		12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorSupportSkillsViewController.swift; sourceTree = "<group>"; };
+		12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorViewController.swift; sourceTree = "<group>"; };
+		12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationController.swift; sourceTree = "<group>"; };
+		12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewCell.swift; sourceTree = "<group>"; };
+		12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewHeader.swift; sourceTree = "<group>"; };
+		12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAdvanceOptionCell.swift; sourceTree = "<group>"; };
+		12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAppealEditingCell.swift; sourceTree = "<group>"; };
+		12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationDescriptionCell.swift; sourceTree = "<group>"; };
+		12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationLiveSelectCell.swift; sourceTree = "<group>"; };
+		12FC8B491EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationMainBodyCell.swift; sourceTree = "<group>"; };
+		12FC8B4A1EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationModeSelectionCell.swift; sourceTree = "<group>"; };
+		12FC8B4B1EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationTeamCell.swift; sourceTree = "<group>"; };
+		12FC8B581EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
+		12FC8B591EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionFooter.swift; sourceTree = "<group>"; };
+		12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6165819FCB1473016A5900 /* Pods-NotificationContent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContent.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContent/Pods-NotificationContent.release.xcconfig"; sourceTree = "<group>"; };
 		6126794B14016D132081DCD9 /* Pods_NotificationContent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationContent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -555,71 +551,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		120479D61ED0182200862266 /* Simulation */ = {
-			isa = PBXGroup;
-			children = (
-				120479D81ED0184700862266 /* View */,
-				120479D71ED0183D00862266 /* Controller */,
-			);
-			name = Simulation;
-			sourceTree = "<group>";
-		};
-		120479D71ED0183D00862266 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				12C4083A1E8BC1F3001373CF /* LiveSimulatorViewController.swift */,
-				1262F50E1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift */,
-				127CBEA71ECA891300C119F9 /* TeamSimulationController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		120479D81ED0184700862266 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				12C4083E1E8BF1D2001373CF /* NoteScoreTableViewCell.swift */,
-				12C408401E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift */,
-				12C408441E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift */,
-				1262F5101ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift */,
-				1262F5121ECD740700AD6424 /* NoteSupportTableViewCell.swift */,
-				127CBEAF1ECA977800C119F9 /* TeamSimulationTeamCell.swift */,
-				127CBEB11ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift */,
-				129ECB181ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift */,
-				129ECB1C1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift */,
-				129ECB1E1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift */,
-				129ECB201ECB35760010BC7F /* TeamSimulationDescriptionCell.swift */,
-				12EECEC11ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		120479D91ED0187500862266 /* Information */ = {
-			isa = PBXGroup;
-			children = (
-				120479DB1ED0189800862266 /* View */,
-				120479DA1ED0189100862266 /* Controller */,
-			);
-			name = Information;
-			sourceTree = "<group>";
-		};
 		120479DA1ED0189100862266 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				127CBEA91ECA8A6700C119F9 /* TeamInfomationController.swift */,
+				12FC8B3B1EDE6DA7003CF3C3 /* TeamInfomationController.swift */,
 			);
 			name = Controller;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		120479DB1ED0189800862266 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				12356BCC1E8FEB27005EEB7A /* TeamLeaderSkillView.swift */,
-				120479DC1ED0196600862266 /* TeamInformationTeamCell.swift */,
-				120479E01ED0230700862266 /* TeamInformationLeaderSkillCell.swift */,
-				120479E21ED026D600862266 /* TeamInformationAppealCell.swift */,
-				120479E41ED02BC700862266 /* TeamInformationSkillListCell.swift */,
+				12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */,
+				12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */,
+				12FC8B331EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift */,
+				12FC8B341EDE6D93003CF3C3 /* TeamInformationTeamCell.swift */,
+				12FC8B351EDE6D93003CF3C3 /* TeamLeaderSkillView.swift */,
 			);
 			name = View;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		1206DEAA1DACDD8600A5A69D /* View */ = {
@@ -757,8 +708,8 @@
 		1269E9101D52085C0071AD7F /* Team */ = {
 			isa = PBXGroup;
 			children = (
-				120479D91ED0187500862266 /* Information */,
-				120479D61ED0182200862266 /* Simulation */,
+				12FC8B301EDE6D40003CF3C3 /* Information */,
+				12FC8B3D1EDE6DEB003CF3C3 /* Simulation */,
 				1269EA1A1D520D850071AD7F /* Model */,
 				1269E9EF1D520C3E0071AD7F /* Controller */,
 				1269E9F41D520C3E0071AD7F /* View */,
@@ -898,7 +849,6 @@
 				1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */,
 				122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */,
 				1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */,
-				1269E9F11D520C3E0071AD7F /* TeamDetailViewController.swift */,
 				129ECB281ECBFB930010BC7F /* TeamDetailController.swift */,
 			);
 			path = Controller;
@@ -910,7 +860,6 @@
 				1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */,
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
 				122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */,
-				121C78C51D557B3900D0B636 /* TeamDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1133,6 +1082,53 @@
 				12EECCD71ED57EFA0047666C /* Info.plist */,
 			);
 			path = NotificationContent;
+			sourceTree = "<group>";
+		};
+		12FC8B301EDE6D40003CF3C3 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				120479DB1ED0189800862266 /* View */,
+				120479DA1ED0189100862266 /* Controller */,
+			);
+			path = Information;
+			sourceTree = "<group>";
+		};
+		12FC8B3D1EDE6DEB003CF3C3 /* Simulation */ = {
+			isa = PBXGroup;
+			children = (
+				12FC8B3E1EDE6DEB003CF3C3 /* Controller */,
+				12FC8B421EDE6DEB003CF3C3 /* View */,
+			);
+			path = Simulation;
+			sourceTree = "<group>";
+		};
+		12FC8B3E1EDE6DEB003CF3C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */,
+				12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */,
+				12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12FC8B421EDE6DEB003CF3C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12FC8B581EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift */,
+				12FC8B591EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift */,
+				12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */,
+				12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */,
+				12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */,
+				12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */,
+				12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */,
+				12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */,
+				12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */,
+				12FC8B491EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift */,
+				12FC8B4A1EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift */,
+				12FC8B4B1EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B944DE078DA419AC45D4315A /* Pods */ = {
@@ -1372,16 +1368,13 @@
 				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
-				127CBEB21ECA9A2000C119F9 /* TeamSimulationLiveSelectCell.swift in Sources */,
 				1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */,
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
-				129ECB191ECAFB140010BC7F /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
-				1262F5111ECD71CF00AD6424 /* NoteSupportTableViewHeader.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */,
 				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
@@ -1391,6 +1384,7 @@
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
+				12FC8B561EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift in Sources */,
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
@@ -1399,52 +1393,55 @@
 				1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
-				127CBEB01ECA977800C119F9 /* TeamSimulationTeamCell.swift in Sources */,
+				12FC8B3A1EDE6D93003CF3C3 /* TeamLeaderSkillView.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
 				121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */,
 				12D975D21E379EF0005E932B /* EventScoreRanking.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
+				12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */,
 				124BA50D1E914ACD002E48FE /* EventTrend.swift in Sources */,
-				120479E11ED0230700862266 /* TeamInformationLeaderSkillCell.swift in Sources */,
 				12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */,
 				129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
-				12356BCD1E8FEB27005EEB7A /* TeamLeaderSkillView.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
 				1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
 				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
 				12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */,
-				127CBEA81ECA891300C119F9 /* TeamSimulationController.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */,
-				1262F50F1ECD70C800AD6424 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
+				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
+				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
 				124BA5071E913808002E48FE /* EventTrendViewController.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
+				12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */,
 				129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */,
+				12FC8B551EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift in Sources */,
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
+				12FC8B3C1EDE6DA7003CF3C3 /* TeamInfomationController.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
 				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				124BA50B1E913E78002E48FE /* EventTrendCell.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
 				1206F6CE1E28D6CA000FAC78 /* SongFilterSortController.swift in Sources */,
+				12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* TeamTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
 				122497261E8E859C005C743C /* LSNote.swift in Sources */,
@@ -1452,24 +1449,21 @@
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
-				127CBEAA1ECA8A6700C119F9 /* TeamInfomationController.swift in Sources */,
 				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
+				12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */,
 				120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */,
-				129ECB1D1ECB31CF0010BC7F /* TeamSimulationModeSelectionCell.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
 				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,
 				121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */,
 				12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */,
 				1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */,
 				121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */,
-				1262F5131ECD740700AD6424 /* NoteSupportTableViewCell.swift in Sources */,
 				123F320F1E6FED0F00B69D26 /* SpreadImageViewController.swift in Sources */,
 				1269E9F91D520C3E0071AD7F /* TeamEditViewController.swift in Sources */,
-				12C408411E8BF334001373CF /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,
 				1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */,
 				122497281E8E85C1005C743C /* LSSkill.swift in Sources */,
@@ -1483,70 +1477,71 @@
 				12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */,
 				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */,
-				120479E31ED026D600862266 /* TeamInformationAppealCell.swift in Sources */,
 				123F32031E6FC6F800B69D26 /* CardRankingView.swift in Sources */,
+				12FC8B5B1EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift in Sources */,
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
-				12EECEC21ED70B260047666C /* TeamSimulationAdvanceOptionCell.swift in Sources */,
 				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
 				12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
+				12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */,
 				127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
 				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
-				120479E51ED02BC700862266 /* TeamInformationSkillListCell.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				12D975D01E379DF7005E932B /* EventPtRanking.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,
-				121C78C61D557B3900D0B636 /* TeamDetailView.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
 				1296759E1EBF62400037827B /* PageTitleView.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
 				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
+				12FC8B541EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
 				121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */,
-				12C4083B1E8BC1F3001373CF /* LiveSimulatorViewController.swift in Sources */,
 				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,
 				123F320B1E6FECC800B69D26 /* SpreadImageView.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
+				12FC8B4E1EDE6DEB003CF3C3 /* TeamSimulationController.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
-				12C408451E8E1781001373CF /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
+				12FC8B531EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
-				120479DD1ED0196600862266 /* TeamInformationTeamCell.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */,
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
+				12FC8B511EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
+				12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */,
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
-				129ECB211ECB35760010BC7F /* TeamSimulationDescriptionCell.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
+				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
 				122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
-				1269E9F81D520C3E0071AD7F /* TeamDetailViewController.swift in Sources */,
 				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
+				12FC8B571EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift in Sources */,
+				12FC8B391EDE6D93003CF3C3 /* TeamInformationTeamCell.swift in Sources */,
 				12536DBA1ED5177C00B75BA0 /* UserNotificationHandler.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
@@ -1556,17 +1551,16 @@
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,
+				12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */,
 				127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */,
-				12C4083F1E8BF1D2001373CF /* NoteScoreTableViewCell.swift in Sources */,
 				1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */,
 				129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */,
 				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
 				122497241E8E8582005C743C /* LFDistribution.swift in Sources */,
-				129ECB1F1ECB35530010BC7F /* TeamSimulationMainBodyCell.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
