@@ -282,8 +282,13 @@ class CGSSTeam: NSObject, NSCoding {
         }
         var newContents = [CGSSCardTypes: [LeaderSkillUpType: Int]]()
         for content in contents {
-            newContents[content.upTarget] = [LeaderSkillUpType: Int]()
-            newContents[content.upTarget]![content.upType] = content.upValue
+            if
+                newContents.keys.contains(content.upTarget) {
+                newContents[content.upTarget]![content.upType] = content.upValue
+            } else {
+                newContents[content.upTarget] = [LeaderSkillUpType: Int]()
+                newContents[content.upTarget]![content.upType] = content.upValue
+            }
         }
         return newContents
     }
