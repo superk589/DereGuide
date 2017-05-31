@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import SDWebImage
+import Social
 
 class SettingsTableViewController: UITableViewController, UpdateStatusViewDelegate {
     
@@ -53,6 +54,27 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
             sendEmailCell.addGestureRecognizer(tap)
         }
     }
+    
+    @IBOutlet weak var sendTweetCell: UITableViewCell! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(sendTweet(_:)))
+            sendTweetCell.addGestureRecognizer(tap)
+        }
+    }
+    
+    func sendTweet(_ tap: UITapGestureRecognizer) {
+        if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
+            print("open twitter by SLComposeViewController")
+            vc.setInitialText("#CGSSGuide ")
+            self.tabBarController?.present(vc, animated: true, completion: nil)
+        } else if let url = URL(string: "https://twitter.com/intent/tweet?text=%23CGSSGuide%20"), UIApplication.shared.canOpenURL(url) {
+            print("open twitter by openURL")
+            UIApplication.shared.openURL(url)
+        } else {
+            print("open twitter failed")
+        }
+    }
+    
     func sendEmail() {
         // 首先要判断设备具不具备发送邮件功能
         if MFMailComposeViewController.canSendMail() {

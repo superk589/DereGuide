@@ -29,10 +29,12 @@ class TeamSimulationAdvanceOptionCell: UITableViewCell {
         contentView.addSubview(leftLabel)
         leftLabel.text = NSLocalizedString("高级选项", comment: "")
         leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.adjustsFontSizeToFitWidth = true
 
         leftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(10)
+            make.right.lessThanOrEqualTo(-10)
         }
         
         option1Switch = UISwitch()
@@ -57,6 +59,9 @@ class TeamSimulationAdvanceOptionCell: UITableViewCell {
             make.left.equalTo(leftLabel)
             make.right.lessThanOrEqualTo(option1Switch.snp.left)
         }
+        
+        option1Switch.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        option1Label.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         
         selectionStyle = .none
     }

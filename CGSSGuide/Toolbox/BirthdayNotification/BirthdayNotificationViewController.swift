@@ -99,8 +99,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     }
     
     func gotoSystemNotificationSettings() {
-        let url = URL.init(string: UIApplicationOpenSettingsURLString)!
-        if UIApplication.shared.canOpenURL(url) {
+        if let url = URL.init(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
     }
