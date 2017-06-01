@@ -209,6 +209,8 @@
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
+		12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */; };
+		12F4EAED1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
 		12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */; };
 		12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */; };
@@ -231,6 +233,9 @@
 		12FC8B5B1EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B581EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift */; };
 		12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B591EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift */; };
 		12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */; };
+		12FC8B5F1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B5E1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift */; };
+		12FC8B611EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B601EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift */; };
+		12FC8B631EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B621EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift */; };
 		323BC3994C543BDC591C0203 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */; };
 		B2F3FBF1780F67512AD7E7A8 /* Pods_NotificationContent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6126794B14016D132081DCD9 /* Pods_NotificationContent.framework */; };
 /* End PBXBuildFile section */
@@ -492,6 +497,8 @@
 		12EECCDE1ED5DC460047666C /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationCommonCell.swift; sourceTree = "<group>"; };
+		12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationScoreDistributionController.swift; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
 		12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationAppealCell.swift; path = Information/View/TeamInformationAppealCell.swift; sourceTree = "<group>"; };
 		12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationLeaderSkillCell.swift; path = Information/View/TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
@@ -514,6 +521,9 @@
 		12FC8B581EDE6E6D003CF3C3 /* NoteScoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewCell.swift; sourceTree = "<group>"; };
 		12FC8B591EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionFooter.swift; sourceTree = "<group>"; };
 		12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteScoreTableViewSectionHeader.swift; sourceTree = "<group>"; };
+		12FC8B5E1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationSwitchOption.swift; sourceTree = "<group>"; };
+		12FC8B601EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationSliderOption.swift; sourceTree = "<group>"; };
+		12FC8B621EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationTextFieldOption.swift; sourceTree = "<group>"; };
 		22548F9D37722946B2DE3BBB /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6165819FCB1473016A5900 /* Pods-NotificationContent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContent.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContent/Pods-NotificationContent.release.xcconfig"; sourceTree = "<group>"; };
 		6126794B14016D132081DCD9 /* Pods_NotificationContent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationContent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1108,6 +1118,7 @@
 				12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */,
 				12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */,
 				12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */,
+				12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1120,13 +1131,17 @@
 				12FC8B5A1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift */,
 				12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */,
 				12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */,
-				12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */,
 				12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */,
 				12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */,
 				12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */,
 				12FC8B491EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift */,
+				12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */,
 				12FC8B4A1EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift */,
+				12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */,
 				12FC8B4B1EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift */,
+				12FC8B5E1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift */,
+				12FC8B601EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift */,
+				12FC8B621EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1381,12 +1396,14 @@
 				126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */,
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
+				12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
 				12FC8B561EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift in Sources */,
 				1269EA2B1D5210160071AD7F /* TeamMemberTableViewCell.swift in Sources */,
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
+				12FC8B611EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
@@ -1416,6 +1433,7 @@
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
+				12F4EAED1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift in Sources */,
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */,
@@ -1437,6 +1455,7 @@
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
 				12FC8B3C1EDE6DA7003CF3C3 /* TeamInfomationController.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
+				12FC8B631EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift in Sources */,
 				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				124BA50B1E913E78002E48FE /* EventTrendCell.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
@@ -1536,6 +1555,7 @@
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
+				12FC8B5F1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift in Sources */,
 				122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,

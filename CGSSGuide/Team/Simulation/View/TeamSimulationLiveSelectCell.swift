@@ -69,23 +69,27 @@ class TeamSimulationLiveView: UIView {
         }
     }
     
-    func setupWith(live: CGSSLive, difficulty: CGSSLiveDifficulty) {
-        backgroundLabel.text = ""
-        guard let beatmap = live.getBeatmap(of: difficulty) else {
+    func setup(with scene: CGSSLiveScene?) {
+        guard let scene = scene, let beatmap = scene.beatmap else {
+            backgroundLabel.text = NSLocalizedString("请选择歌曲", comment: "队伍详情页面")
+            descriptionLabel.text = ""
+            jacketImageView.image = nil
+            nameLabel.text = ""
+            typeIcon.image = nil
             return
         }
-        descriptionLabel.text = "\(live[difficulty].stars)☆ \(live[difficulty].difficulty.description) bpm: \(live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
+        backgroundLabel.text = ""
+        descriptionLabel.text = "\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
-        nameLabel.text = live.name
-        nameLabel.textColor = live.color
-        typeIcon.image = live.icon
+        nameLabel.text = scene.live.name
+        nameLabel.textColor = scene.live.color
+        typeIcon.image = scene.live.icon
         
-        if let url = live.jacketURL {
+        if let url = scene.live.jacketURL {
             jacketImageView.sd_setImage(with: url)
         }
-
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,8 +131,8 @@ class TeamSimulationLiveSelectCell: UITableViewCell {
         accessoryType = .disclosureIndicator
     }
     
-    func setupWith(live: CGSSLive, difficulty: CGSSLiveDifficulty) {
-        liveView.setupWith(live: live, difficulty: difficulty)
+    func setup(with scene: CGSSLiveScene?) {
+        liveView.setup(with: scene)
     }
     
     required init?(coder aDecoder: NSCoder) {

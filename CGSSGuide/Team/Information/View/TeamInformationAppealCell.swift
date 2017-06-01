@@ -26,6 +26,8 @@ class TeamInformationAppealCell: UITableViewCell {
     
     var leftLabel: UILabel!
     
+    var descriptionLabel: UILabel!
+    
     var supportLabel: UILabel!
     
     var supportAppealLabel: UILabel!
@@ -44,6 +46,7 @@ class TeamInformationAppealCell: UITableViewCell {
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         leftLabel.textAlignment = .left
         
+        
 //        supportLabel = UILabel()
 //        supportLabel.font = UIFont.systemFont(ofSize: 14)
 //        // backSupportLabel.textColor = UIColor.lightGrayColor()
@@ -55,7 +58,7 @@ class TeamInformationAppealCell: UITableViewCell {
 //        supportAppealTextField.addTarget(self, action: #selector(beginEditAppealTextField(sender:)), for: .editingDidBegin)
 //        supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEnd)
 //        supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEndOnExit)
-//       
+//
 //        supportAppealLabel = UILabel()
 //        supportAppealLabel.font = UIFont.systemFont(ofSize: 14)
 //        supportAppealLabel.textColor = UIColor.darkGray
@@ -83,7 +86,7 @@ class TeamInformationAppealCell: UITableViewCell {
 //            make.right.equalTo(-10)
 //            make.top.equalTo(leftLabel.snp.bottom).offset(5)
 //        }
-//        
+//
 //        supportLabel.snp.makeConstraints { (make) in
 //            make.left.equalTo(10)
 //            make.centerY.equalTo(supportAppealLabel)
@@ -94,8 +97,21 @@ class TeamInformationAppealCell: UITableViewCell {
             make.left.equalTo(10)
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
         }
+        
+        descriptionLabel = UILabel()
+        descriptionLabel.textColor = UIColor.darkGray
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.text = NSLocalizedString("* 不含后援值，歌曲模式为常规模式", comment: "")
+        contentView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(appealGrid.snp.bottom).offset(5)
+            make.bottom.equalTo(-10)
+            make.left.equalTo(10)
+            make.right.lessThanOrEqualTo(-10)
+        }
+        
         selectionStyle = .none
     }
     
@@ -123,13 +139,13 @@ class TeamInformationAppealCell: UITableViewCell {
         
         appealStrings.append([" ", "Total", "Vocal", "Dance", "Visual"])
         var presentSub1 = [NSLocalizedString("彩色曲", comment: "队伍详情页面")]
-        presentSub1.append(contentsOf: team.getAppeal(.office).toStringArrayWithBackValue(0))
+        presentSub1.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .allType).toStringArrayWithBackValue(0))
         var presentSub2 = [NSLocalizedString("Cu曲", comment: "队伍详情页面")]
-        presentSub2.append(contentsOf: team.getAppeal(.cute).toStringArrayWithBackValue(0))
+        presentSub2.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .cute).toStringArrayWithBackValue(0))
         var presentSub3 = [NSLocalizedString("Co曲", comment: "队伍详情页面")]
-        presentSub3.append(contentsOf: team.getAppeal(.cool).toStringArrayWithBackValue(0))
+        presentSub3.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .cool).toStringArrayWithBackValue(0))
         var presentSub4 = [NSLocalizedString("Pa曲", comment: "队伍详情页面")]
-        presentSub4.append(contentsOf: team.getAppeal(.passion).toStringArrayWithBackValue(0))
+        presentSub4.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .passion).toStringArrayWithBackValue(0))
         
         appealStrings.append(presentSub1)
         appealStrings.append(presentSub2)

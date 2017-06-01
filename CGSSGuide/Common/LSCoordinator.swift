@@ -79,13 +79,8 @@ class LSCoordinator {
         self.fixedAppeal = team.usingCustomAppeal ? team.customAppeal : nil
     }
     
-    func getBaseScorePerNote() -> Double {
-        let diffStars = scene.live.getStarsForDiff(scene.difficulty)
-        if let fixedAppeal = fixedAppeal {
-            return Double(fixedAppeal / beatmap.numberOfNotes) * (difficultyFactor[diffStars] ?? 1)
-        } else {
-            return Double(self.appeal) / Double(beatmap.numberOfNotes) * (difficultyFactor[diffStars] ?? 1)
-        }
+    var baseScorePerNote: Double {
+        return Double(fixedAppeal ?? appeal) / Double(beatmap.numberOfNotes) * (difficultyFactor[scene.stars] ?? 1)
     }
     
     func getCriticalPointNoteIndexes(total: Int) -> [Int] {
@@ -111,7 +106,7 @@ class LSCoordinator {
     private func generateLSNotes() -> [LSNote] {
         var lsNotes = [LSNote]()
         
-        let baseScore = self.getBaseScorePerNote()
+        let baseScore = baseScorePerNote
         
         let notes = beatmap.validNotes
         

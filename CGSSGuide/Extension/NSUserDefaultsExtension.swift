@@ -65,4 +65,31 @@ extension UserDefaults {
             return UserDefaults.standard.bool(forKey: "allowOverloadSkillsTriggerLifeCondition")
         }
     }
+    
+    var roomUpValue: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "roomUpValue")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "roomUpValue") as? Int ?? 10
+        }
+    }
+    
+    var greatPercent: Double {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "greatPercent")
+        }
+        get {
+            return UserDefaults.standard.double(forKey: "greatPercent")
+        }
+    }
+    
+    var simulationTimes: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "simulationTimes")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "simulationTimes") as? Int ?? 10000
+        }
+    }
 }

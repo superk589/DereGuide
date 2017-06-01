@@ -11,6 +11,12 @@ import SwiftyJSON
 
 typealias LSResultClosure = (LSResult, [LSLog]) -> Void
 
+fileprivate extension Int {
+    func addGreatPercent(_ percent: Double) -> Int {
+        return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
+    }
+}
+
 class CGSSLiveSimulator {
     
     var notes: [LSNote]
@@ -253,7 +259,7 @@ class CGSSLiveSimulator {
 
         }
         
-        simulateResult.append(sum)
+        simulateResult.append(sum.addGreatPercent(UserDefaults.standard.greatPercent))
         callback?(LSResult.init(scores: simulateResult), logs)
         
 //        #if DEBUG

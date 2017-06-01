@@ -166,6 +166,7 @@ class EventChartController: BaseViewController {
             let color = colors.removeLast()
             set.setColor(color)
             set.lineWidth = 2
+            set.drawValuesEnabled = false
             dataSets.append(set)
         }
     
@@ -180,6 +181,7 @@ class EventChartController: BaseViewController {
         chartView.rightAxis.enabled = false
         chartView.xAxis.granularity = 1
         chartView.scaleYEnabled = false
+        chartView.leftAxis.drawBottomYLabelEntryEnabled = false
         let nf = NumberFormatter()
         nf.positiveFormat = "0K"
         nf.multiplier = 0.001

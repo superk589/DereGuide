@@ -63,13 +63,13 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     }
     
     func sendTweet(_ tap: UITapGestureRecognizer) {
-        if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
-            print("open twitter by SLComposeViewController")
-            vc.setInitialText("#CGSSGuide ")
-            self.tabBarController?.present(vc, animated: true, completion: nil)
-        } else if let url = URL(string: "https://twitter.com/intent/tweet?text=%23CGSSGuide%20"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "https://twitter.com/intent/tweet?text=%23CGSSGuide%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter by openURL")
             UIApplication.shared.openURL(url)
+        } else if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
+            print("open twitter by SLComposeViewController")
+            vc.setInitialText("#CGSSGuide\n")
+            self.tabBarController?.present(vc, animated: true, completion: nil)
         } else {
             print("open twitter failed")
         }

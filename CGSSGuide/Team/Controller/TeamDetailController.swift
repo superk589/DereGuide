@@ -16,8 +16,9 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
     
     var team: CGSSTeam! {
         didSet {
-            for vc in vcs {
-                vc.team = team
+            setNeedsReloadTeam()
+            if self.isShowing {
+                reloadTeamIfNeeded()
             }
         }
     }
@@ -27,16 +28,43 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
     var titles = [NSLocalizedString("得分计算", comment: ""),
                   NSLocalizedString("队伍信息", comment: "")]
     
+    private func reloadTeamIfNeeded() {
+        if needsReloadTeam {
+            needsReloadTeam = false
+            for vc in vcs {
+                vc.team = team
+            }
+        }
+    }
+    
+    private var isShowing = false
+    private var needsReloadTeam = false
+    private func setNeedsReloadTeam() {
+        needsReloadTeam = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.dataSource = self
         self.delegate = self
         
         titleView.backgroundColor = UIColor.init(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
+        
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isShowing = true
+        reloadTeamIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isShowing = false
+    }
+    
     func pageCollectionController(_ pageCollectionController: PageCollectionController, viewControllerAt indexPath: IndexPath) -> UIViewController {
         let vc = vcs[indexPath.item] as! UIViewController
         return vc

@@ -9,6 +9,12 @@
 import UIKit
 import SwiftyJSON
 
+fileprivate extension Int {
+    func addGreatPercent(_ percent: Double) -> Int {
+        return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
+    }
+}
+
 extension LSNote {
     func expectation(in distribution: LFDistribution) -> Double {
         
@@ -44,7 +50,7 @@ class CGSSLiveFormulator {
 //            scores.append(Int(round(note.baseScore * note.comboFactor * distribution.average / 10000)))
         }
 //        (scores as NSArray).write(to: URL.init(fileURLWithPath: NSHomeDirectory() + "/new.txt"), atomically: true)
-        return Int(round(sum))
+        return Int(round(sum)).addGreatPercent(UserDefaults.standard.greatPercent)
     }
     
     var maxScore: Int {
@@ -54,7 +60,7 @@ class CGSSLiveFormulator {
             let distribution = distributions[i]
             sum += Int(round(note.baseScore * note.comboFactor * Double(distribution.max) / 10000))
         }
-        return sum
+        return sum.addGreatPercent(UserDefaults.standard.greatPercent)
     }
     
     private func generateScoreDistributions() -> [LFDistribution] {

@@ -39,11 +39,18 @@ class CGSSTeam: NSObject, NSCoding {
     var leader: CGSSTeamMember!
     var subs: [CGSSTeamMember]!
     var friendLeader: CGSSTeamMember!
-    // 队伍总表现值
-    var customAppeal: Int!
-    var supportAppeal: Int!
+    var customAppeal: Int
+    var supportAppeal: Int
+    var usingCustomAppeal: Bool
     
-    var usingCustomAppeal: Bool = false
+    init(leader: CGSSTeamMember, subs: [CGSSTeamMember], friendLeader: CGSSTeamMember?, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, customAppeal: Int = 0, usingCustomAppeal: Bool = false) {
+        self.leader = leader
+        self.subs = subs
+        self.supportAppeal = supportAppeal
+        self.friendLeader = friendLeader ?? leader
+        self.usingCustomAppeal = usingCustomAppeal
+        self.customAppeal = customAppeal
+    }
     
     var testLive: CGSSLive? {
         var result: CGSSLive?
@@ -109,29 +116,29 @@ class CGSSTeam: NSObject, NSCoding {
         return appeal
     }
     
-    func getAppeal(_ type: CGSSCardTypes) -> CGSSAppeal {
+    private func getAppeal(_ type: CGSSCardTypes) -> CGSSAppeal {
         var appeal = CGSSAppeal.zero
         let contents = getUpContent()
         for i in 0...5 {
-            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
     
-    func getAppealInGroove(_ type: CGSSCardTypes, burstType: LeaderSkillUpType) -> CGSSAppeal {
-        var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+    private func getAppealInGroove(_ type: CGSSCardTypes, burstType: LeaderSkillUpType) -> CGSSAppeal {
+        var appeal = CGSSAppeal.zero
         let contents = getUpContentInGroove(by: burstType)
         for i in 0...4 {
-            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
     
-    func getAppealInParade(_ type: CGSSLiveTypes) -> CGSSAppeal {
-        var appeal = CGSSAppeal.init(visual: 0, vocal: 0, dance: 0, life: 0)
+    private func getAppealInParade(_ type: CGSSLiveTypes) -> CGSSAppeal {
+        var appeal = CGSSAppeal.zero
         let contents = getUpContentInParade()
         for i in 0...4 {
-            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, roomUpValue: 10, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
+            appeal += self[i]!.cardRef!.getAppealBy(liveType: type, contents: contents, potential: self[i]?.potential ?? CGSSPotential.zero)
         }
         return appeal
     }
@@ -216,7 +223,7 @@ class CGSSTeam: NSObject, NSCoding {
     }
     
     // 获取队长技能对队伍的加成效果
-    func getUpContent() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+    private func getUpContent() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
@@ -245,7 +252,7 @@ class CGSSTeam: NSObject, NSCoding {
         return newContents
     }
     
-    func getUpContentInGroove(by burstType: LeaderSkillUpType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+    private func getUpContentInGroove(by burstType: LeaderSkillUpType) -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
@@ -274,7 +281,7 @@ class CGSSTeam: NSObject, NSCoding {
         return newContents
     }
     
-    func getUpContentInParade() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
+    private func getUpContentInParade() -> [CGSSCardTypes: [LeaderSkillUpType: Int]] {
         var contents = [LeaderSkillUpContent]()
         // 自己的队长技能
         if let leaderSkill = leader.cardRef?.leaderSkill {
@@ -327,21 +334,14 @@ class CGSSTeam: NSObject, NSCoding {
         return true
     }
     
-    init(leader: CGSSTeamMember, subs: [CGSSTeamMember], supportAppeal: Int, friendLeader: CGSSTeamMember?) {
-        self.leader = leader
-        self.subs = subs
-        self.supportAppeal = supportAppeal
-        self.friendLeader = friendLeader ?? leader
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         self.leader = aDecoder.decodeObject(forKey: "leader") as? CGSSTeamMember
         self.subs = aDecoder.decodeObject(forKey: "subs") as? [CGSSTeamMember]
-        self.supportAppeal = aDecoder.decodeObject(forKey: "supportAppeal") as? Int ?? CGSSGlobal.defaultSupportAppeal
+        self.supportAppeal = aDecoder.decodeInteger(forKey: "supportAppeal")
         self.friendLeader = aDecoder.decodeObject(forKey: "friendLeader") as? CGSSTeamMember
         self.testDifficulty = CGSSLiveDifficulty(rawValue: aDecoder.decodeObject(forKey: "testDifficulty") as? Int ?? 1)
         self.testLiveId = aDecoder.decodeObject(forKey: "testLiveId") as? Int
-        self.customAppeal = aDecoder.decodeObject(forKey: "customAppeal") as? Int ?? 0
+        self.customAppeal = aDecoder.decodeInteger(forKey: "customAppeal")
         self.usingCustomAppeal = aDecoder.decodeBool(forKey: "usingCustomAppeal")
     }
     
@@ -360,7 +360,7 @@ class CGSSTeam: NSObject, NSCoding {
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = 10, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
+    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = UserDefaults.standard.roomUpValue, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
         var appeal = self.appeal.addBy(potential: potential, rarity: self.rarityType)
         var factor = 100 + roomUpValue
         if liveType == cardType || liveType == .allType {

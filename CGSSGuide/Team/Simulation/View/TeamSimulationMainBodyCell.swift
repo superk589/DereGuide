@@ -12,8 +12,6 @@ import SnapKit
 protocol TeamSimulationMainBodyCellDelegate: class {
     func startCalculate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
     func startSimulate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
-    func checkScoreDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
-    func checkSupportSkillDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
 }
 
 class TeamSimulationMainBodyCell: UITableViewCell {
@@ -26,9 +24,11 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     
     var simulationGrid: GridLabel!
     
-    var scoreDetailButton: UIButton!
-    
-    var supportSkillDetailButton: UIButton!
+//    var scoreDistributionButton: UIButton!
+//    
+//    var scoreDetailButton: UIButton!
+//    
+//    var supportSkillDetailButton: UIButton!
     
     weak var delegate: TeamSimulationMainBodyCellDelegate?
     
@@ -76,32 +76,46 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(simulationButton.snp.bottom).offset(10)
-        }
-
-        scoreDetailButton = UIButton()
-        scoreDetailButton.setTitle("  " + NSLocalizedString("得分详情", comment: "") + " >", for: .normal)
-        scoreDetailButton.backgroundColor = Color.visual
-        scoreDetailButton.addTarget(self, action: #selector(checkScoreDetail), for: .touchUpInside)
-        contentView.addSubview(scoreDetailButton)
-        scoreDetailButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.height.equalTo(30)
-            make.top.equalTo(simulationGrid.snp.bottom).offset(10)
-        }
-        
-        supportSkillDetailButton = UIButton()
-        supportSkillDetailButton.setTitle("  " + NSLocalizedString("辅助技能详情", comment: "") + " >", for: .normal)
-        supportSkillDetailButton.backgroundColor = Color.life
-        supportSkillDetailButton.addTarget(self, action: #selector(checkSupportSkillDetail), for: .touchUpInside)
-        contentView.addSubview(supportSkillDetailButton)
-        supportSkillDetailButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.height.equalTo(30)
-            make.top.equalTo(scoreDetailButton.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }
+        
+//        scoreDistributionButton = UIButton()
+//        scoreDistributionButton.setTitle("  " + NSLocalizedString("得分分布", comment: "") + " >", for: .normal)
+//        scoreDistributionButton.backgroundColor = Color.parade
+//        scoreDistributionButton.addTarget(self, action: #selector(checkScoreDistribution), for: .touchUpInside)
+//        contentView.addSubview(scoreDistributionButton)
+//        scoreDistributionButton.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.height.equalTo(30)
+//            make.top.equalTo(simulationGrid.snp.bottom).offset(10)
+//        }
+//        
+//
+//        scoreDetailButton = UIButton()
+//        scoreDetailButton.setTitle("  " + NSLocalizedString("得分详情", comment: "") + " >", for: .normal)
+//        scoreDetailButton.backgroundColor = Color.visual
+//        scoreDetailButton.addTarget(self, action: #selector(checkScoreDetail), for: .touchUpInside)
+//        contentView.addSubview(scoreDetailButton)
+//        scoreDetailButton.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.height.equalTo(30)
+//            make.top.equalTo(scoreDistributionButton.snp.bottom).offset(10)
+//        }
+//        
+//        supportSkillDetailButton = UIButton()
+//        supportSkillDetailButton.setTitle("  " + NSLocalizedString("辅助技能详情", comment: "") + " >", for: .normal)
+//        supportSkillDetailButton.backgroundColor = Color.life
+//        supportSkillDetailButton.addTarget(self, action: #selector(checkSupportSkillDetail), for: .touchUpInside)
+//        contentView.addSubview(supportSkillDetailButton)
+//        supportSkillDetailButton.snp.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.height.equalTo(30)
+//            make.top.equalTo(scoreDetailButton.snp.bottom).offset(10)
+//            make.bottom.equalTo(-10)
+//        }
         
         prepareGridViewFields()
         
@@ -170,14 +184,6 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     
     func startSimulate() {
         delegate?.startSimulate(self)
-    }
-    
-    func checkScoreDetail() {
-        delegate?.checkScoreDetail(self)
-    }
-    
-    func checkSupportSkillDetail() {
-        delegate?.checkSupportSkillDetail(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

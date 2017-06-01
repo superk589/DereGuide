@@ -21,6 +21,7 @@ class TeamEditViewController: BaseTableViewController {
     var friendLeader: CGSSTeamMember?
     var supportAppeal: Int?
     var customAppeal: Int?
+    var usingCustomAppeal = false
     var hv = UIView()
     var lastIndex = 0
     var lastScrollViewOffset: CGPoint?
@@ -80,6 +81,7 @@ class TeamEditViewController: BaseTableViewController {
         }
         self.supportAppeal = team.supportAppeal
         self.customAppeal = team.customAppeal
+        self.usingCustomAppeal = team.usingCustomAppeal
     }
     
     func getMemberByIndex(_ index: Int) -> CGSSTeamMember? {
@@ -115,8 +117,7 @@ class TeamEditViewController: BaseTableViewController {
     
     func saveTeam() {
         if let leader = self.leader, let friendLeader = self.friendLeader , subs.count == 4 {
-            let team = CGSSTeam.init(leader: leader, subs: [CGSSTeamMember].init(subs.values), supportAppeal: supportAppeal ?? CGSSGlobal.defaultSupportAppeal, friendLeader: friendLeader)
-            team.customAppeal = customAppeal ?? 0
+            let team = CGSSTeam(leader: leader, subs: [CGSSTeamMember].init(subs.values), friendLeader: friendLeader, supportAppeal: supportAppeal ?? CGSSGlobal.defaultSupportAppeal, customAppeal: customAppeal ?? 0, usingCustomAppeal: usingCustomAppeal)
             delegate?.save(team)
             _ = self.navigationController?.popViewController(animated: true)
         } else {

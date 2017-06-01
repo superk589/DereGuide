@@ -117,7 +117,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         
         customAppealTextField.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(supportAppealTextField.snp.bottom).offset(5)
+            make.top.equalTo(supportAppealTextField.snp.bottom).offset(10)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
             make.height.greaterThanOrEqualTo(24)
             make.bottom.equalTo(-10)

@@ -92,14 +92,16 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        print("load \(indexPath.item)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCell", for: indexPath)
         if let vc = dataSource?.pageCollectionController(self, viewControllerAt: indexPath) {
+            self.addChildViewController(vc)
+            vc.beginAppearanceTransition(true, animated: false)
             cell.contentView.addSubview(vc.view)
             vc.view.snp.remakeConstraints { (remake) in
                 remake.edges.equalTo(cell.contentView)
             }
-            self.addChildViewController(vc)
+            vc.endAppearanceTransition()
+            vc.didMove(toParentViewController: self)
         }
         return cell
     }

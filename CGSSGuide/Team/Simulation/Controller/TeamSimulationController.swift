@@ -14,7 +14,14 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     var team: CGSSTeam! {
         didSet {
             tableView?.reloadData()
+            resetDataGrid()
         }
+    }
+    
+    fileprivate func resetDataGrid() {
+        let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
+        cell?.clearSimulationGrid()
+        cell?.clearCalculationGrid()
     }
     
     var simulatorType: CGSSLiveSimulatorType = .normal {
@@ -40,7 +47,13 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         vc.delegate = self
         return vc
     }()
-
+    
+    var simulationResult: LSResult?
+    
+    var titles = [NSLocalizedString("得分分布", comment: ""),
+                  NSLocalizedString("得分详情", comment: ""),
+                  NSLocalizedString("辅助技能详情", comment: "")]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,21 +65,45 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         tableView.register(TeamSimulationTeamCell.self, forCellReuseIdentifier: TeamSimulationTeamCell.description())
         tableView.register(TeamSimulationLiveSelectCell.self, forCellReuseIdentifier: TeamSimulationLiveSelectCell.description())
 
+        tableView.register(TeamSimulationCommonCell.self, forCellReuseIdentifier: TeamSimulationCommonCell.description())
         tableView.register(TeamSimulationAppealEditingCell.self, forCellReuseIdentifier: TeamSimulationAppealEditingCell.description())
         tableView.register(TeamSimulationModeSelectionCell.self, forCellReuseIdentifier: TeamSimulationModeSelectionCell.description())
         tableView.register(TeamSimulationMainBodyCell.self, forCellReuseIdentifier: TeamSimulationMainBodyCell.description())
         tableView.register(TeamSimulationDescriptionCell.self, forCellReuseIdentifier: TeamSimulationDescriptionCell.description())
         tableView.register(TeamSimulationAdvanceOptionCell.self, forCellReuseIdentifier: TeamSimulationAdvanceOptionCell.description())
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
-    
+        
     }
-
+    
+    func resetAllSettings() {
+        resetDataGrid()
+        simulationResult = nil
+        simulatorType = .normal
+        grooveType = nil
+        scene = nil
+        UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition = false
+        UserDefaults.standard.greatPercent = 0.0
+        UserDefaults.standard.simulationTimes = 10000
+        UserDefaults.standard.roomUpValue = 10
+        tableView?.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.endEditing(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        pageCollectionController?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: ""), style: .plain, target: self, action: #selector(resetAllSettings))
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 11
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,9 +115,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationLiveSelectCell.description(), for: indexPath) as! TeamSimulationLiveSelectCell
-            if let scene = scene {
-                cell.setupWith(live: scene.live, difficulty: scene.difficulty)
-            }
+            cell.setup(with: scene)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationAppealEditingCell.description(), for: indexPath) as! TeamSimulationAppealEditingCell
@@ -99,12 +134,16 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationMainBodyCell.description(), for: indexPath) as! TeamSimulationMainBodyCell
             cell.delegate = self
             return cell
-        case 6:
+        case 6...8:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationCommonCell.description(), for: indexPath) as! TeamSimulationCommonCell
+            cell.setup(with: titles[indexPath.row - 6])
+            return cell
+        case 9:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationAdvanceOptionCell.description(), for: indexPath) as! TeamSimulationAdvanceOptionCell
             cell.delegate = self
-            cell.option1Switch.isOn = UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition
+            cell.setupWithUserDefaults()
             return cell
-        case 7:
+        case 10:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationDescriptionCell.description(), for: indexPath) as! TeamSimulationDescriptionCell
             return cell
         default:
@@ -121,10 +160,10 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
                 let teamEditDVC = TeamEditViewController()
                 teamEditDVC.delegate = self
                 teamEditDVC.initWith(team)
-                pageCollectionController?.navigationController?.pushViewController(teamEditDVC, animated: true)
+                navigationController?.pushViewController(teamEditDVC, animated: true)
             }
         case 1:
-            pageCollectionController?.navigationController?.pushViewController(liveSelectionViewController, animated: true)
+            navigationController?.pushViewController(liveSelectionViewController, animated: true)
         case 3:
             let cell = tableView.cellForRow(at: indexPath)
             showActionSheetOfLiveModeSelection(at: cell as? TeamSimulationModeSelectionCell)
@@ -133,12 +172,49 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
                 let cell = tableView.cellForRow(at: indexPath)
                 showActionSheetOfGrooveTypeSelection(at: cell as? TeamSimulationModeSelectionCell)
             }
-            
+        case 6:
+            checkScoreDistribution()
+        case 7:
+            checkScoreDetail()
+        case 8:
+            checkSupportSkillDetail()
         default:
             break
         }
 
     }
+    
+    func checkScoreDistribution() {
+        if let result = self.simulationResult, result.scores.count > 0 {
+            let vc = TeamSimulationScoreDistributionController(result: result)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            UIAlertController.showHintMessage(NSLocalizedString("至少进行一次模拟计算之后才能查看得分分布", comment: ""), in: nil)
+        }
+    }
+
+    func checkScoreDetail() {
+        if let scene = self.scene {
+            let vc = LiveSimulatorViewController()
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            vc.coordinator = coordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showNotSelectSongAlert()
+        }
+    }
+    
+    func checkSupportSkillDetail() {
+        if let scene = self.scene {
+            let vc = LiveSimulatorSupportSkillsViewController()
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            vc.coordinator = coordinator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showNotSelectSongAlert()
+        }
+    }
+
     
     private func showActionSheetOfLiveModeSelection(at cell: TeamSimulationModeSelectionCell?) {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择歌曲模式", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
@@ -229,17 +305,13 @@ extension TeamSimulationController: TeamSimulationAppealEditingCellDelegate {
 }
 
 extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
-    
-    private func showUnknownSkillAlert() {
-        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+
+    fileprivate func showUnknownSkillAlert() {
+        UIAlertController.showHintMessage(NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), in: nil)
     }
     
-    private func showNotSelectSongAlert() {
-        let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: "弹出框标题"), message: NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    fileprivate func showNotSelectSongAlert() {
+        UIAlertController.showHintMessage(NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), in: nil)
     }
     
     func startSimulate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
@@ -256,10 +328,11 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
                     cell?.simulationButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
                 }
             }, callback: { (result, logs) in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     cell?.setupSimulationResult(value1: result.get(percent: 1), value2: result.get(percent: 5), value3: result.get(percent: 20), value4: result.get(percent: 50))
 //                    print(result.average)
                     cell?.resetSimulationButton()
+                    self?.simulationResult = result
                 }
             })
         }
@@ -275,7 +348,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
                 #if DEBUG
                     doSimulationBy(simulator: simulator, times: 500)
                 #else
-                    doSimulationBy(simulator: simulator, times: 10000)
+                    doSimulationBy(simulator: simulator, times: UserDefaults.standard.simulationTimes)
                 #endif
             }
         } else {
@@ -317,32 +390,23 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             cell?.resetCalculationButton()
         }
     }
-    
-    func checkScoreDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
-        if let scene = self.scene {
-            let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
-            vc.coordinator = coordinator
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            showNotSelectSongAlert()
-        }
-    }
-    
-    func checkSupportSkillDetail(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
-        if let scene = self.scene {
-            let vc = LiveSimulatorSupportSkillsViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
-            vc.coordinator = coordinator
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            showNotSelectSongAlert()
-        }
-    }
 }
 
 
 extension TeamSimulationController: TeamSimulationAdvanceOptionCellDelegate {
+    
+    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetGreatPercent value: Double) {
+        UserDefaults.standard.greatPercent = value
+    }
+
+    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetSimulationTimes times: Int) {
+        UserDefaults.standard.simulationTimes = times
+    }
+    
+    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetRoomValue value: Int) {
+        UserDefaults.standard.roomUpValue = value
+    }
+
     func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetOverloadSkillLifeLimitation allowed: Bool) {
         UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition = allowed
     }

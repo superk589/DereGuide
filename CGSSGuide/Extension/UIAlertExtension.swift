@@ -20,4 +20,12 @@ extension UIAlertController {
             showConfirmAlert(message: message, in: vc)
         }
     }
+    
+    static func showHintMessage(_ message: String, title: String = NSLocalizedString("提示", comment: ""), in viewController: UIViewController?) {
+        if let vc = viewController ?? UIApplication.shared.keyWindow?.rootViewController {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .default))
+            vc.present(alert, animated: true)
+        }
+    }
 }

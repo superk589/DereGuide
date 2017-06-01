@@ -47,7 +47,7 @@ class TeamInformationLeaderSkillCell: UITableViewCell {
     func setup(with team: CGSSTeam) {
         var upValueStrings = [[String]]()
         
-        let contents = team.getUpContent()
+        let contents = team.getLeaderSkillUpContentBy(simulatorType: .normal)
         upValueStrings.append(["  ", "Vocal", "Dance", "Visual", NSLocalizedString("技能触发", comment: "队伍详情页面"), "HP"])
         
         var upCuteString = [String]()

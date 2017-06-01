@@ -22,6 +22,9 @@ struct LSResult {
     
     func get(percent: Int) -> Int {
         let index = percent * scores.count / 100
+        guard index > 0 else {
+            return scores[0]
+        }
         return scores[index - 1]
     }
 }
