@@ -348,7 +348,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
                 #if DEBUG
                     doSimulationBy(simulator: simulator, times: 500)
                 #else
-                    doSimulationBy(simulator: simulator, times: UserDefaults.standard.simulationTimes)
+                    doSimulationBy(simulator: simulator, times: UInt(UserDefaults.standard.simulationTimes))
                 #endif
             }
         } else {

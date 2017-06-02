@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.3.2
+
+1. 反馈方式增加 Twitter
+2. 修复公主系列队长技能对队伍表现值加成错误的问题
+3. 组队模拟中新增得分分布图，同时还增加了更多高级选项
+
+##### Japanese version
+
+##### English version
+
+1. add Twitter as a new way to feedback
+2. fix wrong team appeal when leader skill is one of princess series skills
+3. add a score distribution chart and more advance options for team simulation
+
 ### 1.3.1
 
 1. 修复生日通知中没有角色头像的问题

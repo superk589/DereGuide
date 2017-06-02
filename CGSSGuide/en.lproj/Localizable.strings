@@ -618,4 +618,12 @@
 "高级选项" = "Advance Options";
 "模拟计算中生命不足时不发动过载技能" = "Simulation considers overload skill's trigger condition";
 
+/* new in 1.3.2 */
+
+"得分分布" = "Score Distribution";
+"Great占比%" = "Great Percent %";
+"小屋加成%" = "Room Bonus %";
+"模拟次数" = "Simulation Times";
+"* 不含后援值，歌曲模式为常规模式" = "* Does not contain support appeal, in normal mode";
+"至少进行一次模拟计算之后才能查看得分分布" = "You can not see score distribution chart unless simulating at least once";
 
