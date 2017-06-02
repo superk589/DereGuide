@@ -50,7 +50,7 @@ class CGSSLiveFormulator {
 //            scores.append(Int(round(note.baseScore * note.comboFactor * distribution.average / 10000)))
         }
 //        (scores as NSArray).write(to: URL.init(fileURLWithPath: NSHomeDirectory() + "/new.txt"), atomically: true)
-        return Int(round(sum)).addGreatPercent(UserDefaults.standard.greatPercent)
+        return Int(round(sum)).addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
     }
     
     var maxScore: Int {
@@ -60,7 +60,7 @@ class CGSSLiveFormulator {
             let distribution = distributions[i]
             sum += Int(round(note.baseScore * note.comboFactor * Double(distribution.max) / 10000))
         }
-        return sum.addGreatPercent(UserDefaults.standard.greatPercent)
+        return sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
     }
     
     private func generateScoreDistributions() -> [LFDistribution] {

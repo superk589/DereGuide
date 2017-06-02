@@ -104,11 +104,6 @@ class TeamEditViewController: BaseTableViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tableView.endEditing(true)
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // print(indexPath.row, cells[indexPath.row].contentView.fheight)
         // 如果此处不加上一个1pixel的分割线的宽度 每次reloadData会自动将contentView的高度减少1pixel高度
@@ -264,13 +259,6 @@ extension TeamEditViewController: BaseCardTableViewControllerDelegate {
             cell.initWith(friendLeader!, type: .friend)
         }
         tableView.reloadData()
-    }
-}
-
-//MARK: UIScrollView代理方法
-extension TeamEditViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        tableView.endEditing(true)
     }
 }
 

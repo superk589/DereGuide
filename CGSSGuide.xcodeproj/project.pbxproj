@@ -211,6 +211,9 @@
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */; };
 		12F4EAED1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */; };
+		12F57C5D1EE2928000638650 /* TeamAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */; };
+		12F57C5F1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */; };
+		12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
 		12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */; };
 		12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */; };
@@ -223,7 +226,6 @@
 		12FC8B4E1EDE6DEB003CF3C3 /* TeamSimulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */; };
 		12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */; };
 		12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */; };
-		12FC8B511EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */; };
 		12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */; };
 		12FC8B531EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */; };
 		12FC8B541EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */; };
@@ -499,6 +501,9 @@
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationCommonCell.swift; sourceTree = "<group>"; };
 		12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationScoreDistributionController.swift; sourceTree = "<group>"; };
+		12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAdvanceOptionsController.swift; sourceTree = "<group>"; };
+		12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAdvanceOptionsTableViewCell.swift; sourceTree = "<group>"; };
+		12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulationAdvanceOptionsManager.swift; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
 		12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationAppealCell.swift; path = Information/View/TeamInformationAppealCell.swift; sourceTree = "<group>"; };
 		12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationLeaderSkillCell.swift; path = Information/View/TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
@@ -511,7 +516,6 @@
 		12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationController.swift; sourceTree = "<group>"; };
 		12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewCell.swift; sourceTree = "<group>"; };
 		12FC8B441EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewHeader.swift; sourceTree = "<group>"; };
-		12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAdvanceOptionCell.swift; sourceTree = "<group>"; };
 		12FC8B461EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationAppealEditingCell.swift; sourceTree = "<group>"; };
 		12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationDescriptionCell.swift; sourceTree = "<group>"; };
 		12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationLiveSelectCell.swift; sourceTree = "<group>"; };
@@ -754,6 +758,7 @@
 				12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */,
 				1262F4F31ECC4E8700AD6424 /* Protocols.swift */,
 				12536DB91ED5177C00B75BA0 /* UserNotificationHandler.swift */,
+				12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1119,6 +1124,7 @@
 				12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */,
 				12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */,
 				12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */,
+				12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1135,13 +1141,13 @@
 				12FC8B471EDE6DEB003CF3C3 /* TeamSimulationDescriptionCell.swift */,
 				12FC8B481EDE6DEB003CF3C3 /* TeamSimulationLiveSelectCell.swift */,
 				12FC8B491EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift */,
-				12FC8B451EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift */,
 				12FC8B4A1EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift */,
 				12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */,
 				12FC8B4B1EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift */,
 				12FC8B5E1EDE90D0003CF3C3 /* TeamSimulationSwitchOption.swift */,
 				12FC8B601EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift */,
 				12FC8B621EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift */,
+				12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1421,6 +1427,7 @@
 				12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
+				12F57C5F1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift in Sources */,
 				129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */,
 				129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
@@ -1547,7 +1554,6 @@
 				12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */,
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				1269E9E01D520B5D0071AD7F /* CGSSShiftingBPMLive.swift in Sources */,
-				12FC8B511EDE6DEB003CF3C3 /* TeamSimulationAdvanceOptionCell.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */,
@@ -1566,10 +1572,12 @@
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
+				12F57C5D1EE2928000638650 /* TeamAdvanceOptionsController.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
+				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,
 				12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,

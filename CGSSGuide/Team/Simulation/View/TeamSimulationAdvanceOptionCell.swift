@@ -33,7 +33,7 @@ class TeamSimulationAdvanceOptionCell: UITableViewCell {
     
     var option4: TeamSimulationTextFieldOption!
     
-    // var resetButton: UIButton!
+    var resetButton: UIButton!
 
     weak var delegate: TeamSimulationAdvanceOptionCellDelegate?
     
@@ -60,7 +60,7 @@ class TeamSimulationAdvanceOptionCell: UITableViewCell {
         option1Label.text = NSLocalizedString("模拟计算中生命不足时不发动过载技能", comment: "")
        
         option1.snp.makeConstraints { (make) in
-            make.top.equalTo(leftLabel.snp.bottom).offset(5)
+            make.top.equalTo(leftLabel.snp.bottom).offset(10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
         }
@@ -116,10 +116,10 @@ class TeamSimulationAdvanceOptionCell: UITableViewCell {
     }
     
     func setupWithUserDefaults() {
-        option1.switch.isOn = UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition
-        option2.textField.text = String(UserDefaults.standard.roomUpValue)
-        option3.textField.text = String(UserDefaults.standard.greatPercent)
-        option4.textField.text = String(UserDefaults.standard.simulationTimes)
+        option1.switch.isOn = LiveSimulationAdvanceOptionsManager.default.allowOverloadSkillsTriggerLifeCondition
+        option2.textField.text = String(LiveSimulationAdvanceOptionsManager.default.roomUpValue)
+        option3.textField.text = String(LiveSimulationAdvanceOptionsManager.default.greatPercent)
+        option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)
     }
     
     func option2TextFieldEndEditing(_ sender: UITextField) {

@@ -259,7 +259,7 @@ class CGSSLiveSimulator {
 
         }
         
-        simulateResult.append(sum.addGreatPercent(UserDefaults.standard.greatPercent))
+        simulateResult.append(sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent))
         callback?(LSResult.init(scores: simulateResult), logs)
         
 //        #if DEBUG

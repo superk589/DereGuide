@@ -45,7 +45,7 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
         case .simulation:
             navigationItem.title = displayType.description
             var options: LSOptions = [.detailLog, .supportSkills]
-            if UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition {
+            if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
                 options.insert(.overloadLimitByLife)
             }
             simulator.simulateOnce(options: options, callback: { [weak self] (result, logs) in

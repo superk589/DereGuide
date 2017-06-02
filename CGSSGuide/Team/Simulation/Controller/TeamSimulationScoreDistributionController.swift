@@ -17,48 +17,27 @@ protocol DistributionChartRepresentable {
 
 extension LSResult: DistributionChartRepresentable {
     
-    var parzenH: Double {
-        guard let max = scores.max(), let min = scores.min() else {
-            return .infinity
-        }
-        return 4 * Double(max - min) / sqrt(Double(scores.count))
-    }
-    
     var dataSet: LineChartDataSet {
         
         var entries = [ChartDataEntry]()
-        let sortedScores = scores.sorted()
-        
-        let h = parzenH
-        
-        guard let max = scores.max(), let min = scores.min() else {
-            fatalError()
-        }
-        
-        let step = (max + 2 * Int(h) - min) / 400
-        var current = min - Int(h)
-        
+        let h = self.h
+        let step = (maxScore + 2 * Int(h) - minScore) / 400
+        var current = minScore - Int(h)
         var lastIndex = 0
-        
-        
-        func k(_ value: Double) -> Double {
-            //        return 1 / sqrt(2 * Double.pi) * pow(M_E, -value * value / 2)
-            return 1 / 2
-        }
-
-        while current <= max + Int(h) {
-            var kx = 0.0
-            for score in sortedScores[lastIndex..<sortedScores.count] {
+        let scores = self.reversed
+        while current <= maxScore + Int(h) {
+            var k = 0.0
+            for score in scores[lastIndex..<scores.count] {
                 if Double(score - current) < -h {
                     lastIndex += 1
                     continue
                 } else if Double(abs(score - current)) <= h {
-                    kx += k(Double(score - current) / h)
+                    k += Kernel.uniformUnchecked(Double(score - current), h)
                 } else {
                     break
                 }
             }
-            entries.append(ChartDataEntry.init(x: Double(current), y: kx / h / Double(scores.count)))
+            entries.append(ChartDataEntry.init(x: Double(current), y: k / h / Double(scores.count)))
             current += step
         }
         return LineChartDataSet.init(values: entries, label: nil)
@@ -73,6 +52,7 @@ class TeamSimulationScoreDistributionController: BaseViewController {
     convenience init(result: LSResult) {
         self.init()
         self.result = result
+        self.navigationItem.title = NSLocalizedString("得分分布", comment: "")
     }
     
     
@@ -80,7 +60,7 @@ class TeamSimulationScoreDistributionController: BaseViewController {
         super.viewDidLoad()
         
         let bottomLabel = UILabel()
-        bottomLabel.text = NSLocalizedString("* 本图是得分分布的近似概率密度函数，纵坐标代表某值的概率密度，模拟次数越多，曲线越准确", comment: "")
+        bottomLabel.text = NSLocalizedString("* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确", comment: "")
         bottomLabel.textColor = UIColor.darkGray
         bottomLabel.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(bottomLabel)
@@ -100,7 +80,6 @@ class TeamSimulationScoreDistributionController: BaseViewController {
             make.bottom.equalTo(bottomLabel.snp.top).offset(-10)
             make.left.right.equalToSuperview()
         }
-        
         
         let dataSet = result.dataSet
         dataSet.setColor(Color.parade)
@@ -129,7 +108,7 @@ class TeamSimulationScoreDistributionController: BaseViewController {
 //        nf.maximumFractionDigits = 2
         nf.numberStyle = .scientific
         nf.exponentSymbol = "e"
-        nf.maximumFractionDigits = 1
+        nf.maximumFractionDigits = 2
 //        nf.multiplier = 10000
 //        nf.positiveFormat = "0.00e-5"
         chartView.leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: nf)

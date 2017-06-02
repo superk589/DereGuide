@@ -620,10 +620,11 @@
 
 /* new in 1.3.2 */
 
-"得分分布" = "Score Distribution";
+"得分分布" = "Score Distribution Graph";
 "Great占比%" = "Great Percent %";
 "小屋加成%" = "Room Bonus %";
 "模拟次数" = "Simulation Times";
 "* 不含后援值，歌曲模式为常规模式" = "* Does not contain support appeal, in normal mode";
-"至少进行一次模拟计算之后才能查看得分分布" = "You can not see score distribution chart unless simulating at least once";
+"至少进行一次模拟计算之后才能查看得分分布" = "Can not see score distribution graph unless simulating at least once";
+"* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确" = "* This graph is the approximate probability density curve of the score distribution, the more times of simulation the more accurate of the result.";
 

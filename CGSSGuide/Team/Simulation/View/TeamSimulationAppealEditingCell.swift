@@ -30,6 +30,7 @@ class TeamSimulationAppealInputTextField: UITextField {
         textAlignment = .right
         font = UIFont.systemFont(ofSize: 14)
         keyboardType = .numbersAndPunctuation
+        returnKeyType = .done
         contentVerticalAlignment = .center
     }
     

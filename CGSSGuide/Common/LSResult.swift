@@ -10,7 +10,7 @@ import Foundation
 
 struct LSResult {
     
-    var scores: [Int]
+    let scores: [Int]
     
     var average: Int {
         return scores.reduce(0, +) / scores.count
@@ -27,4 +27,61 @@ struct LSResult {
         }
         return scores[index - 1]
     }
+    
+    var maxScore: Int {
+        return scores.max() ?? 0
+    }
+    
+    var minScore: Int {
+        return scores.min() ?? 0
+    }
+    
+}
+
+
+// kernel density estimation
+extension LSResult {
+    
+    typealias KernelFunction = (Double, Double) -> Double
+    
+    struct Kernel {
+        
+        static let uniform: KernelFunction = { (x: Double, h: Double) in
+            if abs(x) <= h {
+                return uniformUnchecked(x, h)
+            } else {
+                return 0
+            }
+        }
+        
+        static let uniformUnchecked: KernelFunction = { (x: Double, h: Double) in
+            return 1 / 2 / h
+        }
+
+        static let gaussian: KernelFunction = { (x: Double, h: Double) in
+            return 1 / sqrt(2 * Double.pi) * pow(M_E, -1 / 2 * (x / h) * (x / h)) / h
+        }
+        
+        static let triangular: KernelFunction = { (x: Double, h: Double) in
+            if abs(x) <= h {
+                return triangularUnchecked(x, h)
+            } else {
+                return 0
+            }
+        }
+        
+        static let triangularUnchecked: KernelFunction = { (x: Double, h: Double) in
+            return (1 - abs(x / h)) / h
+        }
+        
+    }
+
+    var reversed: [Int] {
+        return scores.reversed()
+    }
+    
+    var h: Double {
+        return 4 * Double(maxScore - minScore) / sqrt(Double(scores.count))
+    }
+    
 }

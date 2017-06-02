@@ -8,6 +8,10 @@
 
 ##### Japanese version
 
+1. フィードバック方式追加：Twitter
+2. プリンセス系センター効果のアピール加算に不具合が発生するバグを修正します
+3. スコア計算にスコア確率分布グラフを追加します、アドバンスオプションも拡張します
+
 ##### English version
 
 1. add Twitter as a new way to feedback

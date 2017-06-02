@@ -50,9 +50,12 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     
     var simulationResult: LSResult?
     
+    fileprivate var simulationWork: DispatchWorkItem?
+    
     var titles = [NSLocalizedString("得分分布", comment: ""),
                   NSLocalizedString("得分详情", comment: ""),
-                  NSLocalizedString("辅助技能详情", comment: "")]
+                  NSLocalizedString("辅助技能详情", comment: ""),
+                  NSLocalizedString("高级选项", comment: "")]
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,32 +73,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         tableView.register(TeamSimulationModeSelectionCell.self, forCellReuseIdentifier: TeamSimulationModeSelectionCell.description())
         tableView.register(TeamSimulationMainBodyCell.self, forCellReuseIdentifier: TeamSimulationMainBodyCell.description())
         tableView.register(TeamSimulationDescriptionCell.self, forCellReuseIdentifier: TeamSimulationDescriptionCell.description())
-        tableView.register(TeamSimulationAdvanceOptionCell.self, forCellReuseIdentifier: TeamSimulationAdvanceOptionCell.description())
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
-        
-    }
-    
-    func resetAllSettings() {
-        resetDataGrid()
-        simulationResult = nil
-        simulatorType = .normal
-        grooveType = nil
-        scene = nil
-        UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition = false
-        UserDefaults.standard.greatPercent = 0.0
-        UserDefaults.standard.simulationTimes = 10000
-        UserDefaults.standard.roomUpValue = 10
-        tableView?.reloadData()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tableView.endEditing(true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        pageCollectionController?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: ""), style: .plain, target: self, action: #selector(resetAllSettings))
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -134,14 +112,9 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationMainBodyCell.description(), for: indexPath) as! TeamSimulationMainBodyCell
             cell.delegate = self
             return cell
-        case 6...8:
+        case 6...9:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationCommonCell.description(), for: indexPath) as! TeamSimulationCommonCell
             cell.setup(with: titles[indexPath.row - 6])
-            return cell
-        case 9:
-            let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationAdvanceOptionCell.description(), for: indexPath) as! TeamSimulationAdvanceOptionCell
-            cell.delegate = self
-            cell.setupWithUserDefaults()
             return cell
         case 10:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationDescriptionCell.description(), for: indexPath) as! TeamSimulationDescriptionCell
@@ -178,10 +151,12 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             checkScoreDetail()
         case 8:
             checkSupportSkillDetail()
+        case 9:
+            let vc = TeamAdvanceOptionsController()
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
-
     }
     
     func checkScoreDistribution() {
@@ -319,7 +294,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
         
         func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
             var options = LSOptions()
-            if UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition {
+            if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
                 options.insert(.overloadLimitByLife)
             }
             simulator.simulate(times: times, options: options, progress: { (a, b) in
@@ -344,13 +319,14 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             }
             let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
-            DispatchQueue.global(qos: .userInitiated).async {
+            simulationWork = DispatchWorkItem(block: {
                 #if DEBUG
-                    doSimulationBy(simulator: simulator, times: 500)
+                    doSimulationBy(simulator: simulator, times: 2000)
                 #else
-                    doSimulationBy(simulator: simulator, times: UInt(UserDefaults.standard.simulationTimes))
+                    doSimulationBy(simulator: simulator, times: UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes))
                 #endif
-            }
+            })
+            DispatchQueue.global(qos: .userInitiated).async(execute: simulationWork!)
         } else {
             showNotSelectSongAlert()
             cell?.resetSimulationButton()
@@ -389,25 +365,5 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             showNotSelectSongAlert()
             cell?.resetCalculationButton()
         }
-    }
-}
-
-
-extension TeamSimulationController: TeamSimulationAdvanceOptionCellDelegate {
-    
-    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetGreatPercent value: Double) {
-        UserDefaults.standard.greatPercent = value
-    }
-
-    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetSimulationTimes times: Int) {
-        UserDefaults.standard.simulationTimes = times
-    }
-    
-    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetRoomValue value: Int) {
-        UserDefaults.standard.roomUpValue = value
-    }
-
-    func teamSimulationAdvanceOptionCell(_ teamSimulationAdvanceOptionCell: TeamSimulationAdvanceOptionCell, didSetOverloadSkillLifeLimitation allowed: Bool) {
-        UserDefaults.standard.allowOverloadSkillsTriggerLifeCondition = allowed
     }
 }
