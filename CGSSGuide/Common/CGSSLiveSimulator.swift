@@ -277,11 +277,21 @@ class CGSSLiveSimulator {
     
     func simulate(times: UInt, options: LSOptions = [], progress: CGSSProgressClosure = { _,_ in }, callback: @escaping LSResultClosure) {
         for i in 0..<times {
+            if cancelled {
+                cancelled = false
+                break
+            }
             simulateOnce(options: options)
             progress(Int(i + 1), Int(times))
         }
         let result = LSResult.init(scores: simulateResult)
         callback(result, [])
+    }
+    
+    private var cancelled = false
+    
+    func cancelSimulating() {
+        cancelled = true
     }
 }
 

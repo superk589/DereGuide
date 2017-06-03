@@ -50,7 +50,11 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     
     var simulationResult: LSResult?
     
-    fileprivate var simulationWork: DispatchWorkItem?
+    weak var currentSimulator: CGSSLiveSimulator?
+    
+    deinit {
+        currentSimulator?.cancelSimulating()
+    }
     
     var titles = [NSLocalizedString("得分分布", comment: ""),
                   NSLocalizedString("得分详情", comment: ""),
@@ -292,7 +296,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
     func startSimulate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
         
-        func doSimulationBy(simulator: CGSSLiveSimulator, times: UInt) {
+        let doSimulationBy = { [weak self] (simulator: CGSSLiveSimulator, times: UInt) in
             var options = LSOptions()
             if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
                 options.insert(.overloadLimitByLife)
@@ -306,7 +310,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
                 DispatchQueue.main.async { [weak self] in
                     cell?.setupSimulationResult(value1: result.get(percent: 1), value2: result.get(percent: 5), value3: result.get(percent: 20), value4: result.get(percent: 50))
 //                    print(result.average)
-                    cell?.resetSimulationButton()
+                    cell?.stopSimulationAnimating()
                     self?.simulationResult = result
                 }
             })
@@ -314,22 +318,23 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
         
         if let scene = self.scene {
             cell?.clearSimulationGrid()
+            cell?.startSimulationAnimating()
             if team.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
             let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
-            simulationWork = DispatchWorkItem(block: {
+            currentSimulator = simulator
+            DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
-                    doSimulationBy(simulator: simulator, times: 2000)
+                    doSimulationBy(simulator,5000)
                 #else
-                    doSimulationBy(simulator: simulator, times: UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes))
+                    doSimulationBy(simulator, UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes))
                 #endif
-            })
-            DispatchQueue.global(qos: .userInitiated).async(execute: simulationWork!)
+            }
         } else {
             showNotSelectSongAlert()
-            cell?.resetSimulationButton()
+            cell?.stopSimulationAnimating()
         }
         
     }
@@ -365,5 +370,9 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             showNotSelectSongAlert()
             cell?.resetCalculationButton()
         }
+    }
+    
+    func cancelSimulating(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell) {
+        currentSimulator?.cancelSimulating()
     }
 }

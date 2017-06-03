@@ -12,6 +12,7 @@ import SnapKit
 protocol TeamSimulationMainBodyCellDelegate: class {
     func startCalculate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
     func startSimulate(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
+    func cancelSimulating(_ teamSimulationMainBodyCell: TeamSimulationMainBodyCell)
 }
 
 class TeamSimulationMainBodyCell: UITableViewCell {
@@ -22,7 +23,11 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     
     var simulationButton: UIButton!
     
+    var cancelButton: UIButton!
+    
     var simulationGrid: GridLabel!
+    
+    var simulatingIndicator: UIActivityIndicatorView!
     
 //    var scoreDistributionButton: UIButton!
 //    
@@ -60,17 +65,35 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         simulationButton.setTitle(NSLocalizedString("模拟计算", comment: "队伍详情页面"), for: .normal)
         simulationButton.backgroundColor = Color.vocal
         simulationButton.addTarget(self, action: #selector(startSimulate), for: .touchUpInside)
-        
         contentView.addSubview(simulationButton)
         simulationButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.right.equalTo(-10)
             make.height.equalTo(30)
             make.top.equalTo(calculationGrid.snp.bottom).offset(10)
         }
         
-        simulationGrid = GridLabel.init(rows: 2, columns: 4)
+        simulatingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        simulationButton.addSubview(simulatingIndicator)
+        simulatingIndicator.snp.makeConstraints { (make) in
+            make.right.equalTo(simulationButton.titleLabel!.snp.left)
+            make.centerY.equalTo(simulationButton)
+        }
         
+        cancelButton = UIButton()
+        cancelButton.setTitle(NSLocalizedString("取消", comment: ""), for: .normal)
+        cancelButton.backgroundColor = Color.vocal
+        cancelButton.addTarget(self, action: #selector(cancelSimulating), for: .touchUpInside)
+        contentView.addSubview(cancelButton)
+        cancelButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.height.equalTo(30)
+            make.top.equalTo(simulationButton)
+            make.width.equalTo(0)
+            make.left.equalTo(simulationButton.snp.right)
+        }
+        cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        simulationGrid = GridLabel.init(rows: 2, columns: 4)
         contentView.addSubview(simulationGrid)
         simulationGrid.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -140,9 +163,29 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         calculationButton.isUserInteractionEnabled = true
     }
     
-    func resetSimulationButton() {
+    func stopSimulationAnimating() {
         simulationButton.setTitle(NSLocalizedString("模拟计算", comment: ""), for: .normal)
         simulationButton.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 0.25) {
+            self.cancelButton.snp.updateConstraints({ (update) in
+                update.width.equalTo(0)
+                update.left.equalTo(self.simulationButton.snp.right)
+            })
+            self.layoutIfNeeded()
+        }
+        simulatingIndicator.stopAnimating()
+    }
+    
+    func startSimulationAnimating() {
+        simulatingIndicator.startAnimating()
+        UIView.animate(withDuration: 0.25) {
+            self.cancelButton.snp.updateConstraints({ (update) in
+                update.width.equalTo(floor((Screen.width - 20) / 4))
+                update.left.equalTo(self.simulationButton.snp.right).offset(1)
+            })
+            self.layoutIfNeeded()
+        }
+        simulationButton.isUserInteractionEnabled = false
     }
 
     func setupCalculationResult(value1: Int, value2: Int, value3: Int, value4: Int) {
@@ -184,6 +227,10 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     
     func startSimulate() {
         delegate?.startSimulate(self)
+    }
+    
+    func cancelSimulating() {
+        delegate?.cancelSimulating(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
