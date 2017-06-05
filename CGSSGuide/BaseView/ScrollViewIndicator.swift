@@ -93,9 +93,9 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
     var offsetRatio: CGFloat {
         if let scrollView = self.scrollView {
-            let indicatorMaxOffsetY = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY
-            let totalMaxOffsetY = scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.top + scrollView.contentInset.bottom
-            return indicatorMaxOffsetY / totalMaxOffsetY
+            let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY
+            let totalHeight = scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.top + scrollView.contentInset.bottom
+            return indicatorScrollabelHeight / totalHeight
         }
         return 1
     }

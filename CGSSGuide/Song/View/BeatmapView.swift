@@ -8,15 +8,12 @@
 
 import UIKit
 
-class BeatmapView: UIScrollView, UIScrollViewDelegate {
+class BeatmapView: IndicatorScrollView {
    
     var beatmapDrawer: AdvanceBeatmapDrawer!
     var beatmap: CGSSBeatmap!
     var bpm: Int!
     var type: Int!
-    
-    var indicator: ScrollViewIndicator!
-    var debouncer: Debouncer!
     
     // 是否镜像翻转
     var mirrorFlip: Bool = false {
@@ -41,17 +38,7 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        showsVerticalScrollIndicator = false
-        indicator = ScrollViewIndicator(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
         backgroundColor = UIColor.white
-        delaysContentTouches = false
-        debouncer = Debouncer.init(interval: 3, callback: { [weak self] in
-            if self?.indicator.panGesture.state == .possible {
-                self?.indicator.hide()
-            } else {
-                self?.debouncer.call()
-            }
-        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,21 +77,6 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
         beatmapDrawer.drawIn(rect: rect)
     }
     
-    // MARK: scrollView的代理方法
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        setNeedsDisplay()
-        debouncer.call()
-        indicator.adjustFrameInScrollView()
-    }
-
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        indicator.show(to: self)
-    }
-
-    
-    // MARK: 生成整张谱面图片的方法
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
 
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
@@ -115,6 +87,13 @@ class BeatmapView: UIScrollView, UIScrollViewDelegate {
                 callBack(newImage)
             }
         }
+    }
+}
+
+// MARK: UIScrollViewDelegate
+extension BeatmapView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        setNeedsDisplay()
     }
 }
 

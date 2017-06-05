@@ -214,6 +214,8 @@
 		12F57C5D1EE2928000638650 /* TeamAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */; };
 		12F57C5F1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */; };
 		12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */; };
+		12F57C631EE308B600638650 /* IndicatorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C621EE308B600638650 /* IndicatorScrollView.swift */; };
+		12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C641EE30EFB00638650 /* IndicatorTableView.swift */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
 		12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */; };
 		12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */; };
@@ -504,6 +506,8 @@
 		12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAdvanceOptionsController.swift; sourceTree = "<group>"; };
 		12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamAdvanceOptionsTableViewCell.swift; sourceTree = "<group>"; };
 		12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulationAdvanceOptionsManager.swift; sourceTree = "<group>"; };
+		12F57C621EE308B600638650 /* IndicatorScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorScrollView.swift; sourceTree = "<group>"; };
+		12F57C641EE30EFB00638650 /* IndicatorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorTableView.swift; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
 		12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationAppealCell.swift; path = Information/View/TeamInformationAppealCell.swift; sourceTree = "<group>"; };
 		12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationLeaderSkillCell.swift; path = Information/View/TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
@@ -833,6 +837,8 @@
 				12AE77C71E39A81C006A9653 /* StatusIndicator.swift */,
 				12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */,
 				120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */,
+				12F57C621EE308B600638650 /* IndicatorScrollView.swift */,
+				12F57C641EE30EFB00638650 /* IndicatorTableView.swift */,
 				12356BCA1E8FE94F005EEB7A /* TipView.swift */,
 				129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */,
 				129ECB241ECB3BC00010BC7F /* GridView.swift */,
@@ -1524,6 +1530,7 @@
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
+				12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */,
 				1296759E1EBF62400037827B /* PageTitleView.swift in Sources */,
 				1269E9C31D520B160071AD7F /* CardDetailView.swift in Sources */,
 				1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */,
@@ -1535,6 +1542,7 @@
 				121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */,
 				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,
+				12F57C631EE308B600638650 /* IndicatorScrollView.swift in Sources */,
 				123F320B1E6FECC800B69D26 /* SpreadImageView.swift in Sources */,
 				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,

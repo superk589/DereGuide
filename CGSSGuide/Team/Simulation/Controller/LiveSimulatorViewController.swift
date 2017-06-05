@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import SnapKit
 
-class LiveSimulatorViewController: BaseTableViewController {
+class LiveSimulatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let tableView = IndicatorTableView()
     
     enum DisplayType: CustomStringConvertible {
         case optimistic1
@@ -48,7 +51,18 @@ class LiveSimulatorViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.indicator.strokeColor = Color.life.withAlphaComponent(0.5)
+        tableView.sectionHeaderHeight = 30
+        tableView.sectionFooterHeight = 30
+        
         prepareNavigationBar()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(NoteScoreTableViewCell.self, forCellReuseIdentifier: "Note Cell")
         tableView.register(NoteScoreTableViewSectionHeader.self, forHeaderFooterViewReuseIdentifier: "Note Header")
         tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
@@ -105,39 +119,32 @@ class LiveSimulatorViewController: BaseTableViewController {
     
     // MARK: TableViewDataSource & Delegate
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return logs.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Note Cell", for: indexPath) as! NoteScoreTableViewCell
         cell.setup(with: logs[indexPath.row])
         return cell
     }
     
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Note Header")
         return header
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Note Footer") as! NoteScoreTableViewSectionFooter
         if let baseScore = logs.first?.baseScore, let totalScore = logs.last?.sum {
             footer.setupWith(baseScore: baseScore, totalScore: totalScore)
         }
         return footer
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
-    }
+
 }

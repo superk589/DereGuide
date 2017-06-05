@@ -164,7 +164,6 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     }
     
     func stopSimulationAnimating() {
-        simulationButton.setTitle(NSLocalizedString("模拟计算", comment: ""), for: .normal)
         simulationButton.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.25) {
             self.cancelButton.snp.updateConstraints({ (update) in
@@ -174,6 +173,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             self.layoutIfNeeded()
         }
         simulatingIndicator.stopAnimating()
+        simulationButton.setTitle(NSLocalizedString("模拟计算", comment: ""), for: .normal)
     }
     
     func startSimulationAnimating() {

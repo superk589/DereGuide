@@ -13,6 +13,8 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.sectionFooterHeight = 0
+        tableView.indicator.strokeColor = Color.parade.withAlphaComponent(0.5)
         tableView.register(NoteSupportTableViewCell.self, forCellReuseIdentifier: NoteSupportTableViewCell.description())
         tableView.register(NoteSupportTableViewHeader.self, forHeaderFooterViewReuseIdentifier: NoteSupportTableViewHeader.description())
     }
@@ -78,14 +80,6 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
     }
     
 }

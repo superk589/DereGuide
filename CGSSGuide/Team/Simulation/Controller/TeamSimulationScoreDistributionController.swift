@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import Charts
 
-
 protocol DistributionChartRepresentable {
     var dataSet: LineChartDataSet { get }
 }
