@@ -80,8 +80,6 @@ struct Color {
     static let separator = UIColor.init(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
 }
 
-
-
 public class CGSSGlobal: NSObject {
     
     // 当前屏幕的宽度和高度常量

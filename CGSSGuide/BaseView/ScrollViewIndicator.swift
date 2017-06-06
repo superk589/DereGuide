@@ -16,6 +16,8 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
         return self.superview as? UIScrollView
     }
 
+    var insets: UIEdgeInsets = UIEdgeInsets.zero
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentMode = .redraw
@@ -93,7 +95,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
     var offsetRatio: CGFloat {
         if let scrollView = self.scrollView {
-            let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY
+            let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY - insets.top - insets.bottom
             let totalHeight = scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.top + scrollView.contentInset.bottom
             return indicatorScrollabelHeight / totalHeight
         }
@@ -102,14 +104,14 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
     var maxOffsetY: CGFloat {
         if let scrollView = self.scrollView {
-            return scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentInset.bottom - bounds.midY
+            return scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentInset.bottom - bounds.midY - insets.bottom
         }
         return 0
     }
 
     var minOffsetY: CGFloat {
         if let scrollView = self.scrollView {
-            return scrollView.contentOffset.y + scrollView.contentInset.top + bounds.midY
+            return scrollView.contentOffset.y + scrollView.contentInset.top + bounds.midY + insets.top
         }
         return 0
     }
@@ -118,13 +120,13 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     func adjustFrameInScrollView() {
         if let scrollView = self.scrollView {
             center.x = scrollView.bounds.maxX - bounds.midY - 1
-            center.y = max(min((scrollView.contentInset.top + scrollView.contentOffset.y) * (1 + offsetRatio) + bounds.midY, maxOffsetY), minOffsetY)
+            center.y = max(min((scrollView.contentInset.top + scrollView.contentOffset.y) * (1 + offsetRatio) + bounds.midY + insets.top, maxOffsetY), minOffsetY)
         }
     }
     
     func adjustScrollView() {
         if let scrollView = scrollView {
-            let offsetY = frame.minY - scrollView.contentInset.top - scrollView.contentOffset.y
+            let offsetY = frame.minY - scrollView.contentInset.top - scrollView.contentOffset.y - insets.top
             scrollView.contentOffset.y = offsetY / offsetRatio - scrollView.contentInset.top
         }
     }

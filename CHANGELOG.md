@@ -9,7 +9,7 @@
 
 ##### English version
 
-1. fix crash on entering team tab 
+1. fix crash on entering team tab
 
 ### 1.3.2
 
