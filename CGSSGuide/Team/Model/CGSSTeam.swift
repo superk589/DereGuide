@@ -39,8 +39,8 @@ class CGSSTeam: NSObject, NSCoding {
     var leader: CGSSTeamMember!
     var subs: [CGSSTeamMember]!
     var friendLeader: CGSSTeamMember!
-    var customAppeal: Int
-    var supportAppeal: Int
+    var customAppeal: Int!
+    var supportAppeal: Int!
     var usingCustomAppeal: Bool
     
     init(leader: CGSSTeamMember, subs: [CGSSTeamMember], friendLeader: CGSSTeamMember?, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, customAppeal: Int = 0, usingCustomAppeal: Bool = false) {
@@ -337,11 +337,11 @@ class CGSSTeam: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.leader = aDecoder.decodeObject(forKey: "leader") as? CGSSTeamMember
         self.subs = aDecoder.decodeObject(forKey: "subs") as? [CGSSTeamMember]
-        self.supportAppeal = aDecoder.decodeInteger(forKey: "supportAppeal")
+        self.supportAppeal = aDecoder.decodeObject(forKey: "supportAppeal") as? Int ?? CGSSGlobal.defaultSupportAppeal
         self.friendLeader = aDecoder.decodeObject(forKey: "friendLeader") as? CGSSTeamMember
         self.testDifficulty = CGSSLiveDifficulty(rawValue: aDecoder.decodeObject(forKey: "testDifficulty") as? Int ?? 1)
         self.testLiveId = aDecoder.decodeObject(forKey: "testLiveId") as? Int
-        self.customAppeal = aDecoder.decodeInteger(forKey: "customAppeal")
+        self.customAppeal = aDecoder.decodeObject(forKey: "customAppeal") as? Int ?? 0
         self.usingCustomAppeal = aDecoder.decodeBool(forKey: "usingCustomAppeal")
     }
     

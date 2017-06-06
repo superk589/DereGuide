@@ -1,5 +1,16 @@
 # ChangeLog
 
+
+### 1.3.3
+
+1. 修复组队页面闪退问题
+
+##### Japanese version
+
+##### English version
+
+1. fix crash on entering team tab 
+
 ### 1.3.2
 
 1. 反馈方式增加 Twitter
