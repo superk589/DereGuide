@@ -90,11 +90,6 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         setEditing(false, animated: false)
         self.tableView.reloadData()
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: animated)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

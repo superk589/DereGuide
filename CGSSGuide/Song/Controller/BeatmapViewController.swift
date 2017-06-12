@@ -58,8 +58,9 @@ class BeatmapViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         self.view.backgroundColor = UIColor.white
 
-        // 设置toolbar
         prepareToolbar()
+        
+        updateUI()
     }
     
     func backAction() {
@@ -128,17 +129,6 @@ class BeatmapViewController: UIViewController {
   
     func setup(with scene: CGSSLiveScene) {
         self.scene = scene
-    }
-  
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateUI()
-        navigationController?.setToolbarHidden(false, animated: true)
-    }
- 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func getImageTitle() -> String {
