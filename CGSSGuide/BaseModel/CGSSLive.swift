@@ -237,7 +237,8 @@ class CGSSLive: CGSSBaseModel {
         
         let path = String.init(format: DataPath.beatmap, self.id)
         let fm = FileManager.default
-        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue.init(path: path) {
+        let dbQueue = MusicScoreDBQueue.init(path: path)
+        if fm.fileExists(atPath: path) {
             dbQueue.getBeatmapCount(callback: { (count) in
                 result = count
                 semaphore.signal()

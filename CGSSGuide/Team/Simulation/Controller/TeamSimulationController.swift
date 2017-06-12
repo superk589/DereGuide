@@ -134,10 +134,10 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         switch indexPath.row {
         case 0:
             if let team = self.team {
-                let teamEditDVC = TeamEditViewController()
-                teamEditDVC.delegate = self
-                teamEditDVC.initWith(team)
-                navigationController?.pushViewController(teamEditDVC, animated: true)
+                let vc = TeamEditViewController()
+                vc.delegate = self
+                vc.setup(with: team)
+                navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
             navigationController?.pushViewController(liveSelectionViewController, animated: true)

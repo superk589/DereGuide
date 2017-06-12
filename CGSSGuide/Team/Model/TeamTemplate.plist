@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Cute</key>
+	<array>
+		<integer>100372</integer>
+		<integer>100298</integer>
+		<integer>100398</integer>
+		<integer>100350</integer>
+		<integer>100256</integer>
+		<integer>100372</integer>
+	</array>
+	<key>Cool</key>
+	<array>
+		<integer>200400</integer>
+		<integer>200254</integer>
+		<real>200378</real>
+		<integer>200360</integer>
+		<integer>200294</integer>
+		<integer>200400</integer>
+	</array>
+	<key>Passion</key>
+	<array>
+		<integer>300378</integer>
+		<integer>300236</integer>
+		<integer>300368</integer>
+		<integer>300328</integer>
+		<integer>300336</integer>
+		<integer>300378</integer>
+	</array>
+</dict>
+</plist>

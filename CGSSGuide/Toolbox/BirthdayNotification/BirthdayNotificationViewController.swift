@@ -130,7 +130,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
             (UIApplication.shared.delegate as! AppDelegate).registerUserNotification()
             BirthdayCenter.default.scheduleNotifications()
         } else {
-            BirthdayCenter.default.removeNotifications()
+            BirthdayCenter.default.removeBirthdayNotifications()
         }
     }
     

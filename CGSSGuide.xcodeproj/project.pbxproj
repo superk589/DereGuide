@@ -22,6 +22,11 @@
 		1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */; };
 		1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */; };
 		1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */; };
+		120DBB271EEE2F6B004E0084 /* TeamCardSelectionAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB261EEE2F6A004E0084 /* TeamCardSelectionAdvanceOptionsController.swift */; };
+		120DBB291EEE3120004E0084 /* TeamTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB281EEE3120004E0084 /* TeamTemplateController.swift */; };
+		120DBB2D1EEE3A0D004E0084 /* TeamTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 120DBB2C1EEE3A0D004E0084 /* TeamTemplate.plist */; };
+		120DBB2F1EEE414A004E0084 /* TeamTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB2E1EEE414A004E0084 /* TeamTemplate.swift */; };
+		120DBB311EEE4812004E0084 /* TeamTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB301EEE4812004E0084 /* TeamTemplateCell.swift */; };
 		120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */; };
 		1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */; };
 		1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */; };
@@ -86,6 +91,9 @@
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
 		12536DBA1ED5177C00B75BA0 /* UserNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DB91ED5177C00B75BA0 /* UserNotificationHandler.swift */; };
 		12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */; };
+		1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1258499E1EE59C35006AF479 /* BaseCardCollectionViewController.swift */; };
+		125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */; };
+		125849B11EE6A26C006AF479 /* BaseModelCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */; };
 		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
 		1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */; };
 		1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */; };
@@ -294,6 +302,11 @@
 		1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFilterSortController.swift; sourceTree = "<group>"; };
 		1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFilter.swift; sourceTree = "<group>"; };
 		1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEventFilter.swift; sourceTree = "<group>"; };
+		120DBB261EEE2F6A004E0084 /* TeamCardSelectionAdvanceOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCardSelectionAdvanceOptionsController.swift; sourceTree = "<group>"; };
+		120DBB281EEE3120004E0084 /* TeamTemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTemplateController.swift; sourceTree = "<group>"; };
+		120DBB2C1EEE3A0D004E0084 /* TeamTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TeamTemplate.plist; sourceTree = "<group>"; };
+		120DBB2E1EEE414A004E0084 /* TeamTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTemplate.swift; sourceTree = "<group>"; };
+		120DBB301EEE4812004E0084 /* TeamTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTemplateCell.swift; sourceTree = "<group>"; };
 		120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
 		1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
@@ -376,6 +389,9 @@
 		12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
 		12536DC21ED5636000B75BA0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		1258499E1EE59C35006AF479 /* BaseCardCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardCollectionViewController.swift; sourceTree = "<group>"; };
+		125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelCollectionViewController.swift; sourceTree = "<group>"; };
 		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveScene.swift; sourceTree = "<group>"; };
 		1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFormulator.swift; sourceTree = "<group>"; };
@@ -779,6 +795,7 @@
 				123F320A1E6FECC800B69D26 /* SpreadImageView.swift */,
 				123F32001E6FC49700B69D26 /* CardAppealView.swift */,
 				123F32021E6FC6F800B69D26 /* CardRankingView.swift */,
+				125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -787,6 +804,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */,
+				1258499E1EE59C35006AF479 /* BaseCardCollectionViewController.swift */,
 				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
 				12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */,
 				1269E9181D5209610071AD7F /* CardTableViewController.swift */,
@@ -866,6 +884,8 @@
 			isa = PBXGroup;
 			children = (
 				1269E9F01D520C3E0071AD7F /* TeamCardSelectTableViewController.swift */,
+				120DBB261EEE2F6A004E0084 /* TeamCardSelectionAdvanceOptionsController.swift */,
+				120DBB281EEE3120004E0084 /* TeamTemplateController.swift */,
 				121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */,
 				1269E9F21D520C3E0071AD7F /* TeamEditViewController.swift */,
 				122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */,
@@ -879,6 +899,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9F61D520C3E0071AD7F /* TeamTableViewCell.swift */,
+				120DBB301EEE4812004E0084 /* TeamTemplateCell.swift */,
 				1269EA291D5210160071AD7F /* TeamMemberTableViewCell.swift */,
 				122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */,
 			);
@@ -916,6 +937,7 @@
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
 				1269EA091D520CD50071AD7F /* RootTabBarController.swift */,
 				121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */,
+				125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
 				1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */,
 			);
@@ -927,6 +949,8 @@
 			children = (
 				1269EA1F1D520DDB0071AD7F /* CGSSTeam.swift */,
 				1269EA201D520DDB0071AD7F /* CGSSTeamMember.swift */,
+				120DBB2E1EEE414A004E0084 /* TeamTemplate.swift */,
+				120DBB2C1EEE3A0D004E0084 /* TeamTemplate.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1234,7 +1258,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = zzk;
 				TargetAttributes = {
 					1282EE5E1D011A8F0024318C = {
@@ -1295,6 +1319,7 @@
 				1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */,
 				1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */,
 				1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */,
+				120DBB2D1EEE3A0D004E0084 /* TeamTemplate.plist in Resources */,
 				12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1454,12 +1479,14 @@
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
+				120DBB291EEE3120004E0084 /* TeamTemplateController.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
 				124BA5071E913808002E48FE /* EventTrendViewController.swift in Sources */,
+				120DBB271EEE2F6B004E0084 /* TeamCardSelectionAdvanceOptionsController.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
 				12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */,
@@ -1467,8 +1494,10 @@
 				12FC8B551EDE6DEB003CF3C3 /* TeamSimulationMainBodyCell.swift in Sources */,
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
 				12FC8B3C1EDE6DA7003CF3C3 /* TeamInfomationController.swift in Sources */,
+				120DBB2F1EEE414A004E0084 /* TeamTemplate.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
 				12FC8B631EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift in Sources */,
+				125849B11EE6A26C006AF479 /* BaseModelCollectionViewController.swift in Sources */,
 				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				124BA50B1E913E78002E48FE /* EventTrendCell.swift in Sources */,
 				121C78C81D55F0F800D0B636 /* CGSSTeamManager.swift in Sources */,
@@ -1504,6 +1533,7 @@
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
 				12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */,
 				1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */,
+				120DBB311EEE4812004E0084 /* TeamTemplateCell.swift in Sources */,
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
 				1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */,
 				12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */,
@@ -1522,6 +1552,7 @@
 				12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */,
 				127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
+				125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */,
 				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
@@ -1577,6 +1608,7 @@
 				12FC8B571EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift in Sources */,
 				12FC8B391EDE6D93003CF3C3 /* TeamInformationTeamCell.swift in Sources */,
 				12536DBA1ED5177C00B75BA0 /* UserNotificationHandler.swift in Sources */,
+				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
@@ -1711,14 +1743,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1762,14 +1800,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

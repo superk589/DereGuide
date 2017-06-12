@@ -39,7 +39,9 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.filter.searchText = self?.searchBar.text ?? ""
+            DispatchQueue.main.sync {
+                self?.filter.searchText = self?.searchBar.text ?? ""
+            }
             var newList = self?.filter.filter(self?.defualtLiveList ?? [CGSSLive]()) ?? [CGSSLive]()
             self?.sorter.sortList(&newList)
             DispatchQueue.main.async {

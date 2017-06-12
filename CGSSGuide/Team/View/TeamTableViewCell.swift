@@ -21,7 +21,7 @@ class TeamTableViewCellCardView: UIView {
 //        label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.darkGray
-       
+        
         super.init(frame: frame)
         addSubview(label)
         addSubview(icon)
@@ -53,13 +53,12 @@ class TeamTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         prepareUI()
-       
     }
     
     private func prepareUI() {
         var views = [UIView]()
         for _ in 0...5 {
-            let view = TeamTableViewCellCardView()
+            let view = TeamSimulationCardView()
             views.append(view)
         }
         iconStackView = UIStackView(arrangedSubviews: views)
@@ -85,7 +84,7 @@ class TeamTableViewCell: UITableViewCell {
         iconStackView.snp.makeConstraints { (make) in
             make.top.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-5)
+            make.bottom.equalTo(-10)
         }
         
 //        appealStackView.snp.makeConstraints { (make) in
@@ -105,18 +104,18 @@ class TeamTableViewCell: UITableViewCell {
     
     func setup(with team: CGSSTeam) {
         for i in 0...5 {
-            let tm = team[i]
-            if let card = tm?.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamTableViewCellCardView {
+            if let teamMember = team[i], let card = teamMember.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
                 view.icon.cardId = card.id
                 if i != 5 {
                     if card.skill != nil {
-                        view.label.text = "SLv.\((tm?.skillLevel)!)"
+                        view.skillLabel.text = "SLv.\((teamMember.skillLevel)!)"
                     } else {
-                        view.label.text = "n/a"
+                        view.skillLabel.text = "n/a"
                     }
                 } else {
-                    view.label.text = "n/a"
+                    view.skillLabel.text = "n/a"
                 }
+                view.potentialLabel.setup(with: teamMember.potential)
             }
         }
         

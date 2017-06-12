@@ -10,6 +10,21 @@ import UIKit
 import SwiftyJSON
 
 extension CGSSCard {
+    var properPotential: CGSSPotential {
+        switch attributeType {
+        case CGSSAttributeTypes.vocal:
+            return CGSSPotential(vocalLevel: 10, danceLevel: 10, visualLevel: 5, lifeLevel: 0)
+        case CGSSAttributeTypes.dance:
+            return CGSSPotential(vocalLevel: 5, danceLevel: 10, visualLevel: 10, lifeLevel: 0)
+        case CGSSAttributeTypes.visual:
+            return CGSSPotential(vocalLevel: 10, danceLevel: 5, visualLevel: 10, lifeLevel: 0)
+        default:
+            return CGSSPotential.zero
+        }
+    }
+}
+
+extension CGSSCard {
     
     var attShort: String {
         switch attribute {

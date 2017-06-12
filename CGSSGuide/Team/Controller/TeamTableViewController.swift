@@ -34,7 +34,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 79
+        tableView.estimatedRowHeight = 124
         tableView.tableFooterView = UIView()
         
         if teams.count == 0 {

@@ -1,14 +1,15 @@
 //
-//  BaseModelTableViewController.swift
+//  BaseModelCollectionViewController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2017/5/1.
+//  Created by zzk on 2017/6/6.
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class BaseModelTableViewController: RefreshableTableViewController {
+@available(iOS 10.0, *)
+class BaseModelCollectionViewController: RefreshableCollectionViewController {
 
     lazy var searchBar: CGSSSearchBar = {
         let bar = CGSSSearchBar()
@@ -31,7 +32,7 @@ class BaseModelTableViewController: RefreshableTableViewController {
             reloadDataIfNeeded()
         }
     }
-
+    
     func reloadDataIfNeeded() {
         if needsReloadData {
             reloadData()
@@ -39,8 +40,8 @@ class BaseModelTableViewController: RefreshableTableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         isShowing = true
         reloadDataIfNeeded()
     }
@@ -51,14 +52,17 @@ class BaseModelTableViewController: RefreshableTableViewController {
         searchBar.resignFirstResponder()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // 滑动时取消输入框的第一响应者
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
     }
 }
 
 //MARK: UISearchBarDelegate
-extension BaseModelTableViewController: UISearchBarDelegate {
+@available(iOS 10.0, *)
+extension BaseModelCollectionViewController: UISearchBarDelegate {
     
     // 文字改变时
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -79,15 +83,4 @@ extension BaseModelTableViewController: UISearchBarDelegate {
     //    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     //
     //    }
-}
-
-
-//MARK: UIScrollViewDelegate
-extension BaseModelTableViewController {
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        // 滑动时取消输入框的第一响应者
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
-    }
 }

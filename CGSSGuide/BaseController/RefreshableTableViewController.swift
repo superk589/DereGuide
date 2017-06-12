@@ -15,7 +15,7 @@ protocol Refreshable {
     func checkUpdate()
 }
 
-extension Refreshable where Self: UITableViewController {
+extension Refreshable where Self: UIViewController {
     
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
@@ -73,6 +73,46 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         refreshControl = refresher
+        refresher.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
+        
+        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
+        updateStatusView.center = view.center
+        updateStatusView.center.y = view.center.y - 120
+        updateStatusView.isHidden = true
+        updateStatusView.delegate = self
+        UIApplication.shared.keyWindow?.addSubview(updateStatusView)
+    }
+    
+    func checkUpdate() {
+        
+    }
+    
+    func cancelUpdate() {
+        CGSSUpdater.default.cancelCurrentSession()
+    }
+    
+    // 当该页面作为二级页面被销毁时 仍有未完成的下载任务时 强行终止下载(作为tabbar的一级页面时 永远不会销毁 不会触发此方法)
+    deinit {
+        if !self.updateStatusView.isHidden {
+            updateStatusView.isHidden = true
+            cancelUpdate()
+        }
+    }
+}
+
+
+@available(iOS 10.0, *)
+class RefreshableCollectionViewController: UICollectionViewController, UpdateStatusViewDelegate, Refreshable {
+    
+    var refresher = UIRefreshControl()
+    var updateStatusView = UpdateStatusView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
+        
+        collectionView?.refreshControl = refresher
         refresher.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
         
         updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))

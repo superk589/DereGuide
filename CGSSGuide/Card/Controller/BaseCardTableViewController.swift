@@ -49,7 +49,9 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         self.navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        navigationItem.rightBarButtonItem = item1
+        
         self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
@@ -64,7 +66,9 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     override func updateUI() {
         CGSSLoadingHUDManager.default.show()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.filter.searchText = self?.searchBar.text ?? ""
+            DispatchQueue.main.sync {
+                self?.filter.searchText = self?.searchBar.text ?? ""
+            }
             var newList = self?.filter.filter(CGSSDAO.shared.cardDict.allValues as! [CGSSCard]) ?? [CGSSCard]()
             self?.sorter.sortList(&newList)
             DispatchQueue.main.async {
@@ -74,7 +78,6 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
                 self?.tableView.reloadData()
             }
         }
-
     }
     
     override func reloadData() {
@@ -91,6 +94,17 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
                 self.setNeedsReloadData()
             }
         }
+    }
+    
+    @available(iOS 10.0, *)
+    func transitionToCollectionView() {
+//        navigationController?.isHeroEnabled = true
+//        isHeroEnabled = true
+        let vc = BaseCardCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.cards = self.cardList
+//        hero_replaceViewController(with: vc)
+        
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     func filterAction() {
@@ -136,6 +150,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         let row = indexPath.row
         let card = cardList[row]
         cell.setup(with: card)
+//        cell.cardView.cardIconView.heroID = "\(indexPath.row)"
         return cell
     }
     

@@ -30,6 +30,7 @@ class CGSSTeamMember: NSObject, NSCoding {
 		let dao = CGSSDAO.shared
 		return dao.findCardById(id!)
 	}
+    
     init(id: Int, skillLevel: Int, vocalLevel:Int = 0, danceLevel:Int = 0 ,visualLevel:Int = 0) {
 		self.id = id
 		self.skillLevel = skillLevel
@@ -37,6 +38,11 @@ class CGSSTeamMember: NSObject, NSCoding {
         self.danceLevel = danceLevel
         self.visualLevel = visualLevel
 	}
+    
+    convenience init (id: Int, skillLevel: Int, potential: CGSSPotential) {
+        self.init(id: id, skillLevel: skillLevel, vocalLevel: potential.vocalLevel, danceLevel: potential.danceLevel, visualLevel: potential.visualLevel)
+    }
+    
 	required init?(coder aDecoder: NSCoder) {
 		self.id = aDecoder.decodeObject(forKey: "id") as? Int
 		self.skillLevel = aDecoder.decodeObject(forKey: "skillLevel") as? Int
@@ -44,6 +50,7 @@ class CGSSTeamMember: NSObject, NSCoding {
         self.danceLevel = aDecoder.decodeObject(forKey: "danceLevel") as? Int ?? 0
         self.visualLevel = aDecoder.decodeObject(forKey: "visualLevel") as? Int ?? 0
 	}
+    
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(id, forKey: "id")
 		aCoder.encode(skillLevel, forKey: "skillLevel")

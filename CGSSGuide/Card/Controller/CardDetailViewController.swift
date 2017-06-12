@@ -49,9 +49,9 @@ class CardDetailViewController: BaseViewController {
         navigationItem.leftBarButtonItem = leftItem
         
         cardDV.setup(with: card)
+        print("load card \(card.id!)")
         sv.contentSize = cardDV.frame.size
         
-    
         prepareToolbar()
     }
     

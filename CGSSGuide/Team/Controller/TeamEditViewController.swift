@@ -24,15 +24,13 @@ class TeamEditViewController: BaseTableViewController {
     var usingCustomAppeal = false
     var hv = UIView()
     var lastIndex = 0
-    var lastScrollViewOffset: CGPoint?
-    var keyBoardHeigt: CGFloat = 258
     var cells = [TeamMemberTableViewCell]()
    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTeam))
-        
+        navigationItem.title = NSLocalizedString("编辑队伍", comment: "")
         hv.frame = CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 100)
         for i in 0...5 {
             let cell = TeamMemberTableViewCell()
@@ -63,17 +61,29 @@ class TeamEditViewController: BaseTableViewController {
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        let swipe = UISwipeGestureRecognizer.init(target: self, action: #selector(cancel))
-        swipe.direction = .right
-        self.view.addGestureRecognizer(swipe)
+        
+        prepareToolbar()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func prepareToolbar() {
+        let item1 = UIBarButtonItem(title: NSLocalizedString("高级选项", comment: ""), style: .plain, target: self, action: #selector(openAdvanceOptions))
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let item2 = UIBarButtonItem(title: NSLocalizedString("队伍模板", comment: ""), style: .plain, target: self, action: #selector(openTemplates))
+        toolbarItems = [item1, spaceItem, item2]
     }
     
-    func initWith(_ team: CGSSTeam) {
+    func openAdvanceOptions() {
+        let vc = TeamCardSelectionAdvanceOptionsController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func openTemplates() {
+        let vc = TeamTemplateController()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setup(with team: CGSSTeam) {
         self.leader = CGSSTeamMember.initWithAnother(teamMember: team.leader)
         self.friendLeader = CGSSTeamMember.initWithAnother(teamMember: team.friendLeader)
         for i in 0...3 {
@@ -122,10 +132,6 @@ class TeamEditViewController: BaseTableViewController {
         }
     }
     
-    func cancel() {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -135,7 +141,8 @@ class TeamEditViewController: BaseTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cells[indexPath.row]
-        if getMemberByIndex(indexPath.row) != nil {
+        if let member = getMemberByIndex(indexPath.row) {
+            cell.initWith(member, type: getTypeByIndex(indexPath.row))
             cell.selectionStyle = .none
         } else {
             cell.selectionStyle = .default
@@ -157,17 +164,6 @@ class TeamEditViewController: BaseTableViewController {
         // 让tableview的选中状态快速消失 而不会影响之后的颜色设置
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPresentationControllerDelegate {
     func replaceMember(cell: TeamMemberTableViewCell) {
@@ -273,5 +269,12 @@ extension TeamEditViewController: CGSSIconViewDelegate {
                 navigationController?.pushViewController(cardDVC, animated: true)
             }
         }
+    }
+}
+
+extension TeamEditViewController: TeamTemplateControllerDelegate {
+    func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect team: CGSSTeam) {
+        self.setup(with: team)
+        tableView.reloadData()
     }
 }

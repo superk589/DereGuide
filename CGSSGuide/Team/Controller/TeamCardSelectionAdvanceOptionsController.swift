@@ -1,33 +1,26 @@
 //
-//  TeamMemberEditingViewController.swift
+//  TeamCardSelectionAdvanceOptionsController.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2016/9/18.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Created by zzk on 2017/6/12.
+//  Copyright © 2017年 zzk. All rights reserved.
 //
 
 import UIKit
 
-class TeamMemberEditingViewController: UIViewController {
+class TeamCardSelectionAdvanceOptionsController: UIViewController {
 
-    var editView: TeamMemberEditingView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
-    
-    func setup(model:CGSSTeamMember, type:CGSSTeamMemberType) {
-        if editView == nil {
-            editView = TeamMemberEditingView.init(frame: CGRect.init(x: 0, y: 0, width: 240, height: 290))
-        }
-        self.view.addSubview(editView)
-        editView.setupWith(model: model, type: type)
-    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     /*
     // MARK: - Navigation

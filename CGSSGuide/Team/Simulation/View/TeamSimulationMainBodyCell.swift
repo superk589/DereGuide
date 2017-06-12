@@ -92,6 +92,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.left.equalTo(simulationButton.snp.right)
         }
         cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        cancelButton.titleLabel?.baselineAdjustment = .alignCenters
         
         simulationGrid = GridLabel.init(rows: 2, columns: 4)
         contentView.addSubview(simulationGrid)

@@ -603,13 +603,7 @@
 "队伍信息" = "Team Information";
 "辅助技能详情" = "Support Skills Detail";
 "极限模式" = "Optimistic Mode";
-
-"note数" = "Number of Notes";
-"使用后援表现值" = "Use Support Appeal";
-"队伍信息" = "Team Information";
-"辅助技能详情" = "Support Skills Detail";
-"极限模式" = "Optimistic Mode";
-"还没有队伍，点击右上＋创建一个吧" = "Have no teams, click + to create";
+"还没有队伍，点击右上＋创建一个吧" = "No teams, click + to create";
 
 "偶像生日提醒" = "Birthday Notification";
 "生日快乐!!" = "Happy birthday!!";

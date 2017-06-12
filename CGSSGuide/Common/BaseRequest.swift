@@ -120,7 +120,9 @@ class BaseRequest {
         #endif
         
         let task = session?.dataTask(with: request) { (data, response, error) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
             if error != nil {
                 
             } else {

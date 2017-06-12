@@ -72,11 +72,10 @@ class BirthdayCenter {
     }
     
     @objc func scheduleNotifications() {
+        removeBirthdayNotifications()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             if let strongSelf = self {
-                strongSelf.removeNotifications()
                 for char in strongSelf.getRecent(1, endDays: 30) {
-                    
                     if #available(iOS 10.0, *) {
                         // 1. 创建通知内容
                         let content = UNMutableNotificationContent()
@@ -127,7 +126,7 @@ class BirthdayCenter {
 //                        print("notification scheduling: \(requestIdentifier)")
                         UNUserNotificationCenter.current().add(request) { error in
                             if error == nil {
-                                print("notification scheduled: \(requestIdentifier)")
+                                // print("notification scheduled: \(requestIdentifier)")
                             } else {
                                 // if userinfo is not property list, this closure will not be executed, no errors here
                                 print("notification falied in scheduling: \(requestIdentifier)")
@@ -177,13 +176,14 @@ class BirthdayCenter {
         return arr
     }
     
-    func removeNotifications() {
+    func removeBirthdayNotifications() {
         if #available(iOS 10.0, *) {
 //            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         } else {
             
         }
+        
         if let notifications = UIApplication.shared.scheduledLocalNotifications {
             for notification in notifications {
                 if notification.category == "Birthday" {
