@@ -61,13 +61,19 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 let fromNavigationController = fromViewController.navigationController {
                 
                 fromNavigationController.view.insertSubview(toView, belowSubview: fromNavigationController.navigationBar)
-
-                let sourceFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
                 
+                transitionContext.containerView.addSubview(toView)
                 toView.layoutIfNeeded()
+                let sourceFrame: CGRect
+                if #available(iOS 11.0, *) {
+                    var frame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
+                    frame.origin.y -= fromNavigationController.navigationBar.frame.maxY
+                    sourceFrame = frame
+                } else {
+                    sourceFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
+                }
                 let destFrame = destBanner.frame
                 destBanner.frame = sourceFrame
-                destBanner.layoutIfNeeded()
                 toView.backgroundColor = UIColor.clear
                 
                 for view in destDetailViews {
@@ -94,7 +100,6 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     }
                 }, completion: { [weak self] (finished) in
                     self?.sourceBannerView.isHidden = false
-                    transitionContext.containerView.addSubview(toView)
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }
