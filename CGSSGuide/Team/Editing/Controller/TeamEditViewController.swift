@@ -25,7 +25,7 @@ class TeamEditViewController: BaseTableViewController {
     var hv = UIView()
     var lastIndex = 0
     var cells = [TeamMemberTableViewCell]()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -239,19 +239,22 @@ extension TeamEditViewController: TeamMemberTableViewCellDelegate, UIPopoverPres
 
 extension TeamEditViewController: BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard) {
+        let skillLevel = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
+        let potentialLevel = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
+        let member = CGSSTeamMember(id: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
         let cell = cells[lastIndex]
         if lastIndex == 0 {
-            self.leader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+            self.leader = member
             cell.initWith(leader!, type: .leader)
             if self.friendLeader == nil {
-                self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+                self.friendLeader = member
                 cells.last!.initWith(friendLeader!, type: .friend)
             }
         } else if lastIndex < 5 {
-            self.subs[lastIndex - 1] = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+            self.subs[lastIndex - 1] = member
             cell.initWith(subs[lastIndex - 1]!, type: .sub)
         } else {
-            self.friendLeader = CGSSTeamMember.init(id: card.id!, skillLevel: 10)
+            self.friendLeader = member
             cell.initWith(friendLeader!, type: .friend)
         }
         tableView.reloadData()
@@ -278,3 +281,15 @@ extension TeamEditViewController: TeamTemplateControllerDelegate {
         tableView.reloadData()
     }
 }
+
+//extension TeamEditViewController: Transitionable {
+//    var transitionViews: [String : UIView] {
+//        var dict = [String: UIView]()
+//        for cell in cells {
+//            let icon = cell.iconView!
+//            let index = cells.index(of: cell)
+//            dict["\(index ?? 0)\(icon.cardId ?? 0)"] = icon
+//        }
+//        return dict
+//    }
+//}

@@ -46,6 +46,9 @@ class TeamTableViewCellCardView: UIView {
 class TeamTableViewCell: UITableViewCell {
     
     var iconStackView: UIStackView!
+    var cardIcons: [CGSSCardIconView] {
+        return iconStackView.arrangedSubviews.flatMap{ ($0 as? TeamSimulationCardView)?.icon }
+    }
     
 //    var appealStackView: UIStackView!
     
@@ -64,7 +67,7 @@ class TeamTableViewCell: UITableViewCell {
         iconStackView = UIStackView(arrangedSubviews: views)
         iconStackView.spacing = 5
         iconStackView.distribution = .fillEqually
-        
+        iconStackView.isUserInteractionEnabled = false
         contentView.addSubview(iconStackView)
         
 //        var labels = [UILabel]()

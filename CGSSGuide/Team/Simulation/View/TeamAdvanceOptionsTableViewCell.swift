@@ -12,7 +12,7 @@ import SnapKit
 class TeamAdvanceOptionsTableViewCell: UITableViewCell {
 
     enum OptionStyle {
-        case slider
+        case slider(TeamSimulationSliderOption)
         case textField(TeamSimulationTextFieldOption)
         case `switch`(TeamSimulationSwitchOption)
         case plain
@@ -29,6 +29,8 @@ class TeamAdvanceOptionsTableViewCell: UITableViewCell {
         case .`switch`(let view):
             optionView = view
         case .textField(let view):
+            optionView = view
+        case .slider(let view):
             optionView = view
         default:
             optionView = UIView()

@@ -22,6 +22,22 @@ extension CGSSCard {
             return CGSSPotential.zero
         }
     }
+    
+    func properPotentialByLevel(_ level: Int) -> CGSSPotential {
+        let first = min(level, 10)
+        let second = max(min(level - 10, 10), 0)
+        let third = max(min(level - 20, 5), 0)
+        switch attributeType {
+        case CGSSAttributeTypes.vocal:
+            return CGSSPotential(vocalLevel: first, danceLevel: second, visualLevel: third, lifeLevel: 0)
+        case CGSSAttributeTypes.dance:
+            return CGSSPotential(vocalLevel: third, danceLevel: first, visualLevel: second, lifeLevel: 0)
+        case CGSSAttributeTypes.visual:
+            return CGSSPotential(vocalLevel: second, danceLevel: third, visualLevel: first, lifeLevel: 0)
+        default:
+            return CGSSPotential.zero
+        }
+    }
 }
 
 extension CGSSCard {

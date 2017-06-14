@@ -6,7 +6,7 @@
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class LiveSimulationAdvanceOptionsManager {
 

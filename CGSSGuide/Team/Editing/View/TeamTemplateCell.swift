@@ -27,6 +27,8 @@ class TeamTemplateCell: TeamTableViewCell {
             make.left.equalTo(10)
             make.bottom.right.equalTo(-10)
         }
+        
+        accessoryType = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

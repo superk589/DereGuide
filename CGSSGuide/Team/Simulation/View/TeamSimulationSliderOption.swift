@@ -16,8 +16,16 @@ class TeamSimulationSliderOption: UIControl {
     let sliderDescriptionLabel: UILabel
     
     var currentValue: Int {
-        return Int(round(slider.value))
+        get {
+            return Int(round(slider.value))
+        }
+        set {
+            slider.value = Float(newValue)
+            sliderDescriptionLabel.text = String(newValue)
+            layoutIfNeeded()
+        }
     }
+    
     override init(frame: CGRect) {
         
         slider = UISlider()
@@ -25,14 +33,13 @@ class TeamSimulationSliderOption: UIControl {
         sliderDescriptionLabel = UILabel()
         super.init(frame: frame)
         
-        
         addSubview(slider)
         addSubview(label)
         addSubview(sliderDescriptionLabel)
         
         slider.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.right.equalToSuperview()
+            make.right.equalTo(-5)
             make.width.equalTo(self.snp.width).dividedBy(2)
             make.bottom.equalToSuperview()
         }
@@ -56,12 +63,18 @@ class TeamSimulationSliderOption: UIControl {
             make.right.lessThanOrEqualTo(sliderDescriptionLabel.snp.left)
         }
         
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+        
         label.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         sliderDescriptionLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
     }
     
     override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControlEvents) {
         slider.addTarget(target, action: action, for: controllEvents)
+    }
+    
+    func sliderValueChanged(_ sender: UISlider) {
+        sliderDescriptionLabel.text = String(currentValue)
     }
     
     required init?(coder aDecoder: NSCoder) {

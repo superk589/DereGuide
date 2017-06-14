@@ -11,7 +11,3 @@ import UIKit
 protocol ColorRepresentable {
     var color: UIColor { get }
 }
-
-protocol IconTransitionable {
-    var icons: [CGSSIconView] { get }
-}

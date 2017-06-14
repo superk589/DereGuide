@@ -81,7 +81,7 @@ class TeamSimulationLiveView: UIView {
         backgroundLabel.text = ""
         descriptionLabel.text = "\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes) \(NSLocalizedString("时长", comment: "队伍详情页面")): \(Int(beatmap.totalSeconds))\(NSLocalizedString("秒", comment: "队伍详情页面"))"
         
-        nameLabel.text = scene.live.name
+        nameLabel.text = scene.live.title
         nameLabel.textColor = scene.live.color
         typeIcon.image = scene.live.icon
         

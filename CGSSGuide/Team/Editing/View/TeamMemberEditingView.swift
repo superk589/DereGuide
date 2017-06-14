@@ -9,13 +9,11 @@
 import UIKit
 import ASValueTrackingSlider
 
-
 class CGSSSliderView: UIView, ASValueTrackingSliderDelegate {
     
     var descLabel : UILabel!
     var numLabel: UILabel!
     var slider: ASValueTrackingSlider!
-    
     
     private let space:CGFloat = 10
     
