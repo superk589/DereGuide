@@ -52,6 +52,10 @@ class CGSSTeam: NSObject, NSCoding {
         self.customAppeal = customAppeal
     }
     
+    convenience init(members: [CGSSTeamMember]) {
+        self.init(leader: members[0], subs: Array(members[1...4]), friendLeader: members[5])
+    }
+    
     var testLive: CGSSLive? {
         var result: CGSSLive?
         let semaphore = DispatchSemaphore.init(value: 0)

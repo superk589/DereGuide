@@ -13,10 +13,10 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.cellLayoutMarginsFollowReadableWidth = false
+    tableView.cellLayoutMarginsFollowReadableWidth = false
         
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = true
+        clearsSelectionOnViewWillAppear = true
         
         tableView.keyboardDismissMode = .onDrag
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -43,8 +43,8 @@ class BaseTableViewController: UITableViewController {
     // 下面这两个方法可以让分割线左侧顶格显示 不再留15像素
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.separatorInset = UIEdgeInsets.zero
-        self.tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.layoutMargins = UIEdgeInsets.zero
     }
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets.zero

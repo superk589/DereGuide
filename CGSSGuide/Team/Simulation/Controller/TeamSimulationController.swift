@@ -134,7 +134,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         switch indexPath.row {
         case 0:
             if let team = self.team {
-                let vc = TeamEditViewController()
+                let vc = TeamEditingController()
                 vc.delegate = self
                 vc.setup(with: team)
                 navigationController?.pushViewController(vc, animated: true)
@@ -243,8 +243,8 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
        
 }
 
-extension TeamSimulationController: TeamEditViewControllerDelegate {
-    func save(_ team: CGSSTeam) {
+extension TeamSimulationController: TeamEditingControllerDelegate {
+    func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
         let manager = CGSSTeamManager.default
         if let team = self.team, let index = manager.teams.index(of: team) {
             manager.teams.remove(at: index)

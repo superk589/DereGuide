@@ -112,15 +112,24 @@ class TeamMemberEditingView: UIView {
         
     }
     
-    func setupWith(model:CGSSTeamMember, type: CGSSTeamMemberType) {
-        if model.cardRef?.skill == nil || type == .friend {
-            skillItem.slider.value = 0
-            skillItem.isUserInteractionEnabled = false
-            skillItem.slider.isEnabled = false
-            skillItem.numLabel.text = "n/a"
-        } else {
-            skillItem.slider.value = Float(model.skillLevel!)
-            skillItem.numLabel.text = String(model.skillLevel!)
+    private func setSkillItemNotAvailable() {
+        skillItem.slider.value = 0
+        skillItem.isUserInteractionEnabled = false
+        skillItem.slider.isEnabled = false
+        skillItem.numLabel.text = "n/a"
+    }
+    
+    func setupWith(model: CGSSTeamMember, type: CGSSTeamMemberType) {
+        switch type {
+        case .friend:
+            setSkillItemNotAvailable()
+        default:
+            if model.cardRef?.skill == nil {
+                setSkillItemNotAvailable()
+            } else {
+                skillItem.slider.value = Float(model.skillLevel!)
+                skillItem.numLabel.text = String(model.skillLevel!)
+            }
         }
         
         vocalItem.slider.value = Float(model.vocalLevel!)
@@ -136,12 +145,4 @@ class TeamMemberEditingView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

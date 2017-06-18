@@ -8,10 +8,34 @@
 
 import UIKit
 
-enum CGSSTeamMemberType {
+enum CGSSTeamMemberType: CustomStringConvertible {
 	case leader
-	case sub
+	case sub(Int)
 	case friend
+    
+    init(index: Int) {
+        switch index {
+        case 0:
+            self = .leader
+        case 1...4:
+            self = .sub(index)
+        case 5:
+            self = .friend
+        default:
+            fatalError()
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .leader:
+            return NSLocalizedString("队长", comment: "")
+        case .sub(let index):
+            return NSLocalizedString("队员", comment: "") + "\(index)"
+        case .friend:
+            return NSLocalizedString("好友", comment: "")
+        }
+    }
 }
 
 extension CGSSTeamMember {
@@ -59,8 +83,19 @@ class CGSSTeamMember: NSObject, NSCoding {
         aCoder.encode(visualLevel, forKey: "visualLevel")
 	}
 
-    class func initWithAnother(teamMember:CGSSTeamMember) -> CGSSTeamMember {
+    class func initWithAnother(teamMember: CGSSTeamMember) -> CGSSTeamMember {
         let model = CGSSTeamMember.init(id: teamMember.id!, skillLevel: teamMember.skillLevel!, vocalLevel: teamMember.vocalLevel!, danceLevel: teamMember.danceLevel!, visualLevel: teamMember.visualLevel!)
         return model
+    }
+}
+
+extension CGSSTeamMember {
+    static func ==(lhs: CGSSTeamMember, rhs: CGSSTeamMember) -> Bool {
+        if let lCard = lhs.cardRef, let rCard = rhs.cardRef {
+            if lCard.id == rCard.id && lhs.potential == rhs.potential {
+                return true
+            }
+        }
+        return false
     }
 }

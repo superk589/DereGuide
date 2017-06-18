@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate, TeamEditViewControllerDelegate {
+class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate {
     
     var addItem: UIBarButtonItem!
     var deleteItem: UIBarButtonItem!
@@ -69,7 +69,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     
     func addTeam() {
-        let vc = TeamEditViewController()
+        let vc = TeamEditingController()
         vc.delegate = self
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -216,10 +216,11 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
-    
-    // MARK: TeamEditViewController的协议方法
-    
-    func save(_ team: CGSSTeam) {
+}
+
+// MARK: TeamEditingControllerDelegate
+extension TeamTableViewController: TeamEditingControllerDelegate {
+    func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
         teams.insert(team, at: 0)
     }
 }

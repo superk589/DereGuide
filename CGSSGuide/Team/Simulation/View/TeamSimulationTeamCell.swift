@@ -47,11 +47,13 @@ class TeamSimulationCardView: UIView {
             make.centerX.bottom.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
+            make.height.equalTo(14.5)
         }
         potentialLabel.snp.makeConstraints { (make) in
             make.centerX.top.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
+            make.height.equalTo(14.5)
         }
         
         icon.snp.makeConstraints { (make) in
@@ -60,6 +62,29 @@ class TeamSimulationCardView: UIView {
             make.height.equalTo(snp.width)
             make.bottom.equalTo(skillLabel.snp.top)
         }
+        
+//        skillLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .vertical)
+//        potentialLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .vertical)
+//        skillLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
+//        potentialLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
+        
+    }
+    
+    func setupWith(card: CGSSCard, potential: CGSSPotential, skillLevel: Int?) {
+        icon.cardId = card.id
+        potentialLabel.setup(with: potential)
+        if let level = skillLevel {
+            skillLabel.text = "SLv.\(level)"
+        } else {
+            skillLabel.text = "n/a"
+        }
+    }
+    
+    func setup(with member: CGSSTeamMember) {
+        guard let card = member.cardRef else {
+            return
+        }
+        setupWith(card: card, potential: member.potential, skillLevel: member.skillLevel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -111,15 +136,11 @@ class TeamSimulationTeamCell: UITableViewCell, CGSSIconViewDelegate {
     func setup(with team: CGSSTeam) {
         for i in 0...5 {
             if let teamMember = team[i], let card = teamMember.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
-                view.icon.cardId = card.id
                 if i == 5 || card.skill == nil {
-                    view.skillLabel.text = "n/a"
-                } else {
-                    if let skillLevel = teamMember.skillLevel {
-                        view.skillLabel.text = "SLv.\(skillLevel)"
-                    }
+                    view.setupWith(card: card, potential: teamMember.potential, skillLevel: nil)
+                } else if let skillLevel = teamMember.skillLevel {
+                    view.setupWith(card: card, potential: teamMember.potential, skillLevel: skillLevel)
                 }
-                view.potentialLabel.setup(with: teamMember.potential)
             }
         }
         

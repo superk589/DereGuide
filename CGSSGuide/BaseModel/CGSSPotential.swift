@@ -49,3 +49,9 @@ struct CGSSPotential {
         return CGSSAppeal(visual: potentialOfLevel[baseRarity]![visualLevel], vocal: potentialOfLevel[baseRarity]![vocalLevel], dance: potentialOfLevel[baseRarity]![danceLevel], life: potentialOfLevel[baseRarity]![lifeLevel])
     }
 }
+
+extension CGSSPotential: Equatable {
+    static func ==(lhs: CGSSPotential, rhs: CGSSPotential) -> Bool {
+        return lhs.vocalLevel == rhs.vocalLevel && lhs.danceLevel == rhs.danceLevel && lhs.visualLevel == rhs.visualLevel && lhs.lifeLevel == rhs.lifeLevel
+    }
+}
