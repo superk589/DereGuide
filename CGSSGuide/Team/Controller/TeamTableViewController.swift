@@ -34,7 +34,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 124
+        tableView.estimatedRowHeight = 91
         tableView.tableFooterView = UIView()
         
         if teams.count == 0 {
@@ -83,17 +83,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setEditing(false, animated: false)
-        self.tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        setEditing(false, animated: true)
     }
     
     func selectAllAction() {
@@ -222,5 +212,6 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
 extension TeamTableViewController: TeamEditingControllerDelegate {
     func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
         teams.insert(team, at: 0)
+        tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
     }
 }

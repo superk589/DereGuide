@@ -39,7 +39,7 @@ class TeamEditingAdvanceOptionsManager {
             UserDefaults.standard.set(newValue, forKey: "includeGuestLeaderInRecentUsedIdols")
         }
         get {
-            return UserDefaults.standard.object(forKey: "includeGuestLeaderInRecentUsedIdols") as? Bool ?? true
+            return UserDefaults.standard.object(forKey: "includeGuestLeaderInRecentUsedIdols") as? Bool ?? false
         }
     }
     
@@ -55,7 +55,7 @@ class TeamEditingAdvanceOptionsManager {
     func reset() {
         defaultPotentialLevel = 25
         defaultSkillLevel = 10
-        includeGuestLeaderInRecentUsedIdols = true
+        includeGuestLeaderInRecentUsedIdols = false
         useGridView = true
     }
 }

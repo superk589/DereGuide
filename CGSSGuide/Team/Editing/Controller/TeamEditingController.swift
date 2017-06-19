@@ -46,16 +46,20 @@ class TeamEditingController: BaseViewController {
     var members = [CGSSTeamMember?].init(repeating: nil, count: 6)
     
     lazy var recentMembers: [CGSSTeamMember] = {
+        return self.generateRecentMembers()
+    }()
+    
+    fileprivate func generateRecentMembers() -> [CGSSTeamMember] {
         var members = [CGSSTeamMember]()
         for team in CGSSTeamManager.default.teams {
-            for i in 0..<6 {
-                if let member = team[i], !members.contains(member) {
+            for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
+                if let member = team[i], !members.contains{$0 == member} {
                     members.append(member)
                 }
             }
         }
         return members
-    }()
+    }
     
     lazy var cardSelectionViewController: TeamCardSelectTableViewController = {
         let vc = TeamCardSelectTableViewController()
@@ -119,6 +123,7 @@ class TeamEditingController: BaseViewController {
 
     func openAdvanceOptions() {
         let vc = TeamCardSelectionAdvanceOptionsController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -223,7 +228,7 @@ extension TeamEditingController: TeamMemberEditableViewDelegate {
         tevc.modalPresentationStyle = .popover
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
         if let member = members[index] {
-            tevc.setup(model: member, type: CGSSTeamMemberType.init(index: index))
+            tevc.setup(model: member)
         }
         let pc = tevc.popoverPresentationController
         
@@ -268,6 +273,13 @@ extension TeamEditingController: BaseCardTableViewControllerDelegate {
 extension TeamEditingController: TeamTemplateControllerDelegate {
     func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect team: CGSSTeam) {
         self.setup(with: team)
+    }
+}
+
+extension TeamEditingController: TeamCardSelectionAdvanceOptionsControllerDelegate {
+    func recentUsedIdolsNeedToReload() {
+        self.recentMembers = generateRecentMembers()
+        collectionView.reloadData()
     }
 }
 

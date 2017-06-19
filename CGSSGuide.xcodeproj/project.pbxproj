@@ -109,7 +109,6 @@
 		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
 		12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */; };
 		12655FEB1EF2197800FE4066 /* TeamMemberPlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12655FEA1EF2197800FE4066 /* TeamMemberPlaceholderCell.swift */; };
-		12655FED1EF22E6B00FE4066 /* TeamRecentUsedSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12655FEC1EF22E6B00FE4066 /* TeamRecentUsedSelectionController.swift */; };
 		126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSLiveFilter.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
@@ -414,7 +413,6 @@
 		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
 		12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WipeTableViewController.swift; sourceTree = "<group>"; };
 		12655FEA1EF2197800FE4066 /* TeamMemberPlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberPlaceholderCell.swift; sourceTree = "<group>"; };
-		12655FEC1EF22E6B00FE4066 /* TeamRecentUsedSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRecentUsedSelectionController.swift; sourceTree = "<group>"; };
 		126666231D7D70F70022348E /* CGSSLiveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFilter.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
@@ -738,7 +736,6 @@
 				120DBB261EEE2F6A004E0084 /* TeamCardSelectionAdvanceOptionsController.swift */,
 				122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */,
 				120DBB281EEE3120004E0084 /* TeamTemplateController.swift */,
-				12655FEC1EF22E6B00FE4066 /* TeamRecentUsedSelectionController.swift */,
 				1239F1CC1EF375B500861092 /* TeamEditingController.swift */,
 			);
 			path = Controller;
@@ -1562,7 +1559,6 @@
 				12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
-				12655FED1EF22E6B00FE4066 /* TeamRecentUsedSelectionController.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */,
 				120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */,

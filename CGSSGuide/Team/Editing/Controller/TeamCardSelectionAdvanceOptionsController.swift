@@ -8,8 +8,14 @@
 
 import UIKit
 
-class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
+protocol TeamCardSelectionAdvanceOptionsControllerDelegate: class {
+    func recentUsedIdolsNeedToReload()
+}
 
+class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
+    
+    weak var delegate: TeamCardSelectionAdvanceOptionsControllerDelegate?
+    
     var staticCells = [TeamAdvanceOptionsTableViewCell]()
     
     var option1: TeamSimulationSliderOption!
@@ -40,7 +46,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option1))
         let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option2))
         let cell3 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
-        staticCells.append(contentsOf: [cell1, cell2])
+        staticCells.append(contentsOf: [cell1, cell2, cell3])
         
         setupWithUserDefaults()
     }
@@ -86,7 +92,8 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     }
     
     func option3ValueChanged(_ sender: UISwitch) {
-        
+        TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols = option3.switch.isOn
+        delegate?.recentUsedIdolsNeedToReload()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

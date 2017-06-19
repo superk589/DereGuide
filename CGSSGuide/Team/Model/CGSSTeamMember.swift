@@ -92,7 +92,7 @@ class CGSSTeamMember: NSObject, NSCoding {
 extension CGSSTeamMember {
     static func ==(lhs: CGSSTeamMember, rhs: CGSSTeamMember) -> Bool {
         if let lCard = lhs.cardRef, let rCard = rhs.cardRef {
-            if lCard.id == rCard.id && lhs.potential == rhs.potential {
+            if lCard.id == rCard.id && lhs.potential == rhs.potential && lhs.skillLevel! == rhs.skillLevel! {
                 return true
             }
         }

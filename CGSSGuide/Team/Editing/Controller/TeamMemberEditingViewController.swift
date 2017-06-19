@@ -12,12 +12,12 @@ class TeamMemberEditingViewController: UIViewController {
 
     var editView: TeamMemberEditingView!
 
-    func setup(model:CGSSTeamMember, type: CGSSTeamMemberType) {
+    func setup(model:CGSSTeamMember) {
         if editView == nil {
             editView = TeamMemberEditingView.init(frame: CGRect.init(x: 0, y: 0, width: 240, height: 290))
         }
         view.addSubview(editView)
-        editView.setupWith(model: model, type: type)
+        editView.setup(with: model)
     }
 
 }

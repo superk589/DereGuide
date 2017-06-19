@@ -113,23 +113,17 @@ class TeamMemberEditingView: UIView {
     }
     
     private func setSkillItemNotAvailable() {
-        skillItem.slider.value = 0
         skillItem.isUserInteractionEnabled = false
         skillItem.slider.isEnabled = false
         skillItem.numLabel.text = "n/a"
     }
     
-    func setupWith(model: CGSSTeamMember, type: CGSSTeamMemberType) {
-        switch type {
-        case .friend:
+    func setup(with model: CGSSTeamMember) {
+        if model.cardRef?.skill == nil {
             setSkillItemNotAvailable()
-        default:
-            if model.cardRef?.skill == nil {
-                setSkillItemNotAvailable()
-            } else {
-                skillItem.slider.value = Float(model.skillLevel!)
-                skillItem.numLabel.text = String(model.skillLevel!)
-            }
+        } else {
+            skillItem.slider.value = Float(model.skillLevel!)
+            skillItem.numLabel.text = String(model.skillLevel!)
         }
         
         vocalItem.slider.value = Float(model.vocalLevel!)
