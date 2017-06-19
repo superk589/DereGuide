@@ -14,7 +14,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     
     var option1: TeamSimulationSliderOption!
     var option2: TeamSimulationSliderOption!
-//    var option3: TeamSimulationSwitchOption!
+    var option3: TeamSimulationSwitchOption!
 //    var option4: TeamSimulationSwitchOption!
     //    weak var delegate: TeamAdvanceOptionsControllerDelegate?
     
@@ -28,14 +28,18 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         option1.slider.minimumValue = 0
         
         option2 = TeamSimulationSliderOption()
-        
         option2.addTarget(self, action: #selector(option2ValueChanged(_:)), for: .valueChanged)
         option2.label.text = NSLocalizedString("默认潜能等级", comment: "")
         option2.slider.maximumValue = 25
         option2.slider.minimumValue = 0
         
+        option3 = TeamSimulationSwitchOption()
+        option3.addTarget(self, action: #selector(option3ValueChanged(_:)), for: .valueChanged)
+        option3.label.text = NSLocalizedString("最近使用中也包含好友的队长", comment: "")
+        
         let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option1))
         let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option2))
+        let cell3 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
         staticCells.append(contentsOf: [cell1, cell2])
         
         setupWithUserDefaults()
@@ -70,6 +74,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     private func setupWithUserDefaults() {
         option1.currentValue = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
         option2.currentValue = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
+        option3.switch.isOn = TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols
     }
     
     func option1ValueChanged(_ sender: UISlider) {
@@ -78,6 +83,10 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     
     func option2ValueChanged(_ sender: UISlider) {
         TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel = option2.currentValue
+    }
+    
+    func option3ValueChanged(_ sender: UISwitch) {
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
