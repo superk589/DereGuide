@@ -3,6 +3,7 @@ PODS:
   - Charts (3.0.2):
     - Charts/Core (= 3.0.2)
   - Charts/Core (3.0.2)
+  - EasyTipView (1.0.2)
   - Firebase/AdMob (4.0.2):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.20.0)
@@ -39,6 +40,7 @@ PODS:
 DEPENDENCIES:
   - ASValueTrackingSlider
   - Charts
+  - EasyTipView
   - Firebase/AdMob
   - Firebase/Core
   - FMDB
@@ -54,6 +56,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ASValueTrackingSlider: 5261de3fcf00adb339efc93885e8f0bc99e703cd
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
   FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
   FirebaseCore: 1a8bf6c795ad07d2918278657954ffd2552e9c17
@@ -70,6 +73,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: b331cd5a4f3a8f27b8707f09776e861d3d9cffce
   ZKDrawerController: b4ff8694c9e06bee360affa71dc727ac29e2e1e7
 
-PODFILE CHECKSUM: b797550f1496c78b3bd3b4c1fcddfea251d04044
+PODFILE CHECKSUM: 2621f8d477809aa8f6984431f98b8cfdc144c2dd
 
 COCOAPODS: 1.2.1

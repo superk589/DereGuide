@@ -57,4 +57,13 @@ extension UserDefaults {
         }
     }
     
+    var firstTimeUsingTeamEditingPage: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeUsingTeamEditingPage")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeUsingTeamEditingPage") as? Bool ?? true
+        }
+    }
+    
 }

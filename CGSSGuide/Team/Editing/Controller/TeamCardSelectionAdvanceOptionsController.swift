@@ -21,8 +21,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     var option1: TeamSimulationSliderOption!
     var option2: TeamSimulationSliderOption!
     var option3: TeamSimulationSwitchOption!
-//    var option4: TeamSimulationSwitchOption!
-    //    weak var delegate: TeamAdvanceOptionsControllerDelegate?
+    var option4: TeamSimulationSwitchOption!
     
     private func prepareStaticCells() {
         
@@ -43,10 +42,15 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         option3.addTarget(self, action: #selector(option3ValueChanged(_:)), for: .valueChanged)
         option3.label.text = NSLocalizedString("最近使用中也包含好友的队长", comment: "")
         
+        option4 = TeamSimulationSwitchOption()
+        option4.addTarget(self, action: #selector(option4ValueChanged(_:)), for: .valueChanged)
+        option4.label.text = NSLocalizedString("修改最近使用中的偶像潜能同步到同角色所有卡片", comment: "")
+        
         let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option1))
         let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option2))
         let cell3 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
-        staticCells.append(contentsOf: [cell1, cell2, cell3])
+        let cell4 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option4))
+        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4])
         
         setupWithUserDefaults()
     }
@@ -81,6 +85,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         option1.currentValue = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
         option2.currentValue = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
         option3.switch.isOn = TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols
+        option4.switch.isOn = TeamEditingAdvanceOptionsManager.default.editAllSameChara
     }
     
     func option1ValueChanged(_ sender: UISlider) {
@@ -94,6 +99,10 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     func option3ValueChanged(_ sender: UISwitch) {
         TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols = option3.switch.isOn
         delegate?.recentUsedIdolsNeedToReload()
+    }
+    
+    func option4ValueChanged(_ sender: UISwitch) {
+        TeamEditingAdvanceOptionsManager.default.editAllSameChara = option4.switch.isOn
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

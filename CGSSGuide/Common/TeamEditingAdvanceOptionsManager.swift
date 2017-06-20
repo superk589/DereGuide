@@ -43,12 +43,12 @@ class TeamEditingAdvanceOptionsManager {
         }
     }
     
-    var useGridView: Bool {
+    var editAllSameChara: Bool {
         set {
-            UserDefaults.standard.set(newValue, forKey: "useGridView")
+            UserDefaults.standard.set(newValue, forKey: "editAllSameChara")
         }
         get {
-            return UserDefaults.standard.object(forKey: "useGridView") as? Bool ?? true
+            return UserDefaults.standard.object(forKey: "editAllSameChara") as? Bool ?? true
         }
     }
     
@@ -56,6 +56,6 @@ class TeamEditingAdvanceOptionsManager {
         defaultPotentialLevel = 25
         defaultSkillLevel = 10
         includeGuestLeaderInRecentUsedIdols = false
-        useGridView = true
+        editAllSameChara = true
     }
 }

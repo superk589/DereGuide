@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import EasyTipView
 
 protocol TeamEditingControllerDelegate: class {
     func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam)
@@ -19,7 +20,7 @@ class TeamEditingController: BaseViewController {
     weak var delegate: TeamEditingControllerDelegate?
     
     var collectionView: UICollectionView!
-    
+    var titleLabel: UILabel!
     var editableView = TeamMemberEditableView()
     
     var leader: CGSSTeamMember? {
@@ -86,7 +87,7 @@ class TeamEditingController: BaseViewController {
         layout.minimumInteritemSpacing = 10
         view.addSubview(collectionView)
         
-        let titleLabel = UILabel()
+        titleLabel = UILabel()
         titleLabel.text = NSLocalizedString("最近使用", comment: "")
         view.addSubview(titleLabel)
         titleLabel.font = UIFont.systemFont(ofSize: 16)
@@ -94,6 +95,14 @@ class TeamEditingController: BaseViewController {
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
             make.left.equalTo(10)
         }
+        
+        let infoButton = UIButton(type: .detailDisclosure)
+        view.addSubview(infoButton)
+        infoButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.centerY.equalTo(titleLabel)
+        }
+        infoButton.addTarget(self, action: #selector(handleInfoButton), for: .touchUpInside)
         
         editableView.delegate = self
         editableView.backgroundColor = Color.cool.withAlphaComponent(0.1)
@@ -115,6 +124,14 @@ class TeamEditingController: BaseViewController {
         editableView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if UserDefaults.standard.firstTimeUsingTeamEditingPage {
+            showHelpTips()
+            UserDefaults.standard.firstTimeUsingTeamEditingPage = false
+        }
+    }
+    
     func prepareToolbar() {
         let item1 = UIBarButtonItem(title: NSLocalizedString("高级选项", comment: ""), style: .plain, target: self, action: #selector(openAdvanceOptions))
         let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -133,6 +150,43 @@ class TeamEditingController: BaseViewController {
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func handleInfoButton() {
+        showHelpTips()
+    }
+    
+    var tip1: EasyTipView!
+    var tip2: EasyTipView!
+    var maskView: UIView?
+    
+    private func showHelpTips() {
+        if tip1 == nil || tip2 == nil {
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
+            preferences.drawing.foregroundColor = UIColor.white
+            preferences.drawing.backgroundColor = Color.cute
+            
+            tip1 = EasyTipView(text: NSLocalizedString("最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）", comment: ""), preferences: preferences, delegate: nil)
+            
+            preferences.drawing.backgroundColor = Color.passion
+            tip2 = EasyTipView(text: NSLocalizedString("单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级", comment: ""), preferences: preferences, delegate: nil)
+        }
+        tip1.show(forView: titleLabel)
+        tip2.show(forView: editableView)
+        maskView = UIView()
+        navigationController?.view.addSubview(maskView!)
+        maskView?.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
+        maskView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
+    }
+    
+    func hideHelpTips() {
+        tip1.dismiss()
+        tip2.dismiss()
+        maskView?.removeFromSuperview()
+    }
+    
 
     func setup(with team: CGSSTeam) {
         self.leader = CGSSTeamMember.initWithAnother(teamMember: team.leader)
@@ -270,8 +324,10 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         return .none
     }
     
-    fileprivate func modify(_ member: CGSSTeamMember, using vc: TeamMemberEditingViewController) {
-        member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+    fileprivate func modify(_ member: CGSSTeamMember, using vc: TeamMemberEditingViewController, modifySkill: Bool = true) {
+        if modifySkill {
+            member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+        }
         member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
         member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
         member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
@@ -287,7 +343,10 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
                 for team in CGSSTeamManager.default.teams {
                     for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
                         if let member = team[i] {
-                            if member == selectedMember {
+                            if (TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.cardRef?.charaId == selectedMember.cardRef?.charaId) {
+                                modify(member, using: vc, modifySkill: false)
+                                modifiedTeams.insert(team)
+                            } else if member == selectedMember {
                                 modify(member, using: vc)
                                 modifiedTeams.insert(team)
                             }

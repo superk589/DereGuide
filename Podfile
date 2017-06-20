@@ -14,6 +14,7 @@ target 'CGSSGuide' do
   pod 'Firebase/AdMob'
   pod 'TTGTagCollectionView'
   pod 'Charts'
+  pod 'EasyTipView'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'
