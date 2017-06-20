@@ -159,7 +159,7 @@ class TeamMemberEditableView: UIView {
         }
         
         descLabel = UILabel()
-        descLabel.text = NSLocalizedString("* 双击从全部偶像中选择\n* 长按编辑潜能和特技等级", comment: "")
+        descLabel.text = NSLocalizedString("* 双击从全部偶像中选择\n* 长按编辑潜能和特技等级\n* 最近使用中将潜能和特技等级相同的同一张卡视作同一偶像，长按编辑会更新所有关联队伍", comment: "")
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
         descLabel.font = UIFont.systemFont(ofSize: 14)

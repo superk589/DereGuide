@@ -9,18 +9,31 @@
 import UIKit
 import SnapKit
 
+protocol TeamRecentUsedCellDelegate: class {
+    func didLongPressAt(_ teamRecentUsedCell: TeamRecentUsedCell)
+}
+
 class TeamRecentUsedCell: UICollectionViewCell {
+    
     var cardView: TeamSimulationCardView!
+    
+    weak var delegate: TeamRecentUsedCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         cardView = TeamSimulationCardView()
         contentView.addSubview(cardView)
         cardView.icon.isUserInteractionEnabled = false
-
         cardView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        addGestureRecognizer(press)
+    }
+    
+    func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        delegate?.didLongPressAt(self)
     }
     
     func setup(with member: CGSSTeamMember) {

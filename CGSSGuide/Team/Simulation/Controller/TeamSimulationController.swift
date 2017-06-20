@@ -244,6 +244,14 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
 }
 
 extension TeamSimulationController: TeamEditingControllerDelegate {
+    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>) {
+        if teams.contains(self.team) {
+            if let vc = pageCollectionController as? TeamDetailController {
+                vc.team = team
+            }
+        }
+    }
+    
     func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
         let manager = CGSSTeamManager.default
         if let team = self.team, let index = manager.teams.index(of: team) {

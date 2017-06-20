@@ -58,14 +58,15 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         copyItem = UIBarButtonItem.init(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
         
         spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        // toolbarItems = [selectItem, copyItem]
-     
-        // navigationController?.setToolbarHidden(true, animated: true)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTeamModifiedNotification), name: .teamModified, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func handleTeamModifiedNotification() {
+        tableView.reloadData()
     }
     
     func addTeam() {
@@ -213,6 +214,10 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
 
 // MARK: TeamEditingControllerDelegate
 extension TeamTableViewController: TeamEditingControllerDelegate {
+    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>) {
+        
+    }
+    
     func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
         teams.insert(team, at: 0)
         tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)

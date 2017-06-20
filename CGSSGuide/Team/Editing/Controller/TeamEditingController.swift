@@ -11,6 +11,7 @@ import SnapKit
 
 protocol TeamEditingControllerDelegate: class {
     func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam)
+    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>)
 }
 
 class TeamEditingController: BaseViewController {
@@ -203,7 +204,7 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamRecentUsedCell.description(), for: indexPath) as! TeamRecentUsedCell
-        
+        cell.delegate = self
         cell.setup(with: recentMembers[indexPath.item])
         return cell
     }
@@ -211,6 +212,29 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let member = recentMembers[indexPath.item]
         insertMember(member, atIndex: editableView.currentIndex)
+    }
+}
+
+extension TeamEditingController: TeamRecentUsedCellDelegate {
+    func didLongPressAt(_ teamRecentUsedCell: TeamRecentUsedCell) {
+        guard let index = collectionView.indexPath(for: teamRecentUsedCell)?.item else {
+            return
+        }
+        let tevc = TeamMemberEditingViewController()
+        tevc.modalPresentationStyle = .popover
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
+        
+        let member = recentMembers[index]
+        tevc.setup(model: member)
+        
+        let pc = tevc.popoverPresentationController
+        
+        pc?.delegate = self
+        pc?.permittedArrowDirections = .any
+        pc?.sourceView = teamRecentUsedCell
+        pc?.sourceRect = CGRect.init(x: teamRecentUsedCell.fwidth / 2, y: teamRecentUsedCell.fheight
+         / 2, width: 0, height: 0)
+        present(tevc, animated: true, completion: nil)
     }
 }
 
@@ -246,15 +270,45 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         return .none
     }
     
+    fileprivate func modify(_ member: CGSSTeamMember, using vc: TeamMemberEditingViewController) {
+        member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+        member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
+        member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
+        member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
+    }
+    
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         let vc = popoverPresentationController.presentedViewController as! TeamMemberEditingViewController
-        if let member = members[editableView.currentIndex] {
-            let index = editableView.currentIndex
-            member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
-            member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
-            member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
-            member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
-            reload(index: index)
+        
+        if let sourceView = popoverPresentationController.sourceView as? TeamRecentUsedCell {
+            if let index = collectionView.indexPath(for: sourceView)?.item {
+                let selectedMember = recentMembers[index]
+                var modifiedTeams = Set<CGSSTeam>()
+                for team in CGSSTeamManager.default.teams {
+                    for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
+                        if let member = team[i] {
+                            if member == selectedMember {
+                                modify(member, using: vc)
+                                modifiedTeams.insert(team)
+                            }
+                        }
+                    }
+                }
+                modify(selectedMember, using: vc)
+                delegate?.teamEditingController(self, didModify: modifiedTeams)
+                NotificationCenter.default.post(name: .teamModified, object: nil)
+                CGSSTeamManager.default.save()
+                collectionView.reloadData()
+            }
+        } else if let _ = popoverPresentationController.sourceView as? TeamMemberEditableItemView {
+            if let member = members[editableView.currentIndex] {
+                let index = editableView.currentIndex
+                member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+                member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
+                member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
+                member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
+                reload(index: index)
+            }
         }
     }
 }
