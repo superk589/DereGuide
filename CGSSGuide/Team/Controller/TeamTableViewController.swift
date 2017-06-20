@@ -34,7 +34,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 91
+        tableView.estimatedRowHeight = 99
         tableView.tableFooterView = UIView()
         
         if teams.count == 0 {
@@ -84,6 +84,9 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         setEditing(false, animated: true)
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     func selectAllAction() {

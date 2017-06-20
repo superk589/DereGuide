@@ -19,6 +19,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         self.interactivePopGestureRecognizer?.delegate = self
         self.interactivePopGestureRecognizer?.isEnabled = true
         self.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     

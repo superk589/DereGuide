@@ -95,23 +95,37 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
     var offsetRatio: CGFloat {
         if let scrollView = self.scrollView {
-            let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY - insets.top - insets.bottom
-            let totalHeight = scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.top + scrollView.contentInset.bottom
-            return indicatorScrollabelHeight / totalHeight
+            if #available(iOS 11.0, *) {
+                let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.adjustedContentInset.top - scrollView.adjustedContentInset.bottom - bounds.maxY - insets.top - insets.bottom
+                let totalHeight = scrollView.contentSize.height - scrollView.bounds.height + scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom
+                return indicatorScrollabelHeight / totalHeight
+            } else {
+                let indicatorScrollabelHeight = scrollView.bounds.height - scrollView.contentInset.top - scrollView.contentInset.bottom - bounds.maxY - insets.top - insets.bottom
+                let totalHeight = scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.top + scrollView.contentInset.bottom
+                return indicatorScrollabelHeight / totalHeight
+            }
         }
         return 1
     }
     
     var maxOffsetY: CGFloat {
         if let scrollView = self.scrollView {
-            return scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentInset.bottom - bounds.midY - insets.bottom
+            if #available(iOS 11.0, *) {
+                return scrollView.contentOffset.y + scrollView.bounds.height - scrollView.adjustedContentInset.bottom - bounds.midY - insets.bottom
+            } else {
+                return scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentInset.bottom - bounds.midY - insets.bottom
+            }
         }
         return 0
     }
 
     var minOffsetY: CGFloat {
         if let scrollView = self.scrollView {
-            return scrollView.contentOffset.y + scrollView.contentInset.top + bounds.midY + insets.top
+            if #available(iOS 11.0, *) {
+                return scrollView.contentOffset.y + scrollView.adjustedContentInset.top + bounds.midY + insets.top
+            } else {
+                return scrollView.contentOffset.y + scrollView.contentInset.top + bounds.midY + insets.top
+            }
         }
         return 0
     }
@@ -120,14 +134,23 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     func adjustFrameInScrollView() {
         if let scrollView = self.scrollView {
             center.x = scrollView.bounds.maxX - bounds.midY - 1
-            center.y = max(min((scrollView.contentInset.top + scrollView.contentOffset.y) * (1 + offsetRatio) + bounds.midY + insets.top, maxOffsetY), minOffsetY)
+            if #available(iOS 11.0, *) {
+                center.y = max(min((scrollView.adjustedContentInset.top + scrollView.contentOffset.y) * (1 + offsetRatio) + bounds.midY + insets.top, maxOffsetY), minOffsetY)
+            } else {
+                center.y = max(min((scrollView.contentInset.top + scrollView.contentOffset.y) * (1 + offsetRatio) + bounds.midY + insets.top, maxOffsetY), minOffsetY)
+            }
         }
     }
     
     func adjustScrollView() {
         if let scrollView = scrollView {
-            let offsetY = frame.minY - scrollView.contentInset.top - scrollView.contentOffset.y - insets.top
-            scrollView.contentOffset.y = offsetY / offsetRatio - scrollView.contentInset.top
+            if #available(iOS 11.0, *) {
+                let offsetY = frame.minY - scrollView.adjustedContentInset.top - scrollView.contentOffset.y - insets.top
+                scrollView.contentOffset.y = offsetY / offsetRatio - scrollView.adjustedContentInset.top
+            } else {
+                let offsetY = frame.minY - scrollView.contentInset.top - scrollView.contentOffset.y - insets.top
+                scrollView.contentOffset.y = offsetY / offsetRatio - scrollView.contentInset.top
+            }
         }
     }
     

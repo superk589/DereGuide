@@ -33,15 +33,18 @@ class BeatmapViewController: UIViewController {
     var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        #if DEBUG
-            print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
-        #endif
+        prepareToolbar()
+        print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
         
         bv = BeatmapView()
         self.view.addSubview(bv)
         bv.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.left.right.equalToSuperview()
+                make.bottom.equalTo(-44)
+            } else {
+                make.edges.equalToSuperview()
+            }
         }
         bv.contentMode = .redraw
         
@@ -57,8 +60,6 @@ class BeatmapViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         self.view.backgroundColor = UIColor.white
-
-        prepareToolbar()
         
         updateUI()
     }
@@ -111,11 +112,6 @@ class BeatmapViewController: UIViewController {
             }
         }
         return nil
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     private func prepareToolbar() {
