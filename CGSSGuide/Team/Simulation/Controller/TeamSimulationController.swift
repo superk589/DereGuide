@@ -57,6 +57,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     }
     
     var titles = [NSLocalizedString("得分分布", comment: ""),
+                  NSLocalizedString("高级计算", comment: ""),
                   NSLocalizedString("得分详情", comment: ""),
                   NSLocalizedString("辅助技能详情", comment: ""),
                   NSLocalizedString("高级选项", comment: "")]
@@ -85,7 +86,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 11
+        return 12
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,11 +117,11 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationMainBodyCell.description(), for: indexPath) as! TeamSimulationMainBodyCell
             cell.delegate = self
             return cell
-        case 6...9:
+        case 6...10:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationCommonCell.description(), for: indexPath) as! TeamSimulationCommonCell
             cell.setup(with: titles[indexPath.row - 6])
             return cell
-        case 10:
+        case 11:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationDescriptionCell.description(), for: indexPath) as! TeamSimulationDescriptionCell
             return cell
         default:
@@ -152,10 +153,12 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         case 6:
             checkScoreDistribution()
         case 7:
-            checkScoreDetail()
+            gotoAdvanceCalculation()
         case 8:
-            checkSupportSkillDetail()
+            checkScoreDetail()
         case 9:
+            checkSupportSkillDetail()
+        case 10:
             let vc = TeamAdvanceOptionsController()
             navigationController?.pushViewController(vc, animated: true)
         default:
@@ -193,7 +196,18 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             showNotSelectSongAlert()
         }
     }
-
+    
+    func gotoAdvanceCalculation() {
+        if let result = self.simulationResult, result.scores.count > 0, let scene = scene {
+            let vc = TeamAdvanceCalculationController(result: result)
+            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let formulator = coordinator.generateLiveFormulator()
+            vc.formulator = formulator
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            UIAlertController.showHintMessage(NSLocalizedString("至少进行一次模拟计算之后才能进行高级计算", comment: ""), in: nil)
+        }
+    }
     
     private func showActionSheetOfLiveModeSelection(at cell: TeamSimulationModeSelectionCell?) {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择歌曲模式", comment: "弹出框标题"), message: nil, preferredStyle: .actionSheet)
@@ -335,7 +349,7 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
             currentSimulator = simulator
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
-                    doSimulationBy(simulator,5000)
+                    doSimulationBy(simulator, 5000)
                 #else
                     doSimulationBy(simulator, UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes))
                 #endif

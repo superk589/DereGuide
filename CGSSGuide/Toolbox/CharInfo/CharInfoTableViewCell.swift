@@ -35,6 +35,7 @@ class CharInfoTableViewCell: UITableViewCell {
         charNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
         charNameLabel.font = UIFont.systemFont(ofSize: 16)
         charNameLabel.adjustsFontSizeToFitWidth = true
+        charNameLabel.baselineAdjustment = .alignCenters
         
         charCVLabel = UILabel.init(frame: CGRect(x: 68, y: 46, width: CGSSGlobal.width - 78, height: 12))
         charCVLabel.font = UIFont.systemFont(ofSize: 12)

@@ -86,6 +86,7 @@ class GachaTableViewCell: UITableViewCell {
         nameLabel.font = UIFont.systemFont(ofSize: 14)
         nameLabel.textColor = UIColor.black
         nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.baselineAdjustment = .alignCenters
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(startDateView.snp.right).offset(10)
             make.centerY.equalTo(startDateView)

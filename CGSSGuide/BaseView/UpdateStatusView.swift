@@ -36,11 +36,13 @@ class UpdateStatusView: UIView {
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
         statusLabel.adjustsFontSizeToFitWidth = true
+        statusLabel.baselineAdjustment = .alignCenters
         descriptionLabel = UILabel()
         descriptionLabel.textColor = UIColor.white
         descriptionLabel.frame = CGRect(x: 20, y: 0, width: frame.size.width - 40, height: frame.size.height / 2)
         descriptionLabel.font = UIFont.boldSystemFont(ofSize: 17)
         descriptionLabel.adjustsFontSizeToFitWidth = true
+        descriptionLabel.baselineAdjustment = .alignCenters
         descriptionLabel.textAlignment = .center
         
         loadingView = LoadingImageView.init(frame: CGRect.init(x: self.fheight * 0.1, y: self.fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))

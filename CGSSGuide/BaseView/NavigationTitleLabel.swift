@@ -16,6 +16,7 @@ class NavigationTitleLabel: UILabel {
         font = UIFont.systemFont(ofSize: 12)
         textAlignment = .center
         adjustsFontSizeToFitWidth = true
+        baselineAdjustment = .alignCenters
     }
     
     required init?(coder aDecoder: NSCoder) {

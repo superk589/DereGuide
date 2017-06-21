@@ -19,6 +19,7 @@ class TeamLeaderSkillView: TipView {
         descLabel.numberOfLines = 0
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.adjustsFontSizeToFitWidth = true
+        descLabel.baselineAdjustment = .alignCenters
         contentView.addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
             make.left.equalTo(5)

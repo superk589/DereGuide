@@ -40,17 +40,15 @@ class CGSSSliderView: UIView, ASValueTrackingSliderDelegate {
         addSubview(descLabel)
         addSubview(slider)
         addSubview(numLabel)
-        
-        
     }
     
     func sliderDidHidePopUpView(_ slider: ASValueTrackingSlider!) {
         self.numLabel.text = String(Int(round(self.slider.value)))
     }
+    
     func sliderWillDisplayPopUpView(_ slider: ASValueTrackingSlider!) {
         //
     }
-
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -63,7 +61,6 @@ class TeamMemberEditingView: UIView {
     var vocalItem: CGSSSliderView!
     var danceItem: CGSSSliderView!
     var visualItem: CGSSSliderView!
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,7 +106,6 @@ class TeamMemberEditingView: UIView {
         addSubview(vocalItem)
         addSubview(danceItem)
         addSubview(visualItem)
-        
     }
     
     private func setSkillItemNotAvailable() {

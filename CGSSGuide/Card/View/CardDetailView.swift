@@ -247,6 +247,7 @@ class CardDetailView: UIView {
         skillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
         skillNameLabel.font = UIFont.systemFont(ofSize: 16)
         skillNameLabel.adjustsFontSizeToFitWidth = true
+        skillNameLabel.baselineAdjustment = .alignCenters
         // skillContentView.addSubview(skillNameLabel)
         skillContentView.addSubview(skillNameLabel)
         // skillTypeLabel = UILabel()
@@ -345,6 +346,7 @@ class CardDetailView: UIView {
         leaderSkillNameLabel = UILabel()
         leaderSkillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
         leaderSkillNameLabel.adjustsFontSizeToFitWidth = true
+        leaderSkillNameLabel.baselineAdjustment = .alignCenters
         leaderSkillNameLabel.font = UIFont.systemFont(ofSize: 16)
         
         // leaderSkillContentView.addSubview(leaderSkillNameLabel)

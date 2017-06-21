@@ -28,6 +28,23 @@ struct LSResult {
         return scores[index - 1]
     }
     
+    func get(percent: Double, _ fromHighToLow: Bool) -> Int {
+        if fromHighToLow {
+            let index = percent * Double(scores.count) / 100
+            guard floor(index) > 0 else {
+                return scores[0]
+            }
+            return scores[Int(floor(index)) - 1]
+        } else {
+            let reversed = Array(scores.reversed())
+            let index = percent * Double(scores.count) / 100
+            guard floor(index) > 0 else {
+                return reversed[0]
+            }
+            return reversed[Int(floor(index)) - 1]
+        }
+    }
+    
     var maxScore: Int {
         return scores.max() ?? 0
     }
@@ -82,6 +99,26 @@ extension LSResult {
     
     var h: Double {
         return 4 * Double(maxScore - minScore) / sqrt(Double(scores.count))
+    }
+    
+    func estimate(using kernel: KernelFunction, range: Range<Double>, bound: Range<Double>) -> Double {
+        let upperBound = min(range.upperBound, bound.upperBound)
+        let lowerBound = max(range.lowerBound, bound.lowerBound)
+        var result = 0.0
+        let h = self.h
+        let step = max(1, min(100, (upperBound - lowerBound) / 1000))
+        var current = lowerBound
+//        var lastIndex = 0
+        let scores = self.reversed
+        while current <= upperBound {
+            var k = 0.0
+            for score in scores {
+                k += kernel(Double(score) - current, h)
+            }
+            result += k / Double(scores.count) * step
+            current += step
+        }
+        return result
     }
     
 }

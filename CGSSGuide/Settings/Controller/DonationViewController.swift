@@ -111,6 +111,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         bannerDescLabel2.textAlignment = .center
         bannerDescLabel2.text = NSLocalizedString("广告仅存在于本页面内。", comment: "")
         bannerDescLabel2.adjustsFontSizeToFitWidth = true
+        bannerDescLabel2.baselineAdjustment = .alignCenters
         
         if !UserDefaults.standard.shouldShowAd {
             removeAd()
@@ -130,6 +131,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         CGSSLoadingHUDManager.default.show()
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
+    
     func reloadData() {
         self.cv.reloadData()
     }
@@ -147,6 +149,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }

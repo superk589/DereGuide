@@ -87,6 +87,7 @@ class CGSSLoadingHUD: UIView {
         titleLable = UILabel.init(frame: CGRect.init(x: 0, y: 75, width: 120, height: 25))
         titleLable.textAlignment = .center
         titleLable.adjustsFontSizeToFitWidth = true
+        titleLable.baselineAdjustment = .alignCenters
         titleLable.font = UIFont.boldSystemFont(ofSize: 17)
         titleLable.textColor = UIColor.white
         titleLable.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")

@@ -47,6 +47,7 @@ class CharDetailView: UIView {
         charNameLabel.frame = CGRect(x: 68, y: 26, width: CGSSGlobal.width - 78, height: 16)
         charNameLabel.font = UIFont.systemFont(ofSize: 16)
         charNameLabel.adjustsFontSizeToFitWidth = true
+        charNameLabel.baselineAdjustment = .alignCenters
         
         basicView.addSubview(charNameLabel)
         basicView.addSubview(charIconView)

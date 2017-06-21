@@ -50,6 +50,7 @@ class TeamSimulationLiveView: UIView {
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
         descriptionLabel.textColor = UIColor.darkGray
         descriptionLabel.adjustsFontSizeToFitWidth = true
+        descriptionLabel.baselineAdjustment = .alignCenters
         descriptionLabel.textAlignment = .left
         addSubview(descriptionLabel)
         

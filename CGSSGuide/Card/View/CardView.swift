@@ -52,6 +52,7 @@ class CardView: UIView {
         cardNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
         cardNameLabel.font = UIFont.systemFont(ofSize: 16)
         cardNameLabel.adjustsFontSizeToFitWidth = true
+        cardNameLabel.baselineAdjustment = .alignCenters
         
         titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 98, y: 10, width: CGSSGlobal.width - 150, height: 10)

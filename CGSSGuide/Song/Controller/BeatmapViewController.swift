@@ -55,6 +55,7 @@ class BeatmapViewController: UIViewController {
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.baselineAdjustment = .alignCenters
         navigationItem.titleView = titleLabel
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))

@@ -58,7 +58,17 @@ class CGSSLiveFormulator {
         for i in 0..<notes.count {
             let note = notes[i]
             let distribution = distributions[i]
-            sum += Int(round(note.baseScore * note.comboFactor * Double(distribution.max) / 10000))
+            sum += Int(round(note.baseScore * note.comboFactor * Double(distribution.maxValue) / 10000))
+        }
+        return sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
+    }
+    
+    var minScore: Int {
+        var sum = 0
+        for i in 0..<notes.count {
+            let note = notes[i]
+            let distribution = distributions[i]
+            sum += Int(round(note.baseScore * note.comboFactor * Double(distribution.minValue) / 10000))
         }
         return sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
     }

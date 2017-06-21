@@ -85,6 +85,7 @@ class EventTableViewCell: UITableViewCell {
         eventNameLabel.font = UIFont.systemFont(ofSize: 14)
         eventNameLabel.textColor = UIColor.black
         eventNameLabel.adjustsFontSizeToFitWidth = true
+        eventNameLabel.baselineAdjustment = .alignCenters
         eventNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(startDateView.snp.right).offset(10)
             make.centerY.equalTo(startDateView)

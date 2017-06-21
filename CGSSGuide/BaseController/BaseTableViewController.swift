@@ -13,7 +13,7 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         
         // Uncomment the following line to preserve selection between presentations
         clearsSelectionOnViewWillAppear = true

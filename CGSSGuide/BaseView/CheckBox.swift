@@ -48,6 +48,7 @@ class CheckBox: UIView {
         }
         label = UILabel()
         label.adjustsFontSizeToFitWidth = true
+        label.baselineAdjustment = .alignCenters
         addSubview(label)
         label.snp.makeConstraints { (make) in
             make.left.equalTo(icon.snp.right).offset(5)

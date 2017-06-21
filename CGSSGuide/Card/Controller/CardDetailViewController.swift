@@ -36,6 +36,7 @@ class CardDetailViewController: BaseViewController {
         titleView.font = UIFont.systemFont(ofSize: 12)
         titleView.textAlignment = .center
         titleView.adjustsFontSizeToFitWidth = true
+        titleView.baselineAdjustment = .alignCenters
         navigationItem.titleView = titleView
         
         // let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))

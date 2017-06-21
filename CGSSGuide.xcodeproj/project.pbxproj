@@ -39,6 +39,7 @@
 		121C78E41D57376200D0B636 /* TeamSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */; };
 		121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23791E70F97700319519 /* BannerViewAnimator.swift */; };
 		121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23811E7198AE00319519 /* ToolboxNavigationController.swift */; };
+		121FCFAE1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FCFAD1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift */; };
 		122497241E8E8582005C743C /* LFDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497231E8E8582005C743C /* LFDistribution.swift */; };
 		122497261E8E859C005C743C /* LSNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497251E8E859C005C743C /* LSNote.swift */; };
 		122497281E8E85C1005C743C /* LSSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497271E8E85C1005C743C /* LSSkill.swift */; };
@@ -161,8 +162,11 @@
 		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
+		12852EE71EF912DE00E26A73 /* TeamAdvanceCalculationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12852EE61EF912DE00E26A73 /* TeamAdvanceCalculationController.swift */; };
+		12852EE91EF9189500E26A73 /* TeamAdvanceCalculationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12852EE81EF9189500E26A73 /* TeamAdvanceCalculationCell.swift */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
+		128E94931EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E94921EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift */; };
 		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
 		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
 		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
@@ -325,6 +329,7 @@
 		121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSongSelectViewController.swift; sourceTree = "<group>"; };
 		121D23791E70F97700319519 /* BannerViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewAnimator.swift; sourceTree = "<group>"; };
 		121D23811E7198AE00319519 /* ToolboxNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxNavigationController.swift; sourceTree = "<group>"; };
+		121FCFAD1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAdvanceDescriptionCell.swift; sourceTree = "<group>"; };
 		122497231E8E8582005C743C /* LFDistribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFDistribution.swift; sourceTree = "<group>"; };
 		122497251E8E859C005C743C /* LSNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSNote.swift; sourceTree = "<group>"; };
 		122497271E8E85C1005C743C /* LSSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSSkill.swift; sourceTree = "<group>"; };
@@ -466,8 +471,11 @@
 		1282EE5F1D011A8F0024318C /* CGSSGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CGSSGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		12852EE61EF912DE00E26A73 /* TeamAdvanceCalculationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAdvanceCalculationController.swift; sourceTree = "<group>"; };
+		12852EE81EF9189500E26A73 /* TeamAdvanceCalculationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAdvanceCalculationCell.swift; sourceTree = "<group>"; };
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
+		128E94921EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAdvanceCalculationResultView.swift; sourceTree = "<group>"; };
 		1296759D1EBF62400037827B /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		129675A41EBF62B20037827B /* PageCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionController.swift; sourceTree = "<group>"; };
 		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
@@ -1197,6 +1205,7 @@
 				12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */,
 				12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */,
 				12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */,
+				12852EE61EF912DE00E26A73 /* TeamAdvanceCalculationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1220,6 +1229,9 @@
 				12FC8B601EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift */,
 				12FC8B621EDE90F0003CF3C3 /* TeamSimulationTextFieldOption.swift */,
 				12F57C5E1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift */,
+				12852EE81EF9189500E26A73 /* TeamAdvanceCalculationCell.swift */,
+				121FCFAD1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift */,
+				128E94921EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1482,6 +1494,7 @@
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
 				12FC8B561EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift in Sources */,
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
+				121FCFAE1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift in Sources */,
 				12FC8B611EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,
 				12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */,
@@ -1553,9 +1566,11 @@
 				122497261E8E859C005C743C /* LSNote.swift in Sources */,
 				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
+				12852EE91EF9189500E26A73 /* TeamAdvanceCalculationCell.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
 				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
+				128E94931EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift in Sources */,
 				12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
@@ -1679,6 +1694,7 @@
 				122497241E8E8582005C743C /* LFDistribution.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
+				12852EE71EF912DE00E26A73 /* TeamAdvanceCalculationController.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,

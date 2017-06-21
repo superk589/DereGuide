@@ -21,12 +21,23 @@ struct LFDistribution {
         }
     }
     
-    var max: Int {
+    var maxValue: Int {
         let max = samples.max {
             $0.value.bonusValue < $1.value.bonusValue
         }
         if let max = max {
             return max.value.bonusValue
+        } else {
+            return LSScoreBonusGroup.basic.bonusValue
+        }
+    }
+    
+    var minValue: Int {
+        let min = samples.filter { $0.probability > 0 }.min {
+            $0.value.bonusValue < $1.value.bonusValue
+        }
+        if let min = min {
+            return min.value.bonusValue
         } else {
             return LSScoreBonusGroup.basic.bonusValue
         }

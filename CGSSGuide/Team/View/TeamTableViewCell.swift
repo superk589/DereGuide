@@ -18,6 +18,7 @@ class TeamTableViewCellCardView: UIView {
         icon.isUserInteractionEnabled = false
         label = UILabel()
         label.adjustsFontSizeToFitWidth = true
+        label.baselineAdjustment = .alignCenters
 //        label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.darkGray

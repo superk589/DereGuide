@@ -36,7 +36,7 @@ extension LSResult: DistributionChartRepresentable {
                     break
                 }
             }
-            entries.append(ChartDataEntry.init(x: Double(current), y: k / h / Double(scores.count)))
+            entries.append(ChartDataEntry.init(x: Double(current), y: k / Double(scores.count)))
             current += step
         }
         return LineChartDataSet.init(values: entries, label: nil)
@@ -80,14 +80,7 @@ class TeamSimulationScoreDistributionController: BaseViewController {
             make.left.right.equalToSuperview()
         }
         
-        let dataSet = result.dataSet
-        dataSet.setColor(Color.parade)
-        dataSet.drawCirclesEnabled = false
-        dataSet.drawCircleHoleEnabled = false
-        dataSet.lineWidth = 2
-        dataSet.drawValuesEnabled = false
-        
-        let data = LineChartData.init(dataSets: [dataSet])
+        let data = LineChartData.init(dataSets: [])
         
         chartView.legend.enabled = false
         chartView.data = data
@@ -113,7 +106,23 @@ class TeamSimulationScoreDistributionController: BaseViewController {
         chartView.leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: nf)
         chartView.leftAxis.axisMinimum = 0
         chartView.delegate = self
-
+        
+        CGSSLoadingHUDManager.default.show()
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            if let strongSelf = self {
+                let dataSet = strongSelf.result.dataSet
+                dataSet.setColor(Color.parade)
+                dataSet.drawCirclesEnabled = false
+                dataSet.drawCircleHoleEnabled = false
+                dataSet.lineWidth = 2
+                dataSet.drawValuesEnabled = false
+                DispatchQueue.main.async {
+                    data.addDataSet(dataSet)
+                    strongSelf.chartView.notifyDataSetChanged()
+                    CGSSLoadingHUDManager.default.hide()
+                }
+            }
+        }
     }
 }
 

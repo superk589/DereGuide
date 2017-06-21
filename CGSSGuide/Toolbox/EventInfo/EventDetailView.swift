@@ -84,6 +84,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         startToEndLabel.textColor = UIColor.darkGray
         startToEndLabel.textAlignment = .left
         startToEndLabel.adjustsFontSizeToFitWidth = true
+        startToEndLabel.baselineAdjustment = .alignCenters
         
         timeIndicator = TimeStatusIndicator()
         addSubview(timeIndicator)

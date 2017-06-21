@@ -33,6 +33,7 @@ class TeamMemberPlaceholderCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = UIColor.lightGray
         titleLabel.textAlignment = .left
+        titleLabel.baselineAdjustment = .alignCenters
         titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in

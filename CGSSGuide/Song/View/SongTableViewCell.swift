@@ -28,6 +28,7 @@ class SongDiffView: UIView {
         addSubview(label)
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
+        label.baselineAdjustment = .alignCenters
         label.textColor = UIColor.white
         label.textAlignment = .center
         iv.zk.cornerRadius = 8

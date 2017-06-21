@@ -50,6 +50,7 @@ class GachaDetailView: UIView {
             make.centerY.equalTo(descLabel)
         }
         nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.baselineAdjustment = .alignCenters
         nameLabel.textAlignment = .left
         nameLabel.font = UIFont.systemFont(ofSize: 16)
         
@@ -96,6 +97,7 @@ class GachaDetailView: UIView {
         }
         timeLabel.font = UIFont.systemFont(ofSize: 12)
         timeLabel.adjustsFontSizeToFitWidth = true
+        timeLabel.baselineAdjustment = .alignCenters
         timeLabel.textColor = UIColor.darkGray
         
         line = LineView()
