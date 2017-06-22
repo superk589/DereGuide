@@ -153,10 +153,10 @@ class TeamMemberEditableView: UIView {
         addSubview(stackView)
         
         stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(30)
+            make.top.equalTo(20)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-30)
+            make.bottom.equalTo(-20)
         }
     }
     

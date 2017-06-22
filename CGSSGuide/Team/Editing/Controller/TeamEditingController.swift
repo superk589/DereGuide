@@ -166,6 +166,10 @@ class TeamEditingController: BaseViewController {
             preferences.drawing.foregroundColor = UIColor.white
             preferences.drawing.backgroundColor = Color.cute
             
+            if Screen.width < 375 {
+                preferences.positioning.maxWidth = Screen.width - 40
+            }
+            
             tip1 = EasyTipView(text: NSLocalizedString("最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）", comment: ""), preferences: preferences, delegate: nil)
             
             preferences.drawing.backgroundColor = Color.passion
