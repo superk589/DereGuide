@@ -619,6 +619,37 @@
 "小屋加成%" = "Room Bonus %";
 "模拟次数" = "Simulation Times";
 "* 不含后援值，歌曲模式为常规模式" = "* Does not contain support appeal, in normal mode";
-"至少进行一次模拟计算之后才能查看得分分布" = "Can not see score distribution graph unless simulating at least once";
+"至少进行一次模拟计算之后才能查看得分分布" = "Distribution graph is not available until simulating at least once";
 "* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确" = "* This graph is the approximate probability density curve of the score distribution, the more times of simulation the more accurate of the result.";
 
+/* new in 1.4.0 */
+"队伍模板" = "Team Template";
+"编辑队伍" = "Edit Team";
+"默认潜能等级" = "Default Potential Level";
+"默认特技等级" = "Default Skill Level";
+"最近使用" = "Recent idols";
+
+"最近使用中也包含好友的队长" = "Include guest leaders in recent idols";
+"修改最近使用中的偶像潜能同步到同角色所有卡片" = "Synchronize to all of the same chara while editing recent idols' potential";
+
+"最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）" = "In Recent idols, it regards cards with the same skill level and potential levels as the same idol. Click to add it to the bottom editing area. Long press to edit its skill level and potential levels, this action will update all the teams contains this idol. Besides, the idol's potential levels will be synchronized to all of the same chara(can be closed in advance options).";
+
+"单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级" = "Click to select a position, double click to select from full card list, long press to edit its skill level and potential levels";
+
+"至少进行一次模拟计算之后才能进行高级计算" = "Advance calculation is not available until simulating at least once";
+"高级计算" = "Advance Calculation";
+"计算结果" = "Result";
+"开始计算" = "Calculate";
+
+"最高分数" = "Maximum Score";
+"最低分数" = "Minimum Score";
+"理论最高分数" = "Theoretical Maximum Score";
+"理论最低分数" = "Theoretical Minimum Score";
+"模拟结果中前x%的最低分数" = "Minimum score of the highest x% in simulation result";
+"模拟结果中后x%的最高分数" = "Maximum score of the lowest x% in simulation result";
+"模拟结果中分数落入指定区间[a, b]的概率" = "The probability of simulation result falls in [a, b]";
+"不填表示" = "empty represent ";  // -∞ 或 +∞
+"根据概率密度曲线估算分数区间[a, b]的概率" = "Estimate the probability of score falls in [a, b] by kernel density estimation";
+"参考值" = "Reference Value";
+"自定义计算" = "Custom Calculation";
+"您输入的变量不合法" = "Your input is not valid";
