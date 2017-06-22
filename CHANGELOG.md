@@ -4,13 +4,15 @@
 
 1. 大幅改进组队编辑页面，可以快速选择使用过的偶像，编辑同一角色所有卡片的潜能
 2. 组队模拟增加高级计算，可以根据模拟结果进行更加详细的计算
+3. 修复更新数据时闪退的问题
 
 ##### Japanese version
 
 ##### English version
 
 1. Improve team edit page, you can select recent used idols and edit all the same chara's potential more conveniently.
-2. Add adcance calculation to team simulation, you can use the simulation result to do more in-depth calculation.
+2. Add advance calculation to team simulation, you can use the simulation result to do more in-depth calculation.
+3. Fix crash when updating data
 
 ### 1.3.3
 

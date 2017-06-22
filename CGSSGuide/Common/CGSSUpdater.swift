@@ -22,7 +22,7 @@ struct DataURL {
 // used in notification userinfo key name
 let CGSSUpdateDataTypesName = "CGSSUpdateDataTypesKey"
 
-struct CGSSUpdateDataTypes: OptionSet, RawRepresentable {
+struct CGSSUpdateDataTypes: OptionSet {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let card = CGSSUpdateDataTypes.init(rawValue: 1 << 0)
@@ -31,7 +31,6 @@ struct CGSSUpdateDataTypes: OptionSet, RawRepresentable {
     static let all: CGSSUpdateDataTypes = [.card, .master, .beatmap]
     static let image = CGSSUpdateDataTypes.init(rawValue: 1 << 3)
 }
-
 
 struct CGSSUpdaterError: Error {
     var localizedDescription: String
@@ -158,8 +157,13 @@ open class CGSSUpdater: NSObject {
     func checkManifest(callback: @escaping CGSSFinishedClosure) {
         if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
             let url = String.init(format: DataURL.manifest, truthVersion)
-            let task = self.dataSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
+            var request = URLRequest(url: URL(string: url)!)
+            request.addValue("5.1.2f1", forHTTPHeaderField: "X-Unity-Version")
+            let task = self.dataSession.dataTask(with: request, completionHandler: { (data, response, error) in
                 if error != nil {
+                    callback(false, error)
+                } else if (response as! HTTPURLResponse).statusCode != 200 {
+                    let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     callback(false, error)
                 } else {
                     let manifestData = LZ4Decompressor.decompress(data!)
@@ -340,8 +344,15 @@ open class CGSSUpdater: NSObject {
     
     private func updateItem(item: CGSSUpdateItem, callback: @escaping CGSSDownloadItemFinishedClosure) {
         if let url = item.dataURL {
-            let task = dataSession.dataTask(with: url, completionHandler: { (data, response, error) in
+            var request = URLRequest(url: url)
+            if [CGSSUpdateDataTypes.beatmap, .master].contains(item.dataType) {
+                request.addValue("5.1.2f1", forHTTPHeaderField: "X-Unity-Version")
+            }
+            let task = dataSession.dataTask(with: request, completionHandler: { (data, response, error) in
                 if error != nil {
+                    callback(item, nil, error)
+                } else if (response as! HTTPURLResponse).statusCode != 200 {
+                    let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     callback(item, nil, error)
                 } else {
                     callback(item, data, nil)
