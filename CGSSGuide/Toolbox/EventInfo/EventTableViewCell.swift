@@ -75,10 +75,10 @@ class EventTableViewCell: UITableViewCell {
             make.top.equalTo(startDateView.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
             make.right.equalToSuperview()
-            // make.height.equalTo(banner.snp.width).multipliedBy(212 / 824)
+            make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
         }
-        // 宽高比snapkit有问题 用原生方法加
-        banner.addConstraint(NSLayoutConstraint.init(item: banner, attribute: .height, relatedBy: .equal, toItem: banner, attribute: .width, multiplier: 212 / 824, constant: 1))
+//        // 宽高比snapkit有问题 用原生方法加
+//        banner.addConstraint(NSLayoutConstraint.init(item: banner, attribute: .height, relatedBy: .equal, toItem: banner, attribute: .width, multiplier: 212 / 824, constant: 1))
         
         eventNameLabel = UILabel()
         contentView.addSubview(eventNameLabel)

@@ -41,7 +41,7 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
         sv.addSubview(banner)
         banner.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(banner.snp.width).multipliedBy(212 / 824)
+            make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
         }
         banner.sd_setImage(with: event.detailBannerURL)
         
