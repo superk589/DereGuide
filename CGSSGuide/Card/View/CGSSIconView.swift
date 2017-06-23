@@ -47,6 +47,10 @@ class CGSSIconView: UIImageView {
         }
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 48, height: 48)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepare()
