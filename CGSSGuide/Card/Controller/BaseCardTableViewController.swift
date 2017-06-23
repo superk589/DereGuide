@@ -108,20 +108,20 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     }
     
     func filterAction() {
-        CGSSClient.shared.drawerController?.show(animated: true)
+        CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
-        drawer?.rightVC = filterVC
+        drawer?.rightViewController = filterVC
         drawer?.delegate = self
         drawer?.defaultRightWidth = min(Screen.width - 68, 400)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CGSSClient.shared.drawerController?.rightVC = nil
+        CGSSClient.shared.drawerController?.rightViewController = nil
     }
     
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {

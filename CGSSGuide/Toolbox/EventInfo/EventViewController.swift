@@ -74,7 +74,7 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     }
     
     func filterAction() {
-        CGSSClient.shared.drawerController?.show(animated: true)
+        CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
 
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
@@ -107,13 +107,13 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        CGSSClient.shared.drawerController?.rightVC = nil
+        CGSSClient.shared.drawerController?.rightViewController = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
-        drawer?.rightVC = filterVC
+        drawer?.rightViewController = filterVC
         drawer?.defaultRightWidth = min(Screen.width - 68, 400)
         drawer?.delegate = self
     }
