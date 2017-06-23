@@ -29,7 +29,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 ```
 $ git clone https://github.com/superk589/CGSSGuide.git
 ```
-* Install dependencies with CocoaPods
+* Install dependencies with [CocoaPods](https://cocoapods.org)
 ```
 $ pod install
 ```
@@ -56,7 +56,7 @@ CGSSGuide now provide files of localizable strings for other languages
 * Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
 * Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
 
-### [deresute.info](https://deresute.info)
+### deresute.info
 * Author: [Snack-X](https://github.com/Snack-X)
 
 ### [starlight.tachibana.cool](https://starlight.tachibana.cool)
