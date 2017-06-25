@@ -70,6 +70,13 @@ typealias CGSSDownloadItemFinishedClosure = (CGSSUpdateItem, Data?, Error?) -> V
 typealias CGSSProgressClosure = (_ progress: Int, _ total: Int) -> Void
 typealias CGSSProgressCompleteClosure = (_ success: Int, _ total: Int) -> Void
 
+
+extension URLRequest {
+    mutating func setUnityVersion() {
+        addValue(Config.unityVersion, forHTTPHeaderField: "X-Unity-Version")
+    }
+}
+
 open class CGSSUpdater: NSObject {
   
     static let `default` = CGSSUpdater()
@@ -135,7 +142,6 @@ open class CGSSUpdater: NSObject {
         configSession()
     }
     
-    
     func checkApiInfo(callback: @escaping CGSSFinishedClosure) {
         let url = DataURL.ChineseDatabase + "/api/v1/info"
         let task = checkSession.dataTask(with: URL.init(string: url)!) { (data, response, error) in
@@ -158,7 +164,7 @@ open class CGSSUpdater: NSObject {
         if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
             let url = String.init(format: DataURL.manifest, truthVersion)
             var request = URLRequest(url: URL(string: url)!)
-            request.addValue("5.1.2f1", forHTTPHeaderField: "X-Unity-Version")
+            request.setUnityVersion()
             let task = self.dataSession.dataTask(with: request, completionHandler: { (data, response, error) in
                 if error != nil {
                     callback(false, error)
@@ -346,7 +352,7 @@ open class CGSSUpdater: NSObject {
         if let url = item.dataURL {
             var request = URLRequest(url: url)
             if [CGSSUpdateDataTypes.beatmap, .master].contains(item.dataType) {
-                request.addValue("5.1.2f1", forHTTPHeaderField: "X-Unity-Version")
+                request.setUnityVersion()
             }
             let task = dataSession.dataTask(with: request, completionHandler: { (data, response, error) in
                 if error != nil {
