@@ -13,6 +13,7 @@ import ReachabilitySwift
 struct Config {
     static let iAPRemoveADProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
     static let bundlerId = "com.zzk.cgssguide"
+    static let unityVersion = "5.4.5p1"
 }
 
 struct NotificationCategory {
@@ -80,7 +81,7 @@ struct Color {
     static let separator = UIColor.init(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
 }
 
-public class CGSSGlobal: NSObject {
+public class CGSSGlobal {
     
     // 当前屏幕的宽度和高度常量
     public static let width = UIScreen.main.bounds.width
@@ -96,8 +97,6 @@ public class CGSSGlobal: NSObject {
     public static let spreadImageHeight: CGFloat = 824
     
     static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
-    
-    
     
     static let maxPotentialTotal = 25
     static let maxPotentialSingle = 10
