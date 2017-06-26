@@ -20,7 +20,7 @@ protocol EventDetailViewDelegate: class {
     func refreshScoreView(eventDetailView: EventDetailView)
 }
 
-class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
+class EventDetailView: UIView, CGSSIconViewDelegate {
 
     var startToEndLabel: UILabel!
     
@@ -40,7 +40,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     
     var liveTrendLabel: UILabel!
     
-    var songView: EventSongView!
+    var liveView: SongTableViewCell!
     
     var eventPtContentView: UIView!
     var line4: LineView!
@@ -172,21 +172,19 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
         liveTrendLabel.addGestureRecognizer(tap)
         
-        songView = EventSongView()
-        addSubview(songView)
-        songView.snp.makeConstraints { (make) in
+        liveView = SongTableViewCell()
+        addSubview(liveView.contentView)
+        liveView.contentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(songDescLabel.snp.bottom).offset(-2)
-            make.height.equalTo(86)
+            make.top.equalTo(songDescLabel.snp.bottom)
         }
-        songView.delegate = self
-        songView.layer.masksToBounds = true
+        liveView.delegate = self
         
         eventPtContentView = UIView()
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(songView.snp.bottom)
+            make.top.equalTo(liveView.contentView.snp.bottom)
             make.height.equalTo(192)
         }
         eventPtContentView.layer.masksToBounds = true
@@ -332,7 +330,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true
             card2View.isHidden = true
-            songView.isHidden = true
+            liveView.isHidden = true
             songDescLabel.isHidden = true
             liveTrendLabel.isHidden = true
             
@@ -358,13 +356,13 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
             }
             
             if let live = event.live {
-                songView.setup(live: live)
-                songView.snp.updateConstraints({ (update) in
+                liveView.setup(with: live)
+                liveView.snp.updateConstraints({ (update) in
                     update.height.equalTo(88)
                 })
                 songDescLabel.isHidden = false
             } else {
-                songView.snp.updateConstraints({ (update) in
+                liveView.snp.updateConstraints({ (update) in
                     update.height.equalTo(0)
                 })
                 songDescLabel.isHidden = true
@@ -411,11 +409,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate, EventSongViewDelegate {
     func iconClick(_ iv: CGSSIconView) {
         delegate?.eventDetailView(self, didClick: iv as! CGSSCardIconView)
     }
-    
-    func eventSongView(_ view: EventSongView, didSelect scene: CGSSLiveScene) {
-        delegate?.eventDetailView(self, didSelect: scene)
-    }
-    
 }
 
 extension EventDetailView: EventPtViewDelegate {
@@ -427,5 +420,11 @@ extension EventDetailView: EventPtViewDelegate {
 extension EventDetailView: EventScoreViewDelegate {
     func refresh(eventScoreView: EventScoreView) {
         delegate?.refreshScoreView(eventDetailView: self)
+    }
+}
+
+extension EventDetailView: SongTableViewCellDelegate {
+    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene) {
+        delegate?.eventDetailView(self, didSelect: scene)
     }
 }

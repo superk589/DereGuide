@@ -50,7 +50,7 @@ class CardView: UIView {
         addSubview(rarityLabel)
         rarityLabel.snp.makeConstraints { (make) in
             make.left.equalTo(68)
-            make.top.equalTo(10)
+            make.top.equalTo(9)
         }
         
         skillLabel = UILabel()
@@ -60,7 +60,7 @@ class CardView: UIView {
         addSubview(skillLabel)
         skillLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(10)
+            make.top.equalTo(rarityLabel)
         }
         
         cardNameLabel = UILabel()
@@ -72,7 +72,7 @@ class CardView: UIView {
         cardNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(68)
             make.right.lessThanOrEqualTo(-10)
-            make.top.equalTo(rarityLabel.snp.bottom)
+            make.top.equalTo(rarityLabel.snp.bottom).offset(2)
         }
         
         titleLabel = UILabel()

@@ -195,7 +195,6 @@
 		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
-		12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABA1E2CBADA0009986F /* EventSongView.swift */; };
 		12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */; };
 		12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC31E2E0D620009986F /* EventCardView.swift */; };
 		12D45AC61E2E26AD0009986F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AC51E2E26AD0009986F /* CardView.swift */; };
@@ -506,7 +505,6 @@
 		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		12D45AB81E2CB5560009986F /* EventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
-		12D45ABA1E2CBADA0009986F /* EventSongView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSongView.swift; sourceTree = "<group>"; };
 		12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
 		12D45AC31E2E0D620009986F /* EventCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		12D45AC51E2E26AD0009986F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -1090,7 +1088,6 @@
 			children = (
 				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
 				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
-				12D45ABA1E2CBADA0009986F /* EventSongView.swift */,
 				12D45AC31E2E0D620009986F /* EventCardView.swift */,
 				12636EC91E375E9900E3C833 /* EventPtView.swift */,
 				12D975CD1E379619005E932B /* EventScoreView.swift */,
@@ -1410,13 +1407,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotificationContent-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6B13DC9F4D99A7ABF5884DFF /* [CP] Copy Pods Resources */ = {
@@ -1440,9 +1440,36 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CGSSGuide/Pods-CGSSGuide-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ASValueTrackingSlider/ASValueTrackingSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTagCollectionView.framework",
+				"${BUILT_PRODUCTS_DIR}/ZKCornerRadiusView/ZKCornerRadiusView.framework",
+				"${BUILT_PRODUCTS_DIR}/ZKDrawerController/ZKDrawerController.framework",
+				"${BUILT_PRODUCTS_DIR}/lz4/lz4.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASValueTrackingSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTagCollectionView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCornerRadiusView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKDrawerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lz4.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1455,13 +1482,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CGSSGuide-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1674,7 +1704,6 @@
 				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
-				12D45ABB1E2CBADA0009986F /* EventSongView.swift in Sources */,
 				12F57C5D1EE2928000638650 /* TeamAdvanceOptionsController.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,

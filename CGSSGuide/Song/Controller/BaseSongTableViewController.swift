@@ -12,6 +12,7 @@ import ZKDrawerController
 protocol BaseSongTableViewControllerDelegate: class {
     func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene)
 }
+
 class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
@@ -70,6 +71,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         drawer?.delegate = self
         drawer?.defaultRightWidth = min(Screen.width - 86, 400)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CGSSClient.shared.drawerController?.rightViewController = nil

@@ -8,10 +8,11 @@
 
 import UIKit
 import ZKCornerRadiusView
+import SnapKit
 
-class SongDiffView: UIView {
+class LiveDifficultyView: UIView {
     var label: UILabel!
-    var iv: ZKCornerRadiusView!
+    var backgoundView: ZKCornerRadiusView!
     var text: String? {
         get {
             return self.label.text
@@ -22,21 +23,34 @@ class SongDiffView: UIView {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        iv = ZKCornerRadiusView.init(frame: self.bounds)
-        addSubview(iv)
-        label = UILabel.init(frame: CGRect(x: 5, y: 0, width: frame.size.width - 10, height: frame.size.height))
+        backgoundView = ZKCornerRadiusView.init(frame: self.bounds)
+        addSubview(backgoundView)
+        backgoundView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        label = UILabel()
         addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
+        }
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         label.textColor = UIColor.white
         label.textAlignment = .center
-        iv.zk.cornerRadius = 8
+        backgoundView.zk.cornerRadius = 8
     }
     
     func addTarget(_ target: AnyObject?, action: Selector) {
         let tap = UITapGestureRecognizer.init(target: target, action: action)
         self.addGestureRecognizer(tap)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgoundView.image = nil
+        backgoundView.render()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,7 +69,9 @@ class SongTableViewCell: UITableViewCell {
     var nameLabel: UILabel!
     var typeIcon: UIImageView!
     var descriptionLabel: UILabel!
-    var diffViews: [SongDiffView]!
+    var stackView: UIStackView!
+    var difficultyViews: [LiveDifficultyView]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         prepare()
@@ -63,42 +79,75 @@ class SongTableViewCell: UITableViewCell {
     
     fileprivate func prepare() {
         jacketImageView = BannerView()
-        jacketImageView.frame = CGRect(x: 10, y: 10, width: 66, height: 66)
+        contentView.addSubview(jacketImageView)
+        jacketImageView.snp.makeConstraints { (make) in
+            make.left.top.equalTo(10)
+            make.width.height.equalTo(66)
+            make.bottom.equalTo(-10)
+        }
         
-        typeIcon = UIImageView.init(frame: CGRect(x: 86, y: 10, width: 20, height: 20))
+        typeIcon = UIImageView()
+        contentView.addSubview(typeIcon)
+        typeIcon.snp.makeConstraints { (make) in
+            make.top.equalTo(10)
+            make.left.equalTo(jacketImageView.snp.right).offset(10)
+            make.width.height.equalTo(20)
+        }
+        
         nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 111, y: 10, width: CGSSGlobal.width - 121, height: 20)
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
-        
-        descriptionLabel = UILabel()
-        descriptionLabel.frame = CGRect(x: 86, y: 35, width: CGSSGlobal.width - 96, height: 16)
-        descriptionLabel.font = CGSSGlobal.alphabetFont
-        
-        let width = floor((CGSSGlobal.width - 96 - 40) / 5)
-        let space: CGFloat = 10
-        // let fontSize: CGFloat = 16
-        let height: CGFloat = 33
-        let originY: CGFloat = 43
-        let originX: CGFloat = 86
-        
-        contentView.addSubview(jacketImageView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(typeIcon)
+        nameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(typeIcon.snp.right).offset(5)
+            make.right.lessThanOrEqualTo(-10)
+            make.centerY.equalTo(typeIcon)
+        }
+        
+//        descriptionLabel = UILabel()
+//        descriptionLabel.frame = CGRect(x: 86, y: 35, width: CGSSGlobal.width - 96, height: 16)
+//        descriptionLabel.font = CGSSGlobal.alphabetFont
+//        addSubview(descriptionLabel)
+//        descriptionLabel.snp.makeConstraints { (make) in
+//            make.left.equalTo(jacketImageView.snp.right).offset(10)
+//            make.top.equalTo()
+//        }
+        
+//        let width = floor((CGSSGlobal.width - 96 - 40) / 5)
+//        let space: CGFloat = 10
+//        // let fontSize: CGFloat = 16
+//        let height: CGFloat = 33
+//        let originY: CGFloat = 43
+//        let originX: CGFloat = 86
+//        
+//        contentView.addSubview(jacketImageView)
+//        contentView.addSubview(nameLabel)
+//        contentView.addSubview(typeIcon)
         // contentView.addSubview(descriptionLabel)
         
 //        let colors = [Color.debut, Color.regular, Color.pro, Color.master, Color.masterPlus]
-        diffViews = [SongDiffView]()
+        difficultyViews = [LiveDifficultyView]()
         for i in 0...4 {
-            let diffView = SongDiffView.init(frame: CGRect(x: originX + (space + width) * CGFloat(i), y: originY, width: width, height: height))
+            let diffView = LiveDifficultyView()
 //            diffView.iv.zk.backgroundColor = colors[i]
 //            diffView.iv.render()
             diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))
-            diffViews.append(diffView)
-            addSubview(diffView)
+            difficultyViews.append(diffView)
+        }
+        
+        stackView = UIStackView(arrangedSubviews: difficultyViews)
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        contentView.addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.left.equalTo(jacketImageView.snp.right).offset(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(33)
+            make.bottom.equalTo(jacketImageView)
         }
         
         selectionStyle = .none
@@ -124,36 +173,30 @@ class SongTableViewCell: UITableViewCell {
     func setup(with live: CGSSLive) {
         self.live = live
         self.nameLabel.text = live.title
-        let descString = "bpm:\(live.bpm)"
-        self.descriptionLabel.text = descString
         self.nameLabel.textColor = live.color
         self.typeIcon.image = live.icon
         let diffStars = live.liveDetails.map { $0.stars }
         
         let difficulties = CGSSLiveDifficulty.all
         for i in 0...4 {
-            let view = diffViews[i]
+            let view = difficultyViews[i]
             view.text = "\(diffStars[i])"
+            let color = view.backgoundView.zk.backgroundColor
             if !live.difficultyTypes.contains(difficulties[i].difficultyTypes) {
-                view.iv.zk.backgroundColor = UIColor.lightBackground
+                view.backgoundView.zk.backgroundColor = UIColor.lightBackground
             } else {
-                view.iv.zk.backgroundColor = difficulties[i].color
+                view.backgoundView.zk.backgroundColor = difficulties[i].color
             }
-            view.iv.render()
+            if color != view.backgoundView.zk.backgroundColor {
+                view.backgoundView.image = nil
+                view.backgoundView.render()
+            }
         }
         
-        self.diffViews[4].isHidden = !(live.maxDiff.rawValue == 5)
+        self.difficultyViews[4].alpha = (live.maxDiff.rawValue == 5) ? 1 : 0
         
         if let url = live.jacketURL {
             self.jacketImageView.sd_setImage(with: url)
         }
-        
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
 }
