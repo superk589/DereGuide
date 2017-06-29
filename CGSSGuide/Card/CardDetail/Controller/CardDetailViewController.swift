@@ -9,27 +9,54 @@
 import UIKit
 import SnapKit
 
-class CardDetailViewController: BaseViewController {
+class CardDetailViewController: BaseTableViewController {
     
-    var card: CGSSCard!
-    var cardDV: CardDetailView!
-    var sv: UIScrollView!
-    var fullScreenView: UIView!
+    var card: CGSSCard! {
+        didSet {
+            prepareRows()
+            tableView?.reloadData()
+            print("load card \(card.id!)")
+        }
+    }
+    
+    fileprivate struct Row: CustomStringConvertible {
+        var type: UITableViewCell.Type
+        var description: String {
+            return type.description()
+        }
+    }
+    
+    fileprivate var rows: [Row] = []
+    
+    private func prepareRows() {
+        rows.removeAll()
+        guard let card = self.card else {
+            return
+        }
+        if card.hasSpread {
+            rows.append(Row(type: CardDetailSpreadImageCell.self))
+        }
+        rows.append(Row(type: CardDetailBasicCell.self))
+        rows.append(Row(type: CardDetailAppealCell.self))
+        rows.append(Row(type: CardDetailRelativeStrengthCell.self))
+        if card.skill != nil {
+            rows.append(Row(type: CardDetailSkillCell.self))
+        }
+        if card.leaderSkill != nil {
+            rows.append(Row(type: CardDetailLeaderSkillCell.self))
+        }
+        
+        rows.append(Row(type: CardDetailEvolutionCell.self))
+        rows.append(Row(type: CardDetailRelatedCardsCell.self))
+        
+        if card.rarityType.rawValue >= CGSSRarityTypes.sr.rawValue {
+            rows.append(Row(type: CardDetailSourceCell.self))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sv = UIScrollView()
-        view.addSubview(sv)
-        sv.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
-        cardDV = CardDetailView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-        cardDV.delegate = self
-
-        sv.addSubview(cardDV!)
-        
         // 自定义titleView的文字大小
         let titleView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
         titleView.text = card.name
@@ -49,24 +76,31 @@ class CardDetailViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = leftItem
         
-        cardDV.setup(with: card)
-        print("load card \(card.id!)")
-        sv.contentSize = cardDV.frame.size
-        
         prepareToolbar()
+        
+        registerCells()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 68
+        tableView.tableFooterView = UIView()
+    }
+    
+    private func registerCells() {
+        for row in rows {
+            tableView
+            .register(row.type, forCellReuseIdentifier: row.description)
+        }
     }
     
     // 添加当前卡到收藏
     func addOrRemoveFavorite() {
-        let fm = CGSSFavoriteManager.default
-        if !fm.contains(cardId: card.id!) {
-            fm.add(self.card)
+        let manager = CGSSFavoriteManager.default
+        if !manager.contains(cardId: card.id!) {
+            manager.add(self.card)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
         } else {
-            fm.remove(self.card)
+            manager.remove(self.card)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
-        
     }
     
     @available(iOS 9.0, *)
@@ -133,6 +167,26 @@ class CardDetailViewController: BaseViewController {
         let vc = CardSignImageController()
         vc.card = self.card
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension CardDetailViewController {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.description, for: indexPath)
+        (cell as? CardDetailSetable)?.setup(with: card)
+        
+//        (cell as? CardDetailBasicCell).delegate = self
+        
+        return cell
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.count
     }
 }
 

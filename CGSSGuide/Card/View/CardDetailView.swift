@@ -59,50 +59,25 @@ class CardDetailView: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
         // self.bounces = false
-        // 全尺寸大图视图
-        let spreadImageHeigth = CGSSGlobal.width / CGSSGlobal.spreadImageWidth * CGSSGlobal.spreadImageHeight
-        spreadImageView = SpreadImageView(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: spreadImageHeigth))
+        
+        spreadImageView = SpreadImageView()
+        addSubview(spreadImageView)
+        spreadImageView.snp.makeConstraints({ (make) in
+            make.top.left.width.equalToSuperview()
+            make.height.equalTo(spreadImageView.snp.width).multipliedBy(824.0 / 1280.0)
+        })
+        
         spreadImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(spreadImageTapAction(tap:)))
         spreadImageView.addGestureRecognizer(tap)
-        addSubview(spreadImageView)
-        
-        originY = spreadImageHeigth
         
         // 人物名称 图标视图
         originY += topSpace
-        cardIconView = CGSSCardIconView.init(frame: CGRect(x: 10, y: originY, width: 48, height: 48))
-        
-        rarityLabel = UILabel()
-        rarityLabel.frame = CGRect(x: 68, y: originY + 5, width: 30, height: 10)
-        rarityLabel.textAlignment = .left
-        rarityLabel.font = UIFont.systemFont(ofSize: 10)
-        
-        cardNameLabel = UILabel()
-        cardNameLabel.frame = CGRect(x: 68, y: originY + 27, width: CGSSGlobal.width - 78, height: 16)
-        cardNameLabel.font = UIFont.systemFont(ofSize: 16)
-        
-        titleLabel = UILabel()
-        titleLabel.frame = CGRect(x: 98, y: originY + 5, width: CGSSGlobal.width - 150, height: 10)
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
-//        titleLabel.layer.borderWidth = 1/UIScreen.mainScreen().scale
-//        titleLabel.layer.borderColor = UIColor.blackColor().CGColor
-        
-        addSubview(cardIconView)
-        addSubview(rarityLabel)
-        addSubview(cardNameLabel)
-        addSubview(titleLabel)
         
         // 属性表格
         originY = originY + topSpace + 48
         
         
-        appealView = CardAppealView()
-        addSubview(appealView)
-        appealView.snp.makeConstraints { (make) in
-            make.top.equalTo(cardIconView.snp.bottom)
-            make.left.right.equalToSuperview()
-        }
         originY = appealView.fbottom
         drawSectionLine(originY)
         originY = originY + topSpace
@@ -114,7 +89,7 @@ class CardDetailView: UIView {
             make.right.left.equalToSuperview()
         }
         
-        layoutIfNeeded()
+//        layoutIfNeeded()
         
         prepareSkillContentView()
         prepareLeaderSkillContentView()
@@ -138,10 +113,6 @@ class CardDetailView: UIView {
             setWithoutSpreadImage()
         }
         
-        cardNameLabel.text = card.chara!.name + "  " + (card.chara?.conventional)!
-        titleLabel.text = card.title
-        rarityLabel.text = card.rarity?.rarityString
-        cardIconView.cardId = card.id
         
         appealView.setup(with: card)
         
@@ -223,7 +194,7 @@ class CardDetailView: UIView {
         if skillContentView != nil {
             return
         }
-        skillContentView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
+        skillContentView = UIView()
         skillContentView.clipsToBounds = true
         skillContentView.drawSectionLine(0)
         var insideY: CGFloat = 10
@@ -278,43 +249,7 @@ class CardDetailView: UIView {
     }
     
     func setupSkillContentView(_ skill: CGSSSkill) {
-        skillNameLabel.text = NSLocalizedString("特技", comment: "通用") + ": " + skill.skillName
-        skillDescriptionLabel.text = skill.getExplainByLevelRange(1, end: 10, languageType: CGSSGlobal.languageType)
-        skillDescriptionLabel.fwidth = CGSSGlobal.width - 20
-        skillDescriptionLabel.sizeToFit()
-        skillProcGridView.fy = skillDescriptionLabel.fheight + skillDescriptionLabel.fy + topSpace
-        
-        var procGridStrings = [[String]]()
-        let procChanceMax = skill.procChanceOfLevel(10)
-        let procChanceMin = skill.procChanceOfLevel(1)
-        let durationMax = skill.effectLengthOfLevel(10)
-        let durationMin = skill.effectLengthOfLevel(1)
-        
-        procGridStrings.append(["  ",
-                                NSLocalizedString("触发几率%", comment: "卡片详情页"),
-                                NSLocalizedString("持续时间s", comment: "卡片详情页"),
-                                NSLocalizedString("最大覆盖率%", comment: "卡片详情页"),
-                                NSLocalizedString("平均覆盖率%", comment: "卡片详情页")])
-        procGridStrings.append(["Lv.1",
-                                String(format: "%.2f", procChanceMin / 100),
-                                String(format: "%.2f", durationMin / 100),
-                                String(format: "%.2f", durationMin / Double(skill.condition!)),
-                                String(format: "%.2f", durationMin / Double(skill.condition!) * procChanceMin / 10000)])
-        procGridStrings.append(["Lv.10",
-                                String(format: "%.2f", procChanceMax / 100),
-                                String(format: "%.2f", durationMax / 100),
-                                String(format: "%.2f", durationMax / Double(skill.condition!)),
-                                String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax / 10000)])
-        procGridStrings.append(["Lv.10(+30%)",
-                                String(format: "%.3f", procChanceMax * 1.3 / 100),
-                                String(format: "%.2f", durationMax / 100),
-                                String(format: "%.2f", durationMax / Double(skill.condition!)),
-                                String(format: "%.2f", durationMax / Double(skill.condition!) * procChanceMax * 1.3 / 10000)])
-        
-        skillProcGridView.setContents(procGridStrings)
-        
-        skillContentView.fheight = skillProcGridView.fheight + skillProcGridView.fy + topSpace
-    }
+        }
     
     var leaderSkillContentView: UIView!
     
@@ -322,62 +257,12 @@ class CardDetailView: UIView {
         if leaderSkillContentView != nil {
             return
         }
-        leaderSkillContentView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-        leaderSkillContentView.clipsToBounds = true
-        // leaderSkillContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 69 + (1 / UIScreen.mainScreen().scale))
-        leaderSkillContentView.drawSectionLine(0)
-        var insideY: CGFloat = 10
-        let descLabel4 = UILabel()
-        descLabel4.frame = CGRect(x: 10, y: insideY, width: 80, height: 16)
-        descLabel4.textColor = UIColor.black
-        descLabel4.font = UIFont.systemFont(ofSize: 16)
-        //descLabel4.text = NSLocalizedString("队长技能", comment: "通用") + ":"
-        descLabel4.textColor = UIColor.black
-        // leaderSkillContentView.addSubview(descLabel4)
-        //leaderSkillContentView.addSubview(descLabel4)
-        
-        // let descLabel4 = UILabel()
-        // descLabel4.frame = CGRectMake(10, 19, 40, 10)
-        // descLabel4.textColor = UIColor.blackColor()
-        // descLabel4.font = UIFont.systemFontOfSize(10)
-        // descLabel4.text = "类型:"
-        // skillContentView.addSubview(descLabel4)
-        
-        leaderSkillNameLabel = UILabel()
-        leaderSkillNameLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 18)
-        leaderSkillNameLabel.adjustsFontSizeToFitWidth = true
-        leaderSkillNameLabel.baselineAdjustment = .alignCenters
-        leaderSkillNameLabel.font = UIFont.systemFont(ofSize: 16)
-        
-        // leaderSkillContentView.addSubview(leaderSkillNameLabel)
-        leaderSkillContentView.addSubview(leaderSkillNameLabel)
-        // skillTypeLabel = UILabel()
-        // skillTypeLabel.frame = CGRectMake(50, 19, 140, 14)
-        // skillTypeLabel.font = UIFont.systemFontOfSize(14)
-        // skillTypeLabel.textAlignment = .Left
-        // skillContentView.addSubview(skillTypeLabel)
-        
-        insideY += topSpace + 16
-        leaderSkillDescriptionLabel = UILabel()
-        leaderSkillDescriptionLabel.numberOfLines = 0
-        leaderSkillDescriptionLabel.lineBreakMode = .byCharWrapping
-        leaderSkillDescriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        leaderSkillDescriptionLabel.textColor = UIColor.darkGray
-        leaderSkillDescriptionLabel.frame = CGRect(x: 10, y: insideY, width: CGSSGlobal.width - 20, height: 0)
-        
-        leaderSkillContentView.addSubview(leaderSkillDescriptionLabel)
-        addSubview(leaderSkillContentView)
+    
     }
     
     func setupLeaderSkillContentView(_ leaderSkill: CGSSLeaderSkill) {
         
-        leaderSkillNameLabel.text = NSLocalizedString("队长技能", comment: "通用") + ": " + leaderSkill.name
-        
-        leaderSkillDescriptionLabel.text = leaderSkill.getLocalizedExplain(languageType: CGSSGlobal.languageType)
-        leaderSkillDescriptionLabel.fwidth = CGSSGlobal.width - 20
-        leaderSkillDescriptionLabel.sizeToFit()
-        
-        leaderSkillContentView.fheight = leaderSkillDescriptionLabel.fheight + leaderSkillDescriptionLabel.fy + topSpace
+       
         
     }
     
@@ -450,29 +335,6 @@ class CardDetailView: UIView {
         if relatedCardsContentView != nil {
             return
         }
-        relatedCardsContentView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-        relatedCardsContentView.clipsToBounds = true
-        relatedCardsContentView.drawSectionLine(0)
-        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
-        let insideY: CGFloat = topSpace
-        let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 18)
-        descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页") + ":"
-        descLabel.textColor = UIColor.black
-        
-        let charInfoLabel = UILabel.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 18))
-        charInfoLabel.text = NSLocalizedString("查看角色详情", comment: "卡片详情页") + " >"
-        charInfoLabel.font = UIFont.systemFont(ofSize: 16)
-        charInfoLabel.textColor = UIColor.lightGray
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(charInfoClick))
-        charInfoLabel.addGestureRecognizer(tap)
-        charInfoLabel.textAlignment = .right
-        charInfoLabel.isUserInteractionEnabled = true
-        
-        relatedCardsContentView.addSubview(descLabel)
-        relatedCardsContentView.addSubview(charInfoLabel)
-        addSubview(relatedCardsContentView)
         
     }
     
@@ -555,27 +417,7 @@ class CardDetailView: UIView {
         
     }
     func setupAvailableInfoContentView(card:CGSSCard) {
-        var types: CGSSAvailableTypes = .free
-        if card.evolutionId == 0 {
-            availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"
-            if let cardFrom = CGSSDAO.shared.findCardById(card.id - 1) {
-                types = cardFrom.gachaType
-            }
-        } else {
-            types = card.gachaType
-        }
-        switch types {
-        case CGSSAvailableTypes.fes:
-            availableFes.isChecked = true
-        case CGSSAvailableTypes.limit:
-            availableLimit.isChecked = true
-        case CGSSAvailableTypes.event:
-            availableEvent.isChecked = true
-        case CGSSAvailableTypes.normal:
-            availableGacha.isChecked = true
-        default:
-            break
-        }
+        
 //        var tuple = (false, false, false, false)
 //        if card.evolutionId == 0 {
 //            availableDescLabel.text = NSLocalizedString("获得途径(进化前)", comment: "卡片详情页") + ":"

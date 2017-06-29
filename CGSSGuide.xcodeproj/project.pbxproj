@@ -192,6 +192,15 @@
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B678441EF12ACF00615D22 /* TeamMemberCell.swift */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
+		12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */; };
+		12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */; };
+		12C6B3521F00B6A200A25DB1 /* CardDetailAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B3511F00B6A200A25DB1 /* CardDetailAppealCell.swift */; };
+		12C6B3541F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B3531F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift */; };
+		12C6B3561F00B70200A25DB1 /* CardDetailSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B3551F00B70200A25DB1 /* CardDetailSkillCell.swift */; };
+		12C6B3581F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B3571F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift */; };
+		12C6B35A1F00B73100A25DB1 /* CardDetailEvolutionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B3591F00B73100A25DB1 /* CardDetailEvolutionCell.swift */; };
+		12C6B35C1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B35B1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift */; };
+		12C6B35E1F00B77D00A25DB1 /* CardDetailSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B35D1F00B77D00A25DB1 /* CardDetailSourceCell.swift */; };
 		12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
@@ -501,6 +510,15 @@
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B678441EF12ACF00615D22 /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
+		12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSpreadImageCell.swift; sourceTree = "<group>"; };
+		12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailBasicCell.swift; sourceTree = "<group>"; };
+		12C6B3511F00B6A200A25DB1 /* CardDetailAppealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailAppealCell.swift; sourceTree = "<group>"; };
+		12C6B3531F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailRelativeStrengthCell.swift; sourceTree = "<group>"; };
+		12C6B3551F00B70200A25DB1 /* CardDetailSkillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSkillCell.swift; sourceTree = "<group>"; };
+		12C6B3571F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailLeaderSkillCell.swift; sourceTree = "<group>"; };
+		12C6B3591F00B73100A25DB1 /* CardDetailEvolutionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailEvolutionCell.swift; sourceTree = "<group>"; };
+		12C6B35B1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailRelatedCardsCell.swift; sourceTree = "<group>"; };
+		12C6B35D1F00B77D00A25DB1 /* CardDetailSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSourceCell.swift; sourceTree = "<group>"; };
 		12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
@@ -774,6 +792,7 @@
 		1269E90C1D52085C0071AD7F /* Card */ = {
 			isa = PBXGroup;
 			children = (
+				12C6B34A1F00B59C00A25DB1 /* CardDetail */,
 				1269E9141D5209240071AD7F /* Controller */,
 				1269E9131D5209140071AD7F /* View */,
 			);
@@ -870,7 +889,6 @@
 			children = (
 				1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */,
 				1258499E1EE59C35006AF479 /* BaseCardCollectionViewController.swift */,
-				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
 				12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */,
 				1269E9181D5209610071AD7F /* CardTableViewController.swift */,
 				127AA1A01E34FD8D0006627B /* Card3DModelController.swift */,
@@ -1069,6 +1087,39 @@
 				129675A41EBF62B20037827B /* PageCollectionController.swift */,
 			);
 			name = PageCollectionView;
+			sourceTree = "<group>";
+		};
+		12C6B34A1F00B59C00A25DB1 /* CardDetail */ = {
+			isa = PBXGroup;
+			children = (
+				12C6B34C1F00B5B400A25DB1 /* View */,
+				12C6B34B1F00B5AC00A25DB1 /* Controller */,
+			);
+			path = CardDetail;
+			sourceTree = "<group>";
+		};
+		12C6B34B1F00B5AC00A25DB1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12C6B34C1F00B5B400A25DB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */,
+				12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */,
+				12C6B3511F00B6A200A25DB1 /* CardDetailAppealCell.swift */,
+				12C6B3531F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift */,
+				12C6B3551F00B70200A25DB1 /* CardDetailSkillCell.swift */,
+				12C6B3571F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift */,
+				12C6B3591F00B73100A25DB1 /* CardDetailEvolutionCell.swift */,
+				12C6B35B1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift */,
+				12C6B35D1F00B77D00A25DB1 /* CardDetailSourceCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		12D45ABE1E2DFB640009986F /* Controller */ = {
@@ -1519,6 +1570,7 @@
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */,
+				12C6B35A1F00B73100A25DB1 /* CardDetailEvolutionCell.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				1269E9EE1D520BC60071AD7F /* SettingsTableViewController.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
@@ -1544,6 +1596,7 @@
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				12F57C5F1EE292DF00638650 /* TeamAdvanceOptionsTableViewCell.swift in Sources */,
+				12C6B3521F00B6A200A25DB1 /* CardDetailAppealCell.swift in Sources */,
 				129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */,
 				129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */,
 				1239F1D11EF37BF900861092 /* TeamMemberEditableView.swift in Sources */,
@@ -1575,6 +1628,7 @@
 				123F54581EF6B7CA00C76F31 /* TeamRecentUsedCell.swift in Sources */,
 				124BA5071E913808002E48FE /* EventTrendViewController.swift in Sources */,
 				120DBB271EEE2F6B004E0084 /* TeamCardSelectionAdvanceOptionsController.swift in Sources */,
+				12C6B3581F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
 				12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */,
@@ -1602,6 +1656,7 @@
 				127AA1A11E34FD8D0006627B /* Card3DModelController.swift in Sources */,
 				128E94931EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift in Sources */,
 				12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */,
+				12C6B3541F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
@@ -1619,6 +1674,7 @@
 				122497281E8E85C1005C743C /* LSSkill.swift in Sources */,
 				1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
+				12C6B3561F00B70200A25DB1 /* CardDetailSkillCell.swift in Sources */,
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
 				12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */,
 				1269EA171D520D370071AD7F /* CGSSGlobal.swift in Sources */,
@@ -1638,6 +1694,7 @@
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
 				1239F1CD1EF375B500861092 /* TeamEditingController.swift in Sources */,
+				12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */,
 				12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
 				12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */,
@@ -1690,6 +1747,7 @@
 				12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */,
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
+				12C6B35E1F00B77D00A25DB1 /* CardDetailSourceCell.swift in Sources */,
 				1237D11C1EEFDD0400C43337 /* TransitionableNavigationController.swift in Sources */,
 				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
@@ -1729,8 +1787,10 @@
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
+				12C6B35C1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift in Sources */,
 				120541761D76DAF00021F875 /* CharFilterAndSorterTableViewController.swift in Sources */,
 				1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */,
+				12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */,
 				12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

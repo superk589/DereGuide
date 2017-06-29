@@ -38,7 +38,6 @@ class FilterItemView: UIView {
 //            make.right.equalTo(-6)
 //            make.width.greaterThanOrEqualTo(26)
 //        }
-
     }
     
     var isSelected: Bool = false {
@@ -52,6 +51,7 @@ class FilterItemView: UIView {
             }
         }
     }
+    
     func setSelected(selected: Bool) {
         isSelected = selected
     }
@@ -60,7 +60,6 @@ class FilterItemView: UIView {
         self.label.text = title
     }
     
-    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         label.sizeToFit()
         var frame = label.bounds
@@ -68,6 +67,7 @@ class FilterItemView: UIView {
         frame.size.height += 12
         return frame.size
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         iv.frame = self.bounds
@@ -79,15 +79,4 @@ class FilterItemView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

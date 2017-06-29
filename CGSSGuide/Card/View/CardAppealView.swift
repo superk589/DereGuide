@@ -21,7 +21,7 @@ class CardAppealView: UIView {
         titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.systemFont(ofSize: 16)
-        titleLabel.text = NSLocalizedString("卡片属性", comment: "卡片详情页") + ":"
+        titleLabel.text = NSLocalizedString("卡片属性", comment: "卡片详情页")
         titleLabel.textColor = UIColor.black
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in

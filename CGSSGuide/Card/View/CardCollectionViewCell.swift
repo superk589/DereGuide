@@ -17,6 +17,7 @@ class CardCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         icon = CGSSCardIconView()
+        icon.isUserInteractionEnabled = false
         contentView.addSubview(icon)
         icon.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

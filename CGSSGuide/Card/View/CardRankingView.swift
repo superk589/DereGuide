@@ -27,7 +27,7 @@ class CardRankingView: UIView {
         titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.systemFont(ofSize: 16)
-        titleLabel.text = NSLocalizedString("属性排名", comment: "卡片详情页") + ":"
+        titleLabel.text = NSLocalizedString("属性排名", comment: "卡片详情页")
         titleLabel.textColor = UIColor.black
         addSubview(titleLabel)
         
@@ -37,7 +37,7 @@ class CardRankingView: UIView {
         }
         
         rangkingGridLabel = GridLabel.init(rows: 3, columns: 5)
-        rangkingGridLabel.frame = CGRect(x: 10, y: 0, width: CGSSGlobal.width - 20, height: 54)
+//        rangkingGridLabel.frame = CGRect(x: 10, y: 0, width: CGSSGlobal.width - 20, height: 54)
         addSubview(rangkingGridLabel)
         rangkingGridLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -46,7 +46,6 @@ class CardRankingView: UIView {
             make.height.equalTo(54)
             make.bottom.equalTo(-10)
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

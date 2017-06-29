@@ -28,6 +28,14 @@ class SpreadImageView: UIImageView {
         }
     }
     
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func hideIndicator() {
         progressIndicator.isHidden = true
     }
@@ -59,9 +67,5 @@ class SpreadImageView: UIImageView {
                 }
             }
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
