@@ -11,14 +11,18 @@ import SnapKit
 
 class LoadingImageView: UIImageView {
     
+    var isRotating = false
+    var hideWhenStopped = true
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         image = #imageLiteral(resourceName: "loading")
         startAnimating()
     }
     
-    var isRotating = false
-    var hideWhenStopped = true
+    convenience init() {
+        self.init(frame: .zero)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,13 +83,11 @@ class CGSSLoadingHUD: UIView {
         self.isUserInteractionEnabled = true
         let contentView = UIView()
         contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-        contentView.center = self.center
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview().offset(-120)
-            make.centerX.equalToSuperview()
+            make.center.equalToSuperview()
             make.height.width.equalTo(120)
         }
         

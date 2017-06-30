@@ -199,9 +199,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
         UIApplication.shared.openURL(url)
     }
     
-    var updateStatusView: UpdateStatusView!
-    
-    
     @IBOutlet weak var ackCell: UITableViewCell! {
         didSet {
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(showAck))
@@ -242,18 +239,6 @@ class SettingsTableViewController: UITableViewController, UpdateStatusViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
-        updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 120
-        updateStatusView.isHidden = true
-        updateStatusView.delegate = self
-        UIApplication.shared.keyWindow?.addSubview(updateStatusView)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {

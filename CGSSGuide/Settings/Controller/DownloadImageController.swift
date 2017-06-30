@@ -130,12 +130,16 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "703-download"), style: .plain, target: self, action: #selector(cacheData))
         
-        updateStatusView = UpdateStatusView.init(frame: CGRect(x: 0, y: 0, width: 240, height: 50))
-        updateStatusView.center = view.center
-        updateStatusView.center.y = view.center.y - 120
+        updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
         updateStatusView.delegate = self
         UIApplication.shared.keyWindow?.addSubview(updateStatusView)
+        updateStatusView.snp.makeConstraints { (make) in
+            make.width.equalTo(240)
+            make.height.equalTo(50)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-120)
+        }
         
         calculate()
         // Do any additional setup after loading the view.
