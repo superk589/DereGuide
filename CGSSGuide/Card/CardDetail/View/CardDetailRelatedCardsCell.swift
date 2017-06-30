@@ -59,7 +59,9 @@ class CardDetailRelatedCardsCell: UITableViewCell {
             make.right.equalTo(-10)
             make.top.equalTo(rightLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
-        }        
+        }
+        selectionStyle = .none
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,6 +92,7 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
             icon = view
         } else {
             icon = CGSSCardIconView()
+            icon.isUserInteractionEnabled = false
             tagViews.setObject(icon, forKey: NSNumber.init(value: index))
         }
         icon.cardId = cards[Int(index)].id

@@ -51,6 +51,8 @@ class CardDetailBasicCell: UITableViewCell {
             make.left.equalTo(rarityLabel.snp.right).offset(5)
             make.top.equalTo(iconView.snp.top)
         }
+        
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

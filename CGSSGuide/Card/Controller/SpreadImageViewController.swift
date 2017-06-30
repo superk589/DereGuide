@@ -20,6 +20,10 @@ class SpreadImageViewController: UIViewController {
         return statusBarHidden
     }
     
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .landscapeRight
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         statusBarHidden = true
@@ -33,6 +37,10 @@ class SpreadImageViewController: UIViewController {
         view.backgroundColor = UIColor.clear
         transitioningDelegate = self
         view.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        imageView.backgroundColor = UIColor.clear
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(handleTapGesture(_:)))
         imageView.addGestureRecognizer(tap)
@@ -41,10 +49,9 @@ class SpreadImageViewController: UIViewController {
         imageView.setImage(with: imageURL, shouldShowIndicator: false)
         
         let longPress = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressGesture(_:)))
-        longPress.minimumPressDuration = 0.5
         imageView.addGestureRecognizer(longPress)
     }
-    
+        
     func handleTapGesture(_ tap: UITapGestureRecognizer) {
         if tap.state == .ended {
             dismiss(animated: true, completion: nil)
@@ -72,7 +79,7 @@ class SpreadImageViewController: UIViewController {
 extension SpreadImageViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if let vc = source as? CardDetailViewController {
-            customPresentAnimator.sourceImageView = vc.cardDV.spreadImageView
+            customPresentAnimator.sourceImageView = vc.spreadImageView
             customPresentAnimator.sourceNavigationController = vc.navigationController
         }
         customPresentAnimator.animatorType = . present
@@ -82,5 +89,11 @@ extension SpreadImageViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         customPresentAnimator.animatorType = .dismiss
         return customPresentAnimator
+    }
+}
+
+extension SpreadImageViewController: Transitionable {
+    var transitionViews: [String : UIView] {
+        return ["spreadImageView": imageView]
     }
 }

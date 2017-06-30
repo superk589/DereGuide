@@ -44,23 +44,23 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         self.popToRootViewController(animated: true)
         setToolbarHidden(true, animated: true)
     }
- 
+    
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if self.viewControllers.count <= showHomeButtonCount {
             if let items = viewController.toolbarItems {
                 if items.count > 0 {
                     for item in items {
                         if ![1002, 1003].contains(item.tag) {
-                            setToolbarHidden(false, animated: true)
+                            setToolbarHidden(false, animated: animated)
                             break
                         }
                     }
                 }
             } else {
-                setToolbarHidden(true, animated: true)
+                setToolbarHidden(true, animated: animated)
             }
         } else {
-            setToolbarHidden(false, animated: true)
+            setToolbarHidden(false, animated: animated)
             let item = UIBarButtonItem.init(image: UIImage.init(named: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
             item.tag = 1002
             if let items = viewController.toolbarItems, items.count > 0 {

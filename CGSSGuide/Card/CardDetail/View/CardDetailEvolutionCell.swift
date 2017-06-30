@@ -58,6 +58,7 @@ class CardDetailEvolutionCell: UITableViewCell {
             make.top.equalTo(fromIcon)
             make.bottom.equalTo(-10)
         }
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -53,6 +53,7 @@ class CardDetailSourceCell: UITableViewCell {
             make.right.equalTo(-10)
             make.bottom.equalTo(-10)
         }
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

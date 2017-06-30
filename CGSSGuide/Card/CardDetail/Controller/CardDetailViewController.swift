@@ -26,7 +26,15 @@ class CardDetailViewController: BaseTableViewController {
         }
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return isSpreadModeOn
+    }
+    
     fileprivate var rows: [Row] = []
+    
+    var spreadImageView: SpreadImageView? {
+        return (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? CardDetailSpreadImageCell)?.spreadImageView
+    }
     
     private func prepareRows() {
         rows.removeAll()
@@ -136,6 +144,31 @@ class CardDetailViewController: BaseTableViewController {
         toolbarItems = [item2, spaceItem2, item3]
         
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setSpreadImageMode(card.hasSpread && UIDevice.current.orientation.isLandscape, animated: false)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    fileprivate var isSpreadModeOn = false
+    fileprivate func setSpreadImageMode(_ isOn: Bool, animated: Bool) {
+        isSpreadModeOn = isOn
+        setNeedsStatusBarAppearanceUpdate()
+        
+        navigationController?.setToolbarHidden(isOn, animated: animated)
+        navigationController?.setNavigationBarHidden(isOn, animated: animated)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = !isOn
+        
+        if animated {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+        let indexPath = IndexPath(row: 0, section: 0)
+        if isOn {
+            tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
+        }
+    }
+    
     func backAction() {
         _ = navigationController?.popViewController(animated: true)
         /*if navigationController?.viewControllers.count > 2 {
@@ -168,16 +201,22 @@ class CardDetailViewController: BaseTableViewController {
         vc.card = self.card
         self.navigationController?.pushViewController(vc, animated: true)
     }
-}
-
-extension CardDetailViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isSpreadModeOn && indexPath.row == 0 {
+            return UIScreen.main.bounds.height
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.description, for: indexPath)
         (cell as? CardDetailSetable)?.setup(with: card)
-        
-//        (cell as? CardDetailBasicCell).delegate = self
-        
+        (cell as? CardDetailRelatedCardsCell)?.delegate = self
+        (cell as? CardDetailEvolutionCell)?.delegate = self
+        (cell as? CardDetailSpreadImageCell)?.delegate = self
         return cell
     }
     
@@ -188,20 +227,40 @@ extension CardDetailViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rows.count
     }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if isSpreadModeOn {
+            setSpreadImageMode(false, animated: true)
+        }
+    }
 }
 
-extension CardDetailViewController: CardDetailViewDelegate {
-    func seeCharInfo(cardDetailView: CardDetailView) {
-        let charDetailVC = CharDetailViewController()
-        charDetailVC.char = card.chara
-        self.navigationController?.pushViewController(charDetailVC, animated: true)
+extension CardDetailViewController: CardDetailRelatedCardsCellDelegate {
+    func checkCharaInfo(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
+        let vc = CharDetailViewController()
+        vc.char = card.chara
+        navigationController?.pushViewController(vc, animated: true)
     }
-    func cardDetailView(_ cardDetailView: CardDetailView, didTapOn spreadImageView: SpreadImageView) {
-        if let url = card.spreadImageURL {
-            let vc = SpreadImageViewController()
-            vc.imageURL = url
-            self.present(vc, animated: true, completion: nil)
+}
+
+extension CardDetailViewController: CardDetailSpreadImageCellDelegate {
+    func cardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell, longPressAt point: CGPoint) {
+        
+        guard let image = cardDetailSpreadImageCell.spreadImageView.image else {
+            return
         }
+        // 作为被分享的内容 不能是可选类型 否则分享项不显示
+        let urlArray = [image]
+        let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
+        let excludeActivitys:[UIActivityType] = []
+        activityVC.excludedActivityTypes = excludeActivitys
+        activityVC.popoverPresentationController?.sourceView = cardDetailSpreadImageCell.spreadImageView
+        activityVC.popoverPresentationController?.sourceRect = CGRect(x: point.x, y: point.y, width: 0, height: 0)
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    func tappedCardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell) {
+        setSpreadImageMode(!isSpreadModeOn, animated: true)
     }
 }
 

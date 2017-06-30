@@ -20,6 +20,8 @@ class CardDetailAppealCell: UITableViewCell {
         appealView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        selectionStyle = .none
+
     }
     
     required init?(coder aDecoder: NSCoder) {

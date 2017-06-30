@@ -50,6 +50,8 @@ class CardDetailLeaderSkillCell: UITableViewCell {
             make.bottom.equalTo(-10)
             make.right.lessThanOrEqualTo(-10)
         }
+        selectionStyle = .none
+
     }
     
     required init?(coder aDecoder: NSCoder) {

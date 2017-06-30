@@ -59,6 +59,8 @@ class CardDetailSkillCell: UITableViewCell {
             make.bottom.equalTo(-10)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
         }
+        selectionStyle = .none
+
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -16,6 +16,7 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var sourceImageView: SpreadImageView!
     var sourceNavigationController: UINavigationController?
     
+    var orientation: UIDeviceOrientation!
     var animatorType: AnimatorType = .present
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -32,15 +33,19 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 
                 sourceNavigationController?.view.insertSubview(toView, belowSubview: sourceNavigationController!.toolbar)
                 
+                toView.layoutIfNeeded()
                 let imageView = toViewController.imageView
                 
-                imageView.frame = sourceImageFrame
                 let toFrame = toViewController.view.bounds
                 sourceNavigationController?.setToolbarHidden(true, animated: true)
                 sourceNavigationController?.setNavigationBarHidden(true, animated: true)
                 sourceImageView.isHidden = true
-                UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: { 
-                    imageView.transform = imageView.transform.rotated(by: .pi / 2)
+                imageView.frame = sourceImageFrame
+                
+                UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
+//                    if UIDevice.current.orientation.isPortrait {
+//                        imageView.transform = imageView.transform.rotated(by: .pi / 2)
+//                    }
                     imageView.frame = toFrame
                     toView.backgroundColor = UIColor.black
                 }, completion: { [weak self] (finished) in
@@ -51,22 +56,30 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }
         } else if animatorType == .dismiss {
             if let fromViewController = transitionContext.viewController(forKey: .from) as? SpreadImageViewController,
+                let toViewController = transitionContext.viewController(forKey: .to),
                 let fromView = transitionContext.view(forKey: .from),
-                let sourceImageFrame = sourceImageView.superview?.convert(sourceImageView.frame, to: fromView),
                 let toView = transitionContext.view(forKey: .to) {
-                
+                toViewController.beginAppearanceTransition(true, animated: false)
+                toViewController.endAppearanceTransition()
+                toView.layoutIfNeeded()
                 transitionContext.containerView.insertSubview(toView, at: 0)
                 sourceNavigationController?.view.insertSubview(fromView, belowSubview: sourceNavigationController!.navigationBar)
                 let imageView = fromViewController.imageView
                 sourceNavigationController?.setToolbarHidden(false, animated: true)
                 sourceNavigationController?.setNavigationBarHidden(false, animated: true)
-                sourceImageView.isHidden = true
-                UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: { 
-                    imageView.transform = imageView.transform.rotated(by: -.pi / 2)
-                    imageView.frame = sourceImageFrame
+                imageView.isHidden = true
+                let sourceImageFrame = sourceImageView.frame
+                let destFrame = toView.convert(fromViewController.imageView.frame, to: sourceImageView.superview)
+                sourceImageView.frame = destFrame
+                fromView.backgroundColor = UIColor.clear
+                UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
+                    [weak self] in
+//                    if UIDevice.current.orientation.isPortrait {
+//                        imageView.transform = imageView.transform.rotated(by: -.pi / 2)
+//                    }
+                    self?.sourceImageView.frame = sourceImageFrame
                     fromView.backgroundColor = UIColor.clear
-                }, completion: { [weak self] (finished) in
-                    self?.sourceImageView.isHidden = false
+                }, completion: { (finished) in
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }

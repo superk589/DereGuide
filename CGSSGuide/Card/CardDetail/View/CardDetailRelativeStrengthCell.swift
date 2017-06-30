@@ -20,6 +20,7 @@ class CardDetailRelativeStrengthCell: UITableViewCell {
         rankingView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

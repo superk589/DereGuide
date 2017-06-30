@@ -50,6 +50,19 @@ extension CGAffineTransform {
     }
 }
 
+extension UIView {
+    var snapshotImage: UIImage? {
+        UIGraphicsBeginImageContext(frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
 class TransitionAnimatorController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var transitionTypes: TransitionTypes
@@ -87,6 +100,7 @@ class TransitionAnimatorController: NSObject, UIViewControllerAnimatedTransition
         transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
         toView.layoutIfNeeded()
         
+        var snapshots = [String: UIView]()
         var transforms = [String: CGAffineTransform]()
         for (id, sourceView) in fromViewController.transitionViews {
             if let destView = toViewController.transitionViews[id] {
@@ -100,24 +114,32 @@ class TransitionAnimatorController: NSObject, UIViewControllerAnimatedTransition
 //                    destFrame = destView.convert(destView.bounds, to: transitionContext.containerView)
 //                }
                 let transform = CGAffineTransform.init(from: sourceFrame, toRect: destFrame)
-                let negativeTransform = CGAffineTransform.init(from: destFrame, toRect: sourceFrame)
                 transforms[id] = transform
-                destView.transform = negativeTransform
+                
+                let snapshotView = UIImageView.init(frame: sourceFrame)
+                snapshotView.image = (sourceView as? UIImageView)?.image ?? sourceView.snapshotImage
+                snapshots[id] = snapshotView
+                sourceView.isHidden = true
+                destView.isHidden = true
+                transitionContext.containerView.addSubview(snapshotView)
             }
         }
         
         let duration = self.transitionDuration(using: transitionContext)
         UIView.animate(withDuration: duration, animations: {
             fromView.alpha = 0
-            for (id, sourceView) in fromViewController.transitionViews {
-                if let destView = toViewController.transitionViews[id] {
-                    sourceView.transform = transforms[id] ?? .identity
-                    destView.transform = .identity
-                }
+            for (id, snapshotView) in snapshots {
+                snapshotView.transform = transforms[id] ?? .identity
             }
         }) { (finished) in
-            for (_, sourceView) in fromViewController.transitionViews {
-                sourceView.transform = .identity
+            for (id, snapshotView) in snapshots {
+                guard let sourceView = fromViewController.transitionViews[id],
+                    let destView = toViewController.transitionViews[id] else {
+                        continue
+                }
+                sourceView.isHidden = false
+                destView.isHidden = false
+                snapshotView.removeFromSuperview()
             }
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }

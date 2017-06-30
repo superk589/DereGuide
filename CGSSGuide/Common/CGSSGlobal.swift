@@ -33,6 +33,8 @@ struct Screen {
     public static let height = UIScreen.main.bounds.height
     // 当前屏幕1坐标的像素点数量
     public static let scale = UIScreen.main.scale
+    static let shortSide = min(width, height)
+    static let longSide = max(width, height)
 }
 
 struct Font {
