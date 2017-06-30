@@ -11,7 +11,6 @@ import SnapKit
 
 class LoadingImageView: UIImageView {
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         image = #imageLiteral(resourceName: "loading")
@@ -34,6 +33,7 @@ class LoadingImageView: UIImageView {
         rotateAni.toValue = .pi * 2.0
         rotateAni.duration = 2
         rotateAni.repeatCount = .infinity
+        // make the animation not removed when the application returns to active
         rotateAni.isRemovedOnCompletion = false
         self.layer.add(rotateAni, forKey: "rotate")
         isRotating = true
@@ -73,16 +73,22 @@ class CGSSLoadingHUD: UIView {
     var iv: LoadingImageView!
     var titleLable:UILabel!
     
-    init() {
-        super.init(frame: UIScreen.main.bounds)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         self.isUserInteractionEnabled = true
-        let contentView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 120))
+        let contentView = UIView()
         contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         contentView.center = self.center
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
-        self.addSubview(contentView)
+        addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview().offset(-120)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(120)
+        }
+        
         iv = LoadingImageView.init(frame: CGRect.init(x: 35, y: 20, width: 50, height: 50))
         titleLable = UILabel.init(frame: CGRect.init(x: 0, y: 75, width: 120, height: 25))
         titleLable.textAlignment = .center
@@ -95,54 +101,20 @@ class CGSSLoadingHUD: UIView {
         contentView.addSubview(iv)
         contentView.addSubview(titleLable)
         self.alpha = 0
-        //NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
-    
-//    deinit {
-//        NotificationCenter.default.removeObserver(self)
-//    }
-//    func becomeActive() {
-//        if self.alpha == 1 {
-//            iv.layer.removeAnimation(forKey: "rotate")
-//            self.startAnimate()
-//        }
-//    }
-//    
-//    func startAnimate() {
-//        //superview?.bringSubview(toFront: self)
-//        self.alpha = 1
-//        let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
-//        rotateAni.fromValue = 0
-//        rotateAni.toValue = M_PI * 2
-//        rotateAni.duration = 4
-//        rotateAni.repeatCount = 1e50
-//        iv.layer.add(rotateAni, forKey: "rotate")
-//        rotateAni.isRemovedOnCompletion = false
-//        
-//    }
-//    func stopAnimate() {
-//        self.alpha = 0
-//        iv.layer.removeAnimation(forKey: "rotate")
-//    }
     
     func setTitle(title:String) {
         self.titleLable.text = title
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
 
 
 class CGSSLoadingHUDManager {
+    
     static let `default` = CGSSLoadingHUDManager()
     var hud: CGSSLoadingHUD!
 
@@ -152,11 +124,14 @@ class CGSSLoadingHUDManager {
     private init () {
         hud = CGSSLoadingHUD()
         debouncer = Debouncer.init(interval: 0.1)
-        UIApplication.shared.keyWindow?.addSubview(hud)
     }
+    
     private lazy var showClosure: (() -> Void)? = { [unowned self] in
         let window = UIApplication.shared.keyWindow
-        window?.bringSubview(toFront: self.hud)
+        window?.addSubview(self.hud)
+        self.hud.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         for subview in window?.subviews ?? [UIView]() {
             if subview is UpdateStatusView {
                 window?.bringSubview(toFront: subview)
@@ -164,12 +139,15 @@ class CGSSLoadingHUDManager {
         }
         self.hud.alpha = 1
     }
+    
     func show() {
         debouncer.callback = showClosure
         debouncer.call()
     }
+    
     func hide() {
         debouncer.callback = nil
         hud.alpha = 0
+        hud.removeFromSuperview()
     }
 }
