@@ -146,7 +146,9 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        setSpreadImageMode(card.hasSpread && UIDevice.current.orientation.isLandscape, animated: false)
+        if isShowing {
+            setSpreadImageMode(card.hasSpread && UIDevice.current.orientation.isLandscape, animated: false)
+        }
         super.viewWillTransition(to: size, with: coordinator)
     }
     
@@ -167,6 +169,17 @@ class CardDetailViewController: BaseTableViewController {
         if isOn {
             tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
         }
+    }
+    
+    private var isShowing = false
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isShowing = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isShowing = false
     }
     
     func backAction() {
