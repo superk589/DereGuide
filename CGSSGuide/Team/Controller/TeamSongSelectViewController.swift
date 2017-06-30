@@ -9,7 +9,25 @@
 import UIKit
 
 class TeamSongSelectViewController: BaseSongTableViewController {
-
+    
+    override var filter: CGSSLiveFilter {
+        get {
+            return CGSSSorterFilterManager.default.teamLiveFilter
+        }
+        set {
+            CGSSSorterFilterManager.default.teamLiveFilter = newValue
+        }
+    }
+    
+    override var sorter: CGSSSorter {
+        get {
+            return CGSSSorterFilterManager.default.teamLiveSorter
+        }
+        set {
+            CGSSSorterFilterManager.default.teamLiveSorter = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
@@ -41,4 +59,10 @@ class TeamSongSelectViewController: BaseSongTableViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
+    override func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.teamLiveFilter = filter
+        CGSSSorterFilterManager.default.teamLiveSorter = sorter
+        CGSSSorterFilterManager.default.saveForTeamLive()
+        updateUI()
+    }
 }

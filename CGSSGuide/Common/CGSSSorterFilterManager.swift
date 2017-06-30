@@ -15,14 +15,17 @@ class CGSSSorterFilterManager {
         static let card = NSHomeDirectory() + "/Documents/cardSorter.plist"
         static let teamCard = NSHomeDirectory() + "/Documents/teamCardSorter.plist"
         static let live = NSHomeDirectory() + "/Documents/liveSorter.plist"
+        static let teamLive = NSHomeDirectory() + "/Documents/teamLiveSorter.plist"
         static let char = NSHomeDirectory() + "/Documents/charSorter.plist"
         static let event = NSHomeDirectory() + "/Documents/eventSorter.plist"
         static let gachaPool = NSHomeDirectory() + "/Documents/gachaPoolSorter.plist"
     }
+    
     struct FilterPath {
         static let card = NSHomeDirectory() + "/Documents/cardFilter.plist"
         static let teamCard = NSHomeDirectory() + "/Documents/teamCardFilter.plist"
         static let live = NSHomeDirectory() + "/Documents/liveFilter.plist"
+        static let teamLive = NSHomeDirectory() + "/Documents/teamLiveFilter.plist"
         static let char = NSHomeDirectory() + "/Documents/charFilter.plist"
         static let event = NSHomeDirectory() + "/Documents/eventFilter.plist"
         static let gachaPool = NSHomeDirectory() + "/Documents/gachaPoolFilter.plist"
@@ -64,6 +67,10 @@ class CGSSSorterFilterManager {
     
     lazy var liveSorter = CGSSSorter.init(fromFile: SorterPath.live) ?? DefaultSorter.live
     
+    lazy var teamLiveFilter = CGSSLiveFilter(fromFile: FilterPath.teamLive) ?? DefaultFilter.live
+    
+    lazy var teamLiveSorter = CGSSSorter(fromFile: SorterPath.teamLive) ?? DefaultSorter.live
+    
     lazy var eventFilter = CGSSEventFilter.init(fromFile: FilterPath.event) ?? DefaultFilter.event
     
     lazy var eventSorter = CGSSSorter.init(fromFile: SorterPath.event) ?? DefaultSorter.event
@@ -72,15 +79,21 @@ class CGSSSorterFilterManager {
     
     lazy var gachaPoolSorter = CGSSSorter.init(fromFile: SorterPath.gachaPool) ?? DefaultSorter.gachaPool
     
-    func saveForTeam() {
+    func saveForTeamCard() {
         teamCardSorter.save(to: SorterPath.teamCard)
         teamCardfilter.save(to: FilterPath.teamCard)
+    }
+    
+    func saveForTeamLive() {
+        teamLiveFilter.save(to: FilterPath.teamLive)
+        teamLiveSorter.save(to: SorterPath.teamLive)
     }
     
     func saveForCard() {
         cardSorter.save(to: SorterPath.card)
         cardfilter.save(to: FilterPath.card)
     }
+    
     func saveForChar() {
         charFilter.save(to: FilterPath.char)
         charSorter.save(to: SorterPath.char)

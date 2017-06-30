@@ -64,7 +64,7 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
     override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
         CGSSSorterFilterManager.default.teamCardfilter = filter
         CGSSSorterFilterManager.default.teamCardSorter = sorter
-        CGSSSorterFilterManager.default.saveForTeam()
+        CGSSSorterFilterManager.default.saveForTeamCard()
         updateUI()
     }
 }

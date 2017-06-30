@@ -13,7 +13,7 @@ protocol BaseSongTableViewControllerDelegate: class {
     func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene)
 }
 
-class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate {
+class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, SongFilterSortControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
     var liveList: [CGSSLive] = [CGSSLive]()
@@ -171,12 +171,19 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
         
     }
+    
     func drawerController(_ drawerVC: ZKDrawerController, willShow vc: UIViewController) {
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.reloadData()
     }
 
+    func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter) {
+        CGSSSorterFilterManager.default.liveFilter = filter
+        CGSSSorterFilterManager.default.liveSorter = sorter
+        CGSSSorterFilterManager.default.saveForLive()
+        updateUI()
+    }
     
     // 此方法应该被override或者通过代理来响应
     func selectScene(_ scene: CGSSLiveScene) {
@@ -199,15 +206,5 @@ extension BaseSongTableViewController: SongTableViewCellDelegate {
         } else {
             showBeatmapNotFoundAlert()
         }
-    }
-}
-
-
-extension BaseSongTableViewController: SongFilterSortControllerDelegate {
-    func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter) {
-        CGSSSorterFilterManager.default.liveFilter = filter
-        CGSSSorterFilterManager.default.liveSorter = sorter
-        CGSSSorterFilterManager.default.saveForLive()
-        updateUI()
     }
 }
