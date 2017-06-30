@@ -77,7 +77,7 @@ class TeamEditingController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.itemSize = CGSize(width: (Screen.width - 70) / 6, height: (Screen.width - 70) / 6 + 29)
+        layout.itemSize = CGSize(width: (Screen.shortSide - 70) / 6, height: (Screen.shortSide - 70) / 6 + 29)
         collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -210,6 +210,7 @@ class TeamEditingController: BaseViewController {
         }).count == 6 {
             let team = CGSSTeam(members: members.flatMap { $0 })
             delegate?.teamEditingController(self, didSave: team)
+            NotificationCenter.default.post(name: .teamModified, object: nil)
             navigationController?.popViewController(animated: true)
         } else {
             let alvc = UIAlertController.init(title: NSLocalizedString("队伍不完整", comment: "弹出框标题"), message: NSLocalizedString("请完善队伍后，再点击存储", comment: "弹出框正文"), preferredStyle: .alert)
