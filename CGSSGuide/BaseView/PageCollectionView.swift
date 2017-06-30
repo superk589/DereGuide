@@ -10,15 +10,18 @@ import UIKit
 
 class PageCollectionView: UICollectionView {
     
+    var layout: UICollectionViewFlowLayout {
+        return self.collectionViewLayout as! UICollectionViewFlowLayout
+    }
+    
     convenience init() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        self.init(frame: CGRect.zero, collectionViewLayout: layout)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        self.init(frame: CGRect.zero, collectionViewLayout: flowLayout)
     
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         bounces = false
-        
         backgroundColor = UIColor.white
         isPagingEnabled = true
     }

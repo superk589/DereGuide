@@ -77,6 +77,7 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         if #available(iOS 10.0, *) {
@@ -86,7 +87,19 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         }
         automaticallyAdjustsScrollViewInsets = false
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) in
+            self.collectionView.performBatchUpdates(nil, completion: nil)
+            self.collectionView.contentOffset.x = CGFloat(self.currentIndex) * size.width
+        }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.frame.size
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.numberOfPages(self) ?? 0
     }
@@ -104,10 +117,6 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
             vc.didMove(toParentViewController: self)
         }
         return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: collectionView.fwidth, height: collectionView.fheight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
