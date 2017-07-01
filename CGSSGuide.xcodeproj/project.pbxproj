@@ -966,7 +966,6 @@
 		1269E9EF1D520C3E0071AD7F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */,
 				1269E9F31D520C3E0071AD7F /* TeamTableViewController.swift */,
 				129ECB281ECBFB930010BC7F /* TeamDetailController.swift */,
 			);
@@ -1261,6 +1260,7 @@
 			children = (
 				12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */,
 				12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */,
+				121C78E31D57376200D0B636 /* TeamSongSelectViewController.swift */,
 				12FC8B411EDE6DEB003CF3C3 /* TeamSimulationController.swift */,
 				12F4EAEC1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift */,
 				12F57C5C1EE2928000638650 /* TeamAdvanceOptionsController.swift */,

@@ -96,6 +96,11 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         super.viewWillTransition(to: size, with: coordinator)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
     }
