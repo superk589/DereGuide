@@ -7,38 +7,38 @@
 //
 
 import UIKit
+import SnapKit
 
 class CharDetailViewController: UIViewController {
+    
     var char: CGSSChar!
     var detailView: CharDetailView!
-    var sv: UIScrollView!
+    var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        sv = UIScrollView.init(frame: CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height -
-                64))
-        automaticallyAdjustsScrollViewInsets = false
-        detailView = CharDetailView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
+        
+        scrollView = UIScrollView() //.init(frame: CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64))
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+//        automaticallyAdjustsScrollViewInsets = false
+        detailView = CharDetailView() //.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
+        scrollView.addSubview(detailView)
+        detailView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+        }
         detailView.setup(char)
         detailView.delegate = self
-        sv.contentSize = detailView.frame.size
-        sv.addSubview(detailView)
-        view.addSubview(sv)
         
         let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.default.contains(charId: char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
         rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
-
-        
-        // Do any additional setup after loading the view.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     
     // 添加当前角色到收藏
     func addOrRemoveFavorite() {
@@ -50,19 +50,7 @@ class CharDetailViewController: UIViewController {
             fm.remove(self.char)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
-        
     }
-    
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension CharDetailViewController: CharDetailViewDelegate {

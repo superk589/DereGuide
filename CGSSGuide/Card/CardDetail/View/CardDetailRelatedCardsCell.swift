@@ -72,7 +72,11 @@ class CardDetailRelatedCardsCell: UITableViewCell {
         delegate?.checkCharaInfo(self)
     }
     
-    var cards = [CGSSCard]()
+    var cards = [CGSSCard]() {
+        didSet {
+            collectionView.reload()
+        }
+    }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         layoutIfNeeded()
@@ -112,7 +116,6 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
 extension CardDetailRelatedCardsCell: CardDetailSetable {
     func setup(with card: CGSSCard) {
         self.cards = CGSSDAO.shared.findCardsByCharId(card.charaId)
-        collectionView.reload()
 //        collectionView.sizeToFit()
     }
 }

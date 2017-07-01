@@ -111,7 +111,7 @@ class GachaSimulateView: UIView {
         //descLabel.isHidden = false
     }
     
-    func iconClick(iv:CGSSCardIconView) {
+    func iconClick(iv: CGSSCardIconView) {
         delegate?.gachaSimulateView(self, didClick: iv)
     }
     

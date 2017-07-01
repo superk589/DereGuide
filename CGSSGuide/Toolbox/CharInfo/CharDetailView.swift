@@ -7,21 +7,18 @@
 //
 
 import UIKit
-
-private let topSpace: CGFloat = 10
-private let leftSpace: CGFloat = 10
-private let bottomInset: CGFloat = 50
+import TTGTagCollectionView
 
 protocol CharDetailViewDelegate: class {
     func cardIconClick(_ icon: CGSSCardIconView)
-    
 }
 
-class CharDetailView: UIView {
+class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDelegate {
+    
     weak var delegate: CharDetailViewDelegate?
     
-    var charIconView: CGSSCharIconView!
-    var charNameLabel: UILabel!
+    var iconView: CGSSCharIconView!
+    var nameLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,94 +30,78 @@ class CharDetailView: UIView {
         prepare()
     }
     
-    var basicView: UIView!
+    // var basicView: UIView!
     var detailView: UIView!
-    var relatedView: UIView!
+    var relatedView: CardDetailRelatedCardsCell!
     
     var profileView: CharProfileView!
     
     fileprivate func prepare() {
-        basicView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 68))
-        charIconView = CGSSCharIconView(frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        // basicView = UIView() // .init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 68))
+        iconView = CGSSCharIconView() //frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        addSubview(iconView)
+        iconView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.top.equalTo(10)
+            make.height.width.equalTo(48)
+        }
         
-        charNameLabel = UILabel()
-        charNameLabel.frame = CGRect(x: 68, y: 26, width: CGSSGlobal.width - 78, height: 16)
-        charNameLabel.font = UIFont.systemFont(ofSize: 16)
-        charNameLabel.adjustsFontSizeToFitWidth = true
-        charNameLabel.baselineAdjustment = .alignCenters
+        nameLabel = UILabel()
+//        charNameLabel.frame = CGRect(x: 68, y: 26, width: CGSSGlobal.width - 78, height: 16)
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.baselineAdjustment = .alignCenters
+        addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(iconView.snp.right).offset(10)
+            make.centerY.equalTo(iconView)
+            make.right.lessThanOrEqualTo(-10)
+        }
         
-        basicView.addSubview(charNameLabel)
-        basicView.addSubview(charIconView)
-        addSubview(basicView)
-        
-        profileView = CharProfileView.init(frame: CGRect(x: 10, y: 78, width: CGSSGlobal.width - 20, height: 0))
+        profileView = CharProfileView()
+            // .init(frame: CGRect(x: 10, y: 78, width: CGSSGlobal.width - 20, height: 0))
         addSubview(profileView)
+        profileView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(iconView.snp.bottom).offset(20)
+        }
+        
+        let line = LineView()
+        addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(profileView.snp.bottom).offset(10)
+        }
+        
+        relatedView = CardDetailRelatedCardsCell()
+        addSubview(relatedView.contentView)
+        relatedView.contentView.snp.makeConstraints { (make) in
+            make.right.left.equalToSuperview()
+            make.top.equalTo(line.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+        relatedView.rightLabel.isHidden = true
+        relatedView.delegate = self
     }
     
     func setup(_ char: CGSSChar) {
-        charNameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
-        charIconView.charId = char.charaId
+        nameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
+        iconView.charId = char.charaId
         profileView.setup(char)
         var cards = CGSSDAO.shared.findCardsByCharId(char.charaId)
         let sorter = CGSSSorter.init(property: "sAlbumId")
         sorter.sortList(&cards)
-        if cards.count > 0 {
-            prepareRelatedCardsContentView()
-            setupRelatedCardsContentView(cards)
+        relatedView.cards = cards
+    }
+    
+    func checkCharaInfo(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
+        
+    }
+    
+    func iconClick(_ iv: CGSSIconView) {
+        if let cardIcon = iv as? CGSSCardIconView {
+            delegate?.cardIconClick(cardIcon)
         }
-        relatedCardsContentView.fy = profileView.fy + profileView.fheight + topSpace
-        
-        fheight = relatedCardsContentView.fheight + relatedCardsContentView.fy + bottomInset
     }
-    
-    // 相关卡片
-    var relatedCardsContentView: UIView!
-    func prepareRelatedCardsContentView() {
-        if relatedCardsContentView != nil {
-            return
-        }
-        relatedCardsContentView = UIView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
-        relatedCardsContentView.clipsToBounds = true
-        relatedCardsContentView.drawSectionLine(0)
-        // evolutionContentView.frame = CGRectMake(-1, originY - (1 / UIScreen.mainScreen().scale), CGSSGlobal.width+2, 92 + (1 / UIScreen.mainScreen().scale))
-        let insideY: CGFloat = topSpace
-        let descLabel = UILabel()
-        descLabel.frame = CGRect(x: 10, y: insideY, width: 170, height: 17)
-        descLabel.textColor = UIColor.black
-        descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.text = NSLocalizedString("角色所有卡片", comment: "角色信息页面") + ":"
-        descLabel.textColor = UIColor.black
-        relatedCardsContentView.addSubview(descLabel)
-        addSubview(relatedCardsContentView)
-        
-    }
-    
-    // 设置相关卡片
-    func setupRelatedCardsContentView(_ cards: [CGSSCard]) {
-        let column = floor((CGSSGlobal.width - 2 * topSpace) / 50)
-        let spaceTotal = CGSSGlobal.width - 2 * topSpace - column * 48
-        let space = spaceTotal / (column - 1)
-        
-        for i in 0..<cards.count {
-            let y = CGFloat(i / Int(column)) * (48 + space) + 37
-            let x = CGFloat(i % Int(column)) * (48 + space) + topSpace
-            let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
-            icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
-            relatedCardsContentView.addSubview(icon)
-        }
-        relatedCardsContentView.fheight = CGFloat((cards.count - 1) / Int(column)) * (48 + space) + 48 + 37 + topSpace
-        
-    }
-    
-    func iconClick(_ icon: CGSSCardIconView) {
-        delegate?.cardIconClick(icon)
-    }
-    /*
-     // Only override drawRect: if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func drawRect(rect: CGRect) {
-     // Drawing code
-     }
-     */
-    
 }
