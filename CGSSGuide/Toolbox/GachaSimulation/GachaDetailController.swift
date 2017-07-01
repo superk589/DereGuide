@@ -62,7 +62,6 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         simulationView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(gachaDetailView.snp.bottom)
-            make.height.equalTo(simulationView.fheight)
             make.bottom.equalToSuperview()
         }
         simulationView.delegate = self

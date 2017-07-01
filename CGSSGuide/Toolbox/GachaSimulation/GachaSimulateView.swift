@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol GachaSimulateViewDelegate: class {
     func singleGacha(gachaSimulateView: GachaSimulateView)
     func tenGacha(gachaSimulateView: GachaSimulateView)
@@ -16,7 +17,7 @@ protocol GachaSimulateViewDelegate: class {
 class GachaSimulateView: UIView {
     
     let space: CGFloat = 10
-    let btnW = (CGSSGlobal.width - 60) / 5
+    let btnW = (Screen.shortSide - 60) / 5
     var singleButton : UIButton!
     var tenButton: UIButton!
     var resultView: UIView!
@@ -24,35 +25,55 @@ class GachaSimulateView: UIView {
     weak var delegate: GachaSimulateViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
-        drawSectionLine(0)
-        singleButton = UIButton.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        
+        singleButton = UIButton() //.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = Color.passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
+        addSubview(singleButton)
+        singleButton.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.width.equalToSuperview().dividedBy(2).offset(-15)
+            make.top.equalTo(2 * btnW + 30)
+            make.height.equalTo(30)
+        }
         
-        tenButton = UIButton.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        tenButton = UIButton() //.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
         tenButton.backgroundColor = Color.cute
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
+        addSubview(tenButton)
+        tenButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.width.equalToSuperview().dividedBy(2).offset(-15)
+            make.top.equalTo(2 * btnW + 30)
+            make.height.equalTo(30)
+        }
         
-        resultView = UIView.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
+        resultView = UIView() //.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
+        addSubview(resultView)
+        resultView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(10)
+            make.width.equalTo(Screen.shortSide - 20)
+            make.height.equalTo(2 * btnW + 10)
+        }
         
-        descLabel = UILabel.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
+        descLabel = UILabel() //.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
         descLabel.text = NSLocalizedString("* 每张卡片的获取几率和官方公布数据一致", comment: "模拟抽卡页面")
         //descLabel.isHidden = true
         descLabel.sizeToFit()
+        addSubview(descLabel)
+        descLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            make.top.equalTo(singleButton.snp.bottom).offset(10)
+            make.bottom.equalTo(-10)
+        }
         
-        
-        self.addSubview(singleButton)
-        self.addSubview(tenButton)
-        self.addSubview(resultView)
-        self.addSubview(descLabel)
-        drawSectionLine(descLabel.fy + descLabel.fheight + space - 1 / Screen.scale)
-        self.fheight = descLabel.fy + descLabel.fheight + space
-        //self.fheight = tenButton.fbottom + space
         self.backgroundColor = Color.cool.withAlphaComponent(0.1)
     }
     
@@ -69,9 +90,8 @@ class GachaSimulateView: UIView {
             subview.removeFromSuperview()
         }
     }
-
     
-    func setupResultView(cardIds:[Int]) {
+    func setupResultView(cardIds: [Int]) {
         wipeResultView()
         for i in 0..<cardIds.count {
             let x = CGFloat(i % 5) * (space + btnW)
