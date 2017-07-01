@@ -12,10 +12,11 @@ import GoogleMobileAds
 
 class DonationViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var scrollView: UIScrollView!
     var questionView1: DonationQAView!
     var questionView2: DonationQAView!
     
-    var cv: UICollectionView!
+    var collectionView: UICollectionView!
     var gadBanner: GADBannerView!
     var bannerDescLabel2: UILabel!
     
@@ -47,16 +48,23 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         self.navigationItem.title = NSLocalizedString("支持作者", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("恢复", comment: ""), style: .plain, target: self, action: #selector(restoreAction))
         
+        scrollView = UIScrollView()
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.top.right.left.equalToSuperview()
+        }
+        
         questionView1 = DonationQAView()
-        view.addSubview(questionView1)
+        scrollView.addSubview(questionView1)
         questionView1.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.top.equalTo(74)
+            make.top.equalTo(10)
+            make.width.equalToSuperview().offset(-20)
         }
         
         questionView2 = DonationQAView()
-        view.addSubview(questionView2)
+        scrollView.addSubview(questionView2)
         questionView2.snp.makeConstraints { (make) in
             make.left.right.equalTo(questionView1)
             make.top.equalTo(questionView1.snp.bottom).offset(10)
@@ -84,26 +92,28 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize.init(width: (Screen.width - 30) / 2, height: 80)
-        cv = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
-        view.addSubview(cv)
-        cv.snp.makeConstraints { (make) in
-            make.top.equalTo(questionView2.snp.bottom).offset(40)
+//        layout.itemSize = CGSize.init(width: (Screen.width - 30) / 2, height: 80)
+        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        scrollView.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(questionView2.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
             make.height.equalTo(80)
+            make.bottom.equalToSuperview().offset(-20)
         }
-        cv.delegate = self
-        cv.dataSource = self
-        cv.backgroundColor = UIColor.white
-        cv.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
       
         bannerDescLabel2 = UILabel()
         view.addSubview(bannerDescLabel2)
         bannerDescLabel2.snp.makeConstraints { (make) in
-            make.bottom.equalTo(gadBanner.snp.top).offset(-10)
+            make.bottom.equalTo(gadBanner.snp.top).offset(-5)
             make.left.equalTo(10)
             make.right.equalTo(-10)
+            make.top.equalTo(scrollView.snp.bottom)
         }
         bannerDescLabel2.textColor = UIColor.darkGray
         bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
@@ -118,12 +128,19 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) in
+            self.collectionView.performBatchUpdates(nil, completion: nil)
+        }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
     var hud: LoadingImageView?
     func requestData() {
         let request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductId)
         request.delegate = self
         hud = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
-        hud?.show(to: self.cv)
+        hud?.show(to: self.collectionView)
         request.start()
     }
     
@@ -133,7 +150,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     }
     
     func reloadData() {
-        self.cv.reloadData()
+        self.collectionView.reloadData()
     }
     
     func removeAd() {
@@ -146,6 +163,10 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     // MARK: UICollectionViewDelegate & DataSource
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: (view.frame.width - 30) / 2, height: 80)
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -155,7 +176,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cv.dequeueReusableCell(withReuseIdentifier: "DonationCell", for: indexPath) as! DonationCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DonationCell", for: indexPath) as! DonationCell
         
         let product = products[indexPath.item]
         cell.setup(amount: (product.priceLocale.currencySymbol ?? "") + product.price.stringValue, desc: product.localizedTitle)
