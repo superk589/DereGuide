@@ -186,11 +186,15 @@ class TeamEditingController: BaseViewController {
     }
     
     func hideHelpTips() {
-        tip1.dismiss()
-        tip2.dismiss()
+        tip1?.dismiss()
+        tip2?.dismiss()
         maskView?.removeFromSuperview()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideHelpTips()
+    }
 
     func setup(with team: CGSSTeam) {
         self.leader = CGSSTeamMember.initWithAnother(teamMember: team.leader)
