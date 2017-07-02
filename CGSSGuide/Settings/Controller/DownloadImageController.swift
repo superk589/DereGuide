@@ -138,7 +138,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             make.width.equalTo(240)
             make.height.equalTo(50)
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-120)
+            make.centerY.equalToSuperview().offset(-95)
         }
         
         calculate()

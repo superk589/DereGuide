@@ -74,6 +74,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 }
                 let destFrame = destBanner.frame
                 destBanner.frame = sourceFrame
+                destBanner.layoutIfNeeded()
                 toView.backgroundColor = UIColor.clear
                 
                 for view in destDetailViews {

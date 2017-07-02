@@ -11,7 +11,7 @@ import MessageUI
 import SDWebImage
 import Social
 
-class SettingsTableViewController: UITableViewController, UpdateStatusViewDelegate {
+class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var downloadAtStartCell: UITableViewCell! {
         didSet {

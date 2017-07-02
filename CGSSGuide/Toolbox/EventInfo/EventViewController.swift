@@ -114,7 +114,7 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         super.viewDidAppear(animated)
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightViewController = filterVC
-        drawer?.defaultRightWidth = min(Screen.width - 68, 400)
+        drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
         drawer?.delegate = self
     }
     

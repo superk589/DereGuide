@@ -87,7 +87,8 @@ class CGSSLoadingHUD: UIView {
         contentView.layer.masksToBounds = true
         addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.height.width.equalTo(120)
         }
         

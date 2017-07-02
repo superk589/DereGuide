@@ -28,11 +28,20 @@ struct Path {
     static let home = NSHomeDirectory()
 }
 struct Screen {
-    // 当前屏幕的宽度和高度常量
-    public static let width = UIScreen.main.bounds.width
-    public static let height = UIScreen.main.bounds.height
+    
+    static var width: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
+    static var height: CGFloat {
+        return UIScreen.main.bounds.height
+    }
+    
     // 当前屏幕1坐标的像素点数量
-    public static let scale = UIScreen.main.scale
+    static var scale: CGFloat {
+        return UIScreen.main.scale
+    }
+    
     static let shortSide = min(width, height)
     static let longSide = max(width, height)
 }

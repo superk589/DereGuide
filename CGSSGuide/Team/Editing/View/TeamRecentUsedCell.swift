@@ -33,7 +33,9 @@ class TeamRecentUsedCell: UICollectionViewCell {
     }
     
     func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
-        delegate?.didLongPressAt(self)
+        if gesture.state == .began {
+            delegate?.didLongPressAt(self)
+        }
     }
     
     func setup(with member: CGSSTeamMember) {

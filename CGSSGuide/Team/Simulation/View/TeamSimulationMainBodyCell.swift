@@ -181,7 +181,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         simulatingIndicator.startAnimating()
         UIView.animate(withDuration: 0.25) {
             self.cancelButton.snp.updateConstraints({ (update) in
-                update.width.equalTo(floor((Screen.width - 20) / 4))
+                update.width.equalTo(floor((Screen.shortSide - 20) / 4))
                 update.left.equalTo(self.simulationButton.snp.right).offset(1)
             })
             self.layoutIfNeeded()

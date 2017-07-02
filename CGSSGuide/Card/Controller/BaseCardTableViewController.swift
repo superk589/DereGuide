@@ -116,7 +116,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         let drawer = CGSSClient.shared.drawerController
         drawer?.rightViewController = filterVC
         drawer?.delegate = self
-        drawer?.defaultRightWidth = min(Screen.width - 68, 400)
+        drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

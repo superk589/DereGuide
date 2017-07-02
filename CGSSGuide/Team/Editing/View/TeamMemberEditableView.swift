@@ -120,6 +120,10 @@ class TeamMemberEditableView: UIView {
     
     var editableItemViews: [TeamMemberEditableItemView]!
     
+    var centerLabel: UILabel!
+    
+    var guestLabel: UILabel!
+    
     var currentIndex: Int = 0 {
         didSet {
             if oldValue != currentIndex {
@@ -150,13 +154,36 @@ class TeamMemberEditableView: UIView {
         stackView = UIStackView(arrangedSubviews: editableItemViews)
         stackView.spacing = 6
         stackView.distribution = .fillEqually
+        stackView.alignment = .center
         addSubview(stackView)
         
+        centerLabel = UILabel()
+        centerLabel.text = NSLocalizedString("队长", comment: "")
+        centerLabel.font = UIFont.systemFont(ofSize: 12)
+        centerLabel.adjustsFontSizeToFitWidth = true
+        addSubview(centerLabel)
+        centerLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(5)
+            make.centerX.equalTo(editableItemViews[0])
+            make.width.lessThanOrEqualTo(editableItemViews[0].snp.width).offset(-4)
+        }
+        
+        guestLabel = UILabel()
+        guestLabel.text = NSLocalizedString("好友", comment: "")
+        guestLabel.font = UIFont.systemFont(ofSize: 12)
+        guestLabel.adjustsFontSizeToFitWidth = true
+        addSubview(guestLabel)
+        guestLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(centerLabel)
+            make.width.lessThanOrEqualTo(editableItemViews[5].snp.width)
+            make.centerX.equalTo(editableItemViews[5])
+        }
+        
         stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(20)
+            make.top.equalTo(centerLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(-10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-20)
         }
     }
     
@@ -169,11 +196,13 @@ class TeamMemberEditableView: UIView {
     }
     
     func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
-        guard let view = longPress.view as? TeamMemberEditableItemView else { return }
-        if let index = stackView.arrangedSubviews.index(of: view) {
-            currentIndex = index
+        if longPress.state == .began {
+            guard let view = longPress.view as? TeamMemberEditableItemView else { return }
+            if let index = stackView.arrangedSubviews.index(of: view) {
+                currentIndex = index
+            }
+            delegate?.teamMemberEditableView(self, didLongPressAt: view)
         }
-        delegate?.teamMemberEditableView(self, didLongPressAt: view)
     }
     
     func handleDoubleTapGesture(_ doubleTap: UITapGestureRecognizer) {

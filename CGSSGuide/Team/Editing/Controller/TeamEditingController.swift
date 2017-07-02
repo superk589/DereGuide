@@ -108,7 +108,7 @@ class TeamEditingController: BaseViewController {
         editableView.backgroundColor = Color.cool.withAlphaComponent(0.1)
         view.addSubview(editableView)
         editableView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-44)
+            make.bottom.equalTo(traitCollection.verticalSizeClass == .compact ? -32 : -44)
             make.left.right.equalToSuperview()
         }
         
@@ -122,6 +122,16 @@ class TeamEditingController: BaseViewController {
         editableView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .vertical)
         collectionView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
         editableView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.editableView.snp.updateConstraints { (update) in
+                update.bottom.equalTo(self.traitCollection.verticalSizeClass == .compact ? -32 : -44)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
