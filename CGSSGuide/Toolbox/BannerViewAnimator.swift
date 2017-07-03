@@ -130,7 +130,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 // make sure the frame is the same if orientation changing occurred
                 toView.frame = fromView.frame
                 toView.layoutIfNeeded()
-
+                
                 let toFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
                 
                 sourceBannerView.isHidden = true

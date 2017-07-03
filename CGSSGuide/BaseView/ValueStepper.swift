@@ -368,12 +368,12 @@ private enum Button: Int {
         if value >= maximumValue {
             increaseButton.isEnabled = false
             decreaseButton.isEnabled = true
-            increaseLayer.strokeColor = UIColor.gray.cgColor
+            increaseLayer.strokeColor = UIColor.lightGray.cgColor
             continuousTimer = nil
         } else if value <= minimumValue {
             decreaseButton.isEnabled = false
             increaseButton.isEnabled = true
-            decreaseLayer.strokeColor = UIColor.gray.cgColor
+            decreaseLayer.strokeColor = UIColor.lightGray.cgColor
             continuousTimer = nil
         } else {
             increaseButton.isEnabled = true

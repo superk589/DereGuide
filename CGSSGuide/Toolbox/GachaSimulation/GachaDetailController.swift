@@ -42,7 +42,13 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         banner = BannerView()
         sv.addSubview(banner)
         banner.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().priority(900)
+            make.right.equalToSuperview().priority(900)
+            make.left.greaterThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.lessThanOrEqualTo(824)
             make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
         }
         banner.sd_setImage(with: pool.detailBannerURL)
@@ -50,9 +56,8 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         gachaDetailView = GachaDetailView()
         sv.addSubview(gachaDetailView)
         gachaDetailView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
+            make.left.right.equalTo(banner)
             make.top.equalTo(banner.snp.bottom)
-            make.width.equalToSuperview()
         }
         gachaDetailView.setupWith(pool: pool)
         gachaDetailView.delegate = self
@@ -60,7 +65,7 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         simulationView = GachaSimulateView()
         sv.addSubview(simulationView)
         simulationView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
+            make.left.right.equalTo(banner)
             make.top.equalTo(gachaDetailView.snp.bottom)
             make.bottom.equalToSuperview()
         }

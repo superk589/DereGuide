@@ -17,7 +17,7 @@ protocol GachaSimulateViewDelegate: class {
 class GachaSimulateView: UIView {
     
     let space: CGFloat = 10
-    let btnW = (Screen.shortSide - 60) / 5
+    let btnW = min(96, (Screen.shortSide - 60) / 5)
     var singleButton : UIButton!
     var tenButton: UIButton!
     var resultView: UIView!
@@ -55,7 +55,7 @@ class GachaSimulateView: UIView {
         resultView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(10)
-            make.width.equalTo(Screen.shortSide - 20)
+            make.width.equalTo(btnW * 5 + 40)
             make.height.equalTo(2 * btnW + 10)
         }
         

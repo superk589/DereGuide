@@ -41,6 +41,12 @@ class TipView: UIView {
         }
     }
     
+    var sourceView: UIView? {
+        didSet {
+            updateUI()
+        }
+    }
+    
     var arrowOffset: CGPoint = CGPoint.zero { didSet { updateUI() } }
     
     var arrowDirection: ArrowDirection = .up { didSet { updateUI() } }
@@ -65,7 +71,11 @@ class TipView: UIView {
         switch arrowDirection {
         case .up:
             arrowView.snp.remakeConstraints({ (make) in
-                make.left.equalTo(arrowOffset.x)
+                if let view = sourceView {
+                    make.centerX.equalTo(view)
+                } else {
+                    make.left.equalTo(arrowOffset.x)
+                }
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
                 make.top.equalToSuperview()
@@ -77,7 +87,11 @@ class TipView: UIView {
             arrowView.transform = CGAffineTransform.identity
         case .down:
             arrowView.snp.remakeConstraints({ (make) in
-                make.left.equalTo(arrowOffset.x)
+                if let view = sourceView {
+                    make.centerX.equalTo(view)
+                } else {
+                    make.left.equalTo(arrowOffset.x)
+                }
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
                 make.bottom.equalToSuperview()
@@ -92,7 +106,11 @@ class TipView: UIView {
                 make.left.equalToSuperview()
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
-                make.top.equalTo(arrowOffset.y)
+                if let view = sourceView {
+                    make.centerY.equalTo(view)
+                } else {
+                    make.top.equalTo(arrowOffset.y)
+                }
             })
             contentView.snp.remakeConstraints({ (make) in
                 make.bottom.top.right.equalToSuperview()
@@ -104,7 +122,11 @@ class TipView: UIView {
                 make.right.equalToSuperview()
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
-                make.top.equalTo(arrowOffset.y)
+                if let view = sourceView {
+                    make.centerY.equalTo(view)
+                } else {
+                    make.top.equalTo(arrowOffset.y)
+                }
             })
             contentView.snp.remakeConstraints({ (make) in
                 make.bottom.top.left.equalToSuperview()

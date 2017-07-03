@@ -33,7 +33,7 @@ class TeamMemberEditingView: UIView {
         skillStepper.numberFormatter.maximumFractionDigits = 0
         skillStepper.numberFormatter.positivePrefix = "SLv. "
         skillStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
-        skillStepper.tintColor = Color.allType
+        skillStepper.tintColor = UIColor.black
         
         vocalStepper = ValueStepper()
         vocalStepper.maximumValue = 10

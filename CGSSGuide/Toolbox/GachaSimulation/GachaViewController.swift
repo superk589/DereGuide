@@ -43,6 +43,7 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         
         tableView.register(GachaTableViewCell.self, forCellReuseIdentifier: "GachaCell")
         tableView.estimatedRowHeight = GachaTableViewCell.estimatedHeight
+        tableView.separatorStyle = .none
         
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = backItem
@@ -153,13 +154,5 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         let cell = tableView.cellForRow(at: indexPath) as? GachaTableViewCell
         bannerViewAnimator.sourceBannerView = cell?.banner
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
-    }
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.separatorInset = UIEdgeInsets.init(top: 0, left: 32, bottom: 0, right: 0)
     }
 }

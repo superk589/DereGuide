@@ -55,6 +55,13 @@ class BaseModelTableViewController: RefreshableTableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
     }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        coordinator.animate(alongsideTransition: { (context) in
+//            self.searchBar.superview?.layoutIfNeeded()
+//        }, completion: nil)
+//        super.viewWillTransition(to: size, with: coordinator)
+//    }
 }
 
 //MARK: UISearchBarDelegate

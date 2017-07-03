@@ -22,11 +22,18 @@ class TeamTemplateCell: TeamTableViewCell {
             make.left.top.equalTo(10)
         }
         
-        iconStackView.snp.remakeConstraints { (make) in
+        iconStackView.snp.remakeConstraints({ (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.left.equalTo(10)
-            make.bottom.right.equalTo(-10)
-        }
+            make.left.greaterThanOrEqualTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            // make the view as wide as possible
+            make.right.equalTo(-10).priority(900)
+            make.left.equalTo(10).priority(900)
+            //
+            make.bottom.equalTo(-10)
+            make.width.lessThanOrEqualTo(96 * 6 + 25)
+            make.centerX.equalToSuperview()
+        })
         
         accessoryType = .none
     }

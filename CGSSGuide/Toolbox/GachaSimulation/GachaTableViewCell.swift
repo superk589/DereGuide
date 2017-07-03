@@ -32,11 +32,31 @@ class GachaTableViewCell: UITableViewCell {
         selectionStyle = .none
         accessoryType = .disclosureIndicator
         
+        banner = BannerView()
+        contentView.addSubview(banner)
+        banner.snp.makeConstraints { (make) in
+            make.left.greaterThanOrEqualTo(32)
+            make.right.lessThanOrEqualToSuperview()
+            make.left.equalTo(32).priority(900)
+            make.right.equalToSuperview().priority(900)
+            make.bottom.equalTo(-10)
+            make.centerX.equalToSuperview().offset(11)
+            make.width.lessThanOrEqualTo(824)
+            make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
+        }
+        let separator = LineView()
+        contentView.addSubview(separator)
+        separator.snp.makeConstraints { (make) in
+            make.left.right.equalTo(banner)
+            make.bottom.equalToSuperview()
+        }
+        
         startDateView = UIView()
         contentView.addSubview(startDateView)
         startDateView.snp.makeConstraints { (make) in
             make.top.equalTo(10)
-            make.left.equalTo(32)
+            make.left.equalTo(banner)
+            make.bottom.equalTo(banner.snp.top).offset(-10)
         }
         startDateView.backgroundColor = Color.parade
         startDateView.layer.cornerRadius = 3
@@ -55,7 +75,7 @@ class GachaTableViewCell: UITableViewCell {
         let line = LineView()
         contentView.addSubview(line)
         line.snp.makeConstraints { (make) in
-            make.left.equalTo(16)
+            make.right.equalTo(banner.snp.left).offset(-16)
             make.width.equalTo(1 / Screen.scale)
             make.top.bottom.equalToSuperview()
         }
@@ -65,22 +85,9 @@ class GachaTableViewCell: UITableViewCell {
         statusIndicator.snp.makeConstraints { (make) in
             make.centerY.equalTo(startDateView)
             make.height.width.equalTo(12)
-            make.left.equalTo(10)
+            make.left.equalTo(banner.snp.left).offset(-22)
         }
-        
-        
-        banner = BannerView()
-        contentView.addSubview(banner)
-        banner.snp.makeConstraints { (make) in
-            make.left.equalTo(32)
-            make.top.equalTo(startDateView.snp.bottom).offset(10)
-            make.bottom.equalTo(-10)
-            make.right.equalToSuperview()
-            make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
-        }
-//        // 宽高比snapkit有问题 用原生方法加
-//        banner.addConstraint(NSLayoutConstraint.init(item: banner, attribute: .height, relatedBy: .equal, toItem: banner, attribute: .width, multiplier: 212 / 824, constant: 1))
-        
+             
         nameLabel = UILabel()
         contentView.addSubview(nameLabel)
         nameLabel.font = UIFont.systemFont(ofSize: 14)

@@ -40,17 +40,24 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
         banner = BannerView()
         sv.addSubview(banner)
         banner.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().priority(900)
+            make.right.equalToSuperview().priority(900)
+            make.left.greaterThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.lessThanOrEqualTo(824)
             make.height.equalTo(banner.snp.width).multipliedBy(212.0 / 824.0)
         }
+        
         banner.sd_setImage(with: event.detailBannerURL)
         
         eventDetailView = EventDetailView()
         sv.addSubview(eventDetailView)
         eventDetailView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalTo(banner)
+            make.bottom.equalToSuperview()
             make.top.equalTo(banner.snp.bottom)
-            make.width.equalToSuperview()
         }
         eventDetailView.setup(event: event, bannerId: bannerId)
         eventDetailView.delegate = self

@@ -86,9 +86,16 @@ class TeamTableViewCell: UITableViewCell {
 //        contentView.addSubview(appealStackView)
         
         iconStackView.snp.makeConstraints { (make) in
-            make.top.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.top.equalTo(10)
+            make.left.greaterThanOrEqualTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            // make the view as wide as possible
+            make.right.equalTo(-10).priority(900)
+            make.left.equalTo(10).priority(900)
+            //
             make.bottom.equalTo(-10)
+            make.width.lessThanOrEqualTo(96 * 6 + 25)
+            make.centerX.equalToSuperview()
         }
         
 //        appealStackView.snp.makeConstraints { (make) in

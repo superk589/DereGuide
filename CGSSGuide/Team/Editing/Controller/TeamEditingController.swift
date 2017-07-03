@@ -77,7 +77,8 @@ class TeamEditingController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.itemSize = CGSize(width: (Screen.shortSide - 70) / 6, height: (Screen.shortSide - 70) / 6 + 29)
+        let maxWidth = min((Screen.shortSide - 70) / 6, 96)
+        layout.itemSize = CGSize(width: maxWidth, height: maxWidth + 29)
         collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -113,7 +114,7 @@ class TeamEditingController: BaseViewController {
         }
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(editableView.snp.top)
         }

@@ -157,6 +157,18 @@ class TeamMemberEditableView: UIView {
         stackView.alignment = .center
         addSubview(stackView)
         
+        stackView.snp.remakeConstraints({ (make) in
+            make.left.greaterThanOrEqualTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            // make the view as wide as possible
+            make.right.equalTo(-10).priority(900)
+            make.left.equalTo(10).priority(900)
+            //
+            make.bottom.equalTo(-10)
+            make.width.lessThanOrEqualTo(104 * 6 + 30)
+            make.centerX.equalToSuperview()
+        })
+        
         centerLabel = UILabel()
         centerLabel.text = NSLocalizedString("队长", comment: "")
         centerLabel.font = UIFont.systemFont(ofSize: 12)
@@ -165,6 +177,7 @@ class TeamMemberEditableView: UIView {
         centerLabel.snp.makeConstraints { (make) in
             make.top.equalTo(5)
             make.centerX.equalTo(editableItemViews[0])
+            make.bottom.equalTo(stackView.snp.top).offset(-5)
             make.width.lessThanOrEqualTo(editableItemViews[0].snp.width).offset(-4)
         }
         
@@ -175,15 +188,8 @@ class TeamMemberEditableView: UIView {
         addSubview(guestLabel)
         guestLabel.snp.makeConstraints { (make) in
             make.top.equalTo(centerLabel)
-            make.width.lessThanOrEqualTo(editableItemViews[5].snp.width)
+            make.width.lessThanOrEqualTo(editableItemViews[5].snp.width).offset(-4)
             make.centerX.equalTo(editableItemViews[5])
-        }
-        
-        stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(centerLabel.snp.bottom).offset(5)
-            make.bottom.equalTo(-10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
         }
     }
     

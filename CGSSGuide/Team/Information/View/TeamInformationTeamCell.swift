@@ -39,6 +39,9 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
             let icon = CGSSCardIconView()
             icon.delegate = self
             icons.append(icon)
+            icon.snp.makeConstraints({ (make) in
+                make.height.equalTo(icon.snp.width)
+            })
         }
         iconStackView = UIStackView(arrangedSubviews: icons)
         iconStackView.spacing = 5
@@ -48,9 +51,14 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         
         iconStackView.snp.makeConstraints { (make) in
             make.top.equalTo(selfLeaderSkillLabel.snp.bottom).offset(3)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.width.equalTo(iconStackView.snp.height).multipliedBy(6).offset(25)
+            make.left.greaterThanOrEqualTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            // make the view as wide as possible
+            make.right.equalTo(-10).priority(900)
+            make.left.equalTo(10).priority(900)
+            //
+            make.width.lessThanOrEqualTo(96 * 6 + 25)
+            make.centerX.equalToSuperview()
         }
         
         friendLeaderSkillLabel = TeamLeaderSkillView()
@@ -64,20 +72,14 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         friendLeaderSkillLabel.arrowDirection = .up
         friendLeaderSkillLabel.descLabel.textAlignment = .right
         
+        selfLeaderSkillLabel.sourceView = icons[0]
+        friendLeaderSkillLabel.sourceView = icons[5]
+        
         selectionStyle = .none
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.layoutIfNeeded()
-        let frame = self.iconStackView.convert(self.iconStackView.arrangedSubviews.first?.frame ?? CGRect.zero, to: selfLeaderSkillLabel)
-        let frame2 = self.iconStackView.convert(self.iconStackView.arrangedSubviews.last?.frame ?? CGRect.zero, to: friendLeaderSkillLabel)
-        selfLeaderSkillLabel.arrowOffset = CGPoint(x: frame.midX - selfLeaderSkillLabel.arrowWidth / 2, y: 0)
-        friendLeaderSkillLabel.arrowOffset = CGPoint(x: frame2.midX - friendLeaderSkillLabel.arrowWidth / 2, y: 0)
     }
     
     func setup(with team: CGSSTeam) {

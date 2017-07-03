@@ -49,6 +49,7 @@ class TeamSimulationCardView: UIView {
             make.right.lessThanOrEqualToSuperview()
             make.height.equalTo(14.5)
         }
+        
         potentialLabel.snp.makeConstraints { (make) in
             make.centerX.top.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
@@ -119,10 +120,16 @@ class TeamSimulationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         contentView.addSubview(iconStackView)
         
         iconStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(5)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-5)
+            make.top.equalTo(10)
+            make.left.greaterThanOrEqualTo(10)
+            make.right.lessThanOrEqualTo(-10)
+            // make the view as wide as possible
+            make.right.equalTo(-10).priority(900)
+            make.left.equalTo(10).priority(900)
+            //
+            make.bottom.equalTo(-10)
+            make.width.lessThanOrEqualTo(96 * 6 + 25)
+            make.centerX.equalToSuperview()
         }
 
         accessoryType = .disclosureIndicator
