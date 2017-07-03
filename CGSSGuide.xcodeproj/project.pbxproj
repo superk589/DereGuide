@@ -169,6 +169,7 @@
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
 		128E94931EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E94921EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift */; };
+		129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B8A6AA1F09E348001074B3 /* ValueStepper.swift */; };
 		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
 		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
 		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
@@ -509,6 +510,7 @@
 		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B678441EF12ACF00615D22 /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
+		12B8A6AA1F09E348001074B3 /* ValueStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStepper.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
 		12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSpreadImageCell.swift; sourceTree = "<group>"; };
 		12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailBasicCell.swift; sourceTree = "<group>"; };
@@ -944,6 +946,7 @@
 				129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */,
 				129ECB241ECB3BC00010BC7F /* GridView.swift */,
 				129ECB261ECBD2D90010BC7F /* GridLabel.swift */,
+				12B8A6AA1F09E348001074B3 /* ValueStepper.swift */,
 				1296759F1EBF62450037827B /* PageCollectionView */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
@@ -1492,7 +1495,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CGSSGuide/Pods-CGSSGuide-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ASValueTrackingSlider/ASValueTrackingSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
@@ -1508,7 +1510,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASValueTrackingSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
@@ -1552,6 +1553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */,
 				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,

@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import SnapKit
 
 class TeamMemberEditingViewController: UIViewController {
 
     var editView: TeamMemberEditingView!
 
-    func setup(model:CGSSTeamMember) {
+    func setupWith(member: CGSSTeamMember, card: CGSSCard) {
         if editView == nil {
-            editView = TeamMemberEditingView.init(frame: CGRect.init(x: 0, y: 0, width: 240, height: 290))
+            editView = TeamMemberEditingView()
+            view.addSubview(editView)
+            editView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
         }
-        view.addSubview(editView)
-        editView.setup(with: model)
+        
+        editView.setupWith(member: member, card: card)
     }
 
 }

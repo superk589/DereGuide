@@ -7,60 +7,17 @@
 //
 
 import UIKit
-import ASValueTrackingSlider
-
-class CGSSSliderView: UIView, ASValueTrackingSliderDelegate {
-    
-    var descLabel : UILabel!
-    var numLabel: UILabel!
-    var slider: ASValueTrackingSlider!
-    
-    private let space:CGFloat = 10
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        descLabel = UILabel.init(frame: CGRect(x: space, y: fheight * 0.75 - fheight / 8, width: 30, height: fheight / 4))
-        descLabel.font = UIFont.systemFont(ofSize: 16)
-        descLabel.textAlignment = .center
-    
-        numLabel = UILabel.init(frame: CGRect(x: space, y: fheight * 0.75 + fheight / 8, width: 30, height: fheight / 4))
-        numLabel.font = UIFont.systemFont(ofSize: 14)
-        numLabel.textAlignment = .center
-        
-        slider = ASValueTrackingSlider.init(frame: CGRect(x: space + 35, y: fheight * 0.75 , width: fwidth - 35 - 2 * space, height: fheight / 4))
-//        let nf = NumberFormatter()
-//        nf.numberStyle = .none
-//        slider.numberFormatter = nf
-        
-        self.slider.textColor = UIColor.white
-        self.slider.popUpViewCornerRadius = self.fheight / 4
-        self.slider.setMaxFractionDigitsDisplayed(0)
-        self.slider.delegate = self
-        addSubview(descLabel)
-        addSubview(slider)
-        addSubview(numLabel)
-    }
-    
-    func sliderDidHidePopUpView(_ slider: ASValueTrackingSlider!) {
-        self.numLabel.text = String(Int(round(self.slider.value)))
-    }
-    
-    func sliderWillDisplayPopUpView(_ slider: ASValueTrackingSlider!) {
-        //
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 
 class TeamMemberEditingView: UIView {
 
-    var skillItem: CGSSSliderView!
-    var vocalItem: CGSSSliderView!
-    var danceItem: CGSSSliderView!
-    var visualItem: CGSSSliderView!
+    var skillStepper: ValueStepper!
+    var vocalStepper: ValueStepper!
+    var danceStepper: ValueStepper!
+    var visualStepper: ValueStepper!
+    
+    var stackView: UIStackView!
+    
+    var card: CGSSCard!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,68 +25,99 @@ class TeamMemberEditingView: UIView {
     }
     
     func prepare() {
-        let space:CGFloat = 10
-        let height = (fheight - 6 * space) / 4
-        skillItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space, width: fwidth, height: height))
-        skillItem.slider.maximumValue = 10
-        skillItem.slider.minimumValue = 1
-        skillItem.slider.value = 10
-        skillItem.slider.popUpViewColor = Color.allType
-        skillItem.descLabel.text = "SLv."
-        skillItem.numLabel.textColor = Color.allType
         
-        vocalItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 2 + height, width: fwidth, height: height))
-        vocalItem.slider.maximumValue = 10
-        vocalItem.slider.minimumValue = 0
-        vocalItem.slider.value = 0
-        vocalItem.slider.popUpViewColor = Color.vocal
-        vocalItem.descLabel.text = "Vo+"
-        vocalItem.numLabel.textColor = Color.vocal
+        skillStepper = ValueStepper()
+        skillStepper.maximumValue = 10
+        skillStepper.minimumValue = 1
+        skillStepper.stepValue = 1
+        skillStepper.numberFormatter.maximumFractionDigits = 0
+        skillStepper.numberFormatter.positivePrefix = "SLv. "
+        skillStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        skillStepper.tintColor = Color.allType
         
-        danceItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 3 + height * 2, width: self.fwidth, height: height))
-        danceItem.slider.maximumValue = 10
-        danceItem.slider.minimumValue = 0
-        danceItem.slider.value = 0
-        danceItem.slider.popUpViewColor = Color.dance
-        danceItem.descLabel.text = "Da+"
-        danceItem.numLabel.textColor = Color.dance
+        vocalStepper = ValueStepper()
+        vocalStepper.maximumValue = 10
+        vocalStepper.minimumValue = 0
+        vocalStepper.stepValue = 1
+        vocalStepper.numberFormatter.maximumFractionDigits = 0
+        vocalStepper.numberFormatter.positivePrefix = "Vo +"
+        vocalStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        vocalStepper.tintColor = Color.vocal
         
-        visualItem = CGSSSliderView.init(frame: CGRect(x: 0, y: space * 4 + height * 3, width: self.fwidth, height: height))
-        visualItem.slider.maximumValue = 10
-        visualItem.slider.minimumValue = 0
-        visualItem.slider.value = 0
-        visualItem.slider.popUpViewColor = Color.visual
-        visualItem.descLabel.text = "Vi+"
-        visualItem.numLabel.textColor = Color.visual
+        danceStepper = ValueStepper()
+        danceStepper.maximumValue = 10
+        danceStepper.minimumValue = 0
+        danceStepper.stepValue = 1
+        danceStepper.numberFormatter.maximumFractionDigits = 0
+        danceStepper.numberFormatter.positivePrefix = "Da +"
+        danceStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        danceStepper.tintColor = Color.dance
         
-        addSubview(skillItem)
-        addSubview(vocalItem)
-        addSubview(danceItem)
-        addSubview(visualItem)
+        visualStepper = ValueStepper()
+        visualStepper.maximumValue = 10
+        visualStepper.minimumValue = 0
+        visualStepper.stepValue = 1
+        visualStepper.numberFormatter.maximumFractionDigits = 0
+        visualStepper.numberFormatter.positivePrefix = "Vi +"
+        visualStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        visualStepper.tintColor = Color.visual
+        
+        stackView = UIStackView(arrangedSubviews: [skillStepper, vocalStepper, danceStepper, visualStepper])
+        addSubview(stackView)
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(10)
+            make.bottom.equalTo(-10)
+        }
+    }
+    
+    func handleStepperValueChanged(_ stepper: ValueStepper) {
+        let potential = CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: 0)
+        let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
+        if stepper == skillStepper {
+            if let skill = card.skill {
+                stepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(Int(stepper.value)) / 100, skill.condition, skill.procChanceOfLevel(Int(stepper.value)) / 100, skill.skillFilterType.description)
+            }
+        } else if stepper == vocalStepper {
+            stepper.descriptionLabel.text = String(appeal.vocal)
+        } else if stepper == danceStepper {
+            stepper.descriptionLabel.text = String(appeal.dance)
+        } else if stepper == visualStepper {
+            stepper.descriptionLabel.text = String(appeal.visual)
+        }
     }
     
     private func setSkillItemNotAvailable() {
-        skillItem.isUserInteractionEnabled = false
-        skillItem.slider.isEnabled = false
-        skillItem.numLabel.text = "n/a"
+        skillStepper.isEnabled = false
+        skillStepper.valueLabel.text = "n/a"
+        skillStepper.descriptionLabel.text = ""
     }
     
-    func setup(with model: CGSSTeamMember) {
-        if model.cardRef?.skill == nil {
-            setSkillItemNotAvailable()
+    func setupWith(member: CGSSTeamMember, card: CGSSCard) {
+        self.card = card
+        if let skill = member.cardRef?.skill {
+            skillStepper.value = Double(member.skillLevel!)
+            skillStepper.valueLabel.text = "SLv. \(member.skillLevel!)"
+            skillStepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(member.skillLevel!) / 100, skill.condition, skill.procChanceOfLevel(member.skillLevel!) / 100, skill.skillFilterType.description)
         } else {
-            skillItem.slider.value = Float(model.skillLevel!)
-            skillItem.numLabel.text = String(model.skillLevel!)
+            setSkillItemNotAvailable()
         }
         
-        vocalItem.slider.value = Float(model.vocalLevel!)
-        vocalItem.numLabel.text = String(model.vocalLevel!)
+        let potential = member.potential
+        let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         
-        danceItem.slider.value = Float(model.danceLevel!)
-        danceItem.numLabel.text = String(model.danceLevel!)
+        vocalStepper.value = Double(member.vocalLevel!)
+        vocalStepper.descriptionLabel.text = String(appeal.vocal)
         
-        visualItem.slider.value = Float(model.visualLevel!)
-        visualItem.numLabel.text = String(model.visualLevel!)
+        danceStepper.value = Double(member.danceLevel!)
+        danceStepper.descriptionLabel.text = String(appeal.dance)
+        
+        visualStepper.value = Double(member.visualLevel!)
+        visualStepper.descriptionLabel.text = String(appeal.visual)
     }
     
     required init?(coder aDecoder: NSCoder) {

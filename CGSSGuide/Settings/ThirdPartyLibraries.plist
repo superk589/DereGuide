@@ -16,9 +16,9 @@
 	</dict>
 	<dict>
 		<key>site</key>
-		<string>https://github.com/alskipp/ASValueTrackingSlider</string>
+		<string>https://github.com/superk589/ValueStepper</string>
 		<key>name</key>
-		<string>ASValueTrackingSlider</string>
+		<string>ValueStepper</string>
 	</dict>
 	<dict>
 		<key>site</key>
@@ -68,11 +68,11 @@
 		<key>name</key>
 		<string>SnapKit</string>
 	</dict>
-    <dict>
-        <key>site</key>
-        <string>https://github.com/teodorpatras/EasyTipView</string>
-        <key>name</key>
-        <string>EasyTipView</string>
-    </dict>
+	<dict>
+		<key>site</key>
+		<string>https://github.com/teodorpatras/EasyTipView</string>
+		<key>name</key>
+		<string>EasyTipView</string>
+	</dict>
 </array>
 </plist>

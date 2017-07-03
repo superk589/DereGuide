@@ -36,6 +36,10 @@ extension CGSSSkill {
         return CGSSSkillTypes.init(typeId: skillTypeId)
     }
     
+    var descriptionShort: String {
+        return "\(condition!)s/\(procTypeShort)/\(skillFilterType.description)"
+    }
+    
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
     func procChanceOfLevel(_ lv: Int) -> Double {
         if let p = procChance {
@@ -46,6 +50,7 @@ extension CGSSSkill {
             return 0
         }
     }
+    
     func effectLengthOfLevel(_ lv: Int) -> Double {
         if let e = effectLength {
             let e1 = Double(e[1])
@@ -55,6 +60,7 @@ extension CGSSSkill {
             return 0
         }
     }
+    
     func getExplainByLevel(_ lv: Int, languageType: LanguageType = .ja) -> String {
         var explain:String
         switch languageType {
@@ -74,6 +80,7 @@ extension CGSSSkill {
         explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv) / 100))
         return explain
     }
+    
     func getExplainByLevelRange(_ start: Int, end: Int, languageType: LanguageType = .ja) -> String {
         var explain:String
         switch languageType {

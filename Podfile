@@ -6,7 +6,7 @@ target 'CGSSGuide' do
   pod 'ReachabilitySwift'
   pod 'FMDB'
   pod 'lz4'
-  pod 'ASValueTrackingSlider'
+#  pod 'ASValueTrackingSlider'
   pod 'ZKCornerRadiusView'
   pod 'ZKDrawerController'
   pod 'SnapKit'

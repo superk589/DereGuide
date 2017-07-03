@@ -298,7 +298,11 @@ extension TeamEditingController: TeamRecentUsedCellDelegate {
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
         
         let member = recentMembers[index]
-        tevc.setup(model: member)
+        guard let card = member.cardRef else {
+            return
+        }
+        
+        tevc.setupWith(member: member, card: card)
         
         let pc = tevc.popoverPresentationController
         
@@ -324,9 +328,13 @@ extension TeamEditingController: TeamMemberEditableViewDelegate {
         let tevc = TeamMemberEditingViewController()
         tevc.modalPresentationStyle = .popover
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
-        if let member = members[index] {
-            tevc.setup(model: member)
+        
+        guard let member = members[index], let card = member.cardRef else {
+            return
         }
+        
+        tevc.setupWith(member: member, card: card)
+        
         let pc = tevc.popoverPresentationController
         
         pc?.delegate = self
@@ -343,13 +351,19 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         return .none
     }
     
+    /// commit the change to idols skill level and potential levels
+    ///
+    /// - Parameters:
+    ///   - member: team member need to commit
+    ///   - vc: view controller that holds new data
+    ///   - modifySkill: modify skill level or not (when the commit is synced by another card of the same chara, need not to modify skill level
     fileprivate func modify(_ member: CGSSTeamMember, using vc: TeamMemberEditingViewController, modifySkill: Bool = true) {
         if modifySkill {
-            member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
+            member.skillLevel = Int(round(vc.editView.skillStepper.value))
         }
-        member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
-        member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
-        member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
+        member.vocalLevel = Int(round(vc.editView.vocalStepper.value))
+        member.danceLevel = Int(round(vc.editView.danceStepper.value))
+        member.visualLevel = Int(round(vc.editView.visualStepper.value))
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
@@ -381,10 +395,10 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         } else if let _ = popoverPresentationController.sourceView as? TeamMemberEditableItemView {
             if let member = members[editableView.currentIndex] {
                 let index = editableView.currentIndex
-                member.skillLevel = Int(round(vc.editView.skillItem.slider.value))
-                member.vocalLevel = Int(round(vc.editView.vocalItem.slider.value))
-                member.danceLevel = Int(round(vc.editView.danceItem.slider.value))
-                member.visualLevel = Int(round(vc.editView.visualItem.slider.value))
+                member.skillLevel = Int(round(vc.editView.skillStepper.value))
+                member.vocalLevel = Int(round(vc.editView.vocalStepper.value))
+                member.danceLevel = Int(round(vc.editView.danceStepper.value))
+                member.visualLevel = Int(round(vc.editView.visualStepper.value))
                 reload(index: index)
             }
         }
