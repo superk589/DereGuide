@@ -34,7 +34,9 @@ class CardSignImageController: BaseViewController {
         imageView = BannerView()
         view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
+            make.width.lessThanOrEqualToSuperview()
+            make.top.greaterThanOrEqualTo(topLayoutGuide.snp.bottom)
+            make.bottom.lessThanOrEqualTo(bottomLayoutGuide.snp.top)
             make.height.equalTo(imageView.snp.width).multipliedBy(504.0 / 630.0)
             make.center.equalToSuperview()
         }

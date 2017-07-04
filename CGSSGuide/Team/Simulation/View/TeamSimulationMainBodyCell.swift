@@ -29,6 +29,10 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     
     var simulatingIndicator: UIActivityIndicatorView!
     
+    var cancelButtonWidthConstraint: Constraint!
+    
+    var cancelButtonLeftConstraint: Constraint!
+    
 //    var scoreDistributionButton: UIButton!
 //    
 //    var scoreDetailButton: UIButton!
@@ -88,8 +92,10 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.right.equalTo(-10)
             make.height.equalTo(30)
             make.top.equalTo(simulationButton)
-            make.width.equalTo(0)
-            make.left.equalTo(simulationButton.snp.right)
+            self.cancelButtonWidthConstraint = make.width.equalTo(0).constraint
+            self.cancelButtonLeftConstraint = make.left.equalTo(simulationButton.snp.right).constraint
+            make.width.equalTo(calculationGrid.snp.width).dividedBy(4).priority(900)
+            make.left.equalTo(simulationButton.snp.right).offset(1).priority(900)
         }
         cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
         cancelButton.titleLabel?.baselineAdjustment = .alignCenters
@@ -167,10 +173,8 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     func stopSimulationAnimating() {
         simulationButton.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.25) {
-            self.cancelButton.snp.updateConstraints({ (update) in
-                update.width.equalTo(0)
-                update.left.equalTo(self.simulationButton.snp.right)
-            })
+            self.cancelButtonWidthConstraint.activate()
+            self.cancelButtonLeftConstraint.activate()
             self.layoutIfNeeded()
         }
         simulatingIndicator.stopAnimating()
@@ -180,10 +184,8 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     func startSimulationAnimating() {
         simulatingIndicator.startAnimating()
         UIView.animate(withDuration: 0.25) {
-            self.cancelButton.snp.updateConstraints({ (update) in
-                update.width.equalTo(floor((Screen.shortSide - 20) / 4))
-                update.left.equalTo(self.simulationButton.snp.right).offset(1)
-            })
+            self.cancelButtonLeftConstraint.deactivate()
+            self.cancelButtonWidthConstraint.deactivate()
             self.layoutIfNeeded()
         }
         simulationButton.isUserInteractionEnabled = false

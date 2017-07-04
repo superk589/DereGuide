@@ -197,12 +197,6 @@ class CardDetailViewController: BaseTableViewController {
         
     }
     
-    func show3DModelAction() {
-        let vc = Card3DModelController()
-        vc.card = self.card
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     func showCardImageAction() {
         let vc = CardImageController()
         vc.card = self.card

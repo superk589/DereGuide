@@ -9,25 +9,43 @@
 import UIKit
 
 class WipeTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-    }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let tl1 = textLabel, let tl2 = detailTextLabel {
-            tl1.fwidth = tl2.fx - 10 - tl1.fx
+    var leftLabel: UILabel!
+    
+    var rightLabel: UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        leftLabel = UILabel()
+        contentView.addSubview(leftLabel)
+        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        
+        leftLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.centerY.equalToSuperview()
         }
-        textLabel?.adjustsFontSizeToFitWidth = true
-        textLabel?.baselineAdjustment = .alignCenters
+        
+        rightLabel = UILabel()
+        contentView.addSubview(rightLabel)
+        rightLabel.font = UIFont.systemFont(ofSize: 16)
+        
+        rightLabel.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.centerY.equalToSuperview()
+            make.left.greaterThanOrEqualTo(leftLabel.snp.right).offset(5)
+        }
+        rightLabel.textColor = UIColor.gray
+        
+        leftLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        rightLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        leftLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        rightLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

@@ -21,13 +21,16 @@ class CardImageController: BaseViewController {
         
         imageView = BannerView()
         view.addSubview(imageView)
+        
         imageView.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview()
-//            make.height.equalTo(Screen.width * 340 / 272)
+            make.width.lessThanOrEqualToSuperview()
+            make.top.greaterThanOrEqualTo(topLayoutGuide.snp.bottom)
+            make.bottom.lessThanOrEqualTo(bottomLayoutGuide.snp.top)
+            make.height.equalTo(imageView.snp.width).multipliedBy(340.0 / 272.0)
             make.center.equalToSuperview()
         }
-        imageView.style = .custom
         
+        imageView.style = .custom
         
         prepareToolbar()
         if let url = URL.init(string: card.cardImageRef) {
@@ -35,18 +38,13 @@ class CardImageController: BaseViewController {
                 self.item.isEnabled = true
             })
         }
-        
-        
-        // Do any additional setup after loading the view.
     }
-    
     
     func prepareToolbar() {
         item = UIBarButtonItem.init(image: #imageLiteral(resourceName: "702-share-toolbar"), style: .plain, target: self, action: #selector(shareAction(item:)))
         item.isEnabled = false
         toolbarItems = [item]
     }
-    
     
     func shareAction(item: UIBarButtonItem) {
         if imageView.image == nil {

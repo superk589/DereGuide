@@ -113,9 +113,9 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
     
     func setupCellAtIndex(_ index: Int) {
         DispatchQueue.main.async {
-            let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0))
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? DownloadImageCell
             let urls = self.getURLsBy(index: index)
-            cell?.detailTextLabel?.text = "\(urls.inCache.count)/\(urls.count)"
+            cell?.rightLabel?.text = "\(urls.inCache.count)/\(urls.count)"
         }
     }
     
@@ -327,11 +327,11 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CacheCell", for: indexPath) as! DownloadImageCell
         if indexPath.row == 0 {
-            cell.detailTextLabel?.text = ""
+            cell.rightLabel?.text = ""
         } else {
             setupCellAtIndex(indexPath.row)
         }
-        cell.textLabel?.text = dataTypes[indexPath.row]
+        cell.leftLabel?.text = dataTypes[indexPath.row]
         // Configure the cell...
         return cell
     }

@@ -92,6 +92,7 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
         coordinator.animate(alongsideTransition: { (context) in
             self.collectionView.performBatchUpdates(nil, completion: nil)
             self.collectionView.contentOffset.x = CGFloat(self.currentIndex) * size.width
+            self.titleView.currentIndex = self.currentIndex
         }, completion: nil)
         super.viewWillTransition(to: size, with: coordinator)
     }

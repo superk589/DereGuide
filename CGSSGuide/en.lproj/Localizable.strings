@@ -542,7 +542,7 @@
 "活动封面" = "Event Banner";
 "卡池封面" = "Gacha Banner";
 
-"队伍中存在未知的技能类型，计算结果可能不准确。" = "There are unknown skills in the team, calculation results may not be accurate.";
+"队伍中存在未知的技能类型，计算结果可能不准确。" = "There are unknown skills in the unit, calculation results may not be accurate.";
 
 /* new in 1.2.3 */
 "变更时间" = "Last updated time";
@@ -600,10 +600,10 @@
 /* new in 1.3.0 */
 "note数" = "Number of Notes";
 "使用后援表现值" = "Use Support Appeal";
-"队伍信息" = "Team Information";
+"队伍信息" = "Unit Information";
 "辅助技能详情" = "Support Skills Detail";
 "极限模式" = "Optimistic Mode";
-"还没有队伍，点击右上＋创建一个吧" = "No teams, click + to create";
+"还没有队伍，点击右上＋创建一个吧" = "No units, click + to create";
 
 "偶像生日提醒" = "Birthday Notification";
 "生日快乐!!" = "Happy birthday!!";
@@ -623,8 +623,8 @@
 "* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确" = "* This graph is the approximate probability density curve of the score distribution, the more times of simulation the more accurate of the result.";
 
 /* new in 1.4.0 */
-"队伍模板" = "Team Template";
-"编辑队伍" = "Edit Team";
+"队伍模板" = "Unit Template";
+"编辑队伍" = "Edit Unit";
 "默认潜能等级" = "Default Potential Level";
 "默认特技等级" = "Default Skill Level";
 "最近使用" = "Recent idols";
@@ -632,7 +632,7 @@
 "最近使用中也包含好友的队长" = "Include guest leaders in recent idols";
 "修改最近使用中的偶像潜能同步到同角色所有卡片" = "Synchronize to all of the same chara while editing recent idols' potential";
 
-"最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）" = "In Recent idols, it regards cards with the same skill level and potential levels as the same idol. Click to add it to the bottom editing area. Long press to edit its skill level and potential levels, this action will update all the teams contains this idol. Besides, the idol's potential levels will be synchronized to all of the same chara(can be closed in advance options).";
+"最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）" = "In Recent idols, it regards cards with the same skill level and potential levels as the same idol. Click to add it to the bottom editing area. Long press to edit its skill level and potential levels, this action will update all the units contains this idol. Besides, the idol's potential levels will be synchronized to all of the same chara(can be closed in advance options).";
 
 "单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级" = "Click to select a position, double click to select from full card list, long press to edit its skill level and potential levels";
 
