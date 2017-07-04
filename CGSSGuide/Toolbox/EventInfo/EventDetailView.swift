@@ -232,7 +232,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         
         eventPtView.delegate = self
         
-        
         eventScoreContentView = UIView()
         addSubview(eventScoreContentView)
         eventScoreContentView.snp.makeConstraints { (make) in
@@ -326,7 +325,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
 //                startToEndLabel.text = "\(preStartDateString) ~ \(NSLocalizedString("待定", comment: ""))"
 //            }
             
-            //startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
+            // startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true
             card2View.isHidden = true
@@ -357,35 +356,35 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             
             if let live = event.live {
                 liveView.setup(with: live)
-                liveView.snp.updateConstraints({ (update) in
+                liveView.snp.updateConstraints { (update) in
                     update.height.equalTo(88)
-                })
+                }
                 songDescLabel.isHidden = false
             } else {
-                liveView.snp.updateConstraints({ (update) in
+                liveView.snp.updateConstraints { (update) in
                     update.height.equalTo(0)
-                })
+                }
                 songDescLabel.isHidden = true
             }
         
             if CGSSEventTypes.ptRankingExists.contains(event.eventType) {
-                eventPtContentView.snp.updateConstraints({ (update) in
+                eventPtContentView.snp.updateConstraints { (update) in
                     update.height.equalTo(Height.ptContentView)
-                })
+                }
             } else {
-                eventPtContentView.snp.updateConstraints({ (update) in
+                eventPtContentView.snp.updateConstraints { (update) in
                     update.height.equalTo(0)
-                })
+                }
             }
             
             if CGSSEventTypes.scoreRankingExists.contains(event.eventType) {
-                eventScoreContentView.snp.updateConstraints({ (update) in
+                eventScoreContentView.snp.updateConstraints { (update) in
                     update.height.equalTo(Height.scoreContentView)
-                })
+                }
             } else {
-                eventScoreContentView.snp.updateConstraints({ (update) in
+                eventScoreContentView.snp.updateConstraints { (update) in
                     update.height.equalTo(0)
-                })
+                }
             }
             
             liveTrendLabel.isHidden = !event.hasTrendLives
@@ -412,19 +411,25 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
 }
 
 extension EventDetailView: EventPtViewDelegate {
+    
     func refresh(eventPtView: EventPtView) {
         delegate?.refreshPtView(eventDetailView: self)
     }
+    
 }
 
 extension EventDetailView: EventScoreViewDelegate {
+    
     func refresh(eventScoreView: EventScoreView) {
         delegate?.refreshScoreView(eventDetailView: self)
     }
+    
 }
 
 extension EventDetailView: SongTableViewCellDelegate {
+    
     func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene) {
         delegate?.eventDetailView(self, didSelect: scene)
     }
+    
 }

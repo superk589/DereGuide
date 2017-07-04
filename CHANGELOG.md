@@ -1,5 +1,20 @@
 # ChangeLog
 
+### 1.4.1
+
+1. 所有页面支持横屏模式
+2. 优化组队编辑页面
+3. 其他bug修复
+
+##### Japanese version
+
+
+##### English version
+
+1. Support for landscape mode
+2. Improve unit editing page
+3. Other bugs fixed
+
 ### 1.4.0
 
 1. 大幅改进组队编辑页面，可以快速选择使用过的偶像，编辑同一角色所有卡片的潜能

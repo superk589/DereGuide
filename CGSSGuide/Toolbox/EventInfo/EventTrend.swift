@@ -60,8 +60,8 @@ class EventTrend : NSObject, NSCoding {
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         endDate = json["end_date"].stringValue
@@ -80,22 +80,21 @@ class EventTrend : NSObject, NSCoding {
     /**
      * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> NSDictionary
-    {
+    func toDictionary() -> NSDictionary {
         let dictionary = NSMutableDictionary()
-        if endDate != nil{
+        if endDate != nil {
             dictionary["end_date"] = endDate
         }
-        if eventId != nil{
+        if eventId != nil {
             dictionary["event_id"] = eventId
         }
-        if id != nil{
+        if id != nil {
             dictionary["id"] = id
         }
-        if liveDataIds != nil{
+        if liveDataIds != nil {
             dictionary["live_data_ids"] = liveDataIds
         }
-        if startDate != nil{
+        if startDate != nil {
             dictionary["start_date"] = startDate
         }
         return dictionary
@@ -105,8 +104,7 @@ class EventTrend : NSObject, NSCoding {
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    required init(coder aDecoder: NSCoder)
-    {
+    required init(coder aDecoder: NSCoder) {
         endDate = aDecoder.decodeObject(forKey: "end_date") as? String
         eventId = aDecoder.decodeObject(forKey: "event_id") as? Int
         id = aDecoder.decodeObject(forKey: "id") as? Int
@@ -119,8 +117,7 @@ class EventTrend : NSObject, NSCoding {
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
+    func encode(with aCoder: NSCoder) {
         if endDate != nil{
             aCoder.encode(endDate, forKey: "end_date")
         }

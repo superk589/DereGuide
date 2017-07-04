@@ -31,6 +31,7 @@ class BeatmapViewController: UIViewController {
    
     var tv: UIToolbar!
     var titleLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareToolbar()
@@ -116,7 +117,7 @@ class BeatmapViewController: UIViewController {
     }
     
     private func prepareToolbar() {
-        //let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
+        // let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
         let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
         spaceItem.width = 40
@@ -131,6 +132,7 @@ class BeatmapViewController: UIViewController {
     func getImageTitle() -> String {
         return "\(scene.live.name) \(scene.stars)☆ \(scene.difficulty.description) bpm:\(scene.live.bpm) notes:\(scene.beatmap?.numberOfNotes ?? 0) length:\(Int(scene.beatmap?.totalSeconds ?? 0))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by CGSSGuide"
     }
+    
     func enterImageView() {
         bv.exportImageAsync(title: getImageTitle()) { (image) in
             let data = UIImagePNGRepresentation(image!)
@@ -139,7 +141,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func share(item: UIBarButtonItem) {
-        //enterImageView()
+        // enterImageView()
         CGSSLoadingHUDManager.default.show()
         bv.exportImageAsync(title: getImageTitle()) { (image) in
             CGSSLoadingHUDManager.default.hide()
@@ -149,54 +151,16 @@ class BeatmapViewController: UIViewController {
             let urlArray = [image!]
             let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
             activityVC.popoverPresentationController?.barButtonItem = item
-            //activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
+            // activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
+            
             // 需要屏蔽的模块
-            let cludeActivitys:[UIActivityType] = [
-                // 保存到本地相册
-                //UIActivityType.saveToCameraRoll,
-
-                // 拷贝 复制
-                //UIActivityType.copyToPasteboard,
-
-                // 打印
-                //UIActivityType.print,
-
-                // 指定联系人
-                //UIActivityTypeAssignToContact,
-
-                // Facebook
-                //UIActivityType.postToFacebook,
-
-                // 微博
-                //UIActivityType.postToWeibo,
-
-                // 短信
-                //UIActivityType.message,
-
-                // 邮箱
-                //UIActivityType.mail,
-
-                // 腾讯微博
-                //UIActivityType.postToTencentWeibo,
-
-                // twitter
-                //UIActivityTypePostToTwitter,
-
-                // vimeo
-                //UIActivityTypePostToVimeo,
-
-                // airDrop
-                //UIActivityTypeAirDrop,
-
-                //UIActivityTypeAddToReadingList,
-                //UIActivityTypePostToFlickr,
-                //UIActivityTypeOpenInIBooks, // 9.0
-            ]
+            let cludeActivitys:[UIActivityType] = []
+            
             // 排除活动类型
             activityVC.excludedActivityTypes = cludeActivitys
             
             // 呈现分享界面
-            self.present(activityVC, animated: true, completion: { 
+            self.present(activityVC, animated: true, completion: {
                 
             })
         }

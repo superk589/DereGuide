@@ -258,6 +258,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
 }
 
 extension TeamSimulationController: TeamEditingControllerDelegate {
+    
     func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>) {
         if teams.contains(self.team) {
             if let vc = pageCollectionController as? TeamDetailController {
@@ -280,6 +281,7 @@ extension TeamSimulationController: TeamEditingControllerDelegate {
 }
 
 extension TeamSimulationController: TeamSimulationTeamCellDelegate {
+    
     func teamSimulationTeamCell(_ teamSimulationTeamCell: TeamSimulationTeamCell, didClick cardIcon: CGSSCardIconView) {
         if let id = cardIcon.cardId, let card = CGSSDAO.shared.findCardById(id) {
             let cardDVC = CardDetailViewController()
@@ -291,12 +293,14 @@ extension TeamSimulationController: TeamSimulationTeamCellDelegate {
 }
 
 extension TeamSimulationController: BaseSongTableViewControllerDelegate {
+    
     func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene) {
         self.scene = liveScene
     }
 }
 
 extension TeamSimulationController: TeamSimulationAppealEditingCellDelegate {
+    
     func teamSimulationAppealEditingCell(_ teamSimulationAppealEditingCell: TeamSimulationAppealEditingCell, didUpdateAt selectionIndex: Int, supportAppeal: Int, customAppeal: Int) {
         team.customAppeal = customAppeal
         team.supportAppeal = supportAppeal

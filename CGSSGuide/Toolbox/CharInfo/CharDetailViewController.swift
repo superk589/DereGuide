@@ -19,14 +19,14 @@ class CharDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        scrollView = UIScrollView() //.init(frame: CGRect(x: 0, y: 64, width: CGSSGlobal.width, height: CGSSGlobal.height - 64))
+        scrollView = UIScrollView()
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
 //        automaticallyAdjustsScrollViewInsets = false
-        detailView = CharDetailView() //.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 0))
+        detailView = CharDetailView()
         scrollView.addSubview(detailView)
         detailView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

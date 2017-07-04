@@ -10,7 +10,10 @@ import Foundation
 
 struct LSOptions: OptionSet {
     let rawValue: UInt
-    init(rawValue: UInt) { self.rawValue = rawValue }
+    
+    init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
     
     /// skill proc in maxRate
     static let maxRate = LSOptions.init(rawValue: 1 << 0)

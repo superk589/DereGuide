@@ -14,12 +14,14 @@ class CGSSFavoriteManager {
     
     static let favoriteCardsFilePath = NSHomeDirectory() + "/Documents/favoriteCards.plist"
     static let favoriteCharsFilePath = NSHomeDirectory() + "/Documents/favoriteChars.plist"
+    
     var favoriteCards: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCardsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCardsToFile()
             NotificationCenter.default.post(name: .favoriteCardsChanged, object: self)
         }
     }
+    
     var favoriteChars: [Int] = NSArray.init(contentsOfFile: CGSSFavoriteManager.favoriteCharsFilePath) as? [Int] ?? [Int]() {
         didSet {
             writeFavoriteCharsToFile()
@@ -34,6 +36,7 @@ class CGSSFavoriteManager {
     private func writeFavoriteCardsToFile() {
         (favoriteCards as NSArray).write(toFile: CGSSFavoriteManager.favoriteCardsFilePath, atomically: true)
     }
+    
     private func writeFavoriteCharsToFile() {
         (favoriteChars as NSArray).write(toFile: CGSSFavoriteManager.favoriteCharsFilePath, atomically: true)
     }
@@ -41,11 +44,13 @@ class CGSSFavoriteManager {
     func add(_ card: CGSSCard) {
         self.favoriteCards.append(card.id!)
     }
+    
     func remove(_ card: CGSSCard) {
         if let index = favoriteCards.index(of: card.id!) {
             self.favoriteCards.remove(at: index)
         }
     }
+    
     func contains(cardId: Int) -> Bool {
         return favoriteCards.contains(cardId)
     }
@@ -53,11 +58,13 @@ class CGSSFavoriteManager {
     func add(_ char: CGSSChar) {
         self.favoriteChars.append(char.charaId)
     }
+    
     func remove(_ char: CGSSChar) {
         if let index = favoriteChars.index(of: char.charaId!) {
             self.favoriteChars.remove(at: index)
         }
     }
+    
     func contains(charId: Int) -> Bool {
         return favoriteChars.contains(charId)
     }

@@ -190,9 +190,9 @@ class TeamEditingController: BaseViewController {
         tip2.show(forView: editableView)
         maskView = UIView()
         navigationController?.view.addSubview(maskView!)
-        maskView?.snp.makeConstraints({ (make) in
+        maskView?.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
-        })
+        }
         maskView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
     }
     
@@ -267,15 +267,19 @@ class TeamEditingController: BaseViewController {
         }
         editableView.currentIndex = nextIndex
     }
+    
 }
 
 extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recentMembers.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamRecentUsedCell.description(), for: indexPath) as! TeamRecentUsedCell
         cell.delegate = self
@@ -290,6 +294,7 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
 }
 
 extension TeamEditingController: TeamRecentUsedCellDelegate {
+    
     func didLongPressAt(_ teamRecentUsedCell: TeamRecentUsedCell) {
         guard let index = collectionView.indexPath(for: teamRecentUsedCell)?.item else {
             return
@@ -377,7 +382,7 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
                 for team in CGSSTeamManager.default.teams {
                     for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
                         if let member = team[i] {
-                            if (TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.cardRef?.charaId == selectedMember.cardRef?.charaId) {
+                            if TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.cardRef?.charaId == selectedMember.cardRef?.charaId {
                                 modify(member, using: vc, modifySkill: false)
                                 modifiedTeams.insert(team)
                             } else if member == selectedMember {
@@ -418,6 +423,7 @@ extension TeamEditingController: BaseCardTableViewControllerDelegate {
 }
 
 extension TeamEditingController: TeamTemplateControllerDelegate {
+    
     func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect team: CGSSTeam) {
         self.setup(with: team)
     }
@@ -429,15 +435,3 @@ extension TeamEditingController: TeamCardSelectionAdvanceOptionsControllerDelega
         collectionView.reloadData()
     }
 }
-
-//extension TeamEditViewController: Transitionable {
-//    var transitionViews: [String : UIView] {
-//        var dict = [String: UIView]()
-//        for cell in cells {
-//            let icon = cell.iconView!
-//            let index = cells.index(of: cell)
-//            dict["\(index ?? 0)\(icon.cardId ?? 0)"] = icon
-//        }
-//        return dict
-//    }
-//}

@@ -13,6 +13,7 @@ class BaseSession {
     
     static let shared = BaseSession()
     var session: URLSession!
+    
     private init() {
         let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = 30

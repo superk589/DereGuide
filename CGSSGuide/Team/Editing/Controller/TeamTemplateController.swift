@@ -28,6 +28,7 @@ class TeamTemplateController: BaseTableViewController {
     }
     
     private var templates = [TeamTemplate]()
+    
     private func loadTeamTemplates() {
         if let path = Bundle.main.path(forResource: "TeamTemplate", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) as? [String: [Int]] {
@@ -73,23 +74,3 @@ class TeamTemplateController: BaseTableViewController {
         return cell
     }
 }
-
-//extension TeamTemplateController: Transitionable {
-//    
-//    var transitionTypes: TransitionTypes {
-//        return [.pop, .interactive]
-//    }
-//    
-//    var transitionViews: [String: UIView] {
-//        if let selectedIndexPath = tableView.indexPathForSelectedRow,
-//            let cell = tableView.cellForRow(at: selectedIndexPath) as? TeamTemplateCell {
-//            var dict = [String: UIView]()
-//            cell.cardIcons.forEach({ (icon) in
-//                let index = cell.cardIcons.index(of: icon)
-//                dict["\(index ?? 0)\(icon.cardId ?? 0)"] = icon
-//            })
-//            return dict
-//        }
-//        return [:]
-//    }
-//}

@@ -9,9 +9,11 @@
 import UIKit
 
 extension NSAttributedString {
-    static func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
+    
+    static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
         let resultString = NSMutableAttributedString.init(attributedString: lhs)
         resultString.append(rhs)
         return resultString
     }
+    
 }

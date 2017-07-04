@@ -37,8 +37,7 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
     var profileView: CharProfileView!
     
     fileprivate func prepare() {
-        // basicView = UIView() // .init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 68))
-        iconView = CGSSCharIconView() //frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        iconView = CGSSCharIconView()
         addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -47,7 +46,6 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
         }
         
         nameLabel = UILabel()
-//        charNameLabel.frame = CGRect(x: 68, y: 26, width: CGSSGlobal.width - 78, height: 16)
         nameLabel.font = UIFont.systemFont(ofSize: 16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
@@ -59,7 +57,6 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
         }
         
         profileView = CharProfileView()
-            // .init(frame: CGRect(x: 10, y: 78, width: CGSSGlobal.width - 20, height: 0))
         addSubview(profileView)
         profileView.snp.makeConstraints { (make) in
             make.left.equalTo(10)

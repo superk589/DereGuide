@@ -9,7 +9,7 @@
 import UIKit
 
 class BeatmapView: IndicatorScrollView {
-   
+    
     var beatmapDrawer: AdvanceBeatmapDrawer!
     var beatmap: CGSSBeatmap!
     var bpm: Int!
@@ -51,10 +51,11 @@ class BeatmapView: IndicatorScrollView {
         self.bpm = bpm
         self.type = type
         indicator.strokeColor = self.strokeColor
+        
         /* debug */
 //        beatmap.exportNote()
 //        beatmap.exportIntervalToBpm()
-//        beatmap.exportNoteWithOffset() 
+//        beatmap.exportNoteWithOffset()
         
         let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
         let innerWidthInset: CGFloat = widthInset
@@ -88,16 +89,20 @@ class BeatmapView: IndicatorScrollView {
             }
         }
     }
+    
 }
 
 // MARK: UIScrollViewDelegate
 extension BeatmapView: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNeedsDisplay()
     }
+    
 }
 
 class AdvanceBeatmapDrawer {
+    
     var sectionHeight: CGFloat
     var columnWidth: CGFloat
     var widthInset: CGFloat
@@ -200,9 +205,9 @@ class AdvanceBeatmapDrawer {
             }
             
             // CGImage坐标系Y轴和UIImage的相反, 画出的图是上下颠倒的
-            //context.draw(subImage, in: CGRect.init(x: CGFloat(i) * CGSSGlobal.width, y: 50, width: CGSSGlobal.width, height: columnH))
+            // context.draw(subImage, in: CGRect.init(x: CGFloat(i) * CGSSGlobal.width, y: 50, width: CGSSGlobal.width, height: columnH))
             
-            //let bottomSide:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: contentSize.height - columnH * CGFloat(i) + CGFloat(i) * 2 * BeatmapView.heightInset - BeatmapView.heightInset, width: CGSSGlobal.width, height: BeatmapView.heightInset))
+            // let bottomSide:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: contentSize.height - columnH * CGFloat(i) + CGFloat(i) * 2 * BeatmapView.heightInset - BeatmapView.heightInset, width: CGSSGlobal.width, height: BeatmapView.heightInset))
             
           
         }
@@ -222,9 +227,9 @@ class AdvanceBeatmapDrawer {
         context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions.init(rawValue: 0))
 
         
-        //另一种思路处理上下颠倒, 翻转180度
-        //context.translateBy(x: imageW, y: imageH + 50)
-        //context.concatenate(CGAffineTransform.init(rotationAngle: CGFloat(M_PI)))
+        // 另一种思路处理上下颠倒, 翻转180度
+        // context.translateBy(x: imageW, y: imageH + 50)
+        // context.concatenate(CGAffineTransform.init(rotationAngle: CGFloat(M_PI)))
         
         let newImage = UIImage.init(cgImage: context.makeImage()!)
         UIGraphicsEndImageContext()
@@ -430,7 +435,7 @@ class AdvanceBeatmapDrawer {
             if note.finishPos != 0 {
                 // 画滑条
                 if note.groupId != 0 {
-                    if (slidesAndFlicks[note.groupId] != nil) {
+                    if slidesAndFlicks[note.groupId] != nil {
                         let path = (note.type == 3) ? pathForSlide(slidesAndFlicks[note.groupId]!, note2: note) : pathForFlick(slidesAndFlicks[note.groupId]!, note2: note)
                         slidesAndFlicks[note.groupId] = note
                         UIColor.white.set()
@@ -475,18 +480,18 @@ class AdvanceBeatmapDrawer {
         drawNote(minIndex: minIndex, maxIndex: maxIndex)
     }
 
-    private func pathForPoint(_ position: Int, sec: Float) -> UIBezierPath
-    {
+    private func pathForPoint(_ position: Int, sec: Float) -> UIBezierPath {
         let radius = noteRadius
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
-    private func pathForSmallPoint(_ position: Int, sec: Float) -> UIBezierPath
-    {
+    
+    private func pathForSmallPoint(_ position: Int, sec: Float) -> UIBezierPath {
         let radius = floor(noteRadius / 2)
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
+    
     fileprivate func pathForSlidePoint(_ position: Int, sec: Float) -> UIBezierPath {
         let path = UIBezierPath()
         let x = getPointX(position)
@@ -496,8 +501,8 @@ class AdvanceBeatmapDrawer {
         path.lineWidth = 2
         return path
     }
-    private func pathForSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath
-    {
+    
+    private func pathForSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
         let x1 = getPointX(note1.finishPos)
         let x2 = getPointX(note2.finishPos)
         let y = getPointY(note1.sec + note1.offset)
@@ -507,7 +512,6 @@ class AdvanceBeatmapDrawer {
         path.addLine(to: CGPoint(x: x2, y: y))
         path.lineWidth = 3
         return path
-        
     }
     
     private func pathForLongPress(_ position: Int, sec1: Float, sec2: Float) -> UIBezierPath {
@@ -562,8 +566,7 @@ class AdvanceBeatmapDrawer {
         return path
     }
 
-    private func pathForSectionLine(_ positionY: CGFloat) -> UIBezierPath
-    {
+    private func pathForSectionLine(_ positionY: CGFloat) -> UIBezierPath {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: widthInset, y: positionY))
         path.addLine(to: CGPoint(x: columnWidth - widthInset, y: positionY))
@@ -571,8 +574,7 @@ class AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForVerticalLine(_ originY: CGFloat, height: CGFloat, positionX: CGFloat) -> UIBezierPath
-    {
+    private func pathForVerticalLine(_ originY: CGFloat, height: CGFloat, positionX: CGFloat) -> UIBezierPath {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: positionX, y: originY))
         path.addLine(to: CGPoint(x: positionX, y: originY + height))
@@ -580,8 +582,7 @@ class AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForCircleCenteredAtPoint(_ midPoint: CGPoint, withRadius radius: CGFloat) -> UIBezierPath
-    {
+    private func pathForCircleCenteredAtPoint(_ midPoint: CGPoint, withRadius radius: CGFloat) -> UIBezierPath {
         let path = UIBezierPath(
             arcCenter: midPoint,
             radius: radius,
@@ -605,7 +606,3 @@ class AdvanceBeatmapDrawer {
         return Float((totalHeight - y - heightInset) / secScale)
     }
 }
-
-
-
-

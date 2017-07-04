@@ -13,6 +13,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
     var headerCells: [UITableViewCell]!
     let sectionTitles = [NSLocalizedString("今天", comment: "生日提醒页面"), NSLocalizedString("明天", comment: "生日提醒页面"), NSLocalizedString("七天内", comment: "生日提醒页面"), NSLocalizedString("一个月内", comment: "生日提醒页面")]
     var presentChars = [[CGSSChar]].init(repeating: [CGSSChar](), count: 4)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareSettingCells()
@@ -34,11 +35,6 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
         self.popoverPresentationController?.delegate = self
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
@@ -50,6 +46,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         // 对齐tableview和headerview的左边界
         tableView.layoutMargins = UIEdgeInsetsMake(0, 15, 0, 0)
     }
+    
     func prepareChars() {
         for i in 0...3 {
             presentChars[i].removeAll()
@@ -59,8 +56,8 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
         presentChars[1].append(contentsOf: bc.getRecent(1, endDays: 1))
         presentChars[2].append(contentsOf: bc.getRecent(2, endDays: 6))
         presentChars[3].append(contentsOf: bc.getRecent(7, endDays: 30))
-        
     }
+    
     func prepareSettingCells() {
         
         headerCells = [UITableViewCell]()
@@ -175,6 +172,7 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
             return presentChars[indexPath.section].count > 0 ? 89 : 0
         }
     }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == headerView {
             return nil
@@ -211,9 +209,11 @@ class BirthdayNotificationViewController: UITableViewController, UIPopoverPresen
 }
 
 extension BirthdayNotificationViewController: BirthdayNotificationTableViewCellDelegate {
+    
     func charIconClick(_ icon: CGSSCharIconView) {
         let charInfoDVC = CharDetailViewController()
         charInfoDVC.char = CGSSDAO.shared.findCharById(icon.charId!)
         self.navigationController?.pushViewController(charInfoDVC, animated: true)
     }
+    
 }

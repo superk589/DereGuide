@@ -8,12 +8,13 @@
 
 import UIKit
 
-struct BpmShiftingPoint {
+struct BpmShiftingPoint {    
     var bpm: Int
     var timestamp: Float
 }
 
 struct BpmShiftingRange {
+    
     var start: Float
     var length: Float {
         return end - start
@@ -24,9 +25,11 @@ struct BpmShiftingRange {
     var beginPoint: BpmShiftingPoint {
         return BpmShiftingPoint.init(bpm: bpm, timestamp: start)
     }
+    
 }
 
 extension CGSSBeatmapNote {
+    
     func inRange(range: BpmShiftingRange) -> Bool {
         if sec >= range.start && sec < range.end {
             return true
@@ -34,11 +37,14 @@ extension CGSSBeatmapNote {
             return false
         }
     }
+    
 }
 
 struct CGSSBeatmapShiftingInfo {
+    
     var shiftingPoints = [BpmShiftingPoint]()
     var shiftingRanges = [BpmShiftingRange]()
+    
     init(info: NSDictionary) {
         let timestampStrings = info.value(forKey: "timestamps") as! [String]
         let start = info.value(forKey: "start") as! Float

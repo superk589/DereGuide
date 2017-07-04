@@ -22,7 +22,7 @@ class CGSSCacheManager {
         SDImageCache.shared().clearMemory()
         if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
             let subPath = cachePath + "/default"
-            if (FileManager.default.fileExists(atPath: subPath)) {
+            if FileManager.default.fileExists(atPath: subPath) {
                 do {
                     try FileManager.default.removeItem(atPath: subPath)
                 } catch {
@@ -34,7 +34,7 @@ class CGSSCacheManager {
     
     func wipeCard() {
         for path in getCardFiles() {
-            if (FileManager.default.fileExists(atPath: path)) {
+            if FileManager.default.fileExists(atPath: path) {
                 do {
                     try FileManager.default.removeItem(atPath: path)
                 } catch {
@@ -46,7 +46,7 @@ class CGSSCacheManager {
     
     func wipeLive() {
         for path in getSongFiles() {
-            if (FileManager.default.fileExists(atPath: path)) {
+            if FileManager.default.fileExists(atPath: path) {
                 do {
                     try FileManager.default.removeItem(atPath: path)
                 } catch {
@@ -61,7 +61,7 @@ class CGSSCacheManager {
         if let files = FileManager.default.subpaths(atPath: documentPath) {
             for file in files {
                 let path = documentPath.appendingFormat("/\(file)")
-                if (FileManager.default.fileExists(atPath: path)) {
+                if FileManager.default.fileExists(atPath: path) {
                     do {
                         try FileManager.default.removeItem(atPath: path)
                     } catch {
@@ -80,7 +80,7 @@ class CGSSCacheManager {
                     if file.contains("default") || file.contains("Data") {
                         continue
                     }
-                    if (FileManager.default.fileExists(atPath: path)) {
+                    if FileManager.default.fileExists(atPath: path) {
                         do {
                             try FileManager.default.removeItem(atPath: path)
                         } catch {
@@ -148,7 +148,8 @@ class CGSSCacheManager {
         }
         return filePaths
     }
-    func getCacheSizeOfCard(complete:((String)->Void)?) {
+    
+    func getCacheSizeOfCard(complete: ((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             var size = 0
             for path in self.getCardFiles() {
@@ -162,8 +163,7 @@ class CGSSCacheManager {
         }
     }
     
-    
-    func getCacheSizeOfSong(complete:((String)->Void)?) {
+    func getCacheSizeOfSong(complete: ((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             var size = 0
             for path in self.getSongFiles() {
@@ -177,7 +177,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getCacheSizeAt(path:String, complete:((String)->Void)?) {
+    func getCacheSizeAt(path: String, complete: ((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let files = FileManager.default.subpaths(atPath: path) {
                 var size = 0
@@ -194,7 +194,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getOtherSize(complete:((String)->Void)?) {
+    func getOtherSize(complete: ((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
                 if let files = FileManager.default.subpaths(atPath: cachePath) {

@@ -9,7 +9,7 @@
 import UIKit
 
 class CardImageController: BaseViewController {
-
+    
     var card: CGSSCard!
     
     var imageView: BannerView!
@@ -55,53 +55,11 @@ class CardImageController: BaseViewController {
         activityVC.popoverPresentationController?.barButtonItem = item
         //activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
         // 需要屏蔽的模块
-        let cludeActivitys:[UIActivityType] = [
-            // 保存到本地相册
-            //UIActivityType.saveToCameraRoll,
-            
-            // 拷贝 复制
-            //UIActivityType.copyToPasteboard,
-            
-            // 打印
-            //UIActivityType.print,
-            
-            // 指定联系人
-            //UIActivityTypeAssignToContact,
-            
-            // Facebook
-            //UIActivityType.postToFacebook,
-            
-            // 微博
-            //UIActivityType.postToWeibo,
-            
-            // 短信
-            //UIActivityType.message,
-            
-            // 邮箱
-            //UIActivityType.mail,
-            
-            // 腾讯微博
-            //UIActivityType.postToTencentWeibo,
-            
-            // twitter
-            //UIActivityTypePostToTwitter,
-            
-            // vimeo
-            //UIActivityTypePostToVimeo,
-            
-            // airDrop
-            //UIActivityTypeAirDrop,
-            
-            //UIActivityTypeAddToReadingList,
-            //UIActivityTypePostToFlickr,
-            //UIActivityTypeOpenInIBooks, // 9.0
-        ]
+        let cludeActivitys:[UIActivityType] = []
         // 排除活动类型
         activityVC.excludedActivityTypes = cludeActivitys
         
         // 呈现分享界面
-        self.present(activityVC, animated: true, completion: {
-            
-        })
+        self.present(activityVC, animated: true, completion: nil)
     }
 }

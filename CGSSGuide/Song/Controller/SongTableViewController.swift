@@ -10,16 +10,6 @@ import UIKit
 
 class SongTableViewController: BaseSongTableViewController {
 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func selectScene(_ scene: CGSSLiveScene) {
         super.selectScene(scene)
         let vc = BeatmapViewController()
@@ -27,6 +17,7 @@ class SongTableViewController: BaseSongTableViewController {
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 

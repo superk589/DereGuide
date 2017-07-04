@@ -37,7 +37,7 @@ class UpdateStatusView: UIView {
 //            make.
 //        }
         
-        loadingView = LoadingImageView() //.init(frame: CGRect.init(x: self.fheight * 0.1, y: self.fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
+        loadingView = LoadingImageView()
         loadingView.hideWhenStopped = true
         addSubview(loadingView)
         loadingView.snp.makeConstraints { (make) in
@@ -46,7 +46,7 @@ class UpdateStatusView: UIView {
             make.width.height.equalTo(40)
         }
         
-        cancelButton = UIButton() //.init(frame: CGRect(x: frame.size.width - self.fheight * 0.9, y: fheight * 0.1, width: self.fheight * 0.8, height: self.fheight * 0.8))
+        cancelButton = UIButton()
         cancelButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         cancelButton.setImage(UIImage.init(named: "433-x")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
         cancelButton.tintColor = UIColor.white
@@ -68,7 +68,6 @@ class UpdateStatusView: UIView {
             make.left.greaterThanOrEqualTo(loadingView.snp.right)
             make.right.lessThanOrEqualTo(-5)
         }
-        // statusLabel.frame = CGRect(x: fheight * 0.8, y: 0, width: fwidth - fheight * 0.8 * 2, height: fheight)
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
         statusLabel.adjustsFontSizeToFitWidth = true
@@ -129,6 +128,7 @@ class UpdateStatusView: UIView {
         statusLabel.text = "\(a)/\(b)"
 //        progressView.progress = Float(a) / Float(b)
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -139,12 +139,5 @@ class UpdateStatusView: UIView {
         self.isHidden = true
         delegate?.cancelUpdate()
     }
-    /*
-     // Only override drawRect: if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func drawRect(rect: CGRect) {
-     // Drawing code
-     }
-     */
     
 }

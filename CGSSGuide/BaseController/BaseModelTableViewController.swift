@@ -20,10 +20,10 @@ class BaseModelTableViewController: RefreshableTableViewController {
     private var isShowing = false
     
     // called after search text changed, must to be overrided
-    func updateUI() { }
+    func updateUI() {}
     
     // called if needsReloadData is true when text changed, must to be overrided
-    func reloadData() { }
+    func reloadData() {}
     
     func setNeedsReloadData() {
         needsReloadData = true
@@ -64,7 +64,7 @@ class BaseModelTableViewController: RefreshableTableViewController {
 //    }
 }
 
-//MARK: UISearchBarDelegate
+// MARK: UISearchBarDelegate
 extension BaseModelTableViewController: UISearchBarDelegate {
     
     // 文字改变时
@@ -89,8 +89,9 @@ extension BaseModelTableViewController: UISearchBarDelegate {
 }
 
 
-//MARK: UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 extension BaseModelTableViewController {
+    
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 滑动时取消输入框的第一响应者
         if searchBar.isFirstResponder {

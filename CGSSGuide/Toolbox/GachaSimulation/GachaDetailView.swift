@@ -67,7 +67,6 @@ class GachaDetailView: UIView {
         
         
         detailLabel = UILabel()
-            //.init(frame: CGRect.init(x: space, y: originY, width: CGSSGlobal.width - 2 * space, height: 0))
         addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -88,7 +87,6 @@ class GachaDetailView: UIView {
         }
         
         timeLabel = UILabel()
-            //.init(frame: CGRect.init(x: space + 22, y: originY, width: CGSSGlobal.width - space * 2 - 22, height: 12))
         addSubview(timeLabel)
         timeLabel.snp.makeConstraints { (make) in
             make.left.equalTo(timeStatusIndicator.snp.right).offset(10)
@@ -119,7 +117,6 @@ class GachaDetailView: UIView {
         descLabel2.textColor = UIColor.black
         
         let moreCardLabel = UILabel()
-        //.init(frame: CGRect(x: 100, y: insideY, width: CGSSGlobal.width - 110, height: 17))
         addSubview(moreCardLabel)
         moreCardLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)

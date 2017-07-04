@@ -9,6 +9,7 @@
 import UIKit
 
 extension Date {
+    
     func toString(format: String = "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone = TimeZone.tokyo) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
@@ -22,4 +23,5 @@ extension Date {
         let comps = gregorian.dateComponents([.day, .month, .year], from: self)
         return gregorian.date(from: comps)!
     }
+    
 }

@@ -10,8 +10,9 @@ import UIKit
 import SnapKit
 import ZKCornerRadiusView
 
-//带描边的Label
+// 带描边的Label
 class CharProfileDescLabel: UILabel {
+    
     override func drawText(in rect: CGRect) {
         
         let offset = self.shadowOffset
@@ -30,7 +31,6 @@ class CharProfileDescLabel: UILabel {
         super.drawText(in: rect)
         
         self.shadowOffset = offset
-        
     }
 }
 
@@ -80,7 +80,7 @@ class CharProfileDescView: UIView {
     }
 }
 
-//带虚线下划线的Label
+// 带虚线下划线的Label
 class CharProfileContentLabel: UILabel {
     
     var border: CAShapeLayer!
@@ -121,8 +121,10 @@ class CharProfileViewCell: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        descLabel = CharProfileDescView() // .init(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        contentLabel = CharProfileContentLabel() // .init(frame: CGRect(x: 65, y: 0, width: frame.size.width - 65, height: 30))
+        descLabel = CharProfileDescView()
+        // .init(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        contentLabel = CharProfileContentLabel()
+        // .init(frame: CGRect(x: 65, y: 0, width: frame.size.width - 65, height: 30))
         addSubview(descLabel)
         addSubview(contentLabel)
         
@@ -167,40 +169,39 @@ class CharProfileView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        nameKanaCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        nameKanaCell = CharProfileViewCell()
         
-        heightCell = CharProfileViewCell() // .init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
+        heightCell = CharProfileViewCell()
         
-        ageCell = CharProfileViewCell() //.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
+        ageCell = CharProfileViewCell()
         
         let stackView1 = UIStackView(arrangedSubviews: [heightCell, ageCell])
         stackView1.distribution = .fillEqually
         
-        weightCell = CharProfileViewCell() // .init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
-        
-        birthdayCell = CharProfileViewCell() //.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
+        weightCell = CharProfileViewCell()
+        birthdayCell = CharProfileViewCell()
         
         let stackView2 = UIStackView(arrangedSubviews: [weightCell, birthdayCell])
         stackView2.distribution = .fillEqually
         
         
-        bloodCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width / 2, height: height))
+        bloodCell = CharProfileViewCell()
         
-        handCell = CharProfileViewCell() //.init(frame: CGRect(x: width / 2, y: originY, width: width / 2, height: height))
+        handCell = CharProfileViewCell()
         
         let stackView3 = UIStackView(arrangedSubviews: [bloodCell, handCell])
         stackView3.distribution = .fillEqually
         
         
-        threeSizeCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        threeSizeCell = CharProfileViewCell()
         
-        constellationCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        constellationCell = CharProfileViewCell()
         
-        homeTownCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        homeTownCell = CharProfileViewCell()
         
-        favoriteCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        favoriteCell = CharProfileViewCell()
         
-        voiceCell = CharProfileViewCell() //.init(frame: CGRect(x: 0, y: originY, width: width, height: height))
+        voiceCell = CharProfileViewCell()
         
         stackView = UIStackView(arrangedSubviews: [nameKanaCell, stackView1, stackView2, stackView3, threeSizeCell, constellationCell, homeTownCell, favoriteCell, voiceCell])
         addSubview(stackView)

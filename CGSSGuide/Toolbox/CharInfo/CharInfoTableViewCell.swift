@@ -27,7 +27,7 @@ class CharInfoTableViewCell: UITableViewCell {
     
     fileprivate func prepare() {
         
-        iconView = CGSSCharIconView() // frame: CGRect(x: 10, y: 10, width: 48, height: 48))
+        iconView = CGSSCharIconView()
         iconView.isUserInteractionEnabled = false
         contentView.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
@@ -36,7 +36,7 @@ class CharInfoTableViewCell: UITableViewCell {
             make.bottom.equalTo(-10)
         }
         
-        kanaSpacedLabel = UILabel() //.init(frame: CGRect(x: 68, y: 10, width: CGSSGlobal.width - 78, height: 10))
+        kanaSpacedLabel = UILabel()
         kanaSpacedLabel.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(kanaSpacedLabel)
         kanaSpacedLabel.snp.makeConstraints { (make) in
@@ -46,7 +46,6 @@ class CharInfoTableViewCell: UITableViewCell {
         }
         
         nameLabel = UILabel()
-//        charNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
         nameLabel.font = UIFont.systemFont(ofSize: 16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
@@ -57,7 +56,7 @@ class CharInfoTableViewCell: UITableViewCell {
             make.top.equalTo(kanaSpacedLabel.snp.bottom).offset(3)
         }
         
-        cvLabel = UILabel() // .init(frame: CGRect(x: 68, y: 46, width: CGSSGlobal.width - 78, height: 12))
+        cvLabel = UILabel()
         cvLabel.font = UIFont.systemFont(ofSize: 12)
         contentView.addSubview(cvLabel)
         cvLabel.snp.makeConstraints { (make) in

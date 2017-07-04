@@ -59,6 +59,7 @@ open class CGSSDAO: NSObject {
         // return NSHomeDirectory() + "/Documents/" + key.rawValue + ".plist"
         return CGSSDAO.path + "/Data/" + key.rawValue + ".plist"
     }
+    
     func getDictForKey(_ key: CGSSDataKey) -> NSMutableDictionary {
         switch key {
         case .skill:
@@ -89,6 +90,7 @@ open class CGSSDAO: NSObject {
             })
         }
     }
+    
     fileprivate static func loadDataFromFile(_ key: CGSSDataKey) -> NSMutableDictionary {
         if let path = getDataPath(key) {
             if let theData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
@@ -104,6 +106,7 @@ open class CGSSDAO: NSObject {
         let filter = CGSSCardFilter.init(cardMask: cardMask, attributeMask: attributeMask, rarityMask: rarityMask, skillMask: skillMask ,gachaMask: gachaMask, conditionMask: 0b11111111, procMask: 0b1111, favoriteMask: favoriteMask)
         return filter.filter(cardDict.allValues as! [CGSSCard])
     }
+    
     func getCardListByMask(_ filter: CGSSCardFilter) -> [CGSSCard] {
         return filter.filter(self.cardDict.allValues as! [CGSSCard])
     }
@@ -114,14 +117,14 @@ open class CGSSDAO: NSObject {
     
     // 根据名字搜索
     func getCardListByName(_ cardList: [CGSSCard], string: String) -> [CGSSCard] {
-        return cardList.filter({ (v: CGSSCard) -> Bool in
+        return cardList.filter { (v: CGSSCard) -> Bool in
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
                 let b1 = v.name?.lowercased().contains(comp.lowercased()) ?? false
                 let b2 = v.chara?.conventional?.lowercased().contains(comp.lowercased()) ?? false
                 let b3 = v.skill?.skillType.lowercased().contains(comp.lowercased()) ?? false
-                let b4 = (v.rarity?.rarityString.lowercased() == (comp.lowercased()))
+                let b4 = v.rarity?.rarityString.lowercased() == comp.lowercased()
                 if b1 || b2 || b3 || b4 {
                     continue
                 } else {
@@ -129,11 +132,11 @@ open class CGSSDAO: NSObject {
                 }
             }
             return true
-        })
+        }
     }
     
     func getCharListByName(_ charList: [CGSSChar], string: String) -> [CGSSChar] {
-        return charList.filter({ (v: CGSSChar) -> Bool in
+        return charList.filter { (v: CGSSChar) -> Bool in
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
@@ -148,12 +151,12 @@ open class CGSSDAO: NSObject {
                 }
             }
             return true
-        })
+        }
     }
     
     // 根据名字搜索live
     func getLiveListByName(_ liveList: [CGSSLive], string: String) -> [CGSSLive] {
-        return liveList.filter({ (v: CGSSLive) -> Bool in
+        return liveList.filter { (v: CGSSLive) -> Bool in
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
@@ -165,11 +168,11 @@ open class CGSSDAO: NSObject {
                 }
             }
             return true
-        })
+        }
     }
     
     func getEventListByName(_ eventList: [CGSSEvent], string: String) -> [CGSSEvent] {
-        return eventList.filter({ (v: CGSSEvent) -> Bool in
+        return eventList.filter { (v: CGSSEvent) -> Bool in
             let comps = string.components(separatedBy: " ")
             for comp in comps {
                 if comp == "" { continue }
@@ -181,7 +184,7 @@ open class CGSSDAO: NSObject {
                 }
             }
             return true
-        })
+        }
     }
     
     // 排序指定的CGSSBaseModel的list
@@ -189,11 +192,10 @@ open class CGSSDAO: NSObject {
         let sorter = CGSSSorter.init(property: property, ascending: ascending)
         sorter.sortList(&list)
     }
+    
     func sortListInPlace<T: CGSSBaseModel>(_ list: inout [T], sorter: CGSSSorter) {
         sorter.sortList(&list)
     }
-    
-    
     
     func getCardDataBy(filter: CGSSCardFilter, sorter: CGSSSorter) -> [CGSSCard] {
         var cardList = filter.filter(cardDict.allValues as! [CGSSCard])
@@ -238,7 +240,6 @@ open class CGSSDAO: NSObject {
         }
         
     }
-    
     
     // 异步存储全部数据
     func saveAll(_ complete: (() -> Void)?) {

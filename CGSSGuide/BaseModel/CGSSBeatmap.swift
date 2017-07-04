@@ -27,6 +27,7 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     override init() {
         super.init()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as? Int
         self.sec = aDecoder.decodeObject(forKey: "sec") as? Float
@@ -37,6 +38,7 @@ class CGSSBeatmapNote: NSObject, NSCoding {
         self.sync = aDecoder.decodeObject(forKey: "sync") as? Int
         self.groupId = aDecoder.decodeObject(forKey: "groupId") as? Int
     }
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.sec, forKey: "sec")
@@ -130,7 +132,7 @@ class CGSSBeatmap: CGSSBaseModel {
                     // 滑条中间点或结束点
                     let interval = (note.sec + note.offset) - slides[note.groupId]!
                     // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
-                    if interval > maxLongPressInterval && !(note.type != 3 && interval > 4){
+                    if interval > maxLongPressInterval && !(note.type != 3 && interval > 4) {
                         maxLongPressInterval = interval
                     }
                     slides[note.groupId] = note.sec + note.offset
@@ -145,7 +147,7 @@ class CGSSBeatmap: CGSSBaseModel {
             let bps = Float(bpm) / 60
             let spb = 1 / bps
             let remainder = secondOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
-            if remainder < 0.001 || 4 * spb - remainder < 0.001 { } else {
+            if !(remainder < 0.001 || 4 * spb - remainder < 0.001) {
                 offset = remainder * Float(bpm) / Float(rawBpm)
             }
         }
@@ -178,12 +180,15 @@ class CGSSBeatmap: CGSSBaseModel {
     var secondOfFirstNote: Float {
         return firstNote?.sec ?? 0
     }
+    
     var secondOfLastNote: Float {
         return lastNote?.sec ?? 0
     }
+    
     var totalSeconds: Float {
         return notes.last?.sec ?? 0
     }
+    
     var validSeconds: Float {
         return secondOfLastNote - secondOfFirstNote
     }
@@ -212,6 +217,7 @@ class CGSSBeatmap: CGSSBaseModel {
         super.init(coder: aDecoder)
         
     }
+    
     override open func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         aCoder.encode(self.notes, forKey: "notes")
@@ -255,6 +261,7 @@ class CGSSBeatmap: CGSSBaseModel {
     
     /* debug methods */
     #if DEBUG
+    
     func exportIntervalToBpm() {
         let predict: Float = 1
         var arr = [Float]()
@@ -266,7 +273,6 @@ class CGSSBeatmap: CGSSBaseModel {
         }
         (arr as NSArray).write(toFile: NSHomeDirectory() + "/beat_interval.plist", atomically: true)
     }
-    
     
     func exportNote() {
         var arr = [Float]()

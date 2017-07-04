@@ -23,10 +23,11 @@ class GachaSimulateView: UIView {
     var resultView: UIView!
     var descLabel: UILabel!
     weak var delegate: GachaSimulateViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        singleButton = UIButton() //.init(frame: CGRect.init(x: space, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        singleButton = UIButton()
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = Color.passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
@@ -38,7 +39,7 @@ class GachaSimulateView: UIView {
             make.height.equalTo(30)
         }
         
-        tenButton = UIButton() //.init(frame: CGRect.init(x: CGSSGlobal.width / 2 + space / 2, y: 2 * btnW + space * 3, width: CGSSGlobal.width / 2 - space - space / 2, height: 30))
+        tenButton = UIButton()
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
         tenButton.backgroundColor = Color.cute
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
@@ -50,7 +51,7 @@ class GachaSimulateView: UIView {
             make.height.equalTo(30)
         }
         
-        resultView = UIView() //.init(frame: CGRect.init(x: space, y: 10, width: CGSSGlobal.width - 2 * space, height: 2 * btnW + space ))
+        resultView = UIView()
         addSubview(resultView)
         resultView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -59,12 +60,11 @@ class GachaSimulateView: UIView {
             make.height.equalTo(2 * btnW + 10)
         }
         
-        descLabel = UILabel() //.init(frame: CGRect(x: space, y: singleButton.fy + singleButton.fheight + space, width: CGSSGlobal.width - 2 * space, height: 60))
+        descLabel = UILabel()
         descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = UIColor.darkGray
         descLabel.numberOfLines = 0
         descLabel.text = NSLocalizedString("* 每张卡片的获取几率和官方公布数据一致", comment: "模拟抽卡页面")
-        //descLabel.isHidden = true
         descLabel.sizeToFit()
         addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
@@ -108,7 +108,6 @@ class GachaSimulateView: UIView {
             resultView.addSubview(btn)
             resultView.sendSubview(toBack: btn)
         }
-        //descLabel.isHidden = false
     }
     
     func iconClick(iv: CGSSCardIconView) {
@@ -118,12 +117,5 @@ class GachaSimulateView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

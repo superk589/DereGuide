@@ -32,11 +32,11 @@ class SettingsTableViewController: UITableViewController {
             fullImageCacheSwitch.addTarget(self, action: #selector(fullImageCacheChanged), for: .valueChanged)
         }
     }
+    
     func fullImageCacheChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "FullImageCache")
     }
     
-//    @IBOutlet weak var dataVersionLabel: UILabel!
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
             let infoDic = Bundle.main.infoDictionary
@@ -101,6 +101,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
     }
+    
     @IBOutlet weak var wipeDataCell: UITableViewCell! {
         didSet {
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(wipeData))
@@ -126,13 +127,12 @@ class SettingsTableViewController: UITableViewController {
             }
         }
     }
+    
     @IBOutlet weak var cacheSizeLabel: UILabel! {
         didSet {
             cacheSizeLabel.text = "..MB"
         }
     }
-    
-    
     
     func wipeData() {
         if CGSSUpdater.default.isWorking {
@@ -165,7 +165,7 @@ class SettingsTableViewController: UITableViewController {
         let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
         self.tabBarController?.present(alvc, animated: true, completion: nil)
-        //updateCacheSize()
+        // updateCacheSize()
     }
     
     func refresh() {
@@ -191,6 +191,7 @@ class SettingsTableViewController: UITableViewController {
             reviewCell.addGestureRecognizer(tap)
         }
     }
+    
     func postReview() {
         // let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
         guard let url = URL.init(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") else {
@@ -212,12 +213,14 @@ class SettingsTableViewController: UITableViewController {
             donateCell.addGestureRecognizer(tap)
         }
     }
+    
     @IBOutlet weak var licenseCell: UITableViewCell! {
         didSet {
             let tap = UITapGestureRecognizer.init(target: self, action: #selector(showLicense))
             licenseCell.addGestureRecognizer(tap)
         }
     }
+    
     func showAck() {
         let ackVC = AcknowledgementViewController()
         ackVC.hidesBottomBarWhenPushed = true
@@ -241,13 +244,9 @@ class SettingsTableViewController: UITableViewController {
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
-//MARK: MFMailComposeViewControllerDelegate
+// MARK: MFMailComposeViewControllerDelegate
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     // 发送邮件代理方法
     
@@ -259,15 +258,15 @@ extension SettingsTableViewController: MFMailComposeViewControllerDelegate, UINa
 //            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
 //            self.presentViewController(alert, animated: true, completion: nil)
 //        case MFMailComposeResultCancelled:
-//            break //print("邮件已取消")
+//            break // print("邮件已取消")
 //        case MFMailComposeResultSaved:
-//            break //print("邮件已保存")
+//            break // print("邮件已保存")
 //        case MFMailComposeResultFailed:
 //            let alert = UIAlertController.init(title: "邮件发送失败", message: "", preferredStyle: .Alert)
 //            alert.addAction(UIAlertAction.init(title: "确定", style: .Default, handler: nil))
 //            self.presentViewController(alert, animated: true, completion: nil)
 //        default:
-//            //print("邮件没有发送")
+//            // print("邮件没有发送")
 //            break
 //        }
     }

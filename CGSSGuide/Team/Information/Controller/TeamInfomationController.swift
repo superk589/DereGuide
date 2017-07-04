@@ -69,21 +69,12 @@ class TeamInfomationController: BaseTableViewController, TeamCollectionPage {
             return UITableViewCell()
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 
 
 extension TeamInfomationController: TeamInformationTeamCellDelegate {
+    
     func teamInformationTeamCell(_ teamInformationTeamCell: TeamInformationTeamCell, didClick cardIcon: CGSSCardIconView) {
         if let id = cardIcon.cardId, let card = CGSSDAO.shared.findCardById(id) {
             let cardDVC = CardDetailViewController()
@@ -91,4 +82,5 @@ extension TeamInfomationController: TeamInformationTeamCellDelegate {
             navigationController?.pushViewController(cardDVC, animated: true)
         }
     }
+    
 }

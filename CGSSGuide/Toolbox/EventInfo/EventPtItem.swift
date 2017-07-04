@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class EventPtItem : NSObject, NSCoding{
+class EventPtItem : NSObject, NSCoding {
     
     var date : String!
     var rank1 : Int!
@@ -24,8 +24,8 @@ class EventPtItem : NSObject, NSCoding{
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         date = json["date"].stringValue
@@ -42,34 +42,33 @@ class EventPtItem : NSObject, NSCoding{
     /**
      * Returns all the available property values in the form of NSDictionary object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> NSDictionary
-    {
+    func toDictionary() -> NSDictionary {
         let dictionary = NSMutableDictionary()
-        if date != nil{
+        if date != nil {
             dictionary["date"] = date
         }
-        if rank1 != nil{
+        if rank1 != nil {
             dictionary["rank1"] = rank1
         }
-        if rank2 != nil{
+        if rank2 != nil {
             dictionary["rank2"] = rank2
         }
-        if rank3 != nil{
+        if rank3 != nil {
             dictionary["rank3"] = rank3
         }
-        if reward1 != nil{
+        if reward1 != nil {
             dictionary["reward1"] = reward1
         }
-        if reward2 != nil{
+        if reward2 != nil {
             dictionary["reward2"] = reward2
         }
-        if reward3 != nil{
+        if reward3 != nil {
             dictionary["reward3"] = reward3
         }
-        if reward4 != nil{
+        if reward4 != nil {
             dictionary["reward4"] = reward4
         }
-        if reward5 != nil{
+        if reward5 != nil {
             dictionary["reward5"] = reward5
         }
         return dictionary
@@ -79,8 +78,7 @@ class EventPtItem : NSObject, NSCoding{
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    required init(coder aDecoder: NSCoder)
-    {
+    required init(coder aDecoder: NSCoder) {
         date = aDecoder.decodeObject(forKey: "date") as? String
         rank1 = aDecoder.decodeObject(forKey: "rank1") as? Int
         rank2 = aDecoder.decodeObject(forKey: "rank2") as? Int
@@ -97,33 +95,32 @@ class EventPtItem : NSObject, NSCoding{
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if date != nil{
+    func encode(with aCoder: NSCoder) {
+        if date != nil {
             aCoder.encode(date, forKey: "date")
         }
-        if rank1 != nil{
+        if rank1 != nil {
             aCoder.encode(rank1, forKey: "rank1")
         }
-        if rank2 != nil{
+        if rank2 != nil {
             aCoder.encode(rank2, forKey: "rank2")
         }
-        if rank3 != nil{
+        if rank3 != nil {
             aCoder.encode(rank3, forKey: "rank3")
         }
-        if reward1 != nil{
+        if reward1 != nil {
             aCoder.encode(reward1, forKey: "reward1")
         }
-        if reward2 != nil{
+        if reward2 != nil {
             aCoder.encode(reward2, forKey: "reward2")
         }
-        if reward3 != nil{
+        if reward3 != nil {
             aCoder.encode(reward3, forKey: "reward3")
         }
-        if reward4 != nil{
+        if reward4 != nil {
             aCoder.encode(reward4, forKey: "reward4")
         }
-        if reward5 != nil{
+        if reward5 != nil {
             aCoder.encode(reward5, forKey: "reward5")
         }
         
