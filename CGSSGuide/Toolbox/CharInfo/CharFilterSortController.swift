@@ -212,6 +212,7 @@ extension CharFilterSortController: SortTableViewCellDelegate {
                     sorter.ascending = (index == 1)
                 case 1:
                     sorter.property = sorterMethods[index]
+                    sorter.displayName = sorterTitles[index]
                 default:
                     break
                 }

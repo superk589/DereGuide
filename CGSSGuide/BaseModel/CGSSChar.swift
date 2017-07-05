@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 
 extension CGSSChar {
+    
     var attColor: UIColor {
         switch type {
         case "cute":
@@ -22,18 +23,23 @@ extension CGSSChar {
             return Color.allType
         }
     }
+    
     var charType: CGSSCharTypes {
         return CGSSCharTypes.init(typeString: type)
     }
+    
     var charAgeType: CGSSCharAgeTypes {
         return CGSSCharAgeTypes.init(age: age)
     }
+    
     var charBloodType: CGSSCharBloodTypes {
         return CGSSCharBloodTypes.init(bloodType: bloodType)
     }
+    
     var charCVType: CGSSCharCVTypes {
         return voice == "" ? .no : .yes
     }
+    
     var favoriteType: CGSSFavoriteTypes {
         return CGSSFavoriteManager.default.contains(charId: self.charaId) ? .inFavorite : .notInFavorite
     }
@@ -42,29 +48,37 @@ extension CGSSChar {
     dynamic var sHeight: Int {
         return height
     }
+    
     dynamic var sWeight: Int {
         return weight
     }
+    
     dynamic var BMI: Float {
         let fw = Float(weight)
         let fh = Float(height) / 100
         return fw / fh / fh
     }
+    
     dynamic var sAge: Int {
         return age
     }
+    
     dynamic var sizeB: Int {
         return bodySize1 >= 5000 ? 0 : bodySize1
     }
+    
     dynamic var sizeW: Int {
         return bodySize2 >= 5000 ? 0 : bodySize2
     }
+    
     dynamic var sizeH: Int {
         return bodySize3 >= 5000 ? 0 : bodySize3
     }
+    
     dynamic var sName: String {
         return nameKana
     }
+    
     dynamic var sCharaId: Int {
         return charaId
     }

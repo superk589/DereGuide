@@ -8,6 +8,12 @@
 		<key>name</key>
 		<string>FMDB</string>
 	</dict>
+    <dict>
+        <key>site</key>
+        <string>https://github.com/yannickl/DynamicColor</string>
+        <key>name</key>
+        <string>DynamicColor</string>
+    </dict>
 	<dict>
 		<key>site</key>
 		<string>https://github.com/lz4/lz4</string>

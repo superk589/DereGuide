@@ -2,6 +2,7 @@ PODS:
   - Charts (3.0.2):
     - Charts/Core (= 3.0.2)
   - Charts/Core (3.0.2)
+  - DynamicColor (3.3)
   - EasyTipView (1.0.2)
   - Firebase/AdMob (4.0.3):
     - Firebase/Core
@@ -38,6 +39,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DynamicColor
   - EasyTipView
   - Firebase/AdMob
   - Firebase/Core
@@ -53,6 +55,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
   EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
   Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
@@ -70,6 +73,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: b331cd5a4f3a8f27b8707f09776e861d3d9cffce
   ZKDrawerController: 669c26533e1e797f95a8aaa8edc150353bf6228b
 
-PODFILE CHECKSUM: 0a8461a7aaf2985041db60f50e0d8a3fb15cda75
+PODFILE CHECKSUM: 7da3042f8426d126e190e5729511f9e83f1c62b6
 
 COCOAPODS: 1.3.0.beta.2

@@ -15,6 +15,7 @@ class CharInfoTableViewCell: UITableViewCell {
     var kanaSpacedLabel: UILabel!
     var nameLabel: UILabel!
     var cvLabel: UILabel!
+    var sortingPropertyLabel: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,11 +40,25 @@ class CharInfoTableViewCell: UITableViewCell {
         kanaSpacedLabel = UILabel()
         kanaSpacedLabel.font = UIFont.systemFont(ofSize: 10)
         contentView.addSubview(kanaSpacedLabel)
+        kanaSpacedLabel.adjustsFontSizeToFitWidth = true
+        kanaSpacedLabel.baselineAdjustment = .alignCenters
         kanaSpacedLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
             make.top.equalTo(9)
-            make.right.lessThanOrEqualTo(-10)
         }
+        
+        sortingPropertyLabel = UILabel()
+        sortingPropertyLabel.font = UIFont.systemFont(ofSize: 10)
+        contentView.addSubview(sortingPropertyLabel)
+        sortingPropertyLabel.textAlignment = .right
+        sortingPropertyLabel.snp.makeConstraints { (make) in
+            make.left.greaterThanOrEqualTo(kanaSpacedLabel.snp.right).offset(5)
+            make.right.equalTo(-10)
+            make.top.equalTo(kanaSpacedLabel)
+        }
+        
+        sortingPropertyLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        kanaSpacedLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         
         nameLabel = UILabel()
         nameLabel.font = UIFont.systemFont(ofSize: 16)
@@ -65,7 +80,7 @@ class CharInfoTableViewCell: UITableViewCell {
         }
     }
     
-    func setup(_ char: CGSSChar) {
+    func setup(_ char: CGSSChar, sorter: CGSSSorter) {
         nameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
         if char.voice == "" {
             cvLabel.text = "CV: \(NSLocalizedString("未付声", comment: "角色信息页面"))"
@@ -74,6 +89,20 @@ class CharInfoTableViewCell: UITableViewCell {
         }
         iconView.charId = char.charaId
         kanaSpacedLabel.text = "\(char.kanaSpaced!)"
+        
+        if !["sName", "sCharaId"].contains(sorter.property) {
+            if sorter.property == "sBirthday" {
+                sortingPropertyLabel.text = "\(sorter.displayName): \(String.init(format: NSLocalizedString("%d月%d日", comment: ""), char.birthMonth, char.birthDay))"
+            } else {
+                if let value = char.value(forKeyPath: sorter.property) as? Int, value == 0 || value >= 5000 {
+                    sortingPropertyLabel.text = "\(sorter.displayName): \(NSLocalizedString("未知", comment: ""))"
+                } else {
+                    sortingPropertyLabel.text = "\(sorter.displayName): \(char.value(forKeyPath: sorter.property) ?? NSLocalizedString("未知", comment: ""))"
+                }
+            }
+        } else {
+            sortingPropertyLabel.text = ""
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

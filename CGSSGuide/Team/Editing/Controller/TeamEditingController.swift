@@ -106,7 +106,7 @@ class TeamEditingController: BaseViewController {
         infoButton.addTarget(self, action: #selector(handleInfoButton), for: .touchUpInside)
         
         editableView.delegate = self
-        editableView.backgroundColor = Color.cool.withAlphaComponent(0.1)
+        editableView.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
         view.addSubview(editableView)
         editableView.snp.makeConstraints { (make) in
             make.bottom.equalTo(traitCollection.verticalSizeClass == .compact ? -32 : -44)

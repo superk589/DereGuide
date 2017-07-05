@@ -119,7 +119,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharCell", for: indexPath) as! CharInfoTableViewCell
-        cell.setup(charList[indexPath.row])
+        cell.setup(charList[indexPath.row], sorter: self.sorter)
         return cell
     }
     

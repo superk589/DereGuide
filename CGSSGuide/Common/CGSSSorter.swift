@@ -9,12 +9,16 @@
 import Foundation
 
 struct CGSSSorter {
+    
     var property: String
     var ascending: Bool
+    var displayName: String = ""
+    
     init(property: String, ascending: Bool) {
         self.property = property
         self.ascending = ascending
     }
+    
     init(property: String) {
         self.init(property: property, ascending: false)
     }
@@ -36,14 +40,16 @@ struct CGSSSorter {
     }
     
     func toDictionary() -> NSDictionary {
-        let dict = ["property": property, "ascending": ascending] as NSDictionary
+        let dict = ["property": property, "ascending": ascending, "displayName": displayName] as NSDictionary
         return dict
     }
     
     init?(fromFile path: String) {
         if let dict = NSDictionary.init(contentsOfFile: path) {
-            if let property = dict.object(forKey: "property") as? String, let ascending = dict.object(forKey: "ascending") as? Bool {
+            if let property = dict.object(forKey: "property") as? String, let ascending = dict.object(forKey: "ascending") as? Bool,
+                let displayName = dict.object(forKey: "displayName") as? String {
                 self.init(property: property, ascending: ascending)
+                self.displayName = displayName
                 return
             }
         }

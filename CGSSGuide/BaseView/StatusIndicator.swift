@@ -31,7 +31,7 @@ class StatusIndicator: UIView {
     
     
     override func draw(_ rect: CGRect) {
-        let colors = [color.cgColor, color.withAlphaComponent(0.1).cgColor]
+        let colors = [color.cgColor, color.mixed(withColor: .white, weight: 0.9).cgColor]
         let gradient = CGGradient.init(colorsSpace: nil, colors: colors as CFArray, locations: nil)
         
         if let context = UIGraphicsGetCurrentContext() {

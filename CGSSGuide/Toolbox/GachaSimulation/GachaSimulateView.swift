@@ -74,7 +74,7 @@ class GachaSimulateView: UIView {
             make.bottom.equalTo(-10)
         }
         
-        self.backgroundColor = Color.cool.withAlphaComponent(0.1)
+        self.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
     }
     
     func clickTen() {

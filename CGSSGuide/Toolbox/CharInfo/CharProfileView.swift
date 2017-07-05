@@ -230,11 +230,11 @@ class CharProfileView: UIView {
         
         for subView in stackView.arrangedSubviews {
             if let backgroundImageView = (subView as? CharProfileViewCell)?.descLabel.backgoundImageView {
-                backgroundImageView.zk.backgroundColor = char.attColor.withAlphaComponent(0.5)
+                backgroundImageView.zk.backgroundColor = char.attColor.lighter()
             } else if let views = (subView as? UIStackView)?.arrangedSubviews {
                 for view in views {
                     if let backgroundImageView = (view as? CharProfileViewCell)?.descLabel.backgoundImageView {
-                        backgroundImageView.zk.backgroundColor = char.attColor.withAlphaComponent(0.5)
+                        backgroundImageView.zk.backgroundColor = char.attColor.lighter()
                     }
                 }
             }
