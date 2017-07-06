@@ -198,6 +198,7 @@ extension CGSSChar {
         return result
     }
 }
+
 class CGSSChar: CGSSBaseModel {
     
     var age: Int!
@@ -284,8 +285,7 @@ class CGSSChar: CGSSBaseModel {
         super.init()
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         age = aDecoder.decodeObject(forKey: "age") as? Int
         birthDay = aDecoder.decodeObject(forKey: "birth_day") as? Int
@@ -324,8 +324,7 @@ class CGSSChar: CGSSBaseModel {
          * NSCoding required method.
          * Encodes mode properties into the decoder
          */
-    override func encode(with aCoder: NSCoder)
-    {
+    override func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         if age != nil {
             aCoder.encode(age, forKey: "age")

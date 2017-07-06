@@ -88,7 +88,6 @@
 		124BA50B1E913E78002E48FE /* EventTrendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124BA50A1E913E78002E48FE /* EventTrendCell.swift */; };
 		124BA50D1E914ACD002E48FE /* EventTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124BA50C1E914ACD002E48FE /* EventTrend.swift */; };
 		124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47051D654AB700DD0399 /* BirthdayCenter.swift */; };
-		124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */; };
 		124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */; };
 		124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */; };
 		124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470A1D654AB700DD0399 /* CharInfoViewController.swift */; };
@@ -225,6 +224,7 @@
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
+		12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveView.swift */; };
 		12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
@@ -399,7 +399,6 @@
 		124CF5311DA0D96100ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/ToolboxList.plist"; sourceTree = "<group>"; };
 		124CF5321DA0DA7600ACF6F8 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		124E47051D654AB700DD0399 /* BirthdayCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayCenter.swift; sourceTree = "<group>"; };
-		124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayCollectionViewCell.swift; sourceTree = "<group>"; };
 		124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayNotificationViewController.swift; sourceTree = "<group>"; };
 		124E470A1D654AB700DD0399 /* CharInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoViewController.swift; sourceTree = "<group>"; };
@@ -541,6 +540,7 @@
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
+		12E65CED1F0C8917001B69AF /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 		12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveJacketViewAnimator.swift; sourceTree = "<group>"; };
 		12EECCCE1ED57EF90047666C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EECCD21ED57EFA0047666C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -734,7 +734,6 @@
 			children = (
 				124E47051D654AB700DD0399 /* BirthdayCenter.swift */,
 				124E47081D654AB700DD0399 /* BirthdayNotificationViewController.swift */,
-				124E47061D654AB700DD0399 /* BirthdayCollectionViewCell.swift */,
 				124E47071D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift */,
 			);
 			path = BirthdayNotification;
@@ -991,6 +990,7 @@
 				1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */,
 				1269EA011D520C9F0071AD7F /* BeatmapView.swift */,
 				1269EA021D520C9F0071AD7F /* SongTableViewCell.swift */,
+				12E65CED1F0C8917001B69AF /* LiveView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1713,8 +1713,8 @@
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,
 				12F57C631EE308B600638650 /* IndicatorScrollView.swift in Sources */,
 				123F320B1E6FECC800B69D26 /* SpreadImageView.swift in Sources */,
-				124E470F1D654AB700DD0399 /* BirthdayCollectionViewCell.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
+				12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */,
 				12FC8B4E1EDE6DEB003CF3C3 /* TeamSimulationController.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,

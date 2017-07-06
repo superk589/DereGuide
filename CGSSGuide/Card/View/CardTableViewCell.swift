@@ -27,7 +27,19 @@ class CardTableViewCell: UITableViewCell {
         cardView = CardView()
         contentView.addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.width.lessThanOrEqualTo(768)
+            make.left.greaterThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+            make.left.equalToSuperview().priority(900)
+            make.right.equalToSuperview().priority(900)
+            make.centerX.equalToSuperview()
+        }
+        let line = LineView()
+        contentView.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.left.right.equalTo(cardView)
+            make.bottom.equalToSuperview()
         }
     }
     

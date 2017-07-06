@@ -76,7 +76,6 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         
     }
     
-    
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
         let tagView = tagViews[Int(index)]
         if index == 0 {
@@ -129,7 +128,6 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         }
     }
     
-    
     func setup(titles: [String], index: UInt, all: UInt) {
         self.setup(titles: titles)
         if index == all {
@@ -140,7 +138,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
     }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-        filterView.layoutIfNeeded()
+        layoutIfNeeded()
         filterView.invalidateIntrinsicContentSize()
         return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }

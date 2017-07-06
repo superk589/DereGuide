@@ -46,13 +46,14 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         super.viewDidLoad()
         
         // 初始化导航栏的搜索条
-        self.navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/技能/稀有度", comment: "搜索框文字, 不宜过长")
         
         let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = item1
         
-        self.tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
+        tableView.separatorStyle = .none
+        tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCardsChanged, object: nil)

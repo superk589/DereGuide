@@ -7,83 +7,134 @@
 //
 
 import UIKit
+import TTGTagCollectionView
+import SnapKit
+
+class CharaWithBirthdayView: UIView {
+    
+    var icon: CGSSCharIconView!
+    var birthdayLabel: UILabel!
+    weak var delegate: CGSSIconViewDelegate? {
+        didSet {
+            icon.delegate = self.delegate
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        icon = CGSSCharIconView()
+        addSubview(icon)
+        icon.snp.makeConstraints { (make) in
+            make.left.top.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        icon.isUserInteractionEnabled = false
+        
+        birthdayLabel = UILabel()
+        birthdayLabel.font = UIFont.systemFont(ofSize: 14)
+        birthdayLabel.textColor = UIColor.darkGray
+        birthdayLabel.textAlignment = .center
+        birthdayLabel.adjustsFontSizeToFitWidth = true
+        birthdayLabel.baselineAdjustment = .alignCenters
+        birthdayLabel.text = " "
+        addSubview(birthdayLabel)
+        birthdayLabel.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(icon.snp.bottom).offset(3)
+        }
+    }
+    
+    func setup(with chara: CGSSChar) {
+        icon.charId = chara.charaId
+        birthdayLabel.text = "\(chara.birthMonth!)-\(chara.birthDay!)"
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 protocol BirthdayNotificationTableViewCellDelegate:class {
     func charIconClick(_ icon:CGSSCharIconView)
 }
 
-class BirthdayNotificationTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var chars = [CGSSChar]()
-    var cv: UICollectionView!
+class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
+    
+    var charas = [CGSSChar]()
+    var leftLabel: UILabel!
+    var collectionView: TTGTagCollectionView!
+    var charaViews = NSCache<NSNumber, CharaWithBirthdayView>()
+    
     weak var delegate: BirthdayNotificationTableViewCellDelegate?
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         
-//        let left = UIButton.init(frame: CGRectMake(0, 32, 10, 15))
-//        left.setImage(UIImage.init(named: "765-arrow-left-toolbar"), forState: .Normal)
-//        let right = UIButton.init(frame: CGRectMake(CGSSGlobal.width - 10, 32, 10, 15))
-//        left.setImage(UIImage.init(named: "766-arrow-right-toolbar"), forState: .Normal)
-//        contentView.addSubview(left)
-//        contentView.addSubview(right)
+        leftLabel = UILabel()
+        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        contentView.addSubview(leftLabel)
+        leftLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(15)
+            make.top.equalTo(10)
+        }
         
-        cv = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: CGSSGlobal.width - 0, height: 79), collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.white
-        cv.register(BirthdayCollectionViewCell.self, forCellWithReuseIdentifier: "BirthdayCollectionViewCell")
-        cv.showsHorizontalScrollIndicator = false
-        contentView.addSubview(cv)
-        var inset = self.separatorInset
-        inset.left = inset.left - 10
-        inset.right = inset.left
-        cv.contentInset = inset
-        cv.delegate = self
-        cv.dataSource = self
-        
+        collectionView = TTGTagCollectionView()
+        collectionView.contentInset = .zero
+        collectionView.verticalSpacing = 10
+        collectionView.horizontalSpacing = 10
+        contentView.addSubview(collectionView)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+            make.top.equalTo(leftLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(-10)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func initWith(_ models: [CGSSChar]) {
-        chars.removeAll()
-        chars.append(contentsOf: models)
-        if chars.count == 0 {
-            cv.frame = CGRect.zero
+    func setup(with charas: [CGSSChar], title: String) {
+        self.charas = charas
+        leftLabel.text = title
+        collectionView.reload()
+    }
+    
+    func numberOfTags(in tagCollectionView: TTGTagCollectionView!) -> UInt {
+        return UInt(charas.count)
+    }
+    
+    private func viewFor(index: Int) -> CharaWithBirthdayView {
+        if let view = charaViews.object(forKey: NSNumber.init(value: index)) {
+            return view
         } else {
-            cv.frame = CGRect(x: 0, y: 0, width: CGSSGlobal.width, height: 79)
+            let view = CharaWithBirthdayView()
+            charaViews.setObject(view, forKey: NSNumber.init(value: index))
+            return view
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return chars.count
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
+        let view = viewFor(index: Int(index))
+        view.setup(with: charas[Int(index)])
+        return view
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BirthdayCollectionViewCell", for: indexPath) as! BirthdayCollectionViewCell
-        cell.initWithChar(chars[indexPath.item])
-        cell.delegate = self
-        return cell
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, sizeForTagAt index: UInt) -> CGSize {
+        return CGSize(width: 48, height: 68)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 68, height: 79)
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
+        delegate?.charIconClick((tagView as! CharaWithBirthdayView).icon)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        layoutIfNeeded()
+        collectionView.invalidateIntrinsicContentSize()
+        return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }
     
-}
-
-extension BirthdayNotificationTableViewCell: BirthdayCollectionViewCellDelegate {
-    func charIconClick(_ icon: CGSSCharIconView) {
-        delegate?.charIconClick(icon)
-    }
 }

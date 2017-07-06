@@ -40,7 +40,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
     
     var liveTrendLabel: UILabel!
     
-    var liveView: SongTableViewCell!
+    var liveView: LiveView!
     
     var eventPtContentView: UIView!
     var line4: LineView!
@@ -172,11 +172,12 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
         liveTrendLabel.addGestureRecognizer(tap)
         
-        liveView = SongTableViewCell()
-        addSubview(liveView.contentView)
-        liveView.contentView.snp.makeConstraints { (make) in
+        liveView = LiveView()
+        addSubview(liveView)
+        liveView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(songDescLabel.snp.bottom)
+            make.height.equalTo(88)
         }
         liveView.delegate = self
         
@@ -184,7 +185,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(liveView.contentView.snp.bottom)
+            make.top.equalTo(liveView.snp.bottom)
             make.height.equalTo(192)
         }
         eventPtContentView.layer.masksToBounds = true
@@ -426,9 +427,9 @@ extension EventDetailView: EventScoreViewDelegate {
     
 }
 
-extension EventDetailView: SongTableViewCellDelegate {
+extension EventDetailView: LiveViewDelegate {
     
-    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene) {
+    func liveView(_ liveView: LiveView, didSelect scene: CGSSLiveScene) {
         delegate?.eventDetailView(self, didSelect: scene)
     }
     

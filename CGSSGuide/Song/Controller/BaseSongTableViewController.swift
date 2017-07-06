@@ -81,12 +81,13 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         super.viewDidLoad()
         
         // 初始化导航栏的搜索条
-        self.navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-        self.tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
-        self.tableView.rowHeight = 86
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
+        tableView.rowHeight = 86
+        tableView.separatorStyle = .none
         
         filterVC = SongFilterSortController()
         filterVC.filter = self.filter
@@ -199,12 +200,14 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
 }
 
 //MARK: SongTableViewCell的协议方法
-extension BaseSongTableViewController: SongTableViewCellDelegate {
-    func songTableViewCell(_ songTableViewCell: SongTableViewCell, didSelect scene: CGSSLiveScene) {
+extension BaseSongTableViewController: LiveViewDelegate {
+    
+    func liveView(_ liveView: LiveView, didSelect scene: CGSSLiveScene) {
         if scene.beatmap != nil {
             selectScene(scene)
         } else {
             showBeatmapNotFoundAlert()
         }
     }
+    
 }
