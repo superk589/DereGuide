@@ -19,16 +19,14 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         self.registerNotificationCategory()
     }
     
-    
     struct UserNotificationCategoryType {
         static let birthday = "birthdayCategory"
     }
     
     struct BirthdayActionType {
-        static let happp = "action.happyBirthday"
+        static let happy = "action.happyBirthday"
         static let cancel = "action.cancel"
     }
-    
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
@@ -40,15 +38,16 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         // completionHandler([])
     }
     
-    
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let category = response.notification.request.content.categoryIdentifier
-        if category == UserNotificationCategoryType.birthday {
+        // let category = response.notification.request.content.categoryIdentifier
+        let action = response.actionIdentifier
+        if action == UNNotificationDismissActionIdentifier {
+            // dismissed, do nothing
+        } else if action == BirthdayActionType.happy || action == BirthdayActionType.cancel {
             handleBirthdayAction(response: response)
+        } else if action == UNNotificationDefaultActionIdentifier {
             openSpecificPageBy(response: response)
         }
-        
         completionHandler()
     }
     
@@ -67,21 +66,21 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
     
     private func handleBirthdayAction(response: UNNotificationResponse) {        
         let actionType = response.actionIdentifier
-        if actionType == BirthdayActionType.happp {
+        if actionType == BirthdayActionType.happy {
             let charName = response.notification.request.content.userInfo["charName"]! as! String
             let reply = NSLocalizedString("%@收到了你的祝福", comment: "")
             let message = String.init(format: reply, charName)
             
+            openSpecificPageBy(response: response)
             // 延时2秒, 同时进行会导致无法弹出角色详情页面
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 UIAlertController.showConfirmAlertFromTopViewController(message: message)
             })
             
         } else if actionType == BirthdayActionType.cancel {
-            
+            // do nothing
         }
     }
-    
     
     private func registerNotificationCategory() {
         let birthdayCategory: UNNotificationCategory = {
@@ -95,7 +94,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
             
             // 2
             let happyBirthdayAction = UNNotificationAction(
-                identifier: BirthdayActionType.happp,
+                identifier: BirthdayActionType.happy,
                 title: NSLocalizedString("生日快乐!!", comment: ""),
                 options: [.foreground])
             
@@ -110,4 +109,5 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         
         UNUserNotificationCenter.current().setNotificationCategories([birthdayCategory])
     }
+    
 }
