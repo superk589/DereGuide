@@ -128,5 +128,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>twitter</string>
+    </array>
 </dict>
 </plist>

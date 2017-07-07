@@ -63,7 +63,10 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func sendTweet(_ tap: UITapGestureRecognizer) {
-        if let url = URL(string: "https://twitter.com/intent/tweet?text=%23CGSSGuide%0d"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "twitter://post?message=%23CGSSGuide%0d"), UIApplication.shared.canOpenURL(url) {
+            print("open twitter using url scheme")
+            UIApplication.shared.openURL(url)
+        } else if let url = URL(string: "https://twitter.com/intent/tweet?text=%23CGSSGuide%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter by openURL")
             UIApplication.shared.openURL(url)
         } else if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
