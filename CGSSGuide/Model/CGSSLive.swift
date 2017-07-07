@@ -62,6 +62,7 @@ enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
             return Color.passion
         }
     }
+    
     init? (cardType: CGSSCardTypes) {
         switch cardType {
         case CGSSCardTypes.cute:
@@ -168,7 +169,6 @@ extension CGSSLive {
     var validBeatmapCount: Int {
         return self.getLiveDetail(of: .masterPlus).id == 0 ? 4 : 5
     }
-    
     
     func getBeatmap(of difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
         if beatmaps.count >= difficulty.rawValue {

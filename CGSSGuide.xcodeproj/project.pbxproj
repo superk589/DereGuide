@@ -56,6 +56,26 @@
 		122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */; };
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
 		12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12312E4E1DA527820088FE27 /* StoreKit.framework */; };
+		12353A481F0F6A92008286C2 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAC1F0F634600B75E47 /* NSManagedObjectContext+Extensions.swift */; };
+		12353A491F0F6A92008286C2 /* NSManagedObjectContext+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAD1F0F634600B75E47 /* NSManagedObjectContext+Observers.swift */; };
+		12353A4A1F0F6A92008286C2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAF1F0F634600B75E47 /* Utilities.swift */; };
+		12353A4B1F0F6A92008286C2 /* ManagedObjectObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB01F0F634600B75E47 /* ManagedObjectObserver.swift */; };
+		12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB11F0F634600B75E47 /* CoreDataErrors.swift */; };
+		12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB21F0F634600B75E47 /* ValueTransformer.swift */; };
+		12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB41F0F634600B75E47 /* ModelVersion.swift */; };
+		12353A4F1F0F6A92008286C2 /* NSFetchRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */; };
+		12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB61F0F634600B75E47 /* ModelBuilder.swift */; };
+		12353A511F0F6A92008286C2 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB71F0F634600B75E47 /* Managed.swift */; };
+		12353A521F0F6A92008286C2 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB81F0F634600B75E47 /* Migration.swift */; };
+		12353A531F0F6A92008286C2 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB91F0F634600B75E47 /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		12353A541F0F6A92008286C2 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DBA1F0F634600B75E47 /* NSManagedObject+Extensions.swift */; };
+		12353A551F0F6A92008286C2 /* Collection+CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DBB1F0F634600B75E47 /* Collection+CoreDataExtensions.swift */; };
+		12353A561F0F6AB3008286C2 /* UserOwnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DBD1F0F68C100B75E47 /* UserOwnable.swift */; };
+		12353A571F0F6AB3008286C2 /* RemoteDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DBE1F0F68C100B75E47 /* RemoteDeletable.swift */; };
+		12353A581F0F6AB3008286C2 /* DelayedDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DBF1F0F68C100B75E47 /* DelayedDeletable.swift */; };
+		12353A591F0F6AB3008286C2 /* LocalizedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */; };
+		12353A5A1F0F6AB3008286C2 /* RemoteUploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */; };
+		12353A5B1F0F6AB3008286C2 /* UpdateTimestampable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */; };
 		12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCA1E8FE94F005EEB7A /* TipView.swift */; };
 		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
 		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
@@ -232,6 +252,9 @@
 		12EECCD61ED57EFA0047666C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12EECCD41ED57EFA0047666C /* MainInterface.storyboard */; };
 		12EECCDA1ED57EFA0047666C /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 12EECCCE1ED57EF90047666C /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
+		12F33D9C1F0F2B9100B75E47 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */; };
+		12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA11F0F32E900B75E47 /* Unit.swift */; };
+		12F33DA71F0F32E900B75E47 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA31F0F32E900B75E47 /* Member.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */; };
@@ -547,6 +570,31 @@
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12EECCD71ED57EFA0047666C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EECCDE1ED5DC460047666C /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		12F33DA11F0F32E900B75E47 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		12F33DA31F0F32E900B75E47 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		12F33DAC1F0F634600B75E47 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		12F33DAD1F0F634600B75E47 /* NSManagedObjectContext+Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Observers.swift"; sourceTree = "<group>"; };
+		12F33DAE1F0F634600B75E47 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		12F33DAF1F0F634600B75E47 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		12F33DB01F0F634600B75E47 /* ManagedObjectObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectObserver.swift; sourceTree = "<group>"; };
+		12F33DB11F0F634600B75E47 /* CoreDataErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataErrors.swift; sourceTree = "<group>"; };
+		12F33DB21F0F634600B75E47 /* ValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformer.swift; sourceTree = "<group>"; };
+		12F33DB31F0F634600B75E47 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		12F33DB41F0F634600B75E47 /* ModelVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelVersion.swift; sourceTree = "<group>"; };
+		12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFetchRequest+Extensions.swift"; sourceTree = "<group>"; };
+		12F33DB61F0F634600B75E47 /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
+		12F33DB71F0F634600B75E47 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		12F33DB81F0F634600B75E47 /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
+		12F33DB91F0F634600B75E47 /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
+		12F33DBA1F0F634600B75E47 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
+		12F33DBB1F0F634600B75E47 /* Collection+CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataExtensions.swift"; sourceTree = "<group>"; };
+		12F33DBD1F0F68C100B75E47 /* UserOwnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOwnable.swift; sourceTree = "<group>"; };
+		12F33DBE1F0F68C100B75E47 /* RemoteDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDeletable.swift; sourceTree = "<group>"; };
+		12F33DBF1F0F68C100B75E47 /* DelayedDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedDeletable.swift; sourceTree = "<group>"; };
+		12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringConvertible.swift; sourceTree = "<group>"; };
+		12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUploadable.swift; sourceTree = "<group>"; };
+		12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimestampable.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationCommonCell.swift; sourceTree = "<group>"; };
@@ -820,7 +868,6 @@
 				1261944B1EF108D000673BC5 /* Editing */,
 				12FC8B301EDE6D40003CF3C3 /* Information */,
 				12FC8B3D1EDE6DEB003CF3C3 /* Simulation */,
-				1269EA1A1D520D850071AD7F /* Model */,
 				1269E9EF1D520C3E0071AD7F /* Controller */,
 				1269E9F41D520C3E0071AD7F /* View */,
 			);
@@ -891,9 +938,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		1269E9C51D520B5D0071AD7F /* BaseModel */ = {
+		1269E9C51D520B5D0071AD7F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				12F33DAB1F0F634500B75E47 /* CoreDataHelper */,
+				12F33DBC1F0F68C100B75E47 /* Protocol */,
+				1269EA1A1D520D850071AD7F /* Unit */,
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
 				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
 				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
@@ -912,7 +962,7 @@
 				121C78C91D561E7900D0B636 /* CGSSAppeal.swift */,
 				127CBEAB1ECA8CDC00C119F9 /* CGSSPotential.swift */,
 			);
-			path = BaseModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1269E9E61D520B750071AD7F /* BaseView */ = {
@@ -1012,15 +1062,17 @@
 			path = BaseController;
 			sourceTree = "<group>";
 		};
-		1269EA1A1D520D850071AD7F /* Model */ = {
+		1269EA1A1D520D850071AD7F /* Unit */ = {
 			isa = PBXGroup;
 			children = (
+				12F33DA11F0F32E900B75E47 /* Unit.swift */,
+				12F33DA31F0F32E900B75E47 /* Member.swift */,
 				1269EA1F1D520DDB0071AD7F /* CGSSTeam.swift */,
 				1269EA201D520DDB0071AD7F /* CGSSTeamMember.swift */,
 				120DBB2E1EEE414A004E0084 /* TeamTemplate.swift */,
 				120DBB2C1EEE3A0D004E0084 /* TeamTemplate.plist */,
 			);
-			path = Model;
+			path = Unit;
 			sourceTree = "<group>";
 		};
 		1282EE561D011A8F0024318C = {
@@ -1048,7 +1100,7 @@
 			children = (
 				1269EA071D520CD50071AD7F /* BaseController */,
 				1269E9E61D520B750071AD7F /* BaseView */,
-				1269E9C51D520B5D0071AD7F /* BaseModel */,
+				1269E9C51D520B5D0071AD7F /* Model */,
 				122EECC71D5DC4ED008ADE08 /* Extension */,
 				1269E9121D5208B80071AD7F /* Common */,
 				1269E90C1D52085C0071AD7F /* Card */,
@@ -1063,6 +1115,7 @@
 				1244F59E1D9814350021E4B1 /* Localizable.strings */,
 				1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */,
 				12A71D911D8C20260021320D /* CGSSGuide.entitlements */,
+				12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */,
 				12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */,
 				1244F5E71D98E6210021E4B1 /* ToolboxList.plist */,
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
@@ -1226,6 +1279,42 @@
 				12EECCD71ED57EFA0047666C /* Info.plist */,
 			);
 			path = NotificationContent;
+			sourceTree = "<group>";
+		};
+		12F33DAB1F0F634500B75E47 /* CoreDataHelper */ = {
+			isa = PBXGroup;
+			children = (
+				12F33DAC1F0F634600B75E47 /* NSManagedObjectContext+Extensions.swift */,
+				12F33DAD1F0F634600B75E47 /* NSManagedObjectContext+Observers.swift */,
+				12F33DAE1F0F634600B75E47 /* LICENSE.md */,
+				12F33DAF1F0F634600B75E47 /* Utilities.swift */,
+				12F33DB01F0F634600B75E47 /* ManagedObjectObserver.swift */,
+				12F33DB11F0F634600B75E47 /* CoreDataErrors.swift */,
+				12F33DB21F0F634600B75E47 /* ValueTransformer.swift */,
+				12F33DB31F0F634600B75E47 /* README.md */,
+				12F33DB41F0F634600B75E47 /* ModelVersion.swift */,
+				12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */,
+				12F33DB61F0F634600B75E47 /* ModelBuilder.swift */,
+				12F33DB71F0F634600B75E47 /* Managed.swift */,
+				12F33DB81F0F634600B75E47 /* Migration.swift */,
+				12F33DB91F0F634600B75E47 /* NSPersistentStoreCoordinator+Extensions.swift */,
+				12F33DBA1F0F634600B75E47 /* NSManagedObject+Extensions.swift */,
+				12F33DBB1F0F634600B75E47 /* Collection+CoreDataExtensions.swift */,
+			);
+			path = CoreDataHelper;
+			sourceTree = "<group>";
+		};
+		12F33DBC1F0F68C100B75E47 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				12F33DBD1F0F68C100B75E47 /* UserOwnable.swift */,
+				12F33DBE1F0F68C100B75E47 /* RemoteDeletable.swift */,
+				12F33DBF1F0F68C100B75E47 /* DelayedDeletable.swift */,
+				12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */,
+				12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */,
+				12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		12FC8B301EDE6D40003CF3C3 /* Information */ = {
@@ -1543,6 +1632,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12353A561F0F6AB3008286C2 /* UserOwnable.swift in Sources */,
+				12353A571F0F6AB3008286C2 /* RemoteDeletable.swift in Sources */,
+				12353A581F0F6AB3008286C2 /* DelayedDeletable.swift in Sources */,
+				12353A591F0F6AB3008286C2 /* LocalizedStringConvertible.swift in Sources */,
+				12353A5A1F0F6AB3008286C2 /* RemoteUploadable.swift in Sources */,
+				12353A5B1F0F6AB3008286C2 /* UpdateTimestampable.swift in Sources */,
+				12353A481F0F6A92008286C2 /* NSManagedObjectContext+Extensions.swift in Sources */,
+				12353A491F0F6A92008286C2 /* NSManagedObjectContext+Observers.swift in Sources */,
+				12353A4A1F0F6A92008286C2 /* Utilities.swift in Sources */,
+				12353A4B1F0F6A92008286C2 /* ManagedObjectObserver.swift in Sources */,
+				12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */,
+				12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */,
+				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
+				12353A4F1F0F6A92008286C2 /* NSFetchRequest+Extensions.swift in Sources */,
+				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
+				12353A511F0F6A92008286C2 /* Managed.swift in Sources */,
+				12353A521F0F6A92008286C2 /* Migration.swift in Sources */,
+				12353A531F0F6A92008286C2 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
+				12353A541F0F6A92008286C2 /* NSManagedObject+Extensions.swift in Sources */,
+				12353A551F0F6A92008286C2 /* Collection+CoreDataExtensions.swift in Sources */,
 				129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */,
 				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
@@ -1602,6 +1711,7 @@
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
+				12F33D9C1F0F2B9100B75E47 /* Model.xcdatamodeld in Sources */,
 				12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */,
 				12F4EAED1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift in Sources */,
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
@@ -1755,6 +1865,7 @@
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
+				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,
@@ -1771,6 +1882,7 @@
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				12852EE71EF912DE00E26A73 /* TeamAdvanceCalculationController.swift in Sources */,
+				12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
@@ -2116,6 +2228,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */,
+			);
+			currentVersion = 12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1282EE571D011A8F0024318C /* Project object */;
 }
