@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13154.30" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1.0">
-    <entity name="Member" representedClassName="Member" syncable="YES">
+    <entity name="Member" representedClassName=".Member" syncable="YES">
         <attribute name="cardId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="creatorId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="danceLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="markedForRemoteDeletion" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="remoteIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="skillLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="visualLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vocalLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="units" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="members" inverseEntity="Unit" syncable="YES"/>
+        <relationship name="centeredUnits" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="center" inverseEntity="Unit" syncable="YES"/>
+        <relationship name="guestedUnits" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="guest" inverseEntity="Unit" syncable="YES"/>
+        <relationship name="participatedUnits" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="otherMembers" inverseEntity="Unit" syncable="YES"/>
     </entity>
-    <entity name="Unit" representedClassName="Unit" syncable="YES">
+    <entity name="Unit" representedClassName=".Unit" syncable="YES">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="creatorId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="customAppeal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="markedForRemoteDeletion" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="remoteIdentifiter" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="supportAppeal" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="supportAppeal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="useCustomAppeal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="members" toMany="YES" minCount="6" maxCount="6" deletionRule="Nullify" ordered="YES" destinationEntity="Member" inverseName="units" inverseEntity="Member" syncable="YES"/>
+        <relationship name="center" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="centeredUnits" inverseEntity="Member" syncable="YES"/>
+        <relationship name="guest" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="guestedUnits" inverseEntity="Member" syncable="YES"/>
+        <relationship name="otherMembers" toMany="YES" minCount="4" maxCount="4" deletionRule="Nullify" destinationEntity="Member" inverseName="participatedUnits" inverseEntity="Member" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Member" positionX="-54" positionY="0" width="128" height="225"/>
-        <element name="Unit" positionX="196" positionY="9" width="128" height="195"/>
+        <element name="Member" positionX="-54" positionY="0" width="128" height="255"/>
+        <element name="Unit" positionX="196" positionY="9" width="128" height="225"/>
     </elements>
 </model>

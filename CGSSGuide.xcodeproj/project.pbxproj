@@ -76,6 +76,9 @@
 		12353A591F0F6AB3008286C2 /* LocalizedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */; };
 		12353A5A1F0F6AB3008286C2 /* RemoteUploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */; };
 		12353A5B1F0F6AB3008286C2 /* UpdateTimestampable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */; };
+		12353A5D1F1309C2008286C2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12353A5C1F1309C2008286C2 /* CoreDataStack.swift */; };
+		12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */; };
+		12353AA71F145936008286C2 /* CGSSGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12353AA21F145771008286C2 /* CGSSGuide.xcdatamodeld */; };
 		12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCA1E8FE94F005EEB7A /* TipView.swift */; };
 		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
 		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
@@ -115,7 +118,6 @@
 		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
-		12536DBA1ED5177C00B75BA0 /* UserNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DB91ED5177C00B75BA0 /* UserNotificationHandler.swift */; };
 		12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */; };
 		1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1258499E1EE59C35006AF479 /* BaseCardCollectionViewController.swift */; };
 		125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */; };
@@ -252,7 +254,6 @@
 		12EECCD61ED57EFA0047666C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12EECCD41ED57EFA0047666C /* MainInterface.storyboard */; };
 		12EECCDA1ED57EFA0047666C /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 12EECCCE1ED57EF90047666C /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
-		12F33D9C1F0F2B9100B75E47 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */; };
 		12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA11F0F32E900B75E47 /* Unit.swift */; };
 		12F33DA71F0F32E900B75E47 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA31F0F32E900B75E47 /* Member.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
@@ -374,6 +375,9 @@
 		122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharIconView.swift; sourceTree = "<group>"; };
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
 		12312E4E1DA527820088FE27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		12353A5C1F1309C2008286C2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CGSSGuide.xcdatamodel; sourceTree = "<group>"; };
+		12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationHandler.swift; sourceTree = "<group>"; };
 		12356BCA1E8FE94F005EEB7A /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		123679031E0E6B1300622114 /* DeviceInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManager.swift; sourceTree = "<group>"; };
 		123679051E0E6C3600622114 /* CGSSVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSVersionManager.swift; sourceTree = "<group>"; };
@@ -429,7 +433,6 @@
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
-		12536DB91ED5177C00B75BA0 /* UserNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationHandler.swift; sourceTree = "<group>"; };
 		12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
 		12536DC21ED5636000B75BA0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -570,7 +573,6 @@
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		12EECCD71ED57EFA0047666C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EECCDE1ED5DC460047666C /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		12F33DA11F0F32E900B75E47 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		12F33DA31F0F32E900B75E47 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		12F33DAC1F0F634600B75E47 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
@@ -900,9 +902,10 @@
 				12738EEE1E2B6C150040E413 /* Debouncer.swift */,
 				12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */,
 				1262F4F31ECC4E8700AD6424 /* Protocols.swift */,
-				12536DB91ED5177C00B75BA0 /* UserNotificationHandler.swift */,
 				12F57C601EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift */,
 				1261944E1EF10E7F00673BC5 /* TeamEditingAdvanceOptionsManager.swift */,
+				12353A5C1F1309C2008286C2 /* CoreDataStack.swift */,
+				12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1111,11 +1114,11 @@
 				1282EE621D011A8F0024318C /* AppDelegate.swift */,
 				1282EE6C1D011A8F0024318C /* Assets.xcassets */,
 				12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */,
+				12353AA21F145771008286C2 /* CGSSGuide.xcdatamodeld */,
 				12F3761D1D5C96A8003A358C /* Main.storyboard */,
 				1244F59E1D9814350021E4B1 /* Localizable.strings */,
 				1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */,
 				12A71D911D8C20260021320D /* CGSSGuide.entitlements */,
-				12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */,
 				12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */,
 				1244F5E71D98E6210021E4B1 /* ToolboxList.plist */,
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
@@ -1632,6 +1635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */,
 				12353A561F0F6AB3008286C2 /* UserOwnable.swift in Sources */,
 				12353A571F0F6AB3008286C2 /* RemoteDeletable.swift in Sources */,
 				12353A581F0F6AB3008286C2 /* DelayedDeletable.swift in Sources */,
@@ -1685,6 +1689,7 @@
 				1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* TeamCardSelectTableViewController.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
+				12353AA71F145936008286C2 /* CGSSGuide.xcdatamodeld in Sources */,
 				12FC8B3A1EDE6D93003CF3C3 /* TeamLeaderSkillView.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
 				121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */,
@@ -1711,7 +1716,6 @@
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */,
-				12F33D9C1F0F2B9100B75E47 /* Model.xcdatamodeld in Sources */,
 				12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */,
 				12F4EAED1EE0017100A92C9F /* TeamSimulationScoreDistributionController.swift in Sources */,
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
@@ -1732,6 +1736,7 @@
 				120DBB271EEE2F6B004E0084 /* TeamCardSelectionAdvanceOptionsController.swift in Sources */,
 				12C6B3581F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
+				12353A5D1F1309C2008286C2 /* CoreDataStack.swift in Sources */,
 				12FC8B521EDE6DEB003CF3C3 /* TeamSimulationAppealEditingCell.swift in Sources */,
 				12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */,
 				129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */,
@@ -1857,7 +1862,6 @@
 				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
 				12FC8B571EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift in Sources */,
 				12FC8B391EDE6D93003CF3C3 /* TeamInformationTeamCell.swift in Sources */,
-				12536DBA1ED5177C00B75BA0 /* UserNotificationHandler.swift in Sources */,
 				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
@@ -2230,13 +2234,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		12F33D9A1F0F2B9100B75E47 /* Model.xcdatamodeld */ = {
+		12353AA21F145771008286C2 /* CGSSGuide.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */,
+				12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */,
 			);
-			currentVersion = 12F33D9B1F0F2B9100B75E47 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = 12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */;
+			path = CGSSGuide.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import ZKDrawerController
 import UserNotifications
+import CoreData
 
 @UIApplicationMain
 
@@ -44,6 +45,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 5 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
+            }
+            if lastVersion < 6 {
+                let context = CoreDataStack.default.viewContext
+                
+                for team in CGSSTeamManager.default.teams {
+                    let center = Member.insert(into: context, cardId: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
+                    let guest = Member.insert(into: context, cardId: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
+                    var otherMembers = [Member]()
+                    for sub in team.subs {
+                        let member = Member.insert(into: context, cardId: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
+                        otherMembers.append(member)
+                    }
+                    _ = Unit.insert(into: context, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, useCustomAppeal: team.usingCustomAppeal, center: center, guest: guest, otherMembers: otherMembers)
+                }
+                
+                _ = context.saveOrRollback()
             }
         }
         
@@ -194,6 +211,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        CoreDataStack.default.viewContext.refreshAllObjects()
+        CoreDataStack.default.backgroundContext.refreshAllObjects()
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
@@ -201,5 +223,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
 }
 

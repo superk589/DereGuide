@@ -25,7 +25,9 @@ public class Member: NSManagedObject {
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
     @NSManaged public var remoteIdentifier: String?
-    @NSManaged public var units: Set<Unit>
+    @NSManaged public var participatedUnits: Set<Unit>
+    @NSManaged public var centeredUnits: Set<Unit>
+    @NSManaged public var guestedUnits: Set<Unit>
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date

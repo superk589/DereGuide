@@ -23,7 +23,9 @@ public class Unit: NSManagedObject {
     @NSManaged public var updatedAt: Date
     @NSManaged public var useCustomAppeal: Bool
     @NSManaged public var remoteIdentifiter: String?
-    @NSManaged public var members: NSOrderedSet
+    @NSManaged public var otherMembers: Set<Member>
+    @NSManaged public var center: Member
+    @NSManaged public var guest: Member
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
@@ -32,6 +34,17 @@ public class Unit: NSManagedObject {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()
         primitiveCreatedAt = Date()
+    }
+    
+    static func insert(into moc: NSManagedObjectContext, customAppeal: Int, supportAppeal: Int, useCustomAppeal: Bool, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
+        let unit: Unit = moc.insertObject()
+        unit.customAppeal = Int64(customAppeal)
+        unit.supportAppeal = Int64(supportAppeal)
+        unit.useCustomAppeal = useCustomAppeal
+        unit.center = center
+        unit.guest = guest
+        unit.otherMembers = Set(otherMembers)
+        return unit
     }
     
 }
@@ -64,15 +77,23 @@ extension Unit: RemoteDeletable {
 extension Unit {
     
     var leader: Member {
-        return self[0]
+        return center
     }
     
     var friendLeader: Member {
-        return self[5]
+        return guest
     }
     
     var subs: [Member] {
-        return Array(self[1...4])
+        return Array(otherMembers)
+    }
+    
+    var members: [Member] {
+        var result = [Member]()
+        result.append(leader)
+        result.append(contentsOf: subs)
+        result.append(friendLeader)
+        return result
     }
     
     var skills: [CGSSRankedSkill] {
@@ -88,7 +109,16 @@ extension Unit {
     }
     
     subscript (index: Int) -> Member {
-        return members.object(at: index) as! Member
+        switch index {
+        case 0:
+            return leader
+        case 1...4:
+            return subs[index - 1]
+        case 5:
+            return guest
+        default:
+            fatalError("index out of range")
+        }
     }
     
     subscript (range: CountableClosedRange<Int>) -> ArraySlice<Member> {

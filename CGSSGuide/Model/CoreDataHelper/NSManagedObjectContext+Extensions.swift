@@ -45,7 +45,8 @@ extension NSManagedObjectContext {
         do {
             try save()
             return true
-        } catch {
+        } catch let e as NSError {
+            print(e.userInfo)
             rollback()
             return false
         }
