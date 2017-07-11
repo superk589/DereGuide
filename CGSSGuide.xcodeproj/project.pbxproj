@@ -15,7 +15,6 @@
 		1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */; };
 		1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F81E2760F900185782 /* SortTableViewCell.swift */; };
 		1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0FC1E278D6200185782 /* FilterItemView.swift */; };
-		1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */; };
 		1206F6CE1E28D6CA000FAC78 /* SongFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */; };
 		1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */; };
 		1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D31E2A2586000FAC78 /* StringExtension.swift */; };
@@ -210,6 +209,7 @@
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B678441EF12ACF00615D22 /* TeamMemberCell.swift */; };
 		12B7A1A61F1475A000537C80 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B7A1A51F1475A000537C80 /* CloudKit.framework */; };
+		12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
 		12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */; };
 		12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */; };
@@ -335,7 +335,6 @@
 		1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilterSortController.swift; sourceTree = "<group>"; };
 		1206C0F81E2760F900185782 /* SortTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortTableViewCell.swift; sourceTree = "<group>"; };
 		1206C0FC1E278D6200185782 /* FilterItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterItemView.swift; sourceTree = "<group>"; };
-		1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WipeTableViewCell.swift; path = ../WipeTableViewCell.swift; sourceTree = "<group>"; };
 		1206F6CD1E28D6CA000FAC78 /* SongFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongFilterSortController.swift; sourceTree = "<group>"; };
 		1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharFilterSortController.swift; sourceTree = "<group>"; };
 		1206F6D31E2A2586000FAC78 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -529,6 +528,7 @@
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B678441EF12ACF00615D22 /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		12B7A1A51F1475A000537C80 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTableViewCell.swift; sourceTree = "<group>"; };
 		12B8A6AA1F09E348001074B3 /* ValueStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStepper.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
 		12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSpreadImageCell.swift; sourceTree = "<group>"; };
@@ -704,13 +704,12 @@
 		1206DEAA1DACDD8600A5A69D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1206DEA81DACDD4000A5A69D /* WipeTableViewCell.swift */,
+				12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */,
 				12D4F8AE1E1BDB8E0064991E /* DonationQAView.swift */,
 				12D4F8B01E1CAB330064991E /* DonationCell.swift */,
 				12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */,
 			);
-			name = View;
-			path = Controller/View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		122497201E8E848A005C743C /* CGSSLiveSimulator */ = {
@@ -1643,6 +1642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */,
+				12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */,
 				12353A561F0F6AB3008286C2 /* UserOwnable.swift in Sources */,
 				12353A571F0F6AB3008286C2 /* RemoteDeletable.swift in Sources */,
 				12353A581F0F6AB3008286C2 /* DelayedDeletable.swift in Sources */,
@@ -1900,7 +1900,6 @@
 				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
 				12C6B35C1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift in Sources */,
-				1206DEA91DACDD4000A5A69D /* WipeTableViewCell.swift in Sources */,
 				12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */,
 				12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */,
 			);
