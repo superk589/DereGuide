@@ -209,6 +209,7 @@
 		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B678441EF12ACF00615D22 /* TeamMemberCell.swift */; };
+		12B7A1A61F1475A000537C80 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B7A1A51F1475A000537C80 /* CloudKit.framework */; };
 		12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */; };
 		12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */; };
 		12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C6B34F1F00B68E00A25DB1 /* CardDetailBasicCell.swift */; };
@@ -527,6 +528,7 @@
 		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B678441EF12ACF00615D22 /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
+		12B7A1A51F1475A000537C80 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		12B8A6AA1F09E348001074B3 /* ValueStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStepper.swift; sourceTree = "<group>"; };
 		12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewCell.swift; sourceTree = "<group>"; };
 		12C6B34D1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailSpreadImageCell.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12C9A9B71E4D7D5300A7B8CE /* libsqlite3.tbd in Frameworks */,
+				12B7A1A61F1475A000537C80 /* CloudKit.framework in Frameworks */,
 				12312E4F1DA527820088FE27 /* StoreKit.framework in Frameworks */,
 				0A5869BC3B3599AEB8C03622 /* Pods_CGSSGuide.framework in Frameworks */,
 			);
@@ -1381,6 +1384,7 @@
 		C670F2DE7E4FDF80136AB4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12B7A1A51F1475A000537C80 /* CloudKit.framework */,
 				12C9A9B61E4D7D5300A7B8CE /* libsqlite3.tbd */,
 				12312E4E1DA527820088FE27 /* StoreKit.framework */,
 				12536DC21ED5636000B75BA0 /* UserNotifications.framework */,
@@ -1456,6 +1460,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
