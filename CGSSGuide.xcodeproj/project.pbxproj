@@ -868,7 +868,7 @@
 			path = Song;
 			sourceTree = "<group>";
 		};
-		1269E9101D52085C0071AD7F /* Team */ = {
+		1269E9101D52085C0071AD7F /* Unit */ = {
 			isa = PBXGroup;
 			children = (
 				1261944B1EF108D000673BC5 /* Editing */,
@@ -877,7 +877,7 @@
 				1269E9EF1D520C3E0071AD7F /* Controller */,
 				1269E9F41D520C3E0071AD7F /* View */,
 			);
-			path = Team;
+			path = Unit;
 			sourceTree = "<group>";
 		};
 		1269E9121D5208B80071AD7F /* Common */ = {
@@ -1113,7 +1113,7 @@
 				1269E9121D5208B80071AD7F /* Common */,
 				1269E90C1D52085C0071AD7F /* Card */,
 				1269E90F1D52085C0071AD7F /* Song */,
-				1269E9101D52085C0071AD7F /* Team */,
+				1269E9101D52085C0071AD7F /* Unit */,
 				122EECDC1D5EF9A1008ADE08 /* Toolbox */,
 				1269E90E1D52085C0071AD7F /* Settings */,
 				1282EE621D011A8F0024318C /* AppDelegate.swift */,
