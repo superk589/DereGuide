@@ -42,8 +42,8 @@ class TeamTemplateCell: TeamTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with name: String, team: CGSSTeam) {
+    func setup(with name: String, unit: Unit) {
         titleLabel.text = name
-        super.setup(with: team)
+        super.setup(with: unit)
     }
 }

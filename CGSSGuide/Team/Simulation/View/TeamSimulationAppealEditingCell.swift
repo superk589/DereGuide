@@ -161,13 +161,13 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         endEditAppeal()
     }
     
-    func setup(with team: CGSSTeam) {
-        supportAppealBox.setChecked(!team.usingCustomAppeal)
-        supportAppealTextField.isEnabled = !team.usingCustomAppeal
-        supportAppealTextField.text = team.supportAppeal.description
-        customAppealBox.setChecked(team.usingCustomAppeal)
-        customAppealTextField.isEnabled = team.usingCustomAppeal
-        customAppealTextField.text = team.customAppeal.description
+    func setup(with unit: Unit) {
+        supportAppealBox.setChecked(!unit.usesCustomAppeal)
+        supportAppealTextField.isEnabled = !unit.usesCustomAppeal
+        supportAppealTextField.text = unit.supportAppeal.description
+        customAppealBox.setChecked(unit.usesCustomAppeal)
+        customAppealTextField.isEnabled = unit.usesCustomAppeal
+        customAppealTextField.text = unit.customAppeal.description
     }
     
     func checkBox(_ tap: UITapGestureRecognizer) {

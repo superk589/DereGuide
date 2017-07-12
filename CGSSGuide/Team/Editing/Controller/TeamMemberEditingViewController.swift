@@ -13,7 +13,7 @@ class TeamMemberEditingViewController: UIViewController {
 
     var editView: TeamMemberEditingView!
 
-    func setupWith(member: CGSSTeamMember, card: CGSSCard) {
+    func setupWith(member: Member, card: CGSSCard) {
         if editView == nil {
             editView = TeamMemberEditingView()
             view.addSubview(editView)

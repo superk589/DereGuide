@@ -21,7 +21,7 @@ public class Unit: NSManagedObject {
     @NSManaged public var supportAppeal: Int64
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
-    @NSManaged public var useCustomAppeal: Bool
+    @NSManaged public var usesCustomAppeal: Bool
     @NSManaged public var remoteIdentifiter: String?
     @NSManaged public var otherMembers: Set<Member>
     @NSManaged public var center: Member
@@ -36,14 +36,27 @@ public class Unit: NSManagedObject {
         primitiveCreatedAt = Date()
     }
     
-    static func insert(into moc: NSManagedObjectContext, customAppeal: Int, supportAppeal: Int, useCustomAppeal: Bool, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
+    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
         let unit: Unit = moc.insertObject()
         unit.customAppeal = Int64(customAppeal)
         unit.supportAppeal = Int64(supportAppeal)
-        unit.useCustomAppeal = useCustomAppeal
+        unit.usesCustomAppeal = usesCustomAppeal
         unit.center = center
         unit.guest = guest
         unit.otherMembers = Set(otherMembers)
+        return unit
+    }
+    
+    static func insert(into moc: NSManagedObjectContext, anotherUnit: Unit) -> Unit {
+        let unit: Unit = moc.insertObject()
+        unit.customAppeal = anotherUnit.customAppeal
+        unit.supportAppeal = anotherUnit.supportAppeal
+        unit.usesCustomAppeal = anotherUnit.usesCustomAppeal
+        unit.center = Member.insert(into: moc, anotherMember: anotherUnit.center)
+        unit.guest = Member.insert(into: moc, anotherMember: anotherUnit.guest)
+        unit.otherMembers = Set(anotherUnit.subs.map {
+            return Member.insert(into: moc, anotherMember: $0)
+        })
         return unit
     }
     
@@ -73,6 +86,21 @@ extension Unit: RemoteDeletable {
     @NSManaged public var markedForRemoteDeletion: Bool
 }
 
+extension Unit {
+    
+    static func insert(into moc: NSManagedObjectContext, team: CGSSTeam) -> Unit {
+        let center = Member.insert(into: moc, cardId: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
+        let guest = Member.insert(into: moc, cardId: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
+        var otherMembers = [Member]()
+        for sub in team.subs {
+            let member = Member.insert(into: moc, cardId: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
+            otherMembers.append(member)
+        }
+        
+        return Unit.insert(into: moc, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, usesCustomAppeal: team.usingCustomAppeal, center: center, guest: guest, otherMembers: otherMembers)
+    }
+    
+}
 
 extension Unit {
     
@@ -377,7 +405,7 @@ extension Unit {
     
     func validateMembers() -> Bool {
         return members.count == 6 && members.flatMap { (member) -> CGSSCard? in
-           return (member as? Member)?.card
+           return member.card
         }.count == 6
     }
     

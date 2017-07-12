@@ -9,8 +9,8 @@
 import UIKit
 
 class TeamInfomationController: BaseTableViewController, TeamCollectionPage {
-
-    var team: CGSSTeam! {
+        
+    var unit: Unit! {
         didSet {
             self.tableView.reloadData()
         }
@@ -50,20 +50,20 @@ class TeamInfomationController: BaseTableViewController, TeamCollectionPage {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamInformationTeamCell.description(), for: indexPath) as! TeamInformationTeamCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             cell.delegate = self
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamInformationLeaderSkillCell.description(), for: indexPath) as! TeamInformationLeaderSkillCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamInformationAppealCell.description(), for: indexPath) as! TeamInformationAppealCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamInformationSkillListCell.description(), for: indexPath) as! TeamInformationSkillListCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             return cell
         default:
             return UITableViewCell()

@@ -38,7 +38,7 @@ class TeamRecentUsedCell: UICollectionViewCell {
         }
     }
     
-    func setup(with member: CGSSTeamMember) {
+    func setup(with member: Member) {
         cardView.setup(with: member)
     }
     

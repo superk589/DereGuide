@@ -162,7 +162,7 @@ extension NSManagedObjectContext {
             handler(wrappedNote)
         }
     }
-
+    
     public func performMergeChanges(from note: ContextDidSaveNotification) {
         perform {
             self.mergeChanges(fromContextDidSave: note.notification)

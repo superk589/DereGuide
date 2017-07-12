@@ -64,7 +64,13 @@ extension NSManagedObjectContext {
             _ = self.saveOrRollback()
         }
     }
-
+    
+    public func newChildContext(concurrencyType: NSManagedObjectContextConcurrencyType? = nil) -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: concurrencyType ?? self.concurrencyType)
+        context.parent = self
+        return context
+    }
+    
 }
 
 

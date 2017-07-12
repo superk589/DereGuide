@@ -25,9 +25,9 @@ public class Member: NSManagedObject {
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
     @NSManaged public var remoteIdentifier: String?
-    @NSManaged public var participatedUnits: Set<Unit>
-    @NSManaged public var centeredUnits: Set<Unit>
-    @NSManaged public var guestedUnits: Set<Unit>
+    @NSManaged public var participatedUnit: Unit?
+    @NSManaged public var centeredUnit: Unit?
+    @NSManaged public var guestedUnit: Unit?
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
@@ -35,6 +35,10 @@ public class Member: NSManagedObject {
     var card: CGSSCard? {
         let dao = CGSSDAO.shared
         return dao.findCardById(Int(cardId))
+    }
+    
+    var unit: Unit! {
+        return participatedUnit ?? centeredUnit ?? guestedUnit
     }
     
     var potential: CGSSPotential {
@@ -54,6 +58,16 @@ public class Member: NSManagedObject {
         member.vocalLevel = Int16(potential.vocalLevel)
         member.danceLevel = Int16(potential.danceLevel)
         member.visualLevel = Int16(potential.visualLevel)
+        return member
+    }
+    
+    static func insert(into moc: NSManagedObjectContext, anotherMember: Member) -> Member {
+        let member: Member = moc.insertObject()
+        member.cardId = anotherMember.cardId
+        member.skillLevel = anotherMember.skillLevel
+        member.vocalLevel = anotherMember.vocalLevel
+        member.danceLevel = anotherMember.danceLevel
+        member.visualLevel = anotherMember.visualLevel
         return member
     }
     
@@ -82,3 +96,15 @@ extension Member: DelayedDeletable {
 extension Member: RemoteDeletable {
     @NSManaged public var markedForRemoteDeletion: Bool
 }
+
+extension Member {
+    static func ==(lhs: Member, rhs: Member) -> Bool {
+        if let lCard = lhs.card, let rCard = rhs.card {
+            if lCard.id == rCard.id && lhs.potential == rhs.potential && lhs.skillLevel == rhs.skillLevel {
+                return true
+            }
+        }
+        return false
+    }
+}
+

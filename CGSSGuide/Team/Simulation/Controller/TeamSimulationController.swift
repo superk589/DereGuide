@@ -8,10 +8,11 @@
 
 import UIKit
 import StoreKit
+import CoreData
 
 class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     
-    var team: CGSSTeam! {
+    var unit: Unit! {
         didSet {
             tableView?.reloadData()
             resetDataGrid()
@@ -64,7 +65,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.showsVerticalScrollIndicator = false
@@ -93,7 +94,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationTeamCell.description(), for: indexPath) as! TeamSimulationTeamCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             cell.delegate = self
             return cell
         case 1:
@@ -102,7 +103,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: TeamSimulationAppealEditingCell.description(), for: indexPath) as! TeamSimulationAppealEditingCell
-            cell.setup(with: team)
+            cell.setup(with: unit)
             cell.delegate = self
             return cell
         case 3:
@@ -134,10 +135,10 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
-            if let team = self.team {
+            if let unit = self.unit {
                 let vc = TeamEditingController()
+                vc.parentUnit = unit
                 vc.delegate = self
-                vc.setup(with: team)
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
@@ -178,7 +179,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     func checkScoreDetail() {
         if let scene = self.scene {
             let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -189,7 +190,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     func checkSupportSkillDetail() {
         if let scene = self.scene {
             let vc = LiveSimulatorSupportSkillsViewController()
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -200,7 +201,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
     func gotoAdvanceCalculation() {
         if let result = self.simulationResult, result.scores.count > 0, let scene = scene {
             let vc = TeamAdvanceCalculationController(result: result)
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let formulator = coordinator.generateLiveFormulator()
             vc.formulator = formulator
             self.navigationController?.pushViewController(vc, animated: true)
@@ -226,7 +227,7 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
                 if [.normal, .parade].contains(simulatorType) {
                     self.grooveType = nil
                 } else if self.grooveType == nil {
-                    self.grooveType = CGSSGrooveType.init(cardType: self.team.leader.cardRef?.cardType ?? .cute)
+                    self.grooveType = CGSSGrooveType.init(cardType: self.unit.leader.card?.cardType ?? .cute)
                 }
             }))
         }
@@ -258,26 +259,15 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
 }
 
 extension TeamSimulationController: TeamEditingControllerDelegate {
-    
-    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>) {
-        if teams.contains(self.team) {
+    func teamEditingController(_ teamEditingController: TeamEditingController, didModify units: Set<Unit>) {
+        if units.contains(self.unit) {
             if let vc = pageCollectionController as? TeamDetailController {
-                vc.team = team
+                vc.setNeedsReloadTeam()
+                vc.reloadTeamIfNeeded()
             }
         }
     }
     
-    func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
-        let manager = CGSSTeamManager.default
-        if let team = self.team, let index = manager.teams.index(of: team) {
-            manager.teams.remove(at: index)
-        }
-        manager.teams.insert(team, at: 0)
-        
-        if let vc = pageCollectionController as? TeamDetailController {
-            vc.team = team
-        }
-    }
 }
 
 extension TeamSimulationController: TeamSimulationTeamCellDelegate {
@@ -290,6 +280,7 @@ extension TeamSimulationController: TeamSimulationTeamCellDelegate {
         }
 
     }
+    
 }
 
 extension TeamSimulationController: BaseSongTableViewControllerDelegate {
@@ -302,9 +293,9 @@ extension TeamSimulationController: BaseSongTableViewControllerDelegate {
 extension TeamSimulationController: TeamSimulationAppealEditingCellDelegate {
     
     func teamSimulationAppealEditingCell(_ teamSimulationAppealEditingCell: TeamSimulationAppealEditingCell, didUpdateAt selectionIndex: Int, supportAppeal: Int, customAppeal: Int) {
-        team.customAppeal = customAppeal
-        team.supportAppeal = supportAppeal
-        team.usingCustomAppeal = (selectionIndex == 1)
+        unit.customAppeal = Int64(customAppeal)
+        unit.supportAppeal = Int64(supportAppeal)
+        unit.usesCustomAppeal = (selectionIndex == 1)
         CGSSTeamManager.default.save()
     }
 }
@@ -345,10 +336,10 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
         if let scene = self.scene {
             cell?.clearSimulationGrid()
             cell?.startSimulationAnimating()
-            if team.hasUnknownSkills() {
+            if unit.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             currentSimulator = simulator
             DispatchQueue.global(qos: .userInitiated).async {
@@ -369,10 +360,10 @@ extension TeamSimulationController: TeamSimulationMainBodyCellDelegate {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? TeamSimulationMainBodyCell
         if let scene = self.scene {
             cell?.clearCalculationGrid()
-            if team.hasUnknownSkills() {
+            if unit.hasUnknownSkills() {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(team: team, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             let formulator = coordinator.generateLiveFormulator()
             cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)

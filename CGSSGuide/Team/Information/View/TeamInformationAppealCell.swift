@@ -131,7 +131,7 @@ class TeamInformationAppealCell: UITableViewCell {
         delegate?.teamInformationAppealCell(self, didUpdate: Int(supportAppealTextField.text ?? "") ?? 0)
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
 //        supportAppealLabel.text = "\(team.supportAppeal!)"
         
         var appealStrings = [[String]]()
@@ -139,13 +139,13 @@ class TeamInformationAppealCell: UITableViewCell {
         
         appealStrings.append([" ", "Total", "Vocal", "Dance", "Visual"])
         var presentSub1 = [NSLocalizedString("彩色曲", comment: "队伍详情页面")]
-        presentSub1.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .allType).toStringArrayWithBackValue(0))
+        presentSub1.append(contentsOf: unit.getAppealBy(simulatorType: .normal, liveType: .allType).toStringArrayWithBackValue(0))
         var presentSub2 = [NSLocalizedString("Cu曲", comment: "队伍详情页面")]
-        presentSub2.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .cute).toStringArrayWithBackValue(0))
+        presentSub2.append(contentsOf: unit.getAppealBy(simulatorType: .normal, liveType: .cute).toStringArrayWithBackValue(0))
         var presentSub3 = [NSLocalizedString("Co曲", comment: "队伍详情页面")]
-        presentSub3.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .cool).toStringArrayWithBackValue(0))
+        presentSub3.append(contentsOf: unit.getAppealBy(simulatorType: .normal, liveType: .cool).toStringArrayWithBackValue(0))
         var presentSub4 = [NSLocalizedString("Pa曲", comment: "队伍详情页面")]
-        presentSub4.append(contentsOf: team.getAppealBy(simulatorType: .normal, liveType: .passion).toStringArrayWithBackValue(0))
+        presentSub4.append(contentsOf: unit.getAppealBy(simulatorType: .normal, liveType: .passion).toStringArrayWithBackValue(0))
         
         appealStrings.append(presentSub1)
         appealStrings.append(presentSub2)

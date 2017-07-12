@@ -46,24 +46,24 @@ fileprivate let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
 
 
 class LSCoordinator {
-    var team: CGSSTeam
+    var unit: Unit
     var scene: CGSSLiveScene
     var simulatorType: CGSSLiveSimulatorType
     var grooveType: CGSSGrooveType?
     var fixedAppeal: Int?
     var appeal: Int {
         if grooveType != nil {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).total + team.supportAppeal
+            return unit.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).total + Int(unit.supportAppeal)
         } else {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).total + team.supportAppeal
+            return unit.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).total + Int(unit.supportAppeal)
         }
     }
     
     var life: Int {
         if grooveType != nil {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).life
+            return unit.getAppealBy(simulatorType: simulatorType, liveType: CGSSLiveTypes.init(grooveType: grooveType!)).life
         } else {
-            return team.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).life
+            return unit.getAppealBy(simulatorType: simulatorType, liveType: scene.live.filterType).life
         }
     }
     
@@ -71,12 +71,12 @@ class LSCoordinator {
         return self.scene.beatmap!
     }
     
-    init(team: CGSSTeam, scene: CGSSLiveScene, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?) {
-        self.team = team
+    init(unit: Unit, scene: CGSSLiveScene, simulatorType: CGSSLiveSimulatorType, grooveType: CGSSGrooveType?) {
+        self.unit = unit
         self.scene = scene
         self.simulatorType = simulatorType
         self.grooveType = grooveType
-        self.fixedAppeal = team.usingCustomAppeal ? team.customAppeal : nil
+        self.fixedAppeal = unit.usesCustomAppeal ? Int(unit.customAppeal) : nil
     }
     
     var baseScorePerNote: Double {
@@ -125,21 +125,26 @@ class LSCoordinator {
     fileprivate func generateBonusesAndSupports() -> (bonuses: [LSSkill], supports: [LSSkill]) {
         var bonuses = [LSSkill]()
         var supports = [LSSkill]()
-        let leaderSkillUpContent = team.getLeaderSkillUpContentBy(simulatorType: simulatorType)
+        let leaderSkillUpContent = unit.getLeaderSkillUpContentBy(simulatorType: simulatorType)
         
         for i in 0...4 {
-            if let member = team[i], let skill = team[i]?.cardRef?.skill, let level = member.skillLevel {
+            let member = unit[i]
+            let level = Int(member.skillLevel)
+            guard let card = member.card else {
+                continue
+            }
+            if let skill = card.skill {
                 let rankedSkill = CGSSRankedSkill(level: level, skill: skill)
-                if let type = LSSkillType.init(type: skill.skillFilterType),
-                    let cardType = member.cardRef?.cardType {
+                if let type = LSSkillType.init(type: skill.skillFilterType) {
+                    let cardType = card.cardType
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var rateBonus = 0
                     if grooveType != nil {
-                        if member.cardRef!.cardType == CGSSCardTypes.init(grooveType: grooveType!) {
+                        if member.card!.cardType == CGSSCardTypes.init(grooveType: grooveType!) {
                             rateBonus += 30
                         }
                     } else {
-                        if member.cardRef!.cardType == scene.live.filterType || scene.live.filterType == .allType {
+                        if member.card!.cardType == scene.live.filterType || scene.live.filterType == .allType {
                             rateBonus += 30
                         }
                     }
@@ -157,7 +162,7 @@ class LSCoordinator {
                             bonuses.append(bonus)
                             supports.append(bonus)
                         case .deep:
-                            if team.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
+                            if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
                                 fallthrough
                             } else {
                                 break
@@ -193,13 +198,13 @@ class LSCoordinator {
     }
 }
 
-fileprivate extension CGSSTeam {
+fileprivate extension Unit {
     func isAllOfType(_ type: CGSSCardTypes, isInGrooveOrParade: Bool) -> Bool {
         let c = isInGrooveOrParade ? 5 : 6
         var result = true
         for i in 0..<c {
             let member = self[i]
-            guard let cardType = member?.cardRef?.cardType, cardType == type else {
+            guard let cardType = member.card?.cardType, cardType == type else {
                 result = false
                 break
             }

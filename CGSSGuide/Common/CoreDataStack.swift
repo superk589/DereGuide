@@ -43,13 +43,17 @@ class CoreDataStack {
     }()
     
     private lazy var coordinator: NSPersistentStoreCoordinator = {
-        let bundles = [Bundle(for: Unit.self)]
-        guard let model = NSManagedObjectModel.mergedModel(from: bundles) else {
-            fatalError("model not found")
+        if #available(iOS 10.0, *) {
+            return self.container.persistentStoreCoordinator
+        } else {
+            let bundles = [Bundle(for: Unit.self)]
+            guard let model = NSManagedObjectModel.mergedModel(from: bundles) else {
+                fatalError("model not found")
+            }
+            let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
+            try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
+            return psc
         }
-        let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
-        try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
-        return psc
     }()
     
     private(set) lazy var viewContext: NSManagedObjectContext = {
@@ -72,4 +76,10 @@ class CoreDataStack {
             return context
         }
     }()
+    
+    func newChildContext(parent: NSManagedObjectContext, concurrencyType: NSManagedObjectContextConcurrencyType? = nil) -> NSManagedObjectContext {
+        
+        return parent.newChildContext(concurrencyType: concurrencyType)
+    }
+    
 }

@@ -44,12 +44,12 @@ class TeamInformationSkillListCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
         var skillListStrings = [[String]]()
         let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
         for i in 0...4 {
-            if let skill = team[i]?.cardRef?.skill {
-                let str = "\(skill.skillName!): Lv.\(team[i]!.skillLevel!)\n\(skill.getExplainByLevel(team[i]!.skillLevel!, languageType: CGSSGlobal.languageType))"
+            if let skill = unit[i].card?.skill {
+                let str = "\(skill.skillName!): Lv.\(unit[i].skillLevel)\n\(skill.getExplainByLevel(Int(unit[i].skillLevel), languageType: CGSSGlobal.languageType))"
                 let arr = [str]
                 skillListStrings.append(arr)
             } else {

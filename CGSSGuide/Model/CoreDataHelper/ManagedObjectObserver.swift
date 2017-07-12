@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 public final class ManagedObjectObserver {
     public enum ChangeType {
         case delete
@@ -25,7 +24,7 @@ public final class ManagedObjectObserver {
             changeHandler(changeType)
         }
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(token)
     }

@@ -82,19 +82,20 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
         for i in 0...5 {
-            if let teamMember = team[i], let card = teamMember.cardRef, let view = iconStackView.arrangedSubviews[i] as? CGSSCardIconView {
+            let member = unit[i]
+            if let card = member.card, let view = iconStackView.arrangedSubviews[i] as? CGSSCardIconView {
                 view.cardId = card.id
             }
         }
 
-        if let selfLeaderRef = team.leader.cardRef {
+        if let selfLeaderRef = unit.leader.card {
             selfLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: selfLeaderRef.attColor.mixed(withColor: .white))
         } else {
             selfLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))
         }
-        if let friendLeaderRef = team.friendLeader.cardRef {
+        if let friendLeaderRef = unit.friendLeader.card {
             friendLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: friendLeaderRef.attColor.mixed(withColor: .white))
         } else {
             friendLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))

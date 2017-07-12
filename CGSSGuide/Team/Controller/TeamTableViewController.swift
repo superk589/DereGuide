@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate {
     
@@ -17,19 +18,18 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     var copyItem: UIBarButtonItem!
     var spaceItem: UIBarButtonItem!
     
-    var teams: [CGSSTeam] {
+    var fetchedResultsController: NSFetchedResultsController<Unit>?
+    var context: NSManagedObjectContext {
+        return CoreDataStack.default.viewContext
+    }
+    
+    var units: [Unit] {
         get {
-            let manager = CGSSTeamManager.default
-            return manager.teams
-        }
-        set {
-            hintLabel?.isHidden = true
-            let manager = CGSSTeamManager.default
-            manager.teams = newValue
+            return fetchedResultsController?.fetchedObjects ?? [Unit]()
         }
     }
     
-    var hintLabel: UILabel?
+    var hintLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +37,29 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         tableView.estimatedRowHeight = 99
         tableView.tableFooterView = UIView()
         
-        if teams.count == 0 {
-            hintLabel = UILabel()
-            hintLabel?.textColor = UIColor.darkGray
-            hintLabel?.text = NSLocalizedString("还没有队伍，点击右上＋创建一个吧", comment: "")
-            hintLabel?.sizeToFit()
-            var center = view.center
-            center.y -= 64
-            hintLabel?.center = center
-            view.addSubview(hintLabel!)
+        hintLabel = UILabel()
+        hintLabel.textColor = UIColor.darkGray
+        hintLabel.text = NSLocalizedString("还没有队伍，点击右上＋创建一个吧", comment: "")
+        hintLabel.numberOfLines = 0
+        hintLabel.textAlignment = .center
+        view.addSubview(hintLabel)
+        hintLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-64)
+            make.left.greaterThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTeamModifiedNotification), name: .teamModified, object: nil)
+        
+        prepareToolbar()
+        
+        prepareFetchRequest()
+        
+        hintLabel.isHidden = units.count != 0
+    }
+    
+    private func prepareToolbar() {
         addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTeam))
         deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
         self.navigationItem.rightBarButtonItem = addItem
@@ -58,20 +70,26 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         copyItem = UIBarButtonItem.init(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
         
         spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTeamModifiedNotification), name: .teamModified, object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    private func prepareFetchRequest() {
+        let request: NSFetchRequest<Unit> = Unit.sortedFetchRequest
+        request.returnsObjectsAsFaults = false
+        fetchedResultsController =  NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController?.delegate = self
+        try? fetchedResultsController?.performFetch()
     }
     
     func handleTeamModifiedNotification() {
         tableView.reloadData()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func addTeam() {
         let vc = TeamEditingController()
-        vc.delegate = self
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -80,19 +98,16 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         // 采用倒序删除法
         for indexPath in (tableView.indexPathsForSelectedRows ?? [IndexPath]()).sorted(by: { $0.row > $1.row }) {
         // for indexPath in (tableView.indexPathsForSelectedRows?.reversed() ?? [IndexPath]()) {
-            teams.remove(at: indexPath.row)
+            context.delete(units[indexPath.row])
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
+        _ = context.saveOrRollback()
         setEditing(false, animated: true)
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
     
     func selectAllAction() {
         if isEditing {
-            for i in 0..<teams.count {
+            for i in 0..<units.count {
                 tableView.selectRow(at: IndexPath.init(row: i, section: 0), animated: false, scrollPosition: .none)
             }
         }
@@ -100,7 +115,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     func deselectAllAction() {
         if isEditing {
-            for i in 0..<teams.count {
+            for i in 0..<units.count {
                 tableView.deselectRow(at: IndexPath.init(row: i, section: 0), animated: false)
             }
         }
@@ -109,21 +124,24 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     func copyAction() {
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows, isEditing {
             for indexPath in selectedIndexPaths {
-                teams.append(teams[indexPath.row])
+                _ = Unit.insert(into: context, anotherUnit: units[indexPath.row])
             }
-            tableView.reloadData()
+            _ = context.saveOrRollback()
         }
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return fetchedResultsController?.sections?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teams.count
+        if let sections = fetchedResultsController?.sections, sections.count > 0 {
+            return sections[section].numberOfObjects
+        } else {
+            return 0
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -137,6 +155,8 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             navigationController?.setToolbarHidden(true, animated: true)
             setToolbarItems(nil, animated: true)
         }
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     // 实现了这两个方法 delete 手势才不会调用 setediting
@@ -154,7 +174,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamTableViewCell
-        cell.setup(with: teams[indexPath.row])
+        cell.setup(with: units[indexPath.row])
         return cell
     }
     
@@ -172,22 +192,16 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         return true
     }
     
-//    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-//        return proposedDestinationIndexPath
-//    }
-    
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let team = teams[sourceIndexPath.row]
-        teams.remove(at: sourceIndexPath.row)
-        teams.insert(team, at: destinationIndexPath.row)
+        let sourceUnit = units[sourceIndexPath.row]
+        let destinationUnit = units[destinationIndexPath.row]
+        (sourceUnit.updatedAt, destinationUnit.updatedAt) = (destinationUnit.updatedAt, sourceUnit.updatedAt)
     }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            teams.remove(at: indexPath.row)
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            context.delete(units[indexPath.row])
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -196,10 +210,10 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
-        let team = teams[indexPath.row]
-        if team.validateCardRef() {
+        let unit = units[indexPath.row]
+        if unit.validateMembers() {
             let vc = TeamDetailController()
-            vc.team = team
+            vc.unit = unit
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -210,16 +224,13 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
-}
-
-// MARK: TeamEditingControllerDelegate
-extension TeamTableViewController: TeamEditingControllerDelegate {
-    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>) {
-        
-    }
     
-    func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam) {
-        teams.insert(team, at: 0)
-        tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        super.controllerDidChangeContent(controller)
+        if units.count != 0 {
+            hintLabel?.isHidden = true
+        } else {
+            hintLabel?.isHidden = false
+        }
     }
 }

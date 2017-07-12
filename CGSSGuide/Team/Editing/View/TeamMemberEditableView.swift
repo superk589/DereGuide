@@ -94,10 +94,10 @@ class TeamMemberEditableItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with member: CGSSTeamMember) {
+    func setup(with member: Member) {
         placeholderImageView.isHidden = true
         cardPlaceholder.isHidden = true
-        if let color = member.cardRef?.attColor.cgColor {
+        if let color = member.card?.attColor.cgColor {
             strokeColor = color
         }
         cardView.setup(with: member)
@@ -216,15 +216,14 @@ class TeamMemberEditableView: UIView {
         delegate?.teamMemberEditableView(self, didDoubleTap: view)
     }
     
-    func setupWith(team: CGSSTeam) {
+    func setup(with unit: Unit) {
         for i in 0..<6 {
-            if let member = team[i] {
-                setupWithMember(member, atIndex: i)
-            }
+            let member = unit[i]
+            setup(with: member, at: i)
         }
     }
     
-    func setupWithMember(_ member: CGSSTeamMember, atIndex index: Int) {
+    func setup(with member: Member, at index: Int) {
         editableItemViews[index].setup(with: member)
     }
     

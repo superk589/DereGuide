@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
 protocol TeamCollectionPage: PageCollectionControllerContainable {
-    var team: CGSSTeam! { set get }
+    var unit: Unit! { set get }
 }
 
 class TeamDetailController: PageCollectionController, PageCollectionControllerDataSource, PageCollectionControllerDelegate {
     
-    var team: CGSSTeam! {
+    private var observer: ManagedObjectObserver?
+    
+    var unit: Unit! {
         didSet {
+            observer = ManagedObjectObserver(object: unit, changeHandler: { [weak self] (type) in
+                if type == .delete {
+                    self?.navigationController?.popViewController(animated: true)
+                } else if type == .update {
+                    self?.setNeedsReloadTeam()
+                    if self?.isShowing ?? false {
+                        self?.reloadTeamIfNeeded()
+                    }
+                }
+            })
             setNeedsReloadTeam()
             if self.isShowing {
                 reloadTeamIfNeeded()
@@ -28,18 +41,18 @@ class TeamDetailController: PageCollectionController, PageCollectionControllerDa
     var titles = [NSLocalizedString("得分计算", comment: ""),
                   NSLocalizedString("队伍信息", comment: "")]
     
-    private func reloadTeamIfNeeded() {
+    func reloadTeamIfNeeded() {
         if needsReloadTeam {
             needsReloadTeam = false
             for vc in vcs {
-                vc.team = team
+                vc.unit = unit
             }
         }
     }
     
     private var isShowing = false
     private var needsReloadTeam = false
-    private func setNeedsReloadTeam() {
+    func setNeedsReloadTeam() {
         needsReloadTeam = true
     }
     

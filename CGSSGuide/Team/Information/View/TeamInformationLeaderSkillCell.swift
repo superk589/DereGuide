@@ -44,10 +44,10 @@ class TeamInformationLeaderSkillCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
         var upValueStrings = [[String]]()
         
-        let contents = team.getLeaderSkillUpContentBy(simulatorType: .normal)
+        let contents = unit.getLeaderSkillUpContentBy(simulatorType: .normal)
         upValueStrings.append(["  ", "Vocal", "Dance", "Visual", NSLocalizedString("技能触发", comment: "队伍详情页面"), "HP"])
         
         var upCuteString = [String]()

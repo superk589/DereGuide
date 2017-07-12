@@ -113,29 +113,23 @@ class TeamTableViewCell: UITableViewCell {
         prepareUI()
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
         for i in 0...5 {
-            if let teamMember = team[i], let card = teamMember.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
+            let member = unit[i]
+            if let card = member.card, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
                 view.icon.cardId = card.id
                 if i != 5 {
                     if card.skill != nil {
-                        view.skillLabel.text = "SLv.\((teamMember.skillLevel)!)"
+                        view.skillLabel.text = "SLv.\((member.skillLevel))"
                     } else {
                         view.skillLabel.text = "n/a"
                     }
                 } else {
                     view.skillLabel.text = "n/a"
                 }
-                view.potentialLabel.setup(with: teamMember.potential)
+                view.potentialLabel.setup(with: member.potential)
             }
         }
-        
-//        let values = [team.rawHP, team.rawVocal, team.rawDance, team.rawVisual, team.rawAppeal.total]
-//        for i in 0...4 {
-//            if let label = appealStackView.arrangedSubviews[i] as? UILabel {
-//                label.text = String(values[i])
-//            }
-//        }
     }
     
 }

@@ -10,5 +10,5 @@ import UIKit
 
 struct TeamTemplate {
     var name: String
-    var team: CGSSTeam
+    var unit: Unit
 }

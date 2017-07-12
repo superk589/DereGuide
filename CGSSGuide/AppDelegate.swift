@@ -48,18 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             if lastVersion < 6 {
                 let context = CoreDataStack.default.viewContext
-                
                 for team in CGSSTeamManager.default.teams {
-                    let center = Member.insert(into: context, cardId: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
-                    let guest = Member.insert(into: context, cardId: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
-                    var otherMembers = [Member]()
-                    for sub in team.subs {
-                        let member = Member.insert(into: context, cardId: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
-                        otherMembers.append(member)
-                    }
-                    _ = Unit.insert(into: context, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, useCustomAppeal: team.usingCustomAppeal, center: center, guest: guest, otherMembers: otherMembers)
+                    _ = Unit.insert(into: context, team: team)
                 }
-                
                 _ = context.saveOrRollback()
             }
         }

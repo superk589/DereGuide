@@ -81,11 +81,11 @@ class TeamSimulationCardView: UIView {
         }
     }
     
-    func setup(with member: CGSSTeamMember) {
-        guard let card = member.cardRef else {
+    func setup(with member: Member) {
+        guard let card = member.card else {
             return
         }
-        setupWith(card: card, potential: member.potential, skillLevel: member.skillLevel)
+        setupWith(card: card, potential: member.potential, skillLevel: Int(member.skillLevel))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -140,17 +140,18 @@ class TeamSimulationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with team: CGSSTeam) {
+    func setup(with unit: Unit) {
         for i in 0...5 {
-            if let teamMember = team[i], let card = teamMember.cardRef, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
+            let member = unit[i]
+            if let card = member.card, let view = iconStackView.arrangedSubviews[i] as? TeamSimulationCardView {
                 if i == 5 || card.skill == nil {
-                    view.setupWith(card: card, potential: teamMember.potential, skillLevel: nil)
-                } else if let skillLevel = teamMember.skillLevel {
-                    view.setupWith(card: card, potential: teamMember.potential, skillLevel: skillLevel)
+                    view.setupWith(card: card, potential: member.potential, skillLevel: nil)
+                } else {
+                    let skillLevel = member.skillLevel
+                    view.setupWith(card: card, potential: member.potential, skillLevel: Int(skillLevel))
                 }
             }
         }
-        
     }
 
     func iconClick(_ iv: CGSSIconView) {

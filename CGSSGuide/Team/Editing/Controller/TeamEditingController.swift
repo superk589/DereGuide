@@ -9,53 +9,55 @@
 import UIKit
 import SnapKit
 import EasyTipView
+import CoreData
 
 protocol TeamEditingControllerDelegate: class {
-    func teamEditingController(_ teamEditingController: TeamEditingController, didSave team: CGSSTeam)
-    func teamEditingController(_ teamEditingController: TeamEditingController, didModify teams: Set<CGSSTeam>)
+    func teamEditingController(_ teamEditingController: TeamEditingController, didModify units: Set<Unit>)
 }
 
 class TeamEditingController: BaseViewController {
-
-    weak var delegate: TeamEditingControllerDelegate?
     
+    weak var delegate: TeamEditingControllerDelegate?
     var collectionView: UICollectionView!
     var titleLabel: UILabel!
     var editableView = TeamMemberEditableView()
     
-    var leader: CGSSTeamMember? {
-        set {
-            members[0] = newValue
-        }
-        get {
-            return members[0]
+    lazy var context: NSManagedObjectContext = self.parentContext.newChildContext()
+    
+    fileprivate var parentContext: NSManagedObjectContext {
+        return CoreDataStack.default.viewContext
+    }
+    
+    private var observer: ManagedObjectObserver?
+    
+    var parentUnit: Unit? {
+        didSet {
+            if let unit = parentUnit {
+                observer = ManagedObjectObserver(object: unit, changeHandler: { [weak self] (type) in
+                    if type == .delete {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                })
+                setup(withParentUnit: unit)
+            }
         }
     }
     
-    var friendLeader: CGSSTeamMember? {
-        set {
-            members[5] = newValue
-        }
-        get {
-            return members[5]
-        }
-    }
+    var unit: Unit?
     
-    var supportAppeal: Int?
-    var customAppeal: Int?
-    var usingCustomAppeal = false
+    var members = [Int: Member]()
     
-    var members = [CGSSTeamMember?].init(repeating: nil, count: 6)
-    
-    lazy var recentMembers: [CGSSTeamMember] = {
+    lazy var recentMembers: [Member] = {
         return self.generateRecentMembers()
     }()
     
-    fileprivate func generateRecentMembers() -> [CGSSTeamMember] {
-        var members = [CGSSTeamMember]()
-        for team in CGSSTeamManager.default.teams {
+    fileprivate func generateRecentMembers() -> [Member] {
+        var members = [Member]()
+        let units = Unit.fetch(in: parentContext)
+        for unit in units {
             for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
-                if let member = team[i], !members.contains{$0 == member} {
+                let member = unit[i]
+                if !members.contains{$0 == member} {
                     members.append(member)
                 }
             }
@@ -123,6 +125,7 @@ class TeamEditingController: BaseViewController {
         editableView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .vertical)
         collectionView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
         editableView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -158,6 +161,7 @@ class TeamEditingController: BaseViewController {
 
     func openTemplates() {
         let vc = TeamTemplateController()
+        vc.parentContext = self.context
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -206,31 +210,43 @@ class TeamEditingController: BaseViewController {
         super.viewWillDisappear(animated)
         hideHelpTips()
     }
-
-    func setup(with team: CGSSTeam) {
-        self.leader = CGSSTeamMember.initWithAnother(teamMember: team.leader)
-        self.friendLeader = CGSSTeamMember.initWithAnother(teamMember: team.friendLeader)
-        for i in 1...4 {
-            self.members[i] = CGSSTeamMember.initWithAnother(teamMember: team.subs[i - 1])
+    
+//    private func removeCurrentUnitAndMembers() {
+//        self.members.values.forEach { (member) in
+//            context.delete(member)
+//        }
+//        self.members.removeAll()
+//
+//        if let unit = self.unit {
+//            context.delete(unit)
+//        }
+//    }
+    
+    fileprivate func setup(withParentUnit unit: Unit) {
+//        removeCurrentUnitAndMembers()
+        self.unit = context.object(with: unit.objectID) as? Unit
+        for i in 0...5 {
+            self.members[i] = self.unit!.members[i]
         }
-        self.supportAppeal = team.supportAppeal
-        self.customAppeal = team.customAppeal
-        self.usingCustomAppeal = team.usingCustomAppeal
-        editableView.setupWith(team: team)
+        editableView.setup(with: unit)
     }
 
     func saveTeam() {
-        if members.flatMap({ (m) -> CGSSTeamMember? in
-            return m
-        }).count == 6 {
-            let team = CGSSTeam(members: members.flatMap { $0 })
-            delegate?.teamEditingController(self, didSave: team)
-            NotificationCenter.default.post(name: .teamModified, object: nil)
+        if self.unit != nil {
+            _ = context.saveOrRollback()
+            _ = parentContext.saveOrRollback()
             navigationController?.popViewController(animated: true)
         } else {
-            let alvc = UIAlertController.init(title: NSLocalizedString("队伍不完整", comment: "弹出框标题"), message: NSLocalizedString("请完善队伍后，再点击存储", comment: "弹出框正文"), preferredStyle: .alert)
-            alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .cancel, handler: nil))
-            self.tabBarController?.present(alvc, animated: true, completion: nil)
+            if members.values.count == 6 {
+                _ = Unit.insert(into: context, center: members[0]!, guest: members[5]!, otherMembers: [members[1]!, members[2]!, members[3]!, members[4]!])
+                _ = context.saveOrRollback()
+                _ = parentContext.saveOrRollback()
+                navigationController?.popViewController(animated: true)
+            } else {
+                let alvc = UIAlertController.init(title: NSLocalizedString("队伍不完整", comment: "弹出框标题"), message: NSLocalizedString("请完善队伍后，再点击存储", comment: "弹出框正文"), preferredStyle: .alert)
+                alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .cancel, handler: nil))
+                self.tabBarController?.present(alvc, animated: true, completion: nil)
+            }
         }
     }
     
@@ -241,20 +257,32 @@ class TeamEditingController: BaseViewController {
     
     fileprivate func reload(index: Int) {
         if let member = members[index] {
-            editableView.setupWithMember(member, atIndex: index)
+            editableView.setup(with: member, at: index)
         }
     }
     
-    func insertMember(_ member: CGSSTeamMember, atIndex index: Int) {
+    func insertMember(_ member: Member, at index: Int) {
+        
+        if members[index] != nil {
+            context.delete(members[index]!)
+        }
+        
         switch index {
         case 0:
-            self.leader = member
-            if self.friendLeader == nil {
-                self.friendLeader = CGSSTeamMember.initWithAnother(teamMember: member)
+            members[0] = member
+            unit?.center = member
+            if members[5] == nil {
+                let guest = Member.insert(into: context, anotherMember: members[0]!)
+                unit?.guest = guest
+                members[5] = guest
                 reload(index: 5)
             }
-        case 1...5:
+        case 1...4:
             self.members[editableView.currentIndex] = member
+            unit?.otherMembers.insert(member)
+        case 5:
+            self.members[editableView.currentIndex] = member
+            unit?.guest = member
         default:
             break
         }
@@ -288,8 +316,8 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let member = recentMembers[indexPath.item]
-        insertMember(member, atIndex: editableView.currentIndex)
+        let member = Member.insert(into: context, anotherMember: recentMembers[indexPath.item])
+        insertMember(member, at: editableView.currentIndex)
     }
 }
 
@@ -304,7 +332,7 @@ extension TeamEditingController: TeamRecentUsedCellDelegate {
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
         
         let member = recentMembers[index]
-        guard let card = member.cardRef else {
+        guard let card = member.card else {
             return
         }
         
@@ -335,7 +363,7 @@ extension TeamEditingController: TeamMemberEditableViewDelegate {
         tevc.modalPresentationStyle = .popover
         tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
         
-        guard let member = members[index], let card = member.cardRef else {
+        guard let member = members[index], let card = member.card else {
             return
         }
         
@@ -363,13 +391,13 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
     ///   - member: team member need to commit
     ///   - vc: view controller that holds new data
     ///   - modifySkill: modify skill level or not (when the commit is synced by another card of the same chara, need not to modify skill level
-    fileprivate func modify(_ member: CGSSTeamMember, using vc: TeamMemberEditingViewController, modifySkill: Bool = true) {
+    fileprivate func modify(_ member: Member, using vc: TeamMemberEditingViewController, modifySkill: Bool = true) {
         if modifySkill {
-            member.skillLevel = Int(round(vc.editView.skillStepper.value))
+            member.skillLevel = Int16(round(vc.editView.skillStepper.value))
         }
-        member.vocalLevel = Int(round(vc.editView.vocalStepper.value))
-        member.danceLevel = Int(round(vc.editView.danceStepper.value))
-        member.visualLevel = Int(round(vc.editView.visualStepper.value))
+        member.vocalLevel = Int16(round(vc.editView.vocalStepper.value))
+        member.danceLevel = Int16(round(vc.editView.danceStepper.value))
+        member.visualLevel = Int16(round(vc.editView.visualStepper.value))
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
@@ -378,33 +406,32 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         if let sourceView = popoverPresentationController.sourceView as? TeamRecentUsedCell {
             if let index = collectionView.indexPath(for: sourceView)?.item {
                 let selectedMember = recentMembers[index]
-                var modifiedTeams = Set<CGSSTeam>()
-                for team in CGSSTeamManager.default.teams {
+                let units = Unit.fetch(in: parentContext)
+                var modifiedUnits = Set<Unit>()
+                for unit in units {
                     for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
-                        if let member = team[i] {
-                            if TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.cardRef?.charaId == selectedMember.cardRef?.charaId {
-                                modify(member, using: vc, modifySkill: false)
-                                modifiedTeams.insert(team)
-                            } else if member == selectedMember {
-                                modify(member, using: vc)
-                                modifiedTeams.insert(team)
-                            }
+                        let member = unit[i]
+                        if TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.card?.charaId == selectedMember.card?.charaId {
+                            modify(member, using: vc, modifySkill: false)
+                            modifiedUnits.insert(unit)
+                        } else if member == selectedMember {
+                            modify(member, using: vc)
+                            modifiedUnits.insert(unit)
                         }
                     }
                 }
-                modify(selectedMember, using: vc)
-                delegate?.teamEditingController(self, didModify: modifiedTeams)
+                _ = parentContext.saveOrRollback()
+                delegate?.teamEditingController(self, didModify: modifiedUnits)
                 NotificationCenter.default.post(name: .teamModified, object: nil)
-                CGSSTeamManager.default.save()
                 collectionView.reloadData()
             }
         } else if let _ = popoverPresentationController.sourceView as? TeamMemberEditableItemView {
             if let member = members[editableView.currentIndex] {
                 let index = editableView.currentIndex
-                member.skillLevel = Int(round(vc.editView.skillStepper.value))
-                member.vocalLevel = Int(round(vc.editView.vocalStepper.value))
-                member.danceLevel = Int(round(vc.editView.danceStepper.value))
-                member.visualLevel = Int(round(vc.editView.visualStepper.value))
+                member.skillLevel = Int16(round(vc.editView.skillStepper.value))
+                member.vocalLevel = Int16(round(vc.editView.vocalStepper.value))
+                member.danceLevel = Int16(round(vc.editView.danceStepper.value))
+                member.visualLevel = Int16(round(vc.editView.visualStepper.value))
                 reload(index: index)
             }
         }
@@ -416,16 +443,10 @@ extension TeamEditingController: BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard) {
         let skillLevel = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
         let potentialLevel = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
-        let member = CGSSTeamMember(id: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
         
-        insertMember(member, atIndex: editableView.currentIndex)
-    }
-}
-
-extension TeamEditingController: TeamTemplateControllerDelegate {
-    
-    func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect team: CGSSTeam) {
-        self.setup(with: team)
+        let member = Member.insert(into: context, cardId: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
+        
+        insertMember(member, at: editableView.currentIndex)
     }
 }
 
@@ -433,5 +454,15 @@ extension TeamEditingController: TeamCardSelectionAdvanceOptionsControllerDelega
     func recentUsedIdolsNeedToReload() {
         self.recentMembers = generateRecentMembers()
         collectionView.reloadData()
+    }
+}
+
+extension TeamEditingController: TeamTemplateControllerDelegate {
+    
+    func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect unit: Unit) {
+        for i in 0...5 {
+            let member = Member.insert(into: context, anotherMember: unit[i])
+            insertMember(member, at: i)
+        }
     }
 }

@@ -47,6 +47,7 @@
 		1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972B1E8E85FC005C743C /* LSOptions.swift */; };
 		122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972F1E8E95D1005C743C /* LFSamplePoint.swift */; };
 		122497321E8E9B57005C743C /* LSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497311E8E9B57005C743C /* LSResult.swift */; };
+		122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A3DF51F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift */; };
 		122B0F291D8E6D8E0096E3E0 /* TeamMemberEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */; };
 		122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */; };
 		122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */; };
@@ -367,6 +368,7 @@
 		1224972B1E8E85FC005C743C /* LSOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSOptions.swift; sourceTree = "<group>"; };
 		1224972F1E8E95D1005C743C /* LFSamplePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFSamplePoint.swift; sourceTree = "<group>"; };
 		122497311E8E9B57005C743C /* LSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSResult.swift; sourceTree = "<group>"; };
+		122A3DF51F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
 		122B0F281D8E6D8E0096E3E0 /* TeamMemberEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingView.swift; sourceTree = "<group>"; };
 		122B0F321D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberEditingViewController.swift; sourceTree = "<group>"; };
 		122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorterFilterManager.swift; sourceTree = "<group>"; };
@@ -1063,6 +1065,7 @@
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
 				1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */,
 				1237D1171EEFBA9C00C43337 /* TransitionAnimatorController.swift */,
+				122A3DF51F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -1818,6 +1821,7 @@
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
+				122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
 				12D975D01E379DF7005E932B /* EventPtRanking.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
 				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,

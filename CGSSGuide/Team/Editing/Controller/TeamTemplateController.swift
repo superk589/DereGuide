@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 protocol TeamTemplateControllerDelegate: class {
-    func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect team: CGSSTeam)
+    func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect unit: Unit)
 }
 
 class TeamTemplateController: BaseTableViewController {
@@ -27,23 +28,34 @@ class TeamTemplateController: BaseTableViewController {
         // Do any additional setup after loading the view.
     }
     
+    var parentContext: NSManagedObjectContext? {
+        didSet {
+            context = parentContext?.newChildContext()
+        }
+    }
+    
+    private var context: NSManagedObjectContext?
+    
     private var templates = [TeamTemplate]()
     
     private func loadTeamTemplates() {
+        guard let context = context else {
+            fatalError("parent context not set")
+        }
         if let path = Bundle.main.path(forResource: "TeamTemplate", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) as? [String: [Int]] {
                 for (name, array) in dict {
-                    var members = [CGSSTeamMember]()
+                    var members = [Member]()
                     for id in array {
                         let card = CGSSDAO.shared.findCardById(id)
-                        let member = CGSSTeamMember(id: id, skillLevel: 10, potential: card?.properPotential ?? CGSSPotential.zero)
+                        let member = Member.insert(into: context, cardId: id, skillLevel: 10, potential: card?.properPotential ?? .zero)
                         members.append(member)
                     }
                     guard members.count == 6 else {
                         continue
                     }
-                    let team = CGSSTeam(leader: members[0], subs: Array(members[1..<5]), friendLeader: members[5])
-                    let template = TeamTemplate(name: name, team: team)
+                    let unit = Unit.insert(into: context, customAppeal: 0, supportAppeal: CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: false, center: members[0], guest: members[5], otherMembers: Array(members[1...4]))
+                    let template = TeamTemplate(name: name, unit: unit)
                     templates.append(template)
                 }
                 reloadUI()
@@ -64,13 +76,13 @@ class TeamTemplateController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.teamTemplateController(self, didSelect: templates[indexPath.row].team)
+        delegate?.teamTemplateController(self, didSelect: templates[indexPath.row].unit)
         navigationController?.popViewController(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TeamTemplateCell.description(), for: indexPath) as! TeamTemplateCell
-        cell.setup(with: templates[indexPath.row].name, team: templates[indexPath.row].team)
+        cell.setup(with: templates[indexPath.row].name, unit: templates[indexPath.row].unit)
         return cell
     }
 }

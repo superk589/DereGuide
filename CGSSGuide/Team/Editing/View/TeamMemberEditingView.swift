@@ -97,12 +97,12 @@ class TeamMemberEditingView: UIView {
         skillStepper.descriptionLabel.text = ""
     }
     
-    func setupWith(member: CGSSTeamMember, card: CGSSCard) {
+    func setupWith(member: Member, card: CGSSCard) {
         self.card = card
-        if let skill = member.cardRef?.skill {
-            skillStepper.value = Double(member.skillLevel!)
-            skillStepper.valueLabel.text = "SLv. \(member.skillLevel!)"
-            skillStepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(member.skillLevel!) / 100, skill.condition, skill.procChanceOfLevel(member.skillLevel!) / 100, skill.skillFilterType.description)
+        if let skill = member.card?.skill {
+            skillStepper.value = Double(member.skillLevel)
+            skillStepper.valueLabel.text = "SLv. \(member.skillLevel)"
+            skillStepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(Int(member.skillLevel)) / 100, skill.condition, skill.procChanceOfLevel(Int(member.skillLevel)) / 100, skill.skillFilterType.description)
         } else {
             setSkillItemNotAvailable()
         }
@@ -110,13 +110,13 @@ class TeamMemberEditingView: UIView {
         let potential = member.potential
         let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         
-        vocalStepper.value = Double(member.vocalLevel!)
+        vocalStepper.value = Double(member.vocalLevel)
         vocalStepper.descriptionLabel.text = String(appeal.vocal)
         
-        danceStepper.value = Double(member.danceLevel!)
+        danceStepper.value = Double(member.danceLevel)
         danceStepper.descriptionLabel.text = String(appeal.dance)
         
-        visualStepper.value = Double(member.visualLevel!)
+        visualStepper.value = Double(member.visualLevel)
         visualStepper.descriptionLabel.text = String(appeal.visual)
     }
     
