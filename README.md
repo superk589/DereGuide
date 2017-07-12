@@ -10,7 +10,6 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 
 ## Features
 * Card, beatmap and character information
-* Team simulation
 * Live score calculation
 * Birthday notification
 * Gacha simulation
@@ -20,9 +19,9 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 <https://itunes.apple.com/app/cgssguide/id1131934691>
 
 ## Requirements
-* iOS 8.0+
-* Xcode 8.1+
-* Swift 3.0+
+* iOS 9.0+
+* Xcode 8.0+
+* Swift 3.1+
 
 ## How to build
 * Clone the repository
