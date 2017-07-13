@@ -36,28 +36,35 @@ public class Unit: NSManagedObject {
         primitiveCreatedAt = Date()
     }
     
-    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
+    public override func willSave() {
+        super.willSave()
+        if hasChanges {
+            refreshUpdateDate()
+        }
+    }
+    
+    private static func insert(into moc: NSManagedObjectContext, customAppeal: Int64, supportAppeal: Int64, usesCustomAppeal: Bool, center: Member, guest: Member, otherMembers: Set<Member>) -> Unit {
         let unit: Unit = moc.insertObject()
-        unit.customAppeal = Int64(customAppeal)
-        unit.supportAppeal = Int64(supportAppeal)
+        unit.customAppeal = customAppeal
+        unit.supportAppeal = supportAppeal
         unit.usesCustomAppeal = usesCustomAppeal
         unit.center = center
         unit.guest = guest
-        unit.otherMembers = Set(otherMembers)
+        unit.otherMembers = otherMembers
         return unit
     }
     
+    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
+        otherMembers.forEach {
+            $0.participatedPosition = Int16(otherMembers.index(of: $0)!) + 1
+        }
+        return insert(into: moc, customAppeal: Int64(customAppeal), supportAppeal: Int64(supportAppeal), usesCustomAppeal: usesCustomAppeal, center: center, guest: guest, otherMembers: Set(otherMembers))
+    }
+    
     static func insert(into moc: NSManagedObjectContext, anotherUnit: Unit) -> Unit {
-        let unit: Unit = moc.insertObject()
-        unit.customAppeal = anotherUnit.customAppeal
-        unit.supportAppeal = anotherUnit.supportAppeal
-        unit.usesCustomAppeal = anotherUnit.usesCustomAppeal
-        unit.center = Member.insert(into: moc, anotherMember: anotherUnit.center)
-        unit.guest = Member.insert(into: moc, anotherMember: anotherUnit.guest)
-        unit.otherMembers = Set(anotherUnit.subs.map {
+        return insert(into: moc, customAppeal: anotherUnit.customAppeal, supportAppeal: anotherUnit.supportAppeal, usesCustomAppeal: anotherUnit.usesCustomAppeal, center: Member.insert(into: moc, anotherMember: anotherUnit.center), guest: Member.insert(into: moc, anotherMember: anotherUnit.guest), otherMembers: Set(anotherUnit.otherMembers.map {
             return Member.insert(into: moc, anotherMember: $0)
-        })
-        return unit
+        }))
     }
     
 }
@@ -75,6 +82,14 @@ extension Unit: Managed {
     public static var defaultPredicate: NSPredicate {
         return notMarkedForDeletionPredicate
     }
+    
+}
+
+extension Unit {
+    
+}
+
+extension Unit: UpdateTimestampable {
     
 }
 
@@ -113,7 +128,7 @@ extension Unit {
     }
     
     var subs: [Member] {
-        return Array(otherMembers)
+        return otherMembers.sorted { $0.participatedPosition < $1.participatedPosition }
     }
     
     var members: [Member] {

@@ -26,24 +26,12 @@ public class Member: NSManagedObject {
     @NSManaged public var updatedAt: Date
     @NSManaged public var remoteIdentifier: String?
     @NSManaged public var participatedUnit: Unit?
+    @NSManaged public var participatedPosition: Int16
     @NSManaged public var centeredUnit: Unit?
     @NSManaged public var guestedUnit: Unit?
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
-    
-    var card: CGSSCard? {
-        let dao = CGSSDAO.shared
-        return dao.findCardById(Int(cardId))
-    }
-    
-    var unit: Unit! {
-        return participatedUnit ?? centeredUnit ?? guestedUnit
-    }
-    
-    var potential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: 0)
-    }
     
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -51,24 +39,55 @@ public class Member: NSManagedObject {
         primitiveUpdatedAt = Date()
     }
     
-    static func insert(into moc: NSManagedObjectContext, cardId: Int, skillLevel: Int, potential: CGSSPotential) -> Member {
+    public override func willSave() {
+        super.willSave()
+        if hasChanges {
+            refreshUpdateDate()
+            unit?.refreshUpdateDate()
+        }
+        if unit == nil {
+            markForLocalDeletion()
+        }
+    }
+    
+    private static func insert(into moc: NSManagedObjectContext, cardId: Int32, skillLevel: Int16, potential: CGSSPotential, participatedPostion: Int16 = 0) -> Member {
         let member: Member = moc.insertObject()
-        member.cardId = Int32(cardId)
-        member.skillLevel = Int16(skillLevel)
+        member.cardId = cardId
+        member.skillLevel = skillLevel
         member.vocalLevel = Int16(potential.vocalLevel)
         member.danceLevel = Int16(potential.danceLevel)
         member.visualLevel = Int16(potential.visualLevel)
+        member.participatedPosition = participatedPostion
         return member
     }
     
+    static func insert(into moc: NSManagedObjectContext, cardId: Int, skillLevel: Int, potential: CGSSPotential, participatedPostion: Int = 0) -> Member {
+        return insert(into: moc, cardId: Int32(cardId), skillLevel: Int16(skillLevel), potential: potential, participatedPostion: Int16(participatedPostion))
+    }
+    
     static func insert(into moc: NSManagedObjectContext, anotherMember: Member) -> Member {
-        let member: Member = moc.insertObject()
-        member.cardId = anotherMember.cardId
-        member.skillLevel = anotherMember.skillLevel
-        member.vocalLevel = anotherMember.vocalLevel
-        member.danceLevel = anotherMember.danceLevel
-        member.visualLevel = anotherMember.visualLevel
-        return member
+        return insert(into: moc, cardId: anotherMember.cardId, skillLevel: anotherMember.skillLevel, potential: anotherMember.potential, participatedPostion: anotherMember.participatedPosition)
+    }
+    
+}
+
+extension Member: UpdateTimestampable {
+    
+}
+
+extension Member {
+    
+    var unit: Unit! {
+        return participatedUnit ?? centeredUnit ?? guestedUnit
+    }
+    
+    var card: CGSSCard? {
+        let dao = CGSSDAO.shared
+        return dao.findCardById(Int(cardId))
+    }
+    
+    var potential: CGSSPotential {
+        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: 0)
     }
     
 }

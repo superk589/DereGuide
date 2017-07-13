@@ -119,16 +119,18 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharCell", for: indexPath) as! CharInfoTableViewCell
-        cell.setup(charList[indexPath.row], sorter: self.sorter)
+        cell.setupWith(char: charList[indexPath.row], sorter: self.sorter)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return charList?.count ?? 0
     }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 68
     }
@@ -147,15 +149,5 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         CGSSSorterFilterManager.default.saveForChar()
         self.updateUI()
     }
-    
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

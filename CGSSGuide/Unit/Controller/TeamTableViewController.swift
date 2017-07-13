@@ -188,15 +188,24 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
     
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let sourceUnit = units[sourceIndexPath.row]
-        let destinationUnit = units[destinationIndexPath.row]
-        (sourceUnit.updatedAt, destinationUnit.updatedAt) = (destinationUnit.updatedAt, sourceUnit.updatedAt)
-    }
+//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        guard sourceIndexPath.row != destinationIndexPath.row else {
+//            return
+//        }
+//        fetchedResultsController?.delegate = nil
+//        let step = (destinationIndexPath.row - sourceIndexPath.row).signum()
+//        stride(from: sourceIndexPath.row, to: destinationIndexPath.row, by: step).forEach({ (index) in
+//            let unit1 = units[index + step]
+//            let unit2 = units[index]
+//            (unit1.updatedAt, unit2.updatedAt) = (unit2.updatedAt, unit1.updatedAt)
+//        })
+//        _ = context.saveOrRollback()
+//        fetchedResultsController?.delegate = self
+//    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -224,6 +233,15 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
+    
+//    private var isUserDrivenMoving = false
+//
+//    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        if !isUserDrivenMoving {
+//            super.controller(controller, didChange: anObject, at: indexPath, for: type, newIndexPath: newIndexPath)
+//
+//        }
+//    }
     
     override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         super.controllerDidChangeContent(controller)

@@ -279,6 +279,7 @@ class TeamEditingController: BaseViewController {
             }
         case 1...4:
             self.members[editableView.currentIndex] = member
+            member.participatedPosition = Int16(index)
             unit?.otherMembers.insert(member)
         case 5:
             self.members[editableView.currentIndex] = member
