@@ -92,7 +92,7 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
         relatedView.cards = cards
     }
     
-    func checkCharaInfo(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
+    func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
         
     }
     

@@ -18,6 +18,7 @@ class GachaSimulateView: UIView {
     
     let space: CGFloat = 10
     let btnW = min(96, (Screen.shortSide - 60) / 5)
+    var leftLabel: UILabel!
     var singleButton : UIButton!
     var tenButton: UIButton!
     var resultView: UIView!
@@ -27,6 +28,15 @@ class GachaSimulateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        leftLabel = UILabel()
+        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.text = NSLocalizedString("模拟抽卡", comment: "")
+        addSubview(leftLabel)
+        leftLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.top.equalTo(10)
+        }
+        
         singleButton = UIButton()
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = Color.passion
@@ -35,7 +45,7 @@ class GachaSimulateView: UIView {
         singleButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
-            make.top.equalTo(2 * btnW + 30)
+            make.top.equalTo(leftLabel.snp.bottom).offset(2 * btnW + 30)
             make.height.equalTo(30)
         }
         
@@ -47,7 +57,7 @@ class GachaSimulateView: UIView {
         tenButton.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
-            make.top.equalTo(2 * btnW + 30)
+            make.top.equalTo(singleButton)
             make.height.equalTo(30)
         }
         
@@ -55,7 +65,7 @@ class GachaSimulateView: UIView {
         addSubview(resultView)
         resultView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(10)
+            make.top.equalTo(leftLabel.snp.bottom).offset(10)
             make.width.equalTo(btnW * 5 + 40)
             make.height.equalTo(2 * btnW + 10)
         }

@@ -23,8 +23,8 @@ class GachaDetailView: UIView {
     var ratioLabel:UILabel!
     var timeLabel:UILabel!
     var timeStatusIndicator: TimeStatusIndicator!
-    var cardListView: UIView!
-    var line: UIView!
+    var cardListView: GachaCardWithOddsListView!
+    var gurranteedView: CardDetailRelatedCardsCell!
     var simulationView: GachaSimulateView!
     
     weak var delegate: GachaDetailViewDelegate?
@@ -33,7 +33,7 @@ class GachaDetailView: UIView {
         super.init(frame: frame)
         
         let descLabel = UILabel()
-        descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")  + ": "
+        descLabel.text = NSLocalizedString("卡池", comment: "模拟抽卡页面")
         descLabel.textAlignment = .left
         descLabel.font = UIFont.systemFont(ofSize: 16)
         descLabel.sizeToFit()
@@ -98,9 +98,9 @@ class GachaDetailView: UIView {
         timeLabel.baselineAdjustment = .alignCenters
         timeLabel.textColor = UIColor.darkGray
         
-        line = LineView()
-        addSubview(line)
-        line.snp.makeConstraints { (make) in
+        let line1 = LineView()
+        addSubview(line1)
+        line1.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(timeLabel.snp.bottom).offset(8)
             make.height.equalTo(1 / Screen.scale)
@@ -110,17 +110,17 @@ class GachaDetailView: UIView {
         addSubview(descLabel2)
         descLabel2.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.top.equalTo(line.snp.bottom).offset(8)
+            make.top.equalTo(line1.snp.bottom).offset(8)
         }
         descLabel2.font = UIFont.systemFont(ofSize: 16)
-        descLabel2.text = NSLocalizedString("新卡列表", comment: "模拟抽卡页面") + ":"
+        descLabel2.text = NSLocalizedString("新增卡片", comment: "模拟抽卡页面")
         descLabel2.textColor = UIColor.black
         
         let moreCardLabel = UILabel()
         addSubview(moreCardLabel)
         moreCardLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.top.equalTo(line.snp.bottom).offset(8)
+            make.top.equalTo(line1.snp.bottom).offset(8)
         }
         moreCardLabel.text = NSLocalizedString("查看完整卡池", comment: "模拟抽卡页面") + " >"
         moreCardLabel.font = UIFont.systemFont(ofSize: 16)
@@ -130,12 +130,39 @@ class GachaDetailView: UIView {
         moreCardLabel.textAlignment = .right
         moreCardLabel.isUserInteractionEnabled = true
         
-        cardListView = UIView()
+        cardListView = GachaCardWithOddsListView()
         addSubview(cardListView)
         cardListView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(moreCardLabel.snp.bottom).offset(5)
+        }
+        cardListView.delegate = self
+        
+        let line2 = LineView()
+        addSubview(line2)
+        line2.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(moreCardLabel.snp.bottom).offset(8)
-            make.height.equalTo(0)
+            make.top.equalTo(cardListView.snp.bottom).offset(10)
+            make.height.equalTo(1 / Screen.scale)
+        }
+        
+        gurranteedView = CardDetailRelatedCardsCell()
+        gurranteedView.rightLabel.isHidden = true
+        gurranteedView.leftLabel.text = NSLocalizedString("天井", comment: "模拟抽卡页面")
+        addSubview(gurranteedView.contentView)
+        gurranteedView.contentView.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(line2.snp.bottom)
+        }
+        gurranteedView.delegate = self
+        
+        let line3 = LineView()
+        addSubview(line3)
+        line3.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(gurranteedView.contentView.snp.bottom)
+            make.height.equalTo(1 / Screen.scale)
             make.bottom.equalToSuperview()
         }
         
@@ -168,50 +195,30 @@ class GachaDetailView: UIView {
         }
         let sorter = CGSSSorter.init(property: "sRarity")
         sorter.sortList(&cards)
-        setupCardListView(cards)
+        cardListView.setupWith(cards: cards, odds: cards.map { pool.rewardTable[$0.id]?.relativeOdds })
+        
+        gurranteedView.cards = pool.cardsOfgurranteed
     }
     
     func seeMoreCardAction() {
         delegate?.seeModeCard(gachaDetailView: self)
     }
-    
-    var cardIcons = [CGSSCardIconView]()
-    func setupCardListView(_ cards: [CGSSCard]) {
-        
-        for icon in cardIcons {
-            icon.removeFromSuperview()
-        }
-        cardIcons.removeAll()
-        let column = floor((CGSSGlobal.width - 2 * 10) / 50)
-        let spaceTotal = CGSSGlobal.width - 2 * 10 - column * 48
-        let interSpace = spaceTotal / (column - 1)
-        for i in 0..<cards.count {
-            let y = CGFloat(i / Int(column)) * (48 + interSpace)
-            let x = CGFloat(i % Int(column)) * (48 + interSpace) + 10
-            let icon = CGSSCardIconView.init(frame: CGRect(x: x, y: y, width: 48, height: 48))
-            icon.setWithCardId(cards[i].id, target: self, action: #selector(iconClick))
-            cardListView.addSubview(icon)
-            cardIcons.append(icon)
-        }
-        
-        
-        if cards.count > 0 {
-            cardListView.snp.updateConstraints { (update) in
-                update.height.equalTo(ceil(CGFloat(cards.count) / column) * (48 + interSpace) - interSpace + 10)
-            }
-        } else {
-            cardListView.snp.updateConstraints { (update) in
-                update.height.equalTo(0)
-            }
-        }
-        
-    }
-    
-    func iconClick(iv: CGSSCardIconView) {
-        delegate?.gachaDetailView(self, didClick: iv)
-    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension GachaDetailView: CardDetailRelatedCardsCellDelegate, CGSSIconViewDelegate {
+    
+    func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
+        if cardDetailRelatedCardsCell == self.cardListView {
+            delegate?.seeModeCard(gachaDetailView: self)
+        }
+    }
+    
+    func iconClick(_ iv: CGSSIconView) {
+        delegate?.gachaDetailView(self, didClick: iv as! CGSSCardIconView)
+    }
+    
 }

@@ -72,7 +72,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
                 return $0
             }
         } else {
-            defaultCardList = [CGSSCard]()
+            defaultCardList = pool.cardList
         }
         rewardTable = pool.rewardTable
         hasOdds = pool.hasOdds
@@ -94,8 +94,9 @@ class GachaCardTableViewController: BaseCardTableViewController {
         let cardDetailVC = CardDetailViewController()
         cardDetailVC.card = cardList[indexPath.row]
         cardDetailVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(cardDetailVC, animated: true)
+        navigationController?.pushViewController(cardDetailVC, animated: true)
     }
+    
     override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {
         self.filter = filter
         self.sorter = sorter

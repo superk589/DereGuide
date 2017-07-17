@@ -9,41 +9,6 @@
 import UIKit
 import SnapKit
 
-class TeamTableViewCellCardView: UIView {
-    var icon: CGSSCardIconView
-    var label: UILabel
-
-    override init(frame: CGRect) {
-        icon = CGSSCardIconView()
-        icon.isUserInteractionEnabled = false
-        label = UILabel()
-        label.adjustsFontSizeToFitWidth = true
-        label.baselineAdjustment = .alignCenters
-//        label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.darkGray
-        
-        super.init(frame: frame)
-        addSubview(label)
-        addSubview(icon)
-        label.snp.makeConstraints { (make) in
-            make.centerX.bottom.equalToSuperview()
-            make.left.greaterThanOrEqualToSuperview()
-            make.right.lessThanOrEqualToSuperview()
-        }
-        
-        icon.snp.makeConstraints { (make) in
-            make.top.right.left.equalToSuperview()
-            make.height.equalTo(snp.width)
-            make.bottom.equalTo(label.snp.top)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 class TeamTableViewCell: UITableViewCell {
     
     var iconStackView: UIStackView!

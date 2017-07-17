@@ -94,6 +94,7 @@ extension CGSSGachaPool {
             return Color.allType
         }
     }
+
 }
 
 struct Reward {
@@ -122,6 +123,17 @@ class CGSSGachaPool: CGSSBaseModel {
     var newssr = [Reward]()
     var newsr = [Reward]()
     var newr = [Reward]()
+    
+    lazy var cardsOfgurranteed: [CGSSCard] = {
+        let semephore = DispatchSemaphore(value: 0)
+        var result = [CGSSCard]()
+        CGSSGameResource.shared.master.getGurranteedCardIds(gacha: self, callback: { (cardIds) in
+            result.append(contentsOf: cardIds.map { CGSSDAO.shared.findCardById($0) }.flatMap { $0 } )
+            semephore.signal()
+        })
+        semephore.wait()
+        return result
+    }()
     
     init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[Reward]) {
         self.id = id

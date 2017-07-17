@@ -12,7 +12,11 @@ import StoreKit
 
 class GachaDetailController: BaseViewController, BannerViewContainerViewController {
 
-    var pool: CGSSGachaPool!
+    var pool: CGSSGachaPool! {
+        didSet {
+            print("load gacha pool \(pool.id)")
+        }
+    }
     
     var sv: UIScrollView!
     

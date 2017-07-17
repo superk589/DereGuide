@@ -10,10 +10,11 @@ import UIKit
 import TTGTagCollectionView
 
 protocol CardDetailRelatedCardsCellDelegate: class {
-    func checkCharaInfo(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell)
+    func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell)
 }
 
 class CardDetailRelatedCardsCell: UITableViewCell {
+    
     var leftLabel: UILabel!
     var rightLabel: UILabel!
     var collectionView: TTGTagCollectionView!
@@ -69,7 +70,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
     }
     
     func handleTapGesture(_ tap: UITapGestureRecognizer) {
-        delegate?.checkCharaInfo(self)
+        delegate?.didClickRightDetail(self)
     }
     
     var cards = [CGSSCard]() {
@@ -86,6 +87,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
 }
 
 extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
+    
     func numberOfTags(in tagCollectionView: TTGTagCollectionView!) -> UInt {
         return UInt(cards.count)
     }
@@ -111,11 +113,14 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
         let icon = tagView as! CGSSCardIconView
         delegate?.iconClick(icon)
     }
+    
 }
 
 extension CardDetailRelatedCardsCell: CardDetailSetable {
+    
     func setup(with card: CGSSCard) {
         self.cards = CGSSDAO.shared.findCardsByCharId(card.charaId)
 //        collectionView.sizeToFit()
     }
+    
 }

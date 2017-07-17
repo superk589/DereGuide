@@ -104,6 +104,8 @@
 		1245F79A1F175B07009A80EC /* CloudKitMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7991F175B06009A80EC /* CloudKitMergePolicy.swift */; };
 		1245F79F1F18A70B009A80EC /* MembersRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F79E1F18A70B009A80EC /* MembersRemote.swift */; };
 		1245F7A11F1C629D009A80EC /* RemoteModifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A01F1C629C009A80EC /* RemoteModifiable.swift */; };
+		1245F7A31F1C9D4E009A80EC /* GachaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A21F1C9D4E009A80EC /* GachaCardView.swift */; };
+		1245F7A91F1CA3AA009A80EC /* GachaCardWithOddsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A81F1CA3AA009A80EC /* GachaCardWithOddsListView.swift */; };
 		1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */; };
 		1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */; };
 		124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124791801D87F4FD00ED8EA6 /* GachaViewController.swift */; };
@@ -434,6 +436,8 @@
 		1245F7991F175B06009A80EC /* CloudKitMergePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitMergePolicy.swift; sourceTree = "<group>"; };
 		1245F79E1F18A70B009A80EC /* MembersRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersRemote.swift; sourceTree = "<group>"; };
 		1245F7A01F1C629C009A80EC /* RemoteModifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteModifiable.swift; sourceTree = "<group>"; };
+		1245F7A21F1C9D4E009A80EC /* GachaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaCardView.swift; sourceTree = "<group>"; };
+		1245F7A81F1CA3AA009A80EC /* GachaCardWithOddsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaCardWithOddsListView.swift; sourceTree = "<group>"; };
 		1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiInfo.swift; sourceTree = "<group>"; };
 		1247917D1D87DCF000ED8EA6 /* CGSSGameResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSGameResource.swift; sourceTree = "<group>"; };
 		124791801D87F4FD00ED8EA6 /* GachaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaViewController.swift; sourceTree = "<group>"; };
@@ -1337,6 +1341,8 @@
 				12D45AC71E2E44590009986F /* GachaTableViewCell.swift */,
 				128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */,
 				12C408421E8D5E8C001373CF /* GachaCardTableViewCell.swift */,
+				1245F7A21F1C9D4E009A80EC /* GachaCardView.swift */,
+				1245F7A81F1CA3AA009A80EC /* GachaCardWithOddsListView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1758,6 +1764,7 @@
 				126612B21F1723AB00B7D17F /* RemoteUnit.swift in Sources */,
 				12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */,
 				12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */,
+				1245F7A31F1C9D4E009A80EC /* GachaCardView.swift in Sources */,
 				12353A561F0F6AB3008286C2 /* UserOwnable.swift in Sources */,
 				12353A571F0F6AB3008286C2 /* RemoteDeletable.swift in Sources */,
 				12353A581F0F6AB3008286C2 /* DelayedDeletable.swift in Sources */,
@@ -1958,6 +1965,7 @@
 				12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */,
 				12FC8B4E1EDE6DEB003CF3C3 /* TeamSimulationController.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
+				1245F7A91F1CA3AA009A80EC /* GachaCardWithOddsListView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,

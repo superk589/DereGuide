@@ -17,6 +17,6 @@ class GachaCardTableViewCell: CardTableViewCell {
     
     func setupWith(_ card: CGSSCard, _ odds: Int) {
         super.setup(with: card)
-        cardView.titleLabel.text = NSLocalizedString("出现率", comment: "") + ": " + String.init(format: "%.3f%%", Double(odds / 10) / 1000 )
+        cardView.titleLabel.text = NSLocalizedString("出现率", comment: "") + ": " + String.init(format: "%.3f%%", Double(odds / 10) / 1000)
     }
 }

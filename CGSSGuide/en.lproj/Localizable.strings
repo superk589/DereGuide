@@ -176,7 +176,7 @@
 "数据需要更新" = "The data needs to be updated.";
 
 /* 模拟抽卡页面 */
-"新卡列表" = "New cards";
+"新增卡片" = "New cards";
 
 /* 空字符串说明文字 */
 "无" = "None";
@@ -578,7 +578,7 @@
 "模式" = "Mode";
 "选择模式" = "Select Mode";
 "得分详情" = "Score Detail";
-"出现率" = "Ratio";
+"出现率" = "Rate";
 
 // score detail table header (length sensitive)
 "Combo" = "Combo";
@@ -653,3 +653,7 @@
 "参考值" = "Reference Value";
 "自定义计算" = "Custom Calculation";
 "您输入的变量不合法" = "Your input is not valid";
+
+/* new in 1.4.2 */
+"天井" = "300-pulls gurrantees";
+"模拟抽卡" = "Simulation";

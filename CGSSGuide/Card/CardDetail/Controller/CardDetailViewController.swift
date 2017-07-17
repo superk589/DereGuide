@@ -243,7 +243,7 @@ class CardDetailViewController: BaseTableViewController {
 }
 
 extension CardDetailViewController: CardDetailRelatedCardsCellDelegate {
-    func checkCharaInfo(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
+    func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
         let vc = CharDetailViewController()
         vc.char = card.chara
         navigationController?.pushViewController(vc, animated: true)

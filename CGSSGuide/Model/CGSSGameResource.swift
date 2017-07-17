@@ -307,6 +307,20 @@ class Master: FMDatabaseQueue {
             callback(list)
         }
     }
+    
+    func getGurranteedCardIds(gacha: CGSSGachaPool, callback: @escaping FMDBCallBackClosure<[Int]>) {
+        var list = [Int]()
+        execute({ (db) in
+            let selectSql = "select reward_id from gacha_l_e_list a, gacha_l_group b where a.g_id = b.id and b.start_date <= '\(gacha.startDate)' and b.end_date >= '\(gacha.endDate)'"
+            let set = try db.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let id = Int(set.int(forColumn: "reward_id"))
+                list.append(id)
+            }
+        }) {
+            callback(list)
+        }
+    }
 }
 
 class Manifest: FMDatabase {
