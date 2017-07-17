@@ -221,14 +221,14 @@ class TeamEditingController: BaseViewController {
 
     func saveTeam() {
         if self.unit != nil {
-            _ = context.saveOrRollback()
-            _ = parentContext.saveOrRollback()
+            context.saveOrRollback()
+            parentContext.saveOrRollback()
             navigationController?.popViewController(animated: true)
         } else {
             if members.values.count == 6 {
-                _ = Unit.insert(into: context, center: members[0]!, guest: members[5]!, otherMembers: [members[1]!, members[2]!, members[3]!, members[4]!])
-                _ = context.saveOrRollback()
-                _ = parentContext.saveOrRollback()
+                Unit.insert(into: context, center: members[0]!, guest: members[5]!, otherMembers: [members[1]!, members[2]!, members[3]!, members[4]!])
+                context.saveOrRollback()
+                parentContext.saveOrRollback()
                 navigationController?.popViewController(animated: true)
             } else {
                 let alvc = UIAlertController.init(title: NSLocalizedString("队伍不完整", comment: "弹出框标题"), message: NSLocalizedString("请完善队伍后，再点击存储", comment: "弹出框正文"), preferredStyle: .alert)
@@ -251,22 +251,24 @@ class TeamEditingController: BaseViewController {
     
     func insertMember(_ member: Member, at index: Int, movesCurrentIndex: Bool = false) {
         
-        if members[index] != nil {
-            members[index]?.markForRemoteDeletion()
+        let previousMember = members[index]
+        if previousMember != nil {
+            previousMember?.markForRemoteDeletion()
         }
         
         member.participatedPosition = Int16(index)
         members[index] = member
+        member.creatorID = unit?.members[index].creatorID
+        member.remoteIdentifier = unit?.members[index].remoteIdentifier
         switch index {
         case 0:
-            member.creatorID = unit?.center.creatorID
-            member.remoteIdentifier = unit?.center.remoteIdentifier
             unit?.center = member
             if members[5] == nil {
                 let guest = Member.insert(into: context, anotherMember: members[0]!)
                 insertMember(guest, at: 5, movesCurrentIndex: false)
             }
         case 1...4:
+            previousMember?.participatedUnit = nil
             unit?.otherMembers.insert(member)
         case 5:
             unit?.guest = member
@@ -274,7 +276,7 @@ class TeamEditingController: BaseViewController {
             break
         }
         
-        reload(index: editableView.currentIndex)
+        reload(index: index)
         
         if movesCurrentIndex {
             var nextIndex = index + 1
@@ -449,7 +451,7 @@ extension TeamEditingController: TeamCardSelectionAdvanceOptionsControllerDelega
 extension TeamEditingController: TeamTemplateControllerDelegate {
     
     func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect unit: Unit) {
-        for i in 0...5 {
+        for i in stride(from: 5, through: 0, by: -1) {
             let member = Member.insert(into: context, anotherMember: unit[i])
             insertMember(member, at: i)
         }

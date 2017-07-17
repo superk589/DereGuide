@@ -183,7 +183,7 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     func backAction() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         /*if navigationController?.viewControllers.count > 2 {
          navigationController?.popViewControllerAnimated(true)
          } else {

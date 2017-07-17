@@ -68,7 +68,7 @@ extension RemoteUnit {
             let otherMembers = remoteMembers[1...4].map {
                 return $0.insert(into: context)
             }
-            _ = Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, center: remoteMembers[0].insert(into: context), guest: remoteMembers[5].insert(into: context), otherMembers: otherMembers)
+            Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, center: remoteMembers[0].insert(into: context), guest: remoteMembers[5].insert(into: context), otherMembers: otherMembers)
         })
     }
     

@@ -51,6 +51,7 @@ public class Member: NSManagedObject {
         }
     }
     
+    @discardableResult
     private static func insert(into moc: NSManagedObjectContext, cardID: Int32, skillLevel: Int16, potential: CGSSPotential, participatedPostion: Int16 = 0) -> Member {
         let member: Member = moc.insertObject()
         member.cardID = cardID
@@ -62,10 +63,12 @@ public class Member: NSManagedObject {
         return member
     }
     
+    @discardableResult
     static func insert(into moc: NSManagedObjectContext, cardID: Int, skillLevel: Int, potential: CGSSPotential, participatedPostion: Int = 0) -> Member {
         return insert(into: moc, cardID: Int32(cardID), skillLevel: Int16(skillLevel), potential: potential, participatedPostion: Int16(participatedPostion))
     }
     
+    @discardableResult
     static func insert(into moc: NSManagedObjectContext, anotherMember: Member) -> Member {
         return insert(into: moc, cardID: anotherMember.cardID, skillLevel: anotherMember.skillLevel, potential: anotherMember.potential, participatedPostion: anotherMember.participatedPosition)
     }
@@ -125,6 +128,7 @@ extension Member: UserOwnable {
 }
 
 extension Member: RemoteUploadable {
+    
     public func toCKRecord() -> CKRecord {
         let record = CKRecord(recordType: RemoteMember.recordType)
         record["skillLevel"] = skillLevel as CKRecordValue
@@ -137,6 +141,7 @@ extension Member: RemoteUploadable {
         record["localModifiedAt"] = updatedAt as CKRecordValue
         return record
     }
+    
 }
 
 

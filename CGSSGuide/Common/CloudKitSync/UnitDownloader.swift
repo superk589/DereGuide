@@ -92,7 +92,7 @@ extension UnitDownloader {
 
         for remoteUnit in remoteUnits {
             guard existingUnits[remoteUnit.id] == nil else { continue }
-            _ = remoteUnit.insert(into: context)
+            remoteUnit.insert(into: context)
         }
     }
     

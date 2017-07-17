@@ -57,7 +57,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     }
     
     func backAction() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     // 根据设定的筛选和排序方法重新展现数据

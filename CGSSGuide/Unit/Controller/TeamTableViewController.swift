@@ -101,7 +101,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             units[indexPath.row].markForRemoteDeletion()
             // Delete the row from the data source
         }
-        _ = context.saveOrRollback()
+        context.saveOrRollback()
         setEditing(false, animated: true)
     }
     
@@ -124,9 +124,9 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     func copyAction() {
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows, isEditing {
             for indexPath in selectedIndexPaths {
-                _ = Unit.insert(into: context, anotherUnit: units[indexPath.row])
+                Unit.insert(into: context, anotherUnit: units[indexPath.row])
             }
-            _ = context.saveOrRollback()
+            context.saveOrRollback()
         }
     }
     
@@ -203,7 +203,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
 //            let unit2 = units[index]
 //            (unit1.updatedAt, unit2.updatedAt) = (unit2.updatedAt, unit1.updatedAt)
 //        })
-//        _ = context.saveOrRollback()
+//        context.saveOrRollback()
 //        fetchedResultsController?.delegate = self
 //    }
     
@@ -211,7 +211,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             units[indexPath.row].markForRemoteDeletion()
-            _ = context.saveOrRollback()
+            context.saveOrRollback()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }

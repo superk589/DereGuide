@@ -81,7 +81,7 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
     
     
     func backAction() {
-        _ = self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     /*

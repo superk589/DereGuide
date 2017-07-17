@@ -36,7 +36,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     }
     
     func backAction() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +56,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
     
     override func selectScene(_ scene: CGSSLiveScene) {
         super.selectScene(scene)
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     override func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter) {

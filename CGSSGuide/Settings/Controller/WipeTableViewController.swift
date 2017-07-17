@@ -38,8 +38,8 @@ class WipeTableViewController: BaseTableViewController {
     
     func wipeData() {
         CGSSLoadingHUDManager.default.show()
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            if let selectedIndexPaths = self?.tableView.indexPathsForSelectedRows {
+        if let selectedIndexPaths = self.tableView.indexPathsForSelectedRows {
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 for indexPath in selectedIndexPaths {
                     switch indexPath.row {
                     case 1:
@@ -64,13 +64,12 @@ class WipeTableViewController: BaseTableViewController {
                         break
                     }
                 }
-            }
-            DispatchQueue.main.async {
-                CGSSLoadingHUDManager.default.hide()
-                self?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    CGSSLoadingHUDManager.default.hide()
+                    self?.tableView.reloadData()
+                }
             }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

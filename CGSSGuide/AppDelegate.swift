@@ -49,9 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 6 {
                 let context = CoreDataStack.default.viewContext
                 for team in CGSSTeamManager.default.teams {
-                    _ = Unit.insert(into: context, team: team)
+                    Unit.insert(into: context, team: team)
                 }
-                _ = context.saveOrRollback()
+                context.saveOrRollback()
+                try? FileManager.default.moveItem(atPath: Path.document + "/beatmapHash.plist", toPath: BeatmapHashManager.default.path)
             }
         }
         

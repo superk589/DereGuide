@@ -71,7 +71,7 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     }
     
     func backAction() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func filterAction() {

@@ -67,7 +67,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func backAction() {
-        _ = self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func selectDiff() {

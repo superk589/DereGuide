@@ -57,7 +57,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
     }
     
     func backAction() {
-        _ = navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     

@@ -43,6 +43,7 @@ public class Unit: NSManagedObject {
         }
     }
     
+    @discardableResult
     private static func insert(into moc: NSManagedObjectContext, customAppeal: Int64, supportAppeal: Int64, usesCustomAppeal: Bool, center: Member, guest: Member, otherMembers: Set<Member>) -> Unit {
         let unit: Unit = moc.insertObject()
         unit.customAppeal = customAppeal
@@ -54,6 +55,7 @@ public class Unit: NSManagedObject {
         return unit
     }
     
+    @discardableResult
     static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
         otherMembers.forEach {
             $0.participatedPosition = Int16(otherMembers.index(of: $0)!) + 1
@@ -61,6 +63,7 @@ public class Unit: NSManagedObject {
         return insert(into: moc, customAppeal: Int64(customAppeal), supportAppeal: Int64(supportAppeal), usesCustomAppeal: usesCustomAppeal, center: center, guest: guest, otherMembers: Set(otherMembers))
     }
     
+    @discardableResult
     static func insert(into moc: NSManagedObjectContext, anotherUnit: Unit) -> Unit {
         return insert(into: moc, customAppeal: anotherUnit.customAppeal, supportAppeal: anotherUnit.supportAppeal, usesCustomAppeal: anotherUnit.usesCustomAppeal, center: Member.insert(into: moc, anotherMember: anotherUnit.center), guest: Member.insert(into: moc, anotherMember: anotherUnit.guest), otherMembers: Set(anotherUnit.otherMembers.map {
             return Member.insert(into: moc, anotherMember: $0)
@@ -120,6 +123,7 @@ extension Unit: RemoteUploadable {
 
 extension Unit {
     
+    @discardableResult
     static func insert(into moc: NSManagedObjectContext, team: CGSSTeam) -> Unit {
         let center = Member.insert(into: moc, cardID: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
         let guest = Member.insert(into: moc, cardID: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)

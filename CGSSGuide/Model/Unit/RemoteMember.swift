@@ -60,6 +60,7 @@ extension RemoteMember {
         return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: 0)
     }
     
+    @discardableResult
     func insert(into context: NSManagedObjectContext) -> Member {
         let member = Member.insert(into: context, cardID: Int(cardID), skillLevel: Int(skillLevel), potential: potential, participatedPostion: Int(participatedPosition))
         member.creatorID = self.creatorID
