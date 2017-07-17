@@ -48,7 +48,7 @@ class TeamTemplateController: BaseTableViewController {
                     var members = [Member]()
                     for id in array {
                         let card = CGSSDAO.shared.findCardById(id)
-                        let member = Member.insert(into: context, cardId: id, skillLevel: 10, potential: card?.properPotential ?? .zero)
+                        let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: card?.properPotential ?? .zero)
                         members.append(member)
                     }
                     guard members.count == 6 else {

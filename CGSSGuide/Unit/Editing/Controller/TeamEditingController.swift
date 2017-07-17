@@ -211,22 +211,10 @@ class TeamEditingController: BaseViewController {
         hideHelpTips()
     }
     
-//    private func removeCurrentUnitAndMembers() {
-//        self.members.values.forEach { (member) in
-//            context.delete(member)
-//        }
-//        self.members.removeAll()
-//
-//        if let unit = self.unit {
-//            context.delete(unit)
-//        }
-//    }
-    
     fileprivate func setup(withParentUnit unit: Unit) {
-//        removeCurrentUnitAndMembers()
         self.unit = context.object(with: unit.objectID) as? Unit
         for i in 0...5 {
-            self.members[i] = self.unit!.members[i]
+            self.members[i] = unit.members[i]
         }
         editableView.setup(with: unit)
     }
@@ -261,28 +249,26 @@ class TeamEditingController: BaseViewController {
         }
     }
     
-    func insertMember(_ member: Member, at index: Int) {
+    func insertMember(_ member: Member, at index: Int, movesCurrentIndex: Bool = false) {
         
         if members[index] != nil {
-            context.delete(members[index]!)
+            members[index]?.markForRemoteDeletion()
         }
         
+        member.participatedPosition = Int16(index)
+        members[index] = member
         switch index {
         case 0:
-            members[0] = member
+            member.creatorID = unit?.center.creatorID
+            member.remoteIdentifier = unit?.center.remoteIdentifier
             unit?.center = member
             if members[5] == nil {
                 let guest = Member.insert(into: context, anotherMember: members[0]!)
-                unit?.guest = guest
-                members[5] = guest
-                reload(index: 5)
+                insertMember(guest, at: 5, movesCurrentIndex: false)
             }
         case 1...4:
-            self.members[editableView.currentIndex] = member
-            member.participatedPosition = Int16(index)
             unit?.otherMembers.insert(member)
         case 5:
-            self.members[editableView.currentIndex] = member
             unit?.guest = member
         default:
             break
@@ -290,11 +276,13 @@ class TeamEditingController: BaseViewController {
         
         reload(index: editableView.currentIndex)
         
-        var nextIndex = index + 1
-        if nextIndex == 6 {
-            nextIndex = 0
+        if movesCurrentIndex {
+            var nextIndex = index + 1
+            if nextIndex == 6 {
+                nextIndex = 0
+            }
+            editableView.currentIndex = nextIndex
         }
-        editableView.currentIndex = nextIndex
     }
     
 }
@@ -445,7 +433,7 @@ extension TeamEditingController: BaseCardTableViewControllerDelegate {
         let skillLevel = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
         let potentialLevel = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
         
-        let member = Member.insert(into: context, cardId: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
+        let member = Member.insert(into: context, cardID: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
         
         insertMember(member, at: editableView.currentIndex)
     }

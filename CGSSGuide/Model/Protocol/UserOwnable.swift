@@ -1,6 +1,6 @@
 //
 //  UserOwnable.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Florian on 05/09/15.
 //  Copyright © 2015 objc.io. All rights reserved.
@@ -39,35 +39,20 @@ extension UserOwnable where Self: NSManagedObject {
     }
 }
 
-
-extension Unit: UserOwnable {
-
-}
-
-
-//extension Country {
-//    public static func predicateForContainingMoods(withCreatorIdentifier identifier: String?) -> NSPredicate {
-//        let noIDPredicate = NSPredicate(format: "ANY moods.%K = NULL", CreatorIDKey)
-//        let defaultOwnerPredicate = NSPredicate(format: "ANY moods.%K = %@", CreatorIDKey, CKCurrentUserDefaultName)
-//        guard let id = identifier else { return NSCompoundPredicate(orPredicateWithSubpredicates: [noIDPredicate, defaultOwnerPredicate]) }
-//        let idPredicate = NSPredicate(format: "ANY moods.%K = %@", CreatorIDKey, id)
-//        return NSCompoundPredicate(orPredicateWithSubpredicates: [noIDPredicate, defaultOwnerPredicate, idPredicate])
-//    }
-//}
-
-
-private let UserIDKey = "io.objc.Moody.CloudKitUserID"
+private let UserIDKey = "com.zzk.cgssguide.CloudKitUserID"
 
 extension NSManagedObjectContext {
-    public var userID: RemoteRecordID? {
+    
+    public var userID: RemoteIdentifier? {
         get {
-            return metaData[UserIDKey] as? RemoteRecordID
+            return metaData[UserIDKey] as? RemoteIdentifier
         }
         set {
             guard newValue != userID else { return }
             setMetaData(object: newValue.map { $0 as NSString }, forKey: UserIDKey)
         }
     }
+    
 }
 
 

@@ -1,6 +1,6 @@
 //
 //  Notifications.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Daniel Eggert on 24/05/2015.
 //  Copyright (c) 2015 objc.io. All rights reserved.

@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 public class Unit: NSManagedObject {
     
@@ -16,13 +17,11 @@ public class Unit: NSManagedObject {
         return NSFetchRequest<Unit>(entityName: "Unit")
     }
     
-    @NSManaged public var creatorID: String?
     @NSManaged public var customAppeal: Int64
     @NSManaged public var supportAppeal: Int64
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
     @NSManaged public var usesCustomAppeal: Bool
-    @NSManaged public var remoteIdentifiter: String?
     @NSManaged public var otherMembers: Set<Member>
     @NSManaged public var center: Member
     @NSManaged public var guest: Member
@@ -40,6 +39,7 @@ public class Unit: NSManagedObject {
         super.willSave()
         if hasChanges {
             refreshUpdateDate()
+            markForRemoteModification()
         }
     }
     
@@ -85,13 +85,13 @@ extension Unit: Managed {
     
 }
 
-extension Unit {
-    
+extension Unit: RemoteModifiable {
+    @NSManaged public var markedForLocalChange: Bool
 }
 
-extension Unit: UpdateTimestampable {
-    
-}
+extension Unit {}
+
+extension Unit: UpdateTimestampable {}
 
 extension Unit: DelayedDeletable {
     @NSManaged public var markedForDeletionDate: Date?
@@ -99,16 +99,33 @@ extension Unit: DelayedDeletable {
 
 extension Unit: RemoteDeletable {
     @NSManaged public var markedForRemoteDeletion: Bool
+    @NSManaged public var remoteIdentifier: String?
+}
+
+extension Unit: UserOwnable {
+    @NSManaged public var creatorID: String?
+}
+
+extension Unit: RemoteUploadable {
+    public func toCKRecord() -> CKRecord {
+        let record = CKRecord(recordType: RemoteMember.recordType)
+        record["customAppeal"] = customAppeal as CKRecordValue
+        record["supportAppeal"] = supportAppeal as CKRecordValue
+        record["usesCustomAppeal"] = (usesCustomAppeal ? 1 : 0) as CKRecordValue
+        record["localCreatedAt"] = createdAt as CKRecordValue
+        record["localModifiedAt"] = updatedAt as CKRecordValue
+        return record
+    }
 }
 
 extension Unit {
     
     static func insert(into moc: NSManagedObjectContext, team: CGSSTeam) -> Unit {
-        let center = Member.insert(into: moc, cardId: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
-        let guest = Member.insert(into: moc, cardId: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
+        let center = Member.insert(into: moc, cardID: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
+        let guest = Member.insert(into: moc, cardID: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
         var otherMembers = [Member]()
         for sub in team.subs {
-            let member = Member.insert(into: moc, cardId: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
+            let member = Member.insert(into: moc, cardID: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
             otherMembers.append(member)
         }
         

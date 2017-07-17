@@ -1,6 +1,6 @@
 //
 //  DelayedDeletable.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Daniel Eggert on 23/08/2015.
 //  Copyright © 2015 objc.io. All rights reserved.
@@ -36,6 +36,7 @@ extension DelayedDeletable where Self: NSManagedObject {
         guard isFault || markedForDeletionDate == nil else { return }
         markedForDeletionDate = Date()
     }
+    
 }
 
 
@@ -43,15 +44,17 @@ extension DelayedDeletable where Self: NSManagedObject {
 private let DeletionAgeBeforePermanentlyDeletingObjects = TimeInterval(2 * 60)
 
 extension NSManagedObjectContext {
+    
     public func batchDeleteObjectsMarkedForLocalDeletion() {
-//        Mood.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
-//        Country.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
-//        Continent.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        Unit.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        Member.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
     }
+    
 }
 
 
 extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
+    
     fileprivate static func batchDeleteObjectsMarkedForLocalDeletionInContext(_ managedObjectContext: NSManagedObjectContext) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
         let cutoff = Date(timeIntervalSinceNow: -DeletionAgeBeforePermanentlyDeletingObjects)
@@ -60,6 +63,7 @@ extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
         batchRequest.resultType = .resultTypeStatusOnly
         try! managedObjectContext.execute(batchRequest)
     }
+    
 }
 
 

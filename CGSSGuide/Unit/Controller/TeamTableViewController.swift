@@ -98,7 +98,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         // 采用倒序删除法
         for indexPath in (tableView.indexPathsForSelectedRows ?? [IndexPath]()).sorted(by: { $0.row > $1.row }) {
         // for indexPath in (tableView.indexPathsForSelectedRows?.reversed() ?? [IndexPath]()) {
-            context.delete(units[indexPath.row])
+            units[indexPath.row].markForRemoteDeletion()
             // Delete the row from the data source
         }
         _ = context.saveOrRollback()
@@ -210,7 +210,8 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(units[indexPath.row])
+            units[indexPath.row].markForRemoteDeletion()
+            _ = context.saveOrRollback()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }

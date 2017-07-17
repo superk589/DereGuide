@@ -1,6 +1,6 @@
 //
 //  ManagedObjectChangeObserver.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Daniel Eggert on 15/05/2015.
 //  Copyright (c) 2015 objc.io. All rights reserved.

@@ -80,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             openSpecificPageWithLocalNotification(notification)
         }
         
+        // 注册远程推送 用于订阅CloudKit同步信息
+        application.registerForRemoteNotifications()
+        
         return true
     }
     
@@ -134,13 +137,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func registerUserNotification() {
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert]) { (granted, error) in
+            UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .badge, .alert]) { (granted, error) in
                 if error == nil {
 
                 }
             }
         } else {
-            let setting = UIUserNotificationSettings.init(types: [.badge, .alert], categories: nil)
+            let setting = UIUserNotificationSettings.init(types: [.sound, .badge, .alert], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(setting)
         }
     }
@@ -149,9 +152,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        //
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+        // 删除已经被标记为本地删除的对象
+        CoreDataStack.default.viewContext.batchDeleteObjectsMarkedForLocalDeletion()
+        CoreDataStack.default.viewContext.refreshAllObjects()
     }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        CoreDataStack.default.viewContext.refreshAllObjects()
+    }
+    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         //
     }
@@ -177,9 +190,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // 接收到远程消息
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        
+        guard let info = userInfo as? [String: NSObject] else { return }
+        SyncCoordinator.shared.application(application, didReceiveRemoteNotification: info)
     }
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         
@@ -189,22 +202,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         // 每次进入前台时 规划接下来一个月的偶像生日
         if UserDefaults.standard.shouldPostBirthdayNotice {
             BirthdayCenter.default.scheduleNotifications()
         }
-    }
-    
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        CoreDataStack.default.viewContext.refreshAllObjects()
-        CoreDataStack.default.backgroundContext.refreshAllObjects()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

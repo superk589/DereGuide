@@ -1,6 +1,6 @@
 //
 //  NSManagedObject+Extensions.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Florian on 19/09/15.
 //  Copyright © 2015 objc.io. All rights reserved.

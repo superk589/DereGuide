@@ -66,7 +66,7 @@ class CoreDataStack {
         }
     }()
     
-    private(set) lazy var backgroundContext: NSManagedObjectContext = {
+    private(set) lazy var syncContext: NSManagedObjectContext = {
         if #available(iOS 10.0, *) {
             return self.container.newBackgroundContext()
         } else {

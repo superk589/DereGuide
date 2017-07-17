@@ -1,6 +1,6 @@
 //
 //  RemoteDeletable.swift
-//  Moody
+//  CGSSGuide
 //
 //  Created by Florian on 05/09/15.
 //  Copyright © 2015 objc.io. All rights reserved.
@@ -11,6 +11,8 @@ import CoreData
 private let MarkedForRemoteDeletionKey = "markedForRemoteDeletion"
 
 public protocol RemoteDeletable: class {
+    var creatorID: String? { get set }
+    var remoteIdentifier: String? { get set }
     var changedForRemoteDeletion: Bool { get }
     var markedForRemoteDeletion: Bool { get set }
     func markForRemoteDeletion()
