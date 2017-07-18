@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var syncCoordinator: SyncCoordinator!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 处理一系列启动任务
@@ -84,6 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 注册远程推送 用于订阅CloudKit同步信息
         application.registerForRemoteNotifications()
         
+        // 初始化同步协调器
+//        syncCoordinator = SyncCoordinator.shared
         return true
     }
     

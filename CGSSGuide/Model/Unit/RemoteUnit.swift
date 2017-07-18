@@ -15,10 +15,10 @@ struct RemoteUnit: RemoteRecord {
     var id: String
     var creatorID: String
     
-    var center: CKReference
+//    var center: CKReference
     var customAppeal: Int64
-    var guest: CKReference
-    var otherMembers: [CKReference]
+//    var guest: CKReference
+//    var otherMembers: [CKReference]
     var supportAppeal: Int64
     var usesCustomAppeal: Int64
     var localCreatedAt: Date
@@ -31,10 +31,11 @@ extension RemoteUnit {
     
     init?(record: CKRecord) {
         guard record.recordType == RemoteUnit.recordType else { fatalError("wrong record type") }
-        guard let center = record.object(forKey: "center") as? CKReference,
+        guard
+//        let center = record.object(forKey: "center") as? CKReference,
         let customAppeal = record.object(forKey: "customAppeal") as? Int64,
-        let guest = record.object(forKey: "guest") as? CKReference,
-        let otherMembers = record["otherMembers"] as? [CKReference],
+//        let guest = record.object(forKey: "guest") as? CKReference,
+//        let otherMembers = record["otherMembers"] as? [CKReference],
         let supportAppeal = record["supportAppeal"] as? Int64,
         let usesCustomAppeal = record["usesCustomAppeal"] as? Int64,
         let localCreatedAt = record["localCreatedAt"] as? Date,
@@ -45,9 +46,9 @@ extension RemoteUnit {
         self.id = record.recordID.recordName
         self.creatorID = creatorID
         self.localCreatedAt = localCreatedAt
-        self.center = center
-        self.guest = guest
-        self.otherMembers = otherMembers
+//        self.center = center
+//        self.guest = guest
+//        self.otherMembers = otherMembers
         self.supportAppeal = supportAppeal
         self.customAppeal = customAppeal
         self.usesCustomAppeal = usesCustomAppeal

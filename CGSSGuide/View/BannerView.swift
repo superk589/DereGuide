@@ -19,6 +19,8 @@ class BannerView: UIImageView {
     
     var style: BannerLoadingStyle = .system
     
+    var url: URL?
+    
     var indicator: UIActivityIndicatorView?
     
     var indicator2: LoadingImageView?
@@ -30,6 +32,21 @@ class BannerView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentMode = .scaleAspectFit
+        
+        isUserInteractionEnabled = true
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
+    }
+    
+    func handleDoubleTap(_ tap: UITapGestureRecognizer) {
+        if let url = self.url {
+            if let key = SDWebImageManager.shared().cacheKey(for: url) {
+                SDImageCache.shared().removeImage(forKey: key, withCompletion: {
+                    self.sd_setImage(with: url)
+                })
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,6 +54,7 @@ class BannerView: UIImageView {
     }
     
     override func sd_setImage(with url: URL!) {
+        self.url = url
         sd_setImage(with: url, completed: nil)
     }
     
@@ -65,6 +83,7 @@ class BannerView: UIImageView {
     }
     
     override func sd_setImage(with url: URL?, completed completedBlock: SDExternalCompletionBlock? = nil) {
+        self.url = url
         showIndicator()
         super.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
             self?.indicator?.stopAnimating()

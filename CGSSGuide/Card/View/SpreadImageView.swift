@@ -10,9 +10,11 @@ import UIKit
 import SDWebImage
 import SnapKit
 
-class SpreadImageView: UIImageView {
+class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
     
     var progressIndicator: UIProgressView!
+    
+    var url: URL?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +27,26 @@ class SpreadImageView: UIImageView {
         progressIndicator.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()
             make.height.equalTo(2)
+        }
+        
+        isUserInteractionEnabled = true
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
+        doubleTap.delegate = self
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return otherGestureRecognizer is UITapGestureRecognizer
+    }
+    
+    func handleDoubleTap(_ tap: UITapGestureRecognizer) {
+        if let url = self.url {
+            if let key = SDWebImageManager.shared().cacheKey(for: url) {
+                SDImageCache.shared().removeImage(forKey: key, withCompletion: {
+                    self.setImage(with: url)
+                })
+            }
         }
     }
     
@@ -45,6 +67,8 @@ class SpreadImageView: UIImageView {
     }
     
     func setImage(with url: URL, shouldShowIndicator: Bool = true) {
+        
+        self.url = url
         
         SDWebImageManager.shared().cachedImageExists(for: url) { [weak self] (isInCache) in
             if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !isInCache {

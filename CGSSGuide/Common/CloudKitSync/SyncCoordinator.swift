@@ -186,8 +186,13 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
                 guard let entityAndPredicate = cp.entityAndPredicateForLocallyTrackedObjects(in: self) else { continue }
                 let request = entityAndPredicate.fetchRequest
                 request.returnsObjectsAsFaults = false
-                let result = try! self.syncContext.fetch(request)
-                objects.formUnion(result)
+
+                do {
+                    let result = try self.syncContext.fetch(request)
+                    objects.formUnion(result)
+                } catch let e as NSError {
+                    print(e)
+                }
             }
             self.processChangedLocalObjects(Array(objects))
         }

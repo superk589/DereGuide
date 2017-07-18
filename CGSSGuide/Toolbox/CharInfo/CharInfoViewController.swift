@@ -38,7 +38,8 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
-//        
+//
+        tableView.separatorStyle = .none
         self.tableView.register(CharInfoTableViewCell.self, forCellReuseIdentifier: "CharCell")
         let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         

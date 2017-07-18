@@ -29,6 +29,8 @@ public class Unit: NSManagedObject {
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
     
+    public lazy var ckReference: CKReference = CKReference(record: self.toCKRecord(), action: .deleteSelf)
+    
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()

@@ -282,19 +282,13 @@ class CGSSGachaPool: CGSSBaseModel {
         }
     }
 
-    func simulate(times:UInt32, srGuaranteeCount:Int) -> [Int] {
+    func simulate(times: Int, srGuaranteeCount: Int) -> [Int] {
         var result = [Int]()
-        var rands = [UInt32]()
-        for _ in 0..<srGuaranteeCount {
-            var rand:UInt32
-            // !!!当sr低保数和总抽卡数相近时 可能存在效率问题 
-            repeat {
-                rand = arc4random_uniform(times)
-            } while rands.contains(rand)
-            rands.append(rand)
+        guard srGuaranteeCount <= times else {
+            fatalError("sr guarantees is greater than simulation times")
         }
-        for i:UInt32 in 0..<times {
-            if rands.contains(i) {
+        for i in 0..<times {
+            if i + srGuaranteeCount >= times {
                 result.append(simulateOnce(srGuarantee: true))
             } else {
                 result.append(simulateOnce(srGuarantee: false))
@@ -302,4 +296,5 @@ class CGSSGachaPool: CGSSBaseModel {
         }
         return result
     }
+    
 }

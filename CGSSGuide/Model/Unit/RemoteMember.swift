@@ -22,6 +22,7 @@ struct RemoteMember: RemoteRecord {
     var vocalLevel: Int64
     var visualLevel: Int64
     var participatedPosition: Int64
+    var participatedUnit: CKReference
     
 }
 
@@ -32,6 +33,7 @@ extension RemoteMember {
     init?(record: CKRecord) {
         guard record.recordType == RemoteMember.recordType else { fatalError("wrong record type") }
         guard let cardID = record.object(forKey: "cardID") as? Int64,
+            let participatedUnit = record["participatedUnit"] as? CKReference,
             let skillLevel = record["skillLevel"] as? Int64,
             let vocalLevel = record["vocalLevel"] as? Int64,
             let danceLevel = record["danceLevel"] as? Int64,
@@ -44,6 +46,7 @@ extension RemoteMember {
         
         self.id = record.recordID.recordName
         self.creatorID = creatorID
+        self.participatedUnit = participatedUnit
         self.localCreatedAt = localCreatedAt
         self.cardID = cardID
         self.skillLevel = skillLevel
