@@ -30,6 +30,7 @@
 		120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */; };
 		1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */; };
 		1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */; };
+		121685EE1F1D911300F204D8 /* GachaSimulationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121685ED1F1D911300F204D8 /* GachaSimulationResult.swift */; };
 		121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82131EB7383600273F37 /* CGSSNotification.swift */; };
 		121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */; };
 		121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */; };
@@ -372,6 +373,7 @@
 		120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
 		1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
+		121685ED1F1D911300F204D8 /* GachaSimulationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaSimulationResult.swift; sourceTree = "<group>"; };
 		121B82131EB7383600273F37 /* CGSSNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSNotification.swift; sourceTree = "<group>"; };
 		121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelTableViewController.swift; sourceTree = "<group>"; };
 		121B82171EB82A6E00273F37 /* GachaCardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardFilterSortController.swift; sourceTree = "<group>"; };
@@ -1330,6 +1332,7 @@
 			children = (
 				124791841D882B2400ED8EA6 /* CGSSGachaPool.swift */,
 				12D45AD21E2E49660009986F /* CGSSGachaFilter.swift */,
+				121685ED1F1D911300F204D8 /* GachaSimulationResult.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2017,6 +2020,7 @@
 				129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */,
 				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
 				122497241E8E8582005C743C /* LFDistribution.swift in Sources */,
+				121685EE1F1D911300F204D8 /* GachaSimulationResult.swift in Sources */,
 				1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */,
 				1269E9D71D520B5D0071AD7F /* CGSSBeatmap.swift in Sources */,
 				12852EE71EF912DE00E26A73 /* TeamAdvanceCalculationController.swift in Sources */,

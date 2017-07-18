@@ -124,10 +124,10 @@ class CGSSGachaPool: CGSSBaseModel {
     var newsr = [Reward]()
     var newr = [Reward]()
     
-    lazy var cardsOfgurranteed: [CGSSCard] = {
+    lazy var cardsOfguaranteed: [CGSSCard] = {
         let semephore = DispatchSemaphore(value: 0)
         var result = [CGSSCard]()
-        CGSSGameResource.shared.master.getGurranteedCardIds(gacha: self, callback: { (cardIds) in
+        CGSSGameResource.shared.master.getGuaranteedCardIds(gacha: self, callback: { (cardIds) in
             result.append(contentsOf: cardIds.map { CGSSDAO.shared.findCardById($0) }.flatMap { $0 } )
             semephore.signal()
         })

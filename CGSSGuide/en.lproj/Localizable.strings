@@ -655,5 +655,8 @@
 "您输入的变量不合法" = "Your input is not valid";
 
 /* new in 1.4.2 */
-"天井" = "300-pulls gurrantees";
+"天井" = "300-pulls guarantees";
 "模拟抽卡" = "Simulation";
+"抽卡次数" = "pulls";
+"星星数" = "star jewels";
+"占比" = "percent";

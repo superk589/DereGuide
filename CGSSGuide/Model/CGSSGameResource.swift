@@ -308,7 +308,7 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func getGurranteedCardIds(gacha: CGSSGachaPool, callback: @escaping FMDBCallBackClosure<[Int]>) {
+    func getGuaranteedCardIds(gacha: CGSSGachaPool, callback: @escaping FMDBCallBackClosure<[Int]>) {
         var list = [Int]()
         execute({ (db) in
             let selectSql = "select reward_id from gacha_l_e_list a, gacha_l_group b where a.g_id = b.id and b.start_date <= '\(gacha.startDate)' and b.end_date >= '\(gacha.endDate)'"

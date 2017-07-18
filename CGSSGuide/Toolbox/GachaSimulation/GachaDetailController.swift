@@ -18,6 +18,8 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         }
     }
     
+    var gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
+    
     var sv: UIScrollView!
     
     var banner: BannerView!
@@ -34,8 +36,10 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         navigationItem.titleView = label
         
         let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        
         navigationItem.leftBarButtonItem = leftItem
+        
+        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
+        navigationItem.rightBarButtonItem = resetItem
         
         sv = UIScrollView()
         view.addSubview(sv)
@@ -77,48 +81,45 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         
         // Do any additional setup after loading the view.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
+
     func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func resetAction() {
+        gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
+        simulationView.wipeResultView()
+        simulationView.wipeResultGrid()
+    }
     
 }
 
 // MARK: GachaDetailViewDelegate
 extension GachaDetailController: GachaDetailViewDelegate {
+    
     func seeModeCard(gachaDetailView view: GachaDetailView) {
         let vc = GachaCardTableViewController()
         vc.setup(with: pool)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     func gachaDetailView(_ view: GachaDetailView, didClick cardIcon: CGSSCardIconView) {
         let vc = CardDetailViewController()
         vc.card = CGSSDAO.shared.findCardById(cardIcon.cardId!)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 // MARK: GachaSimulateViewDelegate
 extension GachaDetailController: GachaSimulateViewDelegate {
+    
     func tenGacha(gachaSimulateView: GachaSimulateView) {
         let cardIds = pool.simulate(times: 10, srGuaranteeCount: 1)
-        simulationView.setupResultView(cardIds: cardIds)
+        let ssrCount = cardIds.filter { CGSSDAO.shared.findCardById($0)?.rarityType == .ssr }.count
+        let srCount = cardIds.filter { CGSSDAO.shared.findCardById($0)?.rarityType == .sr }.count
+        gachaResult += GachaSimulationResult(times: 10, ssrCount: ssrCount, srCount: srCount)
+        simulationView.setupWith(cardIds: cardIds, result: gachaResult)
         
         /// first time using ten pull in gacha view controller, shows app store rating alert in app.
         if #available(iOS 10.3, *) {
@@ -130,9 +131,13 @@ extension GachaDetailController: GachaSimulateViewDelegate {
             })
         }
     }
+    
     func singleGacha(gachaSimulateView: GachaSimulateView) {
         let cardId = pool.simulateOnce(srGuarantee: false)
-        simulationView.setupResultView(cardIds: [cardId])
+        let ssrCount = [cardId].filter { CGSSDAO.shared.findCardById($0)?.rarityType == .ssr }.count
+        let srCount = [cardId].filter { CGSSDAO.shared.findCardById($0)?.rarityType == .sr }.count
+        gachaResult += GachaSimulationResult(times: 1, ssrCount: ssrCount, srCount: srCount)
+        simulationView.setupWith(cardIds: [cardId], result: gachaResult)
     }
     
     func gachaSimulateView(_ view: GachaSimulateView, didClick cardIcon: CGSSCardIconView) {
@@ -142,4 +147,5 @@ extension GachaDetailController: GachaSimulateViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         }        
     }
+    
 }

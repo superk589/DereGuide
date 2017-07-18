@@ -22,7 +22,8 @@ class GachaSimulateView: UIView {
     var singleButton : UIButton!
     var tenButton: UIButton!
     var resultView: UIView!
-    var descLabel: UILabel!
+    var resultGrid: GridLabel!
+
     weak var delegate: GachaSimulateViewDelegate?
     
     override init(frame: CGRect) {
@@ -70,20 +71,20 @@ class GachaSimulateView: UIView {
             make.height.equalTo(2 * btnW + 10)
         }
         
-        descLabel = UILabel()
-        descLabel.font = UIFont.systemFont(ofSize: 14)
-        descLabel.textColor = UIColor.darkGray
-        descLabel.numberOfLines = 0
-        descLabel.text = NSLocalizedString("* 每张卡片的获取几率和官方公布数据一致", comment: "模拟抽卡页面")
-        descLabel.sizeToFit()
-        addSubview(descLabel)
-        descLabel.snp.makeConstraints { (make) in
+        resultGrid = GridLabel(rows: 4, columns: 4)
+        addSubview(resultGrid)
+        resultGrid.snp.makeConstraints { (make) in
+            make.top.equalTo(tenButton.snp.bottom).offset(10)
             make.left.equalTo(10)
-            make.right.lessThanOrEqualTo(-10)
-            make.top.equalTo(singleButton.snp.bottom).offset(10)
+            make.right.equalTo(-10)
             make.bottom.equalTo(-10)
         }
         
+        resultGrid.setContents([[NSLocalizedString("抽卡次数", comment: ""), "SSR", "SR", "R"],
+                                ["", "", "", ""],
+                                [NSLocalizedString("星星数", comment: ""), "SSR \(NSLocalizedString("占比", comment: ""))", "SR \(NSLocalizedString("占比", comment: ""))", "R \(NSLocalizedString("占比", comment: ""))"],
+                                ["", "", "", ""]])
+                
         self.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
     }
     
@@ -101,7 +102,18 @@ class GachaSimulateView: UIView {
         }
     }
     
-    func setupResultView(cardIds: [Int]) {
+    func wipeResultGrid() {
+        resultGrid[1, 0].text = ""
+        resultGrid[1, 1].text = ""
+        resultGrid[1, 2].text = ""
+        resultGrid[1, 3].text = ""
+        resultGrid[3, 0].text = ""
+        resultGrid[3, 1].text = ""
+        resultGrid[3, 2].text = ""
+        resultGrid[3, 3].text = ""
+    }
+    
+    func setupWith(cardIds: [Int], result: GachaSimulationResult) {
         wipeResultView()
         for i in 0..<cardIds.count {
             let x = CGFloat(i % 5) * (space + btnW)
@@ -118,6 +130,16 @@ class GachaSimulateView: UIView {
             resultView.addSubview(btn)
             resultView.sendSubview(toBack: btn)
         }
+        
+        resultGrid[1, 0].text = "\(result.times)"
+        resultGrid[1, 1].text = "\(result.ssrCount)"
+        resultGrid[1, 2].text = "\(result.srCount)"
+        resultGrid[1, 3].text = "\(result.rCount)"
+        resultGrid[3, 0].text = "\(result.jewel)"
+        resultGrid[3, 1].text = String.init(format: "%.2f%%", result.ssrRate * 100)
+        resultGrid[3, 2].text = String.init(format: "%.2f%%", result.srRate * 100)
+        resultGrid[3, 3].text = String.init(format: "%.2f%%", result.rRate * 100)
+        
     }
     
     func iconClick(iv: CGSSCardIconView) {

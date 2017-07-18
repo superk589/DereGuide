@@ -65,13 +65,15 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 transitionContext.containerView.addSubview(toView)
                 toView.layoutIfNeeded()
                 let sourceFrame: CGRect
-                if #available(iOS 11.0, *) {
-                    var frame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
-                    frame.origin.y -= fromNavigationController.navigationBar.frame.maxY
-                    sourceFrame = frame
-                } else {
-                    sourceFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
-                }
+                sourceFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
+//                if #available(iOS 11.0, *) {
+//                    
+//                    var frame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
+//                    frame.origin.y -= fromNavigationController.navigationBar.frame.maxY
+//                    sourceFrame = frame
+//                } else {
+//                    
+//                }
                 let destFrame = destBanner.frame
                 destBanner.frame = sourceFrame
                 destBanner.layoutIfNeeded()

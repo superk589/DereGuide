@@ -24,7 +24,7 @@ class GachaDetailView: UIView {
     var timeLabel:UILabel!
     var timeStatusIndicator: TimeStatusIndicator!
     var cardListView: GachaCardWithOddsListView!
-    var gurranteedView: CardDetailRelatedCardsCell!
+    var guaranteesView: CardDetailRelatedCardsCell!
     var simulationView: GachaSimulateView!
     
     weak var delegate: GachaDetailViewDelegate?
@@ -147,21 +147,21 @@ class GachaDetailView: UIView {
             make.height.equalTo(1 / Screen.scale)
         }
         
-        gurranteedView = CardDetailRelatedCardsCell()
-        gurranteedView.rightLabel.isHidden = true
-        gurranteedView.leftLabel.text = NSLocalizedString("天井", comment: "模拟抽卡页面")
-        addSubview(gurranteedView.contentView)
-        gurranteedView.contentView.snp.makeConstraints { (make) in
+        guaranteesView = CardDetailRelatedCardsCell()
+        guaranteesView.rightLabel.isHidden = true
+        guaranteesView.leftLabel.text = NSLocalizedString("天井", comment: "模拟抽卡页面")
+        addSubview(guaranteesView.contentView)
+        guaranteesView.contentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(line2.snp.bottom)
         }
-        gurranteedView.delegate = self
+        guaranteesView.delegate = self
         
         let line3 = LineView()
         addSubview(line3)
         line3.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(gurranteedView.contentView.snp.bottom)
+            make.top.equalTo(guaranteesView.contentView.snp.bottom)
             make.height.equalTo(1 / Screen.scale)
             make.bottom.equalToSuperview()
         }
@@ -197,7 +197,7 @@ class GachaDetailView: UIView {
         sorter.sortList(&cards)
         cardListView.setupWith(cards: cards, odds: cards.map { pool.rewardTable[$0.id]?.relativeOdds })
         
-        gurranteedView.cards = pool.cardsOfgurranteed
+        guaranteesView.cards = pool.cardsOfguaranteed
     }
     
     func seeMoreCardAction() {
