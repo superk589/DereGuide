@@ -14,6 +14,7 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
     case pro
     case master
     case masterPlus
+    case legacyMasterPlus
     
     static let all: [CGSSLiveDifficulty] = [CGSSLiveDifficulty.debut, .regular, .pro, .master, .masterPlus]
     
@@ -30,6 +31,8 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
             return "MASTER"
         case .masterPlus:
             return "MASTER+"
+        case .legacyMasterPlus:
+            return "LEGACY MASTER+"
         }
     }
     
@@ -44,6 +47,8 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
         case .master:
             return Color.master
         case .masterPlus:
+            return Color.masterPlus
+        case .legacyMasterPlus:
             return Color.masterPlus
         }
     }
@@ -77,6 +82,8 @@ struct CGSSLiveDifficultyTypes: OptionSet {
             self = .master
         case .masterPlus:
             self = .masterPlus
+        default:
+            fatalError("no matched types")
         }
     }
     

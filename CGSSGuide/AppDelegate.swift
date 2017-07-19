@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         // 初始化同步协调器
-//        syncCoordinator = SyncCoordinator.shared
+        syncCoordinator = SyncCoordinator.shared
         return true
     }
     

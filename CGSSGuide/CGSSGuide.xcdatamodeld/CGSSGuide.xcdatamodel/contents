@@ -14,9 +14,7 @@
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="visualLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vocalLevel" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="centeredUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="center" inverseEntity="Unit" syncable="YES"/>
-        <relationship name="guestedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="guest" inverseEntity="Unit" syncable="YES"/>
-        <relationship name="participatedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="otherMembers" inverseEntity="Unit" syncable="YES"/>
+        <relationship name="participatedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="members" inverseEntity="Unit" syncable="YES"/>
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -25,16 +23,14 @@
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="markedForLocalChange" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="remoteIdentifiter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="supportAppeal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="usesCustomAppeal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="center" maxCount="1" deletionRule="Cascade" destinationEntity="Member" inverseName="centeredUnit" inverseEntity="Member" syncable="YES"/>
-        <relationship name="guest" maxCount="1" deletionRule="Cascade" destinationEntity="Member" inverseName="guestedUnit" inverseEntity="Member" syncable="YES"/>
-        <relationship name="otherMembers" toMany="YES" minCount="4" maxCount="4" deletionRule="Cascade" destinationEntity="Member" inverseName="participatedUnit" inverseEntity="Member" syncable="YES"/>
+        <relationship name="members" toMany="YES" minCount="6" maxCount="6" deletionRule="Cascade" destinationEntity="Member" inverseName="participatedUnit" inverseEntity="Member" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Member" positionX="-54" positionY="0" width="128" height="285"/>
-        <element name="Unit" positionX="196" positionY="9" width="128" height="240"/>
+        <element name="Member" positionX="-54" positionY="0" width="128" height="255"/>
+        <element name="Unit" positionX="196" positionY="9" width="128" height="210"/>
     </elements>
 </model>

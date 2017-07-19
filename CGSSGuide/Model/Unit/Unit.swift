@@ -22,14 +22,10 @@ public class Unit: NSManagedObject {
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
     @NSManaged public var usesCustomAppeal: Bool
-    @NSManaged public var otherMembers: Set<Member>
-    @NSManaged public var center: Member
-    @NSManaged public var guest: Member
+    @NSManaged public var members: Set<Member>
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
-    
-    public lazy var ckReference: CKReference = CKReference(record: self.toCKRecord(), action: .deleteSelf)
     
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -46,28 +42,26 @@ public class Unit: NSManagedObject {
     }
     
     @discardableResult
-    private static func insert(into moc: NSManagedObjectContext, customAppeal: Int64, supportAppeal: Int64, usesCustomAppeal: Bool, center: Member, guest: Member, otherMembers: Set<Member>) -> Unit {
+    private static func insert(into moc: NSManagedObjectContext, customAppeal: Int64, supportAppeal: Int64, usesCustomAppeal: Bool, members: Set<Member>) -> Unit {
         let unit: Unit = moc.insertObject()
         unit.customAppeal = customAppeal
         unit.supportAppeal = supportAppeal
         unit.usesCustomAppeal = usesCustomAppeal
-        unit.center = center
-        unit.guest = guest
-        unit.otherMembers = otherMembers
+        unit.members = members
         return unit
     }
     
     @discardableResult
-    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, center: Member, guest: Member, otherMembers: [Member]) -> Unit {
-        otherMembers.forEach {
-            $0.participatedPosition = Int16(otherMembers.index(of: $0)!) + 1
+    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, members: [Member]) -> Unit {
+        members.forEach {
+            $0.participatedPosition = Int16(members.index(of: $0)!)
         }
-        return insert(into: moc, customAppeal: Int64(customAppeal), supportAppeal: Int64(supportAppeal), usesCustomAppeal: usesCustomAppeal, center: center, guest: guest, otherMembers: Set(otherMembers))
+        return insert(into: moc, customAppeal: Int64(customAppeal), supportAppeal: Int64(supportAppeal), usesCustomAppeal: usesCustomAppeal, members: Set(members))
     }
     
     @discardableResult
     static func insert(into moc: NSManagedObjectContext, anotherUnit: Unit) -> Unit {
-        return insert(into: moc, customAppeal: anotherUnit.customAppeal, supportAppeal: anotherUnit.supportAppeal, usesCustomAppeal: anotherUnit.usesCustomAppeal, center: Member.insert(into: moc, anotherMember: anotherUnit.center), guest: Member.insert(into: moc, anotherMember: anotherUnit.guest), otherMembers: Set(anotherUnit.otherMembers.map {
+        return insert(into: moc, customAppeal: anotherUnit.customAppeal, supportAppeal: anotherUnit.supportAppeal, usesCustomAppeal: anotherUnit.usesCustomAppeal, members: Set(anotherUnit.members.map {
             return Member.insert(into: moc, anotherMember: $0)
         }))
     }
@@ -105,6 +99,13 @@ extension Unit: DelayedDeletable {
 extension Unit: RemoteDeletable {
     @NSManaged public var markedForRemoteDeletion: Bool
     @NSManaged public var remoteIdentifier: String?
+    
+    var ckReference: CKReference? {
+        guard let id = remoteIdentifier else {
+            return nil
+        }
+        return CKReference(recordID: CKRecordID.init(recordName: id), action: .deleteSelf)
+    }
 }
 
 extension Unit: UserOwnable {
@@ -113,7 +114,7 @@ extension Unit: UserOwnable {
 
 extension Unit: RemoteUploadable {
     public func toCKRecord() -> CKRecord {
-        let record = CKRecord(recordType: RemoteMember.recordType)
+        let record = CKRecord(recordType: RemoteUnit.recordType)
         record["customAppeal"] = customAppeal as CKRecordValue
         record["supportAppeal"] = supportAppeal as CKRecordValue
         record["usesCustomAppeal"] = (usesCustomAppeal ? 1 : 0) as CKRecordValue
@@ -127,15 +128,21 @@ extension Unit {
     
     @discardableResult
     static func insert(into moc: NSManagedObjectContext, team: CGSSTeam) -> Unit {
+        
+        var members = [Member]()
+        
         let center = Member.insert(into: moc, cardID: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
-        let guest = Member.insert(into: moc, cardID: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
-        var otherMembers = [Member]()
+        members.append(center)
+        
         for sub in team.subs {
             let member = Member.insert(into: moc, cardID: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
-            otherMembers.append(member)
+            members.append(member)
         }
         
-        return Unit.insert(into: moc, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, usesCustomAppeal: team.usingCustomAppeal, center: center, guest: guest, otherMembers: otherMembers)
+        let guest = Member.insert(into: moc, cardID: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
+        members.append(guest)
+        
+        return Unit.insert(into: moc, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, usesCustomAppeal: team.usingCustomAppeal, members: members)
     }
     
 }
@@ -143,23 +150,19 @@ extension Unit {
 extension Unit {
     
     var leader: Member {
-        return center
+        return orderedMembers[0]
     }
     
     var friendLeader: Member {
-        return guest
+        return orderedMembers[1]
     }
     
     var subs: [Member] {
-        return otherMembers.sorted { $0.participatedPosition < $1.participatedPosition }
+        return Array(members.sorted { $0.participatedPosition < $1.participatedPosition }[1...4])
     }
     
-    var members: [Member] {
-        var result = [Member]()
-        result.append(leader)
-        result.append(contentsOf: subs)
-        result.append(friendLeader)
-        return result
+    var orderedMembers: [Member] {
+        return members.sorted { $0.participatedPosition < $1.participatedPosition }
     }
     
     var skills: [CGSSRankedSkill] {
@@ -175,16 +178,7 @@ extension Unit {
     }
     
     subscript (index: Int) -> Member {
-        switch index {
-        case 0:
-            return leader
-        case 1...4:
-            return subs[index - 1]
-        case 5:
-            return guest
-        default:
-            fatalError("index out of range")
-        }
+        return orderedMembers[index]
     }
     
     subscript (range: CountableClosedRange<Int>) -> ArraySlice<Member> {

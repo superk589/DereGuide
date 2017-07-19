@@ -51,6 +51,21 @@ class MusicScoreDBQueue: FMDatabaseQueue {
         }
     }
     
+    func getLegacyBeatmap(callback: @escaping FMDBCallBackClosure<CGSSBeatmap?>) {
+        var beatmap: CGSSBeatmap?
+        execute({ (db) in
+            let selectSql = "select * from blobs where name like '%101.csv' order by name asc"
+            let set = try db.executeQuery(selectSql, values: nil)
+            while set.next() {
+                if let data = set.data(forColumn: "data") {
+                    beatmap = CGSSBeatmap.init(data: data)
+                }
+            }
+        }) {
+            callback(beatmap)
+        }
+    }
+    
     func getBeatmapCount(callback: @escaping FMDBCallBackClosure<Int>) {
         var result = 0
         execute({ (db) in
@@ -439,6 +454,24 @@ class CGSSGameResource: NSObject {
             manifest.close()
         }
         return manifest.getMusicScores()
+    }
+    
+    func getLegacyBeatmap(liveId: Int) -> CGSSBeatmap? {
+        let path = String.init(format: DataPath.beatmap, liveId)
+        let fm = FileManager.default
+        var result: CGSSBeatmap?
+        let semaphore = DispatchSemaphore.init(value: 0)
+        let dbQueue = MusicScoreDBQueue.init(path: path)
+        if fm.fileExists(atPath: path) {
+            dbQueue.getLegacyBeatmap(callback: { (beatmap) in
+                result = beatmap
+                semaphore.signal()
+            })
+        } else {
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
     }
     
     func getBeatmaps(liveId: Int) -> [CGSSBeatmap]? {

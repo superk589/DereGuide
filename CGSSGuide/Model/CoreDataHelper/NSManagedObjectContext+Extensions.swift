@@ -7,7 +7,7 @@
 //
 
 import CoreData
-
+import SwiftTryCatch
 
 extension NSManagedObjectContext {
 
@@ -43,11 +43,20 @@ extension NSManagedObjectContext {
 
     @discardableResult
     public func saveOrRollback() -> Bool {
+        
+//        SwiftTryCatch.try({
+//            try! self.save()
+//        }, catch: { (e) in
+//            print(e!)
+//        }, finally: {
+//
+//        })
+//        return true
+        
         do {
             try save()
             return true
-        } catch let e as NSError {
-            print(e.userInfo)
+        } catch {
             rollback()
             return false
         }

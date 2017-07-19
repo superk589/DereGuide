@@ -280,6 +280,9 @@
 		12EECCDF1ED5DC460047666C /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCDE1ED5DC460047666C /* BannerView.swift */; };
 		12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA11F0F32E900B75E47 /* Unit.swift */; };
 		12F33DA71F0F32E900B75E47 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA31F0F32E900B75E47 /* Member.swift */; };
+		12F351121F1F07E000F47FD1 /* MemberUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351111F1F07E000F47FD1 /* MemberUploader.swift */; };
+		12F351141F1F087C00F47FD1 /* MemberRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351131F1F087C00F47FD1 /* MemberRemover.swift */; };
+		12F351161F1F08F200F47FD1 /* MemberDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351151F1F08F200F47FD1 /* MemberDownloader.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
 		12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */; };
@@ -645,6 +648,9 @@
 		12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringConvertible.swift; sourceTree = "<group>"; };
 		12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUploadable.swift; sourceTree = "<group>"; };
 		12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimestampable.swift; sourceTree = "<group>"; };
+		12F351111F1F07E000F47FD1 /* MemberUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberUploader.swift; sourceTree = "<group>"; };
+		12F351131F1F087C00F47FD1 /* MemberRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRemover.swift; sourceTree = "<group>"; };
+		12F351151F1F08F200F47FD1 /* MemberDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDownloader.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12F4EAEA1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSimulationCommonCell.swift; sourceTree = "<group>"; };
@@ -834,6 +840,9 @@
 				12D6243F1F171F640017999A /* UnitUploader.swift */,
 				12D624441F171F640017999A /* UnitRemover.swift */,
 				12D624461F171F640017999A /* UnitDownloader.swift */,
+				12F351111F1F07E000F47FD1 /* MemberUploader.swift */,
+				12F351131F1F087C00F47FD1 /* MemberRemover.swift */,
+				12F351151F1F08F200F47FD1 /* MemberDownloader.swift */,
 			);
 			name = Processor;
 			sourceTree = "<group>";
@@ -1698,6 +1707,7 @@
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftTryCatch/SwiftTryCatch.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTagCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZKCornerRadiusView/ZKCornerRadiusView.framework",
@@ -1714,6 +1724,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTryCatch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTagCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCornerRadiusView.framework",
@@ -1858,6 +1869,7 @@
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
+				12F351141F1F087C00F47FD1 /* MemberRemover.swift in Sources */,
 				120DBB291EEE3120004E0084 /* TeamTemplateController.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
@@ -1942,6 +1954,7 @@
 				127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
 				125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */,
+				12F351121F1F07E000F47FD1 /* MemberUploader.swift in Sources */,
 				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
@@ -1959,6 +1972,7 @@
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				1269EA211D520DDB0071AD7F /* CGSSTeam.swift in Sources */,
+				12F351161F1F08F200F47FD1 /* MemberDownloader.swift in Sources */,
 				121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */,
 				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
 				128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */,

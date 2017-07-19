@@ -45,19 +45,21 @@ extension UnitUploader {
     
     fileprivate func processInsertedUnits(_ insertions: [Unit], in context: ChangeProcessorContext) {
         remote.upload(insertions) { (remoteUnits, error) in
-            guard !(error?.isPermanent ?? false) else {
-                // Since the error was permanent, delete these objects:
-                insertions.forEach { $0.markForLocalDeletion() }
+            context.perform {
+                guard !(error?.isPermanent ?? false) else {
+                    // Since the error was permanent, delete these objects:
+                    insertions.forEach { $0.markForLocalDeletion() }
+                    self.elementsInProgress.markObjectsAsComplete(insertions)
+                    return
+                }
+                for unit in insertions {
+                    guard let remoteUnit = remoteUnits.first(where: { unit.createdAt == $0.localCreatedAt }) else { continue }
+                    unit.creatorID = remoteUnit.creatorID
+                    unit.remoteIdentifier = remoteUnit.id
+                }
+                context.delayedSaveOrRollback()
                 self.elementsInProgress.markObjectsAsComplete(insertions)
-                return
             }
-            for unit in insertions {
-                guard let remoteUnit = remoteUnits.first(where: { unit.createdAt == $0.localCreatedAt }) else { continue }
-                unit.creatorID = remoteUnit.creatorID
-                unit.remoteIdentifier = remoteUnit.id
-            }
-            context.delayedSaveOrRollback()
-            self.elementsInProgress.markObjectsAsComplete(insertions)
         }
     }
     

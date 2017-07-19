@@ -30,7 +30,7 @@ extension RemoteUnit {
     static var recordType: String { return "Unit" }
     
     init?(record: CKRecord) {
-        guard record.recordType == RemoteUnit.recordType else { fatalError("wrong record type") }
+        guard record.recordType == RemoteUnit.recordType else { return nil }
         guard
 //        let center = record.object(forKey: "center") as? CKReference,
         let customAppeal = record.object(forKey: "customAppeal") as? Int64,
@@ -65,11 +65,7 @@ extension RemoteUnit {
             guard remoteMembers.count == 6 else {
                 return
             }
-            
-            let otherMembers = remoteMembers[1...4].map {
-                return $0.insert(into: context)
-            }
-            Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, center: remoteMembers[0].insert(into: context), guest: remoteMembers[5].insert(into: context), otherMembers: otherMembers)
+            Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, members: remoteMembers.map { $0.insert(into: context) })
         })
     }
     

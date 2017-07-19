@@ -54,7 +54,7 @@ class TeamTemplateController: BaseTableViewController {
                     guard members.count == 6 else {
                         continue
                     }
-                    let unit = Unit.insert(into: context, customAppeal: 0, supportAppeal: CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: false, center: members[0], guest: members[5], otherMembers: Array(members[1...4]))
+                    let unit = Unit.insert(into: context, customAppeal: 0, supportAppeal: CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: false, members: members)
                     let template = TeamTemplate(name: name, unit: unit)
                     templates.append(template)
                 }

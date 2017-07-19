@@ -55,15 +55,25 @@ extension NSManagedObjectContext {
 
 extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
     
+//    fileprivate static func batchDeleteObjectsMarkedForLocalDeletionInContext(_ managedObjectContext: NSManagedObjectContext) {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+//        let cutoff = Date(timeIntervalSinceNow: -DeletionAgeBeforePermanentlyDeletingObjects)
+//        fetchRequest.predicate = NSPredicate(format: "%K < %@", MarkedForDeletionDateKey, cutoff as NSDate)
+//        let batchRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        batchRequest.resultType = .resultTypeStatusOnly
+//        try! managedObjectContext.execute(batchRequest)
+//    }
+
     fileprivate static func batchDeleteObjectsMarkedForLocalDeletionInContext(_ managedObjectContext: NSManagedObjectContext) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: self.entityName)
         let cutoff = Date(timeIntervalSinceNow: -DeletionAgeBeforePermanentlyDeletingObjects)
         fetchRequest.predicate = NSPredicate(format: "%K < %@", MarkedForDeletionDateKey, cutoff as NSDate)
-        let batchRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        batchRequest.resultType = .resultTypeStatusOnly
-        try! managedObjectContext.execute(batchRequest)
+        let objects = try! managedObjectContext.fetch(fetchRequest)
+
+        objects.forEach { managedObjectContext.delete($0) }
+        
+        managedObjectContext.saveOrRollback()
     }
-    
 }
 
 

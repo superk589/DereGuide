@@ -51,10 +51,8 @@ final class UnitDownloader: ChangeProcessor {
 
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
         remote.fetchLatestRecords(completion: { (remoteUnits) in
-            context.perform {
-                self.insert(remoteUnits, into: context.context)
-                context.delayedSaveOrRollback()
-            }
+            self.insert(remoteUnits, into: context.context)
+            context.delayedSaveOrRollback()
         })
     }
 
@@ -69,30 +67,34 @@ extension UnitDownloader {
 
     fileprivate func deleteUnits(with ids: [RemoteIdentifier], in context: NSManagedObjectContext) {
         guard !ids.isEmpty else { return }
-        let units = Unit.fetch(in: context) { (request) -> () in
-            request.predicate = Unit.predicateForRemoteIdentifiers(ids)
-            request.returnsObjectsAsFaults = false
-        }
-        units.forEach { $0.markForLocalDeletion() }
-    }
-
-    fileprivate func insert(_ remoteUnits: [RemoteUnit], into context: NSManagedObjectContext) {
-        let existingUnits = { () -> [RemoteIdentifier: Unit] in
-            let ids = remoteUnits.map { $0.id }.flatMap { $0 }
-            let units = Unit.fetch(in: context) { request in
+        context.perform {
+            let units = Unit.fetch(in: context) { (request) -> () in
                 request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                 request.returnsObjectsAsFaults = false
             }
-            var result: [RemoteIdentifier: Unit] = [:]
-            for unit in units {
-                result[unit.remoteIdentifier!] = unit
-            }
-            return result
-        }()
+            units.forEach { $0.markForLocalDeletion() }
+        }
+    }
 
-        for remoteUnit in remoteUnits {
-            guard existingUnits[remoteUnit.id] == nil else { continue }
-            remoteUnit.insert(into: context)
+    fileprivate func insert(_ remoteUnits: [RemoteUnit], into context: NSManagedObjectContext) {
+        context.perform {
+            let existingUnits = { () -> [RemoteIdentifier: Unit] in
+                let ids = remoteUnits.map { $0.id }.flatMap { $0 }
+                let units = Unit.fetch(in: context) { request in
+                    request.predicate = Unit.predicateForRemoteIdentifiers(ids)
+                    request.returnsObjectsAsFaults = false
+                }
+                var result: [RemoteIdentifier: Unit] = [:]
+                for unit in units {
+                    result[unit.remoteIdentifier!] = unit
+                }
+                return result
+            }()
+            
+            for remoteUnit in remoteUnits {
+                guard existingUnits[remoteUnit.id] == nil else { continue }
+                remoteUnit.insert(into: context)
+            }
         }
     }
     

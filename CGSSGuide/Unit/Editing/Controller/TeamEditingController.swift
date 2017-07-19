@@ -53,7 +53,9 @@ class TeamEditingController: BaseViewController {
     
     fileprivate func generateRecentMembers() -> [Member] {
         var members = [Member]()
-        let units = Unit.fetch(in: parentContext)
+        let request: NSFetchRequest<Unit> = Unit.sortedFetchRequest
+        request.returnsObjectsAsFaults = false
+        let units = try! context.fetch(request)
         for unit in units {
             for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
                 let member = unit[i]
@@ -214,7 +216,7 @@ class TeamEditingController: BaseViewController {
     fileprivate func setup(withParentUnit unit: Unit) {
         self.unit = context.object(with: unit.objectID) as? Unit
         for i in 0...5 {
-            self.members[i] = unit.members[i]
+            self.members[i] = unit.orderedMembers[i]
         }
         editableView.setup(with: unit)
     }
@@ -226,7 +228,7 @@ class TeamEditingController: BaseViewController {
             navigationController?.popViewController(animated: true)
         } else {
             if members.values.count == 6 {
-                Unit.insert(into: context, center: members[0]!, guest: members[5]!, otherMembers: [members[1]!, members[2]!, members[3]!, members[4]!])
+                Unit.insert(into: context, members: members.sorted{ $0.key < $1.key }.map { $0.value })
                 context.saveOrRollback()
                 parentContext.saveOrRollback()
                 navigationController?.popViewController(animated: true)
@@ -253,25 +255,25 @@ class TeamEditingController: BaseViewController {
         
         let previousMember = members[index]
         if previousMember != nil {
+            previousMember?.participatedUnit = nil
             previousMember?.markForRemoteDeletion()
         }
         
         member.participatedPosition = Int16(index)
         members[index] = member
-        member.creatorID = unit?.members[index].creatorID
-        member.remoteIdentifier = unit?.members[index].remoteIdentifier
+
         switch index {
         case 0:
-            unit?.center = member
+            unit?.members.insert(member)
             if members[5] == nil {
                 let guest = Member.insert(into: context, anotherMember: members[0]!)
                 insertMember(guest, at: 5, movesCurrentIndex: false)
             }
         case 1...4:
             previousMember?.participatedUnit = nil
-            unit?.otherMembers.insert(member)
+            unit?.members.insert(member)
         case 5:
-            unit?.guest = member
+            unit?.members.insert(member)
         default:
             break
         }

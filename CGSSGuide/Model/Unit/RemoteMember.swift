@@ -31,7 +31,7 @@ extension RemoteMember {
     static var recordType: String { return "Member" }
     
     init?(record: CKRecord) {
-        guard record.recordType == RemoteMember.recordType else { fatalError("wrong record type") }
+        guard record.recordType == RemoteMember.recordType else { return nil }
         guard let cardID = record.object(forKey: "cardID") as? Int64,
             let participatedUnit = record["participatedUnit"] as? CKReference,
             let skillLevel = record["skillLevel"] as? Int64,

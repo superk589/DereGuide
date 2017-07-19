@@ -7,7 +7,7 @@
 //
 
 import CoreData
-
+import SwiftTryCatch
 
 extension NSManagedObjectContext {
     func perform(group: DispatchGroup, block: @escaping () -> ()) {
@@ -35,15 +35,17 @@ extension NSManagedObjectContext {
     fileprivate var changedObjectsCount: Int {
         return insertedObjects.count + updatedObjects.count + deletedObjects.count
     }
-
+    
     func delayedSaveOrRollback(group: DispatchGroup, completion: @escaping (Bool) -> () = { _ in }) {
         let changeCountLimit = 100
-        guard changeCountLimit >= changedObjectsCount else { return completion(saveOrRollback()) }
-        let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
-        group.notify(queue: queue) {
-            self.perform(group: group) {
-                guard self.hasChanges else { return completion(true) }
-                completion(self.saveOrRollback())
+        perform {
+            guard changeCountLimit >= self.changedObjectsCount else { return completion(self.saveOrRollback()) }
+            let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+            group.notify(queue: queue) {
+                self.perform(group: group) {
+                    guard self.hasChanges else { return completion(true) }
+                    completion(self.saveOrRollback())
+                }
             }
         }
     }

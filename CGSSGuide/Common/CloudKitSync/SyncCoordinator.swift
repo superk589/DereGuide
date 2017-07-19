@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftTryCatch
 
 public protocol CloudKitNotificationDrain {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any])
@@ -52,7 +53,7 @@ public final class SyncCoordinator {
         self.syncContext = syncContext
         syncContext.name = "SyncCoordinator"
         syncContext.mergePolicy = CloudKitMergePolicy(mode: .remote)
-        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote)]
+        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote), MemberDownloader(remote: membersRemote), MemberRemover(remote: membersRemote)]
         setup()
     }
 
@@ -187,12 +188,15 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
                 let request = entityAndPredicate.fetchRequest
                 request.returnsObjectsAsFaults = false
 
-                do {
-                    let result = try self.syncContext.fetch(request)
+                SwiftTryCatch.try({
+                    let result = try! self.syncContext.fetch(request)
                     objects.formUnion(result)
-                } catch let e as NSError {
-                    print(e)
-                }
+                }, catch: { (e) in
+                    print(e!)
+                }, finally: {
+                    
+                })
+
             }
             self.processChangedLocalObjects(Array(objects))
         }
@@ -206,9 +210,11 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
 extension SyncCoordinator {
     
     fileprivate func fetchRemoteDataForApplicationDidBecomeActive() {
-        switch Unit.count(in: context) {
-        case 0: self.fetchLatestRemoteData()
-        default: self.fetchNewRemoteData()
+        perform {
+            switch Unit.count(in: self.context) {
+            case 0: self.fetchLatestRemoteData()
+            default: self.fetchNewRemoteData()
+            }
         }
     }
 
@@ -222,6 +228,15 @@ extension SyncCoordinator {
     }
 
     fileprivate func fetchNewRemoteData() {
+        membersRemote.fetchNewRecords { (changes, callback) in
+            self.processRemoteChanges(changes, completion: {
+                self.perform {
+                    self.context.delayedSaveOrRollback(group: self.syncGroup) { success in
+                        callback(success)
+                    }
+                }
+            })
+        }
         unitsRemote.fetchNewRecords { changes, callback in
             self.processRemoteChanges(changes) {
                 self.perform {

@@ -27,7 +27,7 @@ extension RemoteModifiable {
 
 extension RemoteModifiable where Self: NSManagedObject {
     func markForRemoteModification() {
-        guard changedValue(forKey: MarkedForRemoteModificationKey) == nil else { return }
+        guard changedValue(forKey: MarkedForRemoteModificationKey) == nil && !markedForLocalChange else { return }
         markedForLocalChange = true
     }
 }

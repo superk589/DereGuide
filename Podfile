@@ -16,6 +16,7 @@ target 'CGSSGuide' do
   pod 'Charts'
   pod 'EasyTipView'
   pod 'DynamicColor'
+  pod 'SwiftTryCatch'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

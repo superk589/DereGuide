@@ -26,8 +26,6 @@ public class Member: NSManagedObject {
     @NSManaged public var updatedAt: Date
     @NSManaged public var participatedUnit: Unit?
     @NSManaged public var participatedPosition: Int16
-    @NSManaged public var centeredUnit: Unit?
-    @NSManaged public var guestedUnit: Unit?
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
@@ -42,11 +40,11 @@ public class Member: NSManagedObject {
         super.willSave()
         if hasChanges {
             refreshUpdateDate()
-            unit?.refreshUpdateDate()
+            participatedUnit?.refreshUpdateDate()
             markForRemoteModification()
-            unit?.markForRemoteModification()
+            participatedUnit?.markForRemoteModification()
         }
-        if unit == nil {
+        if participatedUnit == nil {
             markForLocalDeletion()
         }
     }
@@ -82,10 +80,6 @@ extension Member: RemoteModifiable {
 }
 
 extension Member {
-    
-    var unit: Unit! {
-        return participatedUnit ?? centeredUnit ?? guestedUnit
-    }
     
     var card: CGSSCard? {
         let dao = CGSSDAO.shared
@@ -131,17 +125,18 @@ extension Member: RemoteUploadable {
     
     public func toCKRecord() -> CKRecord {
         let record = CKRecord(recordType: RemoteMember.recordType)
+        record["cardID"] = cardID as CKRecordValue
         record["skillLevel"] = skillLevel as CKRecordValue
         record["vocalLevel"] = vocalLevel as CKRecordValue
         record["danceLevel"] = danceLevel as CKRecordValue
         record["visualLevel"] = visualLevel as CKRecordValue
         record["participatedPosition"] = participatedPosition as CKRecordValue
-        record["participatedUnit"] = CKReference(record: unit.toCKRecord(), action: .deleteSelf)
+        record["participatedUnit"] = participatedUnit!.ckReference
         record["localCreatedAt"] = createdAt as CKRecordValue
         record["localModifiedAt"] = updatedAt as CKRecordValue
         return record
     }
-    
+
 }
 
 

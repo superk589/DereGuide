@@ -268,6 +268,12 @@ class CGSSLive: CGSSBaseModel {
         return beatmaps
     }()
 
+    lazy var legacyMasterPlusBeatmap: CGSSBeatmap? = {
+        guard let beatmap = CGSSGameResource.shared.getLegacyBeatmap(liveId: self.id) else {
+            return nil
+        }
+        return beatmap
+    }()
     
     /// used in filter
     var difficultyTypes: CGSSLiveDifficultyTypes = .all

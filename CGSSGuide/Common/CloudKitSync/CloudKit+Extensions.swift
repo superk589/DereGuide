@@ -126,7 +126,7 @@ extension NSError {
             case .serviceUnavailable: return false
             case .requestRateLimited: return false
             case .missingEntitlement: return true
-            case .notAuthenticated: return true
+            case .notAuthenticated: return false
             case .permissionFailure: return true
             case .unknownItem: return true
             case .invalidArguments: return true
@@ -151,8 +151,8 @@ extension NSError {
             case .referenceViolation: return true
             case .managedAccountRestricted: return true
             case .participantMayNeedVerification: return true
-        default:
-            return false
+            default:
+                return false
 //            case .serverResponseLost: return false
         }
     }

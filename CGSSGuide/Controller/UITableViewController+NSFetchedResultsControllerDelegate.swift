@@ -34,7 +34,7 @@ extension UITableViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
+            tableView.reloadRows(at: [indexPath!], with: .none)
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
