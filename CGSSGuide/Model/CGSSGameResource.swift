@@ -37,7 +37,7 @@ class MusicScoreDBQueue: FMDatabaseQueue {
     func getBeatmaps(callback: @escaping FMDBCallBackClosure<[CGSSBeatmap]>) {
         var beatmaps = [CGSSBeatmap]()
         execute({ (db) in
-            let selectSql = "select * from blobs where name like '%_1.csv' or name like '%_2.csv' or name like '%_3.csv' or name like '%_4.csv' or name like '%_5.csv' order by name asc"
+            let selectSql = "select * from blobs where name like '%^__.csv' escape '^' order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 if let data = set.data(forColumn: "data") {
@@ -54,7 +54,7 @@ class MusicScoreDBQueue: FMDatabaseQueue {
     func getBeatmapCount(callback: @escaping FMDBCallBackClosure<Int>) {
         var result = 0
         execute({ (db) in
-            let selectSql = "select count(*) count from blobs where name like '%_1.csv' or name like '%_2.csv' or name like '%_3.csv' or name like '%_4.csv' or name like '%_5.csv'"
+            let selectSql = "select count(*) count from blobs where name like '%^__.csv' escape '^' order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let count = Int(set.int(forColumn: "count"))
