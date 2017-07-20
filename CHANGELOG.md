@@ -9,6 +9,24 @@
 5. 针对图片下载失败的情况（卡片大图，卡池图，活动图等），现在双击可以重新下载
 6. 增加隐私政策页面，即将添加的新功能可能会收集您使用本程序过程中产生的一些数据，如模拟时组建的队伍，喜欢的卡片和角色等
 
+##### Japanese version
+
+1. 快適に閲覧のため、横画面に一部ページの幅を縮めます
+2. キャラ一覧ページにソートを行っている時、利用している条件の対応する数値もリストに表示します
+3. ガシャシミュレーターに天丼リストとガシャる回数の表示を追加します
+4. 一部のイベント楽曲の難易度と対応する譜面は一致しませんの不具合を修正します
+5. 単独の画像（フルサイズ/ガシャヘッダー/イベントヘッダー など）にダブルクリックして、画像が再ダウンロードできるようになります
+6. プライバシーポリシーを追加します。次の新機能の準備として、お客様がアプリ利用の過程に一部のデータ（編成したユニットや、お気に入ったカードとアイドルなど）を採取・アップロードすることがあります。
+
+##### English version
+
+1. Make it more readable in landscape mode by reducing the width of some page
+2. Chara info page also show sorting property at right side
+3. Add 300-pull guaranteed cards and simulation statistics in gacha simulation page
+4. Fix that some beatmaps mismatching there difficulties
+5. Double click can reload the spread image of card, gacha header and event header
+6. Add privacy policy page, the feature will be added in the near future may collect data such as the units you created, favorite cards and charas
+
 ### 1.4.1
 2017-7-6
 
