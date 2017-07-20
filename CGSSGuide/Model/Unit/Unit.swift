@@ -38,6 +38,10 @@ public class Unit: NSManagedObject {
         if hasChanges {
             refreshUpdateDate()
             markForRemoteModification()
+            members.forEach {
+                $0.refreshUpdateDate()
+                $0.markForRemoteModification()
+            }
         }
     }
     
@@ -105,6 +109,10 @@ extension Unit: RemoteDeletable {
             return nil
         }
         return CKReference(recordID: CKRecordID.init(recordName: id), action: .deleteSelf)
+    }
+    
+    public func markForRemoteDeletion() {
+        markedForRemoteDeletion = true
     }
 }
 

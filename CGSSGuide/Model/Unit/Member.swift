@@ -40,8 +40,8 @@ public class Member: NSManagedObject {
         super.willSave()
         if hasChanges {
             refreshUpdateDate()
-            participatedUnit?.refreshUpdateDate()
             markForRemoteModification()
+            participatedUnit?.refreshUpdateDate()
             participatedUnit?.markForRemoteModification()
         }
         if participatedUnit == nil {

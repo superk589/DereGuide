@@ -16,14 +16,14 @@
 3. ガシャシミュレーターに天丼リストとガシャる回数の表示を追加します
 4. 一部のイベント楽曲の難易度と対応する譜面は一致しませんの不具合を修正します
 5. 単独の画像（フルサイズ/ガシャヘッダー/イベントヘッダー など）にダブルクリックして、画像が再ダウンロードできるようになります
-6. プライバシーポリシーを追加します。次の新機能の準備として、お客様がアプリ利用の過程に一部のデータ（編成したユニットや、お気に入ったカードとアイドルなど）を採取・アップロードすることがあります。
+6. プライバシーポリシーを追加します。次の新機能の準備として、お客様がアプリ利用の過程に一部のデータ（編成したユニットや、お気に入ったカードとアイドルなど）を採取・アップロードすることがあります
 
 ##### English version
 
-1. Make it more readable in landscape mode by reducing the width of some page
+1. Make it more readable in landscape mode by reducing the width of some pages
 2. Chara info page also show sorting property at right side
 3. Add 300-pull guaranteed cards and simulation statistics in gacha simulation page
-4. Fix that some beatmaps mismatching there difficulties
+4. Fix that some beatmaps mismatching with their difficulties
 5. Double click can reload the spread image of card, gacha header and event header
 6. Add privacy policy page, the feature will be added in the near future may collect data such as the units you created, favorite cards and charas
 

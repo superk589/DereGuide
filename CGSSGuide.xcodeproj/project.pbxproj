@@ -281,7 +281,6 @@
 		12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA11F0F32E900B75E47 /* Unit.swift */; };
 		12F33DA71F0F32E900B75E47 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DA31F0F32E900B75E47 /* Member.swift */; };
 		12F351121F1F07E000F47FD1 /* MemberUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351111F1F07E000F47FD1 /* MemberUploader.swift */; };
-		12F351141F1F087C00F47FD1 /* MemberRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351131F1F087C00F47FD1 /* MemberRemover.swift */; };
 		12F351161F1F08F200F47FD1 /* MemberDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351151F1F08F200F47FD1 /* MemberDownloader.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
@@ -649,7 +648,6 @@
 		12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUploadable.swift; sourceTree = "<group>"; };
 		12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimestampable.swift; sourceTree = "<group>"; };
 		12F351111F1F07E000F47FD1 /* MemberUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberUploader.swift; sourceTree = "<group>"; };
-		12F351131F1F087C00F47FD1 /* MemberRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRemover.swift; sourceTree = "<group>"; };
 		12F351151F1F08F200F47FD1 /* MemberDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDownloader.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -841,7 +839,6 @@
 				12D624441F171F640017999A /* UnitRemover.swift */,
 				12D624461F171F640017999A /* UnitDownloader.swift */,
 				12F351111F1F07E000F47FD1 /* MemberUploader.swift */,
-				12F351131F1F087C00F47FD1 /* MemberRemover.swift */,
 				12F351151F1F08F200F47FD1 /* MemberDownloader.swift */,
 			);
 			name = Processor;
@@ -1867,7 +1864,6 @@
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
-				12F351141F1F087C00F47FD1 /* MemberRemover.swift in Sources */,
 				120DBB291EEE3120004E0084 /* TeamTemplateController.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,

@@ -52,7 +52,7 @@ public final class SyncCoordinator {
         self.syncContext = syncContext
         syncContext.name = "SyncCoordinator"
         syncContext.mergePolicy = CloudKitMergePolicy(mode: .remote)
-        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote), MemberDownloader(remote: membersRemote), MemberRemover(remote: membersRemote)]
+        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote), MemberDownloader(remote: membersRemote)]
         setup()
     }
 
