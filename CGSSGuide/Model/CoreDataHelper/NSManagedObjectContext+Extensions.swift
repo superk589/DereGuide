@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import SwiftTryCatch
 
 extension NSManagedObjectContext {
 

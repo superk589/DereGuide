@@ -31,7 +31,6 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SnapKit (3.2.0)
-  - SwiftTryCatch (0.0.1)
   - SwiftyJSON (3.1.4)
   - TTGTagCollectionView (1.6.0)
   - ZKCornerRadiusView (0.0.7)
@@ -49,7 +48,6 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SDWebImage
   - SnapKit
-  - SwiftTryCatch
   - SwiftyJSON
   - TTGTagCollectionView
   - ZKCornerRadiusView
@@ -70,12 +68,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftTryCatch: fb6d2b34abe48efd69578dac919293a44f95b481
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTGTagCollectionView: ba35fb7dc284b368c86bf044bd889293a69114e8
   ZKCornerRadiusView: b331cd5a4f3a8f27b8707f09776e861d3d9cffce
   ZKDrawerController: 669c26533e1e797f95a8aaa8edc150353bf6228b
 
-PODFILE CHECKSUM: 6542fcc3c253e22ff165eeec8ce2d8325ae7bff6
+PODFILE CHECKSUM: 12e4545b05e0c109a7b0644a2536463c93651015
 
 COCOAPODS: 1.3.0.beta.2

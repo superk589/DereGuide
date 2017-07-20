@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import SwiftTryCatch
 
 public protocol CloudKitNotificationDrain {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any])
@@ -188,15 +187,9 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
                 let request = entityAndPredicate.fetchRequest
                 request.returnsObjectsAsFaults = false
 
-                SwiftTryCatch.try({
-                    let result = try! self.syncContext.fetch(request)
-                    objects.formUnion(result)
-                }, catch: { (e) in
-                    print(e!)
-                }, finally: {
-                    
-                })
-
+                let result = try! self.syncContext.fetch(request)
+                objects.formUnion(result)
+                
             }
             self.processChangedLocalObjects(Array(objects))
         }

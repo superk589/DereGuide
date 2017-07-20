@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import SwiftTryCatch
 
 extension NSManagedObjectContext {
     func perform(group: DispatchGroup, block: @escaping () -> ()) {
