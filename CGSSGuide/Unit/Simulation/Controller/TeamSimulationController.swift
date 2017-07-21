@@ -296,7 +296,8 @@ extension TeamSimulationController: TeamSimulationAppealEditingCellDelegate {
         unit.customAppeal = Int64(customAppeal)
         unit.supportAppeal = Int64(supportAppeal)
         unit.usesCustomAppeal = (selectionIndex == 1)
-        unit.managedObjectContext?.saveOrRollback()
+        // save action cause tableView.reloadData(), delayed save to avoid cycling save
+        unit.managedObjectContext?.delayedSaveOrRollback(group: DispatchGroup())
     }
 }
 

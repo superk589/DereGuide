@@ -51,11 +51,16 @@ class TeamEditingController: BaseViewController {
         return self.generateRecentMembers()
     }()
     
-    fileprivate func generateRecentMembers() -> [Member] {
-        var members = [Member]()
+    fileprivate func fetchAllUnitsOfParentContext() -> [Unit] {
         let request: NSFetchRequest<Unit> = Unit.sortedFetchRequest
         request.returnsObjectsAsFaults = false
-        let units = try! context.fetch(request)
+        let units = try! parentContext.fetch(request)
+        return units
+    }
+    
+    fileprivate func generateRecentMembers() -> [Member] {
+        var members = [Member]()
+        let units = fetchAllUnitsOfParentContext()
         for unit in units {
             for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
                 let member = unit[i]
@@ -399,7 +404,7 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
         if let sourceView = popoverPresentationController.sourceView as? TeamRecentUsedCell {
             if let index = collectionView.indexPath(for: sourceView)?.item {
                 let selectedMember = recentMembers[index]
-                let units = Unit.fetch(in: parentContext)
+                let units = fetchAllUnitsOfParentContext()
                 var modifiedUnits = Set<Unit>()
                 for unit in units {
                     for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
@@ -413,7 +418,7 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
                         }
                     }
                 }
-                _ = parentContext.saveOrRollback()
+                parentContext.saveOrRollback()
                 delegate?.teamEditingController(self, didModify: modifiedUnits)
                 NotificationCenter.default.post(name: .teamModified, object: nil)
                 collectionView.reloadData()

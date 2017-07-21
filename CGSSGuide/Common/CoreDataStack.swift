@@ -14,7 +14,15 @@ class CoreDataStack {
     static let `default` = CoreDataStack()
     
     private init() {
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleiCloudAccountChanged), name: .CKAccountChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleiCloudAccountChanged() {
+        // TODO: switch persistentStore after user change their iCloud account
     }
     
     private let ubiquityToken: String = {
