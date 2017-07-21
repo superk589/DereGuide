@@ -126,8 +126,8 @@ extension Unit: RemoteUploadable {
         record["customAppeal"] = customAppeal as CKRecordValue
         record["supportAppeal"] = supportAppeal as CKRecordValue
         record["usesCustomAppeal"] = (usesCustomAppeal ? 1 : 0) as CKRecordValue
-        record["localCreatedAt"] = createdAt as CKRecordValue
-        record["localModifiedAt"] = updatedAt as CKRecordValue
+        record["localCreatedAt"] = createdAt as NSDate
+        record["localModifiedAt"] = updatedAt as NSDate
         return record
     }
 }

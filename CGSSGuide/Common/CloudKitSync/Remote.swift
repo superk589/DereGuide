@@ -74,7 +74,7 @@ extension Remote {
     }
     
     var defaultSortDescriptor: NSSortDescriptor {
-        return NSSortDescriptor(key: "modifiedAt", ascending: false)
+        return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: false)
     }
     
     func predicateOfUser(_ userID: CKRecordID) -> NSPredicate {
@@ -119,11 +119,14 @@ extension Remote {
     }
     
     func fetchRecordsWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], completion: @escaping ([R]) -> ()) {
-        let query = CKQuery(recordType: "Unit", predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
+        let query = CKQuery(recordType: R.recordType, predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
         query.sortDescriptors = sortDescriptors
         let op = CKQueryOperation(query: query)
         //        op.resultsLimit = maximumNumberOfUnits
-        op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, _ in
+        op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
+            if error != nil {
+                print(error!)
+            }
             completion(records.map { R(record: $0) }.flatMap { $0 })
         }
     }
@@ -152,7 +155,7 @@ extension Remote {
                 completion([])
                 return
             }
-            let query = CKQuery(recordType: "Unit", predicate: self.predicateOfUser(userID))
+            let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
             query.sortDescriptors = [self.defaultSortDescriptor]
             let op = CKQueryOperation(query: query)
             //        op.resultsLimit = maximumNumberOfUnits

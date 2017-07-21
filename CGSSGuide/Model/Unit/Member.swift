@@ -131,9 +131,9 @@ extension Member: RemoteUploadable {
         record["danceLevel"] = danceLevel as CKRecordValue
         record["visualLevel"] = visualLevel as CKRecordValue
         record["participatedPosition"] = participatedPosition as CKRecordValue
-        record["participatedUnit"] = participatedUnit!.ckReference
-        record["localCreatedAt"] = createdAt as CKRecordValue
-        record["localModifiedAt"] = updatedAt as CKRecordValue
+        record["participatedUnit"] = participatedUnit!.ckReference!
+        record["localCreatedAt"] = createdAt as NSDate
+        record["localModifiedAt"] = updatedAt as NSDate
         return record
     }
 

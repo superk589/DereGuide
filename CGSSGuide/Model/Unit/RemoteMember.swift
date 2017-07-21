@@ -10,12 +10,13 @@ import UIKit
 import CoreData
 import CloudKit
 
-struct RemoteMember: RemoteRecord {
+struct RemoteMember: RemoteRecord {    
 
     var id: String
     var creatorID: String
     var localCreatedAt: Date
-    
+    var localModifiedAt: Date
+
     var cardID: Int64
     var skillLevel: Int64
     var danceLevel: Int64
@@ -40,6 +41,7 @@ extension RemoteMember {
             let visualLevel = record["visualLevel"] as? Int64,
             let participatedPosition = record["participatedPosition"] as? Int64,
             let localCreatedAt = record["localCreatedAt"] as? Date,
+            let localModifiedAt = record["localModifiedAt"] as? Date,
             let creatorID = record.creatorUserRecordID?.recordName else {
                 return nil
         }
@@ -48,6 +50,7 @@ extension RemoteMember {
         self.creatorID = creatorID
         self.participatedUnit = participatedUnit
         self.localCreatedAt = localCreatedAt
+        self.localModifiedAt = localModifiedAt
         self.cardID = cardID
         self.skillLevel = skillLevel
         self.vocalLevel = vocalLevel

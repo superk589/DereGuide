@@ -11,7 +11,7 @@ import CloudKit
 import CoreData
 
 struct RemoteUnit: RemoteRecord {
-    
+
     var id: String
     var creatorID: String
     
@@ -22,7 +22,7 @@ struct RemoteUnit: RemoteRecord {
     var supportAppeal: Int64
     var usesCustomAppeal: Int64
     var localCreatedAt: Date
-
+    var localModifiedAt: Date
 }
 
 extension RemoteUnit {
@@ -39,6 +39,7 @@ extension RemoteUnit {
         let supportAppeal = record["supportAppeal"] as? Int64,
         let usesCustomAppeal = record["usesCustomAppeal"] as? Int64,
         let localCreatedAt = record["localCreatedAt"] as? Date,
+        let localModifiedAt = record["localModifiedAt"] as? Date,
         let creatorID = record.creatorUserRecordID?.recordName else {
             return nil
         }
@@ -52,20 +53,26 @@ extension RemoteUnit {
         self.supportAppeal = supportAppeal
         self.customAppeal = customAppeal
         self.usesCustomAppeal = usesCustomAppeal
+        self.localModifiedAt = localModifiedAt
     }
     
 }
 
 extension RemoteUnit {
     
-    func insert(into context: NSManagedObjectContext) {
-        let recordToMatch = CKReference(recordID: CKRecordID(recordName: id), action: .none)
+    func insert(into context: NSManagedObjectContext, completion: @escaping () -> ()) {
+        let recordToMatch = CKReference(recordID: CKRecordID(recordName: id), action: .deleteSelf)
         let predicate = NSPredicate(format: "participatedUnit = %@", recordToMatch)
         SyncCoordinator.shared.membersRemote.fetchRecordsForCurrentUserWith([predicate], [NSSortDescriptor.init(key: "participatedPosition", ascending: true)], completion: { (remoteMembers) in
             guard remoteMembers.count == 6 else {
                 return
             }
-            Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, members: remoteMembers.map { $0.insert(into: context) })
+            context.perform {
+                let unit = Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, members: remoteMembers.map { $0.insert(into: context) })
+                unit.creatorID = self.creatorID
+                unit.remoteIdentifier = self.id
+                completion()
+            }
         })
     }
     

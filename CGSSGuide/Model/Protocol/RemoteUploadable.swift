@@ -17,6 +17,7 @@ public protocol RemoteUploadable: class {
 public typealias RemoteIdentifier = String
 
 public protocol RemoteRecord {
+    static var recordType: String { get }
     var id: RemoteIdentifier { get set }
     var creatorID: RemoteIdentifier { get set }
     init?(record: CKRecord)

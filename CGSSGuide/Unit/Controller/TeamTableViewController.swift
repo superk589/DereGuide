@@ -51,6 +51,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTeamModifiedNotification), name: .teamModified, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateEnd), name: .updateEnd, object: nil)
         
         prepareToolbar()
         
@@ -81,6 +82,10 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     }
     
     func handleTeamModifiedNotification() {
+        tableView.reloadData()
+    }
+    
+    func handleUpdateEnd() {
         tableView.reloadData()
     }
     

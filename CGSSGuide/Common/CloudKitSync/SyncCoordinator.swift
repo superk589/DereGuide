@@ -52,7 +52,7 @@ public final class SyncCoordinator {
         self.syncContext = syncContext
         syncContext.name = "SyncCoordinator"
         syncContext.mergePolicy = CloudKitMergePolicy(mode: .remote)
-        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote), MemberDownloader(remote: membersRemote)]
+        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote)]
         setup()
     }
 
@@ -111,6 +111,10 @@ extension SyncCoordinator : ContextOwner {
         for cp in changeProcessors {
             cp.processChangedLocalObjects(objects, in: self)
         }
+    }
+    
+    fileprivate func processChangedLocalObjects(_ objects: [NSManagedObject], using processor: ChangeProcessor) {
+        processor.processChangedLocalObjects(objects, in: self)
     }
     
 }
@@ -178,20 +182,35 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
         syncContext.refreshAllObjects()
     }
 
+//    fileprivate func fetchLocallyTrackedObjects() {
+//        self.perform {
+//            // TODO: Could optimize this to only execute a single fetch request per entity.
+//            var objects: Set<NSManagedObject> = []
+//            for cp in self.changeProcessors {
+//                guard let entityAndPredicate = cp.entityAndPredicateForLocallyTrackedObjects(in: self) else { continue }
+//                let request = entityAndPredicate.fetchRequest
+//                request.returnsObjectsAsFaults = false
+//
+//                let result = try! self.syncContext.fetch(request)
+//                objects.formUnion(result)
+//
+//            }
+//            self.processChangedLocalObjects(Array(objects))
+//        }
+//    }
+
     fileprivate func fetchLocallyTrackedObjects() {
         self.perform {
             // TODO: Could optimize this to only execute a single fetch request per entity.
-            var objects: Set<NSManagedObject> = []
             for cp in self.changeProcessors {
                 guard let entityAndPredicate = cp.entityAndPredicateForLocallyTrackedObjects(in: self) else { continue }
                 let request = entityAndPredicate.fetchRequest
                 request.returnsObjectsAsFaults = false
 
                 let result = try! self.syncContext.fetch(request)
-                objects.formUnion(result)
-                
+
+                self.processChangedLocalObjects(result, using: cp)
             }
-            self.processChangedLocalObjects(Array(objects))
         }
     }
 
@@ -221,15 +240,6 @@ extension SyncCoordinator {
     }
 
     fileprivate func fetchNewRemoteData() {
-        membersRemote.fetchNewRecords { (changes, callback) in
-            self.processRemoteChanges(changes, completion: {
-                self.perform {
-                    self.context.delayedSaveOrRollback(group: self.syncGroup) { success in
-                        callback(success)
-                    }
-                }
-            })
-        }
         unitsRemote.fetchNewRecords { changes, callback in
             self.processRemoteChanges(changes) {
                 self.perform {

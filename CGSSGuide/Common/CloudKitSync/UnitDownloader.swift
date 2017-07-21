@@ -42,7 +42,7 @@ final class UnitDownloader: ChangeProcessor {
                 fatalError("change reason not implemented")
             }
         }
-        insert(creates, into: context.context)
+        insert(creates, in: context)
         deleteUnits(with: deletionIDs, in: context.context)
         update(updates, in: context.context)
         context.delayedSaveOrRollback()
@@ -51,8 +51,7 @@ final class UnitDownloader: ChangeProcessor {
 
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
         remote.fetchLatestRecords(completion: { (remoteUnits) in
-            self.insert(remoteUnits, into: context.context)
-            context.delayedSaveOrRollback()
+            self.insert(remoteUnits, in: context)
         })
     }
 
@@ -76,11 +75,11 @@ extension UnitDownloader {
         }
     }
 
-    fileprivate func insert(_ remoteUnits: [RemoteUnit], into context: NSManagedObjectContext) {
+    fileprivate func insert(_ remoteUnits: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
                 let ids = remoteUnits.map { $0.id }.flatMap { $0 }
-                let units = Unit.fetch(in: context) { request in
+                let units = Unit.fetch(in: context.context) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }
@@ -93,7 +92,9 @@ extension UnitDownloader {
             
             for remoteUnit in remoteUnits {
                 guard existingUnits[remoteUnit.id] == nil else { continue }
-                remoteUnit.insert(into: context)
+                remoteUnit.insert(into: context.context) {
+                    context.delayedSaveOrRollback()
+                }
             }
         }
     }
