@@ -86,10 +86,14 @@ extension Remote {
             guard let userID = userID else {
                 return
             }
-            let predicate = NSPredicate(format: "creatorUserRecordID == %@", userID)
             
+            let reference = CKReference(recordID: userID, action: .none)
+            
+            let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
+
             let info = CKNotificationInfo()
             info.shouldSendContentAvailable = true
+            info.soundName = ""
             
             let subscription: CKSubscription
             

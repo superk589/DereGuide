@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 注册远程推送 用于订阅CloudKit同步信息
         application.registerForRemoteNotifications()
-        
+
         // 初始化同步协调器
         syncCoordinator = SyncCoordinator.shared
         return true
@@ -170,8 +170,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoreDataStack.default.viewContext.refreshAllObjects()
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("register remote notification success")
+    }
+    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        //
+        print("register remote notfication failed")
     }
     
     private func openSpecificPageWithLocalNotification(_ notification: UILocalNotification) {
@@ -195,6 +199,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // 接收到远程消息
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        //
+    }
+    
+    // 接受CloudKit Subscription
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         guard let info = userInfo as? [String: NSObject] else { return }
         SyncCoordinator.shared.application(application, didReceiveRemoteNotification: info)
     }
