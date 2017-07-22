@@ -52,7 +52,16 @@ public final class SyncCoordinator {
         self.syncContext = syncContext
         syncContext.name = "SyncCoordinator"
         syncContext.mergePolicy = CloudKitMergePolicy(mode: .remote)
-        changeProcessors = [UnitUploader(remote: unitsRemote), UnitDownloader(remote: unitsRemote), UnitRemover(remote: unitsRemote), MemberUploader(remote: membersRemote)]
+        
+        // Member in remote has a reference of .deleteSelf action, so Member doesn't need a remover
+        // local Unit need all of the 6 members to create, Member is created when Unit is downloaded by fetching in CloudKit using the CKReference on remote Member, so Member downloader only responsible for update remote changes
+        changeProcessors = [UnitUploader(remote: unitsRemote),
+                            UnitDownloader(remote: unitsRemote),
+                            MemberDownloader(remote: membersRemote),
+                            UnitRemover(remote: unitsRemote),
+                            MemberUploader(remote: membersRemote),
+                            UnitModifier(remote: unitsRemote),
+                            MemberModifier(remote: membersRemote)]
         setup()
     }
 
@@ -240,6 +249,7 @@ extension SyncCoordinator {
     }
 
     fileprivate func fetchNewRemoteData() {
+        
         unitsRemote.fetchNewRecords { changes, callback in
             self.processRemoteChanges(changes) {
                 self.perform {
@@ -249,8 +259,18 @@ extension SyncCoordinator {
                 }
             }
         }
+        
+        membersRemote.fetchNewRecords { changes, callback in
+            self.processRemoteChanges(changes) {
+                self.perform {
+                    self.context.delayedSaveOrRollback(group: self.syncGroup) { success in
+                        callback(success)
+                    }
+                }
+            }
+        }
     }
-
+    
     fileprivate func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], completion: @escaping () -> ()) {
         self.changeProcessors.asyncForEach(completion: completion) { changeProcessor, innerCompletion in
             perform {

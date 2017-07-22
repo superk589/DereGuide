@@ -8,6 +8,7 @@
 
 import CoreData
 
+/// delete remote units when local units are deleted
 final class UnitRemover: ElementChangeProcessor {
 
     var remote: UnitsRemote

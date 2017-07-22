@@ -22,7 +22,16 @@ class CoreDataStack {
     }
     
     @objc func handleiCloudAccountChanged() {
-        // TODO: switch persistentStore after user change their iCloud account
+        // switch persistentStore after user change their iCloud account
+        guard let currentStore = coordinator.persistentStores.first else {
+            return
+        }
+        do {
+            try coordinator.remove(currentStore)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
+        } catch let error {
+            print(error)
+        }
     }
     
     private let ubiquityToken: String = {

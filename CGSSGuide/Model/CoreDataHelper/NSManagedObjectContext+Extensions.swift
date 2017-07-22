@@ -83,7 +83,6 @@ extension NSManagedObjectContext {
     
 }
 
-
 private let SingleObjectCacheKey = "SingleObjectCache"
 private typealias SingleObjectCache = [String:NSManagedObject]
 

@@ -8,6 +8,7 @@
 
 import CoreData
 
+/// download the newest remote units and re
 final class UnitDownloader: ChangeProcessor {
    
     typealias Element = Unit
@@ -39,12 +40,13 @@ final class UnitDownloader: ChangeProcessor {
             case .update(let r) where r is RemoteUnit:
                 updates.append(r as! RemoteUnit)
             default:
-                fatalError("change reason not implemented")
+                continue
             }
         }
         insert(creates, in: context)
         deleteUnits(with: deletionIDs, in: context.context)
-        update(updates, in: context.context)
+        update(updates, in: context)
+        print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
         context.delayedSaveOrRollback()
         completion()
     }
@@ -75,10 +77,10 @@ extension UnitDownloader {
         }
     }
 
-    fileprivate func insert(_ remoteUnits: [RemoteUnit], in context: ChangeProcessorContext) {
+    fileprivate func insert(_ inserts: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
-                let ids = remoteUnits.map { $0.id }.flatMap { $0 }
+                let ids = inserts.map { $0.id }.flatMap { $0 }
                 let units = Unit.fetch(in: context.context) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
@@ -90,7 +92,7 @@ extension UnitDownloader {
                 return result
             }()
             
-            for remoteUnit in remoteUnits {
+            for remoteUnit in inserts {
                 guard existingUnits[remoteUnit.id] == nil else { continue }
                 remoteUnit.insert(into: context.context) {
                     context.delayedSaveOrRollback()
@@ -99,8 +101,27 @@ extension UnitDownloader {
         }
     }
     
-    fileprivate func update(_ updates: [RemoteUnit], in context: NSManagedObjectContext) {
-        
+    fileprivate func update(_ updates: [RemoteUnit], in context: ChangeProcessorContext) {
+        context.perform {
+            let existingUnits = { () -> [RemoteIdentifier: Unit] in
+                let ids = updates.map { $0.id }.flatMap { $0 }
+                let units = Unit.fetch(in: context.context) { request in
+                    request.predicate = Unit.predicateForRemoteIdentifiers(ids)
+                    request.returnsObjectsAsFaults = false
+                }
+                var result: [RemoteIdentifier: Unit] = [:]
+                for unit in units {
+                    result[unit.remoteIdentifier!] = unit
+                }
+                return result
+            }()
+            
+            for remoteUnit in updates {
+                guard let unit = existingUnits[remoteUnit.id] else { continue }
+                unit.update(using: remoteUnit)
+                context.delayedSaveOrRollback()
+            }
+        }
     }
 
 }

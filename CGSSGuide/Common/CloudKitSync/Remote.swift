@@ -99,9 +99,9 @@ extension Remote {
             
             if #available(iOS 10.0, *) {
                 let options: CKQuerySubscriptionOptions = [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion]
-                subscription = CKQuerySubscription(recordType: RemoteUnit.recordType, predicate: predicate, subscriptionID: UnitsRemote.subscriptionID, options: options)
+                subscription = CKQuerySubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: options)
             } else {
-                subscription = CKSubscription(recordType: RemoteUnit.recordType, predicate: predicate, subscriptionID: UnitsRemote.subscriptionID, options: [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion])
+                subscription = CKSubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion])
             }
             subscription.notificationInfo = info
             let op = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: [])
@@ -177,6 +177,24 @@ extension Remote {
             let remoteRecords = modifiedRecords?.map { R(record: $0) }.flatMap { $0 } ?? []
             let remoteError = RemoteError(cloudKitError: error)
             completion(remoteRecords, remoteError)
+        }
+        cloudKitContainer.publicCloudDatabase.add(op)
+    }
+    
+    func modify(_ locals: [L], modification: @escaping ([CKRecord], @escaping () -> ()) -> (), completion: @escaping ([R], RemoteError?) -> ()) {
+        
+        let op = CKFetchRecordsOperation(recordIDs: locals.flatMap{ $0.remoteIdentifier }.map(CKRecordID.init(recordName:)))
+        
+        op.fetchRecordsCompletionBlock = { records, error in
+            modification(records?.map { $0.value } ?? []) {
+                let op = CKModifyRecordsOperation(recordsToSave: records?.map { $0.value }, recordIDsToDelete: nil)
+                self.cloudKitContainer.publicCloudDatabase.add(op)
+                op.modifyRecordsCompletionBlock = { modifiedRecords, _, error in
+                    let remoteRecords = modifiedRecords?.map { R(record: $0) }.flatMap { $0 } ?? []
+                    let remoteError = RemoteError(cloudKitError: error)
+                    completion(remoteRecords, remoteError)
+                }
+            }
         }
         cloudKitContainer.publicCloudDatabase.add(op)
     }

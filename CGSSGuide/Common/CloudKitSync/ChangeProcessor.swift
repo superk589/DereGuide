@@ -28,6 +28,7 @@ protocol ChangeProcessor {
 
     /// Does the initial fetch from the remote.
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext)
+    
 }
 
 

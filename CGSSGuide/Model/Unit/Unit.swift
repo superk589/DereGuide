@@ -36,11 +36,22 @@ public class Unit: NSManagedObject {
     public override func willSave() {
         super.willSave()
         if hasChanges {
-            refreshUpdateDate()
-            markForRemoteModification()
-            members.forEach {
-                $0.refreshUpdateDate()
-                $0.markForRemoteModification()
+            if let context = managedObjectContext {
+                // modification made by main queue will upload to the remote
+                if context.concurrencyType == .mainQueueConcurrencyType {
+                    refreshUpdateDate()
+                    if hasLocalTrackedChanges {
+                        markForRemoteModification()
+                    }
+                }
+            }
+            // after unit uploaded successfully, upload members by marking them as changed
+            if changedValues().keys.contains(where: {
+                ["remoteIdentifier", "creatorID"].contains($0)
+            }) {
+                members.forEach {
+                    $0.refreshUpdateDate()
+                }
             }
         }
     }
@@ -88,8 +99,25 @@ extension Unit: Managed {
     
 }
 
-extension Unit: RemoteModifiable {
+extension Unit: RemoteRefreshable {
     @NSManaged public var markedForLocalChange: Bool
+    var localTrackedKeys: [String] {
+        return ["customAppeal", "supportAppeal", "usesCustomAppeal"]
+    }
+}
+
+extension Unit: RemoteUpdatable {
+    
+    typealias R = RemoteUnit
+    
+    func update(using remoteRecord: RemoteUnit) {
+        self.customAppeal = remoteRecord.customAppeal
+        self.supportAppeal = remoteRecord.supportAppeal
+        self.usesCustomAppeal = remoteRecord.usesCustomAppeal != 0
+        self.updatedAt = remoteRecord.localModifiedAt
+        self.createdAt = remoteRecord.localCreatedAt
+    }
+    
 }
 
 extension Unit {}

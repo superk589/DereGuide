@@ -104,7 +104,7 @@
 		1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1244F5E71D98E6210021E4B1 /* ToolboxList.plist */; };
 		1245F79A1F175B07009A80EC /* CloudKitMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7991F175B06009A80EC /* CloudKitMergePolicy.swift */; };
 		1245F79F1F18A70B009A80EC /* MembersRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F79E1F18A70B009A80EC /* MembersRemote.swift */; };
-		1245F7A11F1C629D009A80EC /* RemoteModifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A01F1C629C009A80EC /* RemoteModifiable.swift */; };
+		1245F7A11F1C629D009A80EC /* RemoteRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A01F1C629C009A80EC /* RemoteRefreshable.swift */; };
 		1245F7A31F1C9D4E009A80EC /* GachaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A21F1C9D4E009A80EC /* GachaCardView.swift */; };
 		1245F7A91F1CA3AA009A80EC /* GachaCardWithOddsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245F7A81F1CA3AA009A80EC /* GachaCardWithOddsListView.swift */; };
 		1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */; };
@@ -204,6 +204,10 @@
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
 		129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* TeamDetailController.swift */; };
+		12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D3F1F223A020070D7A1 /* UnitModifier.swift */; };
+		12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D411F2241700070D7A1 /* MemberModifier.swift */; };
+		12A14D441F2265B60070D7A1 /* RemoteUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */; };
+		12A14D461F2269340070D7A1 /* MemberDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D451F2269340070D7A1 /* MemberDownloader.swift */; };
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
 		12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */; };
 		12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */; };
@@ -438,7 +442,7 @@
 		1244F5E91D98E6250021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/ToolboxList.plist; sourceTree = "<group>"; };
 		1245F7991F175B06009A80EC /* CloudKitMergePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitMergePolicy.swift; sourceTree = "<group>"; };
 		1245F79E1F18A70B009A80EC /* MembersRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersRemote.swift; sourceTree = "<group>"; };
-		1245F7A01F1C629C009A80EC /* RemoteModifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteModifiable.swift; sourceTree = "<group>"; };
+		1245F7A01F1C629C009A80EC /* RemoteRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRefreshable.swift; sourceTree = "<group>"; };
 		1245F7A21F1C9D4E009A80EC /* GachaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaCardView.swift; sourceTree = "<group>"; };
 		1245F7A81F1CA3AA009A80EC /* GachaCardWithOddsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaCardWithOddsListView.swift; sourceTree = "<group>"; };
 		1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiInfo.swift; sourceTree = "<group>"; };
@@ -546,6 +550,10 @@
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
 		129ECB281ECBFB930010BC7F /* TeamDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailController.swift; sourceTree = "<group>"; };
+		12A14D3F1F223A020070D7A1 /* UnitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitModifier.swift; sourceTree = "<group>"; };
+		12A14D411F2241700070D7A1 /* MemberModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModifier.swift; sourceTree = "<group>"; };
+		12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUpdatable.swift; sourceTree = "<group>"; };
+		12A14D451F2269340070D7A1 /* MemberDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDownloader.swift; sourceTree = "<group>"; };
 		12A3F1691E5ADA96007B470E /* BpmShift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BpmShift.plist; sourceTree = "<group>"; };
 		12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapShiftingInfo.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
@@ -834,9 +842,12 @@
 			isa = PBXGroup;
 			children = (
 				12D6243F1F171F640017999A /* UnitUploader.swift */,
+				12A14D3F1F223A020070D7A1 /* UnitModifier.swift */,
 				12D624441F171F640017999A /* UnitRemover.swift */,
 				12D624461F171F640017999A /* UnitDownloader.swift */,
+				12A14D451F2269340070D7A1 /* MemberDownloader.swift */,
 				12F351111F1F07E000F47FD1 /* MemberUploader.swift */,
+				12A14D411F2241700070D7A1 /* MemberModifier.swift */,
 			);
 			name = Processor;
 			sourceTree = "<group>";
@@ -1426,7 +1437,8 @@
 				12F33DBD1F0F68C100B75E47 /* UserOwnable.swift */,
 				12F33DBE1F0F68C100B75E47 /* RemoteDeletable.swift */,
 				12F33DBF1F0F68C100B75E47 /* DelayedDeletable.swift */,
-				1245F7A01F1C629C009A80EC /* RemoteModifiable.swift */,
+				1245F7A01F1C629C009A80EC /* RemoteRefreshable.swift */,
+				12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */,
 				12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */,
 				12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */,
 				12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */,
@@ -1786,6 +1798,7 @@
 				12353A4B1F0F6A92008286C2 /* ManagedObjectObserver.swift in Sources */,
 				12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */,
 				12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */,
+				12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */,
 				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
 				12353A4F1F0F6A92008286C2 /* NSFetchRequest+Extensions.swift in Sources */,
 				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
@@ -1860,6 +1873,7 @@
 				124791851D882B2400ED8EA6 /* CGSSGachaPool.swift in Sources */,
 				1269EA031D520C9F0071AD7F /* BeatmapViewController.swift in Sources */,
 				1247917E1D87DCF000ED8EA6 /* CGSSGameResource.swift in Sources */,
+				12A14D461F2269340070D7A1 /* MemberDownloader.swift in Sources */,
 				1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */,
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
@@ -1897,6 +1911,7 @@
 				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* SongTableViewController.swift in Sources */,
 				12852EE91EF9189500E26A73 /* TeamAdvanceCalculationCell.swift in Sources */,
+				12A14D441F2265B60070D7A1 /* RemoteUpdatable.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
 				12D4F8AD1E1BCD780064991E /* DonationViewController.swift in Sources */,
 				128E94931EFA4E4C00E09433 /* TeamAdvanceCalculationResultView.swift in Sources */,
@@ -2033,8 +2048,9 @@
 				12852EE71EF912DE00E26A73 /* TeamAdvanceCalculationController.swift in Sources */,
 				12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
-				1245F7A11F1C629D009A80EC /* RemoteModifiable.swift in Sources */,
+				1245F7A11F1C629D009A80EC /* RemoteRefreshable.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
+				12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */,
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,

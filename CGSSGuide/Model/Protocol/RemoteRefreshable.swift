@@ -7,15 +7,18 @@
 //
 
 import CoreData
+import CloudKit
 
 private let MarkedForRemoteModificationKey = "markedForLocalChange"
 
-protocol RemoteModifiable: class {
+/// can upload to refresh remote record
+protocol RemoteRefreshable: class {
+    var localTrackedKeys: [String] { get }
     var markedForLocalChange: Bool { get set }
     func markForRemoteModification()
 }
 
-extension RemoteModifiable {
+extension RemoteRefreshable {
     public static var notMarkedForRemoteModificationPredicate: NSPredicate {
         return NSPredicate(format: "%K == false", MarkedForRemoteModificationKey)
     }
@@ -25,9 +28,29 @@ extension RemoteModifiable {
     }
 }
 
-extension RemoteModifiable where Self: NSManagedObject {
+extension RemoteRefreshable where Self: NSManagedObject {
+    
+    var hasLocalTrackedChanges: Bool {
+        return changedValues().keys.contains(where: {
+            localTrackedKeys.contains($0)
+        })
+    }
+    
     func markForRemoteModification() {
         guard changedValue(forKey: MarkedForRemoteModificationKey) == nil && !markedForLocalChange else { return }
         markedForLocalChange = true
     }
+    
+    func unmarkForRemoteModification() {
+        markedForLocalChange = false
+    }
+    
+}
+
+extension RemoteRefreshable where Self: RemoteUploadable & RemoteDeletable & DelayedDeletable  {
+   
+    static var waitingForRemoteModificationPredicate: NSPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [markedForRemoteModificationPredicate, uploadedPredicate, notMarkedForDeletionPredicate])
+    }
+
 }

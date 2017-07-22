@@ -221,7 +221,7 @@ class TeamEditingController: BaseViewController {
     fileprivate func setup(withParentUnit unit: Unit) {
         self.unit = context.object(with: unit.objectID) as? Unit
         for i in 0...5 {
-            self.members[i] = unit.orderedMembers[i]
+            self.members[i] = self.unit?.orderedMembers[i]
         }
         editableView.setup(with: unit)
     }

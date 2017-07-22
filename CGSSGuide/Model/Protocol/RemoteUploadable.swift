@@ -31,13 +31,19 @@ extension RemoteUploadable {
         return NSPredicate(format: "%K in %@", RemoteIdentifierKey, ids)
     }
 
+    public static var notUploadedPredicate: NSPredicate {
+        return NSPredicate(format: "%K == NULL", RemoteIdentifierKey)
+    }
+    
+    public static var uploadedPredicate: NSPredicate {
+        return NSCompoundPredicate(notPredicateWithSubpredicate: notUploadedPredicate)
+    }
 }
 
 extension RemoteUploadable where Self: RemoteDeletable & DelayedDeletable {
 
     public static var waitingForUploadPredicate: NSPredicate {
-        let notUploaded = NSPredicate(format: "%K == NULL", RemoteIdentifierKey)
-        return NSCompoundPredicate(andPredicateWithSubpredicates:[notUploaded, notMarkedForDeletionPredicate])
+        return NSCompoundPredicate(andPredicateWithSubpredicates:[notUploadedPredicate, notMarkedForDeletionPredicate])
     }
 
 }

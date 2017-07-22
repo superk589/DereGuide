@@ -39,11 +39,20 @@ public class Member: NSManagedObject {
     public override func willSave() {
         super.willSave()
         if hasChanges {
-            refreshUpdateDate()
-            markForRemoteModification()
+            if let context = managedObjectContext {
+                // modification made by main queue will upload to the remote
+                if context.concurrencyType == .mainQueueConcurrencyType {
+                    refreshUpdateDate()
+                    if hasLocalTrackedChanges {
+                        markForRemoteModification()
+                    }                    
+                }
+            }
+            // when members change, let the unit they participated in know the change and refresh ui
             participatedUnit?.refreshUpdateDate()
-            participatedUnit?.markForRemoteModification()
         }
+        
+        // if a member has no participated unit, delete it
         if participatedUnit == nil {
             markForLocalDeletion()
         }
@@ -75,8 +84,26 @@ public class Member: NSManagedObject {
 
 extension Member: UpdateTimestampable {}
 
-extension Member: RemoteModifiable {
+extension Member: RemoteRefreshable {
     @NSManaged public var markedForLocalChange: Bool
+    var localTrackedKeys: [String] {
+        return ["vocalLevel", "skillLevel", "danceLevel", "visualLevel"]
+    }
+}
+
+extension Member: RemoteUpdatable {
+    
+    typealias R = RemoteMember
+    
+    func update(using remoteRecord: RemoteMember) {
+        self.vocalLevel = Int16(remoteRecord.vocalLevel)
+        self.danceLevel = Int16(remoteRecord.danceLevel)
+        self.visualLevel = Int16(remoteRecord.visualLevel)
+        self.skillLevel = Int16(remoteRecord.skillLevel)
+        self.updatedAt = remoteRecord.localModifiedAt
+        self.createdAt = remoteRecord.localCreatedAt
+    }
+    
 }
 
 extension Member {
