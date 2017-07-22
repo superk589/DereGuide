@@ -40,7 +40,7 @@ public class Unit: NSManagedObject {
                 // modification made by main queue will upload to the remote
                 if context.concurrencyType == .mainQueueConcurrencyType {
                     refreshUpdateDate()
-                    if hasLocalTrackedChanges {
+                    if hasLocalTrackedChanges && !isInserted {
                         markForRemoteModification()
                     }
                 }
@@ -115,7 +115,6 @@ extension Unit: RemoteUpdatable {
         self.supportAppeal = remoteRecord.supportAppeal
         self.usesCustomAppeal = remoteRecord.usesCustomAppeal != 0
         self.updatedAt = remoteRecord.localModifiedAt
-        self.createdAt = remoteRecord.localCreatedAt
     }
     
 }

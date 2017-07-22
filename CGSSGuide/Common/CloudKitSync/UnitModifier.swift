@@ -27,7 +27,9 @@ final class UnitModifier: ElementChangeProcessor {
     
     func processChangedLocalElements(_ objects: [Unit], in context: ChangeProcessorContext) {
         processLocalModifiedUnits(objects, in: context)
-        print("update remote units: \(objects.count)")
+        if Config.cloudKitDebug {
+            print("update remote units: \(objects.count)")
+        }
     }
     
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {

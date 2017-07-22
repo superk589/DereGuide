@@ -14,6 +14,8 @@ struct Config {
     static let iAPRemoveADProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
     static let bundlerId = "com.zzk.cgssguide"
     static let unityVersion = "5.4.5p1"
+    
+    static let cloudKitDebug = true
 }
 
 struct NotificationCategory {

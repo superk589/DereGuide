@@ -46,7 +46,9 @@ final class MemberDownloader: ChangeProcessor {
         deleteMembers(with: deletionIDs, in: context.context)
         update(updates, in: context)
         context.delayedSaveOrRollback()
-        print("Member remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+        if Config.cloudKitDebug {
+            print("Member remote fetch updates: \(updates.count)")
+        }
         completion()
     }
     

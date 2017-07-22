@@ -43,19 +43,29 @@ public class Member: NSManagedObject {
                 // modification made by main queue will upload to the remote
                 if context.concurrencyType == .mainQueueConcurrencyType {
                     refreshUpdateDate()
-                    if hasLocalTrackedChanges {
+                    if hasLocalTrackedChanges && !isInserted {
                         markForRemoteModification()
                     }                    
                 }
             }
-            // when members change, let the unit they participated in know the change and refresh ui
-            participatedUnit?.refreshUpdateDate()
+            if hasLocalTrackedChanges {
+                // when members change, let the unit they participated in know the change and refresh ui
+                participatedUnit?.refreshUpdateDate()
+            }
         }
         
         // if a member has no participated unit, delete it
         if participatedUnit == nil {
             markForLocalDeletion()
         }
+    }
+    
+    func setBy(cardID: Int, skillLevel: Int, potential: CGSSPotential) {
+        self.cardID = Int32(cardID)
+        self.skillLevel = Int16(skillLevel)
+        self.vocalLevel = Int16(potential.vocalLevel)
+        self.danceLevel = Int16(potential.danceLevel)
+        self.visualLevel = Int16(potential.visualLevel)
     }
     
     @discardableResult
@@ -87,7 +97,7 @@ extension Member: UpdateTimestampable {}
 extension Member: RemoteRefreshable {
     @NSManaged public var markedForLocalChange: Bool
     var localTrackedKeys: [String] {
-        return ["vocalLevel", "skillLevel", "danceLevel", "visualLevel"]
+        return ["cardID", "vocalLevel", "skillLevel", "danceLevel", "visualLevel"]
     }
 }
 
@@ -96,12 +106,12 @@ extension Member: RemoteUpdatable {
     typealias R = RemoteMember
     
     func update(using remoteRecord: RemoteMember) {
+        self.cardID = Int32(remoteRecord.cardID)
         self.vocalLevel = Int16(remoteRecord.vocalLevel)
         self.danceLevel = Int16(remoteRecord.danceLevel)
         self.visualLevel = Int16(remoteRecord.visualLevel)
         self.skillLevel = Int16(remoteRecord.skillLevel)
         self.updatedAt = remoteRecord.localModifiedAt
-        self.createdAt = remoteRecord.localCreatedAt
     }
     
 }

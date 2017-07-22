@@ -15,6 +15,8 @@ final class UnitDownloader: ChangeProcessor {
     
     var remote: UnitsRemote
     
+    var unitsInFetching = [RemoteIdentifier]()
+    
     init(remote: UnitsRemote) {
         self.remote = remote
     }
@@ -46,7 +48,9 @@ final class UnitDownloader: ChangeProcessor {
         insert(creates, in: context)
         deleteUnits(with: deletionIDs, in: context.context)
         update(updates, in: context)
-        print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+        if Config.cloudKitDebug {
+            print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+        }
         context.delayedSaveOrRollback()
         completion()
     }
@@ -93,9 +97,16 @@ extension UnitDownloader {
             }()
             
             for remoteUnit in inserts {
-                guard existingUnits[remoteUnit.id] == nil else { continue }
+                guard existingUnits[remoteUnit.id] == nil && !self.unitsInFetching.contains(remoteUnit.id) else { continue }
+                
+                // insertion of unit need to fetch participated members from cloudkit async, so keep an in-fetching tracking array to avoid insert the same unit more than once(cause the CloudKit subscription may fire more than once for the same change.
+                self.unitsInFetching.append(remoteUnit.id)
                 remoteUnit.insert(into: context.context) {
                     context.delayedSaveOrRollback()
+                    guard let index = self.unitsInFetching.index(of: remoteUnit.id) else {
+                        return
+                    }
+                    self.unitsInFetching.remove(at: index)
                 }
             }
         }

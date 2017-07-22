@@ -223,6 +223,14 @@ class TeamMemberEditableView: UIView {
         }
     }
     
+    func moveIndexToNext() {
+        var nextIndex = currentIndex + 1
+        if nextIndex == 6 {
+            nextIndex = 0
+        }
+        currentIndex = nextIndex
+    }
+    
     func setup(with member: Member, at index: Int) {
         editableItemViews[index].setup(with: member)
     }

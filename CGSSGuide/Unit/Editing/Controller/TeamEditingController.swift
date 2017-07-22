@@ -256,44 +256,24 @@ class TeamEditingController: BaseViewController {
         }
     }
     
-    func insertMember(_ member: Member, at index: Int, movesCurrentIndex: Bool = false) {
+    fileprivate func createOrReplaceMember(cardID: Int, skillLevel: Int, potential: CGSSPotential, at index: Int) {
         
-        let previousMember = members[index]
-        if previousMember != nil {
-            previousMember?.participatedUnit = nil
-            previousMember?.markForRemoteDeletion()
+        let member: Member
+        
+        if members[index] != nil {
+            member = members[index]!
+            member.setBy(cardID: cardID, skillLevel: skillLevel, potential: potential)
+        } else {
+            member = Member.insert(into: context, cardID: cardID, skillLevel: skillLevel, potential: potential, participatedPostion: index)
+            members[index] = member
         }
         
-        member.participatedPosition = Int16(index)
-        members[index] = member
-
-        switch index {
-        case 0:
-            unit?.members.insert(member)
-            if members[5] == nil {
-                let guest = Member.insert(into: context, anotherMember: members[0]!)
-                insertMember(guest, at: 5, movesCurrentIndex: false)
-            }
-        case 1...4:
-            previousMember?.participatedUnit = nil
-            unit?.members.insert(member)
-        case 5:
-            unit?.members.insert(member)
-        default:
-            break
+        if index == 0 && members[5] == nil {
+            createOrReplaceMember(cardID: cardID, skillLevel: skillLevel, potential: potential, at: 5)
         }
         
         reload(index: index)
-        
-        if movesCurrentIndex {
-            var nextIndex = index + 1
-            if nextIndex == 6 {
-                nextIndex = 0
-            }
-            editableView.currentIndex = nextIndex
-        }
     }
-    
 }
 
 extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -314,8 +294,8 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let member = Member.insert(into: context, anotherMember: recentMembers[indexPath.item])
-        insertMember(member, at: editableView.currentIndex)
+        let member = recentMembers[indexPath.item]
+        createOrReplaceMember(cardID: Int(member.cardID), skillLevel: Int(member.skillLevel), potential: member.potential, at: editableView.currentIndex)
     }
 }
 
@@ -441,10 +421,7 @@ extension TeamEditingController: BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard) {
         let skillLevel = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
         let potentialLevel = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
-        
-        let member = Member.insert(into: context, cardID: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel))
-        
-        insertMember(member, at: editableView.currentIndex)
+        createOrReplaceMember(cardID: card.id, skillLevel: skillLevel, potential: card.properPotentialByLevel(potentialLevel), at: editableView.currentIndex)
     }
 }
 
@@ -459,8 +436,8 @@ extension TeamEditingController: TeamTemplateControllerDelegate {
     
     func teamTemplateController(_ teamTemplateController: TeamTemplateController, didSelect unit: Unit) {
         for i in stride(from: 5, through: 0, by: -1) {
-            let member = Member.insert(into: context, anotherMember: unit[i])
-            insertMember(member, at: i)
+            let member = unit[i]
+            createOrReplaceMember(cardID: Int(member.cardID), skillLevel: Int(member.skillLevel), potential: member.potential, at: i)
         }
     }
 }

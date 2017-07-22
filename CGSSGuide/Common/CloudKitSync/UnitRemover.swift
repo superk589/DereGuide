@@ -25,6 +25,9 @@ final class UnitRemover: ElementChangeProcessor {
 
     func processChangedLocalElements(_ elements: [Unit], in context: ChangeProcessorContext) {
         processDeletedUnits(elements, in: context)
+        if Config.cloudKitDebug {
+            print("delete local units \(elements.count)")
+        }
     }
 
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {
