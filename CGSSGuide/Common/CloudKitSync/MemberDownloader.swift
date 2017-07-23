@@ -46,14 +46,16 @@ final class MemberDownloader: ChangeProcessor {
         deleteMembers(with: deletionIDs, in: context.managedObjectContext)
         update(updates, in: context)
         context.delayedSaveOrRollback()
-        if Config.cloudKitDebug {
+        if Config.cloudKitDebug && updates.count > 0 {
             print("Member remote fetch updates: \(updates.count)")
         }
         completion()
     }
     
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
-        //
+        remote.fetchLatestRecords(completion: { (remoteMembers) in
+            self.update(remoteMembers, in: context)
+        })
     }
     
     func entityAndPredicateForLocallyTrackedObjects(in context: ChangeProcessorContext) -> EntityAndPredicate<NSManagedObject>? {

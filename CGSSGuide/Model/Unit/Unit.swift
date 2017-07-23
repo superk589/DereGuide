@@ -111,6 +111,11 @@ extension Unit: RemoteUpdatable {
     typealias R = RemoteUnit
     
     func update(using remoteRecord: RemoteUnit) {
+        guard remoteRecord.localModifiedAt >= self.updatedAt else {
+            print("no need to update this unit \(self.remoteIdentifier!)")
+            markForRemoteModification()
+            return
+        }
         self.customAppeal = remoteRecord.customAppeal
         self.supportAppeal = remoteRecord.supportAppeal
         self.usesCustomAppeal = remoteRecord.usesCustomAppeal != 0

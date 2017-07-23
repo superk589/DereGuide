@@ -13,5 +13,4 @@ final class UnitsRemote: Remote {
     typealias R = RemoteUnit
     typealias L = Unit
     
-    static let subscriptionID: String = "My Units"
 }

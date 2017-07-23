@@ -33,11 +33,11 @@ extension RemoteUnit {
         guard record.recordType == RemoteUnit.recordType else { return nil }
         guard
 //        let center = record.object(forKey: "center") as? CKReference,
-        let customAppeal = record.object(forKey: "customAppeal") as? Int64,
+        let customAppeal = record.object(forKey: "customAppeal") as? NSNumber,
 //        let guest = record.object(forKey: "guest") as? CKReference,
 //        let otherMembers = record["otherMembers"] as? [CKReference],
-        let supportAppeal = record["supportAppeal"] as? Int64,
-        let usesCustomAppeal = record["usesCustomAppeal"] as? Int64,
+        let supportAppeal = record["supportAppeal"] as? NSNumber,
+        let usesCustomAppeal = record["usesCustomAppeal"] as? NSNumber,
         let localCreatedAt = record["localCreatedAt"] as? Date,
         let localModifiedAt = record["localModifiedAt"] as? Date,
         let creatorID = record.creatorUserRecordID?.recordName else {
@@ -50,9 +50,9 @@ extension RemoteUnit {
 //        self.center = center
 //        self.guest = guest
 //        self.otherMembers = otherMembers
-        self.supportAppeal = supportAppeal
-        self.customAppeal = customAppeal
-        self.usesCustomAppeal = usesCustomAppeal
+        self.supportAppeal = supportAppeal.int64Value
+        self.customAppeal = customAppeal.int64Value
+        self.usesCustomAppeal = usesCustomAppeal.int64Value
         self.localModifiedAt = localModifiedAt
     }
     
@@ -65,6 +65,9 @@ extension RemoteUnit {
         let predicate = NSPredicate(format: "participatedUnit = %@", recordToMatch)
         SyncCoordinator.shared.membersRemote.fetchRecordsForCurrentUserWith([predicate], [NSSortDescriptor.init(key: "participatedPosition", ascending: true)], completion: { (remoteMembers) in
             guard remoteMembers.count == 6 else {
+                SyncCoordinator.shared.unitsRemote.remove([self.id], completion: { _, _ in
+                    // no check
+                })
                 return
             }
             context.perform {

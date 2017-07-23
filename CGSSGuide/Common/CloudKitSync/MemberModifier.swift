@@ -26,7 +26,9 @@ final class MemberModifier: ElementChangeProcessor {
     
     func processChangedLocalElements(_ objects: [Member], in context: ChangeProcessorContext) {
         processLocalModifiedMembers(objects, in: context)
-        print("update remote members: \(objects.count)")
+        if Config.cloudKitDebug && objects.count > 0 {
+            print("update remote members \(objects.count)")
+        }
     }
     
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {

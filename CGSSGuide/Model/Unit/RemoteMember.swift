@@ -33,13 +33,13 @@ extension RemoteMember {
     
     init?(record: CKRecord) {
         guard record.recordType == RemoteMember.recordType else { return nil }
-        guard let cardID = record.object(forKey: "cardID") as? Int64,
+        guard let cardID = record.object(forKey: "cardID") as? NSNumber,
             let participatedUnit = record["participatedUnit"] as? CKReference,
-            let skillLevel = record["skillLevel"] as? Int64,
-            let vocalLevel = record["vocalLevel"] as? Int64,
-            let danceLevel = record["danceLevel"] as? Int64,
-            let visualLevel = record["visualLevel"] as? Int64,
-            let participatedPosition = record["participatedPosition"] as? Int64,
+            let skillLevel = record["skillLevel"] as? NSNumber,
+            let vocalLevel = record["vocalLevel"] as? NSNumber,
+            let danceLevel = record["danceLevel"] as? NSNumber,
+            let visualLevel = record["visualLevel"] as? NSNumber,
+            let participatedPosition = record["participatedPosition"] as? NSNumber,
             let localCreatedAt = record["localCreatedAt"] as? Date,
             let localModifiedAt = record["localModifiedAt"] as? Date,
             let creatorID = record.creatorUserRecordID?.recordName else {
@@ -51,12 +51,12 @@ extension RemoteMember {
         self.participatedUnit = participatedUnit
         self.localCreatedAt = localCreatedAt
         self.localModifiedAt = localModifiedAt
-        self.cardID = cardID
-        self.skillLevel = skillLevel
-        self.vocalLevel = vocalLevel
-        self.danceLevel = danceLevel
-        self.visualLevel = visualLevel
-        self.participatedPosition = participatedPosition
+        self.cardID = cardID.int64Value
+        self.skillLevel = skillLevel.int64Value
+        self.vocalLevel = vocalLevel.int64Value
+        self.danceLevel = danceLevel.int64Value
+        self.visualLevel = visualLevel.int64Value
+        self.participatedPosition = participatedPosition.int64Value
     }
 }
 

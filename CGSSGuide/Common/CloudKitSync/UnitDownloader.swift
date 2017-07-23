@@ -48,7 +48,7 @@ final class UnitDownloader: ChangeProcessor {
         insert(creates, in: context)
         deleteUnits(with: deletionIDs, in: context)
         update(updates, in: context)
-        if Config.cloudKitDebug {
+        if Config.cloudKitDebug && creates.count + deletionIDs.count + updates.count > 0 {
             print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
         }
         context.delayedSaveOrRollback()
@@ -59,6 +59,7 @@ final class UnitDownloader: ChangeProcessor {
         remote.fetchLatestRecords(completion: { (remoteUnits) in
             self.insert(remoteUnits, in: context)
             self.reserve(remoteUnits, in: context)
+            self.update(remoteUnits, in: context)
         })
     }
 

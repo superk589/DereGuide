@@ -27,7 +27,7 @@ final class UnitUploader: ElementChangeProcessor {
 
     func processChangedLocalElements(_ objects: [Unit], in context: ChangeProcessorContext) {
         processInsertedUnits(objects, in: context)
-        if Config.cloudKitDebug {
+        if Config.cloudKitDebug && objects.count > 0 {
             print("upload \(objects.count) unit to remote")
         }
     }

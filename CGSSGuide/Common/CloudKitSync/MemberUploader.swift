@@ -26,7 +26,7 @@ final class MemberUploader: ElementChangeProcessor {
     
     func processChangedLocalElements(_ objects: [Member], in context: ChangeProcessorContext) {
         processInsertedMembers(objects, in: context)
-        if Config.cloudKitDebug {
+        if Config.cloudKitDebug && objects.count > 0 {
             print("upload \(objects.count) member to remote")
         }
     }

@@ -106,6 +106,11 @@ extension Member: RemoteUpdatable {
     typealias R = RemoteMember
     
     func update(using remoteRecord: RemoteMember) {
+        guard remoteRecord.localModifiedAt >= self.updatedAt else {
+            print("no need to update this member \(self.remoteIdentifier!)")
+            markForRemoteModification()
+            return
+        }
         self.cardID = Int32(remoteRecord.cardID)
         self.vocalLevel = Int16(remoteRecord.vocalLevel)
         self.danceLevel = Int16(remoteRecord.danceLevel)
