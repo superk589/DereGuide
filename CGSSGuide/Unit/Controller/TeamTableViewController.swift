@@ -52,6 +52,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTeamModifiedNotification), name: .teamModified, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateEnd), name: .updateEnd, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleUbiquityIdentityChange), name: .NSUbiquityIdentityDidChange, object: nil)
         
         prepareToolbar()
         

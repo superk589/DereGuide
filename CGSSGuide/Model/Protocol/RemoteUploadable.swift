@@ -30,7 +30,11 @@ extension RemoteUploadable {
     public static func predicateForRemoteIdentifiers(_ ids: [RemoteIdentifier]) -> NSPredicate {
         return NSPredicate(format: "%K in %@", RemoteIdentifierKey, ids)
     }
-
+    
+    public static func predicateForNotInRemoteIdentifiers(_ ids: [RemoteIdentifier]) -> NSPredicate {
+        return NSCompoundPredicate(notPredicateWithSubpredicate: predicateForRemoteIdentifiers(ids))
+    }
+    
     public static var notUploadedPredicate: NSPredicate {
         return NSPredicate(format: "%K == NULL", RemoteIdentifierKey)
     }

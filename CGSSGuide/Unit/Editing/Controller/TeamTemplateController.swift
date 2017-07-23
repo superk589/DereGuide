@@ -43,13 +43,20 @@ class TeamTemplateController: BaseTableViewController {
             fatalError("parent context not set")
         }
         if let path = Bundle.main.path(forResource: "TeamTemplate", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: path) as? [String: [Int]] {
+            if let dict = NSDictionary(contentsOfFile: path) as? [String: [Any]] {
                 for (name, array) in dict {
                     var members = [Member]()
                     for id in array {
-                        let card = CGSSDAO.shared.findCardById(id)
-                        let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: card?.properPotential ?? .zero)
-                        members.append(member)
+                        if let subDict = id as? [String: Any] {
+                            if let id = subDict["id"] as? Int, let potentials = subDict["potential"] as? [String: Int] {
+                                let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: CGSSPotential(vocalLevel: potentials["vocalLevel"]!, danceLevel: potentials["danceLevel"]!, visualLevel: potentials["visualLevel"]!, lifeLevel: 0))
+                                members.append(member)
+                            }
+                        } else if let id = id as? Int {
+                            let card = CGSSDAO.shared.findCardById(id)
+                            let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: card?.properPotential ?? .zero)
+                            members.append(member)
+                        }
                     }
                     guard members.count == 6 else {
                         continue

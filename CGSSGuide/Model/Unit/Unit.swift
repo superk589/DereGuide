@@ -189,7 +189,7 @@ extension Unit {
     }
     
     var friendLeader: Member {
-        return orderedMembers[1]
+        return orderedMembers[5]
     }
     
     var subs: [Member] {

@@ -25,9 +25,6 @@ final class UnitRemover: ElementChangeProcessor {
 
     func processChangedLocalElements(_ elements: [Unit], in context: ChangeProcessorContext) {
         processDeletedUnits(elements, in: context)
-        if Config.cloudKitDebug {
-            print("delete local units \(elements.count)")
-        }
     }
 
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {
@@ -54,6 +51,10 @@ extension UnitRemover {
             let allObjects = Set(deletions)
             let localOnly = allObjects.filter { $0.remoteIdentifier == nil }
             let objectsToDeleteRemotely = Array(allObjects.subtracting(localOnly))
+            if Config.cloudKitDebug {
+                print("delete local units \(localOnly.count)")
+                print("delete remote units \(objectsToDeleteRemotely.count)")
+            }
             self.deleteLocally(localOnly, context: context)
             self.deleteRemotely(objectsToDeleteRemotely, context: context)
         }
@@ -65,6 +66,7 @@ extension UnitRemover {
 
     fileprivate func deleteRemotely(_ deletions: [Unit], context: ChangeProcessorContext) {
         remote.remove(deletions, completion: context.perform { deletedRecordIDs, error in
+            
             var deletedIDs = Set(deletedRecordIDs)
             if case .permanent(let ids)? = error {
                 deletedIDs.formUnion(ids)
@@ -73,7 +75,12 @@ extension UnitRemover {
             let toBeDeleted = deletions.filter { deletedIDs.contains($0.remoteIdentifier ?? "") }
             self.deleteLocally(toBeDeleted, context: context)
             // This will retry failures with non-permanent failures:
-            self.didComplete(Array(deletions), in: context)
+            if case .temporary(let interval)? = error {
+                self.retryAfter(interval, in: context, task: {
+                    self.didComplete(Array(deletions), in: context)
+                })
+            }
+
             context.delayedSaveOrRollback()
         })
     }

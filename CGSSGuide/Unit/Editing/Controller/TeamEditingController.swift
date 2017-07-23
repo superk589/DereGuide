@@ -389,11 +389,11 @@ extension TeamEditingController: UIPopoverPresentationControllerDelegate {
                 for unit in units {
                     for i in 0..<(TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols ? 6 : 5) {
                         let member = unit[i]
-                        if TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.card?.charaId == selectedMember.card?.charaId {
-                            modify(member, using: vc, modifySkill: false)
-                            modifiedUnits.insert(unit)
-                        } else if member == selectedMember {
+                        if member == selectedMember {
                             modify(member, using: vc)
+                            modifiedUnits.insert(unit)
+                        } else if TeamEditingAdvanceOptionsManager.default.editAllSameChara && member.card?.charaId == selectedMember.card?.charaId {
+                            modify(member, using: vc, modifySkill: false)
                             modifiedUnits.insert(unit)
                         }
                     }

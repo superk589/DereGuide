@@ -43,7 +43,7 @@ final class MemberDownloader: ChangeProcessor {
             }
         }
         insert(creates, in: context)
-        deleteMembers(with: deletionIDs, in: context.context)
+        deleteMembers(with: deletionIDs, in: context.managedObjectContext)
         update(updates, in: context)
         context.delayedSaveOrRollback()
         if Config.cloudKitDebug {
@@ -77,7 +77,7 @@ extension MemberDownloader {
         context.perform {
             let existingMembers = { () -> [RemoteIdentifier: Member] in
                 let ids = updates.map { $0.id }.flatMap { $0 }
-                let members = Member.fetch(in: context.context) { request in
+                let members = Member.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Member.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }

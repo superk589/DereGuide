@@ -135,7 +135,7 @@ extension SyncCoordinator : ContextOwner {
 extension SyncCoordinator: ChangeProcessorContext {
     
     /// This is the context that the sync coordinator, change processors, and other sync components do work on.
-    var context: NSManagedObjectContext {
+    var managedObjectContext: NSManagedObjectContext {
         return syncContext
     }
 
@@ -161,7 +161,7 @@ extension SyncCoordinator: ChangeProcessorContext {
     }
 
     func delayedSaveOrRollback() {
-        context.delayedSaveOrRollback(group: syncGroup)
+        managedObjectContext.delayedSaveOrRollback(group: syncGroup)
     }
     
 }
@@ -181,6 +181,10 @@ extension SyncCoordinator {
 // MARK: - Active & Background -
 
 extension SyncCoordinator: ApplicationActiveStateObserving {
+    
+    func applicationDidFinishLaunching() {
+        fetchRemoteDataForApplicationDidFinishLaunching()
+    }
     
     func applicationDidBecomeActive() {
         fetchLocallyTrackedObjects()
@@ -231,12 +235,11 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
 extension SyncCoordinator {
     
     fileprivate func fetchRemoteDataForApplicationDidBecomeActive() {
-        perform {
-            switch Unit.count(in: self.context) {
-            case 0: self.fetchLatestRemoteData()
-            default: self.fetchNewRemoteData()
-            }
-        }
+        self.fetchNewRemoteData()
+    }
+    
+    fileprivate func fetchRemoteDataForApplicationDidFinishLaunching() {
+        self.fetchLatestRemoteData()
     }
 
     fileprivate func fetchLatestRemoteData() {
@@ -253,7 +256,7 @@ extension SyncCoordinator {
         unitsRemote.fetchNewRecords { changes, callback in
             self.processRemoteChanges(changes) {
                 self.perform {
-                    self.context.delayedSaveOrRollback(group: self.syncGroup) { success in
+                    self.managedObjectContext.delayedSaveOrRollback(group: self.syncGroup) { success in
                         callback(success)
                     }
                 }
@@ -263,7 +266,7 @@ extension SyncCoordinator {
         membersRemote.fetchNewRecords { changes, callback in
             self.processRemoteChanges(changes) {
                 self.perform {
-                    self.context.delayedSaveOrRollback(group: self.syncGroup) { success in
+                    self.managedObjectContext.delayedSaveOrRollback(group: self.syncGroup) { success in
                         callback(success)
                     }
                 }

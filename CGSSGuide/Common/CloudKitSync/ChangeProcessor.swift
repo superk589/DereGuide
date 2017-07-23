@@ -31,6 +31,24 @@ protocol ChangeProcessor {
     
 }
 
+// MARK: ChangeProcessor Retry
+
+fileprivate let CloudKitRetryInterval: TimeInterval = 60
+extension ChangeProcessor {
+    
+    func retryAfter(_ interval: TimeInterval?, in context: ChangeProcessorContext, task: @escaping () -> ()) {
+        if Config.cloudKitDebug {
+            print("retry after interval \(interval ?? CloudKitRetryInterval)")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + (interval ?? CloudKitRetryInterval)) {
+            context.perform {
+                task()
+            }
+        }
+    }
+    
+}
+
 
 // MARK: - Change Processor Context -
 
@@ -39,7 +57,7 @@ protocol ChangeProcessor {
 protocol ChangeProcessorContext: class {
 
     /// The managed object context to use
-    var context: NSManagedObjectContext { get }
+    var managedObjectContext: NSManagedObjectContext { get }
 
     /// Wraps a block such that it is run on the right queue.
     func perform(_ block: @escaping () -> ())
@@ -111,7 +129,7 @@ extension ElementChangeProcessor {
             processChangedLocalElements(newElements, in: context)
         }
     }
-
+    
     func entityAndPredicateForLocallyTrackedObjects(in context: ChangeProcessorContext) -> EntityAndPredicate<NSManagedObject>? {
         let predicate = predicateForLocallyTrackedElements
         return EntityAndPredicate(entity: Element.entity, predicate: predicate)

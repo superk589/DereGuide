@@ -86,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 注册远程推送 用于订阅CloudKit同步信息
         application.registerForRemoteNotifications()
 
-        // 初始化同步协调器
-        syncCoordinator = SyncCoordinator.shared
+        // 同步协调器获取最新的远端数据
+        SyncCoordinator.shared.applicationDidFinishLaunching()
         return true
     }
     

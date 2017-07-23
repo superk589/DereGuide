@@ -7,19 +7,43 @@
 		<integer>100412</integer>
 		<real>100344</real>
 		<integer>100256</integer>
-		<integer>100326</integer>
+		<real>100282</real>
 		<real>100396</real>
 		<real>100412</real>
 	</array>
 	<key>Cool</key>
 	<array>
-		<integer>200400</integer>
-		<integer>200254</integer>
+		<dict>
+			<key>potential</key>
+			<dict>
+				<key>vocalLevel</key>
+				<integer>10</integer>
+				<key>danceLevel</key>
+				<integer>10</integer>
+				<key>visualLevel</key>
+				<integer>5</integer>
+			</dict>
+			<key>id</key>
+			<real>200400</real>
+		</dict>
+		<real>200254</real>
 		<real>200378</real>
 		<integer>200360</integer>
 		<integer>200294</integer>
-		<integer>200400</integer>
-	</array>
+        <dict>
+            <key>potential</key>
+            <dict>
+                <key>vocalLevel</key>
+                <integer>10</integer>
+                <key>danceLevel</key>
+                <integer>10</integer>
+                <key>visualLevel</key>
+                <integer>5</integer>
+            </dict>
+            <key>id</key>
+            <real>200400</real>
+        </dict>
+    </array>
 	<key>Passion</key>
 	<array>
 		<integer>300378</integer>

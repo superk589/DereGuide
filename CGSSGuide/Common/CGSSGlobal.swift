@@ -159,7 +159,7 @@ public class CGSSGlobal {
     
     // max = 15928 + 500 + 500 + 220 
     // ceil(0.5 × max × 1.3) * 10
-    static let defaultSupportAppeal = 111462
+    static let defaultSupportAppeal = 111470
     
 }
 

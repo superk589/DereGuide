@@ -73,6 +73,19 @@ class TeamTableViewCell: UITableViewCell {
         
     }
     
+    // fix a strange bug for an extra separator line
+    override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        // must check here, or will crash in subclass of this cell
+        let optionalView: UIView? = view
+        guard optionalView != nil else {
+            return
+        }
+        if type(of: view).description() ==  "_UITableViewCellSeparatorView" && subviews.count < 3 {
+            view.isHidden = true
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepareUI()

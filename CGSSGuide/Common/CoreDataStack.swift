@@ -14,25 +14,36 @@ class CoreDataStack {
     static let `default` = CoreDataStack()
     
     private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleiCloudAccountChanged), name: .CKAccountChanged, object: nil)
+        // still have some error in switching store of core data at runtime
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleiCloudAccountChanged), name: .NSUbiquityIdentityDidChange, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func handleiCloudAccountChanged() {
-        // switch persistentStore after user change their iCloud account
-        guard let currentStore = coordinator.persistentStores.first else {
-            return
-        }
-        do {
-            try coordinator.remove(currentStore)
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
-        } catch let error {
-            print(error)
-        }
-    }
+//    @objc func handleiCloudAccountChanged() {
+//        // switch persistentStore after user change their iCloud account
+//        guard let currentStore = coordinator.persistentStores.first else {
+//            return
+//        }
+//        do {
+//            try coordinator.remove(currentStore)
+//            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
+//            viewContext.perform { [weak self] in
+//                self?.viewContext.refreshAllObjects()
+//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: self?.viewContext.registeredObjects.map { $0.objectID } ?? []], into: [self?.viewContext].flatMap { $0 })
+//                self?.viewContext.reset()
+//            }
+//            syncContext.perform { [weak self] in
+//                self?.syncContext.refreshAllObjects()
+//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: self?.syncContext.registeredObjects.map { $0.objectID } ?? []], into: [self?.syncContext].flatMap { $0 })
+//                self?.syncContext.reset()
+//            }
+//        } catch let error {
+//            print(error)
+//        }
+//    }
     
     private let ubiquityToken: String = {
         guard let token = FileManager.default.ubiquityIdentityToken else { return "unknown" }

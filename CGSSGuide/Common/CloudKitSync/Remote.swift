@@ -17,7 +17,7 @@ enum RemoteRecordChange<T: RemoteRecord> {
 
 enum RemoteError {
     case permanent([RemoteIdentifier])
-    case temporary
+    case temporary(TimeInterval?)
 
     var isPermanent: Bool {
         switch self {
@@ -33,7 +33,7 @@ extension RemoteError {
         if error.permanentCloudKitError {
             self = .permanent(error.partiallyFailedRecordIDsWithPermanentError.map { $0.recordName })
         } else {
-            self = .temporary
+            self = .temporary(error.userInfo[CKErrorRetryAfterKey] as? TimeInterval)
         }
     }
 }

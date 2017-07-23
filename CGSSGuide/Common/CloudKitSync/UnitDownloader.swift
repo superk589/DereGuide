@@ -46,7 +46,7 @@ final class UnitDownloader: ChangeProcessor {
             }
         }
         insert(creates, in: context)
-        deleteUnits(with: deletionIDs, in: context.context)
+        deleteUnits(with: deletionIDs, in: context)
         update(updates, in: context)
         if Config.cloudKitDebug {
             print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
@@ -58,6 +58,7 @@ final class UnitDownloader: ChangeProcessor {
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
         remote.fetchLatestRecords(completion: { (remoteUnits) in
             self.insert(remoteUnits, in: context)
+            self.reserve(remoteUnits, in: context)
         })
     }
 
@@ -70,14 +71,30 @@ final class UnitDownloader: ChangeProcessor {
 
 extension UnitDownloader {
 
-    fileprivate func deleteUnits(with ids: [RemoteIdentifier], in context: NSManagedObjectContext) {
+    fileprivate func deleteUnits(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
         guard !ids.isEmpty else { return }
         context.perform {
-            let units = Unit.fetch(in: context) { (request) -> () in
+            let units = Unit.fetch(in: context.managedObjectContext) { (request) -> () in
                 request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                 request.returnsObjectsAsFaults = false
             }
             units.forEach { $0.markForLocalDeletion() }
+        }
+    }
+    
+    fileprivate func reserve(_ reserves: [RemoteUnit], in context: ChangeProcessorContext) {
+        context.perform {
+            let remoteRemoveds = { () -> [RemoteIdentifier] in
+                let ids = reserves.map { $0.id }.flatMap { $0 }
+                let units = Unit.fetch(in: context.managedObjectContext) { request in
+                    request.predicate = Unit.predicateForNotInRemoteIdentifiers(ids)
+                    request.returnsObjectsAsFaults = false
+                }
+                return units.map { $0.remoteIdentifier }.flatMap { $0 }
+            }()
+            
+            self.deleteUnits(with: remoteRemoveds, in: context)
+            context.delayedSaveOrRollback()
         }
     }
 
@@ -85,7 +102,7 @@ extension UnitDownloader {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
                 let ids = inserts.map { $0.id }.flatMap { $0 }
-                let units = Unit.fetch(in: context.context) { request in
+                let units = Unit.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }
@@ -101,7 +118,7 @@ extension UnitDownloader {
                 
                 // insertion of unit need to fetch participated members from cloudkit async, so keep an in-fetching tracking array to avoid insert the same unit more than once(cause the CloudKit subscription may fire more than once for the same change.
                 self.unitsInFetching.append(remoteUnit.id)
-                remoteUnit.insert(into: context.context) {
+                remoteUnit.insert(into: context.managedObjectContext) {
                     context.delayedSaveOrRollback()
                     guard let index = self.unitsInFetching.index(of: remoteUnit.id) else {
                         return
@@ -116,7 +133,7 @@ extension UnitDownloader {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
                 let ids = updates.map { $0.id }.flatMap { $0 }
-                let units = Unit.fetch(in: context.context) { request in
+                let units = Unit.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }
