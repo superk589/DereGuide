@@ -2,8 +2,8 @@
 /* Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx"; */
 "08b-yF-FVx.title" = "ツール";
 
-/* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "1N5-JG-Kjr"; */
-"1N5-JG-Kjr.title" = "マイユニット";
+/* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb"; */
+"omj-Op-jcb.title" = "マイユニット";
 
 /* Class = "UITableViewSection"; headerTitle = "反馈"; ObjectID = "1cN-eL-xzi"; */
 "1cN-eL-xzi.headerTitle" = "フィードバック";

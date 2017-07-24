@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 
-class TeamTableViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate {
+class TeamTableViewController: BaseViewController, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    var tableView = UITableView()
     
     var addItem: UIBarButtonItem!
     var deleteItem: UIBarButtonItem!
@@ -33,9 +35,18 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: "TeamCell")
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 99
         tableView.tableFooterView = UIView()
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.keyboardDismissMode = .onDrag
         
         hintLabel = UILabel()
         hintLabel.textColor = UIColor.darkGray
@@ -44,8 +55,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         hintLabel.textAlignment = .center
         view.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-64)
+            make.center.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
         }
@@ -138,11 +148,11 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController?.sections?.count ?? 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController?.sections, sections.count > 0 {
             return sections[section].numberOfObjects
         } else {
@@ -162,15 +172,16 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
             setToolbarItems(nil, animated: true)
         }
         tableView.beginUpdates()
+        tableView.setEditing(editing, animated: animated)
         tableView.endUpdates()
     }
     
     // 实现了这两个方法 delete 手势才不会调用 setediting
-    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
     }
    
-    override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
@@ -178,13 +189,13 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         self.tableView.setEditing(false, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath) as! TeamTableViewCell
         cell.setup(with: units[indexPath.row])
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if isEditing {
             // 编辑状态时 为多选删除模式
             return UITableViewCellEditingStyle.init(rawValue: 0b11)!
@@ -214,7 +225,7 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
 //    }
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             units[indexPath.row].markForRemoteDeletion()
             context.saveOrRollback()
@@ -223,7 +234,19 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // 下面这两个方法可以让分割线左侧顶格显示 不再留15像素
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.layoutMargins = UIEdgeInsets.zero
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
         let unit = units[indexPath.row]
@@ -250,8 +273,43 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
 //        }
 //    }
     
-    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        super.controllerDidChangeContent(controller)
+}
+
+extension TeamTableViewController: NSFetchedResultsControllerDelegate {
+    
+    // MARK: NSFetchedResultsControllerDelegate
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections([sectionIndex], with: .fade)
+        case .delete:
+            tableView.deleteSections([sectionIndex], with: .fade)
+        default:
+            break
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .none)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        }
+        
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
         if units.count != 0 {
             hintLabel?.isHidden = true
         } else {
@@ -259,3 +317,4 @@ class TeamTableViewController: BaseTableViewController, UIPopoverPresentationCon
         }
     }
 }
+

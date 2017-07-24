@@ -57,7 +57,7 @@ class UpdateStatusView: UIView {
         cancelButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.width.height.equalTo(40)
-            make.right.lessThanOrEqualTo(-5)
+            make.right.equalTo(-5)
         }
         
         statusLabel = UILabel()

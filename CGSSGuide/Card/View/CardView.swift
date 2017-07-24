@@ -82,8 +82,10 @@ class CardView: UIView {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(rarityLabel.snp.right).offset(5)
             make.top.equalTo(rarityLabel)
+            make.right.lessThanOrEqualTo(skillLabel.snp.left).offset(-5)
         }
-        
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        skillLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
 //        let width = (CGSSGlobal.width - 78) / 5
 //        let fontSize: CGFloat = 12
 //        let height: CGFloat = 12

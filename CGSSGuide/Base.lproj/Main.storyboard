@@ -404,9 +404,9 @@ If you choose to use our Service</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content"> then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+                                        <string key="content"> then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
 
-The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions</mutableString>
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions</string>
                                         <attributes>
                                             <font key="NSFont" metaFont="system" size="14"/>
                                         </attributes>
@@ -818,35 +818,6 @@ If you have any questions or suggestions about our Privacy Policy</string>
             </objects>
             <point key="canvasLocation" x="-4453" y="918"/>
         </scene>
-        <!--组队-->
-        <scene sceneID="4om-XR-tsE">
-            <objects>
-                <tableViewController title="组队" id="Zys-WZ-9cy" customClass="TeamTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="3og-Fu-WEt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TeamCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamCell" id="nT8-0z-vMu" customClass="TeamTableViewCell" customModule="CGSSGuide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nT8-0z-vMu" id="2SE-Rf-waV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Zys-WZ-9cy" id="bLP-SL-O8T"/>
-                            <outlet property="delegate" destination="Zys-WZ-9cy" id="XzS-P2-Dxw"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="我的队伍" id="1N5-JG-Kjr"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9J9-Wr-vyq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4401" y="1721"/>
-        </scene>
         <!--组队导航-->
         <scene sceneID="3Ro-R5-hIA">
             <objects>
@@ -857,12 +828,31 @@ If you have any questions or suggestions about our Privacy Policy</string>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Zys-WZ-9cy" kind="relationship" relationship="rootViewController" id="aR7-Z5-Bwt"/>
+                        <segue destination="GZS-2K-Fnc" kind="relationship" relationship="rootViewController" id="M7l-fS-Jjp"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nx-Ag-0t2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5894" y="1721"/>
+        </scene>
+        <!--我的队伍-->
+        <scene sceneID="ILv-7i-9nP">
+            <objects>
+                <viewController id="GZS-2K-Fnc" customClass="TeamTableViewController" customModule="CGSSGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qdf-q2-Z8T"/>
+                        <viewControllerLayoutGuide type="bottom" id="TaQ-cT-OAD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="YES" id="6Ek-cq-sl0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我的队伍" id="omj-Op-jcb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5N-Xu-pZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5223" y="1719"/>
         </scene>
         <!--歌曲-->
         <scene sceneID="5me-Bd-loQ">
