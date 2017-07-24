@@ -17,16 +17,19 @@ enum CloudKitRecordChange {
 
 extension CKContainer {
 
-    func fetchAllPendingNotifications(changeToken: CKServerChangeToken?, processChanges: @escaping (_ changeReasons: [CKRecordID: CKQueryNotificationReason], _ error: NSError?, _ callback: @escaping (_ success: Bool) -> ()) -> ()) {
+    func fetchAllPendingNotifications(changeToken: CKServerChangeToken?, subcriptionID: String?, processChanges: @escaping (_ changeReasons: [CKRecordID: CKQueryNotificationReason], _ error: NSError?, _ callback: @escaping (_ success: Bool) -> ()) -> ()) {
         let op = CKFetchNotificationChangesOperation(previousServerChangeToken: changeToken)
         var changeReasons: [CKRecordID: CKQueryNotificationReason] = [:]
         var notificationIDs: [CKNotificationID] = []
+        
         op.notificationChangedBlock = { note in
-            if let notificationID = note.notificationID {
-                notificationIDs.append(notificationID)
-            }
-            if let n = note as? CKQueryNotification, let recordID = n.recordID {
-                changeReasons[recordID] = n.queryNotificationReason
+            if note.subscriptionID == subcriptionID {
+                if let notificationID = note.notificationID {
+                    notificationIDs.append(notificationID)
+                }
+                if let n = note as? CKQueryNotification, let recordID = n.recordID {
+                    changeReasons[recordID] = n.queryNotificationReason
+                }
             }
         }
         op.fetchNotificationChangesCompletionBlock = { newChangeToken, error in
@@ -36,7 +39,7 @@ extension CKContainer {
                 self.add(op)
             }
             if op.moreComing {
-                self.fetchAllPendingNotifications(changeToken: newChangeToken, processChanges: processChanges)
+                self.fetchAllPendingNotifications(changeToken: newChangeToken, subcriptionID: subcriptionID, processChanges: processChanges)
             }
         }
         add(op)

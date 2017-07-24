@@ -26,9 +26,6 @@ final class MemberUploader: ElementChangeProcessor {
     
     func processChangedLocalElements(_ objects: [Member], in context: ChangeProcessorContext) {
         processInsertedMembers(objects, in: context)
-        if Config.cloudKitDebug && objects.count > 0 {
-            print("upload \(objects.count) member to remote")
-        }
     }
     
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {
@@ -60,6 +57,9 @@ extension MemberUploader {
                     guard let remoteMember = remoteMembers.first(where: { member.createdAt == $0.localCreatedAt }) else { continue }
                     member.creatorID = remoteMember.creatorID
                     member.remoteIdentifier = remoteMember.id
+                }
+                if Config.cloudKitDebug && insertions.count > 0 {
+                    print("upload \(insertions.count) members, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 context.delayedSaveOrRollback()
                 self.elementsInProgress.markObjectsAsComplete(insertions)                

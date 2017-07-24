@@ -57,6 +57,7 @@ protocol Remote {
     associatedtype R: RemoteRecord
     associatedtype L: RemoteUploadable, RemoteDeletable
     
+    static var subscriptionID: String { get }
     var cloudKitContainer: CKContainer { get }
     func setupSubscription()
     func fetchLatestRecords(completion: @escaping ([R]) -> ())
@@ -98,9 +99,9 @@ extension Remote {
             
             if #available(iOS 10.0, *) {
                 let options: CKQuerySubscriptionOptions = [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion]
-                subscription = CKQuerySubscription(recordType: R.recordType, predicate: predicate, options: options)
+                subscription = CKQuerySubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: options)
             } else {
-                subscription = CKSubscription(recordType: R.recordType, predicate: predicate, options: [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion])
+                subscription = CKSubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion])
             }
             subscription.notificationInfo = info
             let op = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: [])
@@ -112,7 +113,7 @@ extension Remote {
     }
 
     func fetchNewRecords(completion: @escaping ([RemoteRecordChange<R>], @escaping (_ success: Bool) -> ()) -> ()) {
-        cloudKitContainer.fetchAllPendingNotifications(changeToken: nil) { changeReasons, error, callback in
+        cloudKitContainer.fetchAllPendingNotifications(changeToken: nil, subcriptionID: Self.subscriptionID) { changeReasons, error, callback in
             guard error == nil else { return completion([], { _ in }) } // TODO We should handle this case with e.g. a clean refetch
             guard changeReasons.count > 0 else { return completion([], callback) }
             self.cloudKitContainer.publicCloudDatabase.fetchRecords(for: changeReasons) { changes, error in
@@ -173,6 +174,9 @@ extension Remote {
         let op = CKModifyRecordsOperation(recordsToSave: recordsToSave,
                                           recordIDsToDelete: nil)
         op.modifyRecordsCompletionBlock = { modifiedRecords, _, error in
+            if error != nil {
+                print(error!)
+            }
             let remoteRecords = modifiedRecords?.map { R(record: $0) }.flatMap { $0 } ?? []
             let remoteError = RemoteError(cloudKitError: error)
             completion(remoteRecords, remoteError)

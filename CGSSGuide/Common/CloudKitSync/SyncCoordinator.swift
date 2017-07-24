@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 public protocol CloudKitNotificationDrain {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any])

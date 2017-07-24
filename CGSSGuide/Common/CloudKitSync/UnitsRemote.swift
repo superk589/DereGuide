@@ -10,6 +10,8 @@ import CloudKit
 
 final class UnitsRemote: Remote {
 
+    static let subscriptionID: String = "My Units"
+
     typealias R = RemoteUnit
     typealias L = Unit
     
