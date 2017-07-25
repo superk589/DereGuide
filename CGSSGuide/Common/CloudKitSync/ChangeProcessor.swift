@@ -33,10 +33,10 @@ protocol ChangeProcessor {
 
 // MARK: ChangeProcessor Retry
 
-fileprivate let CloudKitRetryInterval: TimeInterval = 60
+fileprivate let CloudKitRetryInterval: TimeInterval = 10
 extension ChangeProcessor {
     
-    func retryAfter(_ interval: TimeInterval?, in context: ChangeProcessorContext, task: @escaping () -> ()) {
+    func retryAfter(_ interval: TimeInterval? = CloudKitRetryInterval, in context: ChangeProcessorContext, task: @escaping () -> ()) {
         if Config.cloudKitDebug {
             print("retry after interval \(interval ?? CloudKitRetryInterval)")
         }

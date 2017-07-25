@@ -53,6 +53,9 @@ extension UnitUploader {
                     self.elementsInProgress.markObjectsAsComplete(insertions)
                     return
                 }
+                // currently not retry for temporarily error
+
+                // set unit remote id
                 for unit in insertions {
                     guard let remoteUnit = remoteUnits.first(where: { unit.createdAt == $0.localCreatedAt }) else { continue }
                     unit.creatorID = remoteUnit.creatorID

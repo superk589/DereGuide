@@ -47,7 +47,7 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         tableView.tableFooterView = UIView()
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.keyboardDismissMode = .onDrag
-        
+
         hintLabel = UILabel()
         hintLabel.textColor = UIColor.darkGray
         hintLabel.text = NSLocalizedString("还没有队伍，点击右上＋创建一个吧", comment: "")
@@ -247,7 +247,12 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if tableView.isEditing { return }
+        
+        // 这种情况下 cell不会自动去除选中状态 故手动置为非选中状态
+        tableView.cellForRow(at: indexPath)?.isSelected = false
+        
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
         let unit = units[indexPath.row]
         if unit.validateMembers() {
@@ -259,8 +264,6 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
             let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
             self.navigationController?.present(alert, animated: true, completion: nil)
-            // 这种情况下 cell不会自动去除选中状态 故手动置为非选中状态
-            tableView.cellForRow(at: indexPath)?.isSelected = false
         }
     }
     

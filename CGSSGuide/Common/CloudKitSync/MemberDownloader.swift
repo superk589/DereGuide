@@ -68,7 +68,7 @@ final class MemberDownloader: ChangeProcessor {
 extension MemberDownloader {
     
     fileprivate func deleteMembers(with ids: [RemoteIdentifier], in context: NSManagedObjectContext) {
-        // local units use cascade deletion relation to members, so no need to reacte to the remote deletion
+        // local units use cascade deletion relation to members, so no need to react to the remote deletion
     }
     
     fileprivate func insert(_ inserts: [RemoteMember], in context: ChangeProcessorContext) {

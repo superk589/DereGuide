@@ -94,11 +94,28 @@ extension UnitDownloader {
                 return units.map { $0.remoteIdentifier }.flatMap { $0 }
             }()
             
+            // delete those have no remote records but left in local database
             self.deleteUnits(with: remoteRemoveds, in: context)
             context.delayedSaveOrRollback()
         }
     }
 
+    fileprivate func insert(_ remoteUnit: RemoteUnit, into context: ChangeProcessorContext) {
+        remoteUnit.insert(into: context.managedObjectContext) { success in
+            if success {
+                context.delayedSaveOrRollback()
+                guard let index = self.unitsInFetching.index(of: remoteUnit.id) else {
+                    return
+                }
+                self.unitsInFetching.remove(at: index)
+            } else {
+                self.retryAfter(in: context, task: {
+                    self.insert(remoteUnit, into: context)
+                })
+            }
+        }
+    }
+    
     fileprivate func insert(_ inserts: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
@@ -119,13 +136,7 @@ extension UnitDownloader {
                 
                 // insertion of unit need to fetch participated members from cloudkit async, so keep an in-fetching tracking array to avoid insert the same unit more than once(cause the CloudKit subscription may fire more than once for the same change.
                 self.unitsInFetching.append(remoteUnit.id)
-                remoteUnit.insert(into: context.managedObjectContext) {
-                    context.delayedSaveOrRollback()
-                    guard let index = self.unitsInFetching.index(of: remoteUnit.id) else {
-                        return
-                    }
-                    self.unitsInFetching.remove(at: index)
-                }
+                self.insert(remoteUnit, into: context)
             }
         }
     }

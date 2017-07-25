@@ -60,21 +60,23 @@ extension RemoteUnit {
 
 extension RemoteUnit {
     
-    func insert(into context: NSManagedObjectContext, completion: @escaping () -> ()) {
+    func insert(into context: NSManagedObjectContext, completion: @escaping (Bool) -> ()) {
         let recordToMatch = CKReference(recordID: CKRecordID(recordName: id), action: .deleteSelf)
         let predicate = NSPredicate(format: "participatedUnit = %@", recordToMatch)
         SyncCoordinator.shared.membersRemote.fetchRecordsForCurrentUserWith([predicate], [NSSortDescriptor.init(key: "participatedPosition", ascending: true)], completion: { (remoteMembers) in
             guard remoteMembers.count == 6 else {
-                SyncCoordinator.shared.unitsRemote.remove([self.id], completion: { _, _ in
-                    // no check
-                })
+//                SyncCoordinator.shared.unitsRemote.remove([self.id], completion: { _, _ in
+//                    // no check
+//                })
+                // this situation may occur when the remote unit exists, but members are still uploading, so completion(false) and let the context to retry later
+                completion(false)
                 return
             }
             context.perform {
                 let unit = Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, members: remoteMembers.map { $0.insert(into: context) })
                 unit.creatorID = self.creatorID
                 unit.remoteIdentifier = self.id
-                completion()
+                completion(true)
             }
         })
     }

@@ -47,14 +47,14 @@ class TeamSimulationCardView: UIView {
             make.centerX.bottom.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
-            make.height.equalTo(14.5)
+            make.bottom.equalToSuperview()
         }
         
         potentialLabel.snp.makeConstraints { (make) in
             make.centerX.top.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
-            make.height.equalTo(14.5)
+            make.top.equalToSuperview()
         }
         
         icon.snp.makeConstraints { (make) in

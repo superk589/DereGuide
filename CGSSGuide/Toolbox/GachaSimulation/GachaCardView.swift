@@ -28,7 +28,6 @@ class GachaCardView: UIView {
             make.centerX.bottom.equalToSuperview()
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
-            make.height.equalTo(14.5)
             make.bottom.equalToSuperview()
         }
         
