@@ -25,7 +25,7 @@ class BaseModelTableViewController: RefreshableTableViewController {
     // called if needsReloadData is true when text changed, must to be overrided
     func reloadData() {}
     
-    func setNeedsReloadData() {
+    @objc func setNeedsReloadData() {
         needsReloadData = true
         if isShowing {
             reloadDataIfNeeded()

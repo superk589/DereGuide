@@ -79,13 +79,13 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         tableView.register(TeamAdvanceOptionsTableViewCell.self, forCellReuseIdentifier: TeamAdvanceOptionsTableViewCell.description())
     }
     
-    func resetAction() {
+    @objc func resetAction() {
         LiveSimulationAdvanceOptionsManager.default.reset()
         setupWithUserDefaults()
         tableView.reloadData()
     }
     
-    func option1ValueChanged(_ sender: UISwitch) {
+    @objc func option1ValueChanged(_ sender: UISwitch) {
         LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition = option1.switch.isOn
     }
     
@@ -104,7 +104,7 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)
     }
     
-    func option2TextFieldEndEditing(_ sender: UITextField) {
+    @objc func option2TextFieldEndEditing(_ sender: UITextField) {
         validateOption2TextField()
         LiveSimulationAdvanceOptionsManager.default.roomUpValue = Int(option2.textField.text!)!
     }
@@ -117,7 +117,7 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         }
     }
     
-    func option3TextFieldEndEditing(_ sender: UITextField) {
+    @objc func option3TextFieldEndEditing(_ sender: UITextField) {
         validateOption3TextField()
         LiveSimulationAdvanceOptionsManager.default.greatPercent = Double(option3.textField.text!)!
     }
@@ -130,7 +130,7 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         }
     }
     
-    func option4TextFieldEndEditing(_ sender: UITextField) {
+    @objc func option4TextFieldEndEditing(_ sender: UITextField) {
         validateOption4TextField()
         LiveSimulationAdvanceOptionsManager.default.simulationTimes = Int(option4.textField.text!)!
     }

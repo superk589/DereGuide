@@ -80,19 +80,19 @@ enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
 
 // MARK: 用于排序的属性
 extension CGSSLive {
-    dynamic var updateId: Int {
+    @objc dynamic var updateId: Int {
         return beatmapCount == 5 ? self[.masterPlus].id : self[.master].id
     }
     
-    dynamic var createId: Int {
+    @objc dynamic var createId: Int {
         return self[.debut].id
     }
     
-    dynamic var maxDiffStars: Int {
+    @objc dynamic var maxDiffStars: Int {
         return self[selectableMaxDifficulty].stars
     }
     
-    dynamic var maxNumberOfNotes: Int {
+    @objc dynamic var maxNumberOfNotes: Int {
         return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
     }
 }

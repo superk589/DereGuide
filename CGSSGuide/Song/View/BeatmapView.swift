@@ -189,7 +189,7 @@ class AdvanceBeatmapDrawer {
         path.fill()
         // 画标题
         UIColor.darkGray.set()
-        let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 24), NSForegroundColorAttributeName: UIColor.darkGray]
+        let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24), NSAttributedStringKey.foregroundColor: UIColor.darkGray]
         (title as NSString).draw(at: CGPoint.init(x: 30, y: 10), withAttributes: attDict)
         for i in 0..<Int(columns) {
             
@@ -254,7 +254,7 @@ class AdvanceBeatmapDrawer {
             if i % 8 == 0 {
                 UIColor.darkGray.set()
                 let sectionNumber: NSString = NSString.init(format: "%03d", i / 8)
-                let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.darkGray]
+                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.darkGray]
                 sectionNumber.draw(at: CGPoint(x: widthInset - 25, y: pointY - 7), withAttributes: attDict)
                 let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
                 comboNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: pointY - 7), withAttributes: attDict)
@@ -287,13 +287,13 @@ class AdvanceBeatmapDrawer {
                 
                 UIColor.red.set()
                 let bpmNumber = NSString.init(format: "%d", point.bpm)
-                let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: Color.bpmShift]
+                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Color.bpmShift]
                 bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y - 14 + offset), withAttributes: attDict)
                 
                 if i > 0 {
                     let lastPoint = shiftingPoints[i - 1]
                     let bpmNumber = NSString.init(format: "%d", lastPoint.bpm)
-                    let attDict = [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: Color.bpmShift]
+                    let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Color.bpmShift]
                     bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y + offset), withAttributes: attDict)
                 }
                 

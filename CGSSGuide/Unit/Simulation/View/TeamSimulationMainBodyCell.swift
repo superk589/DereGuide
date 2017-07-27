@@ -224,15 +224,15 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         simulationGrid[1, 3].text = ""
     }
     
-    func startCalculate() {
+    @objc func startCalculate() {
         delegate?.startCalculate(self)
     }
     
-    func startSimulate() {
+    @objc func startSimulate() {
         delegate?.startSimulate(self)
     }
     
-    func cancelSimulating() {
+    @objc func cancelSimulating() {
         delegate?.cancelSimulating(self)
     }
     

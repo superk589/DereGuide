@@ -274,7 +274,7 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         self.gachaURLs.removeAll()
     }
     
-    func cacheData() {
+    @objc func cacheData() {
         if CGSSUpdater.default.isWorking {
             return
         }

@@ -78,7 +78,7 @@ extension MemberDownloader {
     fileprivate func update(_ updates: [RemoteMember], in context: ChangeProcessorContext) {
         context.perform {
             let existingMembers = { () -> [RemoteIdentifier: Member] in
-                let ids = updates.map { $0.id }.flatMap { $0 }
+                let ids = updates.map { $0.id }
                 let members = Member.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Member.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false

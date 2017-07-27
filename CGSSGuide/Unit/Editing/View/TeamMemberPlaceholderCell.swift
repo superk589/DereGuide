@@ -78,11 +78,11 @@ class TeamMemberPlaceholderCell: UITableViewCell {
         }
     }
     
-    func handleFullListButton(_ sender: UIButton) {
+    @objc func handleFullListButton(_ sender: UIButton) {
         delegate?.selectFromFullList(self)
     }
     
-    func handleRecentUsedButton(_ sender: UIButton) {
+    @objc func handleRecentUsedButton(_ sender: UIButton) {
         delegate?.selectFromRecentUsed(self)
     }
     

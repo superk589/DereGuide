@@ -59,7 +59,7 @@ extension UnitRemover {
                     print("delete remote units \(objectsToDeleteRemotely.count)")
                 }
             }
-            self.deleteLocally(localOnly, context: context)
+            self.deleteLocally(Array(localOnly), context: context)
             self.deleteRemotely(objectsToDeleteRemotely, context: context)
         }
     }

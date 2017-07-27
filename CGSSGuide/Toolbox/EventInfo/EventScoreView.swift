@@ -94,7 +94,7 @@ class EventScoreView: UIView {
         }
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         if !isLoading {
             delegate?.refresh(eventScoreView: self)
             setLoading(loading: true)

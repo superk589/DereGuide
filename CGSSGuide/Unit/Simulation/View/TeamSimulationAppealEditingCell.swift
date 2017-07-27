@@ -134,7 +134,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
     }
     
     
-    func beginEditAppealTextField(sender: UITextField) {
+    @objc func beginEditAppealTextField(sender: UITextField) {
         delegate?.teamSimulationAppealEditingCell(self, beginEdit: sender)
     }
     
@@ -152,7 +152,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         }
     }
     
-    func endEditAppeal() {
+    @objc func endEditAppeal() {
         validteInputResult()
         delegate?.teamSimulationAppealEditingCell(self, didUpdateAt: supportAppealBox.isChecked ? 0 : 1, supportAppeal: Int(supportAppealTextField.text ?? "") ?? 0, customAppeal: Int(customAppealTextField.text ?? "") ?? 0)
     }
@@ -170,7 +170,7 @@ class TeamSimulationAppealEditingCell: UITableViewCell {
         customAppealTextField.text = unit.customAppeal.description
     }
     
-    func checkBox(_ tap: UITapGestureRecognizer) {
+    @objc func checkBox(_ tap: UITapGestureRecognizer) {
         supportAppealBox.setChecked(tap.view == supportAppealBox)
         customAppealBox.setChecked(!(tap.view == supportAppealBox))
         supportAppealTextField.isEnabled = (tap.view == supportAppealBox)

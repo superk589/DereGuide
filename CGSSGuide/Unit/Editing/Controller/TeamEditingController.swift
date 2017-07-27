@@ -128,10 +128,10 @@ class TeamEditingController: BaseViewController {
             make.bottom.equalTo(editableView.snp.top)
         }
         
-        collectionView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .vertical)
-        editableView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .vertical)
-        collectionView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
-        editableView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
+        collectionView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .vertical)
+        editableView.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .vertical)
+        collectionView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+        editableView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
         
     }
     
@@ -160,20 +160,20 @@ class TeamEditingController: BaseViewController {
         toolbarItems = [item1, spaceItem, item2]
     }
 
-    func openAdvanceOptions() {
+    @objc func openAdvanceOptions() {
         let vc = TeamCardSelectionAdvanceOptionsController()
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    func openTemplates() {
+    @objc func openTemplates() {
         let vc = TeamTemplateController()
         vc.parentContext = self.context
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func handleInfoButton() {
+    @objc func handleInfoButton() {
         showHelpTips()
     }
     
@@ -207,7 +207,7 @@ class TeamEditingController: BaseViewController {
         maskView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
     }
     
-    func hideHelpTips() {
+    @objc func hideHelpTips() {
         tip1?.dismiss()
         tip2?.dismiss()
         maskView?.removeFromSuperview()
@@ -226,7 +226,7 @@ class TeamEditingController: BaseViewController {
         editableView.setup(with: unit)
     }
 
-    func saveTeam() {
+    @objc func saveTeam() {
         if self.unit != nil {
             context.saveOrRollback()
             parentContext.saveOrRollback()

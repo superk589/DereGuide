@@ -45,45 +45,45 @@ extension CGSSChar {
     }
     
     // 用于排序的动态属性
-    dynamic var sHeight: Int {
+    @objc dynamic var sHeight: Int {
         return height
     }
     
-    dynamic var sWeight: Int {
+    @objc dynamic var sWeight: Int {
         return weight
     }
     
-    dynamic var BMI: Float {
+    @objc dynamic var BMI: Float {
         let fw = Float(weight)
         let fh = Float(height) / 100
         return fw / fh / fh
     }
     
-    dynamic var sAge: Int {
+    @objc dynamic var sAge: Int {
         return age
     }
     
-    dynamic var sizeB: Int {
+    @objc dynamic var sizeB: Int {
         return bodySize1 >= 5000 ? 0 : bodySize1
     }
     
-    dynamic var sizeW: Int {
+    @objc dynamic var sizeW: Int {
         return bodySize2 >= 5000 ? 0 : bodySize2
     }
     
-    dynamic var sizeH: Int {
+    @objc dynamic var sizeH: Int {
         return bodySize3 >= 5000 ? 0 : bodySize3
     }
     
-    dynamic var sName: String {
+    @objc dynamic var sName: String {
         return nameKana
     }
     
-    dynamic var sCharaId: Int {
+    @objc dynamic var sCharaId: Int {
         return charaId
     }
     
-    dynamic var sBirthday: Int {
+    @objc dynamic var sBirthday: Int {
         return birthMonth * 100 + birthDay
     }
     

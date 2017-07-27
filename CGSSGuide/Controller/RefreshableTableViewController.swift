@@ -87,7 +87,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         }
     }
     
-    func checkUpdate() {
+    @objc func checkUpdate() {
         
     }
     
@@ -131,7 +131,7 @@ class RefreshableCollectionViewController: UICollectionViewController, UpdateSta
         }
     }
     
-    func checkUpdate() {
+    @objc func checkUpdate() {
         
     }
     

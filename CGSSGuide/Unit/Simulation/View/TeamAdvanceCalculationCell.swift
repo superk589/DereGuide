@@ -105,7 +105,7 @@ class TeamAdvanceCalculationCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func handleStartButton(_ button: UIButton) {
+    @objc func handleStartButton(_ button: UIButton) {
         delegate?.teamAdvanceCalculationCell(self, didStartCalculationWith: inputStrings)
     }
     

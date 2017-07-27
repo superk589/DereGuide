@@ -69,7 +69,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func handleTapGesture(_ tap: UITapGestureRecognizer) {
+    @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
         delegate?.didClickRightDetail(self)
     }
     

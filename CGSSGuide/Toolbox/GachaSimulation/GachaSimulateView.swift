@@ -88,11 +88,11 @@ class GachaSimulateView: UIView {
         self.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
     }
     
-    func clickTen() {
+    @objc func clickTen() {
         delegate?.tenGacha(gachaSimulateView: self)
     }
     
-    func clickSingle(){
+    @objc func clickSingle(){
         delegate?.singleGacha(gachaSimulateView: self)
     }
     
@@ -142,7 +142,7 @@ class GachaSimulateView: UIView {
         
     }
     
-    func iconClick(iv: CGSSCardIconView) {
+    @objc func iconClick(iv: CGSSCardIconView) {
         delegate?.gachaSimulateView(self, didClick: iv)
     }
     

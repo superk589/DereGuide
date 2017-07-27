@@ -75,7 +75,7 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         tableView.register(TeamAdvanceOptionsTableViewCell.self, forCellReuseIdentifier: TeamAdvanceOptionsTableViewCell.description())
     }
     
-    func resetAction() {
+    @objc func resetAction() {
         TeamEditingAdvanceOptionsManager.default.reset()
         setupWithUserDefaults()
         tableView.reloadData()
@@ -88,20 +88,20 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         option4.switch.isOn = TeamEditingAdvanceOptionsManager.default.editAllSameChara
     }
     
-    func option1ValueChanged(_ sender: UISlider) {
+    @objc func option1ValueChanged(_ sender: UISlider) {
         TeamEditingAdvanceOptionsManager.default.defaultSkillLevel = option1.currentValue
     }
     
-    func option2ValueChanged(_ sender: UISlider) {
+    @objc func option2ValueChanged(_ sender: UISlider) {
         TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel = option2.currentValue
     }
     
-    func option3ValueChanged(_ sender: UISwitch) {
+    @objc func option3ValueChanged(_ sender: UISwitch) {
         TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols = option3.switch.isOn
         delegate?.recentUsedIdolsNeedToReload()
     }
     
-    func option4ValueChanged(_ sender: UISwitch) {
+    @objc func option4ValueChanged(_ sender: UISwitch) {
         TeamEditingAdvanceOptionsManager.default.editAllSameChara = option4.switch.isOn
     }
     

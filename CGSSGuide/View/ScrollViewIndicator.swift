@@ -180,7 +180,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    func panAction(_ pan: UIPanGestureRecognizer) {
+    @objc func panAction(_ pan: UIPanGestureRecognizer) {
         //print(pan.state, scrollView?.contentOffset.y)
         switch pan.state {
         case .began:

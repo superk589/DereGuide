@@ -137,7 +137,7 @@ class LiveView: UIView {
         prepare()
     }
     
-    func diffClick(_ tap: UITapGestureRecognizer) {
+    @objc func diffClick(_ tap: UITapGestureRecognizer) {
         let selectedDifficulty = CGSSLiveDifficulty(rawValue: tap.view!.tag)!
         if live.difficultyTypes.contains(selectedDifficulty.difficultyTypes) {
             delegate?.liveView(self, didSelect: CGSSLiveScene(live: live, difficulty: selectedDifficulty))

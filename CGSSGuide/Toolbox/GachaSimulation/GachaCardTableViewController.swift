@@ -56,7 +56,7 @@ class GachaCardTableViewController: BaseCardTableViewController {
         self.tableView.register(GachaCardTableViewCell.self, forCellReuseIdentifier: GachaCardTableViewCell.description())
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     

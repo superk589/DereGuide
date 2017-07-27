@@ -82,11 +82,11 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         // Do any additional setup after loading the view.
     }
 
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    func resetAction() {
+    @objc func resetAction() {
         gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
         simulationView.wipeResultView()
         simulationView.wipeResultGrid()

@@ -47,7 +47,7 @@ class TransitionableNavigationController: BaseNavigationController {
         return interactiveAnimator
     }
     
-    func handleCustomGesture(gesture: UIScreenEdgePanGestureRecognizer) {
+    @objc func handleCustomGesture(gesture: UIScreenEdgePanGestureRecognizer) {
         
         var progress = gesture.translation(in: self.view).x / self.view.bounds.size.width
         progress = min(1.0, max(0.0, progress))

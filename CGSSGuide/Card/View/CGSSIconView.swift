@@ -40,7 +40,7 @@ class CGSSIconView: UIImageView {
         self.target = target
     }
     
-    func onClick() {
+    @objc func onClick() {
         delegate?.iconClick(self)
         if action != nil {
             _ = self.target?.perform(action!, with: self)

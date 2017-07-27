@@ -46,13 +46,13 @@ class CardDetailSpreadImageCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func handleTapGesture(_ tap: UITapGestureRecognizer) {
+    @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
         if tap.state == .ended {
             delegate?.tappedCardDetailSpreadImageCell(self)
         }
     }
     
-    func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
         if longPress.state == .began {
             if let _ = spreadImageView.image {
                 delegate?.cardDetailSpreadImageCell(self, longPressAt: longPress.location(in: spreadImageView))

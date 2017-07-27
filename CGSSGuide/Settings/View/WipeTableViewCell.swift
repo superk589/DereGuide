@@ -37,10 +37,10 @@ class WipeTableViewCell: UITableViewCell {
         }
         rightLabel.textColor = UIColor.gray
         
-        leftLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
-        rightLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-        leftLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-        rightLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        leftLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
+        rightLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        leftLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        rightLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
         
     }
     

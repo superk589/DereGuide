@@ -100,7 +100,7 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     // 添加当前卡到收藏
-    func addOrRemoveFavorite() {
+    @objc func addOrRemoveFavorite() {
         let manager = CGSSFavoriteManager.default
         if !manager.contains(cardId: card.id!) {
             manager.add(self.card)
@@ -182,7 +182,7 @@ class CardDetailViewController: BaseTableViewController {
         isShowing = false
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
         /*if navigationController?.viewControllers.count > 2 {
          navigationController?.popViewControllerAnimated(true)
@@ -197,13 +197,13 @@ class CardDetailViewController: BaseTableViewController {
         
     }
     
-    func showCardImageAction() {
+    @objc func showCardImageAction() {
         let vc = CardImageController()
         vc.card = self.card
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showSignImageAction() {
+    @objc func showSignImageAction() {
         let vc = CardSignImageController()
         vc.card = self.card
         self.navigationController?.pushViewController(vc, animated: true)

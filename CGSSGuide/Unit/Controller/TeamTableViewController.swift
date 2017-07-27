@@ -92,11 +92,11 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         try? fetchedResultsController?.performFetch()
     }
     
-    func handleTeamModifiedNotification() {
+    @objc func handleTeamModifiedNotification() {
         tableView.reloadData()
     }
     
-    func handleUpdateEnd() {
+    @objc func handleUpdateEnd() {
         tableView.reloadData()
     }
     
@@ -104,13 +104,13 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         NotificationCenter.default.removeObserver(self)
     }
     
-    func addTeam() {
+    @objc func addTeam() {
         let vc = TeamEditingController()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func commitDeletion() {
+    @objc func commitDeletion() {
         // 采用倒序删除法
         for indexPath in (tableView.indexPathsForSelectedRows ?? [IndexPath]()).sorted(by: { $0.row > $1.row }) {
         // for indexPath in (tableView.indexPathsForSelectedRows?.reversed() ?? [IndexPath]()) {
@@ -121,7 +121,7 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         setEditing(false, animated: true)
     }
     
-    func selectAllAction() {
+    @objc func selectAllAction() {
         if isEditing {
             for i in 0..<units.count {
                 tableView.selectRow(at: IndexPath.init(row: i, section: 0), animated: false, scrollPosition: .none)
@@ -129,7 +129,7 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         }
     }
     
-    func deselectAllAction() {
+    @objc func deselectAllAction() {
         if isEditing {
             for i in 0..<units.count {
                 tableView.deselectRow(at: IndexPath.init(row: i, section: 0), animated: false)
@@ -137,7 +137,7 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         }
     }
     
-    func copyAction() {
+    @objc func copyAction() {
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows, isEditing {
             for indexPath in selectedIndexPaths {
                 Unit.insert(into: context, anotherUnit: units[indexPath.row])
@@ -185,7 +185,7 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
-    func doneAction() {
+    @objc func doneAction() {
         self.tableView.setEditing(false, animated: true)
     }
     

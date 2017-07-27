@@ -552,7 +552,7 @@ class CGSSGameResource: NSObject {
         return fm.fileExists(atPath: path)
     }
     
-    func updateEnd(notification: Notification) {
+    @objc func updateEnd(notification: Notification) {
         if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
             if types.contains(.master) || types.contains(.card) {
                 prepareGachaList {

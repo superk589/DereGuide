@@ -35,7 +35,7 @@ class TeamCardSelectTableViewController: BaseCardTableViewController {
         navigationItem.leftBarButtonItem = leftItem
     }
     
-    func backAction() {
+    @objc func backAction() {
         _ = navigationController?.popViewController(animated: true)
     }
     

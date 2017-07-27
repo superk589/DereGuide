@@ -52,13 +52,13 @@ class SpreadImageViewController: UIViewController {
         imageView.addGestureRecognizer(longPress)
     }
         
-    func handleTapGesture(_ tap: UITapGestureRecognizer) {
+    @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
         if tap.state == .ended {
             dismiss(animated: true, completion: nil)
         }
     }
     
-    func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
         if longPress.state == .began {
             if let image = imageView.image {
                 // 作为被分享的内容 不能是可选类型 否则分享项不显示

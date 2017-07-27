@@ -144,7 +144,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         request.start()
     }
     
-    func restoreAction() {
+    @objc func restoreAction() {
         CGSSLoadingHUDManager.default.show()
         SKPaymentQueue.default().restoreCompletedTransactions()
     }

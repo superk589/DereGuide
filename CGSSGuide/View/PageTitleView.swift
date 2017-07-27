@@ -133,7 +133,7 @@ class PageTitleView: UIView {
         setCurrentIndex(index: 0, animated: false)
     }
     
-    func clickAction(tap: UITapGestureRecognizer) {
+    @objc func clickAction(tap: UITapGestureRecognizer) {
         if let view = tap.view, let index = titleStackView.arrangedSubviews.index(of: view) {
             // setCurrentIndex(index: index, animated: true)
             delegate?.pageTitleView(self, didSelectAtIndex: index)

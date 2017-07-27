@@ -39,8 +39,8 @@ class TeamSimulationSwitchOption: UIControl {
             make.right.lessThanOrEqualTo(`switch`.snp.left)
         }
         
-        `switch`.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-        label.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        `switch`.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
     
     }
     

@@ -101,42 +101,42 @@ extension CGSSCard {
     }
     
     // 对卡片进行按更新时间先后排序时使用, 对于新卡取更新时间, 对于旧卡取id%1000
-    dynamic var update_id: Int {
+    @objc dynamic var update_id: Int {
         var returnValue = id! % 1000
         returnValue += Int(updateTime.timeIntervalSince1970)
         return returnValue
     }
     
     // 用户排序的动态属性
-    dynamic var sAlbumId: Int {
+    @objc dynamic var sAlbumId: Int {
         return albumId
     }
     
-    dynamic var sRarity: Int {
+    @objc dynamic var sRarity: Int {
         return rarity.rarity
     }
     
     //
-    dynamic var dance: Int {
+    @objc dynamic var dance: Int {
         if let base = danceMax, let bonus = bonusDance {
             return base + bonus
         }
         return 0
     }
     
-    dynamic var vocal: Int {
+    @objc dynamic var vocal: Int {
         if let base = vocalMax, let bonus = bonusVocal {
             return base + bonus
         }
         return 0
     }
-    dynamic var visual: Int {
+    @objc dynamic var visual: Int {
         if let base = visualMax, let bonus = bonusVisual {
             return base + bonus
         }
         return 0
     }
-    dynamic var life: Int {
+    @objc dynamic var life: Int {
         if let base = hpMax, let bonus = bonusHp {
             return base + bonus
         }
@@ -147,7 +147,7 @@ extension CGSSCard {
         return CGSSAppeal(visual: visual, vocal: vocal, dance: dance, life: life)
     }
     
-    dynamic var overall: Int {
+    @objc dynamic var overall: Int {
         if let base = overallMax, let bonus = overallBonus {
             return base + bonus
         }
@@ -236,7 +236,7 @@ class CGSSCard: CGSSBaseModel {
     
     // 非JSON获取
     var availableType: CGSSAvailableTypes?
-    dynamic var odds = 0
+    @objc dynamic var odds = 0
     
     /**
          * Instantiate the instance using the passed json values to set the properties values

@@ -75,7 +75,7 @@ class TeamMemberEditingView: UIView {
         }
     }
     
-    func handleStepperValueChanged(_ stepper: ValueStepper) {
+    @objc func handleStepperValueChanged(_ stepper: ValueStepper) {
         let potential = CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: 0)
         let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         if stepper == skillStepper {

@@ -94,7 +94,7 @@ class EventPtView: UIView {
         }
     }
     
-    func refreshAction() {
+    @objc func refreshAction() {
         if !isLoading {
             delegate?.refresh(eventPtView: self)
             setLoading(loading: true)

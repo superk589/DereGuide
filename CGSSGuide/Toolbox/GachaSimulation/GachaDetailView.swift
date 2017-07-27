@@ -200,7 +200,7 @@ class GachaDetailView: UIView {
         guaranteesView.cards = pool.cardsOfguaranteed
     }
     
-    func seeMoreCardAction() {
+    @objc func seeMoreCardAction() {
         delegate?.seeModeCard(gachaDetailView: self)
     }
 

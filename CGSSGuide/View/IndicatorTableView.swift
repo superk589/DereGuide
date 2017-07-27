@@ -53,7 +53,7 @@ class IndicatorTableView: UITableView {
         }
     }
     
-    func handlePanGestureInside(_ pan: UIPanGestureRecognizer) {
+    @objc func handlePanGestureInside(_ pan: UIPanGestureRecognizer) {
         if pan.state == .began {
             indicator.show(to: self)
         }

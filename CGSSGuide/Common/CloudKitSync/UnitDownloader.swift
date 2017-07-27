@@ -86,7 +86,7 @@ extension UnitDownloader {
     fileprivate func reserve(_ reserves: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let remoteRemoveds = { () -> [RemoteIdentifier] in
-                let ids = reserves.map { $0.id }.flatMap { $0 }
+                let ids = reserves.map { $0.id }
                 let units = Unit.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Unit.predicateForNotInRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
@@ -119,7 +119,7 @@ extension UnitDownloader {
     fileprivate func insert(_ inserts: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
-                let ids = inserts.map { $0.id }.flatMap { $0 }
+                let ids = inserts.map { $0.id }
                 let units = Unit.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
@@ -144,7 +144,7 @@ extension UnitDownloader {
     fileprivate func update(_ updates: [RemoteUnit], in context: ChangeProcessorContext) {
         context.perform {
             let existingUnits = { () -> [RemoteIdentifier: Unit] in
-                let ids = updates.map { $0.id }.flatMap { $0 }
+                let ids = updates.map { $0.id }
                 let units = Unit.fetch(in: context.managedObjectContext) { request in
                     request.predicate = Unit.predicateForRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false

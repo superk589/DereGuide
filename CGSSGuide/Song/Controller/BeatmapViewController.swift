@@ -66,11 +66,11 @@ class BeatmapViewController: UIViewController {
         updateUI()
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    func selectDiff() {
+    @objc func selectDiff() {
         let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         for i in 1...scene.live.maxDiff.rawValue {
@@ -140,7 +140,7 @@ class BeatmapViewController: UIViewController {
         }
     }
     
-    func share(item: UIBarButtonItem) {
+    @objc func share(item: UIBarButtonItem) {
         // enterImageView()
         CGSSLoadingHUDManager.default.show()
         bv.exportImageAsync(title: getImageTitle()) { (image) in
@@ -166,7 +166,7 @@ class BeatmapViewController: UIViewController {
         }
     }
     
-    func flip() {
+    @objc func flip() {
         bv.mirrorFlip = !bv.mirrorFlip
         if bv.mirrorFlip {
             flipItem.image = UIImage.init(named: "1110-rotate-toolbar-selected")

@@ -60,11 +60,11 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         filterVC.sorter = self.sorter        
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    func filterAction() {
+    @objc func filterAction() {
         CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
     

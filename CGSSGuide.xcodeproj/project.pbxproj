@@ -64,7 +64,6 @@
 		12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB11F0F634600B75E47 /* CoreDataErrors.swift */; };
 		12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB21F0F634600B75E47 /* ValueTransformer.swift */; };
 		12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB41F0F634600B75E47 /* ModelVersion.swift */; };
-		12353A4F1F0F6A92008286C2 /* NSFetchRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */; };
 		12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB61F0F634600B75E47 /* ModelBuilder.swift */; };
 		12353A511F0F6A92008286C2 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB71F0F634600B75E47 /* Managed.swift */; };
 		12353A521F0F6A92008286C2 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DB81F0F634600B75E47 /* Migration.swift */; };
@@ -204,6 +203,8 @@
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
 		129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* TeamDetailController.swift */; };
+		129EEDBD1F297336001AFC5B /* FavoriteCardRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */; };
+		129EEDBF1F297399001AFC5B /* FavoriteCharaRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */; };
 		12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D3F1F223A020070D7A1 /* UnitModifier.swift */; };
 		12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D411F2241700070D7A1 /* MemberModifier.swift */; };
 		12A14D441F2265B60070D7A1 /* RemoteUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */; };
@@ -295,6 +296,10 @@
 		12F57C631EE308B600638650 /* IndicatorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C621EE308B600638650 /* IndicatorScrollView.swift */; };
 		12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C641EE30EFB00638650 /* IndicatorTableView.swift */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
+		12F9B0391F28932F00D3B47E /* FavoriteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B0381F28932F00D3B47E /* FavoriteCard.swift */; };
+		12F9B03C1F28935900D3B47E /* FavoriteChara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B03B1F28935900D3B47E /* FavoriteChara.swift */; };
+		12F9B03E1F28955E00D3B47E /* RemoteFavoriteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */; };
+		12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B03F1F28956C00D3B47E /* RemoteFavoriteChara.swift */; };
 		12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */; };
 		12FC8B371EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */; };
 		12FC8B381EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B331EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift */; };
@@ -550,6 +555,8 @@
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
 		129ECB281ECBFB930010BC7F /* TeamDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailController.swift; sourceTree = "<group>"; };
+		129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardRemote.swift; sourceTree = "<group>"; };
+		129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharaRemote.swift; sourceTree = "<group>"; };
 		12A14D3F1F223A020070D7A1 /* UnitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitModifier.swift; sourceTree = "<group>"; };
 		12A14D411F2241700070D7A1 /* MemberModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModifier.swift; sourceTree = "<group>"; };
 		12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUpdatable.swift; sourceTree = "<group>"; };
@@ -641,7 +648,6 @@
 		12F33DB21F0F634600B75E47 /* ValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformer.swift; sourceTree = "<group>"; };
 		12F33DB31F0F634600B75E47 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		12F33DB41F0F634600B75E47 /* ModelVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelVersion.swift; sourceTree = "<group>"; };
-		12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFetchRequest+Extensions.swift"; sourceTree = "<group>"; };
 		12F33DB61F0F634600B75E47 /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 		12F33DB71F0F634600B75E47 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		12F33DB81F0F634600B75E47 /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
@@ -665,6 +671,11 @@
 		12F57C621EE308B600638650 /* IndicatorScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorScrollView.swift; sourceTree = "<group>"; };
 		12F57C641EE30EFB00638650 /* IndicatorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorTableView.swift; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
+		12F9B0371F28908D00D3B47E /* CGSSGuide 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CGSSGuide 2.xcdatamodel"; sourceTree = "<group>"; };
+		12F9B0381F28932F00D3B47E /* FavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCard.swift; sourceTree = "<group>"; };
+		12F9B03B1F28935900D3B47E /* FavoriteChara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteChara.swift; sourceTree = "<group>"; };
+		12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteCard.swift; sourceTree = "<group>"; };
+		12F9B03F1F28956C00D3B47E /* RemoteFavoriteChara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteChara.swift; sourceTree = "<group>"; };
 		12FC8B311EDE6D93003CF3C3 /* TeamInformationAppealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationAppealCell.swift; path = Information/View/TeamInformationAppealCell.swift; sourceTree = "<group>"; };
 		12FC8B321EDE6D93003CF3C3 /* TeamInformationLeaderSkillCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationLeaderSkillCell.swift; path = Information/View/TeamInformationLeaderSkillCell.swift; sourceTree = "<group>"; };
 		12FC8B331EDE6D93003CF3C3 /* TeamInformationSkillListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInformationSkillListCell.swift; path = Information/View/TeamInformationSkillListCell.swift; sourceTree = "<group>"; };
@@ -858,6 +869,8 @@
 				12D624391F171F640017999A /* Remote.swift */,
 				12D6243D1F171F640017999A /* UnitsRemote.swift */,
 				1245F79E1F18A70B009A80EC /* MembersRemote.swift */,
+				129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */,
+				129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */,
 			);
 			name = Remote;
 			sourceTree = "<group>";
@@ -1054,6 +1067,7 @@
 				12F33DBC1F0F68C100B75E47 /* Protocol */,
 				1269EA1A1D520D850071AD7F /* Unit */,
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
+				12F9B03A1F28933D00D3B47E /* Favorite */,
 				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
 				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
 				12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */,
@@ -1420,7 +1434,6 @@
 				12F33DB21F0F634600B75E47 /* ValueTransformer.swift */,
 				12F33DB31F0F634600B75E47 /* README.md */,
 				12F33DB41F0F634600B75E47 /* ModelVersion.swift */,
-				12F33DB51F0F634600B75E47 /* NSFetchRequest+Extensions.swift */,
 				12F33DB61F0F634600B75E47 /* ModelBuilder.swift */,
 				12F33DB71F0F634600B75E47 /* Managed.swift */,
 				12F33DB81F0F634600B75E47 /* Migration.swift */,
@@ -1444,6 +1457,17 @@
 				12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		12F9B03A1F28933D00D3B47E /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				12F9B0381F28932F00D3B47E /* FavoriteCard.swift */,
+				12F9B03B1F28935900D3B47E /* FavoriteChara.swift */,
+				12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */,
+				12F9B03F1F28956C00D3B47E /* RemoteFavoriteChara.swift */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		12FC8B301EDE6D40003CF3C3 /* Information */ = {
@@ -1576,7 +1600,7 @@
 					1282EE5E1D011A8F0024318C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MXJJEEMF3U;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1596,6 +1620,7 @@
 					12EECCCD1ED57EF90047666C = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = MXJJEEMF3U;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1721,6 +1746,7 @@
 				"${BUILT_PRODUCTS_DIR}/ZKCornerRadiusView/ZKCornerRadiusView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZKDrawerController/ZKDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/lz4/lz4.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1737,6 +1763,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCornerRadiusView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lz4.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1777,6 +1804,7 @@
 				12D6244F1F171FB70017999A /* UnitUploader.swift in Sources */,
 				12D624511F171FB70017999A /* InProgressTracker.swift in Sources */,
 				12D624521F171FB70017999A /* EntityAndPredicate.swift in Sources */,
+				12F9B0391F28932F00D3B47E /* FavoriteCard.swift in Sources */,
 				12D624531F171FB70017999A /* CloudKit+Extensions.swift in Sources */,
 				12D624541F171FB70017999A /* UnitRemover.swift in Sources */,
 				12D624551F171FB70017999A /* ApplicationActiveStateObserver.swift in Sources */,
@@ -1800,7 +1828,7 @@
 				12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */,
 				12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */,
 				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
-				12353A4F1F0F6A92008286C2 /* NSFetchRequest+Extensions.swift in Sources */,
+				129EEDBD1F297336001AFC5B /* FavoriteCardRemote.swift in Sources */,
 				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
 				12353A511F0F6A92008286C2 /* Managed.swift in Sources */,
 				12353A521F0F6A92008286C2 /* Migration.swift in Sources */,
@@ -1824,6 +1852,7 @@
 				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */,
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
+				12F9B03C1F28935900D3B47E /* FavoriteChara.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				12F4EAEB1EDFFCEF00A92C9F /* TeamSimulationCommonCell.swift in Sources */,
 				12C6B35A1F00B73100A25DB1 /* CardDetailEvolutionCell.swift in Sources */,
@@ -1880,6 +1909,7 @@
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
 				120DBB291EEE3120004E0084 /* TeamTemplateController.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
+				12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
@@ -1999,6 +2029,7 @@
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
+				129EEDBF1F297399001AFC5B /* FavoriteCharaRemote.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
@@ -2011,6 +2042,7 @@
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12C6B35E1F00B77D00A25DB1 /* CardDetailSourceCell.swift in Sources */,
+				12F9B03E1F28955E00D3B47E /* RemoteFavoriteCard.swift in Sources */,
 				1237D11C1EEFDD0400C43337 /* TransitionableNavigationController.swift in Sources */,
 				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
@@ -2287,7 +2319,8 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CGSSGuide/Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2318,7 +2351,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/CGSSGuide/Bridge-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2339,7 +2373,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -2358,7 +2393,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide.NotificationContent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -2398,6 +2434,7 @@
 		12353AA21F145771008286C2 /* CGSSGuide.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				12F9B0371F28908D00D3B47E /* CGSSGuide 2.xcdatamodel */,
 				12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */,
 			);
 			currentVersion = 12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */;

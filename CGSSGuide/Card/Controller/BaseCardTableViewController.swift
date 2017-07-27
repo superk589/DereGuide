@@ -89,7 +89,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         check([.card, .master])
     }
     
-    func dataChanged(notification: Notification) {
+    @objc func dataChanged(notification: Notification) {
         if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
             if types.contains(.master) || types.contains(.card) {
                 self.setNeedsReloadData()
@@ -108,7 +108,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
 //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    func filterAction() {
+    @objc func filterAction() {
         CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
     

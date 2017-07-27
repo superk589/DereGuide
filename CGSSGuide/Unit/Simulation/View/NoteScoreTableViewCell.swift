@@ -82,9 +82,9 @@ class NoteScoreTableViewCell: UITableViewCell {
     
     func setup(with log: LSLog) {
         
-        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", log.noteIndex), attributes: [NSForegroundColorAttributeName: Color.allType])
+        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: Color.allType])
         if log.comboFactor > 1 {
-            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", log.comboFactor), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)]))
+            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
         }
         comboIndexLabel.attributedText = attributeStr
         

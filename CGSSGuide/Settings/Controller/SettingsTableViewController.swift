@@ -33,7 +33,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func fullImageCacheChanged(_ sender: UISwitch) {
+    @objc func fullImageCacheChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "FullImageCache")
     }
     
@@ -44,7 +44,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func downloadAtStartValueChanged(_ sender: UISwitch) {
+    @objc func downloadAtStartValueChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "DownloadAtStart")
     }
     
@@ -62,7 +62,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func sendTweet(_ tap: UITapGestureRecognizer) {
+    @objc func sendTweet(_ tap: UITapGestureRecognizer) {
         if let url = URL(string: "twitter://post?message=%23CGSSGuide%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter using url scheme")
             UIApplication.shared.openURL(url)
@@ -78,7 +78,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func sendEmail() {
+    @objc func sendEmail() {
         // 首先要判断设备具不具备发送邮件功能
         if MFMailComposeViewController.canSendMail() {
             let controller = MFMailComposeViewController()
@@ -137,7 +137,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func wipeData() {
+    @objc func wipeData() {
         if CGSSUpdater.default.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试清除数据。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
@@ -149,7 +149,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func cacheImage() {
+    @objc func cacheImage() {
         if CGSSUpdater.default.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
@@ -171,7 +171,7 @@ class SettingsTableViewController: UITableViewController {
         // updateCacheSize()
     }
     
-    func refresh() {
+    @objc func refresh() {
 //        dataVersionLabel.text = CGSSVersionManager.default.currentDataVersionString
         updateCacheSize()
     }
@@ -195,7 +195,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func postReview() {
+    @objc func postReview() {
         // let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
         guard let url = URL.init(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") else {
             return
@@ -224,19 +224,19 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func showAck() {
+    @objc func showAck() {
         let ackVC = AcknowledgementViewController()
         ackVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(ackVC, animated: true)
     }
     
-    func showLicense() {
+    @objc func showLicense() {
         let licenseVC = LicenseViewController()
         licenseVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(licenseVC, animated: true)
     }
     
-    func showDonate() {
+    @objc func showDonate() {
         let donationVC = DonationViewController()
         donationVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(donationVC, animated: true)

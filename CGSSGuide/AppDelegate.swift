@@ -56,6 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 context.saveOrRollback()
                 try? FileManager.default.moveItem(atPath: Path.document + "/beatmapHash.plist", toPath: BeatmapHashManager.default.path)
             }
+            if lastVersion < 7 {
+                let context = CoreDataStack.default.viewContext
+                for cardID in CGSSFavoriteManager.default.favoriteCards {
+                    FavoriteCard.insert(into: context, cardID: cardID)
+                }
+                for charaID in CGSSFavoriteManager.default.favoriteChars {
+                    FavoriteChara.insert(into: context, charaID: charaID)
+                }
+            }
         }
         
         // 规划近期偶像生日

@@ -35,7 +35,7 @@ class TeamSongSelectViewController: BaseSongTableViewController {
         // Do any additional setup after loading the view.
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     

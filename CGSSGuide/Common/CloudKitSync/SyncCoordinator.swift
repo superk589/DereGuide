@@ -244,14 +244,14 @@ extension SyncCoordinator {
     }
 
     fileprivate func fetchLatestRemoteData() {
-        perform { _ in
+        perform { 
             for changeProcessor in self.changeProcessors {
                 changeProcessor.fetchLatestRemoteRecords(in: self)
                 self.delayedSaveOrRollback()
             }
         }
     }
-
+    
     fileprivate func fetchNewRemoteData() {
         
         unitsRemote.fetchNewRecords { changes, callback in

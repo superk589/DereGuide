@@ -79,7 +79,7 @@ class CoreDataStack {
                 fatalError("model not found")
             }
             let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
-            try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: nil)
+            try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
             return psc
         }
     }()

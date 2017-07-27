@@ -133,7 +133,7 @@ class UpdateStatusView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func cancelUpdate() {
+    @objc func cancelUpdate() {
         // activityIndicator.stopAnimating()
         loadingView.stopAnimating()
         self.isHidden = true

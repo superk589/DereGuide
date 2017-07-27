@@ -57,7 +57,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         NotificationCenter.default.removeObserver(self)
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -79,7 +79,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         check([.card, .master])
     }
     
-    func filterAction() {
+    @objc func filterAction() {
         CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
     

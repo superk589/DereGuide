@@ -32,7 +32,7 @@ class TeamRecentUsedCell: UICollectionViewCell {
         addGestureRecognizer(press)
     }
     
-    func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
             delegate?.didLongPressAt(self)
         }

@@ -294,21 +294,21 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tapAction(tap: UITapGestureRecognizer) {
+    @objc func tapAction(tap: UITapGestureRecognizer) {
         if let view = tap.view as? EventCardView {
             delegate?.eventDetailView(self, didClick: view.cardView.cardIconView)
         }
     }
     
-    func gotoScoreChartAction() {
+    @objc func gotoScoreChartAction() {
         delegate?.gotoScoreChartView(eventDetailView: self)
     }
     
-    func gotoPtChartAction() {
+    @objc func gotoPtChartAction() {
         delegate?.gotoPtChartView(eventDetailView: self)
     }
     
-    func gotoLiveTrendViewAction(gesture: UITapGestureRecognizer) {
+    @objc func gotoLiveTrendViewAction(gesture: UITapGestureRecognizer) {
         delegate?.gotoLiveTrendView(eventDetailView: self)
     }
     

@@ -70,11 +70,11 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         }
     }
     
-    func backAction() {
+    @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    func filterAction() {
+    @objc func filterAction() {
         CGSSClient.shared.drawerController?.show(.right, animated: true)
     }
 

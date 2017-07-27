@@ -118,15 +118,15 @@ class TeamMemberCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    func handleEditButton(_ sender: UIButton) {
+    @objc func handleEditButton(_ sender: UIButton) {
         delegate?.beginEditingPotentialAndSkillLevel(self)
     }
     
-    func handleRecentUsedButton(_ sender: UIButton) {
+    @objc func handleRecentUsedButton(_ sender: UIButton) {
         delegate?.selectMemberUsingRecentUsedIdols(self)
     }
     
-    func handleFullListButton(_ sender: UIButton) {
+    @objc func handleFullListButton(_ sender: UIButton) {
         delegate?.selectMemberUsingCardList(self)
     }
     

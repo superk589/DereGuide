@@ -193,7 +193,7 @@ class TeamMemberEditableView: UIView {
         }
     }
     
-    func handleTapGesture(_ tap: UITapGestureRecognizer) {
+    @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
         if let view = tap.view as? TeamMemberEditableItemView {
             if let index = stackView.arrangedSubviews.index(of: view) {
                 currentIndex = index
@@ -201,7 +201,7 @@ class TeamMemberEditableView: UIView {
         }
     }
     
-    func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
         if longPress.state == .began {
             guard let view = longPress.view as? TeamMemberEditableItemView else { return }
             if let index = stackView.arrangedSubviews.index(of: view) {
@@ -211,7 +211,7 @@ class TeamMemberEditableView: UIView {
         }
     }
     
-    func handleDoubleTapGesture(_ doubleTap: UITapGestureRecognizer) {
+    @objc func handleDoubleTapGesture(_ doubleTap: UITapGestureRecognizer) {
         guard let view = doubleTap.view as? TeamMemberEditableItemView else { return }
         delegate?.teamMemberEditableView(self, didDoubleTap: view)
     }

@@ -55,11 +55,11 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
     }
 
     
-    func doneAction() {
+    @objc func doneAction() {
         
     }
     
-    func resetAction() {
+    @objc func resetAction() {
         
     }
     

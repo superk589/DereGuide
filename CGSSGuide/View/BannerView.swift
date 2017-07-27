@@ -39,7 +39,7 @@ class BannerView: UIImageView {
         addGestureRecognizer(doubleTap)
     }
     
-    func handleDoubleTap(_ tap: UITapGestureRecognizer) {
+    @objc func handleDoubleTap(_ tap: UITapGestureRecognizer) {
         if let url = self.url {
             if let key = SDWebImageManager.shared().cacheKey(for: url) {
                 SDImageCache.shared().removeImage(forKey: key, withCompletion: {

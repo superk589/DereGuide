@@ -88,19 +88,19 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         staticCells.append(cell2)
     }
     
-    func valueChanged(_ sw: UISwitch) {
+    @objc func valueChanged(_ sw: UISwitch) {
         UserDefaults.standard.setValue(sw.isOn, forKey: "BirthdayNotice")
         rescheduleBirthdayNotifications()
         reloadData()
     }
     
-    func gotoSystemNotificationSettings() {
+    @objc func gotoSystemNotificationSettings() {
         if let url = URL.init(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
     }
     
-    func selectTimeZone() {
+    @objc func selectTimeZone() {
         let timeZoneCell = staticCells[2]
         let alvc = UIAlertController.init(title: NSLocalizedString("选择提醒时区", comment: "生日提醒页面"), message: nil, preferredStyle: .actionSheet)
         alvc.popoverPresentationController?.sourceView = timeZoneCell.detailTextLabel
@@ -130,7 +130,7 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         }
     }
     
-    func reloadData() {
+    @objc func reloadData() {
         prepareChars()
         tableView.reloadData()
         staticCells[0].detailTextLabel?.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")

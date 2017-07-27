@@ -75,7 +75,7 @@ class LiveSimulatorViewController: BaseViewController, UITableViewDelegate, UITa
         self.navigationItem.rightBarButtonItem = rightItem
     }
     
-    func selectDisplayMode() {
+    @objc func selectDisplayMode() {
         let alvc = UIAlertController.init(title: NSLocalizedString("选择模式", comment: ""), message: nil, preferredStyle: .actionSheet)
         
         alvc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem

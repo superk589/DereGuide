@@ -41,7 +41,7 @@ class CharDetailViewController: UIViewController {
     }
     
     // 添加当前角色到收藏
-    func addOrRemoveFavorite() {
+    @objc func addOrRemoveFavorite() {
         let fm = CGSSFavoriteManager.default
         if !fm.contains(charId: char.charaId) {
             fm.add(self.char)

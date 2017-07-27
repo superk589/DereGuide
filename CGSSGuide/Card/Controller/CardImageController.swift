@@ -46,7 +46,7 @@ class CardImageController: BaseViewController {
         toolbarItems = [item]
     }
     
-    func shareAction(item: UIBarButtonItem) {
+    @objc func shareAction(item: UIBarButtonItem) {
         if imageView.image == nil {
             return
         }

@@ -117,7 +117,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         }
     }
     
-    func dataChanged(notification: Notification) {
+    @objc func dataChanged(notification: Notification) {
         if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
             if types.contains(.master) || types.contains(.beatmap) {
                 self.setNeedsReloadData()
@@ -125,7 +125,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         }
     }
     
-    func filterAction() {
+    @objc func filterAction() {
         CGSSClient.shared.drawerController?.show(.right, animated: true)
         // navigationController?.pushViewController(filterVC, animated: true)
 

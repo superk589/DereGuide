@@ -200,7 +200,7 @@ class CGSSBeatmap: CGSSBaseModel {
         var end = numberOfNotes - 1
         var start = 0
         while start <= end {
-            let middle = (start + end) / 2
+            let middle = start + (end - start) / 2
             let middleNote = validNotes[middle]
             let middleSec = middleNote.sec + middleNote.offset
             if newSec < middleSec {

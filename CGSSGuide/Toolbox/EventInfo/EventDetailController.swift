@@ -107,7 +107,7 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
         }
     }
     
-    func backAction() {
+    @objc func backAction() {
         self.navigationController?.popViewController(animated: true)
     }
 
