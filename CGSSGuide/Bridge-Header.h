@@ -10,5 +10,6 @@
 #define Bridge_Header_h
 
 #import "sqlite3.h"
+#import <CommonCrypto/CommonCrypto.h>
 
 #endif /* Bridge_Header_h */

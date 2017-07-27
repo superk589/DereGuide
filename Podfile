@@ -16,6 +16,7 @@ target 'CGSSGuide' do
   pod 'Charts'
   pod 'EasyTipView'
   pod 'DynamicColor'
+#  pod 'CryptoSwift'
 #  pod 'SwiftTryCatch'
 end
 target 'NotificationContent' do

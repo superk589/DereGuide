@@ -80,5 +80,11 @@
 		<key>name</key>
 		<string>EasyTipView</string>
 	</dict>
+<!--    <dict>-->
+<!--        <key>site</key>-->
+<!--        <string>https://github.com/krzyzanowskim/CryptoSwift</string>-->
+<!--        <key>name</key>-->
+<!--        <string>CryptoSwift</string>-->
+<!--    </dict>-->
 </array>
 </plist>

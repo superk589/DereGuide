@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		0A5869BC3B3599AEB8C03622 /* Pods_CGSSGuide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D11945C4F893322EDF7FAF /* Pods_CGSSGuide.framework */; };
 		0E22B6E3BF806A646E04273E /* Pods_NotificationContent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49008836332ECC91D5BDBADF /* Pods_NotificationContent.framework */; };
+		1203A8921F29C39A001A510A /* FavoriteCardUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8911F29C39A001A510A /* FavoriteCardUploader.swift */; };
+		1203A8941F29C3A9001A510A /* FavoriteCardDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8931F29C3A9001A510A /* FavoriteCardDownloader.swift */; };
+		1203A8961F29C3B9001A510A /* FavoriteCardRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8951F29C3B9001A510A /* FavoriteCardRemover.swift */; };
+		1203A8981F29C3E4001A510A /* FavoriteCharaUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8971F29C3E4001A510A /* FavoriteCharaUploader.swift */; };
+		1203A89A1F29C3F4001A510A /* FavoriteCharaDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8991F29C3F4001A510A /* FavoriteCharaDownloader.swift */; };
+		1203A89C1F29C404001A510A /* FavoriteCharaRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A89B1F29C404001A510A /* FavoriteCharaRemover.swift */; };
 		1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */; };
 		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
 		120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */; };
@@ -203,8 +209,8 @@
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
 		129ECB291ECBFB930010BC7F /* TeamDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* TeamDetailController.swift */; };
-		129EEDBD1F297336001AFC5B /* FavoriteCardRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */; };
-		129EEDBF1F297399001AFC5B /* FavoriteCharaRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */; };
+		129EEDBD1F297336001AFC5B /* FavoriteCardsRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */; };
+		129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */; };
 		12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D3F1F223A020070D7A1 /* UnitModifier.swift */; };
 		12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D411F2241700070D7A1 /* MemberModifier.swift */; };
 		12A14D441F2265B60070D7A1 /* RemoteUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */; };
@@ -362,6 +368,12 @@
 /* Begin PBXFileReference section */
 		08D11945C4F893322EDF7FAF /* Pods_CGSSGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CGSSGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E91FE698CA5AD75813D6589 /* Pods-NotificationContent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContent/Pods-NotificationContent.debug.xcconfig"; sourceTree = "<group>"; };
+		1203A8911F29C39A001A510A /* FavoriteCardUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardUploader.swift; sourceTree = "<group>"; };
+		1203A8931F29C3A9001A510A /* FavoriteCardDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardDownloader.swift; sourceTree = "<group>"; };
+		1203A8951F29C3B9001A510A /* FavoriteCardRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardRemover.swift; sourceTree = "<group>"; };
+		1203A8971F29C3E4001A510A /* FavoriteCharaUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharaUploader.swift; sourceTree = "<group>"; };
+		1203A8991F29C3F4001A510A /* FavoriteCharaDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharaDownloader.swift; sourceTree = "<group>"; };
+		1203A89B1F29C404001A510A /* FavoriteCharaRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharaRemover.swift; sourceTree = "<group>"; };
 		1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharFilter.swift; sourceTree = "<group>"; };
 		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
 		120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewIndicator.swift; sourceTree = "<group>"; };
@@ -555,8 +567,8 @@
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
 		129ECB281ECBFB930010BC7F /* TeamDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailController.swift; sourceTree = "<group>"; };
-		129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardRemote.swift; sourceTree = "<group>"; };
-		129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharaRemote.swift; sourceTree = "<group>"; };
+		129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardsRemote.swift; sourceTree = "<group>"; };
+		129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharasRemote.swift; sourceTree = "<group>"; };
 		12A14D3F1F223A020070D7A1 /* UnitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitModifier.swift; sourceTree = "<group>"; };
 		12A14D411F2241700070D7A1 /* MemberModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModifier.swift; sourceTree = "<group>"; };
 		12A14D431F2265B60070D7A1 /* RemoteUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUpdatable.swift; sourceTree = "<group>"; };
@@ -859,6 +871,12 @@
 				12A14D451F2269340070D7A1 /* MemberDownloader.swift */,
 				12F351111F1F07E000F47FD1 /* MemberUploader.swift */,
 				12A14D411F2241700070D7A1 /* MemberModifier.swift */,
+				1203A8911F29C39A001A510A /* FavoriteCardUploader.swift */,
+				1203A8931F29C3A9001A510A /* FavoriteCardDownloader.swift */,
+				1203A8951F29C3B9001A510A /* FavoriteCardRemover.swift */,
+				1203A8971F29C3E4001A510A /* FavoriteCharaUploader.swift */,
+				1203A8991F29C3F4001A510A /* FavoriteCharaDownloader.swift */,
+				1203A89B1F29C404001A510A /* FavoriteCharaRemover.swift */,
 			);
 			name = Processor;
 			sourceTree = "<group>";
@@ -869,8 +887,8 @@
 				12D624391F171F640017999A /* Remote.swift */,
 				12D6243D1F171F640017999A /* UnitsRemote.swift */,
 				1245F79E1F18A70B009A80EC /* MembersRemote.swift */,
-				129EEDBC1F297336001AFC5B /* FavoriteCardRemote.swift */,
-				129EEDBE1F297399001AFC5B /* FavoriteCharaRemote.swift */,
+				129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */,
+				129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */,
 			);
 			name = Remote;
 			sourceTree = "<group>";
@@ -1803,6 +1821,7 @@
 				12D6244D1F171FB70017999A /* UnitsRemote.swift in Sources */,
 				12D6244F1F171FB70017999A /* UnitUploader.swift in Sources */,
 				12D624511F171FB70017999A /* InProgressTracker.swift in Sources */,
+				1203A89C1F29C404001A510A /* FavoriteCharaRemover.swift in Sources */,
 				12D624521F171FB70017999A /* EntityAndPredicate.swift in Sources */,
 				12F9B0391F28932F00D3B47E /* FavoriteCard.swift in Sources */,
 				12D624531F171FB70017999A /* CloudKit+Extensions.swift in Sources */,
@@ -1826,9 +1845,10 @@
 				12353A4B1F0F6A92008286C2 /* ManagedObjectObserver.swift in Sources */,
 				12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */,
 				12353A4D1F0F6A92008286C2 /* ValueTransformer.swift in Sources */,
+				1203A8981F29C3E4001A510A /* FavoriteCharaUploader.swift in Sources */,
 				12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */,
 				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
-				129EEDBD1F297336001AFC5B /* FavoriteCardRemote.swift in Sources */,
+				129EEDBD1F297336001AFC5B /* FavoriteCardsRemote.swift in Sources */,
 				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
 				12353A511F0F6A92008286C2 /* Managed.swift in Sources */,
 				12353A521F0F6A92008286C2 /* Migration.swift in Sources */,
@@ -1964,6 +1984,7 @@
 				122497281E8E85C1005C743C /* LSSkill.swift in Sources */,
 				1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */,
 				1269E9FA1D520C3E0071AD7F /* TeamTableViewController.swift in Sources */,
+				1203A8961F29C3B9001A510A /* FavoriteCardRemover.swift in Sources */,
 				12C6B3561F00B70200A25DB1 /* CardDetailSkillCell.swift in Sources */,
 				122B0F331D8E7E9B0096E3E0 /* TeamMemberEditingViewController.swift in Sources */,
 				12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */,
@@ -2029,7 +2050,7 @@
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
-				129EEDBF1F297399001AFC5B /* FavoriteCharaRemote.swift in Sources */,
+				129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
@@ -2051,6 +2072,7 @@
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
 				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
+				1203A8941F29C3A9001A510A /* FavoriteCardDownloader.swift in Sources */,
 				12FC8B571EDE6DEB003CF3C3 /* TeamSimulationTeamCell.swift in Sources */,
 				12FC8B391EDE6D93003CF3C3 /* TeamInformationTeamCell.swift in Sources */,
 				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
@@ -2058,8 +2080,10 @@
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12F57C5D1EE2928000638650 /* TeamAdvanceOptionsController.swift in Sources */,
 				12D4F8B71E1CB0800064991E /* UIColorExtension.swift in Sources */,
+				1203A89A1F29C3F4001A510A /* FavoriteCharaDownloader.swift in Sources */,
 				124E470E1D654AB700DD0399 /* BirthdayCenter.swift in Sources */,
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
+				1203A8921F29C39A001A510A /* FavoriteCardUploader.swift in Sources */,
 				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
@@ -2437,7 +2461,7 @@
 				12F9B0371F28908D00D3B47E /* CGSSGuide 2.xcdatamodel */,
 				12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */,
 			);
-			currentVersion = 12353AA31F145771008286C2 /* CGSSGuide.xcdatamodel */;
+			currentVersion = 12F9B0371F28908D00D3B47E /* CGSSGuide 2.xcdatamodel */;
 			path = CGSSGuide.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

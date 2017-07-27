@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FavoriteCardRemote: Remote {
+final class FavoriteCardsRemote: Remote {
     
     typealias R = RemoteFavoriteCard
     typealias L = FavoriteCard

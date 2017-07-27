@@ -41,7 +41,9 @@ public final class SyncCoordinator {
 
     let membersRemote: MembersRemote
     let unitsRemote: UnitsRemote
-
+    let favoriteCardsRemote: FavoriteCardsRemote
+    let favoriteCharasRemote: FavoriteCharasRemote
+    
     fileprivate var observerTokens: [NSObjectProtocol] = [] //< The tokens registered with NotificationCenter
     let changeProcessors: [ChangeProcessor] //< The change processors for upload, download, etc.
     var teardownFlag = atomic_flag()
@@ -49,6 +51,9 @@ public final class SyncCoordinator {
     private init(viewContext: NSManagedObjectContext, syncContext: NSManagedObjectContext) {
         self.membersRemote = MembersRemote()
         self.unitsRemote = UnitsRemote()
+        self.favoriteCardsRemote = FavoriteCardsRemote()
+        self.favoriteCharasRemote = FavoriteCharasRemote()
+        
         self.viewContext = viewContext
         self.syncContext = syncContext
         syncContext.name = "SyncCoordinator"
@@ -62,7 +67,14 @@ public final class SyncCoordinator {
                             UnitRemover(remote: unitsRemote),
                             MemberUploader(remote: membersRemote),
                             UnitModifier(remote: unitsRemote),
-                            MemberModifier(remote: membersRemote)]
+                            MemberModifier(remote: membersRemote),
+                            FavoriteCardUploader(remote: favoriteCardsRemote),
+                            FavoriteCardDownloader(remote: favoriteCardsRemote),
+                            FavoriteCardRemover(remote: favoriteCardsRemote),
+                            FavoriteCharaUploader(remote: favoriteCharasRemote),
+                            FavoriteCharaDownloader(remote: favoriteCharasRemote),
+                            FavoriteCharaRemover(remote: favoriteCharasRemote)
+        ]
         setup()
     }
 
@@ -254,17 +266,15 @@ extension SyncCoordinator {
     
     fileprivate func fetchNewRemoteData() {
         
-        unitsRemote.fetchNewRecords { changes, callback in
-            self.processRemoteChanges(changes) {
-                self.perform {
-                    self.managedObjectContext.delayedSaveOrRollback(group: self.syncGroup) { success in
-                        callback(success)
-                    }
-                }
-            }
-        }
+        fetchNewRemoteData(using: unitsRemote)
+        fetchNewRemoteData(using: membersRemote)
+        fetchNewRemoteData(using: favoriteCardsRemote)
+        fetchNewRemoteData(using: favoriteCharasRemote)
         
-        membersRemote.fetchNewRecords { changes, callback in
+    }
+    
+    fileprivate func fetchNewRemoteData<T: Remote>(using remote: T) {
+        remote.fetchNewRecords { (changes, callback) in
             self.processRemoteChanges(changes) {
                 self.perform {
                     self.managedObjectContext.delayedSaveOrRollback(group: self.syncGroup) { success in

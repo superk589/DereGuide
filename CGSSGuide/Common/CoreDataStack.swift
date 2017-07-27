@@ -48,7 +48,7 @@ class CoreDataStack {
     private let ubiquityToken: String = {
         guard let token = FileManager.default.ubiquityIdentityToken else { return "unknown" }
         let string = NSKeyedArchiver.archivedData(withRootObject: token).base64EncodedString(options: [])
-        return string.removingCharacters(in: CharacterSet.letters.inverted)
+        return string.removingCharacters(in: CharacterSet.letters.inverted).md5()
     }()
     
     private lazy var storeURL: URL = URL.documents.appendingPathComponent("\(self.ubiquityToken).cgssguide")

@@ -224,15 +224,3 @@ extension Remote {
 //    }
     
 }
-
-class RemoteBox<A: RemoteUploadable & RemoteDeletable, B: RemoteRecord>: Remote {
-    
-    typealias R = B
-    
-    typealias L = A
-    
-    static var subscriptionID: String {
-        return ""
-    }
-    
-}

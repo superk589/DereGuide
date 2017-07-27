@@ -46,9 +46,9 @@
         <relationship name="members" toMany="YES" minCount="6" maxCount="6" deletionRule="Cascade" destinationEntity="Member" inverseName="participatedUnit" inverseEntity="Member" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Member" positionX="-54" positionY="0" width="128" height="255"/>
-        <element name="Unit" positionX="196" positionY="9" width="128" height="210"/>
         <element name="FavoriteCard" positionX="72" positionY="117" width="128" height="135"/>
         <element name="FavoriteChara" positionX="81" positionY="126" width="128" height="135"/>
+        <element name="Member" positionX="-54" positionY="0" width="128" height="255"/>
+        <element name="Unit" positionX="196" positionY="9" width="128" height="210"/>
     </elements>
 </model>

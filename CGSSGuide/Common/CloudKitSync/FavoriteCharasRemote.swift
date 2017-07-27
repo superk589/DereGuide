@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FavoriteCharaRemote: Remote {
+final class FavoriteCharasRemote: Remote {
     typealias R = RemoteFavoriteChara
     typealias L = FavoriteChara
     
