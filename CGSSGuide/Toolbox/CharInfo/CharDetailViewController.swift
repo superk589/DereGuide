@@ -35,19 +35,19 @@ class CharDetailViewController: UIViewController {
         detailView.setup(char)
         detailView.delegate = self
         
-        let rightItem = UIBarButtonItem.init(image: CGSSFavoriteManager.default.contains(charId: char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
+        let rightItem = UIBarButtonItem.init(image: FavoriteCharasManager.shared.contains(char.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
         rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
     }
     
     // 添加当前角色到收藏
     @objc func addOrRemoveFavorite() {
-        let fm = CGSSFavoriteManager.default
-        if !fm.contains(charId: char.charaId) {
-            fm.add(self.char)
+        let manager = FavoriteCharasManager.shared
+        if !manager.contains(char.charaId) {
+            manager.add(char)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
         } else {
-            fm.remove(self.char)
+            manager.remove(char.charaId)
             self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
     }

@@ -46,7 +46,7 @@ final class FavoriteCardDownloader: ChangeProcessor {
         insert(creates, in: context)
         deleteFavoriteCards(with: deletionIDs, in: context)
         if Config.cloudKitDebug && creates.count + deletionIDs.count + updates.count > 0 {
-            print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+            print("Favorite Card remote fetch inserts: \(creates.count) and updates: \(updates.count)")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -71,11 +71,13 @@ extension FavoriteCardDownloader {
     fileprivate func deleteFavoriteCards(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
         guard !ids.isEmpty else { return }
         context.perform {
-            let favoriteCards = FavoriteCard.fetch(in: context.managedObjectContext) { (request) -> () in
+            let objects = FavoriteCard.fetch(in: context.managedObjectContext) { (request) -> () in
                 request.predicate = FavoriteCard.predicateForRemoteIdentifiers(ids)
-                request.returnsObjectsAsFaults = false
             }
-            favoriteCards.forEach { $0.markForLocalDeletion() }
+            if Config.cloudKitDebug && objects.count > 0 {
+                print("delete \(objects.count) local favorite card from remote fetch")
+            }
+            objects.forEach { $0.markForLocalDeletion() }
         }
     }
     

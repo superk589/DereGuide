@@ -46,7 +46,7 @@ final class FavoriteCharaDownloader: ChangeProcessor {
         insert(creates, in: context)
         deleteFavoriteCharas(with: deletionIDs, in: context)
         if Config.cloudKitDebug && creates.count + deletionIDs.count + updates.count > 0 {
-            print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+            print("Favorite Chara remote fetch inserts: \(creates.count) and updates: \(updates.count)")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -71,11 +71,13 @@ extension FavoriteCharaDownloader {
     fileprivate func deleteFavoriteCharas(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
         guard !ids.isEmpty else { return }
         context.perform {
-            let favoriteCharas = FavoriteChara.fetch(in: context.managedObjectContext) { (request) -> () in
+            let objects = FavoriteChara.fetch(in: context.managedObjectContext) { (request) -> () in
                 request.predicate = FavoriteChara.predicateForRemoteIdentifiers(ids)
-                request.returnsObjectsAsFaults = false
             }
-            favoriteCharas.forEach { $0.markForLocalDeletion() }
+            if Config.cloudKitDebug && objects.count > 0 {
+                print("delete \(objects.count) local favorite chara from remote fetch")
+            }
+            objects.forEach { $0.markForLocalDeletion() }
         }
     }
     

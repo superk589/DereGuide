@@ -52,7 +52,11 @@ extension FavoriteChara: Managed {
     
 }
 
-extension FavoriteChara {}
+extension FavoriteChara: IDSearchable {
+    var id: Int {
+        return Int(charaID)
+    }
+}
 
 extension FavoriteChara: DelayedDeletable {
     @NSManaged public var markedForDeletionDate: Date?

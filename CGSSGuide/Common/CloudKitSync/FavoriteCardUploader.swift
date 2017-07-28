@@ -66,7 +66,7 @@ extension FavoriteCardUploader {
                 }
                 context.delayedSaveOrRollback()
                 if Config.cloudKitDebug && insertions.count > 0 {
-                    print("upload \(insertions.count) units, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
+                    print("upload \(insertions.count) favorite cards, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 self.elementsInProgress.markObjectsAsComplete(insertions)
             }

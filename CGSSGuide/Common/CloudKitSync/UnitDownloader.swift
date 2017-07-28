@@ -49,7 +49,7 @@ final class UnitDownloader: ChangeProcessor {
         deleteUnits(with: deletionIDs, in: context)
         update(updates, in: context)
         if Config.cloudKitDebug && creates.count + deletionIDs.count + updates.count > 0 {
-            print("Unit remote fetch inserts: \(creates.count) delete: \(deletionIDs.count) and updates: \(updates.count)")
+            print("Unit remote fetch inserts: \(creates.count) and updates: \(updates.count)")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -77,7 +77,9 @@ extension UnitDownloader {
         context.perform {
             let units = Unit.fetch(in: context.managedObjectContext) { (request) -> () in
                 request.predicate = Unit.predicateForRemoteIdentifiers(ids)
-                request.returnsObjectsAsFaults = false
+            }
+            if Config.cloudKitDebug && units.count > 0 {
+                print("delete \(units.count) local units from remote fetch")
             }
             units.forEach { $0.markForLocalDeletion() }
         }

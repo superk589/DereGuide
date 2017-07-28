@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 for charaID in CGSSFavoriteManager.default.favoriteChars {
                     FavoriteChara.insert(into: context, charaID: charaID)
                 }
+                context.saveOrRollback()
             }
         }
         

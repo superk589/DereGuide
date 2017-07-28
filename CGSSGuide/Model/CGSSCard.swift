@@ -179,7 +179,7 @@ extension CGSSCard {
     }
 
     var favoriteType: CGSSFavoriteTypes {
-        return CGSSFavoriteManager.default.contains(cardId: self.id!) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
+        return FavoriteCardsManager.shared.contains(self.id) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
     }
     
     var spreadImageURL: URL? {

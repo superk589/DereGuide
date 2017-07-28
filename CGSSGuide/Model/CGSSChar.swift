@@ -41,7 +41,7 @@ extension CGSSChar {
     }
     
     var favoriteType: CGSSFavoriteTypes {
-        return CGSSFavoriteManager.default.contains(charId: self.charaId) ? .inFavorite : .notInFavorite
+        return FavoriteCharasManager.shared.contains(self.charaId) ? .inFavorite : .notInFavorite
     }
     
     // 用于排序的动态属性

@@ -46,6 +46,7 @@ extension RemoteFavoriteChara {
             let chara = FavoriteChara.insert(into: context, charaID: Int(self.charaID))
             chara.creatorID = self.creatorID
             chara.remoteIdentifier = self.id
+            chara.createdAt = self.localCreatedAt
             completion(true)
         }
     }

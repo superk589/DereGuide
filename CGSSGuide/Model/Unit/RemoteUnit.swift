@@ -76,6 +76,8 @@ extension RemoteUnit {
                 let unit = Unit.insert(into: context, customAppeal: Int(self.customAppeal), supportAppeal: Int(self.supportAppeal), usesCustomAppeal: self.usesCustomAppeal == 0 ? false : true, members: remoteMembers.map { $0.insert(into: context) })
                 unit.creatorID = self.creatorID
                 unit.remoteIdentifier = self.id
+                unit.createdAt = self.localCreatedAt
+                unit.updatedAt = self.localModifiedAt
                 completion(true)
             }
         })

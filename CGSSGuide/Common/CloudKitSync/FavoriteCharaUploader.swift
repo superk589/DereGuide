@@ -61,12 +61,12 @@ extension FavoriteCharaUploader {
                     favoriteChara.creatorID = remoteFavoriteChara.creatorID
                     favoriteChara.remoteIdentifier = remoteFavoriteChara.id
                     if Config.cloudKitDebug && insertions.count > 0 {
-                        print("upload unit \(favoriteChara.remoteIdentifier!)")
+                        print("upload favorite charas \(favoriteChara.remoteIdentifier!)")
                     }
                 }
                 context.delayedSaveOrRollback()
                 if Config.cloudKitDebug && insertions.count > 0 {
-                    print("upload \(insertions.count) units, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
+                    print("upload \(insertions.count) favorite charas, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 self.elementsInProgress.markObjectsAsComplete(insertions)
             }

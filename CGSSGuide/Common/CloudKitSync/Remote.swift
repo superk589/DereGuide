@@ -74,7 +74,7 @@ extension Remote {
     }
     
     var defaultSortDescriptor: NSSortDescriptor {
-        return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: false)
+        return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: true)
     }
     
     func predicateOfUser(_ userID: CKRecordID) -> NSPredicate {
@@ -106,7 +106,11 @@ extension Remote {
             subscription.notificationInfo = info
             let op = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: [])
             op.modifySubscriptionsCompletionBlock = { (foo, bar, error: Error?) -> () in
-                if let e = error { print("Failed to modify subscription: \(e)") }
+                if let e = error as NSError?, e.code == CKError.serverRejectedRequest.rawValue {
+                    // ignore
+                } else if error != nil {
+                    print("Failed to modify subscription: \(error!)")
+                }
             }
             self.cloudKitContainer.publicCloudDatabase.add(op)
         }
@@ -163,7 +167,10 @@ extension Remote {
             query.sortDescriptors = [self.defaultSortDescriptor]
             let op = CKQueryOperation(query: query)
             //        op.resultsLimit = maximumNumberOfUnits
-            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, _ in
+            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
+                if error != nil {
+                    print(error!)
+                }
                 completion(records.map { R(record: $0) }.flatMap { $0 })
             }
         }

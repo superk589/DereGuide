@@ -93,6 +93,10 @@
 		1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059C1DAA15B9007361CF /* EventViewController.swift */; };
 		1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1238059E1DAA1995007361CF /* CGSSEvent.swift */; };
 		123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123805A01DAA4354007361CF /* EventTableViewCell.swift */; };
+		1239AC111F2AC113005B6C35 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239AC101F2AC113005B6C35 /* FavoriteManager.swift */; };
+		1239AC131F2AC37E005B6C35 /* FavoriteCardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239AC121F2AC37E005B6C35 /* FavoriteCardsManager.swift */; };
+		1239AC151F2AC576005B6C35 /* IDSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239AC141F2AC576005B6C35 /* IDSearchable.swift */; };
+		1239AC171F2ACA71005B6C35 /* FavoriteCharasManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239AC161F2ACA71005B6C35 /* FavoriteCharasManager.swift */; };
 		1239B0521E2FAAA600958849 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0511E2FAAA600958849 /* LineView.swift */; };
 		1239B0541E2FB41200958849 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239B0531E2FB41200958849 /* BannerView.swift */; };
 		1239F1CD1EF375B500861092 /* TeamEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1239F1CC1EF375B500861092 /* TeamEditingController.swift */; };
@@ -433,6 +437,10 @@
 		1238059C1DAA15B9007361CF /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		1238059E1DAA1995007361CF /* CGSSEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEvent.swift; sourceTree = "<group>"; };
 		123805A01DAA4354007361CF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		1239AC101F2AC113005B6C35 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
+		1239AC121F2AC37E005B6C35 /* FavoriteCardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardsManager.swift; sourceTree = "<group>"; };
+		1239AC141F2AC576005B6C35 /* IDSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDSearchable.swift; sourceTree = "<group>"; };
+		1239AC161F2ACA71005B6C35 /* FavoriteCharasManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharasManager.swift; sourceTree = "<group>"; };
 		1239B0511E2FAAA600958849 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		1239B0531E2FB41200958849 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		1239F1CC1EF375B500861092 /* TeamEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamEditingController.swift; sourceTree = "<group>"; };
@@ -1023,6 +1031,9 @@
 				126666231D7D70F70022348E /* CGSSLiveFilter.swift */,
 				1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */,
 				1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */,
+				1239AC101F2AC113005B6C35 /* FavoriteManager.swift */,
+				1239AC121F2AC37E005B6C35 /* FavoriteCardsManager.swift */,
+				1239AC161F2ACA71005B6C35 /* FavoriteCharasManager.swift */,
 				121B82131EB7383600273F37 /* CGSSNotification.swift */,
 				12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */,
 				122C4B9C1D6E85B500F94E8D /* CGSSSorterFilterManager.swift */,
@@ -1473,6 +1484,7 @@
 				12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */,
 				12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */,
 				12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */,
+				1239AC141F2AC576005B6C35 /* IDSearchable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1816,6 +1828,7 @@
 				12D624491F171FB70017999A /* Remote.swift in Sources */,
 				12D6244A1F171FB70017999A /* CoreData+Sync.swift in Sources */,
 				12D6244B1F171FB70017999A /* SyncContextOwner.swift in Sources */,
+				1239AC171F2ACA71005B6C35 /* FavoriteCharasManager.swift in Sources */,
 				1245F79A1F175B07009A80EC /* CloudKitMergePolicy.swift in Sources */,
 				12D6244C1F171FB70017999A /* ChangeProcessor.swift in Sources */,
 				12D6244D1F171FB70017999A /* UnitsRemote.swift in Sources */,
@@ -2010,11 +2023,13 @@
 				12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */,
 				12D4F8CC1E1EA9020064991E /* FilterTableViewCell.swift in Sources */,
 				1269EA061D520C9F0071AD7F /* SongTableViewCell.swift in Sources */,
+				1239AC111F2AC113005B6C35 /* FavoriteManager.swift in Sources */,
 				12FC8B361EDE6D93003CF3C3 /* TeamInformationAppealCell.swift in Sources */,
 				127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */,
 				1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */,
 				125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */,
 				12F351121F1F07E000F47FD1 /* MemberUploader.swift in Sources */,
+				1239AC131F2AC37E005B6C35 /* FavoriteCardsManager.swift in Sources */,
 				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
@@ -2052,6 +2067,7 @@
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
 				129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
+				1239AC151F2AC576005B6C35 /* IDSearchable.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1261944F1EF10E7F00673BC5 /* TeamEditingAdvanceOptionsManager.swift in Sources */,

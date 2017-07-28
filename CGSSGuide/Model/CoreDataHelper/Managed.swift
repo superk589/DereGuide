@@ -78,6 +78,10 @@ extension Managed where Self: NSManagedObject {
         }
         return object
     }
+    
+    public static func find(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> [Self] {
+        return materializedObjects(in: context, matching: predicate)
+    }
 
     public static func fetch(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> () = { _ in }) -> [Self] {
         let request = NSFetchRequest<Self>(entityName: Self.entityName)
@@ -99,6 +103,15 @@ extension Managed where Self: NSManagedObject {
         return nil
     }
 
+    public static func materializedObjects(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> [Self] {
+        var objests = [Self]()
+        for object in context.registeredObjects where !object.isFault {
+            guard let result = object as? Self, predicate.evaluate(with: result) else { continue }
+            objests.append(result)
+        }
+        return objests
+    }
+    
 }
 
 

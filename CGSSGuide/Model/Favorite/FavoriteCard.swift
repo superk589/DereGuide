@@ -52,7 +52,11 @@ extension FavoriteCard: Managed {
     
 }
 
-extension FavoriteCard {}
+extension FavoriteCard: IDSearchable {
+    var id: Int {
+        return Int(cardID)
+    }
+}
 
 extension FavoriteCard: DelayedDeletable {
     @NSManaged public var markedForDeletionDate: Date?

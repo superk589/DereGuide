@@ -46,6 +46,7 @@ extension RemoteFavoriteCard {
             let card = FavoriteCard.insert(into: context, cardID: Int(self.cardID))
             card.creatorID = self.creatorID
             card.remoteIdentifier = self.id
+            card.createdAt = self.localCreatedAt
             completion(true)
         }
     }

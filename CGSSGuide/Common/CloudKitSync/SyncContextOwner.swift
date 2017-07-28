@@ -84,6 +84,8 @@ extension ContextOwner {
             let updates = notification.updatedObjects.remap(to: self.syncContext)
             let inserts = notification.insertedObjects.remap(to: self.syncContext)
             self.processChangedLocalObjects(updates + inserts)
+            // why here not remap deletedObjects?
+            // because we only perform delayable delete, the detele item is marked as deleted but not really deleted. we delete it later at app did enter background.
         }
     }
 }

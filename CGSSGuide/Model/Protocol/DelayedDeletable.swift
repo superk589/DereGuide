@@ -47,6 +47,8 @@ extension NSManagedObjectContext {
     
     public func batchDeleteObjectsMarkedForLocalDeletion() {
         Unit.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        FavoriteCard.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        FavoriteChara.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
     }
     
 }

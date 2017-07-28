@@ -71,6 +71,8 @@ extension RemoteMember {
         let member = Member.insert(into: context, cardID: Int(cardID), skillLevel: Int(skillLevel), potential: potential, participatedPostion: Int(participatedPosition))
         member.creatorID = self.creatorID
         member.remoteIdentifier = id
+        member.createdAt = self.localCreatedAt
+        member.updatedAt = self.localModifiedAt
         return member
     }
     
