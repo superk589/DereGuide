@@ -57,8 +57,8 @@ class CharView: UIView {
             make.top.equalTo(kanaSpacedLabel)
         }
         
-        sortingPropertyLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        kanaSpacedLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
+        sortingPropertyLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        kanaSpacedLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         
         nameLabel = UILabel()
         nameLabel.font = UIFont.systemFont(ofSize: 16)

@@ -128,10 +128,10 @@ class TeamEditingController: BaseViewController {
             make.bottom.equalTo(editableView.snp.top)
         }
         
-        collectionView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .vertical)
-        editableView.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .vertical)
-        collectionView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
-        editableView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+        collectionView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .vertical)
+        editableView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .vertical)
+        collectionView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)
+        editableView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .vertical)
         
     }
     

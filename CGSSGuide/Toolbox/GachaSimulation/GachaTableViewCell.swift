@@ -101,10 +101,10 @@ class GachaTableViewCell: UITableViewCell {
         }
         // 两个Label同行, setContentHuggingPriority优先级高的可以避免拉伸
         // 同理setContentCompressionResistancePriority 优先级高的可以避免被缩小
-        startLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        startLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        nameLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        nameLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+        startLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        startLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        nameLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
     }
     
     func setup(pool: CGSSGachaPool) {

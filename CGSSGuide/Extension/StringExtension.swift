@@ -29,7 +29,7 @@ extension String {
         let res = regex!.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.characters.count))
         var arr = [String]()
         for checkingRes in res {
-            arr.append((self as NSString).substring(with: checkingRes.range(at: index)))
+            arr.append((self as NSString).substring(with: checkingRes.rangeAt(index)))
         }
         return arr
     }

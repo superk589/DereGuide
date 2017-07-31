@@ -37,7 +37,7 @@ class NoteScoreTableViewSectionFooter: UITableViewHeaderFooterView {
     func setupWith(baseScore: Double, totalScore: Int) {
         baseScoreLabel.text = NSLocalizedString("基础分", comment: "") + ": " + String.init(format: "%.2f", baseScore)
         let attStr = NSMutableAttributedString.init(string: NSLocalizedString("总分", comment: "") + ": ", attributes: nil)
-        attStr.append(NSAttributedString.init(string: String(totalScore), attributes: [NSAttributedStringKey.foregroundColor: Color.cute]))
+        attStr.append(NSAttributedString.init(string: String(totalScore), attributes: [NSForegroundColorAttributeName: Color.cute]))
         totalScoreLabel.attributedText = attStr
     }
     

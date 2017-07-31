@@ -66,8 +66,8 @@ class TeamSimulationSliderOption: UIControl {
         
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         
-        label.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        sliderDescriptionLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        sliderDescriptionLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
     }
     
     override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControlEvents) {

@@ -11,11 +11,11 @@ import UIKit
 class PotentialLabel: UILabel {
     
     func setup(with potential: CGSSPotential) {
-        let vocal = NSAttributedString.init(string: String(potential.vocalLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let dance = NSAttributedString.init(string: String(potential.danceLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let visual = NSAttributedString.init(string: String(potential.visualLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let separator = NSAttributedString.init(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let plus = NSAttributedString.init(string: "+", attributes: [NSAttributedStringKey.foregroundColor: Color.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let vocal = NSAttributedString.init(string: String(potential.vocalLevel), attributes: [NSForegroundColorAttributeName: Color.vocal, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
+        let dance = NSAttributedString.init(string: String(potential.danceLevel), attributes: [NSForegroundColorAttributeName: Color.dance, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
+        let visual = NSAttributedString.init(string: String(potential.visualLevel), attributes: [NSForegroundColorAttributeName: Color.visual, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
+        let separator = NSAttributedString.init(string: "/", attributes: [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
+        let plus = NSAttributedString.init(string: "+", attributes: [NSForegroundColorAttributeName: Color.allType, NSFontAttributeName: UIFont.systemFont(ofSize: 12)])
         
         self.attributedText = plus + vocal + separator + dance + separator + visual
     }

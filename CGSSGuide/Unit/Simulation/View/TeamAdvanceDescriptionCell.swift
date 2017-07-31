@@ -38,11 +38,11 @@ class TeamAdvanceDescriptionCell: UITableViewCell {
         rightLabel.font = UIFont.systemFont(ofSize: 16)
         rightLabel.textColor = UIColor.darkGray
         
-        leftLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        rightLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        leftLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        rightLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
         
-        leftLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
-        rightLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        leftLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        rightLabel.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
         
         selectionStyle = .none
     }
