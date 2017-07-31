@@ -53,7 +53,7 @@ extension FavoriteCard: Managed {
 }
 
 extension FavoriteCard: IDSearchable {
-    var id: Int {
+    var searchedID: Int {
         return Int(cardID)
     }
 }

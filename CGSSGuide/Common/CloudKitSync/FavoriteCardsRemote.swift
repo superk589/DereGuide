@@ -6,7 +6,8 @@
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CloudKit
 
 final class FavoriteCardsRemote: Remote {
     
@@ -16,4 +17,48 @@ final class FavoriteCardsRemote: Remote {
     static var subscriptionID: String {
         return "My Favorite Cards"
     }
+    
+    func fetchLatestRecords(completion: @escaping ([R]) -> ()) {
+        fetchUserID { (userID) in
+            guard let userID = userID else {
+                completion([])
+                return
+            }
+            let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
+            query.sortDescriptors = [self.defaultSortDescriptor]
+            let op = CKQueryOperation(query: query)
+            //        op.resultsLimit = maximumNumberOfUnits
+            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
+                if error != nil {
+                    print(error!)
+                }
+                let rs = records.map { R(record: $0) }.flatMap { $0 }
+                completion(rs)
+                
+                // remove redundants in remote, when user create favorites from multiple devices, the remote may have more than one of the same cardID. remove them when fetch latest records 
+                self.remove(rs.redundants { $0.cardID == $1.cardID }.map { $0.id }, completion: { _, _ in })
+            }
+        }
+    }
+    
+}
+
+extension Sequence {
+    
+    /// find redundant elements in a sequence
+    func redundants(condition: @escaping (Iterator.Element, Iterator.Element) -> Bool) -> Array<Iterator.Element> {
+        var filtered = Array<Iterator.Element>()
+        var result = Array<Iterator.Element>()
+        for x in self {
+            if filtered.contains(where: {
+                return condition($0, x)
+            }) {
+                result.append(x)
+            } else {
+                filtered.append(x)
+            }
+        }
+        return result
+    }
+    
 }

@@ -53,7 +53,7 @@ extension FavoriteChara: Managed {
 }
 
 extension FavoriteChara: IDSearchable {
-    var id: Int {
+    var searchedID: Int {
         return Int(charaID)
     }
 }

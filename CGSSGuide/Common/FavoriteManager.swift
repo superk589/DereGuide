@@ -78,7 +78,7 @@ extension FavoriteManager where Favorite: IDSearchable {
     func contains(_ id: Int) -> Bool {
         var result = false
         context.performAndWait {
-            result = favorites.contains { id == $0.id }
+            result = favorites.contains { id == $0.searchedID }
         }
         return result
     }
@@ -88,7 +88,7 @@ extension FavoriteManager where Favorite: IDSearchable {
 extension FavoriteManager where Favorite: IDSearchable & DelayedDeletable & RemoteDeletable {
     
     func remove(_ id: Int) {
-        favorites.filter { $0.id == id }.forEach { $0.markForRemoteDeletion() }
+        favorites.filter { $0.searchedID == id }.forEach { $0.markForRemoteDeletion() }
         context.saveOrRollback()
     }
 }

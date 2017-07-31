@@ -221,13 +221,13 @@ extension Remote {
         cloudKitContainer.publicCloudDatabase.add(op)
     }
     
-//    func remove(_ ids: [RemoteIdentifier], completion: @escaping ([RemoteIdentifier], RemoteError?) -> ()) {
-//        let recordIDsToDelete = ids.map(CKRecordID.init(recordName:))
-//        let op = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDsToDelete)
-//        op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
-//            completion((deletedRecordIDs ?? []).map { $0.recordName }, RemoteError(cloudKitError: error))
-//        }
-//        cloudKitContainer.publicCloudDatabase.add(op)
-//    }
+    func remove(_ ids: [RemoteIdentifier], completion: @escaping ([RemoteIdentifier], RemoteError?) -> ()) {
+        let recordIDsToDelete = ids.map(CKRecordID.init(recordName:))
+        let op = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDsToDelete)
+        op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
+            completion((deletedRecordIDs ?? []).map { $0.recordName }, RemoteError(cloudKitError: error))
+        }
+        cloudKitContainer.publicCloudDatabase.add(op)
+    }
     
 }

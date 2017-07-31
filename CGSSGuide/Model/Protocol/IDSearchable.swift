@@ -9,5 +9,5 @@
 import Foundation
 
 protocol IDSearchable {
-    var id: Int { get }
+    var searchedID: Int { get }
 }

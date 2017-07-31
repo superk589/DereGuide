@@ -65,7 +65,6 @@ final class FavoriteCardDownloader: ChangeProcessor {
     
 }
 
-
 extension FavoriteCardDownloader {
     
     fileprivate func deleteFavoriteCards(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
