@@ -105,9 +105,13 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
     }
     
     @objc func addTeam() {
-        let vc = TeamEditingController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
+        if units.count >= Config.maxNumberOfStoredUnits {
+            showTooManyUnitsAlert()
+        } else {
+            let vc = TeamEditingController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @objc func commitDeletion() {
@@ -137,12 +141,20 @@ class TeamTableViewController: BaseViewController, UIPopoverPresentationControll
         }
     }
     
+    private func showTooManyUnitsAlert() {
+        UIAlertController.showHintMessage(String.init(format: NSLocalizedString("您无法创建超过 %d 个队伍", comment: ""), Config.maxNumberOfStoredUnits), in: nil)
+    }
+    
     @objc func copyAction() {
         if let selectedIndexPaths = tableView.indexPathsForSelectedRows, isEditing {
-            for indexPath in selectedIndexPaths {
-                Unit.insert(into: context, anotherUnit: units[indexPath.row])
+            if selectedIndexPaths.count + units.count > Config.maxNumberOfStoredUnits {
+                showTooManyUnitsAlert()
+            } else {
+                for indexPath in selectedIndexPaths {
+                    Unit.insert(into: context, anotherUnit: units[indexPath.row])
+                }
+                context.saveOrRollback()
             }
-            context.saveOrRollback()
         }
     }
     

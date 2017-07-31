@@ -16,6 +16,7 @@ struct Config {
     static let unityVersion = "5.4.5p1"
     
     static let cloudKitDebug = true
+    static let maxNumberOfStoredUnits = 100
 }
 
 struct NotificationCategory {
