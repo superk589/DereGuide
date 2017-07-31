@@ -78,7 +78,7 @@ extension FavoriteManager where Favorite: IDSearchable {
     func contains(_ id: Int) -> Bool {
         var result = false
         context.performAndWait {
-            result = favorites.contains { id == $0.searchedID }
+            result = self.favorites.contains { id == $0.searchedID }
         }
         return result
     }

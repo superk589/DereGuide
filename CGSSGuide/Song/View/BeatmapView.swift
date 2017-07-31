@@ -65,7 +65,7 @@ class BeatmapView: IndicatorScrollView {
         
         beatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: sectionHeight, columnWidth: self.frame.size.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1)
         contentSize.height = beatmapDrawer.totalHeight
-        contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height)
+        contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
         delegate = self
     }
     
