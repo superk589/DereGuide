@@ -1,5 +1,18 @@
 # ChangeLog
 
+### 1.4.3
+
+1. 喜欢的角色和卡片也纳入iCloud同步
+2. 优化和bug修复
+
+##### Japanese version
+
+
+##### English version
+
+1. Favorite cards and characters auto sync to iCloud
+2. Improvements and bug fixes
+
 ### 1.4.2
 
 1. 缩小一些页面横屏模式下的宽度，更适合阅读
@@ -291,7 +304,7 @@
 1. 活动和卡池页面的时间从日本时间改为本地时间
 2. 优化致谢和版权声明页面
 3. 优化缓存所有图片功能
-4. 其他Bug修复
+4. 其他bug修复
 
 ##### Japanese version
 1. イベント・ガシャページにおける時間表記のローカライズ

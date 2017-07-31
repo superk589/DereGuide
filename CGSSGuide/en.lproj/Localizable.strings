@@ -660,3 +660,6 @@
 "抽卡次数" = "pulls";
 "星星数" = "star jewels";
 "占比" = "percent";
+
+/* new in 1.4.3 */
+"您无法创建超过 %d 个队伍" = "The number of units has reached the limit of %d";
