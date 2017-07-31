@@ -24,7 +24,7 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
         
         alvc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         alvc.addAction(UIAlertAction.init(title: NSLocalizedString("极限模式", comment: ""), style: .default, handler: { [weak self] (action) in
-            self?.displayType = .optimistic1
+            self?.displayType = .optimistic2
         }))
         
         alvc.addAction(UIAlertAction.init(title: DisplayType.simulation.description, style: .default, handler: { [weak self] (action) in

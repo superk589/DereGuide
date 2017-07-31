@@ -45,7 +45,7 @@ final class FavoriteCharaDownloader: ChangeProcessor {
         }
         insert(creates, in: context)
         deleteFavoriteCharas(with: deletionIDs, in: context)
-        if Config.cloudKitDebug && creates.count + deletionIDs.count + updates.count > 0 {
+        if Config.cloudKitDebug && creates.count + updates.count > 0 {
             print("Favorite Chara remote fetch inserts: \(creates.count) and updates: \(updates.count)")
         }
         context.delayedSaveOrRollback()
