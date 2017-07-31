@@ -63,7 +63,6 @@ class EventPtView: UIView {
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(dateDescLabel.snp.bottom).offset(10)
-            make.height.equalTo(7 * 18)
         }
         
         loadingHUD = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
