@@ -67,6 +67,7 @@ class TeamMemberEditableItemView: UIView {
         addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4))
+            make.height.greaterThanOrEqualTo(cardView.snp.width).offset(29)
         }
         
         placeholderImageView = UIImageView(image: #imageLiteral(resourceName: "436-plus").withRenderingMode(.alwaysTemplate))
@@ -157,7 +158,7 @@ class TeamMemberEditableView: UIView {
         stackView.alignment = .center
         addSubview(stackView)
         
-        stackView.snp.remakeConstraints({ (make) in
+        stackView.snp.remakeConstraints { (make) in
             make.left.greaterThanOrEqualTo(10)
             make.right.lessThanOrEqualTo(-10)
             // make the view as wide as possible
@@ -167,7 +168,7 @@ class TeamMemberEditableView: UIView {
             make.bottom.equalTo(-10)
             make.width.lessThanOrEqualTo(104 * 6 + 30)
             make.centerX.equalToSuperview()
-        })
+        }
         
         centerLabel = UILabel()
         centerLabel.text = NSLocalizedString("队长", comment: "")

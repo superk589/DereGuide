@@ -296,6 +296,7 @@ extension TeamEditingController: UICollectionViewDelegate, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let member = recentMembers[indexPath.item]
         createOrReplaceMember(cardID: Int(member.cardID), skillLevel: Int(member.skillLevel), potential: member.potential, at: editableView.currentIndex)
+        editableView.moveIndexToNext()
     }
 }
 
