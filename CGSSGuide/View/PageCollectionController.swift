@@ -89,10 +89,11 @@ class PageCollectionController: BaseViewController, UICollectionViewDelegate, UI
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        let index = self.currentIndex
         coordinator.animate(alongsideTransition: { (context) in
             self.collectionView.performBatchUpdates(nil, completion: nil)
-            self.collectionView.contentOffset.x = CGFloat(self.currentIndex) * size.width
-            self.titleView.currentIndex = self.currentIndex
+            self.collectionView.contentOffset.x = CGFloat(index) * size.width
+            self.titleView.currentIndex = index
         }, completion: nil)
         super.viewWillTransition(to: size, with: coordinator)
     }
