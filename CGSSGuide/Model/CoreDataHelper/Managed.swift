@@ -79,10 +79,6 @@ extension Managed where Self: NSManagedObject {
         return object
     }
     
-    public static func find(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> [Self] {
-        return materializedObjects(in: context, matching: predicate)
-    }
-
     public static func fetch(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> () = { _ in }) -> [Self] {
         let request = NSFetchRequest<Self>(entityName: Self.entityName)
         configurationBlock(request)

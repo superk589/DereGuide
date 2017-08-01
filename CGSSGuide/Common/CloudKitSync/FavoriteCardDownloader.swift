@@ -30,23 +30,23 @@ final class FavoriteCardDownloader: ChangeProcessor {
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {
         var creates: [RemoteFavoriteCard] = []
         var deletionIDs: [RemoteIdentifier] = []
-        var updates: [RemoteFavoriteCard] = []
+//        var updates: [RemoteFavoriteCard] = []
         for change in changes {
             switch change {
             case .insert(let r) where r is RemoteFavoriteCard:
                 creates.append(r as! RemoteFavoriteCard)
             case .delete(let id):
                 deletionIDs.append(id)
-            case .update(let r) where r is RemoteFavoriteCard:
-                updates.append(r as! RemoteFavoriteCard)
+//            case .update(let r) where r is RemoteFavoriteCard:
+//                updates.append(r as! RemoteFavoriteCard)
             default:
                 continue
             }
         }
         insert(creates, in: context)
         deleteFavoriteCards(with: deletionIDs, in: context)
-        if Config.cloudKitDebug && creates.count + updates.count > 0 {
-            print("Favorite Card remote fetch inserts: \(creates.count) and updates: \(updates.count)")
+        if Config.cloudKitDebug && creates.count > 0 {
+            print("favorite card downloader: insert \(creates.count) from subscription")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -71,10 +71,10 @@ extension FavoriteCardDownloader {
         guard !ids.isEmpty else { return }
         context.perform {
             let objects = FavoriteCard.fetch(in: context.managedObjectContext) { (request) -> () in
-                request.predicate = FavoriteCard.predicateForRemoteIdentifiers(ids)
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [FavoriteCard.predicateForRemoteIdentifiers(ids), FavoriteCard.notMarkedForLocalDeletionPredicate])
             }
             if Config.cloudKitDebug && objects.count > 0 {
-                print("delete \(objects.count) local favorite card from remote fetch")
+                print("favorite card downloader: delete \(objects.count) from subscription")
             }
             objects.forEach { $0.markForLocalDeletion() }
         }

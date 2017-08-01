@@ -53,10 +53,10 @@ extension FavoriteCardRemover {
             let objectsToDeleteRemotely = Array(allObjects.subtracting(localOnly))
             if Config.cloudKitDebug {
                 if localOnly.count > 0 {
-                    print("delete local favorite cards \(localOnly.count)")
+                    print("favorite card remover: delete local \(localOnly.count)")
                 }
                 if objectsToDeleteRemotely.count > 0 {
-                    print("delete remote favorite cards \(objectsToDeleteRemotely.count)")
+                    print("favorite card remover: delete remote \(objectsToDeleteRemotely.count)")
                 }
             }
             self.deleteLocally(Array(localOnly), context: context)

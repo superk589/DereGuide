@@ -60,13 +60,10 @@ extension FavoriteCardUploader {
                     guard let remoteFavoriteCard = remoteFavoriteCards.first(where: { favoriteCard.createdAt == $0.localCreatedAt }) else { continue }
                     favoriteCard.creatorID = remoteFavoriteCard.creatorID
                     favoriteCard.remoteIdentifier = remoteFavoriteCard.id
-                    if Config.cloudKitDebug && insertions.count > 0 {
-                        print("upload unit \(favoriteCard.remoteIdentifier!)")
-                    }
                 }
                 context.delayedSaveOrRollback()
                 if Config.cloudKitDebug && insertions.count > 0 {
-                    print("upload \(insertions.count) favorite cards, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
+                    print("favorite card uploader: upload \(insertions.count) success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 self.elementsInProgress.markObjectsAsComplete(insertions)
             }

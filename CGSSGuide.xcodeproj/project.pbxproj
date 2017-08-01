@@ -231,6 +231,7 @@
 		12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */; };
 		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
+		12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B0A0621F305DBE005967C1 /* Syncable.swift */; };
 		12B678451EF12ACF00615D22 /* TeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B678441EF12ACF00615D22 /* TeamMemberCell.swift */; };
 		12B7A1A61F1475A000537C80 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B7A1A51F1475A000537C80 /* CloudKit.framework */; };
 		12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */; };
@@ -594,6 +595,7 @@
 		12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStatusIndicator.swift; sourceTree = "<group>"; };
 		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
+		12B0A0621F305DBE005967C1 /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
 		12B678441EF12ACF00615D22 /* TeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCell.swift; sourceTree = "<group>"; };
 		12B7A1A51F1475A000537C80 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1484,6 +1486,7 @@
 				12F33DC01F0F68C100B75E47 /* LocalizedStringConvertible.swift */,
 				12F33DC11F0F68C100B75E47 /* RemoteUploadable.swift */,
 				12F33DC21F0F68C100B75E47 /* UpdateTimestampable.swift */,
+				12B0A0621F305DBE005967C1 /* Syncable.swift */,
 				1239AC141F2AC576005B6C35 /* IDSearchable.swift */,
 			);
 			path = Protocol;
@@ -1894,6 +1897,7 @@
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
 				12FC8B561EDE6DEB003CF3C3 /* TeamSimulationModeSelectionCell.swift in Sources */,
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
+				12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */,
 				121FCFAE1EFA1A6100B7DFF4 /* TeamAdvanceDescriptionCell.swift in Sources */,
 				12FC8B611EDE90E0003CF3C3 /* TeamSimulationSliderOption.swift in Sources */,
 				124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */,

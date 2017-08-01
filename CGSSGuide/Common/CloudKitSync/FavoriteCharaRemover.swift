@@ -53,10 +53,10 @@ extension FavoriteCharaRemover {
             let objectsToDeleteRemotely = Array(allObjects.subtracting(localOnly))
             if Config.cloudKitDebug {
                 if localOnly.count > 0 {
-                    print("delete local favorite charas \(localOnly.count)")
+                    print("favorite chara remover: delete local \(localOnly.count)")
                 }
                 if objectsToDeleteRemotely.count > 0 {
-                    print("delete remote favorite charas \(objectsToDeleteRemotely.count)")
+                    print("favorite chara remover: delete remote \(objectsToDeleteRemotely.count)")
                 }
             }
             self.deleteLocally(Array(localOnly), context: context)

@@ -82,6 +82,13 @@ class TeamSimulationController: BaseTableViewController, TeamCollectionPage {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.description())
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if unit.hasChanges {
+            unit.managedObjectContext?.saveOrRollback()
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -297,7 +304,7 @@ extension TeamSimulationController: TeamSimulationAppealEditingCellDelegate {
         unit.supportAppeal = Int64(supportAppeal)
         unit.usesCustomAppeal = (selectionIndex == 1)
         // save action cause tableView.reloadData(), delayed save to avoid cycling save
-        unit.managedObjectContext?.delayedSaveOrRollback(group: DispatchGroup())
+        // not save here
     }
 }
 

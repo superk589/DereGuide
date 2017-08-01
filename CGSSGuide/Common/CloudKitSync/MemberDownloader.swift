@@ -47,7 +47,7 @@ final class MemberDownloader: ChangeProcessor {
         update(updates, in: context)
         context.delayedSaveOrRollback()
         if Config.cloudKitDebug && updates.count > 0 {
-            print("Member remote fetch updates: \(updates.count)")
+            print("member downloader: update \(updates.count) from subscription")
         }
         completion()
     }

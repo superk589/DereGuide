@@ -30,23 +30,23 @@ final class FavoriteCharaDownloader: ChangeProcessor {
     func processRemoteChanges<T>(_ changes: [RemoteRecordChange<T>], in context: ChangeProcessorContext, completion: () -> ()) {
         var creates: [RemoteFavoriteChara] = []
         var deletionIDs: [RemoteIdentifier] = []
-        var updates: [RemoteFavoriteChara] = []
+//        var updates: [RemoteFavoriteChara] = []
         for change in changes {
             switch change {
             case .insert(let r) where r is RemoteFavoriteChara:
                 creates.append(r as! RemoteFavoriteChara)
             case .delete(let id):
                 deletionIDs.append(id)
-            case .update(let r) where r is RemoteFavoriteChara:
-                updates.append(r as! RemoteFavoriteChara)
+//            case .update(let r) where r is RemoteFavoriteChara:
+//                updates.append(r as! RemoteFavoriteChara)
             default:
                 continue
             }
         }
         insert(creates, in: context)
         deleteFavoriteCharas(with: deletionIDs, in: context)
-        if Config.cloudKitDebug && creates.count + updates.count > 0 {
-            print("Favorite Chara remote fetch inserts: \(creates.count) and updates: \(updates.count)")
+        if Config.cloudKitDebug && creates.count > 0 {
+            print("favorite chara downloader: insert \(creates.count) from subscription")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -72,10 +72,10 @@ extension FavoriteCharaDownloader {
         guard !ids.isEmpty else { return }
         context.perform {
             let objects = FavoriteChara.fetch(in: context.managedObjectContext) { (request) -> () in
-                request.predicate = FavoriteChara.predicateForRemoteIdentifiers(ids)
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [FavoriteChara.predicateForRemoteIdentifiers(ids), FavoriteChara.notMarkedForLocalDeletionPredicate])
             }
             if Config.cloudKitDebug && objects.count > 0 {
-                print("delete \(objects.count) local favorite chara from remote fetch")
+                print("favorite chara downloader: delete \(objects.count) from subscription")
             }
             objects.forEach { $0.markForLocalDeletion() }
         }

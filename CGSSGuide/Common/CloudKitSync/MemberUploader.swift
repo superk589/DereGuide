@@ -59,7 +59,7 @@ extension MemberUploader {
                     member.remoteIdentifier = remoteMember.id
                 }
                 if Config.cloudKitDebug && insertions.count > 0 {
-                    print("upload \(insertions.count) members, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
+                    print("member uploader: upload \(insertions.count) success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 context.delayedSaveOrRollback()
                 self.elementsInProgress.markObjectsAsComplete(insertions)                

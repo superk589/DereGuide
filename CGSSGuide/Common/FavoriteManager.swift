@@ -16,7 +16,7 @@ protocol FavoriteManager: class {
     
     var context: NSManagedObjectContext { get }
     
-    var favorites: [Favorite] { set get }
+    var favorites: [Favorite] { get set }
     
     var observerToken: NSObjectProtocol? { get set }
     
@@ -63,8 +63,10 @@ extension FavoriteManager where Favorite: Managed {
             self.favorites = try! self.context.fetch(request)
         }
         
-        observerToken = context.addContextDidSaveNotificationObserver { (note) in
-            self.favorites = Favorite.find(in: self.context, matching: Favorite.defaultPredicate)
+        observerToken = context.addObjectsDidChangeNotificationObserver { (note) in
+            let inserts = note.insertedObjects.remap(to: self.context)
+            self.favorites.append(contentsOf: inserts.flatMap { $0 as? Favorite })
+            self.favorites = self.favorites.filter(EntityAndPredicate(entity: Favorite.entity, predicate: Favorite.defaultPredicate))
             self.postChangedNotification()
         }
     

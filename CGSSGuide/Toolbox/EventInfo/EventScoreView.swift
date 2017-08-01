@@ -106,6 +106,7 @@ class EventScoreView: UIView {
         
         setLoading(loading: false)
         if let last = rankingList.last {
+            gridView.isHidden = false
             var gridStrings = [[String]]()
             if onGoing {
                 gridStrings.append(["", NSLocalizedString("当前分数", comment: ""), NSLocalizedString("增速(/h)", comment: "")])
@@ -121,17 +122,13 @@ class EventScoreView: UIView {
                 gridStrings.append([rankingList.event.rankingHighScoreLabels[2], String(last.reward3), "-"])
             }
             gridView.setContents(gridStrings)
+        } else {
+            gridView.isHidden = true
         }
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An emScorey implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
     
 }

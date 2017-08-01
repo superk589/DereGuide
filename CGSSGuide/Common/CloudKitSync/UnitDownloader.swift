@@ -48,8 +48,8 @@ final class UnitDownloader: ChangeProcessor {
         insert(creates, in: context)
         deleteUnits(with: deletionIDs, in: context)
         update(updates, in: context)
-        if Config.cloudKitDebug && creates.count + updates.count > 0 {
-            print("Unit remote fetch inserts: \(creates.count) and updates: \(updates.count)")
+        if Config.cloudKitDebug && updates.count > 0 {
+            print("unit downloader: update \(updates.count) from subscription")
         }
         context.delayedSaveOrRollback()
         completion()
@@ -76,10 +76,10 @@ extension UnitDownloader {
         guard !ids.isEmpty else { return }
         context.perform {
             let units = Unit.fetch(in: context.managedObjectContext) { (request) -> () in
-                request.predicate = Unit.predicateForRemoteIdentifiers(ids)
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [Unit.predicateForRemoteIdentifiers(ids), Unit.notMarkedForLocalDeletionPredicate]) 
             }
             if Config.cloudKitDebug && units.count > 0 {
-                print("delete \(units.count) local units from remote fetch")
+                print("unit downloader: delete \(units.count) from subscription")
             }
             units.forEach { $0.markForLocalDeletion() }
         }
@@ -133,13 +133,21 @@ extension UnitDownloader {
                 return result
             }()
             
-            for remoteUnit in inserts {
-                guard existingUnits[remoteUnit.id] == nil && !self.unitsInFetching.contains(remoteUnit.id) else { continue }
-                
-                // insertion of unit need to fetch participated members from cloudkit async, so keep an in-fetching tracking array to avoid insert the same unit more than once(cause the CloudKit subscription may fire more than once for the same change.
-                self.unitsInFetching.append(remoteUnit.id)
-                self.insert(remoteUnit, into: context)
+            let localInserts = inserts.filter { existingUnits[$0.id] == nil && !self.unitsInFetching.contains($0.id) }
+            if Config.cloudKitDebug && localInserts.count > 0 {
+                print("unit downloader: insert \(localInserts.count) from subscription")
             }
+            localInserts.forEach {
+                self.unitsInFetching.append($0.id)
+                self.insert($0, into: context)
+            }
+//            for remoteUnit in inserts {
+//                guard existingUnits[remoteUnit.id] == nil && !self.unitsInFetching.contains(remoteUnit.id) else { continue }
+//
+//                // insertion of unit need to fetch participated members from cloudkit async, so keep an in-fetching tracking array to avoid insert the same unit more than once(cause the CloudKit subscription may fire more than once for the same change.
+//                self.unitsInFetching.append(remoteUnit.id)
+//                self.insert(remoteUnit, into: context)
+//            }
         }
     }
     

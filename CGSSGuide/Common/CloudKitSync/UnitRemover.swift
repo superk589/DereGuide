@@ -53,10 +53,10 @@ extension UnitRemover {
             let objectsToDeleteRemotely = Array(allObjects.subtracting(localOnly))
             if Config.cloudKitDebug {
                 if localOnly.count > 0 {
-                    print("delete local units \(localOnly.count)")
+                    print("unit remover: delete local \(localOnly.count)")
                 }
                 if objectsToDeleteRemotely.count > 0 {
-                    print("delete remote units \(objectsToDeleteRemotely.count)")
+                    print("unit remover: delete remote \(objectsToDeleteRemotely.count)")
                 }
             }
             self.deleteLocally(Array(localOnly), context: context)

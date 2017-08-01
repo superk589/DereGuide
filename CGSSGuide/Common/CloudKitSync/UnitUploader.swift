@@ -60,13 +60,10 @@ extension UnitUploader {
                     guard let remoteUnit = remoteUnits.first(where: { unit.createdAt == $0.localCreatedAt }) else { continue }
                     unit.creatorID = remoteUnit.creatorID
                     unit.remoteIdentifier = remoteUnit.id
-                    if Config.cloudKitDebug && insertions.count > 0 {
-                        print("upload unit \(unit.remoteIdentifier!)")
-                    }
                 }
                 context.delayedSaveOrRollback()
                 if Config.cloudKitDebug && insertions.count > 0 {
-                    print("upload \(insertions.count) units, success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
+                    print("unit uploader: upload \(insertions.count) success \(insertions.filter { $0.remoteIdentifier != nil }.count)")
                 }
                 self.elementsInProgress.markObjectsAsComplete(insertions)
             }
