@@ -3,8 +3,7 @@
 ## Introduction
 This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on data/api from   
 * English version of card data api <https://starlight.kirara.ca>
-* Chinese version of card data api <http://starlight.hyspace.io>
-* Beatmap api <https://deresute.info>
+* Chinese version of card data api <http://starlight.346lab.org>
 * Image data <https://hoshimoriuta.kirara.ca>
 * Event data <https://starlight.tachibana.cool>
 
