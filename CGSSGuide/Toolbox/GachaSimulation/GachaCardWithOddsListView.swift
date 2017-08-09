@@ -79,8 +79,8 @@ extension GachaCardWithOddsListView: TTGTagCollectionViewDelegate, TTGTagCollect
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
-        let icon = tagView as! CGSSCardIconView
-        delegate?.iconClick(icon)
+        let cardView = tagView as! GachaCardView
+        delegate?.iconClick(cardView.icon)
     }
     
 }
