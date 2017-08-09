@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.4.4
+
+1. 修复模拟抽卡页面点击新卡图标时闪退的问题
+2. 修复组队详情页面翻转后停留在错误的分页
+
+##### Japanese version
+
+
+
+##### English version
+
+1. Fix a crash when clicking at card icon on gacha detail page
+2. Fix a layout issue when orientation changed on team detail page
+
 ### 1.4.3
 
 1. 喜欢的角色和卡片也纳入iCloud同步
