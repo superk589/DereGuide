@@ -137,7 +137,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     var hud: LoadingImageView?
     func requestData() {
-        let request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductId)
+        let request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductIDs)
         request.delegate = self
         hud = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
         hud?.show(to: self.collectionView)
@@ -277,7 +277,7 @@ extension DonationViewController: SKPaymentTransactionObserver {
         CGSSLoadingHUDManager.default.hide()
         var restored = false
         label: for transaction in queue.transactions {
-            for id in Config.iAPRemoveADProductId {
+            for id in Config.iAPRemoveADProductIDs {
                 if transaction.payment.productIdentifier == id {
                     restored = true
                     break label

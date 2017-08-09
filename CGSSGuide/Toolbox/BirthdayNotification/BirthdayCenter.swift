@@ -87,7 +87,7 @@ class BirthdayCenter {
                         let trigger = UNCalendarNotificationTrigger(dateMatching: char.nextBirthdayComponents, repeats: false)
                         
                         // 3. 发送请求标识符
-                        let requestIdentifier = Config.bundlerId + ".\(char.name!)"
+                        let requestIdentifier = Config.bundleID + ".\(char.name!)"
                         
                         
                         content.categoryIdentifier = NotificationHandler.UserNotificationCategoryType.birthday

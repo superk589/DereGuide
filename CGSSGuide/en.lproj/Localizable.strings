@@ -663,3 +663,17 @@
 
 /* new in 1.4.3 */
 "您无法创建超过 %d 个队伍" = "The number of units has reached the limit of %d";
+
+/* new in 1.5.0 */
+"删除" = "Delete";
+"寻找同僚" = "Search Colleague";
+"我的信息" = "My Profile";
+"发布" = "Post";
+"游戏ID" = "Game ID";
+"昵称" = "Nickname";
+"我的队长" = "My Centers";
+"希望征集的队长" = "Centers Wanted";
+"留言" = "Message";
+
+"撤销发布" = "Revoke";
+"撤销发布后其他人将无法搜索到您的信息，您已编辑过的信息不会被重置，随时可以再次发布。" = "After revoking, your profile are not searchable by others. But your profile will NOT be reset, you can post it again later.";

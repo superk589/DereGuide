@@ -10,14 +10,14 @@ import UIKit
 
 extension Date {
     
-    func toString(format: String = "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone = TimeZone.tokyo) -> String {
+    func toString(format: String = "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone = .tokyo) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
     
-    func truncateHours(timeZone: TimeZone = TimeZone.tokyo) -> Date {
+    func truncateHours(timeZone: TimeZone = .tokyo) -> Date {
         var gregorian = Calendar(identifier: .gregorian)
         gregorian.timeZone = timeZone
         let comps = gregorian.dateComponents([.day, .month, .year], from: self)

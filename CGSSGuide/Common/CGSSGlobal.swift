@@ -11,12 +11,13 @@ import ReachabilitySwift
 
 
 struct Config {
-    static let iAPRemoveADProductId: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
-    static let bundlerId = "com.zzk.cgssguide"
+    static let iAPRemoveADProductIDs: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
+    static let bundleID = "com.zzk.cgssguide"
     static let unityVersion = "5.4.5p1"
     
     static let cloudKitDebug = true
     static let maxNumberOfStoredUnits = 100
+    static let maxCharactersOfMessage = 200
 }
 
 struct NotificationCategory {
@@ -30,6 +31,7 @@ struct Path {
     static let library = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
     static let home = NSHomeDirectory()
 }
+
 struct Screen {
     
     static var width: CGFloat {

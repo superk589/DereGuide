@@ -66,4 +66,13 @@ extension UserDefaults {
         }
     }
     
+    var firstTimeComposingMyProfile: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeComposingMyProfile")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeComposingMyProfile") as? Bool ?? true
+        }
+    }
+    
 }

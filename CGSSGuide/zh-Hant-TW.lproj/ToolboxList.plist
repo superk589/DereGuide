@@ -34,5 +34,13 @@
 		<key>title</key>
 		<string>活動資訊查詢</string>
 	</dict>
+	<dict>
+		<key>cName</key>
+		<string>ColleagueViewController</string>
+		<key>iconId</key>
+		<string>300310</string>
+		<key>title</key>
+		<string>尋找同僚</string>
+	</dict>
 </array>
 </plist>

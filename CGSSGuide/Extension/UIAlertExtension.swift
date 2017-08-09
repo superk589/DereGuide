@@ -28,4 +28,17 @@ extension UIAlertController {
             vc.present(alert, animated: true)
         }
     }
+    
+    static func showConfirmAlert(title: String, message: String, confirm: @escaping () -> (), cancel: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .destructive, handler: { (action) in
+            confirm()
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: ""), style: .cancel, handler: { (action) in
+            cancel()
+        }))
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            vc.present(alert, animated: true)
+        }
+    }
 }

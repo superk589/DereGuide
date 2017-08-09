@@ -34,5 +34,13 @@
 		<key>title</key>
 		<string>Event Information</string>
 	</dict>
+	<dict>
+		<key>cName</key>
+		<string>ColleagueViewController</string>
+		<key>iconId</key>
+		<string>300310</string>
+		<key>title</key>
+		<string>Search Colleague</string>
+	</dict>
 </array>
 </plist>

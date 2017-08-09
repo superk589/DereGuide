@@ -59,7 +59,7 @@ extension Managed where Self: NSManagedObject {
     
     public static var entity: NSEntityDescription { return NSEntityDescription(cls: Self.self, name: entityName) }
     
-    public static func findOrCreate(in context: NSManagedObjectContext, matching predicate: NSPredicate, configure: (Self) -> ()) -> Self {
+    public static func findOrCreate(in context: NSManagedObjectContext, matching predicate: NSPredicate = Self.defaultPredicate, configure: (Self) -> ()) -> Self {
         guard let object = findOrFetch(in: context, matching: predicate) else {
             let newObject: Self = context.insertObject()
             configure(newObject)
@@ -68,7 +68,7 @@ extension Managed where Self: NSManagedObject {
         return object
     }
 
-    public static func findOrFetch(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> Self? {
+    public static func findOrFetch(in context: NSManagedObjectContext, matching predicate: NSPredicate = Self.defaultPredicate) -> Self? {
         guard let object = materializedObject(in: context, matching: predicate) else {
             return fetch(in: context) { request in
                 request.predicate = predicate
@@ -124,7 +124,7 @@ extension Managed where Self: NSManagedObject {
     fileprivate static func fetchSingleObject(in context: NSManagedObjectContext, configure: (NSFetchRequest<Self>) -> ()) -> Self? {
         let result = fetch(in: context) { request in
             configure(request)
-            request.fetchLimit = 2
+            request.fetchLimit = 1
         }
         switch result.count {
         case 0: return nil

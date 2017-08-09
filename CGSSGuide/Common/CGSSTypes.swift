@@ -6,7 +6,7 @@
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     let rawValue:UInt
@@ -168,8 +168,33 @@ struct CGSSAttributeTypes: OptionSet {
     init (type: Int) {
         self.init(rawValue: 1 << UInt(type))
     }
+    
+    var color: UIColor {
+        switch self {
+        case CGSSAttributeTypes.vocal:
+            return Color.vocal
+        case CGSSAttributeTypes.dance:
+            return Color.dance
+        case CGSSAttributeTypes.visual:
+            return Color.visual
+        default:
+            return Color.allType
+        }
+    }
+    
+    var short: String {
+        switch self {
+        case CGSSAttributeTypes.vocal:
+            return "Vo"
+        case CGSSAttributeTypes.dance:
+            return "Da"
+        case CGSSAttributeTypes.visual:
+            return "Vi"
+        default:
+            return ""
+        }
+    }
 }
-
 
 struct CGSSRarityTypes: OptionSet, Hashable {
     let rawValue: UInt
@@ -330,6 +355,34 @@ extension CGSSLiveTypes {
             self = .cool
         case .passion:
             self = .passion
+        }
+    }
+    
+    var icon: UIImage? {
+        switch self {
+        case CGSSLiveTypes.cute:
+            return #imageLiteral(resourceName: "song-cute")
+        case CGSSLiveTypes.cool:
+            return #imageLiteral(resourceName: "song-cool")
+        case CGSSLiveTypes.passion:
+            return #imageLiteral(resourceName: "song-passion")
+        case CGSSLiveTypes.allType:
+            return #imageLiteral(resourceName: "song-all")
+        default:
+            return nil
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case CGSSLiveTypes.cute:
+            return Color.cute
+        case CGSSLiveTypes.cool:
+            return Color.cool
+        case CGSSLiveTypes.passion:
+            return Color.passion
+        default:
+            return Color.allType
         }
     }
 }
