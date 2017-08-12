@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import ZKCornerRadiusView
 import SnapKit
 
 typealias SongTableViewCellDelegate = LiveViewDelegate
 
-class SongTableViewCell: UITableViewCell {
+class SongTableViewCell: ReadableWidthTableViewCell {
     
     weak var delegate: SongTableViewCellDelegate? {
         didSet {
@@ -25,24 +24,10 @@ class SongTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         liveView = LiveView()
-        
-        contentView.addSubview(liveView)
+        readableContentView.addSubview(liveView)
         liveView.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.width.lessThanOrEqualTo(768)
-            make.left.greaterThanOrEqualToSuperview()
-            make.right.lessThanOrEqualToSuperview()
-            make.left.equalToSuperview().priority(900)
-            make.right.equalToSuperview().priority(900)
-            make.centerX.equalToSuperview()
+            make.edges.equalToSuperview()
         }
-        let line = LineView()
-        contentView.addSubview(line)
-        line.snp.makeConstraints { (make) in
-            make.left.right.equalTo(liveView)
-            make.bottom.equalToSuperview()
-        }
-        
         selectionStyle = .none
     }
     

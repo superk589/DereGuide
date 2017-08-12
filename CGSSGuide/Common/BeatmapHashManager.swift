@@ -10,7 +10,7 @@ import UIKit
 
 class BeatmapHashManager {
     
-    var path = Path.cache + "beatmapHash.plist"
+    var path = Path.cache + "/beatmapHash.plist"
 
     static let `default` = BeatmapHashManager()
     

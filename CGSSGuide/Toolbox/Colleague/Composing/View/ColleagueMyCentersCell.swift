@@ -1,5 +1,5 @@
 //
-//  ColleagueCentersWantedCell.swift
+//  ColleagueMyCentersCell.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2017/8/4.
@@ -8,16 +8,20 @@
 
 import UIKit
 
-class ColleagueCentersWantedCell: ColleagueBaseCell {
+class ColleagueMyCentersCell: ColleagueBaseCell {
 
-    weak var delegate: CenterWantedGroupViewDelegate? {
+    weak var delegate: MyCenterGroupViewDelegate? {
         didSet {
             editableView.delegate = self.delegate
         }
     }
     
-    var editableView = CenterWantedGroupView()
     var infoButton = UIButton(type: .infoLight)
+    var editableView = MyCenterGroupView()
+    
+    var centers: [(Int, CGSSPotential)] {
+        return editableView.result
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,14 +41,16 @@ class ColleagueCentersWantedCell: ColleagueBaseCell {
     }
     
     func setup(_ profile: Profile) {
-        editableView.setupWith(cardID: Int(profile.guestCuteCardID), at: 0)
-        editableView.setupWith(cardID: Int(profile.guestCoolCardID), at: 1)
-        editableView.setupWith(cardID: Int(profile.guestPassionCardID), at: 2)
-        editableView.setupWith(cardID: Int(profile.guestAllTypeCardID), at: 3)
+        editableView.setupWith(cardID: Int(profile.cuteCardID), potential: profile.cutePotential, at: 0)
+        editableView.setupWith(cardID: Int(profile.coolCardID), potential: profile.coolPotential, at: 1)
+        editableView.setupWith(cardID: Int(profile.passionCardID), potential: profile.passionPotential, at: 2)
+        editableView.setupWith(cardID: Int(profile.allTypeCardID), potential: profile.allTypePotential, at: 3)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 
 }

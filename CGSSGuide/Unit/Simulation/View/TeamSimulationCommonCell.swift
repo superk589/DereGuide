@@ -19,9 +19,8 @@ class TeamSimulationCommonCell: UITableViewCell {
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
             make.left.equalTo(10)
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
         }
         accessoryType = .disclosureIndicator
     }

@@ -23,6 +23,10 @@ class MyCenterGroupView: UIView {
     
     var editableItemViews: [MyCenterItemView]!
     
+    var result: [(Int, CGSSPotential)] {
+        return editableItemViews.map { ($0.cardID, $0.potential) }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -83,8 +87,13 @@ class MyCenterGroupView: UIView {
         delegate?.profileMemberEditableView(self, didDoubleTap: view)
     }
     
-    func setupWith(cardID: Int, potential: CGSSPotential, at index: Int) {
+    func setupWith(cardID: Int, potential: CGSSPotential, at index: Int, hidesIfNeeded: Bool = false) {
         editableItemViews[index].setupWith(cardID: cardID, potential: potential)
+        if cardID == 0 && hidesIfNeeded {
+            editableItemViews[index].isHidden = true
+        } else {
+            editableItemViews[index].isHidden = false
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

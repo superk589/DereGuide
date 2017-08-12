@@ -80,7 +80,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     }
     
     @objc func filterAction() {
-        CGSSClient.shared.drawerController?.show(.right, animated: true)
+        drawerController?.show(.right, animated: true)
     }
     
     func cancelAction() {
@@ -91,7 +91,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let drawer = CGSSClient.shared.drawerController
+        let drawer = drawerController
         drawer?.rightViewController = filterVC
         drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
         drawer?.delegate = self
@@ -99,7 +99,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CGSSClient.shared.drawerController?.rightViewController = nil
+        drawerController?.rightViewController = nil
         // self.navigationController?.setToolbarHidden(true, animated: true)
     }
     

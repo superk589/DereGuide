@@ -246,7 +246,10 @@ class TeamEditingController: BaseViewController {
     }
     
     private func prepareNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .save, target: self, action: #selector(saveTeam))
+        let saveItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTeam))
+        saveItem.style = .done
+        navigationItem.rightBarButtonItem = saveItem
+        
         navigationItem.title = NSLocalizedString("编辑队伍", comment: "")
     }
     

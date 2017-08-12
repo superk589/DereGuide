@@ -66,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 context.saveOrRollback()
             }
+            if lastVersion < 8 {
+                try? FileManager.default.moveItem(atPath: Path.cache + "beatmapHash.plist", toPath: BeatmapHashManager.default.path)
+            }
         }
         
         // 规划近期偶像生日
@@ -85,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerController.gestureRecognizerWidth = 120
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()
-        CGSSClient.shared.drawerController = drawerController
         CGSSClient.shared.tabBarController = rootTabBarController
         
         // 判断是否通过本地消息进入, 如果是跳转到指定页面
@@ -172,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
         // 删除已经被标记为本地删除的对象
-        CoreDataStack.default.viewContext.batchDeleteObjectsMarkedForLocalDeletion()
+        CoreDataStack.default.viewContext.deleteObjectsMarkedForLocalDeletion()
         CoreDataStack.default.viewContext.refreshAllObjects()
     }
     

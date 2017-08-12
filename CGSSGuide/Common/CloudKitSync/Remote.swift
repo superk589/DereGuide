@@ -28,7 +28,7 @@ enum RemoteError {
 }
 
 extension RemoteError {
-    fileprivate init?(cloudKitError: Error?) {
+    init?(cloudKitError: Error?) {
         guard let error = cloudKitError as NSError? else { return nil }
         if error.permanentCloudKitError {
             self = .permanent(error.partiallyFailedRecordIDsWithPermanentError.map { $0.recordName })
@@ -74,14 +74,27 @@ extension Remote {
     }
     
     var defaultSortDescriptor: NSSortDescriptor {
-        return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: true)
+        return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: false)
     }
     
     func predicateOfUser(_ userID: CKRecordID) -> NSPredicate {
         return NSPredicate(format: "creatorUserRecordID == %@", userID)
     }
     
+    private var subscrptionIsCached: Bool {
+        get {
+            return UserDefaults.standard.value(forKey: "CKSubscription \(Self.subscriptionID)") as? Bool ?? false
+        }
+    }
+    
+    private func setSubscriptionCached() {
+        UserDefaults.standard.set(true, forKey: "CKSubscription \(Self.subscriptionID)")
+    }
+    
     func setupSubscription() {
+        
+        if subscrptionIsCached { return }
+        
         fetchUserID { (userID) in
             guard let userID = userID else {
                 return
@@ -110,6 +123,9 @@ extension Remote {
                     // ignore
                 } else if error != nil {
                     print("Failed to modify subscription: \(error!)")
+                } else {
+                    // since we should only register the subscription once, when succeed we set that subscription a flag "cached" in user defaults
+                    self.setSubscriptionCached()
                 }
             }
             self.cloudKitContainer.publicCloudDatabase.add(op)
@@ -137,6 +153,38 @@ extension Remote {
             }
             completion(records.map { R(record: $0) }.flatMap { $0 })
         }
+    }
+    
+    func fetchRecordsWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], resultsLimit: Int, completion: @escaping ([R], CKQueryCursor?, RemoteError?) -> ()) {
+        let query = CKQuery(recordType: R.recordType, predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
+        query.sortDescriptors = sortDescriptors
+        let op = CKQueryOperation(query: query)
+        op.resultsLimit = resultsLimit
+        
+        var results = [CKRecord]()
+        op.recordFetchedBlock = { record in
+            results.append(record)
+        }
+        
+        op.queryCompletionBlock = { cursor, error in
+            completion(results.map { R(record: $0) }.flatMap { $0 }, cursor, RemoteError(cloudKitError: error))
+        }
+  
+        cloudKitContainer.publicCloudDatabase.add(op)
+        
+    }
+    
+    func fetchRecordsWith(cursor: CKQueryCursor, resultsLimit: Int, completion: @escaping ([R], CKQueryCursor?, RemoteError?) -> ()) {
+        let op = CKQueryOperation(cursor: cursor)
+        op.resultsLimit = resultsLimit
+        var results = [CKRecord]()
+        op.recordFetchedBlock = { record in
+            results.append(record)
+        }
+        op.queryCompletionBlock = { cursor, error in
+            completion(results.map { R(record: $0) }.flatMap { $0 }, cursor, RemoteError(cloudKitError: error))
+        }
+        cloudKitContainer.publicCloudDatabase.add(op)
     }
     
     func fetchRecordsForCurrentUserWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], completion: @escaping ([R]) -> ()) {

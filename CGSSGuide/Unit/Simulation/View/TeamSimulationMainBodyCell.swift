@@ -44,7 +44,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        calculationButton = UIButton()
+        calculationButton = Widebutton()
         calculationButton.setTitle(NSLocalizedString("一般计算", comment: "队伍详情页面"), for: .normal)
         calculationButton.backgroundColor = Color.dance
         calculationButton.addTarget(self, action: #selector(startCalculate), for: .touchUpInside)
@@ -53,7 +53,6 @@ class TeamSimulationMainBodyCell: UITableViewCell {
         calculationButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.height.equalTo(30)
             make.top.equalTo(10)
         }
         
@@ -65,14 +64,13 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.top.equalTo(calculationButton.snp.bottom).offset(10)
         }
         
-        simulationButton = UIButton()
+        simulationButton = Widebutton()
         simulationButton.setTitle(NSLocalizedString("模拟计算", comment: "队伍详情页面"), for: .normal)
         simulationButton.backgroundColor = Color.vocal
         simulationButton.addTarget(self, action: #selector(startSimulate), for: .touchUpInside)
         contentView.addSubview(simulationButton)
         simulationButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.height.equalTo(30)
             make.top.equalTo(calculationGrid.snp.bottom).offset(10)
         }
         
@@ -83,14 +81,13 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.centerY.equalTo(simulationButton)
         }
         
-        cancelButton = UIButton()
+        cancelButton = Widebutton()
         cancelButton.setTitle(NSLocalizedString("取消", comment: ""), for: .normal)
         cancelButton.backgroundColor = Color.vocal
         cancelButton.addTarget(self, action: #selector(cancelSimulating), for: .touchUpInside)
         contentView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-            make.height.equalTo(30)
             make.top.equalTo(simulationButton)
             self.cancelButtonWidthConstraint = make.width.equalTo(0).constraint
             self.cancelButtonLeftConstraint = make.left.equalTo(simulationButton.snp.right).constraint

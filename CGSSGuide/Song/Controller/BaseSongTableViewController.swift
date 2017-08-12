@@ -66,7 +66,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let drawer = CGSSClient.shared.drawerController
+        let drawer = drawerController
         drawer?.rightViewController = filterVC
         drawer?.delegate = self
         drawer?.defaultRightWidth = min(Screen.shortSide - 86, 400)
@@ -74,7 +74,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CGSSClient.shared.drawerController?.rightViewController = nil
+        drawerController?.rightViewController = nil
     }
     
     override func viewDidLoad() {
@@ -126,7 +126,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     }
     
     @objc func filterAction() {
-        CGSSClient.shared.drawerController?.show(.right, animated: true)
+        drawerController?.show(.right, animated: true)
         // navigationController?.pushViewController(filterVC, animated: true)
 
     }

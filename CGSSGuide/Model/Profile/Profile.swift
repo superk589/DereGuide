@@ -41,25 +41,130 @@ class Profile: NSManagedObject {
     @NSManaged public var creatorID: String?
     @NSManaged public var remoteIdentifier: String?
     @NSManaged public var coolVisualLevel: Int16
-
+    
+    @NSManaged public var guestCuteMinLevel: Int16
+    @NSManaged public var guestCoolMinLevel: Int16
+    @NSManaged public var guestPassionMinLevel: Int16
+    @NSManaged public var guestAllTypeMinLevel: Int16
+    @NSManaged public var isOpen: Bool
+    
+    @NSManaged public var remoteCreatedAt: Date?
 }
 
 extension Profile {
     
     var cutePotential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(cuteVocalLevel), danceLevel: Int(cuteDanceLevel), visualLevel: Int(cuteVisualLevel), lifeLevel: 0)
+        get {
+            return CGSSPotential(vocalLevel: Int(cuteVocalLevel), danceLevel: Int(cuteDanceLevel), visualLevel: Int(cuteVisualLevel), lifeLevel: 0)
+        }
+        set {
+            cuteVocalLevel = Int16(newValue.vocalLevel)
+            cuteDanceLevel = Int16(newValue.danceLevel)
+            cuteVisualLevel = Int16(newValue.visualLevel)
+        }
     }
     
     var coolPotential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(coolVocalLevel), danceLevel: Int(coolDanceLevel), visualLevel: Int(coolVisualLevel), lifeLevel: 0)
+        get {
+            return CGSSPotential(vocalLevel: Int(coolVocalLevel), danceLevel: Int(coolDanceLevel), visualLevel: Int(coolVisualLevel), lifeLevel: 0)
+        }
+        set {
+            coolVocalLevel = Int16(newValue.vocalLevel)
+            coolDanceLevel = Int16(newValue.danceLevel)
+            coolVisualLevel = Int16(newValue.visualLevel)
+        }
     }
     
-    var passtionPotential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(passionVocalLevel), danceLevel: Int(passionDanceLevel), visualLevel: Int(passionVisualLevel), lifeLevel: 0)
+    var passionPotential: CGSSPotential {
+        get {
+            return CGSSPotential(vocalLevel: Int(passionVocalLevel), danceLevel: Int(passionDanceLevel), visualLevel: Int(passionVisualLevel), lifeLevel: 0)
+        }
+        set {
+            passionVocalLevel = Int16(newValue.vocalLevel)
+            passionDanceLevel = Int16(newValue.danceLevel)
+            passionVisualLevel = Int16(newValue.visualLevel)
+        }
     }
     
     var allTypePotential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(allTypeVocalLevel), danceLevel: Int(allTypeDanceLevel), visualLevel: Int(allTypeVisualLevel), lifeLevel: 0)
+        get {
+            return CGSSPotential(vocalLevel: Int(allTypeVocalLevel), danceLevel: Int(allTypeDanceLevel), visualLevel: Int(allTypeVisualLevel), lifeLevel: 0)
+        }
+        set {
+            allTypeVocalLevel = Int16(newValue.vocalLevel)
+            allTypeDanceLevel = Int16(newValue.danceLevel)
+            allTypeVisualLevel = Int16(newValue.visualLevel)
+        }
+    }
+    
+    var myCenters: [(Int, CGSSPotential)] {
+        set {
+            cuteCardID = Int32(newValue[0].0)
+            cutePotential = newValue[0].1
+            coolCardID = Int32(newValue[1].0)
+            coolPotential = newValue[1].1
+            passionCardID = Int32(newValue[2].0)
+            passionPotential = newValue[2].1
+            allTypeCardID = Int32(newValue[3].0)
+            allTypePotential = newValue[3].1
+        }
+        get {
+            return [(Int(cuteCardID), cutePotential),
+             (Int(coolCardID), coolPotential),
+             (Int(passionCardID), passionPotential),
+             (Int(allTypeCardID), allTypePotential)]
+        }
+    }
+    
+    var centersWanted: [(Int, Int)] {
+        set {
+            guestCuteCardID = Int32(newValue[0].0)
+            guestCuteMinLevel = Int16(newValue[0].1)
+            guestCoolCardID = Int32(newValue[1].0)
+            guestCoolMinLevel = Int16(newValue[1].1)
+            guestPassionCardID = Int32(newValue[2].0)
+            guestPassionMinLevel = Int16(newValue[2].1)
+            guestAllTypeCardID = Int32(newValue[3].0)
+            guestAllTypeMinLevel = Int16(newValue[3].1)
+        }
+        get {
+            return [(Int(guestCuteCardID), Int(guestCuteMinLevel)),
+                    (Int(guestCoolCardID), Int(guestCoolMinLevel)),
+                    (Int(guestPassionCardID), Int(guestPassionMinLevel)),
+                    (Int(guestAllTypeCardID), Int(guestAllTypeMinLevel))]
+        }
+    }
+    
+    
+    func reset() {
+        self.gameID = ""
+        self.nickName = ""
+        self.cuteCardID = 0
+        self.coolCardID = 0
+        self.passionCardID = 0
+        self.cuteVocalLevel = 0
+        self.allTypeCardID = 0
+        self.guestAllTypeCardID = 0
+        self.guestPassionCardID = 0
+        self.guestCoolCardID = 0
+        self.guestCuteCardID = 0
+        self.passionVisualLevel = 0
+        self.passionDanceLevel = 0
+        self.passionVocalLevel = 0
+        self.coolDanceLevel = 0
+        self.coolVocalLevel = 0
+        self.cuteVisualLevel = 0
+        self.cuteDanceLevel = 0
+        self.allTypeVisualLevel = 0
+        self.allTypeDanceLevel = 0
+        self.allTypeVocalLevel = 0
+        self.message = ""
+        self.coolVisualLevel = 0
+        
+        self.guestCuteMinLevel = 0
+        self.guestCoolMinLevel = 0
+        self.guestPassionMinLevel = 0
+        self.guestAllTypeMinLevel = 0
     }
 }
 
@@ -69,6 +174,18 @@ extension Profile: Managed {
         return "Profile"
     }
     
+}
+
+// not really need to be remote deletable
+extension Profile: RemoteDeletable {
+    var markedForRemoteDeletion: Bool {
+        get {
+            return false
+        }
+        set {
+            // no-op
+        }
+    }
 }
 
 extension Profile: RemoteUploadable {
@@ -100,41 +217,62 @@ extension Profile: RemoteUploadable {
         record["message"] = (message ?? "") as CKRecordValue
         record["coolVisualLevel"] = coolVisualLevel as CKRecordValue
         
+        record["guestCuteMinLevel"] = guestCuteMinLevel as CKRecordValue
+        record["guestCoolMinLevel"] = guestCoolMinLevel as CKRecordValue
+        record["guestPassionMinLevel"] = guestPassionMinLevel as CKRecordValue
+        record["guestAllTypeMinLevel"] = guestAllTypeMinLevel as CKRecordValue
+        record["isOpen"] = (isOpen ? 1 : 0) as CKRecordValue
+        
+        record["cuteTotalLevel"] = cutePotential.totalLevel as CKRecordValue
+        record["coolTotalLevel"] = coolPotential.totalLevel as CKRecordValue
+        record["passionTotalLevel"] = passionPotential.totalLevel as CKRecordValue
+        record["allTypeTotalLevel"] = allTypePotential.totalLevel as CKRecordValue
+
         return record
     }
     
 }
 
 extension Profile {
-    convenience init(remoteRecord: RemoteProfile, context: NSManagedObjectContext) {
+    
+    static func insert(remoteRecord: RemoteProfile, into context: NSManagedObjectContext) -> Profile {
 
-        self.init(entity: Profile.entity, insertInto: context)
-
-        self.gameID = remoteRecord.gameID
-        self.nickName = remoteRecord.nickName
-        self.cuteCardID = Int32(remoteRecord.cuteCardID)
-        self.coolCardID = Int32(remoteRecord.coolCardID)
-        self.passionCardID = Int32(remoteRecord.passionCardID)
-        self.cuteVocalLevel = Int16(remoteRecord.cuteVocalLevel)
-        self.allTypeCardID = Int32(remoteRecord.allTypeCardID)
-        self.guestAllTypeCardID = Int32(remoteRecord.guestAllTypeCardID)
-        self.guestPassionCardID = Int32(remoteRecord.guestPassionCardID)
-        self.guestCoolCardID = Int32(remoteRecord.guestCoolCardID)
-        self.guestCuteCardID = Int32(remoteRecord.guestCuteCardID)
-        self.passionVisualLevel = Int16(remoteRecord.passionVisualLevel)
-        self.passionDanceLevel = Int16(remoteRecord.passionDanceLevel)
-        self.passionVocalLevel = Int16(remoteRecord.passionVocalLevel)
-        self.coolDanceLevel = Int16(remoteRecord.coolDanceLevel)
-        self.coolVocalLevel = Int16(remoteRecord.coolVocalLevel)
-        self.cuteVisualLevel = Int16(remoteRecord.cuteVisualLevel)
-        self.cuteDanceLevel = Int16(remoteRecord.cuteDanceLevel)
-        self.allTypeVisualLevel = Int16(remoteRecord.allTypeVisualLevel)
-        self.allTypeDanceLevel = Int16(remoteRecord.allTypeDanceLevel)
-        self.allTypeVocalLevel = Int16(remoteRecord.allTypeVocalLevel)
-        self.message = remoteRecord.message
-        self.remoteIdentifier = remoteRecord.id
-        self.creatorID = remoteRecord.creatorID
-        self.coolVisualLevel = Int16(remoteRecord.coolVisualLevel)
+        let profile: Profile = context.insertObject()
+        profile.gameID = remoteRecord.gameID
+        profile.nickName = remoteRecord.nickName
+        profile.cuteCardID = Int32(remoteRecord.cuteCardID)
+        profile.coolCardID = Int32(remoteRecord.coolCardID)
+        profile.passionCardID = Int32(remoteRecord.passionCardID)
+        profile.cuteVocalLevel = Int16(remoteRecord.cuteVocalLevel)
+        profile.allTypeCardID = Int32(remoteRecord.allTypeCardID)
+        profile.guestAllTypeCardID = Int32(remoteRecord.guestAllTypeCardID)
+        profile.guestPassionCardID = Int32(remoteRecord.guestPassionCardID)
+        profile.guestCoolCardID = Int32(remoteRecord.guestCoolCardID)
+        profile.guestCuteCardID = Int32(remoteRecord.guestCuteCardID)
+        profile.passionVisualLevel = Int16(remoteRecord.passionVisualLevel)
+        profile.passionDanceLevel = Int16(remoteRecord.passionDanceLevel)
+        profile.passionVocalLevel = Int16(remoteRecord.passionVocalLevel)
+        profile.coolDanceLevel = Int16(remoteRecord.coolDanceLevel)
+        profile.coolVocalLevel = Int16(remoteRecord.coolVocalLevel)
+        profile.cuteVisualLevel = Int16(remoteRecord.cuteVisualLevel)
+        profile.cuteDanceLevel = Int16(remoteRecord.cuteDanceLevel)
+        profile.allTypeVisualLevel = Int16(remoteRecord.allTypeVisualLevel)
+        profile.allTypeDanceLevel = Int16(remoteRecord.allTypeDanceLevel)
+        profile.allTypeVocalLevel = Int16(remoteRecord.allTypeVocalLevel)
+        profile.message = remoteRecord.message
+        profile.remoteIdentifier = remoteRecord.id
+        profile.creatorID = remoteRecord.creatorID
+        profile.coolVisualLevel = Int16(remoteRecord.coolVisualLevel)
+        
+        profile.guestCuteMinLevel = Int16(remoteRecord.guestCuteMinLevel)
+        profile.guestCoolMinLevel = Int16(remoteRecord.guestCoolMinLevel)
+        profile.guestPassionMinLevel = Int16(remoteRecord.guestPassionMinLevel)
+        profile.guestAllTypeMinLevel = Int16(remoteRecord.guestAllTypeMinLevel)
+        profile.isOpen = remoteRecord.isOpen == 1
+        
+        profile.remoteCreatedAt = remoteRecord.remoteModifiedAt
+        
+        return profile
         
     }
 }

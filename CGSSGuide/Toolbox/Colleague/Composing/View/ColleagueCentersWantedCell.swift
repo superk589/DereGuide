@@ -1,5 +1,5 @@
 //
-//  ColleagueMyCentersCell.swift
+//  ColleagueCentersWantedCell.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2017/8/4.
@@ -8,16 +8,20 @@
 
 import UIKit
 
-class ColleagueMyCentersCell: ColleagueBaseCell {
+class ColleagueCentersWantedCell: ColleagueBaseCell {
 
-    weak var delegate: MyCenterGroupViewDelegate? {
+    weak var delegate: CenterWantedGroupViewDelegate? {
         didSet {
             editableView.delegate = self.delegate
         }
     }
     
+    var editableView = CenterWantedGroupView()
     var infoButton = UIButton(type: .infoLight)
-    var editableView = MyCenterGroupView()
+    
+    var centers: [(Int, Int)] {
+        return editableView.result
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,16 +41,14 @@ class ColleagueMyCentersCell: ColleagueBaseCell {
     }
     
     func setup(_ profile: Profile) {
-        editableView.setupWith(cardID: Int(profile.cuteCardID), potential: profile.cutePotential, at: 0)
-        editableView.setupWith(cardID: Int(profile.coolCardID), potential: profile.coolPotential, at: 1)
-        editableView.setupWith(cardID: Int(profile.passionCardID), potential: profile.passtionPotential, at: 2)
-        editableView.setupWith(cardID: Int(profile.allTypeCardID), potential: profile.allTypePotential, at: 3)
+        editableView.setupWith(cardID: Int(profile.guestCuteCardID), minLevel: Int(profile.guestCuteMinLevel), at: 0)
+        editableView.setupWith(cardID: Int(profile.guestCoolCardID), minLevel: Int(profile.guestCoolMinLevel), at: 1)
+        editableView.setupWith(cardID: Int(profile.guestPassionCardID), minLevel: Int(profile.guestPassionMinLevel), at: 2)
+        editableView.setupWith(cardID: Int(profile.guestAllTypeCardID), minLevel: Int(profile.guestAllTypeMinLevel), at: 3)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 
 }

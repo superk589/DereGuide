@@ -21,10 +21,12 @@ extension UIAlertController {
         }
     }
     
-    static func showHintMessage(_ message: String, title: String = NSLocalizedString("提示", comment: ""), in viewController: UIViewController?) {
+    static func showHintMessage(_ message: String, title: String = NSLocalizedString("提示", comment: ""), in viewController: UIViewController?, confirm: (() -> ())? = nil) {
         if let vc = viewController ?? UIApplication.shared.keyWindow?.rootViewController {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .default))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
+                confirm?()
+            }))
             vc.present(alert, animated: true)
         }
     }

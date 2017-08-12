@@ -16,6 +16,8 @@ class CenterWantedEditingView: UIView {
 
     var deleteButton: UIButton!
     
+    var minLevelStepper: PotentialValueStepper!
+    
     var stackView: UIStackView!
     
     var card: CGSSCard!
@@ -27,8 +29,21 @@ class CenterWantedEditingView: UIView {
         prepare()
     }
     
+    var minLevel: Int {
+        get {
+            return Int(minLevelStepper.value)
+        }
+        set {
+            self.minLevelStepper.value = Double(newValue)
+        }
+    }
+    
     func prepare() {
-        
+        minLevelStepper = PotentialValueStepper(type: .all)
+        minLevelStepper.maximumValue = 25
+        minLevelStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        minLevelStepper.numberFormatter.positivePrefix = "≥ "
+
         deleteButton = UIButton()
         deleteButton.setTitle(NSLocalizedString("删除", comment: ""), for: .normal)
         deleteButton.titleLabel?.textColor = UIColor.white
@@ -37,7 +52,7 @@ class CenterWantedEditingView: UIView {
         deleteButton.layer.cornerRadius = 4
         deleteButton.layer.masksToBounds = true
         
-        stackView = UIStackView(arrangedSubviews: [deleteButton])
+        stackView = UIStackView(arrangedSubviews: [minLevelStepper, deleteButton])
         addSubview(stackView)
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -54,8 +69,18 @@ class CenterWantedEditingView: UIView {
         delegate?.didDelete(centerWantedEditingView: self)
     }
     
-    func setupWith(card: CGSSCard) {
+    func handleStepperValueChanged(_ stepper: ValueStepper) {
+        setDescriptionLabels()
+    }
+    
+    func setupWith(card: CGSSCard, minLevel: Int) {
         self.card = card
+        self.minLevel = minLevel
+        setDescriptionLabels()
+    }
+    
+    private func setDescriptionLabels() {
+//        minLevelStepper.descriptionLabel.text = ">= " + String(minLevel)
     }
     
     required init?(coder aDecoder: NSCoder) {

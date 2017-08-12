@@ -19,7 +19,7 @@ class CenterWantedEditingViewController: UIViewController {
     
     weak var delegate: CenterWantedEditingViewControllerDelegate?
     
-    func setupWith(card: CGSSCard) {
+    func setupWith(card: CGSSCard, minLevel: Int) {
         if editingView == nil {
             editingView = CenterWantedEditingView()
             view.addSubview(editingView)
@@ -29,7 +29,7 @@ class CenterWantedEditingViewController: UIViewController {
             editingView.delegate = self
         }
         
-        editingView.setupWith(card: card)
+        editingView.setupWith(card: card, minLevel: minLevel)
     }
     
 }

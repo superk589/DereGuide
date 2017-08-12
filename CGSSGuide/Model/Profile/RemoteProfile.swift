@@ -37,6 +37,14 @@ struct RemoteProfile: RemoteRecord {
     var creatorID: RemoteIdentifier
     var coolVisualLevel: Int64
     
+    var guestCuteMinLevel: Int64
+    var guestCoolMinLevel: Int64
+    var guestPassionMinLevel: Int64
+    var guestAllTypeMinLevel: Int64
+    var isOpen: Int64
+    
+    var remoteModifiedAt: Date?
+    
 }
 
 extension RemoteProfile {
@@ -71,12 +79,17 @@ extension RemoteProfile {
         let allTypeVocalLevel = record["allTypeVocalLevel"] as? NSNumber,
         let message = record["message"] as? NSString,
         let creatorID = record.creatorUserRecordID?.recordName,
-        let coolVisualLevel = record["coolVisualLevel"] as? NSNumber else {
-                return nil
-        }
+        let coolVisualLevel = record["coolVisualLevel"] as? NSNumber,
+        
+        let guestCuteMinLevel = record["guestCuteMinLevel"] as? NSNumber,
+        let guestCoolMinLevel = record["guestCoolMinLevel"] as? NSNumber,
+        let guestPassionMinLevel = record["guestPassionMinLevel"] as? NSNumber,
+        let guestAllTypeMinLevel = record["guestAllTypeMinLevel"] as? NSNumber,
+        let isOpen = record["isOpen"] as? NSNumber else { return nil }
         
         self.id = record.recordID.recordName
         self.creatorID = creatorID
+        self.remoteModifiedAt = record.modificationDate
         
         self.gameID = gameID as String
         self.nickName = nickName as String
@@ -101,6 +114,12 @@ extension RemoteProfile {
         self.allTypeVocalLevel = allTypeVocalLevel.int64Value
         self.message = message as String
         self.coolVisualLevel = coolVisualLevel.int64Value
+        
+        self.guestCuteMinLevel = guestCuteMinLevel.int64Value
+        self.guestCoolMinLevel = guestCoolMinLevel.int64Value
+        self.guestPassionMinLevel = guestPassionMinLevel.int64Value
+        self.guestAllTypeMinLevel = guestAllTypeMinLevel.int64Value
+        self.isOpen = isOpen.int64Value
     }
     
 }

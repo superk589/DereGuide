@@ -7,6 +7,21 @@
 //
 
 import UIKit
+import ZKDrawerController
+
+extension UIViewController {
+    var drawerController: ZKDrawerController? {
+        var vc = parent
+        while vc != nil {
+            if vc is ZKDrawerController {
+                return vc as? ZKDrawerController
+            } else {
+                vc = vc?.parent
+            }
+        }
+        return nil
+    }
+}
 
 class BaseViewController: UIViewController {
 

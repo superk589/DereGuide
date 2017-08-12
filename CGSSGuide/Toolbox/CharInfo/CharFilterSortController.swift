@@ -41,7 +41,7 @@ class CharFilterSortController: BaseFilterSortController {
     
     override func doneAction() {
         delegate?.doneAndReturn(filter: filter, sorter: sorter)
-        CGSSClient.shared.drawerController?.hide(animated: true)
+        drawerController?.hide(animated: true)
         // 使用自定义动画效果
         /*let transition = CATransition()
          transition.duration = 0.3

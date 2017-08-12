@@ -55,6 +55,7 @@ class TeamSimulationCardView: UIView {
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(skillLabel)
         }
         
         icon.snp.makeConstraints { (make) in

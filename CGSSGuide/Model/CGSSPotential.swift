@@ -48,6 +48,10 @@ struct CGSSPotential {
         
         return CGSSAppeal(visual: potentialOfLevel[baseRarity]![visualLevel], vocal: potentialOfLevel[baseRarity]![vocalLevel], dance: potentialOfLevel[baseRarity]![danceLevel], life: potentialOfLevel[baseRarity]![lifeLevel])
     }
+    
+    var totalLevel: Int {
+        return vocalLevel + danceLevel + visualLevel
+    }
 }
 
 extension CGSSPotential: Equatable {

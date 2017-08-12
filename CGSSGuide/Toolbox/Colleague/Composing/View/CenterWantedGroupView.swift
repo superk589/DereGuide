@@ -23,6 +23,10 @@ class CenterWantedGroupView: UIView {
     
     var editableItemViews: [CenterWantedItemView]!
     
+    var result: [(Int, Int)] {
+        return editableItemViews.map { ($0.cardID, $0.minLevel) }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -83,8 +87,13 @@ class CenterWantedGroupView: UIView {
         delegate?.centerWantedGroupView(self, didDoubleTap: view)
     }
     
-    func setupWith(cardID: Int, at index: Int) {
-        editableItemViews[index].setupWith(cardID: cardID)
+    func setupWith(cardID: Int, minLevel: Int, at index: Int, hidesIfNeeded: Bool = false) {
+        editableItemViews[index].setupWith(cardID: cardID, minLevel: minLevel)
+        if cardID == 0 && hidesIfNeeded {
+            editableItemViews[index].isHidden = true
+        } else {
+            editableItemViews[index].isHidden = false
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

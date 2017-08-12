@@ -23,22 +23,19 @@ class CGSSSearchBar: UISearchBar {
         returnKeyType = .search
         
         enablesReturnKeyAutomatically = false
-//        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: Screen.width, height: 30))
-//        let imageView = UIImageView.init(frame: CGRect.init(x: Screen.width - 22, y: 8, width: 22, height: 22))
-//        view.addSubview(imageView)
-//        imageView.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected")
-//        inputAccessoryView = view
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    override var intrinsicContentSize: CGSize {
+        // fix a layout issue in iOS 11
+        if #available(iOS 11.0, *) {
+            return CGSize(width: UIViewNoIntrinsicMetric, height: 44)
+        } else {
+            return super.intrinsicContentSize
+        }
     }
-    */
 
 }

@@ -47,7 +47,7 @@ class EventFilterSortController: BaseFilterSortController {
     
     override func doneAction() {
         delegate?.doneAndReturn(filter: filter, sorter: sorter)
-        CGSSClient.shared.drawerController?.hide(animated: true)
+        drawerController?.hide(animated: true)
     }
     
     override func resetAction() {

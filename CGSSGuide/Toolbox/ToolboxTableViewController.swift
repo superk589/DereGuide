@@ -15,6 +15,7 @@ class ToolboxTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = NSArray.init(contentsOfFile: path!) as! [[String: String]]
+        tableView.register(ToolboxTableViewCell.self, forCellReuseIdentifier: ToolboxTableViewCell.description())
     }
     
     // MARK: - Table view data source
@@ -30,7 +31,7 @@ class ToolboxTableViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolboxCell", for: indexPath) as! ToolboxTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToolboxTableViewCell.description(), for: indexPath) as! ToolboxTableViewCell
         
         cell.descLabel.text = dataSource[indexPath.row]["title"]
         cell.icon.cardId = Int(dataSource[indexPath.row]["iconId"]!)

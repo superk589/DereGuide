@@ -1,32 +1,34 @@
 //
-//  CenterWantedItemView.swift
+//  ProfileMemberEditableItemView.swift
 //  CGSSGuide
 //
-//  Created by zzk on 2017/8/4.
+//  Created by zzk on 2017/8/3.
 //  Copyright © 2017年 zzk. All rights reserved.
 //
 
 import UIKit
+import SnapKit
 
-class CenterWantedItemView: UIView {
+class MyCenterItemView: UIView {
 
-    private var cardView: CenterWantedCardView!
+    private var cardView: MyCenterCardView!
     private var placeholderImageView: UIImageView!
     private var cardPlaceholder: UIView!
     private var typeIcon: UIImageView!
     
     private(set) var cardID: Int!
-    
+    private(set) var potential: CGSSPotential!
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        cardView = CenterWantedCardView()
+        cardView = MyCenterCardView()
         cardView.icon.isUserInteractionEnabled = false
         addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
             make.top.equalTo(2)
-            make.left.equalTo(4)
-            make.right.equalTo(-4)
+            make.left.right.equalToSuperview()
+            make.height.greaterThanOrEqualTo(cardView.snp.width).offset(14.5)
         }
         
         typeIcon = UIImageView()
@@ -37,11 +39,11 @@ class CenterWantedItemView: UIView {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
+
         cardPlaceholder = UIView()
         addSubview(cardPlaceholder)
         cardPlaceholder.snp.makeConstraints { (make) in
-            make.edges.equalTo(cardView.snp.edges)
+            make.edges.equalTo(cardView.icon.snp.edges)
         }
         cardPlaceholder.layer.masksToBounds = true
         cardPlaceholder.layer.cornerRadius = 4
@@ -66,19 +68,23 @@ class CenterWantedItemView: UIView {
         typeIcon.image = liveType.icon
     }
     
-    func setupWith(cardID: Int) {
+    func setupWith(cardID: Int, potential: CGSSPotential = .zero) {
         self.cardID = cardID
+        self.potential = potential
         
         if cardID != 0 {
-            cardPlaceholder.isHidden = true
-            cardView.isHidden = false
-            cardView.setupWith(cardID: cardID)
-            bringSubview(toFront: cardView)
+            showsPlaceholder = false
+            cardView.setupWith(cardID: cardID, potential: potential)
         } else {
-            cardPlaceholder.isHidden = false
-            cardView.isHidden = true
-            bringSubview(toFront: cardPlaceholder)
+            showsPlaceholder = true
         }
     }
-
+    
+    var showsPlaceholder: Bool = true {
+        didSet {
+            cardPlaceholder.isHidden = !showsPlaceholder
+            cardView.isHidden = showsPlaceholder
+            bringSubview(toFront: showsPlaceholder ? cardPlaceholder : cardView)
+        }
+    }
 }

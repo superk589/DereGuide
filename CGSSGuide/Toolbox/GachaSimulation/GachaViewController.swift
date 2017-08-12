@@ -65,7 +65,7 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     }
     
     @objc func filterAction() {
-        CGSSClient.shared.drawerController?.show(.right, animated: true)
+        drawerController?.show(.right, animated: true)
     }
     
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
@@ -110,12 +110,12 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        CGSSClient.shared.drawerController?.rightViewController = nil
+        drawerController?.rightViewController = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let drawer = CGSSClient.shared.drawerController
+        let drawer = drawerController
         drawer?.rightViewController = filterVC
         drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
         drawer?.delegate = self

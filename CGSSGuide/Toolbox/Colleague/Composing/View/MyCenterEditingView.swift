@@ -1,5 +1,5 @@
 //
-//  ColleagueCenterEditingView.swift
+//  MyCenterEditingView.swift
 //  CGSSGuide
 //
 //  Created by zzk on 2017/8/3.

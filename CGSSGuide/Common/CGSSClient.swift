@@ -17,6 +17,5 @@ class CGSSClient {
         
     }
     var searchDebouncer = Debouncer(interval: 0.5)
-    var drawerController: ZKDrawerController?
     var tabBarController: UITabBarController?
 }

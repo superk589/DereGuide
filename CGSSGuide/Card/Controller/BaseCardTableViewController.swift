@@ -8,6 +8,7 @@
 
 import UIKit
 import ZKDrawerController
+import SnapKit
 
 protocol BaseCardTableViewControllerDelegate {
     func selectCard(_ card: CGSSCard)
@@ -109,12 +110,12 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     }
     
     @objc func filterAction() {
-        CGSSClient.shared.drawerController?.show(.right, animated: true)
+        drawerController?.show(.right, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let drawer = CGSSClient.shared.drawerController
+        let drawer = drawerController
         drawer?.rightViewController = filterVC
         drawer?.delegate = self
         drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
@@ -122,7 +123,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CGSSClient.shared.drawerController?.rightViewController = nil
+        drawerController?.rightViewController = nil
     }
     
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {

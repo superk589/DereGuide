@@ -18,6 +18,12 @@ struct Config {
     static let cloudKitDebug = true
     static let maxNumberOfStoredUnits = 100
     static let maxCharactersOfMessage = 200
+    
+    #if DEBUG
+    static let cloudKitFetchLimits = 5
+    #else
+    static let cloudKitFetchLimits = 20
+    #endif
 }
 
 struct NotificationCategory {
@@ -25,11 +31,13 @@ struct NotificationCategory {
 }
 
 struct Path {
-    static let cache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first!
-    static let tmp = NSTemporaryDirectory()
+    static let cache = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
     static let document = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     static let library = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
     static let home = NSHomeDirectory()
+    
+    // include the last "/"
+    static let temporary = NSTemporaryDirectory()
 }
 
 struct Screen {

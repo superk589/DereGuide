@@ -9,53 +9,25 @@
 import UIKit
 import SnapKit
 
-class CardTableViewCell: UITableViewCell {
+class CardTableViewCell: ReadableWidthTableViewCell {
     
     var cardView: CardView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        prepare()
+        cardView = CardView()
+        readableContentView.addSubview(cardView)
+        cardView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func prepare() {
-        
-        cardView = CardView()
-        contentView.addSubview(cardView)
-        cardView.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.width.lessThanOrEqualTo(768)
-            make.left.greaterThanOrEqualToSuperview()
-            make.right.lessThanOrEqualToSuperview()
-            make.left.equalToSuperview().priority(900)
-            make.right.equalToSuperview().priority(900)
-            make.centerX.equalToSuperview()
-        }
-        let line = LineView()
-        contentView.addSubview(line)
-        line.snp.makeConstraints { (make) in
-            make.left.right.equalTo(cardView)
-            make.bottom.equalToSuperview()
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        prepare()
-    }
-    
     func setup(with card: CGSSCard) {
         cardView.setup(with: card)
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
+
 }
