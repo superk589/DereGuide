@@ -53,9 +53,11 @@ final class FavoriteCardDownloader: ChangeProcessor {
     }
     
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
-        remote.fetchLatestRecords(completion: { (remoteFavoriteCards) in
+        remote.fetchLatestRecords(completion: { (remoteFavoriteCards, errors) in
             self.insert(remoteFavoriteCards, in: context)
-            self.reserve(remoteFavoriteCards, in: context)
+            if errors.count == 0 {
+                self.reserve(remoteFavoriteCards, in: context)
+            }
         })
     }
     

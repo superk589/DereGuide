@@ -53,9 +53,11 @@ final class FavoriteCharaDownloader: ChangeProcessor {
     }
     
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
-        remote.fetchLatestRecords(completion: { (remoteFavoriteCharas) in
+        remote.fetchLatestRecords(completion: { (remoteFavoriteCharas, errors) in
             self.insert(remoteFavoriteCharas, in: context)
-            self.reserve(remoteFavoriteCharas, in: context)
+            if errors.count == 0 {
+                self.reserve(remoteFavoriteCharas, in: context)
+            }
         })
     }
     

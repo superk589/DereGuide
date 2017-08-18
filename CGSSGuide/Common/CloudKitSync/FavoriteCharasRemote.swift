@@ -17,22 +17,22 @@ final class FavoriteCharasRemote: Remote {
         return "My Favorite Charas"
     }
     
-    func fetchLatestRecords(completion: @escaping ([R]) -> ()) {
-        fetchUserID { (userID) in
-            guard let userID = userID else {
-                completion([])
+    func fetchLatestRecords(completion: @escaping ([R], [RemoteError]) -> ()) {
+        cloudKitContainer.fetchUserRecordID { userRecordID, error in
+            guard let userID = userRecordID else {
+                completion([], [RemoteError.init(cloudKitError: error)].flatMap { $0 })
                 return
             }
             let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
             query.sortDescriptors = [self.defaultSortDescriptor]
             let op = CKQueryOperation(query: query)
             //        op.resultsLimit = maximumNumberOfUnits
-            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
-                if error != nil {
-                    print(error!)
+            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: [], previousErrors: []) { records, errors in
+                if errors.count > 0 {
+                    print(errors)
                 }
                 let rs = records.map { R(record: $0) }.flatMap { $0 }
-                completion(rs)
+                completion(rs, errors.map(RemoteError.init).flatMap { $0 })
                 self.remove(rs.redundants { $0.charaID == $1.charaID }.map { $0.id }, completion: { _, _ in })
             }
         }

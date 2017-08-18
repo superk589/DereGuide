@@ -18,23 +18,24 @@ final class ProfileRemote: Remote {
         return "My Profile"
     }
     
-    func removeAll(completion: @escaping ([RemoteIdentifier], RemoteError?) -> ()) {
+    func removeAll(completion: @escaping ([RemoteIdentifier], [RemoteError]) -> ()) {
         
         cloudKitContainer.fetchUserRecordID { userRecordID, error in
             guard let userID = userRecordID else {
-                completion([], RemoteError(cloudKitError: error))
+                
+                completion([], [RemoteError.init(cloudKitError: error)].flatMap { $0 })
                 return
             }
             let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
             let op = CKQueryOperation(query: query)
-            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
-                if error != nil {
-                    print(error!)
+            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: [], previousErrors: []) { records, errors in
+                if errors.count > 0 {
+                    print(errors)
                 }
                 let op = CKModifyRecordsOperation(recordsToSave:nil, recordIDsToDelete: records.map { $0.recordID })
                 
                 op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
-                    completion((deletedRecordIDs ?? []).map { $0.recordName }, RemoteError(cloudKitError: error))
+                    completion((deletedRecordIDs ?? []).map { $0.recordName }, [RemoteError(cloudKitError: error)].flatMap { $0 })
                 }
                 self.cloudKitContainer.publicCloudDatabase.add(op)
             }

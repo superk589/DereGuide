@@ -53,7 +53,7 @@ final class MemberDownloader: ChangeProcessor {
     }
     
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
-        remote.fetchLatestRecords(completion: { (remoteMembers) in
+        remote.fetchLatestRecords(completion: { (remoteMembers, errors) in
             self.update(remoteMembers, in: context)
         })
     }

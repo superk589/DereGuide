@@ -60,11 +60,10 @@ protocol Remote {
     static var subscriptionID: String { get }
     var cloudKitContainer: CKContainer { get }
     func setupSubscription()
-    func fetchLatestRecords(completion: @escaping ([R]) -> ())
+    func fetchLatestRecords(completion: @escaping ([R], [RemoteError]) -> ())
     func fetchNewRecords(completion: @escaping ([RemoteRecordChange<R>], @escaping (_ success: Bool) -> ()) -> ())
     func upload(_ locals: [L], completion: @escaping ([R], RemoteError?) -> ())
     func remove(_ locals: [L], completion: @escaping ([RemoteIdentifier], RemoteError?) -> ())
-    func fetchUserID(completion: @escaping (CKRecordID?) -> ())
 }
 
 extension Remote {
@@ -95,8 +94,8 @@ extension Remote {
         
         if subscrptionIsCached { return }
         
-        fetchUserID { (userID) in
-            guard let userID = userID else {
+        cloudKitContainer.fetchUserRecordID { userRecordID, error in
+            guard let userID = userRecordID else {
                 return
             }
             
@@ -147,9 +146,9 @@ extension Remote {
         query.sortDescriptors = sortDescriptors
         let op = CKQueryOperation(query: query)
         //        op.resultsLimit = maximumNumberOfUnits
-        op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
-            if error != nil {
-                print(error!)
+        op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: [], previousErrors: []) { records, errors in
+            if errors.count > 0 {
+                print(errors)
             }
             completion(records.map { R(record: $0) }.flatMap { $0 })
         }
@@ -188,8 +187,8 @@ extension Remote {
     }
     
     func fetchRecordsForCurrentUserWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], completion: @escaping ([R]) -> ()) {
-        fetchUserID { (userID) in
-            guard let userID = userID else {
+        cloudKitContainer.fetchUserRecordID { userRecordID, error in
+            guard let userID = userRecordID else {
                 completion([])
                 return
             }
@@ -199,27 +198,21 @@ extension Remote {
         }
     }
     
-    func fetchUserID(completion: @escaping (CKRecordID?) -> ()) {
+    func fetchLatestRecords(completion: @escaping ([R], [RemoteError]) -> ()) {
         cloudKitContainer.fetchUserRecordID { userRecordID, error in
-            completion(userRecordID)
-        }
-    }
-    
-    func fetchLatestRecords(completion: @escaping ([R]) -> ()) {
-        fetchUserID { (userID) in
-            guard let userID = userID else {
-                completion([])
+            guard let userID = userRecordID else {
+                completion([], [])
                 return
             }
             let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
             query.sortDescriptors = [self.defaultSortDescriptor]
             let op = CKQueryOperation(query: query)
             //        op.resultsLimit = maximumNumberOfUnits
-            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: []) { records, error in
-                if error != nil {
-                    print(error!)
+            op.fetchAggregateResults(in: self.cloudKitContainer.publicCloudDatabase, previousResults: [], previousErrors: []) { records, errors in
+                if errors.count > 0 {
+                    print(errors)
                 }
-                completion(records.map { R(record: $0) }.flatMap { $0 })
+                completion(records.map { R(record: $0) }.flatMap { $0 }, errors.map(RemoteError.init).flatMap { $0 })
             }
         }
     }

@@ -56,10 +56,12 @@ final class UnitDownloader: ChangeProcessor {
     }
 
     func fetchLatestRemoteRecords(in context: ChangeProcessorContext) {
-        remote.fetchLatestRecords(completion: { (remoteUnits) in
+        remote.fetchLatestRecords(completion: { remoteUnits, errors in
             self.insert(remoteUnits, in: context)
-            self.reserve(remoteUnits, in: context)
             self.update(remoteUnits, in: context)
+            if errors.count == 0 {
+                self.reserve(remoteUnits, in: context)
+            }
         })
     }
 

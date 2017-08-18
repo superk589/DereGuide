@@ -95,7 +95,9 @@ public final class SyncCoordinator {
     fileprivate func setup() {
         self.perform {
             // All these need to run on the same queue, since they're modifying `observerTokens`
-            self.unitsRemote.fetchUserID { self.viewContext.userID = $0?.recordName }
+            self.unitsRemote.cloudKitContainer.fetchUserRecordID(completionHandler: { (userRecordID, error) in
+                self.viewContext.userID = userRecordID?.recordName
+            })
             self.setupContexts()
             self.setupChangeProcessors()
             self.setupApplicationActiveNotifications()

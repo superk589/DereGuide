@@ -80,15 +80,20 @@ extension CKDatabase {
 
 extension CKQueryOperation {
 
-    func fetchAggregateResults(in database: CKDatabase, previousResults: [CKRecord], completion: @escaping ([CKRecord], NSError?) -> ()) {
+    func fetchAggregateResults(in database: CKDatabase, previousResults: [CKRecord], previousErrors: [Error], completion: @escaping ([CKRecord], [Error]) -> ()) {
         var results = previousResults
         recordFetchedBlock = { record in
             results.append(record)
         }
+        
+        var errors = previousErrors
         queryCompletionBlock = { cursor, error in
-            guard let c = cursor else { return completion(results, error as NSError?) }
+            if let error = error {
+                errors.append(error)
+            }
+            guard let c = cursor else { return completion(results, errors) }
             let nextOp = CKQueryOperation(cursor: c)
-            nextOp.fetchAggregateResults(in: database, previousResults: results, completion: completion)
+            nextOp.fetchAggregateResults(in: database, previousResults: results, previousErrors: errors, completion: completion)
         }
         database.add(self)
     }
