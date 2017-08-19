@@ -15,7 +15,6 @@ class TeamAdvanceOptionsTableViewCell: UITableViewCell {
         case slider(TeamSimulationSliderOption)
         case textField(TeamSimulationTextFieldOption)
         case `switch`(TeamSimulationSwitchOption)
-        case stepper(TeamSimulationStepperOption)
         case plain
     }
     
@@ -32,8 +31,6 @@ class TeamAdvanceOptionsTableViewCell: UITableViewCell {
         case .textField(let view):
             optionView = view
         case .slider(let view):
-            optionView = view
-        case .stepper(let view):
             optionView = view
         default:
             optionView = UIView()

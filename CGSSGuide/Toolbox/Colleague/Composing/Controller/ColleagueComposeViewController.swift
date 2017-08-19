@@ -158,7 +158,7 @@ class ColleagueComposeViewController: BaseTableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
         indicator.startAnimating()
-        if let _ = profile.remoteIdentifier, false {
+        if let _ = profile.remoteIdentifier {
             remote.modify([profile], modification: { (records, commit) in
                 self.context.perform {
                     if let record = records.first {

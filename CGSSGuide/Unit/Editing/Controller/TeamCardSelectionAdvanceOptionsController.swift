@@ -18,25 +18,20 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     
     var staticCells = [TeamAdvanceOptionsTableViewCell]()
     
-    var option1: TeamSimulationSliderOption!
-    var option2: TeamSimulationSliderOption!
+    var option1: TeamSimulationStepperOption!
+    var option2: TeamSimulationStepperOption!
     var option3: TeamSimulationSwitchOption!
     var option4: TeamSimulationSwitchOption!
     
     private func prepareStaticCells() {
         
-        option1 = TeamSimulationSliderOption()
-        
+        option1 = TeamSimulationStepperOption()
         option1.addTarget(self, action: #selector(option1ValueChanged(_:)), for: .valueChanged)
-        option1.label.text = NSLocalizedString("默认特技等级", comment: "")
-        option1.slider.maximumValue = 10
-        option1.slider.minimumValue = 0
+        option1.setup(title: NSLocalizedString("默认特技等级", comment: ""), minValue: 0, maxValue: 10, currentValue: 0)
         
-        option2 = TeamSimulationSliderOption()
+        option2 = TeamSimulationStepperOption()
         option2.addTarget(self, action: #selector(option2ValueChanged(_:)), for: .valueChanged)
-        option2.label.text = NSLocalizedString("默认潜能等级", comment: "")
-        option2.slider.maximumValue = 25
-        option2.slider.minimumValue = 0
+        option2.setup(title: NSLocalizedString("默认潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: 0)
         
         option3 = TeamSimulationSwitchOption()
         option3.addTarget(self, action: #selector(option3ValueChanged(_:)), for: .valueChanged)
@@ -46,8 +41,8 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
         option4.addTarget(self, action: #selector(option4ValueChanged(_:)), for: .valueChanged)
         option4.label.text = NSLocalizedString("修改最近使用中的偶像潜能同步到同角色所有卡片", comment: "")
         
-        let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option1))
-        let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .slider(option2))
+        let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .stepper(option1))
+        let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .stepper(option2))
         let cell3 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
         let cell4 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option4))
         staticCells.append(contentsOf: [cell1, cell2, cell3, cell4])
@@ -82,18 +77,18 @@ class TeamCardSelectionAdvanceOptionsController: BaseTableViewController {
     }
     
     private func setupWithUserDefaults() {
-        option1.currentValue = TeamEditingAdvanceOptionsManager.default.defaultSkillLevel
-        option2.currentValue = TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel
+        option1.stepper.value = Double(TeamEditingAdvanceOptionsManager.default.defaultSkillLevel)
+        option2.stepper.value = Double(TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel)
         option3.switch.isOn = TeamEditingAdvanceOptionsManager.default.includeGuestLeaderInRecentUsedIdols
         option4.switch.isOn = TeamEditingAdvanceOptionsManager.default.editAllSameChara
     }
     
     @objc func option1ValueChanged(_ sender: UISlider) {
-        TeamEditingAdvanceOptionsManager.default.defaultSkillLevel = option1.currentValue
+        TeamEditingAdvanceOptionsManager.default.defaultSkillLevel = Int(option1.stepper.value)
     }
     
-    @objc func option2ValueChanged(_ sender: UISlider) {
-        TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel = option2.currentValue
+    @objc func option2ValueChanged(_ sender: ValueStepper) {
+        TeamEditingAdvanceOptionsManager.default.defaultPotentialLevel = Int(option2.stepper.value)
     }
     
     @objc func option3ValueChanged(_ sender: UISwitch) {

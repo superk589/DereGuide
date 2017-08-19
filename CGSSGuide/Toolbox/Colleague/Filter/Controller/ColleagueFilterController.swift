@@ -16,9 +16,12 @@ class ColleagueFilterController: UITableViewController {
     
     weak var delegate: ColleagueFilterControllerDelegate?
     
-    var sectionTitles = [NSLocalizedString("位置(目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\")", comment: ""),
+    var sectionTitles = [NSLocalizedString("位置", comment: ""),
                          NSLocalizedString("潜能", comment: ""),
-                         NSLocalizedString("偶像(左滑删除)", comment: "")]
+                         NSLocalizedString("偶像", comment: "")]
+    var footerTitles = [NSLocalizedString("目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\"", comment: ""),
+                        "",
+                        NSLocalizedString("左滑删除", comment: "")]
 
     struct FilterSetting: Equatable {
         
@@ -94,6 +97,8 @@ class ColleagueFilterController: UITableViewController {
     
     var setting = FilterSetting(type: [], cardIDs: [], minLevel: 0)
     
+    var stepperCell: TeamAdvanceOptionsTableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,12 +110,17 @@ class ColleagueFilterController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         
         tableView.register(ColleagueFilterTypeCell.self, forCellReuseIdentifier: ColleagueFilterTypeCell.description())
-        tableView.register(ValueStepperCell.self, forCellReuseIdentifier: ValueStepperCell.description())
         tableView.register(ColleagueFilterCardCell.self, forCellReuseIdentifier: ColleagueFilterCardCell.description())
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        
+        
+        let option = TeamSimulationStepperOption()
+        option.addTarget(self, action: #selector(handleStepper(_:)), for: .valueChanged)
+        option.setup(title: NSLocalizedString("最低潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel))
+        stepperCell = TeamAdvanceOptionsTableViewCell(optionStyle: .stepper(option))
     }
     
     func doneAction() {
@@ -121,7 +131,12 @@ class ColleagueFilterController: UITableViewController {
     
     func cancelAction() {
         setting.load()
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleStepper(_ stepper: ValueStepper) {
+        setting.minLevel = Int(stepper.value)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -134,6 +149,10 @@ class ColleagueFilterController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return footerTitles[section]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -171,10 +190,7 @@ class ColleagueFilterController: UITableViewController {
             }
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ValueStepperCell.description(), for: indexPath) as! ValueStepperCell
-            cell.setup(title: NSLocalizedString("最低潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel))
-            cell.delegate = self
-            return cell
+            return stepperCell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: ColleagueFilterCardCell.description(), for: indexPath) as! ColleagueFilterCardCell
             if indexPath.row < setting.cardIDs.count {
@@ -233,12 +249,6 @@ class ColleagueFilterController: UITableViewController {
             setting.cardIDs.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    }
-}
-
-extension ColleagueFilterController: ValueStepperCellDelegate {
-    func valueStepperCell(_ valueStepperCell: ValueStepperCell, didChangeTo newValue: Double) {
-        setting.minLevel = Int(newValue)
     }
 }
 

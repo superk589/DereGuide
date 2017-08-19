@@ -20,13 +20,16 @@ class ColleagueViewController: BaseTableViewController {
         return vc
     }()
     
+    fileprivate var loadMoreCell = LoadMoreTableViewCell()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadMoreCell.delegate = self
         
         prepareNavigationBar()
         
         tableView.register(ColleagueTableViewCell.self, forCellReuseIdentifier: ColleagueTableViewCell.description())
-        tableView.register(LoadingMoreTableViewCell.self, forCellReuseIdentifier: LoadingMoreTableViewCell.description())
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.tableFooterView = UIView()
@@ -34,9 +37,15 @@ class ColleagueViewController: BaseTableViewController {
         tableView.separatorStyle = .none
 
         refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("下拉刷新数据", comment: ""))
         refreshControl?.addTarget(self, action: #selector(fetchLatestProfiles), for: .valueChanged)
         refreshControl?.beginRefreshing()
         fetchLatestProfiles()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        refreshControl?.endRefreshing()
     }
     
     var remote = ProfileRemote()
@@ -47,7 +56,10 @@ class ColleagueViewController: BaseTableViewController {
     
     lazy var currentSetting: ColleagueFilterController.FilterSetting = self.filterController.setting
     
+    private var isFetching: Bool = false
+    
     func fetchLatestProfiles() {
+        isFetching = true
         remote.fetchRecordsWith([currentSetting.predicate], [remote.defaultSortDescriptor], resultsLimit: Config.cloudKitFetchLimits) { (remoteProfiles, cursor, error) in
             DispatchQueue.main.async {
                 if error != nil {
@@ -55,6 +67,7 @@ class ColleagueViewController: BaseTableViewController {
                 } else {
                     self.profiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                 }
+                self.isFetching = false
                 self.refreshControl?.endRefreshing()
                 self.cursor = cursor
                 self.tableView.reloadData()
@@ -62,39 +75,29 @@ class ColleagueViewController: BaseTableViewController {
         }
     }
     
-    func fetchMore() {
+    func fetchMore(completion: @escaping () -> ()) {
         guard let cursor = cursor else {
+            completion()
             return
         }
+        isFetching = true
         remote.fetchRecordsWith(cursor: cursor, resultsLimit: Config.cloudKitFetchLimits) { (remoteProfiles, cursor, error) in
             DispatchQueue.main.async {
+                self.isFetching = false
                 if error != nil {
                     UIAlertController.showHintMessage(NSLocalizedString("获取数据失败，请检查您的网络", comment: ""), in: nil)
                 } else {
-//                    self.tableView.beginUpdates()
                     let moreProfiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                     self.profiles.append(contentsOf: moreProfiles)
-//                    self.tableView.insertRows(at: moreProfiles.enumerated().map { IndexPath.init(row: $0.offset + self.profiles.count - moreProfiles.count, section: 0) }, with: .automatic)
                     self.cursor = cursor
-//                    if cursor == nil {
-//                        self.tableView.deleteRows(at: [IndexPath.init(row: self.profiles.count, section: 0)], with: .fade)
-//                    }
-//                     self.tableView.endUpdates()
-                    self.tableView.reloadData()
-                    print("reload data")
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: moreProfiles.enumerated().map { IndexPath.init(row: $0.offset + self.profiles.count - moreProfiles.count, section: 0) }, with: .automatic)
+                    self.tableView.endUpdates()
                 }
+                completion()
             }
         }
         self.cursor = nil
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 && scrollView.bounds.maxY > scrollView.contentSize.height - 30 {
-            if cursor != nil {
-                print("success")
-            }
-            fetchMore()
-        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,23 +110,11 @@ class ColleagueViewController: BaseTableViewController {
             cell.delegate = self
             return cell
         case profiles.count:
-            let cell = tableView.dequeueReusableCell(withIdentifier: LoadingMoreTableViewCell.description(), for: indexPath) as! LoadingMoreTableViewCell
-            cell.indicator.startAnimating()
-            return cell
+            return loadMoreCell
         default:
             fatalError("wrong index path")
         }
         
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,7 +122,11 @@ class ColleagueViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profiles.count + (cursor == nil ? 0 : 1)
+        if profiles.count == 0 {
+            return 0
+        } else {
+            return profiles.count + 1
+        }
     }
     
     var context: NSManagedObjectContext {
@@ -203,4 +198,14 @@ extension ColleagueViewController: ColleagueFilterControllerDelegate {
         fetchLatestProfiles()
     }
 
+}
+
+extension ColleagueViewController: LoadMoreTableViewCellDelegate {
+    func didLoadMore(_ loadMoreTableViewCell: LoadMoreTableViewCell) {
+        loadMoreTableViewCell.loadMoreButton.setLoading(true)
+        fetchMore {
+            loadMoreTableViewCell.setNoMoreData(self.cursor == nil)
+            loadMoreTableViewCell.loadMoreButton.setLoading(false)
+        }
+    }
 }

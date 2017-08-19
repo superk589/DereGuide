@@ -34,13 +34,14 @@ class ColleagueMessageCell: ColleagueBaseCell {
         messageView.layer.borderWidth = 1 / Screen.scale
         messageView.layer.cornerRadius = 6
         messageView.layer.masksToBounds = true
-
+        
         countLabel.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(-15)
         }
         countLabel.isUserInteractionEnabled = false
         countLabel.textColor = UIColor.lightGray
         countLabel.font = UIFont.systemFont(ofSize: 14)
+        
     }
     
     func setup(with message: String) {

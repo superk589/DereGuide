@@ -49,6 +49,12 @@ class Profile: NSManagedObject {
     @NSManaged public var isOpen: Bool
     
     @NSManaged public var remoteCreatedAt: Date?
+    
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        setPrimitiveValue("", forKey: "gameID")
+        setPrimitiveValue("", forKey: "nickName")
+    }
 }
 
 extension Profile {

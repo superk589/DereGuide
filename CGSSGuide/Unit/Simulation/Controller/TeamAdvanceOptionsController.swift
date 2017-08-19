@@ -18,7 +18,7 @@ class TeamAdvanceOptionsController: BaseTableViewController {
     var staticCells = [TeamAdvanceOptionsTableViewCell]()
     
     var option1: TeamSimulationSwitchOption!
-    var option2: TeamSimulationTextFieldOption!
+    var option2: TeamSimulationStepperOption!
     var option3: TeamSimulationTextFieldOption!
     var option4: TeamSimulationTextFieldOption!
     var option5: TeamSimulationTextFieldOption!
@@ -34,11 +34,9 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         let option1Label = option1.label
         option1Label.text = NSLocalizedString("模拟计算中生命不足时不发动过载技能", comment: "")
         
-        option2 = TeamSimulationTextFieldOption()
-        option2.addTarget(self, action: #selector(option2TextFieldEndEditing(_:)), for: .editingDidEnd)
-        option2.addTarget(self, action: #selector(option2TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
-        option2.label.text = NSLocalizedString("小屋加成%", comment: "")
-        
+        option2 = TeamSimulationStepperOption()
+        option2.addTarget(self, action: #selector(option2ValueChanged(_:)), for: .valueChanged)
+        option2.setup(title: NSLocalizedString("小屋加成%", comment: ""), minValue: 0, maxValue: 10, currentValue: 0)
         
         option3 = TeamSimulationTextFieldOption()
         option3.label.text = NSLocalizedString("Great占比%", comment: "")
@@ -51,7 +49,7 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
         let cell1 = TeamAdvanceOptionsTableViewCell(optionStyle: .switch(option1))
-        let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .textField(option2))
+        let cell2 = TeamAdvanceOptionsTableViewCell(optionStyle: .stepper(option2))
         let cell3 = TeamAdvanceOptionsTableViewCell(optionStyle: .textField(option3))
         let cell4 = TeamAdvanceOptionsTableViewCell(optionStyle: .textField(option4))
         staticCells.append(contentsOf: [cell1, cell2, cell3, cell4])
@@ -89,24 +87,15 @@ class TeamAdvanceOptionsController: BaseTableViewController {
         LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition = option1.switch.isOn
     }
     
-    private func validateOption2TextField() {
-        if let value = Double(option2.textField.text ?? ""), value >= 0 && value <= 10 {
-            option2.textField.text = String(Int(value))
-        } else {
-            option2.textField.text = "10"
-        }
+    @objc func option2ValueChanged(_ sender: ValueStepper) {
+        LiveSimulationAdvanceOptionsManager.default.roomUpValue = Int(option2.stepper.value)
     }
     
     func setupWithUserDefaults() {
         option1.switch.isOn = LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition
-        option2.textField.text = String(LiveSimulationAdvanceOptionsManager.default.roomUpValue)
+        option2.stepper.value = Double(LiveSimulationAdvanceOptionsManager.default.roomUpValue)
         option3.textField.text = String(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)
-    }
-    
-    @objc func option2TextFieldEndEditing(_ sender: UITextField) {
-        validateOption2TextField()
-        LiveSimulationAdvanceOptionsManager.default.roomUpValue = Int(option2.textField.text!)!
     }
     
     private func validateOption3TextField() {

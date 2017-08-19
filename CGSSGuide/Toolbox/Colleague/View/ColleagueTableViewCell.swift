@@ -17,9 +17,12 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
     
     weak var delegate: ColleagueTableViewCellDelegate?
     
+    var gameIDView: UIView!
+    var gameIDCopyIcon: UIImageView!
+    var gameIDLabel: UILabel!
+    
     var nameLabel: UILabel!
     var createdDateLabel: UILabel!
-    var gameIDLabel: UILabel!
     var messageLabel: UILabel!
     
     var myCenterLabel: UILabel!
@@ -31,26 +34,45 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        gameIDView = UIView()
+        readableContentView.addSubview(gameIDView)
+        gameIDView.snp.makeConstraints { (make) in
+            make.top.equalTo(10)
+            make.left.equalTo(10)
+        }
+        gameIDView.backgroundColor = Color.parade
+        gameIDView.layer.cornerRadius = 3
+        gameIDView.layer.masksToBounds = true
+        
+        gameIDCopyIcon = UIImageView()
+        gameIDCopyIcon.image = #imageLiteral(resourceName: "511-copy-documents").withRenderingMode(.alwaysTemplate)
+        gameIDCopyIcon.tintColor = UIColor.white
+        gameIDView.addSubview(gameIDCopyIcon)
+        gameIDCopyIcon.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(5)
+            make.height.width.equalTo(18)
+        }
+        
+        gameIDLabel = UILabel()
+        gameIDView.addSubview(gameIDLabel)
+        gameIDLabel.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 3, left: 27, bottom: 3, right: 3))
+        }
+        gameIDLabel.textColor = UIColor.white
+        gameIDLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        gameIDView.addGestureRecognizer(tap)
+        gameIDView.isUserInteractionEnabled = true
+        
         nameLabel = UILabel()
         readableContentView.addSubview(nameLabel)
         nameLabel.font = UIFont.systemFont(ofSize: 16)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.top.equalTo(10)
+            make.left.equalTo(gameIDView.snp.right).offset(5)
+            make.lastBaseline.equalTo(gameIDLabel)
         }
-        
-        gameIDLabel = UILabel()
-        readableContentView.addSubview(gameIDLabel)
-        gameIDLabel.font = UIFont.systemFont(ofSize: 16)
-        gameIDLabel.textColor = Color.parade
-        gameIDLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(nameLabel.snp.right).offset(10)
-            make.lastBaseline.equalTo(nameLabel)
-        }
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-        gameIDLabel.addGestureRecognizer(tap)
-        gameIDLabel.isUserInteractionEnabled = true
         
         createdDateLabel = UILabel()
         readableContentView.addSubview(createdDateLabel)
@@ -73,7 +95,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         messageLabel.textColor = UIColor.darkGray
         messageLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.top.equalTo(gameIDLabel.snp.bottom).offset(5)
+            make.top.equalTo(gameIDView.snp.bottom).offset(5)
             make.right.equalTo(-10)
         }
         
