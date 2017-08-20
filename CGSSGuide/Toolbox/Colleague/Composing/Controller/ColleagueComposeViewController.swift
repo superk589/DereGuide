@@ -422,10 +422,10 @@ extension ColleagueComposeViewController: ColleaColleagueButtonsCellDelegate {
 
     func didRevoke(_ colleagueButtonsCell: ColleagueButtonsCell) {
         colleagueButtonsCell.setRevoking(true)
-        remote.removeAll { (remoteIdentifiers, error) in
+        remote.removeAll { (remoteIdentifiers, errors) in
             DispatchQueue.main.async {
                 colleagueButtonsCell.setRevoking(false)
-                if error != nil {
+                if errors.count > 0 {
                     UIAlertController.showHintMessage(NSLocalizedString("撤销失败，请确保iCloud已登录并且网络状态正常", comment: ""), in: self)
                 } else {
                     UIAlertController.showHintMessage(NSLocalizedString("撤销成功", comment: ""), in: self)
