@@ -70,6 +70,7 @@ class ColleagueViewController: BaseTableViewController {
                 self.isFetching = false
                 self.refreshControl?.endRefreshing()
                 self.cursor = cursor
+                self.loadMoreCell.setNoMoreData(cursor == nil)
                 self.tableView.reloadData()
             }
         }
@@ -169,7 +170,16 @@ class ColleagueViewController: BaseTableViewController {
 }
 
 extension ColleagueViewController: ColleagueTableViewCellDelegate {
-    func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap gameID: String) {
+    
+    func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap cardIcon: CGSSCardIconView) {
+        if let cardID = cardIcon.cardId, let card = CGSSDAO.shared.findCardById(cardID) {
+            let vc = CardDetailViewController()
+            vc.card = card
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    @nonobjc func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap gameID: String) {
         UIPasteboard.general.string = gameID
         UIAlertController.showHintMessage("已复制ID到剪贴板", in: nil)
     }

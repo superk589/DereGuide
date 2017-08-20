@@ -11,6 +11,8 @@ import UIKit
 protocol MyCenterGroupViewDelegate: class {
     func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didLongPressAt item: MyCenterItemView)
     func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didDoubleTap item: MyCenterItemView)
+    func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didTap item: MyCenterItemView)
+
 }
 
 class MyCenterGroupView: UIView {
@@ -68,11 +70,8 @@ class MyCenterGroupView: UIView {
     }
     
     @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
-//        if let view = tap.view as? TeamMemberEditableItemView {
-//            if let index = stackView.arrangedSubviews.index(of: view) {
-//                // select index
-//            }
-//        }
+        guard let view = tap.view as? MyCenterItemView else { return }
+        delegate?.profileMemberEditableView(self, didTap: view)
     }
     
     @objc func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {

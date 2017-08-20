@@ -365,6 +365,10 @@ extension ColleagueComposeViewController: MyCenterGroupViewDelegate {
         navigationController?.pushViewController(cardSelectionViewController, animated: true)
     }
     
+    func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didTap item: MyCenterItemView) {
+        
+    }
+    
 }
 
 extension ColleagueComposeViewController: MyCenterEditingViewControllerDelegate {

@@ -11,6 +11,7 @@ import SnapKit
 
 protocol ColleagueTableViewCellDelegate: class {
     func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap gameID: String)
+    func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap cardIcon: CGSSCardIconView)
 }
 
 class ColleagueTableViewCell: ReadableWidthTableViewCell {
@@ -107,6 +108,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
             make.height.lessThanOrEqualTo(89.5)
             make.bottom.equalTo(-10).priority(900)
         }
+        myCenterGroupView.delegate = self
         
         selectionStyle = .none
     }
@@ -156,4 +158,20 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
 //        layoutIfNeeded()
 //        
 //    }
+}
+
+extension ColleagueTableViewCell: MyCenterGroupViewDelegate {
+    
+    func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didLongPressAt item: MyCenterItemView) {
+        
+    }
+    
+    func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didDoubleTap item: MyCenterItemView) {
+        
+    }
+    
+    func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didTap item: MyCenterItemView) {
+        delegate?.colleagueTableViewCell(self, didTap: item.cardView.icon)
+    }
+    
 }

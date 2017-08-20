@@ -11,7 +11,7 @@ import SnapKit
 
 class MyCenterItemView: UIView {
 
-    private var cardView: MyCenterCardView!
+    private(set) var cardView: MyCenterCardView!
     private var placeholderImageView: UIImageView!
     private var cardPlaceholder: UIView!
     private var typeIcon: UIImageView!
