@@ -40,7 +40,6 @@ class CardDetailLeaderSkillCell: UITableViewCell {
         
         descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.lineBreakMode = .byCharWrapping
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.textColor = UIColor.darkGray
         contentView.addSubview(descriptionLabel)
@@ -66,6 +65,6 @@ extension CardDetailLeaderSkillCell: CardDetailSetable {
         }
         nameLabel.text = leaderSkill.name
         
-        descriptionLabel.text = leaderSkill.getLocalizedExplain(languageType: CGSSGlobal.languageType)
+        descriptionLabel.text = leaderSkill.localizedExplain
     }
 }

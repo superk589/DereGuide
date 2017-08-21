@@ -10,10 +10,10 @@ import Foundation
 import SwiftyJSON
 
 fileprivate let skillDescriptions = [
-    1: NSLocalizedString("使所有PERFECT音符获得 %d 的分数加成", comment: "技能描述"),
-    2: NSLocalizedString("使所有PERFECT/GREAT音符获得 d% 的分数加成", comment: "技能描述"),
-    3: NSLocalizedString("使所有PERFECT/GREAT/NICE音符获得 d% 的分数加成", comment: "技能描述"),
-    4: NSLocalizedString("获得额外的 d% 的COMBO加成", comment: "技能描述"),
+    1: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成", comment: "技能描述"),
+    2: NSLocalizedString("使所有PERFECT/GREAT音符获得 %d%% 的分数加成", comment: "技能描述"),
+    3: NSLocalizedString("使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成", comment: "技能描述"),
+    4: NSLocalizedString("获得额外的 %d%% 的COMBO加成", comment: "技能描述"),
     5: NSLocalizedString("使所有GREAT音符改判为PERFECT", comment: "技能描述"),
     6: NSLocalizedString("使所有GREAT/NICE音符改判为PERFECT", comment: "技能描述"),
     7: NSLocalizedString("使所有GREAT/NICE/BAD音符改判为PERFECT", comment: "技能描述"),
@@ -23,14 +23,78 @@ fileprivate let skillDescriptions = [
     11: NSLocalizedString("使你的COMBO不会中断", comment: "技能描述"),
     12: NSLocalizedString("使你的生命不会减少", comment: "技能描述"),
     13: NSLocalizedString("使所有音符恢复你 %d 点生命", comment: "技能描述"),
-    14: NSLocalizedString("消耗 %d 生命，PERFECT音符获得 d% 的分数加成，并且NICE/BAD音符不会中断COMBO", comment: "技能描述"),
-    17: NSLocalizedString("使所有PERFECT音符恢复你 d% 点生命", comment: "技能描述"),
-    18: NSLocalizedString("使所有PERFECT/GREAT音符恢复你 d% 点生命", comment: "技能描述"),
-    19: NSLocalizedString("使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命", comment: "技能描述")
+    14: NSLocalizedString("消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO", comment: "技能描述"),
+    15: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO", comment: ""),
+    16: NSLocalizedString("会发生有趣的事情", comment: ""),
+    17: NSLocalizedString("使所有PERFECT音符恢复你 %d 点生命", comment: "技能描述"),
+    18: NSLocalizedString("使所有PERFECT/GREAT音符恢复你 %d 点生命", comment: "技能描述"),
+    19: NSLocalizedString("使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命", comment: "技能描述"),
+    20: NSLocalizedString("当前发动技能将被增强", comment: ""),
+    21: NSLocalizedString("当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
+    22: NSLocalizedString("当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
+    23: NSLocalizedString("当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
+    24: NSLocalizedString("获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命", comment: "")
 ]
 
+fileprivate var intervalClause = NSLocalizedString("每 %d 秒，", comment: "")
+
+fileprivate var probabilityClause = NSLocalizedString("有 %@%% 的几率", comment: "")
+
+fileprivate var lengthClause = NSLocalizedString("，持续 %@ 秒。", comment: "")
 
 extension CGSSSkill {
+    
+    private var effectValue: Int {
+        var effectValue = value!
+        if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24].contains(skillTypeId) {
+            effectValue -= 100
+        } else if [20].contains(skillTypeId) {
+            effectValue = (effectValue / 10) - 100
+        }
+        return effectValue
+    }
+    
+    private var effectValue2: Int {
+        var effectValue2 = value2!
+        if [21, 22, 23].contains(skillTypeId) {
+            effectValue2  -= 100
+        }
+        return effectValue2
+    }
+    
+    private var effectExpalin: String {
+        if skillTypeId == 14 {
+            return String.init(format: skillDescriptions[skillTypeId] ?? NSLocalizedString("未知", comment: ""), effectValue, skillTriggerValue)
+        } else {
+            return String.init(format: skillDescriptions[skillTypeId] ?? NSLocalizedString("未知", comment: ""), effectValue, effectValue2)
+        }
+    }
+    
+    private var intervalExplain: String {
+        return String.init(format: intervalClause, condition)
+    }
+    
+    @nonobjc func getLocalizedExplainByRange(_ range: CountableClosedRange<Int>) -> String {
+        
+        let probabilityRangeString = String(format: "%.2f ~ %.2f", self.procChanceOfLevel(range.lowerBound) / 100, self.procChanceOfLevel(range.upperBound) / 100)
+        let probabilityExplain = String.init(format: probabilityClause, probabilityRangeString)
+        
+        let lengthRangeString = String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(range.lowerBound) / 100, self.effectLengthOfLevel(range.upperBound) / 100)
+        let lengthExplain = String.init(format: lengthClause, lengthRangeString)
+        
+        return intervalExplain + probabilityExplain + effectExpalin + lengthExplain
+    }
+    
+    @nonobjc func getLocalizedExplainByLevel(_ level: Int) -> String {
+      
+        let probabilityRangeString = String(format: "%.2f", self.procChanceOfLevel(level) / 100)
+        let probabilityExplain = String.init(format: probabilityClause, probabilityRangeString)
+        
+        let lengthRangeString = String(format: "%.2f", self.effectLengthOfLevel(level) / 100)
+        let lengthExplain = String.init(format: lengthClause, lengthRangeString)
+        
+        return intervalExplain + probabilityExplain + effectExpalin + lengthExplain
+    }
     
     var skillFilterType: CGSSSkillTypes {
         return CGSSSkillTypes.init(typeId: skillTypeId)
@@ -59,46 +123,6 @@ extension CGSSSkill {
         } else {
             return 0
         }
-    }
-    
-    func getExplainByLevel(_ lv: Int, languageType: LanguageType = .ja) -> String {
-        var explain:String
-        switch languageType {
-        case .zh:
-            explain = explainEn
-        case .ja:
-            return self.explain
-        default:
-            return self.explain
-        }
-        let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
-        let sub1 = subs[0]
-        let range1 = explain.range(of: sub1 as String)
-        explain.replaceSubrange(range1!, with: String(format: "%.2f", self.procChanceOfLevel(lv) / 100))
-        let sub2 = subs[1]
-        let range2 = explain.range(of: sub2 as String)
-        explain.replaceSubrange(range2!, with: String(format: "%.2f", self.effectLengthOfLevel(lv) / 100))
-        return explain
-    }
-    
-    func getExplainByLevelRange(_ start: Int, end: Int, languageType: LanguageType = .ja) -> String {
-        var explain:String
-        switch languageType {
-        case .zh:
-            explain = explainEn
-        case .ja:
-            return self.explain
-        default:
-            return self.explain
-        }
-        let subs = explain.match(pattern: "[0-9.]+ ~ [0-9.]+")
-        let sub1 = subs[0]
-        let range1 = explain.range(of: sub1 as String)
-        explain.replaceSubrange(range1!, with: String(format: "%.2f ~ %.2f", self.procChanceOfLevel(start) / 100, self.procChanceOfLevel(end) / 100))
-        let sub2 = subs[1]
-        let range2 = explain.range(of: sub2 as String)
-        explain.replaceSubrange(range2!, with: String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(start) / 100, self.effectLengthOfLevel(end) / 100))
-        return explain
     }
     
     var procTypeShort: String {

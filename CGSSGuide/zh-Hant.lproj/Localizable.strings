@@ -702,3 +702,53 @@
 "不再公开您之前已经发布的信息" = "不再公開您之前已經發布的資訊";
 "保存信息，但是暂不公开" = "儲存資訊，但是暫不公開";
 "保存" = "儲存";
+
+/* localize skill explains locally */
+"使所有PERFECT音符获得 %d%% 的分数加成" = "使所有PERFECT音符獲得 %d%% 的分數加成";
+"使所有PERFECT/GREAT音符获得 %d%% 的分数加成" = "使所有PERFECT/GREAT音符獲得 %d%% 的分數加成";
+"使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成" = "使所有PERFECT/GREAT/NICE音符獲得 %d%% 的分數加成";
+"获得额外的 %d%% 的COMBO加成" = "獲得額外的 %d%% 的COMBO加成";
+"使所有GREAT音符改判为PERFECT" = "使所有GREAT音符改判為PERFECT";
+"使所有GREAT/NICE音符改判为PERFECT" = "使所有GREAT/NICE音符改判為PERFECT";
+"使所有GREAT/NICE/BAD音符改判为PERFECT" = "使所有GREAT/NICE/BAD音符改判為PERFECT";
+"所有音符改判为PERFECT" = "所有音符改判為PERFECT";
+"使NICE音符不会中断COMBO" = "使NICE音符不會中斷COMBO";
+"使BAD/NICE音符不会中断COMBO" = "使BAD/NICE音符不會中斷COMBO";
+"使你的COMBO不会中断" = "使你的COMBO不會中斷";
+"使你的生命不会减少" = "使你的生命不會減少";
+"使所有音符恢复你 %d 点生命" = "使所有音符恢復你 %d 點生命";
+"消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO" = "消耗 %2$d 生命，PERFECT音符獲得 %1$d%% 的分數加成，並且NICE/BAD音符不會中斷COMBO";
+"使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO" = "使所有PERFECT音符獲得 %d%% 的分數加成，且PERFECT以外的判定將中斷COMBO";
+"会发生有趣的事情" = "會發生有趣的事情";
+"使所有PERFECT音符恢复你 %d 点生命" = "使所有PERFECT音符恢復你 %d 點生命";
+"使所有PERFECT/GREAT音符恢复你 %d 点生命" = "使所有PERFECT/GREAT音符恢復你 %d 點生命";
+"使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命" = "使所有PERFECT/GREAT/NICE音符恢復你 %d 點生命";
+"当前发动技能将被增强" = "當前發動技能將被增強";
+"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "當僅有Cute偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成";
+"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "當僅有Cool偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成";
+"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "當僅有Passion偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成";
+"获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "獲得額外的 %d%% 的COMBO加成，並使所有PERFECT音符恢復你 %d 點生命";
+
+"每 %d 秒，" = "每 %d 秒，";
+"有 %@%% 的几率" = "有 %@%% 的機率";
+"，持续 %@ 秒。" = "，持續 %@ 秒。";
+
+"所有Cute" = "所有Cute";
+"所有Cool" = "所有Cool";
+"所有Passion" = "所有Passion";
+"所有" = "所有";
+
+"Vocal表现值" = "Vocal表現值";
+"Visual表现值" = "Visual表現值";
+"Dance表现值" = "Dance表現值";
+"所有表现值" = "所有表現值";
+"生命" = "生命";
+"特技发动几率" = "特技發動機率";
+
+"提升%@偶像的%@ %d%%。" = "提升%@偶像的%@ %d%%。";
+"%@和%@" = "%@和%@";
+"、" = "、";
+"只有" = "只有";
+"当%@属性的偶像存在于队伍时，" = "當%@屬性的偶像存在於隊伍時，";
+"此队长技能的内部描述格式未定义" = "此隊長技能的內部描述格式未定義";
+/* end of skill explain localization */

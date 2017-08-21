@@ -137,7 +137,7 @@ class TeamMemberCell: UITableViewCell, UITextFieldDelegate {
     func setupSkillLabelWith(_ skill: CGSSSkill?, skillLevel: Int?) {
         let prefix = NSLocalizedString("特技", comment: "") + ": "
         if let skill = skill, let skillLevel = skillLevel {
-            skillLabel.text = prefix + skill.getExplainByLevel(skillLevel, languageType: CGSSGlobal.languageType)
+            skillLabel.text = prefix + skill.getLocalizedExplainByLevel(skillLevel)
         } else {
             skillLabel.text = prefix + NSLocalizedString("无", comment: "空字符串说明文字")
         }
@@ -150,7 +150,7 @@ class TeamMemberCell: UITableViewCell, UITextFieldDelegate {
     func setupLeaderSkillLabel(with leaderSkill: CGSSLeaderSkill?) {
         let prefix = NSLocalizedString("队长技能", comment: "") + ": "
         if let leaderSkill = leaderSkill {
-            leaderSkillLabel.text = prefix + leaderSkill.getLocalizedExplain(languageType: CGSSGlobal.languageType)
+            leaderSkillLabel.text = prefix + leaderSkill.localizedExplain
         } else {
             leaderSkillLabel.text = prefix + NSLocalizedString("无", comment: "空字符串说明文字")
         }

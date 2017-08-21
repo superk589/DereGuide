@@ -706,3 +706,53 @@
 "不再公开您之前已经发布的信息" = "Make the profile you post previously unlisted";
 "保存信息，但是暂不公开" = "Save the profile, but don't post it";
 "保存" = "Save";
+
+/* localize skill explains locally */
+"使所有PERFECT音符获得 %d%% 的分数加成" = "Perfect notes will receive a %d%% score bonus";
+"使所有PERFECT/GREAT音符获得 %d%% 的分数加成" = "Great/Perfect notes will receive a %d%% score bonus";
+"使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成" = "Nice/Great/Perfect notes will receive a %d%% score bonus";
+"获得额外的 %d%% 的COMBO加成" = "you will gain an extra %d%% combo bonus";
+"使所有GREAT音符改判为PERFECT" = "Great notes will become Perfect notes";
+"使所有GREAT/NICE音符改判为PERFECT" = "Nice/Great notes will become Perfect notes";
+"使所有GREAT/NICE/BAD音符改判为PERFECT" = "Bad/Nice/Great notes will become Perfect notes";
+"所有音符改判为PERFECT" = "all notes will become Perfect notes";
+"使NICE音符不会中断COMBO" = "Nice notes will not break combo";
+"使BAD/NICE音符不会中断COMBO" = "Bad/Nice notes will not break combo";
+"使你的COMBO不会中断" = "your combo will not be broken";
+"使你的生命不会减少" = "you will not lose health";
+"使所有音符恢复你 %d 点生命" = "all notes will restore %d health";
+"消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO" = "%2$d life will be consumed, then: Perfect notes receive a %1$d%% score bonus, and Nice/Bad notes will not break combo";
+"使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO" = "Perfect notes will receive a %d%% score bonus，and notes other tran Perfect will break combo";
+"会发生有趣的事情" = "something interesting will happen";
+"使所有PERFECT音符恢复你 %d 点生命" = "Perfect notes will restore %d health";
+"使所有PERFECT/GREAT音符恢复你 %d 点生命" = "Great/Perfect notes will restore %d health";
+"使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命" = "Nice/Great/Perfect notes will restore %d health";
+"当前发动技能将被增强" = "currently active skills will be boosted";
+"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cute idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cool idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Passion idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health";
+
+"每 %d 秒，" = "Every %d seconds: ";
+"有 %@%% 的几率" = "there is a %@%% chance that ";
+"，持续 %@ 秒。" = " for %@ seconds.";
+
+"所有Cute" = "all Cute";
+"所有Cool" = "all Cool";
+"所有Passion" = "all Passion";
+"所有" = "all";
+
+"Vocal表现值" = "the Vocal appeal";
+"Visual表现值" = "the Visual appeal";
+"Dance表现值" = "the Dance appeal";
+"所有表现值" = "all appeals";
+"生命" = "life";
+"特技发动几率" = "the skill probability";
+
+"提升%@偶像的%@ %d%%。" = "raises %2$@ of %1$@ members by %3$d%%.";
+"%@和%@" = "%@ and %@";
+"、" = ", ";
+"只有" = "only ";
+"当%@属性的偶像存在于队伍时，" = "When there are %@ idols on the team, ";
+"此队长技能的内部描述格式未定义" = "I don't know how to describe this leader skill.";
+/* end of skill explain localization */

@@ -49,7 +49,7 @@ class TeamInformationSkillListCell: UITableViewCell {
         let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
         for i in 0...4 {
             if let skill = unit[i].card?.skill {
-                let str = "\(skill.skillName!): Lv.\(unit[i].skillLevel)\n\(skill.getExplainByLevel(Int(unit[i].skillLevel), languageType: CGSSGlobal.languageType))"
+                let str = "\(skill.skillName!): Lv.\(unit[i].skillLevel)\n\(skill.getLocalizedExplainByLevel(Int(unit[i].skillLevel)))"
                 let arr = [str]
                 skillListStrings.append(arr)
             } else {

@@ -41,7 +41,6 @@ class CardDetailSkillCell: UITableViewCell {
         
         descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.lineBreakMode = .byCharWrapping
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.textColor = UIColor.darkGray
         contentView.addSubview(descriptionLabel)
@@ -76,7 +75,7 @@ extension CardDetailSkillCell: CardDetailSetable {
             return
         }
         nameLabel.text = skill.skillName
-        descriptionLabel.text = skill.getExplainByLevelRange(1, end: 10, languageType: CGSSGlobal.languageType)
+        descriptionLabel.text = skill.getLocalizedExplainByRange(1...10)
         
         var procGridStrings = [[String]]()
         let procChanceMax = skill.procChanceOfLevel(10)

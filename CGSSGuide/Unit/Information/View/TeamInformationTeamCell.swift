@@ -91,12 +91,12 @@ class TeamInformationTeamCell: UITableViewCell, CGSSIconViewDelegate {
         }
 
         if let selfLeaderRef = unit.leader.card {
-            selfLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: selfLeaderRef.attColor.mixed(withColor: .white))
+            selfLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.localizedExplain ?? "")", backgroundColor: selfLeaderRef.attColor.mixed(withColor: .white))
         } else {
             selfLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))
         }
         if let friendLeaderRef = unit.friendLeader.card {
-            friendLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.getLocalizedExplain(languageType: CGSSGlobal.languageType) ?? "")", backgroundColor: friendLeaderRef.attColor.mixed(withColor: .white))
+            friendLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.localizedExplain ?? "")", backgroundColor: friendLeaderRef.attColor.mixed(withColor: .white))
         } else {
             friendLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))
         }

@@ -9,31 +9,80 @@
 import Foundation
 import SwiftyJSON
 
-fileprivate let leaderSkillTarget:[Int:String] = [
-    1: NSLocalizedString("所有Cute", comment: "队长技能描述"),
-    2: NSLocalizedString("所有Cool", comment: "队长技能描述"),
-    3: NSLocalizedString("所有Passion", comment: "队长技能描述"),
-    4: NSLocalizedString("所有", comment: "队长技能描述")
+fileprivate let leaderSkillTarget = [
+    "cute": NSLocalizedString("所有Cute", comment: "队长技能描述"),
+    "cool": NSLocalizedString("所有Cool", comment: "队长技能描述"),
+    "passion": NSLocalizedString("所有Passion", comment: "队长技能描述"),
+    "all": NSLocalizedString("所有", comment: "队长技能描述")
 ]
 
 fileprivate let leaderSkillParam = [
-    1: NSLocalizedString("Vocal表现值", comment: "队长技能描述"),
-    2: NSLocalizedString("Visual表现值", comment: "队长技能描述"),
-    3: NSLocalizedString("Dance表现值", comment: "队长技能描述"),
-    4: NSLocalizedString("所有表现值", comment: "队长技能描述"),
-    5: NSLocalizedString("生命", comment: "队长技能描述"),
-    6: NSLocalizedString("特技发动几率", comment: "队长技能描述")
+    "vocal": NSLocalizedString("Vocal表现值", comment: "队长技能描述"),
+    "visual": NSLocalizedString("Visual表现值", comment: "队长技能描述"),
+    "dance": NSLocalizedString("Dance表现值", comment: "队长技能描述"),
+    "all": NSLocalizedString("所有表现值", comment: "队长技能描述"),
+    "life": NSLocalizedString("生命", comment: "队长技能描述"),
+    "skill_probability": NSLocalizedString("特技发动几率", comment: "队长技能描述")
 ]
 
+fileprivate var effectClause = NSLocalizedString("提升%@偶像的%@ %d%%。", comment: "")
+fileprivate var andConjunction = NSLocalizedString("%@和%@", comment: "")
+fileprivate var andMark = NSLocalizedString("、", comment: "")
+fileprivate var only = NSLocalizedString("只有", comment: "")
+fileprivate var predicateClause = NSLocalizedString("当%@属性的偶像存在于队伍时，", comment: "")
+fileprivate var unknown = NSLocalizedString("此队长技能的内部描述格式未定义", comment: "")
+
 extension CGSSLeaderSkill {
-    func getLocalizedExplain(languageType: LanguageType) -> String {
-        switch languageType {
-        case .zh:
-            return explainEn
-        default:
-            return explain
+   
+    var localizedExplain: String {
+        if upType == 1 && type == 20 {
+            let attr = leaderSkillTarget[targetAttribute] ?? NSLocalizedString("未知", comment: "")
+            let param = leaderSkillParam[targetParam] ?? NSLocalizedString("未知", comment: "")
+            
+            let effect = String.init(format: effectClause, attr, param, upValue)
+            
+            var needList: [String] = []
+            if needCute > 0 {
+                needList.append("Cute")
+            }
+            if needCool > 0 {
+                needList.append("Cool")
+            }
+            if needPassion > 0 {
+                needList.append("Passion")
+            }
+            
+            var needStr = ""
+            if needList.count > 0 {
+                if needList.count == 1 {
+                    needStr = needList[0]
+                } else {
+                    needStr = needList[..<(needList.count - 1)].joined(separator: andMark)
+                    needStr = String.init(format: andConjunction, needStr, needList.last!)
+                }
+                
+                // FIXME: consider values of need_x in leader_skill_t
+                // Rei_Fan49 - Today at 5:36 PM
+                // princess and focus only works for single color
+                // it requires 5 or 6 per color
+                // which implies monocolor team or no activation
+                // cinfest team requires 1 each color (according to internal data)
+                
+                if needList.count < 3 {
+                    needStr = only + needStr
+                }
+                
+                let built = String.init(format: predicateClause, needStr) + effect
+                return built
+            } else {
+                let built = String(effect.first ?? " ").uppercased() + effect.substring(from: effect.index(after: effect.startIndex))
+                return built
+            }
+        } else {
+            return unknown
         }
     }
+    
 }
 
 class CGSSLeaderSkill: CGSSBaseModel {
