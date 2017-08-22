@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import ImageViewer
+import SDWebImage
 
 class CardDetailViewController: BaseTableViewController {
     
@@ -18,6 +20,42 @@ class CardDetailViewController: BaseTableViewController {
             print("load card \(card.id!)")
         }
     }
+    
+    lazy var items: [GalleryItem] = {
+       var result = [GalleryItem]()
+        result.append(GalleryItem.image(fetchImageBlock: { (completion) in
+            guard let url = URL(string: self.card.cardImageRef) else {
+                completion(nil)
+                return
+            }
+            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
+                completion(image)
+            })
+        }))
+        if self.card.hasSpread {
+            result.append(GalleryItem.image(fetchImageBlock: { (completion) in
+                guard let url = self.card.spreadImageURL else {
+                    completion(nil)
+                    return
+                }
+                SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
+                    completion(image)
+                })
+            }))
+        }
+        if self.card.hasSign {
+            result.append(GalleryItem.image(fetchImageBlock: { (completion) in
+                guard let url = self.card.signImageURL else {
+                    completion(nil)
+                    return
+                }
+                SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
+                    completion(image)
+                })
+            }))
+        }
+        return result
+    }()
     
     fileprivate struct Row: CustomStringConvertible {
         var type: UITableViewCell.Type
@@ -185,17 +223,6 @@ class CardDetailViewController: BaseTableViewController {
     
     @objc func backAction() {
         navigationController?.popViewController(animated: true)
-        /*if navigationController?.viewControllers.count > 2 {
-         navigationController?.popViewControllerAnimated(true)
-         } else {
-         // 当返回列表页时为了搜索栏显示效果(使用默认的动画 会出现闪烁) 只能使用自定义动画返回
-         let transition = CATransition()
-         transition.duration = 0.3
-         transition.type = kCATransitionReveal
-         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-         navigationController?.popViewControllerAnimated(false)
-         }*/
-        
     }
     
     @objc func showCardImageAction() {
@@ -268,8 +295,48 @@ extension CardDetailViewController: CardDetailSpreadImageCellDelegate {
     }
     
     func tappedCardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell) {
-        setSpreadImageMode(!isSpreadModeOn, animated: true)
+//        setSpreadImageMode(!isSpreadModeOn, animated: true)
+        let config = [
+            GalleryConfigurationItem.closeButtonMode(.builtIn),
+            GalleryConfigurationItem.hideDecorationViewsOnLaunch(true),
+            GalleryConfigurationItem.deleteButtonMode(.none),
+            GalleryConfigurationItem.thumbnailsButtonMode(.none),
+            GalleryConfigurationItem.swipeToDismissMode(.vertical)
+        ]
+        let vc = GalleryViewController(startIndex: 1, itemsDataSource: self, itemsDelegate: nil, displacedViewsDataSource: self, configuration: config)
+        presentImageGallery(vc)
     }
+}
+
+extension CardDetailViewController: GalleryItemsDataSource {
+    
+    func itemCount() -> Int {
+        var count = 1
+        if card.hasSpread {
+            count += 1
+        }
+        if card.signImageURL != nil {
+            count += 1
+        }
+        return count
+    }
+    
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        return items[index]
+    }
+    
+}
+
+extension CardDetailViewController: GalleryDisplacedViewsDataSource {
+    
+    func provideDisplacementItem(atIndex index: Int) -> DisplaceableView? {
+        if index == 1 {
+            return spreadImageView
+        } else {
+            return nil
+        }
+    }
+    
 }
 
 extension CardDetailViewController: CGSSIconViewDelegate {

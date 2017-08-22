@@ -35,7 +35,7 @@ class SpreadImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
-        transitioningDelegate = self
+//        transitioningDelegate = self
         view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -76,24 +76,19 @@ class SpreadImageViewController: UIViewController {
     }
 }
 
-extension SpreadImageViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if let vc = source as? CardDetailViewController {
-            customPresentAnimator.sourceImageView = vc.spreadImageView
-            customPresentAnimator.sourceNavigationController = vc.navigationController
-        }
-        customPresentAnimator.animatorType = . present
-        return customPresentAnimator
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        customPresentAnimator.animatorType = .dismiss
-        return customPresentAnimator
-    }
-}
+//extension SpreadImageViewController: UIViewControllerTransitioningDelegate {
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        if let vc = source as? CardDetailViewController {
+//            customPresentAnimator.sourceImageView = vc.spreadImageView
+//            customPresentAnimator.sourceNavigationController = vc.navigationController
+//        }
+//        customPresentAnimator.animatorType = . present
+//        return customPresentAnimator
+//    }
+//
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        customPresentAnimator.animatorType = .dismiss
+//        return customPresentAnimator
+//    }
+//}
 
-extension SpreadImageViewController: Transitionable {
-    var transitionViews: [String : UIView] {
-        return ["spreadImageView": imageView]
-    }
-}

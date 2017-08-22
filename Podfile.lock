@@ -26,6 +26,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - ImageViewer (4.1.0)
   - lz4 (128)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - FMDB
+  - ImageViewer
   - lz4
   - ReachabilitySwift
   - SDWebImage
@@ -70,6 +72,7 @@ SPEC CHECKSUMS:
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  ImageViewer: 163e5832e0a09e31a3e3482cce6e5e9029356174
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -80,6 +83,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: b331cd5a4f3a8f27b8707f09776e861d3d9cffce
   ZKDrawerController: 669c26533e1e797f95a8aaa8edc150353bf6228b
 
-PODFILE CHECKSUM: ab9f0ef686dc7eab8091620c20176610285d6947
+PODFILE CHECKSUM: 0df992a9e2af677304e5ce96a1ef63f4ad07416b
 
 COCOAPODS: 1.3.0.rc.1

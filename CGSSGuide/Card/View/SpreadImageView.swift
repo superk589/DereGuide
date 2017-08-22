@@ -9,8 +9,9 @@
 import UIKit
 import SDWebImage
 import SnapKit
+import ImageViewer
 
-class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
+class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableView {
     
     var progressIndicator: UIProgressView!
     

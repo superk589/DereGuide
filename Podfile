@@ -18,6 +18,7 @@ target 'CGSSGuide' do
   pod 'DynamicColor'
 #  pod 'CryptoSwift'
 #  pod 'SwiftTryCatch'
+  pod 'ImageViewer'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'
