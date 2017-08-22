@@ -93,7 +93,9 @@ extension CGSSLive {
     }
     
     @objc dynamic var maxNumberOfNotes: Int {
-        return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
+        return liveDetails[selectableMaxDifficulty.rawValue - 1].numberOfNotes
+        // this method takes very long time, because it read each beatmap files
+//        return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
     }
 }
 
@@ -294,29 +296,37 @@ class CGSSLive: CGSSBaseModel {
         composer = json["composer"].stringValue
         let debutDetailId = json["debut_detail_id"].intValue
         let debutStars = json["debut_difficulty"].intValue
+        let debutNotes = json["debut_notes_number"].intValue
         eventType = json["event_type"].intValue
         id = json["id"].intValue
         lyricist = json["lyricist"].stringValue
         let masterDetailId = json["master_detail_id"].intValue
         let masterStars = json["master_difficulty"].intValue
+        let masterNotes = json["master_notes_number"].intValue
+
         let masterPlusDetailId = json["master_plus_detail_id"].intValue
         let masterPlusStars = json["master_plus_difficulty"].intValue
+        let masterPlusNotes = json["master_plus_notes_number"].intValue
+
         musicDataId = json["music_data_id"].intValue
         name = json["name"].stringValue.replacingOccurrences(of: "\\n", with: "")
         positionNum = json["position_num"].intValue
         let proDetailId = json["pro"].intValue
         let proStars = json["pro_difficulty"].intValue
+        let proNotes = json["pro_notes_number"].intValue
         let regularDetailId = json["regular_detail_id"].intValue
         let regularStars = json["regular_difficulty"].intValue
+        let regularNotes = json["regular_notes_number"].intValue
+
         startDate = json["start_date"].stringValue
         type = json["type"].intValue
         super.init()
         
-        liveDetails.append(CGSSLiveDetail(detailId: debutDetailId, difficulty: .debut, stars: debutStars))
-        liveDetails.append(CGSSLiveDetail(detailId: regularDetailId, difficulty: .regular, stars: regularStars))
-        liveDetails.append(CGSSLiveDetail(detailId: proDetailId, difficulty: .pro, stars: proStars))
-        liveDetails.append(CGSSLiveDetail(detailId: masterDetailId, difficulty: .master, stars: masterStars))
-        liveDetails.append(CGSSLiveDetail(detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterPlusStars))
+        liveDetails.append(CGSSLiveDetail(detailId: debutDetailId, difficulty: .debut, stars: debutStars, numberOfNotes: debutNotes))
+        liveDetails.append(CGSSLiveDetail(detailId: regularDetailId, difficulty: .regular, stars: regularStars, numberOfNotes: regularNotes))
+        liveDetails.append(CGSSLiveDetail(detailId: proDetailId, difficulty: .pro, stars: proStars, numberOfNotes: proNotes))
+        liveDetails.append(CGSSLiveDetail(detailId: masterDetailId, difficulty: .master, stars: masterStars, numberOfNotes: masterNotes))
+        liveDetails.append(CGSSLiveDetail(detailId: masterPlusDetailId, difficulty: .masterPlus, stars: masterPlusStars, numberOfNotes: masterPlusNotes))
     }
     
     public required init?(coder aDecoder: NSCoder) {

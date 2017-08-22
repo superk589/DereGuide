@@ -245,14 +245,16 @@ class Master: FMDatabaseQueue {
                 var liveId: Int = 0
                 if type == 5 || type == 3 {
                     grooveOrParadeCount += 1
-                    let liveSql = "select * from live_data where sort = \(3000 + grooveOrParadeCount)"
+                    let liveSql = "select * from live_data where sort = \(3000 + grooveOrParadeCount) and event_type > 0"
                     let subSet2 = try db.executeQuery(liveSql, values: nil)
                     while subSet2.next() {
                         liveId = Int(subSet2.int(forColumn: "id"))
                         break
                     }
                 } else {
-                    let liveSql = "select * from live_data where sort = \(id)"
+                    // here use event_type > 0 to filter, cuz sort_id may be the same (1024)
+                    // another way is to use start_date
+                    let liveSql = "select * from live_data where sort = \(id) and event_type > 0"
                     let subSet2 = try db.executeQuery(liveSql, values: nil)
                     while subSet2.next() {
                         liveId = Int(subSet2.int(forColumn: "id"))
@@ -286,7 +288,7 @@ class Master: FMDatabaseQueue {
     func getLives(liveId: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSLive]>) {
         var list = [CGSSLive]()
         execute({ (db) in
-            let selectSql = "select a.id, a.event_type, a.music_data_id, a.start_date, a.difficulty_1 debut_detail_id, (select level_vocal from live_detail where a.difficulty_1 = id) debut_difficulty,  a.difficulty_2 regular_detail_id, (select level_vocal from live_detail where a.difficulty_2 = id) regular_difficulty, a.difficulty_3 pro, (select level_vocal from live_detail where a.difficulty_3 = id) pro_difficulty, a.difficulty_4 master_detail_id, (select level_vocal from live_detail where a.difficulty_4 = id) master_difficulty, a.difficulty_5 master_plus_detail_id, (select level_vocal from live_detail where a.difficulty_5 = id) master_plus_difficulty, a.type, b.bpm, b.name, b.composer, b.lyricist, c.chara_position_1, c.chara_position_2, c.chara_position_3, c.chara_position_4, c.chara_position_5, c.position_num from live_data a, music_data b Left outer join live_data_position c on a.id = c.live_data_id where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
+            let selectSql = "select a.id, a.event_type, a.music_data_id, a.start_date, a.difficulty_1 debut_detail_id, (select level_vocal from live_detail where a.difficulty_1 = id) debut_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 1) debut_notes_number, a.difficulty_2 regular_detail_id, (select level_vocal from live_detail where a.difficulty_2 = id) regular_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 2) regular_notes_number, a.difficulty_3 pro, (select level_vocal from live_detail where a.difficulty_3 = id) pro_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 3) pro_notes_number, a.difficulty_4 master_detail_id, (select level_vocal from live_detail where a.difficulty_4 = id) master_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 4) master_notes_number, a.difficulty_5 master_plus_detail_id, (select level_vocal from live_detail where a.difficulty_5 = id) master_plus_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 5) master_plus_notes_number, a.type, b.bpm, b.name, b.composer, b.lyricist, c.chara_position_1, c.chara_position_2, c.chara_position_3, c.chara_position_4, c.chara_position_5, c.position_num from live_data a, music_data b Left outer join live_data_position c on a.id = c.live_data_id where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let json = JSON(set.resultDictionary ?? [AnyHashable: Any]())

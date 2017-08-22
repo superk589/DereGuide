@@ -115,12 +115,14 @@ class CGSSLiveDetail: CGSSBaseModel {
     var difficulty: CGSSLiveDifficulty
     var id: Int
     var stars: Int
+    var numberOfNotes: Int
         
-    init(detailId: Int, difficulty: CGSSLiveDifficulty, stars: Int) {
+    init(detailId: Int, difficulty: CGSSLiveDifficulty, stars: Int, numberOfNotes: Int) {
         
         self.difficulty = difficulty
         self.id = detailId
         self.stars = stars
+        self.numberOfNotes = numberOfNotes
         super.init()
     }
     
