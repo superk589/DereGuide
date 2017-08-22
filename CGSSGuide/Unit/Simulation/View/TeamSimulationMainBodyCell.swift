@@ -44,7 +44,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        calculationButton = Widebutton()
+        calculationButton = WideButton()
         calculationButton.setTitle(NSLocalizedString("一般计算", comment: "队伍详情页面"), for: .normal)
         calculationButton.backgroundColor = Color.dance
         calculationButton.addTarget(self, action: #selector(startCalculate), for: .touchUpInside)
@@ -64,7 +64,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.top.equalTo(calculationButton.snp.bottom).offset(10)
         }
         
-        simulationButton = Widebutton()
+        simulationButton = WideButton()
         simulationButton.setTitle(NSLocalizedString("模拟计算", comment: "队伍详情页面"), for: .normal)
         simulationButton.backgroundColor = Color.vocal
         simulationButton.addTarget(self, action: #selector(startSimulate), for: .touchUpInside)
@@ -81,7 +81,7 @@ class TeamSimulationMainBodyCell: UITableViewCell {
             make.centerY.equalTo(simulationButton)
         }
         
-        cancelButton = Widebutton()
+        cancelButton = WideButton()
         cancelButton.setTitle(NSLocalizedString("取消", comment: ""), for: .normal)
         cancelButton.backgroundColor = Color.vocal
         cancelButton.addTarget(self, action: #selector(cancelSimulating), for: .touchUpInside)

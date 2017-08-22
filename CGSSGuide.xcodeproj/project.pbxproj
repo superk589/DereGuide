@@ -216,7 +216,7 @@
 		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
 		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
 		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
-		1297F7561F467DFB004F353B /* Widebutton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297F7551F467DFB004F353B /* Widebutton.swift */; };
+		1297F7561F467DFB004F353B /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297F7551F467DFB004F353B /* WideButton.swift */; };
 		129B95541F3156B9007B7AE2 /* ColleagueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95531F3156B9007B7AE2 /* ColleagueViewController.swift */; };
 		129B95581F31B0D2007B7AE2 /* ColleagueComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95571F31B0D2007B7AE2 /* ColleagueComposeViewController.swift */; };
 		129B955A1F31B50F007B7AE2 /* ColleagueInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95591F31B50F007B7AE2 /* ColleagueInputCell.swift */; };
@@ -610,7 +610,7 @@
 		1296759D1EBF62400037827B /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		129675A41EBF62B20037827B /* PageCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionController.swift; sourceTree = "<group>"; };
 		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
-		1297F7551F467DFB004F353B /* Widebutton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widebutton.swift; sourceTree = "<group>"; };
+		1297F7551F467DFB004F353B /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
 		129B95531F3156B9007B7AE2 /* ColleagueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueViewController.swift; sourceTree = "<group>"; };
 		129B95571F31B0D2007B7AE2 /* ColleagueComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueComposeViewController.swift; sourceTree = "<group>"; };
 		129B95591F31B50F007B7AE2 /* ColleagueInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueInputCell.swift; sourceTree = "<group>"; };
@@ -1201,7 +1201,7 @@
 				12F57C621EE308B600638650 /* IndicatorScrollView.swift */,
 				12F57C641EE30EFB00638650 /* IndicatorTableView.swift */,
 				12356BCA1E8FE94F005EEB7A /* TipView.swift */,
-				1297F7551F467DFB004F353B /* Widebutton.swift */,
+				1297F7551F467DFB004F353B /* WideButton.swift */,
 				120BDE871F4871260098E93C /* WideLoadingButton.swift */,
 				129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */,
 				129ECB241ECB3BC00010BC7F /* GridView.swift */,
@@ -2235,7 +2235,7 @@
 				1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */,
 				121C78CA1D561E7900D0B636 /* CGSSAppeal.swift in Sources */,
 				120BDE8A1F4897F90098E93C /* TeamSimulationStepperOption.swift in Sources */,
-				1297F7561F467DFB004F353B /* Widebutton.swift in Sources */,
+				1297F7561F467DFB004F353B /* WideButton.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */,

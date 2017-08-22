@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WideLoadingButton: Widebutton {
+class WideLoadingButton: WideButton {
 
     private(set) var isLoading = false
     var indicator: UIActivityIndicatorView!

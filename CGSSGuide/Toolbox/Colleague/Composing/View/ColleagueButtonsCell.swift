@@ -32,9 +32,9 @@ class ColleagueDescriptionLabel: UILabel {
 
 class ColleagueButtonsCell: UITableViewCell {
     
-    let revokeButton = Widebutton()
+    let revokeButton = WideButton()
 //    let postButton = Widebutton()
-    let saveButton = Widebutton()
+    let saveButton = WideButton()
     
     weak var delegate: ColleaColleagueButtonsCellDelegate?
     

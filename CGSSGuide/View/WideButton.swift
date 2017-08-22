@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Widebutton: UIButton {
+class WideButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

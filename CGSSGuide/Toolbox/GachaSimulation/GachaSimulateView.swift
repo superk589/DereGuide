@@ -19,8 +19,8 @@ class GachaSimulateView: UIView {
     let space: CGFloat = 10
     let btnW = min(96, (Screen.shortSide - 60) / 5)
     var leftLabel: UILabel!
-    var singleButton : UIButton!
-    var tenButton: UIButton!
+    var singleButton = WideButton()
+    var tenButton = WideButton()
     var resultView: UIView!
     var resultGrid: GridLabel!
 
@@ -38,7 +38,6 @@ class GachaSimulateView: UIView {
             make.top.equalTo(10)
         }
         
-        singleButton = UIButton()
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = Color.passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
@@ -47,10 +46,8 @@ class GachaSimulateView: UIView {
             make.left.equalTo(10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
             make.top.equalTo(leftLabel.snp.bottom).offset(2 * btnW + 30)
-            make.height.equalTo(30)
         }
         
-        tenButton = UIButton()
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
         tenButton.backgroundColor = Color.cute
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
@@ -59,7 +56,6 @@ class GachaSimulateView: UIView {
             make.right.equalTo(-10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
             make.top.equalTo(singleButton)
-            make.height.equalTo(30)
         }
         
         resultView = UIView()
