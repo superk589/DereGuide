@@ -118,7 +118,7 @@ extension CGSSEvent {
 
 
 class CGSSEvent: CGSSBaseModel {
-    var sortId: Int
+    @objc dynamic var sortId: Int
     var id:Int
     var type:Int
     var startDate:String

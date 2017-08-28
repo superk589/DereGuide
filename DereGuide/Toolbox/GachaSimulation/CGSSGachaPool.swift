@@ -108,7 +108,7 @@ class CGSSGachaPool: CGSSBaseModel {
 
     var dicription: String
     var endDate: String
-    var id: Int
+    @objc dynamic var id: Int
     var name: String
     var rareRatio: Int
     var srRatio: Int

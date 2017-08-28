@@ -33,7 +33,7 @@ class TeamAdvanceCalculationCell: UITableViewCell {
         }
     }
     var stackView: UIStackView!
-    var startButton: UIButton!
+    var startButton: WideButton!
     var resultView: TeamAdvanceCalculationResultView!
     var startButtonIndicator: UIActivityIndicatorView!
     
@@ -68,16 +68,14 @@ class TeamAdvanceCalculationCell: UITableViewCell {
             make.top.equalTo(stackView.snp.bottom).offset(10)
         }
         
-        startButton = UIButton()
+        startButton = WideButton()
         startButton.setTitle(NSLocalizedString("开始计算", comment: ""), for: .normal)
-        startButton.setTitleColor(UIColor.white, for: .normal)
-        startButton.backgroundColor = Color.parade
+        startButton.backgroundColor = Color.dance
         startButton.addTarget(self, action: #selector(handleStartButton(_:)), for: .touchUpInside)
         contentView.addSubview(startButton)
         startButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.height.equalTo(30)
             make.top.equalTo(resultView.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }

@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var downloadAtStartCell: UITableViewCell! {
         didSet {
             let downloadAtStartSwitch = UISwitch()
+            downloadAtStartSwitch.onTintColor = Color.dance
             downloadAtStartCell.accessoryView = downloadAtStartSwitch
             let downloadAtStart = UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true
             downloadAtStartSwitch.isOn = downloadAtStart
@@ -26,6 +27,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var fullImageCacheCell: UITableViewCell! {
         didSet {
             let fullImageCacheSwitch = UISwitch()
+            fullImageCacheSwitch.onTintColor = Color.dance
             fullImageCacheCell.accessoryView = fullImageCacheSwitch
             let fullImageCache = UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
             fullImageCacheSwitch.isOn = fullImageCache
