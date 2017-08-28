@@ -1,6 +1,6 @@
 //
 //  BannerView.swift
-//  CGSSGuide
+//  DereGuide
 //
 //  Created by zzk on 2017/5/24.
 //  Copyright © 2017年 zzk. All rights reserved.

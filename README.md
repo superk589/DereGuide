@@ -1,4 +1,4 @@
-# CGSSGuide
+# DereGuide
 
 ## Introduction
 This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on data/api from   
@@ -15,17 +15,17 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Event information
 
 ## Download at App Store
-<https://itunes.apple.com/app/cgssguide/id1131934691>
+<https://itunes.apple.com/app/dereguide/id1131934691>
 
 ## Requirements
 * iOS 9.0+
-* Xcode 8.0+
-* Swift 3.1+
+* Xcode 9.0+
+* Swift 4.0+
 
 ## How to build
 * Clone the repository
 ```
-$ git clone https://github.com/superk589/CGSSGuide.git
+$ git clone https://github.com/superk589/DereGuide.git
 ```
 * Install dependencies with [CocoaPods](https://cocoapods.org)
 ```
@@ -33,12 +33,12 @@ $ pod install
 ```
 * Open the workspace in Xcode
 ```
-$ open CGSSGuide.xcworkspace
+$ open DereGuide.xcworkspace
 ```
 
 ## Localization
-CGSSGuide now provide files of localizable strings for other languages
-[How to localize CGSSGuide](https://github.com/superk589/CGSSGuide/wiki)
+DereGuide now provide files of localizable strings for other languages
+[How to localize DereGuide](https://github.com/superk589/DereGuide/wiki)
 
 ## Contributors of other languages
 ### English:

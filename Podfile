@@ -1,6 +1,6 @@
 platform :ios, '9.0'
 use_frameworks!
-target 'CGSSGuide' do
+target 'DereGuide' do
   pod 'SDWebImage'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'

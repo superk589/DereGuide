@@ -1,0 +1,78 @@
+//
+//  NSUserDefaultsExtension.swift
+//  DereGuide
+//
+//  Created by zzk on 16/8/16.
+//  Copyright © 2016年 zzk. All rights reserved.
+//
+
+import UIKit
+
+extension UserDefaults {
+    
+    var birthdayTimeZone: TimeZone {
+        let timeZoneString = self.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
+        switch timeZoneString {
+        case "System":
+            return TimeZone.current
+        default:
+            return TimeZone.init(identifier: timeZoneString)!
+        }
+        
+    }
+    
+    var shouldPostBirthdayNotice: Bool {
+        return UserDefaults.standard.value(forKey: "BirthdayNotice") as? Bool ?? false
+    }
+    var shouldCacheFullImage: Bool {
+        return UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
+    }
+    
+    var shouldShowAd: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "shouldShowAd")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "shouldShowAd") as? Bool ?? true
+        }
+    }
+    
+    func executeDocumentReset(reset: ((Int)->Void)) {
+        let documentVersion = Bundle.main.infoDictionary?["Document Version"] as? Int ?? 1
+        let lastVersion = UserDefaults.standard.value(forKey: "LastDocumentVersion") as? Int ?? 0
+        if documentVersion > lastVersion {
+            reset(lastVersion)
+        }
+        defer {
+            UserDefaults.standard.set(documentVersion, forKey: "LastDocumentVersion")
+        }
+    }
+    
+    var hasRated: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "hasRated")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "hasRated") as? Bool ?? false
+        }
+    }
+    
+    var firstTimeUsingTeamEditingPage: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeUsingTeamEditingPage")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeUsingTeamEditingPage") as? Bool ?? true
+        }
+    }
+    
+    var firstTimeComposingMyProfile: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeComposingMyProfile")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeComposingMyProfile") as? Bool ?? true
+        }
+    }
+    
+}

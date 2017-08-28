@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  DereGuide
+
+  Created by zzk on 2016/9/26.
+  Copyright © 2016年 zzk. All rights reserved.
+*/
+
+NSPhotoLibraryUsageDescription = "ここでアプリをアルバムへのアクセス許可を同意してください。プライバシーの変更はあとでシステム設定に変更することができます。";
+shortcutItemTitle1 = "カード";
+shortcutItemTitle2 = "譜面";
+shortcutItemTitle3 = "イベント";
+shortcutItemTitle4 = "ガシャシミュレーター";
