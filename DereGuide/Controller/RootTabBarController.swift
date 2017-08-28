@@ -12,6 +12,7 @@ class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.tintColor = Color.dance
     }
     
 }

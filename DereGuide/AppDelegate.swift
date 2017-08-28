@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.teamCard)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.unitCard)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.char)
             }
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             if lastVersion < 5 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.teamCard)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
             if lastVersion < 6 {
                 let context = CoreDataStack.default.viewContext
@@ -70,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.moveItem(atPath: Path.cache + "beatmapHash.plist", toPath: BeatmapHashManager.default.path)
             }
             if lastVersion < 9 {
+                CGSSCacheManager.shared.wipeUserDocuments()
                 try? FileManager.default.removeItem(atPath: CGSSDAO.path + "/Data/")
             }
         }

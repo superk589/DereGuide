@@ -86,9 +86,9 @@ class CardFilterSortController: BaseFilterSortController {
         if delegate is CardTableViewController {
             filter = CGSSSorterFilterManager.DefaultFilter.card
             sorter = CGSSSorterFilterManager.DefaultSorter.card
-        } else if delegate is TeamCardSelectTableViewController {
-            filter = CGSSSorterFilterManager.DefaultFilter.teamCard
-            sorter = CGSSSorterFilterManager.DefaultSorter.teamCard
+        } else if delegate is UnitCardSelectTableViewController {
+            filter = CGSSSorterFilterManager.DefaultFilter.unitCard
+            sorter = CGSSSorterFilterManager.DefaultSorter.unitCard
         } else {
             filter = CGSSSorterFilterManager.DefaultFilter.gacha
             sorter = CGSSSorterFilterManager.DefaultSorter.gacha

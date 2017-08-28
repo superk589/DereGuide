@@ -28,8 +28,8 @@ class ColleagueComposeViewController: BaseTableViewController {
         return CoreDataStack.default.viewContext
     }
     
-    lazy var cardSelectionViewController: TeamCardSelectTableViewController = {
-        let vc = TeamCardSelectTableViewController()
+    lazy var cardSelectionViewController: UnitCardSelectTableViewController = {
+        let vc = UnitCardSelectTableViewController()
         vc.delegate = self
         return vc
     }()

@@ -87,8 +87,8 @@ class ColleagueFilterController: UITableViewController {
         }
     }
     
-    lazy var cardSelectionViewController: TeamCardSelectTableViewController = {
-        let vc = TeamCardSelectTableViewController()
+    lazy var cardSelectionViewController: UnitCardSelectTableViewController = {
+        let vc = UnitCardSelectTableViewController()
         vc.delegate = self
         return vc
     }()
@@ -97,7 +97,7 @@ class ColleagueFilterController: UITableViewController {
     
     var setting = FilterSetting(type: [], cardIDs: [], minLevel: 0)
     
-    var stepperCell: TeamAdvanceOptionsTableViewCell!
+    var stepperCell: UnitAdvanceOptionsTableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,10 +117,10 @@ class ColleagueFilterController: UITableViewController {
         tableView.estimatedRowHeight = 44
         
         
-        let option = TeamSimulationStepperOption()
+        let option = StepperOption()
         option.addTarget(self, action: #selector(handleStepper(_:)), for: .valueChanged)
         option.setup(title: NSLocalizedString("最低潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel))
-        stepperCell = TeamAdvanceOptionsTableViewCell(optionStyle: .stepper(option))
+        stepperCell = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option))
     }
     
     @objc func doneAction() {

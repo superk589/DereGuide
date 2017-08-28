@@ -68,7 +68,7 @@ class CenterWantedGroupView: UIView {
     }
     
     @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
-        //        if let view = tap.view as? TeamMemberEditableItemView {
+        //        if let view = tap.view as? MemberEditableItemView {
         //            if let index = stackView.arrangedSubviews.index(of: view) {
         //                // select index
         //            }

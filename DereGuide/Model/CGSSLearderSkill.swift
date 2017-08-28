@@ -65,8 +65,8 @@ extension CGSSLeaderSkill {
                 // Rei_Fan49 - Today at 5:36 PM
                 // princess and focus only works for single color
                 // it requires 5 or 6 per color
-                // which implies monocolor team or no activation
-                // cinfest team requires 1 each color (according to internal data)
+                // which implies monocolor unit or no activation
+                // cinfest unit requires 1 each color (according to internal data)
                 
                 if needList.count < 3 {
                     needStr = only + needStr

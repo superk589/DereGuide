@@ -57,12 +57,12 @@ extension UserDefaults {
         }
     }
     
-    var firstTimeUsingTeamEditingPage: Bool {
+    var firstTimeUsingUnitEditingPage: Bool {
         set {
-            UserDefaults.standard.set(newValue, forKey: "firstTimeUsingTeamEditingPage")
+            UserDefaults.standard.set(newValue, forKey: "firstTimeUsingUnitEditingPage")
         }
         get {
-            return UserDefaults.standard.value(forKey: "firstTimeUsingTeamEditingPage") as? Bool ?? true
+            return UserDefaults.standard.value(forKey: "firstTimeUsingUnitEditingPage") as? Bool ?? true
         }
     }
     

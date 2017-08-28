@@ -13,9 +13,9 @@ class CGSSSorterFilterManager {
     
     struct SorterPath {
         static let card = NSHomeDirectory() + "/Documents/cardSorter.plist"
-        static let teamCard = NSHomeDirectory() + "/Documents/teamCardSorter.plist"
+        static let unitCard = NSHomeDirectory() + "/Documents/unitCardSorter.plist"
         static let live = NSHomeDirectory() + "/Documents/liveSorter.plist"
-        static let teamLive = NSHomeDirectory() + "/Documents/teamLiveSorter.plist"
+        static let unitLive = NSHomeDirectory() + "/Documents/unitLiveSorter.plist"
         static let char = NSHomeDirectory() + "/Documents/charSorter.plist"
         static let event = NSHomeDirectory() + "/Documents/eventSorter.plist"
         static let gachaPool = NSHomeDirectory() + "/Documents/gachaPoolSorter.plist"
@@ -23,9 +23,9 @@ class CGSSSorterFilterManager {
     
     struct FilterPath {
         static let card = NSHomeDirectory() + "/Documents/cardFilter.plist"
-        static let teamCard = NSHomeDirectory() + "/Documents/teamCardFilter.plist"
+        static let unitCard = NSHomeDirectory() + "/Documents/unitCardFilter.plist"
         static let live = NSHomeDirectory() + "/Documents/liveFilter.plist"
-        static let teamLive = NSHomeDirectory() + "/Documents/teamLiveFilter.plist"
+        static let unitLive = NSHomeDirectory() + "/Documents/unitLiveFilter.plist"
         static let char = NSHomeDirectory() + "/Documents/charFilter.plist"
         static let event = NSHomeDirectory() + "/Documents/eventFilter.plist"
         static let gachaPool = NSHomeDirectory() + "/Documents/gachaPoolFilter.plist"
@@ -33,7 +33,7 @@ class CGSSSorterFilterManager {
     
     struct DefaultFilter {
         static let card = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b11110000, skillMask: 0b1_1111_1111_1111, gachaMask: 0b11111, conditionMask: 0b1111111, procMask: 0b1111, favoriteMask: nil)
-        static let teamCard = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b10100000, skillMask: 0b0_1111_1000_0111, gachaMask: 0b11111, conditionMask: 0b1111111, procMask: 0b1111,  favoriteMask: nil)
+        static let unitCard = CGSSCardFilter.init(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b10100000, skillMask: 0b0_1111_1000_0111, gachaMask: 0b11111, conditionMask: 0b1111111, procMask: 0b1111,  favoriteMask: nil)
         static let char = CGSSCharFilter.init(typeMask: 0b111, ageMask: 0b11111, bloodMask: 0b11111, cvMask: 0b11, favoriteMask: 0b11)
         static let live = CGSSLiveFilter.init(typeMask: 0b1111, eventMask: 0b1111, difficultyMask: 0b11111)
         static let event = CGSSEventFilter.init(typeMask: 0b11111)
@@ -43,7 +43,7 @@ class CGSSSorterFilterManager {
     
     struct DefaultSorter {
         static let card = CGSSSorter.init(property: "update_id")
-        static let teamCard = CGSSSorter.init(property: "update_id")
+        static let unitCard = CGSSSorter.init(property: "update_id")
         static let char = CGSSSorter.init(property: "sName", ascending: true)
         static let live = CGSSSorter.init(property: "updateId")
         static let event = CGSSSorter.init(property: "sortId")
@@ -53,11 +53,11 @@ class CGSSSorterFilterManager {
     
     lazy var cardSorter = CGSSSorter.init(fromFile: SorterPath.card) ?? DefaultSorter.card
     
-    lazy var teamCardSorter = CGSSSorter.init(fromFile: SorterPath.teamCard) ?? DefaultSorter.teamCard
+    lazy var unitCardSorter = CGSSSorter.init(fromFile: SorterPath.unitCard) ?? DefaultSorter.unitCard
     
     lazy var cardfilter = CGSSCardFilter.init(fromFile: FilterPath.card) ?? DefaultFilter.card
 
-    lazy var teamCardfilter = CGSSCardFilter.init(fromFile: FilterPath.teamCard) ?? DefaultFilter.teamCard
+    lazy var unitCardfilter = CGSSCardFilter.init(fromFile: FilterPath.unitCard) ?? DefaultFilter.unitCard
     
     lazy var charFilter = CGSSCharFilter.init(fromFile: FilterPath.char) ?? DefaultFilter.char
     
@@ -67,9 +67,9 @@ class CGSSSorterFilterManager {
     
     lazy var liveSorter = CGSSSorter.init(fromFile: SorterPath.live) ?? DefaultSorter.live
     
-    lazy var teamLiveFilter = CGSSLiveFilter(fromFile: FilterPath.teamLive) ?? DefaultFilter.live
+    lazy var unitLiveFilter = CGSSLiveFilter(fromFile: FilterPath.unitLive) ?? DefaultFilter.live
     
-    lazy var teamLiveSorter = CGSSSorter(fromFile: SorterPath.teamLive) ?? DefaultSorter.live
+    lazy var unitLiveSorter = CGSSSorter(fromFile: SorterPath.unitLive) ?? DefaultSorter.live
     
     lazy var eventFilter = CGSSEventFilter.init(fromFile: FilterPath.event) ?? DefaultFilter.event
     
@@ -79,14 +79,14 @@ class CGSSSorterFilterManager {
     
     lazy var gachaPoolSorter = CGSSSorter.init(fromFile: SorterPath.gachaPool) ?? DefaultSorter.gachaPool
     
-    func saveForTeamCard() {
-        teamCardSorter.save(to: SorterPath.teamCard)
-        teamCardfilter.save(to: FilterPath.teamCard)
+    func saveForUnitCard() {
+        unitCardSorter.save(to: SorterPath.unitCard)
+        unitCardfilter.save(to: FilterPath.unitCard)
     }
     
-    func saveForTeamLive() {
-        teamLiveFilter.save(to: FilterPath.teamLive)
-        teamLiveSorter.save(to: SorterPath.teamLive)
+    func saveForUnitLive() {
+        unitLiveFilter.save(to: FilterPath.unitLive)
+        unitLiveSorter.save(to: SorterPath.unitLive)
     }
     
     func saveForCard() {

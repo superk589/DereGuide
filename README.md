@@ -58,4 +58,4 @@ DereGuide now provide files of localizable strings for other languages
 * Author: [Snack-X](https://github.com/Snack-X)
 
 ### [starlight.tachibana.cool](https://starlight.tachibana.cool)
-* Author: StarlightDeck
+* Author: [motitaiyaki](https://github.com/motitaiyaki)
