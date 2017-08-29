@@ -34,9 +34,9 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - ReachabilitySwift (3)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - SDWebImage (4.1.0):
+    - SDWebImage/Core (= 4.1.0)
+  - SDWebImage/Core (4.1.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - TTGTagCollectionView (1.6.0)
@@ -76,7 +76,7 @@ SPEC CHECKSUMS:
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTGTagCollectionView: ba35fb7dc284b368c86bf044bd889293a69114e8

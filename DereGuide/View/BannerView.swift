@@ -53,7 +53,7 @@ class BannerView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func sd_setImage(with url: URL!) {
+    func sd_setImage(with url: URL!) {
         self.url = url
         sd_setImage(with: url, completed: nil)
     }
