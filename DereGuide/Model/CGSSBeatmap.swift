@@ -24,6 +24,10 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     // used in shifting bpm
     var offset: Float = 0
     
+    // context free note information, so each long press slide and filck note need to know the related note
+    weak var previous: CGSSBeatmapNote?
+    weak var next: CGSSBeatmapNote?
+    
     override init() {
         super.init()
     }
@@ -49,6 +53,19 @@ class CGSSBeatmapNote: NSObject, NSCoding {
         aCoder.encode(self.sync, forKey: "sync")
         aCoder.encode(self.groupId, forKey: "groupId")
     }
+}
+
+extension CGSSBeatmapNote {
+    
+    func append(_ anotherNote: CGSSBeatmapNote) {
+        self.next = anotherNote
+        anotherNote.previous = self
+    }
+    
+    func intervalTo(_ anotherNote: CGSSBeatmapNote) -> Float {
+        return anotherNote.sec - sec
+    }
+    
 }
 
 class CGSSBeatmap: CGSSBaseModel {
@@ -101,41 +118,32 @@ class CGSSBeatmap: CGSSBaseModel {
         return arr
     }()
     
-    
-    var maxLongPressInterval: Float = 0
-    func contextFreeAllNotes() {
-        var positionPressed = [Float].init(repeating: 0, count: 5)
-        var slides = [Int: Float]()
+    func contextFree() {
+        var positionPressed = [CGSSBeatmapNote?](repeating: nil, count: 5)
+        var slides = [Int: CGSSBeatmapNote]()
         for note in self.notes {
             if note.finishPos == 0 {
                 continue
             }
-            if note.type == 2 && positionPressed[note.finishPos! - 1] == 0 {
-                // 长按起始点
+            if note.type == 2 && positionPressed[note.finishPos - 1] == nil {
                 note.longPressType = 1
-                positionPressed[note.finishPos! - 1] = note.sec + note.offset
-            } else if positionPressed[note.finishPos! - 1] > 0 {
-                // 长按结束点
+                positionPressed[note.finishPos - 1] = note
+            } else if positionPressed[note.finishPos - 1] != nil {
                 note.longPressType = 2
-                let interval = (note.sec + note.offset) - positionPressed[note.finishPos! - 1]
-                if interval > maxLongPressInterval {
-                    maxLongPressInterval = interval
-                }
-                positionPressed[note.finishPos! - 1] = 0
+                positionPressed[note.finishPos - 1]?.append(note)
+                positionPressed[note.finishPos - 1] = nil
             }
             
             if note.groupId != 0 {
                 if slides[note.groupId] == nil {
                     // 滑条起始点
-                    slides[note.groupId] = note.sec + note.offset
+                    slides[note.groupId] = note
                 } else {
-                    // 滑条中间点或结束点
-                    let interval = (note.sec + note.offset) - slides[note.groupId]!
                     // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
-                    if interval > maxLongPressInterval && !(note.type != 3 && interval > 4) {
-                        maxLongPressInterval = interval
+                    if slides[note.groupId]!.intervalTo(note) < 4 {
+                        slides[note.groupId]?.append(note)
                     }
-                    slides[note.groupId] = note.sec + note.offset
+                    slides[note.groupId] = note
                 }
             }
         }
