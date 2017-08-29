@@ -51,7 +51,7 @@ class CoreDataStack {
         return string.removingCharacters(in: CharacterSet.letters.inverted).md5()
     }()
     
-    private lazy var storeURL: URL = URL.documents.appendingPathComponent("\(self.ubiquityToken).dereguide")
+    lazy var storeURL: URL = URL.documents.appendingPathComponent("\(self.ubiquityToken).dereguide")
     
     @available(iOS 10.0, *)
     private lazy var container: NSPersistentContainer = {

@@ -107,7 +107,7 @@ class WipeTableViewController: BaseTableViewController {
         
         switch indexPath.row {
         case 1:
-            CGSSCacheManager.shared.getCacheSizeAt(path: (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first ?? "") + "/default", complete: { (sizeString) in
+            CGSSCacheManager.shared.getCacheSizeAt(path: (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first ?? "") + "/default", exclusivePaths: [], complete: { (sizeString) in
                 cell.rightLabel?.text = sizeString
             })
         case 2:
@@ -119,7 +119,7 @@ class WipeTableViewController: BaseTableViewController {
                 cell.rightLabel?.text = sizeString
             })
         case 4:
-            CGSSCacheManager.shared.getCacheSizeAt(path: NSHomeDirectory() + "/Documents", complete: { (sizeString) in
+            CGSSCacheManager.shared.getCacheSizeAt(path: NSHomeDirectory() + "/Documents", exclusivePaths: [CoreDataStack.default.storeURL.path], complete: { (sizeString) in
                 cell.rightLabel?.text = sizeString
             })
         case 5:

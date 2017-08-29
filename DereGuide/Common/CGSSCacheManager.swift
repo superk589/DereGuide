@@ -61,6 +61,9 @@ class CGSSCacheManager {
         if let files = FileManager.default.subpaths(atPath: documentPath) {
             for file in files {
                 let path = documentPath.appendingFormat("/\(file)")
+                if path.contains(CoreDataStack.default.storeURL.path) {
+                    continue
+                }
                 if FileManager.default.fileExists(atPath: path) {
                     do {
                         try FileManager.default.removeItem(atPath: path)
@@ -177,12 +180,17 @@ class CGSSCacheManager {
         }
     }
     
-    func getCacheSizeAt(path: String, complete: ((String)->Void)?) {
+    func getCacheSizeAt(path: String, exclusivePaths: [String], complete: ((String)->Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let files = FileManager.default.subpaths(atPath: path) {
                 var size = 0
-                for file in files {
+                label: for file in files {
                     let path = path.appendingFormat("/\(file)")
+                    for exclusivePath in exclusivePaths {
+                        if path.contains(exclusivePath) {
+                            continue label
+                        }
+                    }
                     if let attributes = try? FileManager.default.attributesOfItem(atPath: path) {
                         size += (attributes[FileAttributeKey.size] as! NSNumber).intValue
                     }
