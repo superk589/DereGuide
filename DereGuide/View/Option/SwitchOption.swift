@@ -20,6 +20,7 @@ class SwitchOption: UIControl {
         super.init(frame: frame)
         
         `switch`.isOn = false
+        `switch`.onTintColor = Color.dance
         addSubview(`switch`)
         `switch`.snp.makeConstraints { (make) in
             make.top.equalToSuperview()

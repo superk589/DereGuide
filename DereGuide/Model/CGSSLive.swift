@@ -20,7 +20,7 @@ enum CGSSLiveSimulatorType: String, CustomStringConvertible, ColorRepresentable 
     var color: UIColor {
         switch self {
         case .normal:
-            return Color.parade
+            return Color.dance
         case .vocal:
             return Color.vocal
         case .dance:

@@ -181,7 +181,6 @@ class CardDetailViewController: BaseTableViewController {
             item3.isEnabled = false
         }
         toolbarItems = [item2, spaceItem2, item3]
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

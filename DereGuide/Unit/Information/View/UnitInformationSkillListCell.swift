@@ -19,7 +19,7 @@ class UnitInformationSkillListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel = UILabel()
-        leftLabel.text = NSLocalizedString("特技列表", comment: "队伍详情页面") + ": "
+        leftLabel.text = NSLocalizedString("特技列表", comment: "队伍详情页面")
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         leftLabel.textAlignment = .left
         

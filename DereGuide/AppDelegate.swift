@@ -105,6 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 同步协调器获取最新的远端数据
         SyncCoordinator.shared.applicationDidFinishLaunching()
         
+        // 设置外观
+        initializeAppearance()
+        
         return true
     }
     
@@ -113,6 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case beatmap = "com.zzk.cgssguide.Second"
         case event = "com.zzk.cgssguide.Third"
         case gacha = "com.zzk.cgssguide.Fourth"
+    }
+    
+    private func initializeAppearance() {
+        window?.tintColor = Color.dance
     }
     
     private func handleShortcutItem(_ item: ShortcutItemType) {

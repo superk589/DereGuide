@@ -21,23 +21,15 @@ class FilterItemView: UIView {
         
         iv = ZKCornerRadiusView()
         addSubview(iv)
-//        iv.snp.makeConstraints { (make) in
-//            make.edges.equalToSuperview()
-//        }
+
         iv.zk.cornerRadius = 3
-        iv.zk.backgroundColor = Color.parade
+        iv.zk.backgroundColor = Color.dance
         
         label = UILabel()
         addSubview(label)
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textAlignment = .center
-//        label.snp.makeConstraints { (make) in
-//            make.top.equalTo(6)
-//            make.bottom.equalTo(-6)
-//            make.left.equalTo(6)
-//            make.right.equalTo(-6)
-//            make.width.greaterThanOrEqualTo(26)
-//        }
+
     }
     
     var isSelected: Bool = false {
@@ -47,7 +39,7 @@ class FilterItemView: UIView {
                 label.textColor = UIColor.white
             } else {
                 iv.isHidden = true
-                label.textColor = Color.parade
+                label.textColor = Color.dance
             }
         }
     }

@@ -36,6 +36,7 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         }
         
         toolbar = UIToolbar()
+        toolbar.tintColor = Color.dance
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()
@@ -44,9 +45,9 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
 
         let leftSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         leftSpaceItem.width = 0
-        let doneItem = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(doneAction))
+        let doneItem = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .done, target: self, action: #selector(doneAction))
         let middleSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
+        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .done, target: self, action: #selector(resetAction))
         
         let rightSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         rightSpaceItem.width = 0
@@ -72,12 +73,15 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return NSLocalizedString("筛选", comment: "")
@@ -85,14 +89,5 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
             return NSLocalizedString("排序", comment: "")
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

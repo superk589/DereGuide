@@ -68,7 +68,7 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
         
         
         supportAppealBox = CheckBox()
-        supportAppealBox.tintColor = Color.parade
+        supportAppealBox.tintColor = Color.dance
         supportAppealBox.label.font = UIFont.systemFont(ofSize: 14)
         supportAppealBox.label.text = NSLocalizedString("使用后援表现值", comment: "队伍详情页面") + ": "
         supportAppealBox.label.textColor = UIColor.darkGray
@@ -100,7 +100,7 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
         
         
         customAppealBox = CheckBox()
-        customAppealBox.tintColor = Color.parade
+        customAppealBox.tintColor = Color.dance
         customAppealBox.label.font = UIFont.systemFont(ofSize: 14)
         customAppealBox.label.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
         customAppealBox.label.textColor = UIColor.darkGray

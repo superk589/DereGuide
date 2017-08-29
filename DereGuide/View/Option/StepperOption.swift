@@ -19,7 +19,7 @@ class StepperOption: UIControl {
         super.init(frame: frame)
         
         stepper = ValueStepper()
-        stepper.tintColor = Color.parade
+        stepper.tintColor = Color.dance
         stepper.numberFormatter.maximumFractionDigits = 0
         stepper.stepValue = 1
         addSubview(stepper)

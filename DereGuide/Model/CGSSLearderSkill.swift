@@ -75,7 +75,7 @@ extension CGSSLeaderSkill {
                 let built = String.init(format: predicateClause, needStr) + effect
                 return built
             } else {
-                let built = String(effect.first ?? " ").uppercased() + effect.substring(from: effect.index(after: effect.startIndex))
+                let built = String(effect[effect.startIndex]).uppercased() + effect[..<effect.endIndex]
                 return built
             }
         } else {

@@ -20,7 +20,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         self.interactivePopGestureRecognizer?.isEnabled = true
         self.delegate = self
         navigationBar.tintColor = Color.dance
-        
+        toolbar.tintColor = Color.dance
         // Do any additional setup after loading the view.
     }
     

@@ -40,7 +40,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         
         defaultTagView = FilterItemView()
         defaultTagView.setTitle(title: NSLocalizedString("全部", comment: ""))
-        defaultTagView.iv.zk.backgroundColor = Color.regular
+        defaultTagView.iv.zk.backgroundColor = Color.visual
         defaultTagView.isSelected = false
         tagViews.append(defaultTagView)
     }

@@ -71,6 +71,7 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "BirthDaySettingCell")
         let swich1 = UISwitch.init(frame: CGRect.zero)
+        swich1.onTintColor = Color.dance
         cell.accessoryView = swich1
         cell.textLabel?.text = NSLocalizedString("开启生日通知提醒", comment: "生日提醒页面")
         let birthdayNotice = UserDefaults.standard.value(forKey: "BirthdayNotice") as? Bool ?? false
@@ -81,7 +82,7 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         let cell2 = UITableViewCell.init(style: .value1, reuseIdentifier: "BirthDaySettingCell")
         cell2.textLabel?.text = NSLocalizedString("时区", comment: "生日提醒页面")
         cell2.detailTextLabel?.text = UserDefaults.standard.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
-        cell2.detailTextLabel?.textColor = Color.parade
+        cell2.detailTextLabel?.textColor = Color.dance
 
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectTimeZone))
         cell2.addGestureRecognizer(tap)
