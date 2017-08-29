@@ -23,11 +23,11 @@ class FilterItemView: UIView {
         addSubview(iv)
 
         iv.zk.cornerRadius = 3
-        iv.zk.backgroundColor = Color.dance
+        iv.zk.backgroundColor = Color.parade
         
         label = UILabel()
         addSubview(label)
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .center
 
     }
@@ -39,7 +39,7 @@ class FilterItemView: UIView {
                 label.textColor = UIColor.white
             } else {
                 iv.isHidden = true
-                label.textColor = Color.dance
+                label.textColor = Color.parade
             }
         }
     }

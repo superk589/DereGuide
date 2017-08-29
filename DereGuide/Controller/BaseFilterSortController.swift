@@ -36,7 +36,7 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         }
         
         toolbar = UIToolbar()
-        toolbar.tintColor = Color.dance
+        toolbar.tintColor = Color.parade
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()

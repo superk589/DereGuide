@@ -54,7 +54,7 @@ class EventPtView: UIView {
             make.centerY.equalTo(dateDescLabel)
         }
         refreshButton.setImage(#imageLiteral(resourceName: "759-refresh-2-toolbar").withRenderingMode(.alwaysTemplate), for: .normal)
-        refreshButton.tintColor = Color.dance
+        refreshButton.tintColor = Color.parade
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
         gridView = GridLabel.init(rows: 7, columns: 3)

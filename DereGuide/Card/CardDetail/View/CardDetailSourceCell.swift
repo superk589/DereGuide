@@ -33,7 +33,7 @@ class CardDetailSourceCell: UITableViewCell {
         
         for i in 0..<types.count {
             let checkBox = CheckBox()
-            checkBox.tintColor = Color.dance
+            checkBox.tintColor = Color.parade
             checkBox.label.textColor = .darkGray
             checkBox.label.text = titles[i]
             checkBox.isChecked = false

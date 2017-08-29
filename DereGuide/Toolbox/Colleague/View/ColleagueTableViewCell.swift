@@ -41,7 +41,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
             make.top.equalTo(10)
             make.left.equalTo(10)
         }
-        gameIDView.backgroundColor = Color.dance
+        gameIDView.backgroundColor = Color.parade
         gameIDView.layer.cornerRadius = 3
         gameIDView.layer.masksToBounds = true
         

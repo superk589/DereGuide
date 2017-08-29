@@ -35,7 +35,8 @@ class GalleryImageItemBaseController: ItemBaseController<UIImageView> {
         }
         switch longPress.state {
         case .began:
-            UIActivityViewController.show(images: [image], pointTo: itemView, rect: nil, in: self)
+            let point = longPress.location(in: itemView)
+            UIActivityViewController.show(images: [image], pointTo: itemView, rect: CGRect(origin: point, size: .zero), in: self)
         default:
             break
         }
