@@ -59,7 +59,14 @@ class CardDetailSkillCell: UITableViewCell {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
         }
         selectionStyle = .none
-
+        
+        leftLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
+        leftLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        descriptionLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        leftLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        descriptionLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     required init?(coder aDecoder: NSCoder) {

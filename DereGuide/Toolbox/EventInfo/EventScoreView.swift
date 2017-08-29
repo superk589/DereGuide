@@ -53,7 +53,7 @@ class EventScoreView: UIView {
             make.centerY.equalTo(dateDescLabel)
         }
         refreshButton.setImage(#imageLiteral(resourceName: "759-refresh-2-toolbar").withRenderingMode(.alwaysTemplate), for: .normal)
-        refreshButton.tintColor = Color.parade
+        refreshButton.tintColor = Color.dance
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
         gridView = GridLabel.init(rows: 5, columns: 3)

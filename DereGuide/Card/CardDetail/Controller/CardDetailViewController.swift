@@ -21,41 +21,55 @@ class CardDetailViewController: BaseTableViewController {
         }
     }
     
-    lazy var items: [GalleryItem] = {
-       var result = [GalleryItem]()
-        result.append(GalleryItem.image(fetchImageBlock: { (completion) in
-            guard let url = URL(string: self.card.cardImageRef) else {
+    
+    private func createGalleryItem(url: URL?) -> GalleryItem {
+        let myFetchImageBlock: FetchImageBlock = { (completion) in
+            guard let url = url else {
                 completion(nil)
                 return
             }
             SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
                 completion(image)
             })
-        }))
+        }
+        
+        
+        let itemViewControllerBlock: ItemViewControllerBlock = { index, itemCount, fetchImageBlock, configuration, isInitialController in
+            
+            return GalleryImageItemBaseController(index: index, itemCount: itemCount, fetchImageBlock: myFetchImageBlock, configuration: configuration, isInitialController: isInitialController)
+        }
+        
+        let galleryItem = GalleryItem.custom(fetchImageBlock: myFetchImageBlock, itemViewControllerBlock: itemViewControllerBlock)
+        
+        return galleryItem
+    }
+    
+    lazy var items: [GalleryItem] = {
+        var result = [GalleryItem]()
+        
+        result.append(self.createGalleryItem(url: URL(string: self.card.cardImageRef)))
+
         if self.card.hasSpread {
-            result.append(GalleryItem.image(fetchImageBlock: { (completion) in
-                guard let url = self.card.spreadImageURL else {
-                    completion(nil)
-                    return
-                }
-                SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
-                    completion(image)
-                })
-            }))
+            result.append(self.createGalleryItem(url: self.card.spreadImageURL))
         }
         if self.card.hasSign {
-            result.append(GalleryItem.image(fetchImageBlock: { (completion) in
-                guard let url = self.card.signImageURL else {
-                    completion(nil)
-                    return
-                }
-                SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
-                    completion(image)
-                })
-            }))
+            result.append(self.createGalleryItem(url: self.card.signImageURL))
         }
         return result
     }()
+    
+    fileprivate func createGalleryViewController(startIndex: Int) -> GalleryViewController {
+        let config = [
+            GalleryConfigurationItem.closeButtonMode(.builtIn),
+            GalleryConfigurationItem.closeLayout(.pinLeft(32, 20)),
+            GalleryConfigurationItem.hideDecorationViewsOnLaunch(true),
+            GalleryConfigurationItem.deleteButtonMode(.none),
+            GalleryConfigurationItem.thumbnailsButtonMode(.none),
+            GalleryConfigurationItem.swipeToDismissMode(.vertical)
+        ]
+        let vc = GalleryViewController(startIndex: startIndex, itemsDataSource: self, itemsDelegate: nil, displacedViewsDataSource: self, configuration: config)
+        return vc
+    }
     
     fileprivate struct Row: CustomStringConvertible {
         var type: UITableViewCell.Type
@@ -225,15 +239,13 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     @objc func showCardImageAction() {
-        let vc = CardImageController()
-        vc.card = self.card
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = createGalleryViewController(startIndex: 0)
+        presentImageGallery(vc)
     }
     
     @objc func showSignImageAction() {
-        let vc = CardSignImageController()
-        vc.card = self.card
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = createGalleryViewController(startIndex: 2)
+        presentImageGallery(vc)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -294,15 +306,7 @@ extension CardDetailViewController: CardDetailSpreadImageCellDelegate {
     }
     
     func tappedCardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell) {
-//        setSpreadImageMode(!isSpreadModeOn, animated: true)
-        let config = [
-            GalleryConfigurationItem.closeButtonMode(.builtIn),
-            GalleryConfigurationItem.hideDecorationViewsOnLaunch(true),
-            GalleryConfigurationItem.deleteButtonMode(.none),
-            GalleryConfigurationItem.thumbnailsButtonMode(.none),
-            GalleryConfigurationItem.swipeToDismissMode(.vertical)
-        ]
-        let vc = GalleryViewController(startIndex: 1, itemsDataSource: self, itemsDelegate: nil, displacedViewsDataSource: self, configuration: config)
+        let vc = createGalleryViewController(startIndex: 1)
         presentImageGallery(vc)
     }
 }

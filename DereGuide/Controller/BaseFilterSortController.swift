@@ -47,7 +47,7 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         leftSpaceItem.width = 0
         let doneItem = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .done, target: self, action: #selector(doneAction))
         let middleSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .done, target: self, action: #selector(resetAction))
+        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
         
         let rightSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         rightSpaceItem.width = 0

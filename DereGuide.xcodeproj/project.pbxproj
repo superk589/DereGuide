@@ -311,6 +311,8 @@
 		12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D71E386FB0005E932B /* EventPtDataRequest.swift */; };
 		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
+		12DFCA0B1F55468A00790859 /* GalleryImageItemBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0A1F55468A00790859 /* GalleryImageItemBaseController.swift */; };
+		12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
 		12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveView.swift */; };
@@ -710,6 +712,8 @@
 		12D975D71E386FB0005E932B /* EventPtDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtDataRequest.swift; sourceTree = "<group>"; };
 		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
+		12DFCA0A1F55468A00790859 /* GalleryImageItemBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageItemBaseController.swift; sourceTree = "<group>"; };
+		12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityViewControllerExtension.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
 		12E65CED1F0C8917001B69AF /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
@@ -890,6 +894,7 @@
 				1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */,
 				127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */,
 				12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */,
+				12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1442,6 +1447,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9161D5209610071AD7F /* CardDetailViewController.swift */,
+				12DFCA0A1F55468A00790859 /* GalleryImageItemBaseController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2191,6 +2197,7 @@
 				121C78E41D57376200D0B636 /* UnitSongSelectViewController.swift in Sources */,
 				12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */,
 				1206F6D41E2A2586000FAC78 /* StringExtension.swift in Sources */,
+				12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */,
 				121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */,
 				123F320F1E6FED0F00B69D26 /* SpreadImageViewController.swift in Sources */,
 				1269EA221D520DDB0071AD7F /* CGSSTeamMember.swift in Sources */,
@@ -2281,6 +2288,7 @@
 				12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */,
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				129B955F1F31B565007B7AE2 /* ColleagueMessageCell.swift in Sources */,
+				12DFCA0B1F55468A00790859 /* GalleryImageItemBaseController.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */,
