@@ -13,6 +13,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 * Birthday notification
 * Gacha simulation
 * Event information
+* Colleague finder
 
 ## Download at App Store
 <https://itunes.apple.com/app/dereguide/id1131934691>
@@ -27,7 +28,7 @@ This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on 
 ```
 $ git clone https://github.com/superk589/DereGuide.git
 ```
-* Install dependencies with [CocoaPods](https://cocoapods.org)
+* Install dependencies with [CocoaPods](https://cocoapods.org). **By now, installation with CocoaPods will cause all the pods built on swift 4.0, but not all the pods are competiable with swift 4.0, so you have to modify them manually to 3.2 in Xcode build settings.**
 ```
 $ pod install
 ```
@@ -54,8 +55,11 @@ DereGuide now provide files of localizable strings for other languages
 * Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
 * Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
 
-### deresute.info
+### deresute.info (not exists though, DereGuide's beatmap is mainly based on the design of this site)
 * Author: [Snack-X](https://github.com/Snack-X)
 
 ### [starlight.tachibana.cool](https://starlight.tachibana.cool)
-* Author: [motitaiyaki](https://github.com/motitaiyaki)
+* Author: [Cryptomelone](https://github.com/Cryptomelone)
+
+## Contact
+Follow and contact me on [Twitter](https://twitter.com/superk64). If you find an issue, just [open a ticket](https://github.com/superk589/DereGuide/issues/new). Pull requests are warmly welcome as well.
