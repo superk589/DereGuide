@@ -61,5 +61,8 @@ DereGuide now provide files of localizable strings for other languages
 ### [starlight.tachibana.cool](https://starlight.tachibana.cool)
 * Author: [Cryptomelone](https://github.com/Cryptomelone)
 
+### [deresute.me](https://deresute.me)
+* Author: [Hector Martin](https://github.com/marcan)
+
 ## Contact
 Follow and contact me on [Twitter](https://twitter.com/superk64). If you find an issue, just [open a ticket](https://github.com/superk589/DereGuide/issues/new). Pull requests are warmly welcome as well.
