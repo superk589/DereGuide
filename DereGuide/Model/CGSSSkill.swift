@@ -29,7 +29,7 @@ fileprivate let skillDescriptions = [
     17: NSLocalizedString("使所有PERFECT音符恢复你 %d 点生命", comment: "技能描述"),
     18: NSLocalizedString("使所有PERFECT/GREAT音符恢复你 %d 点生命", comment: "技能描述"),
     19: NSLocalizedString("使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命", comment: "技能描述"),
-    20: NSLocalizedString("当前发动技能将被增强", comment: ""),
+    20: NSLocalizedString("使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档", comment: ""),
     21: NSLocalizedString("当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
     22: NSLocalizedString("当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
     23: NSLocalizedString("当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
