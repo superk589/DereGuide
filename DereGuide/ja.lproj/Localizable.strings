@@ -716,52 +716,64 @@
 "保存" = "保存";
 
 /* localize skill explains locally */
-"使所有PERFECT音符获得 %d%% 的分数加成" = "Perfect notes will receive a %d%% score bonus";
-"使所有PERFECT/GREAT音符获得 %d%% 的分数加成" = "Great/Perfect notes will receive a %d%% score bonus";
-"使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成" = "Nice/Great/Perfect notes will receive a %d%% score bonus";
-"获得额外的 %d%% 的COMBO加成" = "you will gain an extra %d%% combo bonus";
-"使所有GREAT音符改判为PERFECT" = "Great notes will become Perfect notes";
-"使所有GREAT/NICE音符改判为PERFECT" = "Nice/Great notes will become Perfect notes";
-"使所有GREAT/NICE/BAD音符改判为PERFECT" = "Bad/Nice/Great notes will become Perfect notes";
+"使所有PERFECT音符获得 %d%% 的分数加成" = "PERFECTのスコア %d%% アップ";
+"使所有PERFECT/GREAT音符获得 %d%% 的分数加成" = "PERFECT/GREATのスコア %d%% アップ";
+"使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成" = "PERFECT/GREAT/NICEのスコア %d%% アップ";
+"获得额外的 %d%% 的COMBO加成" = "COMBOボーナス %d%% アップ";
+"使所有GREAT音符改判为PERFECT" = "GREATをPERFECTにする";
+"使所有GREAT/NICE音符改判为PERFECT" = "GREAT/NICEをPERFECTにする";
+"使所有GREAT/NICE/BAD音符改判为PERFECT" = "GREAT/NICE/BADをPERFECTにする";
+// TODO: 需要翻译
 "所有音符改判为PERFECT" = "all notes will become Perfect notes";
-"使NICE音符不会中断COMBO" = "Nice notes will not break combo";
-"使BAD/NICE音符不会中断COMBO" = "Bad/Nice notes will not break combo";
+"使NICE音符不会中断COMBO" = "NICEでもCOMBO継続";
+"使BAD/NICE音符不会中断COMBO" = "NICE/BADでもCOMBO継続";
+// TODO: 需要翻译
 "使你的COMBO不会中断" = "your combo will not be broken";
-"使你的生命不会减少" = "you will not lose health";
+"使你的生命不会减少" = "ライフが減少しなくなる";
+// TODO: 需要翻译
 "使所有音符恢复你 %d 点生命" = "all notes will restore %d health";
-"消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO" = "%2$d life will be consumed, then: Perfect notes receive a %1$d%% score bonus, and Nice/Bad notes will not break combo";
-"使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO" = "Perfect notes will receive a %d%% score bonus，and notes other tran Perfect will break combo";
+"消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO" = "ライフを %2$d 消費し、PERFECTのスコア %1$d%% アップ、NICE/BADでもCOMBO継続";
+"使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO" = "PERFECTのスコア %d%% アップ、PERFECTのみCOMBO継続";
+// TODO: 需要翻译
 "会发生有趣的事情" = "something interesting will happen";
-"使所有PERFECT音符恢复你 %d 点生命" = "Perfect notes will restore %d health";
-"使所有PERFECT/GREAT音符恢复你 %d 点生命" = "Great/Perfect notes will restore %d health";
-"使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命" = "Nice/Great/Perfect notes will restore %d health";
-"当前发动技能将被增强" = "currently active skills will be boosted";
-"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cute idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
-"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cool idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
-"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Passion idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
-"获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health";
+"使所有PERFECT音符恢复你 %d 点生命" = "PERFECTでライフ %d 回復";
+"使所有PERFECT/GREAT音符恢复你 %d 点生命" = "PERFECT/GREATでライフ %d 回復";
+"使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命" = "PERFECT/GREAT/NICEでライフ %d 回復";
+// TODO: 需要翻译
+"当前发动技能将被增强" = "他アイドルの特技効果を大アップ";
+"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "キュートアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ";
+"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "クールアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ";
+"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "パッションアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ";
+"获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "COMBOボーナス %d%% アップ、PERFECTでライフ %d 回復";
 
-"每 %d 秒，" = "Every %d seconds: ";
-"有 %@%% 的几率" = "there is a %@%% chance that ";
+"每 %d 秒，" = "%d 秒毎、";
+"有 %@%% 的几率" = "%@%% 確率で";
+// TODO: 这句在句尾，语序不方便调整，怎么翻译合适？
 "，持续 %@ 秒。" = " for %@ seconds.";
 
-"所有Cute" = "all Cute";
-"所有Cool" = "all Cool";
-"所有Passion" = "all Passion";
-"所有" = "all";
+"所有Cute" = "キュートアイドル";
+"所有Cool" = "クールアイドル";
+"所有Passion" = "パッションアイドル";
+"所有" = "全員";
 
-"Vocal表现值" = "the Vocal appeal";
-"Visual表现值" = "the Visual appeal";
-"Dance表现值" = "the Dance appeal";
-"所有表现值" = "all appeals";
-"生命" = "life";
-"特技发动几率" = "the skill probability";
+"Vocal表现值" = "ボーカルアピール値";
+"Visual表现值" = "ビジュアルアピール値";
+"Dance表现值" = "ダンスアピール値";
+"所有表现值" = "全アピール値";
+"生命" = "ライフ";
+"特技发动几率" = "特技発動確率";
 
-"提升%@偶像的%@ %d%%。" = "raises %2$@ of %1$@ members by %3$d%%.";
+"提升%@偶像的%@ %d%%。" = "%1$@の%2$@ %3$d%% アップ。";
+// TODO: 需要翻译，例：当Cute、(Cool和Passion)属性的偶像存在于队伍时
 "%@和%@" = "%@ and %@";
-"、" = ", ";
-"只有" = "only ";
-"当%@属性的偶像存在于队伍时，" = "When there are %@ idols on the team, ";
+"、" = "、";
+"只有%@" = "%@のみ";
+"当%@属性的偶像存在于队伍时，" = "%@アイドル編成時、";
+// 为了与其他技能用词统一，原本从未翻译过的三属性，在这里还是翻译为好
+"Cute" = "キュート";
+"Cool" = "クール";
+"Passion" = "パッション";
+// TODO: 需要翻译
 "此队长技能的内部描述格式未定义" = "I don't know how to describe this leader skill.";
 /* end of skill explain localization */
 

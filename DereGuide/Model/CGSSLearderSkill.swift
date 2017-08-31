@@ -28,7 +28,7 @@ fileprivate let leaderSkillParam = [
 fileprivate var effectClause = NSLocalizedString("提升%@偶像的%@ %d%%。", comment: "")
 fileprivate var andConjunction = NSLocalizedString("%@和%@", comment: "")
 fileprivate var andMark = NSLocalizedString("、", comment: "")
-fileprivate var only = NSLocalizedString("只有", comment: "")
+fileprivate var only = NSLocalizedString("只有%@", comment: "")
 fileprivate var predicateClause = NSLocalizedString("当%@属性的偶像存在于队伍时，", comment: "")
 fileprivate var unknown = NSLocalizedString("此队长技能的内部描述格式未定义", comment: "")
 
@@ -43,13 +43,13 @@ extension CGSSLeaderSkill {
             
             var needList: [String] = []
             if needCute > 0 {
-                needList.append("Cute")
+                needList.append(NSLocalizedString("Cute", comment: ""))
             }
             if needCool > 0 {
-                needList.append("Cool")
+                needList.append(NSLocalizedString("Cool", comment: ""))
             }
             if needPassion > 0 {
-                needList.append("Passion")
+                needList.append(NSLocalizedString("Passion", comment: ""))
             }
             
             var needStr = ""
@@ -69,13 +69,14 @@ extension CGSSLeaderSkill {
                 // cinfest unit requires 1 each color (according to internal data)
                 
                 if needList.count < 3 {
-                    needStr = only + needStr
+                    needStr = String.init(format: only, needStr)
                 }
                 
                 let built = String.init(format: predicateClause, needStr) + effect
                 return built
             } else {
-                let built = String(effect[effect.startIndex]).uppercased() + effect[..<effect.endIndex]
+                // if there is not predicate clause, uppercase the first letter.
+                let built = String(effect[effect.startIndex]).uppercased() + effect[effect.index(after: effect.startIndex)..<effect.endIndex]
                 return built
             }
         } else {
