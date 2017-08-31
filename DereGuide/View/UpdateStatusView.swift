@@ -65,8 +65,8 @@ class UpdateStatusView: UIView {
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.left.greaterThanOrEqualTo(loadingView.snp.right)
-            make.right.lessThanOrEqualTo(-5)
+            make.left.equalTo(loadingView.snp.right)
+            make.right.equalTo(cancelButton.snp.left)
         }
         statusLabel.textAlignment = .center
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
