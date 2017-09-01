@@ -676,13 +676,13 @@
 "留言" = "Message";
 
 "下拉刷新数据" = "Pull Down to Refresh";
-"获取数据失败，请检查您的网络" = "Getting remote data failed, please check your network connection.";
+"获取数据失败，请检查您的网络并确保iCloud处于登录状态" = "Getting remote data failed, please check your network connection and make sure iCloud is signed in.";
 "已复制ID到剪贴板" = "Game ID is copied to clipboard";
 "没有更多数据了" = "No more";
 "加载更多" = "Load more";
 "正在加载..." = "Loading...";
 
-"位置" = "Postion";
+"位置" = "Position";
 "目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\"" = "Only support filtering one position each time, if you don't want to filter, set to \"no limit\"";
 "潜能" = "Potential";
 "偶像" = "Idols";
@@ -692,11 +692,19 @@
 "添加一名偶像" = "Add an idol";
 "不限" = "no limit";
 
+// using deresute.me
+"未能获取到正确的数据，请稍后再试" = "Getting remote data failed, please retry later";
+"下一步" = "Next";
+"获取数据中..." = "Loading...";
+"您输入的游戏ID不存在" = "The game ID doesn't exists";
+"输入您的游戏ID" = "Game ID";
+// using manually input
 "双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布" = "Double click to select from all cards, long press to edit potential or delete it. You have to set at least one center.";
-"向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间" = "Make your profile public, repeat posting will automatically overwrite the previous content and refresh the update time";
-"您输入的游戏ID不合法" = "Your game ID is invalid";
 "昵称不能超过10个文字" = "Nickname must be within 10 characters";
 "至少添加一名自己的队长" = "At least add one of my centers";
+// both
+"您输入的游戏ID不合法" = "The game ID is invalid";
+"向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间" = "Make your profile public, repeat posting will automatically overwrite the previous content and refresh the update time";
 "发布失败，请确保iCloud已登录并且网络状态正常" = "Posting failed, please verify your iCloud account and the internet connection";
 "撤销失败，请确保iCloud已登录并且网络状态正常" = "Revoking failed，please verify your iCloud account and the internet connection";
 "发布成功" = "Posting succeed";

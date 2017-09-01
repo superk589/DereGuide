@@ -208,6 +208,15 @@
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E82221E2E5D7A00B2E626 /* GachaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */; };
 		128E94931EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */; };
+		1291820A1F5853E800F91C0B /* DMProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182091F5853E800F91C0B /* DMProfile.swift */; };
+		1291820D1F58544600F91C0B /* DMSupportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291820C1F58544600F91C0B /* DMSupportCard.swift */; };
+		1291820F1F5854FE00F91C0B /* DMLeaderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291820E1F5854FE00F91C0B /* DMLeaderCard.swift */; };
+		129182111F58552800F91C0B /* DMPotential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182101F58552800F91C0B /* DMPotential.swift */; };
+		129182131F58554000F91C0B /* DMCleared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182121F58554000F91C0B /* DMCleared.swift */; };
+		129182151F585AB800F91C0B /* DMComposingStepTwoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182141F585AB800F91C0B /* DMComposingStepTwoController.swift */; };
+		129182171F58E29500F91C0B /* DMComposingStepOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182161F58E29500F91C0B /* DMComposingStepOneController.swift */; };
+		1291821D1F58F99D00F91C0B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */; };
+		1291821F1F59287600F91C0B /* ColleagueDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */; };
 		129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B8A6AA1F09E348001074B3 /* ValueStepper.swift */; };
 		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
 		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
@@ -604,6 +613,15 @@
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E82211E2E5D7A00B2E626 /* GachaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailView.swift; sourceTree = "<group>"; };
 		128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitAdvanceCalculationResultView.swift; sourceTree = "<group>"; };
+		129182091F5853E800F91C0B /* DMProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMProfile.swift; sourceTree = "<group>"; };
+		1291820C1F58544600F91C0B /* DMSupportCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSupportCard.swift; sourceTree = "<group>"; };
+		1291820E1F5854FE00F91C0B /* DMLeaderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMLeaderCard.swift; sourceTree = "<group>"; };
+		129182101F58552800F91C0B /* DMPotential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPotential.swift; sourceTree = "<group>"; };
+		129182121F58554000F91C0B /* DMCleared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCleared.swift; sourceTree = "<group>"; };
+		129182141F585AB800F91C0B /* DMComposingStepTwoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMComposingStepTwoController.swift; sourceTree = "<group>"; };
+		129182161F58E29500F91C0B /* DMComposingStepOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMComposingStepOneController.swift; sourceTree = "<group>"; };
+		1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueDescriptionCell.swift; sourceTree = "<group>"; };
 		1296759D1EBF62400037827B /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
 		129675A41EBF62B20037827B /* PageCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionController.swift; sourceTree = "<group>"; };
 		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
@@ -895,6 +913,7 @@
 				127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */,
 				12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */,
 				12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */,
+				1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1361,6 +1380,44 @@
 			path = DereGuide;
 			sourceTree = "<group>";
 		};
+		1291820B1F5853EE00F91C0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				129182091F5853E800F91C0B /* DMProfile.swift */,
+				1291820C1F58544600F91C0B /* DMSupportCard.swift */,
+				1291820E1F5854FE00F91C0B /* DMLeaderCard.swift */,
+				129182101F58552800F91C0B /* DMPotential.swift */,
+				129182121F58554000F91C0B /* DMCleared.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		129182181F58E2A100F91C0B /* DMComposing */ = {
+			isa = PBXGroup;
+			children = (
+				129182191F58F3C300F91C0B /* Controller */,
+				129182201F59287A00F91C0B /* View */,
+			);
+			path = DMComposing;
+			sourceTree = "<group>";
+		};
+		129182191F58F3C300F91C0B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				129182161F58E29500F91C0B /* DMComposingStepOneController.swift */,
+				129182141F585AB800F91C0B /* DMComposingStepTwoController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		129182201F59287A00F91C0B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1296759F1EBF62450037827B /* PageCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1374,10 +1431,12 @@
 		129B95551F3156BF007B7AE2 /* Colleague */ = {
 			isa = PBXGroup;
 			children = (
+				129182181F58E2A100F91C0B /* DMComposing */,
 				12D296211F45454E00AFCF7C /* Composing */,
 				12ABE3411F42D351003A5E7F /* Filter */,
 				129B95561F3156E7007B7AE2 /* Controller */,
 				129B955B1F31B516007B7AE2 /* View */,
+				1291820B1F5853EE00F91C0B /* Model */,
 			);
 			path = Colleague;
 			sourceTree = "<group>";
@@ -2020,6 +2079,7 @@
 				1245F79A1F175B07009A80EC /* CloudKitMergePolicy.swift in Sources */,
 				12D6244C1F171FB70017999A /* ChangeProcessor.swift in Sources */,
 				12D6244D1F171FB70017999A /* UnitsRemote.swift in Sources */,
+				1291820F1F5854FE00F91C0B /* DMLeaderCard.swift in Sources */,
 				12D6244F1F171FB70017999A /* UnitUploader.swift in Sources */,
 				12D624511F171FB70017999A /* InProgressTracker.swift in Sources */,
 				1203A89C1F29C404001A510A /* FavoriteCharaRemover.swift in Sources */,
@@ -2083,6 +2143,7 @@
 				12F9B03C1F28935900D3B47E /* FavoriteChara.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				12F4EAEB1EDFFCEF00A92C9F /* UnitSimulationCommonCell.swift in Sources */,
+				1291820A1F5853E800F91C0B /* DMProfile.swift in Sources */,
 				12C6B35A1F00B73100A25DB1 /* CardDetailEvolutionCell.swift in Sources */,
 				124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */,
 				12C3901F1F34241D0077FB38 /* CenterWantedEditingView.swift in Sources */,
@@ -2123,6 +2184,7 @@
 				1239F1D11EF37BF900861092 /* MemberGroupView.swift in Sources */,
 				121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */,
 				121C78E21D57364F00D0B636 /* BaseSongTableViewController.swift in Sources */,
+				1291821D1F58F99D00F91C0B /* UITextFieldExtension.swift in Sources */,
 				1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
@@ -2154,12 +2216,14 @@
 				12C6B3581F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
 				12353A5D1F1309C2008286C2 /* CoreDataStack.swift in Sources */,
+				129182151F585AB800F91C0B /* DMComposingStepTwoController.swift in Sources */,
 				12FC8B521EDE6DEB003CF3C3 /* UnitSimulationAppealEditingCell.swift in Sources */,
 				12C390171F3412AF0077FB38 /* ColleagueCentersWantedCell.swift in Sources */,
 				12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */,
 				129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */,
 				12FC8B551EDE6DEB003CF3C3 /* UnitSimulationMainBodyCell.swift in Sources */,
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
+				129182171F58E29500F91C0B /* DMComposingStepOneController.swift in Sources */,
 				12FC8B3C1EDE6DA7003CF3C3 /* UnitInfomationController.swift in Sources */,
 				120DBB2F1EEE414A004E0084 /* UnitTemplate.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
@@ -2297,10 +2361,13 @@
 				12C6B35E1F00B77D00A25DB1 /* CardDetailSourceCell.swift in Sources */,
 				12F9B03E1F28955E00D3B47E /* RemoteFavoriteCard.swift in Sources */,
 				1237D11C1EEFDD0400C43337 /* TransitionableNavigationController.swift in Sources */,
+				1291820D1F58544600F91C0B /* DMSupportCard.swift in Sources */,
 				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
+				1291821F1F59287600F91C0B /* ColleagueDescriptionCell.swift in Sources */,
 				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
 				12FC8B5F1EDE90D0003CF3C3 /* SwitchOption.swift in Sources */,
 				122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */,
+				129182111F58552800F91C0B /* DMPotential.swift in Sources */,
 				12D45AD31E2E49660009986F /* CGSSGachaFilter.swift in Sources */,
 				1239B0521E2FAAA600958849 /* LineView.swift in Sources */,
 				123F32011E6FC49700B69D26 /* CardAppealView.swift in Sources */,
@@ -2308,6 +2375,7 @@
 				12FC8B571EDE6DEB003CF3C3 /* UnitSimulationUnitCell.swift in Sources */,
 				12FC8B391EDE6D93003CF3C3 /* UnitInformationUnitCell.swift in Sources */,
 				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
+				129182131F58554000F91C0B /* DMCleared.swift in Sources */,
 				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12F57C5D1EE2928000638650 /* UnitAdvanceOptionsController.swift in Sources */,

@@ -45,6 +45,8 @@ struct RemoteProfile: RemoteRecord {
     
     var remoteModifiedAt: Date?
     
+    var leaderCardID: Int64
+    
 }
 
 extension RemoteProfile {
@@ -85,6 +87,7 @@ extension RemoteProfile {
         let guestCoolMinLevel = record["guestCoolMinLevel"] as? NSNumber,
         let guestPassionMinLevel = record["guestPassionMinLevel"] as? NSNumber,
         let guestAllTypeMinLevel = record["guestAllTypeMinLevel"] as? NSNumber,
+        let leaderCardID = record["leaderCardID"] as? NSNumber,
         let isOpen = record["isOpen"] as? NSNumber else { return nil }
         
         self.id = record.recordID.recordName
@@ -119,6 +122,7 @@ extension RemoteProfile {
         self.guestCoolMinLevel = guestCoolMinLevel.int64Value
         self.guestPassionMinLevel = guestPassionMinLevel.int64Value
         self.guestAllTypeMinLevel = guestAllTypeMinLevel.int64Value
+        self.leaderCardID = leaderCardID.int64Value
         self.isOpen = isOpen.int64Value
     }
     

@@ -63,7 +63,7 @@ class ColleagueViewController: BaseTableViewController {
         remote.fetchRecordsWith([currentSetting.predicate], [remote.defaultSortDescriptor], resultsLimit: Config.cloudKitFetchLimits) { (remoteProfiles, cursor, error) in
             DispatchQueue.main.async {
                 if error != nil {
-                    UIAlertController.showHintMessage(NSLocalizedString("获取数据失败，请检查您的网络", comment: ""), in: nil)
+                    UIAlertController.showHintMessage(NSLocalizedString("获取数据失败，请检查您的网络并确保iCloud处于登录状态", comment: ""), in: nil)
                 } else {
                     self.profiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                 }
@@ -86,7 +86,7 @@ class ColleagueViewController: BaseTableViewController {
             DispatchQueue.main.async {
                 self.isFetching = false
                 if error != nil {
-                    UIAlertController.showHintMessage(NSLocalizedString("获取数据失败，请检查您的网络", comment: ""), in: nil)
+                    UIAlertController.showHintMessage(NSLocalizedString("获取数据失败，请检查您的网络并确保iCloud处于登录状态", comment: ""), in: nil)
                 } else {
                     let moreProfiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                     self.profiles.append(contentsOf: moreProfiles)
@@ -147,9 +147,10 @@ class ColleagueViewController: BaseTableViewController {
     }
     
     @objc func composeAction() {
-        let vc = ColleagueComposeViewController()
-        vc.setup(parentProfile: profile)
-        vc.delegate = self
+//        let vc = ColleagueComposeViewController()
+//        vc.setup(parentProfile: profile)
+//        vc.delegate = self
+        let vc = DMComposingStepOneController()
         if UIDevice.current.userInterfaceIdiom == .pad {
             let nav = BaseNavigationController(rootViewController: vc)
             let drawer = ZKDrawerController(main: nav)

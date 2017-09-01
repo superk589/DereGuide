@@ -50,6 +50,8 @@ class Profile: NSManagedObject {
     
     @NSManaged public var remoteCreatedAt: Date?
     
+    @NSManaged public var leaderCardID: Int32
+    
     override func awakeFromInsert() {
         super.awakeFromInsert()
         setPrimitiveValue("", forKey: "gameID")
@@ -171,6 +173,8 @@ extension Profile {
         self.guestCoolMinLevel = 0
         self.guestPassionMinLevel = 0
         self.guestAllTypeMinLevel = 0
+        
+        self.leaderCardID = 0
     }
 }
 
@@ -233,7 +237,7 @@ extension Profile: RemoteUploadable {
         record["coolTotalLevel"] = coolPotential.totalLevel as CKRecordValue
         record["passionTotalLevel"] = passionPotential.totalLevel as CKRecordValue
         record["allTypeTotalLevel"] = allTypePotential.totalLevel as CKRecordValue
-
+        record["leaderCardID"] = leaderCardID as CKRecordValue
         return record
     }
     
@@ -277,6 +281,7 @@ extension Profile {
         profile.isOpen = remoteRecord.isOpen == 1
         
         profile.remoteCreatedAt = remoteRecord.remoteModifiedAt
+        profile.leaderCardID = Int32(remoteRecord.leaderCardID)
         
         return profile
         

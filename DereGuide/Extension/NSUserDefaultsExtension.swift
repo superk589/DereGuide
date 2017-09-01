@@ -79,4 +79,13 @@ extension UserDefaults {
         }
     }
     
+    var firstTimeComposingDMMyProfile: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeComposingDMMyProfile")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeComposingDMMyProfile") as? Bool ?? true
+        }
+    }
+    
 }
