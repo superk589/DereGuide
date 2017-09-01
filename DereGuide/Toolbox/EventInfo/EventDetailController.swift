@@ -86,6 +86,7 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
             } else {
                 DispatchQueue.main.async { [weak self] in
                     self?.eventDetailView.eventPtView.setLoading(loading: false)
+                    self?.eventDetailView.eventPtView.gridView.isHidden = true
                 }
             }
 
@@ -102,6 +103,7 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
             } else {
                 DispatchQueue.main.async { [weak self] in
                     self?.eventDetailView.eventScoreView.setLoading(loading: false)
+                    self?.eventDetailView.eventScoreView.gridView.isHidden = true
                 }
             }
         }
