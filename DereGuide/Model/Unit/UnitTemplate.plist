@@ -13,6 +13,11 @@
 	</array>
 	<key>Cool</key>
 	<array>
+		<integer>200436</integer>
+		<real>200254</real>
+		<real>200378</real>
+		<integer>300412</integer>
+		<real>200294</real>
 		<dict>
 			<key>potential</key>
 			<dict>
@@ -26,31 +31,14 @@
 			<key>id</key>
 			<real>200400</real>
 		</dict>
-		<real>200254</real>
-		<real>200378</real>
-		<integer>200360</integer>
-		<integer>200294</integer>
-        <dict>
-            <key>potential</key>
-            <dict>
-                <key>vocalLevel</key>
-                <integer>10</integer>
-                <key>danceLevel</key>
-                <integer>10</integer>
-                <key>visualLevel</key>
-                <integer>5</integer>
-            </dict>
-            <key>id</key>
-            <real>200400</real>
-        </dict>
-    </array>
+	</array>
 	<key>Passion</key>
 	<array>
 		<integer>300378</integer>
 		<integer>300236</integer>
 		<integer>300368</integer>
-		<integer>300328</integer>
-		<integer>300336</integer>
+		<integer>300412</integer>
+		<real>300336</real>
 		<integer>300378</integer>
 	</array>
 </dict>
