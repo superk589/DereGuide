@@ -1,19 +1,22 @@
 # DereGuide
 
 ## Introduction
-This is an iOS app for Cinderella Girls Starlight Stage(デレステ). Based on data/api from   
-* English version of card data api <https://starlight.kirara.ca>
-* Chinese version of card data api <http://starlight.346lab.org>
-* Image data <https://hoshimoriuta.kirara.ca>
-* Event data <https://starlight.tachibana.cool>
+This is an iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. All the data is from API provided by other sites and has nothing to do with the official application.
+* Images <https://hoshimoriuta.kirara.ca>
+* Card and Character(English) <https://starlight.kirara.ca>
+* Card and Character(Chinese) <http://starlight.346lab.org>
+* Event Pt. and High Score <https://starlight.tachibana.cool>
+* User Related <https://deresute.me>
 
 ## Features
-* Card, beatmap and character information
-* Live score calculation
-* Birthday notification
-* Gacha simulation
-* Event information
-* Colleague finder
+* Card
+* Beatmap
+* Character
+* Unit Simulation
+* Gacha
+* Event
+* Colleague Finder
+* Birthday Notification
 
 ## Download at App Store
 <https://itunes.apple.com/app/dereguide/id1131934691>
