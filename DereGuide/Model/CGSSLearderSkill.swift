@@ -30,7 +30,6 @@ fileprivate var andConjunction = NSLocalizedString("%@和%@", comment: "")
 fileprivate var andMark = NSLocalizedString("、", comment: "")
 fileprivate var only = NSLocalizedString("只有%@", comment: "")
 fileprivate var predicateClause = NSLocalizedString("当%@属性的偶像存在于队伍时，", comment: "")
-fileprivate var unknown = NSLocalizedString("此队长技能的内部描述格式未定义", comment: "")
 
 extension CGSSLeaderSkill {
    
@@ -80,7 +79,8 @@ extension CGSSLeaderSkill {
                 return built
             }
         } else {
-            return unknown
+            // use in-game description
+            return explain
         }
     }
     

@@ -22,7 +22,12 @@
 6. 他の機能向上とバグ修正
 
 ##### English version
-
+1. Add Colluague Finder
+2. Add localization for skills and center skills' description
+3. Adaptation for iOS 11
+4. Improve the performance of beatmap page
+5. Fix a bug that units may disppear when lauching with no internet connection
+6. Other improvements and bug fixes
 
 ### 1.4.4
 
