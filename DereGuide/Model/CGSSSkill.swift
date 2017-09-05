@@ -49,7 +49,8 @@ extension CGSSSkill {
         if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24].contains(skillTypeId) {
             effectValue -= 100
         } else if [20].contains(skillTypeId) {
-            effectValue = (effectValue / 10) - 100
+            // there is only one possibility: 12% up for combo bonus and perfect bonus, using fixed value here instead of reading it from database table skill_boost_type. if more possiblities are added to the game, fix here.
+            effectValue = 12
         }
         return effectValue
     }

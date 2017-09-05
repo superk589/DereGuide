@@ -43,7 +43,7 @@ class CardDetailSourceCell: UITableViewCell {
         collectionView = TTGTagCollectionView()
         collectionView.contentInset = .zero
         collectionView.verticalSpacing = 5
-        collectionView.horizontalSpacing = 5
+        collectionView.horizontalSpacing = 15
         contentView.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
