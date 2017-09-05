@@ -117,7 +117,7 @@ class UnitSimulationLiveSelectCell: UITableViewCell {
 //            make.top.equalTo(10)
 //        }
 //        
-//        leftLabel.text = NSLocalizedString("歌曲", comment: "") + ": "
+//        leftLabel.text = NSLocalizedString("谱面", comment: "") + ": "
         
         liveView = UnitSimulationLiveView()
         contentView.addSubview(liveView)

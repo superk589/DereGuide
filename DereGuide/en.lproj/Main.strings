@@ -12,7 +12,7 @@
 "1ey-jy-bHg.title" = "Idol Sorting/Filtering Table View Controller";
 
 /* Class = "UITableViewController"; title = "歌曲篩選和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "Song Sorting/Filtering Table View Controller";
+"2yB-7S-JxI.title" = "Beatmap Sorting/Filtering Table View Controller";
 
 /* Class = "UINavigationController"; title = "卡片導航"; ObjectID = "5Hs-jz-swe"; */
 "5Hs-jz-swe.title" = "Cards Nav Controller";
@@ -36,7 +36,7 @@
 "Ji2-5n-2Mz.title" = "Units";
 
 /* Class = "UINavigationController"; title = "歌曲導航"; ObjectID = "KxG-H5-NIc"; */
-"KxG-H5-NIc.title" = "Song Nav Controller";
+"KxG-H5-NIc.title" = "Beatmap Nav Controller";
 
 /* Class = "UILabel"; text = "清除快取資料"; ObjectID = "L0F-L7-4EY"; */
 "L0F-L7-4EY.text" = "Clear Cached Data";
@@ -44,8 +44,8 @@
 /* Class = "UINavigationController"; title = "設定導航"; ObjectID = "Lc3-lA-ZOL"; */
 "Lc3-lA-ZOL.title" = "Settings Nav Controller";
 
-/* Class = "UINavigationItem"; title = "歌曲"; ObjectID = "OeQ-8h-gYQ"; */
-"OeQ-8h-gYQ.title" = "Songs";
+/* Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ"; */
+"OeQ-8h-gYQ.title" = "Beatmaps";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
 "S9a-oB-UoS.headerTitle" = "Sort";
@@ -74,8 +74,8 @@
 /* Class = "UILabel"; text = "啟動時自動檢查更新"; ObjectID = "fhG-RG-Edf"; */
 "fhG-RG-Edf.text" = "Check for Updates at Launch";
 
-/* Class = "UITabBarItem"; title = "歌曲"; ObjectID = "gE2-j0-zef"; */
-"gE2-j0-zef.title" = "Songs";
+/* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
+"gE2-j0-zef.title" = "Beatmaps";
 
 /* Class = "UITabBarItem"; title = "設定"; ObjectID = "gI8-ss-NS6"; */
 "gI8-ss-NS6.title" = "Settings";

@@ -108,7 +108,7 @@
 "完成" = "Done";
 
 /* 设置页面 */
-"将会清除所有缓存的图片、卡片、歌曲数据。除非数据出现问题，不建议使用此选项。" = "All cached card, image, and song data will be deleted. Don't use this option unless you are having issues with the app.";
+"将会清除所有缓存的图片、卡片、谱面数据。除非数据出现问题，不建议使用此选项。" = "All cached card, image, and song data will be deleted. Don't use this option unless you are having issues with the app.";
 
 /* 卡片详情页 */
 "属性排名" = "Relative Strength";
@@ -306,7 +306,7 @@
 "获取到的卡数据异常" = "The card data could not be parsed.";
 
 /* 弹出框正文 */
-"获取到的歌曲数据异常" = "The song data could not be parsed.";
+"获取到的谱面数据异常" = "The song data could not be parsed.";
 
 /* 弹出框正文 */
 "获取到的谱面数据异常" = "The beatmap data could not be parsed.";
@@ -419,7 +419,7 @@
 "全选" = "Select All";
 "图片" = "Images";
 "卡片" = "Cards";
-"歌曲" = "Songs";
+"谱面" = "Songs";
 "用户配置" = "Settings";
 "需重启应用" = "restart required";
 
@@ -519,8 +519,6 @@
 
 /* new in 1.2.1 */
 /* 版权声明页面 */
-// "本程序是非官方程序，所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n----------------------------------------\n本程序所使用的卡片、歌曲等数据来源于网络，其版权在不违反官方版权的前提下遵循提供者的版权声明。\n----------------------------------------\n本程序使用的第三方库\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\n本程序的所有界面、图标、非官方资源数据、代码基于MIT协议。\n如果对此项目感兴趣，请访问：\nhttps://github.com/superk589/DereGuide\n\n" = "This is not an official app. All game data used belongs to the original publisher: BANDAI NAMCO Entertainment Inc.\n----------------------------------------\nThis app uses card, song, and other data fetched from Internet sources. Such data is used in compliance with their original sources' copyright policies.\n----------------------------------------\nThis app uses the following third-party libraries:\nSwiftyJson (MIT License)\nCopyright (c) 2014 Ruoyu Fu\nSDWebImage (MIT License)\nCopyright (c) 2016 Olivier Poitrey\nReachabilitySwift (MIT License)\nCopyright (c) 2016 Ashley Mills\nFMDB (MIT License)\nCopyright (c) 2008-2014 Flying Meat Inc.\nlz4 (BSD License)\nCopyright (c) 2011-2015, Yann Collet\n----------------------------------------\nThe source code of this app is made available under the terms of the MIT license.\nFor more information, please visit the app's GitHub page:\nhttps://github.com/superk589/DereGuide\n\n";
-
 "本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。" = "This is not an official app and has no connections with the official app \"アイドルマスターシンデレラガールズ スターライトステージ\". All game data used belongs to the original publisher: \nBANDAI NAMCO Entertainment Inc.\n\nAll the unofficial data used are fetched from Internet. Such data is used in compliance with their original sources' copyright policies.\n\nDereGuide doesn't take responsibility for accuracy of the data. Any risk arising therefrom shall be assumed by your own.";
 "本程序基于MIT协议，详情请访问：" = "DereGuide is under the terms of the MIT license, for details please visit:";
 

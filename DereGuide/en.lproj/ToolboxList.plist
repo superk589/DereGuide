@@ -18,6 +18,14 @@
 		<key>title</key>
 		<string>Idol Information</string>
 	</dict>
+    <dict>
+        <key>cName</key>
+        <string>MusicViewController</string>
+        <key>iconId</key>
+        <string>200294</string>
+        <key>title</key>
+        <string>Music Information</string>
+    </dict>
 	<dict>
 		<key>cName</key>
 		<string>GachaViewController</string>

@@ -15,7 +15,7 @@ class WipeTableViewController: BaseTableViewController {
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("图片", comment: ""),
                      NSLocalizedString("卡片", comment: ""),
-                     NSLocalizedString("歌曲", comment: ""),
+                     NSLocalizedString("谱面", comment: ""),
                      NSLocalizedString("用户配置", comment: "") + "（" + NSLocalizedString("需重启应用", comment: "") + "）",
                      NSLocalizedString("其他", comment: "")]
 
