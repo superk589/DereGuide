@@ -4,16 +4,16 @@
 <dict>
 	<key>Cute</key>
 	<array>
-		<integer>100412</integer>
+		<real>100426</real>
 		<real>100344</real>
 		<integer>100256</integer>
-		<real>100282</real>
+		<integer>100398</integer>
 		<real>100396</real>
-		<real>100412</real>
+		<real>100426</real>
 	</array>
 	<key>Cool</key>
 	<array>
-		<integer>200436</integer>
+		<real>200436</real>
 		<real>200254</real>
 		<real>200378</real>
 		<integer>200360</integer>
