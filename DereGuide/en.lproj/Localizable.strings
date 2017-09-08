@@ -697,7 +697,7 @@
 "下一步" = "Next";
 "获取数据中..." = "Loading...";
 "您输入的游戏ID不存在" = "The game ID doesn't exists";
-"输入您的游戏ID" = "Game ID";
+"输入您的游戏ID" = "Your Game ID";
 // using manually input
 "双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布" = "Double click to select from all cards, long press to edit potential or delete it. You have to set at least one center.";
 "昵称不能超过10个文字" = "Nickname must be within 10 characters";
