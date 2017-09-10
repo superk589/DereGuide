@@ -66,6 +66,15 @@ class BeatmapViewController: UIViewController {
         updateUI()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.bv.beatmapDrawer.widthInset = size.width / 7.2
+            self.bv.beatmapDrawer.innerWidthInset = size.width / 7.2
+            self.bv.setNeedsDisplay()
+        }, completion: nil)
+    }
+    
     @objc func backAction() {
         navigationController?.popViewController(animated: true)
     }
