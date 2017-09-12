@@ -1,5 +1,5 @@
 //
-//  MusicDetailController.swift
+//  SongDetailController.swift
 //  DereGuide
 //
 //  Created by zzk on 04/09/2017.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MusicDetailController: BaseViewController {
+class SongDetailController: BaseViewController {
 
 }

@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 10.0, *)
 class BaseModelCollectionViewController: RefreshableCollectionViewController {
 
     lazy var searchBar: CGSSSearchBar = {
@@ -26,14 +25,14 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
     // called if needsReloadData is true when text changed, must to be overrided
     func reloadData() { }
     
-    func setNeedsReloadData() {
+    @objc func setNeedsReloadData() {
         needsReloadData = true
         if isShowing {
             reloadDataIfNeeded()
         }
     }
     
-    func reloadDataIfNeeded() {
+    @objc func reloadDataIfNeeded() {
         if needsReloadData {
             reloadData()
             needsReloadData = false
@@ -61,7 +60,6 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
 }
 
 //MARK: UISearchBarDelegate
-@available(iOS 10.0, *)
 extension BaseModelCollectionViewController: UISearchBarDelegate {
     
     // 文字改变时

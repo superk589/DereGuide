@@ -292,7 +292,7 @@ extension UnitSimulationController: UnitSimulationUnitCellDelegate {
 
 extension UnitSimulationController: BaseSongTableViewControllerDelegate {
     
-    func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene) {
+    func baseSongTableViewController(_ baseSongTableViewController: BaseLiveTableViewController, didSelect liveScene: CGSSLiveScene) {
         self.scene = liveScene
     }
 }

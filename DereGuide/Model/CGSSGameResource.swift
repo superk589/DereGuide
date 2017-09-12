@@ -270,6 +270,56 @@ class Master: FMDatabaseQueue {
         }
     }
     
+    func getMusicInfo(callback: @escaping FMDBCallBackClosure<[CGSSSong]>) {
+        var list = [CGSSSong]()
+        execute({ (db) in
+            let selectSql = """
+                SELECT
+                    b.id,
+                    a.id live_id,
+                    a.type,
+                    a.event_type,
+                    d.discription,
+                    b.bpm,
+                    b.name,
+                    b.composer,
+                    b.lyricist,
+                    b.name_sort,
+                    c.chara_position_1,
+                    c.chara_position_2,
+                    c.chara_position_3,
+                    c.chara_position_4,
+                    c.chara_position_5,
+                    c.position_num
+                FROM
+                    live_data a,
+                    music_data b,
+                    music_info d
+                    LEFT OUTER JOIN live_data_position c ON a.id = c.live_data_id
+                WHERE
+                    a.music_data_id = b.id
+                    AND b.id = d.id
+            """
+            let set = try db.executeQuery(selectSql, values: nil)
+            while set.next() {
+                
+                let json = JSON(set.resultDictionary ?? [AnyHashable: Any]())
+                
+                guard let song = CGSSSong(fromJson: json) else { continue }
+                
+                // 去掉一些无效数据
+                // 1901 - 2016-4-1 special live
+                // 1902 - 2017-4-1 special live
+                // 90001 - DJ Pinya live
+                if [1901, 1902, 90001].contains(song.musicID) { continue }
+                
+                list.append(song)
+            }
+        }) {
+            callback(list)
+        }
+    }
+    
     func getLiveTrend(eventId: Int, callback: @escaping FMDBCallBackClosure<[EventTrend]>) {
         var list = [EventTrend]()
         execute({ (db) in

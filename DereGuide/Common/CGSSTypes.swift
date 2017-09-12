@@ -106,11 +106,11 @@ struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
     static let office = CGSSCardTypes.init(rawValue: 1 << 3)
     static let all = CGSSCardTypes.init(rawValue: 0b111)
     
-    init (type: Int) {
+    init(type: Int) {
         self.init(rawValue: 1 << UInt(type))
     }
     
-    init (typeString: String) {
+    init(typeString: String) {
         switch typeString {
         case "cute":
             self = .cute
@@ -289,7 +289,38 @@ struct CGSSConditionTypes: OptionSet, Hashable, CustomStringConvertible {
     }
 }
 
-
+struct CGSSPositionNumberTypes: OptionSet, CustomStringConvertible {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let n1 = CGSSPositionNumberTypes(rawValue: 1 << 0)
+    static let n2 = CGSSPositionNumberTypes(rawValue: 1 << 1)
+    static let n3 = CGSSPositionNumberTypes(rawValue: 1 << 2)
+    static let n4 = CGSSPositionNumberTypes(rawValue: 1 << 3)
+    static let n5 = CGSSPositionNumberTypes(rawValue: 1 << 4)
+  
+    static let all = CGSSPositionNumberTypes(rawValue: 0b11111)
+    
+    init(positionNum: Int) {
+        self.init(rawValue: 1 << UInt(positionNum - 1))
+    }
+    
+    var description: String {
+        switch self {
+        case CGSSPositionNumberTypes.n1:
+            return NSLocalizedString("Solo", comment: "")
+        case CGSSPositionNumberTypes.n2:
+            return "2" + NSLocalizedString("人组合", comment: "")
+        case CGSSPositionNumberTypes.n3:
+            return "3" + NSLocalizedString("人组合", comment: "")
+        case CGSSPositionNumberTypes.n4:
+            return "4" + NSLocalizedString("人组合", comment: "")
+        case CGSSPositionNumberTypes.n5:
+            return "5" + NSLocalizedString("人组合", comment: "")
+       default:
+            return NSLocalizedString("其他", comment: "")
+        }
+    }
+}
 
 typealias CGSSCharTypes = CGSSCardTypes
 
@@ -424,6 +455,7 @@ struct CGSSEventTypes: OptionSet, CustomStringConvertible {
     static let all = CGSSEventTypes.init(rawValue: 0b11111)
     static let ptRankingExists: CGSSEventTypes = [.groove, .tradition]
     static let scoreRankingExists: CGSSEventTypes = [.groove, .tradition, .parade]
+    static let hasSong: CGSSEventTypes = .scoreRankingExists
     init (eventType: Int) {
         self.rawValue = 1 << UInt(eventType - 1)
     }

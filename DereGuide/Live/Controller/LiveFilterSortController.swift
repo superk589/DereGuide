@@ -1,5 +1,5 @@
 //
-//  SongFilterSortController.swift
+//  LiveFilterSortController.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/1/13.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol SongFilterSortControllerDelegate: class {
+protocol LiveFilterSortControllerDelegate: class {
     func doneAndReturn(filter: CGSSLiveFilter, sorter: CGSSSorter)
 }
 
-class SongFilterSortController: BaseFilterSortController {
+class LiveFilterSortController: BaseFilterSortController {
 
-    weak var delegate: SongFilterSortControllerDelegate?
+    weak var delegate: LiveFilterSortControllerDelegate?
     var filter: CGSSLiveFilter!
     var sorter: CGSSSorter!
     
-    var songTypeTitles = ["Cute", "Cool", "Passion", "All"]
+    var songTypeTitles = ["Cute", "Cool", "Passion", NSLocalizedString("彩色曲", comment: "")]
     
     var difficultyTypeTitles = [CGSSLiveDifficulty.debut.description,
                                 CGSSLiveDifficulty.regular.description,CGSSLiveDifficulty.pro.description,CGSSLiveDifficulty.master.description,CGSSLiveDifficulty.masterPlus.description]
@@ -112,7 +112,7 @@ class SongFilterSortController: BaseFilterSortController {
 }
 
 
-extension SongFilterSortController: FilterTableViewCellDelegate {
+extension LiveFilterSortController: FilterTableViewCellDelegate {
     func filterTableViewCell(_ cell: FilterTableViewCell, didSelect index: Int) {
         if let indexPath = tableView.indexPath(for: cell) {
             if indexPath.section == 0 {
@@ -182,7 +182,7 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
     }
 }
 
-extension SongFilterSortController: SortTableViewCellDelegate {
+extension LiveFilterSortController: SortTableViewCellDelegate {
     func sortTableViewCell(_ cell: SortTableViewCell, didSelect index: Int) {
         if let indexPath = tableView.indexPath(for: cell) {
             if indexPath.section == 1 {

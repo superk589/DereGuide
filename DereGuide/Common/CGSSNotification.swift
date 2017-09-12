@@ -14,6 +14,7 @@ extension Notification.Name {
     static let saveEnd = Notification.Name.init("CGSS_SAVE_END")
     static let favoriteCardsChanged = Notification.Name.init("CGSS_FAVORITE_CARD_CHANGED")
     static let favoriteCharasChanged = Notification.Name.init("CGSS_FAVORITE_CHARA_CHANGED")
+    static let favoriteSongsChanged = Notification.Name(rawValue: "CGSS_FAVORITE_SONG_CHANGED")
     static let dataRemoved = Notification.Name.init("CGSS_DATA_REMOVED")
     static let unitModified = Notification.Name.init("CGSS_UNIT_MODIFIED")
 }

@@ -1,5 +1,5 @@
 //
-//  SongTableViewCell.swift
+//  LiveTableViewCell.swift
 //  DereGuide
 //
 //  Created by zzk on 16/7/23.
@@ -9,11 +9,11 @@
 import UIKit
 import SnapKit
 
-typealias SongTableViewCellDelegate = LiveViewDelegate
+typealias LiveTableViewCellDelegate = LiveViewDelegate
 
-class SongTableViewCell: ReadableWidthTableViewCell {
+class LiveTableViewCell: ReadableWidthTableViewCell {
     
-    weak var delegate: SongTableViewCellDelegate? {
+    weak var delegate: LiveTableViewCellDelegate? {
         didSet {
             liveView.delegate = self.delegate
         }

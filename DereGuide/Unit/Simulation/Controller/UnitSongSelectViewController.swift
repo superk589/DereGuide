@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnitSongSelectViewController: BaseSongTableViewController {
+class UnitSongSelectViewController: BaseLiveTableViewController {
     
     override var filter: CGSSLiveFilter {
         get {

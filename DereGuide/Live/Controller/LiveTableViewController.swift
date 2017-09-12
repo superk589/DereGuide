@@ -1,5 +1,5 @@
 //
-//  SongTableViewController.swift
+//  LiveTableViewController.swift
 //  DereGuide
 //
 //  Created by zzk on 16/7/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongTableViewController: BaseSongTableViewController {
+class LiveTableViewController: BaseLiveTableViewController {
 
     override func selectScene(_ scene: CGSSLiveScene) {
         super.selectScene(scene)

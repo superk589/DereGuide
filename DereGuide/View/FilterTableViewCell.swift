@@ -137,6 +137,18 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         }
     }
     
+    func setup(titles: [String], selected: [Int]) {
+        self.setup(titles: titles)
+        if selected.count == titles.count {
+            self.presetAll()
+        } else {
+            for i in 0..<tagViews.count - 1 {
+                let tagView = tagViews[i + 1]
+                tagView.setSelected(selected: selected.contains(i))
+            }
+        }
+    }
+    
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         layoutIfNeeded()
         filterView.invalidateIntrinsicContentSize()

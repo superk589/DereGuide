@@ -1,5 +1,5 @@
 //
-//  BaseSongTableViewController.swift
+//  BaseLiveTableViewController.swift
 //  DereGuide
 //
 //  Created by zzk on 16/8/7.
@@ -10,10 +10,10 @@ import UIKit
 import ZKDrawerController
 
 protocol BaseSongTableViewControllerDelegate: class {
-    func baseSongTableViewController(_ baseSongTableViewController: BaseSongTableViewController, didSelect liveScene: CGSSLiveScene)
+    func baseSongTableViewController(_ baseSongTableViewController: BaseLiveTableViewController, didSelect liveScene: CGSSLiveScene)
 }
 
-class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, SongFilterSortControllerDelegate {
+class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, LiveFilterSortControllerDelegate {
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
     var liveList: [CGSSLive] = [CGSSLive]()
@@ -33,7 +33,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
             CGSSSorterFilterManager.default.liveFilter = newValue
         }
     }
-    var filterVC: SongFilterSortController!
+    var filterVC: LiveFilterSortController!
     
     // 根据设定的筛选和排序方法重新展现数据
     override func updateUI() {
@@ -85,11 +85,11 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
         searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-        tableView.register(SongTableViewCell.self, forCellReuseIdentifier: "SongCell")
+        tableView.register(LiveTableViewCell.self, forCellReuseIdentifier: "SongCell")
         tableView.rowHeight = 86
         tableView.separatorStyle = .none
         
-        filterVC = SongFilterSortController()
+        filterVC = LiveFilterSortController()
         filterVC.filter = self.filter
         filterVC.sorter = self.sorter
         filterVC.delegate = self
@@ -149,7 +149,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! LiveTableViewCell
         
         cell.setup(with: liveList[indexPath.row])
         cell.delegate = self
@@ -200,7 +200,7 @@ class BaseSongTableViewController: BaseModelTableViewController, ZKDrawerControl
 }
 
 //MARK: SongTableViewCell的协议方法
-extension BaseSongTableViewController: LiveViewDelegate {
+extension BaseLiveTableViewController: LiveViewDelegate {
     
     func liveView(_ liveView: LiveView, didSelect scene: CGSSLiveScene) {
         if scene.beatmap != nil {

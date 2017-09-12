@@ -9,9 +9,9 @@
 import UIKit
 
 protocol Refreshable {
-    var refresher: UIRefreshControl { get set }
+    var refresher: UIRefreshControl? { get set }
     var updateStatusView: UpdateStatusView { get set }
-    func check(_ type: CGSSUpdateDataTypes)
+    func check(_ types: CGSSUpdateDataTypes)
     func checkUpdate()
 }
 
@@ -20,7 +20,7 @@ extension Refreshable where Self: UIViewController {
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
         if updater.isUpdating {
-            refresher.endRefreshing()
+            refresher?.endRefreshing()
             return
         }
         self.updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
@@ -59,21 +59,21 @@ extension Refreshable where Self: UIViewController {
                 }
             }
         })
-        refresher.endRefreshing()
+        refresher?.endRefreshing()
     }
 }
 
 class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate, Refreshable {
     
-    var refresher = UIRefreshControl()
+    var refresher: UIRefreshControl? = UIRefreshControl()
     var updateStatusView = UpdateStatusView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
+        refresher?.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         refreshControl = refresher
-        refresher.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
+        refresher?.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
@@ -104,20 +104,22 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     }
 }
 
-
-@available(iOS 10.0, *)
 class RefreshableCollectionViewController: UICollectionViewController, UpdateStatusViewDelegate, Refreshable {
     
-    var refresher = UIRefreshControl()
+    var refresher: UIRefreshControl? = UIRefreshControl()
     var updateStatusView = UpdateStatusView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
+        refresher?.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         
-        collectionView?.refreshControl = refresher
-        refresher.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
+        if #available(iOS 10.0, *) {
+            collectionView?.refreshControl = refresher
+        } else {
+            // Fallback on earlier versions
+        }
+        refresher?.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
