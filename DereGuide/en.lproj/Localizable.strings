@@ -704,7 +704,7 @@
 "至少添加一名自己的队长" = "At least add one of my centers";
 // both
 "您输入的游戏ID不合法" = "The game ID is invalid";
-"向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间" = "Make your profile public, repeat posting will automatically overwrite the previous content and refresh the update time";
+"向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间" = "Make your profile public, repeated posts will automatically overwrite the previous content and refresh the update time";
 "发布失败，请确保iCloud已登录并且网络状态正常" = "Posting failed, please verify your iCloud account and the internet connection";
 "撤销失败，请确保iCloud已登录并且网络状态正常" = "Revoking failed，please verify your iCloud account and the internet connection";
 "发布成功" = "Posting succeed";
