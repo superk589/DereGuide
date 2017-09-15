@@ -123,11 +123,7 @@ class ColleagueViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if profiles.count == 0 {
-            return 0
-        } else {
-            return profiles.count + 1
-        }
+        return profiles.count + 1
     }
     
     var context: NSManagedObjectContext {

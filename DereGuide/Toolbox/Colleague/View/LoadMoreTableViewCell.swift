@@ -44,6 +44,7 @@ class LoadMoreTableViewCell: UITableViewCell {
             make.center.equalToSuperview()
         }
         noMoreLabel.isHidden = true
+        loadMoreButton.isHidden = true
         
         selectionStyle = .none
     }
