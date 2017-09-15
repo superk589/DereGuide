@@ -12,7 +12,7 @@
 "1ey-jy-bHg.title" = "キャラの絞り込み・並べ替え";
 
 /* Class = "UITableViewController"; title = "歌曲筛选和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "譜面の絞り込み・並べ替え";
+"2yB-7S-JxI.title" = "楽曲の絞り込み・並べ替え";
 
 /* Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe"; */
 "5Hs-jz-swe.title" = "カードナビ";
