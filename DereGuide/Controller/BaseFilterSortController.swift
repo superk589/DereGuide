@@ -39,7 +39,12 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         toolbar.tintColor = Color.parade
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
-            make.bottom.left.right.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.left.right.equalToSuperview()
+                make.bottom.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.bottom.left.right.equalToSuperview()
+            }
             make.height.equalTo(44)
         }
 
