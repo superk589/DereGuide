@@ -31,7 +31,7 @@ class ColleagueViewController: BaseTableViewController {
         
         tableView.register(ColleagueTableViewCell.self, forCellReuseIdentifier: ColleagueTableViewCell.description())
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 159
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none

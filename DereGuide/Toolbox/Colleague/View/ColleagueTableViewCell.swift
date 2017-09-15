@@ -40,6 +40,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         gameIDView.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(10)
+            make.height.equalTo(26)
         }
         gameIDView.backgroundColor = Color.parade
         gameIDView.layer.cornerRadius = 3
@@ -86,7 +87,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         }
         
         nameLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        gameIDLabel.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        gameIDView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         createdDateLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
         
         messageLabel = UILabel()
@@ -106,7 +107,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
             make.left.equalToSuperview()
             make.top.equalTo(messageLabel.snp.bottom).offset(5)
             make.height.lessThanOrEqualTo(89.5)
-            make.bottom.equalTo(-10).priority(900)
+            make.bottom.equalTo(-10)
         }
         myCenterGroupView.delegate = self
         
