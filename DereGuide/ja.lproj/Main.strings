@@ -9,10 +9,10 @@
 "1cN-eL-xzi.headerTitle" = "フィードバック";
 
 /* Class = "UITableViewController"; title = "角色排序和筛选"; ObjectID = "1ey-jy-bHg"; */
-"1ey-jy-bHg.title" = "キャラのフィルタ・ソート";
+"1ey-jy-bHg.title" = "キャラの絞り込み・並べ替え";
 
 /* Class = "UITableViewController"; title = "歌曲筛选和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "譜面のフィルタ・ソート";
+"2yB-7S-JxI.title" = "譜面の絞り込み・並べ替え";
 
 /* Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe"; */
 "5Hs-jz-swe.title" = "カードナビ";
@@ -21,7 +21,7 @@
 "8Lu-2l-B9T.title" = "カード";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "D6I-uh-wTP"; */
-"D6I-uh-wTP.headerTitle" = "ソート";
+"D6I-uh-wTP.headerTitle" = "並べ替える";
 
 /* Class = "UITabBarController"; title = "根标签栏"; ObjectID = "Eme-MZ-6LK"; */
 "Eme-MZ-6LK.title" = "Root TabBar";
@@ -48,7 +48,7 @@
 "OeQ-8h-gYQ.title" = "譜面";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
-"S9a-oB-UoS.headerTitle" = "ソート";
+"S9a-oB-UoS.headerTitle" = "並べ替える";
 
 /* Class = "UITableViewSection"; headerTitle = "关于"; ObjectID = "Sc7-uC-obv"; */
 "Sc7-uC-obv.headerTitle" = "アプリについて";
@@ -57,13 +57,13 @@
 "UuG-iS-uix.text" = "現在のバージョン";
 
 /* Class = "UITableViewController"; title = "卡片筛选和排序"; ObjectID = "XB8-jt-AiW"; */
-"XB8-jt-AiW.title" = "カードのフィルタ・ソート";
+"XB8-jt-AiW.title" = "カードの絞り込み・並べ替え";
 
 /* Class = "UITableViewController"; title = "卡片"; ObjectID = "XEw-Y1-ITn"; */
 "XEw-Y1-ITn.title" = "カード";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "XrL-IG-AMC"; */
-"XrL-IG-AMC.headerTitle" = "スクリーニング";
+"XrL-IG-AMC.headerTitle" = "絞り込む";
 
 /* Class = "UITableViewController"; title = "组队"; ObjectID = "Zys-WZ-9cy"; */
 "Zys-WZ-9cy.title" = "ユニット";
@@ -81,13 +81,13 @@
 "gI8-ss-NS6.title" = "設定";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "hJn-41-ekr"; */
-"hJn-41-ekr.headerTitle" = "スクリーニング";
+"hJn-41-ekr.headerTitle" = "絞り込む";
 
 /* Class = "UILabel"; text = "评价"; ObjectID = "r3b-gr-oUP"; */
 "r3b-gr-oUP.text" = "レビュー";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
-"rD2-JL-rj6.headerTitle" = "ソート";
+"rD2-JL-rj6.headerTitle" = "並べ替える";
 
 /* Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8"; */
 "sAv-Q2-aG8.title" = "ツールナビ";
@@ -96,7 +96,7 @@
 "u1E-LY-NTo.text" = "モバイル回線でﾌﾙｻｲｽﾞ画像を読み込む";
 
 /* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "vSe-a1-0gm"; */
-"vSe-a1-0gm.headerTitle" = "スクリーニング";
+"vSe-a1-0gm.headerTitle" = "絞り込む";
 
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "ツール";
