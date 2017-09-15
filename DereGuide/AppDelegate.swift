@@ -136,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let vc = EventViewController()
                     vc.hidesBottomBarWhenPushed = true
                     nvc.pushViewController(vc, animated: true)
+                    nvc.navigationBar.setNeedsLayout()
                 }
             case .gacha:
                 CGSSClient.shared.tabBarController?.selectedIndex = 3
@@ -145,6 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let vc = GachaViewController()
                     vc.hidesBottomBarWhenPushed = true
                     nvc.pushViewController(vc, animated: true)
+                    nvc.navigationBar.setNeedsLayout()
                 }
             }
         }
@@ -205,6 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 vc.char = char
                 vc.hidesBottomBarWhenPushed = true
                 nvc.pushViewController(vc, animated: true)
+                nvc.navigationBar.setNeedsLayout()
             }
         }
     }

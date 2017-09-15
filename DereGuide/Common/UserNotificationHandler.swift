@@ -60,6 +60,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
                 vc.char = char
                 vc.hidesBottomBarWhenPushed = true
                 nvc.pushViewController(vc, animated: false)
+                nvc.navigationBar.setNeedsLayout()
             }
         }
     }
