@@ -22,7 +22,7 @@ class ReadableWidthTableViewCell: UITableViewCell {
         prepare()
     }
     
-    func prepare() {
+    private func prepare() {
         readableContentView = UIView()
         contentView.addSubview(readableContentView)
         readableContentView.snp.makeConstraints { (make) in
