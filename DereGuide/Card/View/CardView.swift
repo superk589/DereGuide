@@ -44,7 +44,6 @@ class CardView: UIView {
         }
         
         rarityLabel = UILabel()
-//        rarityLabel.frame = CGRect(x: 68, y: 10, width: 30, height: 10)
         rarityLabel.textAlignment = .left
         rarityLabel.font = UIFont.systemFont(ofSize: 10)
         addSubview(rarityLabel)
@@ -53,18 +52,7 @@ class CardView: UIView {
             make.top.equalTo(9)
         }
         
-        skillLabel = UILabel()
-//        skillLabel.frame = CGRect(x: CGSSGlobal.width - 150, y: 10, width: 140, height: 10)
-        skillLabel.font = UIFont.systemFont(ofSize: 10)
-        skillLabel.textAlignment = .right
-        addSubview(skillLabel)
-        skillLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
-            make.top.equalTo(rarityLabel)
-        }
-        
         cardNameLabel = UILabel()
-//        cardNameLabel.frame = CGRect(x: 68, y: 25, width: CGSSGlobal.width - 78, height: 16)
         cardNameLabel.font = UIFont.systemFont(ofSize: 16)
         cardNameLabel.adjustsFontSizeToFitWidth = true
         cardNameLabel.baselineAdjustment = .alignCenters
@@ -76,21 +64,28 @@ class CardView: UIView {
         }
         
         titleLabel = UILabel()
-//        titleLabel.frame = CGRect(x: 98, y: 10, width: CGSSGlobal.width - 150, height: 10)
         titleLabel.font = UIFont.systemFont(ofSize: 10)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.baselineAdjustment = .alignCenters
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(rarityLabel.snp.right).offset(5)
             make.top.equalTo(rarityLabel)
-            make.right.lessThanOrEqualTo(skillLabel.snp.left).offset(-5)
         }
-        titleLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        skillLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-//        let width = (CGSSGlobal.width - 78) / 5
-//        let fontSize: CGFloat = 12
-//        let height: CGFloat = 12
-//        let originX: CGFloat = 68
-//        let originY: CGFloat = 46
+        
+        skillLabel = UILabel()
+        skillLabel.font = UIFont.systemFont(ofSize: 10)
+        skillLabel.textAlignment = .right
+        addSubview(skillLabel)
+        skillLabel.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.top.equalTo(rarityLabel)
+            make.left.greaterThanOrEqualTo(titleLabel.snp.right).offset(5)
+        }
+        
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        skillLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        rarityLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         lifeLabel = UILabel()
 //        lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
@@ -155,11 +150,7 @@ class CardView: UIView {
         
         // 显示主动技能类型
         if let skill = card.skill {
-            if CGSSGlobal.width > 360 {
-                skillLabel.text = skill.descriptionShort
-            } else {
-                skillLabel.text = "\(skill.skillFilterType.description)"
-            }
+            skillLabel.text = skill.descriptionShort
         } else {
             skillLabel.text = ""
         }
