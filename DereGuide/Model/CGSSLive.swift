@@ -205,7 +205,7 @@ extension CGSSLive {
 
 class CGSSLive: CGSSBaseModel {
     
-    var bpm : Int
+    @objc dynamic var bpm : Int
     var charaPosition1 : Int
     var charaPosition2 : Int
     var charaPosition3 : Int
