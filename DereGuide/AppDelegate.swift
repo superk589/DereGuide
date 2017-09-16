@@ -48,14 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
-            if lastVersion < 6 {
-                let context = CoreDataStack.default.viewContext
-                for team in CGSSTeamManager.default.teams {
-                    Unit.insert(into: context, team: team)
-                }
-                context.saveOrRollback()
-                try? FileManager.default.moveItem(atPath: Path.document + "/beatmapHash.plist", toPath: BeatmapHashManager.default.path)
-            }
             if lastVersion < 7 {
                 let context = CoreDataStack.default.viewContext
                 for cardID in CGSSFavoriteManager.default.favoriteCards {
@@ -65,9 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     FavoriteChara.insert(into: context, charaID: charaID)
                 }
                 context.saveOrRollback()
-            }
-            if lastVersion < 8 {
-                try? FileManager.default.moveItem(atPath: Path.cache + "beatmapHash.plist", toPath: BeatmapHashManager.default.path)
             }
             if lastVersion < 9 {
                 CGSSCacheManager.shared.wipeUserDocuments()

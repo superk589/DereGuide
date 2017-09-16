@@ -166,29 +166,6 @@ extension Unit: RemoteUploadable {
 
 extension Unit {
     
-    @discardableResult
-    static func insert(into moc: NSManagedObjectContext, team: CGSSTeam) -> Unit {
-        
-        var members = [Member]()
-        
-        let center = Member.insert(into: moc, cardID: team.leader.id!, skillLevel: team.leader.skillLevel!, potential: team.leader.potential)
-        members.append(center)
-        
-        for sub in team.subs {
-            let member = Member.insert(into: moc, cardID: sub.id!, skillLevel: sub.skillLevel!, potential: sub.potential)
-            members.append(member)
-        }
-        
-        let guest = Member.insert(into: moc, cardID: team.friendLeader.id!, skillLevel: team.friendLeader.skillLevel!, potential: team.friendLeader.potential)
-        members.append(guest)
-        
-        return Unit.insert(into: moc, customAppeal: team.customAppeal, supportAppeal: team.supportAppeal, usesCustomAppeal: team.usingCustomAppeal, members: members)
-    }
-    
-}
-
-extension Unit {
-    
     var leader: Member {
         return orderedMembers[0]
     }
@@ -481,4 +458,47 @@ extension Unit {
         }.count == 6
     }
     
+}
+
+enum LeaderSkillUpType {
+    case vocal
+    case dance
+    case visual
+    case life
+    case proc
+    
+    init?(simulatorType: CGSSLiveSimulatorType) {
+        switch simulatorType {
+        case .dance:
+            self = .dance
+        case .visual:
+            self = .visual
+        case .vocal:
+            self = .vocal
+        default:
+            return nil
+        }
+    }
+}
+
+struct LeaderSkillUpContent {
+    var upType: LeaderSkillUpType
+    var upTarget: CGSSCardTypes
+    var upValue: Int
+}
+
+extension CGSSCard {
+    // 扩展一个获取卡片在队伍中的表现值的方法
+    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = LiveSimulationAdvanceOptionsManager.default.roomUpValue, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
+        var appeal = self.appeal.addBy(potential: potential, rarity: self.rarityType)
+        var factor = 100 + roomUpValue
+        if liveType == cardType || liveType == .allType {
+            factor += 30
+        }
+        appeal.vocal = Int(ceil(Float(appeal.vocal * (factor + (contents[cardType]?[.vocal] ?? 0))) / 100))
+        appeal.dance = Int(ceil(Float(appeal.dance * (factor + (contents[cardType]?[.dance] ?? 0))) / 100))
+        appeal.visual = Int(ceil(Float(appeal.visual * (factor + (contents[cardType]?[.visual] ?? 0))) / 100))
+        appeal.life = Int(ceil(Float(appeal.life * (100 + (contents[cardType]?[.life] ?? 0))) / 100))
+        return appeal
+    }
 }
