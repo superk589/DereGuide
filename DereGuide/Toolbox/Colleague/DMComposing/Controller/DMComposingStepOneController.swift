@@ -49,6 +49,7 @@ class DMComposingStepOneController: BaseViewController {
         input.keyboardType = .numberPad
         input.returnKeyType = .done
         input.contentVerticalAlignment = .center
+        input.delegate = self
         view.addSubview(input)
         input.snp.makeConstraints { (make) in
             make.top.equalTo(idLabel.snp.bottom).offset(20)
@@ -70,9 +71,71 @@ class DMComposingStepOneController: BaseViewController {
         confirmButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-258)
+            make.bottom.equalTo(-10)
         }
         confirmButton.backgroundColor = Color.dance
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: .UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func avoidKeyboard(_ notification: Notification) {
+        guard
+            // 结束位置
+            let endFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            
+            // 开始位置
+            // let beginFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+            
+            // 持续时间
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+            
+            else {
+                return
+        }
+        
+        // 时间曲线函数
+        let curve = UIViewAnimationOptions.init(rawValue: (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? UIViewAnimationOptions.curveEaseOut.rawValue)
+        lastKeyboardFrame = endFrame
+        lastCurve = curve
+        lastDuration = duration.doubleValue
+        let frame = view.convert(endFrame, from: nil)
+        let intersection = frame.intersection(view.frame)
+        UIView.animate(withDuration: duration.doubleValue, delay: 0, options: [curve], animations: {
+            self.confirmButton.transform = CGAffineTransform(translationX: 0, y: -intersection.height )
+        }, completion: nil)
+        
+        view.setNeedsLayout()
+    }
+    
+    private var lastKeyboardFrame: CGRect?
+    private var lastCurve: UIViewAnimationOptions?
+    private var lastDuration: TimeInterval?
+    
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if let lastFrame = lastKeyboardFrame, let curve = lastCurve, let duration = lastDuration {
+            let frame = view.convert(lastFrame, from: nil)
+            let intersection = frame.intersection(view.frame)
+            UIView.animate(withDuration: duration, delay: 0, options: [curve, .beginFromCurrentState], animations: {
+                self.confirmButton.transform = CGAffineTransform(translationX: 0, y: -intersection.height )
+            }, completion: nil)
+        }
+    }
+    
+    @objc func cancelAction() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func confirmAction() {
@@ -98,4 +161,13 @@ class DMComposingStepOneController: BaseViewController {
             }
         }
     }
+}
+
+extension DMComposingStepOneController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        confirmAction()
+        return true
+    }
+    
 }
