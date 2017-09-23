@@ -7,6 +7,7 @@
 */
 
 NSPhotoLibraryUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
+NSPhotoLibraryAddUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
 shortcutItemTitle1 = "卡片";
 shortcutItemTitle2 = "譜面";
 shortcutItemTitle3 = "活動";

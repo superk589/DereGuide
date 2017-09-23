@@ -7,6 +7,7 @@
 */
 
 NSPhotoLibraryUsageDescription = "ここでアプリをアルバムへのアクセス許可を同意してください。プライバシーの変更はあとでシステム設定に変更することができます。";
+NSPhotoLibraryAddUsageDescription = "ここでアプリをアルバムへのアクセス許可を同意してください。プライバシーの変更はあとでシステム設定に変更することができます。";
 shortcutItemTitle1 = "カード";
 shortcutItemTitle2 = "譜面";
 shortcutItemTitle3 = "イベント";

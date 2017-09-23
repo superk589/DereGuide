@@ -53,6 +53,8 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
