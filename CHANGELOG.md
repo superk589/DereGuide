@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.5.2
+
+1. 修复iOS 11下保存图片时闪退的问题
+2. 修复可能导致启动时闪退的一个问题
+3. 为了减少安装包体积，提升用户体验，“支持我们”页面中不再嵌入象征性的广告。
+
+##### Japanese version
+
+##### English version
+
+1. Fix a crash when add image to system photos.
+2. Fix a potential crash at launching.
+3. To reduce the size of the install package and make the app better, we remove the symbolic advertisement in "Support us" page.
+
 ### 1.5.1
 
 1. 修復點選完整卡池列表時閃退的問題
