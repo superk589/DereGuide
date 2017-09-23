@@ -438,9 +438,9 @@
 /* new in v1.2.0 */
 "支持作者" = "Support us";
 "为什么会有这个页面？" = "What is this?";
-"DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用常驻广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。" = "DereGuide is a free application, and will neither add any paid feature nor any permanent advertisement. However, DereGuide is short of funds for the future development and server costs. If you like this application, please support us.";
+"DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。" = "DereGuide is a free application, and will neither add any paid feature nor any advertisement. However, DereGuide is short of funds for the future development and server costs. If you like this application, please support us.";
 "如何支持我们？" = "How to do it?";
-"您可以通过购买下面的两个商品来支持本程序，购买任何一个商品都将移除本页面下方的广告。" = "You can purchase one of the items below to support us. Any item will remove the bottom advertisement.";
+"您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。" = "You can purchase one of the items below to support us. To make the App better, we decide not to include a symbolic advertiesment in this page. You will NOT get any virtual items or new features after purchase.";
 "广告仅存在于本页面内。" = "The ad. is only within this page.";
 "感谢您的支持，广告已经被移除。" = "Thank you for supporting us, the ad. is removed.";
 "您的设备未开启应用内购买。" = "Your device do not allow in-app purchasing.";

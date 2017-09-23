@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import GoogleMobileAds
+import StoreKit
 
 class DonationViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -17,7 +17,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     var questionView2: DonationQAView!
     
     var collectionView: UICollectionView!
-    var gadBanner: GADBannerView!
+//    var gadBanner: GADBannerView!
     var bannerDescLabel2: UILabel!
     
     var products = [SKProduct]()
@@ -46,12 +46,12 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     func prepareUI() {
         
         self.navigationItem.title = NSLocalizedString("支持作者", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("恢复", comment: ""), style: .plain, target: self, action: #selector(restoreAction))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("恢复", comment: ""), style: .plain, target: self, action: #selector(restoreAction))
         
         scrollView = UIScrollView()
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            make.top.right.left.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         questionView1 = DonationQAView()
@@ -70,24 +70,24 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.top.equalTo(questionView1.snp.bottom).offset(10)
         }
         
-        questionView1.setup(question: NSLocalizedString("为什么会有这个页面？", comment: ""), answer: NSLocalizedString("DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用常驻广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。", comment: ""))
+        questionView1.setup(question: NSLocalizedString("为什么会有这个页面？", comment: ""), answer: NSLocalizedString("DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。", comment: ""))
         
-        questionView2.setup(question: NSLocalizedString("如何支持我们？", comment: ""), answer: NSLocalizedString("您可以通过购买下面的两个商品来支持本程序，购买任何一个商品都将移除本页面下方的广告。", comment: ""))
+        questionView2.setup(question: NSLocalizedString("如何支持我们？", comment: ""), answer: NSLocalizedString("您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。", comment: ""))
         
-        gadBanner = GADBannerView()
-        view.addSubview(gadBanner)
-        gadBanner.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.right.bottom.equalToSuperview()
-        }
-        
-        // Replace this ad unit ID with your own ad unit ID.
-        gadBanner.adUnitID = "ca-app-pub-6074651551939465/6109538639"
-        gadBanner.rootViewController = self
-        
-        let request = GADRequest()
-        request.testDevices = [kGADSimulatorID, "105debdd40b3a6aa8e160e0f2cb4997f"]
-        gadBanner.load(request)
+//        gadBanner = GADBannerView()
+//        view.addSubview(gadBanner)
+//        gadBanner.snp.makeConstraints { (make) in
+//            make.height.equalTo(50)
+//            make.left.right.bottom.equalToSuperview()
+//        }
+//
+//        // Replace this ad unit ID with your own ad unit ID.
+//        gadBanner.adUnitID = "ca-app-pub-6074651551939465/6109538639"
+//        gadBanner.rootViewController = self
+//
+//        let request = GADRequest()
+//        request.testDevices = [kGADSimulatorID, "105debdd40b3a6aa8e160e0f2cb4997f"]
+//        gadBanner.load(request)
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -107,25 +107,25 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         collectionView.backgroundColor = UIColor.white
         collectionView.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
       
-        bannerDescLabel2 = UILabel()
-        view.addSubview(bannerDescLabel2)
-        bannerDescLabel2.snp.makeConstraints { (make) in
-            make.bottom.equalTo(gadBanner.snp.top).offset(-5)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.top.equalTo(scrollView.snp.bottom)
-        }
-        bannerDescLabel2.textColor = UIColor.darkGray
-        bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
-        bannerDescLabel2.numberOfLines = 0
-        bannerDescLabel2.textAlignment = .center
-        bannerDescLabel2.text = NSLocalizedString("广告仅存在于本页面内。", comment: "")
-        bannerDescLabel2.adjustsFontSizeToFitWidth = true
-        bannerDescLabel2.baselineAdjustment = .alignCenters
-        
-        if !UserDefaults.standard.shouldShowAd {
-            removeAd()
-        }
+//        bannerDescLabel2 = UILabel()
+//        view.addSubview(bannerDescLabel2)
+//        bannerDescLabel2.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(gadBanner.snp.top).offset(-5)
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.top.equalTo(scrollView.snp.bottom)
+//        }
+//        bannerDescLabel2.textColor = UIColor.darkGray
+//        bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
+//        bannerDescLabel2.numberOfLines = 0
+//        bannerDescLabel2.textAlignment = .center
+//        bannerDescLabel2.text = NSLocalizedString("广告仅存在于本页面内。", comment: "")
+//        bannerDescLabel2.adjustsFontSizeToFitWidth = true
+//        bannerDescLabel2.baselineAdjustment = .alignCenters
+//
+//        if !UserDefaults.standard.shouldShowAd {
+//            removeAd()
+//        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -153,13 +153,13 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         self.collectionView.reloadData()
     }
     
-    func removeAd() {
-        if UserDefaults.standard.shouldShowAd {
-            UserDefaults.standard.shouldShowAd = false
-        }
-        gadBanner.isHidden = true
-        bannerDescLabel2.text = NSLocalizedString("感谢您的支持，广告已经被移除。", comment: "")
-    }
+//    func removeAd() {
+//        if UserDefaults.standard.shouldShowAd {
+//            UserDefaults.standard.shouldShowAd = false
+//        }
+//        gadBanner.isHidden = true
+//        bannerDescLabel2.text = NSLocalizedString("感谢您的支持，广告已经被移除。", comment: "")
+//    }
     
     // MARK: UICollectionViewDelegate & DataSource
     
@@ -257,7 +257,7 @@ extension DonationViewController: SKPaymentTransactionObserver {
     
     
     func completeTransaction(_ transaction: SKPaymentTransaction) {
-        removeAd()
+//        removeAd()
     }
     
     func failedTransaction(_ transaction: SKPaymentTransaction) {
@@ -265,7 +265,7 @@ extension DonationViewController: SKPaymentTransactionObserver {
     }
     
     func restoreTransaction(_ transaction: SKPaymentTransaction) {
-        removeAd()
+//        removeAd()
     }
     
     func finishTransaction(_ transaction: SKPaymentTransaction) {

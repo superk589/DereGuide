@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import ReachabilitySwift
-
+import Reachability
 
 struct Config {
-    static let iAPRemoveADProductIDs: Set<String> = ["cgssguide_remove_ad_small", "cgssguide_remove_ad_medium"]
+    static let iAPRemoveADProductIDs: Set<String> = ["cgssguide_tips_small", "cgssguide_tips_medium"]
     static let bundleID = "com.zzk.cgssguide"
     static let unityVersion = "5.4.5p1"
     
@@ -149,21 +148,21 @@ public class CGSSGlobal {
     }
     
     static func isWifi() -> Bool {
-        if let reachability = Reachability() {
-            if reachability.isReachableViaWiFi{
-                return true
-            }
+        let reachability = Reachability()
+        if reachability.isReachableViaWiFi() {
+            return true
+        } else {
+            return false
         }
-        return false
     }
     
     static func isMobileNet() -> Bool {
-        if let reachability = Reachability() {
-            if reachability.isReachableViaWWAN {
-                return true
-            }
+        let reachability = Reachability()
+        if reachability.isReachableViaWWAN() {
+            return true
+        } else {
+            return false
         }
-        return false
     }
     
     static var languageType: LanguageType {

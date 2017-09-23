@@ -30,7 +30,7 @@
 		<key>site</key>
 		<string>https://github.com/ashleymills/Reachability.swift</string>
 		<key>name</key>
-		<string>ReachabilitySwift</string>
+		<string>Reachability</string>
 	</dict>
 	<dict>
 		<key>site</key>
@@ -49,6 +49,12 @@
 		<string>https://github.com/superk589/ZKDrawerController</string>
 		<key>name</key>
 		<string>ZKDrawerController</string>
+	</dict>
+	<dict>
+		<key>site</key>
+		<string>https://github.com/superk589/ZKPageViewController</string>
+		<key>name</key>
+		<string>ZKPageViewController</string>
 	</dict>
 	<dict>
 		<key>site</key>

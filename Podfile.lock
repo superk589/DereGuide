@@ -1,88 +1,69 @@
 PODS:
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
+  - Charts (3.0.3):
+    - Charts/Core (= 3.0.3)
+  - Charts/Core (3.0.3)
   - DynamicColor (3.3)
   - EasyTipView (1.0.2)
-  - Firebase/AdMob (4.0.4):
-    - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.21.0)
-  - Firebase/Core (4.0.4):
-    - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.4)
-  - FirebaseAnalytics (4.0.2):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (4.0.4):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseInstanceID (2.0.0):
-    - FirebaseCore (~> 4.0)
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
-  - Google-Mobile-Ads-SDK (7.21.0)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
   - ImageViewer (4.1.0)
   - lz4 (128)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - ReachabilitySwift (3)
+  - Reachability (3.2)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
-  - SnapKit (3.2.0)
+  - SnapKit (4.0.0)
   - SwiftyJSON (3.1.4)
-  - TTGTagCollectionView (1.6.0)
-  - ZKCornerRadiusView (0.0.7)
-  - ZKDrawerController (0.2.1):
+  - TTGTagCollectionView (1.6.1)
+  - ZKCornerRadiusView (0.1.0)
+  - ZKDrawerController (0.3.0):
+    - SnapKit
+  - ZKPageViewController (0.0.5):
+    - DynamicColor
     - SnapKit
 
 DEPENDENCIES:
-  - Charts
+  - Charts (= 3.0.3)
   - DynamicColor
   - EasyTipView
-  - Firebase/AdMob
-  - Firebase/Core
   - FMDB
-  - ImageViewer
+  - ImageViewer (from `https://github.com/leviouss/ImageViewer.git`)
   - lz4
-  - ReachabilitySwift
+  - Reachability
   - SDWebImage
   - SnapKit
   - SwiftyJSON
   - TTGTagCollectionView
   - ZKCornerRadiusView
   - ZKDrawerController
+  - ZKPageViewController
+
+EXTERNAL SOURCES:
+  ImageViewer:
+    :git: https://github.com/leviouss/ImageViewer.git
+
+CHECKOUT OPTIONS:
+  ImageViewer:
+    :commit: 60a8f8eea30e27573f1c542f2b0287321c091edd
+    :git: https://github.com/leviouss/ImageViewer.git
 
 SPEC CHECKSUMS:
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  Charts: bcde37724c161958c1438dd4883971fcb2d50c06
   DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
   EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
-  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
-  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
-  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
-  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  ImageViewer: 163e5832e0a09e31a3e3482cce6e5e9029356174
+  ImageViewer: 1b1fd505659cb88d9358d76accb1d58a6d8f073d
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  TTGTagCollectionView: ba35fb7dc284b368c86bf044bd889293a69114e8
-  ZKCornerRadiusView: b331cd5a4f3a8f27b8707f09776e861d3d9cffce
-  ZKDrawerController: 669c26533e1e797f95a8aaa8edc150353bf6228b
+  TTGTagCollectionView: 828087136810b786ce8c30c89acf3877cccb0383
+  ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
+  ZKDrawerController: 7fd2566f0fbce8aa5e4be8a445d0975a01b28313
+  ZKPageViewController: 7cb999246c7062767ad84f49398a8fe02400d8aa
 
-PODFILE CHECKSUM: 4f21676a3b6b657598d842470c1d7ce56db03713
+PODFILE CHECKSUM: 4ae160b11f06cf2b7a516731c499739236766d1e
 
 COCOAPODS: 1.3.1

@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreTelephony
-import ReachabilitySwift
+import Reachability
 
 class DeviceInformationManager {
     
@@ -47,7 +47,7 @@ class DeviceInformationManager {
     
     var connection: String {
         if let reachability = Reachability.init(hostname: "https://www.baidu.com") {
-            return reachability.currentReachabilityString
+            return reachability.currentReachabilityString()
         } else {
             return "未知"
         }
