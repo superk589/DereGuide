@@ -170,8 +170,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
         // 删除已经被标记为本地删除的对象
-        CoreDataStack.default.viewContext.deleteObjectsMarkedForLocalDeletion()
-        CoreDataStack.default.viewContext.refreshAllObjects()
+        CoreDataStack.default.syncContext.perform {
+            CoreDataStack.default.syncContext.deleteObjectsMarkedForLocalDeletion()
+            CoreDataStack.default.syncContext.refreshAllObjects()
+        }
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
