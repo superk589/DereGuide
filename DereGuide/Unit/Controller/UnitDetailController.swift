@@ -8,12 +8,13 @@
 
 import UIKit
 import CoreData
+import ZKPageViewController
 
-protocol UnitCollectionPage: PageCollectionControllerContainable {
+protocol UnitCollectionPage: class {
     var unit: Unit! { set get }
 }
 
-class UnitDetailController: PageCollectionController, PageCollectionControllerDataSource, PageCollectionControllerDelegate {
+class UnitDetailController: ZKPageViewController, ZKPageViewControllerDelegate, ZKPageViewControllerDataSource {
     
     private var observer: ManagedObjectObserver?
     
@@ -38,9 +39,6 @@ class UnitDetailController: PageCollectionController, PageCollectionControllerDa
     
     var vcs: [UnitCollectionPage] = [UnitSimulationController(), UnitInfomationController()]
     
-    var titles = [NSLocalizedString("得分计算", comment: ""),
-                  NSLocalizedString("队伍信息", comment: "")]
-    
     func reloadUnitIfNeeded() {
         if needsReloadUnit {
             needsReloadUnit = false
@@ -48,6 +46,24 @@ class UnitDetailController: PageCollectionController, PageCollectionControllerDa
                 vc.unit = unit
             }
         }
+    }
+    
+    var titleItems = [ZKPageTitleItem]()
+    
+    private func prepareTitleItems() {
+        let item1 = ZKPageTitleItem()
+        item1.normalColor = .darkGray
+        item1.selectedColor = Color.vocal
+        item1.label.text = NSLocalizedString("得分计算", comment: "")
+        
+        titleItems.append(item1)
+        
+        let item2 = ZKPageTitleItem()
+        item2.normalColor = .darkGray
+        item2.selectedColor = Color.cool
+        item2.label.text = NSLocalizedString("队伍信息", comment: "")
+        
+        titleItems.append(item2)
     }
     
     private var isShowing = false
@@ -58,6 +74,8 @@ class UnitDetailController: PageCollectionController, PageCollectionControllerDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        prepareTitleItems()
         
         self.dataSource = self
         self.delegate = self
@@ -78,30 +96,21 @@ class UnitDetailController: PageCollectionController, PageCollectionControllerDa
         isShowing = false
     }
     
-    func pageCollectionController(_ pageCollectionController: PageCollectionController, viewControllerAt indexPath: IndexPath) -> UIViewController {
-        let vc = vcs[indexPath.item] as! UIViewController
+    func pageViewController(_ pageViewController: ZKPageViewController, titleItemFor index: Int) -> ZKPageTitleItem {
+        return titleItems[index]
+    }
+ 
+    func pageViewController(_ pageViewController: ZKPageViewController, viewControllerAt index: Int) -> UIViewController {
+        let vc = vcs[index] as! UIViewController
         return vc
     }
     
-    func titlesOfPages(_ pageCollectionController: PageCollectionController) -> [String] {
-        return titles
+    func numberOfPages(_ pageViewController: ZKPageViewController) -> Int {
+        return vcs.count
     }
     
-    func numberOfPages(_ pageCollectionController: PageCollectionController) -> Int {
-        return titles.count
+    func pageViewController(_ pageViewController: ZKPageViewController, willShow viewController: UIViewController) {
+        
     }
-
-    func pageCollectionController(pageCollectionController: PageCollectionController, willShow viewController: UIViewController) {
-//        viewController.viewWillAppear(false)
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

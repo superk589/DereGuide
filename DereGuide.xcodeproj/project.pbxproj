@@ -219,9 +219,6 @@
 		1291821D1F58F99D00F91C0B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */; };
 		1291821F1F59287600F91C0B /* ColleagueDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */; };
 		129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B8A6AA1F09E348001074B3 /* ValueStepper.swift */; };
-		1296759E1EBF62400037827B /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1296759D1EBF62400037827B /* PageTitleView.swift */; };
-		129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A41EBF62B20037827B /* PageCollectionController.swift */; };
-		129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129675A61EBFF3490037827B /* PageCollectionView.swift */; };
 		1297F7561F467DFB004F353B /* WideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297F7551F467DFB004F353B /* WideButton.swift */; };
 		129B95541F3156B9007B7AE2 /* ColleagueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95531F3156B9007B7AE2 /* ColleagueViewController.swift */; };
 		129B95581F31B0D2007B7AE2 /* ColleagueComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95571F31B0D2007B7AE2 /* ColleagueComposeViewController.swift */; };
@@ -628,9 +625,6 @@
 		129182161F58E29500F91C0B /* DMComposingStepOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMComposingStepOneController.swift; sourceTree = "<group>"; };
 		1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueDescriptionCell.swift; sourceTree = "<group>"; };
-		1296759D1EBF62400037827B /* PageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
-		129675A41EBF62B20037827B /* PageCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionController.swift; sourceTree = "<group>"; };
-		129675A61EBFF3490037827B /* PageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCollectionView.swift; sourceTree = "<group>"; };
 		1297F7551F467DFB004F353B /* WideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideButton.swift; sourceTree = "<group>"; };
 		129B95531F3156B9007B7AE2 /* ColleagueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueViewController.swift; sourceTree = "<group>"; };
 		129B95571F31B0D2007B7AE2 /* ColleagueComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueComposeViewController.swift; sourceTree = "<group>"; };
@@ -1279,7 +1273,6 @@
 				12B8A6AA1F09E348001074B3 /* ValueStepper.swift */,
 				12C875831F32F5960051C75A /* PotentialValueStepper.swift */,
 				125BC0511F453F6D00860CF0 /* ReadableWidthTableViewCell.swift */,
-				1296759F1EBF62450037827B /* PageCollectionView */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = View;
@@ -1454,16 +1447,6 @@
 				1291821E1F59287600F91C0B /* ColleagueDescriptionCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1296759F1EBF62450037827B /* PageCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				1296759D1EBF62400037827B /* PageTitleView.swift */,
-				129675A61EBFF3490037827B /* PageCollectionView.swift */,
-				129675A41EBF62B20037827B /* PageCollectionController.swift */,
-			);
-			name = PageCollectionView;
 			sourceTree = "<group>";
 		};
 		129B95551F3156BF007B7AE2 /* Colleague */ = {
@@ -2229,8 +2212,6 @@
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				12F57C5F1EE292DF00638650 /* UnitAdvanceOptionsTableViewCell.swift in Sources */,
 				12C6B3521F00B6A200A25DB1 /* CardDetailAppealCell.swift in Sources */,
-				129675A71EBFF3490037827B /* PageCollectionView.swift in Sources */,
-				129675A51EBF62B20037827B /* PageCollectionController.swift in Sources */,
 				1285F4A21F32CB03002A81F7 /* MyCenterGroupView.swift in Sources */,
 				12C875821F32F4700051C75A /* MyCenterEditingView.swift in Sources */,
 				1239F1D11EF37BF900861092 /* MemberGroupView.swift in Sources */,
@@ -2365,7 +2346,6 @@
 				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
 				12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */,
-				1296759E1EBF62400037827B /* PageTitleView.swift in Sources */,
 				125BC0521F453F6D00860CF0 /* ReadableWidthTableViewCell.swift in Sources */,
 				129B95581F31B0D2007B7AE2 /* ColleagueComposeViewController.swift in Sources */,
 				1257C1C21F5CDF4A00C3DFE1 /* SongViewController.swift in Sources */,

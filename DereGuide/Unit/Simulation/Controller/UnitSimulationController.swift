@@ -268,7 +268,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
 extension UnitSimulationController: UnitEditingControllerDelegate {
     func unitEditingController(_ unitEditingController: UnitEditingController, didModify units: Set<Unit>) {
         if units.contains(self.unit) {
-            if let vc = pageCollectionController as? UnitDetailController {
+            if let vc = pageViewController as? UnitDetailController {
                 vc.setNeedsReloadUnit()
                 vc.reloadUnitIfNeeded()
             }
