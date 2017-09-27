@@ -10,7 +10,7 @@ import UIKit
 import Reachability
 
 struct Config {
-    static let iAPRemoveADProductIDs: Set<String> = ["cgssguide_tips_small", "cgssguide_tips_medium"]
+    static let iAPRemoveADProductIDs: Set<String> = ["dereguide_small_tips", "dereguide_medium_tips"]
     static let bundleID = "com.zzk.cgssguide"
     static let unityVersion = "5.4.5p1"
     
