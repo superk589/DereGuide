@@ -297,11 +297,16 @@ struct CGSSPositionNumberTypes: OptionSet, CustomStringConvertible {
     static let n3 = CGSSPositionNumberTypes(rawValue: 1 << 2)
     static let n4 = CGSSPositionNumberTypes(rawValue: 1 << 3)
     static let n5 = CGSSPositionNumberTypes(rawValue: 1 << 4)
+    static let nm = CGSSPositionNumberTypes(rawValue: 1 << 5)
   
-    static let all = CGSSPositionNumberTypes(rawValue: 0b11111)
+    static let all = CGSSPositionNumberTypes(rawValue: 0b111111)
     
     init(positionNum: Int) {
-        self.init(rawValue: 1 << UInt(positionNum - 1))
+        if positionNum > 0 {
+            self.init(rawValue: 1 << UInt(positionNum - 1))
+        } else {
+            self.init(rawValue: 1 << 5)
+        }
     }
     
     var description: String {
@@ -418,7 +423,7 @@ extension CGSSLiveTypes {
     }
 }
 
-struct CGSSLiveEventTypes: OptionSet {
+struct CGSSLiveEventTypes: OptionSet, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let normal = CGSSLiveEventTypes.init(rawValue: 1 << 0)
@@ -438,6 +443,21 @@ struct CGSSLiveEventTypes: OptionSet {
             self = .parade
         default:
             self = .normal
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case CGSSLiveEventTypes.normal:
+            return NSLocalizedString("常规歌曲", comment: "")
+        case CGSSLiveEventTypes.tradition:
+            return NSLocalizedString("传统活动", comment: "")
+        case CGSSLiveEventTypes.groove:
+            return NSLocalizedString("Groove活动", comment: "")
+        case CGSSLiveEventTypes.parade:
+            return NSLocalizedString("巡演活动", comment: "")
+        default:
+            return NSLocalizedString("巡演活动", comment: "")
         }
     }
 }

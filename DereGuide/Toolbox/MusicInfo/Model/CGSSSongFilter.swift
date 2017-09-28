@@ -11,7 +11,7 @@ import Foundation
 struct CGSSSongFilter: CGSSFilter {
     
     var liveTypes: CGSSLiveTypes
-    var eventTypes: CGSSEventTypes
+    var eventTypes: CGSSLiveEventTypes
     var centerTypes: CGSSCardTypes
     var positionNumTypes: CGSSPositionNumberTypes
     var favoriteTypes: CGSSFavoriteTypes
@@ -20,7 +20,7 @@ struct CGSSSongFilter: CGSSFilter {
     
     init(liveMask: UInt, eventMask: UInt, centerMask: UInt, positionNumMask: UInt, favoriteMask: UInt) {
         liveTypes = CGSSLiveTypes.init(rawValue: liveMask)
-        eventTypes = CGSSEventTypes.init(rawValue: eventMask)
+        eventTypes = CGSSLiveEventTypes.init(rawValue: eventMask)
         centerTypes = CGSSCardTypes.init(rawValue: centerMask)
         positionNumTypes = CGSSPositionNumberTypes.init(rawValue: positionNumMask)
         favoriteTypes = CGSSFavoriteTypes.init(rawValue: favoriteMask)
@@ -34,7 +34,7 @@ struct CGSSSongFilter: CGSSFilter {
                 for comp in comps {
                     if comp == "" { continue }
                     let b1 = { v.name.lowercased().contains(comp.lowercased()) }
-                    let b2 = { v.description.lowercased().contains(comp.lowercased())}
+                    let b2 = { v.detail.lowercased().contains(comp.lowercased())}
                     if b1() || b2() {
                         continue
                     } else {

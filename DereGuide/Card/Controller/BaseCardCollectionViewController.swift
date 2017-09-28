@@ -26,7 +26,6 @@ class BaseCardCollectionViewController: BaseModelCollectionViewController {
 
         // Register cell classes
         self.collectionView!.register(CardCollectionViewCell.self, forCellWithReuseIdentifier: CardCollectionViewCell.description())
-        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
         layout.estimatedItemSize = CGSize(width: 48, height: 48)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
@@ -75,7 +74,7 @@ class BaseCardCollectionViewController: BaseModelCollectionViewController {
     
     // MARK: UICollectionViewDelegate
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CardDetailViewController()
         vc.card = cards[indexPath.item]
         vc.hidesBottomBarWhenPushed = true

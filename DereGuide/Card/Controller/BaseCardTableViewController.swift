@@ -102,7 +102,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     func transitionToCollectionView() {
 //        navigationController?.isHeroEnabled = true
 //        isHeroEnabled = true
-        let vc = BaseCardCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let vc = BaseCardCollectionViewController()
         vc.cards = self.cardList
 //        hero_replaceViewController(with: vc)
         

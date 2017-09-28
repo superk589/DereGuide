@@ -24,9 +24,19 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
     var tagViews = [FilterItemView]()
     var defaultTagView: FilterItemView!
     
+    var leftLabel = UILabel()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        
+        leftLabel.font = UIFont.systemFont(ofSize: 14)
+        contentView.addSubview(leftLabel)
+        leftLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(15)
+            make.top.equalTo(10)
+        }
+        
         filterView = TTGTagCollectionView()
         filterView.delegate = self
         filterView.dataSource = self

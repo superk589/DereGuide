@@ -104,10 +104,33 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     }
 }
 
-class RefreshableCollectionViewController: UICollectionViewController, UpdateStatusViewDelegate, Refreshable {
+class RefreshableCollectionViewController: UIViewController, UpdateStatusViewDelegate, Refreshable {
     
     var refresher: UIRefreshControl? = UIRefreshControl()
     var updateStatusView = UpdateStatusView()
+    
+    var layout: UICollectionViewFlowLayout!
+    
+    var collectionView: UICollectionView!
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,5 +170,20 @@ class RefreshableCollectionViewController: UICollectionViewController, UpdateSta
             updateStatusView.isHidden = true
             cancelUpdate()
         }
+    }
+}
+
+extension RefreshableCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
 }

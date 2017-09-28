@@ -23,7 +23,7 @@ struct CGSSSorter {
         self.init(property: property, ascending: false)
     }
     
-    func sortList<T: CGSSBaseModel>(_ list: inout [T]) {
+    func sortList<T: NSObject>(_ list: inout [T]) {
         let compare = { (c1: T, c2: T) -> Bool in
             if let i1 = c1.value(forKeyPath: self.property) as? Int, let i2 = c2.value(forKeyPath: self.property) as? Int {
                 return self.ascending ? (i1 < i2) : (i1 > i2)

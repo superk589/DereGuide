@@ -21,16 +21,16 @@ class SongFilterSortController: BaseFilterSortController {
     
     var liveTypeTitles = ["Cute", "Cool", "Passion", NSLocalizedString("彩色曲", comment: "")]
     
-    var eventTypes: [CGSSEventTypes] = [.tradition, .groove, .parade]
+    var eventTypes: [CGSSLiveEventTypes] = [.normal, .tradition, .groove, .parade]
     
-    lazy var eventTypeTitles = self.eventTypes.map { $0.description }
+    var centerTypeTitles = ["Center: Cute", "Cool", "Passion", NSLocalizedString("未指定", comment: "")]
     
-    var centerTypeTitles = ["Cute", "Cool", "Passion", NSLocalizedString("未指定", comment: "")]
+    var positionNumTypes: [CGSSPositionNumberTypes] = [.n1, .n2, .n3, .n4, .n5, .nm]
     
     var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
                           NSLocalizedString("未收藏", comment: "")]
     
-    var sorterMethods = ["liveID", "bpm"]
+    var sorterMethods = ["_startDate", "bpm"]
     
     var sorterTitles = [NSLocalizedString("首次出现时间", comment: ""), NSLocalizedString("bpm", comment: "")]
     
@@ -71,7 +71,7 @@ class SongFilterSortController: BaseFilterSortController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 4
+            return 5
         } else {
             return 2
         }
@@ -82,17 +82,15 @@ class SongFilterSortController: BaseFilterSortController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
-                cell.setup(titles: liveTypeTitles, index: filter.liveTypes.rawValue, all: CGSSLiveTypes.all.rawValue)
+                cell.setup(titles: liveTypeTitles, index: filter.liveTypes.rawValue, all: CGSSLiveTypes.allLives.rawValue)
             case 1:
-                var selected = [Int]()
-                if eventTypes.contains(.tradition) { selected.append(0) }
-                if eventTypes.contains(.groove) { selected.append(1) }
-                if eventTypes.contains(.parade) { selected.append(2) }
-                cell.setup(titles: eventTypeTitles, selected: selected)
+                cell.setup(titles: eventTypes.map { $0.description }, index: filter.eventTypes.rawValue, all: CGSSLiveEventTypes.all.rawValue)
             case 2:
-                cell.setup(titles: centerTypeTitles, index: filter.centerTypes.rawValue, all: CGSSLiveTypes.all.rawValue)
+                cell.setup(titles: centerTypeTitles, index: filter.centerTypes.rawValue, all: CGSSLiveTypes.allLives.rawValue)
             case 3:
                 cell.setup(titles: favoriteTitles, index: filter.favoriteTypes.rawValue, all: CGSSFavoriteTypes.all.rawValue)
+            case 4:
+                cell.setup(titles: positionNumTypes.map { $0.description }, index: filter.positionNumTypes.rawValue, all: CGSSPositionNumberTypes.all.rawValue)
             default:
                 break
             }
@@ -136,6 +134,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                     filter.centerTypes.insert(CGSSCardTypes.init(type: index))
                 case 3:
                     filter.favoriteTypes.insert(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
+                case 4:
+                    filter.positionNumTypes.insert(CGSSPositionNumberTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -155,6 +155,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                     filter.centerTypes.remove(CGSSCardTypes.init(type: index))
                 case 3:
                     filter.favoriteTypes.remove(CGSSFavoriteTypes.init(rawValue: 1 << UInt(index)))
+                case 4:
+                    filter.positionNumTypes.remove(CGSSPositionNumberTypes.init(rawValue: 1 << UInt(index)))
                 default:
                     break
                 }
@@ -167,13 +169,15 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
             if indexPath.section == 0 {
                 switch indexPath.row {
                 case 0:
-                    filter.liveTypes = .all
+                    filter.liveTypes = .allLives
                 case 1:
-                    filter.eventTypes = CGSSEventTypes.init(rawValue: eventTypes.reduce(0, {$0 + $1.rawValue}))
+                    filter.eventTypes = .all
                 case 2:
-                    filter.centerTypes = .all
+                    filter.centerTypes = .allLives
                 case 3:
                     filter.favoriteTypes = .all
+                case 4:
+                    filter.positionNumTypes = .all
                 default:
                     break
                 }
@@ -193,6 +197,8 @@ extension SongFilterSortController: FilterTableViewCellDelegate {
                     filter.centerTypes = []
                 case 3:
                     filter.favoriteTypes = []
+                case 4:
+                    filter.positionNumTypes = []
                 default:
                     break
                 }

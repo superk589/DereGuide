@@ -276,9 +276,10 @@ class Master: FMDatabaseQueue {
             let selectSql = """
                 SELECT
                     b.id,
-                    a.id live_id,
-                    a.type,
-                    a.event_type,
+                    max( a.id ) live_id,
+                    max( a.type ) type,
+                    max( a.event_type ) event_type,
+                    min( a.start_date ) start_date,
                     d.discription,
                     b.bpm,
                     b.name,
@@ -299,6 +300,8 @@ class Master: FMDatabaseQueue {
                 WHERE
                     a.music_data_id = b.id
                     AND b.id = d.id
+                GROUP BY
+                    b.id
             """
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
@@ -308,11 +311,9 @@ class Master: FMDatabaseQueue {
                 guard let song = CGSSSong(fromJson: json) else { continue }
                 
                 // 去掉一些无效数据
-                // 1901 - 2016-4-1 special live
-                // 1902 - 2017-4-1 special live
-                // 90001 - DJ Pinya live
+                if song.detail == "？" { continue }
                 if [1901, 1902, 90001].contains(song.musicID) { continue }
-                
+                if song.startDate > Date() { continue }
                 list.append(song)
             }
         }) {

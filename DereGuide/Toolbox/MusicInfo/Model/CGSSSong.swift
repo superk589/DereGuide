@@ -9,16 +9,17 @@
 import UIKit
 import SwiftyJSON
 
-class CGSSSong: CGSSBaseModel {
+class CGSSSong: NSObject {
     
     var musicID: Int
     var name: String
     var type: Int
     var eventType: Int
-    var bpm: Int
+    @objc dynamic var bpm: Int
     var composer: String
     var lyricist: String
     var nameSort: Int
+    @objc dynamic var _startDate: String
     var liveID: Int
     var charaPosition1: Int
     var charaPosition2: Int
@@ -28,12 +29,17 @@ class CGSSSong: CGSSBaseModel {
     var positionNum: Int
     var detail: String
     
+    lazy var centerType: CGSSCardTypes = {
+        let chara = CGSSDAO.shared.findCharById(charaPosition1)
+        return chara?.charType ?? .office
+    }()
+    
     init?(fromJson json: JSON) {
         if json.isEmpty {
             return nil
         }
         bpm = json["bpm"].intValue
-        name = json["name"].stringValue
+        name = json["name"].stringValue.replacingOccurrences(of: "\\n", with: "\n")
         musicID = json["id"].intValue
         composer = json["composer"].stringValue
         lyricist = json["lyricist"].stringValue
@@ -47,32 +53,24 @@ class CGSSSong: CGSSBaseModel {
         charaPosition5 = json["chara_position_5"].intValue
         positionNum = json["position_num"].intValue
 
+        _startDate = json["start_date"].stringValue
         detail = json["discription"].stringValue
         
         type = json["type"].intValue
         eventType = json["event_type"].intValue
 
-        super.init()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 
 extension CGSSSong {
     
+    var startDate: Date {
+        return _startDate.toDate()
+    }
+    
     var filterType: CGSSLiveTypes {
-        return CGSSLiveTypes.init(type: type)
-    }
-    
-    var eventFilterType: CGSSEventTypes {
-        return CGSSEventTypes.init(eventType: eventType)
-    }
-    
-    var centerType: CGSSCardTypes {
-        switch charaPosition1 / 100 {
+        switch type {
         case 1:
             return .cute
         case 2:
@@ -80,17 +78,54 @@ extension CGSSSong {
         case 3:
             return .passion
         default:
-            // songs without center return live type
-            return filterType
+            return .office
         }
     }
     
+    var eventFilterType: CGSSLiveEventTypes {
+        return CGSSLiveEventTypes.init(eventType: eventType)
+    }
+    
     var positionNumType: CGSSPositionNumberTypes {
-        return CGSSPositionNumberTypes(positionNum: positionNum)
+        if charaPosition1 != 0 && charaPosition2 == 0 {
+            return .n1
+        } else {
+            return CGSSPositionNumberTypes(positionNum: positionNum)
+        }
     }
     
     var favoriteType: CGSSFavoriteTypes {
         return FavoriteSongsManager.shared.contains(self.musicID) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
+    }
+    
+    var jacketURL: URL? {
+        return URL.init(string: DataURL.Images + "/jacket/\(musicID).png")
+    }
+    
+    var color: UIColor {
+        switch type {
+        case 1:
+            return Color.cute
+        case 2:
+            return Color.cool
+        case 3:
+            return Color.passion
+        default:
+            return UIColor.darkText
+        }
+    }
+    
+    var icon: UIImage {
+        switch type {
+        case 1:
+            return #imageLiteral(resourceName: "song-cute")
+        case 2:
+            return #imageLiteral(resourceName: "song-cool")
+        case 3:
+            return #imageLiteral(resourceName: "song-passion")
+        default:
+            return #imageLiteral(resourceName: "song-all")
+        }
     }
 }
 

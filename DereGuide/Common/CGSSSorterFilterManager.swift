@@ -52,7 +52,7 @@ class CGSSSorterFilterManager {
         static let event = CGSSSorter.init(property: "sortId")
         static let gacha = CGSSSorter.init(property: "sRarity")
         static let gachaPool = CGSSSorter.init(property: "id")
-        static let song = CGSSSorter(property: "liveID")
+        static let song = CGSSSorter(property: "_startDate")
     }
     
     lazy var cardSorter = CGSSSorter.init(fromFile: SorterPath.card) ?? DefaultSorter.card

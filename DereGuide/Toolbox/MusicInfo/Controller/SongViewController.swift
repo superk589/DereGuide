@@ -9,15 +9,11 @@
 import UIKit
 import ZKDrawerController
 
-class SongViewController: BaseModelCollectionViewController, UICollectionViewDelegateFlowLayout {
+class SongViewController: BaseModelCollectionViewController {
     
     var defaultList: [CGSSSong]!
     var songs = [CGSSSong]()
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     var filter: CGSSSongFilter {
         set {
             CGSSSorterFilterManager.default.songFilter = newValue
@@ -44,21 +40,37 @@ class SongViewController: BaseModelCollectionViewController, UICollectionViewDel
         return vc
     }()
     
+    private func reloadLayout() {
+        let itemPerRow = floor(Screen.width / 152)
+        let interval = (Screen.width - 132 * itemPerRow) / (itemPerRow + 1)
+        let size = CGSize(width: 132 + interval, height: 132 + 94)
+        layout.itemSize = size
+        collectionView.contentInset.left = interval / 2
+        collectionView.contentInset.right = interval / 2
+        collectionView.contentInset.top = interval - 10
+        collectionView.contentInset.bottom = interval - 10
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: SongCollectionViewCell.description())
         collectionView?.delegate = self
         collectionView?.dataSource = self
         
+        reloadLayout()
         // 初始化导航栏的搜索条
         navigationItem.titleView = searchBar
         searchBar.placeholder = NSLocalizedString("歌曲名/词曲作者/演唱者", comment: "")
         
         let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = item1
+        
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
+        navigationItem.leftBarButtonItem = backItem
         
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCardsChanged, object: nil)
@@ -91,6 +103,10 @@ class SongViewController: BaseModelCollectionViewController, UICollectionViewDel
             })
         }
     }
+    
+    @objc func backAction() {
+        navigationController?.popViewController(animated: true)
+    }
    
     @objc func dataChanged(notification: Notification) {
         if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
@@ -115,6 +131,16 @@ class SongViewController: BaseModelCollectionViewController, UICollectionViewDel
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         drawerController?.rightViewController = nil
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.collectionView.performBatchUpdates({
+                self.reloadLayout()
+            }, completion: nil)
+            //self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
     }
     
     

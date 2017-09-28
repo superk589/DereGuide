@@ -51,12 +51,13 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
         searchBar.resignFirstResponder()
     }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // 滑动时取消输入框的第一响应者
         if searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
         }
     }
+    
 }
 
 //MARK: UISearchBarDelegate
