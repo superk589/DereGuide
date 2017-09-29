@@ -18,7 +18,7 @@ target 'DereGuide' do
   pod 'DynamicColor'
 #  pod 'CryptoSwift'
 #  pod 'SwiftTryCatch'
-  pod 'ImageViewer', :git => 'https://github.com/leviouss/ImageViewer.git'
+  pod 'ImageViewer', :git => "https://github.com/MailOnline/ImageViewer.git"
   pod 'ZKPageViewController'
 end
 target 'NotificationContent' do

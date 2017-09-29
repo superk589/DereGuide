@@ -28,7 +28,7 @@ DEPENDENCIES:
   - DynamicColor
   - EasyTipView
   - FMDB
-  - ImageViewer (from `https://github.com/leviouss/ImageViewer.git`)
+  - ImageViewer (from `https://github.com/MailOnline/ImageViewer.git`)
   - lz4
   - ReachabilitySwift
   - SDWebImage
@@ -41,12 +41,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   ImageViewer:
-    :git: https://github.com/leviouss/ImageViewer.git
+    :git: https://github.com/MailOnline/ImageViewer.git
 
 CHECKOUT OPTIONS:
   ImageViewer:
-    :commit: 60a8f8eea30e27573f1c542f2b0287321c091edd
-    :git: https://github.com/leviouss/ImageViewer.git
+    :commit: 29cfd48c0d7e93b5c56a03ad5138816ef6b61ffc
+    :git: https://github.com/MailOnline/ImageViewer.git
 
 SPEC CHECKSUMS:
   Charts: bcde37724c161958c1438dd4883971fcb2d50c06
@@ -64,6 +64,6 @@ SPEC CHECKSUMS:
   ZKDrawerController: 7fd2566f0fbce8aa5e4be8a445d0975a01b28313
   ZKPageViewController: 7cb999246c7062767ad84f49398a8fe02400d8aa
 
-PODFILE CHECKSUM: 1f2fbe0e7769a037684c8e583b5c255cd7e8dea1
+PODFILE CHECKSUM: 5cd659fc4551f09ec82267ec293a84308e4b1d9bß
 
 COCOAPODS: 1.4.0.beta.1
