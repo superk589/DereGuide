@@ -9,7 +9,7 @@ PODS:
   - FMDB/standard (2.7.2)
   - ImageViewer (4.1.0)
   - lz4 (128)
-  - Reachability (3.2)
+  - ReachabilitySwift (3)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - FMDB
   - ImageViewer (from `https://github.com/leviouss/ImageViewer.git`)
   - lz4
-  - Reachability
+  - ReachabilitySwift
   - SDWebImage
   - SnapKit
   - SwiftyJSON
@@ -55,7 +55,7 @@ SPEC CHECKSUMS:
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   ImageViewer: 1b1fd505659cb88d9358d76accb1d58a6d8f073d
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -64,6 +64,6 @@ SPEC CHECKSUMS:
   ZKDrawerController: 7fd2566f0fbce8aa5e4be8a445d0975a01b28313
   ZKPageViewController: 7cb999246c7062767ad84f49398a8fe02400d8aa
 
-PODFILE CHECKSUM: 4ae160b11f06cf2b7a516731c499739236766d1e
+PODFILE CHECKSUM: 1f2fbe0e7769a037684c8e583b5c255cd7e8dea1
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0.beta.1

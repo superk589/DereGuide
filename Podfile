@@ -3,7 +3,7 @@ use_frameworks!
 target 'DereGuide' do
   pod 'SDWebImage'
   pod 'SwiftyJSON'
-  pod 'Reachability'
+  pod 'ReachabilitySwift'
   pod 'FMDB'
   pod 'lz4'
 #  pod 'ASValueTrackingSlider'

@@ -72,7 +72,7 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableVie
         self.url = url
         
         SDWebImageManager.shared().cachedImageExists(for: url) { [weak self] (isInCache) in
-            if !UserDefaults.standard.shouldCacheFullImage && CGSSGlobal.isMobileNet() && !isInCache {
+            if !UserDefaults.standard.shouldCacheFullImage && !isInCache && CGSSGlobal.isMobileNet() {
                 return
             } else {
                 if shouldShowIndicator {
