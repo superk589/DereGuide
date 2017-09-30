@@ -27,6 +27,7 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     // context free note information, so each long press slide and filck note need to know the related note
     weak var previous: CGSSBeatmapNote?
     weak var next: CGSSBeatmapNote?
+    weak var along: CGSSBeatmapNote?
     
     override init() {
         super.init()
@@ -66,6 +67,9 @@ extension CGSSBeatmapNote {
         return anotherNote.sec - sec
     }
     
+    var offsetSecond: Float {
+        return sec + offset
+    }
 }
 
 class CGSSBeatmap: CGSSBaseModel {
@@ -119,33 +123,44 @@ class CGSSBeatmap: CGSSBaseModel {
     }()
     
     func contextFree() {
-        var positionPressed = [CGSSBeatmapNote?](repeating: nil, count: 5)
-        var slides = [Int: CGSSBeatmapNote]()
-        for note in self.notes {
+        var positionPressed = [Int?](repeating: nil, count: 5)
+        var slides = [Int: Int]()
+        for (index, note) in self.notes.enumerated() {
             if note.finishPos == 0 {
                 continue
             }
             if note.type == 2 && positionPressed[note.finishPos - 1] == nil {
                 note.longPressType = 1
-                positionPressed[note.finishPos - 1] = note
+                positionPressed[note.finishPos - 1] = index
             } else if positionPressed[note.finishPos - 1] != nil {
+                let previousIndex = positionPressed[note.finishPos - 1]!
+                let previous = notes[previousIndex]
                 note.longPressType = 2
-                positionPressed[note.finishPos - 1]?.append(note)
+                previous.append(note)
+                
+                let startIndex = previousIndex + 1
+                notes[startIndex..<index].forEach { $0.along = previous }
                 positionPressed[note.finishPos - 1] = nil
             }
             
             if note.groupId != 0 {
                 if slides[note.groupId] == nil {
                     // 滑条起始点
-                    slides[note.groupId] = note
+                    slides[note.groupId] = index
                 } else {
+                    let previousIndex = slides[note.groupId]!
+                    let previous = notes[previousIndex]
                     // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
-                    if slides[note.groupId]!.intervalTo(note) < 4 {
-                        slides[note.groupId]?.append(note)
+                    if previous.intervalTo(note) < 4 || note.type == 3 {
+                        previous.append(note)
+                        
+                        let startIndex = previousIndex + 1
+                        notes[startIndex..<index].forEach { $0.along = previous }
                     }
-                    slides[note.groupId] = note
+                    slides[note.groupId] = index
                 }
             }
+            
         }
     }
     

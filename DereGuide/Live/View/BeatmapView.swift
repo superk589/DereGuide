@@ -48,6 +48,7 @@ class BeatmapView: IndicatorScrollView {
     func setup(beatmap: CGSSBeatmap, bpm: Int, type: Int) {
         self.beatmap = beatmap
         beatmap.contextFree()
+        
         self.bpm = bpm
         self.type = type
         indicator.strokeColor = self.strokeColor
@@ -99,12 +100,6 @@ extension BeatmapView: UIScrollViewDelegate {
         setNeedsDisplay()
     }
     
-}
-
-fileprivate extension CGSSBeatmapNote {
-    var offsetSecond: Float {
-        return sec + offset
-    }
 }
 
 class AdvanceBeatmapDrawer {
@@ -318,6 +313,7 @@ class AdvanceBeatmapDrawer {
     typealias Note = CGSSBeatmapNote
 
     private func drawNote(minIndex: Int, maxIndex: Int) {
+        
         for i in minIndex..<maxIndex {
             let note = notes[i]
             if note.finishPos != 0 {
@@ -489,8 +485,22 @@ class AdvanceBeatmapDrawer {
         // 滑条 长按 同步线
         let maxY = rect.maxY
         let minY = rect.minY
-        let minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
-        let maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
+        var minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
+        var maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
+       
+        // if full screen has no notes, then expand the index
+        if maxIndex - minIndex < 1 {
+            if minIndex - 2 > 0 {
+                minIndex -= 2
+            } else if maxIndex + 2 < notes.count {
+                maxIndex += 2
+            }
+        }
+        
+        // if one side has long press or slide over the screen, the other side not, we need to expand the index too
+        if let along = notes[minIndex].along {
+            minIndex = notes.index(of: along)!
+        }
         
         drawNoteGroupLine(minIndex: minIndex, maxIndex: maxIndex)
         
@@ -583,7 +593,7 @@ class AdvanceBeatmapDrawer {
     private func pathForLongPress(_ position: Int, sec1: Float, y: CGFloat) -> UIBezierPath {
         let x = getPointX(position)
         let y1 = getPointY(sec1)
-        let r = noteRadius - 1
+        let r = (noteRadius + 1) / 2
         let path = UIBezierPath.init(rect: CGRect(x: x - r, y: y, width: r * 2, height: y1 - y))
         return path
     }
