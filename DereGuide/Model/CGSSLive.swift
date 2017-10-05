@@ -173,15 +173,21 @@ extension CGSSLive {
     }
     
     func getBeatmap(of difficulty: CGSSLiveDifficulty) -> CGSSBeatmap? {
-        if beatmaps.count >= difficulty.rawValue {
+        switch difficulty {
+        case .regular, .debut, .pro, .master, .masterPlus:
             return beatmaps[difficulty.rawValue - 1]
-        } else {
-            return nil
+        case .legacyMasterPlus:
+            return legacyMasterPlusBeatmap
         }
     }
     
     func getLiveDetail(of difficulty: CGSSLiveDifficulty) -> CGSSLiveDetail {
-        return self.liveDetails[difficulty.rawValue - 1]
+        switch difficulty {
+        case .regular, .debut, .pro, .master, .masterPlus:
+            return liveDetails[difficulty.rawValue - 1]
+        case .legacyMasterPlus:
+            return getLiveDetail(of: .masterPlus)
+        }
     }
     
     var jacketURL: URL? {

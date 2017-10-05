@@ -10,7 +10,7 @@ import UIKit
 
 class CharView: UIView {
     
-    var iconView: CGSSCharIconView!
+    var iconView: CGSSCharaIconView!
     var kanaSpacedLabel: UILabel!
     var nameLabel: UILabel!
     var cvLabel: UILabel!
@@ -28,7 +28,7 @@ class CharView: UIView {
     
     fileprivate func prepare() {
         
-        iconView = CGSSCharIconView()
+        iconView = CGSSCharaIconView()
         iconView.isUserInteractionEnabled = false
         addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
@@ -87,7 +87,7 @@ class CharView: UIView {
         } else {
             cvLabel.text = "CV: \(char.voice!)"
         }
-        iconView.charId = char.charaId
+        iconView.charaID = char.charaId
         kanaSpacedLabel.text = "\(char.kanaSpaced!)"
         
         if !["sName", "sCharaId"].contains(sorter.property) {

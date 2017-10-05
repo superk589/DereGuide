@@ -66,7 +66,7 @@ extension CGSSGachaPool {
     }
         
     var detailBannerURL: URL! {
-        if id > 30170 {
+        if [30171, 30172].contains(id) {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
         } else {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))

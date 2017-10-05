@@ -86,7 +86,7 @@ class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
         for i in 0...5 {
             let member = unit[i]
             if let card = member.card, let view = iconStackView.arrangedSubviews[i] as? CGSSCardIconView {
-                view.cardId = card.id
+                view.cardID = card.id
             }
         }
 

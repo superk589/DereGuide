@@ -69,12 +69,12 @@ class CardDetailEvolutionCell: UITableViewCell {
 extension CardDetailEvolutionCell: CardDetailSetable {
     func setup(with card: CGSSCard) {
         if card.evolutionId == 0 {
-            toIcon.cardId = card.id
-            fromIcon.cardId = card.id - 1
+            toIcon.cardID = card.id
+            fromIcon.cardID = card.id - 1
             fromIcon.delegate = self.delegate
         } else {
-            fromIcon.cardId = card.id
-            toIcon.cardId = card.evolutionId
+            fromIcon.cardID = card.id
+            toIcon.cardID = card.evolutionId
             toIcon.delegate = self.delegate
         }
     }

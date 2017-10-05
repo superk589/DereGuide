@@ -48,7 +48,7 @@ class ColleagueFilterCardCell: UITableViewCell {
     }
     
     func setup(cardID: Int) {
-        cardIcon.cardId = cardID
+        cardIcon.cardID = cardID
         leftLabel.isHidden = true
     }
     

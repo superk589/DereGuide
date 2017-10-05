@@ -60,8 +60,13 @@
 		122D083C1F3406FC00A3741F /* ColleagueButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122D083B1F3406FB00A3741F /* ColleagueButtonsCell.swift */; };
 		122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECC81D5DC516008ADE08 /* UIViewExtension.swift */; };
 		122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */; };
-		122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */; };
+		122EECE91D609C04008ADE08 /* CGSSCharaIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECE81D609C04008ADE08 /* CGSSCharaIconView.swift */; };
 		122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */; };
+		122F36A71F7DEA81006DDE55 /* CardDetailMVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F36A61F7DEA81006DDE55 /* CardDetailMVCell.swift */; };
+		122F36A91F7DEDAA006DDE55 /* FavoriteSongsRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F36A81F7DEDAA006DDE55 /* FavoriteSongsRemote.swift */; };
+		122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F36AA1F7DEE98006DDE55 /* FavoriteSongUploader.swift */; };
+		122F36AD1F7DEEA6006DDE55 /* FavoriteSongDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F36AC1F7DEEA6006DDE55 /* FavoriteSongDownloader.swift */; };
+		122F36AF1F7DEEB4006DDE55 /* FavoriteSongRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F36AE1F7DEEB4006DDE55 /* FavoriteSongRemover.swift */; };
 		12353A481F0F6A92008286C2 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAC1F0F634600B75E47 /* NSManagedObjectContext+Extensions.swift */; };
 		12353A491F0F6A92008286C2 /* NSManagedObjectContext+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAD1F0F634600B75E47 /* NSManagedObjectContext+Observers.swift */; };
 		12353A4A1F0F6A92008286C2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F33DAF1F0F634600B75E47 /* Utilities.swift */; };
@@ -132,6 +137,7 @@
 		124E47141D654AB700DD0399 /* ToolboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */; };
 		124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */; };
 		124E47171D654B3D00DD0399 /* NSUserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */; };
+		124FEBDE1F8524EE00478062 /* SongDetailPositionCharaItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124FEBDD1F8524EE00478062 /* SongDetailPositionCharaItemView.swift */; };
 		12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */; };
 		12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */; };
 		1257C1C21F5CDF4A00C3DFE1 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1257C1C11F5CDF4A00C3DFE1 /* SongViewController.swift */; };
@@ -196,6 +202,11 @@
 		127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A41E34FDF80006627B /* CardImageController.swift */; };
 		127CBEAC1ECA8CDC00C119F9 /* CGSSPotential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEAB1ECA8CDC00C119F9 /* CGSSPotential.swift */; };
 		127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */; };
+		12808E891F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12808E881F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift */; };
+		12816B311F7CE188000456CE /* SongDetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B301F7CE188000456CE /* SongDetailHeaderCell.swift */; };
+		12816B341F7CF71F000456CE /* SongDetailDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B331F7CF71F000456CE /* SongDetailDescriptionCell.swift */; };
+		12816B361F7CF73B000456CE /* SongDetailPositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */; };
+		12816B381F7CF750000456CE /* SongDetailLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B371F7CF750000456CE /* SongDetailLiveCell.swift */; };
 		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
 		1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB431E41C1CD00CEDE04 /* DataSource.plist */; };
 		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
@@ -255,6 +266,8 @@
 		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B0A0621F305DBE005967C1 /* Syncable.swift */; };
+		12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */; };
+		12B225A71F80DB6F0013E90E /* SongJacketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */; };
 		12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */; };
 		12C390151F34128D0077FB38 /* ColleagueMyCentersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */; };
 		12C390171F3412AF0077FB38 /* ColleagueCentersWantedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C390161F3412AF0077FB38 /* ColleagueCentersWantedCell.swift */; };
@@ -467,8 +480,13 @@
 		122D083B1F3406FB00A3741F /* ColleagueButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueButtonsCell.swift; sourceTree = "<group>"; };
 		122EECC81D5DC516008ADE08 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharIconView.swift; sourceTree = "<group>"; };
+		122EECE81D609C04008ADE08 /* CGSSCharaIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCharaIconView.swift; sourceTree = "<group>"; };
 		122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSIconView.swift; sourceTree = "<group>"; };
+		122F36A61F7DEA81006DDE55 /* CardDetailMVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailMVCell.swift; sourceTree = "<group>"; };
+		122F36A81F7DEDAA006DDE55 /* FavoriteSongsRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongsRemote.swift; sourceTree = "<group>"; };
+		122F36AA1F7DEE98006DDE55 /* FavoriteSongUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongUploader.swift; sourceTree = "<group>"; };
+		122F36AC1F7DEEA6006DDE55 /* FavoriteSongDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongDownloader.swift; sourceTree = "<group>"; };
+		122F36AE1F7DEEB4006DDE55 /* FavoriteSongRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongRemover.swift; sourceTree = "<group>"; };
 		12353A5C1F1309C2008286C2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationHandler.swift; sourceTree = "<group>"; };
 		12356BCA1E8FE94F005EEB7A /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
@@ -536,6 +554,7 @@
 		124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewCell.swift; sourceTree = "<group>"; };
 		124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxTableViewController.swift; sourceTree = "<group>"; };
 		124E47161D654B3D00DD0399 /* NSUserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsExtension.swift; sourceTree = "<group>"; };
+		124FEBDD1F8524EE00478062 /* SongDetailPositionCharaItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailPositionCharaItemView.swift; sourceTree = "<group>"; };
 		12523FF91D8AC4B200E48BD5 /* GachaSimulateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaSimulateView.swift; sourceTree = "<group>"; };
 		12536DBB1ED5218600B75BA0 /* UIAlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertExtension.swift; sourceTree = "<group>"; };
 		12536DC21ED5636000B75BA0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -602,6 +621,11 @@
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
 		127CBEAB1ECA8CDC00C119F9 /* CGSSPotential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSPotential.swift; sourceTree = "<group>"; };
 		127CBEAD1ECA928600C119F9 /* NSAtributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAtributedStringExtension.swift; sourceTree = "<group>"; };
+		12808E881F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailLiveDifficultyView.swift; sourceTree = "<group>"; };
+		12816B301F7CE188000456CE /* SongDetailHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailHeaderCell.swift; sourceTree = "<group>"; };
+		12816B331F7CF71F000456CE /* SongDetailDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailDescriptionCell.swift; sourceTree = "<group>"; };
+		12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailPositionCell.swift; sourceTree = "<group>"; };
+		12816B371F7CF750000456CE /* SongDetailLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailLiveCell.swift; sourceTree = "<group>"; };
 		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
 		1281CB431E41C1CD00CEDE04 /* DataSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataSource.plist; sourceTree = "<group>"; };
 		1281CB451E41C79300CEDE04 /* SpecialThanks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpecialThanks.plist; sourceTree = "<group>"; };
@@ -662,6 +686,8 @@
 		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B0A0621F305DBE005967C1 /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
+		12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailCoverFlowCell.swift; sourceTree = "<group>"; };
+		12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongJacketCollectionViewCell.swift; sourceTree = "<group>"; };
 		12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTableViewCell.swift; sourceTree = "<group>"; };
 		12B8A6AA1F09E348001074B3 /* ValueStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStepper.swift; sourceTree = "<group>"; };
 		12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueMyCentersCell.swift; sourceTree = "<group>"; };
@@ -968,6 +994,9 @@
 				1203A8971F29C3E4001A510A /* FavoriteCharaUploader.swift */,
 				1203A8991F29C3F4001A510A /* FavoriteCharaDownloader.swift */,
 				1203A89B1F29C404001A510A /* FavoriteCharaRemover.swift */,
+				122F36AA1F7DEE98006DDE55 /* FavoriteSongUploader.swift */,
+				122F36AC1F7DEEA6006DDE55 /* FavoriteSongDownloader.swift */,
+				122F36AE1F7DEEB4006DDE55 /* FavoriteSongRemover.swift */,
 			);
 			name = Processor;
 			sourceTree = "<group>";
@@ -980,6 +1009,7 @@
 				1245F79E1F18A70B009A80EC /* MembersRemote.swift */,
 				129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */,
 				129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */,
+				122F36A81F7DEDAA006DDE55 /* FavoriteSongsRemote.swift */,
 				124B8FF11F4155EF00880992 /* ProfileRemote.swift */,
 			);
 			name = Remote;
@@ -1029,6 +1059,7 @@
 		1257C1C31F5CDF5300C3DFE1 /* MusicInfo */ = {
 			isa = PBXGroup;
 			children = (
+				12816B2E1F7CE125000456CE /* Detail */,
 				1257C1CA1F5CEE7A00C3DFE1 /* Model */,
 				1257C1C71F5CEE6000C3DFE1 /* View */,
 				1257C1C41F5CEE2B00C3DFE1 /* Controller */,
@@ -1041,7 +1072,6 @@
 			children = (
 				1257C1C11F5CDF4A00C3DFE1 /* SongViewController.swift */,
 				1257C1CB1F5CEEE900C3DFE1 /* SongFilterSortController.swift */,
-				1257C1CD1F5CEF1600C3DFE1 /* SongDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1192,7 +1222,7 @@
 			isa = PBXGroup;
 			children = (
 				1269EA231D520E7E0071AD7F /* CGSSCardIconView.swift */,
-				122EECE81D609C04008ADE08 /* CGSSCharIconView.swift */,
+				122EECE81D609C04008ADE08 /* CGSSCharaIconView.swift */,
 				122EECEA1D609CAF008ADE08 /* CGSSIconView.swift */,
 				1269E9C21D520B160071AD7F /* CardTableViewCell.swift */,
 				12D45AC51E2E26AD0009986F /* CardView.swift */,
@@ -1361,6 +1391,38 @@
 				120DBB2C1EEE3A0D004E0084 /* UnitTemplate.plist */,
 			);
 			path = Unit;
+			sourceTree = "<group>";
+		};
+		12816B2E1F7CE125000456CE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				12816B321F7CF351000456CE /* View */,
+				12816B2F1F7CE13C000456CE /* Controller */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		12816B2F1F7CE13C000456CE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1257C1CD1F5CEF1600C3DFE1 /* SongDetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12816B321F7CF351000456CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12816B301F7CE188000456CE /* SongDetailHeaderCell.swift */,
+				12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */,
+				12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */,
+				12816B331F7CF71F000456CE /* SongDetailDescriptionCell.swift */,
+				12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */,
+				12816B371F7CF750000456CE /* SongDetailLiveCell.swift */,
+				124FEBDD1F8524EE00478062 /* SongDetailPositionCharaItemView.swift */,
+				12808E881F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1282EE561D011A8F0024318C = {
@@ -1544,6 +1606,7 @@
 				12C6B3591F00B73100A25DB1 /* CardDetailEvolutionCell.swift */,
 				12C6B35B1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift */,
 				12C6B35D1F00B77D00A25DB1 /* CardDetailSourceCell.swift */,
+				122F36A61F7DEA81006DDE55 /* CardDetailMVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1901,7 +1964,7 @@
 		1282EE571D011A8F0024318C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = zzk;
 				TargetAttributes = {
@@ -2145,6 +2208,7 @@
 				12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */,
 				1285F4A41F32CB55002A81F7 /* MyCenterItemView.swift in Sources */,
 				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
+				124FEBDE1F8524EE00478062 /* SongDetailPositionCharaItemView.swift in Sources */,
 				129EEDBD1F297336001AFC5B /* FavoriteCardsRemote.swift in Sources */,
 				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
 				129B95661F31D8E0007B7AE2 /* Profile.swift in Sources */,
@@ -2165,6 +2229,7 @@
 				1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */,
 				127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */,
 				129B95611F31CA51007B7AE2 /* ColleagueBaseCell.swift in Sources */,
+				12816B311F7CE188000456CE /* SongDetailHeaderCell.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D296251F45705100AFCF7C /* LoadMoreTableViewCell.swift in Sources */,
@@ -2186,6 +2251,7 @@
 				12C390211F34466F0077FB38 /* CenterWantedGroupView.swift in Sources */,
 				12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */,
 				12FC8B561EDE6DEB003CF3C3 /* UnitSimulationModeSelectionCell.swift in Sources */,
+				12816B341F7CF71F000456CE /* SongDetailDescriptionCell.swift in Sources */,
 				123AC6EB1E2374260016A07F /* CGSSClient.swift in Sources */,
 				12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */,
 				121FCFAE1EFA1A6100B7DFF4 /* UnitAdvanceDescriptionCell.swift in Sources */,
@@ -2197,6 +2263,7 @@
 				12D57A831F427AE600575B40 /* ColleagueTableViewCell.swift in Sources */,
 				1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* UnitCardSelectTableViewController.swift in Sources */,
+				122F36AF1F7DEEB4006DDE55 /* FavoriteSongRemover.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
 				12FC8B3A1EDE6D93003CF3C3 /* UnitLeaderSkillView.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
@@ -2242,6 +2309,7 @@
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
+				122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
 				123F54581EF6B7CA00C76F31 /* RecentUsedMemberCell.swift in Sources */,
 				124BA5071E913808002E48FE /* EventTrendViewController.swift in Sources */,
@@ -2257,6 +2325,7 @@
 				12FC8B551EDE6DEB003CF3C3 /* UnitSimulationMainBodyCell.swift in Sources */,
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
 				129182171F58E29500F91C0B /* DMComposingStepOneController.swift in Sources */,
+				12808E891F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift in Sources */,
 				12FC8B3C1EDE6DA7003CF3C3 /* UnitInfomationController.swift in Sources */,
 				120DBB2F1EEE414A004E0084 /* UnitTemplate.swift in Sources */,
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
@@ -2269,6 +2338,7 @@
 				1206F6CE1E28D6CA000FAC78 /* LiveFilterSortController.swift in Sources */,
 				1285F4A61F32CC1E002A81F7 /* MyCenterCardView.swift in Sources */,
 				124B8FF21F4155EF00880992 /* ProfileRemote.swift in Sources */,
+				122F36A91F7DEDAA006DDE55 /* FavoriteSongsRemote.swift in Sources */,
 				12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* UnitTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
@@ -2321,6 +2391,7 @@
 				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
+				12816B381F7CF750000456CE /* SongDetailLiveCell.swift in Sources */,
 				1239F1CD1EF375B500861092 /* UnitEditingController.swift in Sources */,
 				12C6B34E1F00B67300A25DB1 /* CardDetailSpreadImageCell.swift in Sources */,
 				129B95541F3156B9007B7AE2 /* ColleagueViewController.swift in Sources */,
@@ -2338,6 +2409,7 @@
 				120BDE8A1F4897F90098E93C /* StepperOption.swift in Sources */,
 				12D5813D1F54592500D5D4A9 /* UnitTemplateCell.swift in Sources */,
 				1297F7561F467DFB004F353B /* WideButton.swift in Sources */,
+				122F36A71F7DEA81006DDE55 /* CardDetailMVCell.swift in Sources */,
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
@@ -2363,10 +2435,12 @@
 				122D083C1F3406FC00A3741F /* ColleagueButtonsCell.swift in Sources */,
 				12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */,
 				12FC8B4E1EDE6DEB003CF3C3 /* UnitSimulationController.swift in Sources */,
+				12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				1245F7A91F1CA3AA009A80EC /* GachaCardWithOddsListView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
+				12B225A71F80DB6F0013E90E /* SongJacketCollectionViewCell.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				12FC8B531EDE6DEB003CF3C3 /* UnitSimulationDescriptionCell.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,
@@ -2390,6 +2464,7 @@
 				12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */,
 				1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */,
 				12C6B35E1F00B77D00A25DB1 /* CardDetailSourceCell.swift in Sources */,
+				122F36AD1F7DEEA6006DDE55 /* FavoriteSongDownloader.swift in Sources */,
 				12F9B03E1F28955E00D3B47E /* RemoteFavoriteCard.swift in Sources */,
 				1237D11C1EEFDD0400C43337 /* TransitionableNavigationController.swift in Sources */,
 				12CDC6E91F663F0E004BB7AE /* RemoteFavoriteSong.swift in Sources */,
@@ -2429,6 +2504,7 @@
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */,
 				127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */,
+				12816B361F7CF73B000456CE /* SongDetailPositionCell.swift in Sources */,
 				1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */,
 				129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */,
 				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
@@ -2446,7 +2522,7 @@
 				12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */,
 				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
-				122EECE91D609C04008ADE08 /* CGSSCharIconView.swift in Sources */,
+				122EECE91D609C04008ADE08 /* CGSSCharaIconView.swift in Sources */,
 				12C6B35C1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift in Sources */,
 				12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */,
 				12CDC6E71F663ACD004BB7AE /* DereGuide.xcdatamodeld in Sources */,
@@ -2629,7 +2705,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2657,7 +2733,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 418FCAAA926ED3CDDB13FA06 /* Pods-DereGuide.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DereGuide/DereGuide.entitlements;
@@ -2692,11 +2768,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AF1483415DE3238E1CB051F5 /* Pods-DereGuide.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DereGuide/DereGuide.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
@@ -2748,7 +2824,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;

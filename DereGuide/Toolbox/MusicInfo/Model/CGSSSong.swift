@@ -21,6 +21,7 @@ class CGSSSong: NSObject {
     var nameSort: Int
     @objc dynamic var _startDate: String
     var liveID: Int
+    var normalLiveID: Int
     var charaPosition1: Int
     var charaPosition2: Int
     var charaPosition3: Int
@@ -32,6 +33,28 @@ class CGSSSong: NSObject {
     lazy var centerType: CGSSCardTypes = {
         let chara = CGSSDAO.shared.findCharById(charaPosition1)
         return chara?.charType ?? .office
+    }()
+    
+    lazy var live: CGSSLive? = {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result: CGSSLive?
+        CGSSGameResource.shared.master.getLives(liveId: liveID) { (lives) in
+            result = lives.first
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
+    }()
+    
+    lazy var normalLive: CGSSLive? = {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result: CGSSLive?
+        CGSSGameResource.shared.master.getLives(liveId: normalLiveID) { (lives) in
+            result = lives.first
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
     }()
     
     init?(fromJson json: JSON) {
@@ -46,6 +69,7 @@ class CGSSSong: NSObject {
         nameSort = json["name_sort"].intValue
         composer = json["composer"].stringValue
         liveID = json["live_id"].intValue
+        normalLiveID = json["normal_live_id"].intValue
         charaPosition1 = json["chara_position_1"].intValue
         charaPosition2 = json["chara_position_2"].intValue
         charaPosition3 = json["chara_position_3"].intValue
@@ -54,7 +78,7 @@ class CGSSSong: NSObject {
         positionNum = json["position_num"].intValue
 
         _startDate = json["start_date"].stringValue
-        detail = json["discription"].stringValue
+        detail = json["discription"].stringValue.replacingOccurrences(of: "\\n", with: "\n")
         
         type = json["type"].intValue
         eventType = json["event_type"].intValue

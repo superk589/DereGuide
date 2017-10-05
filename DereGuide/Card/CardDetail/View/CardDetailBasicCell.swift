@@ -65,6 +65,6 @@ extension CardDetailBasicCell: CardDetailSetable {
         nameLabel.text = card.chara!.name + "  " + (card.chara?.conventional)!
         titleLabel.text = card.title
         rarityLabel.text = card.rarity?.rarityString
-        iconView.cardId = card.id
+        iconView.cardID = card.id
     }
 }

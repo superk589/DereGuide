@@ -133,7 +133,7 @@ class CardView: UIView {
             cardNameLabel.text = name + "  " + conventional
         }
         
-        cardIconView?.cardId = card.id
+        cardIconView?.cardID = card.id
         
         // 显示数值
         lifeLabel.text = String(card.life)

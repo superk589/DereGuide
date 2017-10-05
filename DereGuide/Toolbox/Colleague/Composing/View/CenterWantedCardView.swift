@@ -42,7 +42,7 @@ class CenterWantedCardView: UIView {
     }
     
     func setupWith(cardID: Int, minLevel: Int) {
-        icon.cardId = cardID
+        icon.cardID = cardID
         minLevelLabel.text = "≥" + String(minLevel)
     }
     

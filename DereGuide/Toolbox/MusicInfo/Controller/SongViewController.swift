@@ -47,8 +47,10 @@ class SongViewController: BaseModelCollectionViewController {
         layout.itemSize = size
         collectionView.contentInset.left = interval / 2
         collectionView.contentInset.right = interval / 2
-        collectionView.contentInset.top = interval - 10
-        collectionView.contentInset.bottom = interval - 10
+        if #available(iOS 11.0, *) {
+            collectionView.contentInset.top = interval - 10
+            collectionView.contentInset.bottom = interval - 10
+        }
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
     }
@@ -160,6 +162,11 @@ class SongViewController: BaseModelCollectionViewController {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = SongDetailController()
+        vc.setup(songs: songs, index: indexPath.item)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: ZKDrawerControllerDelegate

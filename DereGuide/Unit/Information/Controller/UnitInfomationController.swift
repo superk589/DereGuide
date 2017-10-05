@@ -76,7 +76,7 @@ class UnitInfomationController: BaseTableViewController, UnitCollectionPage {
 extension UnitInfomationController: UnitInformationUnitCellDelegate {
     
     func unitInformationUnitCell(_ unitInformationUnitCell: UnitInformationUnitCell, didClick cardIcon: CGSSCardIconView) {
-        if let id = cardIcon.cardId, let card = CGSSDAO.shared.findCardById(id) {
+        if let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {
             let cardDVC = CardDetailViewController()
             cardDVC.card = card
             navigationController?.pushViewController(cardDVC, animated: true)

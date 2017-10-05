@@ -82,7 +82,7 @@ class UnitTableViewCell: UITableViewCell {
         for i in 0...5 {
             let member = unit[i]
             if let card = member.card, let view = iconStackView.arrangedSubviews[i] as? UnitSimulationCardView {
-                view.icon.cardId = card.id
+                view.icon.cardID = card.id
                 if i != 5 {
                     if card.skill != nil {
                         view.skillLabel.text = "SLv.\((member.skillLevel))"

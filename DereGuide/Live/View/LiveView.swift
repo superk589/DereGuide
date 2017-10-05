@@ -36,7 +36,7 @@ class LiveDifficultyView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.textColor = UIColor.white
+        label.textColor = .darkGray
         label.textAlignment = .center
         backgoundView.zk.cornerRadius = 8
     }
@@ -108,7 +108,6 @@ class LiveView: UIView {
         difficultyViews = [LiveDifficultyView]()
         for i in 0...4 {
             let diffView = LiveDifficultyView()
-            diffView.label.textColor = UIColor.darkGray
             diffView.tag = i + 1
             diffView.addTarget(self, action: #selector(diffClick))
             difficultyViews.append(diffView)

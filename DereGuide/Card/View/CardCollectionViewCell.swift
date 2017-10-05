@@ -26,7 +26,7 @@ class CardCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(with card: CGSSCard) {
-        icon.cardId = card.id
+        icon.cardID = card.id
     }
     
     required init?(coder aDecoder: NSCoder) {

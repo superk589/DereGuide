@@ -57,7 +57,7 @@ extension CharDetailViewController: CharDetailViewDelegate {
     func cardIconClick(_ icon: CGSSCardIconView) {
         let cardDetailVC = CardDetailViewController()
         let dao = CGSSDAO.shared
-        cardDetailVC.card = dao.findCardById(icon.cardId!)
+        cardDetailVC.card = dao.findCardById(icon.cardID!)
         // cardDetailVC.modalTransitionStyle = .CoverVertical
         self.navigationController?.pushViewController(cardDetailVC, animated: true)
     }

@@ -158,7 +158,7 @@ extension EventDetailController: EventDetailViewDelegate {
     }
     
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView) {
-        if let id = icon.cardId {
+        if let id = icon.cardID {
             if let card = CGSSDAO.shared.findCardById(id) {
                 let vc = CardDetailViewController()
                 vc.card = card

@@ -39,7 +39,7 @@ class MyCenterCardView: UIView {
     }
     
     func setupWith(cardID: Int, potential: CGSSPotential) {
-        icon.cardId = cardID
+        icon.cardID = cardID
         potentialLabel.setup(with: potential)
     }
     

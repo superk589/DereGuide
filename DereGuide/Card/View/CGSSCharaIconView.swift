@@ -1,5 +1,5 @@
 //
-//  CGSSCharIconView.swift
+//  CGSSCharaIconView.swift
 //  DereGuide
 //
 //  Created by zzk on 16/8/14.
@@ -29,11 +29,11 @@ fileprivate extension CGSSChar {
     }
 }
 
-class CGSSCharIconView: CGSSIconView {
+class CGSSCharaIconView: CGSSIconView {
     
-    var charId: Int? {
+    var charaID: Int? {
         didSet {
-            if let id = charId, let url = URL.init(string: DataURL.Images + "/icon_char/\(id).png") {
+            if let id = charaID, let url = URL.init(string: DataURL.Images + "/icon_char/\(id).png") {
                 self.sd_setImage(with: url, placeholderImage: CGSSDAO.shared.findCharById(id)?.placeholderImage)
             }
         }
@@ -48,7 +48,7 @@ class CGSSCharIconView: CGSSIconView {
     }
     
     func setWithCharId(_ id: Int, target: AnyObject, action: Selector) {
-        self.charId = id
+        self.charaID = id
         self.setAction(target, action: action)
     }
 }

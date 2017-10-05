@@ -177,9 +177,9 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
 
 extension BirthdayNotificationViewController: BirthdayNotificationTableViewCellDelegate {
     
-    func charIconClick(_ icon: CGSSCharIconView) {
+    func charIconClick(_ icon: CGSSCharaIconView) {
         let charInfoDVC = CharDetailViewController()
-        charInfoDVC.char = CGSSDAO.shared.findCharById(icon.charId!)
+        charInfoDVC.char = CGSSDAO.shared.findCharById(icon.charaID!)
         self.navigationController?.pushViewController(charInfoDVC, animated: true)
     }
     

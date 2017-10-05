@@ -43,6 +43,7 @@ public final class SyncCoordinator {
     let unitsRemote: UnitsRemote
     let favoriteCardsRemote: FavoriteCardsRemote
     let favoriteCharasRemote: FavoriteCharasRemote
+    let favoriteSongsRemote: FavoriteSongsRemote
     
     fileprivate var observerTokens: [NSObjectProtocol] = [] //< The tokens registered with NotificationCenter
     let changeProcessors: [ChangeProcessor] //< The change processors for upload, download, etc.
@@ -53,6 +54,7 @@ public final class SyncCoordinator {
         self.unitsRemote = UnitsRemote()
         self.favoriteCardsRemote = FavoriteCardsRemote()
         self.favoriteCharasRemote = FavoriteCharasRemote()
+        self.favoriteSongsRemote = FavoriteSongsRemote()
         
         self.viewContext = viewContext
         self.syncContext = syncContext
@@ -73,8 +75,10 @@ public final class SyncCoordinator {
                             FavoriteCardRemover(remote: favoriteCardsRemote),
                             FavoriteCharaUploader(remote: favoriteCharasRemote),
                             FavoriteCharaDownloader(remote: favoriteCharasRemote),
-                            FavoriteCharaRemover(remote: favoriteCharasRemote)
-        ]
+                            FavoriteCharaRemover(remote: favoriteCharasRemote),
+                            FavoriteSongUploader(remote: favoriteSongsRemote),
+                            FavoriteSongDownloader(remote: favoriteSongsRemote),
+                            FavoriteSongRemover(remote: favoriteSongsRemote)]
         setup()
     }
 

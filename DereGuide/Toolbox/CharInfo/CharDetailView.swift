@@ -17,7 +17,7 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
     
     weak var delegate: CharDetailViewDelegate?
     
-    var iconView: CGSSCharIconView!
+    var iconView: CGSSCharaIconView!
     var nameLabel: UILabel!
     
     override init(frame: CGRect) {
@@ -37,7 +37,7 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
     var profileView: CharProfileView!
     
     fileprivate func prepare() {
-        iconView = CGSSCharIconView()
+        iconView = CGSSCharaIconView()
         addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -84,7 +84,7 @@ class CharDetailView: UIView, CardDetailRelatedCardsCellDelegate, CGSSIconViewDe
     
     func setup(_ char: CGSSChar) {
         nameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
-        iconView.charId = char.charaId
+        iconView.charaID = char.charaId
         profileView.setup(char)
         var cards = CGSSDAO.shared.findCardsByCharId(char.charaId)
         let sorter = CGSSSorter.init(property: "sAlbumId")

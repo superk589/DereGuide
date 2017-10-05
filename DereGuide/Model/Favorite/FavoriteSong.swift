@@ -73,7 +73,7 @@ extension FavoriteSong: UserOwnable {
 
 extension FavoriteSong: RemoteUploadable {
     public func toCKRecord() -> CKRecord {
-        let record = CKRecord(recordType: RemoteFavoriteChara.recordType)
+        let record = CKRecord(recordType: RemoteFavoriteSong.recordType)
         record["musicID"] = musicID as CKRecordValue
         record["localCreatedAt"] = createdAt as NSDate
         return record

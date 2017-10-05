@@ -39,7 +39,7 @@ class GachaCardView: UIView {
    }
     
     func setupWith(card: CGSSCard, odds: Int?) {
-        icon.cardId = card.id
+        icon.cardID = card.id
         if let odds = odds, odds != 0 {
             oddsLabel.text = String(format: "%.3f%%", Double(odds / 10) / 1000)
         } else {

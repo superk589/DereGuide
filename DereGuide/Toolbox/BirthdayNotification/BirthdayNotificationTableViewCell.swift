@@ -12,7 +12,7 @@ import SnapKit
 
 class CharaWithBirthdayView: UIView {
     
-    var icon: CGSSCharIconView!
+    var icon: CGSSCharaIconView!
     var birthdayLabel: UILabel!
     weak var delegate: CGSSIconViewDelegate? {
         didSet {
@@ -22,7 +22,7 @@ class CharaWithBirthdayView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        icon = CGSSCharIconView()
+        icon = CGSSCharaIconView()
         addSubview(icon)
         icon.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
@@ -45,7 +45,7 @@ class CharaWithBirthdayView: UIView {
     }
     
     func setup(with chara: CGSSChar) {
-        icon.charId = chara.charaId
+        icon.charaID = chara.charaId
         birthdayLabel.text = "\(chara.birthMonth!)-\(chara.birthDay!)"
     }
     
@@ -55,7 +55,7 @@ class CharaWithBirthdayView: UIView {
 }
 
 protocol BirthdayNotificationTableViewCellDelegate:class {
-    func charIconClick(_ icon:CGSSCharIconView)
+    func charIconClick(_ icon:CGSSCharaIconView)
 }
 
 class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {

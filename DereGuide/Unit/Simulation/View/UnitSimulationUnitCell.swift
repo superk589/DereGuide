@@ -73,7 +73,7 @@ class UnitSimulationCardView: UIView {
     }
     
     func setupWith(card: CGSSCard, potential: CGSSPotential, skillLevel: Int?) {
-        icon.cardId = card.id
+        icon.cardID = card.id
         potentialLabel.setup(with: potential)
         if let level = skillLevel {
             skillLabel.text = "SLv.\(level)"

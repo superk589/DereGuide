@@ -101,7 +101,7 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
             icon.isUserInteractionEnabled = false
             tagViews.setObject(icon, forKey: NSNumber.init(value: index))
         }
-        icon.cardId = cards[Int(index)].id
+        icon.cardID = cards[Int(index)].id
         return icon
     }
     

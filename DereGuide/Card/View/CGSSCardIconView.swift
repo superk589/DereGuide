@@ -16,10 +16,12 @@ fileprivate extension CGSSCard {
 
 class CGSSCardIconView: CGSSIconView {
     
-    var cardId: Int? {
+    var cardID: Int? {
         didSet {
-            if let id = cardId, let url = URL.init(string: DataURL.Images + "/icon_card/\(id).png") {
+            if let id = cardID, let url = URL.init(string: DataURL.Images + "/icon_card/\(id).png") {
                 self.sd_setImage(with: url, placeholderImage: CGSSDAO.shared.findCardById(id)?.placeholderImage)
+            } else {
+                sd_setImage(with: nil, placeholderImage: nil, options: [], completed: nil)
             }
         }
     }
@@ -33,7 +35,7 @@ class CGSSCardIconView: CGSSIconView {
     }
     
     func setWithCardId(_ id: Int, target: AnyObject, action: Selector) {
-        self.cardId = id
+        self.cardID = id
         self.setAction(target, action: action)
     }
     

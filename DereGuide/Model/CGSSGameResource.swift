@@ -277,6 +277,7 @@ class Master: FMDatabaseQueue {
                 SELECT
                     b.id,
                     max( a.id ) live_id,
+                    min( a.id ) normal_live_id,
                     max( a.type ) type,
                     max( a.event_type ) event_type,
                     min( a.start_date ) start_date,
@@ -313,7 +314,8 @@ class Master: FMDatabaseQueue {
                 // 去掉一些无效数据
                 if song.detail == "？" { continue }
                 if [1901, 1902, 90001].contains(song.musicID) { continue }
-                if song.startDate > Date() { continue }
+                // some of the event songs have a start date at the end of the event, so add 30 days 
+                if song.startDate > Date().addingTimeInterval(30 * 24 * 3600) { continue }
                 list.append(song)
             }
         }) {

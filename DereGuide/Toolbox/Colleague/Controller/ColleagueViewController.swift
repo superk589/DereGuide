@@ -169,7 +169,7 @@ class ColleagueViewController: BaseTableViewController {
 extension ColleagueViewController: ColleagueTableViewCellDelegate {
     
     func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap cardIcon: CGSSCardIconView) {
-        if let cardID = cardIcon.cardId, let card = CGSSDAO.shared.findCardById(cardID) {
+        if let cardID = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(cardID) {
             let vc = CardDetailViewController()
             vc.card = card
             navigationController?.pushViewController(vc, animated: true)
