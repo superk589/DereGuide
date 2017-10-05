@@ -1,6 +1,20 @@
 # ChangeLog
 
+### 1.5.4
+2017-10-3
+
+修复进入卡片详细页面时发生的崩溃
+
+##### Japanese version
+
+カード詳細ページを開こうするとアプリが強制終了する不具合を修正
+
+##### English version
+
+Fix a crash occurred when entering card detail page.
+
 ### 1.5.3
+2017-9-29
 
 修复"支持我们"中的内购项目
 
@@ -8,7 +22,12 @@
 
 「開発者を応援する」ページのアプリ内課金アイテムの修正
 
+##### English version
+
+Fix iAP items in "Support us" page.
+
 ### 1.5.2
+2017-9-27
 
 1. 修复iOS 11下保存图片时闪退的问题
 2. 修复可能导致启动时闪退的一个问题
@@ -27,6 +46,7 @@
 3. To reduce the size of the install package and make the app better, we remove the symbolic advertisement in "Support us" page.
 
 ### 1.5.1
+2017-9-20
 
 1. 修復點選完整卡池列表時閃退的問題
 2. 修復用bpm排序譜面時閃退的問題
@@ -42,6 +62,7 @@
 4. iOS 11で一部のページでレイアウトの不具合を修正
 
 ### 1.5
+2017-9-15
 
 **此版本起，更名为DereGuide**
 1. 寻找同僚功能正式上线
@@ -70,6 +91,7 @@
 6. Other improvements and bug fixes
 
 ### 1.4.4
+2017-8-10
 
 1. 修复模拟抽卡页面点击新卡图标时闪退的问题
 2. 修复组队详情页面翻转后停留在错误的分页
@@ -85,6 +107,7 @@
 2. Fix a layout issue when orientation changed on team detail page
 
 ### 1.4.3
+2017-8-3
 
 1. 喜欢的角色和卡片也纳入iCloud同步
 2. 优化和bug修复
@@ -100,6 +123,7 @@
 2. Improvements and bug fixes
 
 ### 1.4.2
+2017-7-28
 
 1. 缩小一些页面横屏模式下的宽度，更适合阅读
 2. 角色信息页面排序时也会显示当前排序属性的数值
