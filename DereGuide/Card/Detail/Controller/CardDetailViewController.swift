@@ -289,6 +289,7 @@ class CardDetailViewController: BaseTableViewController {
         case let cell as CardDetailMVCell:
             cell.delegate = self
             cell.setup(songs: songs)
+            cell.layoutIfNeeded()
         case let cell as CardDetailSpreadImageCell:
             cell.delegate = self
         default:

@@ -40,6 +40,8 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
             make.left.equalTo(10)
             make.right.bottom.equalTo(-10)
         }
+        
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

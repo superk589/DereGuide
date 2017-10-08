@@ -106,8 +106,11 @@ class CharDetailViewController: BaseTableViewController {
             cell.setup(chara: chara)
         case let cell as CharaDetailRelatedCardsTableViewCell:
             cell.cards = cards
+            cell.delegate = self
         case let cell as CharaDetailMVTableViewCell:
             cell.setup(songs: songs)
+            cell.layoutIfNeeded()
+            cell.delegate = self
         default:
             break
         }
