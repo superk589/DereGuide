@@ -945,7 +945,7 @@
 			children = (
 				1247917F1D87F4E500ED8EA6 /* GachaSimulation */,
 				124E47041D654AB700DD0399 /* BirthdayNotification */,
-				124E47091D654AB700DD0399 /* CharInfo */,
+				124E47091D654AB700DD0399 /* CharaInfo */,
 				1257C1C31F5CDF5300C3DFE1 /* MusicInfo */,
 				1238059B1DAA1582007361CF /* EventInfo */,
 				129B95551F3156BF007B7AE2 /* Colleague */,
@@ -1047,13 +1047,13 @@
 			path = BirthdayNotification;
 			sourceTree = "<group>";
 		};
-		124E47091D654AB700DD0399 /* CharInfo */ = {
+		124E47091D654AB700DD0399 /* CharaInfo */ = {
 			isa = PBXGroup;
 			children = (
 				12D45AC11E2DFB8C0009986F /* Controller */,
 				12D45AC21E2DFB920009986F /* View */,
 			);
-			path = CharInfo;
+			path = CharaInfo;
 			sourceTree = "<group>";
 		};
 		1257C1C31F5CDF5300C3DFE1 /* MusicInfo */ = {
@@ -1139,7 +1139,7 @@
 		1269E90C1D52085C0071AD7F /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				12C6B34A1F00B59C00A25DB1 /* CardDetail */,
+				12C6B34A1F00B59C00A25DB1 /* Detail */,
 				1269E9141D5209240071AD7F /* Controller */,
 				1269E9131D5209140071AD7F /* View */,
 			);
@@ -1413,8 +1413,8 @@
 		12816B321F7CF351000456CE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				12816B301F7CE188000456CE /* SongDetailHeaderCell.swift */,
 				12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */,
+				12816B301F7CE188000456CE /* SongDetailHeaderCell.swift */,
 				12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */,
 				12816B331F7CF71F000456CE /* SongDetailDescriptionCell.swift */,
 				12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */,
@@ -1576,13 +1576,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		12C6B34A1F00B59C00A25DB1 /* CardDetail */ = {
+		12C6B34A1F00B59C00A25DB1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				12C6B34C1F00B5B400A25DB1 /* View */,
 				12C6B34B1F00B5AC00A25DB1 /* Controller */,
 			);
-			path = CardDetail;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		12C6B34B1F00B5AC00A25DB1 /* Controller */ = {

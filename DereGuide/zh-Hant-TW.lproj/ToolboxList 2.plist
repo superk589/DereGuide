@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>cName</key>
+		<string>BirthdayNotificationViewController</string>
+		<key>iconId</key>
+		<string>200247</string>
+		<key>title</key>
+		<string>偶像生日提醒</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>CharInfoViewController</string>
+		<key>iconId</key>
+		<string>300151</string>
+		<key>title</key>
+		<string>角色資訊查詢</string>
+	</dict>
+    <dict>
+        <key>cName</key>
+        <string>SongViewController</string>
+        <key>iconId</key>
+        <string>200294</string>
+        <key>title</key>
+        <string>歌曲資訊查詢</string>
+    </dict>
+	<dict>
+		<key>cName</key>
+		<string>GachaViewController</string>
+		<key>iconId</key>
+		<string>100282</string>
+		<key>title</key>
+		<string>模擬抽卡</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>EventViewController</string>
+		<key>iconId</key>
+		<string>200206</string>
+		<key>title</key>
+		<string>活動資訊查詢</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>ColleagueViewController</string>
+		<key>iconId</key>
+		<string>300310</string>
+		<key>title</key>
+		<string>尋找同僚</string>
+	</dict>
+</array>
+</plist>

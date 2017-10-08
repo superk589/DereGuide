@@ -112,6 +112,8 @@ class CardDetailViewController: BaseTableViewController {
         if card.rarityType.rawValue >= CGSSRarityTypes.sr.rawValue {
             rows.append(Row(type: CardDetailSourceCell.self))
         }
+        
+        rows.append(Row(type: CardDetailMVCell.self))
     }
     
     override func viewDidLoad() {
@@ -256,13 +258,35 @@ class CardDetailViewController: BaseTableViewController {
         }
     }
     
+    private var songs = [CGSSSong]()
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.description, for: indexPath)
-        (cell as? CardDetailSetable)?.setup(with: card)
-        (cell as? CardDetailRelatedCardsCell)?.delegate = self
-        (cell as? CardDetailEvolutionCell)?.delegate = self
-        (cell as? CardDetailSpreadImageCell)?.delegate = self
+        switch cell {
+        case let cell as CardDetailSetable:
+            cell.setup(with: card)
+        default:
+            break
+        }
+        
+        switch cell {
+        case let cell as CardDetailRelatedCardsCell:
+            cell.delegate = self
+        case let cell as CardDetailEvolutionCell:
+            cell.delegate = self
+        case let cell as CardDetailMVCell:
+            cell.delegate = self
+            CGSSGameResource.shared.master.getMusicInfo(charaID: card.charaId) { (songs) in
+                DispatchQueue.main.async {
+                    self.songs = songs
+                    cell.setup(songs: songs)
+                }
+            }
+        case let cell as CardDetailSpreadImageCell:
+            cell.delegate = self
+        default:
+            break
+        }
         return cell
     }
     
@@ -354,5 +378,13 @@ extension CardDetailViewController: CGSSIconViewDelegate {
                 self.navigationController?.pushViewController(cardDetailVC, animated: true)
             }
         }
+    }
+}
+
+extension CardDetailViewController: CardDetailMVCellDelegate {
+    func cardDetailMVCell(_ cardDetailMVCell: CardDetailMVCell, didClickAt index: Int) {
+        let vc = SongDetailController()
+        vc.setup(songs: songs, index: index)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
