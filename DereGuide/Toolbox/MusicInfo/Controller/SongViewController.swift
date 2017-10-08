@@ -45,12 +45,7 @@ class SongViewController: BaseModelCollectionViewController {
         let interval = (Screen.width - 132 * itemPerRow) / (itemPerRow + 1)
         let size = CGSize(width: 132 + interval, height: 132 + 94)
         layout.itemSize = size
-        collectionView.contentInset.left = interval / 2
-        collectionView.contentInset.right = interval / 2
-        if #available(iOS 11.0, *) {
-            collectionView.contentInset.top = interval - 10
-            collectionView.contentInset.bottom = interval - 10
-        }
+        layout.sectionInset = UIEdgeInsets(top: interval - 10, left: interval / 2, bottom: interval - 10, right: interval / 2)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
     }

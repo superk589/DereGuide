@@ -19,7 +19,7 @@ extension Refreshable where Self: UIViewController {
     
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
-        if updater.isUpdating {
+        if updater.isWorking {
             refresher?.endRefreshing()
             return
         }
@@ -104,7 +104,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
     }
 }
 
-class RefreshableCollectionViewController: UIViewController, UpdateStatusViewDelegate, Refreshable {
+class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewDelegate, Refreshable {
     
     var refresher: UIRefreshControl? = UIRefreshControl()
     var updateStatusView = UpdateStatusView()
@@ -119,11 +119,6 @@ class RefreshableCollectionViewController: UIViewController, UpdateStatusViewDel
         layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -134,6 +129,12 @@ class RefreshableCollectionViewController: UIViewController, UpdateStatusViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
         refresher = UIRefreshControl()
         refresher?.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
         
