@@ -178,7 +178,7 @@ extension ColleagueViewController: ColleagueTableViewCellDelegate {
     
     @nonobjc func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap gameID: String) {
         UIPasteboard.general.string = gameID
-        UIAlertController.showHintMessage("已复制ID到剪贴板", in: nil)
+        UIAlertController.showHintMessage(NSLocalizedString("已复制ID到剪贴板", comment: ""), in: nil)
     }
 }
 
