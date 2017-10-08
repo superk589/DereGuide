@@ -193,9 +193,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarController = CGSSClient.shared.tabBarController
             if let nvc = tabBarController?.selectedViewController as? UINavigationController,
                 let charaId = notification.userInfo?["chara_id"] as? Int,
-                let char = CGSSDAO.shared.findCharById(charaId) {
+                let chara = CGSSDAO.shared.findCharById(charaId) {
                 let vc = CharDetailViewController()
-                vc.char = char
+                vc.chara = chara
                 vc.hidesBottomBarWhenPushed = true
                 nvc.pushViewController(vc, animated: true)
                 nvc.navigationBar.setNeedsLayout()

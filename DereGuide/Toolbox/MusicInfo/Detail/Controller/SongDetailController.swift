@@ -203,7 +203,7 @@ extension SongDetailController: SongDetailPositionCellDelegate {
     func songDetailPositionCell(_ songDetailPositionCell: SongDetailPositionCell, didClickAt charaID: Int) {
         if let chara = CGSSDAO.shared.findCharById(charaID) {
             let vc = CharDetailViewController()
-            vc.char = chara
+            vc.chara = chara
             navigationController?.pushViewController(vc, animated: true)
         }
     }

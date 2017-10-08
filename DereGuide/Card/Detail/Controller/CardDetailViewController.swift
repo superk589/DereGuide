@@ -15,9 +15,7 @@ class CardDetailViewController: BaseTableViewController {
     
     var card: CGSSCard! {
         didSet {
-            prepareRows()
-            tableView?.reloadData()
-            print("load card \(card.id!)")
+           loadDataAsync()
         }
     }
     
@@ -88,6 +86,18 @@ class CardDetailViewController: BaseTableViewController {
         return (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? CardDetailSpreadImageCell)?.spreadImageView
     }
     
+    private func loadDataAsync() {
+        CGSSGameResource.shared.master.getMusicInfo(charaID: card.charaId) { (songs) in
+            DispatchQueue.main.async {
+                self.songs = songs
+                self.prepareRows()
+                self.registerCells()
+                self.tableView?.reloadData()
+                print("load card \(self.card.id!)")
+            }
+        }
+    }
+    
     private func prepareRows() {
         rows.removeAll()
         guard let card = self.card else {
@@ -113,7 +123,10 @@ class CardDetailViewController: BaseTableViewController {
             rows.append(Row(type: CardDetailSourceCell.self))
         }
         
-        rows.append(Row(type: CardDetailMVCell.self))
+        if songs.count > 0 {
+            let row = Row(type: CardDetailMVCell.self)
+            self.rows.append(row)
+        }
     }
     
     override func viewDidLoad() {
@@ -140,7 +153,6 @@ class CardDetailViewController: BaseTableViewController {
         
         prepareToolbar()
         
-        registerCells()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
@@ -276,12 +288,7 @@ class CardDetailViewController: BaseTableViewController {
             cell.delegate = self
         case let cell as CardDetailMVCell:
             cell.delegate = self
-            CGSSGameResource.shared.master.getMusicInfo(charaID: card.charaId) { (songs) in
-                DispatchQueue.main.async {
-                    self.songs = songs
-                    cell.setup(songs: songs)
-                }
-            }
+            cell.setup(songs: songs)
         case let cell as CardDetailSpreadImageCell:
             cell.delegate = self
         default:
@@ -308,7 +315,7 @@ class CardDetailViewController: BaseTableViewController {
 extension CardDetailViewController: CardDetailRelatedCardsCellDelegate {
     func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
         let vc = CharDetailViewController()
-        vc.char = card.chara
+        vc.chara = card.chara
         navigationController?.pushViewController(vc, animated: true)
     }
 }

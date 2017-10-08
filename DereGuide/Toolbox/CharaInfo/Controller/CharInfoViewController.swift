@@ -138,10 +138,10 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let CharDVC = CharDetailViewController()
-        CharDVC.char = charList[indexPath.row]
-        CharDVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(CharDVC, animated: true)
+        let vc = CharDetailViewController()
+        vc.chara = charList[indexPath.row]
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func doneAndReturn(filter: CGSSCharFilter, sorter: CGSSSorter) {

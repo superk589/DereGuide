@@ -54,10 +54,10 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
     private func openSpecificPageBy(response: UNNotificationResponse) {
         let userInfo = response.notification.request.content.userInfo
         if let charaId = userInfo["charaId"] as? Int {
-            if let char = CGSSDAO.shared.findCharById(charaId),
+            if let chara = CGSSDAO.shared.findCharById(charaId),
                 let nvc = CGSSClient.shared.tabBarController?.selectedViewController as? UINavigationController {
                 let vc = CharDetailViewController()
-                vc.char = char
+                vc.chara = chara
                 vc.hidesBottomBarWhenPushed = true
                 nvc.pushViewController(vc, animated: false)
                 nvc.navigationBar.setNeedsLayout()

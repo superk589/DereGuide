@@ -53,6 +53,13 @@
 		1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972B1E8E85FC005C743C /* LSOptions.swift */; };
 		122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1224972F1E8E95D1005C743C /* LFSamplePoint.swift */; };
 		122497321E8E9B57005C743C /* LSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497311E8E9B57005C743C /* LSResult.swift */; };
+		122879401F8A548200AD1F5F /* CharaDetailProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228793F1F8A548200AD1F5F /* CharaDetailProfileTableViewCell.swift */; };
+		122879421F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122879411F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift */; };
+		122879441F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122879431F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift */; };
+		122879461F8A557D00AD1F5F /* CharaProfileTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122879451F8A557D00AD1F5F /* CharaProfileTitleLabel.swift */; };
+		1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228794D1F8A56AE00AD1F5F /* CharaProfileTitleView.swift */; };
+		122879501F8A570900AD1F5F /* CharaProfileContentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228794F1F8A570900AD1F5F /* CharaProfileContentLabel.swift */; };
+		122879521F8A572900AD1F5F /* CharaProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122879511F8A572900AD1F5F /* CharaProfileItemView.swift */; };
 		122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A3DF51F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift */; };
 		122B0F291D8E6D8E0096E3E0 /* MemberEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F281D8E6D8E0096E3E0 /* MemberEditingView.swift */; };
 		122B0F331D8E7E9B0096E3E0 /* MemberEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B0F321D8E7E9B0096E3E0 /* MemberEditingViewController.swift */; };
@@ -194,7 +201,6 @@
 		1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */; };
 		1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */; };
 		1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B61D69816800DEF52B /* CharDetailViewController.swift */; };
-		1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B81D69818E00DEF52B /* CharDetailView.swift */; };
 		127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */; };
 		12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEC1E2B3C890040E413 /* DateExtension.swift */; };
 		12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEE1E2B6C150040E413 /* Debouncer.swift */; };
@@ -473,6 +479,13 @@
 		1224972B1E8E85FC005C743C /* LSOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSOptions.swift; sourceTree = "<group>"; };
 		1224972F1E8E95D1005C743C /* LFSamplePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFSamplePoint.swift; sourceTree = "<group>"; };
 		122497311E8E9B57005C743C /* LSResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSResult.swift; sourceTree = "<group>"; };
+		1228793F1F8A548200AD1F5F /* CharaDetailProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaDetailProfileTableViewCell.swift; sourceTree = "<group>"; };
+		122879411F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaDetailRelatedCardsTableViewCell.swift; sourceTree = "<group>"; };
+		122879431F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaDetailMVTableViewCell.swift; sourceTree = "<group>"; };
+		122879451F8A557D00AD1F5F /* CharaProfileTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaProfileTitleLabel.swift; sourceTree = "<group>"; };
+		1228794D1F8A56AE00AD1F5F /* CharaProfileTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaProfileTitleView.swift; sourceTree = "<group>"; };
+		1228794F1F8A570900AD1F5F /* CharaProfileContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaProfileContentLabel.swift; sourceTree = "<group>"; };
+		122879511F8A572900AD1F5F /* CharaProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharaProfileItemView.swift; sourceTree = "<group>"; };
 		122A3DF51F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
 		122B0F281D8E6D8E0096E3E0 /* MemberEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberEditingView.swift; sourceTree = "<group>"; };
 		122B0F321D8E7E9B0096E3E0 /* MemberEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberEditingViewController.swift; sourceTree = "<group>"; };
@@ -613,7 +626,6 @@
 		1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatusView.swift; sourceTree = "<group>"; };
 		1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1271C6B61D69816800DEF52B /* CharDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailViewController.swift; sourceTree = "<group>"; };
-		1271C6B81D69818E00DEF52B /* CharDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailView.swift; sourceTree = "<group>"; };
 		127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveDetail.swift; sourceTree = "<group>"; };
 		12738EEC1E2B3C890040E413 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		12738EEE1E2B6C150040E413 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
@@ -923,6 +935,33 @@
 			name = CGSSLiveSimulator;
 			sourceTree = "<group>";
 		};
+		122879481F8A561100AD1F5F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */,
+				12D624351F16F63B0017999A /* CharView.swift */,
+				122879451F8A557D00AD1F5F /* CharaProfileTitleLabel.swift */,
+				1228794D1F8A56AE00AD1F5F /* CharaProfileTitleView.swift */,
+				1228794F1F8A570900AD1F5F /* CharaProfileContentLabel.swift */,
+				122879511F8A572900AD1F5F /* CharaProfileItemView.swift */,
+				120541771D78289F0021F875 /* CharProfileView.swift */,
+				1228793F1F8A548200AD1F5F /* CharaDetailProfileTableViewCell.swift */,
+				122879411F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift */,
+				122879431F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1228794A1F8A563D00AD1F5F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				124E470A1D654AB700DD0399 /* CharInfoViewController.swift */,
+				1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */,
+				1271C6B61D69816800DEF52B /* CharDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		122EECC71D5DC4ED008ADE08 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -1050,8 +1089,8 @@
 		124E47091D654AB700DD0399 /* CharaInfo */ = {
 			isa = PBXGroup;
 			children = (
-				12D45AC11E2DFB8C0009986F /* Controller */,
-				12D45AC21E2DFB920009986F /* View */,
+				1228794A1F8A563D00AD1F5F /* Controller */,
+				122879481F8A561100AD1F5F /* View */,
 			);
 			path = CharaInfo;
 			sourceTree = "<group>";
@@ -1693,27 +1732,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		12D45AC11E2DFB8C0009986F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				124E470A1D654AB700DD0399 /* CharInfoViewController.swift */,
-				1206F6CF1E29053C000FAC78 /* CharFilterSortController.swift */,
-				1271C6B61D69816800DEF52B /* CharDetailViewController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		12D45AC21E2DFB920009986F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */,
-				1271C6B81D69818E00DEF52B /* CharDetailView.swift */,
-				120541771D78289F0021F875 /* CharProfileView.swift */,
-				12D624351F16F63B0017999A /* CharView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
 		12D45AC91E2E445E0009986F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2242,6 +2260,7 @@
 				12F9B03C1F28935900D3B47E /* FavoriteChara.swift in Sources */,
 				123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */,
 				12F4EAEB1EDFFCEF00A92C9F /* UnitSimulationCommonCell.swift in Sources */,
+				122879401F8A548200AD1F5F /* CharaDetailProfileTableViewCell.swift in Sources */,
 				12CDC6EB1F663FA4004BB7AE /* FavoriteSongsManager.swift in Sources */,
 				1291820A1F5853E800F91C0B /* DMProfile.swift in Sources */,
 				12C6B35A1F00B73100A25DB1 /* CardDetailEvolutionCell.swift in Sources */,
@@ -2286,6 +2305,7 @@
 				121C78E21D57364F00D0B636 /* BaseLiveTableViewController.swift in Sources */,
 				1291821D1F58F99D00F91C0B /* UITextFieldExtension.swift in Sources */,
 				1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */,
+				122879501F8A570900AD1F5F /* CharaProfileContentLabel.swift in Sources */,
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulateView.swift in Sources */,
 				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
@@ -2304,6 +2324,7 @@
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
 				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
 				120DBB291EEE3120004E0084 /* UnitTemplateController.swift in Sources */,
+				122879521F8A572900AD1F5F /* CharaProfileItemView.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
@@ -2366,6 +2387,7 @@
 				12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */,
 				121B82141EB7383600273F37 /* CGSSNotification.swift in Sources */,
 				123F320F1E6FED0F00B69D26 /* SpreadImageViewController.swift in Sources */,
+				122879461F8A557D00AD1F5F /* CharaProfileTitleLabel.swift in Sources */,
 				1238059F1DAA1995007361CF /* CGSSEvent.swift in Sources */,
 				122497281E8E85C1005C743C /* LSSkill.swift in Sources */,
 				1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */,
@@ -2483,7 +2505,6 @@
 				12FC8B391EDE6D93003CF3C3 /* UnitInformationUnitCell.swift in Sources */,
 				1258499F1EE59C35006AF479 /* BaseCardCollectionViewController.swift in Sources */,
 				129182131F58554000F91C0B /* DMCleared.swift in Sources */,
-				1271C6B91D69818E00DEF52B /* CharDetailView.swift in Sources */,
 				123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */,
 				12F57C5D1EE2928000638650 /* UnitAdvanceOptionsController.swift in Sources */,
 				1257C1C61F5CEE5400C3DFE1 /* SongCollectionViewCell.swift in Sources */,
@@ -2495,15 +2516,18 @@
 				1203A8921F29C39A001A510A /* FavoriteCardUploader.swift in Sources */,
 				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
+				1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,
 				12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */,
 				12C3901D1F3424050077FB38 /* CenterWantedEditingViewController.swift in Sources */,
+				122879441F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift in Sources */,
 				123805A11DAA4354007361CF /* EventTableViewCell.swift in Sources */,
 				1269E9DB1D520B5D0071AD7F /* CGSSChar.swift in Sources */,
 				1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */,
 				129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */,
 				127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */,
+				122879421F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift in Sources */,
 				12816B361F7CF73B000456CE /* SongDetailPositionCell.swift in Sources */,
 				1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */,
 				129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */,
