@@ -77,6 +77,8 @@ class UnitDetailController: ZKPageViewController, ZKPageViewControllerDelegate, 
         
         prepareTitleItems()
         
+        automaticallyAdjustsScrollViewInsets = false
+        
         self.dataSource = self
         self.delegate = self
         

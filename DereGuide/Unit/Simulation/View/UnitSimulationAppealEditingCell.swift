@@ -90,7 +90,7 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
 //            make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.top.equalTo(10)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
-            make.height.greaterThanOrEqualTo(24)
+            make.height.equalTo(30)
         }
         supportAppealBox.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -120,7 +120,7 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
             make.right.equalTo(-10)
             make.top.equalTo(supportAppealTextField.snp.bottom).offset(10)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
-            make.height.greaterThanOrEqualTo(24)
+            make.height.equalTo(30)
             make.bottom.equalTo(-10)
         }
         customAppealBox.snp.makeConstraints { (make) in

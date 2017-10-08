@@ -20,7 +20,7 @@ class UnitInfomationController: BaseTableViewController, UnitCollectionPage {
         super.viewDidLoad()
 
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 100
         tableView.showsVerticalScrollIndicator = false
         tableView.tableFooterView = UIView()
         
