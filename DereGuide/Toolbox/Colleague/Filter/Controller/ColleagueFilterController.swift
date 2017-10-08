@@ -21,7 +21,7 @@ class ColleagueFilterController: UITableViewController {
                          NSLocalizedString("偶像", comment: "")]
     var footerTitles = [NSLocalizedString("目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\"", comment: ""),
                         "",
-                        NSLocalizedString("左滑删除", comment: "")]
+                        NSLocalizedString("* 左滑删除", comment: "")]
 
     struct FilterSetting: Equatable {
         
