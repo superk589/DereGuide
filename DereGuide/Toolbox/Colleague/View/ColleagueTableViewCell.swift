@@ -92,7 +92,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         
         messageLabel = UILabel()
         readableContentView.addSubview(messageLabel)
-        messageLabel.numberOfLines = 4
+        messageLabel.numberOfLines = 7
         messageLabel.font = UIFont.systemFont(ofSize: 11)
         messageLabel.textColor = UIColor.darkGray
         messageLabel.snp.makeConstraints { (make) in
