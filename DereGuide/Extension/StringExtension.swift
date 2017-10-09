@@ -13,6 +13,10 @@ extension String {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = timeZone
+        
+        // If not set this, and in your phone settings select a region that defaults to a 24-hour time, for example "United Kingdom" or "France". Then, disable the "24 hour time" from the settings. Now if you create an NSDateFormatter without setting its locale, "HH" will not work.
+        // Reference from https://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let newDate = dateFormatter.date(from: self) ?? Date()
         return newDate
     }
