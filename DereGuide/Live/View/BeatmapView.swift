@@ -483,8 +483,8 @@ class AdvanceBeatmapDrawer {
         
         
         // 滑条 长按 同步线
-        let maxY = rect.maxY
-        let minY = rect.minY
+        let maxY = rect.maxY + noteRadius
+        let minY = rect.minY - noteRadius
         var minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
         var maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
        
