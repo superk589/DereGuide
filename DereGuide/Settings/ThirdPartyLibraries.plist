@@ -92,5 +92,11 @@
 		<key>name</key>
 		<string>ImageViewer</string>
 	</dict>
+    <dict>
+        <key>site</key>
+        <string>https://github.com/CoderMJLee/MJRefresh</string>
+        <key>name</key>
+        <string>MJRefresh</string>
+    </dict>
 </array>
 </plist>

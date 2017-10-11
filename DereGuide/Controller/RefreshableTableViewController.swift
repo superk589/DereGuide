@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MJRefresh
 
 protocol Refreshable {
-    var refresher: UIRefreshControl? { get set }
+    var refresher: MJRefreshHeader { get set }
     var updateStatusView: UpdateStatusView { get set }
     func check(_ types: CGSSUpdateDataTypes)
     func checkUpdate()
@@ -19,10 +20,10 @@ extension Refreshable where Self: UIViewController {
     
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
-        if updater.isWorking {
-            refresher?.endRefreshing()
-            return
+        defer {
+            refresher.endRefreshing()
         }
+        if updater.isWorking { return }
         self.updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
         updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
             if !errors.isEmpty && items.count == 0 {
@@ -59,21 +60,20 @@ extension Refreshable where Self: UIViewController {
                 }
             }
         })
-        refresher?.endRefreshing()
     }
 }
 
 class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate, Refreshable {
     
-    var refresher: UIRefreshControl? = UIRefreshControl()
     var updateStatusView = UpdateStatusView()
+    
+    var refresher: MJRefreshHeader = CGSSRefreshHeader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refresher = UIRefreshControl()
-        refresher?.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
-        refreshControl = refresher
-        refresher?.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
+        
+        tableView.mj_header = refresher
+        refresher.refreshingBlock = { self.checkUpdate() }
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
@@ -87,7 +87,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         }
     }
     
-    @objc func checkUpdate() {
+    func checkUpdate() {
         
     }
     
@@ -106,7 +106,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
 
 class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewDelegate, Refreshable {
     
-    var refresher: UIRefreshControl? = UIRefreshControl()
+    var refresher: MJRefreshHeader = CGSSRefreshHeader()
     var updateStatusView = UpdateStatusView()
     
     var layout: UICollectionViewFlowLayout!
@@ -135,15 +135,8 @@ class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewD
             make.edges.equalToSuperview()
         }
         
-        refresher = UIRefreshControl()
-        refresher?.attributedTitle = NSAttributedString.init(string: NSLocalizedString("下拉检查更新", comment: "下拉刷新文字"))
-        
-        if #available(iOS 10.0, *) {
-            collectionView?.refreshControl = refresher
-        } else {
-            // Fallback on earlier versions
-        }
-        refresher?.addTarget(self, action: #selector(checkUpdate), for: .valueChanged)
+        collectionView.mj_header = refresher
+        refresher.refreshingBlock = { self.checkUpdate() }
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
@@ -157,7 +150,7 @@ class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewD
         }
     }
     
-    @objc func checkUpdate() {
+    func checkUpdate() {
         
     }
     

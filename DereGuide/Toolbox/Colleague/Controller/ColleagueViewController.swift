@@ -20,12 +20,11 @@ class ColleagueViewController: BaseTableViewController {
         return vc
     }()
     
-    fileprivate var loadMoreCell = LoadMoreTableViewCell()
-    
+    private var refresher = CGSSRefreshHeader()
+    private var loader = CGSSRefreshFooter()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadMoreCell.delegate = self
         
         prepareNavigationBar()
         
@@ -33,19 +32,18 @@ class ColleagueViewController: BaseTableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 159
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
 
-        refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("下拉刷新数据", comment: ""))
-        refreshControl?.addTarget(self, action: #selector(fetchLatestProfiles), for: .valueChanged)
-        refreshControl?.beginRefreshing()
-        fetchLatestProfiles()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        refreshControl?.endRefreshing()
+        tableView.mj_header = refresher
+        refresher.refreshingBlock = { self.fetchLatestProfiles() }
+        
+        tableView.mj_footer = loader
+        loader.refreshingBlock = { [weak self] in self?.fetchMore {
+            self?.loader.state = self?.cursor == nil ? .noMoreData : .idle
+            }
+        }
+        refresher.beginRefreshing()
     }
     
     var remote = ProfileRemote()
@@ -68,9 +66,9 @@ class ColleagueViewController: BaseTableViewController {
                     self.profiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                 }
                 self.isFetching = false
-                self.refreshControl?.endRefreshing()
+                self.refresher.endRefreshing()
                 self.cursor = cursor
-                self.loadMoreCell.setNoMoreData(cursor == nil)
+                self.loader.state = cursor == nil ? .noMoreData : .idle
                 self.tableView.reloadData()
             }
         }
@@ -102,20 +100,11 @@ class ColleagueViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ColleagueTableViewCell.description(), for: indexPath) as! ColleagueTableViewCell
         
-        switch indexPath.row {
-        case ..<profiles.count:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ColleagueTableViewCell.description(), for: indexPath) as! ColleagueTableViewCell
-            
-            cell.setup(profiles[indexPath.row])
-            cell.delegate = self
-            return cell
-        case profiles.count:
-            return loadMoreCell
-        default:
-            fatalError("wrong index path")
-        }
-        
+        cell.setup(profiles[indexPath.row])
+        cell.delegate = self
+        return cell
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,7 +112,7 @@ class ColleagueViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profiles.count + 1
+        return profiles.count
     }
     
     var context: NSManagedObjectContext {
@@ -205,14 +194,4 @@ extension ColleagueViewController: ColleagueFilterControllerDelegate {
         fetchLatestProfiles()
     }
 
-}
-
-extension ColleagueViewController: LoadMoreTableViewCellDelegate {
-    func didLoadMore(_ loadMoreTableViewCell: LoadMoreTableViewCell) {
-        loadMoreTableViewCell.loadMoreButton.setLoading(true)
-        fetchMore {
-            loadMoreTableViewCell.setNoMoreData(self.cursor == nil)
-            loadMoreTableViewCell.loadMoreButton.setLoading(false)
-        }
-    }
 }

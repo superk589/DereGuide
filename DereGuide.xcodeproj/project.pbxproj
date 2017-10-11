@@ -96,6 +96,8 @@
 		12353A5D1F1309C2008286C2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12353A5C1F1309C2008286C2 /* CoreDataStack.swift */; };
 		12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */; };
 		12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12356BCA1E8FE94F005EEB7A /* TipView.swift */; };
+		1235F6D61F8E187C00119F94 /* CGSSRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235F6D51F8E187C00119F94 /* CGSSRefreshHeader.swift */; };
+		1235F6D81F8E1B1E00119F94 /* CGSSRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235F6D71F8E1B1E00119F94 /* CGSSRefreshFooter.swift */; };
 		123679041E0E6B1300622114 /* DeviceInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679031E0E6B1300622114 /* DeviceInformationManager.swift */; };
 		123679061E0E6C3600622114 /* CGSSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123679051E0E6C3600622114 /* CGSSVersionManager.swift */; };
 		1237D1181EEFBA9C00C43337 /* TransitionAnimatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1237D1171EEFBA9C00C43337 /* TransitionAnimatorController.swift */; };
@@ -301,7 +303,6 @@
 		12CDC6E71F663ACD004BB7AE /* DereGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6E21F663A41004BB7AE /* DereGuide.xcdatamodeld */; };
 		12CDC6E91F663F0E004BB7AE /* RemoteFavoriteSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6E81F663F0E004BB7AE /* RemoteFavoriteSong.swift */; };
 		12CDC6EB1F663FA4004BB7AE /* FavoriteSongsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6EA1F663FA4004BB7AE /* FavoriteSongsManager.swift */; };
-		12D296251F45705100AFCF7C /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D296241F45705100AFCF7C /* LoadMoreTableViewCell.swift */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
 		12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */; };
@@ -503,6 +504,8 @@
 		12353A5C1F1309C2008286C2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationHandler.swift; sourceTree = "<group>"; };
 		12356BCA1E8FE94F005EEB7A /* TipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		1235F6D51F8E187C00119F94 /* CGSSRefreshHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSRefreshHeader.swift; sourceTree = "<group>"; };
+		1235F6D71F8E1B1E00119F94 /* CGSSRefreshFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSRefreshFooter.swift; sourceTree = "<group>"; };
 		123679031E0E6B1300622114 /* DeviceInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManager.swift; sourceTree = "<group>"; };
 		123679051E0E6C3600622114 /* CGSSVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSVersionManager.swift; sourceTree = "<group>"; };
 		1237D1171EEFBA9C00C43337 /* TransitionAnimatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimatorController.swift; sourceTree = "<group>"; };
@@ -732,7 +735,6 @@
 		12CDC6E61F663A41004BB7AE /* DereGuide 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DereGuide 2.xcdatamodel"; sourceTree = "<group>"; };
 		12CDC6E81F663F0E004BB7AE /* RemoteFavoriteSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteSong.swift; sourceTree = "<group>"; };
 		12CDC6EA1F663FA4004BB7AE /* FavoriteSongsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongsManager.swift; sourceTree = "<group>"; };
-		12D296241F45705100AFCF7C /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		12D45AB81E2CB5560009986F /* EventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
 		12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
@@ -1342,6 +1344,8 @@
 				12B8A6AA1F09E348001074B3 /* ValueStepper.swift */,
 				12C875831F32F5960051C75A /* PotentialValueStepper.swift */,
 				125BC0511F453F6D00860CF0 /* ReadableWidthTableViewCell.swift */,
+				1235F6D51F8E187C00119F94 /* CGSSRefreshHeader.swift */,
+				1235F6D71F8E1B1E00119F94 /* CGSSRefreshFooter.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = View;
@@ -1575,7 +1579,6 @@
 			isa = PBXGroup;
 			children = (
 				12D57A821F427AE600575B40 /* ColleagueTableViewCell.swift */,
-				12D296241F45705100AFCF7C /* LoadMoreTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2252,7 +2255,6 @@
 				12816B311F7CE188000456CE /* SongDetailHeaderCell.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
-				12D296251F45705100AFCF7C /* LoadMoreTableViewCell.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
 				129ECB291ECBFB930010BC7F /* UnitDetailController.swift in Sources */,
@@ -2340,6 +2342,7 @@
 				12C6B3581F00B71200A25DB1 /* CardDetailLeaderSkillCell.swift in Sources */,
 				12D4F8C81E1E9F1E0064991E /* CardFilterSortController.swift in Sources */,
 				12353A5D1F1309C2008286C2 /* CoreDataStack.swift in Sources */,
+				1235F6D61F8E187C00119F94 /* CGSSRefreshHeader.swift in Sources */,
 				129182151F585AB800F91C0B /* DMComposingStepTwoController.swift in Sources */,
 				12FC8B521EDE6DEB003CF3C3 /* UnitSimulationAppealEditingCell.swift in Sources */,
 				12C390171F3412AF0077FB38 /* ColleagueCentersWantedCell.swift in Sources */,
@@ -2460,6 +2463,7 @@
 				12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */,
 				12FC8B4E1EDE6DEB003CF3C3 /* UnitSimulationController.swift in Sources */,
 				12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */,
+				1235F6D81F8E1B1E00119F94 /* CGSSRefreshFooter.swift in Sources */,
 				120541781D78289F0021F875 /* CharProfileView.swift in Sources */,
 				1245F7A91F1CA3AA009A80EC /* GachaCardWithOddsListView.swift in Sources */,
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
