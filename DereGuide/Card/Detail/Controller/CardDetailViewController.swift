@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import ImageViewer
 import SDWebImage
+import AudioToolbox
 
 class CardDetailViewController: BaseTableViewController {
     
@@ -335,6 +336,10 @@ extension CardDetailViewController: CardDetailSpreadImageCellDelegate {
         activityVC.popoverPresentationController?.sourceView = cardDetailSpreadImageCell.spreadImageView
         activityVC.popoverPresentationController?.sourceRect = CGRect(x: point.x, y: point.y, width: 0, height: 0)
         present(activityVC, animated: true, completion: nil)
+        
+        // play sound like pop(3d touch)
+        AudioServicesPlaySystemSound(1520)
+        
     }
     
     func tappedCardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell) {

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import EasyTipView
 import CoreData
+import  AudioToolbox
 
 protocol UnitEditingControllerDelegate: class {
     func unitEditingController(_ unitEditingController: UnitEditingController, didModify units: Set<Unit>)
@@ -328,6 +329,8 @@ extension UnitEditingController: RecentUsedMemberCellDelegate {
         pc?.sourceRect = CGRect.init(x: recentUsedMemberCell.fwidth / 2, y: recentUsedMemberCell.fheight
          / 2, width: 0, height: 0)
         present(tevc, animated: true, completion: nil)
+        // play sound like peek(3d touch)
+        AudioServicesPlaySystemSound(1519)
     }
 }
 
@@ -358,6 +361,8 @@ extension UnitEditingController: MemberGroupViewDelegate {
         pc?.sourceView = item
         pc?.sourceRect = CGRect.init(x: item.fwidth / 2, y: 0, width: 0, height: 0)
         present(tevc, animated: true, completion: nil)
+        // play sound like peek(3d touch)
+        AudioServicesPlaySystemSound(1519)
     }
 }
 

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import EasyTipView
+import AudioToolbox
 
 protocol ColleagueComposeViewControllerDelegate: class {
     func didPost(_ colleagueComposeViewController: ColleagueComposeViewController)
@@ -336,6 +337,8 @@ extension ColleagueComposeViewController: CenterWantedGroupViewDelegate {
         pc?.sourceView = item
         pc?.sourceRect = CGRect.init(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
         present(vc, animated: true, completion: nil)
+        // play sound like peek(3d touch)
+        AudioServicesPlaySystemSound(1519)
     }
 }
 
@@ -358,6 +361,8 @@ extension ColleagueComposeViewController: MyCenterGroupViewDelegate {
         pc?.sourceView = item
         pc?.sourceRect = CGRect.init(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
         present(vc, animated: true, completion: nil)
+        // play sound like peek(3d touch)
+        AudioServicesPlaySystemSound(1519)
     }
     
     func profileMemberEditableView(_ profileMemberEditableView: MyCenterGroupView, didDoubleTap item: MyCenterItemView) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import ImageViewer
+import AudioToolbox
 
 class GalleryImageItemBaseController: ItemBaseController<UIImageView> {
 
@@ -36,6 +37,8 @@ class GalleryImageItemBaseController: ItemBaseController<UIImageView> {
         switch longPress.state {
         case .began:
             let point = longPress.location(in: itemView)
+            // play sound like pop(3d touch)
+            AudioServicesPlaySystemSound(1520)
             UIActivityViewController.show(images: [image], pointTo: itemView, rect: CGRect(origin: point, size: .zero), in: self)
         default:
             break
