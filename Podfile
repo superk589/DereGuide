@@ -13,13 +13,14 @@ target 'DereGuide' do
 #  pod 'Firebase/Core'
 #  pod 'Firebase/AdMob'
   pod 'TTGTagCollectionView'
-  pod 'Charts', '3.0.3'
+  pod 'Charts'
   pod 'EasyTipView'
   pod 'DynamicColor'
 #  pod 'CryptoSwift'
 #  pod 'SwiftTryCatch'
-  pod 'ImageViewer', :git => "https://github.com/MailOnline/ImageViewer.git"
+  pod 'ImageViewer'
   pod 'ZKPageViewController'
+  pod 'MJRefresh'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

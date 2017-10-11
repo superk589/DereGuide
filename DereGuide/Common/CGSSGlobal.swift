@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Reachability
 
 struct Config {
     static let iAPRemoveADProductIDs: Set<String> = ["dereguide_small_tips", "dereguide_medium_tips"]
@@ -149,7 +149,7 @@ public class CGSSGlobal {
     
     static func isWifi() -> Bool {
         if let reachability = Reachability() {
-            if reachability.isReachableViaWiFi {
+            if reachability.connection == .wifi {
                 return true
             }
         }
@@ -158,7 +158,7 @@ public class CGSSGlobal {
     
     static func isMobileNet() -> Bool {
         if let reachability = Reachability() {
-            if reachability.isReachableViaWWAN {
+            if reachability.connection == .cellular {
                 return true
             }
         }
