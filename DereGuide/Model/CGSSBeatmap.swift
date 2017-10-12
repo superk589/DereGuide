@@ -24,6 +24,9 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     // used in shifting bpm
     var offset: Float = 0
     
+    // from 1 to max combo
+    var comboIndex: Int = 1
+    
     // context free note information, so each long press slide and filck note need to know the related note
     weak var previous: CGSSBeatmapNote?
     weak var next: CGSSBeatmapNote?
@@ -125,21 +128,19 @@ class CGSSBeatmap: CGSSBaseModel {
     func contextFree() {
         var positionPressed = [Int?](repeating: nil, count: 5)
         var slides = [Int: Int]()
-        for (index, note) in self.notes.enumerated() {
-            if note.finishPos == 0 {
-                continue
-            }
+        for (index, note) in self.validNotes.enumerated() {
+            note.comboIndex = index + 1
             if note.type == 2 && positionPressed[note.finishPos - 1] == nil {
                 note.longPressType = 1
                 positionPressed[note.finishPos - 1] = index
             } else if positionPressed[note.finishPos - 1] != nil {
                 let previousIndex = positionPressed[note.finishPos - 1]!
-                let previous = notes[previousIndex]
+                let previous = validNotes[previousIndex]
                 note.longPressType = 2
                 previous.append(note)
                 
                 let startIndex = previousIndex + 1
-                notes[startIndex..<index].forEach { $0.along = previous }
+                validNotes[startIndex..<index].forEach { $0.along = previous }
                 positionPressed[note.finishPos - 1] = nil
             }
             
@@ -149,13 +150,13 @@ class CGSSBeatmap: CGSSBaseModel {
                     slides[note.groupId] = index
                 } else {
                     let previousIndex = slides[note.groupId]!
-                    let previous = notes[previousIndex]
+                    let previous = validNotes[previousIndex]
                     // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
                     if previous.intervalTo(note) < 4 || note.type == 3 {
                         previous.append(note)
                         
                         let startIndex = previousIndex + 1
-                        notes[startIndex..<index].forEach { $0.along = previous }
+                        validNotes[startIndex..<index].forEach { $0.along = previous }
                     }
                     slides[note.groupId] = index
                 }

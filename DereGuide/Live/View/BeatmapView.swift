@@ -499,7 +499,7 @@ class AdvanceBeatmapDrawer {
         
         // if one side has long press or slide over the screen, the other side not, we need to expand the index too
         if let along = notes[minIndex].along {
-            minIndex = notes.index(of: along)!
+            minIndex = along.comboIndex - 1
         }
         
         drawNoteGroupLine(minIndex: minIndex, maxIndex: maxIndex)
