@@ -37,13 +37,15 @@ class MusicScoreDBQueue: FMDatabaseQueue {
     func getBeatmaps(callback: @escaping FMDBCallBackClosure<[CGSSBeatmap]>) {
         var beatmaps = [CGSSBeatmap]()
         execute({ (db) in
-            let selectSql = "select * from blobs where name like '%^__.csv' escape '^' order by name asc"
+            let selectSql = "select * from blobs where name like '%^_%.csv' escape '^' order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
-                if let data = set.data(forColumn: "data") {
-                    if let beatmap = CGSSBeatmap.init(data: data) {
-                        beatmaps.append(beatmap)
-                    }
+                if let data = set.data(forColumn: "data"),
+                    let name = set.string(forColumn: "name"),
+                    let number = name.match(pattern: "_([0-9]+).csv", index: 1).first,
+                    let rawDifficulty = Int(number),
+                    let beatmap = CGSSBeatmap.init(data: data, rawDifficulty: rawDifficulty) {
+                    beatmaps.append(beatmap)
                 }
             }
         }) {
@@ -51,25 +53,10 @@ class MusicScoreDBQueue: FMDatabaseQueue {
         }
     }
     
-    func getLegacyBeatmap(callback: @escaping FMDBCallBackClosure<CGSSBeatmap?>) {
-        var beatmap: CGSSBeatmap?
-        execute({ (db) in
-            let selectSql = "select * from blobs where name like '%101.csv' order by name asc"
-            let set = try db.executeQuery(selectSql, values: nil)
-            while set.next() {
-                if let data = set.data(forColumn: "data") {
-                    beatmap = CGSSBeatmap.init(data: data)
-                }
-            }
-        }) {
-            callback(beatmap)
-        }
-    }
-    
     func getBeatmapCount(callback: @escaping FMDBCallBackClosure<Int>) {
         var result = 0
         execute({ (db) in
-            let selectSql = "select count(*) count from blobs where name like '%^__.csv' escape '^' order by name asc"
+            let selectSql = "select count(*) count from blobs where name like '%^_%.csv' escape '^' order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let count = Int(set.int(forColumn: "count"))
@@ -399,12 +386,28 @@ class Master: FMDatabaseQueue {
     func getLives(liveId: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSLive]>) {
         var list = [CGSSLive]()
         execute({ (db) in
-            let selectSql = "select a.id, a.event_type, a.music_data_id, a.start_date, a.difficulty_1 debut_detail_id, (select level_vocal from live_detail where a.difficulty_1 = id) debut_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 1) debut_notes_number, a.difficulty_2 regular_detail_id, (select level_vocal from live_detail where a.difficulty_2 = id) regular_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 2) regular_notes_number, a.difficulty_3 pro, (select level_vocal from live_detail where a.difficulty_3 = id) pro_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 3) pro_notes_number, a.difficulty_4 master_detail_id, (select level_vocal from live_detail where a.difficulty_4 = id) master_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 4) master_notes_number, a.difficulty_5 master_plus_detail_id, (select level_vocal from live_detail where a.difficulty_5 = id) master_plus_difficulty, (select notes_number from live_notes_number where a.id = live_id and difficulty = 5) master_plus_notes_number, a.type, b.bpm, b.name, b.composer, b.lyricist, c.chara_position_1, c.chara_position_2, c.chara_position_3, c.chara_position_4, c.chara_position_5, c.position_num from live_data a, music_data b Left outer join live_data_position c on a.id = c.live_data_id where a.music_data_id = b.id \(liveId == nil ? "" : "and a.id = \(liveId!)")"
+            let selectSql = """
+                SELECT
+                    a.id,
+                    a.event_type,
+                    a.music_data_id,
+                    a.start_date,
+                    a.type,
+                    b.bpm,
+                    b.name
+                FROM
+                    live_data a,
+                    music_data b
+                WHERE
+                    a.music_data_id = b.id
+                    \(liveId == nil ? "" : "AND a.id = \(liveId!)")
+            """
+            
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let json = JSON(set.resultDictionary ?? [AnyHashable: Any]())
                 
-                guard let live = CGSSLive.init(fromJson: json) else { continue }
+                guard let live = CGSSLive(fromJson: json) else { continue }
                 
                 // not valid if count == 0
                 if live.beatmapCount == 0 { continue }
@@ -415,12 +418,77 @@ class Master: FMDatabaseQueue {
                 // 90001 - DJ Pinya live
                 if [1901, 1902, 90001].contains(live.musicDataId) { continue }
                 
-                list.append(live)
+                let selectSql = """
+                    SELECT
+                        a.id,
+                        a.live_data_id,
+                        a.difficulty_type,
+                        a.level_vocal stars_number,
+                        b.notes_number
+                    FROM
+                        live_detail a
+                        LEFT OUTER JOIN live_notes_number b ON a.live_data_id = b.live_id
+                        AND b.difficulty = a.difficulty_type
+                    WHERE
+                        a.live_data_id = \(live.id)
+                    ORDER BY
+                        a.difficulty_type ASC
+                """
+                var details = [CGSSLiveDetail]()
+                let subSet = try db.executeQuery(selectSql, values: nil)
+                while subSet.next() {
+                    let json = JSON(subSet.resultDictionary ?? [AnyHashable: Any]())
+                    
+                    guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
+                    
+                    details.append(detail)
+                }
+                
+                if details.count == 0 { continue }
+                
+                live.details = details
+                
+                if let anotherLive = list.first(where: { $0.musicDataId == live.musicDataId }) {
+                    anotherLive.merge(anotherLive: live)
+                } else {
+                    list.append(live)
+                }
             }
         }) {
             callback(list)
         }
     }
+    
+//    func getLiveDetails(liveID: Int, callback: @escaping FMDBCallBackClosure<[CGSSLiveDetail]>) {
+//        var list = [CGSSLiveDetail]()
+//        execute({ (db) in
+//            let selectSql = """
+//                SELECT
+//                    a.live_data_id,
+//                    a.difficulty_type,
+//                    a.level_vocal stars_number,
+//                    b.notes_number
+//                FROM
+//                    live_detail a,
+//                    live_notes_number b
+//                WHERE
+//                    a.live_data_id = \(liveID)
+//                    AND b.difficulty = a.difficulty_type
+//                    AND b.live_id = a.live_data_id
+//            """
+//
+//            let set = try db.executeQuery(selectSql, values: nil)
+//            while set.next() {
+//                let json = JSON(set.resultDictionary ?? [AnyHashable: Any]())
+//
+//                guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
+//
+//                list.append(detail)
+//            }
+//        }) {
+//            callback(list)
+//        }
+//    }
     
     func getVocalistsBy(musicDataId: Int, callback: @escaping FMDBCallBackClosure<[Int]>) {
         var list = [Int]()
@@ -569,24 +637,6 @@ class CGSSGameResource: NSObject {
         return manifest.getMusicScores()
     }
     
-    func getLegacyBeatmap(liveId: Int) -> CGSSBeatmap? {
-        let path = String.init(format: DataPath.beatmap, liveId)
-        let fm = FileManager.default
-        var result: CGSSBeatmap?
-        let semaphore = DispatchSemaphore.init(value: 0)
-        let dbQueue = MusicScoreDBQueue.init(path: path)
-        if fm.fileExists(atPath: path) {
-            dbQueue.getLegacyBeatmap(callback: { (beatmap) in
-                result = beatmap
-                semaphore.signal()
-            })
-        } else {
-            semaphore.signal()
-        }
-        semaphore.wait()
-        return result
-    }
-    
     func getBeatmaps(liveId: Int) -> [CGSSBeatmap]? {
         let path = String.init(format: DataPath.beatmap, liveId)
         let fm = FileManager.default
@@ -600,41 +650,6 @@ class CGSSGameResource: NSObject {
             })
         } else {
             semaphore.signal()
-        }
-        semaphore.wait()
-        return result
-    }
-    
-    func getBeatmap(liveId: Int, of diffculty: CGSSLiveDifficulty) -> CGSSBeatmap? {
-        if let beatmaps = getBeatmaps(liveId: liveId), beatmaps.count >= diffculty.rawValue {
-            return beatmaps[diffculty.rawValue - 1]
-        } else {
-            return nil
-        }
-    }
-    
-    func validateBeatmap(liveId: Int) -> Bool {
-        let semaphore = DispatchSemaphore.init(value: 0)
-        var result = false
-        master.getLives(liveId: liveId) { (lives) in
-            let path = String.init(format: DataPath.beatmap, liveId)
-            let fm = FileManager.default
-            let dbQueue = MusicScoreDBQueue.init(path: path)
-            if fm.fileExists(atPath: path), let first = lives.first {
-                // 对于只有4个难度的歌曲, 只要存在bdb文件就略过检查 返回合法
-                if first.validBeatmapCount == 4 {
-                    result = true
-                    semaphore.signal()
-                } else {
-                    // 对于不是4个难度的歌曲进行合法性检查
-                    dbQueue.validateBeatmapCount(first.validBeatmapCount, callback: { (valid) in
-                        result = valid
-                        semaphore.signal()
-                    })
-                }
-            } else {
-                semaphore.signal()
-            }
         }
         semaphore.wait()
         return result

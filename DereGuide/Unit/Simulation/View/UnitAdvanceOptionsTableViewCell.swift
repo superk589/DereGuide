@@ -19,13 +19,14 @@ class UnitAdvanceOptionsTableViewCell: UITableViewCell {
         case plain
     }
     
+    var optionView: UIView!
+    
     private(set) var optionStyle: OptionStyle = .plain
     
     convenience init(optionStyle: OptionStyle) {
         self.init()
         self.optionStyle = optionStyle
         
-        var optionView: UIView
         switch optionStyle {
         case .`switch`(let view):
             optionView = view

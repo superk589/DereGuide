@@ -20,40 +20,44 @@ class LiveFilterSortController: BaseFilterSortController {
     
     var songTypeTitles = ["Cute", "Cool", "Passion", NSLocalizedString("彩色曲", comment: "")]
     
-    var difficultyTypeTitles = [CGSSLiveDifficulty.debut.description,
-                                CGSSLiveDifficulty.regular.description,CGSSLiveDifficulty.pro.description,CGSSLiveDifficulty.master.description,CGSSLiveDifficulty.masterPlus.description]
+    var difficultyTypeTitles = CGSSLiveDifficulty.all.map { $0.description }
     
     var eventTypeTitles = [NSLocalizedString("常规歌曲", comment: ""), NSLocalizedString("传统活动", comment: ""), NSLocalizedString("Groove活动", comment: ""), NSLocalizedString("巡演活动", comment: "")]
     
     
-    var sorterMethods = ["updateId", "createId", "bpm", "maxDiffStars", "maxNumberOfNotes"]
+    var sorterMethods = ["updateId", "startDate", "bpm", "maxDiffStars", "maxNumberOfNotes"]
     
     var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("难度", comment: ""), NSLocalizedString("note数", comment: "")]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
+    var switchOption = SwitchOption()
+    lazy var switchCell = UnitAdvanceOptionsTableViewCell.init(optionStyle: .switch(self.switchOption))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        switchOption.label.text = NSLocalizedString("隐藏难度文字", comment: "")
+        switchCell.optionView.snp.remakeConstraints { (remake) in
+            remake.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 10, left: 20, bottom: 10, right: 20))
+        }
     }
     
     func reloadData() {
         self.tableView.reloadData()
+        switchOption.switch.isOn = UserDefaults.standard.shouldHideDifficultyText
     }
     
     override func doneAction() {
+        UserDefaults.standard.shouldHideDifficultyText = switchOption.switch.isOn
         delegate?.doneAndReturn(filter: filter, sorter: sorter)
         drawerController?.hide(animated: true)
-        // 使用自定义动画效果
-        /*let transition = CATransition()
-         transition.duration = 0.3
-         transition.type = kCATransitionReveal
-         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-         navigationController?.popViewControllerAnimated(false)*/
     }
     
     override func resetAction() {
         filter = CGSSSorterFilterManager.DefaultFilter.live
         sorter = CGSSSorterFilterManager.DefaultSorter.live
+        UserDefaults.standard.shouldHideDifficultyText = false
+        switchOption.switch.isOn = UserDefaults.standard.shouldHideDifficultyText
         tableView.reloadData()
     }
     
@@ -63,18 +67,28 @@ class LiveFilterSortController: BaseFilterSortController {
     }
     
     // MARK: - TableViewDelegate & DataSource
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
+        switch section {
+        case 0:
             return 3
-        } else {
+        case 1:
             return 2
+        case 2:
+            return 1
+        default:
+            fatalError("invalid section")
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        
+        switch indexPath.section {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterTableViewCell
             switch indexPath.row {
             case 0:
@@ -88,8 +102,7 @@ class LiveFilterSortController: BaseFilterSortController {
             }
             cell.delegate = self
             return cell
-        } else {
-            
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
             
             switch indexPath.row {
@@ -106,6 +119,23 @@ class LiveFilterSortController: BaseFilterSortController {
             }
             cell.delegate = self
             return cell
+        case 2:
+            return switchCell
+        default:
+            fatalError("invalid section")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return NSLocalizedString("筛选", comment: "")
+        case 1:
+            return NSLocalizedString("排序", comment: "")
+        case 2:
+            return NSLocalizedString("选项", comment: "")
+        default:
+            fatalError("invalid section")
         }
     }
     

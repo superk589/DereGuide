@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class CGSSBeatmapNote: NSObject, NSCoding {
+class CGSSBeatmapNote {
     var id: Int!
     var sec: Float!
     var type: Int!
@@ -31,32 +31,6 @@ class CGSSBeatmapNote: NSObject, NSCoding {
     weak var previous: CGSSBeatmapNote?
     weak var next: CGSSBeatmapNote?
     weak var along: CGSSBeatmapNote?
-    
-    override init() {
-        super.init()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeObject(forKey: "id") as? Int
-        self.sec = aDecoder.decodeObject(forKey: "sec") as? Float
-        self.type = aDecoder.decodeObject(forKey: "type") as? Int
-        self.startPos = aDecoder.decodeObject(forKey: "startPos") as? Int
-        self.finishPos = aDecoder.decodeObject(forKey: "finishPos") as? Int
-        self.status = aDecoder.decodeObject(forKey: "status") as? Int
-        self.sync = aDecoder.decodeObject(forKey: "sync") as? Int
-        self.groupId = aDecoder.decodeObject(forKey: "groupId") as? Int
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.id, forKey: "id")
-        aCoder.encode(self.sec, forKey: "sec")
-        aCoder.encode(self.type, forKey: "type")
-        aCoder.encode(self.startPos, forKey: "startPos")
-        aCoder.encode(self.finishPos, forKey: "finishPos")
-        aCoder.encode(self.status, forKey: "status")
-        aCoder.encode(self.sync, forKey: "sync")
-        aCoder.encode(self.groupId, forKey: "groupId")
-    }
 }
 
 extension CGSSBeatmapNote {
@@ -75,9 +49,11 @@ extension CGSSBeatmapNote {
     }
 }
 
-class CGSSBeatmap: CGSSBaseModel {
+class CGSSBeatmap {
     
     var notes: [CGSSBeatmapNote]
+    
+    var difficulty: CGSSLiveDifficulty
     
     var shiftingPoints: [BpmShiftingPoint]?
 
@@ -236,18 +212,14 @@ class CGSSBeatmap: CGSSBaseModel {
         return start
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        self.notes = aDecoder.decodeObject(forKey: "notes") as? [CGSSBeatmapNote] ?? [CGSSBeatmapNote]()
-        super.init(coder: aDecoder)
+    init?(data: Data, rawDifficulty: Int) {
+       
+        if let difficulty = CGSSLiveDifficulty(rawValue: rawDifficulty) {
+            self.difficulty = difficulty
+        } else {
+            return nil
+        }
         
-    }
-    
-    override open func encode(with aCoder: NSCoder) {
-        super.encode(with: aCoder)
-        aCoder.encode(self.notes, forKey: "notes")
-    }
-    
-    init?(data: Data) {
         if let csv = String.init(data: data, encoding: .utf8) {
             let lines = csv.components(separatedBy: "\n")
             self.notes = [CGSSBeatmapNote]()
@@ -272,15 +244,9 @@ class CGSSBeatmap: CGSSBaseModel {
                     self.notes.append(note)
                 }
             }
-            super.init()
         } else {
             return nil
         }
-    }
-    
-    override init() {
-        self.notes = [CGSSBeatmapNote]()
-        super.init()
     }
     
     /* debug methods */

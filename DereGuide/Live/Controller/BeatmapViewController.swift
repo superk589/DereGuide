@@ -82,9 +82,9 @@ class BeatmapViewController: UIViewController {
     @objc func selectDiff() {
         let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-        for i in 1...scene.live.maxDiff.rawValue {
-            alert.addAction(UIAlertAction.init(title: CGSSLiveDifficulty(rawValue: i)?.description ?? "", style: .default, handler: { (a) in
-                self.scene.difficulty = CGSSLiveDifficulty(rawValue: i)!
+        for detail in scene.live.details {
+            alert.addAction(UIAlertAction.init(title: detail.difficulty.description, style: .default, handler: { (a) in
+                self.scene.difficulty = detail.difficulty
             }))
         }
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))

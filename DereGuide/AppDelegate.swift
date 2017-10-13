@@ -62,6 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CGSSCacheManager.shared.wipeUserDocuments()
                 try? FileManager.default.removeItem(atPath: CGSSDAO.path + "/Data/")
             }
+            if lastVersion < 10 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
+            }
         }
         
         // 规划近期偶像生日

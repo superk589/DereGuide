@@ -8,6 +8,7 @@
 
 import UIKit
 import ZKDrawerController
+import EasyTipView
 
 protocol BaseSongTableViewControllerDelegate: class {
     func baseSongTableViewController(_ baseSongTableViewController: BaseLiveTableViewController, didSelect liveScene: CGSSLiveScene)
@@ -43,7 +44,7 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
             DispatchQueue.main.sync {
                 self?.filter.searchText = self?.searchBar.text ?? ""
             }
-            var newList = self?.filter.filter(self?.defualtLiveList ?? [CGSSLive]()) ?? [CGSSLive]()
+            var newList = self?.filter.filter(self?.defualtLiveList ?? [CGSSLive]()).filter { $0.selectedLiveDetails.count != 0 } ?? [CGSSLive]()
             self?.sorter.sortList(&newList)
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
@@ -70,11 +71,16 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
         drawer?.rightViewController = filterVC
         drawer?.delegate = self
         drawer?.defaultRightWidth = min(Screen.shortSide - 86, 400)
+        if UserDefaults.standard.firstTimeShowLiveView {
+            showHelpTips()
+            UserDefaults.standard.firstTimeShowLiveView = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         drawerController?.rightViewController = nil
+        hideHelpTips()
     }
     
     override func viewDidLoad() {
@@ -85,8 +91,9 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
         searchBar.placeholder = NSLocalizedString("歌曲名", comment: "")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-        tableView.register(LiveTableViewCell.self, forCellReuseIdentifier: "SongCell")
-        tableView.rowHeight = 86
+        tableView.register(LiveTableViewCell.self, forCellReuseIdentifier: LiveTableViewCell.description())
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 86
         tableView.separatorStyle = .none
         
         filterVC = LiveFilterSortController()
@@ -131,10 +138,33 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
 
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var tip: EasyTipView?
+    var maskView: UIView?
+    
+    private func showHelpTips() {
+        if tip == nil {
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
+            preferences.drawing.foregroundColor = .white
+            preferences.drawing.backgroundColor = UIColor.trick.darkened()
+            
+            tip = EasyTipView(text: NSLocalizedString("如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单", comment: ""), preferences: preferences, delegate: nil)
+            
+        }
+        tip?.show(forItem: navigationItem.rightBarButtonItem!)
+        maskView = UIView()
+        navigationController?.view.addSubview(maskView!)
+        maskView?.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        maskView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
     }
+    
+    @objc func hideHelpTips() {
+        tip?.dismiss()
+        maskView?.removeFromSuperview()
+    }
+    
     
     // MARK: - Table view data source
     
@@ -149,24 +179,15 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! LiveTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: LiveTableViewCell.description(), for: indexPath) as! LiveTableViewCell
         
-        cell.setup(with: liveList[indexPath.row])
+        cell.setup(live: liveList[indexPath.row])
+        
+        // important, because the new height of the cell may be different with the previuous one, we should let system know to calculate it again.
+        cell.setNeedsUpdateConstraints()
         cell.delegate = self
         // Configure the cell...
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let live = liveList[indexPath.row]
-        
-        let difficulty = live.selectableMaxDifficulty
-        let scene = CGSSLiveScene(live: live, difficulty: difficulty)
-        if scene.beatmap != nil {
-            selectScene(scene)
-        } else {
-            showBeatmapNotFoundAlert()
-        }
     }
     
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
@@ -199,15 +220,15 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
     }
 }
 
-//MARK: SongTableViewCell的协议方法
-extension BaseLiveTableViewController: LiveViewDelegate {
+// MARK: LiveTableViewCellDelegate
+extension BaseLiveTableViewController: LiveTableViewCellDelegate {
     
-    func liveView(_ liveView: LiveView, didSelect scene: CGSSLiveScene) {
-        if scene.beatmap != nil {
-            selectScene(scene)
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene) {
+        if liveScene.beatmap != nil {
+            selectScene(liveScene)
         } else {
             showBeatmapNotFoundAlert()
         }
     }
-    
+
 }

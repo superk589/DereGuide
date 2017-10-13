@@ -30,7 +30,7 @@ class SongDetailPositionCharaItemView: UIView {
         charaPlaceholder.layer.masksToBounds = true
         charaPlaceholder.layer.cornerRadius = 4
         charaPlaceholder.layer.borderWidth = 1 / Screen.scale
-        charaPlaceholder.layer.borderColor = UIColor.lightSeparator.cgColor
+        charaPlaceholder.layer.borderColor = UIColor.border.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {

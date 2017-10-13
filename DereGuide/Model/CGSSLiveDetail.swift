@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
+    
     case debut = 1
     case regular
     case pro
     case master
     case masterPlus
-    case legacyMasterPlus
+    case legacyMasterPlus = 101
+    case light = 11
+    case trick = 12
     
-    static let all: [CGSSLiveDifficulty] = [CGSSLiveDifficulty.debut, .regular, .pro, .master, .masterPlus]
+    static let all: [CGSSLiveDifficulty] = [CGSSLiveDifficulty.debut, .regular, .pro, .master, .masterPlus, .legacyMasterPlus, .light, .trick]
     
     var description: String {
         
@@ -33,23 +37,31 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
             return "MASTER+"
         case .legacyMasterPlus:
             return "LEGACY MASTER+"
+        case .light:
+            return "LIGHT"
+        case .trick:
+            return "TRICK"
         }
     }
     
     var color: UIColor {
         switch self {
         case .debut:
-            return Color.debut
+            return .debut
         case .regular:
-            return Color.regular
+            return .regular
         case .pro:
-            return Color.pro
+            return .pro
         case .master:
-            return Color.master
+            return .master
         case .masterPlus:
-            return Color.masterPlus
+            return .masterPlus
         case .legacyMasterPlus:
-            return Color.masterPlus
+            return .legacyMasterPlus
+        case .light:
+            return .light
+        case .trick:
+            return .trick
         }
     }
     
@@ -59,6 +71,7 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
 }
 
 struct CGSSLiveDifficultyTypes: OptionSet {
+    
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     
@@ -67,8 +80,11 @@ struct CGSSLiveDifficultyTypes: OptionSet {
     static let pro = CGSSLiveDifficultyTypes.init(rawValue: 1 << 2)
     static let master = CGSSLiveDifficultyTypes.init(rawValue: 1 << 3)
     static let masterPlus = CGSSLiveDifficultyTypes.init(rawValue: 1 << 4)
-
-    static let all = CGSSLiveDifficultyTypes.init(rawValue: 0b11111)
+    static let legacyMasterPlus = CGSSLiveDifficultyTypes.init(rawValue: 1 << 5)
+    static let light = CGSSLiveDifficultyTypes.init(rawValue: 1 << 6)
+    static let trick = CGSSLiveDifficultyTypes.init(rawValue: 1 << 7)
+    
+    static let all = CGSSLiveDifficultyTypes.init(rawValue: 0b11111111)
     
     init(difficulty: CGSSLiveDifficulty) {
         switch difficulty {
@@ -82,51 +98,39 @@ struct CGSSLiveDifficultyTypes: OptionSet {
             self = .master
         case .masterPlus:
             self = .masterPlus
-        default:
-            fatalError("no matched types")
-        }
-    }
-    
-    var max: CGSSLiveDifficulty? {
-        if self.contains(.masterPlus) {
-            return .masterPlus
-        } else if self.contains(.master) {
-            return .master
-        } else if self.contains(.pro) {
-            return .pro
-        } else if self.contains(.regular) {
-            return .regular
-        } else if self.contains(.debut) {
-            return .debut
-        } else {
-            return nil
+        case .legacyMasterPlus:
+            self = .legacyMasterPlus
+        case .light:
+            self = .light
+        case .trick:
+            self = .trick
         }
     }
 }
 
 extension CGSSLiveDetail {
+    
     var difficultyTypes: CGSSLiveDifficultyTypes {
         return CGSSLiveDifficultyTypes(difficulty: difficulty)
     }
+    
 }
 
-class CGSSLiveDetail: CGSSBaseModel {
+struct CGSSLiveDetail {
     
-    var difficulty: CGSSLiveDifficulty
     var id: Int
+    var difficulty: CGSSLiveDifficulty
+    var liveID: Int
     var stars: Int
     var numberOfNotes: Int
-        
-    init(detailId: Int, difficulty: CGSSLiveDifficulty, stars: Int, numberOfNotes: Int) {
-        
+
+    init?(fromJson json: JSON) {
+        guard let difficulty = CGSSLiveDifficulty(rawValue: json["difficulty_type"].intValue) else { return nil }
+        id = json["id"].intValue
+        liveID = json["live_data_id"].intValue
         self.difficulty = difficulty
-        self.id = detailId
-        self.stars = stars
-        self.numberOfNotes = numberOfNotes
-        super.init()
+        stars = json["stars_number"].intValue
+        numberOfNotes = json["live_notes_number"].intValue
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

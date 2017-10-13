@@ -347,7 +347,7 @@
 		12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
-		12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveView.swift */; };
+		12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */; };
 		12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
@@ -780,7 +780,7 @@
 		12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityViewControllerExtension.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
-		12E65CED1F0C8917001B69AF /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
+		12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDifficultyView.swift; sourceTree = "<group>"; };
 		12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveJacketViewAnimator.swift; sourceTree = "<group>"; };
 		12EECCCE1ED57EF90047666C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EECCD21ED57EFA0047666C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -1400,7 +1400,7 @@
 				1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */,
 				1269EA011D520C9F0071AD7F /* BeatmapView.swift */,
 				1269EA021D520C9F0071AD7F /* LiveTableViewCell.swift */,
-				12E65CED1F0C8917001B69AF /* LiveView.swift */,
+				12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2460,7 +2460,7 @@
 				123F320B1E6FECC800B69D26 /* SpreadImageView.swift in Sources */,
 				12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */,
 				122D083C1F3406FC00A3741F /* ColleagueButtonsCell.swift in Sources */,
-				12E65CEE1F0C8917001B69AF /* LiveView.swift in Sources */,
+				12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */,
 				12FC8B4E1EDE6DEB003CF3C3 /* UnitSimulationController.swift in Sources */,
 				12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */,
 				1235F6D81F8E1B1E00119F94 /* CGSSRefreshFooter.swift in Sources */,

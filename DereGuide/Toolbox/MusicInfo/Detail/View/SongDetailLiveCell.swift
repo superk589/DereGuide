@@ -55,24 +55,17 @@ class SongDetailLiveCell: ReadableWidthTableViewCell {
             return
         }
         
-        let difficulties = CGSSLiveDifficulty.all
-        let stars = live.liveDetails.map { $0.stars }
-        for i in 0..<live.validBeatmapCount {
-            let tag = SongDetailLiveDifficultyView()
-            
-            tag.setup(difficulty: difficulties[i], stars: stars[i])
-            tagViews.append(tag)
+        if let normalLive = song.normalLive {
+            live.merge(anotherLive: normalLive)
+            song.normalLive = nil
         }
         
-        if song.liveID != song.normalLiveID {
-            if let _ = song.normalLive?.legacyMasterPlusBeatmap {
-                let tag = SongDetailLiveDifficultyView()
-                tag.setup(difficulty: .legacyMasterPlus, stars: nil)
-                tagViews.append(tag)
-            }
-        } else {
-            
+        for detail in live.details {
+            let tag = SongDetailLiveDifficultyView()
+            tag.setup(liveDetail: detail)
+            tagViews.append(tag)
         }
+
         collectionView.reload()
     }
     
@@ -104,15 +97,11 @@ extension SongDetailLiveCell: TTGTagCollectionViewDelegate, TTGTagCollectionView
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
-        guard let difficulty = (tagView as? SongDetailLiveDifficultyView)?.difficulty else {
+        guard let live = song.live else {
             return
         }
-        if difficulty == .legacyMasterPlus, let live = song.normalLive {
-            let scene = CGSSLiveScene(live: live, difficulty: difficulty)
-            delegate?.songDetailLiveCell(self, didSelect: scene)
-        } else if let live = song.live {
-            let scene = CGSSLiveScene(live: live, difficulty: difficulty)
-            delegate?.songDetailLiveCell(self, didSelect: scene)
-        }
+        let detail = live.details[Int(index)]
+        let scene = CGSSLiveScene(live: live, difficulty: detail.difficulty)
+        delegate?.songDetailLiveCell(self, didSelect: scene)
     }
 }

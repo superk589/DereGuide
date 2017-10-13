@@ -248,7 +248,7 @@
 "检查更新失败" = "Failed to check for updates.";
 
 /* No comment provided by engineer. */
-"歌曲名" = "Songs";
+"歌曲名" = "Name";
 
 /* 队伍详情页面 */
 "歌曲模式" = "Live Mode";
@@ -767,3 +767,14 @@
 
 // new app name
 "DereGuide" = "DereGuide";
+
+/* new in 1.6 */
+"人组合" = " idols unit"; // 歌曲是由几人组合演唱的, 2人组合, 5人组合等
+"Solo" = "Solo";
+"未指定" = "Unspecific"; // 作为歌曲筛选项目出现, "お願い ! シンデレラ"等mv中未指定center的歌曲
+"歌曲名/词曲作者/演唱者" = "Name, Composer, Lyricist, Singer";
+"出演MV" = "Starred in"; // 卡详情页面和角色详情页面增加该偶像出演过的mv
+"MV站位" = "Positions";
+"选项" = "Option";
+"隐藏难度文字" = "Hide difficutly text";
+"如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单" = "If you want to hide some difficulties or hide difficulty description text, please config in the side menu.";

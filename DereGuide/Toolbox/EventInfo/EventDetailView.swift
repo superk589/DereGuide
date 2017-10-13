@@ -40,7 +40,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
     
     var liveTrendLabel: UILabel!
     
-    var liveView: LiveView!
+    var liveView: LiveTableViewCell!
     
     var eventPtContentView: UIView!
     var line4: LineView!
@@ -172,20 +172,19 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
         liveTrendLabel.addGestureRecognizer(tap)
         
-        liveView = LiveView()
-        addSubview(liveView)
-        liveView.snp.makeConstraints { (make) in
+        liveView = LiveTableViewCell()
+        addSubview(liveView.readableContentView)
+        liveView.readableContentView.snp.remakeConstraints({ (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(songDescLabel.snp.bottom)
-            make.height.equalTo(88)
-        }
+        })
         liveView.delegate = self
         
         eventPtContentView = UIView()
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(liveView.snp.bottom)
+            make.top.equalTo(liveView.readableContentView.snp.bottom)
             make.height.equalTo(192)
         }
         eventPtContentView.layer.masksToBounds = true
@@ -356,7 +355,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             }
             
             if let live = event.live {
-                liveView.setup(with: live)
+                liveView.setup(live: live)
                 liveView.snp.updateConstraints { (update) in
                     update.height.equalTo(88)
                 }
@@ -427,10 +426,10 @@ extension EventDetailView: EventScoreViewDelegate {
     
 }
 
-extension EventDetailView: LiveViewDelegate {
+extension EventDetailView: LiveTableViewCellDelegate {
     
-    func liveView(_ liveView: LiveView, didSelect scene: CGSSLiveScene) {
-        delegate?.eventDetailView(self, didSelect: scene)
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene) {
+        delegate?.eventDetailView(self, didSelect: liveScene)
     }
-    
+
 }

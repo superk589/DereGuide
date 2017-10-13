@@ -88,7 +88,7 @@ class MemberEditableItemView: UIView {
         cardPlaceholder.layer.masksToBounds = true
         cardPlaceholder.layer.cornerRadius = 4
         cardPlaceholder.layer.borderWidth = 1 / Screen.scale
-        cardPlaceholder.layer.borderColor = UIColor.lightSeparator.cgColor
+        cardPlaceholder.layer.borderColor = UIColor.border.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {

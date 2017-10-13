@@ -14,6 +14,7 @@ struct CGSSLiveFilter: CGSSFilter {
     var difficultyTypes: CGSSLiveDifficultyTypes
     
     var searchText: String = ""
+    
     init(typeMask: UInt, eventMask: UInt, difficultyMask: UInt) {
         liveTypes = CGSSLiveTypes.init(rawValue: typeMask)
         eventTypes = CGSSLiveEventTypes.init(rawValue: eventMask)

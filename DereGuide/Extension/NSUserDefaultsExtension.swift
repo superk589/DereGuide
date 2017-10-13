@@ -88,4 +88,22 @@ extension UserDefaults {
         }
     }
     
+    var firstTimeShowLiveView: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "firstTimeShowLiveView")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "firstTimeShowLiveView") as? Bool ?? true
+        }
+    }
+    
+    var shouldHideDifficultyText: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "shouldHideDifficultyText")
+        }
+        get {
+            return UserDefaults.standard.value(forKey: "shouldHideDifficultyText") as? Bool ?? false
+        }
+    }
+    
 }

@@ -10,21 +10,23 @@ import UIKit
 
 class SongDetailLiveDifficultyView: LiveDifficultyView {
     
-    var difficulty: CGSSLiveDifficulty?
-
-    func setup(difficulty: CGSSLiveDifficulty, stars: Int?) {
-        self.difficulty = difficulty
+    private var shouldShowText: Bool = true
+    
+    func setup(liveDetail: CGSSLiveDetail, shouldShowText: Bool = true) {
         let color = backgoundView.zk.backgroundColor
-        backgoundView.zk.backgroundColor = difficulty.color
+        backgoundView.zk.backgroundColor = liveDetail.difficulty.color
         
         if color != backgoundView.zk.backgroundColor {
             backgoundView.image = nil
             backgoundView.render()
         }
-        if let stars = stars {
-            label.text = difficulty.description + " \(stars)"
+        
+        self.shouldShowText = shouldShowText
+        
+        if shouldShowText {
+            label.text = liveDetail.difficulty.description + " \(liveDetail.stars)"
         } else {
-            label.text = difficulty.description
+            label.text = "\(liveDetail.stars)"
         }
     }
     
@@ -33,6 +35,10 @@ class SongDetailLiveDifficultyView: LiveDifficultyView {
         var frame = label.bounds
         frame.size.width += 10
         frame.size.height = 33
+        if !shouldShowText {
+            let suitableWidth = UIDevice.current.userInterfaceIdiom == .pad ? floor((min(768, Screen.shortSide) - 156) / 7) : floor((Screen.shortSide - 136) / 5)
+            frame.size.width = suitableWidth
+        }
         return frame.size
     }
 
