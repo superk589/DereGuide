@@ -92,6 +92,7 @@ class SongDetailController: BaseTableViewController {
     
     private func reload() {
         titleLabel.text = currentSong.name
+        titleLabel.setNeedsUpdateConstraints()
         tableView.reloadRows(at: [1, 2, 3, 4].map { IndexPath.init(row: $0, section: 0) }, with: .automatic)
     }
     
