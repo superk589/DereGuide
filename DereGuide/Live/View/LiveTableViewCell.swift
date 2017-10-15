@@ -119,7 +119,7 @@ extension LiveTableViewCell: TTGTagCollectionViewDelegate, TTGTagCollectionViewD
     }
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
-        let detail = live.details[Int(index)]
+        let detail = live.selectedLiveDetails[Int(index)]
         let scene = CGSSLiveScene(live: live, difficulty: detail.difficulty)
         delegate?.liveTableViewCell(self, didSelect: scene)
     }

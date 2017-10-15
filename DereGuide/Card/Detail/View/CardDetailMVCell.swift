@@ -67,6 +67,11 @@ class CardDetailMVCell: UITableViewCell {
         collectionView.reload()
     }
     
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        layoutIfNeeded()
+        collectionView.invalidateIntrinsicContentSize()
+        return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+    }
     
 }
 
