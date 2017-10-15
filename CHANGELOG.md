@@ -11,6 +11,17 @@
 7. 长按手势加入震动反馈
 8. 优化所有页面的下拉刷新和上拉加载更多，不再卡顿或者跳动
 
+##### English version
+
+1. Add music info page that shows detail information of songs, and position of charas in music video.
+2. Add music videos those the current chara is starred in on card detail page and chara detail page.
+3. Add support for displaying SMART LIVE beatmap and exporting.
+4. Improve beatmap filter, now you can custom the difficulties you want to show at the list.
+5. Fix for some long press and slide note are not drawn currectly.
+6. Fix a bug when your device's setting "24 hour time" is disabled, the date in event and gacha page will always show the current time.
+7. Add vibration feedback for long press gesture.
+8. Redesign all "pull to refresh" and "load more", they will not lag or jump.
+
 ### 1.5.4
 2017-10-3
 
