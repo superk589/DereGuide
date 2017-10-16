@@ -5,13 +5,14 @@ This is an iOS utility application for **The Idolmaster Cinderella Girls: Starli
 * Images <https://hoshimoriuta.kirara.ca>
 * Card and Character(English) <https://starlight.kirara.ca>
 * Card and Character(Chinese) <http://starlight.346lab.org>
-* Event Pt. and High Score <https://starlight.tachibana.cool>
+* Event Pt. and High Score <https://portal.starlightstage.jp>
 * User Related <https://deresute.me>
 
 ## Features
 * Card
 * Beatmap
 * Character
+* Song
 * Unit Simulation
 * Gacha
 * Event
@@ -63,6 +64,8 @@ DereGuide now provide files of localizable strings for other languages
 
 ### [starlight.tachibana.cool](https://starlight.tachibana.cool)
 * Author: [Cryptomelone](https://github.com/Cryptomelone)
+
+### [Starlight Portal](https://portal.starlightstage.jp)
 
 ### [deresute.me](https://deresute.me)
 * Author: [Hector Martin](https://github.com/marcan)

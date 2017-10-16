@@ -164,7 +164,7 @@
 		1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */; };
 		1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */; };
 		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
-		12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventPtItem.swift */; };
+		12636EC81E375DA900E3C833 /* EventLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventLogItem.swift */; };
 		12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC91E375E9900E3C833 /* EventPtView.swift */; };
 		12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */; };
 		126612B21F1723AB00B7D17F /* RemoteUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126612B11F1723AB00B7D17F /* RemoteUnit.swift */; };
@@ -334,12 +334,9 @@
 		12D624551F171FB70017999A /* ApplicationActiveStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D624451F171F640017999A /* ApplicationActiveStateObserver.swift */; };
 		12D624561F171FB70017999A /* UnitDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D624461F171F640017999A /* UnitDownloader.swift */; };
 		12D624571F171FB70017999A /* SyncCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D624471F171F640017999A /* SyncCoordinator.swift */; };
-		12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CB1E3795A2005E932B /* EventScoreItem.swift */; };
 		12D975CE1E379619005E932B /* EventScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CD1E379619005E932B /* EventScoreView.swift */; };
-		12D975D01E379DF7005E932B /* EventPtRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CF1E379DF7005E932B /* EventPtRanking.swift */; };
-		12D975D21E379EF0005E932B /* EventScoreRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D11E379EF0005E932B /* EventScoreRanking.swift */; };
-		12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */; };
-		12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */; };
+		12D975D01E379DF7005E932B /* EventRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CF1E379DF7005E932B /* EventRanking.swift */; };
+		12D975D41E37AB3D005E932B /* EventRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */; };
 		12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D71E386FB0005E932B /* EventPtDataRequest.swift */; };
 		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
@@ -590,7 +587,7 @@
 		1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFormulator.swift; sourceTree = "<group>"; };
 		1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSScoreBonusGroup.swift; sourceTree = "<group>"; };
 		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
-		12636EC71E375DA900E3C833 /* EventPtItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtItem.swift; sourceTree = "<group>"; };
+		12636EC71E375DA900E3C833 /* EventLogItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogItem.swift; sourceTree = "<group>"; };
 		12636EC91E375E9900E3C833 /* EventPtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtView.swift; sourceTree = "<group>"; };
 		12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WipeTableViewController.swift; sourceTree = "<group>"; };
 		126612B11F1723AB00B7D17F /* RemoteUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUnit.swift; sourceTree = "<group>"; };
@@ -767,12 +764,9 @@
 		12D624461F171F640017999A /* UnitDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitDownloader.swift; sourceTree = "<group>"; };
 		12D624471F171F640017999A /* SyncCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCoordinator.swift; sourceTree = "<group>"; };
 		12D6E83167D9D80B8C52945E /* Pods-NotificationContent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContent.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContent/Pods-NotificationContent.release.xcconfig"; sourceTree = "<group>"; };
-		12D975CB1E3795A2005E932B /* EventScoreItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreItem.swift; sourceTree = "<group>"; };
 		12D975CD1E379619005E932B /* EventScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreView.swift; sourceTree = "<group>"; };
-		12D975CF1E379DF7005E932B /* EventPtRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtRanking.swift; sourceTree = "<group>"; };
-		12D975D11E379EF0005E932B /* EventScoreRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreRanking.swift; sourceTree = "<group>"; };
-		12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtRankingSpeed.swift; sourceTree = "<group>"; };
-		12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreRankingSpeed.swift; sourceTree = "<group>"; };
+		12D975CF1E379DF7005E932B /* EventRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRanking.swift; sourceTree = "<group>"; };
+		12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRankingSpeed.swift; sourceTree = "<group>"; };
 		12D975D71E386FB0005E932B /* EventPtDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtDataRequest.swift; sourceTree = "<group>"; };
 		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
@@ -1724,12 +1718,9 @@
 				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
 				12D975D71E386FB0005E932B /* EventPtDataRequest.swift */,
 				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
-				12636EC71E375DA900E3C833 /* EventPtItem.swift */,
-				12D975CB1E3795A2005E932B /* EventScoreItem.swift */,
-				12D975CF1E379DF7005E932B /* EventPtRanking.swift */,
-				12D975D31E37AB3D005E932B /* EventPtRankingSpeed.swift */,
-				12D975D11E379EF0005E932B /* EventScoreRanking.swift */,
-				12D975D51E37AB4A005E932B /* EventScoreRankingSpeed.swift */,
+				12636EC71E375DA900E3C833 /* EventLogItem.swift */,
+				12D975CF1E379DF7005E932B /* EventRanking.swift */,
+				12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */,
 				124BA50C1E914ACD002E48FE /* EventTrend.swift */,
 			);
 			name = Model;
@@ -2292,12 +2283,10 @@
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
 				126612B41F1723B500B7D17F /* RemoteMember.swift in Sources */,
 				121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */,
-				12D975D21E379EF0005E932B /* EventScoreRanking.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
 				12FC8B371EDE6D93003CF3C3 /* UnitInformationLeaderSkillCell.swift in Sources */,
 				124BA50D1E914ACD002E48FE /* EventTrend.swift in Sources */,
-				12D975CC1E3795A2005E932B /* EventScoreItem.swift in Sources */,
 				1247F70E1D855C95009EF42C /* LZ4Decompressor.swift in Sources */,
 				12D45AD11E2E48CB0009986F /* GachaFilterSortController.swift in Sources */,
 				12F57C5F1EE292DF00638650 /* UnitAdvanceOptionsTableViewCell.swift in Sources */,
@@ -2405,7 +2394,6 @@
 				1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */,
 				1238059D1DAA15B9007361CF /* EventViewController.swift in Sources */,
 				1245F79F1F18A70B009A80EC /* MembersRemote.swift in Sources */,
-				12D975D61E37AB4A005E932B /* EventScoreRankingSpeed.swift in Sources */,
 				1237D1181EEFBA9C00C43337 /* TransitionAnimatorController.swift in Sources */,
 				124E47101D654AB700DD0399 /* BirthdayNotificationTableViewCell.swift in Sources */,
 				122B0F291D8E6D8E0096E3E0 /* MemberEditingView.swift in Sources */,
@@ -2414,7 +2402,7 @@
 				1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */,
 				12D624361F16F63B0017999A /* CharView.swift in Sources */,
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
-				12D975D41E37AB3D005E932B /* EventPtRankingSpeed.swift in Sources */,
+				12D975D41E37AB3D005E932B /* EventRankingSpeed.swift in Sources */,
 				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
 				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
@@ -2440,9 +2428,9 @@
 				1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */,
 				1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */,
 				122A3DF61F14B38B007A2F79 /* UITableViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
-				12D975D01E379DF7005E932B /* EventPtRanking.swift in Sources */,
+				12D975D01E379DF7005E932B /* EventRanking.swift in Sources */,
 				1269E9DE1D520B5D0071AD7F /* CGSSLive.swift in Sources */,
-				12636EC81E375DA900E3C833 /* EventPtItem.swift in Sources */,
+				12636EC81E375DA900E3C833 /* EventLogItem.swift in Sources */,
 				122497321E8E9B57005C743C /* LSResult.swift in Sources */,
 				12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */,
 				125BC0521F453F6D00860CF0 /* ReadableWidthTableViewCell.swift in Sources */,

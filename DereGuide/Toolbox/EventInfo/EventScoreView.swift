@@ -101,7 +101,7 @@ class EventScoreView: UIView {
     }
     
     
-    func setup(rankingList: EventScoreRanking ,onGoing: Bool) {
+    func setup(rankingList: EventRanking ,onGoing: Bool) {
         dateLabel.text = rankingList.lastDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
         
         setLoading(loading: false)
@@ -110,16 +110,16 @@ class EventScoreView: UIView {
             var gridStrings = [[String]]()
             if onGoing {
                 gridStrings.append(["", NSLocalizedString("当前分数", comment: ""), NSLocalizedString("增速(/h)", comment: "")])
-                gridStrings.append(["1", String(last.rank1), "\(Int(rankingList.speed.rank1))"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[0], String(last.reward1), "\(rankingList.speed.reward1)"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[1], String(last.reward2), "\(rankingList.speed.reward2)"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[2], String(last.reward3), "\(rankingList.speed.reward3)"])
+                gridStrings.append(["1", String(last[1]), "\(rankingList.speed[1])"])
+                for border in rankingList.borders {
+                    gridStrings.append([String(border), String(last[border]), String(rankingList.speed[border])])
+                }
             } else {
                 gridStrings.append(["", NSLocalizedString("最终分数", comment: ""), "-"])
-                gridStrings.append(["1", String(last.rank1), "-"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[0], String(last.reward1), "-"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[1], String(last.reward2), "-"])
-                gridStrings.append([rankingList.event.rankingHighScoreLabels[2], String(last.reward3), "-"])
+                gridStrings.append(["1", String(last[1]), "-"])
+                for border in rankingList.borders {
+                    gridStrings.append([String(border), String(last[border]), "-"])
+                }
             }
             gridView.setContents(gridStrings)
         } else {

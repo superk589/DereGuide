@@ -10,42 +10,32 @@ import UIKit
 import Charts
 import SnapKit
 
-struct ChartDataEntryWithLabel {
-    var entry: [ChartDataEntry]
-    var label: String
-}
-
 protocol RankingListChartPresentable {
-    var chartEntries: [ChartDataEntryWithLabel] { get }
+    var chartEntries: [Int: [ChartDataEntry]] { get }
     var xAxis: [String] { get }
     var xAxisDetail: [String] { get }
+    var borders: [Int] { get }
 }
 
-extension EventScoreRanking: RankingListChartPresentable {
-    var chartEntries: [ChartDataEntryWithLabel] {
-        var array = [ChartDataEntryWithLabel]()
-        var reward1Entries = [ChartDataEntry]()
-        var reward2Entries = [ChartDataEntry]()
-        var reward3Entries = [ChartDataEntry]()
-        for i in 0..<list.count {
-            let entry1 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward1))
-            reward1Entries.append(entry1)
-            let entry2 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward2))
-            reward2Entries.append(entry2)
-            let entry3 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward3))
-            reward3Entries.append(entry3)
+extension EventRanking: RankingListChartPresentable {
+    var chartEntries: [Int: [ChartDataEntry]] {
+        var borderEntries = [Int: [ChartDataEntry]]()
+        
+        for border in borders {
+            var entries = [ChartDataEntry]()
+            for (index, item) in list.enumerated() {
+                entries.append(ChartDataEntry(x: Double(index), y: Double(item[border])))
+            }
+            borderEntries[border] = entries
         }
-        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: event.rankingHighScoreLabels[0]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: event.rankingHighScoreLabels[1]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: event.rankingHighScoreLabels[2]))
-        return array
+        return borderEntries
     }
     
     
     var xAxis: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
+            let date = list[i].date.toDate(format: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
             var gregorian = Calendar(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
@@ -58,7 +48,7 @@ extension EventScoreRanking: RankingListChartPresentable {
     var xAxisDetail: [String] {
         var strings = [String]()
         for i in 0..<list.count {
-            let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
+            let date = list[i].date.toDate(format: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
             var gregorian = Calendar(identifier: .gregorian)
             gregorian.timeZone = TimeZone.current
             let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
@@ -69,75 +59,6 @@ extension EventScoreRanking: RankingListChartPresentable {
     }
     
 }
-
-extension EventPtRanking: RankingListChartPresentable {
-    var chartEntries: [ChartDataEntryWithLabel] {
-        var array = [ChartDataEntryWithLabel]()
-        var reward1Entries = [ChartDataEntry]()
-        var reward2Entries = [ChartDataEntry]()
-        var reward3Entries = [ChartDataEntry]()
-        var reward4Entries = [ChartDataEntry]()
-        var reward5Entries = [ChartDataEntry]()
-        for i in 0..<list.count {
-            let entry1 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward1))
-            reward1Entries.append(entry1)
-            let entry2 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward2))
-            reward2Entries.append(entry2)
-            let entry3 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward3))
-            reward3Entries.append(entry3)
-            let entry4 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward4))
-            reward4Entries.append(entry4)
-            let entry5 = ChartDataEntry.init(x: Double(i), y: Double(list[i].reward5))
-            reward5Entries.append(entry5)
-        }
-        array.append(ChartDataEntryWithLabel.init(entry: reward1Entries, label: event.rankingPtLabels[0]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward2Entries, label: event.rankingPtLabels[1]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward3Entries, label: event.rankingPtLabels[2]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward4Entries, label: event.rankingPtLabels[3]))
-        array.append(ChartDataEntryWithLabel.init(entry: reward5Entries, label: event.rankingPtLabels[4]))
-        return array
-    }
-    
-    
-    var xAxis: [String] {
-        var strings = [String]()
-        for i in 0..<list.count {
-            let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar(identifier: .gregorian)
-            gregorian.timeZone = TimeZone.current
-            let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
-            let string = String.init(format: NSLocalizedString("%d日%d时", comment: ""), comp.day!, comp.hour!)
-            strings.append(string)
-        }
-        return strings
-    }
-    
-    var xAxisDetail: [String] {
-        var strings = [String]()
-        for i in 0..<list.count {
-            let date = list[i].date.toDate(format: "yyyy-MM-dd HH:mm")
-            var gregorian = Calendar.init(identifier: .gregorian)
-            gregorian.timeZone = TimeZone.current
-            let comp = gregorian.dateComponents([.day, .hour, .minute], from: date)
-            let string = String.init(format: NSLocalizedString("%d日%d时%d分", comment: ""), comp.day!, comp.hour!, comp.minute!)
-            strings.append(string)
-        }
-        return strings
-    }
-    
-}
-
-
-//class CustomChartView: LineChartView {
-//    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        let location = gestureRecognizer.location(in: self)
-//        if location.x <= 20 {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
-//}
 
 class EventChartController: BaseViewController {
 
@@ -160,8 +81,8 @@ class EventChartController: BaseViewController {
         
         var colors = ChartColorTemplates.vordiplom()
         var dataSets = [LineChartDataSet]()
-        for entry in rankingList.chartEntries {
-            let set = LineChartDataSet.init(values: entry.entry, label: entry.label)
+        for border in rankingList.borders.prefix(5) {
+            let set = LineChartDataSet.init(values: rankingList.chartEntries[border] ?? [], label: String(border))
             set.drawCirclesEnabled = false
             let color = colors.removeLast()
             set.setColor(color)
@@ -171,7 +92,6 @@ class EventChartController: BaseViewController {
         }
     
         let data = LineChartData.init(dataSets: dataSets)
-    
         chartView.data = data
         chartView.xAxis.valueFormatter = IndexAxisValueFormatter.init(values: rankingList.xAxis)
         chartView.chartDescription?.text = ""
@@ -190,21 +110,6 @@ class EventChartController: BaseViewController {
         chartView.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension EventChartController: ChartViewDelegate {

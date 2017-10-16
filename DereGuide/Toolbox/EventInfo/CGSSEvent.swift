@@ -62,52 +62,6 @@ extension CGSSEvent {
         }
     }
     
-//    var preStartDate: Date? {
-//        let now = Date()
-//        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-//        gregorian.timeZone = TimeZone.tokyo
-//        let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
-//        var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startDate.toDate())
-//        preDate.year = nowDate.year
-//        if let date1 = preDate.date, let date2 = nowDate.date {
-//            if date1 < date2 {
-//                preDate.year = preDate.year! + 1
-//            }
-//        }
-//        return gregorian.date(from: preDate)
-//    }
-//    
-//    var preEndDate: Date? {
-//        let now = Date()
-//        var gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-//        gregorian.timeZone = TimeZone.tokyo
-//        let nowDate = gregorian.dateComponents([.year, .month, .day], from: now)
-//        var preDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: endDate.toDate())
-//        preDate.year = nowDate.year
-//        if let date1 = preDate.date, let date2 = nowDate.date {
-//            if date1 < date2 {
-//                preDate.year = preDate.year! + 1
-//            }
-//        }
-//        return gregorian.date(from: preDate)
-//    }
-    
-    var rankingPtLabels: [String] {
-        if startDate.toDate() > "2016-6-20".toDate(format: "yyyy-MM-dd") {
-            return ["2000", "10000", "20000", "60000", "120000"]
-        } else {
-            return ["2000", "10000", "20000", "50000", "100000"]
-        }
-    }
-    
-    var rankingHighScoreLabels: [String] {
-        if eventType == .tradition {
-            return ["5000", "10000", "40000"]
-        } else {
-            return ["5000", "10000", "50000"]
-        }
-    }
-    
 }
 
 extension CGSSEvent {

@@ -391,14 +391,14 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
     }
     
-    func setup(ptList: EventPtRanking, onGoing: Bool) {
+    func setup(ptList: EventRanking, onGoing: Bool) {
         eventPtView.setup(rankingList: ptList, onGoing: onGoing)
         if ptList.list.count > 0 {
             gotoPtChartLabel.isHidden = false
         }
     }
     
-    func setup(scoreList: EventScoreRanking, onGoing: Bool) {
+    func setup(scoreList: EventRanking, onGoing: Bool) {
         eventScoreView.setup(rankingList: scoreList, onGoing: onGoing)
         if scoreList.list.count > 0 {
             gotoScoreChartLabel.isHidden = false

@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class EventPtDataRequest {
 
-    static func requestPtData(event: CGSSEvent, callback: ((EventPtRanking?) -> Void)?) {
-        BaseRequest.default.getWith(urlString: "https://api.tachibana.cool/v1/starlight/event/\(event.id)/ranking_list.json") { (data, response, error) in
+    static func requestPtData(event: CGSSEvent, callback: ((EventRanking?) -> Void)?) {
+        BaseRequest.default.getWith(urlString: "https://portal.starlightstage.jp/api/v2/event/\(event.id)/point_ranking.json") { (data, response, error) in
             if error == nil && response?.statusCode == 200 {
                 let json = JSON.init(data: data!)
-                let list = EventPtRanking.init(fromJson: json)
+                let list = EventRanking.init(fromJson: json["data"])
                 list.event = event
                 callback?(list)
             } else {
@@ -24,11 +24,11 @@ class EventPtDataRequest {
         }
     }
     
-    static func requestHighScoreData(event: CGSSEvent, callback: ((EventScoreRanking?) -> Void)?) {
-        BaseRequest.default.getWith(urlString: "https://api.tachibana.cool/v1/starlight/event/\(event.id)/ranking_list_high.json") { (data, response, error) in
+    static func requestHighScoreData(event: CGSSEvent, callback: ((EventRanking?) -> Void)?) {
+        BaseRequest.default.getWith(urlString: "https://portal.starlightstage.jp/api/v2/event/\(event.id)/highscore_ranking.json") { (data, response, error) in
             if error == nil && response?.statusCode == 200 {
                 let json = JSON.init(data: data!)
-                let list = EventScoreRanking.init(fromJson: json)
+                let list = EventRanking.init(fromJson: json["data"])
                 list.event = event
                 callback?(list)
             } else {

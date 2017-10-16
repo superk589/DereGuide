@@ -101,7 +101,7 @@ class EventPtView: UIView {
     }
     
     
-    func setup(rankingList: EventPtRanking, onGoing: Bool) {
+    func setup(rankingList: EventRanking, onGoing: Bool) {
         dateLabel.text = rankingList.lastDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
         setLoading(loading: false)
         if let last = rankingList.last {
@@ -109,20 +109,16 @@ class EventPtView: UIView {
             var gridStrings = [[String]]()
             if onGoing {
                 gridStrings.append(["", NSLocalizedString("当前Pt", comment: ""), NSLocalizedString("增速(/h)", comment: "")])
-                gridStrings.append(["1", String(last.rank1), "\(Int(rankingList.speed.rank1))"])
-                gridStrings.append([rankingList.event.rankingPtLabels[0], String(last.reward1), "\(rankingList.speed.reward1)"])
-                gridStrings.append([rankingList.event.rankingPtLabels[1], String(last.reward2), "\(rankingList.speed.reward2)"])
-                gridStrings.append([rankingList.event.rankingPtLabels[2], String(last.reward3), "\(rankingList.speed.reward3)"])
-                gridStrings.append([rankingList.event.rankingPtLabels[3], String(last.reward4), "\(rankingList.speed.reward4)"])
-                gridStrings.append([rankingList.event.rankingPtLabels[4], String(last.reward5), "\(rankingList.speed.reward5)"])
+                gridStrings.append(["1", String(last[1]), "\(rankingList.speed[1])"])
+                for border in rankingList.borders {
+                    gridStrings.append([String(border), String(last[border]), String(rankingList.speed[border])])
+                }
             } else {
                 gridStrings.append(["", NSLocalizedString("最终Pt", comment: ""), "-"])
-                gridStrings.append(["1", String(last.rank1), "-"])
-                gridStrings.append([rankingList.event.rankingPtLabels[0], String(last.reward1), "-"])
-                gridStrings.append([rankingList.event.rankingPtLabels[1], String(last.reward2), "-"])
-                gridStrings.append([rankingList.event.rankingPtLabels[2], String(last.reward3), "-"])
-                gridStrings.append([rankingList.event.rankingPtLabels[3], String(last.reward4), "-"])
-                gridStrings.append([rankingList.event.rankingPtLabels[4], String(last.reward5), "-"])
+                gridStrings.append(["1", String(last[1]), "-"])
+                for border in rankingList.borders {
+                    gridStrings.append([String(border), String(last[border]), "-"])
+                }
             }
             gridView.setContents(gridStrings)
         } else {

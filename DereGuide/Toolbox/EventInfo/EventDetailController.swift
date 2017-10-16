@@ -17,8 +17,8 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
     var bannerId: Int!
     var banner: BannerView!
     
-    var ptList: EventPtRanking?
-    var scoreList: EventScoreRanking?
+    var ptList: EventRanking?
+    var scoreList: EventRanking?
     
     override func viewDidLoad() {
         super.viewDidLoad()
