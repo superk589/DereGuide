@@ -23,6 +23,8 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
+    var setting: BeatmapAdvanceOptionsViewController.Setting!
+    
     var strokeColor: UIColor {
         switch type {
         case 1:
@@ -45,12 +47,14 @@ class BeatmapView: IndicatorScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(beatmap: CGSSBeatmap, bpm: Int, type: Int) {
+    func setup(beatmap: CGSSBeatmap, bpm: Int, type: Int, setting: BeatmapAdvanceOptionsViewController.Setting) {
         self.beatmap = beatmap
-        beatmap.contextFree()
-        
+        self.setting = setting
         self.bpm = bpm
         self.type = type
+        
+        beatmap.contextFree()
+        
         indicator.strokeColor = self.strokeColor
         
         /* debug */
@@ -64,10 +68,33 @@ class BeatmapView: IndicatorScrollView {
         let heightInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        beatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: sectionHeight, columnWidth: self.frame.size.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1)
+        beatmapDrawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor)
+        updateBeatmapDrawer()
         contentSize.height = beatmapDrawer.totalHeight
         contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
         delegate = self
+        
+        setNeedsDisplay()
+    }
+    
+    private func updateBeatmapDrawer() {
+        if beatmapDrawer == nil { return }
+        switch setting.theme {
+        case .single:
+            beatmapDrawer.tapColor = strokeColor
+            beatmapDrawer.holdColor = strokeColor
+            beatmapDrawer.flickColor = strokeColor
+            beatmapDrawer.slideColor = strokeColor
+            beatmapDrawer.strokeColor = strokeColor
+        case .multiple:
+            beatmapDrawer.tapColor = .tap
+            beatmapDrawer.holdColor = .hold
+            beatmapDrawer.flickColor = .flick
+            beatmapDrawer.slideColor = .slide
+            beatmapDrawer.strokeColor = UIColor.init(hexString: "7f7f7f")
+        }
+        
+        beatmapDrawer.sectionHeight = 245 * setting.scale
     }
     
     override func layoutSubviews() {
@@ -82,7 +109,7 @@ class BeatmapView: IndicatorScrollView {
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
 
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.strokeColor, lineWidth: 1)
+            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.beatmapDrawer.strokeColor, lineWidth: 1, tapColor: self.beatmapDrawer.tapColor, flickColor: self.beatmapDrawer.flickColor, slideColor: self.beatmapDrawer.slideColor, holdColor: self.beatmapDrawer.holdColor)
             let newImage = adBeatmapDrawer.export(sectionPerColumn: 4, title: title)
             
             DispatchQueue.main.async {
@@ -102,7 +129,7 @@ extension BeatmapView: UIScrollViewDelegate {
     
 }
 
-class AdvanceBeatmapDrawer {
+struct AdvanceBeatmapDrawer {
     
     var sectionHeight: CGFloat
     var columnWidth: CGFloat
@@ -116,29 +143,10 @@ class AdvanceBeatmapDrawer {
     var strokeColor: UIColor
     var lineWidth: CGFloat
     
-    init(sectionHeight: CGFloat,
-         columnWidth: CGFloat,
-         widthInset: CGFloat,
-         innerWidthInset: CGFloat,
-         heightInset: CGFloat,
-         noteRadius: CGFloat,
-         beatmap: CGSSBeatmap,
-         bpm: Int,
-         mirrorFlip: Bool,
-         strokeColor: UIColor,
-         lineWidth: CGFloat) {
-        self.sectionHeight = sectionHeight
-        self.columnWidth = columnWidth
-        self.widthInset = widthInset
-        self.innerWidthInset = innerWidthInset
-        self.heightInset = heightInset
-        self.noteRadius = noteRadius
-        self.beatmap = beatmap
-        self.bpm = bpm
-        self.mirrorFlip = mirrorFlip
-        self.strokeColor = strokeColor
-        self.lineWidth = lineWidth
-    }
+    var tapColor: UIColor
+    var flickColor: UIColor
+    var slideColor: UIColor
+    var holdColor: UIColor
     
     var interval: CGFloat {
         return (columnWidth - 2 * widthInset - 2 * innerWidthInset) / 4
@@ -318,29 +326,28 @@ class AdvanceBeatmapDrawer {
             let note = notes[i]
             if note.finishPos != 0 {
                 // 常规点
-                let path = pathForPoint(note.finishPos, sec: note.offsetSecond)
-                strokeColor.set()
-                // path.stroke()
-                path.fill()
+                let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
                 
-                // 长按类型中间画一个小圆
                 if [1, 2].contains(note.longPressType) && (note.status < 1 || note.status > 2) {
-                    let path = pathForSmallPoint(note.finishPos, sec: note.offsetSecond)
+                    // 长按类型中间画一个小圆
+                    holdColor.set()
+                    outerPath.fill()
+                    let innerPath = pathForSmallPoint(note.finishPos, sec: note.offsetSecond)
                     UIColor.white.set()
-                    path.fill()
-                }
-                
-                // slide 中间画一个小横线
-                if note.type == 3 && (note.status < 1 || note.status > 2) {
+                    innerPath.fill()
+                } else if note.type == 3 && (note.status < 1 || note.status > 2) {
+                    // slide 中间画一个小横线
+                    slideColor.set()
+                    outerPath.fill()
                     let path = pathForSmallPoint(note.finishPos, sec: note.offsetSecond)
                     let path2 = pathForSlidePoint(note.finishPos, sec: note.offsetSecond)
                     UIColor.white.set()
                     path.fill()
                     path2.stroke()
-                }
-                
-                // flick 箭头向左
-                if (note.status == 1 && !mirrorFlip) || (note.status == 2 && mirrorFlip) {
+                } else if (note.status == 1 && !mirrorFlip) || (note.status == 2 && mirrorFlip) {
+                    // flick 箭头向左
+                    flickColor.set()
+                    outerPath.fill()
                     let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: center.x - noteRadius + 1, y: center.y)
                     let point2 = CGPoint(x: center.x - 1, y: center.y - noteRadius + 2)
@@ -356,10 +363,10 @@ class AdvanceBeatmapDrawer {
                     path.fill()
                     // path2.stroke()
                     path2.fill()
-                }
-                
-                // flick 箭头向右
-                if (note.status == 2 && !mirrorFlip) || (note.status == 1 && mirrorFlip) {
+                } else if (note.status == 2 && !mirrorFlip) || (note.status == 1 && mirrorFlip) {
+                    // flick 箭头向右
+                    flickColor.set()
+                    outerPath.fill()
                     let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: center.x + noteRadius - 1, y: center.y)
                     let point2 = CGPoint(x: center.x + 1, y: center.y - noteRadius + 2)
@@ -375,8 +382,10 @@ class AdvanceBeatmapDrawer {
                     path.fill()
                     // path2.stroke()
                     path2.fill()
+                } else {
+                    tapColor.set()
+                    outerPath.fill()
                 }
-                
             }
         }
     }

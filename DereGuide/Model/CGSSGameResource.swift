@@ -257,7 +257,7 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func getMusicInfo(callback: @escaping FMDBCallBackClosure<[CGSSSong]>) {
+    func getMusicInfo(musicDataID: Int? = nil, callback: @escaping FMDBCallBackClosure<[CGSSSong]>) {
         var list = [CGSSSong]()
         execute({ (db) in
             let selectSql = """
@@ -288,6 +288,7 @@ class Master: FMDatabaseQueue {
                 WHERE
                     a.music_data_id = b.id
                     AND b.id = d.id
+                    \(musicDataID == nil ? "" : "AND a.music_data_id = \(musicDataID!)")
                 GROUP BY
                     b.id
             """
@@ -302,7 +303,7 @@ class Master: FMDatabaseQueue {
                 if song.detail == "？" { continue }
                 if [1901, 1902, 90001].contains(song.musicID) { continue }
                 // some of the event songs have a start date at the end of the event, so add 30 days 
-                if song.startDate > Date().addingTimeInterval(30 * 24 * 3600) { continue }
+                if song.startDate > Date().addingTimeInterval(30 * 24 * 3600) && musicDataID == nil { continue }
                 list.append(song)
             }
         }) {
@@ -359,8 +360,6 @@ class Master: FMDatabaseQueue {
                 // 去掉一些无效数据
                 if song.detail == "？" { continue }
                 if [1901, 1902, 90001].contains(song.musicID) { continue }
-                // some of the event songs have a start date at the end of the event, so add 30 days
-                if song.startDate > Date().addingTimeInterval(30 * 24 * 3600) { continue }
                 list.append(song)
             }
         }) {

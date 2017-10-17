@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1201A27F1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201A27E1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift */; };
+		1201A2851F94A41100AB1E48 /* BeatmapColorThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201A2841F94A41100AB1E48 /* BeatmapColorThemeTableViewCell.swift */; };
 		1203A8921F29C39A001A510A /* FavoriteCardUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8911F29C39A001A510A /* FavoriteCardUploader.swift */; };
 		1203A8941F29C3A9001A510A /* FavoriteCardDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8931F29C3A9001A510A /* FavoriteCardDownloader.swift */; };
 		1203A8961F29C3B9001A510A /* FavoriteCardRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203A8951F29C3B9001A510A /* FavoriteCardRemover.swift */; };
@@ -431,6 +433,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1201A27E1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatmapAdvanceOptionsViewController.swift; sourceTree = "<group>"; };
+		1201A2841F94A41100AB1E48 /* BeatmapColorThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatmapColorThemeTableViewCell.swift; sourceTree = "<group>"; };
 		1203A8911F29C39A001A510A /* FavoriteCardUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardUploader.swift; sourceTree = "<group>"; };
 		1203A8931F29C3A9001A510A /* FavoriteCardDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardDownloader.swift; sourceTree = "<group>"; };
 		1203A8951F29C3B9001A510A /* FavoriteCardRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardRemover.swift; sourceTree = "<group>"; };
@@ -1384,6 +1388,7 @@
 				1269E9FF1D520C9F0071AD7F /* LiveTableViewController.swift */,
 				1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */,
 				12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */,
+				1201A27E1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1395,6 +1400,7 @@
 				1269EA011D520C9F0071AD7F /* BeatmapView.swift */,
 				1269EA021D520C9F0071AD7F /* LiveTableViewCell.swift */,
 				12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */,
+				1201A2841F94A41100AB1E48 /* BeatmapColorThemeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2230,6 +2236,7 @@
 				12353A521F0F6A92008286C2 /* Migration.swift in Sources */,
 				12353A531F0F6A92008286C2 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				12353A541F0F6A92008286C2 /* NSManagedObject+Extensions.swift in Sources */,
+				1201A2851F94A41100AB1E48 /* BeatmapColorThemeTableViewCell.swift in Sources */,
 				1257C1C91F5CEE7100C3DFE1 /* CGSSSong.swift in Sources */,
 				12353A551F0F6A92008286C2 /* Collection+CoreDataExtensions.swift in Sources */,
 				129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */,
@@ -2473,6 +2480,7 @@
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				129B955F1F31B565007B7AE2 /* ColleagueMessageCell.swift in Sources */,
 				12DFCA0B1F55468A00790859 /* GalleryImageItemBaseController.swift in Sources */,
+				1201A27F1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift in Sources */,
 				12D45AC81E2E44590009986F /* GachaTableViewCell.swift in Sources */,
 				12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */,
 				1257C1CC1F5CEEE900C3DFE1 /* SongFilterSortController.swift in Sources */,

@@ -223,6 +223,17 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
 // MARK: LiveTableViewCellDelegate
 extension BaseLiveTableViewController: LiveTableViewCellDelegate {
     
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect jacketImageView: BannerView, musicDataID: Int) {
+        CGSSGameResource.shared.master.getMusicInfo(musicDataID: musicDataID) { (songs) in
+            DispatchQueue.main.async {
+                let vc = SongDetailController()
+                vc.setup(songs: songs, index: 0)
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
     func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene) {
         if liveScene.beatmap != nil {
             selectScene(liveScene)

@@ -12,7 +12,6 @@ import ZKCornerRadiusView
 
 protocol EventDetailViewDelegate: class {
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView)
-    func eventDetailView(_ view: EventDetailView, didSelect scene: CGSSLiveScene)
     func gotoPtChartView(eventDetailView: EventDetailView)
     func gotoScoreChartView(eventDetailView: EventDetailView)
     func gotoLiveTrendView(eventDetailView: EventDetailView)
@@ -59,7 +58,12 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         static let ptContentView: CGFloat = 192
         static let scoreContentView: CGFloat = 156
     }
-    weak var delegate: EventDetailViewDelegate?
+    
+    weak var delegate: (EventDetailViewDelegate & LiveTableViewCellDelegate)? {
+        didSet {
+            liveView.delegate = self.delegate
+        }
+    }
    
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -178,7 +182,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.left.right.equalToSuperview()
             make.top.equalTo(songDescLabel.snp.bottom)
         })
-        liveView.delegate = self
         
         eventPtContentView = UIView()
         addSubview(eventPtContentView)
@@ -424,12 +427,4 @@ extension EventDetailView: EventScoreViewDelegate {
         delegate?.refreshScoreView(eventDetailView: self)
     }
     
-}
-
-extension EventDetailView: LiveTableViewCellDelegate {
-    
-    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene) {
-        delegate?.eventDetailView(self, didSelect: liveScene)
-    }
-
 }

@@ -20,17 +20,26 @@ class BeatmapViewController: UIViewController {
     private func updateUI() {
         if let beatmap = checkBeatmapData(scene) {
             titleLabel?.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
-            bv?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type)
+            bv?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
             bv?.setNeedsDisplay()
         }
     }
     
     var bv: BeatmapView!
     var descLabel: UILabel!
-    var flipItem:UIBarButtonItem!
-   
+    var flipItem: UIBarButtonItem!
     var tv: UIToolbar!
     var titleLabel: UILabel!
+    
+    private typealias Setting = BeatmapAdvanceOptionsViewController.Setting
+    private var setting = Setting.load() ?? Setting()
+    
+    lazy var filterController: BeatmapAdvanceOptionsViewController = {
+        let vc = BeatmapAdvanceOptionsViewController(style: .grouped)
+        vc.setting = self.setting
+        vc.delegate = self
+        return vc
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,11 +136,13 @@ class BeatmapViewController: UIViewController {
     
     private func prepareToolbar() {
         // let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let fixedSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpaceItem.width = 30
         let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
-        spaceItem.width = 40
+        let advanceItem = UIBarButtonItem(title: NSLocalizedString("高级选项", comment: ""), style: .plain, target: self, action: #selector(showAdvanceOptions))
         flipItem = UIBarButtonItem.init(image: UIImage.init(named: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
-        self.toolbarItems = [shareItem, spaceItem, flipItem]
+        self.toolbarItems = [shareItem, fixedSpaceItem, flipItem, spaceItem, advanceItem]
     }
   
     func setup(with scene: CGSSLiveScene) {
@@ -175,6 +186,12 @@ class BeatmapViewController: UIViewController {
         }
     }
     
+    @objc func showAdvanceOptions() {
+        let nav = BaseNavigationController(rootViewController: filterController)
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true, completion: nil)
+    }
+    
     @objc func flip() {
         bv.mirrorFlip = !bv.mirrorFlip
         if bv.mirrorFlip {
@@ -182,6 +199,14 @@ class BeatmapViewController: UIViewController {
         } else {
             flipItem.image = UIImage.init(named: "1110-rotate-toolbar")
         }
+    }
+}
+
+extension BeatmapViewController: BeatmapAdvanceOptionsViewControllerDelegate {
+    
+    func didDone(_ beatmapAdvanceOptionsViewController: BeatmapAdvanceOptionsViewController) {
+        self.setting = beatmapAdvanceOptionsViewController.setting
+        updateUI()
     }
     
 }

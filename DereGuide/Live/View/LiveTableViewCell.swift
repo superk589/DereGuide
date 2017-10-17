@@ -11,6 +11,7 @@ import TTGTagCollectionView
 
 protocol LiveTableViewCellDelegate: class {
     func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene)
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect jacketImageView: BannerView, musicDataID: Int)
 }
 
 class LiveTableViewCell: ReadableWidthTableViewCell {
@@ -35,6 +36,7 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
             make.width.height.equalTo(66)
             make.bottom.lessThanOrEqualTo(-10)
         }
+        jacketImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:))))
         
         readableContentView.addSubview(typeIcon)
         typeIcon.snp.makeConstraints { (make) in
@@ -89,6 +91,10 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
         }
         
         collectionView.reload()
+    }
+    
+    @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
+        delegate?.liveTableViewCell(self, didSelect: jacketImageView, musicDataID: live.musicDataId)
     }
     
     required init?(coder aDecoder: NSCoder) {

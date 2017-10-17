@@ -113,16 +113,36 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
         self.navigationController?.popViewController(animated: true)
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension EventDetailController: LiveTableViewCellDelegate {
+    
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect jacketImageView: BannerView, musicDataID: Int) {
+        CGSSGameResource.shared.master.getMusicInfo(musicDataID: musicDataID) { (songs) in
+            DispatchQueue.main.async {
+                let vc = SongDetailController()
+                vc.setup(songs: songs, index: 0)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
-    */
-
+    
+    private func showBeatmapNotFoundAlert() {
+        let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。", comment: "弹出框正文"), preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+        self.navigationController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect liveScene: CGSSLiveScene) {
+        if let _ = liveScene.beatmap {
+            let vc = BeatmapViewController()
+            vc.setup(with: liveScene)
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showBeatmapNotFoundAlert()
+        }
+    }
+    
 }
 
 extension EventDetailController: EventDetailViewDelegate {
@@ -167,21 +187,4 @@ extension EventDetailController: EventDetailViewDelegate {
         }
     }
     
-    func showBeatmapNotFoundAlert() {
-        let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。", comment: "弹出框正文"), preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-        self.navigationController?.present(alert, animated: true, completion: nil)
-    }
-    
-    func eventDetailView(_ view: EventDetailView, didSelect scene: CGSSLiveScene) {
-        if let _ = scene.beatmap {
-            let beatmapVC = BeatmapViewController()
-            beatmapVC.setup(with: scene)
-            navigationController?.pushViewController(beatmapVC, animated: true)
-        } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。", comment: "弹出框正文"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-            self.navigationController?.present(alert, animated: true, completion: nil)
-        }
-    }
 }

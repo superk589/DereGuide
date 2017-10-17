@@ -1,31 +1,20 @@
 //
-//  ColleagueFilterTypeCell.swift
+//  BeatmapColorThemeTableViewCell.swift
 //  DereGuide
 //
-//  Created by zzk on 2017/8/15.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Created by zzk on 16/10/2017.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
-class ColleagueFilterTypeCell: UITableViewCell {
+class BeatmapColorThemeTableViewCell: UITableViewCell {
     
-    var icon: UIImageView!
+    let leftLabel = UILabel()
     
-    var leftLabel: UILabel!
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        icon = UIImageView()
-        contentView.addSubview(icon)
-        icon.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
-            make.width.height.equalTo(24)
-        }
         
-        leftLabel = UILabel()
         leftLabel.font = UIFont.systemFont(ofSize: 14)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -33,17 +22,11 @@ class ColleagueFilterTypeCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         leftLabel.textColor = .darkGray
-        
         selectionStyle = .none
     }
     
-    func setup(_ type: CGSSLiveTypes) {
-        icon.image = type.icon
-        if type == [] {
-            leftLabel.text = NSLocalizedString("不限", comment: "")
-        } else {
-            leftLabel.text = ""
-        }
+    func setup(_ type: BeatmapAdvanceOptionsViewController.Setting.ColorTheme) {
+        leftLabel.text = type.description
     }
     
     required init?(coder aDecoder: NSCoder) {
