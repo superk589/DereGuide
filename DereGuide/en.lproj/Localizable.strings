@@ -728,7 +728,7 @@
 "使你的生命不会减少" = "you will not lose health";
 "使所有音符恢复你 %d 点生命" = "all notes will restore %d health";
 "消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO" = "%2$d life will be consumed, then: Perfect notes receive a %1$d%% score bonus, and Nice/Bad notes will not break combo";
-"使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO" = "Perfect notes will receive a %d%% score bonus，and notes other tran Perfect will break combo";
+"使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小" = "Perfect notes will receive a %d%% score bonus, but the duration of note to be judged as Perfect becomes shorter";
 "会发生有趣的事情" = "something interesting will happen";
 "使所有PERFECT音符恢复你 %d 点生命" = "Perfect notes will restore %d health";
 "使所有PERFECT/GREAT音符恢复你 %d 点生命" = "Great/Perfect notes will restore %d health";
@@ -778,3 +778,9 @@
 "选项" = "Option";
 "隐藏难度文字" = "Hide difficutly text";
 "如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单" = "If you want to hide some difficulties or hide difficulty description text, please config in the side menu.";
+
+/* new in 1.6.1 */
+"颜色方案" = "Color schemes";
+"绘制参数" = "Drawing parameters";
+"与歌曲颜色相同" = "Same as song color";
+"纵向缩放比例" = "Vertical scale";

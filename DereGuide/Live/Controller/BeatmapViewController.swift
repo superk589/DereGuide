@@ -140,7 +140,7 @@ class BeatmapViewController: UIViewController {
         let fixedSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpaceItem.width = 30
         let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
-        let advanceItem = UIBarButtonItem(title: NSLocalizedString("高级选项", comment: ""), style: .plain, target: self, action: #selector(showAdvanceOptions))
+        let advanceItem = UIBarButtonItem(title: NSLocalizedString("选项", comment: ""), style: .plain, target: self, action: #selector(showAdvanceOptions))
         flipItem = UIBarButtonItem.init(image: UIImage.init(named: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
         self.toolbarItems = [shareItem, fixedSpaceItem, flipItem, spaceItem, advanceItem]
     }

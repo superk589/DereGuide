@@ -212,7 +212,7 @@ extension CGSSLive {
     }
 }
 
-class CGSSLive: CGSSBaseModel {
+class CGSSLive: NSObject {
     
     @objc dynamic var bpm : Int
     var eventType : Int
@@ -281,7 +281,4 @@ class CGSSLive: CGSSBaseModel {
         super.init()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

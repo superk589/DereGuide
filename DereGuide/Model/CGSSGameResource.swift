@@ -37,7 +37,7 @@ class MusicScoreDBQueue: FMDatabaseQueue {
     func getBeatmaps(callback: @escaping FMDBCallBackClosure<[CGSSBeatmap]>) {
         var beatmaps = [CGSSBeatmap]()
         execute({ (db) in
-            let selectSql = "select * from blobs where name like '%^_%.csv' escape '^' order by name asc"
+            let selectSql = "select * from blobs order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 if let data = set.data(forColumn: "data"),
@@ -56,11 +56,13 @@ class MusicScoreDBQueue: FMDatabaseQueue {
     func getBeatmapCount(callback: @escaping FMDBCallBackClosure<Int>) {
         var result = 0
         execute({ (db) in
-            let selectSql = "select count(*) count from blobs where name like '%^_%.csv' escape '^' order by name asc"
+            let selectSql = "select * from blobs order by name asc"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
-                let count = Int(set.int(forColumn: "count"))
-                result = count
+                if let name = set.string(forColumn: "name"),
+                    let _ = name.match(pattern: "_([0-9]+).csv", index: 1).first {
+                    result += 1
+                }
             }
         }) {
             callback(result)
@@ -435,12 +437,19 @@ class Master: FMDatabaseQueue {
                 """
                 var details = [CGSSLiveDetail]()
                 let subSet = try db.executeQuery(selectSql, values: nil)
-                while subSet.next() {
+                
+                var count = 0
+                while subSet.next() && count < live.beatmapCount {
                     let json = JSON(subSet.resultDictionary ?? [AnyHashable: Any]())
                     
                     guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
                     
                     details.append(detail)
+                    count += 1
+                }
+                
+                if details.count > live.beatmapCount {
+                    print("aaa")
                 }
                 
                 if details.count == 0 { continue }

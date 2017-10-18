@@ -24,7 +24,7 @@ fileprivate let skillDescriptions = [
     12: NSLocalizedString("使你的生命不会减少", comment: "技能描述"),
     13: NSLocalizedString("使所有音符恢复你 %d 点生命", comment: "技能描述"),
     14: NSLocalizedString("消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO", comment: "技能描述"),
-    15: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，且PERFECT以外的判定将中断COMBO", comment: ""),
+    15: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小", comment: ""),
     16: NSLocalizedString("会发生有趣的事情", comment: ""),
     17: NSLocalizedString("使所有PERFECT音符恢复你 %d 点生命", comment: "技能描述"),
     18: NSLocalizedString("使所有PERFECT/GREAT音符恢复你 %d 点生命", comment: "技能描述"),
@@ -36,11 +36,11 @@ fileprivate let skillDescriptions = [
     24: NSLocalizedString("获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命", comment: "")
 ]
 
-fileprivate var intervalClause = NSLocalizedString("每 %d 秒，", comment: "")
+fileprivate let intervalClause = NSLocalizedString("每 %d 秒，", comment: "")
 
-fileprivate var probabilityClause = NSLocalizedString("有 %@%% 的几率", comment: "")
+fileprivate let probabilityClause = NSLocalizedString("有 %@%% 的几率", comment: "")
 
-fileprivate var lengthClause = NSLocalizedString("，持续 %@ 秒。", comment: "")
+fileprivate let lengthClause = NSLocalizedString("，持续 %@ 秒。", comment: "")
 
 extension CGSSSkill {
     

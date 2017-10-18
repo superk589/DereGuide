@@ -43,7 +43,8 @@ extension UIColor {
     static let limited = UIColor(red: 1.0 * 236 / 255, green: 1.0 * 103 / 255, blue: 1.0 * 105 / 255, alpha: 1)
     static let cinfes = UIColor(red: 1.0 * 25 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 218 / 255, alpha: 1)
     
-    static let flick = UIColor(hexString: "3568D5")
+    static let flick4 = UIColor(hexString: "3568D5")
+    static let flick3 = UIColor(hexString: "7CD8AA")
     static let slide = UIColor(hexString: "A544D9")
     static let tap = UIColor(hexString: "EC6279")
     static let hold = UIColor(hexString: "F7CD72")

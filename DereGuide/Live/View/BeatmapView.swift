@@ -86,10 +86,16 @@ class BeatmapView: IndicatorScrollView {
             beatmapDrawer.flickColor = strokeColor
             beatmapDrawer.slideColor = strokeColor
             beatmapDrawer.strokeColor = strokeColor
-        case .multiple:
+        case .type4:
             beatmapDrawer.tapColor = .tap
             beatmapDrawer.holdColor = .hold
-            beatmapDrawer.flickColor = .flick
+            beatmapDrawer.flickColor = .flick4
+            beatmapDrawer.slideColor = .slide
+            beatmapDrawer.strokeColor = UIColor.init(hexString: "7f7f7f")
+        case .type3:
+            beatmapDrawer.tapColor = .tap
+            beatmapDrawer.holdColor = .hold
+            beatmapDrawer.flickColor = .flick3
             beatmapDrawer.slideColor = .slide
             beatmapDrawer.strokeColor = UIColor.init(hexString: "7f7f7f")
         }

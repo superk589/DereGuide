@@ -17,20 +17,22 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     weak var delegate: BeatmapAdvanceOptionsViewControllerDelegate?
     
     var sectionTitles = [NSLocalizedString("颜色方案", comment: ""),
-                         NSLocalizedString("选项", comment: "")]
+                         NSLocalizedString("绘制参数", comment: "")]
     
     struct Setting: Equatable, Codable {
         
         enum ColorTheme: Int, Codable, CustomStringConvertible {
             case single
-            case multiple
-            
+            case type3
+            case type4
             var description: String {
                 switch self {
                 case .single:
                     return NSLocalizedString("与歌曲颜色相同", comment: "")
-                case .multiple:
-                    return NSLocalizedString("区分Note类型", comment: "")
+                case .type3:
+                    return "TYPE 3"
+                case .type4:
+                    return "TYPE 4"
                 }
             }
             
@@ -62,9 +64,8 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         }
        
         init() {
-            self.theme = .multiple
+            self.theme = .type4
             self.scale = 1.0
-//            self.isMirrorFlipped = false
         }
     }
     
@@ -137,7 +138,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
+            return 3
         case 1:
             return staticCells.count
         default:
@@ -154,8 +155,11 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
                 cell.setup(.single)
                 cell.customSelected = setting.theme == .single
             case 1:
-                cell.setup(.multiple)
-                cell.customSelected = setting.theme == .multiple
+                cell.setup(.type3)
+                cell.customSelected = setting.theme == .type3
+            case 2:
+                cell.setup(.type4)
+                cell.customSelected = setting.theme == .type4
             default:
                 fatalError("invalid indexpath")
             }
@@ -174,7 +178,9 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             case 0:
                 setting.theme = .single
             case 1:
-                setting.theme = .multiple
+                setting.theme = .type3
+            case 2:
+                setting.theme = .type4
             default:
                 break
             }

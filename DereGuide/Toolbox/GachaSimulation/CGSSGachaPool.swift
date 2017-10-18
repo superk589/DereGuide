@@ -108,7 +108,7 @@ struct Reward {
     var relativeSROdds: Int
 }
 
-class CGSSGachaPool: CGSSBaseModel {
+class CGSSGachaPool: NSObject {
 
     var dicription: String
     var endDate: String
@@ -180,11 +180,6 @@ class CGSSGachaPool: CGSSBaseModel {
                 }
             }
         }
-        super.init()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     var hasOdds: Bool {
