@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 fileprivate let difficultyFactor: [Int: Double] = [
     5: 1.0,
     6: 1.025,
@@ -115,7 +114,7 @@ class LSCoordinator {
             
             let comboFactor = getComboFactor(of: i + 1, criticalPoints: criticalPoints)
     
-            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec)
+            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec, rangeType: notes[i].rangeType)
             
             lsNotes.append(lsNote)
         }
@@ -186,7 +185,7 @@ class LSCoordinator {
     func generateLiveSimulator() -> CGSSLiveSimulator {
         let (bonuses, supports) = generateBonusesAndSupports()
         let notes = generateLSNotes()
-        let simulator = CGSSLiveSimulator(notes: notes, bonuses: bonuses, supports: supports, totalLife: life)
+        let simulator = CGSSLiveSimulator(notes: notes, bonuses: bonuses, supports: supports, totalLife: life, difficulty: scene.difficulty)
         return simulator
     }
     

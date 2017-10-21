@@ -93,7 +93,7 @@ class CGSSLiveFormulator {
                         switch bonus.type {
                         case .comboBonus, .allRound:
                             bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
-                        case .perfectBonus, .overload:
+                        case .perfectBonus, .overload, .concentration:
                             bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
                         case .skillBoost:
                             bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)

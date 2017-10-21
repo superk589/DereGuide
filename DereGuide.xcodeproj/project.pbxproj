@@ -278,6 +278,7 @@
 		12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B0A0621F305DBE005967C1 /* Syncable.swift */; };
 		12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */; };
 		12B225A71F80DB6F0013E90E /* SongJacketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */; };
+		12B4C1CB1F9B648B00EC03FC /* CGSSBeatmapNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4C1CA1F9B648B00EC03FC /* CGSSBeatmapNote.swift */; };
 		12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */; };
 		12C390151F34128D0077FB38 /* ColleagueMyCentersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */; };
 		12C390171F3412AF0077FB38 /* ColleagueCentersWantedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C390161F3412AF0077FB38 /* ColleagueCentersWantedCell.swift */; };
@@ -704,6 +705,7 @@
 		12B0A0621F305DBE005967C1 /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
 		12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailCoverFlowCell.swift; sourceTree = "<group>"; };
 		12B225A61F80DB6F0013E90E /* SongJacketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongJacketCollectionViewCell.swift; sourceTree = "<group>"; };
+		12B4C1CA1F9B648B00EC03FC /* CGSSBeatmapNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapNote.swift; sourceTree = "<group>"; };
 		12B7A1A91F14A14400537C80 /* WipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTableViewCell.swift; sourceTree = "<group>"; };
 		12B8A6AA1F09E348001074B3 /* ValueStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStepper.swift; sourceTree = "<group>"; };
 		12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueMyCentersCell.swift; sourceTree = "<group>"; };
@@ -1299,6 +1301,7 @@
 				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
 				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
+				12B4C1CA1F9B648B00EC03FC /* CGSSBeatmapNote.swift */,
 				12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */,
 				1269E9C81D520B5D0071AD7F /* CGSSCard.swift */,
 				1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */,
@@ -2362,6 +2365,7 @@
 				124B8FF21F4155EF00880992 /* ProfileRemote.swift in Sources */,
 				122F36A91F7DEDAA006DDE55 /* FavoriteSongsRemote.swift in Sources */,
 				12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
+				12B4C1CB1F9B648B00EC03FC /* CGSSBeatmapNote.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* UnitTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
 				122497261E8E859C005C743C /* LSNote.swift in Sources */,

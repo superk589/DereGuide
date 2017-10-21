@@ -13,4 +13,6 @@ struct LSNote {
     var comboFactor: Double
     var baseScore: Double
     var sec: Float
+    var rangeType: CGSSBeatmapNote.RangeType
+    
 }

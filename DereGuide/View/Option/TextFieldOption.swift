@@ -24,21 +24,21 @@ class TextFieldOption: UIControl {
         addSubview(textField)
         
         textField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(24)
             make.width.equalToSuperview().dividedBy(2).offset(-10)
-            make.bottom.equalToSuperview()
         }
         
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         label.textColor = UIColor.darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         label.snp.makeConstraints { (make) in
-            make.centerY.equalTo(textField)
+            make.top.bottom.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.left.equalToSuperview()
+            make.height.greaterThanOrEqualTo(24)
             make.right.lessThanOrEqualTo(textField.snp.left).offset(-5)
         }
         

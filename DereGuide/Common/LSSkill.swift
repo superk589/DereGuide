@@ -17,13 +17,15 @@ enum LSSkillType {
     case deep
     case allRound
     
+    case concentration
+    
     case `guard`
     case comboContinue
     case perfectLock
     
     static let allSupport: [LSSkillType] = [LSSkillType.guard, .skillBoost, .overload, .heal, .allRound, .comboContinue, .perfectLock]
-    static let allScoreBonus: [LSSkillType] = [LSSkillType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound]
-    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep]
+    static let allScoreBonus: [LSSkillType] = [LSSkillType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound, .concentration]
+    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration]
     static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
     
     var isSupport: Bool {
@@ -40,8 +42,10 @@ enum LSSkillType {
             self = .comboBonus
         case CGSSSkillTypes.allRound:
             self = .allRound
-        case CGSSSkillTypes.perfectBonus, CGSSSkillTypes.concentration:
+        case CGSSSkillTypes.perfectBonus:
             self = .perfectBonus
+        case CGSSSkillTypes.concentration:
+            self = .concentration
         case  CGSSSkillTypes.overload:
             self = .overload
         case CGSSSkillTypes.deep:
@@ -82,8 +86,16 @@ struct LSSkill {
     
     var triggerLife: Int
     
+}
+
+extension LSSkill {
+    
     var probability: Double {
         return min(1, rate * Double(100 + rateBonus) / 1000000)
+    }
+    
+    var isConcentrated: Bool {
+        return type == .concentration
     }
     
 }

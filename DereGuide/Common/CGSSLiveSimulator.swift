@@ -11,6 +11,26 @@ import SwiftyJSON
 
 typealias LSResultClosure = (LSResult, [LSLog]) -> Void
 
+fileprivate let perfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
+    .debut: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .regular: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .light: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .pro: [.click: 0.07, .slide: 0.2, .flick: 0.15],
+    .master: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .masterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .legacyMasterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15]
+]
+
+fileprivate let concentratedPerfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
+    .debut: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .regular: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .light: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .pro: [.click: 0.04, .slide: 0.1, .flick: 0.1],
+    .master: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .masterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .legacyMasterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1]
+]
+
 fileprivate extension Int {
     func addGreatPercent(_ percent: Double) -> Int {
         return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
@@ -23,12 +43,14 @@ class CGSSLiveSimulator {
     var bonuses: [LSSkill]
     var supports: [LSSkill]
     var totalLife: Int
+    var difficulty: CGSSLiveDifficulty
     
-    init(notes: [LSNote], bonuses: [LSSkill], supports: [LSSkill], totalLife: Int) {
+    init(notes: [LSNote], bonuses: [LSSkill], supports: [LSSkill], totalLife: Int, difficulty: CGSSLiveDifficulty) {
         self.notes = notes
         self.bonuses = bonuses
         self.supports = supports
         self.totalLife = totalLife
+        self.difficulty = difficulty
     }
 
     var simulateResult = [Int]()
@@ -37,36 +59,37 @@ class CGSSLiveSimulator {
     func simulateOptimistic1(options: LSOptions = [], callback: LSResultClosure? = nil) {
         var sum = 0
         
-        let sortedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }
+//        let sortedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }
         
         var logs = [LSLog]()
        
-        var lastIndex = 0
         for i in 0..<notes.count {
             let note = notes[i]
             let baseScore = note.baseScore
             let comboFactor = note.comboFactor
             var bonusGroup = LSScoreBonusGroup.basic
-            let noteRange = LSRange(begin: note.sec - 0.06, length: 0.12)
+            let radius = perfectRadius[difficulty]![note.rangeType]!
+            let concentratedRadius = concentratedPerfectRadius[difficulty]![note.rangeType]!
+            let noteRange = LSRange(begin: note.sec - radius, length: 2 * radius)
+            let noteConcentratedRange = LSRange(begin: note.sec - concentratedRadius, length: concentratedRadius * 2)
             
-            var firstLoop = true
             var intersectedRanges = [LSRange]()
             var intersectedBonuses = [LSSkill]()
-            for j in lastIndex..<sortedBonuses.count {
-                let bonus = sortedBonuses[j]
-                if note.sec - 0.06 > bonus.range.end {
-                    continue
-                } else if note.sec + 0.06 < bonus.range.begin {
-                    break
+            for bonus in bonuses {
+                if bonus.isConcentrated {
+                    if note.sec - concentratedRadius <= bonus.range.end || note.sec + concentratedRadius >= bonus.range.begin {
+                        if let intersectedRange = bonus.range.intersection(noteConcentratedRange) {
+                            intersectedRanges.append(intersectedRange)
+                        }
+                        intersectedBonuses.append(bonus)
+                    }
                 } else {
-                    if firstLoop {
-                        lastIndex = j
-                        firstLoop = false
+                    if note.sec - radius <= bonus.range.end || note.sec + radius >= bonus.range.begin {
+                        if let intersectedRange = bonus.range.intersection(noteRange) {
+                            intersectedRanges.append(intersectedRange)
+                        }
+                        intersectedBonuses.append(bonus)
                     }
-                    if let intersectedRange = bonus.range.intersection(noteRange) {
-                        intersectedRanges.append(intersectedRange)
-                    }
-                    intersectedBonuses.append(bonus)
                 }
             }
             
@@ -97,7 +120,7 @@ class CGSSLiveSimulator {
                             switch bonus.type {
                             case .comboBonus, .allRound:
                                 subBonusGroup.baseComboBonus = max(subBonusGroup.baseComboBonus, bonus.value)
-                            case .perfectBonus, .overload:
+                            case .perfectBonus, .overload, .concentration:
                                 subBonusGroup.basePerfectBonus = max(subBonusGroup.basePerfectBonus, bonus.value)
                             case .skillBoost:
                                 subBonusGroup.skillBoost = max(subBonusGroup.skillBoost, bonus.value)
@@ -212,7 +235,7 @@ class CGSSLiveSimulator {
                                 }
                             }
                         }
-                    case .perfectBonus:
+                    case .perfectBonus, .concentration:
                         bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
                     case .skillBoost:
                         bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)
