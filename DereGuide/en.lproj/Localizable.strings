@@ -613,7 +613,7 @@
 /* new in 1.3.2 */
 
 "得分分布" = "Score Distribution Graph";
-"Great占比%(此项设置并未考虑因专注技能导致Great不受加成的因素)" = "Great Percent % (Concentration skills are not taken into consideration)";
+"GREAT占比%(不考虑专注技能只加成PERFECT的因素)" = "Great Percent % (Concentration skills only affect perfect notes is not taken into consideration)";
 "小屋加成%" = "Room Bonus %";
 "模拟次数" = "Simulation Times";
 "* 不含后援值，歌曲模式为常规模式" = "* Does not contain support appeal, in normal mode";
@@ -775,7 +775,7 @@
 "歌曲名/词曲作者/演唱者" = "Name, Composer, Lyricist, Singer";
 "出演MV" = "Starred in"; // 卡详情页面和角色详情页面增加该偶像出演过的mv
 "MV站位" = "Positions";
-"选项" = "Option";
+"选项" = "Options";
 "隐藏难度文字" = "Hide difficutly text";
 "如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单" = "If you want to hide some difficulties or hide difficulty description text, please config in the side menu.";
 

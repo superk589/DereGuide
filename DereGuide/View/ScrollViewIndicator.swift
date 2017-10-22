@@ -51,7 +51,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
 
     private func pathForCircle() -> UIBezierPath {
-        let path = UIBezierPath.init(arcCenter: innerCenter, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
+        let path = UIBezierPath.init(arcCenter: innerCenter, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
         path.lineWidth = 1
         return path
     }

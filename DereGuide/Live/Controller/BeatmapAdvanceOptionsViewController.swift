@@ -76,7 +76,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = NSLocalizedString("高级选项", comment: "")
+        navigationItem.title = NSLocalizedString("选项", comment: "")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         
@@ -95,11 +95,11 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     private var staticCells = [UITableViewCell]()
     private func prepareStaticCells() {
         let option1 = StepperOption()
-        option1.setup(title: NSLocalizedString("纵向缩放比例", comment: ""), minValue: 0.5, maxValue: 2.0, currentValue: Double(setting.scale))
         option1.stepper.stepValue = 0.1
         option1.stepper.numberFormatter.maximumFractionDigits = 1
         option1.stepper.numberFormatter.minimumFractionDigits = 1
         option1.addTarget(self, action: #selector(handleStepper(_:)), for: .valueChanged)
+        option1.setup(title: NSLocalizedString("纵向缩放比例", comment: ""), minValue: 0.5, maxValue: 2.0, currentValue: Double(setting.scale))
         
 //        let option2 = SwitchOption()
 //        option2.label.text = NSLocalizedString("是否镜像翻转", comment: "")

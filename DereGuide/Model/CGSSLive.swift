@@ -170,13 +170,13 @@ extension CGSSLive {
         }
     }
     
-    var title: String {
-        if eventType == 0 {
-            return name
-        } else {
-            return name + "(" + NSLocalizedString("活动", comment: "") + ")"
-        }
-    }
+//    var title: String {
+//        if eventType == 0 {
+//            return name
+//        } else {
+//            return name + "(" + NSLocalizedString("活动", comment: "") + ")"
+//        }
+//    }
     
     subscript (difficulty: CGSSLiveDifficulty) -> CGSSLiveDetail? {
         get {

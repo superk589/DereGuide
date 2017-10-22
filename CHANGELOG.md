@@ -17,6 +17,10 @@
 
 ##### English version
 
+1. New beatmap settings, support note colors like in-game settings type 3 / 4.
+2. Update concentration skills' description. (data update at launching or manually pull to refresh is needed)
+3. Concentration skills are taken into consideration in optimistic score 1.
+4. Use "Starlight Portal" as the new event data source.
 
 ### 1.6
 2017-10-17

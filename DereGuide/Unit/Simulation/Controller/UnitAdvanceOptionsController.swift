@@ -33,7 +33,7 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option2.setup(title: NSLocalizedString("小屋加成%", comment: ""), minValue: 0, maxValue: 10, currentValue: 0)
         
         option3 = TextFieldOption()
-        option3.label.text = NSLocalizedString("Great占比%(此项设置并未考虑因专注技能导致Great不受加成的因素)", comment: "")
+        option3.label.text = NSLocalizedString("GREAT占比%(不考虑专注技能只加成PERFECT的因素)", comment: "")
         option3.addTarget(self, action: #selector(option3TextFieldEndEditing(_:)), for: .editingDidEnd)
         option3.addTarget(self, action: #selector(option3TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
