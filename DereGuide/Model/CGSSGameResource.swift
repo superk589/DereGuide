@@ -448,10 +448,6 @@ class Master: FMDatabaseQueue {
                     count += 1
                 }
                 
-                if details.count > live.beatmapCount {
-                    print("aaa")
-                }
-                
                 if details.count == 0 { continue }
                 
                 live.details = details
