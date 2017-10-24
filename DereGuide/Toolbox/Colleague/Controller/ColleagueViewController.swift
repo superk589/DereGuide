@@ -191,7 +191,8 @@ extension ColleagueViewController: ColleagueFilterControllerDelegate {
     
     func didDone(_ colleagueFilterController: ColleagueFilterController) {
         currentSetting = filterController.setting
-        fetchLatestProfiles()
+        refresher.beginRefreshing()
+//        fetchLatestProfiles()
     }
 
 }
