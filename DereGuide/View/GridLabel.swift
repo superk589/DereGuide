@@ -58,7 +58,9 @@ class GridLabel: GridView {
     func setContents(_ contents: [[String]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
-                self[j, i].text = contents[j][i]
+                if let text = contents[safe: j]?[safe: i] {
+                    self[j, i].text = text
+                }
             }
         }
     }
@@ -66,7 +68,9 @@ class GridLabel: GridView {
     func setColors(_ colors: [[UIColor]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
-                self[j, i].textColor = colors[j][i]
+                if let color = colors[safe: j]?[safe: i] {
+                    self[j, i].textColor = color
+                }
             }
         }
     }
@@ -74,7 +78,9 @@ class GridLabel: GridView {
     func setFonts(_ fonts: [[UIFont]]) {
         for i in 0...columns - 1 {
             for j in 0...rows - 1 {
-                self[j, i].font = fonts[j][i]
+                if let font = fonts[safe: j]?[safe: i] {
+                    self[j, i].font = font
+                }
             }
         }
     }
