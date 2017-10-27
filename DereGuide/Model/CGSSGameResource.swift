@@ -440,12 +440,10 @@ class Master: FMDatabaseQueue {
                 
                 var count = 0
                 while subSet.next() && count < live.beatmapCount {
-                    let json = JSON(subSet.resultDictionary ?? [AnyHashable: Any]())
-                    
-                    guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
-                    
-                    details.append(detail)
                     count += 1
+                    let json = JSON(subSet.resultDictionary ?? [AnyHashable: Any]())
+                    guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
+                    details.append(detail)
                 }
                 
                 if details.count == 0 { continue }

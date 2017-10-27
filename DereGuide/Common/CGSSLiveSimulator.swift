@@ -18,7 +18,8 @@ fileprivate let perfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: 
     .pro: [.click: 0.07, .slide: 0.2, .flick: 0.15],
     .master: [.click: 0.06, .slide: 0.2, .flick: 0.15],
     .masterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
-    .legacyMasterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15]
+    .legacyMasterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .trick: [.click: 0.06, .slide: 0.2, .flick: 0.15]
 ]
 
 fileprivate let concentratedPerfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
@@ -28,7 +29,8 @@ fileprivate let concentratedPerfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote
     .pro: [.click: 0.04, .slide: 0.1, .flick: 0.1],
     .master: [.click: 0.03, .slide: 0.1, .flick: 0.1],
     .masterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
-    .legacyMasterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1]
+    .legacyMasterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .trick: [.click: 0.03, .slide: 0.1, .flick: 0.1]
 ]
 
 fileprivate extension Int {

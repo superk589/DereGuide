@@ -178,11 +178,13 @@ extension ColleagueViewController: ColleagueComposeViewControllerDelegate {
     }
     
     func didPost(_ colleagueComposeViewController: ColleagueComposeViewController) {
-        fetchLatestProfiles()
+        refresher.beginRefreshing()
+//        fetchLatestProfiles()
     }
     
     func didRevoke(_ colleagueComposeViewController: ColleagueComposeViewController) {
-        fetchLatestProfiles()
+        refresher.beginRefreshing()
+//        fetchLatestProfiles()
     }
     
 }
