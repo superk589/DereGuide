@@ -34,6 +34,13 @@ class EventLogItem: NSObject {
             _storage[border] = json[String(border)].intValue
         }
         super.init()
+        
+        // fix remote mismatching
+        if borders.contains(40000) && _storage[40000] == 0 {
+            _storage[40000] = json["50000"].intValue
+        } else if borders.contains(50000) && _storage[50000] == 0 {
+            _storage[50000] = json["40000"].intValue
+        }
     }
     
 }

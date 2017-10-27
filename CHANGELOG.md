@@ -1,5 +1,17 @@
 # ChangeLog
 
+### 1.6.2
+
+1. 修复活动页面详情可能闪退，以及分数榜显示错误的问题
+2. 修复计算TRICK难度歌曲得分时闪退的问题
+
+##### Japanese version
+
+##### English version
+
+1. Fix crash and high score ranking display error on event detail page.
+2. Fix crash when calculate with beatmaps of TRICK difficulty.
+
 
 ### 1.6.1
 2017-10-25
