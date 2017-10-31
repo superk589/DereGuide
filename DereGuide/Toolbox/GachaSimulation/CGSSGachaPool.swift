@@ -21,6 +21,11 @@ extension Array {
 }
 
 extension CGSSGachaPool {
+    
+    var hasOdds: Bool {
+        return id > 30075
+    }
+    
     var cardList: [CGSSCard] {
         get {
             var list = [CGSSCard]()
@@ -33,6 +38,7 @@ extension CGSSGachaPool {
             return list
         }
     }
+    
     var bannerId: Int {
         var result = id - 30000
         if dicription.contains("クールタイプ") || dicription.contains("パッションタイプ") || dicription.contains("キュートタイプ") {
@@ -66,13 +72,17 @@ extension CGSSGachaPool {
     }
         
     var detailBannerURL: URL! {
-        if [30171, 30172].contains(id) {
+//        if [30171, 30172, 30181, 30180].contains(id) {
+        if id > 30170 && isReappeared {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
         } else {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))
         }
     }
-
+    
+    var isReappeared: Bool {
+        return name.contains("復刻")
+    }
     
     var gachaType: CGSSGachaTypes {
         if dicription.contains("フェス限定") {
@@ -182,10 +192,6 @@ class CGSSGachaPool: NSObject {
         }
     }
     
-    var hasOdds: Bool {
-        return id > 30075
-    }
-    
     private struct RewardOdds {
         
         var reward: Reward
@@ -229,7 +235,7 @@ class CGSSGachaPool: NSObject {
             }
             var index: Int?
             repeat {
-                let rand = arc4random_uniform(UInt32(srGuarantee ? (srOdds.last?.end ?? 0) : (odds.last?.end ?? 0)))
+                let rand = arc4random_uniform(UInt32(arr.last?.end ?? 0))
                 index = arr.index { $0.start <= Int(rand) && $0.end > Int(rand) }
             } while index == nil
             return arr[index!].reward.cardId
