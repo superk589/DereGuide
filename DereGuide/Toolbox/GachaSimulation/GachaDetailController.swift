@@ -20,13 +20,13 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
     
     var gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
     
-    var sv: UIScrollView!
+    var scrollView = UIScrollView()
     
     var banner: BannerView!
     
-    var gachaDetailView: GachaDetailView!
+    var gachaDetailView = GachaDetailView()
     
-    var simulationView: GachaSimulateView!
+    var simulationView = GachaSimulateView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +38,18 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = leftItem
         
-        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
-        navigationItem.rightBarButtonItem = resetItem
+        if pool.hasSimulator {
+            let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
+            navigationItem.rightBarButtonItem = resetItem
+        }
         
-        sv = UIScrollView()
-        view.addSubview(sv)
-        sv.snp.makeConstraints { (make) in
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
         banner = BannerView()
-        sv.addSubview(banner)
+        scrollView.addSubview(banner)
         banner.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview().priority(900)
@@ -61,23 +62,26 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         }
         banner.sd_setImage(with: pool.detailBannerURL)
         
-        gachaDetailView = GachaDetailView()
-        sv.addSubview(gachaDetailView)
+        scrollView.addSubview(gachaDetailView)
         gachaDetailView.snp.makeConstraints { (make) in
             make.left.right.equalTo(banner)
             make.top.equalTo(banner.snp.bottom)
+            if !pool.hasSimulator {
+                make.bottom.equalToSuperview()
+            }
         }
         gachaDetailView.setupWith(pool: pool)
         gachaDetailView.delegate = self
         
-        simulationView = GachaSimulateView()
-        sv.addSubview(simulationView)
-        simulationView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(banner)
-            make.top.equalTo(gachaDetailView.snp.bottom)
-            make.bottom.equalToSuperview()
+        if pool.hasSimulator {
+            scrollView.addSubview(simulationView)
+            simulationView.snp.makeConstraints { (make) in
+                make.left.right.equalTo(banner)
+                make.top.equalTo(gachaDetailView.snp.bottom)
+                make.bottom.equalToSuperview()
+            }
+            simulationView.delegate = self
         }
-        simulationView.delegate = self
         
         // Do any additional setup after loading the view.
     }

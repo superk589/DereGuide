@@ -30,6 +30,7 @@ class GachaCardWithOddsListView: UIView {
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        collectionView.scrollView.isScrollEnabled = false
         
     }
     

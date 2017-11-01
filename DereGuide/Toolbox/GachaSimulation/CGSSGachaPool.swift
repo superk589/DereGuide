@@ -26,6 +26,10 @@ extension CGSSGachaPool {
         return id > 30075
     }
     
+    var hasSimulator: Bool {
+        return id < 30180
+    }
+    
     var cardList: [CGSSCard] {
         get {
             var list = [CGSSCard]()
@@ -72,7 +76,6 @@ extension CGSSGachaPool {
     }
         
     var detailBannerURL: URL! {
-//        if [30171, 30172, 30181, 30180].contains(id) {
         if id > 30170 && isReappeared {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
         } else {

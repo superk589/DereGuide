@@ -196,7 +196,6 @@ class GachaDetailView: UIView {
         let sorter = CGSSSorter.init(property: "sRarity")
         sorter.sortList(&cards)
         cardListView.setupWith(cards: cards, odds: cards.map { pool.rewardTable[$0.id]?.relativeOdds })
-        
         guaranteesView.cards = pool.cardsOfguaranteed
     }
     
