@@ -119,7 +119,11 @@ class UnitEditingController: BaseViewController {
         editableView.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
         view.addSubview(editableView)
         editableView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(traitCollection.verticalSizeClass == .compact ? -32 : -44)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            } else {
+                make.bottom.equalTo(traitCollection.verticalSizeClass == .compact ? -32 : -44)
+            }
             make.left.right.equalToSuperview()
         }
         

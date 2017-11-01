@@ -32,7 +32,7 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(20)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
         }
         
         toolbar = UIToolbar()

@@ -46,21 +46,11 @@ class CardTableViewController: BaseCardTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = cardList[indexPath.row]
-        // 打开谱面时 隐藏tabbar
-        cardDetailVC.hidesBottomBarWhenPushed = true
+        let vc = CardDetailViewController()
+        vc.card = cardList[indexPath.row]
+        vc.hidesBottomBarWhenPushed = true
         
-        // cardDetailVC.modalTransitionStyle = .CoverVertical
-        self.navigationController?.pushViewController(cardDetailVC, animated: true)
-        // 使用自定义动画效果
-        // let transition = CATransition()
-        // transition.duration = 0.3
-        // transition.type = kCATransitionMoveIn
-        // transition.subtype = kCATransitionFromRight
-        // navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-        // navigationController?.pushViewController(cardDetailVC, animated: false)
-        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

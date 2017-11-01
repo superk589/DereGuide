@@ -59,7 +59,11 @@ class LiveSimulatorViewController: BaseViewController, UITableViewDelegate, UITa
         prepareNavigationBar()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.edges.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.edges.equalToSuperview()
+            }
         }
         tableView.delegate = self
         tableView.dataSource = self

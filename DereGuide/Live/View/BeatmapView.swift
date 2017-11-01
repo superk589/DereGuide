@@ -71,7 +71,10 @@ class BeatmapView: IndicatorScrollView {
         beatmapDrawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor)
         updateBeatmapDrawer()
         contentSize.height = beatmapDrawer.totalHeight
-        contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
+        if #available(iOS 11.0, *) {
+        } else {
+            contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
+        }
         delegate = self
         
         setNeedsDisplay()
@@ -105,7 +108,7 @@ class BeatmapView: IndicatorScrollView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        beatmapDrawer.columnWidth = self.frame.size.width
+        beatmapDrawer?.columnWidth = self.frame.size.width
     }
     
     override func draw(_ rect: CGRect) {

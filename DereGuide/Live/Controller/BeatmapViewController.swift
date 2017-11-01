@@ -20,12 +20,12 @@ class BeatmapViewController: UIViewController {
     private func updateUI() {
         if let beatmap = checkBeatmapData(scene) {
             titleLabel?.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
-            bv?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
-            bv?.setNeedsDisplay()
+            beatmapView?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
+            beatmapView?.setNeedsDisplay()
         }
     }
     
-    var bv: BeatmapView!
+    var beatmapView: BeatmapView!
     var descLabel: UILabel!
     var flipItem: UIBarButtonItem!
     var tv: UIToolbar!
@@ -46,17 +46,19 @@ class BeatmapViewController: UIViewController {
         prepareToolbar()
         print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
         
-        bv = BeatmapView()
-        self.view.addSubview(bv)
-        bv.snp.makeConstraints { (make) in
+        beatmapView = BeatmapView()
+        self.view.addSubview(beatmapView)
+        beatmapView.snp.makeConstraints { (make) in
             if #available(iOS 11.0, *) {
-                make.top.left.right.equalToSuperview()
-                make.bottom.equalTo(-44)
+                make.edges.equalTo(view.safeAreaLayoutGuide)
             } else {
                 make.edges.equalToSuperview()
             }
         }
-        bv.contentMode = .redraw
+        if #available(iOS 11.0, *) {
+            view.layoutIfNeeded()
+        }
+        beatmapView.contentMode = .redraw
         
         // 自定义title描述歌曲信息
         titleLabel = UILabel()
@@ -78,10 +80,17 @@ class BeatmapViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (context) in
-            self.bv.beatmapDrawer.widthInset = size.width / 7.2
-            self.bv.beatmapDrawer.innerWidthInset = size.width / 7.2
-            self.bv.setNeedsDisplay()
+            self.beatmapView.beatmapDrawer.widthInset = size.width / 7.2
+            self.beatmapView.beatmapDrawer.innerWidthInset = size.width / 7.2
+            self.beatmapView.setNeedsDisplay()
         }, completion: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if #available(iOS 11.0, *) {
+            beatmapView.contentOffset = CGPoint(x: 0, y: beatmapView.contentSize.height - beatmapView.frame.size.height + beatmapView.adjustedContentInset.bottom)
+        }
     }
     
     @objc func backAction() {
@@ -150,11 +159,11 @@ class BeatmapViewController: UIViewController {
     }
     
     func getImageTitle() -> String {
-        return "\(scene.live.name) \(scene.stars)☆ \(scene.difficulty.description) bpm:\(scene.live.bpm) notes:\(scene.beatmap?.numberOfNotes ?? 0) length:\(Int(scene.beatmap?.totalSeconds ?? 0))s \(bv.mirrorFlip ? "mirror flipped" : "") powered by \(Config.appName)"
+        return "\(scene.live.name) \(scene.stars)☆ \(scene.difficulty.description) bpm:\(scene.live.bpm) notes:\(scene.beatmap?.numberOfNotes ?? 0) length:\(Int(scene.beatmap?.totalSeconds ?? 0))s \(beatmapView.mirrorFlip ? "mirror flipped" : "") powered by \(Config.appName)"
     }
     
     func enterImageView() {
-        bv.exportImageAsync(title: getImageTitle()) { (image) in
+        beatmapView.exportImageAsync(title: getImageTitle()) { (image) in
             let data = UIImagePNGRepresentation(image!)
             try? data?.write(to: URL.init(fileURLWithPath: "/Users/zzk/Desktop/aaa.png"))
         }
@@ -163,7 +172,7 @@ class BeatmapViewController: UIViewController {
     @objc func share(item: UIBarButtonItem) {
         // enterImageView()
         CGSSLoadingHUDManager.default.show()
-        bv.exportImageAsync(title: getImageTitle()) { (image) in
+        beatmapView.exportImageAsync(title: getImageTitle()) { (image) in
             CGSSLoadingHUDManager.default.hide()
             if image == nil {
                 return
@@ -193,8 +202,8 @@ class BeatmapViewController: UIViewController {
     }
     
     @objc func flip() {
-        bv.mirrorFlip = !bv.mirrorFlip
-        if bv.mirrorFlip {
+        beatmapView.mirrorFlip = !beatmapView.mirrorFlip
+        if beatmapView.mirrorFlip {
             flipItem.image = UIImage.init(named: "1110-rotate-toolbar-selected")
         } else {
             flipItem.image = UIImage.init(named: "1110-rotate-toolbar")
@@ -206,6 +215,7 @@ extension BeatmapViewController: BeatmapAdvanceOptionsViewControllerDelegate {
     
     func didDone(_ beatmapAdvanceOptionsViewController: BeatmapAdvanceOptionsViewController) {
         self.setting = beatmapAdvanceOptionsViewController.setting
+        view.setNeedsLayout()
         updateUI()
     }
     

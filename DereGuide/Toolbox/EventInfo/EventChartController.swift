@@ -74,9 +74,13 @@ class EventChartController: BaseViewController {
         view.addSubview(chartView)
         
         chartView.snp.makeConstraints { (make) in
-            make.top.equalTo(64)
-            make.bottom.equalTo(-49)
-            make.left.right.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.edges.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                make.left.right.equalToSuperview()
+            }
         }
         
         var colors = ChartColorTemplates.vordiplom()
