@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.6.3
+
+1. 针对近期无法获取卡片概率的卡池，**暂时**去除模拟抽卡的功能
+2. 适配 iPhone X，页面布局优化
+
+##### Japanese version
+
+
+##### English version
+
+1. For gachas those can not get each card's rate, **temporarily** remove its gacha simulator.
+2. Support iPhone X and UI improvements.
+
+
 ### 1.6.2
 2017-10-29
 
