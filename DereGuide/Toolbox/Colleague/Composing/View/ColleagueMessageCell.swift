@@ -46,7 +46,7 @@ class ColleagueMessageCell: ColleagueBaseCell {
     
     func setup(with message: String) {
         messageView.text = message
-        countLabel.text = String(Config.maxCharactersOfMessage - messageView.text.characters.count)
+        countLabel.text = String(Config.maxCharactersOfMessage - messageView.text.count)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,10 +58,10 @@ class ColleagueMessageCell: ColleagueBaseCell {
 extension ColleagueMessageCell: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.characters.count + (text.characters.count - range.length) <= Config.maxCharactersOfMessage
+        return textView.text.count + (text.count - range.length) <= Config.maxCharactersOfMessage
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        countLabel.text = String(Config.maxCharactersOfMessage - textView.text.characters.count)
+        countLabel.text = String(Config.maxCharactersOfMessage - textView.text.count)
     }
 }

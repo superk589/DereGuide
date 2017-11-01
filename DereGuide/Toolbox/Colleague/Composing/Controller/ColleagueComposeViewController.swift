@@ -204,7 +204,7 @@ class ColleagueComposeViewController: BaseTableViewController {
             return false
         }
         
-        guard let count = (cells[1] as! ColleagueInputCell).input.text?.characters.count, count <= 10 else {
+        guard let count = (cells[1] as! ColleagueInputCell).input.text?.count, count <= 10 else {
             UIAlertController.showHintMessage(NSLocalizedString("昵称不能超过10个文字", comment: ""), in: self)
             return false
         }

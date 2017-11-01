@@ -17,7 +17,7 @@ protocol ObserverTokenStore : class {
 /// This is a helper protocol for the SyncCoordinator.
 ///
 /// It receives application active / background state changes and forwards them after switching onto the right queue.
-protocol ApplicationActiveStateObserving : class, ObserverTokenStore {
+protocol ApplicationActiveStateObserving : ObserverTokenStore {
     /// Runs the given block on the right queue and dispatch group.
     func perform(_ block: @escaping () -> ())
 
