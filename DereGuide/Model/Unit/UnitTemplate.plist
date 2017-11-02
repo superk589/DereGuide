@@ -4,12 +4,36 @@
 <dict>
 	<key>Cute</key>
 	<array>
-		<real>100426</real>
-		<real>100344</real>
-		<integer>100256</integer>
+		<dict>
+			<key>potential</key>
+			<dict>
+				<key>vocalLevel</key>
+				<integer>10</integer>
+				<key>danceLevel</key>
+				<integer>5</integer>
+				<key>visualLevel</key>
+				<integer>10</integer>
+			</dict>
+			<key>id</key>
+			<real>100448</real>
+		</dict>
+		<integer>100412</integer>
+		<real>100256</real>
 		<integer>100398</integer>
 		<real>100396</real>
-		<real>100426</real>
+		<dict>
+			<key>potential</key>
+			<dict>
+				<key>vocalLevel</key>
+				<integer>10</integer>
+				<key>danceLevel</key>
+				<integer>5</integer>
+				<key>visualLevel</key>
+				<integer>10</integer>
+			</dict>
+			<key>id</key>
+			<integer>100448</integer>
+		</dict>
 	</array>
 	<key>Cool</key>
 	<array>
@@ -34,12 +58,12 @@
 	</array>
 	<key>Passion</key>
 	<array>
-		<integer>300378</integer>
-		<integer>300236</integer>
-		<integer>300368</integer>
-		<integer>300412</integer>
-		<real>300336</real>
-		<integer>300378</integer>
+		<real>300434</real>
+		<real>300236</real>
+		<integer>300448</integer>
+		<real>300412</real>
+		<real>300378</real>
+		<integer>300434</integer>
 	</array>
 </dict>
 </plist>
