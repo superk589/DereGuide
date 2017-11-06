@@ -144,7 +144,11 @@ class UnitEditingController: BaseViewController {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (context) in
             self.editableView.snp.updateConstraints { (update) in
-                update.bottom.equalTo(self.traitCollection.verticalSizeClass == .compact ? -32 : -44)
+                if #available(iOS 11.0, *) {
+
+            } else {
+                    update.bottom.equalTo(self.traitCollection.verticalSizeClass == .compact ? -32 : -44)
+                }
             }
             self.view.layoutIfNeeded()
         }, completion: nil)

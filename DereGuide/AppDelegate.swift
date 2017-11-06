@@ -62,9 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CGSSCacheManager.shared.wipeUserDocuments()
                 try? FileManager.default.removeItem(atPath: CGSSDAO.path + "/Data/")
             }
-            if lastVersion < 10 {
+            if lastVersion < 11 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitLive)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.unitLive)
             }
         }
         

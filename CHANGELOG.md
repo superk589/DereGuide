@@ -1,6 +1,22 @@
 # ChangeLog
 
+
+### 1.6.4
+
+
+细节优化和bug修复
+
+##### Japanese version
+
+機能向上とバグ修正
+
+##### English version
+
+Bug fixes and improvements
+
+
 ### 1.6.3
+2017-11-2
 
 1. 针对近期无法获取卡片概率的卡池，**暂时**去除模拟抽卡的功能
 2. 适配 iPhone X，页面布局优化
