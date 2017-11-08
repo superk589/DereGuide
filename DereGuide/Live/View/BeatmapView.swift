@@ -8,6 +8,22 @@
 
 import UIKit
 
+extension UIScrollView {
+    
+    var scrollableSize: CGSize {
+        if #available(iOS 11.0, *) {
+            let height = contentSize.height - bounds.height + adjustedContentInset.top + adjustedContentInset.bottom
+            let width = contentSize.width - bounds.width + adjustedContentInset.left + adjustedContentInset.right
+            return CGSize(width: width, height: height)
+        } else {
+            let height = contentSize.height - bounds.height + contentInset.top + contentInset.bottom
+            let width = contentSize.width - bounds.width + contentInset.left + contentInset.right
+            return CGSize(width: width, height: height)
+        }
+    }
+
+}
+
 class BeatmapView: IndicatorScrollView {
     
     var beatmapDrawer: AdvanceBeatmapDrawer!
@@ -23,7 +39,7 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
-    var setting: BeatmapAdvanceOptionsViewController.Setting!
+    var setting = BeatmapAdvanceOptionsViewController.Setting()
     
     var strokeColor: UIColor {
         switch type {
@@ -41,6 +57,50 @@ class BeatmapView: IndicatorScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
+        
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
+        addGestureRecognizer(pinch)
+    }
+    
+    private func getProgress(for point: CGPoint) -> CGFloat {
+        let offsetY = contentOffset.y - beatmapDrawer.heightInset + point.y
+        return offsetY / beatmapDrawer.totalBeatmapHeight
+    }
+    
+    private func setProgress(_ progress: CGFloat, for point: CGPoint) {
+        contentOffset.y = progress * beatmapDrawer.totalBeatmapHeight + beatmapDrawer.heightInset - point.y
+    }
+    
+    private lazy var _scale: CGFloat = self.setting.scale
+    private var scale: CGFloat {
+        set {
+            setting.scale = max(0.5, min(newValue, 2))
+            beatmapDrawer.sectionHeight = 245 * setting.scale
+            setNeedsDisplay()
+        }
+        get {
+            return setting.scale
+        }
+    }
+    
+    private var pinchCenter: CGPoint = .zero
+    private var progress: CGFloat = 0
+    @objc private func handlePinchGesture(_ pinch: UIPinchGestureRecognizer) {
+        switch pinch.state {
+        case .began:
+            let center = pinch.location(in: self)
+            pinchCenter.y = convert(center, to: superview).y - frame.minY
+            progress = getProgress(for: pinchCenter)
+        case .changed:
+            let scale = pinch.scale
+            self.scale *= scale
+            pinch.scale = 1
+            contentSize.height = beatmapDrawer.totalHeight
+            setProgress(progress, for: pinchCenter)
+        default:
+            break
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -112,7 +172,13 @@ class BeatmapView: IndicatorScrollView {
     }
     
     override func draw(_ rect: CGRect) {
-        beatmapDrawer.drawIn(rect: rect)
+        beatmapDrawer.drawIn(rect: rect)        
+//        let path = UIBezierPath()
+//        path.move(to: CGPoint(x: 0, y: pinchCenter.y + contentOffset.y))
+//        path.addLine(to: CGPoint(x: frame.maxX, y: pinchCenter.y + contentOffset.y))
+//        UIColor.black.set()
+//        path.lineWidth = 2
+//        path.stroke()
     }
     
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
