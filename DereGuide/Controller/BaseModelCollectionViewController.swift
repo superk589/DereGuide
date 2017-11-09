@@ -58,6 +58,14 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) in
+            self.navigationController?.navigationBar.setNeedsLayout()
+            self.navigationController?.navigationBar.layoutIfNeeded()
+        }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
 }
 
 //MARK: UISearchBarDelegate
