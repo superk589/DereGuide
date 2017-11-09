@@ -55,6 +55,8 @@ class BeatmapViewController: UIViewController {
         print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
         
         beatmapView = BeatmapView()
+        beatmapView.settingDelegate = self
+
         self.view.addSubview(beatmapView)
         beatmapView.snp.makeConstraints { (make) in
             if #available(iOS 11.0, *) {
@@ -84,15 +86,32 @@ class BeatmapViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         updateUI()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: .UIApplicationDidEnterBackground, object: nil)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        let progress = beatmapView.getProgress(for: CGPoint(x: 0, y: beatmapView.playOffsetY - beatmapView.contentOffset.y))
+        let shouldResume = beatmapView.isAutoScrolling
+        if shouldResume {
+            pause()
+        }
         coordinator.animate(alongsideTransition: { (context) in
-            self.beatmapView.beatmapDrawer.widthInset = size.width / 7.2
-            self.beatmapView.beatmapDrawer.innerWidthInset = size.width / 7.2
+            if size.width > size.height {
+                self.beatmapView.drawer?.widthInset = size.width / 7.2
+                self.beatmapView.drawer?.innerWidthInset = size.width / 21.6
+            } else {
+                self.beatmapView.drawer?.widthInset = size.width / 7.2
+                self.beatmapView.drawer?.innerWidthInset = size.width / 7.2
+            }
+            self.beatmapView.setProgress(progress, for: CGPoint(x: 0, y: self.beatmapView.playOffsetY - self.beatmapView.contentOffset.y))
             self.beatmapView.setNeedsDisplay()
-        }, completion: nil)
+        }, completion: { finished in
+            if shouldResume && !self.beatmapView.isAutoScrolling {
+                self.play()
+            }
+        })
     }
     
     override func viewWillLayoutSubviews() {
@@ -102,11 +121,18 @@ class BeatmapViewController: UIViewController {
         }
     }
     
-    @objc func backAction() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if beatmapView.isAutoScrolling {
+            pause()
+        }
+    }
+    
+    @objc private func backAction() {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func selectDiff() {
+    @objc private func selectDiff() {
         let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         for detail in scene.live.details {
@@ -186,7 +212,7 @@ class BeatmapViewController: UIViewController {
         }
     }
     
-    @objc func share(item: UIBarButtonItem) {
+    @objc private func share(item: UIBarButtonItem) {
         // enterImageView()
         CGSSLoadingHUDManager.default.show()
         beatmapView.exportImageAsync(title: getImageTitle()) { (image) in
@@ -212,13 +238,14 @@ class BeatmapViewController: UIViewController {
         }
     }
     
-    @objc func showAdvanceOptions() {
+    @objc private func showAdvanceOptions() {
         let nav = BaseNavigationController(rootViewController: filterController)
+        filterController.setting = setting
         nav.modalPresentationStyle = .formSheet
         present(nav, animated: true, completion: nil)
     }
     
-    @objc func flip() {
+    @objc private func flip() {
         beatmapView.mirrorFlip = !beatmapView.mirrorFlip
         if beatmapView.mirrorFlip {
             flipItem.image = #imageLiteral(resourceName: "1110-rotate-toolbar-selected")
@@ -230,34 +257,48 @@ class BeatmapViewController: UIViewController {
     @objc private func play() {
         if let index = toolbarItems?.index(of: playItem) {
             toolbarItems?[index] = pauseItem
-            startAutoScrolling()
         }
+        startAutoScrolling()
     }
     
     @objc private func pause() {
         if let index = toolbarItems?.index(of: pauseItem) {
             toolbarItems?[index] = playItem
-            endAutoScrolling()
         }
+        endAutoScrolling()
     }
     
     private lazy var displayLink = CADisplayLink(target: self.beatmapView, selector: #selector(BeatmapView.frameUpdated(displayLink:)))
     
     func startAutoScrolling() {
         displayLink.add(to: .current, forMode: .defaultRunLoopMode)
-        beatmapView.isAutoScrolling = true
-        beatmapView.isUserInteractionEnabled = false
+        beatmapView.startAutoScrolling()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     func endAutoScrolling() {
         displayLink.remove(from: .current, forMode: .defaultRunLoopMode)
-        beatmapView.isAutoScrolling = false
-        beatmapView.setNeedsDisplay()
-        beatmapView.isUserInteractionEnabled = true
+        beatmapView.endAutoScrolling()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    @objc private func enterBackground() {
+        if beatmapView.isAutoScrolling {
+            pause()
+        }
     }
     
     deinit {
         displayLink.invalidate()
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension BeatmapViewController: BeatmapViewSettingDelegate {
+    
+    func beatmapView(_ beatmapView: BeatmapView, didChange setting: BeatmapAdvanceOptionsViewController.Setting) {
+        self.setting = setting
+        self.setting.save()
     }
 }
 
@@ -275,7 +316,8 @@ extension BeatmapViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         beatmapView.setNeedsDisplay()
-        if beatmapView.isAutoScrolling && beatmapView.playOffsetY + beatmapView.beatmapDrawer.heightInset < beatmapView.beatmapDrawer.getPointY(beatmapView.beatmap.lastNote?.offsetSecond ?? 0) {
+        guard let drawer = beatmapView.drawer else { return }
+        if beatmapView.isAutoScrolling && beatmapView.playOffsetY + drawer.heightInset < drawer.getPointY(beatmapView.beatmap.lastNote?.offsetSecond ?? 0) {
             pause()
         }
     }

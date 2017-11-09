@@ -8,17 +8,64 @@
 
 import UIKit
 
+private enum Axis {
+    case horizontal
+    case vertical
+}
+
+private extension UIPinchGestureRecognizer {
+    
+    var axis: Axis {
+        let point1 = location(ofTouch: 0, in: view)
+        let point2 = location(ofTouch: 1, in: view)
+        let angle = atan2(point2.y - point1.y, point2.x - point1.x)
+        if (CGFloat.pi / 4)...(CGFloat.pi * 3 / 4) ~= abs(angle) {
+            return .vertical
+        } else {
+            return .horizontal
+        }
+    }
+    
+    var isHorizontal: Bool {
+        let point1 = location(ofTouch: 0, in: view)
+        let point2 = location(ofTouch: 1, in: view)
+        let angle = atan2(point2.y - point1.y, point2.x - point1.x)
+        if 0...(CGFloat.pi / 3) ~= abs(angle) || (CGFloat.pi * 2 / 3)...CGFloat.pi ~= abs(angle) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var isVertical: Bool {
+        let point1 = location(ofTouch: 0, in: view)
+        let point2 = location(ofTouch: 1, in: view)
+        let angle = atan2(point2.y - point1.y, point2.x - point1.x)
+        if (CGFloat.pi / 6)...(CGFloat.pi * 5 / 6) ~= abs(angle) {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+protocol BeatmapViewSettingDelegate: class {
+    func beatmapView(_ beatmapView: BeatmapView, didChange setting: BeatmapAdvanceOptionsViewController.Setting)
+}
+
 class BeatmapView: IndicatorScrollView {
     
-    var beatmapDrawer: AdvanceBeatmapDrawer!
+    var drawer: AdvanceBeatmapDrawer?
     var beatmap: CGSSBeatmap!
     var bpm: Int!
     var type: Int!
     
+    weak var settingDelegate: BeatmapViewSettingDelegate?
+    
     // 是否镜像翻转
     var mirrorFlip: Bool = false {
         didSet {
-            beatmapDrawer.mirrorFlip = mirrorFlip
+            drawer?.mirrorFlip = mirrorFlip
             setNeedsDisplay()
         }
     }
@@ -41,29 +88,32 @@ class BeatmapView: IndicatorScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
-        
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
         addGestureRecognizer(pinch)
+        pinch.delegate = self
     }
     
-    private func getProgress(for point: CGPoint) -> CGFloat {
-        let offsetY = contentOffset.y - beatmapDrawer.heightInset + point.y
-        return offsetY / beatmapDrawer.totalBeatmapHeight
+    func getProgress(for point: CGPoint) -> CGFloat {
+        guard let drawer = self.drawer else {
+            return 0
+        }
+        let offsetY = contentOffset.y - drawer.heightInset + point.y
+        return offsetY / drawer.totalBeatmapHeight
     }
     
-    private func setProgress(_ progress: CGFloat, for point: CGPoint) {
-        contentOffset.y = progress * beatmapDrawer.totalBeatmapHeight + beatmapDrawer.heightInset - point.y
+    func setProgress(_ progress: CGFloat, for point: CGPoint) {
+        guard let drawer = self.drawer else { return }
+        contentOffset.y = progress * drawer.totalBeatmapHeight + drawer.heightInset - point.y
     }
     
-    private lazy var _scale: CGFloat = self.setting.scale
-    private var scale: CGFloat {
+    private var verticalScale: CGFloat {
         set {
-            _scale = max(0.5, min(newValue, 2))
-            beatmapDrawer.sectionHeight = 245 * _scale
+            setting.verticalScale = max(0.5, min(newValue, 2))
+            drawer?.sectionHeight = 245 * setting.verticalScale
             setNeedsDisplay()
         }
         get {
-            return _scale
+            return setting.verticalScale
         }
     }
     
@@ -77,10 +127,12 @@ class BeatmapView: IndicatorScrollView {
             progress = getProgress(for: pinchCenter)
         case .changed:
             let scale = pinch.scale
-            self.scale *= scale
-            pinch.scale = 1
-            contentSize.height = beatmapDrawer.totalHeight
+            verticalScale *= scale
+            contentSize.height = drawer?.totalHeight ?? 0
             setProgress(progress, for: pinchCenter)
+            pinch.scale = 1
+        case .ended, .cancelled:
+            settingDelegate?.beatmapView(self, didChange: setting)
         default:
             break
         }
@@ -105,16 +157,20 @@ class BeatmapView: IndicatorScrollView {
 //        beatmap.exportNote()
 //        beatmap.exportIntervalToBpm()
 //        beatmap.exportNoteWithOffset()
-        
         let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
-        let innerWidthInset: CGFloat = widthInset
+        let innerWidthInset: CGFloat
+        if frame.width > frame.height {
+            innerWidthInset = widthInset / 3
+        } else {
+            innerWidthInset = widthInset
+        }
         let sectionHeight: CGFloat = 245
         let heightInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        beatmapDrawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor)
-        updateBeatmapDrawer()
-        contentSize.height = beatmapDrawer.totalHeight
+        drawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor)
+        setupDrawer()
+        contentSize.height = drawer?.totalHeight ?? 0
         if #available(iOS 11.0, *) {
         } else {
             contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
@@ -123,49 +179,57 @@ class BeatmapView: IndicatorScrollView {
         setNeedsDisplay()
     }
     
-    private func updateBeatmapDrawer() {
-        if beatmapDrawer == nil { return }
+    private func setupDrawer() {
+        if drawer == nil { return }
         switch setting.theme {
         case .single:
-            beatmapDrawer.tapColor = strokeColor
-            beatmapDrawer.holdColor = strokeColor
-            beatmapDrawer.flickColor = strokeColor
-            beatmapDrawer.slideColor = strokeColor
-            beatmapDrawer.strokeColor = strokeColor
+            drawer?.tapColor = strokeColor
+            drawer?.holdColor = strokeColor
+            drawer?.flickColor = strokeColor
+            drawer?.slideColor = strokeColor
+            drawer?.strokeColor = strokeColor
         case .type4:
-            beatmapDrawer.tapColor = .tap
-            beatmapDrawer.holdColor = .hold
-            beatmapDrawer.flickColor = .flick4
-            beatmapDrawer.slideColor = .slide
-            beatmapDrawer.strokeColor = UIColor.init(hexString: "7f7f7f")
+            drawer?.tapColor = .tap
+            drawer?.holdColor = .hold
+            drawer?.flickColor = .flick4
+            drawer?.slideColor = .slide
+            drawer?.strokeColor = UIColor.init(hexString: "7f7f7f")
         case .type3:
-            beatmapDrawer.tapColor = .tap
-            beatmapDrawer.holdColor = .hold
-            beatmapDrawer.flickColor = .flick3
-            beatmapDrawer.slideColor = .slide
-            beatmapDrawer.strokeColor = UIColor.init(hexString: "7f7f7f")
+            drawer?.tapColor = .tap
+            drawer?.holdColor = .hold
+            drawer?.flickColor = .flick3
+            drawer?.slideColor = .slide
+            drawer?.strokeColor = UIColor.init(hexString: "7f7f7f")
         }
         
-        beatmapDrawer.sectionHeight = 245 * setting.scale
+        verticalScale = setting.verticalScale
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        beatmapDrawer?.columnWidth = self.frame.size.width
+        drawer?.columnWidth = frame.width
+        contentSize.width = frame.width
     }
     
     var isAutoScrolling = false
     override func draw(_ rect: CGRect) {
-        beatmapDrawer.drawIn(rect: rect)
-        if isAutoScrolling {
-            pathForPlayLine().stroke()
+        drawer?.draw(rect)
+        if isAutoScrolling && setting.showsPlayLine {
+            pathForPlayLine()?.stroke()
+            drawTime()
         }
     }
     
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
 
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: self.beatmapDrawer.strokeColor, lineWidth: 1, tapColor: self.beatmapDrawer.tapColor, flickColor: self.beatmapDrawer.flickColor, slideColor: self.beatmapDrawer.slideColor, holdColor: self.beatmapDrawer.holdColor)
+            guard let drawer = self.drawer else {
+                DispatchQueue.main.async {
+                    callBack(nil)
+                }
+                return
+            }
+            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: drawer.strokeColor, lineWidth: 1, tapColor: drawer.tapColor, flickColor: drawer.flickColor, slideColor: drawer.slideColor, holdColor: drawer.holdColor)
             let newImage = adBeatmapDrawer.export(sectionPerColumn: 4, title: title)
             
             DispatchQueue.main.async {
@@ -174,36 +238,56 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
+    private var lastTimestamp: CFTimeInterval?
     @objc func frameUpdated(displayLink: CADisplayLink) {
-        
-        let offsetY = CGFloat(displayLink.duration) * beatmapDrawer.secScale
-        playOffsetY -= offsetY
+        guard let drawer = self.drawer else { return }
+        if let last = lastTimestamp {
+            let offsetY = CGFloat(displayLink.timestamp - last) * drawer.secScale
+            playOffsetY -= offsetY
+        }
+        lastTimestamp = displayLink.timestamp
+    }
     
+    func startAutoScrolling() {
+        isAutoScrolling = true
+        isUserInteractionEnabled = false
+        indicator.hide()
+        setContentOffset(contentOffset, animated: false)
+    }
+    
+    func endAutoScrolling() {
+        isAutoScrolling = false
+        setNeedsDisplay()
+        isUserInteractionEnabled = true
+        lastTimestamp = nil
     }
     
     var playOffsetY: CGFloat {
         get {
+            guard let drawer = self.drawer else { return 0 }
             if #available(iOS 11.0, *) {
-                return frame.height + contentOffset.y - beatmapDrawer.heightInset - adjustedContentInset.bottom
+                return frame.height + contentOffset.y - drawer.heightInset - adjustedContentInset.bottom
             } else {
-                return frame.height + contentOffset.y - beatmapDrawer.heightInset - contentInset.bottom
+                return frame.height + contentOffset.y - drawer.heightInset - contentInset.bottom
             }
         }
         set {
+            guard let drawer = self.drawer else { return }
             if #available(iOS 11.0, *) {
-                contentOffset.y = -frame.height + newValue + beatmapDrawer.heightInset + adjustedContentInset.bottom
+                contentOffset.y = -frame.height + newValue + drawer.heightInset + adjustedContentInset.bottom
             } else {
-                contentOffset.y = -frame.height + newValue + beatmapDrawer.heightInset + contentInset.bottom
+                contentOffset.y = -frame.height + newValue + drawer.heightInset + contentInset.bottom
             }
         }
     }
     
-    private func pathForPlayLine() -> UIBezierPath {
+    private func pathForPlayLine() -> UIBezierPath? {
+        guard let drawer = self.drawer else { return nil }
         let path = UIBezierPath()
         if #available(iOS 11.0, *) {
-            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - beatmapDrawer.heightInset - adjustedContentInset.bottom))
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.heightInset - adjustedContentInset.bottom))
         } else {
-            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - beatmapDrawer.heightInset - contentInset.bottom))
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.heightInset - contentInset.bottom))
         }
         path.addLine(to: CGPoint(x: frame.maxX, y: path.currentPoint.y))
         UIColor.black.set()
@@ -211,8 +295,29 @@ class BeatmapView: IndicatorScrollView {
         return path
     }
     
+    private func drawTime() {
+        guard let drawer = self.drawer else { return }
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
+        
+        let elapsed = TimeInterval(drawer.getSecOffset(y: playOffsetY) + (beatmap.firstNote?.sec ?? 0))
+        
+        let time: NSString = NSString(format: "%d:%02d", Int(elapsed) / 60, Int(elapsed) % 60)
+        time.draw(at: CGPoint(x: 10, y: playOffsetY - 19), withAttributes: attributes)
+    }
+    
 }
 
+extension BeatmapView: UIGestureRecognizerDelegate {
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let pinch = gestureRecognizer as? UIPinchGestureRecognizer {
+            return pinch.isVertical
+        } else {
+            return super.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+    }
+    
+}
 struct AdvanceBeatmapDrawer {
     
     var sectionHeight: CGFloat
@@ -269,7 +374,7 @@ struct AdvanceBeatmapDrawer {
             return nil
         }
         let rect = CGRect.init(x: 0, y: 0, width: columnWidth, height: totalHeight)
-        self.drawIn(rect: rect)
+        draw(rect)
         let image = UIImage.init(cgImage: imageContext.makeImage()!)
         UIGraphicsEndImageContext()
         
@@ -563,7 +668,7 @@ struct AdvanceBeatmapDrawer {
         }
     }
     
-    func drawIn(rect:CGRect) {
+    func draw(_ rect: CGRect) {
         
         // 画纵向辅助线
         drawVerticalLine(rect)

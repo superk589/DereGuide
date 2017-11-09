@@ -39,7 +39,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         }
         
         static func ==(lhs: BeatmapAdvanceOptionsViewController.Setting, rhs: BeatmapAdvanceOptionsViewController.Setting) -> Bool {
-            if lhs.theme == rhs.theme && lhs.scale == rhs.scale {
+            if lhs.theme == rhs.theme && lhs.verticalScale == rhs.verticalScale && lhs.showsPlayLine == rhs.showsPlayLine {
                 return true
             } else {
                 return false
@@ -47,7 +47,9 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         }
         
         var theme: ColorTheme
-        var scale: CGFloat
+        var verticalScale: CGFloat
+        var showsPlayLine: Bool
+        
 //        var isMirrorFlipped: Bool
         
         func save() {
@@ -64,8 +66,9 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         }
        
         init() {
-            self.theme = .type4
-            self.scale = 1.0
+            theme = .type4
+            verticalScale = 1.0
+            showsPlayLine = true
         }
     }
     
@@ -98,19 +101,16 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         option1.stepper.stepValue = 0.1
         option1.stepper.numberFormatter.maximumFractionDigits = 1
         option1.stepper.numberFormatter.minimumFractionDigits = 1
-        option1.addTarget(self, action: #selector(handleStepper(_:)), for: .valueChanged)
-        option1.setup(title: NSLocalizedString("纵向缩放比例", comment: ""), minValue: 0.5, maxValue: 2.0, currentValue: Double(setting.scale))
-        
-//        let option2 = SwitchOption()
-//        option2.label.text = NSLocalizedString("是否镜像翻转", comment: "")
-//        option2.switch.isOn = setting.isMirrorFlipped
-//        option2.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
-        
+        option1.addTarget(self, action: #selector(handleOption1Stepper(_:)), for: .valueChanged)
+        option1.setup(title: NSLocalizedString("纵向缩放比例", comment: ""), minValue: 0.5, maxValue: 2.0, currentValue: Double(setting.verticalScale))
         let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option1))
-//        let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option2))
         
-        staticCells.append(cell1)
-//        staticCells.append(cell2)
+        let option2 = SwitchOption()
+        option2.label.text = NSLocalizedString("自动播放时显示辅助线", comment: "")
+        option2.switch.isOn = setting.showsPlayLine
+        option2.addTarget(self, action: #selector(handleOption2Switch(_:)), for: .valueChanged)
+        let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option2))
+        staticCells = [cell1, cell2]
     }
     
     @objc func doneAction() {
@@ -123,8 +123,12 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func handleStepper(_ stepper: ValueStepper) {
-        setting.scale = CGFloat(stepper.value)
+    @objc func handleOption1Stepper(_ stepper: ValueStepper) {
+        setting.verticalScale = CGFloat(stepper.value)
+    }
+    
+    @objc private func handleOption2Switch(_ `switch`: UISwitch) {
+        setting.showsPlayLine = `switch`.isOn
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
