@@ -11,6 +11,14 @@ import SnapKit
 
 class BeatmapViewController: UIViewController {
     
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
+    }
+    
     var scene: CGSSLiveScene! {
         didSet {
             updateUI()
@@ -59,6 +67,7 @@ class BeatmapViewController: UIViewController {
             view.layoutIfNeeded()
         }
         beatmapView.contentMode = .redraw
+        beatmapView.delegate = self
         
         // 自定义title描述歌曲信息
         titleLabel = UILabel()
@@ -143,15 +152,23 @@ class BeatmapViewController: UIViewController {
         return nil
     }
     
+    lazy private var playItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1241-play-toolbar"), style: .plain, target: self, action: #selector(self.play))
+    lazy private var pauseItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1242-pause-toolbar"), style: .plain, target: self, action: #selector(self.pause))
+
     private func prepareToolbar() {
-        // let imageItem = UIBarButtonItem.init(image: UIImage.init(named: "822-photo-2-toolbar"), style: .plain, target: self, action: #selector(enterImageView))
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let fixedSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixedSpaceItem.width = 30
-        let shareItem = UIBarButtonItem.init(image: UIImage.init(named: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let fixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpaceItem.width = 20
+        let shareItem = UIBarButtonItem(image: #imageLiteral(resourceName: "702-share-toolbar"), style: .plain, target: self, action: #selector(share))
         let advanceItem = UIBarButtonItem(title: NSLocalizedString("选项", comment: ""), style: .plain, target: self, action: #selector(showAdvanceOptions))
-        flipItem = UIBarButtonItem.init(image: UIImage.init(named: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
-        self.toolbarItems = [shareItem, fixedSpaceItem, flipItem, spaceItem, advanceItem]
+        
+        let fixedSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpaceItem2.width = 20
+       
+        
+        flipItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
+        
+        toolbarItems = [shareItem, fixedSpaceItem, flipItem, fixedSpaceItem2, playItem, spaceItem, advanceItem]
     }
   
     func setup(with scene: CGSSLiveScene) {
@@ -204,10 +221,43 @@ class BeatmapViewController: UIViewController {
     @objc func flip() {
         beatmapView.mirrorFlip = !beatmapView.mirrorFlip
         if beatmapView.mirrorFlip {
-            flipItem.image = UIImage.init(named: "1110-rotate-toolbar-selected")
+            flipItem.image = #imageLiteral(resourceName: "1110-rotate-toolbar-selected")
         } else {
-            flipItem.image = UIImage.init(named: "1110-rotate-toolbar")
+            flipItem.image = #imageLiteral(resourceName: "1110-rotate-toolbar")
         }
+    }
+    
+    @objc private func play() {
+        if let index = toolbarItems?.index(of: playItem) {
+            toolbarItems?[index] = pauseItem
+            startAutoScrolling()
+        }
+    }
+    
+    @objc private func pause() {
+        if let index = toolbarItems?.index(of: pauseItem) {
+            toolbarItems?[index] = playItem
+            endAutoScrolling()
+        }
+    }
+    
+    private lazy var displayLink = CADisplayLink(target: self.beatmapView, selector: #selector(BeatmapView.frameUpdated(displayLink:)))
+    
+    func startAutoScrolling() {
+        displayLink.add(to: .current, forMode: .defaultRunLoopMode)
+        beatmapView.isAutoScrolling = true
+        beatmapView.isUserInteractionEnabled = false
+    }
+    
+    func endAutoScrolling() {
+        displayLink.remove(from: .current, forMode: .defaultRunLoopMode)
+        beatmapView.isAutoScrolling = false
+        beatmapView.setNeedsDisplay()
+        beatmapView.isUserInteractionEnabled = true
+    }
+    
+    deinit {
+        displayLink.invalidate()
     }
 }
 
@@ -217,6 +267,17 @@ extension BeatmapViewController: BeatmapAdvanceOptionsViewControllerDelegate {
         self.setting = beatmapAdvanceOptionsViewController.setting
         view.setNeedsLayout()
         updateUI()
+    }
+    
+}
+
+extension BeatmapViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        beatmapView.setNeedsDisplay()
+        if beatmapView.isAutoScrolling && beatmapView.playOffsetY + beatmapView.beatmapDrawer.heightInset < beatmapView.beatmapDrawer.getPointY(beatmapView.beatmap.lastNote?.offsetSecond ?? 0) {
+            pause()
+        }
     }
     
 }

@@ -42,41 +42,44 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     private var showHomeButtonCount = 3
     
     @objc func popToRoot() {
-        self.popToRootViewController(animated: true)
+
+        // 使用自定义动画效果
+        let transition = CATransition()
+        transition.type = kCATransitionFade
+        transition.duration = 0.3
+        view.layer.add(transition, forKey: kCATransition)
+        popViewController(animated: false)
+        popToRootViewController(animated: false)
+        
         setToolbarHidden(true, animated: true)
     }
+    
+    private var flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
+    private var homeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if self.viewControllers.count <= showHomeButtonCount {
             if let items = viewController.toolbarItems {
-                if items.count > 0 {
-                    for item in items {
-                        if ![1002, 1003].contains(item.tag) {
-                            setToolbarHidden(false, animated: animated)
-                            break
-                        }
-                    }
+                if items.count > 0 && items.contains(where: { ![flexibleSpaceItem, homeItem].contains($0) }) {
+                    setToolbarHidden(false, animated: animated)
+                } else {
+                    setToolbarHidden(true, animated: animated)
                 }
             } else {
                 setToolbarHidden(true, animated: animated)
             }
         } else {
             setToolbarHidden(false, animated: animated)
-            let item = UIBarButtonItem.init(image: UIImage.init(named: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
-            item.tag = 1002
-            if let items = viewController.toolbarItems, items.count > 0 {
-                //如果已经有了返回主页按钮 不再重复添加
-                for i in items {
-                    if i.tag == 1002 {
-                        return
+            if let items = viewController.toolbarItems {
+                if !items.contains(homeItem) {
+                    if items.count > 0 {
+                        viewController.toolbarItems?.append(flexibleSpaceItem)
                     }
+                    viewController.toolbarItems?.append(homeItem)
                 }
-                let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-                spaceItem.tag = 1003
-                viewController.toolbarItems?.append(spaceItem)
-                viewController.toolbarItems?.append(item)
             } else {
-                viewController.toolbarItems = [item]
+                viewController.toolbarItems = [homeItem]
             }
         }
     }

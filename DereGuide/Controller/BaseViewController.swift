@@ -10,6 +10,7 @@ import UIKit
 import ZKDrawerController
 
 extension UIViewController {
+    
     var drawerController: ZKDrawerController? {
         var vc = parent
         while vc != nil {
@@ -25,6 +26,14 @@ extension UIViewController {
 
 class BaseViewController: UIViewController {
 
+    override var shouldAutorotate: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIDevice.current.userInterfaceIdiom == .pad ? .all : .portrait
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white

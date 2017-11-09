@@ -15,6 +15,7 @@ protocol BaseSongTableViewControllerDelegate: class {
 }
 
 class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, LiveFilterSortControllerDelegate {
+    
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
     var liveList: [CGSSLive] = [CGSSLive]()

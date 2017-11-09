@@ -8,22 +8,6 @@
 
 import UIKit
 
-extension UIScrollView {
-    
-    var scrollableSize: CGSize {
-        if #available(iOS 11.0, *) {
-            let height = contentSize.height - bounds.height + adjustedContentInset.top + adjustedContentInset.bottom
-            let width = contentSize.width - bounds.width + adjustedContentInset.left + adjustedContentInset.right
-            return CGSize(width: width, height: height)
-        } else {
-            let height = contentSize.height - bounds.height + contentInset.top + contentInset.bottom
-            let width = contentSize.width - bounds.width + contentInset.left + contentInset.right
-            return CGSize(width: width, height: height)
-        }
-    }
-
-}
-
 class BeatmapView: IndicatorScrollView {
     
     var beatmapDrawer: AdvanceBeatmapDrawer!
@@ -74,12 +58,12 @@ class BeatmapView: IndicatorScrollView {
     private lazy var _scale: CGFloat = self.setting.scale
     private var scale: CGFloat {
         set {
-            setting.scale = max(0.5, min(newValue, 2))
-            beatmapDrawer.sectionHeight = 245 * setting.scale
+            _scale = max(0.5, min(newValue, 2))
+            beatmapDrawer.sectionHeight = 245 * _scale
             setNeedsDisplay()
         }
         get {
-            return setting.scale
+            return _scale
         }
     }
     
@@ -135,7 +119,6 @@ class BeatmapView: IndicatorScrollView {
         } else {
             contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
         }
-        delegate = self
         
         setNeedsDisplay()
     }
@@ -171,14 +154,12 @@ class BeatmapView: IndicatorScrollView {
         beatmapDrawer?.columnWidth = self.frame.size.width
     }
     
+    var isAutoScrolling = false
     override func draw(_ rect: CGRect) {
-        beatmapDrawer.drawIn(rect: rect)        
-//        let path = UIBezierPath()
-//        path.move(to: CGPoint(x: 0, y: pinchCenter.y + contentOffset.y))
-//        path.addLine(to: CGPoint(x: frame.maxX, y: pinchCenter.y + contentOffset.y))
-//        UIColor.black.set()
-//        path.lineWidth = 2
-//        path.stroke()
+        beatmapDrawer.drawIn(rect: rect)
+        if isAutoScrolling {
+            pathForPlayLine().stroke()
+        }
     }
     
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
@@ -193,13 +174,41 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
-}
-
-// MARK: UIScrollViewDelegate
-extension BeatmapView: UIScrollViewDelegate {
+    @objc func frameUpdated(displayLink: CADisplayLink) {
+        
+        let offsetY = CGFloat(displayLink.duration) * beatmapDrawer.secScale
+        playOffsetY -= offsetY
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        setNeedsDisplay()
+    }
+    
+    var playOffsetY: CGFloat {
+        get {
+            if #available(iOS 11.0, *) {
+                return frame.height + contentOffset.y - beatmapDrawer.heightInset - adjustedContentInset.bottom
+            } else {
+                return frame.height + contentOffset.y - beatmapDrawer.heightInset - contentInset.bottom
+            }
+        }
+        set {
+            if #available(iOS 11.0, *) {
+                contentOffset.y = -frame.height + newValue + beatmapDrawer.heightInset + adjustedContentInset.bottom
+            } else {
+                contentOffset.y = -frame.height + newValue + beatmapDrawer.heightInset + contentInset.bottom
+            }
+        }
+    }
+    
+    private func pathForPlayLine() -> UIBezierPath {
+        let path = UIBezierPath()
+        if #available(iOS 11.0, *) {
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - beatmapDrawer.heightInset - adjustedContentInset.bottom))
+        } else {
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - beatmapDrawer.heightInset - contentInset.bottom))
+        }
+        path.addLine(to: CGPoint(x: frame.maxX, y: path.currentPoint.y))
+        UIColor.black.set()
+        path.lineWidth = 2
+        return path
     }
     
 }

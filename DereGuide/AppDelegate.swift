@@ -171,6 +171,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
     }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let drawer = window?.rootViewController as? ZKDrawerController, let center = drawer.centerViewController as? UITabBarController, let nav = center.selectedViewController as? UINavigationController, let topmost = nav.topViewController {
+            if topmost is BeatmapViewController {
+                return .all
+            }
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return .all
+        } else {
+            return .portrait
+        }
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
