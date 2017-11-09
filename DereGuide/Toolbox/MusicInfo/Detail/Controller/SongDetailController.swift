@@ -64,9 +64,11 @@ class SongDetailController: BaseTableViewController {
         coordinator.animate(alongsideTransition: { (context) in
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SongDetailCoverFlowCell
             cell.collectionView.performBatchUpdates({
-                cell.collectionView.collectionViewLayout.invalidateLayout()
                 cell.collectionView.contentOffset.x = CGFloat(index ?? 0) * size.width
-            }, completion: nil)
+                cell.collectionView.performBatchUpdates(nil, completion: nil)
+            }, completion: { finished in
+                cell.collectionView.collectionViewLayout.invalidateLayout()
+            })
         }, completion: nil)
     }
     

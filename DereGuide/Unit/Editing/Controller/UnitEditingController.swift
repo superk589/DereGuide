@@ -146,7 +146,7 @@ class UnitEditingController: BaseViewController {
             self.editableView.snp.updateConstraints { (update) in
                 if #available(iOS 11.0, *) {
 
-            } else {
+                } else {
                     update.bottom.equalTo(self.traitCollection.verticalSizeClass == .compact ? -32 : -44)
                 }
             }
