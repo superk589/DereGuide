@@ -152,7 +152,7 @@ class DMComposingStepOneController: BaseViewController {
                 } else if response?.statusCode != 200 {
                     UIAlertController.showHintMessage(NSLocalizedString("您输入的游戏ID不存在", comment: ""), in: self)
                 } else {
-                    let json = JSON.init(data: data!)
+                    let json = JSON(data!)
                     let profile = DMProfile(fromJson: json)
                     let vc = DMComposingStepTwoController()
                     vc.setup(dmProfile: profile)

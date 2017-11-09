@@ -182,7 +182,7 @@ class Master: FMDatabaseQueue {
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 if let data = try? JSONSerialization.data(withJSONObject: set.resultDictionary ?? [], options: []) {
-                    let chara = CGSSChar.init(fromJson: JSON.init(data: data))
+                    let chara = CGSSChar.init(fromJson: JSON(data))
                     result.append(chara)
                 }
             }

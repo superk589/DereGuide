@@ -151,7 +151,7 @@ open class CGSSUpdater: NSObject {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                 callback(false, error)
             } else {
-                let json = JSON.init(data: data!)
+                let json = JSON(data!)
                 let info = ApiInfo.init(fromJson: json)
                 CGSSVersionManager.default.apiInfo = info
                 callback(true, nil)
@@ -193,7 +193,7 @@ open class CGSSUpdater: NSObject {
                 let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                 callback(nil, error)
             } else {
-                let json = JSON.init(data: data!)
+                let json = JSON(data!)
                 var items = [CGSSUpdateItem]()
                 if let cards = json["result"].array {
                     for card in cards {
@@ -414,7 +414,7 @@ open class CGSSUpdater: NSObject {
                     if error != nil {
                         // print("download card item error")
                     } else {
-                        let json = JSON.init(data: data!)["result"][0]
+                        let json = JSON(data!)["result"][0]
                         if json != JSON.null {
                             let card = CGSSCard.init(fromJson: json)
                             let dao = CGSSDAO.shared
