@@ -153,7 +153,7 @@ class LSCoordinator {
                     }
                     
                     // 生成所有可触发范围
-                    let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.secondOfLastNote)
+                    let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.timeOfLastNote)
                     for range in ranges {
                         switch type {
                         case .skillBoost:

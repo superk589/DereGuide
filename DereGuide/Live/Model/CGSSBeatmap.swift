@@ -16,7 +16,9 @@ class CGSSBeatmap {
     var difficulty: CGSSLiveDifficulty
     
     var shiftingPoints: [BpmShiftingPoint]?
-
+    
+    var originalShiftingPoints: [BpmShiftingPoint]?
+    
     var isValid: Bool {
         return notes.count > 0
     }
@@ -61,6 +63,9 @@ class CGSSBeatmap {
         return arr
     }()
     
+    // begin time of beatmap player
+    lazy var beginTime = TimeInterval(self.timeOfFirstNote)
+    
     func contextFree() {
         var positionPressed = [Int?](repeating: nil, count: 5)
         var slides = [Int: Int]()
@@ -102,17 +107,22 @@ class CGSSBeatmap {
     }
     
     func addShiftingOffset(info: CGSSBeatmapShiftingInfo, rawBpm: Int) {
+        
+        // calculate start offset using the first bpm in shifting info
         var offset: Float = 0
         if let bpm = info.shiftingPoints.first?.bpm {
             let bps = Float(bpm) / 60
             let spb = 1 / bps
-            let remainder = secondOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
+            let remainder = timeOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
             if !(remainder < 0.001 || 4 * spb - remainder < 0.001) {
                 offset = remainder * Float(bpm) / Float(rawBpm)
+                beginTime = TimeInterval(timeOfFirstNote - remainder)
             }
         }
         
+        // add shift offset for each note using shift info
         shiftingPoints = [BpmShiftingPoint]()
+        originalShiftingPoints = info.shiftingPoints
         for range in info.shiftingRanges {
             for note in validNotes {
                 if note.sec < range.start { continue }
@@ -126,22 +136,23 @@ class CGSSBeatmap {
         }
     }
     
-    // 如果起始点不是整个小节的开端 添加偏移量(针对机器人29)
+    // add start offset for non-shift-bpm live
     func addStartOffset(rawBpm: Int) {
         let bps = Float(rawBpm) / 60
         let spb = 1 / bps
-        let remainder = secondOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
+        let remainder = timeOfFirstNote.truncatingRemainder(dividingBy: 4 * spb)
         if remainder < 0.001 || 4 * spb - remainder < 0.001 { return }
         for note in validNotes {
             note.offset = remainder
         }
+        beginTime = TimeInterval(timeOfFirstNote - remainder)
     }
     
-    var secondOfFirstNote: Float {
+    var timeOfFirstNote: Float {
         return firstNote?.sec ?? 0
     }
     
-    var secondOfLastNote: Float {
+    var timeOfLastNote: Float {
         return lastNote?.sec ?? 0
     }
     
@@ -150,13 +161,13 @@ class CGSSBeatmap {
     }
     
     var validSeconds: Float {
-        return secondOfLastNote - secondOfFirstNote
+        return timeOfLastNote - timeOfFirstNote
     }
     
     // 折半查找指定秒数对应的combo数
     func comboForSec(_ sec: Float) -> Int {
         // 为了避免近似带来的误差 导致对压小节线的note计算不准确 此处加上0.0001
-        let newSec = sec + secondOfFirstNote + 0.0001
+        let newSec = sec + 0.0001 + timeOfFirstNote
         var end = numberOfNotes - 1
         var start = 0
         while start <= end {

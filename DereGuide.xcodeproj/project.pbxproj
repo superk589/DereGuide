@@ -19,6 +19,7 @@
 		120541781D78289F0021F875 /* CharProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120541771D78289F0021F875 /* CharProfileView.swift */; };
 		1205C0661F7622B3006F8305 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1205C0651F7622B3006F8305 /* StoreKit.framework */; };
 		120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */; };
+		120696D11FB70B9500801BE0 /* CGSSBeatmapPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120696D01FB70B9500801BE0 /* CGSSBeatmapPlayer.swift */; };
 		1206C0F71E275ACD00185782 /* BaseFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */; };
 		1206C0F91E2760F900185782 /* SortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0F81E2760F900185782 /* SortTableViewCell.swift */; };
 		1206C0FD1E278D6200185782 /* FilterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206C0FC1E278D6200185782 /* FilterItemView.swift */; };
@@ -447,6 +448,7 @@
 		120541771D78289F0021F875 /* CharProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharProfileView.swift; sourceTree = "<group>"; };
 		1205C0651F7622B3006F8305 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		120659C11E6BD3C200936C49 /* ScrollViewIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewIndicator.swift; sourceTree = "<group>"; };
+		120696D01FB70B9500801BE0 /* CGSSBeatmapPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapPlayer.swift; sourceTree = "<group>"; };
 		1206C0F61E275ACD00185782 /* BaseFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilterSortController.swift; sourceTree = "<group>"; };
 		1206C0F81E2760F900185782 /* SortTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortTableViewCell.swift; sourceTree = "<group>"; };
 		1206C0FC1E278D6200185782 /* FilterItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterItemView.swift; sourceTree = "<group>"; };
@@ -1137,6 +1139,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1258586D1FB58DDA00301A20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
+				12B4C1CA1F9B648B00EC03FC /* CGSSBeatmapNote.swift */,
+				12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */,
+				120696D01FB70B9500801BE0 /* CGSSBeatmapPlayer.swift */,
+				12A3F1691E5ADA96007B470E /* BpmShift.plist */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1261944B1EF108D000673BC5 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
@@ -1205,7 +1219,7 @@
 		1269E90F1D52085C0071AD7F /* Live */ = {
 			isa = PBXGroup;
 			children = (
-				12A3F1691E5ADA96007B470E /* BpmShift.plist */,
+				1258586D1FB58DDA00301A20 /* Model */,
 				1269E9FD1D520C9F0071AD7F /* Controller */,
 				1269EA001D520C9F0071AD7F /* View */,
 			);
@@ -1303,9 +1317,6 @@
 				129B95691F32AB15007B7AE2 /* Profile */,
 				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
-				1269E9C71D520B5D0071AD7F /* CGSSBeatmap.swift */,
-				12B4C1CA1F9B648B00EC03FC /* CGSSBeatmapNote.swift */,
-				12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */,
 				1269E9C81D520B5D0071AD7F /* CGSSCard.swift */,
 				1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */,
 				1269E9CB1D520B5D0071AD7F /* CGSSChar.swift */,
@@ -2529,6 +2540,7 @@
 				1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,
+				120696D11FB70B9500801BE0 /* CGSSBeatmapPlayer.swift in Sources */,
 				12FC8B501EDE6DEB003CF3C3 /* NoteSupportTableViewHeader.swift in Sources */,
 				12C3901D1F3424050077FB38 /* CenterWantedEditingViewController.swift in Sources */,
 				122879441F8A54A500AD1F5F /* CharaDetailMVTableViewCell.swift in Sources */,

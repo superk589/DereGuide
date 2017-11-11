@@ -277,9 +277,12 @@ class BeatmapViewController: UIViewController {
     }
     
     func endAutoScrolling() {
-        displayLink.remove(from: .current, forMode: .defaultRunLoopMode)
-        beatmapView.endAutoScrolling()
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        // if click too quickly, the main runloop may receive two or more pause action, removing display link from runloop twice will crash.
+        if beatmapView.isAutoScrolling {
+            displayLink.remove(from: .current, forMode: .defaultRunLoopMode)
+            beatmapView.endAutoScrolling()
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        }
     }
     
     @objc private func enterBackground() {

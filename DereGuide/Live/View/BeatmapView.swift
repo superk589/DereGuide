@@ -59,6 +59,7 @@ class BeatmapView: IndicatorScrollView {
     var beatmap: CGSSBeatmap!
     var bpm: Int!
     var type: Int!
+    var player: CGSSBeatmapPlayer?
     
     weak var settingDelegate: BeatmapViewSettingDelegate?
     
@@ -176,6 +177,8 @@ class BeatmapView: IndicatorScrollView {
             contentOffset = CGPoint(x: 0, y: contentSize.height - frame.size.height + contentInset.bottom)
         }
         
+        player = CGSSBeatmapPlayer(beatmap: beatmap, rawBPM: bpm)
+        
         setNeedsDisplay()
     }
     
@@ -217,6 +220,9 @@ class BeatmapView: IndicatorScrollView {
         if isAutoScrolling && setting.showsPlayLine {
             pathForPlayLine()?.stroke()
             drawTime()
+            if beatmap.shiftingPoints != nil {
+                drawBPM()
+            }
         }
     }
     
@@ -238,14 +244,9 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
-    private var lastTimestamp: CFTimeInterval?
     @objc func frameUpdated(displayLink: CADisplayLink) {
-        guard let drawer = self.drawer else { return }
-        if let last = lastTimestamp {
-            let offsetY = CGFloat(displayLink.timestamp - last) * drawer.secScale
-            playOffsetY -= offsetY
-        }
-        lastTimestamp = displayLink.timestamp
+        guard let drawer = self.drawer, let player = self.player else { return }
+        playOffsetY = drawer.getPointY(Float(player.currentShiftedOffset()))
     }
     
     func startAutoScrolling() {
@@ -253,13 +254,14 @@ class BeatmapView: IndicatorScrollView {
         isUserInteractionEnabled = false
         indicator.hide()
         setContentOffset(contentOffset, animated: false)
+        player?.play(shiftedOffset: TimeInterval(drawer?.getShiftedOffset(y: playOffsetY) ?? 0) + TimeInterval(beatmap.timeOfFirstNote))
     }
     
     func endAutoScrolling() {
         isAutoScrolling = false
         setNeedsDisplay()
         isUserInteractionEnabled = true
-        lastTimestamp = nil
+        player?.pause()
     }
     
     var playOffsetY: CGFloat {
@@ -296,13 +298,18 @@ class BeatmapView: IndicatorScrollView {
     }
     
     private func drawTime() {
-        guard let drawer = self.drawer else { return }
+        guard let player = self.player else { return }
         let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
-        
-        let elapsed = TimeInterval(drawer.getSecOffset(y: playOffsetY) + (beatmap.firstNote?.sec ?? 0))
-        
+        let elapsed = player.currentOffset()
         let time: NSString = NSString(format: "%d:%02d", Int(elapsed) / 60, Int(elapsed) % 60)
         time.draw(at: CGPoint(x: 10, y: playOffsetY - 19), withAttributes: attributes)
+    }
+    
+    private func drawBPM() {
+        guard let player = self.player else { return }
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
+        let bpm: NSString = NSString(format: "%d", player.currentBPM())
+        bpm.draw(at: CGPoint(x: 10, y: playOffsetY + 4), withAttributes: attributes)
     }
     
 }
@@ -683,8 +690,8 @@ struct AdvanceBeatmapDrawer {
         // 滑条 长按 同步线
         let maxY = rect.maxY + noteRadius
         let minY = rect.minY - noteRadius
-        var minIndex = beatmap.comboForSec(getSecOffset(y: maxY))
-        var maxIndex = beatmap.comboForSec(getSecOffset(y: minY))
+        var minIndex = beatmap.comboForSec(getShiftedOffset(y: maxY))
+        var maxIndex = beatmap.comboForSec(getShiftedOffset(y: minY))
        
         // if full screen has no notes, then expand the index
         if maxIndex - minIndex < 1 {
@@ -829,10 +836,15 @@ struct AdvanceBeatmapDrawer {
     }
     
     func getPointY(_ sec: Float) -> CGFloat {
-        return totalHeight - CGFloat(sec - self.beatmap.secondOfFirstNote) * secScale - heightInset
+        return totalHeight - CGFloat(sec - self.beatmap.timeOfFirstNote) * secScale - heightInset
     }
     
-    func getSecOffset(y: CGFloat) -> Float {
+    
+    /// Get the shiftd offset time from the very begining of the beatmap to a specific point in all the drawing area
+    ///
+    /// - Parameter y: the point.y of the drawing area
+    /// - Returns: the shifted offset time
+    func getShiftedOffset(y: CGFloat) -> Float {
         return Float((totalHeight - y - heightInset) / secScale)
     }
 }
