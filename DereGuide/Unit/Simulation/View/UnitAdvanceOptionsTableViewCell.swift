@@ -16,7 +16,25 @@ class UnitAdvanceOptionsTableViewCell: UITableViewCell {
         case textField(TextFieldOption)
         case `switch`(SwitchOption)
         case stepper(StepperOption)
+        case segmented(SegmentedOption)
         case plain
+        
+        var view: UIView? {
+            switch self {
+            case .`switch`(let view):
+                return view
+            case .textField(let view):
+                return view
+            case .slider(let view):
+                return view
+            case .stepper(let view):
+                return view
+            case .segmented(let view):
+                return view
+            default:
+                return nil
+            }
+        }
     }
     
     var optionView: UIView!
@@ -27,22 +45,12 @@ class UnitAdvanceOptionsTableViewCell: UITableViewCell {
         self.init()
         self.optionStyle = optionStyle
         
-        switch optionStyle {
-        case .`switch`(let view):
+        if let view = optionStyle.view {
             optionView = view
-        case .textField(let view):
-            optionView = view
-        case .slider(let view):
-            optionView = view
-        case .stepper(let view):
-            optionView = view
-        default:
-            optionView = UIView()
-        }
-        
-        contentView.addSubview(optionView)
-        optionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            contentView.addSubview(view)
+            view.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+            }
         }
         
         selectionStyle = .none

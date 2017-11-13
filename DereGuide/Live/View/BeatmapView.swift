@@ -169,7 +169,7 @@ class BeatmapView: IndicatorScrollView {
         let heightInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        drawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor)
+        drawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor, hidesAssistedLines: setting.hidesAssistedLines)
         setupDrawer()
         contentSize.height = drawer?.totalHeight ?? 0
         if #available(iOS 11.0, *) {
@@ -179,6 +179,7 @@ class BeatmapView: IndicatorScrollView {
         
         player = CGSSBeatmapPlayer(beatmap: beatmap, rawBPM: bpm)
         
+        setNeedsLayout()
         setNeedsDisplay()
     }
     
@@ -212,6 +213,12 @@ class BeatmapView: IndicatorScrollView {
         super.layoutSubviews()
         drawer?.columnWidth = frame.width
         contentSize.width = frame.width
+        drawer?.widthInset = ceil(frame.width / 7.2)
+        if frame.width > frame.height {
+            drawer?.innerWidthInset = ceil(frame.width / 21.6)
+        } else {
+            drawer?.innerWidthInset = ceil(frame.width / 7.2)
+        }
     }
     
     var isAutoScrolling = false
@@ -235,7 +242,7 @@ class BeatmapView: IndicatorScrollView {
                 }
                 return
             }
-            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: drawer.strokeColor, lineWidth: 1, tapColor: drawer.tapColor, flickColor: drawer.flickColor, slideColor: drawer.slideColor, holdColor: drawer.holdColor)
+            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: drawer.strokeColor, lineWidth: 1, tapColor: drawer.tapColor, flickColor: drawer.flickColor, slideColor: drawer.slideColor, holdColor: drawer.holdColor, hidesAssistedLines: false)
             let newImage = adBeatmapDrawer.export(sectionPerColumn: 4, title: title)
             
             DispatchQueue.main.async {
@@ -343,6 +350,10 @@ struct AdvanceBeatmapDrawer {
     var flickColor: UIColor
     var slideColor: UIColor
     var holdColor: UIColor
+    
+
+    var hidesAssistedLines: Bool
+//    var prefersConstantSpeed: Bool
     
     var interval: CGFloat {
         return (columnWidth - 2 * widthInset - 2 * innerWidthInset) / 4
@@ -677,14 +688,16 @@ struct AdvanceBeatmapDrawer {
     
     func draw(_ rect: CGRect) {
         
-        // 画纵向辅助线
-        drawVerticalLine(rect)
-        
-        // 画小节线
-        drawSectionLine(rect)
-        
-        // 画 bpm 改变线
-        drawBpmShiftLine(rect)
+        if !hidesAssistedLines {
+            // 画纵向辅助线
+            drawVerticalLine(rect)
+            
+            // 画小节线
+            drawSectionLine(rect)
+            
+            // 画 bpm 改变线
+            drawBpmShiftLine(rect)
+        }
         
         
         // 滑条 长按 同步线

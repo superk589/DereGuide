@@ -19,7 +19,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     var sectionTitles = [NSLocalizedString("颜色方案", comment: ""),
                          NSLocalizedString("绘制参数", comment: "")]
     
-    struct Setting: Equatable, Codable {
+    struct Setting: Codable {
         
         enum ColorTheme: Int, Codable, CustomStringConvertible {
             case single
@@ -38,17 +38,25 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             
         }
         
-        static func ==(lhs: BeatmapAdvanceOptionsViewController.Setting, rhs: BeatmapAdvanceOptionsViewController.Setting) -> Bool {
-            if lhs.theme == rhs.theme && lhs.verticalScale == rhs.verticalScale && lhs.showsPlayLine == rhs.showsPlayLine {
-                return true
-            } else {
-                return false
-            }
-        }
+//        enum ShiftType: String, Codable, CustomStringConvertible {
+//            case fixedSpeed
+//            case fixedLength
+//            var description: String {
+//                switch self {
+//                case .fixedSpeed:
+//                    return NSLocalizedString("固定速度", comment: "")
+//                case .fixedLength:
+//                    return NSLocalizedString("固定小节长度", comment: "")
+//                }
+//            }
+//        }
         
         var theme: ColorTheme
         var verticalScale: CGFloat
         var showsPlayLine: Bool
+        
+        var hidesAssistedLines: Bool
+//        var shiftType: ShiftType
         
 //        var isMirrorFlipped: Bool
         
@@ -69,6 +77,8 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             theme = .type4
             verticalScale = 1.0
             showsPlayLine = true
+            hidesAssistedLines = false
+//            shiftType = .fixedLength
         }
     }
     
@@ -106,11 +116,32 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option1))
         
         let option2 = SwitchOption()
-        option2.label.text = NSLocalizedString("自动播放时显示辅助线", comment: "")
+        option2.label.text = NSLocalizedString("自动播放时显示按键区辅助线", comment: "")
         option2.switch.isOn = setting.showsPlayLine
         option2.addTarget(self, action: #selector(handleOption2Switch(_:)), for: .valueChanged)
         let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option2))
-        staticCells = [cell1, cell2]
+        
+        let option3 = SwitchOption()
+        option3.label.text = NSLocalizedString("显示网格和标注", comment: "")
+        option3.switch.isOn = !setting.hidesAssistedLines
+        option3.addTarget(self, action: #selector(handleOption3Switch(_:)), for: .valueChanged)
+        let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
+        
+//        let option4 = SegmentedOption()
+//        option4.label.text = NSLocalizedString("BPM变化时的对齐方式", comment: "")
+//
+//        option4.segmentedControll.insertSegment(withTitle: Setting.ShiftType.fixedLength.description, at: 0, animated: false)
+//        option4.segmentedControll.insertSegment(withTitle: Setting.ShiftType.fixedSpeed.description, at: 1, animated: false)
+//        if setting.shiftType == .fixedLength {
+//            option4.segmentedControll.selectedSegmentIndex = 0
+//        } else {
+//            option4.segmentedControll.selectedSegmentIndex = 1
+//        }
+//        option4.addTarget(self, action: #selector(handleOption4(_:)), for: .valueChanged)
+//
+//        let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .segmented(option4))
+        
+        staticCells = [cell1, cell2, cell3]
     }
     
     @objc func doneAction() {
@@ -130,6 +161,18 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     @objc private func handleOption2Switch(_ `switch`: UISwitch) {
         setting.showsPlayLine = `switch`.isOn
     }
+    
+    @objc private func handleOption3Switch(_ `switch`: UISwitch) {
+        setting.hidesAssistedLines = !`switch`.isOn
+    }
+    
+//    @objc private func handleOption4(_ segmentedControll: UISegmentedControl) {
+//        if segmentedControll.selectedSegmentIndex == 0 {
+//            setting.shiftType = .fixedLength
+//        } else {
+//            setting.shiftType = .fixedSpeed
+//        }
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count

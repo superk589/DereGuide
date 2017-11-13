@@ -98,13 +98,6 @@ class BeatmapViewController: UIViewController {
             pause()
         }
         coordinator.animate(alongsideTransition: { (context) in
-            if size.width > size.height {
-                self.beatmapView.drawer?.widthInset = size.width / 7.2
-                self.beatmapView.drawer?.innerWidthInset = size.width / 21.6
-            } else {
-                self.beatmapView.drawer?.widthInset = size.width / 7.2
-                self.beatmapView.drawer?.innerWidthInset = size.width / 7.2
-            }
             self.beatmapView.setProgress(progress, for: CGPoint(x: 0, y: self.beatmapView.playOffsetY - self.beatmapView.contentOffset.y))
             self.beatmapView.setNeedsDisplay()
         }, completion: { finished in

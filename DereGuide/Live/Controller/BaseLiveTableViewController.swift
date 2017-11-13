@@ -68,13 +68,17 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let drawer = drawerController
-        drawer?.rightViewController = filterVC
-        drawer?.delegate = self
-        drawer?.defaultRightWidth = min(Screen.shortSide - 86, 400)
-        if UserDefaults.standard.firstTimeShowLiveView {
-            showHelpTips()
-            UserDefaults.standard.firstTimeShowLiveView = false
+        
+        // a bug that only in iPhone X, from landscape poping to this page will cause layout issue, use gcd after to avoid it
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let drawer = self.drawerController
+            drawer?.rightViewController = self.filterVC
+            drawer?.delegate = self
+            drawer?.defaultRightWidth = min(Screen.shortSide - 86, 400)
+            if UserDefaults.standard.firstTimeShowLiveView {
+                self.showHelpTips()
+                UserDefaults.standard.firstTimeShowLiveView = false
+            }
         }
     }
     
