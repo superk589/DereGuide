@@ -519,6 +519,37 @@ class Master: FMDatabaseQueue {
             callback(list)
         }
     }
+    
+    func getCardsAvailableDate(callback: @escaping FMDBCallBackClosure<[Int: String]>) {
+        var dict = [Int: String]()
+        execute({ (db) in
+            let selectSql = """
+                SELECT
+                    a.id,
+                    min( c.start_date ) gacha_date,
+                    min( e.event_start ) event_date
+                FROM
+                    card_data a
+                    LEFT JOIN gacha_available b ON a.id = b.reward_id
+                    LEFT JOIN gacha_data c ON b.gacha_id = c.id
+                    LEFT JOIN event_available d ON a.id = d.reward_id
+                    LEFT JOIN event_data e ON d.event_id = e.id
+                GROUP BY
+                    a.id
+            """
+            let set = try db.executeQuery(selectSql, values: nil)
+            while set.next() {
+                let id = Int(set.int(forColumn: "id"))
+                if let dateString = set.string(forColumn: "event_date") ?? set.string(forColumn: "gacha_date") {
+                    dict[id] = dateString
+                }
+            }
+        }) {
+            callback(dict)
+        }
+    }
+    
+    
 }
 
 class Manifest: FMDatabase {
@@ -682,17 +713,45 @@ class CGSSGameResource: NSObject {
         return fm.fileExists(atPath: path)
     }
     
+    func processDownloadedData(types: CGSSUpdateDataTypes, completion: (() -> ())?) {
+        let group = DispatchGroup()
+        if types.contains(.master) || types.contains(.card) {
+            group.enter()
+            prepareGachaList {
+                let list = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
+                for item in list {
+                    if self.gachaAvailabelList.contains(item.seriesId) { item.availableType = .normal }
+                    else if self.fesAvailabelList.contains(item.seriesId) { item.availableType = .fes }
+                    else if self.timeLimitAvailableList.contains(item.seriesId) { item.availableType = .limit }
+                    else if self.eventAvailabelList.contains(item.seriesId) { item.availableType = .event }
+                    else { item.availableType = .free }
+                }
+                group.leave()
+            }
+            
+            group.enter()
+            master.getCardsAvailableDate(callback: { (dict) in
+                for (id, value) in dict {
+                    let card = CGSSDAO.shared.cardDict.object(forKey: String(id)) as? CGSSCard
+                    card?.firstAvailableAt = value.toDate()
+                    let evolutedCard = CGSSDAO.shared.cardDict.object(forKey: String(id + 1)) as? CGSSCard
+                    evolutedCard?.firstAvailableAt = value.toDate()
+                }
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main, execute: {
+            completion?()
+            NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: nil)
+        })
+    }
+    
     @objc func updateEnd(notification: Notification) {
         if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
-            if types.contains(.master) || types.contains(.card) {
-                prepareGachaList {
-                    let list = CGSSDAO.shared.cardDict.allValues as! [CGSSCard]
-                    for item in list {
-                        item.availableType = nil
-                    }
-                    NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: self)
-                }
-            }
+            processDownloadedData(types: types, completion: nil)
+        } else {
+            NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: nil)
         }
     }
     
@@ -723,7 +782,7 @@ class CGSSGameResource: NSObject {
             self.fesAvailabelList = result
             group.leave()
         }
-        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { 
+        group.notify(queue: DispatchQueue.global(qos: .userInitiated), work: DispatchWorkItem.init(block: {
             callback?()
         }))
     }

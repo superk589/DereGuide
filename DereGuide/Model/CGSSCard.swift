@@ -67,7 +67,7 @@ extension CGSSCard {
         }
     }
     
-    var gachaType:CGSSAvailableTypes {
+    var gachaType: CGSSAvailableTypes {
         var type: CGSSAvailableTypes
         if availableType != nil {
             type = availableType!
@@ -100,11 +100,12 @@ extension CGSSCard {
         return nil
     }
     
-    // 对卡片进行按更新时间先后排序时使用, 对于新卡取更新时间, 对于旧卡取id%1000
     @objc dynamic var update_id: Int {
-        var returnValue = id! % 1000
-        returnValue += Int(updateTime.timeIntervalSince1970)
-        return returnValue
+        if let firstAvailable = firstAvailableAt {
+            return Int(firstAvailable.timeIntervalSince1970) + id
+        } else {
+            return id
+        }
     }
     
     // 用户排序的动态属性
@@ -237,6 +238,7 @@ class CGSSCard: CGSSBaseModel {
     // 非JSON获取
     var availableType: CGSSAvailableTypes?
     @objc dynamic var odds = 0
+    var firstAvailableAt: Date?
     
     /**
          * Instantiate the instance using the passed json values to set the properties values
@@ -381,7 +383,9 @@ class CGSSCard: CGSSBaseModel {
         vocalMin = aDecoder.decodeObject(forKey: "vocal_min") as? Int
         
         // added in 1.1.3
-        // availableTypes = CGSSAvailableTypes.init(rawValue: aDecoder.decodeObject(forKey: "availableTypes") as? UInt ?? 0)
+
+        availableType = CGSSAvailableTypes.init(rawValue: aDecoder.decodeObject(forKey: "availableType") as? UInt ?? 0)
+        firstAvailableAt = aDecoder.decodeObject(forKey: "firstAvailableAt") as? Date
         
     }
     
@@ -526,9 +530,13 @@ class CGSSCard: CGSSBaseModel {
         }
         
         // added in 1.1.3
-//        if availableTypes != nil {
-//            aCoder.encode(availableTypes.rawValue, forKey: "availableTypes")
-//        }
+        if availableType != nil {
+            aCoder.encode(availableType?.rawValue, forKey: "availableType")
+        }
+        
+        if firstAvailableAt != nil {
+            aCoder.encode(firstAvailableAt, forKey: "firstAvailableAt")
+        }
         
     }
     

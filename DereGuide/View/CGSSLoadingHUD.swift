@@ -143,7 +143,12 @@ class CGSSLoadingHUDManager {
         self.hud.alpha = 1
     }
     
-    func show() {
+    func show(text: String? = nil) {
+        if let text = text {
+            hud.titleLable.text = text
+        } else {
+            hud.titleLable.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
+        }
         debouncer.callback = showClosure
         debouncer.call()
     }

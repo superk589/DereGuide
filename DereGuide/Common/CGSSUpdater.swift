@@ -286,6 +286,7 @@ open class CGSSUpdater: NSObject {
         
         firstCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
             if errors.count > 0 {
+                self?.isChecking = false
                 complete(itemsNeedToUpdate, errors)
             } else {
                 if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
@@ -384,29 +385,29 @@ open class CGSSUpdater: NSObject {
         var updateTypes = CGSSUpdateDataTypes.init(rawValue: 0)
         
         // 为了让较老的数据早更新 做一次排序
-        let sortedItems = items.sorted { (item1, item2) -> Bool in
-            var index1: Int
-            var index2: Int
-            if item1.dataType == .card {
-                index1 = Int(item1.id)! % 1000
-            } else {
-                index1 = Int(item1.id) ?? 9999999
-            }
-            if item2.dataType == .card {
-                index2 = Int(item2.id)! % 1000
-            } else {
-                index2 = Int(item2.id) ?? 9999999
-            }
-            if index1 <= index2 {
-                return true
-            } else {
-                return false
-            }
-        }
-        
+//        let sortedItems = items.sorted { (item1, item2) -> Bool in
+//            var index1: Int
+//            var index2: Int
+//            if item1.dataType == .card {
+//                index1 = Int(item1.id)! % 1000
+//            } else {
+//                index1 = Int(item1.id) ?? 9999999
+//            }
+//            if item2.dataType == .card {
+//                index2 = Int(item2.id)! % 1000
+//            } else {
+//                index2 = Int(item2.id) ?? 9999999
+//            }
+//            if index1 <= index2 {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+ 
         let group = DispatchGroup()
         
-        for item in sortedItems {
+        for item in items {
             switch item.dataType {
             case CGSSUpdateDataTypes.card:
                 group.enter()
@@ -478,22 +479,12 @@ open class CGSSUpdater: NSObject {
             }
         }
         group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(block: { [weak self] in
-            let dao = CGSSDAO.shared
-            dao.saveAll({
-                self?.setVersionToNewest()
-            })
             self?.isUpdating = false
             DispatchQueue.main.async(execute: {
                 complete(success, total)
-                self?.postUpdateEndNotification(types: updateTypes)
+//                self?.postUpdateEndNotification(types: updateTypes)
             })
         }))
-    }
-    
-    
-    func setVersionToNewest() {
-        CGSSVersionManager.default.setDataVersionToNewest()
-        CGSSVersionManager.default.setApiVersionToNewest()
     }
     
     func updateImages(urls: [URL], progress: @escaping CGSSProgressClosure, complete: @escaping CGSSProgressClosure) {

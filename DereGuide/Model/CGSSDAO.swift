@@ -219,7 +219,20 @@ open class CGSSDAO: NSObject {
     fileprivate override init() {
         super.init()
         self.prepareFileDirectory()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(processedEnd(note:)), name: .gameResoureceProcessedEnd, object: nil)
         // self.loadAllDataFromFile()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func processedEnd(note: Notification) {
+        saveAll {
+            CGSSVersionManager.default.setDataVersionToNewest()
+            CGSSVersionManager.default.setApiVersionToNewest()
+        }
     }
     
     func prepareFileDirectory() {

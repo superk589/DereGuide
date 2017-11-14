@@ -96,12 +96,13 @@ class UpdateStatusView: UIView {
         // self.addSubview(cancelButton)
     }
     
-    func setContent(_ text: String, hasProgress: Bool = false ) {
+    func setContent(_ text: String, hasProgress: Bool = false, cancelable: Bool = true) {
         self.layer.removeAllAnimations()
         self.alpha = 1
         self.isHidden = false
         statusLabel.text = text
         loadingView.startAnimating()
+        cancelButton.isHidden = !cancelable
 //        if !hasProgress {
 //            // activityIndicator.startAnimating()
 //            loadingView.fx = (fwidth - loadingView.fwidth) / 2
