@@ -42,9 +42,7 @@ struct CGSSCardFilter: CGSSFilter {
                     if comp == "" { continue }
                     let b1 = v.name?.lowercased().contains(comp.lowercased()) ?? false
                     let b2 = v.chara?.conventional?.lowercased().contains(comp.lowercased()) ?? false
-                    let b3 = v.skill?.skillType.lowercased().contains(comp.lowercased()) ?? false
-                    let b4 = (v.rarity?.rarityString.lowercased() == (comp.lowercased()))
-                    if b1 || b2 || b3 || b4 {
+                    if b1 || b2 {
                         continue
                     } else {
                         return false

@@ -188,7 +188,7 @@
 "日文名/罗马音/CV" = "Name, CV";
 
 /* 搜索框文字, 不宜过长 */
-"日文名/罗马音/技能/稀有度" = "Name, Skill, Rarity";
+"日文名/罗马音" = "Name, Title";
 
 /* 生日提醒页面 */
 "时区" = "Time zone";
@@ -469,7 +469,7 @@
 "游戏编号" = "Character ID";
 "生日" = "Birthday";
 
-"活动名" = "Event name";
+"活动名" = "Name";
 "传统活动" = "Token Event";
 "Groove活动" = "Groove Event";
 "巡演活动" = "LIVE Parade";
