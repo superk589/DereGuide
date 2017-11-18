@@ -79,7 +79,7 @@ class SongViewController: BaseModelCollectionViewController {
     }
 
     override func checkUpdate() {
-        check(.master)
+        check([.master, .beatmap])
     }
     
     override func updateUI() {

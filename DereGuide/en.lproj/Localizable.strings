@@ -789,7 +789,7 @@
 "启动时自动检查更新" = "Check for Updates at Launch";
 "设置" = "Settings";
 "数据" = "Data";
-"移动网络下加载卡片大图" = "Use Cellular Data for Downloads";
+"移动网络下加载卡片大图" = "Use Cellular Data for Large Images";
 "缓存所有图片" = "Download All Images";
 "清除缓存数据" = "Clear Cached Data";
 "反馈" = "Feedback";
@@ -802,3 +802,8 @@
 "版权声明" = "Copyright";
 "致谢" = "Acknowledgements";
 "当前版本" = "Current Version";
+
+/* new in 1.7 */
+"自动播放时显示按键区辅助线" = "Show assisted line when auto-scrolling";
+"显示网格和标注" = "Show grid line and side text";
+"正在完成更新" = "Finishing...";

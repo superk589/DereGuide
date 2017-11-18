@@ -16,7 +16,7 @@ class CardDetailEvolutionCell: UITableViewCell {
     
     var fromIcon: CGSSCardIconView!
     
-    var arrowLabel: UILabel!
+    var arrowImageView = UIImageView(image: #imageLiteral(resourceName: "arrow-rightward").withRenderingMode(.alwaysTemplate))
     
     weak var delegate: CGSSIconViewDelegate?
     
@@ -39,22 +39,18 @@ class CardDetailEvolutionCell: UITableViewCell {
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.left.equalTo(10)
         }
-        
-        arrowLabel = UILabel()
-        arrowLabel.textColor = UIColor.darkGray
-        arrowLabel.font = UIFont.systemFont(ofSize: 24)
-        arrowLabel.text = " >> "
-        // evolutionContentView.addSubview(descLabel5)
-        contentView.addSubview(arrowLabel)
-        arrowLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(fromIcon.snp.right).offset(10)
+
+        contentView.addSubview(arrowImageView)
+        arrowImageView.tintColor = .darkGray
+        arrowImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(fromIcon.snp.right).offset(17)
             make.centerY.equalTo(fromIcon)
         }
         
         toIcon = CGSSCardIconView()
         contentView.addSubview(toIcon)
         toIcon.snp.makeConstraints { (make) in
-            make.left.equalTo(arrowLabel.snp.right).offset(10)
+            make.left.equalTo(arrowImageView.snp.right).offset(17)
             make.top.equalTo(fromIcon)
             make.bottom.equalTo(-10)
         }

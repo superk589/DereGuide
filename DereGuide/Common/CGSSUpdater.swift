@@ -482,7 +482,7 @@ open class CGSSUpdater: NSObject {
             self?.isUpdating = false
             DispatchQueue.main.async(execute: {
                 complete(success, total)
-//                self?.postUpdateEndNotification(types: updateTypes)
+                self?.postUpdateEndNotification(types: updateTypes)
             })
         }))
     }
@@ -497,7 +497,7 @@ open class CGSSUpdater: NSObject {
             complete(Int(a - b), Int(a))
             DispatchQueue.main.async { [weak self] in
                 self?.isUpdating = false
-                // self.postUpdateEndNotification(types: .image)
+//                self?.postUpdateEndNotification(types: .image)
             }
         })
 

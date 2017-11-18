@@ -230,8 +230,8 @@ class CGSSLive: NSObject {
         
         let path = String.init(format: DataPath.beatmap, self.id)
         let fm = FileManager.default
-        let dbQueue = MusicScoreDBQueue.init(path: path)
         if fm.fileExists(atPath: path) {
+            let dbQueue = MusicScoreDBQueue.init(path: path)
             dbQueue.getBeatmapCount(callback: { (count) in
                 result = count
                 semaphore.signal()

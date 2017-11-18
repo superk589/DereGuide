@@ -614,7 +614,6 @@ class CGSSGameResource: NSObject {
         super.init()
         self.prepareFileDirectory()
         self.prepareGachaList(callback: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateEnd(notification:)), name: .updateEnd, object: nil)
     }
     
     deinit {
@@ -745,14 +744,6 @@ class CGSSGameResource: NSObject {
             completion?()
             NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: nil)
         })
-    }
-    
-    @objc func updateEnd(notification: Notification) {
-        if let types = notification.userInfo?[CGSSUpdateDataTypesName] as? CGSSUpdateDataTypes {
-            processDownloadedData(types: types, completion: nil)
-        } else {
-            NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: nil)
-        }
     }
     
     // MARK: 卡池数据部分
