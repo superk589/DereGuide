@@ -8,41 +8,47 @@
 
 import UIKit
 
-class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPresentationControllerDelegate {
+class BirthdayNotificationViewController: BaseTableViewController {
     
-    var staticCells: [UITableViewCell]!
     let sectionTitles = [NSLocalizedString("今天", comment: "生日提醒页面"), NSLocalizedString("明天", comment: "生日提醒页面"), NSLocalizedString("七天内", comment: "生日提醒页面"), NSLocalizedString("一个月内", comment: "生日提醒页面")]
     
     let ranges: [CountableClosedRange<Int>] = [0...0, 1...1, 2...6, 7...30]
     
-    struct Row {
+    private struct Row {
         var title: String
         var charas: [CGSSChar]
     }
     
-    var rows = [Row]()
+    private struct StaticRow {
+        var title: String
+        var detail: String?
+        var hasDisclosure: Bool
+        var accessoryView: UIView?
+        var selector: Selector?
+        var detailTextLabelColor: UIColor?
+    }
+    
+    private var rows = [Row]()
+    private var staticRows = [StaticRow]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareSettingCells()
+        prepareStaticCellData()
         
-        tableView.allowsSelection = false
         tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         tableView.register(BirthdayNotificationTableViewCell.self, forCellReuseIdentifier: "BirthdayNotificationCell")
         
-        // 设置tableView的separatorStyle 在9.0版本之前会触发tableView的协议方法, 所以必须在这步之前注册tableView的cell
-        popoverPresentationController?.delegate = self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateEnd, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .UIApplicationDidBecomeActive, object: nil)
         
         reloadData()
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        let cell = staticCells[0]
-        (cell.accessoryView as! UILabel).text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+        staticRows[0].detail = isSystemNotificationSettingOn ? NSLocalizedString("已开启", comment: "生日提醒页面") : NSLocalizedString("未开启", comment: "生日提醒页面")
+        tableView.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .none)
     }
     
     private func prepareChars() {
@@ -57,35 +63,28 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         }
     }
     
-    private func prepareSettingCells() {
+    private var isSystemNotificationSettingOn: Bool {
+        return !(UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == [])
+    }
+    
+    private var isBirthdayNotificationOn: Bool {
+        return UserDefaults.standard.value(forKey: "BirthdayNotice") as? Bool ?? false
+    }
+    
+    private var birthdayNotificationTimeZone: String {
+        return UserDefaults.standard.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
+    }
+    
+    private func prepareStaticCellData() {
         
-        staticCells = [UITableViewCell]()
-        let cell0 = UITableViewCell.init(style: .value1, reuseIdentifier: "BirthDaySettingCell")
-        cell0.textLabel?.text = NSLocalizedString("系统通知设置", comment: "生日提醒页面")
-        cell0.detailTextLabel?.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
-        cell0.accessoryType = .disclosureIndicator
-        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(gotoSystemNotificationSettings))
-        cell0.addGestureRecognizer(tap2)
-        cell0.isUserInteractionEnabled = true
-        staticCells.append(cell0)
+        staticRows.append(StaticRow(title: NSLocalizedString("系统通知设置", comment: "生日提醒页面"), detail: isSystemNotificationSettingOn ? NSLocalizedString("已开启", comment: "生日提醒页面") : NSLocalizedString("未开启", comment: "生日提醒页面"), hasDisclosure: true, accessoryView: nil, selector: #selector(gotoSystemNotificationSettings), detailTextLabelColor: nil))
         
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "BirthDaySettingCell")
-        let swich1 = UISwitch.init(frame: CGRect.zero)
-        cell.accessoryView = swich1
-        cell.textLabel?.text = NSLocalizedString("开启生日通知提醒", comment: "生日提醒页面")
-        let birthdayNotice = UserDefaults.standard.value(forKey: "BirthdayNotice") as? Bool ?? false
-        swich1.isOn = birthdayNotice
-        swich1.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
-        staticCells.append(cell)
+        let `switch` = UISwitch.init(frame: CGRect.zero)
+        `switch`.isOn = isBirthdayNotificationOn
+        `switch`.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
+        staticRows.append(StaticRow(title: NSLocalizedString("开启生日通知提醒", comment: "生日提醒页面"), detail: nil, hasDisclosure: false, accessoryView: `switch`, selector: nil, detailTextLabelColor: nil))
         
-        let cell2 = UITableViewCell.init(style: .value1, reuseIdentifier: "BirthDaySettingCell")
-        cell2.textLabel?.text = NSLocalizedString("时区", comment: "生日提醒页面")
-        cell2.detailTextLabel?.text = UserDefaults.standard.value(forKey: "BirthdayTimeZone") as? String ?? "Asia/Tokyo"
-        cell2.detailTextLabel?.textColor = Color.parade
-
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(selectTimeZone))
-        cell2.addGestureRecognizer(tap)
-        staticCells.append(cell2)
+        staticRows.append(StaticRow(title: NSLocalizedString("时区", comment: "生日提醒页面"), detail: birthdayNotificationTimeZone, hasDisclosure: false, accessoryView: nil, selector: #selector(selectTimeZone), detailTextLabelColor: .parade))
     }
     
     @objc func valueChanged(_ sw: UISwitch) {
@@ -101,24 +100,25 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
     }
     
     @objc func selectTimeZone() {
-        let timeZoneCell = staticCells[2]
-        let alvc = UIAlertController.init(title: NSLocalizedString("选择提醒时区", comment: "生日提醒页面"), message: nil, preferredStyle: .actionSheet)
-        alvc.popoverPresentationController?.sourceView = timeZoneCell.detailTextLabel
-        alvc.popoverPresentationController?.sourceRect = CGRect(x: timeZoneCell.detailTextLabel!.fwidth / 2, y: timeZoneCell.detailTextLabel!.fheight, width: 0, height: 0)
-        alvc.addAction(UIAlertAction.init(title: "System", style: .default, handler: { [weak self] (a) in
-            UserDefaults.standard.setValue("System", forKey: "BirthdayTimeZone")
-            timeZoneCell.detailTextLabel?.text = "System"
-            self?.rescheduleBirthdayNotifications()
-            self?.reloadData()
+        if let cell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) {
+            let alvc = UIAlertController.init(title: NSLocalizedString("选择提醒时区", comment: "生日提醒页面"), message: nil, preferredStyle: .actionSheet)
+            alvc.popoverPresentationController?.sourceView = cell.detailTextLabel
+            alvc.popoverPresentationController?.sourceRect = CGRect(x: cell.detailTextLabel!.fwidth / 2, y: cell.detailTextLabel!.fheight, width: 0, height: 0)
+            alvc.addAction(UIAlertAction.init(title: "System", style: .default, handler: { [weak self] (a) in
+                UserDefaults.standard.setValue("System", forKey: "BirthdayTimeZone")
+                self?.rescheduleBirthdayNotifications()
+                self?.reloadSettings()
+                self?.reloadData()
             }))
-        alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .default, handler: { [weak self] (a) in
-            UserDefaults.standard.setValue("Asia/Tokyo", forKey: "BirthdayTimeZone")
-            timeZoneCell.detailTextLabel?.text = "Asia/Tokyo"
-            self?.rescheduleBirthdayNotifications()
-            self?.reloadData()
+            alvc.addAction(UIAlertAction.init(title: "Asia/Tokyo", style: .default, handler: { [weak self] (a) in
+                UserDefaults.standard.setValue("Asia/Tokyo", forKey: "BirthdayTimeZone")
+                self?.rescheduleBirthdayNotifications()
+                self?.reloadSettings()
+                self?.reloadData()
             }))
-        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "生日提醒页面"), style: .cancel, handler: nil))
-        self.present(alvc, animated: true, completion: nil)
+            alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "生日提醒页面"), style: .cancel, handler: nil))
+            self.present(alvc, animated: true, completion: nil)
+        }
     }
     
     func rescheduleBirthdayNotifications() {
@@ -133,7 +133,12 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
     @objc func reloadData() {
         prepareChars()
         tableView.reloadData()
-        staticCells[0].detailTextLabel?.text = (UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType()) ? NSLocalizedString("未开启", comment: "生日提醒页面") : NSLocalizedString("已开启", comment: "生日提醒页面")
+    }
+    
+    @objc func reloadSettings() {
+        staticRows[0].detail = isSystemNotificationSettingOn ? NSLocalizedString("已开启", comment: "生日提醒页面") : NSLocalizedString("未开启", comment: "生日提醒页面")
+        staticRows[2].detail = birthdayNotificationTimeZone
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0), IndexPath(row: 2, section: 0)], with: .none)
     }
     
     deinit {
@@ -146,32 +151,48 @@ class BirthdayNotificationViewController: BaseTableViewController, UIPopoverPres
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        switch indexPath.row {
-        case 0...2:
-            return 44
-        default:
-            return UITableViewAutomaticDimension
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return rows.count + staticCells.count
+        return rows.count + staticRows.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
-        case 0...2:
-            return staticCells[indexPath.row]
+        case 0..<staticRows.count:
+            var cell = tableView.dequeueReusableCell(withIdentifier: "BirthdayNotificationSettingCell")
+            if cell == nil {
+                cell = UITableViewCell(style: .value1, reuseIdentifier: "BirthdayNotificationSettingCell")
+            }
+            let row = staticRows[indexPath.row]
+           
+            cell?.textLabel?.text = row.title
+            cell?.detailTextLabel?.text = row.detail
+            cell?.accessoryType = row.hasDisclosure ? .disclosureIndicator : .none
+            cell?.accessoryView = row.accessoryView
+            cell?.selectionStyle = .none
+            cell?.detailTextLabel?.textColor = row.detailTextLabelColor ?? .gray
+            return cell!
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BirthdayNotificationCell", for: indexPath) as! BirthdayNotificationTableViewCell
             cell.setup(with: rows[indexPath.row - 3].charas, title: rows[indexPath.row - 3].title)
             cell.delegate = self
             return cell
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        switch indexPath.row {
+        case 0..<staticRows.count:
+            let row = staticRows[indexPath.row]
+            if let selector = row.selector {
+                self.perform(selector)
+            }
+        default:
+            break
+        }
+        
     }
 }
 

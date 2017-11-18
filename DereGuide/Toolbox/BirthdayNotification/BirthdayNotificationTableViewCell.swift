@@ -91,6 +91,8 @@ class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDe
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
         }
+        
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

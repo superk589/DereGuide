@@ -233,8 +233,8 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = sections[indexPath.section][indexPath.row]
-        if row.selector != nil {
-            self.perform(row.selector!)
+        if let selector = row.selector {
+            self.perform(selector)
         }
     }
     
@@ -268,6 +268,8 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         prepareCellData()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = NSLocalizedString("设置", comment: "")
     }
     
