@@ -224,6 +224,7 @@ class SettingsTableViewController: UITableViewController {
         let row = sections[indexPath.section][indexPath.row]
         
         cell?.textLabel?.text = row.title
+        cell?.textLabel?.adjustsFontSizeToFitWidth = true
         cell?.detailTextLabel?.text = row.detail
         cell?.accessoryType = row.hasDisclosure ? .disclosureIndicator : .none
         cell?.accessoryView = row.accessoryView

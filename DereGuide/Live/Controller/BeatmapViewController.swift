@@ -19,15 +19,12 @@ class BeatmapViewController: UIViewController {
         return .all
     }
     
-    var scene: CGSSLiveScene! {
-        didSet {
-            updateUI()
-        }
-    }
+    var scene: CGSSLiveScene!
     
     private func updateUI() {
         if let beatmap = checkBeatmapData(scene) {
             titleLabel?.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
+            pause()
             beatmapView?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
             beatmapView?.setNeedsDisplay()
         }
