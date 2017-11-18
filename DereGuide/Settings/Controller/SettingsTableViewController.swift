@@ -12,57 +12,94 @@ import SDWebImage
 import Social
 
 class SettingsTableViewController: UITableViewController {
+
+    private var currentVersionCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+    private var wipeCachedDataCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
     
-    @IBOutlet weak var downloadAtStartCell: UITableViewCell! {
-        didSet {
-            let downloadAtStartSwitch = UISwitch()
-            downloadAtStartCell.accessoryView = downloadAtStartSwitch
-            let downloadAtStart = UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true
-            downloadAtStartSwitch.isOn = downloadAtStart
-            downloadAtStartSwitch.addTarget(self, action: #selector(downloadAtStartValueChanged), for: .valueChanged)
+    private var sectionTitles = [NSLocalizedString("数据", comment: ""), NSLocalizedString("反馈", comment: ""), NSLocalizedString("关于", comment: "")]
+    
+    private struct Row {
+        var title: String
+        var detail: String?
+        var hasDisclosure: Bool
+        var accessoryView: UIView?
+        var selector: Selector?
+    }
+    
+    private var sections = [[Row]]()
+    
+    private func prepareCellData() {
+
+        var dataRows = [Row]()
+        var feedbackRows = [Row]()
+        var aboutRows = [Row]()
+        
+        let downloadAtStartSwitch = UISwitch()
+        let downloadAtStart = UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true
+        downloadAtStartSwitch.isOn = downloadAtStart
+        downloadAtStartSwitch.addTarget(self, action: #selector(downloadAtStartValueChanged), for: .valueChanged)
+        dataRows.append(Row(title: NSLocalizedString("启动时自动检查更新", comment: ""), detail: nil, hasDisclosure: false, accessoryView: downloadAtStartSwitch, selector: nil))
+        
+        
+        let fullImageCacheSwitch = UISwitch()
+        let fullImageCache = UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
+        fullImageCacheSwitch.isOn = fullImageCache
+        fullImageCacheSwitch.addTarget(self, action: #selector(fullImageCacheChanged), for: .valueChanged)
+        dataRows.append(Row(title: NSLocalizedString("移动网络下加载卡片大图", comment: ""), detail: nil, hasDisclosure: false, accessoryView: fullImageCacheSwitch, selector: nil))
+        
+        dataRows.append(Row(title: NSLocalizedString("缓存所有图片", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(cacheImage)))
+        
+        dataRows.append(Row(title: NSLocalizedString("清除缓存数据", comment: ""), detail: "...", hasDisclosure: true, accessoryView: nil, selector: #selector(wipeData)))
+        
+        feedbackRows.append(Row(title: NSLocalizedString("发送邮件", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(sendEmail)))
+        
+        feedbackRows.append(Row(title: NSLocalizedString("评价", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(postReview)))
+        
+        feedbackRows.append(Row(title: NSLocalizedString("Twitter", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(sendTweet)))
+        
+        aboutRows.append(Row(title: NSLocalizedString("支持作者", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showDonate)))
+        
+        aboutRows.append(Row(title: NSLocalizedString("致谢", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showAck)))
+        
+        aboutRows.append(Row(title: NSLocalizedString("版权声明", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showLicense)))
+       
+        aboutRows.append(Row(title: NSLocalizedString("隐私政策", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showPrivacyPolicy)))
+        
+        aboutRows.append(Row(title: NSLocalizedString("当前版本", comment: ""), detail: currentVersion, hasDisclosure: false, accessoryView: nil, selector: nil))
+        
+        sections += [dataRows, feedbackRows, aboutRows]
+    }
+    
+    private var cacheSize: String? {
+        set {
+            sections[0][3].detail = newValue
+            tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+        }
+        get {
+            return sections[0][3].detail
         }
     }
     
-    @IBOutlet weak var fullImageCacheCell: UITableViewCell! {
-        didSet {
-            let fullImageCacheSwitch = UISwitch()
-            fullImageCacheCell.accessoryView = fullImageCacheSwitch
-            let fullImageCache = UserDefaults.standard.value(forKey: "FullImageCache") as? Bool ?? true
-            fullImageCacheSwitch.isOn = fullImageCache
-            fullImageCacheSwitch.addTarget(self, action: #selector(fullImageCacheChanged), for: .valueChanged)
-        }
+    private var currentVersion: String? {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
     @objc func fullImageCacheChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "FullImageCache")
     }
     
-    @IBOutlet weak var appVersionLabel: UILabel! {
-        didSet {
-            let infoDic = Bundle.main.infoDictionary
-            appVersionLabel.text = (infoDic!["CFBundleShortVersionString"] as! String)
-        }
-    }
-    
     @objc func downloadAtStartValueChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "DownloadAtStart")
     }
     
-    @IBOutlet weak var sendEmailCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(sendEmail))
-            sendEmailCell.addGestureRecognizer(tap)
-        }
+    @objc private func showPrivacyPolicy() {
+        let sb = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBOutlet weak var sendTweetCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(sendTweet(_:)))
-            sendTweetCell.addGestureRecognizer(tap)
-        }
-    }
-    
-    @objc func sendTweet(_ tap: UITapGestureRecognizer) {
+    @objc func sendTweet() {
         if let url = URL(string: "twitter://post?message=%23\(Config.appName)%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter using url scheme")
             UIApplication.shared.openURL(url)
@@ -97,21 +134,6 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @IBOutlet weak var cacheImageCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(cacheImage))
-            cacheImageCell.addGestureRecognizer(tap)
-        }
-        
-    }
-    
-    @IBOutlet weak var wipeDataCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(wipeData))
-            wipeDataCell.addGestureRecognizer(tap)
-        }
-    }
-    
     func updateCacheSize() {
         DispatchQueue.global(qos: .userInitiated).async {
             if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
@@ -124,16 +146,10 @@ class SettingsTableViewController: UITableViewController {
                         }
                     }
                     DispatchQueue.main.async(execute: { [weak self] in
-                        self?.cacheSizeLabel.text = "\(size/(1024*1024))MB"
+                        self?.cacheSize = "\(size/(1024*1024))MB"
                     })
                 }
             }
-        }
-    }
-    
-    @IBOutlet weak var cacheSizeLabel: UILabel! {
-        didSet {
-            cacheSizeLabel.text = "..MB"
         }
     }
     
@@ -172,7 +188,6 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @objc func refresh() {
-//        dataVersionLabel.text = CGSSVersionManager.default.currentDataVersionString
         updateCacheSize()
     }
     
@@ -183,15 +198,43 @@ class SettingsTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .saveEnd, object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
     
-    @IBOutlet weak var reviewCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(postReview))
-            reviewCell.addGestureRecognizer(tap)
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.description())
+        if cell == nil {
+            cell = UITableViewCell(style: .value1, reuseIdentifier: UITableViewCell.description())
+        }
+        
+        let row = sections[indexPath.section][indexPath.row]
+        
+        cell?.textLabel?.text = row.title
+        cell?.detailTextLabel?.text = row.detail
+        cell?.accessoryType = row.hasDisclosure ? .disclosureIndicator : .none
+        cell?.accessoryView = row.accessoryView
+        cell?.selectionStyle = .none
+        return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = sections[indexPath.section][indexPath.row]
+        if row.selector != nil {
+            self.perform(row.selector!)
         }
     }
     
@@ -201,27 +244,6 @@ class SettingsTableViewController: UITableViewController {
             return
         }
         UIApplication.shared.openURL(url)
-    }
-    
-    @IBOutlet weak var ackCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showAck))
-            ackCell.addGestureRecognizer(tap)
-        }
-    }
-    
-    @IBOutlet weak var donateCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showDonate))
-            donateCell.addGestureRecognizer(tap)
-        }
-    }
-    
-    @IBOutlet weak var licenseCell: UITableViewCell! {
-        didSet {
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(showLicense))
-            licenseCell.addGestureRecognizer(tap)
-        }
     }
     
     @objc func showAck() {
@@ -244,7 +266,9 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareCellData()
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        navigationItem.title = NSLocalizedString("设置", comment: "")
     }
     
 }

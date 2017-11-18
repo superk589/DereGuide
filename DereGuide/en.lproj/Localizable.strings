@@ -784,3 +784,21 @@
 "绘制参数" = "Drawing parameters";
 "与歌曲颜色相同" = "Same as song color";
 "纵向缩放比例" = "Vertical scale";
+
+// settings from storyboard
+"启动时自动检查更新" = "Check for Updates at Launch";
+"设置" = "Settings";
+"数据" = "Data";
+"移动网络下加载卡片大图" = "Use Cellular Data for Downloads";
+"缓存所有图片" = "Download All Images";
+"清除缓存数据" = "Clear Cached Data";
+"反馈" = "Feedback";
+"发送邮件" = "E-mail";
+"Twitter" = "Twitter";
+"评价" = "Review in App Store";
+"关于" = "About";
+"支持作者" = "Support us";
+"隐私政策" = "Privacy Policy";
+"版权声明" = "Copyright";
+"致谢" = "Acknowledgements";
+"当前版本" = "Current Version";

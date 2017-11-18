@@ -23,6 +23,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = NSLocalizedString("版权声明", comment: "")
         tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in

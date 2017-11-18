@@ -34,6 +34,7 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = NSLocalizedString("致谢", comment: "")
         tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in

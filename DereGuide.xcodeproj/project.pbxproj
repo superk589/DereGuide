@@ -346,6 +346,7 @@
 		12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D71E386FB0005E932B /* EventPtDataRequest.swift */; };
 		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
+		12DE93351FC025AB004039F0 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */; };
 		12DFCA0B1F55468A00790859 /* GalleryImageItemBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0A1F55468A00790859 /* GalleryImageItemBaseController.swift */; };
 		12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
@@ -782,6 +783,7 @@
 		12D975D71E386FB0005E932B /* EventPtDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtDataRequest.swift; sourceTree = "<group>"; };
 		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
+		12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		12DFCA0A1F55468A00790859 /* GalleryImageItemBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageItemBaseController.swift; sourceTree = "<group>"; };
 		12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityViewControllerExtension.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
@@ -1378,6 +1380,7 @@
 				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
 				12D4F8AC1E1BCD780064991E /* DonationViewController.swift */,
 				12AC80271E4307A300B48D8D /* DownloadImageController.swift */,
+				12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2353,6 +2356,7 @@
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
+				12DE93351FC025AB004039F0 /* PrivacyPolicyViewController.swift in Sources */,
 				123F54581EF6B7CA00C76F31 /* RecentUsedMemberCell.swift in Sources */,
 				124BA5071E913808002E48FE /* EventTrendViewController.swift in Sources */,
 				120DBB271EEE2F6B004E0084 /* UnitCardSelectionAdvanceOptionsController.swift in Sources */,

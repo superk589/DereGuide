@@ -5,9 +5,6 @@
 /* Class = "UINavigationItem"; title = "我的隊伍"; ObjectID = "omj-Op-jcb"; */
 "omj-Op-jcb.title" = "Units";
 
-/* Class = "UITableViewSection"; headerTitle = "反饋"; ObjectID = "1cN-eL-xzi"; */
-"1cN-eL-xzi.headerTitle" = "Feedback";
-
 /* Class = "UITableViewController"; title = "角色排序和篩選"; ObjectID = "1ey-jy-bHg"; */
 "1ey-jy-bHg.title" = "Idol Sorting/Filtering Table View Controller";
 
@@ -26,9 +23,6 @@
 /* Class = "UITabBarController"; title = "根標籤欄"; ObjectID = "Eme-MZ-6LK"; */
 "Eme-MZ-6LK.title" = "Root Tab Bar Controller";
 
-/* Class = "UILabel"; text = "版權聲明"; ObjectID = "FGJ-uD-iwy"; */
-"FGJ-uD-iwy.text" = "Copyright";
-
 /* Class = "UINavigationController"; title = "組隊導航"; ObjectID = "IyO-O4-iMn"; */
 "IyO-O4-iMn.title" = "Unit Nav Controller";
 
@@ -38,9 +32,6 @@
 /* Class = "UINavigationController"; title = "歌曲導航"; ObjectID = "KxG-H5-NIc"; */
 "KxG-H5-NIc.title" = "Beatmap Nav Controller";
 
-/* Class = "UILabel"; text = "清除快取資料"; ObjectID = "L0F-L7-4EY"; */
-"L0F-L7-4EY.text" = "Clear Cached Data";
-
 /* Class = "UINavigationController"; title = "設定導航"; ObjectID = "Lc3-lA-ZOL"; */
 "Lc3-lA-ZOL.title" = "Settings Nav Controller";
 
@@ -49,12 +40,6 @@
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
 "S9a-oB-UoS.headerTitle" = "Sort";
-
-/* Class = "UITableViewSection"; headerTitle = "關於"; ObjectID = "Sc7-uC-obv"; */
-"Sc7-uC-obv.headerTitle" = "About";
-
-/* Class = "UILabel"; text = "當前版本"; ObjectID = "UuG-iS-uix"; */
-"UuG-iS-uix.text" = "Current Version";
 
 /* Class = "UITableViewController"; title = "卡片篩選和排序"; ObjectID = "XB8-jt-AiW"; */
 "XB8-jt-AiW.title" = "Card Sorting/Filtering Table View Controller";
@@ -68,12 +53,6 @@
 /* Class = "UITableViewController"; title = "組隊"; ObjectID = "Zys-WZ-9cy"; */
 "Zys-WZ-9cy.title" = "Unit";
 
-/* Class = "UILabel"; text = "致謝"; ObjectID = "fQd-50-rlt"; */
-"fQd-50-rlt.text" = "Acknowledgements";
-
-/* Class = "UILabel"; text = "啟動時自動檢查更新"; ObjectID = "fhG-RG-Edf"; */
-"fhG-RG-Edf.text" = "Check for Updates at Launch";
-
 /* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
 "gE2-j0-zef.title" = "Beatmaps";
 
@@ -83,17 +62,11 @@
 /* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "hJn-41-ekr"; */
 "hJn-41-ekr.headerTitle" = "Filter";
 
-/* Class = "UILabel"; text = "評價"; ObjectID = "r3b-gr-oUP"; */
-"r3b-gr-oUP.text" = "Review in App Store";
-
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
 "rD2-JL-rj6.headerTitle" = "Sort";
 
 /* Class = "UINavigationController"; title = "工具導航"; ObjectID = "sAv-Q2-aG8"; */
 "sAv-Q2-aG8.title" = "Tools Nav Controller";
-
-/* Class = "UILabel"; text = "行動網路下載入卡片大圖"; ObjectID = "u1E-LY-NTo"; */
-"u1E-LY-NTo.text" = "Use Cellular Data for Downloads";
 
 /* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "vSe-a1-0gm"; */
 "vSe-a1-0gm.headerTitle" = "Filter";
@@ -101,27 +74,8 @@
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "Tools";
 
-/* Class = "UILabel"; text = "當前資料版本"; ObjectID = "we8-dY-w1C"; */
-"we8-dY-w1C.text" = "Current Data Version";
-
-/* Class = "UILabel"; text = "傳送郵件"; ObjectID = "xrP-YC-gLm"; */
-"xrP-YC-gLm.text" = "E-mail";
-
-/* Class = "UILabel"; text = "快取所有圖片"; ObjectID = "yF0-cl-Say"; */
-"yF0-cl-Say.text" = "Download All Images";
-
 /* Class = "UITableViewSection"; headerTitle = "資料"; ObjectID = "zA8-n9-zYp"; */
 "zA8-n9-zYp.headerTitle" = "Data";
 
 /* Class = "UINavigationItem"; title = "實用工具"; ObjectID = "zeC-Rh-4X6"; */
 "zeC-Rh-4X6.title" = "Tools";
-
-/* Class = "UINavigationItem"; title = "設定"; ObjectID = "zkd-c8-p78"; */
-"zkd-c8-p78.title" = "Settings";
-
-// new in 1.2.0
-"MIJ-2r-FVJ.text" = "Support us";
-
-// new in 1.4.2
-"lvk-wC-Vve.text" = "Privacy Policy";
-"2ao-EV-snd.title" = "Privacy Policy";

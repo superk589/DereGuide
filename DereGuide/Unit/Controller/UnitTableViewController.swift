@@ -71,6 +71,13 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         hintLabel.isHidden = units.count != 0
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.indexPathsForSelectedRows?.forEach {
+            tableView.deselectRow(at: $0, animated: true)
+        }
+    }
+    
     private func prepareToolbar() {
         addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addUnit))
         deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
@@ -274,7 +281,9 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
             navigationController?.pushViewController(vc, animated: true)
         } else {
             let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { alert in
+                tableView.deselectRow(at: indexPath, animated: true)
+            }))
             self.navigationController?.present(alert, animated: true, completion: nil)
         }
     }
