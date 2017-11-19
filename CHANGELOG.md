@@ -1,8 +1,27 @@
 # ChangeLog
 
+### 1.7
+
+1. 新增谱面自动播放功能
+2. 谱面支持通过手势进行缩放
+3. 修复卡片列表按更新时间排序时顺序错乱的问题
+4. 修复当调整系统文本大小时，部分页面显示错误的问题
+5. 其他细节优化和bug修复
+
+##### Japanese version
+
+
+
+##### English version
+
+1. Add beatmap player.
+2. Beatmaps now support for pinch gesture to scale.
+3. Fix the bug when sorting by update time, card list is always disorderly.
+4. Fix that after setting system font size, some pages will display in error and crash.
+5. Other bug fixes and improvements.
 
 ### 1.6.4
-
+2017-11-7
 
 细节优化和bug修复
 
