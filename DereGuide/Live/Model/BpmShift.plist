@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>346,552</key>
+	<dict>
+		<key>timestamps</key>
+		<array>
+			<string>0,130</string>
+			<string>12.923077,128</string>
+			<string>14.798078,130</string>
+			<string>16.644231,124</string>
+			<string>20.515197,163</string>
+			<string>21.987590,185</string>
+		</array>
+		<key>start</key>
+		<real>1.8461539</real>
+		<key>name</key>
+		<string>Trinity Field</string>
+	</dict>
 	<key>60</key>
 	<dict>
 		<key>name</key>
