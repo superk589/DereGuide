@@ -76,6 +76,8 @@ class SongDetailLiveCell: ReadableWidthTableViewCell {
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         layoutIfNeeded()
         collectionView.invalidateIntrinsicContentSize()
+        // if not call setNeedsUpdateConstraints here, it may lead to layout warnings in xcode.
+        setNeedsUpdateConstraints()
         return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }
 }

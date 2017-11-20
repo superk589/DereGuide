@@ -60,16 +60,18 @@ class SongDetailController: BaseTableViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        let index = currentIndex
-        coordinator.animate(alongsideTransition: { (context) in
-            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SongDetailCoverFlowCell
-            cell.collectionView.performBatchUpdates({
-                cell.collectionView.contentOffset.x = CGFloat(index ?? 0) * size.width
-                cell.collectionView.performBatchUpdates(nil, completion: nil)
-            }, completion: { finished in
-                cell.collectionView.collectionViewLayout.invalidateLayout()
-            })
-        }, completion: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let index = currentIndex
+            coordinator.animate(alongsideTransition: { (context) in
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SongDetailCoverFlowCell
+                cell.collectionView.performBatchUpdates({
+                    cell.collectionView.contentOffset.x = CGFloat(index ?? 0) * size.width
+                    cell.collectionView.performBatchUpdates(nil, completion: nil)
+                }, completion: { finished in
+                    cell.collectionView.collectionViewLayout.invalidateLayout()
+                })
+            }, completion: nil)
+        }
     }
     
     @objc func addOrRemoveFavorite() {
