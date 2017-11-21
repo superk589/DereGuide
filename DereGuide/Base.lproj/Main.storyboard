@@ -532,7 +532,7 @@ If you have any questions or suggestions about our Privacy Policy</string>
             </objects>
             <point key="canvasLocation" x="-5169" y="1720"/>
         </scene>
-        <!--歌曲-->
+        <!--谱面-->
         <scene sceneID="5me-Bd-loQ">
             <objects>
                 <tableViewController id="NCZ-z5-ATr" customClass="LiveTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
@@ -546,17 +546,17 @@ If you have any questions or suggestions about our Privacy Policy</string>
                             <outlet property="delegate" destination="NCZ-z5-ATr" id="MKW-ew-3hp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="歌曲" id="OeQ-8h-gYQ"/>
+                    <navigationItem key="navigationItem" title="谱面" id="OeQ-8h-gYQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVT-IT-Bgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3594" y="-1252"/>
         </scene>
-        <!--歌曲导航-->
+        <!--谱面导航-->
         <scene sceneID="kBj-5g-TfY">
             <objects>
-                <navigationController title="歌曲导航" id="KxG-H5-NIc" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="歌曲" image="898-music-note.png" selectedImage="898-music-note-selected.png" id="gE2-j0-zef">
+                <navigationController title="谱面导航" id="KxG-H5-NIc" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="谱面" image="898-music-note.png" selectedImage="898-music-note-selected.png" id="gE2-j0-zef">
                         <inset key="imageInsets" minX="0.0" minY="2" maxX="0.0" maxY="-2"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="unN-TZ-n18">

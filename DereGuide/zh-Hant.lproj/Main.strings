@@ -9,7 +9,7 @@
 "1ey-jy-bHg.title" = "角色排序和篩選";
 
 /* Class = "UITableViewController"; title = "歌曲篩選和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "譜面篩選和排序";
+"2yB-7S-JxI.title" = "歌曲篩選和排序";
 
 /* Class = "UINavigationController"; title = "卡片導航"; ObjectID = "5Hs-jz-swe"; */
 "5Hs-jz-swe.title" = "卡片導航";
@@ -30,13 +30,13 @@
 "Ji2-5n-2Mz.title" = "組隊";
 
 /* Class = "UINavigationController"; title = "歌曲導航"; ObjectID = "KxG-H5-NIc"; */
-"KxG-H5-NIc.title" = "譜面導航";
+"KxG-H5-NIc.title" = "歌曲導航";
 
 /* Class = "UINavigationController"; title = "設定導航"; ObjectID = "Lc3-lA-ZOL"; */
 "Lc3-lA-ZOL.title" = "設定導航";
 
 /* Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ"; */
-"OeQ-8h-gYQ.title" = "譜面";
+"OeQ-8h-gYQ.title" = "歌曲";
 
 /* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
 "S9a-oB-UoS.headerTitle" = "排序";
@@ -54,7 +54,7 @@
 "Zys-WZ-9cy.title" = "組隊";
 
 /* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
-"gE2-j0-zef.title" = "譜面";
+"gE2-j0-zef.title" = "歌曲";
 
 /* Class = "UITabBarItem"; title = "設定"; ObjectID = "gI8-ss-NS6"; */
 "gI8-ss-NS6.title" = "設定";
