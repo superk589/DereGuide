@@ -97,6 +97,39 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     }
 }
 
+struct CGSSLeaderSkillTypes: OptionSet, CustomStringConvertible {
+    var rawValue:UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let vocalUp = CGSSLeaderSkillTypes(rawValue: 1 << 0)
+    static let danceUp = CGSSLeaderSkillTypes(rawValue: 1 << 1)
+    static let visualUp =  CGSSLeaderSkillTypes(rawValue: 1 << 2)
+    static let allAppealUp = CGSSLeaderSkillTypes(rawValue: 1 << 3)
+    static let lifeUp = CGSSLeaderSkillTypes(rawValue: 1 << 4)
+    static let procUp =  CGSSLeaderSkillTypes(rawValue: 1 << 5)
+    static let threeColor = CGSSLeaderSkillTypes(rawValue: 1 << 6)
+    static let princess = CGSSLeaderSkillTypes(rawValue: 1 << 7)
+    static let unknown = CGSSLeaderSkillTypes(rawValue: 1 << 8)
+    static let all =  CGSSLeaderSkillTypes(rawValue: 0b1_1111_1111)
+
+    init(type: Int, upType: Int, targetAttribute: Int, targetParams: Int, needCute: Int, needCool: Int, needPassion: Int) {
+        if upType == 1 && type == 20 {
+            if needCute == 6 || needCool == 6 || needPassion == 6 {
+                self = .threeColor
+            } else if targetParams == 1 {
+                
+            }
+        } else {
+            self = .unknown
+        }
+        
+        self = .unknown
+    }
+    
+    var description: String {
+        return ""
+    }
+}
+
 struct CGSSCardTypes: OptionSet, RawRepresentable, Hashable {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }

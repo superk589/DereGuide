@@ -17,6 +17,7 @@ class ToolboxTableViewController: BaseTableViewController {
         super.viewDidLoad()
         dataSource = NSArray.init(contentsOfFile: path!) as! [[String: String]]
         tableView.register(ToolboxTableViewCell.self, forCellReuseIdentifier: ToolboxTableViewCell.description())
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: - Table view data source
