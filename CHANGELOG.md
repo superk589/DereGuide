@@ -6,7 +6,8 @@
 2. 谱面支持通过手势进行缩放
 3. 修复卡片列表按更新时间排序时顺序错乱的问题
 4. 修复当调整系统文本大小时，部分页面显示错误的问题
-5. 其他细节优化和bug修复
+5. 调整部分技能类型的名称，保持和官方统一
+6. 其他细节优化和bug修复
 
 ##### Japanese version
 
@@ -18,7 +19,8 @@
 2. Beatmaps now support for pinch gesture to scale.
 3. Fix the bug when sorting by update time, card list is always disorderly.
 4. Fix that after setting system font size, some pages will display in error and crash.
-5. Other bug fixes and improvements.
+5. Keep the name of some skill types the same as the formal's.
+6. Other bug fixes and improvements.
 
 ### 1.6.4
 2017-11-7

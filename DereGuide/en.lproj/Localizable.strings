@@ -389,16 +389,16 @@
 "高" = "High";
 
 /* 技能类型 */
-"强判" = "Perfect Lock";
+"强判" = "Perfect Support";
 
 /* 技能类型 */
-"Combo保护" = "Combo Guard";
+"Combo保护" = "Combo Support";
 
 /* 技能类型 */
 "过载" = "Overload";
 
 /* 技能类型 */
-"锁血" = "Life Guard";
+"锁血" = "Damage Guard";
 
 /* 技能类型 */
 "Combo加成" = "Combo Bonus";
@@ -407,7 +407,7 @@
 "无技能" = "No Skill";
 
 /* 技能类型 */
-"分数加成" = "Score Up";
+"分数加成" = "Score Bonus";
 
 /* 技能类型 */
 "恢复生命" = "Healer";
