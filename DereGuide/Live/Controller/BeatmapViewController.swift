@@ -78,9 +78,9 @@ class BeatmapViewController: UIViewController {
         titleLabel.baselineAdjustment = .alignCenters
         navigationItem.titleView = titleLabel
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(self.selectDiff))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        self.view.backgroundColor = UIColor.white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(selectDifficulty))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
+        view.backgroundColor = UIColor.white
         
         updateUI()
         
@@ -122,16 +122,17 @@ class BeatmapViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func selectDiff() {
-        let alert = UIAlertController.init(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
-        alert.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+    @objc private func selectDifficulty() {
+        let alert = UIAlertController(title: NSLocalizedString("选择难度", comment: "底部弹出框标题"), message: nil, preferredStyle: .actionSheet)
+        alert.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         for detail in scene.live.details {
-            alert.addAction(UIAlertAction.init(title: detail.difficulty.description, style: .default, handler: { (a) in
+            alert.addAction(UIAlertAction(title: detail.difficulty.description, style: .default, handler: { (a) in
                 self.scene.difficulty = detail.difficulty
+                self.updateUI()
             }))
         }
-        alert.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "底部弹出框按钮"), style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func showBeatmapNotFoundAlert() {
