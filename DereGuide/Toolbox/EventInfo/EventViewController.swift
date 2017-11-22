@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class EventViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate, BannerViewAnimatorProvider {
+class EventViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, EventFilterSortControllerDelegate, BannerAnimatorProvider, BannerContainer {
 
     var defaultList: [CGSSEvent]!
     var eventList = [CGSSEvent]()
@@ -31,10 +31,12 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         }
     }
     
-    lazy var bannerViewAnimator: BannerViewAnimator = {
-        let animator = BannerViewAnimator()
+    lazy var bannerAnimator: BannerAnimator = {
+        let animator = BannerAnimator()
         return animator
     }()
+    
+    var bannerView: BannerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,7 +154,7 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         vc.bannerId = bannerId
         vc.event = eventList[indexPath.row]
         let cell = tableView.cellForRow(at: indexPath) as? EventTableViewCell
-        self.bannerViewAnimator.sourceBannerView = cell?.banner
-        self.navigationController?.pushViewController(vc, animated: true)
+        bannerView = cell?.banner
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

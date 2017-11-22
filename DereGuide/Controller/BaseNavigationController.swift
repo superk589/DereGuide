@@ -84,4 +84,15 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         }
     }
     
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if let vc = fromVC as? (BannerAnimatorProvider & BannerContainer), toVC is BannerContainer , operation == .push {
+            vc.bannerAnimator.animatorType = .push
+            return vc.bannerAnimator
+        } else if let vc = toVC as? (BannerContainer & BannerAnimatorProvider), fromVC is BannerContainer, operation == .pop, vc.bannerView != nil {
+            vc.bannerAnimator.animatorType = .pop
+            return vc.bannerAnimator
+        }
+        return nil
+    }
 }

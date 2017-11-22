@@ -47,7 +47,6 @@
 		121C78E21D57364F00D0B636 /* BaseLiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E11D57364F00D0B636 /* BaseLiveTableViewController.swift */; };
 		121C78E41D57376200D0B636 /* UnitSongSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121C78E31D57376200D0B636 /* UnitSongSelectViewController.swift */; };
 		121D237A1E70F97700319519 /* BannerViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23791E70F97700319519 /* BannerViewAnimator.swift */; };
-		121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D23811E7198AE00319519 /* ToolboxNavigationController.swift */; };
 		121FCFAE1EFA1A6100B7DFF4 /* UnitAdvanceDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FCFAD1EFA1A6100B7DFF4 /* UnitAdvanceDescriptionCell.swift */; };
 		122497241E8E8582005C743C /* LFDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497231E8E8582005C743C /* LFDistribution.swift */; };
 		122497261E8E859C005C743C /* LSNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122497251E8E859C005C743C /* LSNote.swift */; };
@@ -352,7 +351,6 @@
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
 		12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */; };
-		12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
 		12EECCD31ED57EFA0047666C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCD21ED57EFA0047666C /* NotificationViewController.swift */; };
@@ -478,7 +476,6 @@
 		121C78E11D57364F00D0B636 /* BaseLiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLiveTableViewController.swift; sourceTree = "<group>"; };
 		121C78E31D57376200D0B636 /* UnitSongSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSongSelectViewController.swift; sourceTree = "<group>"; };
 		121D23791E70F97700319519 /* BannerViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewAnimator.swift; sourceTree = "<group>"; };
-		121D23811E7198AE00319519 /* ToolboxNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolboxNavigationController.swift; sourceTree = "<group>"; };
 		121FCFAD1EFA1A6100B7DFF4 /* UnitAdvanceDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitAdvanceDescriptionCell.swift; sourceTree = "<group>"; };
 		122497231E8E8582005C743C /* LFDistribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFDistribution.swift; sourceTree = "<group>"; };
 		122497251E8E859C005C743C /* LSNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSNote.swift; sourceTree = "<group>"; };
@@ -789,7 +786,6 @@
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
 		12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDifficultyView.swift; sourceTree = "<group>"; };
-		12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveJacketViewAnimator.swift; sourceTree = "<group>"; };
 		12EECCCE1ED57EF90047666C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EECCD21ED57EFA0047666C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -1001,7 +997,6 @@
 				129B95551F3156BF007B7AE2 /* Colleague */,
 				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
 				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
-				121D23811E7198AE00319519 /* ToolboxNavigationController.swift */,
 				121D23791E70F97700319519 /* BannerViewAnimator.swift */,
 			);
 			path = Toolbox;
@@ -1410,7 +1405,6 @@
 				1269E9FE1D520C9F0071AD7F /* BeatmapViewController.swift */,
 				1269E9FF1D520C9F0071AD7F /* LiveTableViewController.swift */,
 				1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */,
-				12ED40491EAF9A2E0023418B /* LiveJacketViewAnimator.swift */,
 				1201A27E1F9488FD00AB1E48 /* BeatmapAdvanceOptionsViewController.swift */,
 			);
 			path = Controller;
@@ -2522,7 +2516,6 @@
 				1291820D1F58544600F91C0B /* DMSupportCard.swift in Sources */,
 				12FC8B5D1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionHeader.swift in Sources */,
 				1291821F1F59287600F91C0B /* ColleagueDescriptionCell.swift in Sources */,
-				12ED404A1EAF9A2E0023418B /* LiveJacketViewAnimator.swift in Sources */,
 				12FC8B5F1EDE90D0003CF3C3 /* SwitchOption.swift in Sources */,
 				122497301E8E95D1005C743C /* LFSamplePoint.swift in Sources */,
 				129182111F58552800F91C0B /* DMPotential.swift in Sources */,
@@ -2574,7 +2567,6 @@
 				1245F7A11F1C629D009A80EC /* RemoteRefreshable.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
 				12A14D421F2241700070D7A1 /* MemberModifier.swift in Sources */,
-				121D23821E7198AE00319519 /* ToolboxNavigationController.swift in Sources */,
 				12356BCB1E8FE94F005EEB7A /* TipView.swift in Sources */,
 				122EECE91D609C04008ADE08 /* CGSSCharaIconView.swift in Sources */,
 				12C6B35C1F00B76B00A25DB1 /* CardDetailRelatedCardsCell.swift in Sources */,

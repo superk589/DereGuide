@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class SongViewController: BaseModelCollectionViewController {
+class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvider, BannerContainer {
     
     var defaultList: [CGSSSong]!
     var songs = [CGSSSong]()
@@ -39,6 +39,15 @@ class SongViewController: BaseModelCollectionViewController {
         vc.delegate = self
         return vc
     }()
+    
+    lazy var bannerAnimator: BannerAnimator = {
+        let animator = BannerAnimator()
+        return animator
+    }()
+    
+    var bannerView: BannerView?
+    
+    var otherView: UIView?
     
     private func reloadLayout() {
         let itemPerRow = floor(Screen.width / 152)
@@ -137,7 +146,13 @@ class SongViewController: BaseModelCollectionViewController {
                 self.reloadLayout()
             }, completion: nil)
             //self.collectionView.collectionViewLayout.invalidateLayout()
-        }, completion: nil)
+        }, completion: { finished in
+            if let selected = self.collectionView.indexPathsForSelectedItems?.first {
+                if !self.collectionView.indexPathsForVisibleItems.contains(selected) {
+                    self.bannerView = nil
+                }
+            }
+        })
     }
     
     
@@ -158,10 +173,15 @@ class SongViewController: BaseModelCollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? SongCollectionViewCell {
+            bannerView = cell.jacketImageView
+        }
         let vc = SongDetailController()
+        vc.delegate = self
         vc.setup(songs: songs, index: indexPath.item)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 // MARK: ZKDrawerControllerDelegate
@@ -190,3 +210,12 @@ extension SongViewController: SongFilterSortControllerDelegate {
     
 }
 
+
+extension SongViewController: SongDetailControllerDelegate {
+    
+    func songDetailController(_ songDetailController: SongDetailController, changedCurrentIndexTo index: Int) {
+        let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SongCollectionViewCell
+        bannerView = cell?.jacketImageView
+    }
+    
+}

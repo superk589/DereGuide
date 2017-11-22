@@ -8,20 +8,46 @@
 
 import UIKit
 
-protocol BannerViewAnimatorProvider: class {
-    var bannerViewAnimator: BannerViewAnimator { get set }
+extension CGPoint {
+    
+    func distance(to point: CGPoint) -> CGFloat {
+        let deltaX = x - point.x
+        let deltaY = y - point.y
+        return sqrt(deltaX * deltaX + deltaY * deltaY)
+    }
+    
 }
 
-protocol BannerViewContainerViewController: class {
-    var banner: BannerView! { get set }
+extension CGRect {
+    
+    var center: CGPoint {
+        return CGPoint(x: midX, y: midY)
+    }
+    
 }
 
-class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+protocol BannerAnimatorProvider: class {
+    var bannerAnimator: BannerAnimator { get set }
+}
+
+protocol BannerContainer: class {
+    var bannerView: BannerView? { get }
+    var otherView: UIView? { get }
+}
+
+extension BannerContainer {
+    
+    var otherView: UIView? {
+        return nil
+    }
+    
+}
+
+class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    
     enum AnimatorType {
         case pop, push
     }
-
-    var sourceBannerView: BannerView!
     
     var animatorType: AnimatorType = .push
     
@@ -32,21 +58,30 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         return 0
     }
     
+    var pushUpDuration: TimeInterval = 0.1
+    func durationByDistance(_ distance: CGFloat) -> TimeInterval {
+        return max(0.3, TimeInterval(distance / 150 * 0.1)) - pushUpDuration
+    }
+    
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        var destBanner: BannerView?
+        var destJacketImageView: BannerView?
         
-        var destDetailViews = [UIView]()
+        var destOtherView: UIView?
+        
+        var sourceJacketImageView: BannerView!
+        
+        var tempView: BannerView!
         
         if animatorType == .push {
             
-            if let toViewController = transitionContext.viewController(forKey: .to) as? EventDetailController {
-                destBanner = toViewController.banner
-                destDetailViews.append(toViewController.eventDetailView)
-            } else if let toViewController = transitionContext.viewController(forKey: .to) as? GachaDetailController {
-                destBanner = toViewController.banner
-                destDetailViews.append(toViewController.gachaDetailView)
-                destDetailViews.append(toViewController.simulationView)
+            if let toViewController = transitionContext.viewController(forKey: .to) as? BannerContainer, let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer,
+                let sourceView = fromViewController.bannerView {
+                destJacketImageView = toViewController.bannerView
+                destOtherView = toViewController.otherView
+                sourceJacketImageView = sourceView
+                tempView = BannerView()
+                tempView.sd_setImage(with: sourceJacketImageView.url)
             } else {
                 if let toView = transitionContext.view(forKey: .to) {
                     transitionContext.containerView.addSubview(toView)
@@ -55,66 +90,62 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 return
             }
             
-            if let destBanner = destBanner,
+            if let destJacketImageView = destJacketImageView,
                 let toView = transitionContext.view(forKey: .to),
                 let fromViewController = transitionContext.viewController(forKey: .from),
                 let fromNavigationController = fromViewController.navigationController {
                 
                 fromNavigationController.view.insertSubview(toView, belowSubview: fromNavigationController.navigationBar)
                 
+                let transparentView = UIView(frame: transitionContext.containerView.bounds)
+                transitionContext.containerView.addSubview(transparentView)
                 transitionContext.containerView.addSubview(toView)
                 toView.layoutIfNeeded()
-                let sourceFrame: CGRect
-                sourceFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
-//                if #available(iOS 11.0, *) {
-//                    
-//                    var frame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
-//                    frame.origin.y -= fromNavigationController.navigationBar.frame.maxY
-//                    sourceFrame = frame
-//                } else {
-//                    
-//                }
-                let destFrame = destBanner.frame
-                destBanner.frame = sourceFrame
-                destBanner.layoutIfNeeded()
-                toView.backgroundColor = UIColor.clear
+                let sourceFrame = sourceJacketImageView.convert(sourceJacketImageView.bounds, to: transitionContext.containerView)
                 
-                for view in destDetailViews {
-                    view.alpha = 0
-                    view.transform.ty = 20
-                }
+                let destFrame = destJacketImageView.convert(destJacketImageView.bounds, to: transitionContext.containerView)
+                destJacketImageView.isHidden = true
+                destJacketImageView.layoutIfNeeded()
+                transparentView.backgroundColor = .clear
                 
-                sourceBannerView.isHidden = true
+                destOtherView?.alpha = 0
+                destOtherView?.transform.ty = 20
                 
-                let duration = self.transitionDuration(using: transitionContext)
+                sourceJacketImageView.isHidden = true
                 
-                UIView.animate(withDuration: duration * 3 / 4, delay: 0, options: UIViewAnimationOptions.init(rawValue: 0), animations: {
-                    destBanner.frame = destFrame
-                    toView.backgroundColor = UIColor.white
-                    destBanner.layoutIfNeeded()
+                transitionContext.containerView.addSubview(tempView)
+                tempView.frame = sourceFrame
+                
+                //                let duration = self.transitionDuration(using: transitionContext)
+                let duration = durationByDistance(sourceFrame.center.distance(to: destFrame.center))
+                
+                UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
+                    tempView.frame = destFrame
+                    transparentView.backgroundColor = .white
                 }, completion: { (finished) in
                     
                 })
                 
-                UIView.animate(withDuration: duration / 4, delay: duration * 3 / 4, options: .curveEaseOut, animations: {
-                    for view in destDetailViews {
-                        view.alpha = 1
-                        view.transform.ty = 0
-                    }
-                }, completion: { [weak self] (finished) in
-                    self?.sourceBannerView.isHidden = false
+                UIView.animate(withDuration: pushUpDuration, delay: duration, options: .curveEaseOut, animations: {
+                    destOtherView?.alpha = 1
+                    destOtherView?.transform.ty = 0
+                }, completion: { (finished) in
+                    tempView.removeFromSuperview()
+                    transparentView.removeFromSuperview()
+                    sourceJacketImageView.isHidden = false
+                    destJacketImageView.isHidden = false
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }
         } else if animatorType == .pop {
             
-            if let fromViewController = transitionContext.viewController(forKey: .from) as? EventDetailController {
-                destBanner = fromViewController.banner
-                destDetailViews.append(fromViewController.eventDetailView)
-            } else if let fromViewController = transitionContext.viewController(forKey: .from) as? GachaDetailController {
-                destBanner = fromViewController.banner
-                destDetailViews.append(fromViewController.gachaDetailView)
-                destDetailViews.append(fromViewController.simulationView)
+            if let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer, let toViewController = transitionContext.viewController(forKey: .to) as? (UIViewController & BannerContainer),
+                let sourceView = toViewController.bannerView {
+                destJacketImageView = fromViewController.bannerView
+                destOtherView = fromViewController.otherView
+                sourceJacketImageView = sourceView
+                tempView = BannerView()
+                tempView.sd_setImage(with: sourceJacketImageView.url)
             } else {
                 if let toView = transitionContext.view(forKey: .to) {
                     transitionContext.containerView.addSubview(toView)
@@ -124,32 +155,42 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }
             
             if let toView = transitionContext.view(forKey: .to),
-                let destBanner = destBanner,
+                let destJacketImageView = destJacketImageView,
                 let fromView = transitionContext.view(forKey: .from) {
                 
                 transitionContext.containerView.insertSubview(toView, at: 0)
-                
+                let transparentView = UIView(frame: transitionContext.containerView.bounds)
+                transparentView.backgroundColor = .white
+                transparentView.alpha = 0
+                transitionContext.containerView.addSubview(transparentView)
+                transitionContext.containerView.addSubview(tempView)
                 // make sure the frame is the same if orientation changing occurred
-                toView.frame = fromView.frame
+                //                toView.frame = fromView.frame
                 toView.layoutIfNeeded()
                 
-                let toFrame = sourceBannerView.convert(sourceBannerView.bounds, to: destBanner.superview)
+                let toFrame = sourceJacketImageView.convert(sourceJacketImageView.bounds, to: transparentView)
+                let fromFrame = destJacketImageView.convert(destJacketImageView.bounds, to: transparentView)
+                sourceJacketImageView.isHidden = true
+                destJacketImageView.isHidden = true
+                tempView.frame = fromFrame
                 
-                sourceBannerView.isHidden = true
+                let duration = durationByDistance(toFrame.center.distance(to: fromFrame.center))
                 
-                UIView.animate(withDuration: self.transitionDuration(using: transitionContext) / 4, delay: 0, options: .curveEaseIn, animations: {
-                    for view in destDetailViews {
-                        view.alpha = 0
-                        view.transform.ty = 20
-                    }
-                }, completion: nil)
+                UIView.animate(withDuration: pushUpDuration, delay: 0, options: .curveEaseIn, animations: {
+                    transparentView.alpha = 1
+                    destOtherView?.transform.ty = 20
+                }, completion: { finished in
+                    fromView.removeFromSuperview()
+                })
                 
-                UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: self.transitionDuration(using: transitionContext) / 4, options: UIViewAnimationOptions.init(rawValue: 0), animations: { 
-                    destBanner.frame = toFrame
-                    destBanner.layoutIfNeeded()
-                    fromView.backgroundColor = UIColor.clear
-                }, completion: { [weak self] (finished) in
-                    self?.sourceBannerView.isHidden = false
+                UIView.animate(withDuration: duration, delay: pushUpDuration, options: .curveEaseInOut, animations: {
+                    tempView.frame = toFrame
+                    destJacketImageView.layoutIfNeeded()
+                    transparentView.backgroundColor = .clear
+                }, completion: { (finished) in
+                    sourceJacketImageView.isHidden = false
+                    transparentView.removeFromSuperview()
+                    tempView.removeFromSuperview()
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
             }
@@ -159,7 +200,7 @@ class BannerViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animationEnded(_ transitionCompleted: Bool) {
         
     }
-
+    
 }
 
 fileprivate func * (lhs: CGRect, rhs: CGFloat) -> CGRect {
@@ -170,11 +211,11 @@ fileprivate func + (lhs: CGRect, rhs: CGRect) -> CGRect {
     return CGRect.init(x: lhs.minX + rhs.minX, y: lhs.minY + rhs.minY, width: lhs.size.width + rhs.size.width, height: lhs.size.height + rhs.size.height)
 }
 
-class BannerViewInteractiveAnimator: NSObject, UIViewControllerInteractiveTransitioning {
+class BannerInteractiveAnimator: NSObject, UIViewControllerInteractiveTransitioning {
     
-    var destBanner: BannerView?
+    var destBannerView: BannerView?
     
-    var destDetailViews = [UIView]()
+    var otherView: UIView?
     
     var sourceBannerView: BannerView!
     
@@ -188,21 +229,17 @@ class BannerViewInteractiveAnimator: NSObject, UIViewControllerInteractiveTransi
     
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
         
-        if let fromViewController = transitionContext.viewController(forKey: .from) as? EventDetailController {
-            destBanner = fromViewController.banner
-            destDetailViews.append(fromViewController.eventDetailView)
-        } else if let fromViewController = transitionContext.viewController(forKey: .from) as? GachaDetailController {
-            destBanner = fromViewController.banner
-            destDetailViews.append(fromViewController.gachaDetailView)
-            destDetailViews.append(fromViewController.simulationView)
+        if let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer {
+            destBannerView = fromViewController.bannerView
+            otherView = fromViewController.otherView
         }
-
-        if let toViewController = transitionContext.viewController(forKey: .to) as? BannerViewAnimatorProvider {
-            sourceBannerView = toViewController.bannerViewAnimator.sourceBannerView
+        
+        if let toViewController = transitionContext.viewController(forKey: .to) as? BannerContainer {
+            sourceBannerView = toViewController.bannerView
         }
         
         if let toView = transitionContext.view(forKey: .to),
-            let destBanner = destBanner,
+            let destBanner = destBannerView,
             let fromView = transitionContext.view(forKey: .from) {
             transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
             sourceFrame = destBanner.frame
@@ -220,14 +257,12 @@ class BannerViewInteractiveAnimator: NSObject, UIViewControllerInteractiveTransi
         
         let frame = destFrame * progress2 + sourceFrame * (1 - progress2)
         
-        destBanner?.frame = frame
-        destBanner?.layoutIfNeeded()
+        destBannerView?.frame = frame
+        destBannerView?.layoutIfNeeded()
         
-        for view in destDetailViews {
-            view.alpha = 1 - progress1
-            view.transform.ty = 20 * progress1
-        }
-    
+        otherView?.alpha = 1 - progress1
+        otherView?.transform.ty = 20 * progress1
+        
         transitionContext?.view(forKey: .from)?.backgroundColor = UIColor.white.withAlphaComponent(1 - progress2)
     }
     
@@ -252,4 +287,3 @@ class BannerViewInteractiveAnimator: NSObject, UIViewControllerInteractiveTransi
     }
     
 }
-

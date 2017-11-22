@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class EventDetailController: BaseViewController, BannerViewContainerViewController {
+class EventDetailController: BaseViewController {
     
     var eventDetailView: EventDetailView!
     var sv: UIScrollView!
@@ -113,6 +113,18 @@ class EventDetailController: BaseViewController, BannerViewContainerViewControll
         self.navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension EventDetailController: BannerContainer {
+   
+    var bannerView: BannerView? {
+        return banner
+    }
+    
+    var otherView: UIView? {
+        return view
+    }
+    
 }
 
 extension EventDetailController: LiveTableViewCellDelegate {

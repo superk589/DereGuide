@@ -8,7 +8,23 @@
 
 import UIKit
 
-class SongDetailController: BaseTableViewController {
+protocol SongDetailControllerDelegate: class {
+    func songDetailController(_ songDetailController: SongDetailController, changedCurrentIndexTo index: Int)
+}
+
+class SongDetailController: BaseTableViewController, BannerContainer {
+    
+    var bannerView: BannerView? {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SongDetailCoverFlowCell
+        let innerCell = cell?.collectionView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? SongJacketCollectionViewCell
+        return innerCell?.jacketImageView
+    }
+    
+    var otherView: UIView? {
+        return tableView
+    }
+    
+    weak var delegate: SongDetailControllerDelegate?
     
     var songs = [CGSSSong]()
     
@@ -16,6 +32,7 @@ class SongDetailController: BaseTableViewController {
         didSet {
             if oldValue != currentIndex {
                 reload()
+                delegate?.songDetailController(self, changedCurrentIndexTo: currentIndex)
             }
         }
     }
@@ -105,8 +122,9 @@ class SongDetailController: BaseTableViewController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SongDetailCoverFlowCell.description(), for: indexPath) as! SongDetailCoverFlowCell
             cell.collectionView.register(SongJacketCollectionViewCell.self, forCellWithReuseIdentifier: SongJacketCollectionViewCell.description())
-            cell.index = currentIndex
+            cell.layoutIfNeeded()
             cell.delegate = self
+            cell.index = currentIndex
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: SongDetailHeaderCell.description(), for: indexPath) as! SongDetailHeaderCell

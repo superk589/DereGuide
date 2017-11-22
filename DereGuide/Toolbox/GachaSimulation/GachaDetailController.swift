@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import StoreKit
 
-class GachaDetailController: BaseViewController, BannerViewContainerViewController {
+class GachaDetailController: BaseViewController {
 
     var pool: CGSSGachaPool! {
         didSet {
@@ -94,6 +94,17 @@ class GachaDetailController: BaseViewController, BannerViewContainerViewControll
         gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
         simulationView.wipeResultView()
         simulationView.wipeResultGrid()
+    }
+    
+}
+
+extension GachaDetailController: BannerContainer {
+    var bannerView: BannerView? {
+        return banner
+    }
+    
+    var otherView: UIView? {
+        return view
     }
     
 }

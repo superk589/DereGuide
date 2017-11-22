@@ -65,4 +65,8 @@ class UnitSongSelectViewController: BaseLiveTableViewController {
         CGSSSorterFilterManager.default.saveForUnitLive()
         updateUI()
     }
+    
+    override func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect jacketImageView: BannerView, musicDataID: Int) {
+        // do nothing
+    }
 }

@@ -14,7 +14,7 @@ protocol BaseSongTableViewControllerDelegate: class {
     func baseSongTableViewController(_ baseSongTableViewController: BaseLiveTableViewController, didSelect liveScene: CGSSLiveScene)
 }
 
-class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, LiveFilterSortControllerDelegate {
+class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, LiveFilterSortControllerDelegate, LiveTableViewCellDelegate {
     
     weak var delegate: BaseSongTableViewControllerDelegate?
     var defualtLiveList = [CGSSLive]()
@@ -223,11 +223,8 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
         alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
-}
-
-// MARK: LiveTableViewCellDelegate
-extension BaseLiveTableViewController: LiveTableViewCellDelegate {
     
+    // MARK: LiveTableViewCellDelegate
     func liveTableViewCell(_ liveTableViewCell: LiveTableViewCell, didSelect jacketImageView: BannerView, musicDataID: Int) {
         CGSSGameResource.shared.master.getMusicInfo(musicDataID: musicDataID) { (songs) in
             DispatchQueue.main.async {
@@ -246,5 +243,4 @@ extension BaseLiveTableViewController: LiveTableViewCellDelegate {
             showBeatmapNotFoundAlert()
         }
     }
-
 }

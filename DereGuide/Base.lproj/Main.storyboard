@@ -612,7 +612,7 @@ If you have any questions or suggestions about our Privacy Policy</string>
         <!--工具导航-->
         <scene sceneID="x9V-Lw-SAR">
             <objects>
-                <navigationController title="工具导航" automaticallyAdjustsScrollViewInsets="NO" id="sAv-Q2-aG8" customClass="ToolboxNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title="工具导航" automaticallyAdjustsScrollViewInsets="NO" id="sAv-Q2-aG8" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="工具" image="921-toolbox.png" selectedImage="921-toolbox-selected.png" id="wJt-PI-tVQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B0B-4S-3iD">

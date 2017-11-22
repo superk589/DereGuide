@@ -10,7 +10,7 @@ import UIKit
 
 class SongJacketCollectionViewCell: UICollectionViewCell {
     
-    let jacketImageView = UIImageView()
+    let jacketImageView = BannerView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +29,7 @@ class SongJacketCollectionViewCell: UICollectionViewCell {
     
     func setup(song: CGSSSong) {
         if let url = song.jacketURL {
-            jacketImageView.sd_setImage(with: url, completed: nil)
+            jacketImageView.sd_setImage(with: url)
         }
     }
     
