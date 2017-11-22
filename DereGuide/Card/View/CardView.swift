@@ -13,6 +13,7 @@ class CardView: UIView {
 
     var cardIconView: CGSSCardIconView!
     var cardNameLabel: UILabel!
+    let romajiLabel = UILabel()
     var rarityLabel: UILabel!
     var skillLabel: UILabel!
     var lifeLabel: UILabel!
@@ -59,9 +60,23 @@ class CardView: UIView {
         addSubview(cardNameLabel)
         cardNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(68)
-            make.right.lessThanOrEqualTo(-10)
             make.top.equalTo(rarityLabel.snp.bottom).offset(2)
         }
+    
+        romajiLabel.font = UIFont(name: "PingFangSC-Light", size: 13)
+        romajiLabel.adjustsFontSizeToFitWidth = true
+        romajiLabel.baselineAdjustment = .alignCenters
+        addSubview(romajiLabel)
+        romajiLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(cardNameLabel.snp.right).offset(5)
+            make.right.lessThanOrEqualTo(-10)
+            make.lastBaseline.equalTo(cardNameLabel)
+        }
+        romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        romajiLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        cardNameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        cardNameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+
         
         titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 10)
@@ -129,8 +144,12 @@ class CardView: UIView {
     }
     
     func setup(with card: CGSSCard) {
-        if let name = card.chara?.name, let conventional = card.chara?.conventional {
-            cardNameLabel.text = name + "  " + conventional
+        if CGSSGlobal.languageType == .en {
+            romajiLabel.text = card.chara?.name
+            cardNameLabel.text = card.chara?.conventional
+        } else {
+            cardNameLabel.text = card.chara?.name
+            romajiLabel.text = card.chara?.conventional
         }
         
         cardIconView?.cardID = card.id
