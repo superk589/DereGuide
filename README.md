@@ -32,7 +32,7 @@ This is an iOS utility application for **The Idolmaster Cinderella Girls: Starli
 ```
 $ git clone https://github.com/superk589/DereGuide.git
 ```
-* Install dependencies with [CocoaPods](https://cocoapods.org). **By now, installation with CocoaPods will cause all the pods built on swift 4.0, but not all the pods are competiable with swift 4.0, so you have to modify them manually to 3.2 in Xcode build settings.**
+* Install dependencies with [CocoaPods](https://cocoapods.org).
 ```
 $ pod install
 ```
@@ -55,20 +55,26 @@ DereGuide now provide files of localizable strings for other languages
 * ApricotSalt
 
 ## Acknowledgement
-### [sparklebox](https://github.com/summertriangle-dev/sparklebox)
-* Author: [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
-* Chinese branch maintainer: [CaiMiao](https://github.com/CaiMiao)  
 
-### deresute.info (not exists though, DereGuide's beatmap is mainly based on the design of this site)
-* Author: [Snack-X](https://github.com/Snack-X)
+### API Provider
+* [Starlight Database](https://starlight.kirara.ca)
+    * by [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
+    * Chinese branch maintained by [CaiMiao](https://github.com/CaiMiao)
 
-### [starlight.tachibana.cool](https://starlight.tachibana.cool)
-* Author: [Cryptomelone](https://github.com/Cryptomelone)
+* deresute.info
+    * by [Snack-X](https://github.com/Snack-X)
 
-### [Starlight Portal](https://portal.starlightstage.jp)
+* [starlight.tachibana.cool](https://starlight.tachibana.cool)
+    * by [Cryptomelone](https://github.com/Cryptomelone)
 
-### [deresute.me](https://deresute.me)
-* Author: [Hector Martin](https://github.com/marcan)
+* [Starlight Portal](https://portal.starlightstage.jp)
+
+* [deresute.me](https://deresute.me)
+    * by [Hector Martin](https://github.com/marcan)
+
+### Design and Algorithm Support
+* KIYOMI拖把酱
+* [statementreply](https://github.com/statementreply)
 
 ## Contact
 Follow and contact me on [Twitter](https://twitter.com/superk64). If you find an issue, just [open a ticket](https://github.com/superk589/DereGuide/issues/new). Pull requests are warmly welcome as well.
