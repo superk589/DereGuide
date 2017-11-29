@@ -14,7 +14,7 @@ target 'DereGuide' do
 #  pod 'Firebase/AdMob'
   pod 'TTGTagCollectionView'
   pod 'Charts'
-  pod 'EasyTipView'
+  pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
   pod 'DynamicColor'
 #  pod 'CryptoSwift'
 #  pod 'SwiftTryCatch'
