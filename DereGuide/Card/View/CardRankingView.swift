@@ -17,12 +17,6 @@ class CardRankingView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let line = LineView()
-        addSubview(line)
-        line.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-        }
 
         titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
