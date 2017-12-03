@@ -11,6 +11,7 @@ import UIKit
 class CharaDetailProfileTableViewCell: UITableViewCell {
 
     let nameLabel = UILabel()
+    let romajiLabel = UILabel()
     let iconView = CGSSCharaIconView()
     let charaProfileView = CharaProfileView()
     
@@ -31,8 +32,21 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
             make.centerY.equalTo(iconView)
-            make.right.lessThanOrEqualTo(-10)
         }
+        
+        romajiLabel.font = UIFont(name: "PingFangSC-Light", size: 13)
+        romajiLabel.adjustsFontSizeToFitWidth = true
+        romajiLabel.baselineAdjustment = .alignCenters
+        addSubview(romajiLabel)
+        romajiLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(nameLabel.snp.right).offset(5)
+            make.right.lessThanOrEqualTo(-10)
+            make.lastBaseline.equalTo(nameLabel)
+        }
+        romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        romajiLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
         contentView.addSubview(charaProfileView)
         charaProfileView.snp.makeConstraints { (make) in
@@ -49,7 +63,13 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
     }
     
     func setup(chara: CGSSChar) {
-        nameLabel.text = "\(chara.kanjiSpaced!)  \(chara.conventional!)"
+        if CGSSGlobal.languageType == .en {
+            romajiLabel.text = chara.kanjiSpaced
+            nameLabel.text = chara.conventional
+        } else {
+            nameLabel.text = chara.kanjiSpaced
+            romajiLabel.text = chara.conventional
+        }
         iconView.charaID = chara.charaId
         charaProfileView.setup(chara)
     }

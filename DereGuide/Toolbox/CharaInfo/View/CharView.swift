@@ -13,6 +13,7 @@ class CharView: UIView {
     var iconView: CGSSCharaIconView!
     var kanaSpacedLabel: UILabel!
     var nameLabel: UILabel!
+    let romajiLabel = UILabel()
     var cvLabel: UILabel!
     var sortingPropertyLabel: UILabel!
     
@@ -71,6 +72,20 @@ class CharView: UIView {
             make.top.equalTo(kanaSpacedLabel.snp.bottom).offset(3)
         }
         
+        romajiLabel.font = UIFont(name: "PingFangSC-Light", size: 13)
+        romajiLabel.adjustsFontSizeToFitWidth = true
+        romajiLabel.baselineAdjustment = .alignCenters
+        addSubview(romajiLabel)
+        romajiLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(nameLabel.snp.right).offset(5)
+            make.right.lessThanOrEqualTo(-10)
+            make.lastBaseline.equalTo(nameLabel)
+        }
+        romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        romajiLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        
         cvLabel = UILabel()
         cvLabel.font = UIFont.systemFont(ofSize: 12)
         addSubview(cvLabel)
@@ -81,7 +96,8 @@ class CharView: UIView {
     }
     
     func setupWith(char: CGSSChar, sorter: CGSSSorter) {
-        nameLabel.text = "\(char.kanjiSpaced!)  \(char.conventional!)"
+        nameLabel.text = char.kanjiSpaced
+        romajiLabel.text = char.conventional
         if char.voice == "" {
             cvLabel.text = "CV: \(NSLocalizedString("未付声", comment: "角色信息页面"))"
         } else {
