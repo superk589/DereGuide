@@ -119,8 +119,7 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
 extension CardDetailRelatedCardsCell: CardDetailSetable {
     
     func setup(with card: CGSSCard) {
-        self.cards = CGSSDAO.shared.findCardsByCharId(card.charaId)
-//        collectionView.sizeToFit()
+        cards = CGSSDAO.shared.findCardsByCharId(card.charaId).sorted { $0.albumId > $1.albumId }
     }
     
 }
