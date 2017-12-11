@@ -10,14 +10,15 @@ import UIKit
 import Charts
 import SnapKit
 
-protocol RankingListChartPresentable {
+protocol RankingLineChartRepresentable {
     var chartEntries: [Int: [ChartDataEntry]] { get }
     var xAxis: [String] { get }
     var xAxisDetail: [String] { get }
     var borders: [Int] { get }
+    var xAxisDates: [Date] { get }
 }
 
-extension EventRanking: RankingListChartPresentable {
+extension EventRanking: RankingLineChartRepresentable {
     var chartEntries: [Int: [ChartDataEntry]] {
         var borderEntries = [Int: [ChartDataEntry]]()
         
@@ -58,11 +59,20 @@ extension EventRanking: RankingListChartPresentable {
         return strings
     }
     
+    var xAxisDates: [Date] {
+        var dates = [Date]()
+        for i in 0..<list.count {
+            let date = list[i].date.toDate(format: "yyyy-MM-dd'T'HH:mm:ssZZZZZ")
+            dates.append(date)
+        }
+        return dates
+    }
+    
 }
 
 class EventChartController: BaseViewController {
 
-    var rankingList: RankingListChartPresentable!
+    var rankingList: RankingLineChartRepresentable!
     
     private struct Height {
         static let sv: CGFloat = Screen.height - 113
@@ -92,6 +102,7 @@ class EventChartController: BaseViewController {
             set.setColor(color)
             set.lineWidth = 2
             set.drawValuesEnabled = false
+            set.highlightColor = color
             dataSets.append(set)
         }
     
@@ -111,6 +122,12 @@ class EventChartController: BaseViewController {
         nf.multiplier = 0.001
         chartView.leftAxis.valueFormatter = DefaultAxisValueFormatter.init(formatter: nf)
         chartView.leftAxis.axisMinimum = 0
+                
+        let marker = BalloonMarker(color: UIColor(hex: 0x343D46), font: UIFont.boldSystemFont(ofSize: 12), textColor: UIColor.white, insets: UIEdgeInsets(top: 5, left: 7.0, bottom: 15, right: 7.0), in: chartView)
+        marker.offset = CGPoint(x: 0, y: -5)
+        
+        marker.dataSource = self
+        
         chartView.delegate = self
     }
 
@@ -118,6 +135,15 @@ class EventChartController: BaseViewController {
 
 extension EventChartController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        chartView.chartDescription?.text = "\(rankingList.xAxisDetail[Int(entry.x)])\(Int(entry.y))"
+//        chartView.chartDescription?.text = "\(rankingList.xAxisDetail[Int(entry.x)])\(Int(entry.y))"
+    }
+}
+
+extension EventChartController: BalloonMarkerDataSource {
+    func balloonMarker(_ balloonMarker: BalloonMarker, stringForEntry entry: ChartDataEntry, highlight: Highlight) -> String {
+        let date = rankingList.xAxisDates[Int(entry.x)]
+        let dateString = DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .short)
+        let scoreString = String(Int(round(entry.y)))
+        return "\(dateString)\n\(scoreString)"
     }
 }
