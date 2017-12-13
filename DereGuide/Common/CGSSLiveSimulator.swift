@@ -259,7 +259,7 @@ class CGSSLiveSimulator {
                 }
             }
             
-            life = min(totalLife, life + restoreLife)
+            life = min(2 * totalLife, life + restoreLife)
             
             let score = Int(round(baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
             
