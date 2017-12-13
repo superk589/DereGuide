@@ -44,11 +44,8 @@ class BirthdayNotificationViewController: BaseTableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .UIApplicationDidBecomeActive, object: nil)
         
         reloadData()
-    }
-    
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        staticRows[0].detail = isSystemNotificationSettingOn ? NSLocalizedString("已开启", comment: "生日提醒页面") : NSLocalizedString("未开启", comment: "生日提醒页面")
-        tableView.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .none)
+        
+        popoverPresentationController?.delegate = self
     }
     
     private func prepareChars() {
@@ -202,6 +199,15 @@ extension BirthdayNotificationViewController: BirthdayNotificationTableViewCellD
         let vc = CharDetailViewController()
         vc.chara = CGSSDAO.shared.findCharById(icon.charaID!)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension BirthdayNotificationViewController: UIPopoverPresentationControllerDelegate {
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        staticRows[0].detail = isSystemNotificationSettingOn ? NSLocalizedString("已开启", comment: "生日提醒页面") : NSLocalizedString("未开启", comment: "生日提醒页面")
+        tableView.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .none)
     }
     
 }
