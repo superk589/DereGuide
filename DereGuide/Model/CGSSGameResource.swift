@@ -191,7 +191,7 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func selectTextBy(category: Int, index: Int, callback: @escaping FMDBCallBackClosure<String>) {
+    func getTextBy(category: Int, index: Int, callback: @escaping FMDBCallBackClosure<String>) {
         var result = ""
         execute({ (db) in
             let selectSql = "select * from text_data where category = \(category) and \"index\" = \(index)"

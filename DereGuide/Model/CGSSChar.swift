@@ -88,10 +88,10 @@ extension CGSSChar {
     }
     
     // 一些属性的特殊转换
-    var handToString: String {
+    func handString() -> String {
         let semaphore = DispatchSemaphore.init(value: 0)
         var resultString = ""
-        CGSSGameResource.shared.master.selectTextBy(category: 5, index: hand - 3000) { (result) in
+        CGSSGameResource.shared.master.getTextBy(category: 5, index: hand - 3000) { (result) in
             resultString = result
             semaphore.signal()
         }
@@ -99,10 +99,10 @@ extension CGSSChar {
         return resultString
     }
     
-    var constellationToString: String {
+    func constellationString() -> String {
         let semaphore = DispatchSemaphore.init(value: 0)
         var resultString = ""
-        CGSSGameResource.shared.master.selectTextBy(category: 4, index: constellation - 1000) { (result) in
+        CGSSGameResource.shared.master.getTextBy(category: 4, index: constellation - 1000) { (result) in
             resultString = result
             semaphore.signal()
         }
@@ -110,7 +110,7 @@ extension CGSSChar {
         return resultString
     }
     
-    var bloodTypeToString: String {
+    var bloodTypeString: String {
         switch bloodType {
         case 2001: return "A"
         case 2002: return "B"
@@ -120,11 +120,11 @@ extension CGSSChar {
         }
     }
     
-    var weightToString: String {
+    func weightString() -> String {
         if weight > 5000 {
             var result = ""
             let semaphore = DispatchSemaphore.init(value: 0)
-            CGSSGameResource.shared.master.selectTextBy(category: 6, index: weight - 5000, callback: { (text) in
+            CGSSGameResource.shared.master.getTextBy(category: 6, index: weight - 5000, callback: { (text) in
                 result = text
                 semaphore.signal()
             })
@@ -135,10 +135,10 @@ extension CGSSChar {
         }
     }
     
-    var homeTownToString:String {
+    func homeTownString() -> String {
         var result = ""
         let semaphore = DispatchSemaphore.init(value: 0)
-        CGSSGameResource.shared.master.selectTextBy(category: 2, index: homeTown) { (text) in
+        CGSSGameResource.shared.master.getTextBy(category: 2, index: homeTown) { (text) in
             result = text
             semaphore.signal()
         }
@@ -146,15 +146,15 @@ extension CGSSChar {
         return result
     }
     
-    var threeSizeToString: String {
-        return "\(getSizeString(bodySize1))/\(getSizeString(bodySize2))/\(getSizeString(bodySize3))"
+    func threeSizeString() -> String {
+        return "\(sizeString(of: bodySize1))/\(sizeString(of: bodySize2))/\(sizeString(of: bodySize3))"
     }
     
-    func getSizeString(_ size: Int) -> String {
+    private func sizeString(of size: Int) -> String {
         if size - 5000 > 0 {
             var result = ""
             let semaphore = DispatchSemaphore.init(value: 0)
-            CGSSGameResource.shared.master.selectTextBy(category: 6, index: size - 5000, callback: { (text) in
+            CGSSGameResource.shared.master.getTextBy(category: 6, index: size - 5000, callback: { (text) in
                 result = text
                 semaphore.signal()
             })
@@ -165,11 +165,11 @@ extension CGSSChar {
         }
     }
     
-    var ageToString: String {
+    func ageString() -> String {
         if age - 5000 > 0  {
             var result = ""
             let semaphore = DispatchSemaphore.init(value: 0)
-            CGSSGameResource.shared.master.selectTextBy(category: 6, index: age - 5000, callback: { (text) in
+            CGSSGameResource.shared.master.getTextBy(category: 6, index: age - 5000, callback: { (text) in
                 result = text
                 semaphore.signal()
             })
