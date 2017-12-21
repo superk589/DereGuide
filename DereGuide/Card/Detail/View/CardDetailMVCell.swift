@@ -58,10 +58,7 @@ class CardDetailMVCell: UITableViewCell {
         
         for song in songs {
             let tagView = BannerView()
-            if let url = song.jacketURL {
-                tagView.sd_setImage(with: url)
-            }
-            
+            tagView.sd_setImage(with: song.jacketURL)
             tagViews.append(tagView)
         }
         collectionView.reload()

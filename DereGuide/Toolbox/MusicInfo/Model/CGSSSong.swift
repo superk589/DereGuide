@@ -122,8 +122,8 @@ extension CGSSSong {
         return FavoriteSongsManager.shared.contains(self.musicID) ? CGSSFavoriteTypes.inFavorite : CGSSFavoriteTypes.notInFavorite
     }
     
-    var jacketURL: URL? {
-        return URL.init(string: DataURL.Images + "/jacket/\(musicID).png")
+    var jacketURL: URL {
+        return URL.images.appendingPathComponent("/jacket/\(musicID).png")
     }
     
     var color: UIColor {

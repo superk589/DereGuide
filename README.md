@@ -2,7 +2,7 @@
 
 ## Introduction
 This is an iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. All the data is from API provided by other sites and has nothing to do with the official application.
-* Images <https://hoshimoriuta.kirara.ca>
+* Images <https://truecolor.kirara.ca>
 * Card and Character(English) <https://starlight.kirara.ca>
 * Card and Character(Chinese) <http://starlight.346lab.org>
 * Event Pt. and High Score <https://portal.starlightstage.jp>

@@ -49,9 +49,7 @@ class SongCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(song: CGSSSong) {
-        if let url = song.jacketURL {
-            jacketImageView.sd_setImage(with: url)
-        }
+        jacketImageView.sd_setImage(with: song.jacketURL)
         nameLabel.text = song.name
         nameLabel.textColor = song.color
         typeIcon.image = song.icon

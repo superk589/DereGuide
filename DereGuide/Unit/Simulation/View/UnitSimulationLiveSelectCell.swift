@@ -86,9 +86,7 @@ class UnitSimulationLiveView: UIView {
         nameLabel.textColor = scene.live.color
         typeIcon.image = scene.live.icon
         
-        if let url = scene.live.jacketURL {
-            jacketImageView.sd_setImage(with: url)
-        }
+        jacketImageView.sd_setImage(with: scene.live.jacketURL)
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -167,16 +167,16 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                         })
                     }
                 }
+                
                 // 卡头像图
-                if let url = URL.init(string: DataURL.Images + "/icon_card/\(card.id!).png") {
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if isInCache {
-                            self.cardIconURLs.inCache.append(url)
-                        } else {
-                            self.cardIconURLs.needToDownload.append(url)
-                        }
-                    })
-                }
+                let url = URL.images.appendingPathComponent("/icon_card/\(card.id!).png")
+                SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                    if isInCache {
+                        self.cardIconURLs.inCache.append(url)
+                    } else {
+                        self.cardIconURLs.needToDownload.append(url)
+                    }
+                })
                 
                 // 卡签名图
                 if let url = card.signImageURL {
@@ -204,29 +204,27 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             
             for char in chars {
                 // 角色头像图
-                if let url = URL.init(string: DataURL.Images + "/icon_char/\(char.charaId!).png") {
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if isInCache {
-                            self.charIconURLs.inCache.append(url)
-                        } else {
-                            self.charIconURLs.needToDownload.append(url)
-                        }
-                    })
-                }
+                let url = URL.images.appendingPathComponent("/icon_char/\(char.charaId!).png")
+                SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                    if isInCache {
+                        self.charIconURLs.inCache.append(url)
+                    } else {
+                        self.charIconURLs.needToDownload.append(url)
+                    }
+                })
             }
             
             // 所有歌曲封面图
             CGSSGameResource.shared.master.getLives(callback: { (lives) in
                 for live in lives {
-                    if let url = live.jacketURL {
-                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                            if isInCache {
-                                self.jacketURLs.inCache.append(url)
-                            } else {
-                                self.jacketURLs.needToDownload.append(url)
-                            }
-                        })
-                    }
+                    let url = live.jacketURL
+                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                        if isInCache {
+                            self.jacketURLs.inCache.append(url)
+                        } else {
+                            self.jacketURLs.needToDownload.append(url)
+                        }
+                    })
                 }
             })
             

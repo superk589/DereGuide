@@ -75,9 +75,7 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
         self.live = live
         tagViews.removeAll()
         
-        if let url = live.jacketURL {
-            jacketImageView.sd_setImage(with: url)
-        }
+        jacketImageView.sd_setImage(with: live.jacketURL)
         
         typeIcon.image = live.icon
         

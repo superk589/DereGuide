@@ -100,7 +100,7 @@ class BirthdayCenter {
                         }
                         content.userInfo = userInfo
                         
-                        let url = URL.init(string: DataURL.Images + "/icon_char/\(char.charaId!).png")!
+                        let url = URL.images.appendingPathComponent("/icon_char/\(char.charaId!).png")
                 
                         if let key = SDWebImageManager.shared().cacheKey(for: url) {
                             if let path = SDImageCache.shared().defaultCachePath(forKey: key) {

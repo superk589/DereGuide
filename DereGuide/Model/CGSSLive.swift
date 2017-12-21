@@ -160,8 +160,8 @@ extension CGSSLive {
         return details.first { $0.difficulty == difficulty }
     }
     
-    var jacketURL: URL? {
-        return URL.init(string: DataURL.Images + "/jacket/\(musicDataId).png")
+    var jacketURL: URL {
+        return URL.images.appendingPathComponent("/jacket/\(musicDataId).png")
     }
     
     var selectedLiveDetails: [CGSSLiveDetail] {

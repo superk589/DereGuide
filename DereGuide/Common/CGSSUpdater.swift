@@ -10,13 +10,16 @@ import Foundation
 import SwiftyJSON
 import SDWebImage
 
-struct DataURL {
-    static let EnglishDatabase = "https://starlight.kirara.ca"
-    static let ChineseDatabase = "http://starlight.346lab.org"
-    static let Images = "https://hoshimoriuta.kirara.ca"
-    static let manifest = "https://storages.game.starlight-stage.jp/dl/%@/manifests/iOS_AHigh_SHigh"
-    static let master = "https://storages.game.starlight-stage.jp/dl/resources/Generic//%@"
-    static let musicScore = DataURL.master
+extension URL {
+    static let enDatabase = URL(string: "https://starlight.kirara.ca")!
+    static let cnDatabase = URL(string: "http://starlight.346lab.org")!
+    static let images = URL(string: "https://truecolor.kirara.ca")!
+    static func manifest(truthVersion: String) -> URL {
+        return URL(string: "https://storages.game.starlight-stage.jp/dl/\(truthVersion)/manifests/iOS_AHigh_SHigh")!
+    }
+    static func master(truthVersion: String) -> URL {
+        return URL(string: "https://storages.game.starlight-stage.jp/dl/resources/Generic//\(truthVersion)")!
+    }
 }
 
 // used in notification userinfo key name
@@ -45,11 +48,9 @@ class CGSSUpdateItem: NSObject {
     var dataURL: URL? {
         switch dataType {
         case CGSSUpdateDataTypes.card:
-            return URL.init(string: DataURL.ChineseDatabase + "/api/v1/card_t/\(id)")
-        case CGSSUpdateDataTypes.master:
-            return URL.init(string: String.init(format: DataURL.master, hashString))
-        case CGSSUpdateDataTypes.beatmap:
-            return URL.init(string: String.init(format: DataURL.musicScore, hashString))
+            return URL.cnDatabase.appendingPathComponent("/api/v1/card_t/\(id)")
+        case CGSSUpdateDataTypes.master, .beatmap:
+            return URL.master(truthVersion: hashString)
         default:
             return nil
         }
@@ -143,8 +144,8 @@ open class CGSSUpdater: NSObject {
     }
     
     func checkApiInfo(callback: @escaping CGSSFinishedClosure) {
-        let url = DataURL.ChineseDatabase + "/api/v1/info"
-        let task = checkSession.dataTask(with: URL.init(string: url)!) { (data, response, error) in
+        let url = URL.cnDatabase.appendingPathComponent("/api/v1/info")
+        let task = checkSession.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 callback(false, error)
             } else if (response as! HTTPURLResponse).statusCode != 200 {
@@ -162,8 +163,8 @@ open class CGSSUpdater: NSObject {
     
     func checkManifest(callback: @escaping CGSSFinishedClosure) {
         if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
-            let url = String.init(format: DataURL.manifest, truthVersion)
-            var request = URLRequest(url: URL(string: url)!)
+            let url = URL.manifest(truthVersion: truthVersion)
+            var request = URLRequest(url: url)
             request.setUnityVersion()
             let task = self.dataSession.dataTask(with: request, completionHandler: { (data, response, error) in
                 if error != nil {
@@ -185,8 +186,8 @@ open class CGSSUpdater: NSObject {
     }
     
     func checkCards(callback: @escaping CGSSCheckCompletionClosure) {
-        let url = DataURL.ChineseDatabase + "/api/v1/list/card_t?key=id,evolution_id"
-        let task = checkSession.dataTask(with: URL.init(string: url)!, completionHandler: { (data, response, error) in
+        let url = URL.cnDatabase.appendingPathComponent("/api/v1/list/card_t")
+        let task = checkSession.dataTask(with: URL(string: url.absoluteString + "?key=id,evolution_id")!, completionHandler: { (data, response, error) in
             if let e = error {
                 callback(nil, e)
             } else if (response as! HTTPURLResponse).statusCode != 200 {

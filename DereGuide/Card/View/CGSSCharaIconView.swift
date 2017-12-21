@@ -33,7 +33,8 @@ class CGSSCharaIconView: CGSSIconView {
     
     var charaID: Int? {
         didSet {
-            if let id = charaID, let url = URL.init(string: DataURL.Images + "/icon_char/\(id).png") {
+            if let id = charaID {
+                let url = URL.images.appendingPathComponent("/icon_char/\(id).png")
                 self.sd_setImage(with: url, placeholderImage: CGSSDAO.shared.findCharById(id)?.placeholderImage)
             }
         }
