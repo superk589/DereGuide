@@ -79,7 +79,7 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         super.viewDidLoad()
         
         tableView.mj_header = refresher
-        refresher.refreshingBlock = { self.checkUpdate() }
+        refresher.refreshingBlock = { [weak self] in self?.checkUpdate() }
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true
@@ -142,7 +142,7 @@ class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewD
         }
         
         collectionView.mj_header = refresher
-        refresher.refreshingBlock = { self.checkUpdate() }
+        refresher.refreshingBlock = { [weak self] in self?.checkUpdate() }
         
         updateStatusView = UpdateStatusView()
         updateStatusView.isHidden = true

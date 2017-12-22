@@ -36,11 +36,14 @@ class ColleagueViewController: BaseTableViewController {
         tableView.separatorStyle = .none
 
         tableView.mj_header = refresher
-        refresher.refreshingBlock = { self.fetchLatestProfiles() }
+        refresher.refreshingBlock = { [weak self] in
+            self?.fetchLatestProfiles()
+        }
         
         tableView.mj_footer = loader
-        loader.refreshingBlock = { [weak self] in self?.fetchMore {
-            self?.loader.state = self?.cursor == nil ? .noMoreData : .idle
+        loader.refreshingBlock = { [weak self] in
+            self?.fetchMore {
+                self?.loader.state = self?.cursor == nil ? .noMoreData : .idle
             }
         }
         refresher.beginRefreshing()
