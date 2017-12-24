@@ -42,8 +42,17 @@ $ open DereGuide.xcworkspace
 ```
 
 ## Localization
-DereGuide now provide files of localizable strings for other languages
-[How to localize DereGuide](https://github.com/superk589/DereGuide/wiki)
+Localization files can be found in DereGuide/*.lproj.
+
+Though the base localization is in Chinese, you can take the English one in en.lproj or the Japanese one in ja.lproj as reference.
+
+| File name | Description|
+| :------- | :------ |
+| InfoPlist.strings       | Localizable strings for some app settings
+| LaunchScreen.strings    | Localizable strings for launch screen, unused now
+| Localizable.strings     | Localizable strings for all strings in code
+| Main.strings            | Localizable strings for UI made by storyboard, length sensitive
+| ToolboxList.plist       | Xml style, localizable strings for tools in toolbox
 
 ## Contributors of other languages
 ### English:
