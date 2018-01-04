@@ -371,6 +371,8 @@
 		12F57C631EE308B600638650 /* IndicatorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C621EE308B600638650 /* IndicatorScrollView.swift */; };
 		12F57C651EE30EFB00638650 /* IndicatorTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C641EE30EFB00638650 /* IndicatorTableView.swift */; };
 		12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F590301D9555CF00E004ED /* CGSSTypes.swift */; };
+		12F76DD81FFC710A00AB214B /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F76DD71FFC710A00AB214B /* APIClient.swift */; };
+		12F76DDA1FFCAFC700AB214B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F76DD91FFCAFC700AB214B /* Version.swift */; };
 		12F9B0391F28932F00D3B47E /* FavoriteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B0381F28932F00D3B47E /* FavoriteCard.swift */; };
 		12F9B03C1F28935900D3B47E /* FavoriteChara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B03B1F28935900D3B47E /* FavoriteChara.swift */; };
 		12F9B03E1F28955E00D3B47E /* RemoteFavoriteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */; };
@@ -827,6 +829,8 @@
 		12F57C621EE308B600638650 /* IndicatorScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorScrollView.swift; sourceTree = "<group>"; };
 		12F57C641EE30EFB00638650 /* IndicatorTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorTableView.swift; sourceTree = "<group>"; };
 		12F590301D9555CF00E004ED /* CGSSTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSTypes.swift; sourceTree = "<group>"; };
+		12F76DD71FFC710A00AB214B /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		12F76DD91FFCAFC700AB214B /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		12F9B0381F28932F00D3B47E /* FavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCard.swift; sourceTree = "<group>"; };
 		12F9B03B1F28935900D3B47E /* FavoriteChara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteChara.swift; sourceTree = "<group>"; };
 		12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteCard.swift; sourceTree = "<group>"; };
@@ -1262,6 +1266,7 @@
 				1269EA121D520D370071AD7F /* CGSSUpdater.swift */,
 				12D975D91E38716F005E932B /* BaseRequest.swift */,
 				12D975DB1E3871CD005E932B /* BaseSession.swift */,
+				12F76DD71FFC710A00AB214B /* APIClient.swift */,
 				1247F70D1D855C95009EF42C /* LZ4Decompressor.swift */,
 				12F590301D9555CF00E004ED /* CGSSTypes.swift */,
 				123679031E0E6B1300622114 /* DeviceInformationManager.swift */,
@@ -1274,6 +1279,7 @@
 				1261944E1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift */,
 				12353A5C1F1309C2008286C2 /* CoreDataStack.swift */,
 				12353AA41F1457A0008286C2 /* UserNotificationHandler.swift */,
+				12F76DD91FFCAFC700AB214B /* Version.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2100,7 +2106,9 @@
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageViewer/ImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/MessagePack.swift/MessagePack.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/RijndaelSwift/RijndaelSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -2118,7 +2126,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagePack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RijndaelSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -2471,6 +2481,7 @@
 				12636ECA1E375E9900E3C833 /* EventPtView.swift in Sources */,
 				12FC8B541EDE6DEB003CF3C3 /* UnitSimulationLiveSelectCell.swift in Sources */,
 				122EECE71D5F2131008ADE08 /* BaseTableViewController.swift in Sources */,
+				12F76DDA1FFCAFC700AB214B /* Version.swift in Sources */,
 				124E47111D654AB700DD0399 /* BirthdayNotificationViewController.swift in Sources */,
 				121B82181EB82A6E00273F37 /* GachaCardFilterSortController.swift in Sources */,
 				124AB3B81E8F708600D94A48 /* LSLog.swift in Sources */,
@@ -2577,6 +2588,7 @@
 				12C6B3501F00B68E00A25DB1 /* CardDetailBasicCell.swift in Sources */,
 				12CDC6E71F663ACD004BB7AE /* DereGuide.xcdatamodeld in Sources */,
 				12F590311D9555CF00E004ED /* CGSSTypes.swift in Sources */,
+				12F76DD81FFC710A00AB214B /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

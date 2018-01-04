@@ -56,6 +56,12 @@
 		<key>name</key>
 		<string>ZKPageViewController</string>
 	</dict>
+		<dict>
+		<key>site</key>
+		<string>https://github.com/superk589/RijndaelSwift</string>
+		<key>name</key>
+		<string>RijndaelSwift</string>
+	</dict>
 	<dict>
 		<key>site</key>
 		<string>https://github.com/danielgindi/Charts</string>
@@ -98,5 +104,11 @@
 		<key>name</key>
 		<string>MJRefresh</string>
 	</dict>
+    <dict>
+        <key>site</key>
+        <string>https://github.com/a2/MessagePack.swift</string>
+        <key>name</key>
+        <string>MessagePack.swift</string>
+    </dict>
 </array>
 </plist>

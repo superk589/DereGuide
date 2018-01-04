@@ -83,6 +83,7 @@ class GachaDetailController: BaseViewController {
             simulationView.delegate = self
         }
         
+        requestData()
         // Do any additional setup after loading the view.
     }
 
@@ -94,6 +95,10 @@ class GachaDetailController: BaseViewController {
         gachaResult = GachaSimulationResult(times: 0, ssrCount: 0, srCount: 0)
         simulationView.wipeResultView()
         simulationView.wipeResultGrid()
+    }
+    
+    private func requestData() {
+
     }
     
 }

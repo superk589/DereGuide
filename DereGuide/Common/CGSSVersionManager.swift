@@ -49,6 +49,19 @@ class CGSSVersionManager {
 
     }
     
+    var gameVersion: Version? {
+        set {
+            UserDefaults.standard.set(newValue?.description, forKey: "game_version")
+        }
+        get {
+            if let string = UserDefaults.standard.object(forKey: "game_version") as? String {
+                return Version(string: string)
+            } else {
+                return nil
+            }
+        }
+    }
+    
     var currentMasterTruthVersion: String {
         set {
             UserDefaults.standard.setValue(newValue, forKey: "master_truth_version")

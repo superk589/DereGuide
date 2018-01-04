@@ -161,6 +161,24 @@ open class CGSSUpdater: NSObject {
         task.resume()
     }
     
+    func checkAppVersion(callback: @escaping CGSSFinishedClosure) {
+        let url = URL(string: "https://itunes.apple.com/jp/lookup?id=1016318735")!
+        let task = checkSession.dataTask(with: url) { data, response, error in
+            if error != nil {
+                callback(false, error)
+            } else if (response as! HTTPURLResponse).statusCode != 200 {
+                let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
+                callback(false, error)
+            } else {
+                let json = JSON(data!)
+                let appVersion = json["results"][0]["version"].stringValue
+                CGSSVersionManager.default.gameVersion = Version.init(string: appVersion)
+                callback(true, nil)
+            }
+        }
+        task.resume()
+    }
+
     func checkManifest(callback: @escaping CGSSFinishedClosure) {
         if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
             let url = URL.manifest(truthVersion: truthVersion)
@@ -290,6 +308,15 @@ open class CGSSUpdater: NSObject {
                 self?.isChecking = false
                 complete(itemsNeedToUpdate, errors)
             } else {
+                
+                secondCheckGroup.enter()
+                self?.checkAppVersion { (finished, error) in
+                    if let e = error {
+                        errors.append(e)
+                    }
+                    secondCheckGroup.leave()
+                }
+                
                 if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
                     secondCheckGroup.enter()
                     self?.checkManifest(callback: { (finished, error) in

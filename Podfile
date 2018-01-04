@@ -21,6 +21,8 @@ target 'DereGuide' do
   pod 'ImageViewer'
   pod 'ZKPageViewController'
   pod 'MJRefresh'
+  pod 'RijndaelSwift'
+  pod 'MessagePack.swift'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'
