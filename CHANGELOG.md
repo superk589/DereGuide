@@ -1,5 +1,23 @@
 # ChangeLog
 
+### 1.7.1
+
+1. 增加对新技能的支持
+2. 更新图片服务器地址
+3. 其他细节优化
+
+##### Japanese version
+
+1. 新しい特技・センター効果の対応
+2. 新しい画像サーバーへ移行
+3. 他の機能向上
+
+##### English version
+
+1. Add support for new skills
+2. Update image server
+3. Other improvements
+
 ### 1.7
 
 1. 新增谱面自动播放功能
