@@ -47,7 +47,8 @@ class CGSSLiveSimulator {
             
             var intersectedRanges = [LSRange]()
             var intersectedBonuses = [LSSkill]()
-            for bonus in bonuses {
+            let replacedBonuses = replaceEncores(bonuses)
+            for bonus in replacedBonuses {
                 if bonus.isConcentrated {
                     if note.sec - concentratedRadius <= bonus.range.end || note.sec + concentratedRadius >= bonus.range.begin {
                         if let intersectedRange = bonus.range.intersection(noteConcentratedRange) {
@@ -124,19 +125,7 @@ class CGSSLiveSimulator {
         callback?(LSResult.init(scores: simulateResult), logs)
     }
     
-    func simulateOnce(options: LSOptions = [], callback: LSResultClosure? = nil) {
-        var sum = 0
-        
-        var life = totalLife
-
-        // all proc skills
-        var procedBonuses = bonuses
-            .sorted { $0.range.begin < $1.range.begin }
-            .filter {
-                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
-            }
-        
-        // replace all encore skills by last skill
+    private func replaceEncores(_ procedBonuses: [LSSkill]) -> [LSSkill] {
         var replacedBonuses = [LSSkill]()
         for index in procedBonuses.indices {
             let bonus = procedBonuses[index]
@@ -149,6 +138,23 @@ class CGSSLiveSimulator {
                 replacedBonuses.append(bonus)
             }
         }
+        return replacedBonuses
+    }
+    
+    func simulateOnce(options: LSOptions = [], callback: LSResultClosure? = nil) {
+        var sum = 0
+        
+        var life = totalLife
+
+        // all proc skills
+        let procedBonuses = bonuses
+            .sorted { $0.range.begin < $1.range.begin }
+            .filter {
+                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
+            }
+        
+        // replace all encore skills by last skill
+        let replacedBonuses = replaceEncores(procedBonuses)
         
         var logs = [LSLog]()
         

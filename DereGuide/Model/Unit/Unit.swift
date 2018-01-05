@@ -206,13 +206,8 @@ extension Unit {
         return arraySlice
     }
     
-    func hasUnknownSkills() -> Bool {
-        for i in 0...5 {
-            if let type = self[i].card?.skillType, type == .unknown {
-                return true
-            }
-        }
-        return false
+    func hasSkillType(_ type: CGSSSkillTypes) -> Bool {
+        return orderedMembers[0..<5].contains { $0.card?.skillType == type }
     }
     
     // 队伍原始值

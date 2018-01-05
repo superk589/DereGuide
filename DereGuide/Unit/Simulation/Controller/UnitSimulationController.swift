@@ -343,7 +343,7 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
         if let scene = self.scene {
             cell?.clearSimulationGrid()
             cell?.startSimulationAnimating()
-            if unit.hasUnknownSkills() {
+            if unit.hasSkillType(.unknown) {
                 showUnknownSkillAlert()
             }
             let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
@@ -367,9 +367,11 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? UnitSimulationMainBodyCell
         if let scene = self.scene {
             cell?.clearCalculationGrid()
-            if unit.hasUnknownSkills() {
+            if unit.hasSkillType(.unknown) {
                 showUnknownSkillAlert()
             }
+            
+            let hasUnsupportedSkillType = unit.hasSkillType(.encore) || unit.hasSkillType(.lifeSparkle)
             let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             let formulator = coordinator.generateLiveFormulator()
@@ -377,6 +379,9 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
             
             simulator.simulateOptimistic1(options: [], callback: { (result, logs) in
                 cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: formulator.maxScore, value4: formulator.averageScore)
+                if hasUnsupportedSkillType {
+                    cell?.calculationGrid[1, 3].text = "n/a"
+                }
                 cell?.resetCalculationButton()
             })
             
