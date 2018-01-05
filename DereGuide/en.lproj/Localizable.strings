@@ -552,8 +552,8 @@
 // Skill Type: Concentration
 "专注" = "Concentration";
 
-// Skill Type: Mimic
-"模仿" = "Mimic";
+// Skill Type: Encore
+"返场" = "Encore";
 
 // Skill Type: All Round
 "全才" = "All Round";
@@ -807,3 +807,9 @@
 "自动播放时显示按键区辅助线" = "Show assisted line when auto-scrolling";
 "显示网格和标注" = "Show grid line and side text";
 "正在完成更新" = "Finishing...";
+
+/* new in 1.7.1 */
+"生命闪耀" = "Life Sparkle";
+"重复发动上一个其他偶像发动过的技能" = "to activate the previous skill again";
+"获得额外的COMBO加成，当前生命值越高加成越高" = "that you will gain an extra combo bonus based on your current health";
+"完成LIVE时，额外获得特别奖励" = "gives extra rewards when you finish a live.";

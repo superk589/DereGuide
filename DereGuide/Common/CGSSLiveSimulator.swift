@@ -11,46 +11,16 @@ import SwiftyJSON
 
 typealias LSResultClosure = (LSResult, [LSLog]) -> Void
 
-fileprivate let perfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
-    .debut: [.click: 0.08, .slide: 0.2, .flick: 0.15],
-    .regular: [.click: 0.08, .slide: 0.2, .flick: 0.15],
-    .light: [.click: 0.08, .slide: 0.2, .flick: 0.15],
-    .pro: [.click: 0.07, .slide: 0.2, .flick: 0.15],
-    .master: [.click: 0.06, .slide: 0.2, .flick: 0.15],
-    .masterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
-    .legacyMasterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
-    .trick: [.click: 0.06, .slide: 0.2, .flick: 0.15]
-]
-
-fileprivate let concentratedPerfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
-    .debut: [.click: 0.05, .slide: 0.1, .flick: 0.1],
-    .regular: [.click: 0.05, .slide: 0.1, .flick: 0.1],
-    .light: [.click: 0.05, .slide: 0.1, .flick: 0.1],
-    .pro: [.click: 0.04, .slide: 0.1, .flick: 0.1],
-    .master: [.click: 0.03, .slide: 0.1, .flick: 0.1],
-    .masterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
-    .legacyMasterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
-    .trick: [.click: 0.03, .slide: 0.1, .flick: 0.1]
-]
-
-fileprivate extension Int {
-    func addGreatPercent(_ percent: Double) -> Int {
-        return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
-    }
-}
-
 class CGSSLiveSimulator {
     
     var notes: [LSNote]
     var bonuses: [LSSkill]
-    var supports: [LSSkill]
     var totalLife: Int
     var difficulty: CGSSLiveDifficulty
     
-    init(notes: [LSNote], bonuses: [LSSkill], supports: [LSSkill], totalLife: Int, difficulty: CGSSLiveDifficulty) {
+    init(notes: [LSNote], bonuses: [LSSkill], totalLife: Int, difficulty: CGSSLiveDifficulty) {
         self.notes = notes
         self.bonuses = bonuses
-        self.supports = supports
         self.totalLife = totalLife
         self.difficulty = difficulty
     }
@@ -159,14 +129,24 @@ class CGSSLiveSimulator {
         
         var life = totalLife
 
-        var procedBonuses: [LSSkill]
-        if options.contains(.supportSkills) {
-            procedBonuses = supports.sorted { $0.range.begin < $1.range.begin }.filter {
+        // all proc skills
+        var procedBonuses = bonuses
+            .sorted { $0.range.begin < $1.range.begin }
+            .filter {
                 options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
             }
-        } else {
-            procedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }.filter {
-                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
+        
+        // replace all encore skills by last skill
+        var replacedBonuses = [LSSkill]()
+        for index in procedBonuses.indices {
+            let bonus = procedBonuses[index]
+            if bonus.type == .encore {
+                if var last = replacedBonuses.last {
+                    last.range = bonus.range
+                    replacedBonuses.append(last)
+                }
+            } else {
+                replacedBonuses.append(bonus)
             }
         }
         
@@ -189,8 +169,8 @@ class CGSSLiveSimulator {
             var damageGuard = false
             
             var firstLoop = true
-            for j in lastIndex..<procedBonuses.count {
-                let bonus = procedBonuses[j]
+            for j in lastIndex..<replacedBonuses.count {
+                let bonus = replacedBonuses[j]
                 if note.sec > bonus.range.end {
                     continue
                 } else if note.sec < bonus.range.begin {
@@ -249,6 +229,11 @@ class CGSSLiveSimulator {
                         perfectLock = true
                     case .guard:
                         damageGuard = true
+                    case .lifeSparkle:
+                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, comboBonusValueOfLife(life))
+                    case .encore:
+                        // already replaced by last skill
+                        break
                     }
                 }
             }
@@ -317,6 +302,222 @@ class CGSSLiveSimulator {
     
     func cancelSimulating() {
         cancelled = true
+    }
+}
+
+extension BidirectionalCollection {
+    func last(
+        where predicate: (Self.Iterator.Element) throws -> Bool
+        ) rethrows -> Self.Iterator.Element? {
+        
+        for index in self.indices.reversed() {
+            let element = self[index]
+            if try predicate(element) {
+                return element
+            }
+        }
+        
+        return nil
+    }
+}
+
+
+fileprivate let perfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
+    .debut: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .regular: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .light: [.click: 0.08, .slide: 0.2, .flick: 0.15],
+    .pro: [.click: 0.07, .slide: 0.2, .flick: 0.15],
+    .master: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .masterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .legacyMasterPlus: [.click: 0.06, .slide: 0.2, .flick: 0.15],
+    .trick: [.click: 0.06, .slide: 0.2, .flick: 0.15]
+]
+
+fileprivate let concentratedPerfectRadius: [CGSSLiveDifficulty: [CGSSBeatmapNote.RangeType: Float]] = [
+    .debut: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .regular: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .light: [.click: 0.05, .slide: 0.1, .flick: 0.1],
+    .pro: [.click: 0.04, .slide: 0.1, .flick: 0.1],
+    .master: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .masterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .legacyMasterPlus: [.click: 0.03, .slide: 0.1, .flick: 0.1],
+    .trick: [.click: 0.03, .slide: 0.1, .flick: 0.1]
+]
+
+fileprivate let lifeToComboBonus: [Int: Int] = [
+    0: 108,
+    10: 108,
+    20: 108,
+    30: 108,
+    40: 108,
+    50: 109,
+    60: 109,
+    70: 109,
+    80: 109,
+    90: 109,
+    100: 110,
+    110: 110,
+    120: 110,
+    130: 110,
+    140: 110,
+    150: 111,
+    160: 111,
+    170: 111,
+    180: 111,
+    190: 112,
+    200: 112,
+    210: 112,
+    220: 112,
+    230: 112,
+    240: 113,
+    250: 113,
+    260: 113,
+    270: 113,
+    280: 113,
+    290: 114,
+    300: 114,
+    310: 114,
+    320: 114,
+    330: 114,
+    340: 115,
+    350: 115,
+    360: 115,
+    370: 115,
+    380: 116,
+    390: 116,
+    400: 116,
+    410: 116,
+    420: 116,
+    430: 117,
+    440: 117,
+    450: 117,
+    460: 117,
+    470: 117,
+    480: 118,
+    490: 118,
+    500: 118,
+    510: 118,
+    520: 118,
+    530: 119,
+    540: 119,
+    550: 119,
+    560: 119,
+    570: 120,
+    580: 120,
+    590: 120,
+    600: 120,
+    610: 120,
+    620: 121,
+    630: 121,
+    640: 121,
+    650: 121,
+    660: 121,
+    670: 122,
+    680: 122,
+    690: 122,
+    700: 122,
+    710: 122,
+    720: 123,
+    730: 123,
+    740: 123,
+    750: 123,
+    760: 124,
+    770: 124,
+    780: 124,
+    790: 124,
+    800: 124,
+    810: 125,
+    820: 125,
+    830: 125,
+    840: 125,
+    850: 125,
+    860: 126,
+    870: 126,
+    880: 126,
+    890: 126,
+    900: 126,
+    910: 127,
+    920: 127,
+    930: 127,
+    940: 127,
+    950: 128,
+    960: 128,
+    970: 128,
+    980: 128,
+    990: 128,
+    1000: 129,
+    1010: 129,
+    1020: 129,
+    1030: 129,
+    1040: 129,
+    1050: 130,
+    1060: 130,
+    1070: 130,
+    1080: 130,
+    1090: 130,
+    1100: 131,
+    1110: 131,
+    1120: 131,
+    1130: 131,
+    1140: 132,
+    1150: 132,
+    1160: 132,
+    1170: 132,
+    1180: 132,
+    1190: 133,
+    1200: 133,
+    1210: 133,
+    1220: 133,
+    1230: 133,
+    1240: 134,
+    1250: 134,
+    1260: 134,
+    1270: 134,
+    1280: 134,
+    1290: 135,
+    1300: 135,
+    1310: 135,
+    1320: 135,
+    1330: 136,
+    1340: 136,
+    1350: 136,
+    1360: 136,
+    1370: 136,
+    1380: 137,
+    1390: 137,
+    1400: 137,
+    1410: 137,
+    1420: 137,
+    1430: 138,
+    1440: 138,
+    1450: 138,
+    1460: 138,
+    1470: 138,
+    1480: 139,
+    1490: 139,
+    1500: 139,
+    1510: 139,
+    1520: 140,
+    1530: 140,
+    1540: 140,
+    1550: 140,
+    1560: 140,
+    1570: 141,
+    1580: 141,
+    1590: 141,
+    1600: 141
+]
+
+
+private func comboBonusValueOfLife(_ life: Int) -> Int {
+    let key = life / 10 * 10
+    return lifeToComboBonus[key] ?? 108
+}
+
+
+private extension Int {
+    func addGreatPercent(_ percent: Double) -> Int {
+        return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
     }
 }
 

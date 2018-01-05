@@ -23,5 +23,4 @@ struct LSOptions: OptionSet {
     
     static let overloadLimitByLife = LSOptions.init(rawValue: 1 << 2)
     
-    static let supportSkills = LSOptions.init(rawValue: 1 << 3)
 }

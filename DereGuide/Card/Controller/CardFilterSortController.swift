@@ -32,10 +32,11 @@ class CardFilterSortController: BaseFilterSortController {
         CGSSSkillTypes.heal.description,
         CGSSSkillTypes.guard.description,
         CGSSSkillTypes.concentration.description,
-//        CGSSSkillTypes.mimic.description,
         CGSSSkillTypes.boost.description,
         CGSSSkillTypes.allRound.description,
         CGSSSkillTypes.deep.description,
+        CGSSSkillTypes.encore.description,
+        CGSSSkillTypes.lifeSparkle.description,
         CGSSSkillTypes.unknown.description,
         CGSSSkillTypes.none.description
     ]

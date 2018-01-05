@@ -43,7 +43,6 @@ fileprivate let comboFactor: [Double] = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]
 
 fileprivate let criticalPercent: [Int] = [0, 5, 10, 25, 50, 70, 80, 90]
 
-
 class LSCoordinator {
     var unit: Unit
     var scene: CGSSLiveScene
@@ -121,9 +120,8 @@ class LSCoordinator {
         return lsNotes
     }
     
-    fileprivate func generateBonusesAndSupports() -> (bonuses: [LSSkill], supports: [LSSkill]) {
+    fileprivate func generateBonuses() -> [LSSkill] {
         var bonuses = [LSSkill]()
-        var supports = [LSSkill]()
         let leaderSkillUpContent = unit.getLeaderSkillUpContentBy(simulatorType: simulatorType)
         
         for i in 0...4 {
@@ -159,7 +157,6 @@ class LSCoordinator {
                         case .skillBoost:
                             let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
                             bonuses.append(bonus)
-                            supports.append(bonus)
                         case .deep:
                             if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
                                 fallthrough
@@ -168,29 +165,24 @@ class LSCoordinator {
                             }
                         default:
                             let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
-                            if bonus.type.isScoreBonus {
-                                bonuses.append(bonus)
-                            }
-                            if bonus.type.isSupport {
-                                supports.append(bonus)
-                            }
+                            bonuses.append(bonus)
                         }
                     }
                 }
             }
         }
-        return (bonuses, supports)
+        return bonuses
     }
     
     func generateLiveSimulator() -> CGSSLiveSimulator {
-        let (bonuses, supports) = generateBonusesAndSupports()
+        let bonuses = generateBonuses()
         let notes = generateLSNotes()
-        let simulator = CGSSLiveSimulator(notes: notes, bonuses: bonuses, supports: supports, totalLife: life, difficulty: scene.difficulty)
+        let simulator = CGSSLiveSimulator(notes: notes, bonuses: bonuses, totalLife: life, difficulty: scene.difficulty)
         return simulator
     }
     
     func generateLiveFormulator() -> CGSSLiveFormulator {
-        let (bonuses, _) = self.generateBonusesAndSupports()
+        let bonuses = generateBonuses()
         let notes = generateLSNotes()
         let formulator = CGSSLiveFormulator(notes: notes, bonuses: bonuses)
         return formulator

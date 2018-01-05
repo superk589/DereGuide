@@ -41,12 +41,12 @@ class LiveSimulatorSupportSkillsViewController: LiveSimulatorViewController {
             break
         case .optimistic2:
             navigationItem.title = NSLocalizedString("极限模式", comment: "")
-            simulator.simulateOnce(options: [.maxRate, .detailLog, .supportSkills], callback: { [weak self] (result, logs) in
+            simulator.simulateOnce(options: [.maxRate, .detailLog], callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         case .simulation:
             navigationItem.title = displayType.description
-            var options: LSOptions = [.detailLog, .supportSkills]
+            var options: LSOptions = [.detailLog]
             if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
                 options.insert(.overloadLimitByLife)
             }

@@ -20,15 +20,17 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     static let `guard` = CGSSSkillTypes.init(rawValue: 1 << 6)
     
     static let concentration = CGSSSkillTypes.init(rawValue: 1 << 7)
-//    static let mimic = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let boost = CGSSSkillTypes.init(rawValue: 1 << 8)
     static let allRound = CGSSSkillTypes.init(rawValue: 1 << 9)
     static let deep = CGSSSkillTypes.init(rawValue: 1 << 10)
     
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 11)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 12)
+    static let encore = CGSSSkillTypes.init(rawValue: 1 << 11)
+    static let lifeSparkle = CGSSSkillTypes.init(rawValue: 1 << 12)
+    
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 13)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 14)
 
-    static let all = CGSSSkillTypes.init(rawValue: 0b1_1111_1111_1111)
+    static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111_1111)
     
     init(typeId: Int) {
         switch typeId {
@@ -48,14 +50,16 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             self = .overload
         case 15:
             self = .concentration
-//        case 16:
-//            self = .mimic
+        case 16:
+            self = .encore
         case 20:
             self = .boost
         case 21, 22, 23:
             self = .deep
         case 24:
             self = .allRound
+        case 25:
+            self = .lifeSparkle
         default:
             self = .unknown
         }
@@ -83,8 +87,10 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             return NSLocalizedString("无", comment: "")
         case CGSSSkillTypes.concentration:
             return NSLocalizedString("专注", comment: "")
-            //        case CGSSSkillTypes.mimic:
-        //            return NSLocalizedString("模仿", comment: "")
+        case CGSSSkillTypes.encore:
+            return NSLocalizedString("返场", comment: "")
+        case CGSSSkillTypes.lifeSparkle:
+            return NSLocalizedString("生命闪耀", comment: "")
         case CGSSSkillTypes.allRound:
             return NSLocalizedString("全才", comment: "")
         case CGSSSkillTypes.deep:

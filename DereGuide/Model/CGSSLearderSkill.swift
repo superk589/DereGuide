@@ -29,9 +29,52 @@ fileprivate let effectClause = NSLocalizedString("提升%@偶像的%@ %d%%。", 
 fileprivate let andConjunction = NSLocalizedString("%@和%@", comment: "")
 fileprivate let andMark = NSLocalizedString("、", comment: "")
 fileprivate let only = NSLocalizedString("只有%@", comment: "")
-fileprivate let predicateClause = NSLocalizedString("当%@属性的偶像存在于队伍时，", comment: "")
+
+extension String {
+    func firstCharacterUppercased() -> String {
+        return String(self[startIndex]).uppercased() + self[index(after: startIndex)..<endIndex]
+    }
+}
 
 extension CGSSLeaderSkill {
+    
+    private func buildPredicateClause() -> String {
+        var needList: [String] = []
+        if needCute > 0 {
+            needList.append(NSLocalizedString("Cute", comment: ""))
+        }
+        if needCool > 0 {
+            needList.append(NSLocalizedString("Cool", comment: ""))
+        }
+        if needPassion > 0 {
+            needList.append(NSLocalizedString("Passion", comment: ""))
+        }
+        
+        var needStr = ""
+        if needList.count > 0 {
+            if needList.count == 1 {
+                needStr = needList[0]
+            } else {
+                needStr = needList[..<(needList.count - 1)].joined(separator: andMark)
+                needStr = String.init(format: andConjunction, needStr, needList.last!)
+            }
+            
+            // FIXME: consider values of need_x in leader_skill_t
+            // Rei_Fan49 - Today at 5:36 PM
+            // princess and focus only works for single color
+            // it requires 5 or 6 per color
+            // which implies monocolor unit or no activation
+            // cinfest unit requires 1 each color (according to internal data)
+            
+            if needList.count < 3 {
+                needStr = String.init(format: only, needStr)
+            }
+            
+            let predicateClause = String.init(format: NSLocalizedString("当%@属性的偶像存在于队伍时，", comment: ""), needStr)
+            return predicateClause
+        }
+        return ""
+    }
    
     var localizedExplain: String {
         if upType == 1 && type == 20 {
@@ -40,44 +83,13 @@ extension CGSSLeaderSkill {
             
             let effect = String.init(format: effectClause, attr, param, upValue)
             
-            var needList: [String] = []
-            if needCute > 0 {
-                needList.append(NSLocalizedString("Cute", comment: ""))
-            }
-            if needCool > 0 {
-                needList.append(NSLocalizedString("Cool", comment: ""))
-            }
-            if needPassion > 0 {
-                needList.append(NSLocalizedString("Passion", comment: ""))
-            }
+            let built = buildPredicateClause() + effect
             
-            var needStr = ""
-            if needList.count > 0 {
-                if needList.count == 1 {
-                    needStr = needList[0]
-                } else {
-                    needStr = needList[..<(needList.count - 1)].joined(separator: andMark)
-                    needStr = String.init(format: andConjunction, needStr, needList.last!)
-                }
-                
-                // FIXME: consider values of need_x in leader_skill_t
-                // Rei_Fan49 - Today at 5:36 PM
-                // princess and focus only works for single color
-                // it requires 5 or 6 per color
-                // which implies monocolor unit or no activation
-                // cinfest unit requires 1 each color (according to internal data)
-                
-                if needList.count < 3 {
-                    needStr = String.init(format: only, needStr)
-                }
-                
-                let built = String.init(format: predicateClause, needStr) + effect
-                return built
-            } else {
-                // if there is not predicate clause, uppercase the first letter.
-                let built = String(effect[effect.startIndex]).uppercased() + effect[effect.index(after: effect.startIndex)..<effect.endIndex]
-                return built
-            }
+            return built.firstCharacterUppercased()
+            
+        } else if upType == 1 && type == 30 {
+            let built = buildPredicateClause() + NSLocalizedString("完成LIVE时，额外获得特别奖励", comment: "")
+            return built.firstCharacterUppercased()
         } else {
             // use in-game description
             return explain

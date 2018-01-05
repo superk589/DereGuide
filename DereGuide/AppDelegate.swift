@@ -44,10 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 3 {
                 CGSSCacheManager.shared.wipeLive()
             }
-            if lastVersion < 5 {
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
-            }
             if lastVersion < 7 {
                 let context = CoreDataStack.default.viewContext
                 for cardID in CGSSFavoriteManager.default.favoriteCards {
@@ -67,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitLive)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.unitLive)
+            }
+            if lastVersion < 12 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
         }
         

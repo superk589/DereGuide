@@ -23,19 +23,13 @@ enum LSSkillType {
     case comboContinue
     case perfectLock
     
-    static let allSupport: [LSSkillType] = [LSSkillType.guard, .skillBoost, .overload, .heal, .allRound, .comboContinue, .perfectLock]
-    static let allScoreBonus: [LSSkillType] = [LSSkillType.comboBonus, .perfectBonus, .skillBoost, .heal, .overload, .deep, .allRound, .concentration]
+    case encore
+    
+    case lifeSparkle
+    
     static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration]
-    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .lifeSparkle]
     
-    var isSupport: Bool {
-        return LSSkillType.allSupport.contains(self)
-    }
-    
-    var isScoreBonus: Bool {
-        return LSSkillType.allScoreBonus.contains(self)
-    }
-        
     init?(type: CGSSSkillTypes) {
         switch type {
         case CGSSSkillTypes.comboBonus:
@@ -60,6 +54,10 @@ enum LSSkillType {
             self = .perfectLock
         case CGSSSkillTypes.guard:
             self = .guard
+        case CGSSSkillTypes.encore:
+            self = .encore
+        case CGSSSkillTypes.lifeSparkle:
+            self = .lifeSparkle
         default:
             return nil
         }
