@@ -731,6 +731,7 @@
 		12C2B62820010402006EE7F7 /* DereGuideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DereGuideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C2B62C20010402006EE7F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C2B63320010435006EE7F7 /* LSRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSRangeTests.swift; sourceTree = "<group>"; };
+		12C2B637200268B3006EE7F7 /* DereGuide 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DereGuide 5.xcdatamodel"; sourceTree = "<group>"; };
 		12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueMyCentersCell.swift; sourceTree = "<group>"; };
 		12C390161F3412AF0077FB38 /* ColleagueCentersWantedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueCentersWantedCell.swift; sourceTree = "<group>"; };
 		12C390181F3413340077FB38 /* CenterWantedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterWantedItemView.swift; sourceTree = "<group>"; };
@@ -3142,12 +3143,13 @@
 		12CDC6E21F663A41004BB7AE /* DereGuide.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				12C2B637200268B3006EE7F7 /* DereGuide 5.xcdatamodel */,
 				12CDC6E31F663A41004BB7AE /* DereGuide.xcdatamodel */,
 				12CDC6E41F663A41004BB7AE /* DereGuide 3.xcdatamodel */,
 				12CDC6E51F663A41004BB7AE /* DereGuide 4.xcdatamodel */,
 				12CDC6E61F663A41004BB7AE /* DereGuide 2.xcdatamodel */,
 			);
-			currentVersion = 12CDC6E51F663A41004BB7AE /* DereGuide 4.xcdatamodel */;
+			currentVersion = 12C2B637200268B3006EE7F7 /* DereGuide 5.xcdatamodel */;
 			path = DereGuide.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

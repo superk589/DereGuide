@@ -320,7 +320,7 @@ extension UnitEditingController: RecentUsedMemberCellDelegate {
         }
         let tevc = MemberEditingViewController()
         tevc.modalPresentationStyle = .popover
-        tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 350)
         
         let member = recentMembers[index]
         guard let card = member.card else {
@@ -354,7 +354,7 @@ extension UnitEditingController: MemberGroupViewDelegate {
         }
         let tevc = MemberEditingViewController()
         tevc.modalPresentationStyle = .popover
-        tevc.preferredContentSize = CGSize.init(width: 240, height: 290)
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 350)
         
         guard let member = members[index], let card = member.card else {
             return

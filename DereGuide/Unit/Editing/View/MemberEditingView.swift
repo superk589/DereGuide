@@ -10,10 +10,11 @@ import UIKit
 
 class MemberEditingView: UIView {
 
-    var skillStepper: ValueStepper!
-    var vocalStepper: ValueStepper!
-    var danceStepper: ValueStepper!
-    var visualStepper: ValueStepper!
+    let skillStepper = ValueStepper()
+    let vocalStepper = ValueStepper()
+    let danceStepper = ValueStepper()
+    let visualStepper = ValueStepper()
+    let lifeStepper = ValueStepper()
     
     var stackView: UIStackView!
     
@@ -24,45 +25,25 @@ class MemberEditingView: UIView {
         prepare()
     }
     
+    private func config(stepper: ValueStepper, maximumValue: Double, minimumValue: Double, tintColor: UIColor, prefix: String) {
+        stepper.maximumValue = maximumValue
+        stepper.minimumValue = minimumValue
+        stepper.stepValue = 1
+        stepper.numberFormatter.maximumFractionDigits = 0
+        stepper.numberFormatter.positivePrefix = prefix
+        stepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
+        stepper.tintColor = tintColor
+    }
+    
     func prepare() {
         
-        skillStepper = ValueStepper()
-        skillStepper.maximumValue = 10
-        skillStepper.minimumValue = 1
-        skillStepper.stepValue = 1
-        skillStepper.numberFormatter.maximumFractionDigits = 0
-        skillStepper.numberFormatter.positivePrefix = "SLv. "
-        skillStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
-        skillStepper.tintColor = UIColor.black
+        config(stepper: skillStepper, maximumValue: 10, minimumValue: 1, tintColor: .black, prefix: "SLv. ")
+        config(stepper: vocalStepper, maximumValue: 10, minimumValue: 0, tintColor: .vocal, prefix: "Vo +")
+        config(stepper: danceStepper, maximumValue: 10, minimumValue: 0, tintColor: .dance, prefix: "Da +")
+        config(stepper: visualStepper, maximumValue: 10, minimumValue: 0, tintColor: .visual, prefix: "Vi +")
+        config(stepper: lifeStepper, maximumValue: 10, minimumValue: 0, tintColor: .life, prefix: "HP +")
         
-        vocalStepper = ValueStepper()
-        vocalStepper.maximumValue = 10
-        vocalStepper.minimumValue = 0
-        vocalStepper.stepValue = 1
-        vocalStepper.numberFormatter.maximumFractionDigits = 0
-        vocalStepper.numberFormatter.positivePrefix = "Vo +"
-        vocalStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
-        vocalStepper.tintColor = Color.vocal
-        
-        danceStepper = ValueStepper()
-        danceStepper.maximumValue = 10
-        danceStepper.minimumValue = 0
-        danceStepper.stepValue = 1
-        danceStepper.numberFormatter.maximumFractionDigits = 0
-        danceStepper.numberFormatter.positivePrefix = "Da +"
-        danceStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
-        danceStepper.tintColor = Color.dance
-        
-        visualStepper = ValueStepper()
-        visualStepper.maximumValue = 10
-        visualStepper.minimumValue = 0
-        visualStepper.stepValue = 1
-        visualStepper.numberFormatter.maximumFractionDigits = 0
-        visualStepper.numberFormatter.positivePrefix = "Vi +"
-        visualStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
-        visualStepper.tintColor = Color.visual
-        
-        stackView = UIStackView(arrangedSubviews: [skillStepper, vocalStepper, danceStepper, visualStepper])
+        stackView = UIStackView(arrangedSubviews: [skillStepper, vocalStepper, danceStepper, visualStepper, lifeStepper])
         addSubview(stackView)
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -76,7 +57,7 @@ class MemberEditingView: UIView {
     }
     
     @objc func handleStepperValueChanged(_ stepper: ValueStepper) {
-        let potential = CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: 0)
+        let potential = CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: Int(lifeStepper.value))
         let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         if stepper == skillStepper {
             if let skill = card.skill {
@@ -88,6 +69,8 @@ class MemberEditingView: UIView {
             stepper.descriptionLabel.text = String(appeal.dance)
         } else if stepper == visualStepper {
             stepper.descriptionLabel.text = String(appeal.visual)
+        } else if stepper == lifeStepper {
+            stepper.descriptionLabel.text = String(appeal.life)
         }
     }
     
@@ -118,6 +101,9 @@ class MemberEditingView: UIView {
         
         visualStepper.value = Double(member.visualLevel)
         visualStepper.descriptionLabel.text = String(appeal.visual)
+        
+        lifeStepper.value = Double(member.lifeLevel)
+        lifeStepper.descriptionLabel.text = String(appeal.life)
     }
     
     required init?(coder aDecoder: NSCoder) {

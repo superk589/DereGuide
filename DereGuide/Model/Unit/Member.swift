@@ -22,6 +22,7 @@ public class Member: NSManagedObject {
     @NSManaged public var vocalLevel: Int16
     @NSManaged public var danceLevel: Int16
     @NSManaged public var visualLevel: Int16
+    @NSManaged public var lifeLevel: Int16
     @NSManaged public var createdAt: Date
     @NSManaged public var updatedAt: Date
     @NSManaged public var participatedUnit: Unit?
@@ -66,6 +67,7 @@ public class Member: NSManagedObject {
         self.vocalLevel = Int16(potential.vocalLevel)
         self.danceLevel = Int16(potential.danceLevel)
         self.visualLevel = Int16(potential.visualLevel)
+        self.lifeLevel = Int16(potential.lifeLevel)
     }
     
     @discardableResult
@@ -76,6 +78,7 @@ public class Member: NSManagedObject {
         member.vocalLevel = Int16(potential.vocalLevel)
         member.danceLevel = Int16(potential.danceLevel)
         member.visualLevel = Int16(potential.visualLevel)
+        member.lifeLevel = Int16(potential.lifeLevel)
         member.participatedPosition = participatedPostion
         return member
     }
@@ -116,6 +119,7 @@ extension Member: RemoteUpdatable {
         self.danceLevel = Int16(remoteRecord.danceLevel)
         self.visualLevel = Int16(remoteRecord.visualLevel)
         self.skillLevel = Int16(remoteRecord.skillLevel)
+        self.lifeLevel = Int16(remoteRecord.lifeLevel)
         self.updatedAt = remoteRecord.localModifiedAt
     }
     
@@ -129,7 +133,7 @@ extension Member {
     }
     
     var potential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: 0)
+        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: Int(lifeLevel))
     }
     
 }
@@ -176,6 +180,7 @@ extension Member: RemoteUploadable {
         record["participatedUnit"] = participatedUnit!.ckReference!
         record["localCreatedAt"] = createdAt as NSDate
         record["localModifiedAt"] = updatedAt as NSDate
+        record["lifeLevel"] = lifeLevel as CKRecordValue
         return record
     }
 
