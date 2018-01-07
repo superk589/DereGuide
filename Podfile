@@ -28,3 +28,6 @@ target 'NotificationContent' do
   pod 'SDWebImage'
   pod 'SnapKit'
 end
+target 'DereGuideTests' do
+  pod 'FMDB'
+end

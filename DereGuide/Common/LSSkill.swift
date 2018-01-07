@@ -28,7 +28,8 @@ enum LSSkillType {
     case lifeSparkle
     
     static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration]
-    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .lifeSparkle]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
+    static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal]
     
     init?(type: CGSSSkillTypes) {
         switch type {
@@ -66,7 +67,7 @@ enum LSSkillType {
 
 struct LSSkill {
     
-    var range: LSRange
+    var range: LSRange<Float>
     
     // In percent, 117 means 17%up
     var value: Int
@@ -96,4 +97,27 @@ extension LSSkill {
         return type == .concentration
     }
     
+}
+
+extension LSSkill {
+    
+    var comboBonusValue: Int {
+        if type == .deep {
+            return value2
+        } else if LSSkillType.allComboBonus.contains(type) {
+            return value
+        } else {
+            return 0
+        }
+    }
+    
+    var lifeRestoreValue: Int {
+        if type == .allRound {
+            return value2
+        } else if LSSkillType.allLifeResotre.contains(type) {
+            return value
+        } else {
+            return 0
+        }
+    }
 }

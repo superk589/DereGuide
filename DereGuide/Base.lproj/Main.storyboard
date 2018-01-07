@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -426,12 +426,12 @@ If you have any questions or suggestions about our Privacy Policy</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="leading" secondItem="CIx-ll-EGt" secondAttribute="leading" id="5DB-6v-Gch"/>
-                            <constraint firstItem="CIx-ll-EGt" firstAttribute="trailing" secondItem="0n3-F6-Y4f" secondAttribute="trailing" id="YeD-xe-U4O"/>
-                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="top" secondItem="CIx-ll-EGt" secondAttribute="top" id="cVR-kK-CA0"/>
+                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="leading" secondItem="znz-lr-Zo0" secondAttribute="leading" id="5DB-6v-Gch"/>
+                            <constraint firstItem="znz-lr-Zo0" firstAttribute="trailing" secondItem="0n3-F6-Y4f" secondAttribute="trailing" id="YeD-xe-U4O"/>
+                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="top" secondItem="znz-lr-Zo0" secondAttribute="top" id="cVR-kK-CA0"/>
                             <constraint firstAttribute="bottom" secondItem="0n3-F6-Y4f" secondAttribute="bottom" id="lnp-Fm-K92"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="CIx-ll-EGt"/>
+                        <viewLayoutGuide key="safeArea" id="znz-lr-Zo0"/>
                     </view>
                     <connections>
                         <outlet property="textView" destination="0n3-F6-Y4f" id="Zyq-gO-fdE"/>
@@ -524,7 +524,7 @@ If you have any questions or suggestions about our Privacy Policy</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="9Xr-gr-VUh"/>
+                        <viewLayoutGuide key="safeArea" id="SFx-l4-dxh"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的队伍" id="omj-Op-jcb"/>
                 </viewController>
