@@ -51,7 +51,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     
     var simulationResult: LSResult?
     
-    weak var currentSimulator: CGSSLiveSimulator?
+    weak var currentSimulator: LiveSimulator?
     
     deinit {
         currentSimulator?.cancelSimulating()
@@ -186,7 +186,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     func checkScoreDetail() {
         if let scene = self.scene {
             let vc = LiveSimulatorViewController()
-            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -197,7 +197,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     func checkSupportSkillDetail() {
         if let scene = self.scene {
             let vc = LiveSimulatorSupportSkillsViewController()
-            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -208,7 +208,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     func gotoAdvanceCalculation() {
         if let result = self.simulationResult, result.scores.count > 0, let scene = scene {
             let vc = UnitAdvanceCalculationController(result: result)
-            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let formulator = coordinator.generateLiveFormulator()
             vc.formulator = formulator
             self.navigationController?.pushViewController(vc, animated: true)
@@ -321,7 +321,7 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
     func startSimulate(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell) {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? UnitSimulationMainBodyCell
         
-        let doSimulationBy = { [weak self] (simulator: CGSSLiveSimulator, times: UInt) in
+        let doSimulationBy = { [weak self] (simulator: LiveSimulator, times: UInt) in
             var options = LSOptions()
             if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
                 options.insert(.overloadLimitByLife)
@@ -346,7 +346,7 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
             if unit.hasSkillType(.unknown) {
                 showUnknownSkillAlert()
             }
-            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             currentSimulator = simulator
             DispatchQueue.global(qos: .userInitiated).async {
@@ -372,16 +372,30 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
             }
             
             let hasUnsupportedSkillType = unit.hasSkillType(.encore) || unit.hasSkillType(.lifeSparkle)
-            let coordinator = LSCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             let simulator = coordinator.generateLiveSimulator()
             let formulator = coordinator.generateLiveFormulator()
-            cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)
             
+            // setup appeal
+            cell?.setupAppeal(coordinator.fixedAppeal ?? coordinator.appeal)
+
+            // setup average
+            if hasUnsupportedSkillType {
+                cell?.calculationGrid[1, 3].text = "n/a"
+            } else {
+                cell?.calculationGrid[1, 3].text = String(formulator.averageScore)
+            }
+            
+            // setup optimistic 1
             simulator.simulateOptimistic1(options: [], callback: { (result, logs) in
-                cell?.setupCalculationResult(value1: coordinator.fixedAppeal ?? coordinator.appeal, value2: result.average, value3: formulator.maxScore, value4: formulator.averageScore)
-                if hasUnsupportedSkillType {
-                    cell?.calculationGrid[1, 3].text = "n/a"
-                }
+                cell?.calculationGrid[1, 1].text = String(result.average)
+            })
+            
+            simulator.wipeResults()
+            
+            // setup optimistic 2
+            simulator.simulateOnce(options: [.maxRate], callback: { (result, logs) in
+                cell?.calculationGrid[1, 2].text = String(result.average)
                 cell?.resetCalculationButton()
             })
             

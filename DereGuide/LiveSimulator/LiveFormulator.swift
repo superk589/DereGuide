@@ -1,5 +1,5 @@
 //
-//  CGSSLiveFormulator.swift
+//  LiveFormulator.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/5/18.
@@ -26,7 +26,7 @@ extension LSNote {
 }
 
 /// Formulator is only used in optimistic score 2 and average score calculation
-class CGSSLiveFormulator {
+class LiveFormulator {
     
     var notes: [LSNote]
     var bonuses: [LSSkill]

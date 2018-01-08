@@ -22,7 +22,7 @@ class UnitAdvanceCalculationController: UITableViewController {
         var variables: [String]?
     }
     
-    var formulator: CGSSLiveFormulator!
+    var formulator: LiveFormulator!
     var result: LSResult!
     
     fileprivate lazy var descriptionSection: [DescriptionRow] = {

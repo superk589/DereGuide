@@ -1,5 +1,5 @@
 //
-//  CGSSLiveSimulator.swift
+//  LiveSimulator.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/2/19.
@@ -11,7 +11,7 @@ import SwiftyJSON
 
 typealias LSResultClosure = (LSResult, [LSLog]) -> Void
 
-class CGSSLiveSimulator {
+class LiveSimulator {
     
     var notes: [LSNote]
     var bonuses: [LSSkill]
@@ -224,7 +224,7 @@ class CGSSLiveSimulator {
 
         actions += notes.map { LSAction.note($0) }
         
-        actions.sort { $0.timeOffset < $1.timeOffset }
+        actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order)  }
         
         var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife)
         
@@ -340,7 +340,7 @@ class CGSSLiveSimulator {
                     case .guard:
                         damageGuard = true
                     case .lifeSparkle:
-                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, LSCoordinator.comboBonusValueOfLife(life))
+                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, LiveCoordinator.comboBonusValueOfLife(life))
                     case .encore:
                         // already replaced by last skill
                         break

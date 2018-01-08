@@ -1,5 +1,5 @@
 //
-//  CGSSLiveCoordinator.swift
+//  LiveCoordinator.swift
 //  DereGuide
 //
 //  Created by zzk on 16/8/8.
@@ -207,7 +207,7 @@ fileprivate let lifeToComboBonus: [Int: Int] = [
     1600: 141
 ]
 
-class LSCoordinator {
+class LiveCoordinator {
     
     class func comboBonusValueOfLife(_ life: Int) -> Int {
         let key = life / 10 * 10
@@ -344,17 +344,17 @@ class LSCoordinator {
         return bonuses
     }
     
-    func generateLiveSimulator() -> CGSSLiveSimulator {
+    func generateLiveSimulator() -> LiveSimulator {
         let bonuses = generateBonuses()
         let notes = generateLSNotes()
-        let simulator = CGSSLiveSimulator(notes: notes, bonuses: bonuses, totalLife: life, difficulty: scene.difficulty)
+        let simulator = LiveSimulator(notes: notes, bonuses: bonuses, totalLife: life, difficulty: scene.difficulty)
         return simulator
     }
     
-    func generateLiveFormulator() -> CGSSLiveFormulator {
+    func generateLiveFormulator() -> LiveFormulator {
         let bonuses = generateBonuses()
         let notes = generateLSNotes()
-        let formulator = CGSSLiveFormulator(notes: notes, bonuses: bonuses)
+        let formulator = LiveFormulator(notes: notes, bonuses: bonuses)
         return formulator
     }
 }

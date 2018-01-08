@@ -36,7 +36,7 @@
 		120DBB291EEE3120004E0084 /* UnitTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB281EEE3120004E0084 /* UnitTemplateController.swift */; };
 		120DBB2D1EEE3A0D004E0084 /* UnitTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 120DBB2C1EEE3A0D004E0084 /* UnitTemplate.plist */; };
 		120DBB2F1EEE414A004E0084 /* UnitTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB2E1EEE414A004E0084 /* UnitTemplate.swift */; };
-		120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */; };
+		120FB5E71E59496B003802CD /* LiveSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120FB5E61E59496B003802CD /* LiveSimulator.swift */; };
 		1211B0AE1EAF5A5E0027DD51 /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */; };
 		1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */; };
 		121685EE1F1D911300F204D8 /* GachaSimulationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121685ED1F1D911300F204D8 /* GachaSimulationResult.swift */; };
@@ -163,7 +163,7 @@
 		1261944F1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1261944E1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift */; };
 		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
 		1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */; };
-		1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */; };
+		1262F5171ECDE3CF00AD6424 /* LiveFormulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5161ECDE3CF00AD6424 /* LiveFormulator.swift */; };
 		1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */; };
 		12636EC61E37429C00E3C833 /* EventChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC51E37429C00E3C833 /* EventChartController.swift */; };
 		12636EC81E375DA900E3C833 /* EventLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12636EC71E375DA900E3C833 /* EventLogItem.swift */; };
@@ -250,7 +250,7 @@
 		129B95611F31CA51007B7AE2 /* ColleagueBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95601F31CA51007B7AE2 /* ColleagueBaseCell.swift */; };
 		129B95661F31D8E0007B7AE2 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95641F31D8E0007B7AE2 /* Profile.swift */; };
 		129B95681F31DA28007B7AE2 /* RemoteProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B95671F31DA28007B7AE2 /* RemoteProfile.swift */; };
-		129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */; };
+		129D6EBC1D5883D80071BC4D /* LiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBB1D5883D80071BC4D /* LiveCoordinator.swift */; };
 		129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */; };
 		129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */; };
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
@@ -478,7 +478,7 @@
 		120DBB281EEE3120004E0084 /* UnitTemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTemplateController.swift; sourceTree = "<group>"; };
 		120DBB2C1EEE3A0D004E0084 /* UnitTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnitTemplate.plist; sourceTree = "<group>"; };
 		120DBB2E1EEE414A004E0084 /* UnitTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTemplate.swift; sourceTree = "<group>"; };
-		120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveSimulator.swift; sourceTree = "<group>"; };
+		120FB5E61E59496B003802CD /* LiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulator.swift; sourceTree = "<group>"; };
 		12116CED72ED1D5C773F4C4D /* Pods_DereGuideTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DereGuideTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 		1261944E1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitEditingAdvanceOptionsManager.swift; sourceTree = "<group>"; };
 		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveScene.swift; sourceTree = "<group>"; };
-		1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFormulator.swift; sourceTree = "<group>"; };
+		1262F5161ECDE3CF00AD6424 /* LiveFormulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveFormulator.swift; sourceTree = "<group>"; };
 		1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSScoreBonusGroup.swift; sourceTree = "<group>"; };
 		12636EC51E37429C00E3C833 /* EventChartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChartController.swift; sourceTree = "<group>"; };
 		12636EC71E375DA900E3C833 /* EventLogItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogItem.swift; sourceTree = "<group>"; };
@@ -692,7 +692,7 @@
 		129B95601F31CA51007B7AE2 /* ColleagueBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueBaseCell.swift; sourceTree = "<group>"; };
 		129B95641F31D8E0007B7AE2 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		129B95671F31DA28007B7AE2 /* RemoteProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteProfile.swift; sourceTree = "<group>"; };
-		129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCoordinator.swift; sourceTree = "<group>"; };
+		129D6EBB1D5883D80071BC4D /* LiveCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveCoordinator.swift; sourceTree = "<group>"; };
 		129D6EBD1D58B0C20071BC4D /* CGSSRankedSkill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSRankedSkill.swift; sourceTree = "<group>"; };
 		129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
@@ -952,26 +952,6 @@
 				12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		122497201E8E848A005C743C /* CGSSLiveSimulator */ = {
-			isa = PBXGroup;
-			children = (
-				120FB5E61E59496B003802CD /* CGSSLiveSimulator.swift */,
-				1262F5161ECDE3CF00AD6424 /* CGSSLiveFormulator.swift */,
-				129D6EBB1D5883D80071BC4D /* LSCoordinator.swift */,
-				1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */,
-				1224972F1E8E95D1005C743C /* LFSamplePoint.swift */,
-				122497231E8E8582005C743C /* LFDistribution.swift */,
-				122497251E8E859C005C743C /* LSNote.swift */,
-				122497271E8E85C1005C743C /* LSSkill.swift */,
-				122497291E8E85DD005C743C /* LSRange.swift */,
-				1224972B1E8E85FC005C743C /* LSOptions.swift */,
-				122497311E8E9B57005C743C /* LSResult.swift */,
-				124AB3B71E8F708600D94A48 /* LSLog.swift */,
-				12C2B5F12000ED37006EE7F7 /* LSGame.swift */,
-			);
-			name = CGSSLiveSimulator;
 			sourceTree = "<group>";
 		};
 		122879481F8A561100AD1F5F /* View */ = {
@@ -1274,7 +1254,6 @@
 		1269E9121D5208B80071AD7F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				122497201E8E848A005C743C /* CGSSLiveSimulator */,
 				12D624371F171F640017999A /* CloudKitSync */,
 				1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */,
 				1205416B1D76C59E0021F875 /* CGSSCharFilter.swift */,
@@ -1553,6 +1532,7 @@
 				1269E9121D5208B80071AD7F /* Common */,
 				1269E90C1D52085C0071AD7F /* Card */,
 				1269E90F1D52085C0071AD7F /* Live */,
+				12AC1F262003125C00713AB6 /* LiveSimulator */,
 				1269E9101D52085C0071AD7F /* Unit */,
 				122EECDC1D5EF9A1008ADE08 /* Toolbox */,
 				1269E90E1D52085C0071AD7F /* Settings */,
@@ -1671,6 +1651,26 @@
 				12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		12AC1F262003125C00713AB6 /* LiveSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				120FB5E61E59496B003802CD /* LiveSimulator.swift */,
+				1262F5161ECDE3CF00AD6424 /* LiveFormulator.swift */,
+				129D6EBB1D5883D80071BC4D /* LiveCoordinator.swift */,
+				1262F51A1ECE83D500AD6424 /* LSScoreBonusGroup.swift */,
+				1224972F1E8E95D1005C743C /* LFSamplePoint.swift */,
+				122497231E8E8582005C743C /* LFDistribution.swift */,
+				122497251E8E859C005C743C /* LSNote.swift */,
+				122497271E8E85C1005C743C /* LSSkill.swift */,
+				122497291E8E85DD005C743C /* LSRange.swift */,
+				1224972B1E8E85FC005C743C /* LSOptions.swift */,
+				122497311E8E9B57005C743C /* LSResult.swift */,
+				124AB3B71E8F708600D94A48 /* LSLog.swift */,
+				12C2B5F12000ED37006EE7F7 /* LSGame.swift */,
+			);
+			path = LiveSimulator;
 			sourceTree = "<group>";
 		};
 		12C2B62920010402006EE7F7 /* DereGuideTests */ = {
@@ -2442,7 +2442,7 @@
 				129B95681F31DA28007B7AE2 /* RemoteProfile.swift in Sources */,
 				1269E9E11D520B5D0071AD7F /* CGSSSkill.swift in Sources */,
 				12D57A831F427AE600575B40 /* ColleagueTableViewCell.swift in Sources */,
-				1262F5171ECDE3CF00AD6424 /* CGSSLiveFormulator.swift in Sources */,
+				1262F5171ECDE3CF00AD6424 /* LiveFormulator.swift in Sources */,
 				1269E9F71D520C3E0071AD7F /* UnitCardSelectTableViewController.swift in Sources */,
 				122F36AF1F7DEEB4006DDE55 /* FavoriteSongRemover.swift in Sources */,
 				1269E9D81D520B5D0071AD7F /* CGSSCard.swift in Sources */,
@@ -2488,7 +2488,7 @@
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
-				129D6EBC1D5883D80071BC4D /* LSCoordinator.swift in Sources */,
+				129D6EBC1D5883D80071BC4D /* LiveCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
@@ -2540,7 +2540,7 @@
 				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */,
-				120FB5E71E59496B003802CD /* CGSSLiveSimulator.swift in Sources */,
+				120FB5E71E59496B003802CD /* LiveSimulator.swift in Sources */,
 				120BDE881F4871260098E93C /* WideLoadingButton.swift in Sources */,
 				124E47121D654AB700DD0399 /* CharInfoViewController.swift in Sources */,
 				12D4F8AF1E1BDB8E0064991E /* DonationQAView.swift in Sources */,

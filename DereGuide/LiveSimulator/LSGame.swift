@@ -15,6 +15,7 @@ enum LSAction {
     case skillEnd(Identifier, LSSkill)
     case note(LSNote)
     
+    // time offset from live start, in seconds
     var timeOffset: Float {
         switch self {
         case .skillEnd(_, let skill):
@@ -23,6 +24,18 @@ enum LSAction {
             return skill.range.begin
         case .note(let note):
             return note.sec
+        }
+    }
+    
+    // used for order the actions have the same time offset
+    var order: Int {
+        switch self {
+        case .skillEnd:
+            return 3
+        case .skillStart:
+            return 1
+        case .note:
+            return 2
         }
     }
 }
@@ -158,7 +171,7 @@ struct LSGame {
     var bonusGroup: LSScoreBonusGroup {
         let maxPerfectBonus = bestPerfectBonus?.value ?? 100
         let maxComboBonus = bestComboBonus?.comboBonusValue ?? 100
-        let lifeSparkleBonus = hasLifeSparkle ? LSCoordinator.comboBonusValueOfLife(currentLife) : 100
+        let lifeSparkleBonus = hasLifeSparkle ? LiveCoordinator.comboBonusValueOfLife(currentLife) : 100
         let maxSkillBoost = bestSkillBoost?.value ?? 1000
         return LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
     }

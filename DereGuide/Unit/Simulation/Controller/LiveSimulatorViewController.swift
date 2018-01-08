@@ -32,8 +32,8 @@ class LiveSimulatorViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
-    var coordinator: LSCoordinator!
-    lazy var simulator: CGSSLiveSimulator = {
+    var coordinator: LiveCoordinator!
+    lazy var simulator: LiveSimulator = {
         self.coordinator.generateLiveSimulator()
     }()
     
