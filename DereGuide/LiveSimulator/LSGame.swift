@@ -31,11 +31,24 @@ enum LSAction {
     var order: Int {
         switch self {
         case .skillEnd:
-            return 3
-        case .skillStart:
-            return 1
+            return 300
+        case .skillStart(_, let skill):
+            switch skill.position {
+            case 0:
+                return 102
+            case 1:
+                return 104
+            case 2:
+                return 105
+            case 3:
+                return 103
+            case 4:
+                return 101
+            default:
+                return 100
+            }
         case .note:
-            return 2
+            return 200
         }
     }
 }

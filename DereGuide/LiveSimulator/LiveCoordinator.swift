@@ -325,7 +325,7 @@ class LiveCoordinator {
                     for range in ranges {
                         switch type {
                         case .skillBoost:
-                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i)
                             bonuses.append(bonus)
                         case .deep:
                             if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
@@ -334,7 +334,7 @@ class LiveCoordinator {
                                 break
                             }
                         default:
-                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue)
+                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i)
                             bonuses.append(bonus)
                         }
                     }

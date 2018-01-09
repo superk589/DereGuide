@@ -85,6 +85,7 @@ struct LSSkill {
     
     var triggerLife: Int
     
+    var position: Int
 }
 
 extension LSSkill {
