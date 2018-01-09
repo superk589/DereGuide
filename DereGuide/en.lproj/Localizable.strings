@@ -813,3 +813,6 @@
 "重复发动上一个其他偶像发动过的技能" = "to activate the previous skill again";
 "获得额外的COMBO加成，当前生命值越高加成越高" = "that you will gain an extra combo bonus based on your current health";
 "完成LIVE时，额外获得特别奖励" = "gives extra rewards when you finish a live.";
+
+/* new in 1.7.2 */
+"最低%@等级" = "Min. %@ Lv.";
