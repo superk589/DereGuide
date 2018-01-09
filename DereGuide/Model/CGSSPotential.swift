@@ -57,7 +57,7 @@ struct CGSSPotential {
     }
     
     var totalLevel: Int {
-        return vocalLevel + danceLevel + visualLevel
+        return vocalLevel + danceLevel + visualLevel + lifeLevel
     }
 }
 

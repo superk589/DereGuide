@@ -41,6 +41,10 @@ class Profile: NSManagedObject {
     @NSManaged public var creatorID: String?
     @NSManaged public var remoteIdentifier: String?
     @NSManaged public var coolVisualLevel: Int16
+    @NSManaged public var allTypeLifeLevel: Int16
+    @NSManaged public var cuteLifeLevel: Int16
+    @NSManaged public var coolLifeLevel: Int16
+    @NSManaged public var passionLifeLevel: Int16
     
     @NSManaged public var guestCuteMinLevel: Int16
     @NSManaged public var guestCoolMinLevel: Int16
@@ -63,45 +67,49 @@ extension Profile {
     
     var cutePotential: CGSSPotential {
         get {
-            return CGSSPotential(vocalLevel: Int(cuteVocalLevel), danceLevel: Int(cuteDanceLevel), visualLevel: Int(cuteVisualLevel), lifeLevel: 0)
+            return CGSSPotential(vocalLevel: Int(cuteVocalLevel), danceLevel: Int(cuteDanceLevel), visualLevel: Int(cuteVisualLevel), lifeLevel: Int(cuteLifeLevel))
         }
         set {
             cuteVocalLevel = Int16(newValue.vocalLevel)
             cuteDanceLevel = Int16(newValue.danceLevel)
             cuteVisualLevel = Int16(newValue.visualLevel)
+            cuteLifeLevel = Int16(newValue.lifeLevel)
         }
     }
     
     var coolPotential: CGSSPotential {
         get {
-            return CGSSPotential(vocalLevel: Int(coolVocalLevel), danceLevel: Int(coolDanceLevel), visualLevel: Int(coolVisualLevel), lifeLevel: 0)
+            return CGSSPotential(vocalLevel: Int(coolVocalLevel), danceLevel: Int(coolDanceLevel), visualLevel: Int(coolVisualLevel), lifeLevel: Int(coolLifeLevel))
         }
         set {
             coolVocalLevel = Int16(newValue.vocalLevel)
             coolDanceLevel = Int16(newValue.danceLevel)
             coolVisualLevel = Int16(newValue.visualLevel)
+            coolLifeLevel = Int16(newValue.lifeLevel)
         }
     }
     
     var passionPotential: CGSSPotential {
         get {
-            return CGSSPotential(vocalLevel: Int(passionVocalLevel), danceLevel: Int(passionDanceLevel), visualLevel: Int(passionVisualLevel), lifeLevel: 0)
+            return CGSSPotential(vocalLevel: Int(passionVocalLevel), danceLevel: Int(passionDanceLevel), visualLevel: Int(passionVisualLevel), lifeLevel: Int(passionLifeLevel))
         }
         set {
             passionVocalLevel = Int16(newValue.vocalLevel)
             passionDanceLevel = Int16(newValue.danceLevel)
             passionVisualLevel = Int16(newValue.visualLevel)
+            passionLifeLevel = Int16(newValue.lifeLevel)
         }
     }
     
     var allTypePotential: CGSSPotential {
         get {
-            return CGSSPotential(vocalLevel: Int(allTypeVocalLevel), danceLevel: Int(allTypeDanceLevel), visualLevel: Int(allTypeVisualLevel), lifeLevel: 0)
+            return CGSSPotential(vocalLevel: Int(allTypeVocalLevel), danceLevel: Int(allTypeDanceLevel), visualLevel: Int(allTypeVisualLevel), lifeLevel: Int(allTypeLifeLevel))
         }
         set {
             allTypeVocalLevel = Int16(newValue.vocalLevel)
             allTypeDanceLevel = Int16(newValue.danceLevel)
             allTypeVisualLevel = Int16(newValue.visualLevel)
+            allTypeLifeLevel = Int16(newValue.lifeLevel)
         }
     }
     
@@ -168,6 +176,10 @@ extension Profile {
         self.allTypeVocalLevel = 0
         self.message = ""
         self.coolVisualLevel = 0
+        self.passionLifeLevel = 0
+        self.cuteLifeLevel = 0
+        self.coolLifeLevel = 0
+        self.allTypeLifeLevel = 0
         
         self.guestCuteMinLevel = 0
         self.guestCoolMinLevel = 0
@@ -238,6 +250,12 @@ extension Profile: RemoteUploadable {
         record["passionTotalLevel"] = passionPotential.totalLevel as CKRecordValue
         record["allTypeTotalLevel"] = allTypePotential.totalLevel as CKRecordValue
         record["leaderCardID"] = leaderCardID as CKRecordValue
+        
+        record["allTypeLifeLevel"] = allTypeLifeLevel as CKRecordValue
+        record["cuteLifeLevel"] = cuteLifeLevel as CKRecordValue
+        record["coolLifeLevel"] = coolLifeLevel as CKRecordValue
+        record["passionLifeLevel"] = passionLifeLevel as CKRecordValue
+        
         return record
     }
     
@@ -282,6 +300,11 @@ extension Profile {
         
         profile.remoteCreatedAt = remoteRecord.remoteModifiedAt
         profile.leaderCardID = Int32(remoteRecord.leaderCardID)
+        
+        profile.passionLifeLevel = Int16(remoteRecord.passionLifeLevel)
+        profile.cuteLifeLevel = Int16(remoteRecord.cuteLifeLevel)
+        profile.coolLifeLevel = Int16(remoteRecord.coolLifeLevel)
+        profile.allTypeLifeLevel = Int16(remoteRecord.allTypeLifeLevel)
         
         return profile
         

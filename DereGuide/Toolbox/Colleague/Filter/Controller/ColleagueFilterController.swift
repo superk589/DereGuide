@@ -26,7 +26,7 @@ class ColleagueFilterController: UITableViewController {
     struct FilterSetting: Equatable {
         
         static func ==(lhs: ColleagueFilterController.FilterSetting, rhs: ColleagueFilterController.FilterSetting) -> Bool {
-            if lhs.type == rhs.type && lhs.cardIDs == rhs.cardIDs && lhs.minLevel == rhs.minLevel {
+            if lhs.type == rhs.type && lhs.cardIDs == rhs.cardIDs && lhs.minLevel == rhs.minLevel && lhs.minVocalLevel == rhs.minVocalLevel && lhs.minDanceLevel == rhs.minDanceLevel && lhs.minVisualLevel == rhs.minVisualLevel && lhs.minLifeLevel == rhs.minLifeLevel {
                 return true
             } else {
                 return false
@@ -36,11 +36,19 @@ class ColleagueFilterController: UITableViewController {
         var type: CGSSLiveTypes
         var cardIDs: [Int]
         var minLevel: Int
+        var minVocalLevel: Int
+        var minVisualLevel: Int
+        var minDanceLevel: Int
+        var minLifeLevel: Int
         
         func toDictionary() -> [String: Any] {
             return ["type": type.rawValue,
                     "cardIDs": cardIDs,
-                    "minLevel": minLevel
+                    "minLevel": minLevel,
+                    "minVocalLevel": minVocalLevel,
+                    "minDanceLevel": minDanceLevel,
+                    "minVisualLevel": minVisualLevel,
+                    "minLifeLevel": minLifeLevel
             ]
         }
         
@@ -53,6 +61,10 @@ class ColleagueFilterController: UITableViewController {
                 self.type = CGSSLiveTypes(rawValue: dict["type"] as! UInt)
                 self.cardIDs = dict["cardIDs"] as! [Int]
                 self.minLevel = dict["minLevel"] as! Int
+                self.minVocalLevel = dict["minVocalLevel"] as? Int ?? 0
+                self.minDanceLevel = dict["minDanceLevel"] as? Int ?? 0
+                self.minVisualLevel = dict["minVisualLevel"] as? Int ?? 0
+                self.minLifeLevel = dict["minLifeLevel"] as? Int ?? 0
             }
         }
         
@@ -60,26 +72,26 @@ class ColleagueFilterController: UITableViewController {
             if cardIDs.count > 0 {
                 switch type {
                 case CGSSLiveTypes.cute:
-                    return NSPredicate(format: "cuteCardID IN %@ AND cuteTotalLevel >= %ld", cardIDs, minLevel)
+                    return NSPredicate(format: "cuteCardID IN %@ AND cuteTotalLevel >= %ld AND cuteVocalLevel >= %ld AND cuteDanceLevel >= %ld AND cuteVisualLevel >= %ld AND cuteLifeLevel >= %ld", cardIDs, minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.allType:
-                    return NSPredicate(format: "allTypeCardID IN %@ AND allTypeTotalLevel >= %ld", cardIDs, minLevel)
+                    return NSPredicate(format: "allTypeCardID IN %@ AND allTypeTotalLevel >= %ld AND allTypeVocalLevel >= %ld AND allTypeDanceLevel >= %ld AND allTypeVisualLevel >= %ld AND allTypeLifeLevel >= %ld", cardIDs, minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.cool:
-                    return NSPredicate(format: "coolCardID IN %@ AND coolTotalLevel >= %ld", cardIDs, minLevel)
+                    return NSPredicate(format: "coolCardID IN %@ AND coolTotalLevel >= %ld AND coolVocalLevel >= %ld AND coolDanceLevel >= %ld AND coolVisualLevel >= %ld AND coolLifeLevel >= %ld", cardIDs, minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.passion:
-                    return NSPredicate(format: "passionCardID IN %@ AND passionTotalLevel >= %ld", cardIDs, minLevel)
+                    return NSPredicate(format: "passionCardID IN %@ AND passionTotalLevel >= %ld AND passionVocalLevel >= %ld AND passionDanceLevel >= %ld AND passionVisualLevel >= %ld AND passionLifeLevel >= %ld", cardIDs, minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 default:
                     return NSPredicate(value: true)
                 }
             } else {
                 switch type {
                 case CGSSLiveTypes.cute:
-                    return NSPredicate(format: "cuteTotalLevel >= %ld", minLevel)
+                    return NSPredicate(format: "cuteTotalLevel >= %ld AND cuteVocalLevel >= %ld AND cuteDanceLevel >= %ld AND cuteVisualLevel >= %ld AND cuteLifeLevel >= %ld", minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.allType:
-                    return NSPredicate(format: "allTypeTotalLevel >= %ld", minLevel)
+                    return NSPredicate(format: "allTypeTotalLevel >= %ld AND allTypeVocalLevel >= %ld AND allTypeDanceLevel >= %ld AND allTypeVisualLevel >= %ld AND allTypeLifeLevel >= %ld", minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.cool:
-                    return NSPredicate(format: "coolTotalLevel >= %ld", minLevel)
+                    return NSPredicate(format: "coolTotalLevel >= %ld AND coolVocalLevel >= %ld AND coolDanceLevel >= %ld AND coolVisualLevel >= %ld AND coolLifeLevel >= %ld", minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 case CGSSLiveTypes.passion:
-                    return NSPredicate(format: "passionTotalLevel >= %ld", minLevel)
+                    return NSPredicate(format: "passionTotalLevel >= %ld AND passionVocalLevel >= %ld AND passionDanceLevel >= %ld AND passionVisualLevel >= %ld AND passionLifeLevel >= %ld", minLevel, minVocalLevel, minDanceLevel, minVisualLevel, minLifeLevel)
                 default:
                     return NSPredicate(value: true)
                 }
@@ -95,10 +107,16 @@ class ColleagueFilterController: UITableViewController {
     
     var lastSelectedIndex: Int?
     
-    var setting = FilterSetting(type: [], cardIDs: [], minLevel: 0)
+    var setting = FilterSetting(type: [], cardIDs: [], minLevel: 0, minVocalLevel: 0, minVisualLevel: 0, minDanceLevel: 0, minLifeLevel: 0)
     
-    var stepperCell: UnitAdvanceOptionsTableViewCell!
+    var totalStepperOption: StepperOption!
+    var vocalStepperOption: StepperOption!
+    var danceStepperOption: StepperOption!
+    var visualStepperOption: StepperOption!
+    var lifeStepperOption: StepperOption!
     
+    var stepperCells = [UnitAdvanceOptionsTableViewCell]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,11 +134,29 @@ class ColleagueFilterController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
+        totalStepperOption = createSteppterOption(minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel), tintColor: .parade, title: NSLocalizedString("最低潜能等级", comment: ""))
+        stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(totalStepperOption)))
         
+        vocalStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minVocalLevel), tintColor: .vocal, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Vocal"))
+        stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(vocalStepperOption)))
+        
+        danceStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minDanceLevel), tintColor: .dance, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Dance"))
+        stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(danceStepperOption)))
+        
+        visualStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minVisualLevel), tintColor: .visual, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Visual"))
+        stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(visualStepperOption)))
+        
+        lifeStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minLifeLevel), tintColor: .life, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Life"))
+        stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(lifeStepperOption)))
+        
+    }
+    
+    private func createSteppterOption(minValue: Double, maxValue: Double, currentValue: Double, tintColor: UIColor, title: String) -> StepperOption {
         let option = StepperOption()
+        option.setup(title: title, minValue: minValue, maxValue: maxValue, currentValue: currentValue)
+        option.stepper.tintColor = tintColor
         option.addTarget(self, action: #selector(handleStepper(_:)), for: .valueChanged)
-        option.setup(title: NSLocalizedString("最低潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel))
-        stepperCell = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option))
+        return option
     }
     
     @objc func doneAction() {
@@ -136,7 +172,17 @@ class ColleagueFilterController: UITableViewController {
     }
     
     @objc func handleStepper(_ stepper: ValueStepper) {
-        setting.minLevel = Int(stepper.value)
+        if stepper == totalStepperOption.stepper {
+            setting.minLevel = Int(stepper.value)
+        } else if stepper == vocalStepperOption.stepper {
+            setting.minVocalLevel = Int(stepper.value)
+        } else if stepper == danceStepperOption.stepper {
+            setting.minDanceLevel = Int(stepper.value)
+        } else if stepper == visualStepperOption.stepper {
+            setting.minVisualLevel = Int(stepper.value)
+        } else if stepper == lifeStepperOption.stepper {
+            setting.minLifeLevel = Int(stepper.value)
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -163,7 +209,7 @@ class ColleagueFilterController: UITableViewController {
             if setting.type == [] {
                 return 0
             } else {
-                return 1
+                return stepperCells.count
             }
         case 2:
             if setting.type == [] {
@@ -190,7 +236,7 @@ class ColleagueFilterController: UITableViewController {
             }
             return cell
         case 1:
-            return stepperCell
+            return stepperCells[indexPath.row]
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: ColleagueFilterCardCell.description(), for: indexPath) as! ColleagueFilterCardCell
             if indexPath.row < setting.cardIDs.count {
