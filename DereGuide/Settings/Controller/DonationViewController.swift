@@ -28,6 +28,8 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     }
     
     deinit {
+        request?.delegate = nil
+        request?.cancel()
         SKPaymentQueue.default().remove(self)
     }
     
@@ -136,12 +138,13 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     }
     
     var hud: LoadingImageView?
+    private var request: SKProductsRequest?
     func requestData() {
-        let request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductIDs)
-        request.delegate = self
+        request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductIDs)
+        request?.delegate = self
         hud = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
         hud?.show(to: self.collectionView)
-        request.start()
+        request?.start()
     }
     
     @objc func restoreAction() {
@@ -224,9 +227,9 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
 extension DonationViewController: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         products = response.products.sorted(by: { $0.price.decimalValue < $1.price.decimalValue })
-        DispatchQueue.main.async {
-            self.hud?.hide()
-            self.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.hud?.hide()
+            self?.reloadData()
         }
     }
 }
