@@ -463,7 +463,7 @@ If you have any questions or suggestions about our Privacy Policy</string>
             <objects>
                 <tabBarController storyboardIdentifier="RootTabBarController" title="根标签栏" automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR" customClass="SafeAreaFixTabBar" customModule="DereGuide" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
