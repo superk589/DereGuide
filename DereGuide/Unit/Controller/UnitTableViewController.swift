@@ -60,7 +60,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
             make.right.lessThanOrEqualToSuperview()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleUnitModifiedNotification), name: .unitModified, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleUnitModifiedNotification), name: .unitModified, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateEnd), name: .updateEnd, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleUbiquityIdentityChange), name: .NSUbiquityIdentityDidChange, object: nil)
         

@@ -100,7 +100,7 @@ extension Member: UpdateTimestampable {}
 extension Member: RemoteRefreshable {
     @NSManaged public var markedForLocalChange: Bool
     var localTrackedKeys: [String] {
-        return ["cardID", "vocalLevel", "skillLevel", "danceLevel", "visualLevel"]
+        return ["cardID", "vocalLevel", "skillLevel", "danceLevel", "visualLevel", "lifeLevel"]
     }
 }
 

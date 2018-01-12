@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import EasyTipView
 import CoreData
-import  AudioToolbox
+import AudioToolbox
 
 protocol UnitEditingControllerDelegate: class {
     func unitEditingController(_ unitEditingController: UnitEditingController, didModify units: Set<Unit>)
@@ -393,6 +393,7 @@ extension UnitEditingController: UIPopoverPresentationControllerDelegate {
         member.vocalLevel = Int16(round(vc.editView.vocalStepper.value))
         member.danceLevel = Int16(round(vc.editView.danceStepper.value))
         member.visualLevel = Int16(round(vc.editView.visualStepper.value))
+        member.lifeLevel = Int16(round(vc.editView.lifeStepper.value))
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
@@ -422,12 +423,8 @@ extension UnitEditingController: UIPopoverPresentationControllerDelegate {
             }
         } else if let _ = popoverPresentationController.sourceView as? MemberEditableItemView {
             if let member = members[editableView.currentIndex] {
-                let index = editableView.currentIndex
-                member.skillLevel = Int16(round(vc.editView.skillStepper.value))
-                member.vocalLevel = Int16(round(vc.editView.vocalStepper.value))
-                member.danceLevel = Int16(round(vc.editView.danceStepper.value))
-                member.visualLevel = Int16(round(vc.editView.visualStepper.value))
-                reload(index: index)
+                modify(member, using: vc)
+                reload(index: editableView.currentIndex)
             }
         }
     }

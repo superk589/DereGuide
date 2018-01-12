@@ -20,8 +20,8 @@ class SafeAreaFixTabBar: UITabBar {
             oldSafeAreaInsets = safeAreaInsets
             
             invalidateIntrinsicContentSize()
-            superview?.setNeedsLayout()
-            superview?.layoutSubviews()
+//            superview?.setNeedsLayout()
+//            superview?.layoutIfNeeded()
         }
     }
     
