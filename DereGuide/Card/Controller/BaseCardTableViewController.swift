@@ -47,7 +47,11 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         super.viewDidLoad()
         
         // 初始化导航栏的搜索条
-        navigationItem.titleView = searchBarWrapper
+        if #available(iOS 11.0, *) {
+            navigationItem.titleView = searchBarWrapper
+        } else {
+            navigationItem.titleView = searchBar
+        }
         searchBar.placeholder = NSLocalizedString("日文名/罗马音", comment: "搜索框文字, 不宜过长")
         
         let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
