@@ -98,6 +98,13 @@
 		</array>
 		<key>start</key>
 		<real>3.333333</real>
-	</dict>
+    </dict>
+    <key>351,556</key>
+    <dict>
+        <key>name</key>
+        <string>美に入り彩を穿つ</string>
+        <key>offset</key>
+        <real>0.009475</real>
+    </dict>
 </dict>
 </plist>

@@ -118,6 +118,8 @@ class CGSSBeatmap {
                 offset = remainder * Float(bpm) / Float(rawBpm)
                 beginTime = TimeInterval(timeOfFirstNote - remainder)
             }
+        } else {
+            addStartOffset(rawBpm: rawBpm)
         }
         
         // add shift offset for each note using shift info
@@ -133,6 +135,11 @@ class CGSSBeatmap {
             point.timestamp += offset
             shiftingPoints?.append(point)
             offset += range.length * ((Float(range.bpm) / Float(rawBpm)) - 1)
+        }
+        
+        // add offset from shifting info
+        for note in validNotes {
+            note.offset += info.offset
         }
     }
     
