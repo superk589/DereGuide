@@ -1,5 +1,21 @@
 # ChangeLog
 
+### 1.7.2
+
+1. 优化模拟算分模型，计算更准确，但是计算速度有所下降
+2. 支持编辑生命值潜能，寻求组队中支持根据生命值潜能最小值筛选
+3. 修复几处细微的动画效果问题
+
+##### Japanese version
+
+1.
+
+##### English version
+
+1. Improve live simulator model, result is more accurate, but with a lower speed.
+2. Support for editing life potential. Colleague Finder also supports filtering by minimum life potential.
+3. Fix some subtle animation problem.
+
 ### 1.7.1
 
 1. 增加对新技能的支持

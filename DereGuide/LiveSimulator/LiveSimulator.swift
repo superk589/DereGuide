@@ -395,7 +395,7 @@ class LiveSimulator {
                 cancelled = false
                 break
             }
-            simulateOnceFast(options: options)
+            simulateOnce(options: options)
             progress(Int(i + 1), Int(times))
         }
         let result = LSResult.init(scores: simulateResult)
