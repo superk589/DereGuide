@@ -11,7 +11,7 @@ import UIKit
 extension CGSSCard {
     var signImageURL: URL? {
         if self.rarityType == .ssr || self.rarityType == . ssrp {
-            return URL.init(string: "https://hoshimoriuta.kirara.ca/sign/\(seriesId!).png")
+            return URL.images.appendingPathComponent("/sign/\(seriesId!).png")
         } else {
             return nil
         }
