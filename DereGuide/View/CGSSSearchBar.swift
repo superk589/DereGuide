@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CGSSSearchBar: UISearchBar {
 
@@ -32,10 +33,33 @@ class CGSSSearchBar: UISearchBar {
     override var intrinsicContentSize: CGSize {
         // fix a layout issue in iOS 11
         if #available(iOS 11.0, *) {
-            return CGSize(width: UIViewNoIntrinsicMetric, height: 44)
+            return UILayoutFittingExpandedSize
         } else {
             return super.intrinsicContentSize
         }
     }
 
+}
+
+class SearchBarWrapper: UIView {
+    
+    let searchBar: CGSSSearchBar
+    
+    init(searchBar: CGSSSearchBar) {
+        self.searchBar = searchBar
+        super.init(frame: .zero)
+        addSubview(searchBar)
+        searchBar.snp.makeConstraints { (make) in
+            make.height.equalTo(44)
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  FixedTabBar.swift
+//  SafeAreaFixTabBar.swift
 //  DereGuide
 //
 //  Created by zzk on 11/01/2018.

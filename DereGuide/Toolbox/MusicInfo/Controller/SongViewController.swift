@@ -69,7 +69,7 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
         
         reloadLayout()
         // 初始化导航栏的搜索条
-        navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBarWrapper
         searchBar.placeholder = NSLocalizedString("歌曲名/词曲作者/演唱者", comment: "")
         
         let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))

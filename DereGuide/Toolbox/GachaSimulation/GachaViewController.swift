@@ -53,7 +53,7 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         let filterItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = filterItem
         
-        navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBarWrapper
         searchBar.placeholder = NSLocalizedString("卡池名称或描述", comment: "")
         
         filterVC = GachaFilterSortController()

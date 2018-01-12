@@ -33,7 +33,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = searchBar
+        self.navigationItem.titleView = searchBarWrapper
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
     
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))

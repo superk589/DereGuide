@@ -16,6 +16,11 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
         return bar
     }()
     
+    lazy var searchBarWrapper: UIView = {
+        let wrapper = SearchBarWrapper(searchBar: self.searchBar)
+        return wrapper
+    }()
+    
     private var needsReloadData = true
     private var isShowing = false
     

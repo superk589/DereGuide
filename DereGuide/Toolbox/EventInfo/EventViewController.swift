@@ -50,7 +50,7 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
         let filterItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = filterItem
         
-        navigationItem.titleView = searchBar
+        navigationItem.titleView = searchBarWrapper
         searchBar.placeholder = NSLocalizedString("活动名", comment: "")
         
         filterVC = EventFilterSortController()

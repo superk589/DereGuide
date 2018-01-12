@@ -15,6 +15,11 @@ class BaseModelTableViewController: RefreshableTableViewController {
         bar.delegate = self
         return bar
     }()
+
+    lazy var searchBarWrapper: UIView = {
+        let wrapper = SearchBarWrapper(searchBar: self.searchBar)
+        return wrapper
+    }()
     
     private var needsReloadData = true
     private var isShowing = false
