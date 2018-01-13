@@ -32,7 +32,7 @@ class DonationCell: UICollectionViewCell {
         borderView = UIView()
         contentView.addSubview(borderView)
         borderView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 10, left: 0, bottom: 10, right: 0))
+            make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 10, left: 1, bottom: 10, right: 1))
         }
         borderView.layer.borderWidth = 1 / Screen.scale
         borderView.layer.cornerRadius = 10
