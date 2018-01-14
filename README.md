@@ -1,23 +1,19 @@
 # DereGuide
 
 ## Introduction
-This is an iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. All the data is from API provided by other sites and has nothing to do with the official application.
-* Images <https://truecolor.kirara.ca>
-* Card and Character(English) <https://starlight.kirara.ca>
-* Card and Character(Chinese) <http://starlight.346lab.org>
-* Event Pt. and High Score <https://portal.starlightstage.jp>
-* User Related <https://deresute.me>
+This is an unofficial iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. It's mainly based on APIs provided by other sites. It's designed to collect, cache and rearragne the game data so that you can easily search them. It also has some advance features such as live score simulator and beatmap player.
 
-## Features
-* Card
-* Beatmap
-* Character
-* Song
-* Unit Simulation
-* Gacha
-* Event
+## Modules
+* Card Viewer
+* Beatmap Viewer and Player
+* Character Viewer
+* Song Viewer
+* Unit Editor
+* Live Score Simulator
+* Gacha Viewer and Simulator
+* Event Viewer
 * Colleague Finder
-* Birthday Notification
+* Birthday Reminder
 
 ## Download at App Store
 <https://itunes.apple.com/app/dereguide/id1131934691>
