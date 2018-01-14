@@ -37,7 +37,7 @@ class CGSSBeatmapPlayer {
     }
     
     private func convertToOriginalOffset(_ shiftedOffset: TimeInterval) -> TimeInterval {
-        if let points = beatmap.shiftingPoints {
+        if let points = beatmap.shiftingPoints, points.count > 0 {
             let prefix = points.prefix { shiftedOffset > TimeInterval($0.timestamp) }
             if prefix.count == 0 {
                 let point = points.first!
@@ -62,7 +62,7 @@ class CGSSBeatmapPlayer {
     }
     
     private func convertToShiftedOffset(_ originalOffset: TimeInterval) -> TimeInterval {
-        if let points = beatmap.originalShiftingPoints {
+        if let points = beatmap.originalShiftingPoints, points.count > 0 {
             let prefix = points.prefix { originalOffset > TimeInterval($0.timestamp) }
             if prefix.count == 0 {
                 let point = points.first!
