@@ -322,11 +322,7 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? UnitSimulationMainBodyCell
         
         let doSimulationBy = { [weak self] (simulator: LiveSimulator, times: UInt) in
-            var options = LSOptions()
-            if LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition {
-                options.insert(.overloadLimitByLife)
-            }
-            simulator.simulate(times: times, options: options, progress: { (a, b) in
+            simulator.simulate(times: times, options: [], progress: { (a, b) in
                 DispatchQueue.main.async {
                     cell?.simulationButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
                 }

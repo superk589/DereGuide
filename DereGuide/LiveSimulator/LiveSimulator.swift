@@ -228,9 +228,7 @@ class LiveSimulator {
         
         var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife)
         
-        if options.contains(.detailLog) {
-            game.shouldGenerateLogs = true
-        }
+        game.shouldGenerateLogs = options.contains(.detailLog)
         
         for action in actions {
             game.perform(action)
@@ -245,149 +243,149 @@ class LiveSimulator {
         simulateResult.removeAll()
     }
     
-    func simulateOnceFast(options: LSOptions = [], callback: LSResultClosure? = nil) {
-        var sum = 0
-        
-        var life = totalLife
-        
-        // all proc skills
-        let procedBonuses = bonuses
-            .sorted { $0.range.begin < $1.range.begin }
-            .filter {
-                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
-        }
-        
-        // replace all encore skills by last skill
-        let replacedBonuses = replaceEncores(procedBonuses)
-        
-        var logs = [LSLog]()
-        
-        var lastIndex = 0
-        let overloadLimitByLife = options.contains(.overloadLimitByLife)
-        var overloadedIndexes = [Int]()
-        var missedIndexes = [Int]()
-        
-        for i in 0..<notes.count {
-            let note = notes[i]
-            let baseScore = note.baseScore
-            let comboFactor = note.comboFactor
-            var bonusGroup = LSScoreBonusGroup.basic
-            var restoreLife = 0
-            
-            var perfectLock = false
-            var comboContinue = false
-            var damageGuard = false
-            
-            var firstLoop = true
-            for j in lastIndex..<replacedBonuses.count {
-                let bonus = replacedBonuses[j]
-                if note.sec > bonus.range.end {
-                    continue
-                } else if note.sec < bonus.range.begin {
-                    break
-                } else {
-                    if firstLoop {
-                        lastIndex = j
-                        firstLoop = false
-                    }
-                    switch bonus.type {
-                    case .comboBonus:
-                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
-                    case .deep:
-                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
-                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value2)
-                    case .allRound:
-                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
-                        restoreLife = max(restoreLife, bonus.value2)
-                    case .overload:
-                        comboContinue = true
-                        if !overloadLimitByLife {
-                            fallthrough
-                        } else {
-                            // not missed
-                            if !missedIndexes.contains(j) {
-                                
-                                // proc already
-                                if overloadedIndexes.contains(j) {
-                                    fallthrough
-                                    
-                                    // first proc
-                                } else {
-                                    
-                                    // life enough
-                                    if life - bonus.triggerLife > 0 {
-                                        life -= bonus.triggerLife
-                                        overloadedIndexes.append(j)
-                                        fallthrough
-                                        
-                                        // life not enough
-                                    } else {
-                                        missedIndexes.append(j)
-                                    }
-                                }
-                            }
-                        }
-                    case .perfectBonus, .concentration:
-                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
-                    case .skillBoost:
-                        bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)
-                    case .heal:
-                        restoreLife = max(restoreLife, bonus.value)
-                    case .comboContinue:
-                        comboContinue = true
-                    case .perfectLock:
-                        perfectLock = true
-                    case .guard:
-                        damageGuard = true
-                    case .lifeSparkle:
-                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, LiveCoordinator.comboBonusValueOfLife(life))
-                    case .encore:
-                        // already replaced by last skill
-                        break
-                    }
-                }
-            }
-            
-            if bonusGroup.skillBoost > 1000 {
-                if restoreLife != 0 || damageGuard {
-                    restoreLife += 1
-                }
-            }
-            
-            life = min(2 * totalLife, life + restoreLife)
-            
-            let score = Int(round(baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
-            
-            sum += score
-            
-            if options.contains(.detailLog) {
-                let log = LSLog(noteIndex: i + 1, score: score, sum: sum,
-                                baseScore: baseScore,
-                                baseComboBonus: bonusGroup.baseComboBonus,
-                                comboBonus: bonusGroup.comboBonus,
-                                basePerfectBonus: bonusGroup.basePerfectBonus,
-                                perfectBonus: bonusGroup.perfectBonus,
-                                comboFactor: comboFactor,
-                                skillBoost: bonusGroup.skillBoost,
-                                lifeRestore: restoreLife,
-                                currentLife: life,
-                                perfectLock: perfectLock,
-                                comboContinue: comboContinue,
-                                guard: damageGuard)
-                logs.append(log)
-            }
-            
-        }
-        
-        simulateResult.append(sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent))
-        callback?(LSResult.init(scores: simulateResult), logs)
-        
-        //        #if DEBUG
-        //            let arr = scores.map { $0.toDictionary }
-        //            let json = JSON(arr)
-        //            try? json.rawString()?.write(toFile: NSHomeDirectory() + "/test.txt", atomically: true, encoding: .utf8)
-        //        #endif
-    }
+//    func simulateOnceFast(options: LSOptions = [], callback: LSResultClosure? = nil) {
+//        var sum = 0
+//        
+//        var life = totalLife
+//        
+//        // all proc skills
+//        let procedBonuses = bonuses
+//            .sorted { $0.range.begin < $1.range.begin }
+//            .filter {
+//                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
+//        }
+//        
+//        // replace all encore skills by last skill
+//        let replacedBonuses = replaceEncores(procedBonuses)
+//        
+//        var logs = [LSLog]()
+//        
+//        var lastIndex = 0
+//        let overloadLimitByLife = options.contains(.overloadLimitByLife)
+//        var overloadedIndexes = [Int]()
+//        var missedIndexes = [Int]()
+//        
+//        for i in 0..<notes.count {
+//            let note = notes[i]
+//            let baseScore = note.baseScore
+//            let comboFactor = note.comboFactor
+//            var bonusGroup = LSScoreBonusGroup.basic
+//            var restoreLife = 0
+//            
+//            var perfectLock = false
+//            var comboContinue = false
+//            var damageGuard = false
+//            
+//            var firstLoop = true
+//            for j in lastIndex..<replacedBonuses.count {
+//                let bonus = replacedBonuses[j]
+//                if note.sec > bonus.range.end {
+//                    continue
+//                } else if note.sec < bonus.range.begin {
+//                    break
+//                } else {
+//                    if firstLoop {
+//                        lastIndex = j
+//                        firstLoop = false
+//                    }
+//                    switch bonus.type {
+//                    case .comboBonus:
+//                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
+//                    case .deep:
+//                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
+//                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value2)
+//                    case .allRound:
+//                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value)
+//                        restoreLife = max(restoreLife, bonus.value2)
+//                    case .overload:
+//                        comboContinue = true
+//                        if !overloadLimitByLife {
+//                            fallthrough
+//                        } else {
+//                            // not missed
+//                            if !missedIndexes.contains(j) {
+//                                
+//                                // proc already
+//                                if overloadedIndexes.contains(j) {
+//                                    fallthrough
+//                                    
+//                                    // first proc
+//                                } else {
+//                                    
+//                                    // life enough
+//                                    if life - bonus.triggerLife > 0 {
+//                                        life -= bonus.triggerLife
+//                                        overloadedIndexes.append(j)
+//                                        fallthrough
+//                                        
+//                                        // life not enough
+//                                    } else {
+//                                        missedIndexes.append(j)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    case .perfectBonus, .concentration:
+//                        bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
+//                    case .skillBoost:
+//                        bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)
+//                    case .heal:
+//                        restoreLife = max(restoreLife, bonus.value)
+//                    case .comboContinue:
+//                        comboContinue = true
+//                    case .perfectLock:
+//                        perfectLock = true
+//                    case .guard:
+//                        damageGuard = true
+//                    case .lifeSparkle:
+//                        bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, LiveCoordinator.comboBonusValueOfLife(life))
+//                    case .encore:
+//                        // already replaced by last skill
+//                        break
+//                    }
+//                }
+//            }
+//            
+//            if bonusGroup.skillBoost > 1000 {
+//                if restoreLife != 0 || damageGuard {
+//                    restoreLife += 1
+//                }
+//            }
+//            
+//            life = min(2 * totalLife, life + restoreLife)
+//            
+//            let score = Int(round(baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
+//            
+//            sum += score
+//            
+//            if options.contains(.detailLog) {
+//                let log = LSLog(noteIndex: i + 1, score: score, sum: sum,
+//                                baseScore: baseScore,
+//                                baseComboBonus: bonusGroup.baseComboBonus,
+//                                comboBonus: bonusGroup.comboBonus,
+//                                basePerfectBonus: bonusGroup.basePerfectBonus,
+//                                perfectBonus: bonusGroup.perfectBonus,
+//                                comboFactor: comboFactor,
+//                                skillBoost: bonusGroup.skillBoost,
+//                                lifeRestore: restoreLife,
+//                                currentLife: life,
+//                                perfectLock: perfectLock,
+//                                comboContinue: comboContinue,
+//                                guard: damageGuard)
+//                logs.append(log)
+//            }
+//            
+//        }
+//        
+//        simulateResult.append(sum.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent))
+//        callback?(LSResult.init(scores: simulateResult), logs)
+//        
+//        //        #if DEBUG
+//        //            let arr = scores.map { $0.toDictionary }
+//        //            let json = JSON(arr)
+//        //            try? json.rawString()?.write(toFile: NSHomeDirectory() + "/test.txt", atomically: true, encoding: .utf8)
+//        //        #endif
+//    }
     
     func simulate(times: UInt, options: LSOptions = [], progress: CGSSProgressClosure = { _,_ in }, callback: @escaping LSResultClosure) {
         for i in 0..<times {

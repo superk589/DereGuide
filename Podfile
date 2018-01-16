@@ -23,6 +23,7 @@ target 'DereGuide' do
   pod 'MJRefresh'
   pod 'RijndaelSwift'
   pod 'MessagePack.swift'
+#  pod 'Alamofire'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

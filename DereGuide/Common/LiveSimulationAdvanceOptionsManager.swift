@@ -16,14 +16,14 @@ class LiveSimulationAdvanceOptionsManager {
         
     }
     
-    var considerOverloadSkillsTriggerLifeCondition: Bool {
-        set {
-            UserDefaults.standard.set(newValue, forKey: "considerOverloadSkillsTriggerLifeCondition")
-        }
-        get {
-            return UserDefaults.standard.bool(forKey: "considerOverloadSkillsTriggerLifeCondition")
-        }
-    }
+//    var considerOverloadSkillsTriggerLifeCondition: Bool {
+//        set {
+//            UserDefaults.standard.set(newValue, forKey: "considerOverloadSkillsTriggerLifeCondition")
+//        }
+//        get {
+//            return UserDefaults.standard.bool(forKey: "considerOverloadSkillsTriggerLifeCondition")
+//        }
+//    }
     
     var roomUpValue: Int {
         set {
@@ -53,7 +53,7 @@ class LiveSimulationAdvanceOptionsManager {
     }
     
     func reset() {
-        considerOverloadSkillsTriggerLifeCondition = false
+//        considerOverloadSkillsTriggerLifeCondition = false
         greatPercent = 0.0
         simulationTimes = 10000
         roomUpValue = 10

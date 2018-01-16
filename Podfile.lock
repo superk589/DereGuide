@@ -1,7 +1,7 @@
 PODS:
-  - Charts (3.0.4):
-    - Charts/Core (= 3.0.4)
-  - Charts/Core (3.0.4)
+  - Charts (3.0.5):
+    - Charts/Core (= 3.0.5)
+  - Charts/Core (3.0.5)
   - DynamicColor (4.0.2)
   - EasyTipView (1.1.0)
   - FMDB (2.7.2):
@@ -55,7 +55,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/igorkislyuk/EasyTipView.git
 
 SPEC CHECKSUMS:
-  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
+  Charts: 45cdc985b764c838b35ee47eb1365d15735f6d1a
   DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
   EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
@@ -73,6 +73,6 @@ SPEC CHECKSUMS:
   ZKDrawerController: d407465173b79b0fa7002fdf9e85685a6c667a39
   ZKPageViewController: 95b09fbb880061bbf33d05086a7e734a8ed899f6
 
-PODFILE CHECKSUM: bb5db4a08e9f510195a1fdb04b48b4531e58c9ee
+PODFILE CHECKSUM: ff601db8a72c43213e4a32ae3b2884eb571b1eb1
 
 COCOAPODS: 1.3.1
