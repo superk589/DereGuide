@@ -56,11 +56,16 @@ enum LSAction {
 struct LSGame {
     
     var maxLife: Int
-    var currentLife: Int
+    var currentLife: Int {
+        didSet {
+            if hasLifeSparkle {
+                updateBonusGroup()
+            }
+        }
+    }
     var score: Int
     var logs = [LSLog]()
     var skills = [Identifier: LSSkill]()
-    var optimisticNotes = [Identifier: LSNote]()
     var combo = 0
     var shouldGenerateLogs = false
     
@@ -75,22 +80,25 @@ struct LSGame {
         case .note(let note):
             
             combo += 1
-            
-            //calculate score
+
+            // as restored life may change life sparkle bonus value. I'm not sure which comes first, here do score calculation first.
+
+            // calculate score
             let noteScore = Int(round(note.baseScore * note.comboFactor * Double(bonusGroup.bonusValue) / 10000))
             score += noteScore
             
-            // calculate life
-            var lifeRestoreValue = bestLifeRestore?.lifeRestoreValue ?? 0
+            // calculate life.
+            var restoredLife = bestHealer?.lifeValue ?? 0
             if hasSkillBoost {
-                if hasDamegeGuard && lifeRestoreValue == 0 {
-                    lifeRestoreValue = 1
-                } else if lifeRestoreValue > 0 {
-                    lifeRestoreValue += 1
+                if hasDamegeGuard && restoredLife == 0 {
+                    restoredLife = 1
+                } else if restoredLife > 0 {
+                    restoredLife += 1
                 }
             }
-            currentLife = min(maxLife, currentLife + lifeRestoreValue)
+            currentLife = min(maxLife, currentLife + restoredLife)
             
+            // generate log
             if shouldGenerateLogs {
                 let log = LSLog(noteIndex: combo, score: noteScore, sum: score,
                                 baseScore: note.baseScore,
@@ -100,7 +108,7 @@ struct LSGame {
                                 perfectBonus: bonusGroup.perfectBonus,
                                 comboFactor: note.comboFactor,
                                 skillBoost: bonusGroup.skillBoost,
-                                lifeRestore: lifeRestoreValue,
+                                lifeRestore: restoredLife,
                                 currentLife: currentLife,
                                 perfectLock: hasPerfectSupport,
                                 comboContinue: hasComboSupport,
@@ -112,8 +120,7 @@ struct LSGame {
             case .overload:
                 if currentLife - skill.triggerLife > 0 {
                     currentLife -= skill.triggerLife
-                    skills[id] = skill
-                    lastSkill = skill
+                    addSkill(id: id, skill: skill)
                 }
             case .encore:
                 if var last = lastSkill {
@@ -121,72 +128,138 @@ struct LSGame {
                     perform(.skillStart(id, last))
                 }
             default:
-                skills[id] = skill
-                lastSkill = skill
+                addSkill(id: id, skill: skill)
             }
-        case .skillEnd(let id, _):
-            skills[id] = nil
+        case .skillEnd(let id, let skill):
+            removeSkill(id: id, skill: skill)
+        }
+    }
+    
+    private mutating func addSkill(id: Identifier, skill: LSSkill) {
+        skills[id] = skill
+        lastSkill = skill
+        updateStatusBy(skillType: skill.type)
+    }
+    
+    private mutating func removeSkill(id: Identifier, skill: LSSkill) {
+        skills[id] = nil
+        updateStatusBy(skillType: skill.type)
+    }
+    
+    private mutating func updateStatusBy(skillType: LSSkillType) {
+        switch skillType {
+        case .allRound:
+            updateComboBonus()
+            updateHealer()
+        case .comboBonus:
+            updateComboBonus()
+        case .perfectBonus:
+            updatePerfectBonus()
+        case .skillBoost:
+            updateSkillBoost()
+        case .heal:
+            updateHealer()
+        case .overload:
+            updatePerfectBonus()
+        case .deep:
+            updatePerfectBonus()
+            updateComboBonus()
+        case .concentration:
+            updateConcentration()
+            updatePerfectBonus()
+        case .`guard`:
+            updateDamageGuard()
+        case .comboContinue:
+            updateComboSupport()
+        case .perfectLock:
+            updatePerfectSupport()
+        case .lifeSparkle:
+            updateLifeSparkle()
+        default:
+            break
         }
     }
     
     private var lastSkill: LSSkill?
     
-    var hasConcentration: Bool {
-        return skills.values.contains{ $0.type == .concentration }
+    private(set) var hasConcentration = false
+    
+    private mutating func updateConcentration() {
+        hasConcentration = skills.values.contains{ $0.type == .concentration }
     }
     
-    private var hasDamegeGuard: Bool {
-        return skills.values.contains{ $0.type == .guard }
+    private(set) var hasDamegeGuard = false
+    
+    private mutating func updateDamageGuard() {
+        hasDamegeGuard = skills.values.contains{ $0.type == .guard }
     }
     
-    private var hasPerfectSupport: Bool {
-        return skills.values.contains{ $0.type == .perfectLock }
+    private(set) var hasPerfectSupport = false
+    
+    private mutating func updatePerfectSupport() {
+         hasPerfectSupport = skills.values.contains{ $0.type == .perfectLock }
     }
     
-    private var hasComboSupport: Bool {
-        return skills.values.contains{ $0.type == .comboContinue }
+    private(set) var hasComboSupport = false
+    
+    private mutating func updateComboSupport() {
+        hasComboSupport = skills.values.contains{ $0.type == .comboContinue }
     }
     
-    private var hasSkillBoost: Bool {
-        return skills.values.contains{ $0.type == .skillBoost }
+    private(set) var hasSkillBoost = false
+    
+    private(set) var bestSkillBoost: LSSkill?
+    
+    private mutating func updateSkillBoost() {
+        hasSkillBoost = skills.values.contains{ $0.type == .skillBoost }
+        bestSkillBoost = skills.values
+            .filter { $0.type == .skillBoost }
+            .max { $0.value < $1.value }
+        updateBonusGroup()
     }
     
-    private var hasLifeSparkle: Bool {
-        return skills.values
+    private(set) var hasLifeSparkle = false
+    
+    private mutating func updateLifeSparkle() {
+        hasLifeSparkle = skills.values
             .contains { $0.type == .lifeSparkle }
     }
     
-    private var bestPerfectBonus: LSSkill? {
-        return skills.values
+    private(set) var bestPerfectBonus: LSSkill?
+    
+    private mutating func updatePerfectBonus() {
+        bestPerfectBonus = skills.values
             .filter { LSSkillType.allPerfectBonus.contains($0.type) }
             .max { $0.value < $1.value }
+        updateBonusGroup()
     }
     
     // combo bonus without life sparkle
-    private var bestComboBonus: LSSkill? {
-        return skills.values
+    private(set) var bestComboBonus: LSSkill?
+    
+    private mutating func updateComboBonus() {
+        bestComboBonus = skills.values
             .filter { LSSkillType.allComboBonus.contains($0.type) }
             .max { $0.comboBonusValue < $1.comboBonusValue }
+        updateBonusGroup()
     }
     
-    private var bestSkillBoost: LSSkill? {
-        return skills.values
-            .filter { $0.type == .skillBoost }
-            .max { $0.value < $1.value }
-    }
+    private(set) var bestHealer: LSSkill?
     
-    private var bestLifeRestore: LSSkill? {
-        return skills.values
+    private mutating func updateHealer() {
+        bestHealer = skills.values
             .filter { LSSkillType.allLifeResotre.contains($0.type) }
             .max { $0.value < $1.value }
     }
     
-    var bonusGroup: LSScoreBonusGroup {
+    private(set) var bonusGroup: LSScoreBonusGroup = .basic
+    
+    private mutating func updateBonusGroup() {
         let maxPerfectBonus = bestPerfectBonus?.value ?? 100
         let maxComboBonus = bestComboBonus?.comboBonusValue ?? 100
         let lifeSparkleBonus = hasLifeSparkle ? LiveCoordinator.comboBonusValueOfLife(currentLife) : 100
         let maxSkillBoost = bestSkillBoost?.value ?? 1000
-        return LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
+        bonusGroup = LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
     }
     
 }

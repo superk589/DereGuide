@@ -69,22 +69,24 @@ struct LSSkill {
     
     var range: LSRange<Float>
     
-    // In percent, 117 means 17%up
+    /// in percent, 117 means 17%up
     var value: Int
     
-    // heal of all round / combo bonus of deep 
+    /// heal of all round / combo bonus of deep
     var value2: Int
     
     var type: LSSkillType
     
-    // In 0 - 10000
+    /// 0 ~ 10000
     var rate: Double
     
-    // In percent, 30 means 0.3
+    /// in percent, 30 means 0.3
     var rateBonus: Int
     
+    /// overload skills' trigger life value
     var triggerLife: Int
     
+    /// 0 ~ 4, the index of the member in the unit
     var position: Int
 }
 
@@ -112,7 +114,7 @@ extension LSSkill {
         }
     }
     
-    var lifeRestoreValue: Int {
+    var lifeValue: Int {
         if type == .allRound {
             return value2
         } else if LSSkillType.allLifeResotre.contains(type) {
