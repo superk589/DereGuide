@@ -58,6 +58,7 @@ struct LSGame {
     var maxLife: Int
     var currentLife: Int {
         didSet {
+            // whenever current life is changed, we should update life sparkle bonus value.
             if hasLifeSparkle {
                 updateBonusGroup()
             }
@@ -81,13 +82,7 @@ struct LSGame {
             
             combo += 1
 
-            // as restored life may change life sparkle bonus value. I'm not sure which comes first, here do score calculation first.
-
-            // calculate score
-            let noteScore = Int(round(note.baseScore * note.comboFactor * Double(bonusGroup.bonusValue) / 10000))
-            score += noteScore
-            
-            // calculate life
+            // calculate life (as restored life may change life sparkle bonus value. And in fact, restoring life is calculated first)
             var restoredLife = bestHealer?.lifeValue ?? 0
             if hasSkillBoost {
                 if hasDamegeGuard && restoredLife == 0 {
@@ -97,6 +92,10 @@ struct LSGame {
                 }
             }
             currentLife = min(maxLife, currentLife + restoredLife)
+            
+            // calculate score
+            let noteScore = Int(round(note.baseScore * note.comboFactor * Double(bonusGroup.bonusValue) / 10000))
+            score += noteScore
             
             // generate log
             if shouldGenerateLogs {
