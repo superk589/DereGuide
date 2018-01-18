@@ -87,7 +87,7 @@ struct LSGame {
             let noteScore = Int(round(note.baseScore * note.comboFactor * Double(bonusGroup.bonusValue) / 10000))
             score += noteScore
             
-            // calculate life.
+            // calculate life
             var restoredLife = bestHealer?.lifeValue ?? 0
             if hasSkillBoost {
                 if hasDamegeGuard && restoredLife == 0 {

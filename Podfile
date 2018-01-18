@@ -22,7 +22,7 @@ target 'DereGuide' do
   pod 'ZKPageViewController'
   pod 'MJRefresh'
   pod 'RijndaelSwift'
-  pod 'MessagePack.swift'
+  pod 'MessagePack.swift', :git => 'https://github.com/superk589/MessagePack.swift.git'
 #  pod 'Alamofire'
 end
 target 'NotificationContent' do

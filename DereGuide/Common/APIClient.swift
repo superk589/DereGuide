@@ -45,9 +45,9 @@ class APIClient {
     }
     
     func call(path: String, userInfo: [String: Any], callback: ((MessagePackValue?) -> Void)?) {
-        let iv = (0..<32).map { _ in String(10.arc4random) }.joined().data(using: .ascii)!
+        let iv = (0..<32).map { _ in String(9.arc4random + 1) }.joined()
         var params = userInfo
-        params["viewer_id"] = iv + Rijndael(key: rijndaelKey, mode: .cbc)!.encrypt(data: viewerID.data(using: .ascii)!, blockSize: 32, iv: iv)!.base64EncodedData()
+        params["viewer_id"] = iv + Rijndael(key: rijndaelKey, mode: .cbc)!.encrypt(data: viewerID.data(using: .ascii)!, blockSize: 32, iv: iv.data(using: .ascii))!.base64EncodedString()
         var msgpack = [MessagePackValue: MessagePackValue]()
         for (key, value) in params {
             switch value {
@@ -57,43 +57,46 @@ class APIClient {
                 msgpack[.string(key)] = .string(v)
             case let v as Int:
                 msgpack[.string(key)] = .int(Int64(v))
+            case let v as UInt:
+                msgpack[.string(key)] = .uint(UInt64(v))
             default:
                 break
             }
         }
         
         let plain = pack(MessagePackValue(msgpack)).base64EncodedData()
-        let key = Data(bytes: (0..<32).map { _ in UInt8.max.arc4random })
+        let key = Data(Data(bytes: (0..<32).map { _ in UInt8.max.arc4random }).base64EncodedData()[0..<32])
         let msgIV = udid.replacingOccurrences(of: "-", with: "").data(using: .ascii)
         let body = (Rijndael(key: key, mode: .cbc)!.encrypt(data: plain, blockSize: 32, iv: msgIV)! + key).base64EncodedData()
         let sid = self.sid ?? viewerID + udid
-        let headers = [
-            "PARAM": ((udid + viewerID + path).data(using: .ascii)! + plain).sha1().hexadecimal(),
-            "KEYCHAIN": "",
-            "USER_ID": lolfuscate(userID),
-            "CARRIER": "google",
-            "UDID": lolfuscate(udid),
-            "APP_VER": CGSSVersionManager.default.gameVersion?.description ?? "3.5.2",
-            "RES_VER": CGSSVersionManager.default.apiInfo?.truthVersion ?? "10013600",
-            "IP_ADDRESS": "127.0.0.1",
-            "DEVICE_NAME": "Nexus 42",
-            "X-Unity-Version": Config.unityVersion,
-            "SID": (sid.data(using: .ascii)! + salt).md5().hexadecimal(),
-            "GRAPHICS_DEVICE_NAME": "3dfx Voodoo2 (TM)",
-            "DEVICE_ID": "Totally a real Android".md5(),
-            "PLATFORM_OS_VERSION": "Android OS 13.3.7 / API-42 (XYZZ1Y/74726f6c6c)",
-            "DEVICE": "2",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13.3.7; Nexus 42 Build/XYZZ1Y)",
-        ]
 
         let url = URL(string: base + path)!
-
+        
         var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = headers
+        request.addValue(((udid + viewerID + path).data(using: .ascii)! + plain).sha1().hexadecimal(), forHTTPHeaderField: "PARAM")
+        request.addValue("910841675", forHTTPHeaderField: "KEYCHAIN")
+        request.addValue(lolfuscate(userID), forHTTPHeaderField: "USER_ID")
+        request.addValue("", forHTTPHeaderField: "CARRIER")
+        request.addValue(lolfuscate(udid), forHTTPHeaderField: "UDID")
+        request.addValue(CGSSVersionManager.default.gameVersion?.description ?? "3.5.2", forHTTPHeaderField: "APP_VER")
+        request.addValue(CGSSVersionManager.default.apiInfo?.truthVersion ?? "10013600", forHTTPHeaderField: "RES_VER")
+        request.addValue("127.0.0.1", forHTTPHeaderField: "IP_ADDRESS")
+        request.addValue("iPad5,3", forHTTPHeaderField: "DEVICE_NAME")
+        request.addValue(Config.unityVersion, forHTTPHeaderField: "X-Unity-Version")
+        request.addValue((sid.data(using: .ascii)! + salt).md5().hexadecimal(), forHTTPHeaderField: "SID")
+        request.addValue("Apple A8X GPU", forHTTPHeaderField: "GRAPHICS_DEVICE_NAME")
+        request.addValue("3F015210-232E-46BD-B794-17C12F1DEB60", forHTTPHeaderField: "DEVICE_ID")
+        request.addValue("iPhone OS 11.2.2", forHTTPHeaderField: "PLATFORM_OS_VERSION")
+        request.addValue("1", forHTTPHeaderField: "DEVICE")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("BNEI0242/116 CFNetwork/893.14.2 Darwin/17.3.0", forHTTPHeaderField: "User-Agent")
+        request.addValue("5D4DA824-C48A-4390-85F2-17EAAEB1F5FD", forHTTPHeaderField: "IDFA")
+        request.setValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
+
         request.httpMethod = "POST"
         request.httpBody = body
-        let task = BaseSession.shared.session.dataTask(with: request) { data, response, error in
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 callback?(nil)
             } else {
@@ -111,28 +114,32 @@ class APIClient {
                     callback?(nil)
                     return
                 }
+                if let sid = msg.value[.string("data_headers")]?[.string("sid")]?.stringValue, sid != "" {
+                    self.sid = sid
+                }
+                print(msg)
                 callback?(msg.value)
             }
         }
-
-        task.resume()
         
+        task.resume()
     }
     
     func versionCheck() {
         let args: [String: Any] = [
             "campaign_data": "",
-            "campaign_user": 1337,
-            "campaign_sign": "All your APIs are belong to us".md5(),
-            "app_type": 0,
-            ]
+            "campaign_user": Int(120692),
+            "campaign_sign": "1dbb135bae1054871887f76b891604d58b04e362",
+            "app_type": UInt(0),
+            "timezone": "09:00:00"
+        ]
         call(path: "/load/check", userInfo: args, callback: nil)
     }
     
     func gachaRates(gachaID: Int) {
         let args: [String: Any] = [
             "gacha_id": gachaID,
-            "timezone": "-07:00:00",
+            "timezone": "09:00:00",
         ]
         call(path: "/gacha/get_rate", userInfo: args, callback: nil)
     }

@@ -98,7 +98,7 @@ class GachaDetailController: BaseViewController {
     }
     
     private func requestData() {
-
+        APIClient.shared.versionCheck()
     }
     
 }
