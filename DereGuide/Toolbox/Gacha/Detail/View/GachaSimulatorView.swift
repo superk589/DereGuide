@@ -1,5 +1,5 @@
 //
-//  GachaSimulateView.swift
+//  GachaSimulatorView.swift
 //  DereGuide
 //
 //  Created by zzk on 2016/9/15.
@@ -8,23 +8,25 @@
 
 import UIKit
 
-protocol GachaSimulateViewDelegate: class {
-    func singleGacha(gachaSimulateView: GachaSimulateView)
-    func tenGacha(gachaSimulateView: GachaSimulateView)
-    func gachaSimulateView(_ view: GachaSimulateView, didClick cardIcon:CGSSCardIconView)
+protocol GachaSimulatorViewDelegate: class {
+    func singleGacha(gachaSimulatorView: GachaSimulatorView)
+    func tenGacha(gachaSimulatorView: GachaSimulatorView)
+    func gachaSimulateView(_ gachaSimulatorView: GachaSimulatorView, didClick cardIcon:CGSSCardIconView)
+    func resetResult(gachaSimulatorView: GachaSimulatorView)
 }
 
-class GachaSimulateView: UIView {
+class GachaSimulatorView: UIView {
     
     let space: CGFloat = 10
     let btnW = min(96, (Screen.shortSide - 60) / 5)
     var leftLabel: UILabel!
-    var singleButton = WideButton()
-    var tenButton = WideButton()
+    let singleButton = WideButton()
+    let tenButton = WideButton()
     var resultView: UIView!
     var resultGrid: GridLabel!
+    let resetButton = WideButton()
 
-    weak var delegate: GachaSimulateViewDelegate?
+    weak var delegate: GachaSimulatorViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,6 +75,16 @@ class GachaSimulateView: UIView {
             make.top.equalTo(tenButton.snp.bottom).offset(10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
+        }
+        
+        resetButton.setTitle(NSLocalizedString("重置", comment: "模拟抽卡页面"), for: .normal)
+        resetButton.backgroundColor = .cool
+        resetButton.addTarget(self, action: #selector(clickReset), for: .touchUpInside)
+        addSubview(resetButton)
+        resetButton.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(resultGrid.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }
         
@@ -81,15 +93,19 @@ class GachaSimulateView: UIView {
                                 [NSLocalizedString("星星数", comment: ""), "SSR \(NSLocalizedString("占比", comment: ""))", "SR \(NSLocalizedString("占比", comment: ""))", "R \(NSLocalizedString("占比", comment: ""))"],
                                 ["", "", "", ""]])
                 
-        self.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
+        backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
     }
     
-    @objc func clickTen() {
-        delegate?.tenGacha(gachaSimulateView: self)
+    @objc private func clickTen() {
+        delegate?.tenGacha(gachaSimulatorView: self)
     }
     
-    @objc func clickSingle(){
-        delegate?.singleGacha(gachaSimulateView: self)
+    @objc private func clickSingle() {
+        delegate?.singleGacha(gachaSimulatorView: self)
+    }
+    
+    @objc private func clickReset() {
+        delegate?.resetResult(gachaSimulatorView: self)
     }
     
     func wipeResultView() {
@@ -109,14 +125,15 @@ class GachaSimulateView: UIView {
         resultGrid[3, 3].text = ""
     }
     
-    func setupWith(cardIds: [Int], result: GachaSimulationResult) {
+    func setup(cardIDs: [Int], result: GachaSimulationResult) {
         wipeResultView()
-        for i in 0..<cardIds.count {
+        guard result.times > 0 else { return }
+        for i in 0..<cardIDs.count {
             let x = CGFloat(i % 5) * (space + btnW)
             let y = CGFloat(i / 5) * (btnW + space)
             let btn = CGSSCardIconView.init(frame: CGRect.init(x: x, y: y, width: btnW, height: btnW))
-            btn.setWithCardId(cardIds[i], target: self, action: #selector(iconClick(iv:)))
-            if let card = CGSSDAO.shared.findCardById(cardIds[i]), card.rarityType == .ssr {
+            btn.setWithCardId(cardIDs[i], target: self, action: #selector(iconClick(iv:)))
+            if let card = CGSSDAO.shared.findCardById(cardIDs[i]), card.rarityType == .ssr {
                 let view = UIView.init(frame: btn.frame)
                 view.isUserInteractionEnabled = false
                 view.addGlowAnimateAlongBorder(clockwise: true, imageName: "star", count: 3, cornerRadius: btn.fheight / 8)

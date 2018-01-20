@@ -18,8 +18,8 @@ struct CGSSGachaFilter: CGSSFilter {
         gachaTypes = CGSSGachaTypes.init(rawValue: typeMask)
     }
     
-    func filter(_ list: [CGSSGachaPool]) -> [CGSSGachaPool] {
-        let result = list.filter { (v: CGSSGachaPool) -> Bool in
+    func filter(_ list: [CGSSGacha]) -> [CGSSGacha] {
+        let result = list.filter { (v: CGSSGacha) -> Bool in
             let r1: Bool = searchText == "" ? true : {
                 let comps = searchText.components(separatedBy: "")
                 for comp in comps {
@@ -65,6 +65,5 @@ struct CGSSGachaFilter: CGSSFilter {
         }
         return nil
     }
-    
-    
+  
 }

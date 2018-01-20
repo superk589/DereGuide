@@ -56,6 +56,18 @@ class CGSSCacheManager {
         }
     }
     
+    func wipeGacha() {
+        for path in getGachaFiles() {
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    try FileManager.default.removeItem(atPath: path)
+                } catch {
+                    
+                }
+            }
+        }
+    }
+    
     func wipeUserDocuments() {
         let documentPath = NSHomeDirectory() + "/Documents"
         if let files = FileManager.default.subpaths(atPath: documentPath) {
@@ -150,6 +162,26 @@ class CGSSCacheManager {
             }
         }
         return filePaths
+    }
+    
+    func getGachaFiles() -> [String] {
+        let path = Path.cache + "/Data/Gacha"
+        return FileManager.default.subpaths(atPath: path)?.map { path + "/" + $0 } ?? []
+    }
+    
+    func getCacheSizeOfGacha(complete: ((String) -> Void)?) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let size = self.getGachaFiles().reduce(0) {
+                var itemSize = 0
+                if let attributes = try? FileManager.default.attributesOfItem(atPath: $1) {
+                    itemSize += (attributes[FileAttributeKey.size] as! NSNumber).intValue
+                }
+                return $0 + itemSize
+            }
+            DispatchQueue.main.async(execute: {
+                complete?(self.sizeToString(size: size))
+            })
+        }
     }
     
     func getCacheSizeOfCard(complete: ((String)->Void)?) {

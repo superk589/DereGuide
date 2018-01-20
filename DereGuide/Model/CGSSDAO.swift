@@ -251,7 +251,6 @@ open class CGSSDAO: NSObject {
                 // print(error)
             }
         }
-        
     }
     
     // 异步存储全部数据

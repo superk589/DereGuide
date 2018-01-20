@@ -107,7 +107,7 @@ class GachaTableViewCell: UITableViewCell {
         nameLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
     }
     
-    func setup(pool: CGSSGachaPool) {
+    func setup(pool: CGSSGacha) {
         startLabel.text = pool.startDate.toDate().toString(format: "yyyy-MM-dd")
         startDateView.backgroundColor = pool.gachaColor
         let now = Date()

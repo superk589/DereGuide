@@ -10,7 +10,11 @@ import UIKit
 
 class ReadableWidthTableViewCell: UITableViewCell {
     
-    var readableContentView: UIView!
+    let readableContentView = UIView()
+    
+    var maxReadableWidth: CGFloat {
+        return 768
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,11 +27,10 @@ class ReadableWidthTableViewCell: UITableViewCell {
     }
     
     private func prepare() {
-        readableContentView = UIView()
         contentView.addSubview(readableContentView)
         readableContentView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
-            make.width.lessThanOrEqualTo(768)
+            make.width.lessThanOrEqualTo(maxReadableWidth)
             make.left.greaterThanOrEqualToSuperview()
             make.right.lessThanOrEqualToSuperview()
             make.left.equalToSuperview().priority(900)

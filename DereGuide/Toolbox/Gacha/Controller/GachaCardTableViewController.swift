@@ -63,19 +63,13 @@ class GachaCardTableViewController: BaseCardTableViewController {
     
     var defaultCardList : [CGSSCard]!
     var rewardTable: [Int: Reward]!
-    var hasOdds = false
     
-    func setup(with pool: CGSSGachaPool) {
-        if pool.hasOdds {
-            defaultCardList = pool.cardList.map {
-                $0.odds = pool.rewardTable[$0.id!]?.relativeOdds ?? 0
-                return $0
-            }
-        } else {
-            defaultCardList = pool.cardList
+    func setup(with pool: CGSSGacha) {
+        defaultCardList = pool.cardList.map {
+            $0.odds = pool.rewardTable[$0.id!]?.relativeOdds ?? 0
+            return $0
         }
         rewardTable = pool.rewardTable
-        hasOdds = pool.hasOdds
     }
     
     // 根据设定的筛选和排序方法重新展现数据
@@ -104,18 +98,14 @@ class GachaCardTableViewController: BaseCardTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if hasOdds {
-            let cell = tableView.dequeueReusableCell(withIdentifier: GachaCardTableViewCell.description(), for: indexPath) as! GachaCardTableViewCell
-            let row = indexPath.row
-            let card = cardList[row]
-            if let odds = rewardTable[card.id]?.relativeOdds {
-                cell.setupWith(card, odds)
-            } else {
-                cell.setup(with: card)
-            }
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: GachaCardTableViewCell.description(), for: indexPath) as! GachaCardTableViewCell
+        let row = indexPath.row
+        let card = cardList[row]
+        if let odds = rewardTable[card.id]?.relativeOdds {
+            cell.setupWith(card, odds)
         } else {
-            return super.tableView(tableView, cellForRowAt: indexPath)
+            cell.setup(with: card)
         }
+        return cell
     }
 }

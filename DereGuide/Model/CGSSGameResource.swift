@@ -140,8 +140,8 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func getValidGacha(callback: @escaping FMDBCallBackClosure<[CGSSGachaPool]>) {
-        var list = [CGSSGachaPool]()
+    func getValidGacha(callback: @escaping FMDBCallBackClosure<[CGSSGacha]>) {
+        var list = [CGSSGacha]()
         execute({ (db) in
             let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and a.id like '3%' order by end_date DESC"
             let set = try db.executeQuery(selectSql, values: nil)
@@ -167,7 +167,7 @@ class Master: FMDatabaseQueue {
                     rewards.append(Reward(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: relativeOdds, relativeSROdds: relativeSROdds))
                 }
                 
-                let gachaPool = CGSSGachaPool.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
+                let gachaPool = CGSSGacha.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
                 list.append(gachaPool)
             }
         }) {
@@ -506,7 +506,7 @@ class Master: FMDatabaseQueue {
         }
     }
     
-    func getGuaranteedCardIds(gacha: CGSSGachaPool, callback: @escaping FMDBCallBackClosure<[Int]>) {
+    func getGuaranteedCardIds(gacha: CGSSGacha, callback: @escaping FMDBCallBackClosure<[Int]>) {
         var list = [Int]()
         execute({ (db) in
             let selectSql = "select reward_id from gacha_l_e_list a, gacha_l_group b where a.g_id = b.id and b.start_date <= '\(gacha.startDate)' and b.end_date >= '\(gacha.endDate)'"

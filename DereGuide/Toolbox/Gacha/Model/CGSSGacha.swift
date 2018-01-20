@@ -1,12 +1,12 @@
 //
-//  CGSSGachaPool.swift
+//  CGSSGacha.swift
 //  DereGuide
 //
 //  Created by zzk on 2016/9/13.
 //  Copyright © 2016年 zzk. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SwiftyJSON
 
 extension Array {
@@ -20,14 +20,18 @@ extension Array {
     }
 }
 
-extension CGSSGachaPool {
+extension CGSSGacha {
     
     var hasOdds: Bool {
         return id > 30075
     }
     
-    var hasSimulator: Bool {
+    var hasLocalRates: Bool {
         return id < 30180
+    }
+    
+    var hasCachedRates: Bool {
+        return cachedOdds != nil
     }
     
     var cardList: [CGSSCard] {
@@ -121,15 +125,23 @@ struct Reward {
     var relativeSROdds: Int
 }
 
-class CGSSGachaPool: NSObject {
+struct CardWithOdds {
+    var card: CGSSCard
+    var odds: Int?
+}
+
+class CGSSGacha: NSObject {
 
     var dicription: String
     var endDate: String
     @objc dynamic var id: Int
     var name: String
+    
+    /// 8850 -> 88.5%
     var rareRatio: Int
     var srRatio: Int
     var ssrRatio: Int
+    
     var startDate: String
     
     var rewardTable = [Int: Reward]()
@@ -140,6 +152,15 @@ class CGSSGachaPool: NSObject {
     var newssr = [Reward]()
     var newsr = [Reward]()
     var newr = [Reward]()
+    
+    lazy var cachedOdds: GachaOdds? = {
+        if let odds = GachaOdds(fromCachedDataByGachaID: self.id) {
+            merge(gachaOdds: odds)
+            return odds
+        } else {
+            return nil
+        }
+    }()
     
     lazy var cardsOfguaranteed: [CGSSCard] = {
         let semephore = DispatchSemaphore(value: 0)
@@ -230,10 +251,23 @@ class CGSSGachaPool: NSObject {
         }
     }
     
+    /// merge gacha odds into local reward table
+    ///
+    /// - Parameter gachaOdds: gacha odds from remote api
+    func merge(gachaOdds: GachaOdds) {
+        srRatio = ((gachaOdds.chargeRate[.sr]?.double() ?? 0) * 100).roundedInt()
+        ssrRatio = ((gachaOdds.chargeRate[.ssr]?.double() ?? 0) * 100).roundedInt()
+        rareRatio = ((gachaOdds.chargeRate[.r]?.double() ?? 0) * 100).roundedInt()
+        for (key, value) in gachaOdds.cardIDOdds {
+            rewardTable[key]?.relativeOdds = (value.chargeOdds.double() * 10000).roundedInt()
+            rewardTable[key]?.relativeSROdds = (value.srOdds.double() * 10000).roundedInt()
+        }
+    }
+    
     func simulateOnce(srGuarantee: Bool) -> Int {
         if hasOdds {
             generateOdds()
-            guard let arr = srGuarantee ? srOdds : odds, arr.count > 0 else {
+            guard let arr = srGuarantee ? srOdds : odds, arr.count > 0, arr.last!.end > 0 else {
                 return 0
             }
             var index: Int?
@@ -303,6 +337,22 @@ class CGSSGachaPool: NSObject {
             }
         }
         return result
+    }
+    
+}
+
+
+extension Double {
+    
+    func roundedInt(digits: Int = 0) -> Int {
+        return Int(rounded(digits: digits))
+    }
+}
+
+extension String {
+    
+    func double(`default`: Double = 0) -> Double {
+        return Double(self) ?? `default`
     }
     
 }

@@ -11,9 +11,9 @@ import ZKDrawerController
 
 class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDelegate, GachaFilterSortControllerDelegate, BannerAnimatorProvider, BannerContainer {
     
-    var defaultList: [CGSSGachaPool]!
+    var defaultList: [CGSSGacha]!
     
-    var poolList = [CGSSGachaPool]()
+    var poolList = [CGSSGacha]()
     
     var filterVC: GachaFilterSortController!
     var filter: CGSSGachaFilter {
@@ -156,7 +156,7 @@ class GachaViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = GachaDetailController()
-        vc.pool = poolList[indexPath.row]
+        vc.gacha = poolList[indexPath.row]
         let cell = tableView.cellForRow(at: indexPath) as? GachaTableViewCell
         bannerView = cell?.banner
         self.navigationController?.pushViewController(vc, animated: true)

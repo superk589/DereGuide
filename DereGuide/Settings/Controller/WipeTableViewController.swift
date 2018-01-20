@@ -16,6 +16,7 @@ class WipeTableViewController: BaseTableViewController {
                      NSLocalizedString("图片", comment: ""),
                      NSLocalizedString("卡片", comment: ""),
                      NSLocalizedString("谱面", comment: ""),
+                     NSLocalizedString("卡池", comment: ""),
                      NSLocalizedString("用户配置", comment: "") + "（" + NSLocalizedString("需重启应用", comment: "") + "）",
                      NSLocalizedString("其他", comment: "")]
 
@@ -56,8 +57,10 @@ class WipeTableViewController: BaseTableViewController {
                         CGSSCacheManager.shared.wipeLive()
                         NotificationCenter.default.post(name: .dataRemoved, object: self, userInfo: [CGSSUpdateDataTypesName: CGSSUpdateDataTypes.beatmap])
                     case 4:
-                        CGSSCacheManager.shared.wipeUserDocuments()
+                        CGSSCacheManager.shared.wipeGacha()
                     case 5:
+                        CGSSCacheManager.shared.wipeUserDocuments()
+                    case 6:
                         CGSSCacheManager.shared.wipeOther()
                         NotificationCenter.default.post(name: .dataRemoved, object: self, userInfo: [CGSSUpdateDataTypesName: CGSSUpdateDataTypes.master])
                     default:
@@ -119,10 +122,14 @@ class WipeTableViewController: BaseTableViewController {
                 cell.rightLabel?.text = sizeString
             })
         case 4:
+            CGSSCacheManager.shared.getCacheSizeOfGacha(complete: { (sizeString) in
+                cell.rightLabel.text = sizeString
+            })
+        case 5:
             CGSSCacheManager.shared.getCacheSizeAt(path: NSHomeDirectory() + "/Documents", exclusivePaths: [CoreDataStack.default.storeURL.path], complete: { (sizeString) in
                 cell.rightLabel?.text = sizeString
             })
-        case 5:
+        case 6:
             CGSSCacheManager.shared.getOtherSize(complete: { (sizeString) in
                 cell.rightLabel?.text = sizeString
             })

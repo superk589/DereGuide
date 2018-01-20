@@ -73,6 +73,11 @@ class SongDetailController: BaseTableViewController, BannerContainer {
         tableView.register(SongDetailDescriptionCell.self, forCellReuseIdentifier: SongDetailDescriptionCell.description())
         tableView.register(SongDetailPositionCell.self, forCellReuseIdentifier: SongDetailPositionCell.description())
         tableView.register(SongDetailLiveCell.self, forCellReuseIdentifier: SongDetailLiveCell.description())
+        
+        // fix on iOS 9, after custom transition, tableView may have wrong origin
+        if tableView.frame.origin.y != 0 {
+            tableView.frame.origin.y = 0
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

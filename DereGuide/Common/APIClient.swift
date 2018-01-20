@@ -117,7 +117,6 @@ class APIClient {
                 if let sid = msg.value[.string("data_headers")]?[.string("sid")]?.stringValue, sid != "" {
                     self.sid = sid
                 }
-                print(msg)
                 callback?(msg.value)
             }
         }
@@ -136,12 +135,14 @@ class APIClient {
         call(path: "/load/check", userInfo: args, callback: nil)
     }
     
-    func gachaRates(gachaID: Int) {
+    func gachaRates(gachaID: Int, callback: ((MessagePackValue?) -> Void)?) {
         let args: [String: Any] = [
             "gacha_id": gachaID,
             "timezone": "09:00:00",
         ]
-        call(path: "/gacha/get_rate", userInfo: args, callback: nil)
+        call(path: "/gacha/get_rate", userInfo: args) { pack in
+            callback?(pack)
+        }
     }
 
 }

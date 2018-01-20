@@ -522,7 +522,7 @@
 "本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。" = "This is not an official app and has no connections with the official app \"アイドルマスターシンデレラガールズ スターライトステージ\". All game data used belongs to the original publisher: \nBANDAI NAMCO Entertainment Inc.\n\nAll the unofficial data used are fetched from Internet. Such data is used in compliance with their original sources' copyright policies.\n\nDereGuide doesn't take responsibility for accuracy of the data. Any risk arising therefrom shall be assumed by your own.";
 "本程序基于MIT协议，详情请访问：" = "DereGuide is under the terms of the MIT license, for details please visit:";
 
-"恢复失败" = "Restoration Failed";
+"恢复失败" = "Restore Failed";
 "您的当前账号未曾购买过去除广告服务。" = "You have not bought an advertisement removing service yet.";
 "Data Sources" = "Data Sources";
 "Special Thanks to" = "Special Thanks to";
@@ -674,7 +674,7 @@
 "留言" = "Message";
 
 "下拉刷新数据" = "Pull Down to Refresh";
-"获取数据失败，请检查您的网络并确保iCloud处于登录状态" = "Getting remote data failed, please check your network connection and make sure iCloud is signed in.";
+"获取数据失败，请检查您的网络并确保iCloud处于登录状态" = "Request failed, please check your network connection and make sure iCloud is signed in.";
 "已复制ID到剪贴板" = "Game ID is copied to clipboard";
 "没有更多数据了" = "No more";
 "加载更多" = "Load more";
@@ -691,7 +691,7 @@
 "不限" = "no limit";
 
 // using deresute.me
-"未能获取到正确的数据，请稍后再试" = "Getting remote data failed, please retry later";
+"未能获取到正确的数据，请稍后再试" = "Request failed, please retry later";
 "下一步" = "Next";
 "获取数据中..." = "Loading...";
 "您输入的游戏ID不存在" = "The game ID doesn't exists";
@@ -703,8 +703,8 @@
 // both
 "您输入的游戏ID不合法" = "The game ID is invalid";
 "向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间" = "Make your profile public, repeated posts will automatically overwrite the previous content and refresh the update time";
-"发布失败，请确保iCloud已登录并且网络状态正常" = "Posting failed, please verify your iCloud account and the internet connection";
-"撤销失败，请确保iCloud已登录并且网络状态正常" = "Revoking failed，please verify your iCloud account and the internet connection";
+"发布失败，请确保iCloud已登录并且网络状态正常" = "Post failed, please verify your iCloud account and the internet connection";
+"撤销失败，请确保iCloud已登录并且网络状态正常" = "Revoke failed，please verify your iCloud account and the internet connection";
 "发布成功" = "Posting succeed";
 "撤销成功" = "Revoking succeed";
 "撤销中..." = "Revoking...";
@@ -816,3 +816,7 @@
 
 /* new in 1.7.2 */
 "最低%@等级" = "Min. %@ Lv.";
+
+/* new in 1.7.3 */
+"获取数据失败" = "Request failed";
+"重试" = "Retry";

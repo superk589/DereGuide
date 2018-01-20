@@ -65,8 +65,6 @@ class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        var destJacketImageView: BannerView?
-        
         var destOtherView: UIView?
         
         var sourceJacketImageView: BannerView!
@@ -75,25 +73,16 @@ class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         if animatorType == .push {
             
-            if let toViewController = transitionContext.viewController(forKey: .to) as? BannerContainer, let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer,
-                let sourceView = fromViewController.bannerView {
-                destJacketImageView = toViewController.bannerView
+            if let toViewController = transitionContext.viewController(forKey: .to) as? BannerContainer,
+                let fromViewController = transitionContext.viewController(forKey: .from) as? (BannerContainer & UIViewController),
+                let sourceView = fromViewController.bannerView,
+                let toView = transitionContext.view(forKey: .to),
+                let fromNavigationController = fromViewController.navigationController,
+                let destJacketImageView = toViewController.bannerView {
                 destOtherView = toViewController.otherView
                 sourceJacketImageView = sourceView
                 tempView = BannerView()
                 tempView.sd_setImage(with: sourceJacketImageView.url)
-            } else {
-                if let toView = transitionContext.view(forKey: .to) {
-                    transitionContext.containerView.addSubview(toView)
-                }
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                return
-            }
-            
-            if let destJacketImageView = destJacketImageView,
-                let toView = transitionContext.view(forKey: .to),
-                let fromViewController = transitionContext.viewController(forKey: .from),
-                let fromNavigationController = fromViewController.navigationController {
                 
                 fromNavigationController.view.insertSubview(toView, belowSubview: fromNavigationController.navigationBar)
                 
@@ -136,16 +125,6 @@ class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     destJacketImageView.isHidden = false
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
-            }
-        } else if animatorType == .pop {
-            
-            if let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer, let toViewController = transitionContext.viewController(forKey: .to) as? (UIViewController & BannerContainer),
-                let sourceView = toViewController.bannerView {
-                destJacketImageView = fromViewController.bannerView
-                destOtherView = fromViewController.otherView
-                sourceJacketImageView = sourceView
-                tempView = BannerView()
-                tempView.sd_setImage(with: sourceJacketImageView.url)
             } else {
                 if let toView = transitionContext.view(forKey: .to) {
                     transitionContext.containerView.addSubview(toView)
@@ -154,9 +133,18 @@ class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 return
             }
             
-            if let toView = transitionContext.view(forKey: .to),
-                let destJacketImageView = destJacketImageView,
-                let fromView = transitionContext.view(forKey: .from) {
+        } else if animatorType == .pop {
+            
+            if let fromViewController = transitionContext.viewController(forKey: .from) as? BannerContainer,
+                let toViewController = transitionContext.viewController(forKey: .to) as? (UIViewController & BannerContainer),
+                let sourceView = toViewController.bannerView,
+                let fromView = transitionContext.view(forKey: .from),
+                let destJacketImageView = fromViewController.bannerView,
+                let toView = transitionContext.view(forKey: .to) {
+                destOtherView = fromViewController.otherView
+                sourceJacketImageView = sourceView
+                tempView = BannerView()
+                tempView.sd_setImage(with: sourceJacketImageView.url)
                 
                 transitionContext.containerView.insertSubview(toView, at: 0)
                 let transparentView = UIView(frame: transitionContext.containerView.bounds)
@@ -193,7 +181,15 @@ class BannerAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     tempView.removeFromSuperview()
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
+                
+            } else {
+                if let toView = transitionContext.view(forKey: .to) {
+                    transitionContext.containerView.addSubview(toView)
+                }
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                return
             }
+            
         }
     }
     

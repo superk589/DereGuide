@@ -21,7 +21,7 @@ class LoadingImageView: UIImageView {
     }
     
     convenience init() {
-        self.init(frame: .zero)
+        self.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,9 +29,7 @@ class LoadingImageView: UIImageView {
     }
     
     override func startAnimating() {
-        if isRotating {
-            return
-        }
+        super.startAnimating()
         let rotateAni = CABasicAnimation.init(keyPath: "transform.rotation")
         rotateAni.fromValue = 0
         rotateAni.toValue = .pi * 2.0

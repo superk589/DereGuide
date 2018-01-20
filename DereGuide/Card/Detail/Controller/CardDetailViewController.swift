@@ -20,7 +20,6 @@ class CardDetailViewController: BaseTableViewController {
         }
     }
     
-    
     private func createGalleryItem(url: URL?) -> GalleryItem {
         let myFetchImageBlock: FetchImageBlock = { (completion) in
             guard let url = url else {
@@ -31,7 +30,6 @@ class CardDetailViewController: BaseTableViewController {
                 completion(image)
             })
         }
-        
         
         let itemViewControllerBlock: ItemViewControllerBlock = { index, itemCount, fetchImageBlock, configuration, isInitialController in
             
