@@ -1,5 +1,20 @@
 # ChangeLog
 
+### 1.7.3
+
+1. 恢复模拟抽卡功能
+2. 提升模拟算分速度
+
+##### Japanese version
+
+1. ガシャシミュレーターの機能復旧
+2. シミュレート計算のパフォーマンス改善
+
+##### English version
+
+1. Gacha Simulator is back.
+2. Improve performance of Live Simulator.
+
 ### 1.7.2
 
 1. 优化模拟算分模型，计算更准确，但是计算速度有所下降
