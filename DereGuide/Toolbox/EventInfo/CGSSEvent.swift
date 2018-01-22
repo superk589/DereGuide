@@ -23,6 +23,8 @@ extension CGSSEvent {
             return Color.party
         case CGSSEventTypes.groove:
             return Color.groove
+        case CGSSEventTypes.rail:
+            return .rail
         default:
             return Color.parade
         }

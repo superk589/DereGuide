@@ -820,3 +820,6 @@
 /* new in 1.7.3 */
 "获取数据失败" = "Request failed";
 "重试" = "Retry";
+
+/* new in 1.7.4 */
+"灰姑娘之路" = "Cinderella Road";

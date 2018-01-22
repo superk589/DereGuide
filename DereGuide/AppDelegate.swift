@@ -68,6 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
+            if lastVersion < 13 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.event)
+            }
         }
         
         // 规划近期偶像生日
