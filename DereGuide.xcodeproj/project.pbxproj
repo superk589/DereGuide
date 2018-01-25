@@ -1034,11 +1034,50 @@
 		1238059B1DAA1582007361CF /* EventInfo */ = {
 			isa = PBXGroup;
 			children = (
-				12D45ABE1E2DFB640009986F /* Controller */,
-				12D45ABF1E2DFB6E0009986F /* View */,
-				12D45AC01E2DFB730009986F /* Model */,
+				1239E27120197030006E2BEB /* Model */,
+				1239E26E20196FFA006E2BEB /* Controller */,
+				1239E26F2019700C006E2BEB /* View */,
 			);
 			path = EventInfo;
+			sourceTree = "<group>";
+		};
+		1239E26E20196FFA006E2BEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1238059C1DAA15B9007361CF /* EventViewController.swift */,
+				1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */,
+				12D45AB81E2CB5560009986F /* EventDetailController.swift */,
+				12636EC51E37429C00E3C833 /* EventChartController.swift */,
+				124BA5061E913808002E48FE /* EventTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1239E26F2019700C006E2BEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
+				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
+				12D45AC31E2E0D620009986F /* EventCardView.swift */,
+				12636EC91E375E9900E3C833 /* EventPtView.swift */,
+				12D975CD1E379619005E932B /* EventScoreView.swift */,
+				124BA50A1E913E78002E48FE /* EventTrendCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1239E27120197030006E2BEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
+				12D975D71E386FB0005E932B /* EventPtDataRequest.swift */,
+				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
+				12636EC71E375DA900E3C833 /* EventLogItem.swift */,
+				12D975CF1E379DF7005E932B /* EventRanking.swift */,
+				12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */,
+				124BA50C1E914ACD002E48FE /* EventTrend.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1245F7971F17569E009A80EC /* Sync Engine */ = {
@@ -1774,45 +1813,6 @@
 				12C3901C1F3424050077FB38 /* CenterWantedEditingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		12D45ABE1E2DFB640009986F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1238059C1DAA15B9007361CF /* EventViewController.swift */,
-				1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */,
-				12D45AB81E2CB5560009986F /* EventDetailController.swift */,
-				12636EC51E37429C00E3C833 /* EventChartController.swift */,
-				124BA5061E913808002E48FE /* EventTrendViewController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		12D45ABF1E2DFB6E0009986F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				123805A01DAA4354007361CF /* EventTableViewCell.swift */,
-				12D45AB61E2CB5470009986F /* EventDetailView.swift */,
-				12D45AC31E2E0D620009986F /* EventCardView.swift */,
-				12636EC91E375E9900E3C833 /* EventPtView.swift */,
-				12D975CD1E379619005E932B /* EventScoreView.swift */,
-				124BA50A1E913E78002E48FE /* EventTrendCell.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		12D45AC01E2DFB730009986F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
-				12D975D71E386FB0005E932B /* EventPtDataRequest.swift */,
-				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
-				12636EC71E375DA900E3C833 /* EventLogItem.swift */,
-				12D975CF1E379DF7005E932B /* EventRanking.swift */,
-				12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */,
-				124BA50C1E914ACD002E48FE /* EventTrend.swift */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		12D4F8BE1E1E66840064991E /* FilterAndSorting */ = {
