@@ -55,6 +55,7 @@ extension NSManagedObjectContext {
         Unit.deleteObjectsMarkedForLocalDeletionInContext(self)
         FavoriteCard.deleteObjectsMarkedForLocalDeletionInContext(self)
         FavoriteChara.deleteObjectsMarkedForLocalDeletionInContext(self)
+        FavoriteSong.deleteObjectsMarkedForLocalDeletionInContext(self)
         saveOrRollback()
     }
     
