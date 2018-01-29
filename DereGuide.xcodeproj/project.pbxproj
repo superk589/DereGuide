@@ -270,7 +270,7 @@
 		12ABE34B1F42DD02003A5E7F /* ColleagueFilterCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */; };
 		12AC19261FDA3990006A5D55 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC19251FDA3990006A5D55 /* BalloonMarker.swift */; };
 		12AC1F302007528600713AB6 /* SafeAreaFixTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1F2F2007528600713AB6 /* SafeAreaFixTabBar.swift */; };
-		12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC80271E4307A300B48D8D /* DownloadImageController.swift */; };
+		12AC80281E4307A300B48D8D /* DownloadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */; };
 		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
 		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
 		12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */; };
@@ -721,7 +721,7 @@
 		12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterCardCell.swift; sourceTree = "<group>"; };
 		12AC19251FDA3990006A5D55 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		12AC1F2F2007528600713AB6 /* SafeAreaFixTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeAreaFixTabBar.swift; sourceTree = "<group>"; };
-		12AC80271E4307A300B48D8D /* DownloadImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageController.swift; sourceTree = "<group>"; };
+		12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageViewController.swift; sourceTree = "<group>"; };
 		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
 		12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLoadingHUD.swift; sourceTree = "<group>"; };
@@ -1447,7 +1447,7 @@
 				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
 				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
 				12D4F8AC1E1BCD780064991E /* DonationViewController.swift */,
-				12AC80271E4307A300B48D8D /* DownloadImageController.swift */,
+				12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */,
 				12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */,
 			);
 			path = Controller;
@@ -2533,7 +2533,7 @@
 				1206F6D61E2A3FDE000FAC78 /* CGSSSearchBar.swift in Sources */,
 				12C390151F34128D0077FB38 /* ColleagueMyCentersCell.swift in Sources */,
 				12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */,
-				12AC80281E4307A300B48D8D /* DownloadImageController.swift in Sources */,
+				12AC80281E4307A300B48D8D /* DownloadImageViewController.swift in Sources */,
 				120DBB291EEE3120004E0084 /* UnitTemplateController.swift in Sources */,
 				12F8DF2220117B8100F8A3DC /* GachaDetailGuaranteesCell.swift in Sources */,
 				122879521F8A572900AD1F5F /* CharaProfileItemView.swift in Sources */,

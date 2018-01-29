@@ -1,5 +1,5 @@
 //
-//  DownloadImageController.swift
+//  DownloadImageViewController.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/2/2.
@@ -11,9 +11,13 @@ import SDWebImage
 
 typealias DownloadImageCell = WipeTableViewCell
 
-class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate {
+class DownloadImageViewController: BaseTableViewController, UpdateStatusViewDelegate {
     
-    var updateStatusView: UpdateStatusView!
+    lazy var updateStatusView: UpdateStatusView = {
+        let view = UpdateStatusView()
+        view.delegate = self
+        return view
+    }()
     
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("卡片大图", comment: ""),
@@ -129,17 +133,6 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         tableView.register(DownloadImageCell.self, forCellReuseIdentifier: "CacheCell")
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "703-download"), style: .plain, target: self, action: #selector(cacheData))
-        
-        updateStatusView = UpdateStatusView()
-        updateStatusView.isHidden = true
-        updateStatusView.delegate = self
-        UIApplication.shared.keyWindow?.addSubview(updateStatusView)
-        updateStatusView.snp.makeConstraints { (make) in
-            make.width.equalTo(240)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-95)
-        }
         
         calculate()
         // Do any additional setup after loading the view.
@@ -262,14 +255,14 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         }
     }
     func removeAllURLs() {
-        self.cardIconURLs.removeAll()
-        self.spreadURLs.removeAll()
-        self.cardImageURLs.removeAll()
-        self.cardSignURLs.removeAll()
-        self.charIconURLs.removeAll()
-        self.eventURLs.removeAll()
-        self.jacketURLs.removeAll()
-        self.gachaURLs.removeAll()
+        cardIconURLs.removeAll()
+        spreadURLs.removeAll()
+        cardImageURLs.removeAll()
+        cardSignURLs.removeAll()
+        charIconURLs.removeAll()
+        eventURLs.removeAll()
+        jacketURLs.removeAll()
+        gachaURLs.removeAll()
     }
     
     @objc func cacheData() {
@@ -282,8 +275,8 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
                 urls.append(contentsOf: getURLsBy(index: indexPath.row).needToDownload)
             }
         }
-        
-        self.updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
+        updateStatusView.show()
+        updateStatusView.setContent(NSLocalizedString("缓存所有图片", comment: "设置页面"), total: urls.count)
         
         CGSSUpdater.default.updateImages(urls: urls, progress: { (a, b) in
             DispatchQueue.main.async {
@@ -291,10 +284,10 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
             }
         }) { (a, b) in
             DispatchQueue.main.async {
-                let alert = UIAlertController.init(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面")) \(a), \(NSLocalizedString("失败", comment: "设置页面")) \(b - a)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
+                let alert = UIAlertController(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面")) \(a), \(NSLocalizedString("失败", comment: "设置页面")) \(b - a)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
                 self.tabBarController?.present(alert, animated: true, completion: nil)
-                self.updateStatusView.isHidden = true
+                self.updateStatusView.hide(animated: false)
                 self.calculate()
             }
         }
@@ -351,15 +344,13 @@ class DownloadImageController: BaseTableViewController, UpdateStatusViewDelegate
         }
     }
     
-
-    func cancelUpdate() {
+    func cancelUpdate(updateStatusView: UpdateStatusView) {
         SDWebImagePrefetcher.shared().cancelPrefetching()
         CGSSUpdater.default.isUpdating = false
-        let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
-        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
-        self.tabBarController?.present(alvc, animated: true, completion: nil)
-        //updateCacheSize()
-        self.calculate()
+        let alvc = UIAlertController(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
+        alvc.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
+        tabBarController?.present(alvc, animated: true, completion: nil)
+        calculate()
     }
 
 }

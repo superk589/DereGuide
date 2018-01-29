@@ -10,34 +10,21 @@ import UIKit
 import SnapKit
 
 protocol UpdateStatusViewDelegate: class {
-    func cancelUpdate()
+    func cancelUpdate(updateStatusView: UpdateStatusView)
 }
 
 class UpdateStatusView: UIView {
     
     weak var delegate: UpdateStatusViewDelegate?
-//    var progressView: UIProgressView!
-    var statusLabel: UILabel!
-//    var descriptionLabel: UILabel!
-    // var activityIndicator: UIActivityIndicatorView!
-    var loadingView: LoadingImageView!
-    var cancelButton: UIButton!
+    let statusLabel = UILabel()
+    let loadingView = LoadingImageView()
+    let cancelButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-        self.layer.cornerRadius = 10
-//        // self.layer.masksToBounds = true
-//        progressView = UIProgressView()
-//        progressView.progressTintColor = UIColor.clear
-//        progressView.trackTintColor = UIColor.white
-//        progressView.frame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 0)
-//        addSubview(progressView)
-//        progressView.snp.makeConstraints { (make) in
-//            make.
-//        }
+        backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        layer.cornerRadius = 10
         
-        loadingView = LoadingImageView()
         loadingView.hideWhenStopped = true
         addSubview(loadingView)
         loadingView.snp.makeConstraints { (make) in
@@ -46,10 +33,9 @@ class UpdateStatusView: UIView {
             make.width.height.equalTo(40)
         }
         
-        cancelButton = UIButton()
         cancelButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        cancelButton.setImage(UIImage.init(named: "433-x")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
-        cancelButton.tintColor = UIColor.white
+        cancelButton.setImage(#imageLiteral(resourceName: "433-x").withRenderingMode(.alwaysTemplate), for: UIControlState())
+        cancelButton.tintColor = .white
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.masksToBounds = true
         cancelButton.addTarget(self, action: #selector(cancelUpdate), for: .touchUpInside)
@@ -60,8 +46,7 @@ class UpdateStatusView: UIView {
             make.right.equalTo(-5)
         }
         
-        statusLabel = UILabel()
-        statusLabel.textColor = UIColor.white
+        statusLabel.textColor = .white
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -72,48 +57,48 @@ class UpdateStatusView: UIView {
         statusLabel.font = UIFont.boldSystemFont(ofSize: 17)
         statusLabel.adjustsFontSizeToFitWidth = true
         statusLabel.baselineAdjustment = .alignCenters
-        
-//        descriptionLabel = UILabel()
-//        descriptionLabel.textColor = UIColor.white
-//        descriptionLabel.frame = CGRect(x: 20, y: 0, width: frame.size.width - 40, height: frame.size.height / 2)
-//        descriptionLabel.font = UIFont.boldSystemFont(ofSize: 17)
-//        descriptionLabel.adjustsFontSizeToFitWidth = true
-//        descriptionLabel.baselineAdjustment = .alignCenters
-//        descriptionLabel.textAlignment = .center
-        
-        
-//        wloadingView.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
-//        activityIndicator = UIActivityIndicatorView()
-//        activityIndicator.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 4 * 3)
-//        activityIndicator.hidesWhenStopped = true
-        
-        // self.addSubview(statusLabel)
-        // self.addSubview(descriptionLabel)
-        // 暂时取消进度条
-        // self.addSubview(progressView)
-        // self.addSubview(activityIndicator)
-        // self.addSubview(loadingView)
-        // self.addSubview(cancelButton)
+    }
+    
+    func show() {
+        endAnimating()
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(self)
+            snp.remakeConstraints { (make) in
+                make.width.equalTo(240)
+                make.height.equalTo(50)
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(-95)
+            }
+        }
+    }
+    
+    func hide(animated: Bool) {
+        if animated {
+            layer.removeAllAnimations()
+            UIView.animate(withDuration: 2.5, animations: { [weak self] in
+                self?.alpha = 0
+            }) { [weak self] (finished) in
+                self?.alpha = 1
+                self?.removeFromSuperview()
+            }
+        } else {
+            removeFromSuperview()
+        }
+    }
+    
+    private func startAnimating() {
+        endAnimating()
+        loadingView.startAnimating()
+    }
+    
+    private func endAnimating() {
+        layer.removeAllAnimations()
     }
     
     func setContent(_ text: String, hasProgress: Bool = false, cancelable: Bool = true) {
-        self.layer.removeAllAnimations()
-        self.alpha = 1
-        self.isHidden = false
+        startAnimating()
         statusLabel.text = text
-        loadingView.startAnimating()
         cancelButton.isHidden = !cancelable
-//        if !hasProgress {
-//            // activityIndicator.startAnimating()
-//            loadingView.fx = (fwidth - loadingView.fwidth) / 2
-//        } else {
-//            loadingView.fx = 5
-//            // activityIndicator.stopAnimating()
-//            // loadingView.stopAnimating()
-//        }
-        // statusLabel.text = ""
-        // statusLabel.isHidden = !hasProgress
-//        progressView.isHidden = !hasProgress
     }
     
     func setContent(_ text: String, total: Int) {
@@ -122,23 +107,19 @@ class UpdateStatusView: UIView {
     }
     
     func updateProgress(_ a: Int, b: Int) {
-        self.layer.removeAllAnimations()
-        self.alpha = 1
+        endAnimating()
         statusLabel.isHidden = false
-//        progressView.isHidden = false
         statusLabel.text = "\(a)/\(b)"
-//        progressView.progress = Float(a) / Float(b)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func cancelUpdate() {
-        // activityIndicator.stopAnimating()
+    @objc private func cancelUpdate() {
         loadingView.stopAnimating()
-        self.isHidden = true
-        delegate?.cancelUpdate()
+        hide(animated: false)
+        delegate?.cancelUpdate(updateStatusView: self)
     }
     
 }

@@ -84,11 +84,11 @@ class SettingsTableViewController: UITableViewController {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
-    @objc func fullImageCacheChanged(_ sender: UISwitch) {
+    @objc private func fullImageCacheChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "FullImageCache")
     }
     
-    @objc func downloadAtStartValueChanged(_ sender: UISwitch) {
+    @objc private func downloadAtStartValueChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "DownloadAtStart")
     }
     
@@ -99,7 +99,7 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func sendTweet() {
+    @objc private func sendTweet() {
         if let url = URL(string: "twitter://post?message=%23\(Config.appName)%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter using url scheme")
             UIApplication.shared.openURL(url)
@@ -115,7 +115,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @objc func sendEmail() {
+    @objc private func sendEmail() {
         // 首先要判断设备具不具备发送邮件功能
         if MFMailComposeViewController.canSendMail() {
             let controller = MFMailComposeViewController()
@@ -153,7 +153,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @objc func wipeData() {
+    @objc private func wipeData() {
         if CGSSUpdater.default.isWorking {
             let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试清除数据。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
@@ -165,29 +165,24 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @objc func cacheImage() {
+    private lazy var downloadImageViewController: DownloadImageViewController = {
+        let vc = DownloadImageViewController()
+        vc.hidesBottomBarWhenPushed = true
+        return vc
+    }()
+    
+    @objc private func cacheImage() {
         if CGSSUpdater.default.isWorking {
-            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         } else {
-            let vc = DownloadImageController()
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(downloadImageViewController, animated: true)
         }
         
     }
     
-    func cancelUpdate() {
-        SDWebImagePrefetcher.shared().cancelPrefetching()
-        CGSSUpdater.default.isUpdating = false
-        let alvc = UIAlertController.init(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
-        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
-        self.tabBarController?.present(alvc, animated: true, completion: nil)
-        // updateCacheSize()
-    }
-    
-    @objc func refresh() {
+    @objc private func refresh() {
         updateCacheSize()
     }
     
