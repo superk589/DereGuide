@@ -1,5 +1,20 @@
 # ChangeLog
 
+### 1.7.4
+
+1. 增加新活动类型
+2. 修复一个可能导致启动时崩溃的问题
+
+##### Japanese version
+
+1. 新しいイベントタイプの対応
+2. 起動時に強制終了できるバグを修正
+
+##### English version
+
+1. Add new event type.
+2. Fix a crash problem at launching.
+
 ### 1.7.3
 
 1. 恢复模拟抽卡功能
