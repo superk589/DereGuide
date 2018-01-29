@@ -37,10 +37,10 @@ class GachaDetailLoadingCell: ReadableWidthTableViewCell {
         
         readableContentView.addSubview(loadingView)
         loadingView.snp.makeConstraints { (make) in
-            make.top.equalTo(leftLabel.snp.bottom).offset(5)
+            make.top.equalTo(leftLabel.snp.bottom).offset(8)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.centerY.equalToSuperview()
+            make.bottom.equalTo(-20)
         }
         
         selectionStyle = .none

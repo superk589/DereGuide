@@ -53,7 +53,7 @@ class LoadingView: UIView {
         loadingLabel.textColor = .darkGray
         loadingLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview().offset(15)
         }
         loadingLabel.text = NSLocalizedString("获取数据中...", comment: "")
         

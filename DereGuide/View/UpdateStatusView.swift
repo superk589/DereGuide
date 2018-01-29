@@ -73,6 +73,8 @@ class UpdateStatusView: UIView {
     }
     
     func hide(animated: Bool) {
+        loadingView.stopAnimating()
+        cancelButton.isHidden = true
         if animated {
             layer.removeAllAnimations()
             UIView.animate(withDuration: 2.5, animations: { [weak self] in
