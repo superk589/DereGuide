@@ -13,7 +13,6 @@ protocol Refreshable {
     var refresher: MJRefreshHeader { get set }
     func check(_ types: CGSSUpdateDataTypes)
     func checkUpdate()
-    func cancelUpdate()
 }
 
 extension Refreshable where Self: UIViewController {
@@ -25,7 +24,9 @@ extension Refreshable where Self: UIViewController {
         }
         if updater.isWorking { return }
         CGSSUpdatingHUDManager.shared.show()
-        CGSSUpdatingHUDManager.shared.cancelAction = { [weak self] in self?.cancelUpdate() }
+        CGSSUpdatingHUDManager.shared.cancelAction = {
+            CGSSUpdater.default.cancelCurrentSession()
+        }
         CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("检查更新中", comment: "更新框"), animated: true, cancelable: true)
         updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
             if !errors.isEmpty && items.count == 0 {
@@ -82,10 +83,6 @@ class RefreshableTableViewController: BaseTableViewController, Refreshable {
     func checkUpdate() {
         
     }
-    
-    func cancelUpdate() {
-        CGSSUpdater.default.cancelCurrentSession()
-    }
    
 }
 
@@ -126,11 +123,7 @@ class RefreshableCollectionViewController: BaseViewController, Refreshable {
     func checkUpdate() {
         
     }
-    
-    func cancelUpdate() {
-        CGSSUpdater.default.cancelCurrentSession()
-    }
-  
+
 }
 
 extension RefreshableCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

@@ -521,9 +521,9 @@ open class CGSSUpdater: NSObject {
         SDWebImagePrefetcher.shared().prefetcherQueue = DispatchQueue.global(qos: .userInitiated)
         SDWebImagePrefetcher.shared().prefetchURLs(urls, progress: { (a, b) in
             progress(Int(a), Int(b))
-        }, completed: { (a, b) in
+        }, completed: { [weak self] (a, b) in
             complete(Int(a - b), Int(a))
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.isUpdating = false
 //                self?.postUpdateEndNotification(types: .image)
             }

@@ -15,7 +15,7 @@ protocol BaseCardTableViewControllerDelegate {
 }
 
 class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
-    
+
     var cardList = [CGSSCard]()
     var filter: CGSSCardFilter {
         set {

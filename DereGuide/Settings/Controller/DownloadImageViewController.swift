@@ -270,15 +270,19 @@ class DownloadImageViewController: BaseTableViewController {
             }
         }
         CGSSUpdatingHUDManager.shared.show()
-        CGSSUpdatingHUDManager.shared.cancelAction = { [weak self] in self?.cancelUpdate() }
+        CGSSUpdatingHUDManager.shared.cancelAction = { [weak self] in
+            SDWebImagePrefetcher.shared().cancelPrefetching()
+            CGSSUpdater.default.isUpdating = false
+            self?.calculate()
+        }
         CGSSUpdatingHUDManager.shared.setup(current: 0, total: urls.count, animated: true, cancelable: true)
         
         CGSSUpdater.default.updateImages(urls: urls, progress: { (a, b) in
             DispatchQueue.main.async {
                 CGSSUpdatingHUDManager.shared.setup(current: a, total: b, animated: true, cancelable: true)
             }
-        }) { (a, b) in
-            DispatchQueue.main.async { [weak self] in
+        }) { [weak self] (a, b) in
+            DispatchQueue.main.async {
                 let alert = UIAlertController(title: NSLocalizedString("缓存图片完成", comment: "设置页面"), message: "\(NSLocalizedString("成功", comment: "设置页面")) \(a), \(NSLocalizedString("失败", comment: "设置页面")) \(b - a)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
                 UIViewController.root?.present(alert, animated: true, completion: nil)
@@ -287,14 +291,6 @@ class DownloadImageViewController: BaseTableViewController {
             }
         }
     }
-    
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -337,15 +333,6 @@ class DownloadImageViewController: BaseTableViewController {
         } else {
             tableView.deselectRow(at: IndexPath.init(row: 0, section: 0), animated: false)
         }
-    }
-    
-    func cancelUpdate() {
-        SDWebImagePrefetcher.shared().cancelPrefetching()
-        CGSSUpdater.default.isUpdating = false
-//        let alvc = UIAlertController(title: NSLocalizedString("缓存图片取消", comment: "设置页面"), message: NSLocalizedString("缓存图片已被中止", comment: "设置页面"), preferredStyle: .alert)
-//        alvc.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "设置页面"), style: .cancel, handler: nil))
-//        UIViewController.root?.present(alvc, animated: true, completion: nil)
-        calculate()
     }
 
 }
