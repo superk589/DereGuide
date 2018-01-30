@@ -133,7 +133,7 @@ class CGSSLoadingHUDManager {
                 make.edges.equalToSuperview()
             }
             for subview in window.subviews {
-                if subview is UpdateStatusView {
+                if subview is UpdatingStatusView {
                     window.bringSubview(toFront: subview)
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  UpdateStatusView.swift
+//  UpdatingStatusView.swift
 //  DereGuide
 //
 //  Created by zzk on 16/7/22.
@@ -9,13 +9,13 @@
 import UIKit
 import SnapKit
 
-protocol UpdateStatusViewDelegate: class {
-    func cancelUpdate(updateStatusView: UpdateStatusView)
+protocol UpdatingStatusViewDelegate: class {
+    func cancelUpdate(updateStatusView: UpdatingStatusView)
 }
 
-class UpdateStatusView: UIView {
+class UpdatingStatusView: UIView {
     
-    weak var delegate: UpdateStatusViewDelegate?
+    weak var delegate: UpdatingStatusViewDelegate?
     let statusLabel = UILabel()
     let loadingView = LoadingImageView()
     let cancelButton = UIButton()
@@ -59,7 +59,10 @@ class UpdateStatusView: UIView {
         statusLabel.baselineAdjustment = .alignCenters
     }
     
+    private var isShowing = false
+    
     func show() {
+        isShowing = true
         endAnimating()
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(self)
@@ -73,6 +76,7 @@ class UpdateStatusView: UIView {
     }
     
     func hide(animated: Bool) {
+        isShowing = false
         loadingView.stopAnimating()
         cancelButton.isHidden = true
         if animated {
@@ -81,7 +85,9 @@ class UpdateStatusView: UIView {
                 self?.alpha = 0
             }) { [weak self] (finished) in
                 self?.alpha = 1
-                self?.removeFromSuperview()
+                if let strongSelf = self, !strongSelf.isShowing {
+                    self?.removeFromSuperview()
+                }
             }
         } else {
             removeFromSuperview()
@@ -97,21 +103,12 @@ class UpdateStatusView: UIView {
         layer.removeAllAnimations()
     }
     
-    func setContent(_ text: String, hasProgress: Bool = false, cancelable: Bool = true) {
-        startAnimating()
+    func setup(_ text: String, animated: Bool, cancelable: Bool) {
+        if animated {
+            startAnimating()
+        }
         statusLabel.text = text
         cancelButton.isHidden = !cancelable
-    }
-    
-    func setContent(_ text: String, total: Int) {
-        setContent(text, hasProgress: true)
-        statusLabel.text = "0/\(total)"
-    }
-    
-    func updateProgress(_ a: Int, b: Int) {
-        endAnimating()
-        statusLabel.isHidden = false
-        statusLabel.text = "\(a)/\(b)"
     }
     
     required init?(coder aDecoder: NSCoder) {

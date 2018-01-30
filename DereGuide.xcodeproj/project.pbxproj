@@ -203,7 +203,7 @@
 		1269EA191D520D370071AD7F /* CGSSUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA121D520D370071AD7F /* CGSSUpdater.swift */; };
 		1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA231D520E7E0071AD7F /* CGSSCardIconView.swift */; };
 		1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */; };
-		1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */; };
+		1269EA281D520EAF0071AD7F /* UpdatingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */; };
 		1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */; };
 		1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B61D69816800DEF52B /* CharDetailViewController.swift */; };
 		127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */; };
@@ -365,6 +365,8 @@
 		12F351121F1F07E000F47FD1 /* MemberUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F351111F1F07E000F47FD1 /* MemberUploader.swift */; };
 		12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761B1D5C96A8003A358C /* LaunchScreen.storyboard */; };
 		12F376201D5C96A8003A358C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3761D1D5C96A8003A358C /* Main.storyboard */; };
+		12F48AEE201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F48AED201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift */; };
+		12F48AF02020083C00CE57E1 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F48AEF2020083C00CE57E1 /* UIViewControllerExtension.swift */; };
 		12F4EAEB1EDFFCEF00A92C9F /* UnitSimulationCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEA1EDFFCEF00A92C9F /* UnitSimulationCommonCell.swift */; };
 		12F4EAED1EE0017100A92C9F /* UnitSimulationScoreDistributionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F4EAEC1EE0017100A92C9F /* UnitSimulationScoreDistributionController.swift */; };
 		12F57C5D1EE2928000638650 /* UnitAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F57C5C1EE2928000638650 /* UnitAdvanceOptionsController.swift */; };
@@ -653,7 +655,7 @@
 		1269EA121D520D370071AD7F /* CGSSUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSUpdater.swift; sourceTree = "<group>"; };
 		1269EA231D520E7E0071AD7F /* CGSSCardIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIconView.swift; sourceTree = "<group>"; };
 		1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
-		1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatusView.swift; sourceTree = "<group>"; };
+		1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatingStatusView.swift; sourceTree = "<group>"; };
 		1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1271C6B61D69816800DEF52B /* CharDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailViewController.swift; sourceTree = "<group>"; };
 		127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveDetail.swift; sourceTree = "<group>"; };
@@ -845,6 +847,8 @@
 		12F351111F1F07E000F47FD1 /* MemberUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberUploader.swift; sourceTree = "<group>"; };
 		12F3761C1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12F3761E1D5C96A8003A358C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		12F48AED201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSUpdatingHUDManager.swift; sourceTree = "<group>"; };
+		12F48AEF2020083C00CE57E1 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		12F4EAEA1EDFFCEF00A92C9F /* UnitSimulationCommonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSimulationCommonCell.swift; sourceTree = "<group>"; };
 		12F4EAEC1EE0017100A92C9F /* UnitSimulationScoreDistributionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSimulationScoreDistributionController.swift; sourceTree = "<group>"; };
 		12F57C5C1EE2928000638650 /* UnitAdvanceOptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitAdvanceOptionsController.swift; sourceTree = "<group>"; };
@@ -1011,6 +1015,7 @@
 				12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */,
 				1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */,
 				1265DDB81FA034B500A2A679 /* Array+SafeIndex.swift */,
+				12F48AEF2020083C00CE57E1 /* UIViewControllerExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1408,9 +1413,10 @@
 			isa = PBXGroup;
 			children = (
 				1261A54A1F54F11700869500 /* Option */,
-				1269EA271D520EAF0071AD7F /* UpdateStatusView.swift */,
+				1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */,
 				12A71D921D8C2D280021320D /* CGSSCheckBox.swift */,
 				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
+				12F48AED201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift */,
 				1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */,
 				12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */,
 				1239B0511E2FAAA600958849 /* LineView.swift */,
@@ -2412,6 +2418,7 @@
 				12ABE3401F42CE67003A5E7F /* ColleagueFilterController.swift in Sources */,
 				12D624551F171FB70017999A /* ApplicationActiveStateObserver.swift in Sources */,
 				12D624561F171FB70017999A /* UnitDownloader.swift in Sources */,
+				12F48AF02020083C00CE57E1 /* UIViewControllerExtension.swift in Sources */,
 				129B955A1F31B50F007B7AE2 /* ColleagueInputCell.swift in Sources */,
 				12D624571F171FB70017999A /* SyncCoordinator.swift in Sources */,
 				126612B21F1723AB00B7D17F /* RemoteUnit.swift in Sources */,
@@ -2591,7 +2598,7 @@
 				12C6B3541F00B6EB00A25DB1 /* CardDetailRelativeStrengthCell.swift in Sources */,
 				1247917C1D87D8FC00ED8EA6 /* ApiInfo.swift in Sources */,
 				12F8DF1920109BDF00F8A3DC /* GachaDetailBasicCell.swift in Sources */,
-				1269EA281D520EAF0071AD7F /* UpdateStatusView.swift in Sources */,
+				1269EA281D520EAF0071AD7F /* UpdatingStatusView.swift in Sources */,
 				12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */,
 				127CBEAE1ECA928600C119F9 /* NSAtributedStringExtension.swift in Sources */,
 				120FB5E71E59496B003802CD /* LiveSimulator.swift in Sources */,
@@ -2695,6 +2702,7 @@
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
 				1269E9DD1D520B5D0071AD7F /* CGSSLearderSkill.swift in Sources */,
 				1261944F1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift in Sources */,
+				12F48AEE201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift in Sources */,
 				12C408431E8D5E8C001373CF /* GachaCardTableViewCell.swift in Sources */,
 				12D975CE1E379619005E932B /* EventScoreView.swift in Sources */,
 				129B955F1F31B565007B7AE2 /* ColleagueMessageCell.swift in Sources */,

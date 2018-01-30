@@ -165,21 +165,16 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    private lazy var downloadImageViewController: DownloadImageViewController = {
-        let vc = DownloadImageViewController()
-        vc.hidesBottomBarWhenPushed = true
-        return vc
-    }()
-    
     @objc private func cacheImage() {
         if CGSSUpdater.default.isWorking {
             let alert = UIAlertController(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("请等待更新完成或手动取消更新后，再尝试缓存图片。", comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         } else {
-            navigationController?.pushViewController(downloadImageViewController, animated: true)
+            let vc = DownloadImageViewController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
     
     @objc private func refresh() {

@@ -11,9 +11,9 @@ import MJRefresh
 
 protocol Refreshable {
     var refresher: MJRefreshHeader { get set }
-    var updateStatusView: UpdateStatusView { get set }
     func check(_ types: CGSSUpdateDataTypes)
     func checkUpdate()
+    func cancelUpdate()
 }
 
 extension Refreshable where Self: UIViewController {
@@ -24,11 +24,12 @@ extension Refreshable where Self: UIViewController {
             refresher.endRefreshing()
         }
         if updater.isWorking { return }
-        updateStatusView.show()
-        updateStatusView.setContent(NSLocalizedString("检查更新中", comment: "更新框"), hasProgress: false)
+        CGSSUpdatingHUDManager.shared.show()
+        CGSSUpdatingHUDManager.shared.cancelAction = { [weak self] in self?.cancelUpdate() }
+        CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("检查更新中", comment: "更新框"), animated: true, cancelable: true)
         updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
             if !errors.isEmpty && items.count == 0 {
-                self?.updateStatusView.hide(animated: false)
+                CGSSUpdatingHUDManager.shared.hide(animated: false)
                 var errorStr = ""
                 if let error = errors.first as? CGSSUpdaterError {
                     errorStr.append(error.localizedDescription)
@@ -42,38 +43,32 @@ extension Refreshable where Self: UIViewController {
                 self?.tabBarController?.present(alert, animated: true, completion: nil)
             } else {
                 if items.count == 0 {
-                    self?.updateStatusView.setContent(NSLocalizedString("数据是最新版本", comment: "更新框"), hasProgress: false)
-                    self?.updateStatusView.hide(animated: true)
+                    CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("数据是最新版本", comment: "更新框"), animated: false, cancelable: false)
+                    CGSSUpdatingHUDManager.shared.hide(animated: true)
                     CGSSVersionManager.default.setDataVersionToNewest()
                     CGSSVersionManager.default.setApiVersionToNewest()
                 } else {
-                    self?.updateStatusView.setContent(NSLocalizedString("更新数据中", comment: "更新框"), total: items.count)
-                    updater.updateItems(items, progress: { [weak self] (process, total) in
-                        self?.updateStatusView.updateProgress(process, b: total)
-                        }, complete: { [weak self] (success, total) in
-                            self?.updateStatusView.setContent(NSLocalizedString("正在完成更新", comment: ""), cancelable: false)
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                CGSSGameResource.shared.processDownloadedData(types: CGSSUpdateDataTypes(items.map { $0.dataType }), completion: {
-                                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total - success)", preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                                    self?.tabBarController?.present(alert, animated: true, completion: nil)
-                                    self?.updateStatusView.hide(animated: false)
-                                })
-                            }
-                    })
+                    CGSSUpdatingHUDManager.shared.setup(current: 0, total: items.count, animated: true, cancelable: true)
+                    updater.updateItems(items, progress: { processed, total in
+                        CGSSUpdatingHUDManager.shared.setup(current: processed, total: total, animated: true, cancelable: true)
+                    }) { success, total in
+                        CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("正在完成更新", comment: "更新框"), animated: true, cancelable: false)
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            CGSSGameResource.shared.processDownloadedData(types: CGSSUpdateDataTypes(items.map { $0.dataType }), completion: {
+                                let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total - success)", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                                UIViewController.root?.present(alert, animated: true, completion: nil)
+                                CGSSUpdatingHUDManager.shared.hide(animated: false)
+                            })
+                        }
+                    }
                 }
             }
         })
     }
 }
 
-class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewDelegate, Refreshable {
-    
-    lazy var updateStatusView: UpdateStatusView = {
-        let view = UpdateStatusView()
-        view.delegate = self
-        return view
-    }()
+class RefreshableTableViewController: BaseTableViewController, Refreshable {
     
     var refresher: MJRefreshHeader = CGSSRefreshHeader()
     
@@ -88,26 +83,15 @@ class RefreshableTableViewController: BaseTableViewController, UpdateStatusViewD
         
     }
     
-    func cancelUpdate(updateStatusView: UpdateStatusView) {
+    func cancelUpdate() {
         CGSSUpdater.default.cancelCurrentSession()
     }
    
-    // 当该页面作为二级页面被销毁时 仍有未完成的下载任务时 强行终止下载(作为tabbar的一级页面时 永远不会销毁 不会触发此方法)
-    deinit {
-        updateStatusView.hide(animated: false)
-        CGSSUpdater.default.cancelCurrentSession()
-    }
 }
 
-class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewDelegate, Refreshable {
+class RefreshableCollectionViewController: BaseViewController, Refreshable {
     
     var refresher: MJRefreshHeader = CGSSRefreshHeader()
-
-    lazy var updateStatusView: UpdateStatusView = {
-        let view = UpdateStatusView()
-        view.delegate = self
-        return view
-    }()
     
     var layout: UICollectionViewFlowLayout!
     
@@ -137,22 +121,16 @@ class RefreshableCollectionViewController: BaseViewController, UpdateStatusViewD
         
         collectionView.mj_header = refresher
         refresher.refreshingBlock = { [weak self] in self?.checkUpdate() }
-
     }
     
     func checkUpdate() {
         
     }
     
-    func cancelUpdate(updateStatusView: UpdateStatusView) {
+    func cancelUpdate() {
         CGSSUpdater.default.cancelCurrentSession()
     }
   
-    // 当该页面作为二级页面被销毁时 仍有未完成的下载任务时 强行终止下载(作为tabbar的一级页面时 永远不会销毁 不会触发此方法)
-    deinit {
-        updateStatusView.hide(animated: false)
-        CGSSUpdater.default.cancelCurrentSession()
-    }
 }
 
 extension RefreshableCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
