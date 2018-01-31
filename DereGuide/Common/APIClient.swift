@@ -114,9 +114,13 @@ class APIClient {
                     callback?(nil)
                     return
                 }
+
+                // Changed in 1.7.5: Since we used the same viewer id for all the app users, the sid will be esaily invalid after other users request with the original sid. Instead of saving the sid, we always use the original sid.
+                /* 
                 if let sid = msg.value[.string("data_headers")]?[.string("sid")]?.stringValue, sid != "" {
                     self.sid = sid
                 }
+                 */
                 callback?(msg.value)
             }
         }
@@ -143,6 +147,10 @@ class APIClient {
         call(path: "/gacha/get_rate", userInfo: args) { pack in
             callback?(pack)
         }
+    }
+    
+    func resetSID() {
+        sid = nil
     }
 
 }
