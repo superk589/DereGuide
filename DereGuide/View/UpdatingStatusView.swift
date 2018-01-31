@@ -17,7 +17,7 @@ class UpdatingStatusView: UIView {
     
     weak var delegate: UpdatingStatusViewDelegate?
     let statusLabel = UILabel()
-    let loadingView = LoadingImageView()
+    private let loadingView = LoadingImageView()
     let cancelButton = UIButton()
     
     override init(frame: CGRect) {
@@ -63,7 +63,7 @@ class UpdatingStatusView: UIView {
     
     func show() {
         isShowing = true
-        endAnimating()
+        stopFading()
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(self)
             snp.remakeConstraints { (make) in
@@ -77,7 +77,7 @@ class UpdatingStatusView: UIView {
     
     func hide(animated: Bool) {
         isShowing = false
-        loadingView.stopAnimating()
+        stopAnimating()
         cancelButton.isHidden = true
         if animated {
             layer.removeAllAnimations()
@@ -94,17 +94,24 @@ class UpdatingStatusView: UIView {
         }
     }
     
+    private var isAnimating = false
+    
     private func startAnimating() {
-        endAnimating()
+        isAnimating = true
         loadingView.startAnimating()
     }
     
-    private func endAnimating() {
+    private func stopAnimating() {
+        isAnimating = false
+        loadingView.stopAnimating()
+    }
+    
+    private func stopFading() {
         layer.removeAllAnimations()
     }
     
     func setup(_ text: String, animated: Bool, cancelable: Bool) {
-        if animated {
+        if animated && !isAnimating {
             startAnimating()
         }
         statusLabel.text = text
@@ -116,7 +123,7 @@ class UpdatingStatusView: UIView {
     }
     
     @objc private func cancelUpdate() {
-        loadingView.stopAnimating()
+        stopAnimating()
         hide(animated: false)
         delegate?.cancelUpdate(updateStatusView: self)
     }
