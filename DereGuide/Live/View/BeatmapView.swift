@@ -307,7 +307,7 @@ class BeatmapView: IndicatorScrollView {
     private func drawTime() {
         guard let player = self.player else { return }
         let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
-        let elapsed = player.currentOffset() - TimeInterval(beatmap.firstNote?.offset ?? 0)
+        let elapsed = player.currentOffset()
         let time: NSString = NSString(format: "%d:%02d", Int(elapsed) / 60, Int(elapsed) % 60)
         time.draw(at: CGPoint(x: 10, y: playOffsetY - 19), withAttributes: attributes)
     }
@@ -853,7 +853,7 @@ struct AdvanceBeatmapDrawer {
     }
     
     
-    /// Get the shiftd offset time from the very begining of the beatmap to a specific point in all the drawing area
+    /// Get the shifted offset time from the very begining of the beatmap to a specific point in all the drawing area
     ///
     /// - Parameter y: the point.y of the drawing area
     /// - Returns: the shifted offset time

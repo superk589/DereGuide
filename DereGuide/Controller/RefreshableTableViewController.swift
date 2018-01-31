@@ -49,6 +49,7 @@ extension Refreshable where Self: UIViewController {
                     CGSSVersionManager.default.setDataVersionToNewest()
                     CGSSVersionManager.default.setApiVersionToNewest()
                 } else {
+                    CGSSUpdatingHUDManager.shared.show()
                     CGSSUpdatingHUDManager.shared.setup(current: 0, total: items.count, animated: true, cancelable: true)
                     updater.updateItems(items, progress: { processed, total in
                         CGSSUpdatingHUDManager.shared.setup(current: processed, total: total, animated: true, cancelable: true)

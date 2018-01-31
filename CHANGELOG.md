@@ -1,5 +1,23 @@
 # ChangeLog
 
+### 1.7.5
+
+1. 修复获取模拟抽卡数据经常失败的问题
+2. 修复更新数据时的动画错误
+3. 修复自动播放谱面时，时间显示错误
+
+##### Japanese version
+
+1. ガシャシミュレーターに常にデータ更新失敗する不具合を修正
+2. データ更新時アニメーションの不具合を修正
+3. 譜面の自動再生時、時間表示の不具合を修正
+
+##### English version
+
+1. Fix a bug that loading gacha data often fails.
+2. Fix loading indicator's animation.
+3. Fix a bug that sometimes beatmap player shows wrong current time.
+
 ### 1.7.4
 
 1. 增加新活动类型
