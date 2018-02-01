@@ -27,6 +27,8 @@ struct CGSSSorter {
         let compare = { (c1: T, c2: T) -> Bool in
             if let i1 = c1.value(forKeyPath: self.property) as? Int, let i2 = c2.value(forKeyPath: self.property) as? Int {
                 return self.ascending ? (i1 < i2) : (i1 > i2)
+            } else if let i1 = c1.value(forKeyPath: self.property) as? Float, let i2 = c2.value(forKeyPath: self.property) as? Float {
+                return self.ascending ? (i1 < i2) : (i1 > i2)
             } else if let s1 = c1.value(forKeyPath: self.property) as? String, let s2 = c2.value(forKeyPath: self.property) as? String {
                 return self.ascending ? (s1 < s2) : (s1 > s2)
             }
