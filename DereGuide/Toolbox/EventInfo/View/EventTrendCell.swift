@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import TTGTagCollectionView
 
+protocol EventTrendCellDelegate: class {
+    func eventTrendCell(_ eventTrendCell: EventTrendCell, didSelect live: CGSSLive, banner: BannerView)
+}
+
 class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
 
     var startLabel: UILabel!
@@ -24,6 +28,8 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
             needToReload = true
         }
     }
+    
+    weak var delegate: EventTrendCellDelegate?
     
     private var needToReload = false
     
@@ -164,6 +170,12 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, sizeForTagAt index: UInt) -> CGSize {
         return CGSize.init(width: 132, height: 132)
+    }
+    
+    func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, didSelectTag tagView: UIView!, at index: UInt) {
+        if let live = trend?.lives[Int(index)], let banner = tagView as? BannerView {
+            delegate?.eventTrendCell(self, didSelect: live, banner: banner)
+        }
     }
 
 }

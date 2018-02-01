@@ -9,11 +9,20 @@
 import UIKit
 import SnapKit
 
-class EventTrendViewController: BaseTableViewController {
+class EventTrendViewController: BaseTableViewController, BannerAnimatorProvider, BannerContainer {
     
     var eventId: Int!
     
     var trends = [EventTrend]()
+    
+    lazy var bannerAnimator: BannerAnimator = {
+        let animator = BannerAnimator()
+        return animator
+    }()
+    
+    var bannerView: BannerView?
+    
+    var otherView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +79,7 @@ class EventTrendViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTrendCell.description(), for: indexPath) as! EventTrendCell
         cell.setup(with: trends[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -88,4 +98,20 @@ class EventTrendViewController: BaseTableViewController {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
+}
+
+extension EventTrendViewController: EventTrendCellDelegate {
+    
+    func eventTrendCell(_ eventTrendCell: EventTrendCell, didSelect live: CGSSLive, banner: BannerView) {
+        CGSSGameResource.shared.master.getMusicInfo(musicDataID: live.musicDataId) { [weak self] (songs) in
+            self?.bannerView = banner
+            DispatchQueue.main.async {
+                let vc = SongDetailController()
+                vc.setup(songs: songs, index: 0)
+                vc.hidesBottomBarWhenPushed = true
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
 }
