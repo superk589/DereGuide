@@ -99,7 +99,7 @@ extension CGSSSkill {
     }
     
     var skillFilterType: CGSSSkillTypes {
-        return CGSSSkillTypes.init(typeId: skillTypeId)
+        return CGSSSkillTypes(typeID: skillTypeId)
     }
     
     var descriptionShort: String {

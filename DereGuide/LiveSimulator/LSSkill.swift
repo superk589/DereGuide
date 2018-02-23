@@ -30,7 +30,7 @@ enum LSSkillType {
     static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration]
     static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
     static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal]
-    
+
     init?(type: CGSSSkillTypes) {
         switch type {
         case CGSSSkillTypes.comboBonus:
@@ -65,6 +65,17 @@ enum LSSkillType {
     }
 }
 
+struct LSTriggerEvaluations: OptionSet {
+    let rawValue: UInt
+    init(rawValue: UInt) { self.rawValue = rawValue }
+    static let perfect = LSTriggerEvaluations(rawValue: 1 << 0)
+    static let great = LSTriggerEvaluations(rawValue: 1 << 1)
+    static let nice = LSTriggerEvaluations(rawValue: 1 << 2)
+    static let bad = LSTriggerEvaluations(rawValue: 1 << 3)
+    static let miss = LSTriggerEvaluations(rawValue: 1 << 4)
+    static let all: LSTriggerEvaluations = [.perfect, .great, .nice, .bad, .miss]
+}
+
 struct LSSkill {
     
     var range: LSRange<Float>
@@ -88,6 +99,12 @@ struct LSSkill {
     
     /// 0 ~ 4, the index of the member in the unit
     var position: Int
+    
+    /// what kind of note evaluation can get bonus of effect 1
+    var triggerEvaluations1: LSTriggerEvaluations
+    
+    /// what kind of note evaluation can get bonus of effect 2
+    var triggerEvaluations2: LSTriggerEvaluations
 }
 
 extension LSSkill {
@@ -121,6 +138,49 @@ extension LSSkill {
             return value
         } else {
             return 0
+        }
+    }
+}
+
+extension CGSSSkill {
+    
+    var triggerEvaluations1: LSTriggerEvaluations {
+        switch skillTypeId {
+        case 1, 14, 15, 17, 21...23:
+            return .perfect
+        case 2, 18:
+            return [.perfect, .great]
+        case 3, 19:
+            return [.perfect, .great, .nice]
+        case 13:
+            return [.perfect, .great, .nice, .bad, .miss]
+        case 5:
+            return .great
+        case 6:
+            return [.great, .nice]
+        case 7:
+            return [.great, .nice, .bad]
+        case 8:
+            return [.great, .nice, .bad, .miss]
+        case 9:
+            return .nice
+        case 10:
+            return [.bad, .nice]
+        default:
+            return .all
+        }
+        
+    }
+    
+    // for the second effect of focus, all round and overload
+    var triggerEvaluations2: LSTriggerEvaluations {
+        switch skillTypeId {
+        case 14:
+            return [.nice, .bad]
+        case 24:
+            return .perfect
+        default:
+            return .all
         }
     }
 }

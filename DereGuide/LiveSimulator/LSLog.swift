@@ -46,6 +46,8 @@ struct LSLog {
     
     var perfectLock: Bool
     
+    var strongPerfectLock: Bool
+    
     var comboContinue: Bool
     
     var `guard`: Bool

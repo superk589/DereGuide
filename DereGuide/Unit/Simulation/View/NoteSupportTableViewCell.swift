@@ -23,7 +23,7 @@ class NoteSupportTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
-        let font = UIFont.boldSystemFont(ofSize: 14)
+        let font = UIFont.boldSystemFont(ofSize: 16)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         comboIndexLabel = NoteScoreLabel()
@@ -79,16 +79,32 @@ class NoteSupportTableViewCell: UITableViewCell {
         }
         comboIndexLabel.text = String(log.noteIndex)
         
-        skillBoostLabel.text = log.skillBoost == 1000 ? "-" : "〇"
+        skillBoostLabel.text = log.skillBoost == 1000 ? "-" : "○"
         
-        perfectLockLabel.text = log.perfectLock ? "〇" : "-"
+        perfectLockLabel.text = log.perfectLock ? "○" : "-"
         
-        comboContinueLabel.text = log.comboContinue ? "〇" : "-"
+        perfectLockLabel.text = (log.strongPerfectLock && log.skillBoost > 1000) ? "●" : perfectLockLabel.text
         
-        damageGuardLabel.text = log.guard ? "〇" : "-"
+        comboContinueLabel.text = log.comboContinue ? "○" : "-"
+        
+        damageGuardLabel.text = log.guard ? "○" : "-"
 
-        healLabel.text = log.lifeRestore == 0 ? "-" : "+\(log.lifeRestore)"
-       
+        if log.lifeRestore == 0 {
+            healLabel.text = "-"
+            healLabel.textColor = .darkGray
+        } else if log.lifeRestore > 0 {
+            healLabel.text = "+\(log.lifeRestore)"
+            healLabel.textColor = .life
+        } else {
+            healLabel.text = "\(log.lifeRestore)"
+            healLabel.textColor = .red
+        }
+        
+        if log.currentLife == 0 {
+            backgroundColor = UIColor.lightGray.lighter()
+        } else {
+            backgroundColor = .white
+        }
         lifeLabel.text = String(log.currentLife)
         
     }

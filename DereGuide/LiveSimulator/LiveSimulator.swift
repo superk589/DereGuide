@@ -36,11 +36,10 @@ class LiveSimulator {
         
         actions.sort { $0.timeOffset < $1.timeOffset }
         
-        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife)
+        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
         
-        if options.contains(.detailLog) {
-            game.shouldGenerateLogs = true
-        }
+        game.shouldGenerateLogs = options.contains(.detailLog)
+        game.afkMode = options.contains(.afk)
         
         var actionSlice = ArraySlice(actions)
         
@@ -192,30 +191,21 @@ class LiveSimulator {
 //        callback?(LSResult.init(scores: simulateResult), logs)
     }
     
-    private func replaceEncores(_ procedBonuses: [LSSkill]) -> [LSSkill] {
-        var replacedBonuses = [LSSkill]()
-        for index in procedBonuses.indices {
-            let bonus = procedBonuses[index]
-            if bonus.type == .encore {
-                if var last = replacedBonuses.last {
-                    last.range = bonus.range
-                    replacedBonuses.append(last)
-                }
-            } else {
-                replacedBonuses.append(bonus)
-            }
-        }
-        return replacedBonuses
-    }
-    
     func simulateOnce(options: LSOptions = [], callback: LSResultClosure? = nil) {
         
         // all proc skills
-        let procedBonuses = bonuses
-            .sorted { $0.range.begin < $1.range.begin }
-            .filter {
-                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
-            }
+        let procedBonuses: [LSSkill]
+        if options.contains(.optimistic) {
+            procedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }
+        } else if options.contains(.pessimistic) {
+            procedBonuses = bonuses
+                .sorted { $0.range.begin < $1.range.begin }
+                .filter { $0.rate * Double(100 + $0.rateBonus) > 1000000 }
+        } else {
+            procedBonuses = bonuses
+                .sorted { $0.range.begin < $1.range.begin }
+                .filter { CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10))) }
+        }
         
         var actions = [LSAction]()
         for (index, bonus) in procedBonuses.enumerated() {
@@ -226,8 +216,8 @@ class LiveSimulator {
         
         actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order)  }
         
-        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife)
-        
+        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
+        game.afkMode = options.contains(.afk)
         game.shouldGenerateLogs = options.contains(.detailLog)
         
         for action in actions {
@@ -252,7 +242,7 @@ class LiveSimulator {
 //        let procedBonuses = bonuses
 //            .sorted { $0.range.begin < $1.range.begin }
 //            .filter {
-//                options.contains(.maxRate) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
+//                options.contains(.optimistic) || CGSSGlobal.isProc(rate: Int(round($0.rate * Double(100 + $0.rateBonus) / 10)))
 //        }
 //        
 //        // replace all encore skills by last skill

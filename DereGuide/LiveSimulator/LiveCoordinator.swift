@@ -302,7 +302,7 @@ class LiveCoordinator {
             }
             if let skill = card.skill {
                 let rankedSkill = CGSSRankedSkill(level: level, skill: skill)
-                if let type = LSSkillType.init(type: skill.skillFilterType) {
+                if let type = LSSkillType(type: skill.skillFilterType) {
                     let cardType = card.cardType
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var rateBonus = 0
@@ -325,7 +325,7 @@ class LiveCoordinator {
                     for range in ranges {
                         switch type {
                         case .skillBoost:
-                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i)
+                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2)
                             bonuses.append(bonus)
                         case .deep:
                             if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
@@ -334,7 +334,7 @@ class LiveCoordinator {
                                 break
                             }
                         default:
-                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i)
+                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2)
                             bonuses.append(bonus)
                         }
                     }

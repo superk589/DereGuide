@@ -59,8 +59,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     
     var titles = [NSLocalizedString("得分分布", comment: ""),
                   NSLocalizedString("高级计算", comment: ""),
-                  NSLocalizedString("得分详情", comment: ""),
-                  NSLocalizedString("辅助技能详情", comment: ""),
+                  NSLocalizedString("得分和辅助技能详情", comment: ""),
                   NSLocalizedString("高级选项", comment: "")]
    
     override func viewDidLoad() {
@@ -94,7 +93,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return 11
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,11 +124,11 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitSimulationMainBodyCell.description(), for: indexPath) as! UnitSimulationMainBodyCell
             cell.delegate = self
             return cell
-        case 6...10:
+        case 6...9:
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitSimulationCommonCell.description(), for: indexPath) as! UnitSimulationCommonCell
             cell.setup(with: titles[indexPath.row - 6])
             return cell
-        case 11:
+        case 10:
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitSimulationDescriptionCell.description(), for: indexPath) as! UnitSimulationDescriptionCell
             return cell
         default:
@@ -163,10 +162,8 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
         case 7:
             gotoAdvanceCalculation()
         case 8:
-            checkScoreDetail()
+            checkDetail()
         case 9:
-            checkSupportSkillDetail()
-        case 10:
             let vc = UnitAdvanceOptionsController()
             navigationController?.pushViewController(vc, animated: true)
         default:
@@ -183,21 +180,10 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
         }
     }
 
-    func checkScoreDetail() {
+    func checkDetail() {
         if let scene = self.scene {
             let vc = LiveSimulatorViewController()
-            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
-            vc.coordinator = coordinator
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            showNotSelectSongAlert()
-        }
-    }
-    
-    func checkSupportSkillDetail() {
-        if let scene = self.scene {
-            let vc = LiveSimulatorSupportSkillsViewController()
-            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let coordinator = LiveCoordinator(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -390,7 +376,7 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
             simulator.wipeResults()
             
             // setup optimistic 2
-            simulator.simulateOnce(options: [.maxRate], callback: { (result, logs) in
+            simulator.simulateOnce(options: [.optimistic], callback: { (result, logs) in
                 cell?.calculationGrid[1, 2].text = String(result.average)
                 cell?.resetCalculationButton()
             })

@@ -112,6 +112,12 @@ class NoteScoreTableViewCell: UITableViewCell {
         finalScoreLabel.text = String.init(format: "%d", log.score)
         
         totalScoreLabel.text = String(log.sum)
+        
+        if log.currentLife == 0 {
+            backgroundColor = UIColor.lightGray.lighter()
+        } else {
+            backgroundColor = .white
+        }
     }
 
 }

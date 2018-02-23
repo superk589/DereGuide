@@ -32,8 +32,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 
     static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111_1111)
     
-    init(typeId: Int) {
-        switch typeId {
+    init(typeID: Int) {
+        switch typeID {
         case 1, 2, 3:
             self = .perfectBonus
         case 4:

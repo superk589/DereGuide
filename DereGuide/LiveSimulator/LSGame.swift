@@ -65,54 +65,37 @@ struct LSGame {
         }
     }
     var score: Int
+    var numberOfNotes: Int
     var logs = [LSLog]()
     var skills = [Identifier: LSSkill]()
     var combo = 0
+    var noteIndex = 0
     var shouldGenerateLogs = false
+    var afkMode = false
+    var difficulty: CGSSLiveDifficulty
+    var isDead = false
     
-    init(initialLife: Int, maxLife: Int, score: Int = 0) {
+    init(initialLife: Int, maxLife: Int, numberOfNotes: Int, difficulty: CGSSLiveDifficulty, score: Int = 0) {
         self.currentLife = initialLife
         self.maxLife = maxLife
         self.score = score
+        self.numberOfNotes = numberOfNotes
+        self.difficulty = difficulty
     }
     
     mutating func perform(_ action: LSAction) {
         switch action {
         case .note(let note):
             
-            combo += 1
-
-            // calculate life (as restored life may change life sparkle bonus value. And in fact, restoring life is calculated first)
-            var restoredLife = bestHealer?.lifeValue ?? 0
-            if hasSkillBoost {
-                if hasDamegeGuard && restoredLife == 0 {
-                    restoredLife = 1
-                } else if restoredLife > 0 {
-                    restoredLife += 1
-                }
-            }
-            currentLife = min(maxLife, currentLife + restoredLife)
+            noteIndex += 1
             
-            // calculate score
-            let noteScore = Int(round(note.baseScore * note.comboFactor * Double(bonusGroup.bonusValue) / 10000))
-            score += noteScore
-            
-            // generate log
-            if shouldGenerateLogs {
-                let log = LSLog(noteIndex: combo, score: noteScore, sum: score,
-                                baseScore: note.baseScore,
-                                baseComboBonus: bonusGroup.baseComboBonus,
-                                comboBonus: bonusGroup.comboBonus,
-                                basePerfectBonus: bonusGroup.basePerfectBonus,
-                                perfectBonus: bonusGroup.perfectBonus,
-                                comboFactor: note.comboFactor,
-                                skillBoost: bonusGroup.skillBoost,
-                                lifeRestore: restoredLife,
-                                currentLife: currentLife,
-                                perfectLock: hasPerfectSupport,
-                                comboContinue: hasComboSupport,
-                                guard: hasDamegeGuard)
-                logs.append(log)
+            if isDead {
+                processNoteAfterDead(note)
+            } else if afkMode && !(hasSkillBoost && hasStrongPerfectSupport) {
+                // if in afk mode, note will be missed unless skill boost and perfect support are on
+                processNoteMissing(note)
+            } else {
+                processNormalNote(note)
             }
         case .skillStart(let id, let skill):
             switch skill.type {
@@ -131,6 +114,128 @@ struct LSGame {
             }
         case .skillEnd(let id, let skill):
             removeSkill(id: id, skill: skill)
+        }
+    }
+    
+    private mutating func processNoteMissing(_ note: LSNote) {
+        combo = 0
+        
+        // calculate life loss
+        let lostLife: Int
+        if hasDamegeGuard {
+            lostLife = 0
+        } else {
+            lostLife = note.lifeLost(in: difficulty, evaluation: .miss)
+        }
+        
+        currentLife = max(0, currentLife - lostLife)
+        
+        if currentLife == 0 {
+            isDead = true
+        }
+        
+        let noteScore = 0
+        
+        generateLogIfNeeded(noteIndex: noteIndex, score: noteScore, sum: score,
+                            baseScore: note.baseScore,
+                            baseComboBonus: bonusGroup.baseComboBonus,
+                            comboBonus: bonusGroup.comboBonus,
+                            basePerfectBonus: bonusGroup.basePerfectBonus,
+                            perfectBonus: bonusGroup.perfectBonus,
+                            comboFactor: 0,
+                            skillBoost: bonusGroup.skillBoost,
+                            lifeRestore: -lostLife,
+                            currentLife: currentLife,
+                            perfectLock: hasPerfectSupport,
+                            strongPerfectLock: hasStrongPerfectSupport,
+                            comboContinue: hasComboSupport,
+                            guard: hasDamegeGuard)
+    }
+    
+    private mutating func processNoteAfterDead(_ note: LSNote) {
+        generateLogIfNeeded(noteIndex: noteIndex, score: 0, sum: 0,
+                            baseScore: note.baseScore,
+                            baseComboBonus: bonusGroup.baseComboBonus,
+                            comboBonus: bonusGroup.comboBonus,
+                            basePerfectBonus: bonusGroup.basePerfectBonus,
+                            perfectBonus: bonusGroup.perfectBonus,
+                            comboFactor: 0,
+                            skillBoost: bonusGroup.skillBoost,
+                            lifeRestore: 0,
+                            currentLife: 0,
+                            perfectLock: hasPerfectSupport,
+                            strongPerfectLock: hasStrongPerfectSupport,
+                            comboContinue: hasComboSupport,
+                            guard: hasDamegeGuard)
+    }
+    
+    private mutating func processNormalNote(_ note: LSNote) {
+        
+        combo += 1
+        
+        // calculate life (as restored life may change life sparkle bonus value. And in fact, restoring life is calculated first)
+        var restoredLife = bestHealer?.lifeValue ?? 0
+        if hasSkillBoost {
+            if hasDamegeGuard && restoredLife == 0 {
+                restoredLife = 1
+            } else if restoredLife > 0 {
+                restoredLife += 1
+            }
+        }
+        currentLife = min(maxLife, currentLife + restoredLife)
+        
+        // calculate combo factor
+        let comboFactor: Double
+        if afkMode {
+            updateComboFactor()
+            comboFactor = self.comboFactor
+        } else {
+            comboFactor = note.comboFactor
+        }
+        
+        // calculate score
+        let noteScore = Int(round(note.baseScore * comboFactor * Double(bonusGroup.bonusValue) / 10000))
+        score += noteScore
+        
+        // generate log
+        generateLogIfNeeded(noteIndex: noteIndex, score: noteScore, sum: score,
+                            baseScore: note.baseScore,
+                            baseComboBonus: bonusGroup.baseComboBonus,
+                            comboBonus: bonusGroup.comboBonus,
+                            basePerfectBonus: bonusGroup.basePerfectBonus,
+                            perfectBonus: bonusGroup.perfectBonus,
+                            comboFactor: comboFactor,
+                            skillBoost: bonusGroup.skillBoost,
+                            lifeRestore: restoredLife,
+                            currentLife: currentLife,
+                            perfectLock: hasPerfectSupport,
+                            strongPerfectLock: hasStrongPerfectSupport,
+                            comboContinue: hasComboSupport,
+                            guard: hasDamegeGuard)
+    }
+    
+    @inline(__always)
+    private mutating func generateLogIfNeeded(noteIndex: Int, score: Int, sum: Int, baseScore: Double,
+                                               baseComboBonus: Int, comboBonus: Int, basePerfectBonus: Int,
+                                               perfectBonus: Int, comboFactor: Double, skillBoost: Int,
+                                               lifeRestore: Int, currentLife: Int, perfectLock: Bool,
+                                               strongPerfectLock: Bool, comboContinue: Bool, guard: Bool) {
+        if shouldGenerateLogs {
+            let log = LSLog(noteIndex: noteIndex, score: score, sum: sum,
+                            baseScore: baseScore,
+                            baseComboBonus: baseComboBonus,
+                            comboBonus: comboBonus,
+                            basePerfectBonus: basePerfectBonus,
+                            perfectBonus: perfectBonus,
+                            comboFactor: comboFactor,
+                            skillBoost: skillBoost,
+                            lifeRestore: lifeRestore,
+                            currentLife: currentLife,
+                            perfectLock: perfectLock,
+                            strongPerfectLock: strongPerfectLock,
+                            comboContinue: comboContinue,
+                            guard: `guard`)
+            logs.append(log)
         }
     }
     
@@ -194,9 +299,10 @@ struct LSGame {
     }
     
     private(set) var hasPerfectSupport = false
-    
+    private(set) var hasStrongPerfectSupport = false
     private mutating func updatePerfectSupport() {
-         hasPerfectSupport = skills.values.contains{ $0.type == .perfectLock }
+        hasPerfectSupport = skills.values.contains{ $0.type == .perfectLock }
+        hasStrongPerfectSupport = skills.values.contains { $0.type == .perfectLock && $0.triggerEvaluations1.contains(.bad) }
     }
     
     private(set) var hasComboSupport = false
@@ -261,4 +367,20 @@ struct LSGame {
         bonusGroup = LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
     }
     
+    // MARK: Combo factor calculation
+    
+    private var comboFactor = 1.0
+    lazy var comboFactorIndexes: [(Int, Double)] = {
+        return zip([0, 5, 10, 25, 50, 70, 80, 90], [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0]).map {
+            (Int(floor(Float(self.numberOfNotes * $0.0) / 100)), $0.1)
+        }
+    }()
+
+    private mutating func updateComboFactor() {
+        comboFactor = comboFactorIndexes.last { combo >= $0.0 }?.1 ?? 1.0
+    }
+    
 }
+
+
+

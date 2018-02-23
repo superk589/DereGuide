@@ -39,7 +39,7 @@ class BeatmapViewController: UIViewController {
     private typealias Setting = BeatmapAdvanceOptionsViewController.Setting
     private var setting = Setting.load() ?? Setting()
     
-    lazy var filterController: BeatmapAdvanceOptionsViewController = {
+    lazy var optionController: BeatmapAdvanceOptionsViewController = {
         let vc = BeatmapAdvanceOptionsViewController(style: .grouped)
         vc.setting = self.setting
         vc.delegate = self
@@ -230,8 +230,8 @@ class BeatmapViewController: UIViewController {
     }
     
     @objc private func showAdvanceOptions() {
-        let nav = BaseNavigationController(rootViewController: filterController)
-        filterController.setting = setting
+        let nav = BaseNavigationController(rootViewController: optionController)
+        optionController.setting = setting
         nav.modalPresentationStyle = .formSheet
         present(nav, animated: true, completion: nil)
     }

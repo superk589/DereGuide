@@ -9,142 +9,125 @@
 import UIKit
 import SnapKit
 
-class LiveSimulatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class LiveSimulatorViewController: BaseViewController {
     
-    let tableView = IndicatorTableView()
+    lazy var scoreDashboard: ScoreDashboardController = {
+        let vc = ScoreDashboardController()
+        addChildViewController(vc)
+        vc.didMove(toParentViewController: self)
+        return vc
+    }()
     
-    enum DisplayType: CustomStringConvertible {
-        case optimistic1
-        case optimistic2
-        case simulation
-        
-        static let all: [DisplayType] = [.optimistic1, .optimistic2, .simulation]
-        
-        var description: String {
-            switch self {
-            case .optimistic1:
-                return NSLocalizedString("极限分数", comment: "") + "1"
-            case .optimistic2:
-                return NSLocalizedString("极限分数", comment: "") + "2"
-            case .simulation:
-                return NSLocalizedString("随机单次模拟", comment: "")
-            }
-        }
-    }
+    lazy var supportDashboard: SupportDashboardController = {
+        let vc = SupportDashboardController()
+        addChildViewController(vc)
+        vc.didMove(toParentViewController: self)
+        return vc
+    }()
+    
+    typealias Setting = LiveSimulatorModeSelectionViewController.Setting
+    
+    private var setting = Setting.load() ?? Setting()
+    
+    private lazy var optionController: LiveSimulatorModeSelectionViewController = {
+        let vc = LiveSimulatorModeSelectionViewController(style: .grouped)
+        vc.setting = self.setting
+        vc.delegate = self
+        return vc
+    }()
     
     var coordinator: LiveCoordinator!
     lazy var simulator: LiveSimulator = {
         self.coordinator.generateLiveSimulator()
     }()
     
-    var displayType: DisplayType = .optimistic2 {
-        didSet {
-            reloadUI()
-        }
-    }
-    
     var logs = [LSLog]() {
         didSet {
-            tableView.reloadData()
+            if setting.dashboardType == .score {
+                scoreDashboard.logs = logs
+            } else {
+                supportDashboard.logs = logs
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.indicator.strokeColor = Color.life.withAlphaComponent(0.5)
-        tableView.sectionHeaderHeight = 30
-        tableView.sectionFooterHeight = 30
-        
         prepareNavigationBar()
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
+
+        view.addSubview(supportDashboard.tableView)
+        supportDashboard.tableView.snp.makeConstraints { (make) in
             if #available(iOS 11.0, *) {
                 make.edges.equalTo(view.safeAreaLayoutGuide)
             } else {
                 make.edges.equalToSuperview()
             }
         }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(NoteScoreTableViewCell.self, forCellReuseIdentifier: "Note Cell")
-        tableView.register(NoteScoreTableViewSectionHeader.self, forHeaderFooterViewReuseIdentifier: "Note Header")
-        tableView.register(NoteScoreTableViewSectionFooter.self, forHeaderFooterViewReuseIdentifier: "Note Footer")
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        
+        view.addSubview(scoreDashboard.tableView)
+        scoreDashboard.tableView.snp.makeConstraints { (make) in
+            if #available(iOS 11.0, *) {
+                make.edges.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.edges.equalToSuperview()
+            }
+        }
+        
+        reloadUI()
+        
     }
     
     private func prepareNavigationBar() {
-        let rightItem = UIBarButtonItem.init(title: NSLocalizedString("模式", comment: ""), style: .plain, target: self, action: #selector(selectDisplayMode))
+        let rightItem = UIBarButtonItem.init(title: NSLocalizedString("选项", comment: ""), style: .plain, target: self, action: #selector(showOptions))
         self.navigationItem.rightBarButtonItem = rightItem
     }
     
-    @objc func selectDisplayMode() {
-        let alvc = UIAlertController.init(title: NSLocalizedString("选择模式", comment: ""), message: nil, preferredStyle: .actionSheet)
-        
-        alvc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        for type in DisplayType.all {
-            alvc.addAction(UIAlertAction.init(title: type.description, style: .default, handler: { [weak self] (action) in
-                self?.displayType = type
-            }))
-        }
-        
-        alvc.addAction(UIAlertAction.init(title: NSLocalizedString("取消", comment: ""), style: .cancel, handler: nil))
-        self.tabBarController?.present(alvc, animated: true, completion: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        reloadUI()
+    @objc private func showOptions() {
+        let nav = BaseNavigationController(rootViewController: optionController)
+        optionController.setting = setting
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true, completion: nil)
     }
     
     func reloadUI() {
-        navigationItem.title = displayType.description
+        navigationItem.title = setting.dashboardType.description
         
-        switch displayType {
-        case .optimistic1:
-            simulator.simulateOptimistic1(options: [.detailLog, .maxRate], callback: { [weak self] (result, logs) in
+        var options = LSOptions()
+        if setting.actionMode == .afk {
+            options.insert(.afk)
+        }
+        
+        if setting.procMode == .optimistic1 || setting.procMode == .optimistic2 {
+            options.insert(.optimistic)
+        } else if setting.procMode == .pessimistic {
+            options.insert(.pessimistic)
+        }
+        
+        options.insert(.detailLog)
+        
+        if setting.procMode == .optimistic1 {
+            simulator.simulateOptimistic1(options: options, callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
-        case .optimistic2:
-            simulator.simulateOnce(options: [.maxRate, .detailLog], callback: { [weak self] (result, logs) in
-                self?.logs = logs
-            })
-        case .simulation:
-            simulator.simulateOnce(options: [.detailLog], callback: { [weak self] (result, logs) in
+        } else {
+            simulator.simulateOnce(options: options, callback: { [weak self] (result, logs) in
                 self?.logs = logs
             })
         }
-    }
-    
-    // MARK: TableViewDataSource & Delegate
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logs.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Note Cell", for: indexPath) as! NoteScoreTableViewCell
-        cell.setup(with: logs[indexPath.row])
-        return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Note Header")
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Note Footer") as! NoteScoreTableViewSectionFooter
-        if let baseScore = logs.first?.baseScore, let totalScore = logs.last?.sum {
-            footer.setupWith(baseScore: baseScore, totalScore: totalScore)
+        
+        if setting.dashboardType == .score {
+            scoreDashboard.tableView.isHidden = false
+            supportDashboard.tableView.isHidden = true
+        } else {
+            scoreDashboard.tableView.isHidden = true
+            supportDashboard.tableView.isHidden = false
         }
-        return footer
     }
+}
 
+extension LiveSimulatorViewController: LiveSimulatorModeSelectionViewControllerDelegate {
+    func liveSimulatorModeSelectionViewController(_ liveSimulatorModeSelectionViewController: LiveSimulatorModeSelectionViewController, didSave setting: LiveSimulatorModeSelectionViewController.Setting) {
+        self.setting = setting
+        reloadUI()
+    }
 }

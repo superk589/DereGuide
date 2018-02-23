@@ -207,6 +207,10 @@
 		1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */; };
 		1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B61D69816800DEF52B /* CharDetailViewController.swift */; };
 		127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */; };
+		12725F25203FBA1E00FBBB64 /* LiveSimulatorModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12725F24203FBA1E00FBBB64 /* LiveSimulatorModeSelectionViewController.swift */; };
+		12725F27203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12725F26203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift */; };
+		12725F29203FED1500FBBB64 /* ScoreDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12725F28203FED1500FBBB64 /* ScoreDashboardController.swift */; };
+		12725F2B203FEDBC00FBBB64 /* SupportDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12725F2A203FEDBC00FBBB64 /* SupportDashboardController.swift */; };
 		12738EED1E2B3C890040E413 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEC1E2B3C890040E413 /* DateExtension.swift */; };
 		12738EEF1E2B6C150040E413 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12738EEE1E2B6C150040E413 /* Debouncer.swift */; };
 		127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127AA1A21E34FDEC0006627B /* SignImageController.swift */; };
@@ -395,7 +399,6 @@
 		12FC8B391EDE6D93003CF3C3 /* UnitInformationUnitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B341EDE6D93003CF3C3 /* UnitInformationUnitCell.swift */; };
 		12FC8B3A1EDE6D93003CF3C3 /* UnitLeaderSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B351EDE6D93003CF3C3 /* UnitLeaderSkillView.swift */; };
 		12FC8B3C1EDE6DA7003CF3C3 /* UnitInfomationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B3B1EDE6DA7003CF3C3 /* UnitInfomationController.swift */; };
-		12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */; };
 		12FC8B4D1EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */; };
 		12FC8B4E1EDE6DEB003CF3C3 /* UnitSimulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B411EDE6DEB003CF3C3 /* UnitSimulationController.swift */; };
 		12FC8B4F1EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */; };
@@ -659,6 +662,10 @@
 		1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1271C6B61D69816800DEF52B /* CharDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharDetailViewController.swift; sourceTree = "<group>"; };
 		127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveDetail.swift; sourceTree = "<group>"; };
+		12725F24203FBA1E00FBBB64 /* LiveSimulatorModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSimulatorModeSelectionViewController.swift; sourceTree = "<group>"; };
+		12725F26203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSettingTableViewCell.swift; sourceTree = "<group>"; };
+		12725F28203FED1500FBBB64 /* ScoreDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDashboardController.swift; sourceTree = "<group>"; };
+		12725F2A203FEDBC00FBBB64 /* SupportDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDashboardController.swift; sourceTree = "<group>"; };
 		12738EEC1E2B3C890040E413 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		12738EEE1E2B6C150040E413 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
@@ -877,7 +884,6 @@
 		12FC8B341EDE6D93003CF3C3 /* UnitInformationUnitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitInformationUnitCell.swift; path = Information/View/UnitInformationUnitCell.swift; sourceTree = "<group>"; };
 		12FC8B351EDE6D93003CF3C3 /* UnitLeaderSkillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitLeaderSkillView.swift; path = Information/View/UnitLeaderSkillView.swift; sourceTree = "<group>"; };
 		12FC8B3B1EDE6DA7003CF3C3 /* UnitInfomationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitInfomationController.swift; path = Information/Controller/UnitInfomationController.swift; sourceTree = "<group>"; };
-		12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorSupportSkillsViewController.swift; sourceTree = "<group>"; };
 		12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulatorViewController.swift; sourceTree = "<group>"; };
 		12FC8B411EDE6DEB003CF3C3 /* UnitSimulationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitSimulationController.swift; sourceTree = "<group>"; };
 		12FC8B431EDE6DEB003CF3C3 /* NoteSupportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteSupportTableViewCell.swift; sourceTree = "<group>"; };
@@ -1990,7 +1996,9 @@
 		12FC8B3E1EDE6DEB003CF3C3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				12FC8B3F1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift */,
+				12725F24203FBA1E00FBBB64 /* LiveSimulatorModeSelectionViewController.swift */,
+				12725F28203FED1500FBBB64 /* ScoreDashboardController.swift */,
+				12725F2A203FEDBC00FBBB64 /* SupportDashboardController.swift */,
 				12FC8B401EDE6DEB003CF3C3 /* LiveSimulatorViewController.swift */,
 				121C78E31D57376200D0B636 /* UnitSongSelectViewController.swift */,
 				12FC8B411EDE6DEB003CF3C3 /* UnitSimulationController.swift */,
@@ -2020,6 +2028,7 @@
 				12852EE81EF9189500E26A73 /* UnitAdvanceCalculationCell.swift */,
 				121FCFAD1EFA1A6100B7DFF4 /* UnitAdvanceDescriptionCell.swift */,
 				128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */,
+				12725F26203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2434,6 +2443,7 @@
 				12353A5B1F0F6AB3008286C2 /* UpdateTimestampable.swift in Sources */,
 				12353A481F0F6A92008286C2 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				12353A491F0F6A92008286C2 /* NSManagedObjectContext+Observers.swift in Sources */,
+				12725F25203FBA1E00FBBB64 /* LiveSimulatorModeSelectionViewController.swift in Sources */,
 				12353A4A1F0F6A92008286C2 /* Utilities.swift in Sources */,
 				12353A4B1F0F6A92008286C2 /* ManagedObjectObserver.swift in Sources */,
 				12353A4C1F0F6A92008286C2 /* CoreDataErrors.swift in Sources */,
@@ -2528,6 +2538,7 @@
 				1205416C1D76C59E0021F875 /* CGSSCharFilter.swift in Sources */,
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulatorView.swift in Sources */,
 				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
+				12725F27203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift in Sources */,
 				12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
@@ -2544,6 +2555,7 @@
 				120DBB291EEE3120004E0084 /* UnitTemplateController.swift in Sources */,
 				12F8DF2220117B8100F8A3DC /* GachaDetailGuaranteesCell.swift in Sources */,
 				122879521F8A572900AD1F5F /* CharaProfileItemView.swift in Sources */,
+				12725F2B203FEDBC00FBBB64 /* SupportDashboardController.swift in Sources */,
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
@@ -2581,7 +2593,6 @@
 				1285F4A61F32CC1E002A81F7 /* MyCenterCardView.swift in Sources */,
 				124B8FF21F4155EF00880992 /* ProfileRemote.swift in Sources */,
 				122F36A91F7DEDAA006DDE55 /* FavoriteSongsRemote.swift in Sources */,
-				12FC8B4C1EDE6DEB003CF3C3 /* LiveSimulatorSupportSkillsViewController.swift in Sources */,
 				12B4C1CB1F9B648B00EC03FC /* CGSSBeatmapNote.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* UnitTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
@@ -2743,6 +2754,7 @@
 				122C4B9D1D6E85B500F94E8D /* CGSSSorterFilterManager.swift in Sources */,
 				12C875861F33044A0051C75A /* MyCenterEditingViewController.swift in Sources */,
 				1203A8921F29C39A001A510A /* FavoriteCardUploader.swift in Sources */,
+				12725F29203FED1500FBBB64 /* ScoreDashboardController.swift in Sources */,
 				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
 				1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */,

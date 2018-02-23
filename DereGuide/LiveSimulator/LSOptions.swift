@@ -15,12 +15,16 @@ struct LSOptions: OptionSet {
         self.rawValue = rawValue
     }
     
-    /// skill proc in maxRate
-    static let maxRate = LSOptions.init(rawValue: 1 << 0)
+    /// skill proc rate are assumed to be 100%
+    static let optimistic = LSOptions(rawValue: 1 << 0)
     
     /// generate detail logs of each note in the format of LSLog
-    static let detailLog = LSOptions.init(rawValue: 1 << 1)
+    static let detailLog = LSOptions(rawValue: 1 << 1)
     
-//    static let overloadLimitByLife = LSOptions.init(rawValue: 1 << 2)
+    /// in afk mode, all notes are assumed to be missed
+    static let afk = LSOptions(rawValue: 1 << 2)
     
+    /// In pessimistic mode, all procs are assumed not triggered unless it has an 100% proc rate. If optimistic is set, this option will not work. If both are not set, skill will proc randomly based on its real rate.
+    static let pessimistic = LSOptions(rawValue: 1 << 3)
+
 }

@@ -30,6 +30,8 @@ class APIClient {
 
     private var base = "https://game.starlight-stage.jp"
     
+    private var apis = "https://apis.game.starlight-stage.jp"
+    
     private func lolfuscate(_ s: String) -> String {
         let mid = s.map { String.init(format: "%02d\($0.shiftScalarBy(10))%d", 100.arc4random, 10.arc4random) }.joined()
         let post = (0..<32).map { _ in String(10.arc4random) }.joined()
@@ -44,7 +46,7 @@ class APIClient {
             .joined()
     }
     
-    func call(path: String, userInfo: [String: Any], callback: ((MessagePackValue?) -> Void)?) {
+    func call(base: String? = nil, path: String, userInfo: [String: Any], callback: ((MessagePackValue?) -> Void)?) {
         let iv = (0..<32).map { _ in String(9.arc4random + 1) }.joined()
         var params = userInfo
         params["viewer_id"] = iv + Rijndael(key: rijndaelKey, mode: .cbc)!.encrypt(data: viewerID.data(using: .ascii)!, blockSize: 32, iv: iv.data(using: .ascii))!.base64EncodedString()
@@ -70,6 +72,8 @@ class APIClient {
         let body = (Rijndael(key: key, mode: .cbc)!.encrypt(data: plain, blockSize: 32, iv: msgIV)! + key).base64EncodedData()
         let sid = self.sid ?? viewerID + udid
 
+        let base = base ?? self.base
+        
         let url = URL(string: base + path)!
         
         var request = URLRequest(url: url)
@@ -145,6 +149,17 @@ class APIClient {
             "timezone": "09:00:00",
         ]
         call(path: "/gacha/get_rate", userInfo: args) { pack in
+            callback?(pack)
+        }
+    }
+    
+    func tourRanking(page: Int, type: Int, callback: ((MessagePackValue?) -> Void)?) {
+        let args: [String: Any] = [
+                "page": UInt(page),
+                "ranking_type": UInt(type),
+                "timezone": "09:00:00",
+            ]
+        call(base: apis, path: "/event/tour/ranking_list", userInfo: args) { pack in
             callback?(pack)
         }
     }
