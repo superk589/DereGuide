@@ -164,6 +164,17 @@ class APIClient {
         }
     }
     
+    func ataponRanking(page: Int, type: Int, callback: ((MessagePackValue?) -> Void)?) {
+        let args: [String: Any] = [
+            "page": UInt(page),
+            "ranking_type": UInt(type),
+            "timezone": "09:00:00",
+        ]
+        call(base: apis, path: "/event/atapon/ranking_list", userInfo: args) { pack in
+            callback?(pack)
+        }
+    }
+    
     func resetSID() {
         sid = nil
     }

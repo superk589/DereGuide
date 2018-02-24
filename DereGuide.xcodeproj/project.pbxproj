@@ -30,6 +30,8 @@
 		1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */; };
 		1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */; };
 		1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */; };
+		1209CA262040F63B003CB270 /* RankingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA252040F63B003CB270 /* RankingPage.swift */; };
+		1209CA282040F696003CB270 /* RankingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA272040F696003CB270 /* RankingItem.swift */; };
 		120BDE881F4871260098E93C /* WideLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE871F4871260098E93C /* WideLoadingButton.swift */; };
 		120BDE8A1F4897F90098E93C /* StepperOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE891F4897F90098E93C /* StepperOption.swift */; };
 		120DBB271EEE2F6B004E0084 /* UnitCardSelectionAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */; };
@@ -485,6 +487,8 @@
 		1206F6D71E2A412D000FAC78 /* EventFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFilterSortController.swift; sourceTree = "<group>"; };
 		1206F6D91E2A42EA000FAC78 /* CGSSFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFilter.swift; sourceTree = "<group>"; };
 		1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEventFilter.swift; sourceTree = "<group>"; };
+		1209CA252040F63B003CB270 /* RankingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPage.swift; sourceTree = "<group>"; };
+		1209CA272040F696003CB270 /* RankingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingItem.swift; sourceTree = "<group>"; };
 		120BDE871F4871260098E93C /* WideLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideLoadingButton.swift; sourceTree = "<group>"; };
 		120BDE891F4897F90098E93C /* StepperOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperOption.swift; sourceTree = "<group>"; };
 		120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCardSelectionAdvanceOptionsController.swift; sourceTree = "<group>"; };
@@ -1087,6 +1091,8 @@
 				12D975CF1E379DF7005E932B /* EventRanking.swift */,
 				12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */,
 				124BA50C1E914ACD002E48FE /* EventTrend.swift */,
+				1209CA252040F63B003CB270 /* RankingPage.swift */,
+				1209CA272040F696003CB270 /* RankingItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2599,6 +2605,7 @@
 				122497261E8E859C005C743C /* LSNote.swift in Sources */,
 				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* LiveTableViewController.swift in Sources */,
+				1209CA282040F696003CB270 /* RankingItem.swift in Sources */,
 				12852EE91EF9189500E26A73 /* UnitAdvanceCalculationCell.swift in Sources */,
 				12A14D441F2265B60070D7A1 /* RemoteUpdatable.swift in Sources */,
 				1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */,
@@ -2706,6 +2713,7 @@
 				12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */,
 				1206F6DA1E2A42EA000FAC78 /* CGSSFilter.swift in Sources */,
 				12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */,
+				1209CA262040F63B003CB270 /* RankingPage.swift in Sources */,
 				129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
 				1239AC151F2AC576005B6C35 /* IDSearchable.swift in Sources */,
