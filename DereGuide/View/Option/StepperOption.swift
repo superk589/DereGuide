@@ -39,7 +39,6 @@ class StepperOption: UIControl {
         leftLabel.numberOfLines = 2
         leftLabel.adjustsFontSizeToFitWidth = true
         leftLabel.baselineAdjustment = .alignCenters
-        leftLabel.textColor = UIColor.darkGray
         leftLabel.font = UIFont.systemFont(ofSize: 14)
         leftLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(stepper)

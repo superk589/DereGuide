@@ -15,7 +15,7 @@ class NoteSupportTableViewHeader: UITableViewHeaderFooterView {
         case icon(UIImage)
     }
     
-    var labelTitles: [Title] = [.text(NSLocalizedString("Combo", comment: "")),
+    var labelTitles: [Title] = [.text(NSLocalizedString("序号", comment: "")),
                                 .icon(#imageLiteral(resourceName: "skill-boost")),
                                 .icon(#imageLiteral(resourceName: "perfect-lock")),
                                 .icon(#imageLiteral(resourceName: "combo-continue")),

@@ -30,7 +30,6 @@ class SegmentedOption: UIControl {
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.textColor = UIColor.darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         label.snp.makeConstraints { (make) in
             make.centerY.equalTo(segmentedControll)

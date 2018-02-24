@@ -32,7 +32,6 @@ class TextFieldOption: UIControl {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.textColor = UIColor.darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         label.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()

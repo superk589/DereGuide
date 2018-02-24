@@ -21,7 +21,6 @@ class DashboardSettingTableViewCell: UITableViewCell {
             make.left.equalTo(10)
             make.centerY.equalToSuperview()
         }
-        leftLabel.textColor = .darkGray
         selectionStyle = .none
     }
     

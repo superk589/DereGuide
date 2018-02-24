@@ -17,7 +17,7 @@ class NoteScoreTableViewSectionHeader: UITableViewHeaderFooterView {
     }
     
     var labelTitles: [Title] = [
-        .text(NSLocalizedString("Combo", comment: "")),
+        .text(NSLocalizedString("序号", comment: "")),
         .icon(#imageLiteral(resourceName: "score-bonus")),
         .icon(#imageLiteral(resourceName: "combo-bonus")),
         .icon(#imageLiteral(resourceName: "skill-boost")),
