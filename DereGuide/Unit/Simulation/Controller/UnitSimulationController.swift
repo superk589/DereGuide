@@ -57,9 +57,9 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
         currentSimulator?.cancelSimulating()
     }
     
-    var titles = [NSLocalizedString("得分分布", comment: ""),
+    var titles = [NSLocalizedString("Note列表视图", comment: ""),
                   NSLocalizedString("高级计算", comment: ""),
-                  NSLocalizedString("得分和辅助技能详情", comment: ""),
+                  NSLocalizedString("得分分布", comment: ""),
                   NSLocalizedString("高级选项", comment: "")]
    
     override func viewDidLoad() {
@@ -158,11 +158,11 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
                 showActionSheetOfGrooveTypeSelection(at: cell as? UnitSimulationModeSelectionCell)
             }
         case 6:
-            checkScoreDistribution()
+            checkDetail()
         case 7:
             gotoAdvanceCalculation()
         case 8:
-            checkDetail()
+            checkScoreDistribution()
         case 9:
             let vc = UnitAdvanceOptionsController()
             navigationController?.pushViewController(vc, animated: true)
