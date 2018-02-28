@@ -97,7 +97,7 @@ class LiveFormulator {
                             bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
                         case .skillBoost:
                             bonusGroup.skillBoost = max(bonusGroup.skillBoost, bonus.value)
-                        case .deep:
+                        case .deep, .synergy:
                             bonusGroup.basePerfectBonus = max(bonusGroup.basePerfectBonus, bonus.value)
                             bonusGroup.baseComboBonus = max(bonusGroup.baseComboBonus, bonus.value2)
                         default:

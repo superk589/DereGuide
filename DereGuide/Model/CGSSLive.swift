@@ -100,6 +100,11 @@ extension CGSSLive {
         // this method takes very long time, because it read each beatmap files
 //        return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
     }
+    
+    @objc dynamic var sLength: Float {
+        return getBeatmap(of: .debut)?.totalSeconds ?? 0
+    }
+    
 }
 
 extension CGSSLive {
