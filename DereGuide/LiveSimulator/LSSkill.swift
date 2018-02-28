@@ -27,9 +27,11 @@ enum LSSkillType {
     
     case lifeSparkle
     
-    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration]
-    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep]
-    static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal]
+    case synergy
+    
+    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy]
+    static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal, .synergy]
 
     init?(type: CGSSSkillTypes) {
         switch type {
@@ -59,6 +61,8 @@ enum LSSkillType {
             self = .encore
         case CGSSSkillTypes.lifeSparkle:
             self = .lifeSparkle
+        case CGSSSkillTypes.synergy:
+            self = .synergy
         default:
             return nil
         }
@@ -86,6 +90,9 @@ struct LSSkill {
     /// heal of all round / combo bonus of deep
     var value2: Int
     
+    /// heal of three color synegy
+    var value3: Int
+    
     var type: LSSkillType
     
     /// 0 ~ 10000
@@ -105,6 +112,9 @@ struct LSSkill {
     
     /// what kind of note evaluation can get bonus of effect 2
     var triggerEvaluations2: LSTriggerEvaluations
+    
+    /// what kind of note evaluation can get bonus of effect 3
+    var triggerEvaluations3: LSTriggerEvaluations
 }
 
 extension LSSkill {
@@ -122,7 +132,7 @@ extension LSSkill {
 extension LSSkill {
     
     var comboBonusValue: Int {
-        if type == .deep {
+        if type == .deep || type == .synergy {
             return value2
         } else if LSSkillType.allComboBonus.contains(type) {
             return value
@@ -134,6 +144,8 @@ extension LSSkill {
     var lifeValue: Int {
         if type == .allRound {
             return value2
+        } else if type == .synergy {
+            return value3
         } else if LSSkillType.allLifeResotre.contains(type) {
             return value
         } else {
@@ -146,7 +158,7 @@ extension CGSSSkill {
     
     var triggerEvaluations1: LSTriggerEvaluations {
         switch skillTypeId {
-        case 1, 14, 15, 17, 21...23:
+        case 1, 14, 15, 17, 21...23, 26:
             return .perfect
         case 2, 18:
             return [.perfect, .great]
@@ -179,6 +191,15 @@ extension CGSSSkill {
             return [.nice, .bad]
         case 24:
             return .perfect
+        default:
+            return .all
+        }
+    }
+    
+    var triggerEvalutions3: LSTriggerEvaluations {
+        switch skillTypeId {
+        case 26:
+            return [.perfect]
         default:
             return .all
         }

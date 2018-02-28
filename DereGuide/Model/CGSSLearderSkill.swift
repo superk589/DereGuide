@@ -22,7 +22,7 @@ fileprivate let leaderSkillParam = [
     "dance": NSLocalizedString("Dance表现值", comment: "队长技能描述"),
     "all": NSLocalizedString("所有表现值", comment: "队长技能描述"),
     "life": NSLocalizedString("生命", comment: "队长技能描述"),
-    "skill_probability": NSLocalizedString("特技发动几率", comment: "队长技能描述")
+    "skill_probability": NSLocalizedString("特技发动几率", comment: "队长技能描述"),
 ]
 
 fileprivate let effectClause = NSLocalizedString("提升%@偶像的%@ %d%%。", comment: "")
@@ -89,6 +89,10 @@ extension CGSSLeaderSkill {
             
         } else if upType == 1 && type == 30 {
             let built = buildPredicateClause() + NSLocalizedString("完成LIVE时，额外获得特别奖励", comment: "")
+            return built.firstCharacterUppercased()
+        } else if upType == 1 && type == 40 {
+            let effect = String(format: NSLocalizedString("完成LIVE时，获得的粉丝数提高 %d%%", comment: ""), upValue)
+            let built = buildPredicateClause() + effect
             return built.firstCharacterUppercased()
         } else {
             // use in-game description

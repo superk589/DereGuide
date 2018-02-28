@@ -325,16 +325,20 @@ class LiveCoordinator {
                     for range in ranges {
                         switch type {
                         case .skillBoost:
-                            let bonus = LSSkill.init(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2)
+                            let bonus = LSSkill(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, value3: skill.value3, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                             bonuses.append(bonus)
+                        case .synergy:
+                            if unit.isThreeColor(isInGrooveOrParade: (simulatorType != .normal)) {
+                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                                bonuses.append(bonus)
+                            }
                         case .deep:
                             if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
-                                fallthrough
-                            } else {
-                                break
+                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                                bonuses.append(bonus)
                             }
                         default:
-                            let bonus = LSSkill.init(range: range, value: skill.value, value2: skill.value2, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2)
+                            let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                             bonuses.append(bonus)
                         }
                     }
@@ -371,5 +375,9 @@ fileprivate extension Unit {
             }
         }
         return result
+    }
+    
+    func isThreeColor(isInGrooveOrParade: Bool) -> Bool {
+        return hasType(.cute, count: 1, isInGrooveOrParade: isInGrooveOrParade) && hasType(.cool, count: 1, isInGrooveOrParade: isInGrooveOrParade) && hasType(.passion, count: 1, isInGrooveOrParade: isInGrooveOrParade)
     }
 }

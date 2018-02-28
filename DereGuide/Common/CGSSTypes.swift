@@ -27,10 +27,12 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     static let encore = CGSSSkillTypes.init(rawValue: 1 << 11)
     static let lifeSparkle = CGSSSkillTypes.init(rawValue: 1 << 12)
     
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 13)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 14)
+    static let synergy = CGSSSkillTypes(rawValue: 1 << 13)
 
-    static let all = CGSSSkillTypes.init(rawValue: 0b111_1111_1111_1111)
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 14)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 15)
+    
+    static let all = CGSSSkillTypes.init(rawValue: 0b1111_1111_1111_1111)
     
     init(typeID: Int) {
         switch typeID {
@@ -60,6 +62,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             self = .allRound
         case 25:
             self = .lifeSparkle
+        case 26:
+            self = .synergy
         default:
             self = .unknown
         }
@@ -97,6 +101,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             return NSLocalizedString("集中", comment: "")
         case CGSSSkillTypes.boost:
             return NSLocalizedString("Skill Boost", comment: "")
+        case CGSSSkillTypes.synergy:
+            return NSLocalizedString("三色协同", comment: "")
         default:
             return NSLocalizedString("未知", comment: "")
         }

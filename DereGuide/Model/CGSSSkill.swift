@@ -34,7 +34,8 @@ fileprivate let skillDescriptions = [
     22: NSLocalizedString("当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
     23: NSLocalizedString("当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
     24: NSLocalizedString("获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命", comment: ""),
-    25: NSLocalizedString("获得额外的COMBO加成，当前生命值越高加成越高", comment: "")
+    25: NSLocalizedString("获得额外的COMBO加成，当前生命值越高加成越高", comment: ""),
+    26: NSLocalizedString("当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成", comment: "")
 ]
 
 fileprivate let intervalClause = NSLocalizedString("每 %d 秒，", comment: "")
@@ -47,7 +48,7 @@ extension CGSSSkill {
     
     private var effectValue: Int {
         var effectValue = value!
-        if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24].contains(skillTypeId) {
+        if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24, 26].contains(skillTypeId) {
             effectValue -= 100
         } else if [20].contains(skillTypeId) {
             // there is only one possibility: 20% up for combo bonus and perfect bonus, using fixed value here instead of reading it from database table skill_boost_type. if more possiblities are added to the game, fix here.
@@ -58,17 +59,21 @@ extension CGSSSkill {
     
     private var effectValue2: Int {
         var effectValue2 = value2!
-        if [21, 22, 23].contains(skillTypeId) {
+        if [21, 22, 23, 26].contains(skillTypeId) {
             effectValue2  -= 100
         }
         return effectValue2
+    }
+    
+    private var effectValue3: Int {
+        return value3
     }
     
     private var effectExpalin: String {
         if skillTypeId == 14 {
             return String.init(format: skillDescriptions[skillTypeId] ?? NSLocalizedString("未知", comment: ""), effectValue, skillTriggerValue)
         } else {
-            return String.init(format: skillDescriptions[skillTypeId] ?? NSLocalizedString("未知", comment: ""), effectValue, effectValue2)
+            return String.init(format: skillDescriptions[skillTypeId] ?? NSLocalizedString("未知", comment: ""), effectValue, effectValue2, effectValue3)
         }
     }
     
@@ -194,6 +199,7 @@ class CGSSSkill: CGSSBaseModel {
     var value: Int!
     var skillTypeId: Int!
     var value2: Int!
+    var value3: Int!
     
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -231,6 +237,7 @@ class CGSSSkill: CGSSBaseModel {
 
         value = json["value"].intValue
         value2 = json["value_2"].intValue
+        value3 = json["value_3"].intValue
         skillTypeId = json["skill_type_id"].intValue
     }
     
@@ -258,6 +265,7 @@ class CGSSSkill: CGSSBaseModel {
         value = aDecoder.decodeObject(forKey: "value") as? Int
         skillTypeId = aDecoder.decodeObject(forKey: "skill_type_id") as? Int
         value2 = aDecoder.decodeObject(forKey: "value_2") as? Int
+        value3 = aDecoder.decodeObject(forKey: "value_3") as? Int
     }
     
     /**
@@ -317,6 +325,9 @@ class CGSSSkill: CGSSBaseModel {
         }
         if value2 != nil {
             aCoder.encode(value2, forKey: "value_2")
+        }
+        if value3 != nil {
+            aCoder.encode(value3, forKey: "value_3")
         }
     }
     

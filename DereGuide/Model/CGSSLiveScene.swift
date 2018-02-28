@@ -24,4 +24,7 @@ extension CGSSLiveScene {
         return live.getLiveDetail(of: difficulty)?.stars ?? 0
     }
     
+    var sRankScore: Int {
+        return live.getLiveDetail(of: difficulty)?.rankSCondition ?? 0
+    }
 }

@@ -13,6 +13,8 @@ protocol UnitSimulationMainBodyCellDelegate: class {
     func startCalculate(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell)
     func startSimulate(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell)
     func cancelSimulating(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell)
+    func startAfkModeSimulating(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell)
+    func cancelAfkModeSimulating(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell)
 }
 
 class UnitSimulationMainBodyCell: UITableViewCell {
@@ -32,6 +34,18 @@ class UnitSimulationMainBodyCell: UITableViewCell {
     var cancelButtonWidthConstraint: Constraint!
     
     var cancelButtonLeftConstraint: Constraint!
+    
+    let afkModeButton = WideButton()
+    
+    let afkModeCancelButton = WideButton()
+    
+    let afkModeIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    
+    let afkModeGrid = GridLabel(rows: 2, columns: 3)
+    
+    var afkModeCancelButtonLeftConstraint: Constraint!
+    
+    var afkModeCancelButtonWidthConstraint: Constraint!
     
 //    var scoreDistributionButton: UIButton!
 //    
@@ -103,46 +117,45 @@ class UnitSimulationMainBodyCell: UITableViewCell {
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(simulationButton.snp.bottom).offset(10)
+        }
+
+        contentView.addSubview(afkModeButton)
+        afkModeButton.setTitle(NSLocalizedString("模拟挂机模式", comment: ""), for: .normal)
+        afkModeButton.backgroundColor = .passion
+        afkModeButton.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.top.equalTo(simulationGrid.snp.bottom).offset(10)
+        }
+        afkModeButton.addTarget(self, action: #selector(startAfkModeSimulating), for: .touchUpInside)
+        
+        contentView.addSubview(afkModeGrid)
+        afkModeGrid.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(afkModeButton.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }
         
-//        scoreDistributionButton = UIButton()
-//        scoreDistributionButton.setTitle("  " + NSLocalizedString("得分分布", comment: "") + " >", for: .normal)
-//        scoreDistributionButton.backgroundColor = Color.parade
-//        scoreDistributionButton.addTarget(self, action: #selector(checkScoreDistribution), for: .touchUpInside)
-//        contentView.addSubview(scoreDistributionButton)
-//        scoreDistributionButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.height.equalTo(30)
-//            make.top.equalTo(simulationGrid.snp.bottom).offset(10)
-//        }
-//        
-//
-//        scoreDetailButton = UIButton()
-//        scoreDetailButton.setTitle("  " + NSLocalizedString("得分详情", comment: "") + " >", for: .normal)
-//        scoreDetailButton.backgroundColor = Color.visual
-//        scoreDetailButton.addTarget(self, action: #selector(checkScoreDetail), for: .touchUpInside)
-//        contentView.addSubview(scoreDetailButton)
-//        scoreDetailButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.height.equalTo(30)
-//            make.top.equalTo(scoreDistributionButton.snp.bottom).offset(10)
-//        }
-//        
-//        supportSkillDetailButton = UIButton()
-//        supportSkillDetailButton.setTitle("  " + NSLocalizedString("辅助技能详情", comment: "") + " >", for: .normal)
-//        supportSkillDetailButton.backgroundColor = Color.life
-//        supportSkillDetailButton.addTarget(self, action: #selector(checkSupportSkillDetail), for: .touchUpInside)
-//        contentView.addSubview(supportSkillDetailButton)
-//        supportSkillDetailButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.height.equalTo(30)
-//            make.top.equalTo(scoreDetailButton.snp.bottom).offset(10)
-//            make.bottom.equalTo(-10)
-//        }
+        afkModeButton.addSubview(afkModeIndicator)
+        afkModeIndicator.snp.makeConstraints { (make) in
+            make.right.equalTo(afkModeButton.titleLabel!.snp.left)
+            make.centerY.equalTo(afkModeButton)
+        }
+        
+        afkModeCancelButton.setTitle(NSLocalizedString("取消", comment: ""), for: .normal)
+        afkModeCancelButton.backgroundColor = .passion
+        afkModeCancelButton.addTarget(self, action: #selector(cancelAfkModeSimulating), for: .touchUpInside)
+        contentView.addSubview(afkModeCancelButton)
+        afkModeCancelButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-10)
+            make.top.equalTo(afkModeButton)
+            self.afkModeCancelButtonWidthConstraint = make.width.equalTo(0).constraint
+            self.afkModeCancelButtonLeftConstraint = make.left.equalTo(afkModeButton.snp.right).constraint
+            make.width.equalTo(afkModeGrid.snp.width).dividedBy(4).priority(900)
+            make.left.equalTo(afkModeButton.snp.right).offset(1).priority(900)
+        }
+        afkModeCancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        afkModeCancelButton.titleLabel?.baselineAdjustment = .alignCenters
         
         prepareGridViewFields()
         
@@ -160,6 +173,11 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         simulationStrings.append(["1%", "5%", "20%", "50%"])
         simulationStrings.append(["", "", "", ""])
         simulationGrid.setContents(simulationStrings)
+        
+        var afkModeStrings = [[String]]()
+        afkModeStrings.append([NSLocalizedString("存活率%", comment: ""), NSLocalizedString("S Rank率%", comment: ""), NSLocalizedString("最高得分", comment: "")])
+        afkModeStrings.append(["", "", "", ""])
+        afkModeGrid.setContents(afkModeStrings)
     }
     
     func resetCalculationButton() {
@@ -187,6 +205,27 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         }
         simulationButton.isUserInteractionEnabled = false
     }
+    
+    func startAfkModeSimulationAnimating() {
+        afkModeIndicator.startAnimating()
+        UIView.animate(withDuration: 0.25) {
+            self.afkModeCancelButtonLeftConstraint.deactivate()
+            self.afkModeCancelButtonWidthConstraint.deactivate()
+            self.layoutIfNeeded()
+        }
+        afkModeButton.isUserInteractionEnabled = false
+    }
+    
+    func stopAfkModeSimulationAnimating() {
+        afkModeButton.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 0.25) {
+            self.afkModeCancelButtonLeftConstraint.activate()
+            self.afkModeCancelButtonWidthConstraint.activate()
+            self.layoutIfNeeded()
+        }
+        afkModeIndicator.stopAnimating()
+        afkModeButton.setTitle(NSLocalizedString("模拟挂机模式", comment: ""), for: .normal)
+    }
 
     func setupCalculationResult(value1: Int, value2: Int, value3: Int, value4: Int) {
         calculationGrid[1, 0].text = String(value1)
@@ -202,6 +241,11 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         simulationGrid[1, 3].text = String(value4)
     }
     
+    func setupAfkModeResult(value1: String, value2: String, value3: String) {
+        afkModeGrid[1, 0].text = value1
+        afkModeGrid[1, 1].text = value2
+        afkModeGrid[1, 2].text = value3
+    }
     
     func setupAppeal(_ appeal: Int) {
         calculationGrid[1, 0].text = String(appeal)
@@ -221,6 +265,12 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         simulationGrid[1, 3].text = ""
     }
     
+    func clearAfkModeGrid() {
+        afkModeGrid[1, 0].text = ""
+        afkModeGrid[1, 1].text = ""
+        afkModeGrid[1, 2].text = ""
+    }
+    
     @objc func startCalculate() {
         delegate?.startCalculate(self)
     }
@@ -231,6 +281,14 @@ class UnitSimulationMainBodyCell: UITableViewCell {
     
     @objc func cancelSimulating() {
         delegate?.cancelSimulating(self)
+    }
+    
+    @objc private func startAfkModeSimulating() {
+        delegate?.startAfkModeSimulating(self)
+    }
+    
+    @objc private func cancelAfkModeSimulating() {
+        delegate?.cancelAfkModeSimulating(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

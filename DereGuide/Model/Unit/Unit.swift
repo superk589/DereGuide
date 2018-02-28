@@ -291,7 +291,7 @@ extension Unit {
     }
     
     // 判断需要的指定颜色的队员是否满足条件
-    private func hasType(_ type: CGSSCardTypes, count: Int, isInGrooveOrParade: Bool) -> Bool {
+    func hasType(_ type: CGSSCardTypes, count: Int, isInGrooveOrParade: Bool) -> Bool {
         if count == 0 {
             return true
         }

@@ -132,6 +132,7 @@ struct LSGame {
         
         if currentLife == 0 {
             isDead = true
+            score = 0
         }
         
         let noteScore = 0
@@ -279,6 +280,10 @@ struct LSGame {
             updatePerfectSupport()
         case .lifeSparkle:
             updateLifeSparkle()
+        case .synergy:
+            updateHealer()
+            updatePerfectBonus()
+            updateComboBonus()
         default:
             break
         }
@@ -354,7 +359,7 @@ struct LSGame {
     private mutating func updateHealer() {
         bestHealer = skills.values
             .filter { LSSkillType.allLifeResotre.contains($0.type) }
-            .max { $0.value < $1.value }
+            .max { $0.lifeValue < $1.lifeValue }
     }
     
     private(set) var bonusGroup: LSScoreBonusGroup = .basic

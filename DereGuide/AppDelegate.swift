@@ -64,12 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.unitLive)
             }
-            if lastVersion < 12 {
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
-            }
             if lastVersion < 13 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.event)
+            }
+            if lastVersion < 14 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
         }
         

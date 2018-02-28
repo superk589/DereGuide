@@ -425,7 +425,8 @@ class Master: FMDatabaseQueue {
                         a.live_data_id,
                         a.difficulty_type,
                         a.level_vocal stars_number,
-                        b.notes_number
+                        b.notes_number,
+                        a.rank_s_condition
                     FROM
                         live_detail a
                         LEFT OUTER JOIN live_notes_number b ON a.live_data_id = b.live_id

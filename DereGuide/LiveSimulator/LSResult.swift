@@ -12,12 +12,15 @@ struct LSResult {
     
     let scores: [Int]
     
+    let remainedLives: [Int]
+    
     var average: Int {
         return scores.reduce(0, +) / scores.count
     }
     
-    init(scores: [Int]) {
+    init(scores: [Int], remainedLives: [Int]) {
         self.scores = scores.sorted(by: >)
+        self.remainedLives = remainedLives
     }
     
     func get(percent: Int) -> Int {

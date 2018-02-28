@@ -823,3 +823,33 @@
 
 /* new in 1.7.4 */
 "灰姑娘之路" = "Cinderella Road";
+
+/* new in 1.8 */
+"表格类型" = "Table Type";
+"辅助技能" = "Support Skill";
+
+"动作模式" = "Action Mode";
+"全P" = "Full Perfect";
+"挂机" = "AFK";
+
+"触发模式" = "Proc Mode";
+"随机" = "Random";
+"极限1" = "Optimistic 1";
+"极限2" = "Optimistic 2";
+"悲观" = "Pessimistic";
+
+"* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失" = "* In AFK mode, all notes are assumed to be missed, except when skill boost and perfect lock are on.";
+"* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发" = "* In random mode, all skills are triggered based on their real rate.\n* In optimistic 1, it takes the best score of each note within its Perfect duration.\n* In optimistic 2, all note are assumed to be Perfect.\n* In pessimistic mode, all skills are assumed to be not triggered, unless it has a 100% proc rate.";
+
+"Note列表" = "Note List";
+
+"序号" = "Index";
+
+"存活率%" = "Survival %";
+"S Rank率%" = "S Rank %";
+"最高得分" = "Max Score";
+"模拟挂机模式" = "AFK Mode";
+
+"三色协同" = "Synergy";
+"当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成" = "when there are Cute, Cool and Passion idols on the team, Perfect notes will receive a %1$d%% score bonus / restore %3$d health and you will gain an extra %2$d%% combo bonus";
+"完成LIVE时，获得的粉丝数提高 %d%%" = "gives %d%% extra fans when you finish a live.";

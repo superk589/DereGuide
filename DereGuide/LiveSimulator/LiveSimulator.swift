@@ -26,6 +26,7 @@ class LiveSimulator {
     }
 
     var simulateResult = [Int]()
+    var remainedLives = [Int]()
     
     func simulateOptimistic1(options: LSOptions = [], callback: LSResultClosure? = nil) {
 
@@ -82,7 +83,8 @@ class LiveSimulator {
         
         let score = game.score.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         simulateResult.append(score)
-        callback?(LSResult(scores: simulateResult), game.logs)
+        remainedLives.append(game.currentLife)
+        callback?(LSResult(scores: simulateResult, remainedLives: remainedLives), game.logs)
         
 //
 //        var sum = 0
@@ -226,11 +228,13 @@ class LiveSimulator {
         
         let score = game.score.addGreatPercent(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         simulateResult.append(score)
-        callback?(LSResult(scores: simulateResult), game.logs)
+        remainedLives.append(game.currentLife)
+        callback?(LSResult(scores: simulateResult, remainedLives: remainedLives), game.logs)
     }
 
     func wipeResults() {
         simulateResult.removeAll()
+        remainedLives.removeAll()
     }
     
 //    func simulateOnceFast(options: LSOptions = [], callback: LSResultClosure? = nil) {
@@ -386,7 +390,7 @@ class LiveSimulator {
             simulateOnce(options: options)
             progress(Int(i + 1), Int(times))
         }
-        let result = LSResult.init(scores: simulateResult)
+        let result = LSResult.init(scores: simulateResult, remainedLives: remainedLives)
         callback(result, [])
     }
     

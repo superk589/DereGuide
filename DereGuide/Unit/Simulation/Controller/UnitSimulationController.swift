@@ -51,13 +51,18 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
     
     var simulationResult: LSResult?
     
+    var afkModeResult: LSResult?
+    
     weak var currentSimulator: LiveSimulator?
     
     deinit {
         currentSimulator?.cancelSimulating()
+        afkModeSimulator?.cancelSimulating()
     }
     
-    var titles = [NSLocalizedString("Note列表视图", comment: ""),
+    weak var afkModeSimulator: LiveSimulator?
+    
+    var titles = [NSLocalizedString("Note列表", comment: ""),
                   NSLocalizedString("高级计算", comment: ""),
                   NSLocalizedString("得分分布", comment: ""),
                   NSLocalizedString("高级选项", comment: "")]
@@ -295,6 +300,53 @@ extension UnitSimulationController: UnitSimulationAppealEditingCellDelegate {
 }
 
 extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
+    
+    func startAfkModeSimulating(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell) {
+        let doSimulationBy = { [weak self] (simulator: LiveSimulator, times: UInt, scene: CGSSLiveScene) in
+            simulator.simulate(times: times, options: .afk, progress: { (a, b) in
+                DispatchQueue.main.async {
+                    unitSimulationMainBodyCell.afkModeButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
+                }
+            }, callback: { (result, logs) in
+                DispatchQueue.main.async { [weak self] in
+                    let survivalRate = 100 * Float(result.remainedLives.filter { $0 > 0 }.count) / Float(result.remainedLives.count)
+                    let sRate = 100 * Float(result.scores.filter { $0 >= scene.sRankScore }.count) / Float(result.scores.count)
+                    let maxScore = result.scores.max()
+                    
+                    unitSimulationMainBodyCell.setupAfkModeResult(value1: String(format: "%.2f", survivalRate), value2: String(format: "%.2f", sRate), value3: String(maxScore ?? 0))
+                    //                    print(result.average)
+                    unitSimulationMainBodyCell.stopAfkModeSimulationAnimating()
+                    self?.afkModeResult = result
+                }
+            })
+        }
+        
+        if let scene = self.scene {
+            unitSimulationMainBodyCell.clearAfkModeGrid()
+            unitSimulationMainBodyCell.startAfkModeSimulationAnimating()
+            if unit.hasSkillType(.unknown) {
+                showUnknownSkillAlert()
+            }
+            let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
+            let simulator = coordinator.generateLiveSimulator()
+            afkModeSimulator = simulator
+            DispatchQueue.global(qos: .userInitiated).async {
+                #if DEBUG
+                    doSimulationBy(simulator, 5000, scene)
+                #else
+                    doSimulationBy(simulator, UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes), scene)
+                #endif
+            }
+        } else {
+            showNotSelectSongAlert()
+            unitSimulationMainBodyCell.stopSimulationAnimating()
+        }
+    }
+    
+    func cancelAfkModeSimulating(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell) {
+        afkModeSimulator?.cancelSimulating()
+    }
+    
 
     fileprivate func showUnknownSkillAlert() {
         UIAlertController.showHintMessage(NSLocalizedString("队伍中存在未知的技能类型，计算结果可能不准确。", comment: ""), in: nil)

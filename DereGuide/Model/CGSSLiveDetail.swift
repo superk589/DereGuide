@@ -123,6 +123,7 @@ struct CGSSLiveDetail {
     var liveID: Int
     var stars: Int
     var numberOfNotes: Int
+    var rankSCondition: Int
 
     init?(fromJson json: JSON) {
         guard let difficulty = CGSSLiveDifficulty(rawValue: json["difficulty_type"].intValue) else { return nil }
@@ -131,6 +132,7 @@ struct CGSSLiveDetail {
         self.difficulty = difficulty
         stars = json["stars_number"].intValue
         numberOfNotes = json["live_notes_number"].intValue
+        rankSCondition = json["rank_s_condition"].intValue
     }
     
 }

@@ -1,5 +1,20 @@
 # ChangeLog
 
+### 1.8
+
+1. 支持三色协同技能
+2. 模拟算分中新增挂机模式模拟，原得分详情和辅助技能详情整合成Note列表
+3. 其他细节优化和Bug修复
+
+##### Japanese version
+
+
+##### English version
+
+1. Support for new skill type "Synergy".
+2. Support for AFK mode in live simulator.
+3. Other fixes and improvements.
+
 ### 1.7.5
 
 1. 修复获取模拟抽卡数据经常失败的问题

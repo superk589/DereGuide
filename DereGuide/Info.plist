@@ -22,20 +22,20 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.5</string>
+	<string>1.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>45</string>
+	<string>46</string>
 	<key>Data Version</key>
 	<dict>
 		<key>Major</key>
-		<integer>6</integer>
+		<integer>7</integer>
 		<key>Minor</key>
-		<integer>3</integer>
+		<integer>0</integer>
 	</dict>
 	<key>Document Version</key>
-	<integer>13</integer>
+	<integer>14</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
