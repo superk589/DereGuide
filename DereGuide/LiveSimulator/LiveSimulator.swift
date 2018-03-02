@@ -37,7 +37,8 @@ class LiveSimulator {
         
         actions.sort { $0.timeOffset < $1.timeOffset }
         
-        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
+        let initialLife = options.contains(.doubleHP) ? 2 * totalLife : totalLife
+        var game = LSGame(initialLife: initialLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
         
         game.shouldGenerateLogs = options.contains(.detailLog)
         game.afkMode = options.contains(.afk)
@@ -218,7 +219,8 @@ class LiveSimulator {
         
         actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order)  }
         
-        var game = LSGame(initialLife: totalLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
+        let initialLife = options.contains(.doubleHP) ? 2 * totalLife : totalLife
+        var game = LSGame(initialLife: initialLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
         game.afkMode = options.contains(.afk)
         game.shouldGenerateLogs = options.contains(.detailLog)
         

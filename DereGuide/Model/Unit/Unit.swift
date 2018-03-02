@@ -210,6 +210,14 @@ extension Unit {
         return orderedMembers[0..<5].contains { $0.card?.skillType == type }
     }
     
+    /// if the player may have double hp at the start of groove final live
+    var shouldHaveDoubleHPInGroove: Bool {
+        let r1 = hasSkillType(.allRound) || hasSkillType(.heal)
+        let r2 = hasSkillType(.boost) && hasSkillType(.guard)
+        let r3 = hasSkillType(.synergy) && isThreeColor(isInGrooveOrParade: true)
+        return r1 || r2 || r3
+    }
+    
     // 队伍原始值
     var rawAppeal: CGSSAppeal {
         var appeal = rawAppealInGroove

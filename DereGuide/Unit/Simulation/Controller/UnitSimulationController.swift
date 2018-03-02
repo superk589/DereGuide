@@ -190,6 +190,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
             let vc = LiveSimulatorViewController()
             let coordinator = LiveCoordinator(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
             vc.coordinator = coordinator
+            vc.shouldSimulateWithDoubleHP = shouldSimulateWithDoubleHP
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             showNotSelectSongAlert()
@@ -356,11 +357,16 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
         UIAlertController.showHintMessage(NSLocalizedString("请先选择歌曲", comment: "弹出框正文"), in: nil)
     }
     
+    private var shouldSimulateWithDoubleHP: Bool {
+        return [CGSSLiveSimulatorType.visual, .dance, .vocal].contains(simulatorType) && unit.shouldHaveDoubleHPInGroove && LiveSimulationAdvanceOptionsManager.default.startGrooveWithDoubleHP
+    }
+    
     func startSimulate(_ unitSimulationMainBodyCell: UnitSimulationMainBodyCell) {
         let cell = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? UnitSimulationMainBodyCell
-        
+        let options = shouldSimulateWithDoubleHP ? LSOptions.doubleHP : []
+
         let doSimulationBy = { [weak self] (simulator: LiveSimulator, times: UInt) in
-            simulator.simulate(times: times, options: [], progress: { (a, b) in
+            simulator.simulate(times: times, options: options, progress: { (a, b) in
                 DispatchQueue.main.async {
                     cell?.simulationButton.setTitle(NSLocalizedString("计算中...", comment: "") + "(\(String.init(format: "%d", a * 100 / b))%)", for: .normal)
                 }
@@ -420,15 +426,18 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
                 cell?.calculationGrid[1, 3].text = String(formulator.averageScore)
             }
             
+            var options = self.shouldSimulateWithDoubleHP ? LSOptions.doubleHP : []
+
             // setup optimistic 1
-            simulator.simulateOptimistic1(options: [], callback: { (result, logs) in
+            simulator.simulateOptimistic1(options: options, callback: { (result, logs) in
                 cell?.calculationGrid[1, 1].text = String(result.average)
             })
             
             simulator.wipeResults()
             
+            options.insert(.optimistic)
             // setup optimistic 2
-            simulator.simulateOnce(options: [.optimistic], callback: { (result, logs) in
+            simulator.simulateOnce(options: options, callback: { (result, logs) in
                 cell?.calculationGrid[1, 2].text = String(result.average)
                 cell?.resetCalculationButton()
             })

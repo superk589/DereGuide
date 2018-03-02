@@ -13,7 +13,7 @@ class UnitAdvanceOptionsController: BaseTableViewController {
 
     var staticCells = [UnitAdvanceOptionsTableViewCell]()
     
-//    var option1: SwitchOption!
+    var option1: SwitchOption!
     var option2: StepperOption!
     var option3: TextFieldOption!
     var option4: TextFieldOption!
@@ -21,12 +21,12 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         
     private func prepareStaticCells() {
         
-//        option1 = SwitchOption()
-//        option1.switch.isOn = false
-//
-//        option1.addTarget(self, action: #selector(option1ValueChanged(_:)), for: .valueChanged)
-//        let option1Label = option1.label
-//        option1Label.text = NSLocalizedString("模拟计算中生命不足时不发动过载技能", comment: "")
+        option1 = SwitchOption()
+        option1.switch.isOn = false
+
+        option1.addTarget(self, action: #selector(option1ValueChanged(_:)), for: .valueChanged)
+        let option1Label = option1.label
+        option1Label.text = NSLocalizedString("Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。", comment: "")
         
         option2 = StepperOption()
         option2.addTarget(self, action: #selector(option2ValueChanged(_:)), for: .valueChanged)
@@ -42,11 +42,11 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEnd)
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
-//        let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option1))
+        let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option1))
         let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option2))
         let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option3))
         let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option4))
-        staticCells.append(contentsOf: [cell2, cell3, cell4])
+        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4])
         
         setupWithUserDefaults()
     }
@@ -77,16 +77,16 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         tableView.reloadData()
     }
     
-//    @objc func option1ValueChanged(_ sender: UISwitch) {
-//        LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition = option1.switch.isOn
-//    }
+    @objc func option1ValueChanged(_ sender: UISwitch) {
+        LiveSimulationAdvanceOptionsManager.default.startGrooveWithDoubleHP = option1.switch.isOn
+    }
     
     @objc func option2ValueChanged(_ sender: ValueStepper) {
         LiveSimulationAdvanceOptionsManager.default.roomUpValue = Int(option2.stepper.value)
     }
     
     func setupWithUserDefaults() {
-//        option1.switch.isOn = LiveSimulationAdvanceOptionsManager.default.considerOverloadSkillsTriggerLifeCondition
+        option1.switch.isOn = LiveSimulationAdvanceOptionsManager.default.startGrooveWithDoubleHP
         option2.stepper.value = Double(LiveSimulationAdvanceOptionsManager.default.roomUpValue)
         option3.textField.text = String(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)

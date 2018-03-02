@@ -363,7 +363,7 @@ class LiveCoordinator {
     }
 }
 
-fileprivate extension Unit {
+extension Unit {
     func isAllOfType(_ type: CGSSCardTypes, isInGrooveOrParade: Bool) -> Bool {
         let c = isInGrooveOrParade ? 5 : 6
         var result = true

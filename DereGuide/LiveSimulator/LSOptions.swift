@@ -27,4 +27,6 @@ struct LSOptions: OptionSet {
     /// In pessimistic mode, all procs are assumed not triggered unless it has an 100% proc rate. If optimistic is set, this option will not work. If both are not set, skill will proc randomly based on its real rate.
     static let pessimistic = LSOptions(rawValue: 1 << 3)
 
+    /// start live with double hp
+    static let doubleHP = LSOptions(rawValue: 1 << 4)
 }

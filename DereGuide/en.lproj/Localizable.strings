@@ -853,3 +853,6 @@
 "三色协同" = "Synergy";
 "当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成" = "when there are Cute, Cool and Passion idols on the team, Perfect notes will receive a %1$d%% score bonus / restore %3$d health and you will gain an extra %2$d%% combo bonus";
 "完成LIVE时，获得的粉丝数提高 %d%%" = "gives %d%% extra fans when you finish a live.";
+
+/* new in 1.8.1 */
+"Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。" = "In groove, if you can gain healing effect, simulate with double hp at begining";

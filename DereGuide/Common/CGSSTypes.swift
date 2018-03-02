@@ -9,7 +9,7 @@
 import UIKit
 
 struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
-    let rawValue:UInt
+    let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let comboBonus = CGSSSkillTypes.init(rawValue: 1 << 0)
     static let perfectBonus = CGSSSkillTypes.init(rawValue: 1 << 1)
@@ -110,7 +110,7 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
 }
 
 struct CGSSLeaderSkillTypes: OptionSet, CustomStringConvertible {
-    var rawValue:UInt
+    var rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let vocalUp = CGSSLeaderSkillTypes(rawValue: 1 << 0)
     static let danceUp = CGSSLeaderSkillTypes(rawValue: 1 << 1)

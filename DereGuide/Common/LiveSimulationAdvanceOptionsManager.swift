@@ -52,6 +52,15 @@ class LiveSimulationAdvanceOptionsManager {
         }
     }
     
+    var startGrooveWithDoubleHP: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "startGrooveWithDoubleHP")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "startGrooveWithDoubleHP") as? Bool ?? true
+        }
+    }
+    
     func reset() {
 //        considerOverloadSkillsTriggerLifeCondition = false
         greatPercent = 0.0

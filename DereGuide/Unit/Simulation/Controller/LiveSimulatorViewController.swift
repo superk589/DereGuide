@@ -41,6 +41,8 @@ class LiveSimulatorViewController: BaseViewController {
         self.coordinator.generateLiveSimulator()
     }()
     
+    var shouldSimulateWithDoubleHP: Bool = false
+    
     var logs = [LSLog]() {
         didSet {
             if setting.dashboardType == .score {
@@ -95,6 +97,10 @@ class LiveSimulatorViewController: BaseViewController {
         var options = LSOptions()
         if setting.actionMode == .afk {
             options.insert(.afk)
+        }
+        
+        if shouldSimulateWithDoubleHP {
+            options.insert(.doubleHP)
         }
         
         if setting.procMode == .optimistic1 || setting.procMode == .optimistic2 {
