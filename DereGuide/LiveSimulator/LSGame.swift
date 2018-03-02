@@ -266,6 +266,7 @@ struct LSGame {
             updateHealer()
         case .overload:
             updatePerfectBonus()
+            updateComboSupport()
         case .deep:
             updatePerfectBonus()
             updateComboBonus()
@@ -306,14 +307,14 @@ struct LSGame {
     private(set) var hasPerfectSupport = false
     private(set) var hasStrongPerfectSupport = false
     private mutating func updatePerfectSupport() {
-        hasPerfectSupport = skills.values.contains{ $0.type == .perfectLock }
+        hasPerfectSupport = skills.values.contains { $0.type == .perfectLock }
         hasStrongPerfectSupport = skills.values.contains { $0.type == .perfectLock && $0.triggerEvaluations1.contains(.bad) }
     }
     
     private(set) var hasComboSupport = false
     
     private mutating func updateComboSupport() {
-        hasComboSupport = skills.values.contains{ $0.type == .comboContinue }
+        hasComboSupport = skills.values.contains { $0.type == .comboContinue || $0.type == .overload }
     }
     
     private(set) var hasSkillBoost = false
@@ -321,7 +322,7 @@ struct LSGame {
     private(set) var bestSkillBoost: LSSkill?
     
     private mutating func updateSkillBoost() {
-        hasSkillBoost = skills.values.contains{ $0.type == .skillBoost }
+        hasSkillBoost = skills.values.contains { $0.type == .skillBoost }
         bestSkillBoost = skills.values
             .filter { $0.type == .skillBoost }
             .max { $0.value < $1.value }
