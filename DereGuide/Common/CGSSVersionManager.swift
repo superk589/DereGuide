@@ -12,42 +12,7 @@ class CGSSVersionManager {
     
     static let `default` = CGSSVersionManager()
     
-    var newestDataVersion: (Int, Int) {
-        let major = (Bundle.main.infoDictionary!["Data Version"] as! [String: Int])["Major"]!
-        let minor = (Bundle.main.infoDictionary!["Data Version"] as! [String: Int])["Minor"]!
-        return (major, minor)
-    }
-    
-    var currentDataVersion: (Int, Int) {
-        set {
-            UserDefaults.standard.set(newValue.0, forKey: "data_major")
-            UserDefaults.standard.set(newValue.1, forKey: "data_minor")
-        }
-        get {
-            let major = UserDefaults.standard.object(forKey: "data_major") as? Int ?? 0
-            let minor = UserDefaults.standard.object(forKey: "data_minor") as? Int ?? 0
-            return (major, minor)
-        }
-    }
-
-    var currentDataVersionString: String {
-        return "\(currentDataVersion.0).\(currentDataVersion.1)"
-    }
-    
-    
     var apiInfo: ApiInfo?
-    var currentApiVersion: (Int, Int) {
-        set {
-            UserDefaults.standard.set(newValue.0, forKey: "api_major")
-            UserDefaults.standard.set(newValue.1, forKey: "api_reversion")
-        }
-        get {
-            let major = UserDefaults.standard.object(forKey: "api_major") as? Int ?? 0
-            let reversion = UserDefaults.standard.object(forKey: "api_reversion") as? Int ?? 0
-            return (major, reversion)
-        }
-
-    }
     
     var gameVersion: Version? {
         set {
@@ -62,6 +27,19 @@ class CGSSVersionManager {
         }
     }
     
+    var dataVersion: Version {
+        set {
+            UserDefaults.standard.set(newValue.description, forKey: "data_version")
+        }
+        get {
+            if let string = UserDefaults.standard.object(forKey: "data_version") as? String {
+                return Version(string: string) ?? Version(1, 0, 0)
+            } else {
+                return Version(1, 0, 0)
+            }
+        }
+    }
+    
     var currentMasterTruthVersion: String {
         set {
             UserDefaults.standard.setValue(newValue, forKey: "master_truth_version")
@@ -71,26 +49,12 @@ class CGSSVersionManager {
         }
     }
     
-    
     var currentManifestTruthVersion: String {
         set {
             UserDefaults.standard.setValue(newValue, forKey: "manifest_truth_version")
         }
         get {
             return UserDefaults.standard.object(forKey: "manifest_truth_version") as? String ?? "0"
-        }
-    }
-    
-    
-    // 设置当前版本号为最新版本
-    func setDataVersionToNewest() {
-        currentDataVersion = newestDataVersion
-    }
-    
-    
-    func setApiVersionToNewest() {
-        if let info = apiInfo {
-            currentApiVersion = info.apiVersion
         }
     }
     

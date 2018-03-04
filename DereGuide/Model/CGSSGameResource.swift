@@ -713,8 +713,10 @@ class CGSSGameResource: NSObject {
         return fm.fileExists(atPath: path)
     }
     
+    var isProcessing = false
     func processDownloadedData(types: CGSSUpdateDataTypes, completion: (() -> ())?) {
         let group = DispatchGroup()
+        isProcessing = true
         if types.contains(.master) || types.contains(.card) {
             group.enter()
             prepareGachaList {
@@ -743,6 +745,7 @@ class CGSSGameResource: NSObject {
         
         group.notify(queue: .main, execute: {
             completion?()
+            self.isProcessing = false
             NotificationCenter.default.post(name: .gameResoureceProcessedEnd, object: nil)
         })
     }

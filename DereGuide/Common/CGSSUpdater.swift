@@ -20,6 +20,7 @@ extension URL {
     static func master(truthVersion: String) -> URL {
         return URL(string: "https://storages.game.starlight-stage.jp/dl/resources/Generic//\(truthVersion)")!
     }
+    static let dataVersion = URL(string: "http://346lab.org/dereguide/client_json/force_update.json")!
 }
 
 // used in notification userinfo key name
@@ -70,7 +71,6 @@ typealias CGSSCheckCompletionExternalClosure = ([CGSSUpdateItem], [Error]) -> Vo
 typealias CGSSDownloadItemFinishedClosure = (CGSSUpdateItem, Data?, Error?) -> Void
 typealias CGSSProgressClosure = (_ progress: Int, _ total: Int) -> Void
 typealias CGSSProgressCompleteClosure = (_ success: Int, _ total: Int) -> Void
-
 
 extension URLRequest {
     mutating func setUnityVersion() {
@@ -203,6 +203,36 @@ open class CGSSUpdater: NSObject {
         }
     }
     
+    func checkRemoteDataVersion(callback: @escaping (DataVersionPayload?, Error?) -> Void ) {
+
+        let closure: ((DataVersionPayload?, Error?) -> Void) = { data, error in
+            callback(data, error)
+            self.isChecking = false
+        }
+        
+        isChecking = true
+
+        let url = URL.dataVersion
+        let request = URLRequest(url: url)
+        
+        let task = checkSession.dataTask(with: request) { data, response, error in
+            if error != nil {
+                closure(nil, error)
+            } else if (response as! HTTPURLResponse).statusCode != 200 {
+                let error = CGSSUpdaterError(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: ""))
+                closure(nil, error)
+            } else {
+                if let payload = try? JSONDecoder().decode(DataVersionPayload.self, from: data!) {
+                    closure(payload, nil)
+                } else {
+                    let error = CGSSUpdaterError(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: ""))
+                    closure(nil, error)
+                }
+            }
+        }
+        task.resume()
+    }
+    
     func checkCards(callback: @escaping CGSSCheckCompletionClosure) {
         let url = URL.cnDatabase.appendingPathComponent("/api/v1/list/card_t")
         let task = checkSession.dataTask(with: URL(string: url.absoluteString + "?key=id,evolution_id")!, completionHandler: { (data, response, error) in
@@ -293,7 +323,6 @@ open class CGSSUpdater: NSObject {
         
         // 检查master和beatmap
         let thirdCheckGroup = DispatchGroup()
-        
         
         firstCheckGroup.enter()
         checkApiInfo { (finished, error) in
@@ -447,10 +476,6 @@ open class CGSSUpdater: NSObject {
                         if json != JSON.null {
                             let card = CGSSCard.init(fromJson: json)
                             let dao = CGSSDAO.shared
-                            if let oldCard = dao.cardDict.object(forKey: item.id) as? CGSSCard {
-                                let updateTime = oldCard.updateTime
-                                card.updateTime = updateTime
-                            }
                             dao.cardDict.setObject(card, forKey: item.id as NSCopying)
                             queue.sync {
                                 success += 1

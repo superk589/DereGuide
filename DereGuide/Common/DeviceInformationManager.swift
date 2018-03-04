@@ -18,8 +18,6 @@ class DeviceInformationManager {
 
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     
-    let dataVersion = CGSSVersionManager.default.currentDataVersionString
-    
     var device: String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -54,7 +52,7 @@ class DeviceInformationManager {
     }
     
     func toString() -> String {
-        let string = "App Information:\nApp Name: \(appName)\nApp Version: \(appVersion)\nData Version: \(dataVersion)\n\nDevice Information:\nDevice: \(device)\niOS Version: \(osVersion)\nLanguage: \(language)\nCarrier: \(carrier)\nTimezone: \(timeZone)\nConnection Status: \(connection)"
+        let string = "App Information:\nApp Name: \(appName)\nApp Version: \(appVersion)\n\nDevice Information:\nDevice: \(device)\niOS Version: \(osVersion)\nLanguage: \(language)\nCarrier: \(carrier)\nTimezone: \(timeZone)\nConnection Status: \(connection)"
         return string
     }
 

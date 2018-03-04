@@ -177,15 +177,18 @@ public class CGSSGlobal {
 
 enum LanguageType {
     case en
-    case zh
+    case cn
+    case tw
     case ja
     case other
-    init(identifier:String) {
+    init(identifier: String) {
         switch identifier {
         case let x where x.hasPrefix("en"):
             self = .en
-        case let x where x.hasPrefix("zh"):
-            self = .zh
+        case let x where x.hasPrefix("zh-Hans"):
+            self = .cn
+        case let x where x.hasPrefix("zh-HK") || x.hasPrefix("zh-Hant"):
+            self = .tw
         case let x where x.hasPrefix("ja"):
             self = .ja
         default:

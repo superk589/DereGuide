@@ -162,6 +162,7 @@
 		125849A11EE5A03E006AF479 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */; };
 		125849B11EE6A26C006AF479 /* BaseModelCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */; };
 		125BC0521F453F6D00860CF0 /* ReadableWidthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125BC0511F453F6D00860CF0 /* ReadableWidthTableViewCell.swift */; };
+		125FE3B42047D42E00C6A4BB /* DataVersionPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125FE3B32047D42E00C6A4BB /* DataVersionPayload.swift */; };
 		1261944F1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1261944E1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift */; };
 		1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F4F31ECC4E8700AD6424 /* Protocols.swift */; };
 		1262F5031ECD400600AD6424 /* CGSSLiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */; };
@@ -619,6 +620,7 @@
 		125849A01EE5A03E006AF479 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModelCollectionViewController.swift; sourceTree = "<group>"; };
 		125BC0511F453F6D00860CF0 /* ReadableWidthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableWidthTableViewCell.swift; sourceTree = "<group>"; };
+		125FE3B32047D42E00C6A4BB /* DataVersionPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVersionPayload.swift; sourceTree = "<group>"; };
 		1261944E1EF10E7F00673BC5 /* UnitEditingAdvanceOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitEditingAdvanceOptionsManager.swift; sourceTree = "<group>"; };
 		1262F4F31ECC4E8700AD6424 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1262F5021ECD400600AD6424 /* CGSSLiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveScene.swift; sourceTree = "<group>"; };
@@ -1403,6 +1405,7 @@
 				12F9B03A1F28933D00D3B47E /* Favorite */,
 				129B95691F32AB15007B7AE2 /* Profile */,
 				1247917B1D87D8FC00ED8EA6 /* ApiInfo.swift */,
+				125FE3B32047D42E00C6A4BB /* DataVersionPayload.swift */,
 				1269E9C61D520B5D0071AD7F /* CGSSBaseModel.swift */,
 				1269E9C81D520B5D0071AD7F /* CGSSCard.swift */,
 				1269E9CA1D520B5D0071AD7F /* CGSSCardRarity.swift */,
@@ -2438,6 +2441,7 @@
 				12D624571F171FB70017999A /* SyncCoordinator.swift in Sources */,
 				126612B21F1723AB00B7D17F /* RemoteUnit.swift in Sources */,
 				12353AA51F1457C2008286C2 /* UserNotificationHandler.swift in Sources */,
+				125FE3B42047D42E00C6A4BB /* DataVersionPayload.swift in Sources */,
 				12B7A1AA1F14A16000537C80 /* WipeTableViewCell.swift in Sources */,
 				1245F7A31F1C9D4E009A80EC /* GachaCardView.swift in Sources */,
 				12CDC6DA1F66385A004BB7AE /* FavoriteSong.swift in Sources */,

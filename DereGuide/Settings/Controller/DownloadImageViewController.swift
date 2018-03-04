@@ -260,9 +260,7 @@ class DownloadImageViewController: BaseTableViewController {
     }
     
     @objc private func cacheData() {
-        if CGSSUpdater.default.isWorking {
-            return
-        }
+        if CGSSUpdater.default.isWorking || CGSSGameResource.shared.isProcessing { return }
         var urls = [URL]()
         if let indexPaths = tableView.indexPathsForSelectedRows {
             for indexPath in indexPaths {

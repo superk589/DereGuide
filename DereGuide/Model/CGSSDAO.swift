@@ -229,10 +229,7 @@ open class CGSSDAO: NSObject {
     }
     
     @objc private func processedEnd(note: Notification) {
-        saveAll {
-            CGSSVersionManager.default.setDataVersionToNewest()
-            CGSSVersionManager.default.setApiVersionToNewest()
-        }
+        saveAll(nil)
     }
     
     func prepareFileDirectory() {

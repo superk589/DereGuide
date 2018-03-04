@@ -1,5 +1,21 @@
 # ChangeLog
 
+### 1.8.1
+
+1. Groove模式中，当队伍可以获得恢复效果时，默认以2倍血量开始（高级选项中可关闭）
+2. 修复过载技能在Note列表中没有显示在Combo保护列的错误
+3. 优化数据更新机制
+
+##### Japanese version
+
+1.
+
+##### English version
+
+1. In groove, if you can gain healing effect, simulate with double hp at begining(can be closed in advance options).
+2. Fix a bug that overload skills are not listed as combo support.
+3. Improve for data updating.
+
 ### 1.8
 
 1. 支持三色协同技能
@@ -8,6 +24,9 @@
 
 ##### Japanese version
 
+1. シナジー系の特技を対応
+2. スコア計算に放置モードを追加
+3. 他の修正および改善
 
 ##### English version
 

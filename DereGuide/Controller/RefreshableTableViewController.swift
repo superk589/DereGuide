@@ -19,55 +19,136 @@ extension Refreshable where Self: UIViewController {
     
     func check(_ types: CGSSUpdateDataTypes) {
         let updater = CGSSUpdater.default
+        let vm = CGSSVersionManager.default
+        let dao = CGSSDAO.shared
+        let hm = CGSSUpdatingHUDManager.shared
+        let gr = CGSSGameResource.shared
         defer {
             refresher.endRefreshing()
         }
-        if updater.isWorking { return }
-        CGSSUpdatingHUDManager.shared.show()
-        CGSSUpdatingHUDManager.shared.cancelAction = {
-            CGSSUpdater.default.cancelCurrentSession()
-        }
-        CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("检查更新中", comment: "更新框"), animated: true, cancelable: true)
-        updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
-            if !errors.isEmpty && items.count == 0 {
-                CGSSUpdatingHUDManager.shared.hide(animated: false)
-                var errorStr = ""
-                if let error = errors.first as? CGSSUpdaterError {
-                    errorStr.append(error.localizedDescription)
-                } else if let error = errors.first {
-                    errorStr.append(error.localizedDescription)
+        if updater.isWorking || gr.isProcessing { return }
+        
+        func doUpdating(types: CGSSUpdateDataTypes) {
+            DispatchQueue.main.async {
+                hm.show()
+                hm.cancelAction = {
+                    updater.cancelCurrentSession()
                 }
-                let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
-                    , message: errorStr, preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                // 使用tabBarController来展现UIAlertController的原因是, 该方法处于异步子线程中,当执行时可能这个ViewController已经不在前台,会造成不必要的警告(虽然不会崩溃,但是官方不建议这样)
-                self?.tabBarController?.present(alert, animated: true, completion: nil)
-            } else {
-                if items.count == 0 {
-                    CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("数据是最新版本", comment: "更新框"), animated: false, cancelable: false)
-                    CGSSUpdatingHUDManager.shared.hide(animated: true)
-                    CGSSVersionManager.default.setDataVersionToNewest()
-                    CGSSVersionManager.default.setApiVersionToNewest()
+                hm.setup(NSLocalizedString("检查更新中", comment: "更新框"), animated: true, cancelable: true)
+            }
+            updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
+                if !errors.isEmpty && items.count == 0 {
+                    hm.hide(animated: false)
+                    var errorStr = ""
+                    if let error = errors.first as? CGSSUpdaterError {
+                        errorStr.append(error.localizedDescription)
+                    } else if let error = errors.first {
+                        errorStr.append(error.localizedDescription)
+                    }
+                    let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
+                        , message: errorStr, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                    self?.tabBarController?.present(alert, animated: true, completion: nil)
                 } else {
-                    CGSSUpdatingHUDManager.shared.show()
-                    CGSSUpdatingHUDManager.shared.setup(current: 0, total: items.count, animated: true, cancelable: true)
-                    updater.updateItems(items, progress: { processed, total in
-                        CGSSUpdatingHUDManager.shared.setup(current: processed, total: total, animated: true, cancelable: true)
-                    }) { success, total in
-                        CGSSUpdatingHUDManager.shared.setup(NSLocalizedString("正在完成更新", comment: "更新框"), animated: true, cancelable: false)
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            CGSSGameResource.shared.processDownloadedData(types: CGSSUpdateDataTypes(items.map { $0.dataType }), completion: {
-                                let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total - success)", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                                UIViewController.root?.present(alert, animated: true, completion: nil)
-                                CGSSUpdatingHUDManager.shared.hide(animated: false)
-                            })
+                    if items.count == 0 {
+                        hm.setup(NSLocalizedString("数据是最新版本", comment: "更新框"), animated: false, cancelable: false)
+                        hm.hide(animated: true)
+                    } else {
+                        hm.show()
+                        hm.setup(current: 0, total: items.count, animated: true, cancelable: true)
+                        updater.updateItems(items, progress: { processed, total in
+                            hm.setup(current: processed, total: total, animated: true, cancelable: true)
+                        }) { success, total in
+                            hm.show()
+                            hm.setup(NSLocalizedString("正在完成更新", comment: "更新框"), animated: true, cancelable: false)
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                gr.processDownloadedData(types: CGSSUpdateDataTypes(items.map { $0.dataType }), completion: {
+                                    let alert = UIAlertController.init(title: NSLocalizedString("更新完成", comment: "弹出框标题"), message: "\(NSLocalizedString("成功", comment: "通用")) \(success), \(NSLocalizedString("失败", comment: "通用")) \(total - success)", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                                    UIViewController.root?.present(alert, animated: true, completion: nil)
+                                    hm.hide(animated: false)
+                                })
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+            
+        }
+        
+        if types.contains(.card) {
+            updater.checkRemoteDataVersion(callback: { [weak self] payload, error in
+                if let payload = payload, let version = Version(string: payload.version) {
+                    if vm.dataVersion.major < version.major {
+                        dao.removeAllData()
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: payload.localizedReason, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
+                                vm.dataVersion = version
+                                doUpdating(types: types)
+                            }))
+                            self?.tabBarController?.present(alert, animated: true, completion: nil)
+                        }
+                    } else if vm.dataVersion.minor < version.minor {
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController (title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: payload.localizedReason, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
+                                vm.dataVersion = version
+                                doUpdating(types: types)
+                            }))
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
+                            self?.tabBarController?.present(alert, animated: true, completion: nil)                            
+                        }
+                    } else if vm.dataVersion.patch < version.patch {
+                        for item in payload.items {
+                            switch item.type {
+                            case .card:
+                                dao.cardDict.removeObject(forKey: item.id)
+                            case .chara:
+                                if let id = Int(item.id) {
+                                    let cards = dao.findCardsByCharId(id)
+                                    dao.cardDict.removeObjects(forKeys: cards.map { String($0.id) })
+                                }
+                            default:
+                                break
+                            }
+                        }
+                        vm.dataVersion = version
+                        doUpdating(types: types)
+                    } else {
+                        for item in payload.items {
+                            switch item.type {
+                            case .card:
+                                if let id = Int(item.id), let card = dao.findCardById(id), card.dataVersion < version {
+                                    dao.cardDict.removeObject(forKey: item.id)
+                                }
+                            case .chara:
+                                if let id = Int(item.id) {
+                                    let cards = dao.findCardsByCharId(id)
+                                    dao.cardDict.removeObjects(forKeys: cards.flatMap {
+                                        if $0.dataVersion < version {
+                                            return String($0.id)
+                                        } else {
+                                            return nil
+                                        }
+                                    })
+                                }
+                            default:
+                                break
+                            }
+                        }
+                        vm.dataVersion = version
+                        doUpdating(types: types)
+                    }
+                } else {
+                    doUpdating(types: types)
+                }
+            })
+        } else {
+            doUpdating(types: types)
+        }
     }
+
 }
 
 class RefreshableTableViewController: BaseTableViewController, Refreshable {

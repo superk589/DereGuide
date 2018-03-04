@@ -22,18 +22,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8</string>
+	<string>1.8.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>47</string>
-	<key>Data Version</key>
-	<dict>
-		<key>Major</key>
-		<integer>7</integer>
-		<key>Minor</key>
-		<integer>0</integer>
-	</dict>
+	<string>48</string>
 	<key>Document Version</key>
 	<integer>14</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
