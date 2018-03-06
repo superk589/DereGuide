@@ -82,7 +82,13 @@ extension Refreshable where Self: UIViewController {
                     if vm.dataVersion.major < version.major {
                         dao.removeAllData()
                         DispatchQueue.main.async {
-                            let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: payload.localizedReason, preferredStyle: .alert)
+                            let reason: String?
+                            if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
+                                reason = NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "")
+                            } else {
+                                reason = payload.localizedReason
+                            }
+                            let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
                                 vm.dataVersion = version
                                 doUpdating(types: types)
@@ -91,7 +97,13 @@ extension Refreshable where Self: UIViewController {
                         }
                     } else if vm.dataVersion.minor < version.minor {
                         DispatchQueue.main.async {
-                            let alert = UIAlertController (title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: payload.localizedReason, preferredStyle: .alert)
+                            let reason: String?
+                            if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
+                                reason = NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "")
+                            } else {
+                                reason = payload.localizedReason
+                            }
+                            let alert = UIAlertController (title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
                                 vm.dataVersion = version
                                 doUpdating(types: types)

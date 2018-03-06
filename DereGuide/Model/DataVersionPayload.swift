@@ -38,6 +38,6 @@ extension DataVersionPayload {
     
     var localizedReason: String? {
         let identifier = Locale.current.identifier
-        return reasons.first { identifier.hasPrefix($0.key) }?.value ?? reasons["default"]
+        return reasons.filter { identifier.hasPrefix($0.key) }.max { $0.key.count < $1.key.count }?.value ?? reasons["default"]
     }
 }
