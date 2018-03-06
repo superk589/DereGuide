@@ -10,12 +10,12 @@ PODS:
   - ImageViewer (5.0.0)
   - lz4 (128)
   - MessagePack.swift (3.0.0)
-  - MJRefresh (3.1.15.1)
+  - MJRefresh (3.1.15.3)
   - ReachabilitySwift (4.1.0)
   - RijndaelSwift (0.1.3)
-  - SDWebImage (4.2.3):
-    - SDWebImage/Core (= 4.2.3)
-  - SDWebImage/Core (4.2.3)
+  - SDWebImage (4.3.2):
+    - SDWebImage/Core (= 4.3.2)
+  - SDWebImage/Core (4.3.2)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.0.0)
   - TTGTagCollectionView (1.8.2)
@@ -67,10 +67,10 @@ SPEC CHECKSUMS:
   ImageViewer: 3def6e39c6979ce3e9d001c78eec0d8b895f2f73
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   MessagePack.swift: e739e7d1b9820c91bda31a1165f64bf1abd561d4
-  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   RijndaelSwift: 2d722b9390d8cebc0dd19c20bc84ddb4db06eb18
-  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TTGTagCollectionView: 20cf236b538ea9a17d1f0538968148c8d304414a
@@ -80,4 +80,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd4dd78283be68e7a896fd71a78ed28676febad7
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
