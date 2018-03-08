@@ -26,8 +26,10 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>49</string>
-	<key>Document Version</key>
+	<string>50</string>
+	<key>Data version</key>
+	<string>2.0.0</string>
+	<key>Document version</key>
 	<integer>14</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>

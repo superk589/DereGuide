@@ -73,44 +73,50 @@ extension Refreshable where Self: UIViewController {
                     }
                 }
             })
-            
+        }
+        
+        func confirmToUpdate(reason: String?, newVersion: Version, cancelable: Bool) {
+            DispatchQueue.main.async { [weak self] in
+                let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
+                    vm.dataVersion = newVersion
+                    doUpdating(types: types)
+                }))
+                if cancelable {
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
+                }
+                self?.tabBarController?.present(alert, animated: true, completion: nil)
+            }
         }
         
         if types.contains(.card) {
-            updater.checkRemoteDataVersion(callback: { [weak self] payload, error in
+            updater.checkRemoteDataVersion(callback: { payload, error in
+                
+                // firstly, we check remote data version
                 if let payload = payload, let version = Version(string: payload.version) {
+                    
+                    // if remote data version's major is greater than local version, remove all data then re-download.
                     if vm.dataVersion.major < version.major {
                         dao.removeAllData()
-                        DispatchQueue.main.async {
-                            let reason: String?
-                            if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
-                                reason = NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "")
-                            } else {
-                                reason = payload.localizedReason
-                            }
-                            let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
-                                vm.dataVersion = version
-                                doUpdating(types: types)
-                            }))
-                            self?.tabBarController?.present(alert, animated: true, completion: nil)
+                        let reason: String?
+                        if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
+                            reason = NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "")
+                        } else {
+                            reason = payload.localizedReason
                         }
+                        confirmToUpdate(reason: reason, newVersion: version, cancelable: false)
+                        
+                    // else if remote data version's minor is greater than local version, recommend user to update all data
                     } else if vm.dataVersion.minor < version.minor {
-                        DispatchQueue.main.async {
-                            let reason: String?
-                            if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
-                                reason = NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "")
-                            } else {
-                                reason = payload.localizedReason
-                            }
-                            let alert = UIAlertController (title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
-                                vm.dataVersion = version
-                                doUpdating(types: types)
-                            }))
-                            alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "弹出框按钮"), style: .cancel, handler: nil))
-                            self?.tabBarController?.present(alert, animated: true, completion: nil)                            
+                        let reason: String?
+                        if vm.dataVersion == Version(1, 0, 0) || payload.localizedReason == nil {
+                            reason = NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "")
+                        } else {
+                            reason = payload.localizedReason
                         }
+                        confirmToUpdate(reason: reason, newVersion: version, cancelable: true)
+                        
+                    // else if remote data version's patch is greater than local version, remove the items only in patch items array, then re-download them.
                     } else if vm.dataVersion.patch < version.patch {
                         for item in payload.items {
                             switch item.type {
@@ -127,6 +133,8 @@ extension Refreshable where Self: UIViewController {
                         }
                         vm.dataVersion = version
                         doUpdating(types: types)
+                        
+                    // finally, only check patch items to make sure they are all updated to the newest version
                     } else {
                         for item in payload.items {
                             switch item.type {
@@ -152,8 +160,25 @@ extension Refreshable where Self: UIViewController {
                         vm.dataVersion = version
                         doUpdating(types: types)
                     }
+                    
+                // if we can't get remote data version(eg. network error), check the local minimum supported version
                 } else {
-                    doUpdating(types: types)
+                    
+                    // if local minimum supported version's major is greater than local version, remove all data and re-download
+                    if vm.dataVersion.major < vm.minimumSupportedDataVersion.major {
+                        dao.removeAllData()
+                        let reason = NSLocalizedString("数据主版本过低，请点击确定开始更新", comment: "")
+                        confirmToUpdate(reason: reason, newVersion: vm.minimumSupportedDataVersion, cancelable: false)
+                        
+                    // else if local minimum supported version's minor is greater than local version. recommand user to update
+                    } else if vm.dataVersion.minor < vm.minimumSupportedDataVersion.minor {
+                        let reason = NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "")
+                        confirmToUpdate(reason: reason, newVersion: vm.minimumSupportedDataVersion, cancelable: true)
+                    
+                    // finally, do normal updating, because local minimum supported version has no patch information.
+                    } else {
+                        doUpdating(types: types)
+                    }
                 }
             })
         } else {

@@ -40,6 +40,13 @@ class CGSSVersionManager {
         }
     }
     
+    var minimumSupportedDataVersion: Version {
+        get {
+            let dataVersionString = Bundle.main.infoDictionary?["Data version"] as? String ?? "1.0.0"
+            return Version(string: dataVersionString)!
+        }
+    }
+    
     var currentMasterTruthVersion: String {
         set {
             UserDefaults.standard.setValue(newValue, forKey: "master_truth_version")

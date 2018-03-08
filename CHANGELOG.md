@@ -10,7 +10,7 @@
 
 ##### English version
 
-Fix some localization mistake.
+Fix some localization mistakes.
 
 ### 1.8.1
 2018-3-5
@@ -36,7 +36,7 @@ Fix some localization mistake.
 
 1. 支持三色协同技能。
 2. 模拟算分中新增挂机模式模拟，原得分详情和辅助技能详情整合成 Note 列表。
-3. 其他细节优化和 Bug 修复
+3. 其他细节优化和 Bug 修复。
 
 ##### Japanese version
 
