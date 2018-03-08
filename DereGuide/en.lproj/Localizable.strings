@@ -734,9 +734,9 @@
 "使所有PERFECT/GREAT音符恢复你 %d 点生命" = "Great/Perfect notes will restore %d health";
 "使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命" = "Nice/Great/Perfect notes will restore %d health";
 "使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档" = "currently active combo bonus and score bonus will gain extra %d%%, healer and guard will restore extra 1 health, perfect lock will extend its scope";
-"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cute idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
-"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Cool idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
-"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "when there are only Passion idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "with only Cute idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "with only Cool idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
+"当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "with only Passion idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
 "获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health";
 
 "每 %d 秒，" = "Every %d seconds: ";
@@ -851,7 +851,7 @@
 "模拟挂机模式" = "AFK Mode";
 
 "三色协同" = "Synergy";
-"当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成" = "when there are Cute, Cool and Passion idols on the team, Perfect notes will receive a %1$d%% score bonus / restore %3$d health and you will gain an extra %2$d%% combo bonus";
+"当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成" = "with all three types of idols on the team, you will gain an extra %2$d%% combo bonus, and Perfect notes will receive a %1$d%% score bonus plus restore %3$d health";
 "完成LIVE时，获得的粉丝数提高 %d%%" = "gives %d%% extra fans when you finish a live.";
 
 /* new in 1.8.1 */
