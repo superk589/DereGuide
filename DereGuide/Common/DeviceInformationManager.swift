@@ -32,7 +32,7 @@ class DeviceInformationManager {
     
     let osVersion = UIDevice.current.systemVersion
     
-    let language: String = Locale.current.identifier
+    let language: String = Locale.preferredLanguages.first ?? ""
     
     var carrier: String {
         let info = CTTelephonyNetworkInfo.init()

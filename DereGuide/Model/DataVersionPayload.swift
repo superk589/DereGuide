@@ -37,7 +37,9 @@ struct DataVersionPayload: Codable {
 extension DataVersionPayload {
     
     var localizedReason: String? {
-        let identifier = Locale.current.identifier
-        return reasons.filter { identifier.hasPrefix($0.key) }.max { $0.key.count < $1.key.count }?.value ?? reasons["default"]
+        if let identifier = Locale.preferredLanguages.first {
+            return reasons.filter { identifier.hasPrefix($0.key) }.max { $0.key.count < $1.key.count }?.value ?? reasons["default"]
+        }
+        return reasons["default"]
     }
 }

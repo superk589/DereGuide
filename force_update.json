@@ -3,7 +3,7 @@
     "reasons": {
         "default": "To avoid a potential crash, please update your cached data.",
         "ja": "強制終了のバグを防ぐため、データ更新が必要となります。",
-        "zh": "为了避免一个导致闪退的 Bug，需要您更新缓存数据。数据量较大，请确认您的网络后再点击确认。",
+        "zh-Hans": "为了避免一个导致闪退的 Bug，需要您更新缓存数据。数据量较大，请确认您的网络后再点击确认。",
         "zh-Hant": "為了避免一個導致閃退的 Bug，需要您更新快取資料。資料量較大，請確認您的網路後再點選確認。"
     },
     "items": [

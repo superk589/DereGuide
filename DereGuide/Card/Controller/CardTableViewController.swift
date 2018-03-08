@@ -14,7 +14,7 @@ class CardTableViewController: BaseCardTableViewController {
         super.viewDidLoad()
         
         print(NSHomeDirectory())
-        print(Locale.current.identifier)
+        print(Locale.preferredLanguages.first ?? "")
         
         if UserDefaults.standard.value(forKey: "DownloadAtStart") as? Bool ?? true {
             check(.all)

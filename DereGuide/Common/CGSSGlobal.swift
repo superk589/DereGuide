@@ -166,7 +166,11 @@ public class CGSSGlobal {
     }
     
     static var languageType: LanguageType {
-        return LanguageType.init(identifier: Locale.current.identifier)
+        if let code = Locale.preferredLanguages.first {
+            return LanguageType(identifier: code)
+        } else {
+            return .en
+        }
     }
     
     // max = 15928 + 500 + 500 + 220 
@@ -187,7 +191,7 @@ enum LanguageType {
             self = .en
         case let x where x.hasPrefix("zh-Hans"):
             self = .cn
-        case let x where x.hasPrefix("zh-HK") || x.hasPrefix("zh-Hant"):
+        case let x where x.hasPrefix("zh-Hant"):
             self = .tw
         case let x where x.hasPrefix("ja"):
             self = .ja
