@@ -1,5 +1,17 @@
 # ChangeLog
 
+1.8.2
+
+修正一些翻译错误。
+
+##### Japanese version
+
+一部のローカライズミスを修正
+
+##### English version
+
+Fix some localization mistake.
+
 ### 1.8.1
 2018-3-5
 
