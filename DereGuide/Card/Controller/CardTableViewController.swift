@@ -48,7 +48,7 @@ extension CardTableViewController: UIViewControllerPreviewingDelegate {
         
         let vc = CardDetailViewController()
         vc.card = cardList[indexPath.row]
-        vc.preferredContentSize = CGSize.init(width: Screen.shortSide, height: CGSSGlobal.spreadImageHeight * Screen.shortSide / CGSSGlobal.spreadImageWidth + 68)
+        vc.preferredContentSize = CGSize.init(width: view.shortSide, height: CGSSGlobal.spreadImageHeight * view.shortSide / CGSSGlobal.spreadImageWidth + 68)
         
         previewingContext.sourceRect = cell.frame
         

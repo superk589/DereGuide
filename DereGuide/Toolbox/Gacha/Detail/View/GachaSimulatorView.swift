@@ -18,7 +18,7 @@ protocol GachaSimulatorViewDelegate: class {
 class GachaSimulatorView: UIView {
     
     let space: CGFloat = 10
-    let btnW = min(96, (Screen.shortSide - 60) / 5)
+    lazy var btnW = min(96, ((UIApplication.shared.keyWindow?.shortSide ?? 0) - 60) / 5)
     var leftLabel: UILabel!
     let singleButton = WideButton()
     let tenButton = WideButton()

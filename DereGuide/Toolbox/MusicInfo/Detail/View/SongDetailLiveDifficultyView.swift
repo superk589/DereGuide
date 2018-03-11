@@ -36,7 +36,13 @@ class SongDetailLiveDifficultyView: LiveDifficultyView {
         frame.size.width += 10
         frame.size.height = 33
         if !shouldShowText {
-            let suitableWidth = UIDevice.current.userInterfaceIdiom == .pad ? floor((min(768, Screen.shortSide) - 156) / 7) : floor((Screen.shortSide - 136) / 5)
+            let shortSide = UIApplication.shared.keyWindow?.shortSide ?? 0
+            let suitableWidth: CGFloat
+            if shortSide >= 768 {
+                suitableWidth = floor((min(768, shortSide) - 156) / 7)
+            } else {
+                suitableWidth = floor((shortSide - 136) / 5)
+            }
             frame.size.width = suitableWidth
         }
         return frame.size

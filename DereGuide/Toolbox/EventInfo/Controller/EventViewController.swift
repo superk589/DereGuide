@@ -126,10 +126,10 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if drawerController?.rightViewController == filterVC {
+            drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
+        }
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { [weak self] (context) in
-            self?.drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
-            }, completion: nil)
     }
     
     override func updateUI() {

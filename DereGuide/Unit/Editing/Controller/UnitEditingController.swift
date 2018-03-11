@@ -87,7 +87,7 @@ class UnitEditingController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        let maxWidth = min(floor((Screen.shortSide - 70) / 6), 96)
+        let maxWidth = min(floor((view.shortSide - 70) / 6), 96)
         layout.itemSize = CGSize(width: maxWidth, height: maxWidth + 29)
         collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self

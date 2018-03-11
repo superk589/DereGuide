@@ -56,6 +56,7 @@ struct Screen {
         return UIScreen.main.scale
     }
     
+    // FIXME: do not use these two, because in multi-task mode shortSide or longSide does not make sense.
     static let shortSide = min(width, height)
     static let longSide = max(width, height)
 }

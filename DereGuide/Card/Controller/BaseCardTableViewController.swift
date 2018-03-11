@@ -126,9 +126,9 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { [weak self] (context) in
-            self?.drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
-        }, completion: nil)
+        if drawerController?.rightViewController == filterVC {
+            drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
+        }
         super.viewWillTransition(to: size, with: coordinator)
     }
     

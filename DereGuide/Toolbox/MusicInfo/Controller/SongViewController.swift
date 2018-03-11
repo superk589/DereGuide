@@ -144,12 +144,14 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if drawerController?.rightViewController == filterVC {
+            drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
+        }
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { [weak self] (context) in
             self?.collectionView.performBatchUpdates({
                 self?.reloadLayout()
             }, completion: nil)
-            self?.drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
             //self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: { finished in
             if let selected = self.collectionView.indexPathsForSelectedItems?.first {
