@@ -54,6 +54,14 @@ extension UIView {
         }
     }
     
+    var shortSide: CGFloat {
+        return frame.size.shortSide
+    }
+    
+    var longSide: CGFloat {
+        return frame.size.longSide
+    }
+    
     func drawSectionLine(_ positionY: CGFloat) {
         let view = UIView.init(frame: CGRect(x: 0, y: positionY, width: CGSSGlobal.width, height: 1 / UIScreen.main.scale))
         view.layer.borderWidth = 1 / UIScreen.main.scale
@@ -132,5 +140,16 @@ extension UIView {
             glowLayer.add(scaleAni, forKey: "scale")
         }
     
+    }
+}
+
+extension CGSize {
+    
+    var shortSide: CGFloat {
+        return min(height, width)
+    }
+    
+    var longSide: CGFloat {
+        return max(height, width)
     }
 }

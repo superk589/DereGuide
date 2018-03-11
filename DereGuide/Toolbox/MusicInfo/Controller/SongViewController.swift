@@ -135,7 +135,7 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
         let drawer = drawerController
         drawer?.rightViewController = filterVC
         drawer?.delegate = self
-        drawer?.defaultRightWidth = min(Screen.shortSide - 68, 400)
+        drawer?.defaultRightWidth = min(view.shortSide - 68, 400)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,10 +145,11 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { (context) in
-            self.collectionView.performBatchUpdates({
-                self.reloadLayout()
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            self?.collectionView.performBatchUpdates({
+                self?.reloadLayout()
             }, completion: nil)
+            self?.drawerController?.defaultRightWidth = min(size.shortSide - 68, 400)
             //self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: { finished in
             if let selected = self.collectionView.indexPathsForSelectedItems?.first {

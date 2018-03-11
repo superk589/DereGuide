@@ -74,12 +74,19 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
             let drawer = self.drawerController
             drawer?.rightViewController = self.filterVC
             drawer?.delegate = self
-            drawer?.defaultRightWidth = min(Screen.shortSide - 86, 400)
+            drawer?.defaultRightWidth = min(self.view.shortSide - 86, 400)
             if UserDefaults.standard.firstTimeShowLiveView {
                 self.showHelpTips()
                 UserDefaults.standard.firstTimeShowLiveView = false
             }
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            self?.drawerController?.defaultRightWidth = min(size.shortSide - 86, 400)
+        }, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

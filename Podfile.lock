@@ -20,7 +20,7 @@ PODS:
   - SwiftyJSON (4.0.0)
   - TTGTagCollectionView (1.8.2)
   - ZKCornerRadiusView (0.1.0)
-  - ZKDrawerController (0.3.3):
+  - ZKDrawerController (0.3.4):
     - SnapKit
   - ZKPageViewController (0.0.6):
     - DynamicColor
@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TTGTagCollectionView: 20cf236b538ea9a17d1f0538968148c8d304414a
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
-  ZKDrawerController: d407465173b79b0fa7002fdf9e85685a6c667a39
+  ZKDrawerController: dd9d8b2dfe07dc9ef6a9ac015fca640c2742c5af
   ZKPageViewController: 95b09fbb880061bbf33d05086a7e734a8ed899f6
 
 PODFILE CHECKSUM: fd4dd78283be68e7a896fd71a78ed28676febad7

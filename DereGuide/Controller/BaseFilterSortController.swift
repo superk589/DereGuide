@@ -69,6 +69,15 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            // since the size changes, update all table cells to fit the new size
+            self?.tableView.beginUpdates()
+            self?.tableView.endUpdates()
+        }, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
