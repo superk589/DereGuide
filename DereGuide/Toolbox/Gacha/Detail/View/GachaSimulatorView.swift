@@ -18,11 +18,10 @@ protocol GachaSimulatorViewDelegate: class {
 class GachaSimulatorView: UIView {
     
     let space: CGFloat = 10
-    lazy var btnW = min(96, ((UIApplication.shared.keyWindow?.shortSide ?? 0) - 60) / 5)
     var leftLabel: UILabel!
     let singleButton = WideButton()
     let tenButton = WideButton()
-    var resultView: UIView!
+    var resultView: GridView!
     var resultGrid: GridLabel!
     let resetButton = WideButton()
 
@@ -40,6 +39,19 @@ class GachaSimulatorView: UIView {
             make.top.equalTo(10)
         }
         
+        let iconGroup = (0..<2).map { _ in (0..<5).map { _ in GachaResultCardView() }}
+        
+        resultView = GridView(rows: 2, columns: 5, views: iconGroup)
+        addSubview(resultView)
+        resultView.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(leftLabel.snp.bottom).offset(10)
+            make.left.greaterThanOrEqualTo(5)
+            make.right.lessThanOrEqualTo(-5)
+            make.left.equalTo(5).priority(800)
+            make.right.equalTo(-5).priority(800)
+        }
+        
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
         singleButton.backgroundColor = Color.passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
@@ -47,7 +59,7 @@ class GachaSimulatorView: UIView {
         singleButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
-            make.top.equalTo(leftLabel.snp.bottom).offset(2 * btnW + 30)
+            make.top.equalTo(resultView.snp.bottom).offset(10)
         }
         
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
@@ -58,15 +70,6 @@ class GachaSimulatorView: UIView {
             make.right.equalTo(-10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
             make.top.equalTo(singleButton)
-        }
-        
-        resultView = UIView()
-        addSubview(resultView)
-        resultView.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(leftLabel.snp.bottom).offset(10)
-            make.width.equalTo(btnW * 5 + 40)
-            make.height.equalTo(2 * btnW + 10)
         }
         
         resultGrid = GridLabel(rows: 4, columns: 4)
@@ -109,9 +112,7 @@ class GachaSimulatorView: UIView {
     }
     
     func wipeResultView() {
-        for subview in resultView.subviews {
-            subview.removeFromSuperview()
-        }
+        resultView.subviews.forEach { $0.subviews.forEach { ($0 as? GachaResultCardView)?.setup(card: nil) } }
     }
     
     func wipeResultGrid() {
@@ -129,19 +130,11 @@ class GachaSimulatorView: UIView {
         wipeResultView()
         guard result.times > 0 else { return }
         for i in 0..<cardIDs.count {
-            let x = CGFloat(i % 5) * (space + btnW)
-            let y = CGFloat(i / 5) * (btnW + space)
-            let btn = CGSSCardIconView.init(frame: CGRect.init(x: x, y: y, width: btnW, height: btnW))
-            btn.setWithCardId(cardIDs[i], target: self, action: #selector(iconClick(iv:)))
-            if let card = CGSSDAO.shared.findCardById(cardIDs[i]), card.rarityType == .ssr {
-                let view = UIView.init(frame: btn.frame)
-                view.isUserInteractionEnabled = false
-                view.addGlowAnimateAlongBorder(clockwise: true, imageName: "star", count: 3, cornerRadius: btn.fheight / 8)
-                resultView.addSubview(view)
-                view.tintColor = card.attColor
-            }
-            resultView.addSubview(btn)
-            resultView.sendSubview(toBack: btn)
+            let column = i % 5
+            let row = i / 5
+            let cardView = resultView[row, column] as! GachaResultCardView
+            cardView.setup(card: CGSSDAO.shared.findCardById(cardIDs[i]))
+            cardView.icon.setAction(self, action: #selector(iconClick(iv:)))
         }
         
         resultGrid[1, 0].text = "\(result.times)"

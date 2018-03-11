@@ -24,8 +24,8 @@ class GridView: UIStackView {
         var stackViews = [UIStackView]()
         
         for r in 0..<rows {
-            let subViews = views[r]
-            let stackView = UIStackView(arrangedSubviews: subViews)
+            let rowViews = views[r]
+            let stackView = UIStackView(arrangedSubviews: rowViews)
             stackView.distribution = .fillEqually
             stackView.axis = .horizontal
             stackView.spacing = -1 / CGSSGlobal.scale

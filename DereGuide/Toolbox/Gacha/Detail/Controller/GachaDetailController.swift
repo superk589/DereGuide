@@ -50,6 +50,20 @@ class GachaDetailController: BaseTableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            self?.tableView.beginUpdates()
+            self?.tableView.endUpdates()
+        }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
     private func prepareNavigationBar() {
         let label = NavigationTitleLabel()
         label.text = gacha.name

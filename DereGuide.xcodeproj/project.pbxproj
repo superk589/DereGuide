@@ -360,6 +360,7 @@
 		12DFCA0D1F55482900790859 /* UIActivityViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */; };
 		12E41E491E51958D00D22A0F /* CGSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */; };
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
+		12E45DE9205560E90059E73A /* GachaResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E45DE8205560E80059E73A /* GachaResultCardView.swift */; };
 		12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
@@ -828,6 +829,7 @@
 		12DFCA0C1F55482900790859 /* UIActivityViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityViewControllerExtension.swift; sourceTree = "<group>"; };
 		12E41E481E51958D00D22A0F /* CGSSCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCacheManager.swift; sourceTree = "<group>"; };
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
+		12E45DE8205560E80059E73A /* GachaResultCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultCardView.swift; sourceTree = "<group>"; };
 		12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDifficultyView.swift; sourceTree = "<group>"; };
 		12EECCCE1ED57EF90047666C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EECCD21ED57EFA0047666C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -1935,6 +1937,7 @@
 				12F8DF2120117B8100F8A3DC /* GachaDetailGuaranteesCell.swift */,
 				12F8DF232011873900F8A3DC /* GachaDetailSimulatorCell.swift */,
 				12F8DF292011C02B00F8A3DC /* GachaDetailLoadingCell.swift */,
+				12E45DE8205560E80059E73A /* GachaResultCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2528,6 +2531,7 @@
 				12FC8B3A1EDE6D93003CF3C3 /* UnitLeaderSkillView.swift in Sources */,
 				127AA1A31E34FDEC0006627B /* SignImageController.swift in Sources */,
 				126612B41F1723B500B7D17F /* RemoteMember.swift in Sources */,
+				12E45DE9205560E90059E73A /* GachaResultCardView.swift in Sources */,
 				121B82161EB7516F00273F37 /* BaseModelTableViewController.swift in Sources */,
 				1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */,
 				1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */,
