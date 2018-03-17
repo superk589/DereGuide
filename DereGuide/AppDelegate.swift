@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.executeDocumentReset { (lastVersion) in
             if lastVersion < 2 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.live)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.unitCard)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.SorterPath.live)
@@ -70,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 14 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
+            }
+            if lastVersion < 15 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
         }

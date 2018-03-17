@@ -70,6 +70,8 @@ extension CGSSGacha {
             result -= 2
         } else if id == 30013 {
             result = 12
+        } else if gachaType == .premium {
+            result = id / 3 * 3 + 1
         }
         
         return result
@@ -82,6 +84,8 @@ extension CGSSGacha {
     var detailBannerURL: URL! {
         if id > 30170 && isReappeared {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
+        } else if gachaType == .premium {
+            return URL(string: String(format: "https://apis.game.starlight-stage.jp/image/announce/header/header_premium_%04d.png", detailBannerId % 10000))
         } else {
             return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))
         }
@@ -98,6 +102,8 @@ extension CGSSGacha {
             return CGSSGachaTypes.limit
         } else if dicription.contains("クールタイプ") || dicription.contains("パッションタイプ") || dicription.contains("キュートタイプ") {
             return CGSSGachaTypes.singleType
+        } else if id >= 60000 && id < 70000 {
+            return CGSSGachaTypes.premium
         } else {
             return CGSSGachaTypes.normal
         }
@@ -111,6 +117,8 @@ extension CGSSGacha {
             return Color.limitedGacha
         case CGSSGachaTypes.fes:
             return Color.cinFesGacha
+        case CGSSGachaTypes.premium:
+            return .premium
         default:
             return Color.allType
         }
@@ -141,8 +149,7 @@ class CGSSGacha: NSObject {
     var rareRatio: Int
     var srRatio: Int
     var ssrRatio: Int
-    
-    var startDate: String
+    @objc dynamic var startDate: String
     
     var rewardTable = [Int: Reward]()
     var sr = [Reward]()

@@ -24,10 +24,11 @@ class GachaFilterSortController: BaseFilterSortController {
     var gachaTypeTitles = [CGSSGachaTypes.normal.description,
                            CGSSGachaTypes.limit.description,
                            CGSSGachaTypes.fes.description,
-                           CGSSGachaTypes.singleType.description]
+                           CGSSGachaTypes.singleType.description,
+                           CGSSGachaTypes.premium.description]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
-    var sorterMethods = ["id"]
+    var sorterMethods = ["startDate"]
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     
     override func viewDidLoad() {

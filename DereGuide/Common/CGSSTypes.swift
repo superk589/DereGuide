@@ -554,7 +554,8 @@ struct CGSSGachaTypes: OptionSet {
     static let limit = CGSSGachaTypes.init(rawValue: 1 << 1)
     static let fes = CGSSGachaTypes.init(rawValue: 1 << 2)
     static let singleType = CGSSGachaTypes.init(rawValue: 1 << 3)
-    static let all = CGSSGachaTypes.init(rawValue: 0b1111)
+    static let premium = CGSSGachaTypes(rawValue: 1 << 4)
+    static let all = CGSSGachaTypes.init(rawValue: 0b11111)
     
     var description: String {
         switch self {
@@ -564,8 +565,10 @@ struct CGSSGachaTypes: OptionSet {
             return NSLocalizedString("FES限定卡池", comment: "")
         case CGSSGachaTypes.singleType:
             return NSLocalizedString("单属性卡池", comment: "")
+        case CGSSGachaTypes.premium:
+            return NSLocalizedString("高级试音会", comment: "")
         default:
-            return NSLocalizedString("普通卡池", comment: "")
+            return NSLocalizedString("普通试音会", comment: "")
         }
     }
 }

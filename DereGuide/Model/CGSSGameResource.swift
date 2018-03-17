@@ -143,7 +143,7 @@ class Master: FMDatabaseQueue {
     func getValidGacha(callback: @escaping FMDBCallBackClosure<[CGSSGacha]>) {
         var list = [CGSSGacha]()
         execute({ (db) in
-            let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and a.id like '3%' order by end_date DESC"
+            let selectSql = "select a.id, a.name, a.dicription, a.start_date, a.end_date, b.rare_ratio, b.sr_ratio, b.ssr_ratio from gacha_data a, gacha_rate b where a.id = b.id and ( a.id like '3%' or a.id like '6%' ) order by end_date DESC"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let endDate = set.string(forColumn: "end_date")
@@ -151,7 +151,9 @@ class Master: FMDatabaseQueue {
                 let name = set.string(forColumn: "name")
                 let dicription = set.string(forColumn: "dicription")
                 let startDate = set.string(forColumn: "start_date")
-                
+                if let startDate = startDate?.toDate(), id >= 60000, startDate > Date() {
+                    continue
+                }
                 let rareRatio = Int(set.int(forColumn: "rare_ratio"))
                 let srRatio = Int(set.int(forColumn: "sr_ratio"))
                 let ssrRatio = Int(set.int(forColumn: "ssr_ratio"))

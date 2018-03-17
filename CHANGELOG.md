@@ -1,5 +1,19 @@
 # ChangeLog
 
+1.8.3
+
+1. 支持高级试音会的模拟抽卡。
+2. 优化 iPad 多任务模式下的界面布局。
+
+##### Japanese version
+
+
+
+##### English version
+
+1. Support for premium gacha.
+2. Improve layout in iPad multi-tasking mode.
+
 1.8.2
 
 修正一些翻译错误。
