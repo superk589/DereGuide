@@ -77,35 +77,98 @@ class EventDetailController: BaseViewController {
     }
     
     func requestPtData() {
-        EventPtDataRequest.requestPtData(event: event) { (list) in
-            self.ptList = list
-            if list != nil {
-                DispatchQueue.main.async { [weak self] in
-                    self?.eventDetailView.setup(ptList: list!, onGoing: self?.event.isOnGoing ?? false)
-                }
-            } else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.eventDetailView.eventPtView.setLoading(loading: false)
-                    self?.eventDetailView.eventPtView.gridView.isHidden = true
-                }
-            }
+//        EventPtDataRequest.requestPtData(event: event) { (list) in
+//            self.ptList = list
+//            if list != nil {
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.eventDetailView.setup(ptList: list!, onGoing: self?.event.isOnGoing ?? false)
+//                }
+//            } else {
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.eventDetailView.eventPtView.setLoading(loading: false)
+//                    self?.eventDetailView.eventPtView.gridView.isHidden = true
+//                }
+//            }
+//
+//        }
 
+        let group = DispatchGroup()
+        var items = [RankingItem]()
+        for border in event.ptBorders {
+            group.enter()
+            if event.type == 1 {
+                APIClient.shared.ataponRanking(page: border / 10 + 1, type: 1, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
+            } else if event.type == 3 {
+                APIClient.shared.grooveRanking(page: border / 10 + 1, type: 1, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
+            } else if event.type == 5 {
+                APIClient.shared.tourRanking(page: border / 10 + 1, type: 1, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
+            }
+        }
+        group.notify(queue: .main) { [weak self] in
+            let sortedItems = items.sorted { $0.rank < $1.rank }
+            self?.eventDetailView.setup(ptItems: sortedItems, onGoing: self?.event.isOnGoing ?? false)
         }
     }
     
     func requestScoreData() {
-        EventPtDataRequest.requestHighScoreData(event: event) { (list) in
-            self.scoreList = list
-            if list != nil {
-                DispatchQueue.main.async { [weak self] in
-                     self?.eventDetailView.setup(scoreList: list!, onGoing: self?.event.isOnGoing ?? false)
-                }
-            } else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.eventDetailView.eventScoreView.setLoading(loading: false)
-                    self?.eventDetailView.eventScoreView.gridView.isHidden = true
-                }
+//        EventPtDataRequest.requestHighScoreData(event: event) { (list) in
+//            self.scoreList = list
+//            if list != nil {
+//                DispatchQueue.main.async { [weak self] in
+//                     self?.eventDetailView.setup(scoreList: list!, onGoing: self?.event.isOnGoing ?? false)
+//                }
+//            } else {
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.eventDetailView.eventScoreView.setLoading(loading: false)
+//                    self?.eventDetailView.eventScoreView.gridView.isHidden = true
+//                }
+//            }
+//        }
+        let group = DispatchGroup()
+        var items = [RankingItem]()
+        for border in event.ptBorders {
+            group.enter()
+            if event.type == 1 {
+                APIClient.shared.ataponRanking(page: border / 10 + 1, type: 2, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
+            } else if event.type == 3 {
+                APIClient.shared.grooveRanking(page: border / 10 + 1, type: 2, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
+            } else if event.type == 5 {
+                APIClient.shared.tourRanking(page: border / 10 + 1, type: 2, callback: { pack in
+                    if let pack = pack, let page = RankingPage(fromMsgPack: pack), let item = page.items.first {
+                        items.append(item)
+                    }
+                    group.leave()
+                })
             }
+        }
+        group.notify(queue: .main) { [weak self] in
+            let sortedItems = items.sorted { $0.rank < $1.rank }
+            self?.eventDetailView.setup(scoreItems: sortedItems, onGoing: self?.event.isOnGoing ?? false)
         }
     }
     

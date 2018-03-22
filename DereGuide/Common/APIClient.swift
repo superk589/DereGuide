@@ -175,6 +175,19 @@ class APIClient {
         }
     }
     
+    func grooveRanking(page: Int, type: Int, callback: ((MessagePackValue?) -> Void)?) {
+        let args: [String: Any] = [
+            "page": UInt(page),
+            "ranking_type": UInt(type),
+            "timezone": "09:00:00",
+            ]
+        
+        // need more test
+        call(base: apis, path: "/event/medley/ranking_list", userInfo: args) { pack in
+            callback?(pack)
+        }
+    }
+    
     func resetSID() {
         sid = nil
     }

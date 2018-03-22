@@ -394,18 +394,26 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
     }
     
-    func setup(ptList: EventRanking, onGoing: Bool) {
-        eventPtView.setup(rankingList: ptList, onGoing: onGoing)
-        if ptList.list.count > 0 {
-            gotoPtChartLabel.isHidden = false
-        }
+//    func setup(ptList: EventRanking, onGoing: Bool) {
+//        eventPtView.setup(rankingList: ptList, onGoing: onGoing)
+//        if ptList.list.count > 0 {
+//            gotoPtChartLabel.isHidden = false
+//        }
+//    }
+    
+//    func setup(scoreList: EventRanking, onGoing: Bool) {
+//        eventScoreView.setup(rankingList: scoreList, onGoing: onGoing)
+//        if scoreList.list.count > 0 {
+//            gotoScoreChartLabel.isHidden = false
+//        }
+//    }
+    
+    func setup(ptItems: [RankingItem], onGoing: Bool) {
+        eventPtView.setup(items: ptItems, onGoing: onGoing)
     }
     
-    func setup(scoreList: EventRanking, onGoing: Bool) {
-        eventScoreView.setup(rankingList: scoreList, onGoing: onGoing)
-        if scoreList.list.count > 0 {
-            gotoScoreChartLabel.isHidden = false
-        }
+    func setup(scoreItems: [RankingItem], onGoing: Bool) {
+        eventScoreView.setup(items: scoreItems, onGoing: onGoing)
     }
     
     func iconClick(_ iv: CGSSIconView) {

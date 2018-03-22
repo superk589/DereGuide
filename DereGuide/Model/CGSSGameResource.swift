@@ -252,7 +252,44 @@ class Master: FMDatabaseQueue {
                         break
                     }
                 }
-                let event = CGSSEvent.init(sortId: sortId, id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards, liveId: liveId)
+                
+                var ptBorders = [Int]()
+                if type == 1 {
+                    let sql = "select rank_min from atapon_point_rank_disp where event_id = \(id) limit 6"
+                    let set = try db.executeQuery(sql, values: nil)
+                    while set.next() {
+                        ptBorders.append(Int(set.int(forColumn: "rank_min")))
+                    }
+                } else if type == 3 {
+                    let sql = "select rank_min from medley_point_rank_disp where event_id = \(id) limit 6"
+                    let set = try db.executeQuery(sql, values: nil)
+                    while set.next() {
+                        ptBorders.append(Int(set.int(forColumn: "rank_min")))
+                    }
+                }
+                
+                var scoreBorders = [Int]()
+                if type == 1 {
+                    let sql = "select rank_min from atapon_score_rank_disp where event_id = \(id)"
+                    let set = try db.executeQuery(sql, values: nil)
+                    while set.next() {
+                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                    }
+                } else if type == 3 {
+                    let sql = "select rank_min from medley_score_rank_disp where event_id = \(id)"
+                    let set = try db.executeQuery(sql, values: nil)
+                    while set.next() {
+                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                    }
+                } else if type == 5 {
+                    let sql = "select rank_min from tour_score_rank_disp where event_id = \(id)"
+                    let set = try db.executeQuery(sql, values: nil)
+                    while set.next() {
+                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                    }
+                }
+                
+                let event = CGSSEvent(sortId: sortId, id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards, liveId: liveId, ptBorders: ptBorders, scoreBorders: scoreBorders)
                 
                 list.append(event)
             }

@@ -56,7 +56,7 @@ class EventScoreView: UIView {
         refreshButton.tintColor = Color.parade
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
-        gridView = GridLabel.init(rows: 5, columns: 3)
+        gridView = GridLabel.init(rows: 5, columns: 2)
         
         addSubview(gridView)
         gridView.snp.makeConstraints { (make) in
@@ -100,6 +100,25 @@ class EventScoreView: UIView {
         }
     }
     
+    func setup(items: [RankingItem], onGoing: Bool) {
+        dateLabel.text = Date().toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)
+        setLoading(loading: false)
+        var strings = [[String]]()
+        if onGoing {
+            strings.append([NSLocalizedString("排名", comment: ""), NSLocalizedString("当前分数", comment: "")])
+        } else {
+            strings.append([NSLocalizedString("排名", comment: ""), NSLocalizedString("最终分数", comment: "")])
+        }
+        for item in items {
+            strings.append([String(item.rank), String(item.score)])
+        }
+        if items.count > 0 {
+            gridView.isHidden = false
+        } else {
+            gridView.isHidden = true
+        }
+        gridView.setContents(strings)
+    }
     
     func setup(rankingList: EventRanking ,onGoing: Bool) {
         dateLabel.text = rankingList.lastDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm", timeZone: TimeZone.current)

@@ -859,3 +859,6 @@
 
 /* new in 1.8.3 */
 "高级试音会" = "Premium Gacha";
+
+/* new in 1.8.4 */
+"排名" = "Ranking";

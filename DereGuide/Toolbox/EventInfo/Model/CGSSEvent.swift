@@ -82,10 +82,12 @@ class CGSSEvent: CGSSBaseModel {
     var name:String
     var secondHalfStartDate:String
     var liveId: Int
+    var ptBorders: [Int]
+    var scoreBorders: [Int]
     
     var reward:[Reward]
     
-    init(sortId:Int, id:Int, type:Int, startDate:String, endDate:String, name:String, secondHalfStartDate:String, reward:[Reward], liveId: Int) {
+    init(sortId:Int, id:Int, type:Int, startDate:String, endDate:String, name:String, secondHalfStartDate:String, reward:[Reward], liveId: Int, ptBorders: [Int], scoreBorders: [Int]) {
         self.sortId = sortId
         self.id = id
         self.type = type
@@ -95,6 +97,8 @@ class CGSSEvent: CGSSBaseModel {
         self.secondHalfStartDate = secondHalfStartDate
         self.reward = reward
         self.liveId = liveId
+        self.ptBorders = ptBorders
+        self.scoreBorders = scoreBorders
         super.init()
         
         // 内部数据错误 特殊处理
