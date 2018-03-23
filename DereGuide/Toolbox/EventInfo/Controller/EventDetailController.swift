@@ -117,6 +117,8 @@ class EventDetailController: BaseViewController {
                     }
                     group.leave()
                 })
+            } else {
+                group.leave()
             }
         }
         group.notify(queue: .main) { [weak self] in
@@ -164,6 +166,8 @@ class EventDetailController: BaseViewController {
                     }
                     group.leave()
                 })
+            } else {
+                group.leave()
             }
         }
         group.notify(queue: .main) { [weak self] in
