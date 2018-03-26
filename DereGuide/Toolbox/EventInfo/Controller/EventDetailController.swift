@@ -143,7 +143,7 @@ class EventDetailController: BaseViewController {
 //        }
         let group = DispatchGroup()
         var items = [RankingItem]()
-        for border in event.ptBorders {
+        for border in event.scoreBorders {
             group.enter()
             if event.type == 1 {
                 APIClient.shared.ataponRanking(page: border / 10 + 1, type: 2, callback: { pack in

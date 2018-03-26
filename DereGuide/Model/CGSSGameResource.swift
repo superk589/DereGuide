@@ -269,23 +269,24 @@ class Master: FMDatabaseQueue {
                 }
                 
                 var scoreBorders = [Int]()
+                scoreBorders.append(1)
                 if type == 1 {
-                    let sql = "select rank_min from atapon_score_rank_disp where event_id = \(id)"
+                    let sql = "select rank_max from atapon_score_rank_disp where event_id = \(id)"
                     let set = try db.executeQuery(sql, values: nil)
                     while set.next() {
-                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                        scoreBorders.append(Int(set.int(forColumn: "rank_max")) + 1)
                     }
                 } else if type == 3 {
-                    let sql = "select rank_min from medley_score_rank_disp where event_id = \(id)"
+                    let sql = "select rank_max from medley_score_rank_disp where event_id = \(id)"
                     let set = try db.executeQuery(sql, values: nil)
                     while set.next() {
-                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                        scoreBorders.append(Int(set.int(forColumn: "rank_max")) + 1)
                     }
                 } else if type == 5 {
-                    let sql = "select rank_min from tour_score_rank_disp where event_id = \(id)"
+                    let sql = "select rank_max from tour_score_rank_disp where event_id = \(id)"
                     let set = try db.executeQuery(sql, values: nil)
                     while set.next() {
-                        scoreBorders.append(Int(set.int(forColumn: "rank_min")))
+                        scoreBorders.append(Int(set.int(forColumn: "rank_max")) + 1)
                     }
                 }
                 
