@@ -28,6 +28,12 @@ extension Refreshable where Self: UIViewController {
         }
         if updater.isWorking || gr.isProcessing { return }
         
+        hm.show()
+        hm.cancelAction = {
+            updater.cancelCurrentSession()
+        }
+        hm.setup(NSLocalizedString("检查更新中", comment: "更新框"), animated: true, cancelable: true)
+        
         func doUpdating(types: CGSSUpdateDataTypes) {
             DispatchQueue.main.async {
                 hm.show()
@@ -38,17 +44,23 @@ extension Refreshable where Self: UIViewController {
             }
             updater.checkUpdate(dataTypes: types, complete: { [weak self] (items, errors) in
                 if !errors.isEmpty && items.count == 0 {
-                    hm.hide(animated: false)
-                    var errorStr = ""
-                    if let error = errors.first as? CGSSUpdaterError {
-                        errorStr.append(error.localizedDescription)
-                    } else if let error = errors.first {
-                        errorStr.append(error.localizedDescription)
+                    if errors.contains(where: { (error) -> Bool in
+                        return (error as NSError).code == NSURLErrorCancelled
+                    }) {
+                        // do nothing
+                    } else {
+                        hm.hide(animated: false)
+                        var errorStr = ""
+                        if let error = errors.first as? CGSSUpdaterError {
+                            errorStr.append(error.localizedDescription)
+                        } else if let error = errors.first {
+                            errorStr.append(error.localizedDescription)
+                        }
+                        let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
+                            , message: errorStr, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
+                        self?.tabBarController?.present(alert, animated: true, completion: nil)
                     }
-                    let alert = UIAlertController.init(title: NSLocalizedString("检查更新失败", comment: "更新框")
-                        , message: errorStr, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: nil))
-                    self?.tabBarController?.present(alert, animated: true, completion: nil)
                 } else {
                     if items.count == 0 {
                         hm.setup(NSLocalizedString("数据是最新版本", comment: "更新框"), animated: false, cancelable: false)
@@ -77,6 +89,7 @@ extension Refreshable where Self: UIViewController {
         
         func confirmToUpdate(reason: String?, newVersion: Version, cancelable: Bool) {
             DispatchQueue.main.async { [weak self] in
+                hm.hide(animated: false)
                 let alert = UIAlertController(title: NSLocalizedString("数据需要更新", comment: "弹出框标题"), message: reason, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { (alertAction) in
                     vm.dataVersion = newVersion
@@ -175,9 +188,14 @@ extension Refreshable where Self: UIViewController {
                         let reason = NSLocalizedString("数据存在新版本，推荐进行更新，请点击确定开始更新", comment: "")
                         confirmToUpdate(reason: reason, newVersion: vm.minimumSupportedDataVersion, cancelable: true)
                     
-                    // finally, do normal updating, because local minimum supported version has no patch information.
+                    // finally, do normal updating, local minimum supported version has no patch information.
                     } else {
-                        doUpdating(types: types)
+                        // if user cancelled, do nothing
+                        if let error = error as NSError?, error.code == NSURLErrorCancelled {
+            
+                        } else {
+                            doUpdating(types: types)
+                        }
                     }
                 }
             })
