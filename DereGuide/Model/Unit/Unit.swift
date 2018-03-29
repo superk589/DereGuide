@@ -67,7 +67,7 @@ public class Unit: NSManagedObject {
     }
     
     @discardableResult
-    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: Bool = false, members: [Member]) -> Unit {
+    static func insert(into moc: NSManagedObjectContext, customAppeal: Int = 0, supportAppeal: Int = Config.maximumSupportAppeal, usesCustomAppeal: Bool = false, members: [Member]) -> Unit {
         members.forEach {
             $0.participatedPosition = Int16(members.index(of: $0)!)
         }

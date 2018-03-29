@@ -22,15 +22,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.4</string>
+	<string>1.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>54</string>
+	<string>55</string>
 	<key>Data version</key>
 	<string>2.0.0</string>
 	<key>Document version</key>
-	<integer>15</integer>
+	<integer>16</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>

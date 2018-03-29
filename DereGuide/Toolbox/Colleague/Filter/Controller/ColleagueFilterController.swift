@@ -134,19 +134,19 @@ class ColleagueFilterController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
-        totalStepperOption = createSteppterOption(minValue: 0, maxValue: 25, currentValue: Double(setting.minLevel), tintColor: .parade, title: NSLocalizedString("最低潜能等级", comment: ""))
+        totalStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumTotalPotential), currentValue: Double(setting.minLevel), tintColor: .parade, title: NSLocalizedString("最低潜能等级", comment: ""))
         stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(totalStepperOption)))
         
-        vocalStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minVocalLevel), tintColor: .vocal, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Vocal"))
+        vocalStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumSinglePotential), currentValue: Double(setting.minVocalLevel), tintColor: .vocal, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Vocal"))
         stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(vocalStepperOption)))
         
-        danceStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minDanceLevel), tintColor: .dance, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Dance"))
+        danceStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumSinglePotential), currentValue: Double(setting.minDanceLevel), tintColor: .dance, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Dance"))
         stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(danceStepperOption)))
         
-        visualStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minVisualLevel), tintColor: .visual, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Visual"))
+        visualStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumSinglePotential), currentValue: Double(setting.minVisualLevel), tintColor: .visual, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Visual"))
         stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(visualStepperOption)))
         
-        lifeStepperOption = createSteppterOption(minValue: 0, maxValue: 10, currentValue: Double(setting.minLifeLevel), tintColor: .life, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Life"))
+        lifeStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumSinglePotential), currentValue: Double(setting.minLifeLevel), tintColor: .life, title: String(format: NSLocalizedString("最低%@等级", comment: ""), "Life"))
         stepperCells.append(UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(lifeStepperOption)))
         
     }

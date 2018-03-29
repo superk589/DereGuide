@@ -61,7 +61,7 @@ class UnitTemplateController: BaseTableViewController {
                     guard members.count == 6 else {
                         continue
                     }
-                    let unit = Unit.insert(into: context, customAppeal: 0, supportAppeal: CGSSGlobal.defaultSupportAppeal, usesCustomAppeal: false, members: members)
+                    let unit = Unit.insert(into: context, customAppeal: 0, supportAppeal: Config.maximumSupportAppeal, usesCustomAppeal: false, members: members)
                     let template = UnitTemplate(name: name, unit: unit)
                     templates.append(template)
                 }

@@ -25,6 +25,13 @@ struct Config {
     #endif
     
     static let appName = NSLocalizedString("DereGuide", comment: "")
+    
+    static let maximumSinglePotential = 10
+    static let maximumTotalPotential = 30
+    
+    // max = 15928 + 500 + 500 + 500
+    // ceil(0.5 × max × 1.3) * 10
+    static let maximumSupportAppeal = 113290
 }
 
 struct NotificationCategory {
@@ -123,9 +130,6 @@ public class CGSSGlobal {
     public static let spreadImageHeight: CGFloat = 824
     
     static let rarityToStirng: [String] = ["", "N", "N+", "R", "R+", "SR", "SR+", "SSR", "SSR+"]
-    
-    static let maxPotentialTotal = 25
-    static let maxPotentialSingle = 10
     
     // 传入0-99999的rate 判断是否触发
     static func isProc(rate: Int) -> Bool {

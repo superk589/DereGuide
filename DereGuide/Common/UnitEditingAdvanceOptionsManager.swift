@@ -30,7 +30,7 @@ class UnitEditingAdvanceOptionsManager {
             UserDefaults.standard.set(newValue, forKey: "defaultPotentialLevel")
         }
         get {
-            return UserDefaults.standard.object(forKey: "defaultPotentialLevel") as? Int ?? 25
+            return UserDefaults.standard.object(forKey: "defaultPotentialLevel") as? Int ?? 30
         }
     }
     
@@ -53,7 +53,7 @@ class UnitEditingAdvanceOptionsManager {
     }
     
     func reset() {
-        defaultPotentialLevel = 25
+        defaultPotentialLevel = Config.maximumTotalPotential
         defaultSkillLevel = 10
         includeGuestLeaderInRecentUsedIdols = false
         editAllSameChara = true

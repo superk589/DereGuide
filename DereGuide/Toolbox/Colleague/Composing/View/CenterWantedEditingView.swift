@@ -40,7 +40,7 @@ class CenterWantedEditingView: UIView {
     
     func prepare() {
         minLevelStepper = PotentialValueStepper(type: .all)
-        minLevelStepper.maximumValue = 25
+        minLevelStepper.maximumValue = Double(Config.maximumTotalPotential)
         minLevelStepper.addTarget(self, action: #selector(handleStepperValueChanged(_:)), for: .valueChanged)
         minLevelStepper.numberFormatter.positivePrefix = "≥ "
 

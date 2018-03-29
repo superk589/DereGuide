@@ -73,6 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 15 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
+            if lastVersion < 16 {
+                UnitEditingAdvanceOptionsManager.default.reset()
+            }
         }
         
         // 规划近期偶像生日

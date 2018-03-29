@@ -31,7 +31,7 @@ class UnitCardSelectionAdvanceOptionsController: BaseTableViewController {
         
         option2 = StepperOption()
         option2.addTarget(self, action: #selector(option2ValueChanged(_:)), for: .valueChanged)
-        option2.setup(title: NSLocalizedString("默认潜能等级", comment: ""), minValue: 0, maxValue: 25, currentValue: 0)
+        option2.setup(title: NSLocalizedString("默认潜能等级", comment: ""), minValue: 0, maxValue: Double(Config.maximumTotalPotential), currentValue: 0)
         
         option3 = SwitchOption()
         option3.addTarget(self, action: #selector(option3ValueChanged(_:)), for: .valueChanged)

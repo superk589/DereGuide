@@ -142,7 +142,7 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
         if let value = Double(supportAppealTextField.text ?? "") {
             supportAppealTextField.text = String(Int(value))
         } else {
-            supportAppealTextField.text = String(CGSSGlobal.defaultSupportAppeal)
+            supportAppealTextField.text = String(Config.maximumSupportAppeal)
         }
        
         if let value = Double(customAppealTextField.text ?? "") {

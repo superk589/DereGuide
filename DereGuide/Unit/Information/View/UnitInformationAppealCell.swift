@@ -122,7 +122,7 @@ class UnitInformationAppealCell: UITableViewCell {
     private func validteInputResult() {
         let value1 = Int(supportAppealTextField.text ?? "")
         if value1 == nil {
-            supportAppealTextField.text = String(CGSSGlobal.defaultSupportAppeal)
+            supportAppealTextField.text = String(Config.maximumSupportAppeal)
         }
     }
     
