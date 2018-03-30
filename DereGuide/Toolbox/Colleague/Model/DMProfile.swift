@@ -256,6 +256,11 @@ extension Profile {
         profile.allTypeDanceLevel = Int16(dmProfile.supportCards.all.potential.dance)
         profile.allTypeVocalLevel = Int16(dmProfile.supportCards.all.potential.vocal)
         profile.coolVisualLevel = Int16(dmProfile.supportCards.cool.potential.visual)
+        profile.cuteLifeLevel = Int16(dmProfile.supportCards.cute.potential.life)
+        profile.coolLifeLevel = Int16(dmProfile.supportCards.cool.potential.life)
+        profile.passionLifeLevel = Int16(dmProfile.supportCards.passion.potential.life)
+        profile.allTypeLifeLevel = Int16(dmProfile.supportCards.all.potential.life)
+
         return profile
     }
 }
