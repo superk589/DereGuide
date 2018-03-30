@@ -158,7 +158,7 @@ extension Refreshable where Self: UIViewController {
                             case .chara:
                                 if let id = Int(item.id) {
                                     let cards = dao.findCardsByCharId(id)
-                                    dao.cardDict.removeObjects(forKeys: cards.flatMap {
+                                    dao.cardDict.removeObjects(forKeys: cards.compactMap {
                                         if $0.dataVersion < version {
                                             return String($0.id)
                                         } else {

@@ -65,7 +65,7 @@ extension FavoriteManager where Favorite: Managed {
         
         observerToken = context.addObjectsDidChangeNotificationObserver { (note) in
             let inserts = note.insertedObjects.remap(to: self.context)
-            self.favorites.append(contentsOf: inserts.flatMap { $0 as? Favorite })
+            self.favorites.append(contentsOf: inserts.compactMap { $0 as? Favorite })
             self.favorites = self.favorites.filter(EntityAndPredicate(entity: Favorite.entity, predicate: Favorite.defaultPredicate))
             self.postChangedNotification()
         }

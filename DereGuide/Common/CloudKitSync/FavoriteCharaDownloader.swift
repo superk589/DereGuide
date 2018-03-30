@@ -91,7 +91,7 @@ extension FavoriteCharaDownloader {
                     request.predicate = FavoriteChara.predicateForNotInRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }
-                return favoriteCharas.map { $0.remoteIdentifier }.flatMap { $0 }
+                return favoriteCharas.map { $0.remoteIdentifier }.compactMap { $0 }
             }()
             
             // delete those have no remote records but left in local database

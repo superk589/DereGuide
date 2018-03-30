@@ -173,7 +173,7 @@ class CGSSGacha: NSObject {
         let semephore = DispatchSemaphore(value: 0)
         var result = [CGSSCard]()
         CGSSGameResource.shared.master.getGuaranteedCardIds(gacha: self, callback: { (cardIds) in
-            result.append(contentsOf: cardIds.map { CGSSDAO.shared.findCardById($0) }.flatMap { $0 } )
+            result.append(contentsOf: cardIds.map { CGSSDAO.shared.findCardById($0) }.compactMap { $0 } )
             semephore.signal()
         })
         semephore.wait()

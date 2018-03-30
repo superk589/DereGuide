@@ -456,7 +456,7 @@ extension Unit {
     }
     
     func validateMembers() -> Bool {
-        return members.count == 6 && members.flatMap { (member) -> CGSSCard? in
+        return members.count == 6 && members.compactMap { (member) -> CGSSCard? in
            return member.card
         }.count == 6
     }

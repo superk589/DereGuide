@@ -643,7 +643,7 @@ struct AdvanceBeatmapDrawer {
             }
         }
         
-        let pressed: [Note] = lastPressedNote.flatMap { $0 }
+        let pressed: [Note] = lastPressedNote.compactMap { $0 }
         for last in pressed {
             if let next = last.next {
                 let path = pathForLongPress(last.finishPos, sec1: last.offsetSecond, sec2: next.offsetSecond)

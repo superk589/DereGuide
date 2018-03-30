@@ -30,7 +30,7 @@ class EventTrend : NSObject, NSCoding {
     var startDate : String!
     
     lazy var lives: [CGSSLive] = {
-        return self.liveDataIds.flatMap {
+        return self.liveDataIds.compactMap {
             var result: CGSSLive?
             let semaphore = DispatchSemaphore.init(value: 0)
             CGSSGameResource.shared.master.getLives(liveId: $0, callback: { (lives) in

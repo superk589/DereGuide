@@ -90,7 +90,7 @@ extension FavoriteCardDownloader {
                     request.predicate = FavoriteCard.predicateForNotInRemoteIdentifiers(ids)
                     request.returnsObjectsAsFaults = false
                 }
-                return favoriteCards.map { $0.remoteIdentifier }.flatMap { $0 }
+                return favoriteCards.map { $0.remoteIdentifier }.compactMap { $0 }
             }()
             
             // delete those have no remote records but left in local database

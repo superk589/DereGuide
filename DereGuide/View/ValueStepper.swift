@@ -349,7 +349,7 @@ private enum Button: Int {
         }
         
         alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { (_) in
-            if let newValue = Double((alertController.textFields?[0].text)!) as Double! {
+            if let newValue = Double((alertController.textFields?[0].text)!) as Double? {
                 if newValue >= self.minimumValue || newValue <= self.maximumValue {
                     self.value = newValue
                 }

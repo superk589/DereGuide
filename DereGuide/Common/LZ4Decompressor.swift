@@ -19,7 +19,7 @@ class LZ4Decompressor {
         let source = (newdata as NSData).bytes.bindMemory(to: Int8.self, capacity: newdata.count)
         let dest = UnsafeMutablePointer<Int8>.allocate(capacity: destSize)
         defer {
-            dest.deallocate(capacity: destSize)
+            dest.deallocate()
         }
         LZ4_decompress_fast(source, dest, Int32(destSize))
         

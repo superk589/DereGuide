@@ -23,7 +23,7 @@ final class ProfileRemote: Remote {
         cloudKitContainer.fetchUserRecordID { userRecordID, error in
             guard let userID = userRecordID else {
                 
-                completion([], [RemoteError.init(cloudKitError: error)].flatMap { $0 })
+                completion([], [RemoteError.init(cloudKitError: error)].compactMap { $0 })
                 return
             }
             let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
@@ -35,7 +35,7 @@ final class ProfileRemote: Remote {
                 let op = CKModifyRecordsOperation(recordsToSave:nil, recordIDsToDelete: records.map { $0.recordID })
                 
                 op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
-                    completion((deletedRecordIDs ?? []).map { $0.recordName }, [RemoteError(cloudKitError: error)].flatMap { $0 })
+                    completion((deletedRecordIDs ?? []).map { $0.recordName }, [RemoteError(cloudKitError: error)].compactMap { $0 })
                 }
                 self.cloudKitContainer.publicCloudDatabase.add(op)
             }

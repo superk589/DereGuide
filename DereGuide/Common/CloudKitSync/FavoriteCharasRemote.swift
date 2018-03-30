@@ -20,7 +20,7 @@ final class FavoriteCharasRemote: Remote {
     func fetchLatestRecords(completion: @escaping ([R], [RemoteError]) -> ()) {
         cloudKitContainer.fetchUserRecordID { userRecordID, error in
             guard let userID = userRecordID else {
-                completion([], [RemoteError.init(cloudKitError: error)].flatMap { $0 })
+                completion([], [RemoteError.init(cloudKitError: error)].compactMap { $0 })
                 return
             }
             let query = CKQuery(recordType: R.recordType, predicate: self.predicateOfUser(userID))
@@ -31,8 +31,8 @@ final class FavoriteCharasRemote: Remote {
                 if errors.count > 0 {
                     print(errors)
                 }
-                let rs = records.map { R(record: $0) }.flatMap { $0 }
-                completion(rs, errors.map(RemoteError.init).flatMap { $0 })
+                let rs = records.map { R(record: $0) }.compactMap { $0 }
+                completion(rs, errors.map(RemoteError.init).compactMap { $0 })
                 self.remove(rs.redundants { $0.charaID == $1.charaID }.map { $0.id }, completion: { _, _ in })
             }
         }

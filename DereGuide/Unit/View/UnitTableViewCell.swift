@@ -13,7 +13,7 @@ class UnitTableViewCell: UITableViewCell {
     
     var iconStackView: UIStackView!
     var cardIcons: [CGSSCardIconView] {
-        return iconStackView.arrangedSubviews.flatMap{ ($0 as? UnitSimulationCardView)?.icon }
+        return iconStackView.arrangedSubviews.compactMap { ($0 as? UnitSimulationCardView)?.icon }
     }
     
 //    var appealStackView: UIStackView!

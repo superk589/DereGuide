@@ -136,7 +136,7 @@ extension Remote {
             guard error == nil else { return completion([], { _ in }) } // TODO We should handle this case with e.g. a clean refetch
             guard changeReasons.count > 0 else { return completion([], callback) }
             self.cloudKitContainer.publicCloudDatabase.fetchRecords(for: changeReasons) { changes, error in
-                completion(changes.map { RemoteRecordChange(change: $0) }.flatMap { $0 }, callback)
+                completion(changes.map { RemoteRecordChange(change: $0) }.compactMap { $0 }, callback)
             }
         }
     }
@@ -150,7 +150,7 @@ extension Remote {
             if errors.count > 0 {
                 print(errors)
             }
-            completion(records.map { R(record: $0) }.flatMap { $0 })
+            completion(records.map { R(record: $0) }.compactMap { $0 })
         }
     }
     
@@ -166,7 +166,7 @@ extension Remote {
         }
         
         op.queryCompletionBlock = { cursor, error in
-            completion(results.map { R(record: $0) }.flatMap { $0 }, cursor, RemoteError(cloudKitError: error))
+            completion(results.map { R(record: $0) }.compactMap { $0 }, cursor, RemoteError(cloudKitError: error))
         }
   
         cloudKitContainer.publicCloudDatabase.add(op)
@@ -181,7 +181,7 @@ extension Remote {
             results.append(record)
         }
         op.queryCompletionBlock = { cursor, error in
-            completion(results.map { R(record: $0) }.flatMap { $0 }, cursor, RemoteError(cloudKitError: error))
+            completion(results.map { R(record: $0) }.compactMap { $0 }, cursor, RemoteError(cloudKitError: error))
         }
         cloudKitContainer.publicCloudDatabase.add(op)
     }
@@ -212,7 +212,7 @@ extension Remote {
                 if errors.count > 0 {
                     print(errors)
                 }
-                completion(records.map { R(record: $0) }.flatMap { $0 }, errors.map(RemoteError.init).flatMap { $0 })
+                completion(records.map { R(record: $0) }.compactMap { $0 }, errors.map(RemoteError.init).compactMap { $0 })
             }
         }
     }
@@ -225,7 +225,7 @@ extension Remote {
             if error != nil {
                 print(error!)
             }
-            let remoteRecords = modifiedRecords?.map { R(record: $0) }.flatMap { $0 } ?? []
+            let remoteRecords = modifiedRecords?.map { R(record: $0) }.compactMap { $0 } ?? []
             let remoteError = RemoteError(cloudKitError: error)
             completion(remoteRecords, remoteError)
         }
@@ -234,13 +234,16 @@ extension Remote {
     
     func modify(_ locals: [L], modification: @escaping ([CKRecord], @escaping () -> ()) -> (), completion: @escaping ([R], RemoteError?) -> ()) {
         
-        let op = CKFetchRecordsOperation(recordIDs: locals.flatMap{ $0.remoteIdentifier }.map(CKRecordID.init(recordName:)))
+        let op = CKFetchRecordsOperation(recordIDs: locals
+            .compactMap { $0.remoteIdentifier }
+            .map(CKRecordID.init(recordName:))
+        )
         
         op.fetchRecordsCompletionBlock = { records, error in
             modification(records?.map { $0.value } ?? []) {
                 let op = CKModifyRecordsOperation(recordsToSave: records?.map { $0.value }, recordIDsToDelete: nil)
                 op.modifyRecordsCompletionBlock = { modifiedRecords, _, error in
-                    let remoteRecords = modifiedRecords?.map { R(record: $0) }.flatMap { $0 } ?? []
+                    let remoteRecords = modifiedRecords?.map { R(record: $0) }.compactMap { $0 } ?? []
                     let remoteError = RemoteError(cloudKitError: error)
                     completion(remoteRecords, remoteError)
                 }
