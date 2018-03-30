@@ -1,7 +1,7 @@
 PODS:
-  - Charts (3.0.5):
-    - Charts/Core (= 3.0.5)
-  - Charts/Core (3.0.5)
+  - Charts (3.1.0):
+    - Charts/Core (= 3.1.0)
+  - Charts/Core (3.1.0)
   - DynamicColor (4.0.2)
   - EasyTipView (1.1.0)
   - FMDB (2.7.2):
@@ -13,12 +13,12 @@ PODS:
   - MJRefresh (3.1.15.3)
   - ReachabilitySwift (4.1.0)
   - RijndaelSwift (0.1.3)
-  - SDWebImage (4.3.2):
-    - SDWebImage/Core (= 4.3.2)
-  - SDWebImage/Core (4.3.2)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.0.0)
-  - TTGTagCollectionView (1.8.2)
+  - TTGTagCollectionView (1.9.0)
   - ZKCornerRadiusView (0.1.0)
   - ZKDrawerController (0.3.5):
     - SnapKit
@@ -60,7 +60,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/superk589/MessagePack.swift.git
 
 SPEC CHECKSUMS:
-  Charts: 45cdc985b764c838b35ee47eb1365d15735f6d1a
+  Charts: 0b0c96f6118b6ce63f11adbcaa3b31045ee4d772
   DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
   EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
@@ -70,10 +70,10 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   RijndaelSwift: 2d722b9390d8cebc0dd19c20bc84ddb4db06eb18
-  SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
-  TTGTagCollectionView: 20cf236b538ea9a17d1f0538968148c8d304414a
+  TTGTagCollectionView: 958f20b946dee92a8ba20dc37d10a06737641ae9
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: 00b1b3a1b8b5299e284f30b49d704ac282041e52
   ZKPageViewController: 95b09fbb880061bbf33d05086a7e734a8ed899f6
