@@ -120,9 +120,9 @@ class CharView: UIView {
         nameLabel.text = char.kanjiSpaced
         romajiLabel.text = char.conventional
         if char.voice == "" {
-            cvLabel.text = "CV: \(NSLocalizedString("未付声", comment: "角色信息页面"))"
+            cvLabel.text = "CV \(NSLocalizedString("未付声", comment: "角色信息页面"))"
         } else {
-            cvLabel.text = "CV: \(char.voice!)"
+            cvLabel.text = "CV \(char.voice!)"
         }
         iconView.charaID = char.charaId
         
