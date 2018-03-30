@@ -25,9 +25,9 @@ class CharFilterSortController: BaseFilterSortController {
     var favoriteTitles = [NSLocalizedString("已收藏", comment: ""),
                           NSLocalizedString("未收藏", comment: "")]
 
-    var sorterMethods = ["sHeight", "sWeight", "BMI", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId", "sBirthday"]
+    var sorterMethods = ["sHeight", "sWeight", "BMI", "sAge", "sizeB", "sizeW", "sizeH", "sName", "sCharaId", "sBirthday", "sBusVoValue", "sBusDaValue", "sBusViValue", "sBusTotalValue"]
     
-    var sorterTitles = [NSLocalizedString("身高", comment: ""), NSLocalizedString("体重", comment: ""), "BMI", NSLocalizedString("年龄", comment: ""), "B", "W", "H", NSLocalizedString("五十音", comment: ""), NSLocalizedString("游戏编号", comment: ""), NSLocalizedString("生日", comment: "")]
+    var sorterTitles = [NSLocalizedString("身高", comment: ""), NSLocalizedString("体重", comment: ""), "BMI", NSLocalizedString("年龄", comment: ""), "B", "W", "H", NSLocalizedString("五十音", comment: ""), NSLocalizedString("游戏编号", comment: ""), NSLocalizedString("生日", comment: ""), "Active", "Smart", "Unique", "Total"]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     

@@ -55,6 +55,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         filterVC.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCharasChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
     }
     
     deinit {

@@ -87,6 +87,22 @@ extension CGSSChar {
         return birthMonth * 100 + birthDay
     }
     
+    @objc dynamic var sBusVoValue: Int {
+        return busVoValue ?? 0
+    }
+    
+    @objc dynamic var sBusDaValue: Int {
+        return busDaValue ?? 0
+    }
+    
+    @objc dynamic var sBusViValue: Int {
+        return busViValue ?? 0
+    }
+    
+    @objc dynamic var sBusTotalValue: Int {
+        return busTotalValue ?? 0
+    }
+    
     // 一些属性的特殊转换
     func handString() -> String {
         let semaphore = DispatchSemaphore.init(value: 0)
@@ -197,6 +213,14 @@ extension CGSSChar {
         }
         return result
     }
+    
+    var busTotalValue: Int? {
+        if let vo = busVoValue, let da = busDaValue, let vi = busViValue {
+            return vo + da + vi
+        } else {
+            return nil
+        }
+    }
 }
 
 class CGSSChar: CGSSBaseModel {
@@ -235,6 +259,9 @@ class CGSSChar: CGSSBaseModel {
     var voice: String!
     var weight: Int!
     
+    var busVoValue: Int?
+    var busDaValue: Int?
+    var busViValue: Int?
     /**
          * Instantiate the instance using the passed json values to set the properties values
          */
@@ -278,6 +305,9 @@ class CGSSChar: CGSSBaseModel {
         }
         voice = json["voice"].stringValue
         weight = json["weight"].intValue
+        busVoValue = json["bus_vo_value"].intValue
+        busDaValue = json["bus_da_value"].intValue
+        busViValue = json["bus_vi_value"].intValue
     }
     
     // 用于创建一个空角色, 生日提醒中使用
@@ -318,6 +348,10 @@ class CGSSChar: CGSSBaseModel {
         valist = aDecoder.decodeObject(forKey: "valist") as? [AnyObject]
         voice = aDecoder.decodeObject(forKey: "voice") as? String
         weight = aDecoder.decodeObject(forKey: "weight") as? Int
+        
+        busVoValue = aDecoder.decodeObject(forKey: "bus_vo_value") as? Int
+        busDaValue = aDecoder.decodeObject(forKey: "bus_da_value") as? Int
+        busViValue = aDecoder.decodeObject(forKey: "bus_vi_value") as? Int
     }
     
     /**
@@ -419,7 +453,15 @@ class CGSSChar: CGSSBaseModel {
         if weight != nil {
             aCoder.encode(weight, forKey: "weight")
         }
-        
+        if busVoValue != nil {
+            aCoder.encode(busVoValue, forKey: "bus_vo_value")
+        }
+        if busDaValue != nil {
+            aCoder.encode(busDaValue, forKey: "bus_da_value")
+        }
+        if busViValue != nil {
+            aCoder.encode(busViValue, forKey: "bus_vi_value")
+        }
     }
     
 }

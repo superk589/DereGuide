@@ -11,11 +11,15 @@ import UIKit
 class CharView: UIView {
     
     var iconView: CGSSCharaIconView!
-    var kanaSpacedLabel: UILabel!
     var nameLabel: UILabel!
     let romajiLabel = UILabel()
-    var cvLabel: UILabel!
     var sortingPropertyLabel: UILabel!
+    
+    let cvLabel = UILabel()
+    let voLabel = UILabel()
+    let daLabel = UILabel()
+    let viLabel = UILabel()
+    let totalLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,28 +42,27 @@ class CharView: UIView {
             make.bottom.equalTo(-10)
         }
         
-        kanaSpacedLabel = UILabel()
-        kanaSpacedLabel.font = UIFont.systemFont(ofSize: 10)
-        addSubview(kanaSpacedLabel)
-        kanaSpacedLabel.adjustsFontSizeToFitWidth = true
-        kanaSpacedLabel.baselineAdjustment = .alignCenters
-        kanaSpacedLabel.snp.makeConstraints { (make) in
+        cvLabel.font = UIFont.systemFont(ofSize: 12)
+        addSubview(cvLabel)
+        cvLabel.adjustsFontSizeToFitWidth = true
+        cvLabel.baselineAdjustment = .alignCenters
+        cvLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
             make.top.equalTo(9)
         }
         
         sortingPropertyLabel = UILabel()
-        sortingPropertyLabel.font = UIFont.systemFont(ofSize: 10)
+        sortingPropertyLabel.font = UIFont.systemFont(ofSize: 12)
         addSubview(sortingPropertyLabel)
         sortingPropertyLabel.textAlignment = .right
         sortingPropertyLabel.snp.makeConstraints { (make) in
-            make.left.greaterThanOrEqualTo(kanaSpacedLabel.snp.right).offset(5)
+            make.left.greaterThanOrEqualTo(cvLabel.snp.right).offset(5)
             make.right.equalTo(-10)
-            make.top.equalTo(kanaSpacedLabel)
+            make.top.equalTo(cvLabel)
         }
         
         sortingPropertyLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        kanaSpacedLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
+        cvLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
         
         nameLabel = UILabel()
         nameLabel.font = UIFont.systemFont(ofSize: 16)
@@ -69,7 +72,7 @@ class CharView: UIView {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
             make.right.lessThanOrEqualTo(-10)
-            make.top.equalTo(kanaSpacedLabel.snp.bottom).offset(3)
+            make.top.equalTo(cvLabel.snp.bottom)
         }
         
         romajiLabel.font = UIFont(name: "PingFangSC-Light", size: 13)
@@ -86,12 +89,30 @@ class CharView: UIView {
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
-        cvLabel = UILabel()
-        cvLabel.font = UIFont.systemFont(ofSize: 12)
-        addSubview(cvLabel)
-        cvLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(10)
-            make.lastBaseline.equalTo(iconView.snp.bottom)
+        voLabel.font = UIFont(name: "menlo", size: 12)
+        voLabel.textColor = .vocal
+        voLabel.textAlignment = .right
+        
+        daLabel.font = UIFont(name: "menlo", size: 12)
+        daLabel.textColor = .dance
+        daLabel.textAlignment = .right
+        
+        viLabel.font = UIFont(name: "menlo", size: 12)
+        viLabel.textColor = .visual
+        viLabel.textAlignment = .right
+        
+        totalLabel.font = UIFont(name: "menlo", size: 12)
+        totalLabel.textColor = .darkGray
+        totalLabel.textAlignment = .right
+        
+        let stackView = UIStackView(arrangedSubviews: [voLabel, daLabel, viLabel, totalLabel])
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.left.equalTo(68)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(iconView.snp.bottom)
         }
     }
     
@@ -104,9 +125,8 @@ class CharView: UIView {
             cvLabel.text = "CV: \(char.voice!)"
         }
         iconView.charaID = char.charaId
-        kanaSpacedLabel.text = "\(char.kanaSpaced!)"
         
-        if !["sName", "sCharaId"].contains(sorter.property) {
+        if !["sName", "sCharaId", "sBusVoValue", "sBusDaValue", "sBusViValue", "sBusTotalValue"].contains(sorter.property) {
             if sorter.property == "sBirthday" {
                 sortingPropertyLabel.text = "\(sorter.displayName): \(String.init(format: NSLocalizedString("%d月%d日", comment: ""), char.birthMonth, char.birthDay))"
             } else {
@@ -119,6 +139,11 @@ class CharView: UIView {
         } else {
             sortingPropertyLabel.text = ""
         }
+        
+        voLabel.text = char.busVoValue.flatMap(String.init)
+        daLabel.text = char.busDaValue.flatMap(String.init)
+        viLabel.text = char.busViValue.flatMap(String.init)
+        totalLabel.text = char.busTotalValue.flatMap(String.init)
     }
     
 }
