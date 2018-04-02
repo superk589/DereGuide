@@ -18,7 +18,9 @@ class UnitAdvanceOptionsController: BaseTableViewController {
     var option3: TextFieldOption!
     var option4: TextFieldOption!
     var option5: TextFieldOption!
-        
+    
+    let option6 = TextFieldOption()
+    
     private func prepareStaticCells() {
         
         option1 = SwitchOption()
@@ -43,16 +45,21 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
         option5 = TextFieldOption()
-        option5.label.text = NSLocalizedString("挂机模式中，手动打前x秒", comment: "")
+        option5.label.text = NSLocalizedString("挂机模式中，手动打前 x 秒", comment: "")
         option5.addTarget(self, action: #selector(option5TextFieldEndEditing(_:)), for: .editingDidEnd)
         option5.addTarget(self, action: #selector(option5TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
+
+        option6.label.text = NSLocalizedString("挂机模式中，手动打前 x combo", comment: "")
+        option6.addTarget(self, action: #selector(option6TextFieldEndEditing(_:)), for: .editingDidEnd)
+        option6.addTarget(self, action: #selector(option6TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
         let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option1))
         let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option2))
         let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option3))
         let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option4))
         let cell5 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option5))
-        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4, cell5])
+        let cell6 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option6))
+        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4, cell5, cell6])
         
         setupWithUserDefaults()
     }
@@ -97,6 +104,7 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option3.textField.text = String(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)
         option5.textField.text = String(LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds)
+        option6.textField.text = String(LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo)
     }
     
     private func validateOption3TextField() {
@@ -136,6 +144,19 @@ class UnitAdvanceOptionsController: BaseTableViewController {
     @objc func option5TextFieldEndEditing(_ sender: UITextField) {
         validateOption5TextField()
         LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds = Float(option5.textField.text!)!
+    }
+    
+    private func validateOption6TextField() {
+        if let value = Int(option6.textField.text ?? ""), value >= 0 && value <= Int.max {
+            option6.textField.text = String(value)
+        } else {
+            option6.textField.text = "0"
+        }
+    }
+    
+    @objc func option6TextFieldEndEditing(_ sender: UITextField) {
+        validateOption6TextField()
+        LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo = Int(option6.textField.text!)!
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

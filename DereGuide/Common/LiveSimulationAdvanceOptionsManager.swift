@@ -70,12 +70,22 @@ class LiveSimulationAdvanceOptionsManager {
         }
     }
     
+    var afkModeStartCombo: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "afkModeStartCombo")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "afkModeStartCombo") as? Int ?? 0
+        }
+    }
+    
     func reset() {
 //        considerOverloadSkillsTriggerLifeCondition = false
         greatPercent = 0.0
         simulationTimes = 10000
         roomUpValue = 10
         afkModeStartSeconds = 0.0
+        afkModeStartCombo = 0
     }
 
 }
