@@ -42,11 +42,17 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEnd)
         option4.addTarget(self, action: #selector(option4TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
 
+        option5 = TextFieldOption()
+        option5.label.text = NSLocalizedString("挂机模式中，手动打前x秒", comment: "")
+        option5.addTarget(self, action: #selector(option5TextFieldEndEditing(_:)), for: .editingDidEnd)
+        option5.addTarget(self, action: #selector(option5TextFieldEndEditing(_:)), for: .editingDidEndOnExit)
+
         let cell1 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option1))
         let cell2 = UnitAdvanceOptionsTableViewCell(optionStyle: .stepper(option2))
         let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option3))
         let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option4))
-        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4])
+        let cell5 = UnitAdvanceOptionsTableViewCell(optionStyle: .textField(option5))
+        staticCells.append(contentsOf: [cell1, cell2, cell3, cell4, cell5])
         
         setupWithUserDefaults()
     }
@@ -90,6 +96,7 @@ class UnitAdvanceOptionsController: BaseTableViewController {
         option2.stepper.value = Double(LiveSimulationAdvanceOptionsManager.default.roomUpValue)
         option3.textField.text = String(LiveSimulationAdvanceOptionsManager.default.greatPercent)
         option4.textField.text = String(LiveSimulationAdvanceOptionsManager.default.simulationTimes)
+        option5.textField.text = String(LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds)
     }
     
     private func validateOption3TextField() {
@@ -116,6 +123,19 @@ class UnitAdvanceOptionsController: BaseTableViewController {
     @objc func option4TextFieldEndEditing(_ sender: UITextField) {
         validateOption4TextField()
         LiveSimulationAdvanceOptionsManager.default.simulationTimes = Int(option4.textField.text!)!
+    }
+    
+    private func validateOption5TextField() {
+        if let value = Float(option5.textField.text ?? ""), value >= 0 && value <= Float.greatestFiniteMagnitude {
+            option5.textField.text = String(value)
+        } else {
+            option5.textField.text = "0"
+        }
+    }
+    
+    @objc func option5TextFieldEndEditing(_ sender: UITextField) {
+        validateOption5TextField()
+        LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds = Float(option5.textField.text!)!
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

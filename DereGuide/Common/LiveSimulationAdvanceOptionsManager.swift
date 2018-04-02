@@ -61,11 +61,21 @@ class LiveSimulationAdvanceOptionsManager {
         }
     }
     
+    var afkModeStartSeconds: Float {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "afkModeStartSeconds")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "afkModeStartSeconds") as? Float ?? 0
+        }
+    }
+    
     func reset() {
 //        considerOverloadSkillsTriggerLifeCondition = false
         greatPercent = 0.0
         simulationTimes = 10000
         roomUpValue = 10
+        afkModeStartSeconds = 0.0
     }
 
 }

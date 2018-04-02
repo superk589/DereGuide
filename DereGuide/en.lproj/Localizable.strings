@@ -838,7 +838,7 @@
 "极限2" = "Optimistic 2";
 "悲观" = "Pessimistic";
 
-"* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失" = "* In AFK mode, all notes are assumed to be missed, except when skill boost and perfect lock are on.";
+"* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\n* 如果您在高级选项中设置了手动打前x秒，则前x秒视为全P模式" = "* In AFK mode, all notes are assumed to be missed, except when skill boost and perfect lock are on.\n* If you set \"play for the first x seconds\" in advance options, notes of the first x seconds are assumed as perfect.";
 "* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发" = "* In random mode, all skills are triggered based on their real rate.\n* In optimistic 1, it takes the best score of each note within its Perfect duration.\n* In optimistic 2, all notes are assumed to be Perfect.\n* In pessimistic mode, all skills are assumed to be not triggered, unless it has a 100% proc rate.";
 
 "Note列表" = "Note List";
@@ -862,3 +862,6 @@
 
 /* new in 1.8.4 */
 "排名" = "Ranking";
+
+/* new in 1.8.5 */
+"挂机模式中，手动打前x秒" = "In AFK mode, play for the first x seconds";
