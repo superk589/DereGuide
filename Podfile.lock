@@ -1,7 +1,7 @@
 PODS:
-  - Charts (3.1.0):
-    - Charts/Core (= 3.1.0)
-  - Charts/Core (3.1.0)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
   - DynamicColor (4.0.2)
   - EasyTipView (1.1.0)
   - FMDB (2.7.2):
@@ -60,7 +60,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/superk589/MessagePack.swift.git
 
 SPEC CHECKSUMS:
-  Charts: 0b0c96f6118b6ce63f11adbcaa3b31045ee4d772
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
   EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
