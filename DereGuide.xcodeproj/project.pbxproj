@@ -566,17 +566,14 @@
 		123F320C1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadImageViewAnimator.swift; sourceTree = "<group>"; };
 		123F320D1E6FED0F00B69D26 /* SpreadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadImageViewController.swift; sourceTree = "<group>"; };
 		123F54571EF6B7CA00C76F31 /* RecentUsedMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentUsedMemberCell.swift; sourceTree = "<group>"; };
-		1244F59D1D9814350021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5A11D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1244F5A21D9814740021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		1244F5AB1D981CBD0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1244F5AC1D981CBE0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		1244F5AD1D981CBE0021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1244F5D81D98E4EC0021E4B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1244F5DF1D98E51B0021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1244F5E11D98E5220021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		1244F5E21D98E5230021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1244F5E61D98E6210021E4B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ToolboxList.plist; sourceTree = "<group>"; };
 		1244F5E81D98E6230021E4B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/ToolboxList.plist"; sourceTree = "<group>"; };
 		1244F5E91D98E6250021E4B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/ToolboxList.plist; sourceTree = "<group>"; };
 		1245F7991F175B06009A80EC /* CloudKitMergePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitMergePolicy.swift; sourceTree = "<group>"; };
@@ -801,6 +798,8 @@
 		12D4F8B81E1CCF880064991E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		12D4F8C71E1E9F1E0064991E /* CardFilterSortController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFilterSortController.swift; sourceTree = "<group>"; };
 		12D4F8CB1E1EA9020064991E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		12D51E392073AD1100E34474 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		12D51E3A2073AD1F00E34474 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		12D57A821F427AE600575B40 /* ColleagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueTableViewCell.swift; sourceTree = "<group>"; };
 		12D5813C1F54592400D5D4A9 /* UnitTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTemplateCell.swift; sourceTree = "<group>"; };
 		12D624351F16F63B0017999A /* CharView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharView.swift; sourceTree = "<group>"; };
@@ -882,6 +881,7 @@
 		12F8DF2520118C8900F8A3DC /* GachaOdds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaOdds.swift; sourceTree = "<group>"; };
 		12F8DF292011C02B00F8A3DC /* GachaDetailLoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailLoadingCell.swift; sourceTree = "<group>"; };
 		12F8DF2B2011C16400F8A3DC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		12F991142073AF390019E83C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/ToolboxList.plist"; sourceTree = "<group>"; };
 		12F9B0381F28932F00D3B47E /* FavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCard.swift; sourceTree = "<group>"; };
 		12F9B03B1F28935900D3B47E /* FavoriteChara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteChara.swift; sourceTree = "<group>"; };
 		12F9B03D1F28955E00D3B47E /* RemoteFavoriteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteCard.swift; sourceTree = "<group>"; };
@@ -2087,7 +2087,6 @@
 				127AF72F1D01B2E9007EFBE0 /* Embed Frameworks */,
 				12536DD31ED5636100B75BA0 /* Embed App Extensions */,
 				363B36ADED546B67A9046C6E /* [CP] Embed Pods Frameworks */,
-				9C4D9AE1BC43693F0CD67CC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2108,7 +2107,6 @@
 				12C2B62520010402006EE7F7 /* Frameworks */,
 				12C2B62620010402006EE7F7 /* Resources */,
 				5BF186034D64E4FB8E2D36ED /* [CP] Embed Pods Frameworks */,
-				169D92A796D277A96C0406D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2128,7 +2126,6 @@
 				12EECCCA1ED57EF90047666C /* Sources */,
 				12EECCCB1ED57EF90047666C /* Frameworks */,
 				12EECCCC1ED57EF90047666C /* Resources */,
-				993AABE48082D0412B6B6D25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2245,21 +2242,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		169D92A796D277A96C0406D7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DereGuideTests/Pods-DereGuideTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		363B36ADED546B67A9046C6E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2362,36 +2344,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		993AABE48082D0412B6B6D25 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NotificationContent/Pods-NotificationContent-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C4D9AE1BC43693F0CD67CC8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DereGuide/Pods-DereGuide-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA97C9A316AC79D8BE8E37C1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2849,11 +2801,11 @@
 		1244F59E1D9814350021E4B1 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1244F59D1D9814350021E4B1 /* Base */,
 				1244F5AD1D981CBE0021E4B1 /* ja */,
 				124CF52C1DA0D77000ACF6F8 /* zh-Hant */,
 				124CF5321DA0DA7600ACF6F8 /* zh-Hant-TW */,
 				F57C42EC1DAB070F007CCFC7 /* en */,
+				12D51E392073AD1100E34474 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2861,11 +2813,11 @@
 		1244F5E01D98E51B0021E4B1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1244F5DF1D98E51B0021E4B1 /* Base */,
 				1244F5E11D98E5220021E4B1 /* zh-Hant */,
 				1244F5E21D98E5230021E4B1 /* ja */,
 				124CF5301DA0D96000ACF6F8 /* zh-Hant-TW */,
 				F57C42ED1DAB070F007CCFC7 /* en */,
+				12D51E3A2073AD1F00E34474 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2873,11 +2825,11 @@
 		1244F5E71D98E6210021E4B1 /* ToolboxList.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1244F5E61D98E6210021E4B1 /* Base */,
 				1244F5E81D98E6230021E4B1 /* zh-Hant */,
 				1244F5E91D98E6250021E4B1 /* ja */,
 				124CF5311DA0D96100ACF6F8 /* zh-Hant-TW */,
 				F57C42EE1DAB070F007CCFC7 /* en */,
+				12F991142073AF390019E83C /* zh-Hans */,
 			);
 			name = ToolboxList.plist;
 			sourceTree = "<group>";
