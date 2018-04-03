@@ -53,6 +53,7 @@ extension CGSSEvent {
     }
     
     var detailBannerURL: URL! {
+        // new url https://apis.game.starlight-stage.jp/image/announce/header/header_event_%04d.png
         if startDate.toDate() > Date() {
             return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", id))
         } else {

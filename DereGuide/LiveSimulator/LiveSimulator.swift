@@ -35,7 +35,7 @@ class LiveSimulator {
             actions += [LSAction.skillStart(String(index), bonus), .skillEnd(String(index), bonus)]
         }
         
-        actions.sort { $0.timeOffset < $1.timeOffset }
+        actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order) }
         
         let initialLife = options.contains(.doubleHP) ? 2 * totalLife : totalLife
         var game = LSGame(initialLife: initialLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)
@@ -55,7 +55,7 @@ class LiveSimulator {
                 game.perform(action)
             }
             
-            // tempGame and tampActionSlice are used to retain the highest score among all tries
+            // tempGame and tempActionSlice are used to retain the highest score among all tries
             var tempGame = game
             var tempActionSlice = actionSlice
             tempGame.perform(.note(note))
@@ -217,7 +217,7 @@ class LiveSimulator {
 
         actions += notes.map { LSAction.note($0) }
         
-        actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order)  }
+        actions.sort { ($0.timeOffset, $0.order) < ($1.timeOffset, $1.order) }
         
         let initialLife = options.contains(.doubleHP) ? 2 * totalLife : totalLife
         var game = LSGame(initialLife: initialLife, maxLife: 2 * totalLife, numberOfNotes: notes.count, difficulty: difficulty)

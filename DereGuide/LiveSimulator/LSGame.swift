@@ -91,7 +91,7 @@ struct LSGame {
             
             if isDead {
                 processNoteAfterDead(note)
-            } else if afkMode && !(hasSkillBoost && hasStrongPerfectSupport) && note.sec > LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds && noteIndex > LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo{
+            } else if afkMode && !(hasSkillBoost && hasStrongPerfectSupport) && note.sec > LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds && noteIndex > LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo {
                 // if in afk mode, note will be missed unless skill boost and perfect support are on
                 processNoteMissing(note)
             } else {
