@@ -45,6 +45,24 @@ DEPENDENCIES:
   - ZKDrawerController
   - ZKPageViewController
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Charts
+    - DynamicColor
+    - FMDB
+    - ImageViewer
+    - lz4
+    - MJRefresh
+    - ReachabilitySwift
+    - RijndaelSwift
+    - SDWebImage
+    - SnapKit
+    - SwiftyJSON
+    - TTGTagCollectionView
+    - ZKCornerRadiusView
+    - ZKDrawerController
+    - ZKPageViewController
+
 EXTERNAL SOURCES:
   EasyTipView:
     :git: https://github.com/igorkislyuk/EasyTipView.git
@@ -80,4 +98,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd4dd78283be68e7a896fd71a78ed28676febad7
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0.beta.1
