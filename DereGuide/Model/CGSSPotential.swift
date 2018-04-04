@@ -39,7 +39,7 @@ extension CGSSRarityTypes {
     }
 }
 
-struct CGSSPotential {
+struct CGSSPotential: Equatable {
     
     var vocalLevel: Int
     var danceLevel: Int
@@ -58,11 +58,5 @@ struct CGSSPotential {
     
     var totalLevel: Int {
         return vocalLevel + danceLevel + visualLevel + lifeLevel
-    }
-}
-
-extension CGSSPotential: Equatable {
-    static func ==(lhs: CGSSPotential, rhs: CGSSPotential) -> Bool {
-        return lhs.vocalLevel == rhs.vocalLevel && lhs.danceLevel == rhs.danceLevel && lhs.visualLevel == rhs.visualLevel && lhs.lifeLevel == rhs.lifeLevel
     }
 }

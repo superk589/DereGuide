@@ -25,14 +25,6 @@ class ColleagueFilterController: UITableViewController {
 
     struct FilterSetting: Equatable {
         
-        static func ==(lhs: ColleagueFilterController.FilterSetting, rhs: ColleagueFilterController.FilterSetting) -> Bool {
-            if lhs.type == rhs.type && lhs.cardIDs == rhs.cardIDs && lhs.minLevel == rhs.minLevel && lhs.minVocalLevel == rhs.minVocalLevel && lhs.minDanceLevel == rhs.minDanceLevel && lhs.minVisualLevel == rhs.minVisualLevel && lhs.minLifeLevel == rhs.minLifeLevel {
-                return true
-            } else {
-                return false
-            }
-        }
-        
         var type: CGSSLiveTypes
         var cardIDs: [Int]
         var minLevel: Int

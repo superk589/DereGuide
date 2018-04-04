@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LSRange<Bound: Comparable & Numeric> {
+struct LSRange<Bound: Comparable & Numeric>: Equatable {
     
     var begin: Bound
     var end: Bound
@@ -78,15 +78,6 @@ struct LSRange<Bound: Comparable & Numeric> {
         return ranges
     }
 }
-
-extension LSRange: Equatable {
-    
-    static func ==(lhs: LSRange<Bound>, rhs: LSRange<Bound>) -> Bool {
-        return lhs.begin == rhs.begin && lhs.end == rhs.end
-    }
-    
-}
-
 
 extension CGSSRankedSkill {
     func getUpRanges(lastNoteSec sec: Float) -> [LSRange<Float>] {

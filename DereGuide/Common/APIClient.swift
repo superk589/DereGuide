@@ -119,7 +119,7 @@ class APIClient {
                     return
                 }
 
-                // Changed in 1.7.5: Since we used the same viewer id for all the app users, the sid will be esaily invalid after other users request with the original sid. Instead of saving the sid, we always use the original sid.
+                // Changed in 1.7.5: Since we used the same viewer id for all the app users, the sid will be easily invalid after other users request with the original sid. Instead of saving the sid, we always use the original sid.
                 /* 
                 if let sid = msg.value[.string("data_headers")]?[.string("sid")]?.stringValue, sid != "" {
                     self.sid = sid
