@@ -1,5 +1,27 @@
 # ChangeLog
 
+1.8.4
+
+1. 角色信息中可以查看 Active、Smart 和 Unique 属性。
+2. 挂机模式模拟中，可以设置手动打前 x 秒或前 x combo。
+3. 寻找同僚中，现在可以正确地记录角色的生命值潜能。
+4. 新增一个队伍成员时，现在默认是 30 潜能等级。
+5. 活动档线数据现在又可以在活动页面中查看了。
+6. 修复了一个在 iOS 9 下，繁体中文本地化不能正确生效的 Bug。
+
+##### Japanese version
+
+
+
+##### English version
+
+1. Add chara's Active, Smart and Unique properties to chara info page.
+2. In AFK mode, you can set "play for the first x seconds or x combo" in advance options.
+3. In colleague finder, it can record idols life potential correctly.
+4. Newly added unit member has default total 30 potential points.
+5. Event point and high score borders data are back to event detail page.
+6. Fix a bug that on iOS 9 traditional Chinese localization does not work properly.
+
 1.8.3
 
 1. 支持高级试音会的模拟抽卡。
