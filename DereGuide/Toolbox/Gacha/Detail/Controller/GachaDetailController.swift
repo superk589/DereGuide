@@ -230,7 +230,7 @@ extension GachaDetailController: GachaSimulatorViewDelegate {
     }
     
     func gachaSimulateView(_ gachaSimulatorView: GachaSimulatorView, didClick cardIcon: CGSSCardIconView) {
-        if let card = CGSSDAO.shared.findCardById(cardIcon.cardID!) {
+        if let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {
             let vc = CardDetailViewController()
             vc.card = card
             navigationController?.pushViewController(vc, animated: true)
