@@ -456,8 +456,9 @@ class Master: FMDatabaseQueue {
                 // 去掉一些无效数据
                 // 1901 - 2016-4-1 special live
                 // 1902 - 2017-4-1 special live
+                // 1903 - 2018-4-1 special live
                 // 90001 - DJ Pinya live
-                if [1901, 1902, 90001].contains(live.musicDataId) { continue }
+                if (1900..<2000) ~= live.musicDataId || (90000..<100000) ~= live.musicDataId { continue }
                 
                 let selectSql = """
                     SELECT
@@ -484,6 +485,7 @@ class Master: FMDatabaseQueue {
                     count += 1
                     let json = JSON(subSet.resultDictionary ?? [AnyHashable: Any]())
                     guard let detail = CGSSLiveDetail(fromJson: json) else { continue }
+                    if detail.difficulty == .masterPlus { count -= 1 }
                     details.append(detail)
                 }
                 

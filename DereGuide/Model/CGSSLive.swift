@@ -213,7 +213,6 @@ extension CGSSLive {
             liveDetails.sort { $0.difficulty.rawValue < $1.difficulty.rawValue }
             self.details = liveDetails
         }
-        
     }
 }
 
@@ -260,10 +259,7 @@ class CGSSLive: NSObject {
     }()
     
     lazy var beatmaps: [CGSSBeatmap] = {
-        guard let beatmaps = CGSSGameResource.shared.getBeatmaps(liveId: self.id) else {
-            return [CGSSBeatmap]()
-        }
-        return beatmaps
+        return CGSSGameResource.shared.getBeatmaps(liveId: self.id) ?? []
     }()
     
     /// used in filter

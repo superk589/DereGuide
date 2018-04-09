@@ -49,8 +49,8 @@ struct CGSSBeatmapShiftingInfo {
     
     init(info: NSDictionary) {
         let timestampStrings = info.value(forKey: "timestamps") as? [String] ?? []
-        let start = info.value(forKey: "start") as? Float ?? 0
-        offset = info.value(forKey: "offset") as? Float ?? 0
+        let start = Float(info.value(forKey: "start") as? Double ?? 0)
+        offset = Float(info.value(forKey: "offset") as? Double ?? 0)
         for subString in timestampStrings {
             let value = subString.components(separatedBy: ",")
             let shiftingPoint = BpmShiftingPoint.init(bpm: Int(value[1])!, timestamp: Float(value[0])! + start)
