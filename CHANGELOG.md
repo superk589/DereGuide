@@ -1,6 +1,21 @@
 # ChangeLog
 
-1.8.4
+
+### 1.8.5
+
+细节优化和 Bug 修复。
+
+##### Japanese version
+
+機能向上とバグ修正
+
+##### English version
+
+Bug fixes and improvements.
+
+
+### 1.8.4
+2018-4-5
 
 1. 角色信息中可以查看 Active、Smart 和 Unique 属性。
 2. 挂机模式模拟中，可以设置手动打前 x 秒或前 x combo。
@@ -27,7 +42,8 @@
 5. Event point and high score borders data are back to event detail page.
 6. Fix a bug that on iOS 9 traditional Chinese localization does not work properly.
 
-1.8.3
+### 1.8.3
+2018-3-19
 
 1. 支持高级试音会的模拟抽卡。
 2. 优化 iPad 多任务模式下的界面布局。
@@ -42,7 +58,8 @@
 1. Support for premium gacha.
 2. Improve layout in iPad multi-tasking mode.
 
-1.8.2
+### 1.8.2
+2018-3-9
 
 修正一些翻译错误。
 
