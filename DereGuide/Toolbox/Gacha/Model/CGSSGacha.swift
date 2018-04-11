@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/9/13.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import Foundation
@@ -112,15 +112,15 @@ extension CGSSGacha {
     var gachaColor: UIColor {
         switch gachaType {
         case CGSSGachaTypes.normal:
-            return Color.normalGacha
+            return .normal
         case CGSSGachaTypes.limit:
-            return Color.limitedGacha
+            return .limited
         case CGSSGachaTypes.fes:
-            return Color.cinFesGacha
+            return .cinfes
         case CGSSGachaTypes.premium:
             return .premium
         default:
-            return Color.allType
+            return .allType
         }
     }
 
@@ -302,7 +302,7 @@ class CGSSGacha: NSObject {
             switch rarity {
             case CGSSRarityTypes.ssr:
                 //目前ssr新卡占40% sr新卡占20% r新卡占12% 
-                if newssr.count > 0 && CGSSGlobal.isProc(rate: 40000) {
+                if newssr.count > 0 && 100.proc(40) {
                     return newssr.random()!.cardId
                 } else if ssr.count > 0 {
                     return ssr.random()!.cardId
@@ -310,7 +310,7 @@ class CGSSGacha: NSObject {
                     return 0
                 }
             case CGSSRarityTypes.sr:
-                if newsr.count > 0 && CGSSGlobal.isProc(rate: 20000) {
+                if newsr.count > 0 && 100.proc(20) {
                     return newsr.random()!.cardId
                 } else if sr.count > 0 {
                     return sr.random()!.cardId
@@ -318,7 +318,7 @@ class CGSSGacha: NSObject {
                     return 0
                 }
             case CGSSRarityTypes.r:
-                if newr.count > 0 && CGSSGlobal.isProc(rate: 12000) {
+                if newr.count > 0 && 100.proc(12) {
                     return newr.random()!.cardId
                 } else if r.count > 0 {
                     return r.random()!.cardId

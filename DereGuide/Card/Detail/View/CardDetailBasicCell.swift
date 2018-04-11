@@ -3,22 +3,22 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/26.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class CardDetailBasicCell: UITableViewCell {
     
-    var iconView: CGSSCardIconView!
-    var rarityLabel: UILabel!
-    var nameLabel: UILabel!
+    let iconView = CGSSCardIconView()
+    let rarityLabel = UILabel()
+    let nameLabel = UILabel()
     let romajiLabel = UILabel()
-    var titleLabel: UILabel!
+    let titleLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        iconView = CGSSCardIconView()
+
         contentView.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -26,16 +26,14 @@ class CardDetailBasicCell: UITableViewCell {
             make.bottom.equalTo(-10)
         }
         
-        rarityLabel = UILabel()
-        rarityLabel.font = UIFont.systemFont(ofSize: 10)
+        rarityLabel.font = .systemFont(ofSize: 10)
         contentView.addSubview(rarityLabel)
         rarityLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
             make.top.equalTo(iconView.snp.top)
         }
         
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: 16)
         contentView.addSubview(nameLabel)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
@@ -58,8 +56,7 @@ class CardDetailBasicCell: UITableViewCell {
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
+        titleLabel.font = .systemFont(ofSize: 10)
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(rarityLabel.snp.right).offset(5)

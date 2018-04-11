@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/3.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,13 +12,13 @@ import StoreKit
 
 class DonationViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var scrollView: UIScrollView!
-    var questionView1: DonationQAView!
-    var questionView2: DonationQAView!
+    let scrollView = UIScrollView()
+    let questionView1 = DonationQAView()
+    let questionView2 = DonationQAView()
     
-    var collectionView: UICollectionView!
-//    var gadBanner: GADBannerView!
-    var bannerDescLabel2: UILabel!
+    private(set) var collectionView: UICollectionView!
+
+    let bannerDescLabel2 = UILabel()
     
     var products = [SKProduct]()
     
@@ -50,13 +50,11 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         self.navigationItem.title = NSLocalizedString("支持作者", comment: "")
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: NSLocalizedString("恢复", comment: ""), style: .plain, target: self, action: #selector(restoreAction))
         
-        scrollView = UIScrollView()
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
-        questionView1 = DonationQAView()
         scrollView.addSubview(questionView1)
         questionView1.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -65,7 +63,6 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
             make.width.equalToSuperview().offset(-20)
         }
         
-        questionView2 = DonationQAView()
         scrollView.addSubview(questionView2)
         questionView2.snp.makeConstraints { (make) in
             make.left.right.equalTo(questionView1)
@@ -76,26 +73,10 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         
         questionView2.setup(question: NSLocalizedString("如何支持我们？", comment: ""), answer: NSLocalizedString("您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。", comment: ""))
         
-//        gadBanner = GADBannerView()
-//        view.addSubview(gadBanner)
-//        gadBanner.snp.makeConstraints { (make) in
-//            make.height.equalTo(50)
-//            make.left.right.bottom.equalToSuperview()
-//        }
-//
-//        // Replace this ad unit ID with your own ad unit ID.
-//        gadBanner.adUnitID = "ca-app-pub-6074651551939465/6109538639"
-//        gadBanner.rootViewController = self
-//
-//        let request = GADRequest()
-//        request.testDevices = [kGADSimulatorID, "105debdd40b3a6aa8e160e0f2cb4997f"]
-//        gadBanner.load(request)
-        
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 10
-//        layout.itemSize = CGSize.init(width: (Screen.width - 30) / 2, height: 80)
-        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         scrollView.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(questionView2.snp.bottom).offset(20)
@@ -106,28 +87,8 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         }
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .white
         collectionView.register(DonationCell.self, forCellWithReuseIdentifier: "DonationCell")
-      
-//        bannerDescLabel2 = UILabel()
-//        view.addSubview(bannerDescLabel2)
-//        bannerDescLabel2.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(gadBanner.snp.top).offset(-5)
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.top.equalTo(scrollView.snp.bottom)
-//        }
-//        bannerDescLabel2.textColor = UIColor.darkGray
-//        bannerDescLabel2.font = UIFont.systemFont(ofSize: 14)
-//        bannerDescLabel2.numberOfLines = 0
-//        bannerDescLabel2.textAlignment = .center
-//        bannerDescLabel2.text = NSLocalizedString("广告仅存在于本页面内。", comment: "")
-//        bannerDescLabel2.adjustsFontSizeToFitWidth = true
-//        bannerDescLabel2.baselineAdjustment = .alignCenters
-//
-//        if !UserDefaults.standard.shouldShowAd {
-//            removeAd()
-//        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -140,9 +101,9 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     var hud: LoadingImageView?
     private var request: SKProductsRequest?
     func requestData() {
-        request = SKProductsRequest.init(productIdentifiers: Config.iAPRemoveADProductIDs)
+        request = SKProductsRequest(productIdentifiers: Config.iAPRemoveADProductIDs)
         request?.delegate = self
-        hud = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
+        hud = LoadingImageView.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         hud?.show(to: self.collectionView)
         request?.start()
     }
@@ -153,7 +114,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     }
     
     func reloadData() {
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
     
 //    func removeAd() {
@@ -167,7 +128,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     // MARK: UICollectionViewDelegate & DataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: (view.frame.width - 30) / 2, height: 80)
+        return CGSize(width: (view.frame.width - 30) / 2, height: 80)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -186,9 +147,9 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         
         switch indexPath.item {
         case 0:
-            cell.borderColor = Color.cool.cgColor
+            cell.borderColor = UIColor.cool.cgColor
         case 1:
-            cell.borderColor = Color.cute.cgColor
+            cell.borderColor = UIColor.cute.cgColor
         default:
             break
         }
@@ -200,25 +161,15 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         
         if SKPaymentQueue.canMakePayments() {
             CGSSLoadingHUDManager.default.show()
-            SKPaymentQueue.default().add(SKPayment.init(product: product))
+            SKPaymentQueue.default().add(SKPayment(product: product))
         } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("您的设备未开启应用内购买。", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
+            let alert = UIAlertController(title: NSLocalizedString("提示", comment: ""), message: NSLocalizedString("您的设备未开启应用内购买。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
             }))
-            self.tabBarController?.present(alert, animated: true, completion: nil)
+            tabBarController?.present(alert, animated: true, completion: nil)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -258,7 +209,6 @@ extension DonationViewController: SKPaymentTransactionObserver {
         }
     }
     
-    
     func completeTransaction(_ transaction: SKPaymentTransaction) {
 //        removeAd()
     }
@@ -288,11 +238,11 @@ extension DonationViewController: SKPaymentTransactionObserver {
             }
         }
         if !restored {
-            let alert = UIAlertController.init(title: NSLocalizedString("恢复失败", comment: ""), message: NSLocalizedString("您的当前账号未曾购买过去除广告服务。", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
+            let alert = UIAlertController(title: NSLocalizedString("恢复失败", comment: ""), message: NSLocalizedString("您的当前账号未曾购买过去除广告服务。", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: ""), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
             }))
-            self.tabBarController?.present(alert, animated: true, completion: nil)
+            tabBarController?.present(alert, animated: true, completion: nil)
         }
     }
     

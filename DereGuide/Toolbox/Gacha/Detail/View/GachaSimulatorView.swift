@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/9/15.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -18,11 +18,11 @@ protocol GachaSimulatorViewDelegate: class {
 class GachaSimulatorView: UIView {
     
     let space: CGFloat = 10
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     let singleButton = WideButton()
     let tenButton = WideButton()
     var resultView: GridView!
-    var resultGrid: GridLabel!
+    let resultGrid = GridLabel(rows: 4, columns: 4)
     let resetButton = WideButton()
 
     weak var delegate: GachaSimulatorViewDelegate?
@@ -30,8 +30,7 @@ class GachaSimulatorView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("模拟抽卡", comment: "")
         addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -53,7 +52,7 @@ class GachaSimulatorView: UIView {
         }
         
         singleButton.setTitle(NSLocalizedString("单抽", comment: "模拟抽卡页面"), for: .normal)
-        singleButton.backgroundColor = Color.passion
+        singleButton.backgroundColor = .passion
         singleButton.addTarget(self, action: #selector(clickSingle), for: .touchUpInside)
         addSubview(singleButton)
         singleButton.snp.makeConstraints { (make) in
@@ -63,7 +62,7 @@ class GachaSimulatorView: UIView {
         }
         
         tenButton.setTitle(NSLocalizedString("十连", comment: "模拟抽卡页面"), for: .normal)
-        tenButton.backgroundColor = Color.cute
+        tenButton.backgroundColor = .cute
         tenButton.addTarget(self, action: #selector(clickTen), for: .touchUpInside)
         addSubview(tenButton)
         tenButton.snp.makeConstraints { (make) in
@@ -72,7 +71,6 @@ class GachaSimulatorView: UIView {
             make.top.equalTo(singleButton)
         }
         
-        resultGrid = GridLabel(rows: 4, columns: 4)
         addSubview(resultGrid)
         resultGrid.snp.makeConstraints { (make) in
             make.top.equalTo(tenButton.snp.bottom).offset(10)
@@ -96,7 +94,7 @@ class GachaSimulatorView: UIView {
                                 [NSLocalizedString("星星数", comment: ""), "SSR \(NSLocalizedString("占比", comment: ""))", "SR \(NSLocalizedString("占比", comment: ""))", "R \(NSLocalizedString("占比", comment: ""))"],
                                 ["", "", "", ""]])
                 
-        backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
+        backgroundColor = UIColor.cool.mixed(withColor: .white, weight: 0.9)
     }
     
     @objc private func clickTen() {
@@ -142,9 +140,9 @@ class GachaSimulatorView: UIView {
         resultGrid[1, 2].text = "\(result.srCount)"
         resultGrid[1, 3].text = "\(result.rCount)"
         resultGrid[3, 0].text = "\(result.jewel)"
-        resultGrid[3, 1].text = String.init(format: "%.2f%%", result.ssrRate * 100)
-        resultGrid[3, 2].text = String.init(format: "%.2f%%", result.srRate * 100)
-        resultGrid[3, 3].text = String.init(format: "%.2f%%", result.rRate * 100)
+        resultGrid[3, 1].text = String(format: "%.2f%%", result.ssrRate * 100)
+        resultGrid[3, 2].text = String(format: "%.2f%%", result.srRate * 100)
+        resultGrid[3, 3].text = String(format: "%.2f%%", result.rRate * 100)
         
     }
     

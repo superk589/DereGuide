@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/2/2.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -113,7 +113,7 @@ class DownloadImageViewController: BaseTableViewController {
         DispatchQueue.main.async {
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? DownloadImageCell
             let urls = self.getURLsBy(index: index)
-            cell?.rightLabel?.text = "\(urls.inCache.count)/\(urls.count)"
+            cell?.rightLabel.text = "\(urls.inCache.count)/\(urls.count)"
         }
     }
     
@@ -307,11 +307,11 @@ class DownloadImageViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CacheCell", for: indexPath) as! DownloadImageCell
         if indexPath.row == 0 {
-            cell.rightLabel?.text = ""
+            cell.rightLabel.text = ""
         } else {
             setupCellAtIndex(indexPath.row)
         }
-        cell.leftLabel?.text = dataTypes[indexPath.row]
+        cell.leftLabel.text = dataTypes[indexPath.row]
         // Configure the cell...
         return cell
     }

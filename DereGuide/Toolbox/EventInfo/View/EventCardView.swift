@@ -4,7 +4,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,22 +12,21 @@ import SnapKit
 
 class EventCardView: UIView {
 
-    var cardView: CardView!
+    let cardView = CardView()
     
-    var descLabel: UILabel!
+    let descLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        descLabel = UILabel()
+
         addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
             make.top.equalTo(8)
             make.left.equalTo(10)
         }
-        descLabel.font = Font.title
-        descLabel.textColor = UIColor.black
+        descLabel.font = .systemFont(ofSize: 16)
+        descLabel.textColor = .black
         
-        cardView = CardView()
         addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()

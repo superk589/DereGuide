@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/10/9.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -16,17 +16,17 @@ extension CGSSEvent {
     var eventColor: UIColor {
         switch eventType {
         case CGSSEventTypes.tradition:
-            return Color.tradition
+            return .tradition
         case CGSSEventTypes.kyalapon:
-            return Color.kyalapon
+            return .kyalapon
         case CGSSEventTypes.party:
-            return Color.party
+            return .party
         case CGSSEventTypes.groove:
-            return Color.groove
+            return .groove
         case CGSSEventTypes.rail:
             return .rail
         default:
-            return Color.parade
+            return .parade
         }
     }
     var live: CGSSLive? {

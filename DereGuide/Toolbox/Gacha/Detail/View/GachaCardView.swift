@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/7/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +18,7 @@ class GachaCardView: UIView {
         oddsLabel = UILabel()
         oddsLabel.adjustsFontSizeToFitWidth = true
         oddsLabel.font = UIFont.systemFont(ofSize: 12)
-        oddsLabel.textColor = Color.vocal
+        oddsLabel.textColor = .vocal
         
         super.init(frame: frame)
         addSubview(oddsLabel)

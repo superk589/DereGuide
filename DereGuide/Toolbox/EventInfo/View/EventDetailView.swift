@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -21,38 +21,37 @@ protocol EventDetailViewDelegate: class {
 
 class EventDetailView: UIView, CGSSIconViewDelegate {
 
-    var startToEndLabel: UILabel!
+    let startToEndLabel = UILabel()
     
-    var timeIndicator: TimeStatusIndicator!
+    let timeIndicator = TimeStatusIndicator()
     
-    var line1: UIView!
+    let line1 = UIView()
     
-    var line2: UIView!
+    let line2 = UIView()
     
-    var line3: UIView!
+    let line3 = UIView()
     
-    var card1View: EventCardView!
+    let card1View = EventCardView()
     
-    var card2View: EventCardView!
+    let card2View = EventCardView()
     
-    var songDescLabel: UILabel!
+    let songDescLabel = UILabel()
     
-    var liveTrendLabel: UILabel!
+    let liveTrendLabel = UILabel()
     
-    var liveView: LiveTableViewCell!
+    let liveView = LiveTableViewCell()
     
-    var eventPtContentView: UIView!
-    var line4: LineView!
-    var eventPtDescLabel: UILabel!
-    var gotoPtChartLabel: UILabel!
-    var eventPtView: EventPtView!
+    let eventPtContentView = UIView()
+    let line4 = LineView()
+    let eventPtDescLabel = UILabel()
+    let gotoPtChartLabel = UILabel()
+    let eventPtView = EventPtView()
     
-    var eventScoreContentView: UIView!
-    var line5: LineView!
-    var eventScoreDescLabel: UILabel!
-    var gotoScoreChartLabel: UILabel!
-    var eventScoreView: EventScoreView!
-
+    let eventScoreContentView = UIView()
+    let line5 = LineView()
+    let eventScoreDescLabel = UILabel()
+    let gotoScoreChartLabel = UILabel()
+    let eventScoreView = EventScoreView()
     
     private struct Height {
         static let ptContentView: CGFloat = 192
@@ -67,30 +66,19 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        nameLabel = UILabel()
-//        addSubview(nameLabel)
-//        nameLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.top.equalTo(banner.snp.bottom).offset(8)
-//        }
-//        nameLabel.font = Font.title
-        
-        startToEndLabel = UILabel()
+
         addSubview(startToEndLabel)
         startToEndLabel.snp.makeConstraints { (make) in
             make.right.lessThanOrEqualTo(-10)
             make.left.equalTo(32)
             make.top.equalTo(8)
         }
-        startToEndLabel.font = UIFont.systemFont(ofSize: 12)
-        startToEndLabel.textColor = UIColor.darkGray
+        startToEndLabel.font = .systemFont(ofSize: 12)
+        startToEndLabel.textColor = .darkGray
         startToEndLabel.textAlignment = .left
         startToEndLabel.adjustsFontSizeToFitWidth = true
         startToEndLabel.baselineAdjustment = .alignCenters
         
-        timeIndicator = TimeStatusIndicator()
         addSubview(timeIndicator)
         timeIndicator.snp.makeConstraints { (make) in
             make.height.width.equalTo(12)
@@ -98,7 +86,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.centerY.equalTo(startToEndLabel)
         }
         
-        line1 = LineView()
         addSubview(line1)
         line1.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -106,17 +93,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalTo(startToEndLabel.snp.bottom).offset(8)
         }
         
-//        cardLabel = UILabel()
-//        addSubview(cardLabel)
-//        cardLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.top.equalTo(line.snp.bottom).offset(8)
-//        }
-//        cardLabel.font = Font.title
-//        cardLabel.text = NSLocalizedString("活动卡：", comment: "")
-//        
-        card1View = EventCardView()
         addSubview(card1View)
         card1View.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -126,7 +102,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
         card1View.addGestureRecognizer(tap1)
     
-        line3 = LineView()
         addSubview(line3)
         line3.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -134,7 +109,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalTo(card1View.snp.bottom)
         }
         
-        card2View = EventCardView()
         addSubview(card2View)
         card2View.snp.makeConstraints { (make) in
             make.right.left.equalToSuperview()
@@ -144,8 +118,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
         card2View.addGestureRecognizer(tap2)
         
-        
-        line2 = LineView()
         addSubview(line2)
         line2.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -153,37 +125,33 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalTo(card2View.snp.bottom)
         }
         
-        songDescLabel = UILabel()
         addSubview(songDescLabel)
-        songDescLabel.textColor = UIColor.black
+        songDescLabel.textColor = .black
         songDescLabel.text = NSLocalizedString("活动曲", comment: "")
-        songDescLabel.font = Font.title
+        songDescLabel.font = .systemFont(ofSize: 16)
         songDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line2.snp.bottom).offset(8)
         }
         
-        liveTrendLabel = UILabel()
         addSubview(liveTrendLabel)
-        liveTrendLabel.textColor = UIColor.lightGray
+        liveTrendLabel.textColor = .lightGray
         liveTrendLabel.text = NSLocalizedString("流行曲", comment: "") + " >"
-        liveTrendLabel.font = Font.title
+        liveTrendLabel.font = .systemFont(ofSize: 16)
         liveTrendLabel.snp.makeConstraints { (make) in
             make.top.equalTo(line2.snp.bottom).offset(8)
             make.right.equalTo(-10)
         }
         liveTrendLabel.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(gotoLiveTrendViewAction(gesture:)))
         liveTrendLabel.addGestureRecognizer(tap)
         
-        liveView = LiveTableViewCell()
         addSubview(liveView.readableContentView)
         liveView.readableContentView.snp.remakeConstraints({ (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(songDescLabel.snp.bottom)
         })
         
-        eventPtContentView = UIView()
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -192,7 +160,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
         eventPtContentView.layer.masksToBounds = true
         
-        line4 = LineView()
         eventPtContentView.addSubview(line4)
         line4.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -200,32 +167,28 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalToSuperview()
         }
 
-        eventPtDescLabel = UILabel()
         eventPtContentView.addSubview(eventPtDescLabel)
-        eventPtDescLabel.textColor = UIColor.black
+        eventPtDescLabel.textColor = .black
         eventPtDescLabel.text = NSLocalizedString("活动pt档位", comment: "")
-        eventPtDescLabel.font = Font.title
+        eventPtDescLabel.font = .systemFont(ofSize: 16)
         eventPtDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line4.snp.bottom).offset(8)
         }
         
-        gotoPtChartLabel = UILabel()
         eventPtContentView.addSubview(gotoPtChartLabel)
         gotoPtChartLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.top.equalTo(eventPtDescLabel)
         }
-        gotoPtChartLabel.font = Font.title
-        gotoPtChartLabel.textColor = UIColor.lightGray
+        gotoPtChartLabel.font = .systemFont(ofSize: 16)
+        gotoPtChartLabel.textColor = .lightGray
         gotoPtChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
-        let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(gotoPtChartAction))
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(gotoPtChartAction))
         gotoPtChartLabel.addGestureRecognizer(tap3)
         gotoPtChartLabel.isUserInteractionEnabled = true
         gotoPtChartLabel.isHidden = true
         
-        
-        eventPtView = EventPtView()
         eventPtContentView.addSubview(eventPtView)
         eventPtView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -235,7 +198,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         
         eventPtView.delegate = self
         
-        eventScoreContentView = UIView()
         addSubview(eventScoreContentView)
         eventScoreContentView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -245,7 +207,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
         eventScoreContentView.layer.masksToBounds = true
         
-        line5 = LineView()
         eventScoreContentView.addSubview(line5)
         line5.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -253,31 +214,28 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalToSuperview()
         }
         
-        eventScoreDescLabel = UILabel()
         eventScoreContentView.addSubview(eventScoreDescLabel)
-        eventScoreDescLabel.textColor = UIColor.black
+        eventScoreDescLabel.textColor = .black
         eventScoreDescLabel.text = NSLocalizedString("歌曲分数档位", comment: "")
-        eventScoreDescLabel.font = Font.title
+        eventScoreDescLabel.font = .systemFont(ofSize: 16)
         eventScoreDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(line5.snp.bottom).offset(8)
         }
         
-        gotoScoreChartLabel = UILabel()
         eventScoreContentView.addSubview(gotoScoreChartLabel)
         gotoScoreChartLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.top.equalTo(eventScoreDescLabel)
         }
-        gotoScoreChartLabel.font = Font.title
-        gotoScoreChartLabel.textColor = UIColor.lightGray
+        gotoScoreChartLabel.font = .systemFont(ofSize: 16)
+        gotoScoreChartLabel.textColor = .lightGray
         gotoScoreChartLabel.text = NSLocalizedString("查看完整图表", comment: "") + " >"
-        let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(gotoScoreChartAction))
+        let tap4 = UITapGestureRecognizer(target: self, action: #selector(gotoScoreChartAction))
         gotoScoreChartLabel.isUserInteractionEnabled = true
         gotoScoreChartLabel.addGestureRecognizer(tap4)
         gotoScoreChartLabel.isHidden = true
         
-        eventScoreView = EventScoreView()
         eventScoreContentView.addSubview(eventScoreView)
         eventScoreView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -286,9 +244,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
         
         eventScoreView.delegate = self
-        
-        
-        // TODO: 歌曲分数档线
         
     }
     
@@ -324,11 +279,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
         
         if event.startDate.toDate() > Date() {
-//            if let preStartDateString = event.preStartDate?.toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current) {
-//                startToEndLabel.text = "\(preStartDateString) ~ \(NSLocalizedString("待定", comment: ""))"
-//            }
-            
-            // startToEndLabel.text = Date().toString(format: "yyyy") + "-" + event.startDate.toDate().toString(format: "MM-dd")
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true
             card2View.isHidden = true
@@ -393,20 +343,6 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             liveTrendLabel.isHidden = !event.hasTrendLives
         }
     }
-    
-//    func setup(ptList: EventRanking, onGoing: Bool) {
-//        eventPtView.setup(rankingList: ptList, onGoing: onGoing)
-//        if ptList.list.count > 0 {
-//            gotoPtChartLabel.isHidden = false
-//        }
-//    }
-    
-//    func setup(scoreList: EventRanking, onGoing: Bool) {
-//        eventScoreView.setup(rankingList: scoreList, onGoing: onGoing)
-//        if scoreList.list.count > 0 {
-//            gotoScoreChartLabel.isHidden = false
-//        }
-//    }
     
     func setup(ptItems: [RankingItem], onGoing: Bool) {
         eventPtView.setup(items: ptItems, onGoing: onGoing)

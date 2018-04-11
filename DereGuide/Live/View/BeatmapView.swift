@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/7/25.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -76,13 +76,13 @@ class BeatmapView: IndicatorScrollView {
     var strokeColor: UIColor {
         switch type {
         case 1:
-            return Color.cute
+            return .cute
         case 2:
-            return Color.cool
+            return .cool
         case 3:
-            return Color.passion
+            return .passion
         default:
-            return UIColor.darkGray
+            return .darkGray
         }
     }
     
@@ -490,7 +490,7 @@ struct AdvanceBeatmapDrawer {
                 if y < rect.minX - sectionHeight { break }
                 if y > rect.maxY + sectionHeight { continue }
                 let path = pathForSectionLine(y)
-                Color.bpmShift.set()
+                UIColor.bpmShift.set()
                 path.stroke()
                 
                 var offset: CGFloat = 0
@@ -502,14 +502,15 @@ struct AdvanceBeatmapDrawer {
                 }
                 
                 UIColor.red.set()
-                let bpmNumber = NSString.init(format: "%d", point.bpm)
-                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Color.bpmShift]
+                let bpmNumber = NSString(format: "%d", point.bpm)
+                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.bpmShift]
                 bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y - 14 + offset), withAttributes: attDict)
                 
                 if i > 0 {
                     let lastPoint = shiftingPoints[i - 1]
-                    let bpmNumber = NSString.init(format: "%d", lastPoint.bpm)
-                    let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: Color.bpmShift]
+                    let bpmNumber = NSString(format: "%d", lastPoint.bpm)
+                    let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor
+                        .bpmShift]
                     bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y + offset), withAttributes: attDict)
                 }
                 

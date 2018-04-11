@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/3/29.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 
@@ -11,11 +11,12 @@ import UIKit
 import SnapKit
 
 class NoteScoreLabel: UILabel {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.adjustsFontSizeToFitWidth = true
-        self.textAlignment = .center
-        self.baselineAdjustment = .alignCenters
+        adjustsFontSizeToFitWidth = true
+        textAlignment = .center
+        baselineAdjustment = .alignCenters
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -25,34 +26,29 @@ class NoteScoreLabel: UILabel {
 
 class NoteScoreTableViewCell: UITableViewCell {
     
-    var comboIndexLabel: UILabel!
-    var perfectBonusLabel: UILabel!
-    var comboBonusLabel: UILabel!
-    var skillBoostLabel: UILabel!
-    var finalScoreLabel: UILabel!
-    var totalScoreLabel: UILabel!
+    let comboIndexLabel = UILabel()
+    let perfectBonusLabel = UILabel()
+    let comboBonusLabel = UILabel()
+    let skillBoostLabel = UILabel()
+    let finalScoreLabel = UILabel()
+    let totalScoreLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        comboIndexLabel = NoteScoreLabel()
-        comboIndexLabel.textColor = Color.allType
+
+        comboIndexLabel.textColor = .allType
         
-        perfectBonusLabel = NoteScoreLabel()
-        perfectBonusLabel.textColor = Color.vocal
+        perfectBonusLabel.textColor = .vocal
         perfectBonusLabel.numberOfLines = 2
         
-        comboBonusLabel = NoteScoreLabel()
-        comboBonusLabel.textColor = Color.visual
+        comboBonusLabel.textColor = .visual
         comboBonusLabel.numberOfLines = 2
         
-        skillBoostLabel = NoteScoreLabel()
-        skillBoostLabel.textColor = Color.cute
+        skillBoostLabel.textColor = .cute
         
-        finalScoreLabel = NoteScoreLabel()
-        finalScoreLabel.textColor = Color.allType
+        finalScoreLabel.textColor = .allType
         
-        totalScoreLabel = NoteScoreLabel()
-        totalScoreLabel.textColor = Color.parade
+        totalScoreLabel.textColor = .parade
         
         contentView.addSubview(comboIndexLabel)
         contentView.addSubview(perfectBonusLabel)
@@ -67,12 +63,12 @@ class NoteScoreTableViewCell: UITableViewCell {
         let space: CGFloat = 5
         let width = (contentView.bounds.width - 7 * space) / 6
         let height = contentView.bounds.size.height
-        comboIndexLabel.frame = CGRect.init(x: space, y: 0, width: width, height: height)
-        perfectBonusLabel.frame = CGRect.init(x: space + comboIndexLabel.frame.maxX, y: 0, width: width, height: height)
-        comboBonusLabel.frame = CGRect.init(x: space + perfectBonusLabel.frame.maxX, y: 0, width: width, height: height)
-        skillBoostLabel.frame = CGRect.init(x: space + comboBonusLabel.frame.maxX, y: 0, width: width, height: height)
-        finalScoreLabel.frame = CGRect.init(x: space + skillBoostLabel.frame.maxX, y: 0, width: width, height: height)
-        totalScoreLabel.frame = CGRect.init(x: space + finalScoreLabel.frame.maxX, y: 0, width: width, height: height)
+        comboIndexLabel.frame = CGRect(x: space, y: 0, width: width, height: height)
+        perfectBonusLabel.frame = CGRect(x: space + comboIndexLabel.frame.maxX, y: 0, width: width, height: height)
+        comboBonusLabel.frame = CGRect(x: space + perfectBonusLabel.frame.maxX, y: 0, width: width, height: height)
+        skillBoostLabel.frame = CGRect(x: space + comboBonusLabel.frame.maxX, y: 0, width: width, height: height)
+        finalScoreLabel.frame = CGRect(x: space + skillBoostLabel.frame.maxX, y: 0, width: width, height: height)
+        totalScoreLabel.frame = CGRect(x: space + finalScoreLabel.frame.maxX, y: 0, width: width, height: height)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -82,9 +78,9 @@ class NoteScoreTableViewCell: UITableViewCell {
     
     func setup(with log: LSLog) {
         
-        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: Color.allType])
+        let attributeStr = NSMutableAttributedString(string: String(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: UIColor.allType])
         if log.comboFactor > 1 {
-            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
+            attributeStr.append(NSAttributedString(string: String(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
         }
         comboIndexLabel.attributedText = attributeStr
         
@@ -99,9 +95,6 @@ class NoteScoreTableViewCell: UITableViewCell {
         } else {
             comboBonusLabel.text = "\(log.comboBonus - 100)%"
         }
-            //        } else {
-//            comboBonusLabel.text = "\(Float(detail.baseComboBonus) / 100)\n→\(Float(detail.comboBonus) / 100)"
-//        }
         
         if log.skillBoost == 1000 {
             skillBoostLabel.text = "-"
@@ -109,7 +102,7 @@ class NoteScoreTableViewCell: UITableViewCell {
             skillBoostLabel.text = "\((log.skillBoost - 1000) / 10)%"
         }
         
-        finalScoreLabel.text = String.init(format: "%d", log.score)
+        finalScoreLabel.text = String(format: "%d", log.score)
         
         totalScoreLabel.text = String(log.sum)
         

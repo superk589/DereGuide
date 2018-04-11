@@ -3,24 +3,23 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/26.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class CardDetailSkillCell: UITableViewCell {
     
-    var leftLabel: UILabel!
-    var nameLabel: UILabel!
-    var descriptionLabel: UILabel!
-    var gridLabel: GridLabel!
+    let leftLabel = UILabel()
+    let nameLabel = UILabel()
+    let descriptionLabel = UILabel()
+    let gridLabel = GridLabel(rows: 4, columns: 5)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.textColor = UIColor.black
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.textColor = .black
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("特技", comment: "通用")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -28,8 +27,7 @@ class CardDetailSkillCell: UITableViewCell {
             make.top.equalTo(10)
         }
         
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: 16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
         contentView.addSubview(nameLabel)
@@ -39,10 +37,9 @@ class CardDetailSkillCell: UITableViewCell {
             make.right.lessThanOrEqualTo(-10)
         }
         
-        descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.textColor = UIColor.darkGray
+        descriptionLabel.font = .systemFont(ofSize: 14)
+        descriptionLabel.textColor = .darkGray
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
@@ -50,7 +47,6 @@ class CardDetailSkillCell: UITableViewCell {
             make.right.lessThanOrEqualTo(-10)
         }
         
-        gridLabel = GridLabel.init(rows: 4, columns: 5)
         contentView.addSubview(gridLabel)
         gridLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -73,10 +69,10 @@ class CardDetailSkillCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
 }
 
 extension CardDetailSkillCell: CardDetailSetable {
+    
     func setup(with card: CGSSCard) {
         guard let skill = card.skill else {
             return

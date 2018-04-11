@@ -3,23 +3,22 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/19.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class StepperOption: UIControl {
     
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     
-    var stepper: ValueStepper!
+    let stepper = ValueStepper()
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
-        stepper = ValueStepper()
-        stepper.tintColor = Color.parade
+        stepper.tintColor = .parade
         stepper.numberFormatter.maximumFractionDigits = 0
         stepper.stepValue = 1
         addSubview(stepper)
@@ -34,7 +33,6 @@ class StepperOption: UIControl {
             make.center.equalToSuperview()
         }
         
-        leftLabel = UILabel()
         addSubview(leftLabel)
         leftLabel.numberOfLines = 2
         leftLabel.adjustsFontSizeToFitWidth = true
@@ -50,7 +48,7 @@ class StepperOption: UIControl {
     }
     
     func setup(title: String, minValue: Double, maxValue: Double, currentValue: Double) {
-        self.leftLabel.text = title
+        leftLabel.text = title
         stepper.minimumValue = minValue
         stepper.maximumValue = maxValue
         stepper.value = currentValue

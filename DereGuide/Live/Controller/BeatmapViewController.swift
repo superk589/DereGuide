@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/7/25.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -23,18 +23,16 @@ class BeatmapViewController: UIViewController {
     
     private func updateUI() {
         if let beatmap = checkBeatmapData(scene) {
-            titleLabel?.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
+            titleLabel.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
             pause()
-            beatmapView?.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
-            beatmapView?.setNeedsDisplay()
+            beatmapView.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
+            beatmapView.setNeedsDisplay()
         }
     }
     
-    var beatmapView: BeatmapView!
-    var descLabel: UILabel!
-    var flipItem: UIBarButtonItem!
-    var tv: UIToolbar!
-    var titleLabel: UILabel!
+    let beatmapView = BeatmapView()
+    let descLabel = UILabel()
+    let titleLabel = UILabel()
     
     private typealias Setting = BeatmapAdvanceOptionsViewController.Setting
     private var setting = Setting.load() ?? Setting()
@@ -51,7 +49,6 @@ class BeatmapViewController: UIViewController {
         prepareToolbar()
         print("Beatmap loaded, liveId: \(scene.live.id) musicId: \(scene.live.musicDataId)")
         
-        beatmapView = BeatmapView()
         beatmapView.settingDelegate = self
 
         self.view.addSubview(beatmapView)
@@ -69,10 +66,9 @@ class BeatmapViewController: UIViewController {
         beatmapView.delegate = self
         
         // 自定义title描述歌曲信息
-        titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 44)
         titleLabel.numberOfLines = 2
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.font = .systemFont(ofSize: 12)
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.baselineAdjustment = .alignCenters
@@ -80,7 +76,7 @@ class BeatmapViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("难度", comment: "谱面页面导航按钮"), style: .plain, target: self, action: #selector(selectDifficulty))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         
         updateUI()
         
@@ -156,7 +152,7 @@ class BeatmapViewController: UIViewController {
     }
     
     func checkShiftingInfo() -> CGSSBeatmapShiftingInfo? {
-        if let path = Bundle.main.path(forResource: "BpmShift", ofType: "plist"), let dict = NSDictionary.init(contentsOfFile: path) {
+        if let path = Bundle.main.path(forResource: "BpmShift", ofType: "plist"), let dict = NSDictionary(contentsOfFile: path) {
             for (k, v) in dict {
                 let keys = (k as! String).components(separatedBy: ",")
                 for key in keys {
@@ -171,7 +167,8 @@ class BeatmapViewController: UIViewController {
     
     lazy private var playItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1241-play-toolbar"), style: .plain, target: self, action: #selector(self.play))
     lazy private var pauseItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1242-pause-toolbar"), style: .plain, target: self, action: #selector(self.pause))
-
+    lazy private var flipItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(self.flip))
+    
     private func prepareToolbar() {
         let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let fixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
@@ -181,9 +178,6 @@ class BeatmapViewController: UIViewController {
         
         let fixedSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpaceItem2.width = 20
-       
-        
-        flipItem = UIBarButtonItem(image: #imageLiteral(resourceName: "1110-rotate-toolbar"), style: .plain, target: self, action: #selector(flip))
         
         toolbarItems = [shareItem, fixedSpaceItem, flipItem, fixedSpaceItem2, playItem, spaceItem, advanceItem]
     }

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/4/1.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,13 +11,13 @@ import SnapKit
 
 class UnitLeaderSkillView: TipView {
     
-    var descLabel: UILabel!
+    let descLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        descLabel = UILabel()
+
         descLabel.numberOfLines = 0
-        descLabel.font = UIFont.systemFont(ofSize: 14)
+        descLabel.font = .systemFont(ofSize: 14)
         descLabel.adjustsFontSizeToFitWidth = true
         descLabel.baselineAdjustment = .alignCenters
         contentView.addSubview(descLabel)
@@ -31,7 +31,7 @@ class UnitLeaderSkillView: TipView {
     
     func setupWith(text: String, backgroundColor: UIColor) {
         descLabel.text = text
-        self.contentColor = backgroundColor
+        contentColor = backgroundColor
     }
     
     required init?(coder aDecoder: NSCoder) {

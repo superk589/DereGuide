@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/8/15.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,8 +12,10 @@ import SnapKit
 
 class CharaWithBirthdayView: UIView {
     
-    var icon: CGSSCharaIconView!
-    var birthdayLabel: UILabel!
+    let icon = CGSSCharaIconView()
+    
+    let birthdayLabel = UILabel()
+    
     weak var delegate: CGSSIconViewDelegate? {
         didSet {
             icon.delegate = self.delegate
@@ -22,7 +24,7 @@ class CharaWithBirthdayView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        icon = CGSSCharaIconView()
+
         addSubview(icon)
         icon.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
@@ -30,9 +32,8 @@ class CharaWithBirthdayView: UIView {
         }
         icon.isUserInteractionEnabled = false
         
-        birthdayLabel = UILabel()
-        birthdayLabel.font = UIFont.systemFont(ofSize: 14)
-        birthdayLabel.textColor = UIColor.darkGray
+        birthdayLabel.font = .systemFont(ofSize: 14)
+        birthdayLabel.textColor = .darkGray
         birthdayLabel.textAlignment = .center
         birthdayLabel.adjustsFontSizeToFitWidth = true
         birthdayLabel.baselineAdjustment = .alignCenters
@@ -61,8 +62,8 @@ protocol BirthdayNotificationTableViewCellDelegate:class {
 class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
     
     var charas = [CGSSChar]()
-    var leftLabel: UILabel!
-    var collectionView: TTGTagCollectionView!
+    let leftLabel = UILabel()
+    let collectionView = TTGTagCollectionView()
     var charaViews = NSCache<NSNumber, CharaWithBirthdayView>()
     
     weak var delegate: BirthdayNotificationTableViewCellDelegate?
@@ -70,15 +71,13 @@ class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDe
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(15)
             make.top.equalTo(10)
         }
         
-        collectionView = TTGTagCollectionView()
         collectionView.contentInset = .zero
         collectionView.verticalSpacing = 10
         collectionView.horizontalSpacing = 10
@@ -110,11 +109,11 @@ class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDe
     }
     
     private func viewFor(index: Int) -> CharaWithBirthdayView {
-        if let view = charaViews.object(forKey: NSNumber.init(value: index)) {
+        if let view = charaViews.object(forKey: NSNumber(value: index)) {
             return view
         } else {
             let view = CharaWithBirthdayView()
-            charaViews.setObject(view, forKey: NSNumber.init(value: index))
+            charaViews.setObject(view, forKey: NSNumber(value: index))
             return view
         }
     }

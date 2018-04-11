@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/10/3.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -37,7 +37,7 @@ class LoadingImageView: UIImageView {
         rotateAni.repeatCount = .infinity
         // make the animation not removed when the application returns to active
         rotateAni.isRemovedOnCompletion = false
-        self.layer.add(rotateAni, forKey: "rotate")
+        layer.add(rotateAni, forKey: "rotate")
         isRotating = true
         isHidden = false
     }
@@ -45,26 +45,26 @@ class LoadingImageView: UIImageView {
     override func stopAnimating() {
         super.stopAnimating()
         if hideWhenStopped {
-            self.isHidden = true
+            isHidden = true
         }
-        self.layer.removeAnimation(forKey: "rotate")
+        layer.removeAnimation(forKey: "rotate")
         isRotating = false
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: 50, height: 50)
+        return CGSize(width: 50, height: 50)
     }
     
     func show(to view: UIView) {
         view.addSubview(self)
-        self.snp.makeConstraints { (make) in
+        snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
         startAnimating()
     }
     
     func hide() {
-        self.removeFromSuperview()
+        removeFromSuperview()
     }
 
 }
@@ -72,13 +72,15 @@ class LoadingImageView: UIImageView {
 
 class CGSSLoadingHUD: UIView {
 
-    var iv: LoadingImageView!
-    var titleLable:UILabel!
+    let imageView = LoadingImageView(frame: CGRect(x: 35, y: 20, width: 50, height: 50))
+    let titleLabel = UILabel(frame: CGRect(x: 0, y: 75, width: 120, height: 25))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        self.isUserInteractionEnabled = true
+        
+        backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        isUserInteractionEnabled = true
+        
         let contentView = UIView()
         contentView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         contentView.layer.cornerRadius = 10
@@ -90,22 +92,16 @@ class CGSSLoadingHUD: UIView {
             make.height.width.equalTo(120)
         }
         
-        iv = LoadingImageView.init(frame: CGRect.init(x: 35, y: 20, width: 50, height: 50))
-        titleLable = UILabel.init(frame: CGRect.init(x: 0, y: 75, width: 120, height: 25))
-        titleLable.textAlignment = .center
-        titleLable.adjustsFontSizeToFitWidth = true
-        titleLable.baselineAdjustment = .alignCenters
-        titleLable.font = UIFont.boldSystemFont(ofSize: 17)
-        titleLable.textColor = UIColor.white
-        titleLable.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
-        iv.image = UIImage.init(named: "loading")
-        contentView.addSubview(iv)
-        contentView.addSubview(titleLable)
-        self.alpha = 0
-    }
-    
-    func setTitle(title:String) {
-        self.titleLable.text = title
+        titleLabel.textAlignment = .center
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.baselineAdjustment = .alignCenters
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        titleLabel.textColor = .white
+        titleLabel.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
+        imageView.image = #imageLiteral(resourceName: "loading")
+        contentView.addSubview(imageView)
+        contentView.addSubview(titleLabel)
+        alpha = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -120,7 +116,7 @@ class CGSSLoadingHUDManager {
     let hud = CGSSLoadingHUD()
 
     // 小于0.1秒不显示
-    let debouncer = Debouncer.init(interval: 0.1)
+    let debouncer = Debouncer(interval: 0.1)
     
     private init () {
         
@@ -143,9 +139,9 @@ class CGSSLoadingHUDManager {
     
     func show(text: String? = nil) {
         if let text = text {
-            hud.titleLable.text = text
+            hud.titleLabel.text = text
         } else {
-            hud.titleLable.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
+            hud.titleLabel.text = NSLocalizedString("处理中...", comment: "耗时任务处理过程提示框")
         }
         debouncer.callback = showClosure
         debouncer.call()

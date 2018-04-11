@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/6.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -50,7 +50,7 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
         
         defaultTagView = FilterItemView()
         defaultTagView.setTitle(title: NSLocalizedString("全部", comment: ""))
-        defaultTagView.iv.zk.backgroundColor = Color.visual
+        defaultTagView.iv.zk.backgroundColor = .visual
         defaultTagView.isSelected = false
         tagViews.append(defaultTagView)
     }

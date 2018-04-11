@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/26.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -15,15 +15,14 @@ class CardDetailSourceCell: UITableViewCell {
     var titles: [String] {
         return types.map { $0.description }
     }
-    var collectionView: TTGTagCollectionView!
+    let collectionView = TTGTagCollectionView()
     var tagViews = [CheckBox]()
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("获得途径", comment: "卡片详情页")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -33,14 +32,13 @@ class CardDetailSourceCell: UITableViewCell {
         
         for i in 0..<types.count {
             let checkBox = CheckBox()
-            checkBox.tintColor = Color.parade
+            checkBox.tintColor = .parade
             checkBox.label.textColor = .darkGray
             checkBox.label.text = titles[i]
             checkBox.isChecked = false
             tagViews.append(checkBox)
         }
         
-        collectionView = TTGTagCollectionView()
         collectionView.contentInset = .zero
         collectionView.verticalSpacing = 5
         collectionView.horizontalSpacing = 15

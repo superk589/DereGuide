@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/20.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -93,12 +93,12 @@ class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
         if let selfLeaderRef = unit.leader.card {
             selfLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("队长技能", comment: "队伍详情页面")): \(selfLeaderRef.leaderSkill?.name ?? NSLocalizedString("无", comment: ""))\n\(selfLeaderRef.leaderSkill?.localizedExplain ?? "")", backgroundColor: selfLeaderRef.attColor.mixed(withColor: .white))
         } else {
-            selfLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))
+            selfLeaderSkillLabel.setupWith(text: "", backgroundColor: UIColor.allType.mixed(withColor: .white))
         }
         if let friendLeaderRef = unit.friendLeader.card {
             friendLeaderSkillLabel.setupWith(text: "\(NSLocalizedString("好友技能", comment: "队伍详情页面")): \(friendLeaderRef.leaderSkill?.name ?? "无")\n\(friendLeaderRef.leaderSkill?.localizedExplain ?? "")", backgroundColor: friendLeaderRef.attColor.mixed(withColor: .white))
         } else {
-            friendLeaderSkillLabel.setupWith(text: "", backgroundColor: Color.allType.mixed(withColor: .white))
+            friendLeaderSkillLabel.setupWith(text: "", backgroundColor: UIColor.allType.mixed(withColor: .white))
         }
     }
 

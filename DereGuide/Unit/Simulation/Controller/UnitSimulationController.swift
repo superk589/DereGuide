@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -123,7 +123,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitSimulationModeSelectionCell.description(), for: indexPath) as! UnitSimulationModeSelectionCell
-            cell.setup(with: NSLocalizedString("Groove类别", comment: ""), rightDetail: grooveType?.description ?? "n/a", rightColor: grooveType?.color ?? Color.allType)
+            cell.setup(with: NSLocalizedString("Groove类别", comment: ""), rightDetail: grooveType?.description ?? "n/a", rightColor: grooveType?.color ?? .allType)
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: UnitSimulationMainBodyCell.description(), for: indexPath) as! UnitSimulationMainBodyCell

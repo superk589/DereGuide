@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/20.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ import SnapKit
 
 protocol UnitInformationAppealCellDelegate: class {
     func unitInformationAppealCell(_ unitInformationAppealCell: UnitInformationAppealCell, didUpdate supportAppeal: Int)
-    
     func unitInformationAppealCell(_ unitInformationAppealCell: UnitInformationAppealCell, beginEdit textField: UITextField)
 }
 
@@ -24,50 +23,28 @@ extension UnitInformationAppealCellDelegate {
 
 class UnitInformationAppealCell: UITableViewCell {
     
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     
-    var descriptionLabel: UILabel!
+    let descriptionLabel = UILabel()
     
-    var supportLabel: UILabel!
+    let supportLabel = UILabel()
     
-    var supportAppealLabel: UILabel!
+    let supportAppealLabel = UILabel()
     
-    var supportAppealTextField: UITextField!
+    let supportAppealTextField = UITextField()
     
-    var appealGrid: GridLabel!
+    let appealGrid = GridLabel(rows: 5, columns: 5)
     
     weak var delegate: UnitInformationAppealCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
         leftLabel.text = NSLocalizedString("表现值", comment: "队伍详情页面")
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.textAlignment = .left
         
-        
-//        supportLabel = UILabel()
-//        supportLabel.font = UIFont.systemFont(ofSize: 14)
-//        // backSupportLabel.textColor = UIColor.lightGrayColor()
-//        supportLabel.text = NSLocalizedString("后援数值", comment: "队伍详情页面") + ": "
-//        supportLabel.textColor = UIColor.darkGray
-//        supportLabel.adjustsFontSizeToFitWidth = true
-        
-//        supportAppealTextField = UnitSimulationAppealInputTextField()
-//        supportAppealTextField.addTarget(self, action: #selector(beginEditAppealTextField(sender:)), for: .editingDidBegin)
-//        supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEnd)
-//        supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEndOnExit)
-//
-//        supportAppealLabel = UILabel()
-//        supportAppealLabel.font = UIFont.systemFont(ofSize: 14)
-//        supportAppealLabel.textColor = UIColor.darkGray
-       
-        appealGrid = GridLabel.init(rows: 5, columns: 5)
-        
         contentView.addSubview(leftLabel)
-//        contentView.addSubview(supportLabel)
-//        contentView.addSubview(supportAppealLabel)
         contentView.addSubview(appealGrid)
         
         leftLabel.snp.makeConstraints { (make) in
@@ -75,33 +52,14 @@ class UnitInformationAppealCell: UITableViewCell {
             make.left.equalTo(10)
         }
         
-//        supportAppealTextField.snp.makeConstraints { (make) in
-//            make.right.equalTo(-10)
-//            make.top.equalTo(leftLabel.snp.bottom).offset(5)
-//            make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
-//            make.height.greaterThanOrEqualTo(24)
-//        }
-        
-//        supportAppealLabel.snp.makeConstraints { (make) in
-//            make.right.equalTo(-10)
-//            make.top.equalTo(leftLabel.snp.bottom).offset(5)
-//        }
-//
-//        supportLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.centerY.equalTo(supportAppealLabel)
-//            make.right.lessThanOrEqualTo(supportAppealLabel.snp.left)
-//        }
-        
         appealGrid.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.right.equalTo(-10)
         }
         
-        descriptionLabel = UILabel()
-        descriptionLabel.textColor = UIColor.darkGray
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.textColor = .darkGray
+        descriptionLabel.font = .systemFont(ofSize: 14)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = NSLocalizedString("* 不含后援值，歌曲模式为常规模式", comment: "")
         contentView.addSubview(descriptionLabel)
@@ -150,11 +108,11 @@ class UnitInformationAppealCell: UITableViewCell {
         appealStrings.append(presentSub3)
         appealStrings.append(presentSub4)
         
-        let colorArray2 = [UIColor.darkGray, Color.allType, Color.vocal, Color.dance, Color.visual]
-        presentColor.append(contentsOf: Array.init(repeating: colorArray2, count: 5))
-        presentColor[2][0] = Color.cute
-        presentColor[3][0] = Color.cool
-        presentColor[4][0] = Color.passion
+        let colorArray2 = [UIColor.darkGray, .allType, .vocal, .dance, .visual]
+        presentColor.append(contentsOf: Array(repeating: colorArray2, count: 5))
+        presentColor[2][0] = .cute
+        presentColor[3][0] = .cool
+        presentColor[4][0] = .passion
         
         appealGrid.setContents(appealStrings)
         appealGrid.setColors(presentColor)

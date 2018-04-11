@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/3/7.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,25 +11,23 @@ import SnapKit
 
 class CardAppealView: UIView {
 
-    var titleLabel: UILabel!
-    var appealGridLabel: GridLabel!
+    let titleLabel = UILabel()
+    let appealGridLabel = GridLabel(rows: 5, columns: 6)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         // 属性表格
-        titleLabel = UILabel()
-        titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.textColor = .black
+        titleLabel.font = .systemFont(ofSize: 16)
         titleLabel.text = NSLocalizedString("卡片属性", comment: "卡片详情页")
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = .black
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(10)
         }
         
-        appealGridLabel = GridLabel.init(rows: 5, columns: 6)
         addSubview(appealGridLabel)
         appealGridLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -55,13 +53,13 @@ class CardAppealView: UIView {
         
         appealGridLabel.setContents(appealGridStrings)
         
-        let colorArray = [Color.allType, Color.life, Color.vocal, Color.dance, Color.visual, Color.allType]
-        let colors = [[UIColor]].init(repeating: colorArray, count: 6)
+        let colorArray = [UIColor.allType, .life, .vocal, .dance, .visual, .allType]
+        let colors = [[UIColor]](repeating: colorArray, count: 6)
         appealGridLabel.setColors(colors)
         
         var fonts = [[UIFont]]()
-        let fontArray = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 6)
-        var fontArray2 = [UIFont].init(repeating: CGSSGlobal.numberFont!, count: 6)
+        let fontArray = [UIFont](repeating: CGSSGlobal.alphabetFont, count: 6)
+        var fontArray2 = [UIFont](repeating: CGSSGlobal.numberFont!, count: 6)
         fontArray2[0] = CGSSGlobal.alphabetFont
         fonts.append(fontArray)
         fonts.append(fontArray2)

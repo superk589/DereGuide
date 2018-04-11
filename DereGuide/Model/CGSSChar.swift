@@ -3,7 +3,7 @@
 //  CGSSFoundation
 //
 //  Created by zzk on 16/6/14.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import Foundation
@@ -14,26 +14,26 @@ extension CGSSChar {
     var attColor: UIColor {
         switch type {
         case "cute":
-            return Color.cute
+            return .cute
         case "cool":
-            return Color.cool
+            return .cool
         case "passion":
-            return Color.passion
+            return .passion
         default:
-            return Color.allType
+            return .allType
         }
     }
     
     var charType: CGSSCharTypes {
-        return CGSSCharTypes.init(typeString: type)
+        return CGSSCharTypes(typeString: type)
     }
     
     var charAgeType: CGSSCharAgeTypes {
-        return CGSSCharAgeTypes.init(age: age)
+        return CGSSCharAgeTypes(age: age)
     }
     
     var charBloodType: CGSSCharBloodTypes {
-        return CGSSCharBloodTypes.init(bloodType: bloodType)
+        return CGSSCharBloodTypes(bloodType: bloodType)
     }
     
     var charCVType: CGSSCharCVTypes {

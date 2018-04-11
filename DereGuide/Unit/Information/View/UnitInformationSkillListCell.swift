@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/20.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,19 +11,17 @@ import SnapKit
 
 class UnitInformationSkillListCell: UITableViewCell {
     
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     
-    var skillListGrid: GridLabel!
+    let skillListGrid = GridLabel(rows: 5, columns: 1, textAligment: .left)
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
         leftLabel.text = NSLocalizedString("特技列表", comment: "队伍详情页面")
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         leftLabel.textAlignment = .left
         
-        skillListGrid = GridLabel.init(rows: 5, columns: 1, textAligment: .left)
         skillListGrid.distribution = .fill
         skillListGrid.numberOfLines = 0
         
@@ -46,7 +44,7 @@ class UnitInformationSkillListCell: UITableViewCell {
     
     func setup(with unit: Unit) {
         var skillListStrings = [[String]]()
-        let skillListColor = [[UIColor]].init(repeating: [UIColor.darkGray], count: 5)
+        let skillListColor = [[UIColor]](repeating: [.darkGray], count: 5)
         for i in 0...4 {
             if let skill = unit[i].card?.skill {
                 let str = "\(skill.skillName!): Lv.\(unit[i].skillLevel)\n\(skill.getLocalizedExplainByLevel(Int(unit[i].skillLevel)))"

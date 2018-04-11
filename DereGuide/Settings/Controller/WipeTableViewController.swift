@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/10/7.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -102,24 +102,24 @@ class WipeTableViewController: BaseTableViewController {
             //let indicator = UIActivityIndicatorView.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
             //cell?.accessoryView = indicator
             //indicator.startAnimating()
-            cell.rightLabel?.text = "...."
+            cell.rightLabel.text = "...."
         } else {
             //cell?.accessoryView = nil
-            cell.rightLabel?.text = ""
+            cell.rightLabel.text = ""
         }
         
         switch indexPath.row {
         case 1:
             CGSSCacheManager.shared.getCacheSizeAt(path: (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first ?? "") + "/default", exclusivePaths: [], complete: { (sizeString) in
-                cell.rightLabel?.text = sizeString
+                cell.rightLabel.text = sizeString
             })
         case 2:
             CGSSCacheManager.shared.getCacheSizeOfCard(complete: { (sizeString) in
-                cell.rightLabel?.text = sizeString
+                cell.rightLabel.text = sizeString
             })
         case 3:
             CGSSCacheManager.shared.getCacheSizeOfSong(complete: { (sizeString) in
-                cell.rightLabel?.text = sizeString
+                cell.rightLabel.text = sizeString
             })
         case 4:
             CGSSCacheManager.shared.getCacheSizeOfGacha(complete: { (sizeString) in
@@ -127,17 +127,17 @@ class WipeTableViewController: BaseTableViewController {
             })
         case 5:
             CGSSCacheManager.shared.getCacheSizeAt(path: NSHomeDirectory() + "/Documents", exclusivePaths: [CoreDataStack.default.storeURL.path], complete: { (sizeString) in
-                cell.rightLabel?.text = sizeString
+                cell.rightLabel.text = sizeString
             })
         case 6:
             CGSSCacheManager.shared.getOtherSize(complete: { (sizeString) in
-                cell.rightLabel?.text = sizeString
+                cell.rightLabel.text = sizeString
             })
         default:
             break
         }
 
-        cell.leftLabel?.text = dataTypes[indexPath.row]
+        cell.leftLabel.text = dataTypes[indexPath.row]
         // Configure the cell...
         return cell
     }

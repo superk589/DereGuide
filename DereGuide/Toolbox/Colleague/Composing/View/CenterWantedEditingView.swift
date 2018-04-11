@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/4.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -47,7 +47,7 @@ class CenterWantedEditingView: UIView {
         deleteButton = UIButton()
         deleteButton.setTitle(NSLocalizedString("删除", comment: ""), for: .normal)
         deleteButton.titleLabel?.textColor = UIColor.white
-        deleteButton.backgroundColor = Color.vocal
+        deleteButton.backgroundColor = .vocal
         deleteButton.addTarget(self, action: #selector(handleDeleteButton(_:)), for: .touchUpInside)
         deleteButton.layer.cornerRadius = 4
         deleteButton.layer.masksToBounds = true

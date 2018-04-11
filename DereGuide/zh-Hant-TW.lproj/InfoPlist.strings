@@ -3,7 +3,7 @@
   DereGuide
 
   Created by zzk on 2016/9/26.
-  Copyright © 2016年 zzk. All rights reserved.
+  Copyright © 2016 zzk. All rights reserved.
 */
 
 NSPhotoLibraryUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";

@@ -129,13 +129,13 @@ extension CGSSSong {
     var color: UIColor {
         switch type {
         case 1:
-            return Color.cute
+            return .cute
         case 2:
-            return Color.cool
+            return .cool
         case 3:
-            return Color.passion
+            return .passion
         default:
-            return UIColor.darkText
+            return .darkText
         }
     }
     

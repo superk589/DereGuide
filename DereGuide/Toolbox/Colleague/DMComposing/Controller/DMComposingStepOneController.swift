@@ -73,7 +73,7 @@ class DMComposingStepOneController: BaseViewController {
             make.right.equalTo(-10)
             make.bottom.equalTo(-10)
         }
-        confirmButton.backgroundColor = Color.dance
+        confirmButton.backgroundColor = .dance
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))

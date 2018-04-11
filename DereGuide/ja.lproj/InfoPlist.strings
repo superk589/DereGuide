@@ -3,7 +3,7 @@
   DereGuide
 
   Created by zzk on 2016/9/26.
-  Copyright © 2016年 zzk. All rights reserved.
+  Copyright © 2016 zzk. All rights reserved.
 */
 
 NSPhotoLibraryUsageDescription = "ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。";

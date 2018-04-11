@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/3.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -19,11 +19,11 @@ class MyCenterGroupView: UIView {
     
     weak var delegate: MyCenterGroupViewDelegate?
     
-    var descLabel: UILabel!
+    let descLabel = UILabel()
     
     var stackView: UIStackView!
     
-    var editableItemViews: [MyCenterItemView]!
+    var editableItemViews = [MyCenterItemView]()
     
     var result: [(Int, CGSSPotential)] {
         return editableItemViews.map { ($0.cardID, $0.potential) }
@@ -33,7 +33,7 @@ class MyCenterGroupView: UIView {
         super.init(frame: frame)
         
         let types = [CGSSLiveTypes.cute, .cool, .passion, .allType]
-        editableItemViews = [MyCenterItemView]()
+
         for index in 0..<4 {
             let view = MyCenterItemView()
             view.setup(with: types[index])

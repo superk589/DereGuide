@@ -71,7 +71,7 @@ class DMComposingStepTwoController: BaseTableViewController {
         }
         
         indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        indicator.color = Color.parade
+        indicator.color = .parade
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,8 +104,8 @@ class DMComposingStepTwoController: BaseTableViewController {
         if tip2 == nil {
             var preferences = EasyTipView.Preferences()
             preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
-            preferences.drawing.foregroundColor = UIColor.white
-            preferences.drawing.backgroundColor = Color.cool
+            preferences.drawing.foregroundColor = .white
+            preferences.drawing.backgroundColor = .cool
             tip2 = EasyTipView(text: NSLocalizedString("向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间", comment: ""), preferences: preferences, delegate: nil)
         }
         if maskView?.superview == nil {

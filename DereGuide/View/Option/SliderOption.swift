@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/31.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -49,7 +49,7 @@ class SliderOption: UIControl {
             make.width.equalTo(50)
             make.centerY.equalToSuperview()
         }
-        sliderDescriptionLabel.textColor = Color.parade
+        sliderDescriptionLabel.textColor = .parade
         sliderDescriptionLabel.font = UIFont.systemFont(ofSize: 14)
         sliderDescriptionLabel.textAlignment = .left
         

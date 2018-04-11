@@ -3,17 +3,18 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
 class MemberEditableItemView: UIView {
-    var cardView: UnitSimulationCardView!
-    var overlayView: UIView!
-    var placeholderImageView: UIImageView!
-    var cardPlaceholder: UIView!
+    
+    let cardView = UnitSimulationCardView()
+    let overlayView = UIView()
+    let placeholderImageView = UIImageView(image: #imageLiteral(resourceName: "436-plus").withRenderingMode(.alwaysTemplate))
+    let cardPlaceholder = UIView()
     
     private(set) var isSelected: Bool = false
     
@@ -54,15 +55,13 @@ class MemberEditableItemView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        overlayView = UIView()
         addSubview(overlayView)
         overlayView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        overlayView.layer.shadowOffset = CGSize.zero
+        overlayView.layer.shadowOffset = .zero
         setSelected(false)
         
-        cardView = UnitSimulationCardView()
         cardView.icon.isUserInteractionEnabled = false
         addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
@@ -70,7 +69,6 @@ class MemberEditableItemView: UIView {
             make.height.greaterThanOrEqualTo(cardView.snp.width).offset(29)
         }
         
-        placeholderImageView = UIImageView(image: #imageLiteral(resourceName: "436-plus").withRenderingMode(.alwaysTemplate))
         addSubview(placeholderImageView)
         placeholderImageView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -78,7 +76,6 @@ class MemberEditableItemView: UIView {
         }
         placeholderImageView.tintColor = .lightGray
         
-        cardPlaceholder = UIView()
         addSubview(cardPlaceholder)
         cardPlaceholder.snp.makeConstraints { (make) in
             make.width.equalToSuperview().offset(-8)
@@ -115,15 +112,15 @@ class MemberGroupView: UIView {
     
     weak var delegate: MemberGroupViewDelegate?
     
-    var descLabel: UILabel!
+    let descLabel = UILabel()
     
     var stackView: UIStackView!
     
-    var editableItemViews: [MemberEditableItemView]!
+    var editableItemViews = [MemberEditableItemView]()
     
-    var centerLabel: UILabel!
+    let centerLabel = UILabel()
     
-    var guestLabel: UILabel!
+    let guestLabel = UILabel()
     
     var currentIndex: Int = 0 {
         didSet {
@@ -137,7 +134,6 @@ class MemberGroupView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        editableItemViews = [MemberEditableItemView]()
         for _ in 0..<6 {
             let view = MemberEditableItemView()
             editableItemViews.append(view)
@@ -152,6 +148,7 @@ class MemberGroupView: UIView {
             view.addGestureRecognizer(longPress)
         }
         editableItemViews[0].setSelected(selected: true, animated: false)
+
         stackView = UIStackView(arrangedSubviews: editableItemViews)
         stackView.spacing = 6
         stackView.distribution = .fillEqually
@@ -170,9 +167,8 @@ class MemberGroupView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        centerLabel = UILabel()
         centerLabel.text = NSLocalizedString("队长", comment: "")
-        centerLabel.font = UIFont.systemFont(ofSize: 12)
+        centerLabel.font = .systemFont(ofSize: 12)
         centerLabel.adjustsFontSizeToFitWidth = true
         addSubview(centerLabel)
         centerLabel.snp.makeConstraints { (make) in
@@ -182,9 +178,8 @@ class MemberGroupView: UIView {
             make.width.lessThanOrEqualTo(editableItemViews[0].snp.width).offset(-4)
         }
         
-        guestLabel = UILabel()
         guestLabel.text = NSLocalizedString("好友", comment: "")
-        guestLabel.font = UIFont.systemFont(ofSize: 12)
+        guestLabel.font = .systemFont(ofSize: 12)
         guestLabel.adjustsFontSizeToFitWidth = true
         addSubview(guestLabel)
         guestLabel.snp.makeConstraints { (make) in

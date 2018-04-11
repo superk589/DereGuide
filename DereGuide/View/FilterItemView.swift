@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/12.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,20 +12,18 @@ import ZKCornerRadiusView
 
 class FilterItemView: UIView {
 
-    var iv: ZKCornerRadiusView!
+    let iv = ZKCornerRadiusView()
     
-    var label: UILabel!
+    let label = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        iv = ZKCornerRadiusView()
         addSubview(iv)
 
         iv.zk.cornerRadius = 3
-        iv.zk.backgroundColor = Color.parade
+        iv.zk.backgroundColor = .parade
         
-        label = UILabel()
         addSubview(label)
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .center
@@ -36,10 +34,10 @@ class FilterItemView: UIView {
         didSet {
             if isSelected {
                 iv.isHidden = false
-                label.textColor = UIColor.white
+                label.textColor = .white
             } else {
                 iv.isHidden = true
-                label.textColor = Color.parade
+                label.textColor = .parade
             }
         }
     }
@@ -62,7 +60,7 @@ class FilterItemView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        iv.frame = self.bounds
+        iv.frame = bounds
         iv.render()
         label.sizeToFit()
         label.frame.origin = CGPoint.init(x: 6, y: 6)

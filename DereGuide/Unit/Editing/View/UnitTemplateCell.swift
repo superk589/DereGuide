@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/12.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,12 +11,12 @@ import SnapKit
 
 class UnitTemplateCell: UnitTableViewCell {
     
-    var titleLabel: UILabel!
+    let titleLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+
+        titleLabel.font = .systemFont(ofSize: 16)
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.top.equalTo(10)

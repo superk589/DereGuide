@@ -3,7 +3,7 @@
 //  CGSSFoundation
 //
 //  Created by zzk on 16/7/9.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import Foundation

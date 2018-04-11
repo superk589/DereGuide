@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/3/7.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,18 +11,17 @@ import SnapKit
 
 class CardRankingView: UIView {
 
-    var titleLabel: UILabel!
+    let titleLabel = UILabel()
     
-    var rangkingGridLabel: GridLabel!
+    let rangkingGridLabel = GridLabel(rows: 3, columns: 5)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        titleLabel = UILabel()
-        titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.textColor = .black
+        titleLabel.font = .systemFont(ofSize: 16)
         titleLabel.text = NSLocalizedString("属性排名", comment: "卡片详情页")
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = .black
         addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { (make) in
@@ -30,8 +29,6 @@ class CardRankingView: UIView {
             make.top.equalTo(10)
         }
         
-        rangkingGridLabel = GridLabel.init(rows: 3, columns: 5)
-//        rangkingGridLabel.frame = CGRect(x: 10, y: 0, width: CGSSGlobal.width - 20, height: 54)
         addSubview(rangkingGridLabel)
         rangkingGridLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -58,8 +55,8 @@ class CardRankingView: UIView {
         rangkingGridLabel.setContents(rankGridStrings)
         
         var colors2 = [[UIColor]]()
-        let colorArray2 = [card.attColor, Color.vocal, Color.dance, Color.visual, Color.allType]
-        let colorArray3 = [Color.allType, Color.vocal, Color.dance, Color.visual, Color.allType]
+        let colorArray2 = [card.attColor, .vocal, .dance, .visual, .allType]
+        let colorArray3 = [UIColor.allType, .vocal, .dance, .visual, .allType]
         
         colors2.append(colorArray3)
         colors2.append(colorArray2)
@@ -67,8 +64,8 @@ class CardRankingView: UIView {
         rangkingGridLabel.setColors(colors2)
         
         var fonts2 = [[UIFont]]()
-        let fontArray3 = [UIFont].init(repeating: CGSSGlobal.alphabetFont, count: 5)
-        var fontArray4 = [UIFont].init(repeating: CGSSGlobal.numberFont!, count: 5)
+        let fontArray3 = [UIFont](repeating: CGSSGlobal.alphabetFont, count: 5)
+        var fontArray4 = [UIFont](repeating: CGSSGlobal.numberFont!, count: 5)
         fontArray4[0] = CGSSGlobal.alphabetFont
         fonts2.append(fontArray3)
         fonts2.append(fontArray4)

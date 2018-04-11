@@ -3,37 +3,38 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/7/5.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 import ZKCornerRadiusView
 
 class LiveDifficultyView: UIView {
-    var label: UILabel!
-    var backgoundView: ZKCornerRadiusView!
+    
+    let label = UILabel()
+    private(set) lazy var backgoundView = ZKCornerRadiusView(frame: self.bounds)
+    
     var text: String? {
         get {
-            return self.label.text
+            return label.text
         }
         set {
-            self.label.text = newValue
+            label.text = newValue
         }
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgoundView = ZKCornerRadiusView.init(frame: self.bounds)
+
         addSubview(backgoundView)
         backgoundView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
-        label = UILabel()
         addSubview(label)
         label.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
         }
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = .boldSystemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         label.textColor = .darkGray
@@ -42,8 +43,8 @@ class LiveDifficultyView: UIView {
     }
     
     func addTarget(_ target: AnyObject?, action: Selector) {
-        let tap = UITapGestureRecognizer.init(target: target, action: action)
-        self.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: target, action: action)
+        addGestureRecognizer(tap)
     }
     
     override func layoutSubviews() {

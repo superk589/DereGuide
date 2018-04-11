@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/12.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -36,7 +36,7 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         }
         
         toolbar = UIToolbar()
-        toolbar.tintColor = Color.parade
+        toolbar.tintColor = .parade
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
             if #available(iOS 11.0, *) {

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/26.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -15,9 +15,9 @@ protocol CardDetailRelatedCardsCellDelegate: class {
 
 class CardDetailRelatedCardsCell: UITableViewCell {
     
-    var leftLabel: UILabel!
-    var rightLabel: UILabel!
-    var collectionView: TTGTagCollectionView!
+    let leftLabel = UILabel()
+    let rightLabel = UILabel()
+    let collectionView = TTGTagCollectionView()
     
     var tagViews = NSCache<NSNumber, CGSSCardIconView>()
     
@@ -26,8 +26,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -35,11 +34,10 @@ class CardDetailRelatedCardsCell: UITableViewCell {
             make.top.equalTo(10)
         }
         
-        rightLabel = UILabel()
         rightLabel.text = NSLocalizedString("查看角色详情", comment: "卡片详情页") + " >"
-        rightLabel.font = UIFont.systemFont(ofSize: 16)
-        rightLabel.textColor = UIColor.lightGray
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(handleTapGesture(_:)))
+        rightLabel.font = .systemFont(ofSize: 16)
+        rightLabel.textColor = .lightGray
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         rightLabel.addGestureRecognizer(tap)
         rightLabel.isUserInteractionEnabled = true
         contentView.addSubview(rightLabel)
@@ -48,7 +46,6 @@ class CardDetailRelatedCardsCell: UITableViewCell {
             make.right.equalTo(-10)
         }
         
-        collectionView = TTGTagCollectionView()
         collectionView.contentInset = .zero
         collectionView.verticalSpacing = 5
         collectionView.horizontalSpacing = 5
@@ -94,12 +91,12 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
         let icon: CGSSCardIconView
-        if let view = tagViews.object(forKey: NSNumber.init(value: index)) {
+        if let view = tagViews.object(forKey: NSNumber(value: index)) {
             icon = view
         } else {
             icon = CGSSCardIconView()
             icon.isUserInteractionEnabled = false
-            tagViews.setObject(icon, forKey: NSNumber.init(value: index))
+            tagViews.setObject(icon, forKey: NSNumber(value: index))
         }
         icon.cardID = cards[Int(index)].id
         return icon

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -22,13 +22,14 @@ extension UnitSimulationAppealEditingCellDelegate {
 }
 
 class UnitSimulationAppealInputTextField: UITextField {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         autocorrectionType = .no
         autocapitalizationType = .none
         borderStyle = .roundedRect
         textAlignment = .right
-        font = UIFont.systemFont(ofSize: 14)
+        font = .systemFont(ofSize: 14)
         keyboardType = .numbersAndPunctuation
         returnKeyType = .done
         contentVerticalAlignment = .center
@@ -40,54 +41,36 @@ class UnitSimulationAppealInputTextField: UITextField {
 }
 
 class UnitSimulationAppealEditingCell: UITableViewCell {
-
-//    var leftLabel: UILabel!
     
-    var supportAppealBox: CheckBox!
+    let supportAppealBox = CheckBox()
     
-    var customAppealBox: CheckBox!
+    let customAppealBox = CheckBox()
     
-    var supportAppealTextField: UnitSimulationAppealInputTextField!
+    let supportAppealTextField = UnitSimulationAppealInputTextField()
     
-    var customAppealTextField: UnitSimulationAppealInputTextField!
+    let customAppealTextField = UnitSimulationAppealInputTextField()
     
     weak var delegate: UnitSimulationAppealEditingCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        leftLabel = UILabel()
-//        leftLabel.text = NSLocalizedString("表现值", comment: "队伍详情页面") + ": "
-//        leftLabel.font = UIFont.systemFont(ofSize: 16)
-//
-//        contentView.addSubview(leftLabel)
-//        leftLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(10)
-//            make.top.equalTo(10)
-//        }
-        
-        
-        supportAppealBox = CheckBox()
-        supportAppealBox.tintColor = Color.parade
-        supportAppealBox.label.font = UIFont.systemFont(ofSize: 14)
+        supportAppealBox.tintColor = .parade
+        supportAppealBox.label.font = .systemFont(ofSize: 14)
         supportAppealBox.label.text = NSLocalizedString("使用后援表现值", comment: "队伍详情页面") + ": "
-        supportAppealBox.label.textColor = UIColor.darkGray
-        let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(checkBox(_:)))
+        supportAppealBox.label.textColor = .darkGray
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(checkBox(_:)))
         supportAppealBox.addGestureRecognizer(tap1)
         contentView.addSubview(supportAppealBox)
-       
-        supportAppealTextField = UnitSimulationAppealInputTextField()
         
         supportAppealTextField.addTarget(self, action: #selector(beginEditAppealTextField(sender:)), for: .editingDidBegin)
         supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEnd)
         supportAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEndOnExit)
 
-        
         contentView.addSubview(supportAppealTextField)
         
         supportAppealTextField.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
-//            make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.top.equalTo(10)
             make.width.equalTo(contentView.snp.width).dividedBy(2).offset(-20)
             make.height.equalTo(30)
@@ -98,17 +81,13 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
             make.right.lessThanOrEqualTo(supportAppealTextField.snp.left)
         }
         
-        
-        customAppealBox = CheckBox()
-        customAppealBox.tintColor = Color.parade
-        customAppealBox.label.font = UIFont.systemFont(ofSize: 14)
+        customAppealBox.tintColor = .parade
+        customAppealBox.label.font = .systemFont(ofSize: 14)
         customAppealBox.label.text = NSLocalizedString("使用固定值", comment: "队伍详情页面") + ": "
-        customAppealBox.label.textColor = UIColor.darkGray
-        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(checkBox(_:)))
+        customAppealBox.label.textColor = .darkGray
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(checkBox(_:)))
         customAppealBox.addGestureRecognizer(tap2)
         contentView.addSubview(customAppealBox)
-        
-        customAppealTextField = UnitSimulationAppealInputTextField()
         
         customAppealTextField.addTarget(self, action: #selector(beginEditAppealTextField(sender:)), for: .editingDidBegin)
         customAppealTextField.addTarget(self, action: #selector(endEditAppeal), for: .editingDidEnd)
@@ -132,7 +111,6 @@ class UnitSimulationAppealEditingCell: UITableViewCell {
         selectionStyle = .none
 
     }
-    
     
     @objc func beginEditAppealTextField(sender: UITextField) {
         delegate?.unitSimulationAppealEditingCell(self, beginEdit: sender)

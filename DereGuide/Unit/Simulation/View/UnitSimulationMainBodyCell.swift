@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -60,7 +60,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         
         calculationButton = WideButton()
         calculationButton.setTitle(NSLocalizedString("一般计算", comment: "队伍详情页面"), for: .normal)
-        calculationButton.backgroundColor = Color.dance
+        calculationButton.backgroundColor = .dance
         calculationButton.addTarget(self, action: #selector(startCalculate), for: .touchUpInside)
         
         contentView.addSubview(calculationButton)
@@ -80,7 +80,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         
         simulationButton = WideButton()
         simulationButton.setTitle(NSLocalizedString("模拟计算", comment: "队伍详情页面"), for: .normal)
-        simulationButton.backgroundColor = Color.vocal
+        simulationButton.backgroundColor = .vocal
         simulationButton.addTarget(self, action: #selector(startSimulate), for: .touchUpInside)
         contentView.addSubview(simulationButton)
         simulationButton.snp.makeConstraints { (make) in
@@ -97,7 +97,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
         
         cancelButton = WideButton()
         cancelButton.setTitle(NSLocalizedString("取消", comment: ""), for: .normal)
-        cancelButton.backgroundColor = Color.vocal
+        cancelButton.backgroundColor = .vocal
         cancelButton.addTarget(self, action: #selector(cancelSimulating), for: .touchUpInside)
         contentView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { (make) in

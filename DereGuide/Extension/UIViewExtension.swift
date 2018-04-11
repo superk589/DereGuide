@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/8/12.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -65,7 +65,7 @@ extension UIView {
     func drawSectionLine(_ positionY: CGFloat) {
         let view = UIView.init(frame: CGRect(x: 0, y: positionY, width: CGSSGlobal.width, height: 1 / UIScreen.main.scale))
         view.layer.borderWidth = 1 / UIScreen.main.scale
-        view.layer.borderColor = Color.separator.cgColor
+        view.layer.borderColor = UIColor.separator.cgColor
         self.addSubview(view)
     }
     

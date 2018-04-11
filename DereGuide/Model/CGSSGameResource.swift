@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/9/13.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit

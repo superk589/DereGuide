@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/4/2.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -16,12 +16,12 @@ protocol EventTrendCellDelegate: class {
 
 class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
 
-    var startLabel: UILabel!
-    var startDateView: UIView!
-    var statusIndicator: TimeStatusIndicator!
+    let startLabel = UILabel()
+    let startDateView = UIView()
+    let statusIndicator = TimeStatusIndicator()
 
-    var arrow: UIImageView!
-    var collectionView: TTGTagCollectionView!
+    let arrow = UIImageView()
+    let collectionView = TTGTagCollectionView()
     
     var trend: EventTrend? {
         didSet {
@@ -38,27 +38,23 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        startDateView = UIView()
         contentView.addSubview(startDateView)
         startDateView.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(32)
         }
-        startDateView.backgroundColor = Color.parade
+        startDateView.backgroundColor = .parade
         startDateView.layer.cornerRadius = 3
         startDateView.layer.masksToBounds = true
         
-        startLabel = UILabel()
         startDateView.addSubview(startLabel)
         startLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 3, left: 3, bottom: 3, right: 3))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3))
         }
-        startLabel.textColor = UIColor.white
-        startLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        startLabel.textColor = .white
+        startLabel.font = .boldSystemFont(ofSize: 14)
         
-    
-        statusIndicator = TimeStatusIndicator()
         contentView.addSubview(statusIndicator)
         statusIndicator.snp.makeConstraints { (make) in
             make.centerY.equalTo(startDateView)
@@ -66,18 +62,16 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
             make.left.equalTo(10)
         }
         
-        arrow = UIImageView()
         contentView.addSubview(arrow)
         arrow.snp.makeConstraints { (make) in
             make.width.height.equalTo(20)
             make.right.equalTo(-10)
             make.centerY.equalTo(startDateView)
         }
-        arrow.tintColor = UIColor.lightGray
+        arrow.tintColor = .lightGray
         arrow.contentMode = .scaleAspectFit
         arrow.image = #imageLiteral(resourceName: "764-arrow-down-toolbar-selected").withRenderingMode(.alwaysTemplate)
         
-        collectionView = TTGTagCollectionView()
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -95,7 +89,7 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     
     func setup(with trend: EventTrend) {
         startLabel.text = trend.startDate.toDate().toString(format: "yyyy-MM-dd")
-        startDateView.backgroundColor = Color.parade
+        startDateView.backgroundColor = .parade
         let now = Date()
         let start = trend.startDate.toDate()
         let end = trend.endDate.toDate()
@@ -130,14 +124,14 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState], animations: { [weak self] in
                 if selected {
-                    self?.arrow.transform = CGAffineTransform.init(rotationAngle: .pi)
+                    self?.arrow.transform = CGAffineTransform(rotationAngle: .pi)
                 } else {
                     self?.arrow.transform = .identity
                 }
             }, completion: nil)
         } else {
             if selected {
-                arrow.transform = CGAffineTransform.init(rotationAngle: .pi)
+                arrow.transform = CGAffineTransform(rotationAngle: .pi)
             } else {
                 arrow.transform = .identity
             }
@@ -149,7 +143,7 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     }
     
     private func dequeueFromCachedTags(for index: UInt) -> UIView? {
-        return tagViewsCache.object(forKey: NSNumber.init(value: index))
+        return tagViewsCache.object(forKey: NSNumber(value: index))
     }
     
     func numberOfTags(in tagCollectionView: TTGTagCollectionView!) -> UInt {
@@ -158,13 +152,13 @@ class EventTrendCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagColle
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
         
-        let tagView = dequeueFromCachedTags(for: index) as? BannerView ?? BannerView.init(frame: CGRect.init(x: 0, y: 0, width: 132, height: 132))
+        let tagView = dequeueFromCachedTags(for: index) as? BannerView ?? BannerView.init(frame: CGRect(x: 0, y: 0, width: 132, height: 132))
         
         if let url = trend?.lives[Int(index)].jacketURL {
             tagView.sd_setImage(with: url)
         }
         
-        tagViewsCache.setObject(tagView, forKey: NSNumber.init(value: index))
+        tagViewsCache.setObject(tagView, forKey: NSNumber(value: index))
         return tagView
     }
     

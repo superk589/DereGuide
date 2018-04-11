@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,10 +11,10 @@ import UIKit
 class PotentialLabel: UILabel {
     
     func setup(with potential: CGSSPotential) {
-        let vocal = NSAttributedString.init(string: String(potential.vocalLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let dance = NSAttributedString.init(string: String(potential.danceLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let visual = NSAttributedString.init(string: String(potential.visualLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let life = NSAttributedString.init(string: String(potential.lifeLevel), attributes: [NSAttributedStringKey.foregroundColor: Color.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let vocal = NSAttributedString(string: String(potential.vocalLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let dance = NSAttributedString(string: String(potential.danceLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let visual = NSAttributedString(string: String(potential.visualLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let life = NSAttributedString(string: String(potential.lifeLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let separator = NSAttributedString.init(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
 //        let plus = NSAttributedString.init(string: "+", attributes: [NSAttributedStringKey.foregroundColor: Color.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         
@@ -33,8 +33,8 @@ class UnitSimulationCardView: UIView {
         potentialLabel.adjustsFontSizeToFitWidth = true
         
         skillLabel.adjustsFontSizeToFitWidth = true
-        skillLabel.font = UIFont.systemFont(ofSize: 12)
-        skillLabel.textColor = UIColor.darkGray
+        skillLabel.font = .systemFont(ofSize: 12)
+        skillLabel.textColor = .darkGray
         
         super.init(frame: frame)
         addSubview(skillLabel)

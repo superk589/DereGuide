@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 
@@ -12,27 +12,25 @@ import SnapKit
 
 class GachaTableViewCell: UITableViewCell {
     
-    var banner: BannerView!
-    var nameLabel: UILabel!
-    var dateLabel: UILabel!
-    var startLabel: UILabel!
-    var startDateView: UIView!
-    var endLabel: UILabel!
-    //    var songView: UIView!
-    //    var idolView: UIView!
-    var statusIndicator: TimeStatusIndicator!
+    let banner = BannerView()
+    let nameLabel = UILabel()
+    let dateLabel = UILabel()
+    let startLabel = UILabel()
+    let startDateView = UIView()
+    let endLabel = UILabel()
+
+    var statusIndicator = TimeStatusIndicator()
     
     static let estimatedHeight: CGFloat = (Screen.width - 33 - 32) * (212 / 824) + 53
 
-    private let topSpace:CGFloat = 10
-    private let leftSpace:CGFloat = 10
+    private let topSpace: CGFloat = 10
+    private let leftSpace: CGFloat = 10
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         accessoryType = .disclosureIndicator
         
-        banner = BannerView()
         contentView.addSubview(banner)
         banner.snp.makeConstraints { (make) in
             make.left.greaterThanOrEqualTo(32)
@@ -51,25 +49,23 @@ class GachaTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
         }
         
-        startDateView = UIView()
         contentView.addSubview(startDateView)
         startDateView.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(banner)
             make.bottom.equalTo(banner.snp.top).offset(-10)
         }
-        startDateView.backgroundColor = Color.parade
+        startDateView.backgroundColor = .parade
         startDateView.layer.cornerRadius = 3
         startDateView.layer.masksToBounds = true
         
-        startLabel = UILabel()
         startDateView.addSubview(startLabel)
         startLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 3, left: 3, bottom: 3, right: 3))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3))
         }
-        startLabel.textColor = UIColor.white
-        startLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        startLabel.textColor = .white
+        startLabel.font = .boldSystemFont(ofSize: 14)
         
         
         let line = LineView()
@@ -80,7 +76,6 @@ class GachaTableViewCell: UITableViewCell {
             make.top.bottom.equalToSuperview()
         }
         
-        statusIndicator = TimeStatusIndicator()
         contentView.addSubview(statusIndicator)
         statusIndicator.snp.makeConstraints { (make) in
             make.centerY.equalTo(startDateView)
@@ -88,10 +83,9 @@ class GachaTableViewCell: UITableViewCell {
             make.left.equalTo(banner.snp.left).offset(-22)
         }
              
-        nameLabel = UILabel()
         contentView.addSubview(nameLabel)
-        nameLabel.font = UIFont.systemFont(ofSize: 14)
-        nameLabel.textColor = UIColor.black
+        nameLabel.font = .systemFont(ofSize: 14)
+        nameLabel.textColor = .black
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
         nameLabel.snp.makeConstraints { (make) in
@@ -99,12 +93,11 @@ class GachaTableViewCell: UITableViewCell {
             make.centerY.equalTo(startDateView)
             make.right.equalToSuperview()
         }
-        // 两个Label同行, setContentHuggingPriority优先级高的可以避免拉伸
-        // 同理setContentCompressionResistancePriority 优先级高的可以避免被缩小
-        startLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        startLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        nameLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
-        nameLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+       
+        startLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        startLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
     }
     
     func setup(pool: CGSSGacha) {
@@ -126,19 +119,6 @@ class GachaTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
 }

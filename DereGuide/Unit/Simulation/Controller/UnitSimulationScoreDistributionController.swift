@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/1.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -111,7 +111,7 @@ class UnitSimulationScoreDistributionController: BaseViewController {
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             if let strongSelf = self {
                 let dataSet = strongSelf.result.dataSet
-                dataSet.setColor(Color.parade)
+                dataSet.setColor(.parade)
                 dataSet.drawCirclesEnabled = false
                 dataSet.drawCircleHoleEnabled = false
                 dataSet.lineWidth = 2

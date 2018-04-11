@@ -27,7 +27,7 @@ enum LSAction {
         }
     }
     
-    // used for order the actions have the same time offset
+    // used for order the actions with the same time offset
     var order: Int {
         switch self {
         case .skillEnd:
@@ -58,7 +58,7 @@ struct LSGame {
     var maxLife: Int
     var currentLife: Int {
         didSet {
-            // whenever current life is changed, we should update life sparkle bonus value.
+            // whenever current life is changed, we should update life sparkle bonus value if needed.
             if hasLifeSparkle {
                 updateBonusGroup()
             }

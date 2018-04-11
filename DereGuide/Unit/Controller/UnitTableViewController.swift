@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/7/28.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,14 +11,14 @@ import CoreData
 
 class UnitTableViewController: BaseViewController, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    var tableView = UITableView()
+    let tableView = UITableView()
     
-    var addItem: UIBarButtonItem!
-    var deleteItem: UIBarButtonItem!
-    var selectItem: UIBarButtonItem!
-    var deselectItem: UIBarButtonItem!
-    var copyItem: UIBarButtonItem!
-    var spaceItem: UIBarButtonItem!
+    private(set) lazy var addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addUnit))
+    private(set) lazy var  deleteItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
+    private(set) lazy var selectItem = UIBarButtonItem(title: NSLocalizedString("全选", comment: ""), style: .plain, target: self, action: #selector(selectAllAction))
+    private(set) lazy var  deselectItem = UIBarButtonItem(title: NSLocalizedString("全部取消", comment: ""), style: .plain, target: self, action: #selector(deselectAllAction))
+    private(set) lazy var copyItem = UIBarButtonItem(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
+    private(set) lazy var spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     
     var fetchedResultsController: NSFetchedResultsController<Unit>?
     var context: NSManagedObjectContext {
@@ -31,7 +31,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         }
     }
     
-    var hintLabel: UILabel!
+    let hintLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +48,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.keyboardDismissMode = .onDrag
 
-        hintLabel = UILabel()
-        hintLabel.textColor = UIColor.darkGray
+        hintLabel.textColor = .darkGray
         hintLabel.text = NSLocalizedString("还没有队伍，点击右上＋创建一个吧", comment: "")
         hintLabel.numberOfLines = 0
         hintLabel.textAlignment = .center
@@ -79,16 +78,8 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     }
     
     private func prepareToolbar() {
-        addItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addUnit))
-        deleteItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
         self.navigationItem.rightBarButtonItem = addItem
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        
-        selectItem = UIBarButtonItem.init(title: NSLocalizedString("全选", comment: ""), style: .plain, target: self, action: #selector(selectAllAction))
-        deselectItem = UIBarButtonItem.init(title: NSLocalizedString("全部取消", comment: ""), style: .plain, target: self, action: #selector(deselectAllAction))
-        copyItem = UIBarButtonItem.init(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
-        
-        spaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     }
     
     private func prepareFetchRequest() {
@@ -217,7 +208,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if isEditing {
             // 编辑状态时 为多选删除模式
-            return UITableViewCellEditingStyle.init(rawValue: 0b11)!
+            return UITableViewCellEditingStyle(rawValue: 0b11)!
         } else {
             // 非编辑状态时 为左滑删除模式
             return .delete
@@ -256,13 +247,13 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     // 下面这两个方法可以让分割线左侧顶格显示 不再留15像素
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.separatorInset = UIEdgeInsets.zero
-        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = .zero
+        tableView.layoutMargins = .zero
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = UIEdgeInsets.zero
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -280,8 +271,8 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { alert in
+            let alert = UIAlertController(title: NSLocalizedString("数据缺失", comment: "弹出框标题"), message: NSLocalizedString("因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。", comment: "弹出框正文"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "弹出框按钮"), style: .default, handler: { alert in
                 tableView.deselectRow(at: indexPath, animated: true)
             }))
             self.navigationController?.present(alert, animated: true, completion: nil)
@@ -335,9 +326,9 @@ extension UnitTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
         if units.count != 0 {
-            hintLabel?.isHidden = true
+            hintLabel.isHidden = true
         } else {
-            hintLabel?.isHidden = false
+            hintLabel.isHidden = false
         }
     }
 }

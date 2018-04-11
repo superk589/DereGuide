@@ -3,7 +3,7 @@
   DereGuide
 
   Created by zzk on 2016/9/26.
-  Copyright © 2016年 zzk. All rights reserved.
+  Copyright © 2016 zzk. All rights reserved.
 */
 
 NSPhotoLibraryUsageDescription = "For saving images to the camera roll. This permission can be changed from the Settings app.";

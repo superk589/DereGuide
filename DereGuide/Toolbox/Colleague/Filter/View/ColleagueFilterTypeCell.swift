@@ -3,20 +3,20 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/15.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class ColleagueFilterTypeCell: UITableViewCell {
     
-    var icon: UIImageView!
+    let icon = UIImageView()
     
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        icon = UIImageView()
+
         contentView.addSubview(icon)
         icon.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -25,8 +25,7 @@ class ColleagueFilterTypeCell: UITableViewCell {
             make.width.height.equalTo(24)
         }
         
-        leftLabel = UILabel()
-        leftLabel.font = UIFont.systemFont(ofSize: 14)
+        leftLabel.font = .systemFont(ofSize: 14)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)

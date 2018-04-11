@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/21.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -30,7 +30,7 @@ class UnitAdvanceCalculationResultView: UIView {
             make.width.equalToSuperview().dividedBy(2).offset(-10)
             make.bottom.equalToSuperview()
         }
-        rightLabel.textColor = Color.cute
+        rightLabel.textColor = .cute
         rightLabel.textAlignment = .right
         rightLabel.font = UIFont.systemFont(ofSize: 16)
         rightLabel.adjustsFontSizeToFitWidth = true

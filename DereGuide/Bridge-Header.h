@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/2/10.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 #ifndef Bridge_Header_h

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -53,14 +53,14 @@ class UnitDetailController: ZKPageViewController, ZKPageViewControllerDelegate, 
     private func prepareTitleItems() {
         let item1 = ZKPageTitleItem()
         item1.normalColor = .darkGray
-        item1.selectedColor = Color.vocal
+        item1.selectedColor = .vocal
         item1.label.text = NSLocalizedString("得分计算", comment: "")
         
         titleItems.append(item1)
         
         let item2 = ZKPageTitleItem()
         item2.normalColor = .darkGray
-        item2.selectedColor = Color.cool
+        item2.selectedColor = .cool
         item2.label.text = NSLocalizedString("队伍信息", comment: "")
         
         titleItems.append(item2)

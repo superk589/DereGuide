@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 16/7/23.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -20,15 +20,15 @@ enum CGSSLiveSimulatorType: String, CustomStringConvertible, ColorRepresentable 
     var color: UIColor {
         switch self {
         case .normal:
-            return Color.parade
+            return .parade
         case .vocal:
-            return Color.vocal
+            return .vocal
         case .dance:
-            return Color.dance
+            return .dance
         case .visual:
-            return Color.passion
+            return .passion
         case .parade:
-            return Color.parade
+            return .parade
         }
     }
     
@@ -55,11 +55,11 @@ enum CGSSGrooveType: String, CustomStringConvertible, ColorRepresentable {
     var color: UIColor {
         switch self {
         case .cute:
-            return Color.cute
+            return .cute
         case .cool:
-            return Color.cool
+            return .cool
         case .passion:
-            return Color.passion
+            return .passion
         }
     }
     
@@ -117,13 +117,13 @@ extension CGSSLive {
     var color: UIColor {
         switch type {
         case 1:
-            return Color.cute
+            return .cute
         case 2:
-            return Color.cool
+            return .cool
         case 3:
-            return Color.passion
+            return .passion
         default:
-            return UIColor.darkText
+            return .darkText
         }
     }
     

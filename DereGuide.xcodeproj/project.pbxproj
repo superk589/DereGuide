@@ -177,6 +177,7 @@
 		126612B21F1723AB00B7D17F /* RemoteUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126612B11F1723AB00B7D17F /* RemoteUnit.swift */; };
 		126612B41F1723B500B7D17F /* RemoteMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126612B31F1723B500B7D17F /* RemoteMember.swift */; };
 		126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126666231D7D70F70022348E /* CGSSLiveFilter.swift */; };
+		12693CA62081D13C0052C365 /* IntExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12693CA52081D13C0052C365 /* IntExtenstion.swift */; };
 		1269E9191D5209610071AD7F /* BaseCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */; };
 		1269E91A1D5209610071AD7F /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9161D5209610071AD7F /* CardDetailViewController.swift */; };
 		1269E91C1D5209610071AD7F /* CardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269E9181D5209610071AD7F /* CardTableViewController.swift */; };
@@ -272,7 +273,6 @@
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
 		12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */; };
 		12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */; };
-		12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D921D8C2D280021320D /* CGSSCheckBox.swift */; };
 		12ABE3401F42CE67003A5E7F /* ColleagueFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE33F1F42CE67003A5E7F /* ColleagueFilterController.swift */; };
 		12ABE3471F42D61A003A5E7F /* ColleagueFilterTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */; };
 		12ABE34B1F42DD02003A5E7F /* ColleagueFilterCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */; };
@@ -634,6 +634,7 @@
 		126612B11F1723AB00B7D17F /* RemoteUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUnit.swift; sourceTree = "<group>"; };
 		126612B31F1723B500B7D17F /* RemoteMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMember.swift; sourceTree = "<group>"; };
 		126666231D7D70F70022348E /* CGSSLiveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLiveFilter.swift; sourceTree = "<group>"; };
+		12693CA52081D13C0052C365 /* IntExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtenstion.swift; sourceTree = "<group>"; };
 		1269E9151D5209610071AD7F /* BaseCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCardTableViewController.swift; sourceTree = "<group>"; };
 		1269E9161D5209610071AD7F /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		1269E9181D5209610071AD7F /* CardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewController.swift; sourceTree = "<group>"; };
@@ -730,7 +731,6 @@
 		12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapShiftingInfo.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
 		12A71D911D8C20260021320D /* DereGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DereGuide.entitlements; sourceTree = "<group>"; };
-		12A71D921D8C2D280021320D /* CGSSCheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCheckBox.swift; sourceTree = "<group>"; };
 		12ABE33F1F42CE67003A5E7F /* ColleagueFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterController.swift; sourceTree = "<group>"; };
 		12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterTypeCell.swift; sourceTree = "<group>"; };
 		12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterCardCell.swift; sourceTree = "<group>"; };
@@ -1032,6 +1032,7 @@
 				1291821C1F58F99D00F91C0B /* UITextFieldExtension.swift */,
 				1265DDB81FA034B500A2A679 /* Array+SafeIndex.swift */,
 				12F48AEF2020083C00CE57E1 /* UIViewControllerExtension.swift */,
+				12693CA52081D13C0052C365 /* IntExtenstion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1433,7 +1434,6 @@
 			children = (
 				1261A54A1F54F11700869500 /* Option */,
 				1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */,
-				12A71D921D8C2D280021320D /* CGSSCheckBox.swift */,
 				12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */,
 				12F48AED201FFC5A00CE57E1 /* CGSSUpdatingHUDManager.swift */,
 				1206F6D51E2A3FDE000FAC78 /* CGSSSearchBar.swift */,
@@ -2615,7 +2615,6 @@
 				124791811D87F4FD00ED8EA6 /* GachaViewController.swift in Sources */,
 				12D975D41E37AB3D005E932B /* EventRankingSpeed.swift in Sources */,
 				1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */,
-				12A71D931D8C2D280021320D /* CGSSCheckBox.swift in Sources */,
 				1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */,
 				12816B381F7CF750000456CE /* SongDetailLiveCell.swift in Sources */,
 				1239F1CD1EF375B500861092 /* UnitEditingController.swift in Sources */,
@@ -2728,6 +2727,7 @@
 				12725F29203FED1500FBBB64 /* ScoreDashboardController.swift in Sources */,
 				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
+				12693CA62081D13C0052C365 /* IntExtenstion.swift in Sources */,
 				1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
 				1262F51B1ECE83D500AD6424 /* LSScoreBonusGroup.swift in Sources */,

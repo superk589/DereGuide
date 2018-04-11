@@ -3,17 +3,17 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/7/13.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class CharView: UIView {
     
-    var iconView: CGSSCharaIconView!
-    var nameLabel: UILabel!
+    let iconView = CGSSCharaIconView()
+    let nameLabel = UILabel()
     let romajiLabel = UILabel()
-    var sortingPropertyLabel: UILabel!
+    let sortingPropertyLabel = UILabel()
     
     let cvLabel = UILabel()
     let voLabel = UILabel()
@@ -33,7 +33,6 @@ class CharView: UIView {
     
     fileprivate func prepare() {
         
-        iconView = CGSSCharaIconView()
         iconView.isUserInteractionEnabled = false
         addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
@@ -42,7 +41,7 @@ class CharView: UIView {
             make.bottom.equalTo(-10)
         }
         
-        cvLabel.font = UIFont.systemFont(ofSize: 12)
+        cvLabel.font = .systemFont(ofSize: 12)
         addSubview(cvLabel)
         cvLabel.adjustsFontSizeToFitWidth = true
         cvLabel.baselineAdjustment = .alignCenters
@@ -51,8 +50,7 @@ class CharView: UIView {
             make.top.equalTo(9)
         }
         
-        sortingPropertyLabel = UILabel()
-        sortingPropertyLabel.font = UIFont.systemFont(ofSize: 12)
+        sortingPropertyLabel.font = .systemFont(ofSize: 12)
         addSubview(sortingPropertyLabel)
         sortingPropertyLabel.textAlignment = .right
         sortingPropertyLabel.snp.makeConstraints { (make) in
@@ -64,8 +62,7 @@ class CharView: UIView {
         sortingPropertyLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
         cvLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
         
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: 16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
         addSubview(nameLabel)

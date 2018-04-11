@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -38,7 +38,7 @@ class GridLabel: GridView {
                 label.textAlignment = textAligment
                 label.font = UIFont.init(name: "menlo", size: 14)
                 label.adjustsFontSizeToFitWidth = true
-                label.textColor = Color.allType
+                label.textColor = .allType
                 label.baselineAdjustment = .alignCenters
                 let view = UIView()
                 view.layer.borderColor = UIColor.black.cgColor

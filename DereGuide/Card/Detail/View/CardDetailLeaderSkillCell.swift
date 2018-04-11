@@ -3,23 +3,22 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/26.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class CardDetailLeaderSkillCell: UITableViewCell {
     
-    var leftLabel: UILabel!
-    var nameLabel: UILabel!
-    var descriptionLabel: UILabel!
+    let leftLabel = UILabel()
+    let nameLabel = UILabel()
+    let descriptionLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel = UILabel()
-        leftLabel.textColor = UIColor.black
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.textColor = .black
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("队长技能", comment: "通用")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
@@ -27,8 +26,7 @@ class CardDetailLeaderSkillCell: UITableViewCell {
             make.top.equalTo(10)
         }
         
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: 16)
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
         contentView.addSubview(nameLabel)
@@ -38,10 +36,9 @@ class CardDetailLeaderSkillCell: UITableViewCell {
             make.right.lessThanOrEqualTo(-10)
         }
         
-        descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.textColor = UIColor.darkGray
+        descriptionLabel.font = .systemFont(ofSize: 14)
+        descriptionLabel.textColor = .darkGray
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -63,9 +60,11 @@ class CardDetailLeaderSkillCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 extension CardDetailLeaderSkillCell: CardDetailSetable {
+    
     func setup(with card: CGSSCard) {
         guard let leaderSkill = card.leaderSkill else {
             return
@@ -74,4 +73,5 @@ extension CardDetailLeaderSkillCell: CardDetailSetable {
         
         descriptionLabel.text = leaderSkill.localizedExplain
     }
+    
 }

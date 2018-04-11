@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/2.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -81,7 +81,7 @@ class ColleagueComposeViewController: BaseTableViewController {
         }
         
         indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        indicator.color = Color.parade
+        indicator.color = .parade
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,8 +112,8 @@ class ColleagueComposeViewController: BaseTableViewController {
         if tip1 == nil {
             var preferences = EasyTipView.Preferences()
             preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
-            preferences.drawing.foregroundColor = UIColor.white
-            preferences.drawing.backgroundColor = Color.cute
+            preferences.drawing.foregroundColor = .white
+            preferences.drawing.backgroundColor = .cute
             tip1 = EasyTipView(text: NSLocalizedString("双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布", comment: ""), preferences: preferences, delegate: nil)
         }
         if maskView?.superview == nil {
@@ -126,8 +126,8 @@ class ColleagueComposeViewController: BaseTableViewController {
         if tip2 == nil {
             var preferences = EasyTipView.Preferences()
             preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
-            preferences.drawing.foregroundColor = UIColor.white
-            preferences.drawing.backgroundColor = Color.cool
+            preferences.drawing.foregroundColor = .white
+            preferences.drawing.backgroundColor = .cool
             tip2 = EasyTipView(text: NSLocalizedString("向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间", comment: ""), preferences: preferences, delegate: nil)
         }
         if maskView?.superview == nil {

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -19,9 +19,10 @@ protocol UnitEditingControllerDelegate: class {
 class UnitEditingController: BaseViewController {
     
     weak var delegate: UnitEditingControllerDelegate?
+    
     var collectionView: UICollectionView!
-    var titleLabel: UILabel!
-    var editableView = MemberGroupView()
+    let titleLabel = UILabel()
+    let editableView = MemberGroupView()
     
     lazy var context: NSManagedObjectContext = self.parentContext.newChildContext()
     
@@ -81,7 +82,7 @@ class UnitEditingController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         prepareToolbar()
         prepareNavigationBar()
         automaticallyAdjustsScrollViewInsets = false
@@ -89,7 +90,7 @@ class UnitEditingController: BaseViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         let maxWidth = min(floor((view.shortSide - 70) / 6), 96)
         layout.itemSize = CGSize(width: maxWidth, height: maxWidth + 29)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -98,10 +99,9 @@ class UnitEditingController: BaseViewController {
         layout.minimumInteritemSpacing = 10
         view.addSubview(collectionView)
         
-        titleLabel = UILabel()
         titleLabel.text = NSLocalizedString("最近使用", comment: "")
         view.addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = .systemFont(ofSize: 16)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
             make.left.equalTo(10)
@@ -116,7 +116,7 @@ class UnitEditingController: BaseViewController {
         infoButton.addTarget(self, action: #selector(handleInfoButton), for: .touchUpInside)
         
         editableView.delegate = self
-        editableView.backgroundColor = Color.cool.mixed(withColor: .white, weight: 0.9)
+        editableView.backgroundColor = UIColor.cool.mixed(withColor: .white, weight: 0.9)
         view.addSubview(editableView)
         editableView.snp.makeConstraints { (make) in
             if #available(iOS 11.0, *) {
@@ -177,7 +177,7 @@ class UnitEditingController: BaseViewController {
 
     @objc func openTemplates() {
         let vc = UnitTemplateController()
-        vc.parentContext = self.context
+        vc.parentContext = context
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -188,14 +188,14 @@ class UnitEditingController: BaseViewController {
     
     var tip1: EasyTipView!
     var tip2: EasyTipView!
-    var maskView: UIView?
+    let maskView = UIView()
     
     private func showHelpTips() {
         if tip1 == nil || tip2 == nil {
             var preferences = EasyTipView.Preferences()
             preferences.drawing.font = UIFont.boldSystemFont(ofSize: 14)
-            preferences.drawing.foregroundColor = UIColor.white
-            preferences.drawing.backgroundColor = Color.cute
+            preferences.drawing.foregroundColor = .white
+            preferences.drawing.backgroundColor = .cute
             
             if Screen.width < 375 {
                 preferences.positioning.maxWidth = Screen.width - 40
@@ -203,23 +203,22 @@ class UnitEditingController: BaseViewController {
             
             tip1 = EasyTipView(text: NSLocalizedString("最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）", comment: ""), preferences: preferences, delegate: nil)
             
-            preferences.drawing.backgroundColor = Color.passion
+            preferences.drawing.backgroundColor = .passion
             tip2 = EasyTipView(text: NSLocalizedString("单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级", comment: ""), preferences: preferences, delegate: nil)
         }
         tip1.show(forView: titleLabel)
         tip2.show(forView: editableView)
-        maskView = UIView()
-        navigationController?.view.addSubview(maskView!)
-        maskView?.snp.makeConstraints { (make) in
+        navigationController?.view.addSubview(maskView)
+        maskView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        maskView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
+        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideHelpTips)))
     }
     
     @objc func hideHelpTips() {
         tip1?.dismiss()
         tip2?.dismiss()
-        maskView?.removeFromSuperview()
+        maskView.removeFromSuperview()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

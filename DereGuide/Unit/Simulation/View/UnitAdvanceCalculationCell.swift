@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/6/20.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ protocol UnitAdvanceCalculationCellDelegate: class {
 
 class UnitAdvanceCalculationCell: UITableViewCell {
 
-    var titleLabel: UILabel!
+    let titleLabel = UILabel()
     
     weak var delegate: UnitAdvanceCalculationCellDelegate?
     
@@ -32,16 +32,16 @@ class UnitAdvanceCalculationCell: UITableViewCell {
             return ($0 as? UnitAdvanceCalculationCellVariableView)?.textField.text ?? ""
         }
     }
+    
     var stackView: UIStackView!
-    var startButton: WideButton!
-    var resultView: UnitAdvanceCalculationResultView!
-    var startButtonIndicator: UIActivityIndicatorView!
+    let startButton = WideButton()
+    let resultView = UnitAdvanceCalculationResultView()
+    let startButtonIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = .systemFont(ofSize: 16)
         titleLabel.numberOfLines = 0
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
@@ -60,7 +60,6 @@ class UnitAdvanceCalculationCell: UITableViewCell {
             make.right.equalTo(-10)
         }
         
-        resultView = UnitAdvanceCalculationResultView()
         contentView.addSubview(resultView)
         resultView.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
@@ -68,9 +67,8 @@ class UnitAdvanceCalculationCell: UITableViewCell {
             make.top.equalTo(stackView.snp.bottom).offset(10)
         }
         
-        startButton = WideButton()
         startButton.setTitle(NSLocalizedString("开始计算", comment: ""), for: .normal)
-        startButton.backgroundColor = Color.dance
+        startButton.backgroundColor = .dance
         startButton.addTarget(self, action: #selector(handleStartButton(_:)), for: .touchUpInside)
         contentView.addSubview(startButton)
         startButton.snp.makeConstraints { (make) in
@@ -80,7 +78,6 @@ class UnitAdvanceCalculationCell: UITableViewCell {
             make.bottom.equalTo(-10)
         }
         
-        startButtonIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
         startButton.addSubview(startButtonIndicator)
         startButtonIndicator.snp.makeConstraints { (make) in
             make.right.equalTo(startButton.titleLabel!.snp.left)

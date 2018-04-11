@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,8 +11,9 @@ import SnapKit
 
 class CheckBox: UIView {
         
-    var icon: UIImageView!
-    var label: UILabel!
+    let icon = UIImageView()
+    let label = UILabel()
+    
     var isChecked = false {
         didSet {
             updateUI()
@@ -39,14 +40,12 @@ class CheckBox: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        icon = UIImageView()
         addSubview(icon)
         icon.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
             make.height.equalToSuperview()
-            make.width.equalTo(self.snp.height)
+            make.width.equalTo(snp.height)
         }
-        label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         addSubview(label)

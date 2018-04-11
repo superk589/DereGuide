@@ -12,7 +12,7 @@ class ScoreDashboardController: BaseViewController, UITableViewDelegate, UITable
     
     lazy var tableView: IndicatorTableView = {
         let tableView = IndicatorTableView()
-        tableView.indicator.strokeColor = Color.life.withAlphaComponent(0.5)
+        tableView.indicator.strokeColor = UIColor.life.withAlphaComponent(0.5)
         tableView.sectionHeaderHeight = 30
         tableView.sectionFooterHeight = 30
         

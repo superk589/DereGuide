@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/3/30.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ class GachaCardTableViewCell: CardTableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        cardView.titleLabel.textColor = Color.vocal
+        cardView.titleLabel.textColor = .vocal
     }
     
     required init?(coder aDecoder: NSCoder) {

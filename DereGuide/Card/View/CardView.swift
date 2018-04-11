@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/17.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -11,19 +11,18 @@ import SnapKit
 
 class CardView: UIView {
 
-    var cardIconView: CGSSCardIconView!
-    var cardNameLabel: UILabel!
+    let cardIconView = CGSSCardIconView()
+    let cardNameLabel = UILabel()
     let romajiLabel = UILabel()
-    var rarityLabel: UILabel!
-    var skillLabel: UILabel!
-    var lifeLabel: UILabel!
-    var vocalLabel: UILabel!
-    var danceLabel: UILabel!
-    var visualLabel: UILabel!
-    var totalLabel: UILabel!
-    var titleLabel: UILabel!
-    var nameOnlyLabel: UILabel!
-    
+    let rarityLabel = UILabel()
+    let skillLabel = UILabel()
+    let lifeLabel = UILabel()
+    let vocalLabel = UILabel()
+    let danceLabel = UILabel()
+    let visualLabel = UILabel()
+    let totalLabel = UILabel()
+    let titleLabel = UILabel()
+    let nameOnlyLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,7 +35,6 @@ class CardView: UIView {
     
     fileprivate func prepare() {
         
-        cardIconView = CGSSCardIconView()
         cardIconView.isUserInteractionEnabled = false
         addSubview(cardIconView)
         cardIconView.snp.makeConstraints { (make) in
@@ -44,17 +42,15 @@ class CardView: UIView {
             make.top.equalTo(10)
         }
         
-        rarityLabel = UILabel()
         rarityLabel.textAlignment = .left
-        rarityLabel.font = UIFont.systemFont(ofSize: 10)
+        rarityLabel.font = .systemFont(ofSize: 10)
         addSubview(rarityLabel)
         rarityLabel.snp.makeConstraints { (make) in
             make.left.equalTo(68)
             make.top.equalTo(9)
         }
         
-        cardNameLabel = UILabel()
-        cardNameLabel.font = UIFont.systemFont(ofSize: 16)
+        cardNameLabel.font = .systemFont(ofSize: 16)
         cardNameLabel.adjustsFontSizeToFitWidth = true
         cardNameLabel.baselineAdjustment = .alignCenters
         addSubview(cardNameLabel)
@@ -78,8 +74,7 @@ class CardView: UIView {
         cardNameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
         
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
+        titleLabel.font = .systemFont(ofSize: 10)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.baselineAdjustment = .alignCenters
         addSubview(titleLabel)
@@ -88,8 +83,7 @@ class CardView: UIView {
             make.top.equalTo(rarityLabel)
         }
         
-        skillLabel = UILabel()
-        skillLabel.font = UIFont.systemFont(ofSize: 10)
+        skillLabel.font = .systemFont(ofSize: 10)
         skillLabel.textAlignment = .right
         addSubview(skillLabel)
         skillLabel.snp.makeConstraints { (make) in
@@ -102,34 +96,24 @@ class CardView: UIView {
         skillLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         rarityLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
-        lifeLabel = UILabel()
-//        lifeLabel.frame = CGRect(x: originX, y: originY, width: width, height: height)
-        lifeLabel.font = UIFont.init(name: "menlo", size: 12)
-        lifeLabel.textColor = Color.life
+        lifeLabel.font = UIFont(name: "menlo", size: 12)
+        lifeLabel.textColor = .life
         lifeLabel.textAlignment = .right
         
-        vocalLabel = UILabel()
-//        vocalLabel.frame = CGRect(x: originX + width, y: originY, width: width, height: height)
-        vocalLabel.font = UIFont.init(name: "menlo", size: 12)
-        vocalLabel.textColor = Color.vocal
+        vocalLabel.font = UIFont(name: "menlo", size: 12)
+        vocalLabel.textColor = .vocal
         vocalLabel.textAlignment = .right
         
-        danceLabel = UILabel()
-//        danceLabel.frame = CGRect(x: originX + 2 * width, y: originY, width: width, height: height)
-        danceLabel.font = UIFont.init(name: "menlo", size: 12)
-        danceLabel.textColor = Color.dance
+        danceLabel.font = UIFont(name: "menlo", size: 12)
+        danceLabel.textColor = .dance
         danceLabel.textAlignment = .right
         
-        visualLabel = UILabel()
-//        visualLabel.frame = CGRect(x: originX + 3 * width, y: originY, width: width, height: height)
-        visualLabel.font = UIFont.init(name: "menlo", size: 12)
-        visualLabel.textColor = Color.visual
+        visualLabel.font = UIFont(name: "menlo", size: 12)
+        visualLabel.textColor = .visual
         visualLabel.textAlignment = .right
 
-        totalLabel = UILabel()
-//        totalLabel.frame = CGRect(x: originX + 4 * width, y: originY, width: width, height: height)
-        totalLabel.font = UIFont.init(name: "menlo", size: 12)
-        totalLabel.textColor = UIColor.darkGray
+        totalLabel.font = UIFont(name: "menlo", size: 12)
+        totalLabel.textColor = .darkGray
         totalLabel.textAlignment = .right
 
         let stackView = UIStackView(arrangedSubviews: [lifeLabel, vocalLabel, danceLabel, visualLabel, totalLabel])
@@ -152,7 +136,7 @@ class CardView: UIView {
             romajiLabel.text = card.chara?.conventional
         }
         
-        cardIconView?.cardID = card.id
+        cardIconView.cardID = card.id
         
         // 显示数值
         lifeLabel.text = String(card.life)

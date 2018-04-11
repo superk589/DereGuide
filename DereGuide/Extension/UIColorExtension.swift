@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/4.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -22,7 +22,7 @@ extension UIColor {
     static let debut = UIColor(red: 1.0 * 138 / 255, green: 1.0 * 206 / 255, blue: 1.0 * 233 / 255, alpha: 1)
     static let regular = UIColor(red: 1.0 * 253 / 255, green: 1.0 * 164 / 255, blue: 1.0 * 40 / 255, alpha: 1)
     static let pro = UIColor(red: 1.0 * 254 / 255, green: 1.0 * 183 / 255, blue: 1.0 * 194 / 255, alpha: 1)
-    static let master = UIColor.init(red: 1.0 * 147 / 255, green: 1.0 * 236 / 255, blue: 1.0 * 148 / 255, alpha: 1)
+    static let master = UIColor(red: 1.0 * 147 / 255, green: 1.0 * 236 / 255, blue: 1.0 * 148 / 255, alpha: 1)
     static let masterPlus = UIColor(red: 1.0 * 255 / 255, green: 1.0 * 253 / 255, blue: 1.0 * 114 / 255, alpha: 1)
     static let legacyMasterPlus = UIColor.masterPlus.lighter()
     static let light = UIColor(hexString: "E1F3A6")
@@ -53,5 +53,9 @@ extension UIColor {
     static let hold = UIColor(hexString: "F7CD72")
     
     static let allType = UIColor.darkGray
+
+    static let separator = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+    
+    static let bpmShift = UIColor(red: 1.0 * 131 / 255, green: 1.0 * 108 / 255, blue: 1.0 * 251 / 255, alpha: 1)
 
 }

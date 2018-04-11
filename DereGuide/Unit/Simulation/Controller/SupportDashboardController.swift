@@ -12,7 +12,7 @@ class SupportDashboardController: UIViewController, UITableViewDelegate, UITable
 
     lazy var tableView: IndicatorTableView = {
         let tableView = IndicatorTableView()
-        tableView.indicator.strokeColor = Color.parade.withAlphaComponent(0.5)
+        tableView.indicator.strokeColor = UIColor.parade.withAlphaComponent(0.5)
         tableView.sectionHeaderHeight = 30
         tableView.sectionFooterHeight = 0
         

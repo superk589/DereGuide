@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/24.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -15,12 +15,12 @@ protocol EventScoreViewDelegate: class {
 
 class EventScoreView: UIView {
     
-    var dateLabel: UILabel!
-    var refreshButton: UIButton!
+    let dateLabel = UILabel()
+    let refreshButton = UIButton()
     
-    var gridView: GridLabel!
+    let gridView = GridLabel(rows: 5, columns: 2)
     
-    var loadingHUD: LoadingImageView!
+    let loadingHUD = LoadingImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     
     weak var delegate: EventScoreViewDelegate?
     
@@ -29,23 +29,21 @@ class EventScoreView: UIView {
         let dateDescLabel = UILabel()
         addSubview(dateDescLabel)
         dateDescLabel.text = NSLocalizedString("最后更新时间：", comment: "")
-        dateDescLabel.textColor = UIColor.darkGray
-        dateDescLabel.font = UIFont.systemFont(ofSize: 12)
+        dateDescLabel.textColor = .darkGray
+        dateDescLabel.font = .systemFont(ofSize: 12)
         dateDescLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(8)
         }
         
-        dateLabel = UILabel()
         addSubview(dateLabel)
         dateLabel.snp.makeConstraints { (make) in
             make.left.equalTo(dateDescLabel.snp.right).offset(5)
             make.top.equalTo(dateDescLabel)
         }
-        dateLabel.textColor = UIColor.darkGray
-        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textColor = .darkGray
+        dateLabel.font = .systemFont(ofSize: 12)
         
-        refreshButton = UIButton()
         addSubview(refreshButton)
         refreshButton.snp.makeConstraints { (make) in
             make.left.equalTo(dateLabel.snp.right).offset(10)
@@ -53,10 +51,8 @@ class EventScoreView: UIView {
             make.centerY.equalTo(dateDescLabel)
         }
         refreshButton.setImage(#imageLiteral(resourceName: "759-refresh-2-toolbar").withRenderingMode(.alwaysTemplate), for: .normal)
-        refreshButton.tintColor = Color.parade
+        refreshButton.tintColor = .parade
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
-        
-        gridView = GridLabel.init(rows: 5, columns: 2)
         
         addSubview(gridView)
         gridView.snp.makeConstraints { (make) in
@@ -64,9 +60,7 @@ class EventScoreView: UIView {
             make.right.equalTo(-10)
             make.top.equalTo(dateDescLabel.snp.bottom).offset(10)
         }
-        
-        loadingHUD = LoadingImageView.init(frame: CGRect.init(x: 0, y: 0, width: 50, height: 50))
-        
+                
         setLoading(loading: true)
     }
     

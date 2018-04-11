@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2016/9/23.
-//  Copyright © 2016年 zzk. All rights reserved.
+//  Copyright © 2016 zzk. All rights reserved.
 //
 
 import UIKit
@@ -217,13 +217,13 @@ struct CGSSAttributeTypes: OptionSet {
     var color: UIColor {
         switch self {
         case CGSSAttributeTypes.vocal:
-            return Color.vocal
+            return .vocal
         case CGSSAttributeTypes.dance:
-            return Color.dance
+            return .dance
         case CGSSAttributeTypes.visual:
-            return Color.visual
+            return .visual
         default:
-            return Color.allType
+            return .allType
         }
     }
     
@@ -457,13 +457,13 @@ extension CGSSLiveTypes {
     var color: UIColor {
         switch self {
         case CGSSLiveTypes.cute:
-            return Color.cute
+            return .cute
         case CGSSLiveTypes.cool:
-            return Color.cool
+            return .cool
         case CGSSLiveTypes.passion:
-            return Color.passion
+            return .passion
         default:
-            return Color.allType
+            return .allType
         }
     }
 }

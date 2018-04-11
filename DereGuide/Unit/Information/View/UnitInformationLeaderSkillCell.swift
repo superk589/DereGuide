@@ -3,26 +3,23 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/20.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
 
 class UnitInformationLeaderSkillCell: UITableViewCell {
 
-    var leftLabel: UILabel!
+    let leftLabel = UILabel()
     
-    var leaderGrid: GridLabel!
+    let leaderGrid = GridLabel(rows: 4, columns: 6)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        
-        leftLabel = UILabel()
         leftLabel.text = NSLocalizedString("队长加成", comment: "队伍详情页面")
-        leftLabel.font = UIFont.systemFont(ofSize: 16)
+        leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.textAlignment = .left
-        
-        leaderGrid = GridLabel(rows: 4, columns: 6)
         
         contentView.addSubview(leftLabel)
         contentView.addSubview(leaderGrid)
@@ -111,7 +108,7 @@ class UnitInformationLeaderSkillCell: UITableViewCell {
                 upCoolString.append("")
             }
         } else {
-            upCoolString.append(contentsOf: [String].init(repeating: "", count: 5))
+            upCoolString.append(contentsOf: [String](repeating: "", count: 5))
         }
         
         
@@ -144,7 +141,7 @@ class UnitInformationLeaderSkillCell: UITableViewCell {
                 upPassionString.append("")
             }
         } else {
-            upPassionString.append(contentsOf: [String].init(repeating: "", count: 5))
+            upPassionString.append(contentsOf: [String](repeating: "", count: 5))
         }
         
         
@@ -153,11 +150,11 @@ class UnitInformationLeaderSkillCell: UITableViewCell {
         upValueStrings.append(upPassionString)
         
         var upValueColors = [[UIColor]]()
-        let colorArray = [UIColor.black, Color.vocal, Color.dance, Color.visual, UIColor.darkGray, Color.life]
-        upValueColors.append(contentsOf: Array.init(repeating: colorArray, count: 4))
-        upValueColors[1][0] = Color.cute
-        upValueColors[2][0] = Color.cool
-        upValueColors[3][0] = Color.passion
+        let colorArray = [UIColor.black, .vocal, .dance, .visual, .darkGray, .life]
+        upValueColors.append(contentsOf: Array(repeating: colorArray, count: 4))
+        upValueColors[1][0] = .cute
+        upValueColors[2][0] = .cool
+        upValueColors[3][0] = .passion
         
         leaderGrid.setContents(upValueStrings)
         leaderGrid.setColors(upValueColors)

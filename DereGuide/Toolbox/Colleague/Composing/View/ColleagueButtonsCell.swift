@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/8/4.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -72,7 +72,7 @@ class ColleagueButtonsCell: UITableViewCell {
         }
 
         saveButton.setTitle(NSLocalizedString("保存", comment: ""), for: .normal)
-        saveButton.backgroundColor = Color.dance
+        saveButton.backgroundColor = .dance
         saveButton.addTarget(self, action: #selector(handleSaveButton(_:)), for: .touchUpInside)
         contentView.addSubview(saveButton)
         saveButton.snp.makeConstraints { (make) in
@@ -91,7 +91,7 @@ class ColleagueButtonsCell: UITableViewCell {
         }
         
         revokeButton.setTitle(NSLocalizedString("撤销", comment: ""), for: .normal)
-        revokeButton.backgroundColor = Color.vocal
+        revokeButton.backgroundColor = .vocal
         revokeButton.addTarget(self, action: #selector(handleRevokeButton(_:)), for: .touchUpInside)
         contentView.addSubview(revokeButton)
         revokeButton.snp.makeConstraints { (make) in

@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/5/18.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -13,46 +13,39 @@ class NoteSupportTableViewCell: UITableViewCell {
     
     var stackView: UIStackView!
     
-    var comboIndexLabel: UILabel!
-    var skillBoostLabel: UILabel!
-    var perfectLockLabel: UILabel!
-    var comboContinueLabel: UILabel!
-    var healLabel: UILabel!
-    var damageGuardLabel: UILabel!
-    var lifeLabel: UILabel!
+    let comboIndexLabel = UILabel()
+    let skillBoostLabel = UILabel()
+    let perfectLockLabel = UILabel()
+    let comboContinueLabel = UILabel()
+    let healLabel = UILabel()
+    let damageGuardLabel = UILabel()
+    let lifeLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         let font = UIFont.boldSystemFont(ofSize: 16)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        comboIndexLabel = NoteScoreLabel()
-        comboIndexLabel.textColor = Color.allType
+
+        comboIndexLabel.textColor = .allType
         
-        skillBoostLabel = NoteScoreLabel()
         skillBoostLabel.font = font
-        skillBoostLabel.textColor = Color.cute
+        skillBoostLabel.textColor = .cute
         
-        perfectLockLabel = NoteScoreLabel()
         perfectLockLabel.font = font
-        perfectLockLabel.textColor = Color.master
+        perfectLockLabel.textColor = .master
         
-        comboContinueLabel = NoteScoreLabel()
         comboContinueLabel.font = font
-        comboContinueLabel.textColor = Color.visual
+        comboContinueLabel.textColor = .visual
         
-        healLabel = NoteScoreLabel()
-        healLabel.textColor = Color.life
+        healLabel.textColor = .life
         
-        damageGuardLabel = NoteScoreLabel()
         damageGuardLabel.font = font
-        damageGuardLabel.textColor = Color.parade
+        damageGuardLabel.textColor = .parade
        
-        lifeLabel = NoteScoreLabel()
-        lifeLabel.textColor = Color.life
+        lifeLabel.textColor = .life
         
-        
-        stackView = UIStackView.init(arrangedSubviews: [comboIndexLabel, skillBoostLabel,
+        stackView = UIStackView(arrangedSubviews: [comboIndexLabel, skillBoostLabel,
                                                         perfectLockLabel, comboContinueLabel,
                                                         healLabel, damageGuardLabel, lifeLabel])
         stackView.distribution = .fillEqually
@@ -70,12 +63,11 @@ class NoteSupportTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setup(with log: LSLog) {
         
-        let attributeStr = NSMutableAttributedString.init(string: String.init(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: Color.allType])
+        let attributeStr = NSMutableAttributedString(string: String(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: UIColor.allType])
         if log.comboFactor > 1 {
-            attributeStr.append(NSAttributedString.init(string: String.init(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
+            attributeStr.append(NSAttributedString(string: String(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
         }
         comboIndexLabel.text = String(log.noteIndex)
         

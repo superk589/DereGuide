@@ -3,7 +3,7 @@
 //  DereGuide
 //
 //  Created by zzk on 2017/1/18.
-//  Copyright © 2017年 zzk. All rights reserved.
+//  Copyright © 2017 zzk. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class LineView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.borderWidth = 1 / UIScreen.main.scale
-        self.layer.borderColor = Color.separator.cgColor
+        self.layer.borderColor = UIColor.separator.cgColor
     }
     
     override var intrinsicContentSize: CGSize {
