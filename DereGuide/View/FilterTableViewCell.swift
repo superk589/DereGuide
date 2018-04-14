@@ -19,25 +19,24 @@ protocol FilterTableViewCellDelegate: class {
 
 class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
     
-    var filterView: TTGTagCollectionView!
+    let filterView = TTGTagCollectionView()
     weak var delegate: FilterTableViewCellDelegate?
     var tagViews = [FilterItemView]()
-    var defaultTagView: FilterItemView!
+    let defaultTagView = FilterItemView()
     
-    var leftLabel = UILabel()
+    let leftLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         
-        leftLabel.font = UIFont.systemFont(ofSize: 14)
+        leftLabel.font = .systemFont(ofSize: 14)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(15)
             make.top.equalTo(10)
         }
         
-        filterView = TTGTagCollectionView()
         filterView.delegate = self
         filterView.dataSource = self
         contentView.addSubview(filterView)
@@ -48,7 +47,6 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
             make.right.equalTo(-15)
         }
         
-        defaultTagView = FilterItemView()
         defaultTagView.setTitle(title: NSLocalizedString("全部", comment: ""))
         defaultTagView.iv.zk.backgroundColor = .visual
         defaultTagView.isSelected = false
@@ -115,10 +113,8 @@ class FilterTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTag
                     tagViews[0].isSelected = true
                 }
             }
-
         }
     }
-    
     
     func presetIndex(index: UInt) {
         tagViews[0].isSelected = false

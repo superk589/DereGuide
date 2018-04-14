@@ -10,24 +10,26 @@ import UIKit
 
 class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
-    var panGesture: UIPanGestureRecognizer!
+    lazy var panGesture: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction(_:)))
+        gesture.delegate = self
+        addGestureRecognizer(gesture)
+        return gesture
+    }()
     
     var scrollView: UIScrollView? {
         return self.superview as? UIScrollView
     }
 
-    var insets: UIEdgeInsets = UIEdgeInsets.zero
+    var insets: UIEdgeInsets = .zero
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentMode = .redraw
-        backgroundColor = UIColor.clear
-        panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panAction(_:)))
-        addGestureRecognizer(panGesture)
-        panGesture.delegate = self
+        backgroundColor = .clear
     }
     
-    var strokeColor: UIColor = UIColor.blue
+    var strokeColor: UIColor = .blue
     
     private var scale: CGFloat = 0.8
     
@@ -36,7 +38,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
     
     private var innerCenter: CGPoint {
-        return CGPoint.init(x: bounds.midX, y: bounds.midY)
+        return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,7 +53,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
 
     private func pathForCircle() -> UIBezierPath {
-        let path = UIBezierPath.init(arcCenter: innerCenter, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        let path = UIBezierPath(arcCenter: innerCenter, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         path.lineWidth = 1
         return path
     }
@@ -65,15 +67,15 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
     
     private func pathForTriangle(direction: TriangleDirection) -> UIBezierPath {
-        let path = UIBezierPath.init()
+        let path = UIBezierPath()
         if direction == .up {
-            path.move(to: CGPoint.init(x: innerCenter.x - radius / Ratio.triangle, y: innerCenter.y - radius / Ratio.triangle / 4))
-            path.addLine(to: CGPoint.init(x: innerCenter.x + radius / Ratio.triangle, y: innerCenter.y - radius / Ratio.triangle / 4))
-            path.addLine(to: CGPoint.init(x: innerCenter.x, y: innerCenter.y - radius + radius / Ratio.triangle / 2))
+            path.move(to: CGPoint(x: innerCenter.x - radius / Ratio.triangle, y: innerCenter.y - radius / Ratio.triangle / 4))
+            path.addLine(to: CGPoint(x: innerCenter.x + radius / Ratio.triangle, y: innerCenter.y - radius / Ratio.triangle / 4))
+            path.addLine(to: CGPoint(x: innerCenter.x, y: innerCenter.y - radius + radius / Ratio.triangle / 2))
         } else {
-            path.move(to: CGPoint.init(x: innerCenter.x - radius / Ratio.triangle, y: innerCenter.y + radius / Ratio.triangle / 4))
-            path.addLine(to: CGPoint.init(x: innerCenter.x + radius / Ratio.triangle, y: innerCenter.y + radius / Ratio.triangle / 4))
-            path.addLine(to: CGPoint.init(x: innerCenter.x, y: innerCenter.y + radius - radius / Ratio.triangle / 2))
+            path.move(to: CGPoint(x: innerCenter.x - radius / Ratio.triangle, y: innerCenter.y + radius / Ratio.triangle / 4))
+            path.addLine(to: CGPoint(x: innerCenter.x + radius / Ratio.triangle, y: innerCenter.y + radius / Ratio.triangle / 4))
+            path.addLine(to: CGPoint(x: innerCenter.x, y: innerCenter.y + radius - radius / Ratio.triangle / 2))
         }
         path.close()
         path.lineWidth = 1
@@ -84,14 +86,13 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
         if !view.subviews.contains(self) {
             view.addSubview(self)
         }
-        self.alpha = 1
+        alpha = 1
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         adjustFrameInScrollView()
     }
-    
     
     var offsetRatio: CGFloat {
         if let scrollView = self.scrollView {
@@ -169,13 +170,12 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
             }
         case .changed:
             center.y = max(min(center.y + pan.translation(in: nil).y, maxOffsetY), minOffsetY)
-            pan.setTranslation(CGPoint.zero, in: nil)
+            pan.setTranslation(.zero, in: nil)
             adjustScrollView()
         default:
             break
         }
     }
-    
     
     // MARK: UIGestureRecognizerDelegate
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {

@@ -17,8 +17,8 @@ protocol LiveTableViewCellDelegate: class {
 class LiveTableViewCell: ReadableWidthTableViewCell {
     
     let jacketImageView = BannerView()
-    var nameLabel = UILabel()
-    var typeIcon = UIImageView()
+    let nameLabel = UILabel()
+    let typeIcon = UIImageView()
     
     let collectionView = TTGTagCollectionView()
     var tagViews = [SongDetailLiveDifficultyView]()

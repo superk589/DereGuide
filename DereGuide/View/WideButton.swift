@@ -13,8 +13,8 @@ class WideButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 6
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        titleLabel?.textColor = UIColor.white
+        titleLabel?.font = .boldSystemFont(ofSize: 16)
+        titleLabel?.textColor = .white
     }
     
     override var intrinsicContentSize: CGSize {

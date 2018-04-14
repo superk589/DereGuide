@@ -16,14 +16,14 @@ protocol SortTableViewCellDelegate: class {
 
 class SortTableViewCell: UITableViewCell, TTGTagCollectionViewDelegate, TTGTagCollectionViewDataSource {
     
-    var sortView: TTGTagCollectionView!
+    let sortView = TTGTagCollectionView()
     var tagViews = [FilterItemView]()
     weak var delegate: SortTableViewCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        sortView = TTGTagCollectionView()
+
         sortView.delegate = self
         sortView.dataSource = self
         contentView.addSubview(sortView)

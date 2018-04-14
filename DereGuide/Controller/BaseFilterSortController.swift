@@ -11,21 +11,20 @@ import SnapKit
 
 class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var toolbar: UIToolbar!
+    let toolbar = UIToolbar()
     
-    var tableView: UITableView!
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView = UITableView()
         tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: "FilterCell")
         tableView.register(SortTableViewCell.self, forCellReuseIdentifier: "SortCell")
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 44, right: 0)
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 44, right: 0)
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.estimatedRowHeight = 50
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
@@ -35,7 +34,6 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
             make.top.equalTo(topLayoutGuide.snp.bottom)
         }
         
-        toolbar = UIToolbar()
         toolbar.tintColor = .parade
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { (make) in
@@ -48,13 +46,13 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
             make.height.equalTo(44)
         }
 
-        let leftSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let leftSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         leftSpaceItem.width = 0
-        let doneItem = UIBarButtonItem.init(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .done, target: self, action: #selector(doneAction))
-        let middleSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
+        let doneItem = UIBarButtonItem(title: NSLocalizedString("完成", comment: "导航栏按钮"), style: .done, target: self, action: #selector(doneAction))
+        let middleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let resetItem = UIBarButtonItem(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
         
-        let rightSpaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let rightSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         rightSpaceItem.width = 0
         
         toolbar.setItems([leftSpaceItem, resetItem, middleSpaceItem, doneItem, rightSpaceItem], animated: false)
@@ -82,7 +80,6 @@ class BaseFilterSortController: BaseViewController, UITableViewDelegate, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2

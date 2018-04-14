@@ -85,7 +85,7 @@ private enum Button: Int {
     /// Decrease button positioned on the left of the stepper.
     internal let decreaseButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom)
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = .clear
         button.tag = Button.decrease.rawValue
         return button
     }()
@@ -93,7 +93,7 @@ private enum Button: Int {
     /// Increase button positioned on the right of the stepper.
     internal let increaseButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom)
-        button.backgroundColor = UIColor.clear
+        button.backgroundColor = .clear
         button.tag = Button.increase.rawValue
         return button
     }()
@@ -102,8 +102,8 @@ private enum Button: Int {
     private(set) var valueLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = UIColor.clear
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.backgroundColor = .clear
+        label.font = .systemFont(ofSize: 16)
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -112,9 +112,9 @@ private enum Button: Int {
     private(set) var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = UIColor.clear
+        label.backgroundColor = .clear
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 10)
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -157,7 +157,7 @@ private enum Button: Int {
     }
     
     private func setUp() {
-        backgroundColor = UIColor.white
+        backgroundColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [valueLabel, descriptionLabel])
         stackView.distribution = .equalSpacing
@@ -223,7 +223,7 @@ private enum Button: Int {
         layer.borderColor = tintColor.cgColor
         layer.borderWidth = 1.0
         layer.cornerRadius = 4.0
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         clipsToBounds = true
         
         let leftPath = UIBezierPath()

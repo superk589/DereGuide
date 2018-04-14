@@ -10,7 +10,7 @@ import UIKit
 
 class IndicatorScrollView: UIScrollView {
 
-    var indicator = ScrollViewIndicator(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+    let indicator = ScrollViewIndicator(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     
     lazy var debouncer: Debouncer = {
         return Debouncer.init(interval: 3, callback: { [weak self] in

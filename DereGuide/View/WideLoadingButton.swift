@@ -11,7 +11,9 @@ import UIKit
 class WideLoadingButton: WideButton {
 
     private(set) var isLoading = false
-    var indicator: UIActivityIndicatorView!
+
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    
     var normalTitle = "" {
         didSet {
             if !isLoading {
@@ -30,7 +32,7 @@ class WideLoadingButton: WideButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        
         indicator.hidesWhenStopped = true
         addSubview(indicator)
         

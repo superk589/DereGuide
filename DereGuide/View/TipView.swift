@@ -18,9 +18,9 @@ class ArrowView: UIView {
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()
-        path.move(to: CGPoint.init(x: 0, y: bounds.maxY))
-        path.addLine(to: CGPoint.init(x: bounds.maxX, y: bounds.maxY))
-        path.addLine(to: CGPoint.init(x: bounds.midX, y: 0))
+        path.move(to: CGPoint(x: 0, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+        path.addLine(to: CGPoint(x: bounds.midX, y: 0))
         path.close()
         color.setFill()
         path.fill()
@@ -29,9 +29,9 @@ class ArrowView: UIView {
 
 class TipView: UIView {
     
-    var contentView: UIView!
+    let contentView = UIView()
     
-    var arrowView: ArrowView!
+    let arrowView = ArrowView()
     
     var contentColor = UIColor.white {
         didSet {
@@ -47,7 +47,7 @@ class TipView: UIView {
         }
     }
     
-    var arrowOffset: CGPoint = CGPoint.zero { didSet { updateUI() } }
+    var arrowOffset: CGPoint = .zero { didSet { updateUI() } }
     
     var arrowDirection: ArrowDirection = .up { didSet { updateUI() } }
     
@@ -58,11 +58,9 @@ class TipView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView = UIView()
         addSubview(contentView)
         
-        arrowView = ArrowView()
-        arrowView.backgroundColor = UIColor.clear
+        arrowView.backgroundColor = .clear
         arrowView.contentMode = .redraw
         addSubview(arrowView)
     }
@@ -84,7 +82,7 @@ class TipView: UIView {
                 make.left.bottom.right.equalToSuperview()
                 make.top.equalTo(arrowView.snp.bottom)
             })
-            arrowView.transform = CGAffineTransform.identity
+            arrowView.transform = .identity
         case .down:
             arrowView.snp.remakeConstraints({ (make) in
                 if let view = sourceView {
@@ -100,7 +98,7 @@ class TipView: UIView {
                 make.left.top.right.equalToSuperview()
                 make.bottom.equalTo(arrowView.snp.top)
             })
-            arrowView.transform = CGAffineTransform.init(rotationAngle: .pi)
+            arrowView.transform = CGAffineTransform(rotationAngle: .pi)
         case .left:
             arrowView.snp.remakeConstraints({ (make) in
                 make.left.equalToSuperview()
@@ -116,7 +114,7 @@ class TipView: UIView {
                 make.bottom.top.right.equalToSuperview()
                 make.left.equalTo(arrowView.snp.right)
             })
-            arrowView.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
+            arrowView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         case .right:
             arrowView.snp.remakeConstraints({ (make) in
                 make.right.equalToSuperview()
@@ -132,7 +130,7 @@ class TipView: UIView {
                 make.bottom.top.left.equalToSuperview()
                 make.right.equalTo(arrowView.snp.left)
             })
-            arrowView.transform = CGAffineTransform.init(rotationAngle: .pi / 2)
+            arrowView.transform = CGAffineTransform(rotationAngle: .pi / 2)
         }
         setNeedsLayout()
         setNeedsDisplay()

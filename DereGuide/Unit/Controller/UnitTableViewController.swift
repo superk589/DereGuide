@@ -16,7 +16,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     private(set) lazy var addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addUnit))
     private(set) lazy var  deleteItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(commitDeletion))
     private(set) lazy var selectItem = UIBarButtonItem(title: NSLocalizedString("全选", comment: ""), style: .plain, target: self, action: #selector(selectAllAction))
-    private(set) lazy var  deselectItem = UIBarButtonItem(title: NSLocalizedString("全部取消", comment: ""), style: .plain, target: self, action: #selector(deselectAllAction))
+    private(set) lazy var deselectItem = UIBarButtonItem(title: NSLocalizedString("全部取消", comment: ""), style: .plain, target: self, action: #selector(deselectAllAction))
     private(set) lazy var copyItem = UIBarButtonItem(title: NSLocalizedString("复制", comment: ""), style: .plain, target: self, action: #selector(copyAction))
     private(set) lazy var spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     

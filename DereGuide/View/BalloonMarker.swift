@@ -86,34 +86,6 @@ public class BalloonMarker: MarkerImage {
         roundedRectPath.fill()
         arrowPath.fill()
         
-//
-//        context.beginPath()
-//        context.move(to: CGPoint(
-//            x: rect.origin.x,
-//            y: rect.origin.y))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x + rect.size.width,
-//            y: rect.origin.y))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x + rect.size.width,
-//            y: rect.origin.y + rect.size.height - arrowSize.height))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
-//            y: rect.origin.y + rect.size.height - arrowSize.height))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x + rect.size.width / 2.0,
-//            y: rect.origin.y + rect.size.height))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
-//            y: rect.origin.y + rect.size.height - arrowSize.height))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x,
-//            y: rect.origin.y + rect.size.height - arrowSize.height))
-//        context.addLine(to: CGPoint(
-//            x: rect.origin.x,
-//            y: rect.origin.y))
-//        context.fillPath()
-        
         rect.origin.y += self.insets.top
         rect.size.height -= self.insets.top + self.insets.bottom
         
@@ -139,7 +111,7 @@ public class BalloonMarker: MarkerImage {
         _drawAttributes[.paragraphStyle] = _paragraphStyle
         _drawAttributes[.foregroundColor] = self.textColor
         
-        _labelSize = label?.size(withAttributes: _drawAttributes) ?? CGSize.zero
+        _labelSize = label?.size(withAttributes: _drawAttributes) ?? .zero
         
         var size = CGSize()
         size.width = _labelSize.width + self.insets.left + self.insets.right
