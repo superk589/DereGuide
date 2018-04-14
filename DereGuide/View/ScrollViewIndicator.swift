@@ -10,10 +10,9 @@ import UIKit
 
 class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     
-    lazy var panGesture: UIPanGestureRecognizer = {
+    private(set) lazy var panGesture: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction(_:)))
         gesture.delegate = self
-        addGestureRecognizer(gesture)
         return gesture
     }()
     
@@ -27,6 +26,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
         super.init(frame: frame)
         contentMode = .redraw
         backgroundColor = .clear
+        addGestureRecognizer(panGesture)
     }
     
     var strokeColor: UIColor = .blue
