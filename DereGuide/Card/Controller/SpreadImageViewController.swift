@@ -75,20 +75,3 @@ class SpreadImageViewController: UIViewController {
         }
     }
 }
-
-//extension SpreadImageViewController: UIViewControllerTransitioningDelegate {
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        if let vc = source as? CardDetailViewController {
-//            customPresentAnimator.sourceImageView = vc.spreadImageView
-//            customPresentAnimator.sourceNavigationController = vc.navigationController
-//        }
-//        customPresentAnimator.animatorType = . present
-//        return customPresentAnimator
-//    }
-//
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        customPresentAnimator.animatorType = .dismiss
-//        return customPresentAnimator
-//    }
-//}
-

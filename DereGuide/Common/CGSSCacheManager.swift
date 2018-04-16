@@ -184,7 +184,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getCacheSizeOfCard(complete: ((String)->Void)?) {
+    func getCacheSizeOfCard(complete: ((String) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             var size = 0
             for path in self.getCardFiles() {
@@ -198,7 +198,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getCacheSizeOfSong(complete: ((String)->Void)?) {
+    func getCacheSizeOfSong(complete: ((String) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             var size = 0
             for path in self.getSongFiles() {
@@ -212,7 +212,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getCacheSizeAt(path: String, exclusivePaths: [String], complete: ((String)->Void)?) {
+    func getCacheSizeAt(path: String, exclusivePaths: [String], complete: ((String) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let files = FileManager.default.subpaths(atPath: path) {
                 var size = 0
@@ -234,7 +234,7 @@ class CGSSCacheManager {
         }
     }
     
-    func getOtherSize(complete: ((String)->Void)?) {
+    func getOtherSize(complete: ((String) -> Void)?) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
                 if let files = FileManager.default.subpaths(atPath: cachePath) {

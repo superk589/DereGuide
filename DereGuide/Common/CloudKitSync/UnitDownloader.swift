@@ -71,7 +71,6 @@ final class UnitDownloader: ChangeProcessor {
 
 }
 
-
 extension UnitDownloader {
 
     fileprivate func deleteUnits(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
@@ -177,4 +176,3 @@ extension UnitDownloader {
     }
 
 }
-

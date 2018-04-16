@@ -22,7 +22,7 @@ class UnitTemplateCell: UnitTableViewCell {
             make.left.top.equalTo(10)
         }
         
-        iconStackView.snp.remakeConstraints({ (make) in
+        iconStackView.snp.remakeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.greaterThanOrEqualTo(10)
             make.right.lessThanOrEqualTo(-10)
@@ -33,7 +33,7 @@ class UnitTemplateCell: UnitTableViewCell {
             make.bottom.equalTo(-10)
             make.width.lessThanOrEqualTo(96 * 6 + 25)
             make.centerX.equalToSuperview()
-        })
+        }
         
         accessoryType = .none
     }

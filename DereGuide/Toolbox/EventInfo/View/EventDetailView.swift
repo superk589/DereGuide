@@ -147,10 +147,10 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         liveTrendLabel.addGestureRecognizer(tap)
         
         addSubview(liveView.readableContentView)
-        liveView.readableContentView.snp.remakeConstraints({ (make) in
+        liveView.readableContentView.snp.remakeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(songDescLabel.snp.bottom)
-        })
+        }
         
         addSubview(eventPtContentView)
         eventPtContentView.snp.makeConstraints { (make) in

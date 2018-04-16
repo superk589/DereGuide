@@ -78,8 +78,8 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     }
     
     private func prepareToolbar() {
-        self.navigationItem.rightBarButtonItem = addItem
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = addItem
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     private func prepareFetchRequest() {
@@ -192,11 +192,11 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
     }
    
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        navigationItem.leftBarButtonItem = self.editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     @objc func doneAction() {
-        self.tableView.setEditing(false, animated: true)
+        tableView.setEditing(false, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -332,4 +332,3 @@ extension UnitTableViewController: NSFetchedResultsControllerDelegate {
         }
     }
 }
-

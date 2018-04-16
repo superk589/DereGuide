@@ -169,7 +169,7 @@ class Master: FMDatabaseQueue {
                     rewards.append(Reward(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: relativeOdds, relativeSROdds: relativeSROdds))
                 }
                 
-                let gachaPool = CGSSGacha.init(id: id, name: name!, dicription: dicription!, start_date: startDate!, end_date: endDate!, rare_ratio: rareRatio, sr_ratio: srRatio, ssr_ratio: ssrRatio, rewards: rewards)
+                let gachaPool = CGSSGacha(id: id, name: name!, dicription: dicription!, startDate: startDate!, endDate: endDate!, rareRatio: rareRatio, srRatio: srRatio, ssrRatio: ssrRatio, rewards: rewards)
                 list.append(gachaPool)
             }
         }) {

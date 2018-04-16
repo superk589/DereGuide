@@ -17,7 +17,7 @@ struct LFDistribution {
         if samples.count == 0 {
             return Double(LSScoreBonusGroup.basic.bonusValue)
         } else {
-            return samples.reduce(0.0, {$0 + Double($1.value.bonusValue) * $1.probability})
+            return samples.reduce(0.0) { $0 + Double($1.value.bonusValue) * $1.probability }
         }
     }
     
@@ -43,4 +43,3 @@ struct LFDistribution {
         }
     }
 }
-

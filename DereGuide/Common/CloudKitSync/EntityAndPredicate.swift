@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 final class EntityAndPredicate<A : NSManagedObject> {
     let entity: NSEntityDescription
     let predicate: NSPredicate
@@ -20,7 +19,6 @@ final class EntityAndPredicate<A : NSManagedObject> {
     }
 }
 
-
 extension EntityAndPredicate {
     var fetchRequest: NSFetchRequest<A> {
         let request = NSFetchRequest<A>()
@@ -29,7 +27,6 @@ extension EntityAndPredicate {
         return request
     }
 }
-
 
 extension Sequence where Iterator.Element: NSManagedObject {
     func filter(_ entityAndPredicate: EntityAndPredicate<Iterator.Element>) -> [Iterator.Element] {
@@ -44,4 +41,3 @@ extension Sequence where Iterator.Element: NSManagedObject {
         return Array(filtered)
     }
 }
-

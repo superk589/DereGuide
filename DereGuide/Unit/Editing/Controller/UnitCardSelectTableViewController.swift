@@ -41,12 +41,12 @@ class UnitCardSelectTableViewController: BaseCardTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //navigationController?.setToolbarHidden(false, animated: true)
+        // navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //navigationController?.setToolbarHidden(true, animated: true)
+        // navigationController?.setToolbarHidden(true, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

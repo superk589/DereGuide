@@ -47,7 +47,7 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 //                        imageView.transform = imageView.transform.rotated(by: .pi / 2)
 //                    }
                     imageView.frame = toFrame
-                    toView.backgroundColor = UIColor.black
+                    toView.backgroundColor = .black
                 }, completion: { [weak self] (finished) in
                     transitionContext.containerView.addSubview(toView)
                     self?.sourceImageView.isHidden = false
@@ -71,7 +71,7 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 let sourceImageFrame = sourceImageView.frame
                 let destFrame = toView.convert(fromViewController.imageView.frame, to: sourceImageView.superview)
                 sourceImageView.frame = destFrame
-                fromView.backgroundColor = UIColor.clear
+                fromView.backgroundColor = .clear
                 UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
                     [weak self] in
 //                    if UIDevice.current.orientation.isPortrait {
@@ -90,4 +90,3 @@ class SpreadImageViewAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
     }
 }
-

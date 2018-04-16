@@ -78,14 +78,13 @@ extension UIView {
         }
     }
 
-    
     // 边缘星星环绕效果
-    func addGlowAnimateAlongBorder(clockwise:Bool, imageName:String, count:Int, cornerRadius: CGFloat) {
+    func addGlowAnimateAlongBorder(clockwise: Bool, imageName: String, count: Int, cornerRadius: CGFloat) {
         let layerName = "GLOW\(count)"
         var glowLayers = [CALayer]()
         
         for view in self.subviews {
-            if (view.layer.name?.hasPrefix("GLOW") ?? false) {
+            if view.layer.name?.hasPrefix("GLOW") ?? false {
                 if view.layer.name == layerName {
                     view.removeFromSuperview()
                 } else {

@@ -1,6 +1,5 @@
 import CoreData
 
-
 extension NSManagedObjectModel {
 
     public convenience init(builder: () -> [NSEntityDescription]) {
@@ -9,7 +8,6 @@ extension NSManagedObjectModel {
     }
 
 }
-
 
 extension NSEntityDescription {
 
@@ -73,7 +71,6 @@ extension NSEntityDescription {
 
 }
 
-
 public struct DataTransform<A> {
     public let name: String
     public let forward: (A) -> NSData?
@@ -84,7 +81,6 @@ public struct DataTransform<A> {
         self.reverse = reverse
     }
 }
-
 
 public extension NSPropertyDescription {
     public struct PropertyOptions : OptionSet {
@@ -264,5 +260,3 @@ extension NSAttributeDescription {
         }
     }
 }
-
-

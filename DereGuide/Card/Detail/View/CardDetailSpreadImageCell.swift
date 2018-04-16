@@ -1,4 +1,3 @@
-
 //
 //  CardDetailSpreadImageCell.swift
 //  DereGuide
@@ -29,13 +28,13 @@ class CardDetailSpreadImageCell: UITableViewCell {
         spreadImageView.isUserInteractionEnabled = true
         spreadImageView.contentMode = .scaleAspectFill
         contentView.addSubview(spreadImageView)
-        spreadImageView.snp.makeConstraints({ (make) in
+        spreadImageView.snp.makeConstraints { (make) in
             make.left.width.equalToSuperview()
             make.height.equalTo(spreadImageView.snp.width).multipliedBy(824.0 / 1280.0)
             make.bottom.lessThanOrEqualToSuperview()
             make.top.greaterThanOrEqualToSuperview()
             make.centerY.equalToSuperview()
-        })
+        }
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         spreadImageView.addGestureRecognizer(longPress)

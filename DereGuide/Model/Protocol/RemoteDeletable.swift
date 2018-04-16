@@ -18,7 +18,6 @@ public protocol RemoteDeletable: class {
     func markForRemoteDeletion()
 }
 
-
 extension RemoteDeletable {
     public static var notMarkedForRemoteDeletionPredicate: NSPredicate {
         return NSPredicate(format: "%K == false", MarkedForRemoteDeletionKey)
@@ -36,18 +35,14 @@ extension RemoteDeletable {
     }
 }
 
-
 extension RemoteDeletable where Self: NSManagedObject {
     public var changedForRemoteDeletion: Bool {
         return changedValue(forKey: MarkedForRemoteDeletionKey) as? Bool == true
     }
 }
 
-
 extension RemoteDeletable where Self: DelayedDeletable {
     public static var notMarkedForDeletionPredicate: NSPredicate {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [notMarkedForLocalDeletionPredicate, notMarkedForRemoteDeletionPredicate])
     }
 }
-
-

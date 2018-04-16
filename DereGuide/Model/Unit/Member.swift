@@ -186,7 +186,6 @@ extension Member: RemoteUploadable {
 
 }
 
-
 extension Member {
     static func ==(lhs: Member, rhs: Member) -> Bool {
         if let lCard = lhs.card, let rCard = rhs.card {
@@ -197,4 +196,3 @@ extension Member {
         return false
     }
 }
-

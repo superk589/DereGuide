@@ -79,4 +79,3 @@ extension FavoriteChara: RemoteUploadable {
         return record
     }
 }
-

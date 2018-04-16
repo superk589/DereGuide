@@ -53,15 +53,15 @@ struct CGSSBeatmapShiftingInfo {
         offset = Float(info.value(forKey: "offset") as? Double ?? 0)
         for subString in timestampStrings {
             let value = subString.components(separatedBy: ",")
-            let shiftingPoint = BpmShiftingPoint.init(bpm: Int(value[1])!, timestamp: Float(value[0])! + start)
+            let shiftingPoint = BpmShiftingPoint(bpm: Int(value[1])!, timestamp: Float(value[0])! + start)
             if let lastPoint = shiftingPoints.last {
-                let shiftingRange = BpmShiftingRange.init(start: lastPoint.timestamp, end: shiftingPoint.timestamp, bpm: lastPoint.bpm)
+                let shiftingRange = BpmShiftingRange(start: lastPoint.timestamp, end: shiftingPoint.timestamp, bpm: lastPoint.bpm)
                 shiftingRanges.append(shiftingRange)
             }
             shiftingPoints.append(shiftingPoint)
         }
         if let lastPoint = shiftingPoints.last {
-            let shiftingRange = BpmShiftingRange.init(start: lastPoint.timestamp, end: Float.infinity, bpm: lastPoint.bpm)
+            let shiftingRange = BpmShiftingRange(start: lastPoint.timestamp, end: Float.infinity, bpm: lastPoint.bpm)
             shiftingRanges.append(shiftingRange)
         }
     }

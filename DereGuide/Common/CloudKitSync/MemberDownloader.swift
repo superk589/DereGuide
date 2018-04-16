@@ -64,7 +64,6 @@ final class MemberDownloader: ChangeProcessor {
     
 }
 
-
 extension MemberDownloader {
     
     fileprivate func deleteMembers(with ids: [RemoteIdentifier], in context: NSManagedObjectContext) {
@@ -99,5 +98,3 @@ extension MemberDownloader {
     }
     
 }
-
-

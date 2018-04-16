@@ -49,7 +49,6 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
             self?.sorter.sortList(&newList)
             DispatchQueue.main.async {
                 CGSSLoadingHUDManager.default.hide()
-                //确保cardList在主线程中改变的原子性, 防止筛选过程中tableView滑动崩溃
                 self?.liveList = newList
                 self?.tableView.reloadData()
             }

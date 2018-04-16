@@ -51,7 +51,7 @@ class GachaResultCardView: UIView {
         glowLayers.removeAll()
         
         for view in glow.subviews {
-            if (view.layer.name?.hasPrefix("GLOW") ?? false) {
+            if view.layer.name?.hasPrefix("GLOW") ?? false {
                 if view.layer.name == layerName {
                     view.removeFromSuperview()
                 } else {

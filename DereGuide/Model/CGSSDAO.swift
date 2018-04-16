@@ -346,4 +346,3 @@ open class CGSSDAO: NSObject {
         return rank
     }
 }
-

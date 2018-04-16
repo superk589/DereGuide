@@ -68,7 +68,7 @@ class TipView: UIView {
     private func updateUI() {
         switch arrowDirection {
         case .up:
-            arrowView.snp.remakeConstraints({ (make) in
+            arrowView.snp.remakeConstraints { (make) in
                 if let view = sourceView {
                     make.centerX.equalTo(view)
                 } else {
@@ -77,14 +77,14 @@ class TipView: UIView {
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
                 make.top.equalToSuperview()
-            })
-            contentView.snp.remakeConstraints({ (make) in
+            }
+            contentView.snp.remakeConstraints { (make) in
                 make.left.bottom.right.equalToSuperview()
                 make.top.equalTo(arrowView.snp.bottom)
-            })
+            }
             arrowView.transform = .identity
         case .down:
-            arrowView.snp.remakeConstraints({ (make) in
+            arrowView.snp.remakeConstraints { (make) in
                 if let view = sourceView {
                     make.centerX.equalTo(view)
                 } else {
@@ -93,14 +93,14 @@ class TipView: UIView {
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
                 make.bottom.equalToSuperview()
-            })
-            contentView.snp.remakeConstraints({ (make) in
+            }
+            contentView.snp.remakeConstraints { (make) in
                 make.left.top.right.equalToSuperview()
                 make.bottom.equalTo(arrowView.snp.top)
-            })
+            }
             arrowView.transform = CGAffineTransform(rotationAngle: .pi)
         case .left:
-            arrowView.snp.remakeConstraints({ (make) in
+            arrowView.snp.remakeConstraints { (make) in
                 make.left.equalToSuperview()
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
@@ -109,14 +109,14 @@ class TipView: UIView {
                 } else {
                     make.top.equalTo(arrowOffset.y)
                 }
-            })
-            contentView.snp.remakeConstraints({ (make) in
+            }
+            contentView.snp.remakeConstraints { (make) in
                 make.bottom.top.right.equalToSuperview()
                 make.left.equalTo(arrowView.snp.right)
-            })
+            }
             arrowView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         case .right:
-            arrowView.snp.remakeConstraints({ (make) in
+            arrowView.snp.remakeConstraints { (make) in
                 make.right.equalToSuperview()
                 make.width.equalTo(arrowWidth)
                 make.height.equalTo(arrowHeight)
@@ -125,11 +125,11 @@ class TipView: UIView {
                 } else {
                     make.top.equalTo(arrowOffset.y)
                 }
-            })
-            contentView.snp.remakeConstraints({ (make) in
+            }
+            contentView.snp.remakeConstraints { (make) in
                 make.bottom.top.left.equalToSuperview()
                 make.right.equalTo(arrowView.snp.left)
-            })
+            }
             arrowView.transform = CGAffineTransform(rotationAngle: .pi / 2)
         }
         setNeedsLayout()

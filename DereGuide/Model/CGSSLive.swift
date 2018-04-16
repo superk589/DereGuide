@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 enum CGSSLiveSimulatorType: String, CustomStringConvertible, ColorRepresentable {
-    case normal = "常规模式" //!!!无法被本地化 注意使用时本地化
+    case normal = "常规模式" // !!!无法被本地化 注意使用时本地化
     case vocal = "Vocal Burst"
     case dance = "Dance Burst"
     case visual = "Visual Burst"

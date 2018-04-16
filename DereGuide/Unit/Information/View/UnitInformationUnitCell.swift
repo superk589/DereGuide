@@ -14,9 +14,9 @@ protocol UnitInformationUnitCellDelegate: class  {
 
 class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
 
-    var selfLeaderSkillLabel: UnitLeaderSkillView!
+    let selfLeaderSkillLabel = UnitLeaderSkillView()
     
-    var friendLeaderSkillLabel: UnitLeaderSkillView!
+    let friendLeaderSkillLabel = UnitLeaderSkillView()
     
     var iconStackView: UIStackView!
     
@@ -25,7 +25,6 @@ class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selfLeaderSkillLabel = UnitLeaderSkillView()
         contentView.addSubview(selfLeaderSkillLabel)
         selfLeaderSkillLabel.snp.makeConstraints { (make) in
             make.top.equalTo(10)
@@ -39,9 +38,9 @@ class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
             let icon = CGSSCardIconView()
             icon.delegate = self
             icons.append(icon)
-            icon.snp.makeConstraints({ (make) in
+            icon.snp.makeConstraints { (make) in
                 make.height.equalTo(icon.snp.width)
-            })
+            }
         }
         iconStackView = UIStackView(arrangedSubviews: icons)
         iconStackView.spacing = 5
@@ -61,7 +60,6 @@ class UnitInformationUnitCell: UITableViewCell, CGSSIconViewDelegate {
             make.centerX.equalToSuperview()
         }
         
-        friendLeaderSkillLabel = UnitLeaderSkillView()
         contentView.addSubview(friendLeaderSkillLabel)
         friendLeaderSkillLabel.snp.makeConstraints { (make) in
             make.top.equalTo(iconStackView.snp.bottom).offset(3)

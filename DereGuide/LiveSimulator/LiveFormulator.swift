@@ -17,8 +17,7 @@ fileprivate extension Int {
 
 extension LSNote {
     func expectation(in distribution: LFDistribution) -> Double {
-        
-        //先对离散分布的每种情况进行分别取整 再做单个note的得分期望计算
+        // 先对离散分布的每种情况进行分别取整 再做单个note的得分期望计算
         let expectation = distribution.samples.reduce(0.0) { $0 + round(baseScore * comboFactor * Double($1.value.bonusValue) / 10000) * $1.probability }
         
         return expectation

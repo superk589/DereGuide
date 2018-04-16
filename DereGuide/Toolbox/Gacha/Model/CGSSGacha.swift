@@ -180,15 +180,15 @@ class CGSSGacha: NSObject {
         return result
     }()
     
-    init(id:Int, name:String, dicription:String, start_date:String, end_date:String, rare_ratio:Int, sr_ratio:Int, ssr_ratio:Int, rewards:[Reward]) {
+    init(id: Int, name: String, dicription: String, startDate: String, endDate: String, rareRatio: Int, srRatio: Int, ssrRatio: Int, rewards: [Reward]) {
         self.id = id
         self.name = name
         self.dicription = dicription
-        self.startDate = start_date
-        self.endDate = end_date
-        self.rareRatio = rare_ratio
-        self.srRatio = sr_ratio
-        self.ssrRatio = ssr_ratio
+        self.startDate = startDate
+        self.endDate = endDate
+        self.rareRatio = rareRatio
+        self.srRatio = srRatio
+        self.ssrRatio = ssrRatio
         self.rewardTable = [Int: Reward]()
         let dao = CGSSDAO.shared
         for reward in rewards {
@@ -301,7 +301,7 @@ class CGSSGacha: NSObject {
             
             switch rarity {
             case CGSSRarityTypes.ssr:
-                //目前ssr新卡占40% sr新卡占20% r新卡占12% 
+                // 目前ssr新卡占40% sr新卡占20% r新卡占12%
                 if newssr.count > 0 && 100.proc(40) {
                     return newssr.random()!.cardId
                 } else if ssr.count > 0 {

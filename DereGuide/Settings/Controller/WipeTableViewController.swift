@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 
-
 class WipeTableViewController: BaseTableViewController {
 
     var dataTypes = [NSLocalizedString("全选", comment: ""),
@@ -99,12 +98,12 @@ class WipeTableViewController: BaseTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WipeCell", for: indexPath) as! WipeTableViewCell
         if indexPath.row > 0 {
-            //let indicator = UIActivityIndicatorView.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
-            //cell?.accessoryView = indicator
-            //indicator.startAnimating()
+            // let indicator = UIActivityIndicatorView.init(frame: CGRect.init(x: 0, y: 0, width: 20, height: 20))
+            // cell?.accessoryView = indicator
+            // indicator.startAnimating()
             cell.rightLabel.text = "...."
         } else {
-            //cell?.accessoryView = nil
+            // cell?.accessoryView = nil
             cell.rightLabel.text = ""
         }
         

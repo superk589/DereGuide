@@ -134,5 +134,3 @@ extension FavoriteCardDownloader {
     }
     
 }
-
-

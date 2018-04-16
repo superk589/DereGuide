@@ -29,7 +29,6 @@ public final class ManagedObjectObserver {
         NotificationCenter.default.removeObserver(token)
     }
 
-
     // MARK: Private
 
     fileprivate var token: NSObjectProtocol!
@@ -52,4 +51,3 @@ public final class ManagedObjectObserver {
         return nil
     }
 }
-

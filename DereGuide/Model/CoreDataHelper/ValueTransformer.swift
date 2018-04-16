@@ -42,5 +42,3 @@ class ClosureValueTransformer<A: AnyObject, B: AnyObject>: ValueTransformer {
         return reverseTransform(value as? B)
     }
 }
-
-

@@ -16,13 +16,11 @@ public protocol DelayedDeletable: class {
     func markForLocalDeletion()
 }
 
-
 extension DelayedDeletable {
     public static var notMarkedForLocalDeletionPredicate: NSPredicate {
         return NSPredicate(format: "%K == NULL", MarkedForDeletionDateKey)
     }
 }
-
 
 extension DelayedDeletable where Self: NSManagedObject {
     public var changedForDelayedDeletion: Bool {
@@ -38,7 +36,6 @@ extension DelayedDeletable where Self: NSManagedObject {
     }
     
 }
-
 
 /// Objects that have been marked for local deletion more than this time (in seconds) ago will get permanently deleted.
 private let DeletionAgeBeforePermanentlyDeletingObjects = TimeInterval(2 * 60)
@@ -60,7 +57,6 @@ extension NSManagedObjectContext {
     }
     
 }
-
 
 extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
     
@@ -93,5 +89,3 @@ extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
     }
 
 }
-
-

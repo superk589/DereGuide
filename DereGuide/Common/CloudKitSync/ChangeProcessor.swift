@@ -135,4 +135,3 @@ extension ElementChangeProcessor {
         return EntityAndPredicate(entity: Element.entity, predicate: predicate)
     }
 }
-

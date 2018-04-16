@@ -152,7 +152,7 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
             self?.collectionView.performBatchUpdates({
                 self?.reloadLayout()
             }, completion: nil)
-            //self.collectionView.collectionViewLayout.invalidateLayout()
+            // self.collectionView.collectionViewLayout.invalidateLayout()
         }, completion: { finished in
             if let selected = self.collectionView.indexPathsForSelectedItems?.first {
                 if !self.collectionView.indexPathsForVisibleItems.contains(selected) {
@@ -161,7 +161,6 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
             }
         })
     }
-    
     
     // MARK: - CollectionView dataSource and delegate
     

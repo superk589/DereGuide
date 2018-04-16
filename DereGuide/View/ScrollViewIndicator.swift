@@ -162,7 +162,7 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc func panAction(_ pan: UIPanGestureRecognizer) {
-        //print(pan.state, scrollView?.contentOffset.y)
+        // print(pan.state, scrollView?.contentOffset.y)
         switch pan.state {
         case .began:
             if let scrollView = self.scrollView {
@@ -187,4 +187,3 @@ class ScrollViewIndicator: UIView, UIGestureRecognizerDelegate {
     }
     
 }
-

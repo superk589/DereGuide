@@ -24,7 +24,6 @@ protocol ContextOwner: ObserverTokenStore {
     func processChangedLocalObjects(_ objects: [NSManagedObject])
 }
 
-
 extension ContextOwner {
     func setupContexts() {
         if #available(iOS 10.0, *) {
@@ -89,4 +88,3 @@ extension ContextOwner {
         }
     }
 }
-

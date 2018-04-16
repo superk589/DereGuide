@@ -31,7 +31,6 @@ final class InProgressTracker<O: NSManagedObject> where O: Managed {
 
 }
 
-
 extension InProgressTracker: CustomDebugStringConvertible {
     var debugDescription: String {
         var components = ["InProgressTracker"]
@@ -41,4 +40,3 @@ extension InProgressTracker: CustomDebugStringConvertible {
         return components.joined(separator: " ")
     }
 }
-

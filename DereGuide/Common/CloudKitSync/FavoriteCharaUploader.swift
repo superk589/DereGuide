@@ -71,6 +71,3 @@ extension FavoriteCharaUploader {
     }
     
 }
-
-
-

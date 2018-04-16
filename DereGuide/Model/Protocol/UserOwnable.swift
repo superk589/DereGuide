@@ -9,7 +9,6 @@
 import CoreData
 import CloudKit
 
-
 public protocol UserOwnable: class {
     var creatorID: String? { get }
     var belongsToCurrentUser: Bool { get }
@@ -54,5 +53,3 @@ extension NSManagedObjectContext {
     }
     
 }
-
-

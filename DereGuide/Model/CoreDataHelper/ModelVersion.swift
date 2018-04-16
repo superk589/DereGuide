@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 public protocol ModelVersion: Equatable {
     static var all: [Self] { get }
     static var current: Self { get }
@@ -18,7 +17,6 @@ public protocol ModelVersion: Equatable {
     var modelDirectoryName: String { get }
     func mappingModelsToSuccessor() -> [NSMappingModel]?
 }
-
 
 extension ModelVersion {
 
@@ -69,7 +67,6 @@ extension ModelVersion {
 
 }
 
-
 public final class MigrationStep {
     var source: NSManagedObjectModel
     var destination: NSManagedObjectModel
@@ -82,5 +79,3 @@ public final class MigrationStep {
         self.mappings = mappings
     }
 }
-
-

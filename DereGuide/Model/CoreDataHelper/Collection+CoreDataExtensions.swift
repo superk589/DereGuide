@@ -21,4 +21,3 @@ extension Collection where Iterator.Element: NSManagedObject {
         let _ = try! context.fetch(request)
     }
 }
-

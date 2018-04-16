@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 public struct ContextDidSaveNotification {
 
     public init(note: Notification) {
@@ -34,7 +33,6 @@ public struct ContextDidSaveNotification {
         return c
     }
 
-
     // MARK: Private
 
     fileprivate let notification: Notification
@@ -49,7 +47,6 @@ public struct ContextDidSaveNotification {
 
 }
 
-
 extension ContextDidSaveNotification: CustomDebugStringConvertible {
     public var debugDescription: String {
         var components = [notification.name.rawValue]
@@ -61,7 +58,6 @@ extension ContextDidSaveNotification: CustomDebugStringConvertible {
         return components.joined(separator: " ")
     }
 }
-
 
 public struct ContextWillSaveNotification {
 
@@ -81,7 +77,6 @@ public struct ContextWillSaveNotification {
     fileprivate let notification: Notification
 
 }
-
 
 public struct ObjectsDidChangeNotification {
 
@@ -119,7 +114,6 @@ public struct ObjectsDidChangeNotification {
         return c
     }
 
-
     // MARK: Private
 
     fileprivate let notification: Notification
@@ -129,7 +123,6 @@ public struct ObjectsDidChangeNotification {
     }
 
 }
-
 
 extension NSManagedObjectContext {
 
@@ -170,5 +163,3 @@ extension NSManagedObjectContext {
     }
 
 }
-
-

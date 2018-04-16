@@ -326,7 +326,7 @@ extension ColleagueComposeViewController: CenterWantedGroupViewDelegate {
         }
         let vc = CenterWantedEditingViewController()
         vc.modalPresentationStyle = .popover
-        vc.preferredContentSize = CGSize.init(width: 240, height: 140)
+        vc.preferredContentSize = CGSize(width: 240, height: 140)
         vc.delegate = self
         lastSelectedCenterWantedItem = item
         vc.setupWith(card: card, minLevel: item.minLevel)
@@ -335,7 +335,7 @@ extension ColleagueComposeViewController: CenterWantedGroupViewDelegate {
         
         pc?.delegate = self
         pc?.sourceView = item
-        pc?.sourceRect = CGRect.init(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
+        pc?.sourceRect = CGRect(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
         present(vc, animated: true, completion: nil)
         // play sound like peek(3d touch)
         AudioServicesPlaySystemSound(1519)
@@ -350,7 +350,7 @@ extension ColleagueComposeViewController: MyCenterGroupViewDelegate {
         }
         let vc = MyCenterEditingViewController()
         vc.modalPresentationStyle = .popover
-        vc.preferredContentSize = CGSize.init(width: 240, height: 290)
+        vc.preferredContentSize = CGSize(width: 240, height: 290)
         vc.delegate = self
         lastSelectedMyCenterItem = item
         vc.setupWith(card: card, potential: item.potential)
@@ -359,7 +359,7 @@ extension ColleagueComposeViewController: MyCenterGroupViewDelegate {
         
         pc?.delegate = self
         pc?.sourceView = item
-        pc?.sourceRect = CGRect.init(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
+        pc?.sourceRect = CGRect(x: item.fwidth / 2, y: item.fheight / 2, width: 0, height: 0)
         present(vc, animated: true, completion: nil)
         // play sound like peek(3d touch)
         AudioServicesPlaySystemSound(1519)
@@ -446,4 +446,3 @@ extension ColleagueComposeViewController: ColleaColleagueButtonsCellDelegate {
     }
     
 }
-

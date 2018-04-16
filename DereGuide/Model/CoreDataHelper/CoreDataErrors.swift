@@ -8,7 +8,6 @@
 
 import CoreData
 
-
 struct ManagedObjectValidationError {
     fileprivate let error: NSError
     fileprivate var userInfo: [AnyHashable:Any] { return error.userInfo }
@@ -74,4 +73,3 @@ extension NSManagedObject {
         return NSError(domain: domain, code: NSValidationMultipleErrorsError, userInfo: userInfo)
     }
 }
-

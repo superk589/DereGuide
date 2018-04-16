@@ -36,7 +36,7 @@ class GridLabel: GridView {
             for _ in 0..<columns {
                 let label = UILabel()
                 label.textAlignment = textAligment
-                label.font = UIFont.init(name: "menlo", size: 14)
+                label.font = UIFont(name: "menlo", size: 14)
                 label.adjustsFontSizeToFitWidth = true
                 label.textColor = .allType
                 label.baselineAdjustment = .alignCenters
@@ -44,9 +44,9 @@ class GridLabel: GridView {
                 view.layer.borderColor = UIColor.black.cgColor
                 view.layer.borderWidth = 1 / UIScreen.main.scale
                 view.addSubview(label)
-                label.snp.makeConstraints({ (make) in
-                    make.edges.equalToSuperview().inset(UIEdgeInsets.init(top: 1, left: 2, bottom: 1, right: 2))
-                })
+                label.snp.makeConstraints { (make) in
+                    make.edges.equalToSuperview().inset(UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2))
+                }
                 subViews.append(view)
             }
             views.append(subViews)

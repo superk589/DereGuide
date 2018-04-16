@@ -122,4 +122,3 @@ struct CGSSSongFilter: CGSSFilter {
         return nil
     }
 }
-

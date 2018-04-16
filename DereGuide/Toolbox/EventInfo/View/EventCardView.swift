@@ -1,4 +1,3 @@
-
 //
 //  EventCardView.swift
 //  DereGuide

@@ -18,7 +18,6 @@ class GachaFilterSortController: BaseFilterSortController {
     
     var sorter: CGSSSorter!
     
-    
     weak var delegate: GachaFilterSortControllerDelegate?
     
     var gachaTypeTitles = [CGSSGachaTypes.normal.description,
@@ -182,4 +181,3 @@ extension GachaFilterSortController: SortTableViewCellDelegate {
         }
     }
 }
-

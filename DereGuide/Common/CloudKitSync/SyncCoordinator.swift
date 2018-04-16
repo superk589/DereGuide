@@ -14,9 +14,7 @@ public protocol CloudKitNotificationDrain {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any])
 }
 
-
 private let RemoteTypeEnvKey = "CloudKitRemote"
-
 
 /// This is the central class that coordinates synchronization with the remote backend.
 ///
@@ -45,8 +43,8 @@ public final class SyncCoordinator {
     let favoriteCharasRemote: FavoriteCharasRemote
     let favoriteSongsRemote: FavoriteSongsRemote
     
-    fileprivate var observerTokens: [NSObjectProtocol] = [] //< The tokens registered with NotificationCenter
-    let changeProcessors: [ChangeProcessor] //< The change processors for upload, download, etc.
+    fileprivate var observerTokens: [NSObjectProtocol] = [] // < The tokens registered with NotificationCenter
+    let changeProcessors: [ChangeProcessor] // < The change processors for upload, download, etc.
     var teardownFlag = atomic_flag()
 
     private init(viewContext: NSManagedObjectContext, syncContext: NSManagedObjectContext) {
@@ -121,7 +119,6 @@ extension SyncCoordinator: CloudKitNotificationDrain {
     
 }
 
-
 // MARK: - Context Owner -
 
 extension SyncCoordinator : ContextOwner {
@@ -147,9 +144,7 @@ extension SyncCoordinator : ContextOwner {
     
 }
 
-
 // MARK: - Context -
-
 
 extension SyncCoordinator: ChangeProcessorContext {
     
@@ -184,7 +179,6 @@ extension SyncCoordinator: ChangeProcessorContext {
     }
     
 }
-
 
 // MARK: Setup
 extension SyncCoordinator {
@@ -248,7 +242,6 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
 
 }
 
-
 // MARK: - Remote -
 
 extension SyncCoordinator {
@@ -299,4 +292,3 @@ extension SyncCoordinator {
         }
     }
 }
-

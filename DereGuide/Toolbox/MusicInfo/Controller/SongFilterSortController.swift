@@ -47,12 +47,6 @@ class SongFilterSortController: BaseFilterSortController {
     override func doneAction() {
         delegate?.doneAndReturn(filter: filter, sorter: sorter)
         drawerController?.hide(animated: true)
-        // 使用自定义动画效果
-        /*let transition = CATransition()
-         transition.duration = 0.3
-         transition.type = kCATransitionReveal
-         navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
-         navigationController?.popViewControllerAnimated(false)*/
     }
     
     override func resetAction() {
@@ -118,7 +112,6 @@ class SongFilterSortController: BaseFilterSortController {
     }
     
 }
-
 
 extension SongFilterSortController: FilterTableViewCellDelegate {
     
@@ -227,4 +220,3 @@ extension SongFilterSortController: SortTableViewCellDelegate {
     }
     
 }
-

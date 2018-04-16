@@ -44,14 +44,14 @@ class LicenseTableViewCell: UITableViewCell {
         siteLabel.text = site
         if site == "" {
             accessoryType = .none
-            siteLabel.snp.updateConstraints({ (update) in
+            siteLabel.snp.updateConstraints { (update) in
                 update.top.equalTo(titleLabel.snp.bottom).offset(0)
-            })
+            }
         } else {
             accessoryType = .disclosureIndicator
-            siteLabel.snp.updateConstraints({ (update) in
+            siteLabel.snp.updateConstraints { (update) in
                 update.top.equalTo(titleLabel.snp.bottom).offset(5)
-            })
+            }
         }
     }
     

@@ -157,7 +157,7 @@ class BeatmapViewController: UIViewController {
                 let keys = (k as! String).components(separatedBy: ",")
                 for key in keys {
                     if Int(key) == scene.live.id {
-                        return CGSSBeatmapShiftingInfo.init(info: v as! NSDictionary)
+                        return CGSSBeatmapShiftingInfo(info: v as! NSDictionary)
                     }
                 }
             }

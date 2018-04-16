@@ -31,11 +31,10 @@ public func migrateStore<Version: ModelVersion>(from sourceURL: URL, to targetUR
         currentURL = destinationURL
     }
     try! NSPersistentStoreCoordinator.replaceStore(at: targetURL, withStoreAt: currentURL)
-    if (currentURL != sourceURL) {
+    if currentURL != sourceURL {
         NSPersistentStoreCoordinator.destroyStore(at: currentURL)
     }
-    if (targetURL != sourceURL && deleteSource) {
+    if targetURL != sourceURL && deleteSource {
         NSPersistentStoreCoordinator.destroyStore(at: sourceURL)
     }
 }
-

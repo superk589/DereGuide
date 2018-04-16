@@ -18,7 +18,6 @@ extension NSManagedObjectContext {
     }
 }
 
-
 extension Sequence where Iterator.Element: NSManagedObject {
     func remap(to context: NSManagedObjectContext) -> [Iterator.Element] {
         return map { unmappedMO in
@@ -28,7 +27,6 @@ extension Sequence where Iterator.Element: NSManagedObject {
         }
     }
 }
-
 
 extension NSManagedObjectContext {
     fileprivate var changedObjectsCount: Int {
@@ -49,4 +47,3 @@ extension NSManagedObjectContext {
         }
     }
 }
-

@@ -79,5 +79,3 @@ extension FavoriteSong: RemoteUploadable {
         return record
     }
 }
-
-

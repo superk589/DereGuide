@@ -37,7 +37,7 @@ extension UserDefaults {
         }
     }
     
-    func executeDocumentReset(reset: ((Int)->Void)) {
+    func executeDocumentReset(reset: ((Int) -> Void)) {
         let documentVersion = Bundle.main.infoDictionary?["Document version"] as? Int ?? 1
         
         // if user is the first time launching this app, the LastDocumentVersion is nil, then do nothing

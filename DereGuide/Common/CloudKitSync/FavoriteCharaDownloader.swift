@@ -67,7 +67,6 @@ final class FavoriteCharaDownloader: ChangeProcessor {
     
 }
 
-
 extension FavoriteCharaDownloader {
     
     fileprivate func deleteFavoriteCharas(with ids: [RemoteIdentifier], in context: ChangeProcessorContext) {
@@ -135,6 +134,3 @@ extension FavoriteCharaDownloader {
     }
     
 }
-
-
-

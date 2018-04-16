@@ -73,7 +73,7 @@ class BaseModelCollectionViewController: RefreshableCollectionViewController {
     
 }
 
-//MARK: UISearchBarDelegate
+// MARK: UISearchBarDelegate
 extension BaseModelCollectionViewController: UISearchBarDelegate {
     
     // 文字改变时

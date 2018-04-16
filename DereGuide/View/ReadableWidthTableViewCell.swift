@@ -46,4 +46,3 @@ class ReadableWidthTableViewCell: UITableViewCell {
     }
     
 }
-

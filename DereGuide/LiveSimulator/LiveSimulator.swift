@@ -447,4 +447,3 @@ private extension Int {
         return Int(round(Double(self) * (1 - 0.3 * percent / 100)))
     }
 }
-

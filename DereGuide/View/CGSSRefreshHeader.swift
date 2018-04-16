@@ -54,4 +54,3 @@ class CGSSRefreshHeader: MJRefreshHeader {
     }
     
 }
-
