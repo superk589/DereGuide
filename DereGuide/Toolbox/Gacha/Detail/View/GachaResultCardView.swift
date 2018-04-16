@@ -38,7 +38,7 @@ class GachaResultCardView: UIView {
             }
             icon.cardID = card.id
         } else {
-            glow.removeGlows()
+            removeGlow()
             icon.cardID = nil
         }
     }
@@ -59,10 +59,10 @@ class GachaResultCardView: UIView {
                 }
             }
         }
-        let scale = min(1, sqrt(self.bounds.size.width * self.bounds.size.height / 90))
+        let scale = min(1, sqrt(bounds.size.width * bounds.size.height / 90))
         let missing = count - glowLayers.count
         for _ in 0..<missing {
-            let imageView = UIImageView.init(image: UIImage.init(named: imageName)?.withRenderingMode(.alwaysTemplate))
+            let imageView = UIImageView(image: UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate))
             glow.addSubview(imageView)
             imageView.layer.name = layerName
             glowLayers.append(imageView.layer)
@@ -70,16 +70,16 @@ class GachaResultCardView: UIView {
         
         let movePath = UIBezierPath(roundedRect: icon.bounds, cornerRadius: icon.frame.height / 8)
         if !clockwise {
-            movePath.apply(CGAffineTransform(a: -1, b: 0, c: 0, d: 1, tx: self.bounds.size.width, ty: 0))
+            movePath.apply(CGAffineTransform(a: -1, b: 0, c: 0, d: 1, tx: bounds.size.width, ty: 0))
         }
-        let moveAni = CAKeyframeAnimation.init(keyPath: "position")
+        let moveAni = CAKeyframeAnimation(keyPath: "position")
         moveAni.path = movePath.cgPath
         moveAni.duration = 8
         moveAni.repeatCount = .infinity
         moveAni.calculationMode = "cubicPaced"
         moveAni.isRemovedOnCompletion = false
         
-        let opacityAni = CABasicAnimation.init(keyPath: "opacity")
+        let opacityAni = CABasicAnimation(keyPath: "opacity")
         opacityAni.fromValue = 1
         opacityAni.toValue = 0.3
         opacityAni.duration = 4
@@ -87,7 +87,7 @@ class GachaResultCardView: UIView {
         opacityAni.autoreverses = true
         opacityAni.isRemovedOnCompletion = false
         
-        let scaleAni = CABasicAnimation.init(keyPath: "transform.scale")
+        let scaleAni = CABasicAnimation(keyPath: "transform.scale")
         scaleAni.fromValue = scale * 0.6
         scaleAni.toValue = scale * 0.4
         scaleAni.duration = 4
@@ -109,7 +109,7 @@ class GachaResultCardView: UIView {
     
     func removeGlow() {
         for view in glow.subviews {
-            if (view.layer.name?.hasPrefix("GLOW") ?? false) {
+            if view.layer.name?.hasPrefix("GLOW") ?? false {
                 view.layer.removeAllAnimations()
                 view.removeFromSuperview()
             }

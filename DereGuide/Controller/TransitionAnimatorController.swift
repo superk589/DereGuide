@@ -108,7 +108,6 @@ class TransitionAnimatorController: NSObject, UIViewControllerAnimatedTransition
                 let destFrame = destView.convert(destView.bounds, to: transitionContext.containerView)
 //                if #available(iOS 11.0, *) {
 //                    var frame = destView.convert(destView.bounds, to: transitionContext.containerView)
-////                    frame.origin.y -= (fromViewController as? UIViewController)?.navigationController?.navigationBar.frame.maxY ?? 0
 //                    destFrame = frame
 //                } else {
 //                    destFrame = destView.convert(destView.bounds, to: transitionContext.containerView)

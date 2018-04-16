@@ -41,7 +41,6 @@ public class CloudKitMergePolicy: NSMergePolicy {
     
 }
 
-
 extension NSMergeConflict {
     var newestUpdatedAt: Date {
         guard let o = sourceObject as? UpdateTimestampable else { fatalError("must be UpdateTimestampable") }
@@ -54,7 +53,6 @@ extension NSMergeConflict {
     }
 }
 
-
 extension Sequence where Iterator.Element == NSMergeConflict {
     func conflictedObjects<T>(of cls: T.Type) -> [T] {
         let objects = map { $0.sourceObject }
@@ -65,5 +63,3 @@ extension Sequence where Iterator.Element == NSMergeConflict {
         return filter { $0.sourceObject is T }.map { ($0, $0.sourceObject as! T) }
     }
 }
-
-

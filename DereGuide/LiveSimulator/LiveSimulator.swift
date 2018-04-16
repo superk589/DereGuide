@@ -91,7 +91,6 @@ class LiveSimulator {
 //        var sum = 0
 //
 //        var life = totalLife
-////        let sortedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }
 //
 //        var logs = [LSLog]()
 //

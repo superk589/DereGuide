@@ -210,7 +210,6 @@ extension SyncCoordinator: ApplicationActiveStateObserving {
 
 //    fileprivate func fetchLocallyTrackedObjects() {
 //        self.perform {
-//            // TODO: Could optimize this to only execute a single fetch request per entity.
 //            var objects: Set<NSManagedObject> = []
 //            for cp in self.changeProcessors {
 //                guard let entityAndPredicate = cp.entityAndPredicateForLocallyTrackedObjects(in: self) else { continue }

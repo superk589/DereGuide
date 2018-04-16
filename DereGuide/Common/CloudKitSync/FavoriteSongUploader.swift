@@ -69,6 +69,5 @@ extension FavoriteSongUploader {
             }
         }
     }
-    
 }
 

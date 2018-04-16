@@ -8,13 +8,11 @@
 
 import CoreData
 
-
 extension NSManagedObject {
     public func refresh(_ mergeChanges: Bool = true) {
         managedObjectContext?.refresh(self, mergeChanges: mergeChanges)
     }
 }
-
 
 extension NSManagedObject {
     public func changedValue(forKey key: String) -> Any? {
@@ -24,4 +22,3 @@ extension NSManagedObject {
         return committedValues(forKeys: [key])[key]
     }
 }
-

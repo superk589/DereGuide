@@ -74,7 +74,6 @@ extension DelayedDeletable where Self: NSManagedObject, Self: Managed {
 //        let changes = [NSDeletedObjectsKey: objectIDs]
 //        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes,
 //            into: [managedObjectContext])
-//        // TODO: here we also need to tell other context these changes
 //    }
 
     fileprivate static func deleteObjectsMarkedForLocalDeletionInContext(_ managedObjectContext: NSManagedObjectContext) {
