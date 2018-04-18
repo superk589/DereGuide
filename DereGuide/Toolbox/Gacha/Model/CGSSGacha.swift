@@ -71,7 +71,7 @@ extension CGSSGacha {
         } else if id == 30013 {
             result = 12
         } else if gachaType == .premium {
-            result = (id - 1) / 3 * 3 + 1
+            result = (id % 10000 - 1) / 3 + 1
         }
         
         return result
