@@ -12,7 +12,7 @@ import lz4
 class LZ4Decompressor {
     static func decompress(_ data: Data) -> Data {
         var destSize = 0
-        (data as NSData).getBytes(&destSize, range: NSRange.init(location: 4, length: 4))
+        (data as NSData).getBytes(&destSize, range: NSRange(location: 4, length: 4))
 
         let newdata = data.subdata(in: 16..<data.count)
         
@@ -23,7 +23,7 @@ class LZ4Decompressor {
         }
         LZ4_decompress_fast(source, dest, Int32(destSize))
         
-        let decompressedData = Data.init(bytes: dest, count: destSize)
+        let decompressedData = Data(bytes: dest, count: destSize)
         return decompressedData
     }
 }

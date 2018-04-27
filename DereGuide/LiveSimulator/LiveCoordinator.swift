@@ -276,6 +276,8 @@ class LiveCoordinator {
         
         let baseScore = baseScorePerNote
         
+        beatmap.contextFree()
+        
         let notes = beatmap.validNotes
         
         let criticalPoints = getCriticalPointNoteIndexes(total: beatmap.numberOfNotes)
@@ -283,7 +285,7 @@ class LiveCoordinator {
             
             let comboFactor = getComboFactor(of: i + 1, criticalPoints: criticalPoints)
     
-            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec, rangeType: notes[i].rangeType)
+            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec, rangeType: notes[i].rangeType, beatmapNote: notes[i])
             
             lsNotes.append(lsNote)
         }

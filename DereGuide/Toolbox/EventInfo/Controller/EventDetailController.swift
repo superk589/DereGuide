@@ -67,7 +67,6 @@ class EventDetailController: BaseViewController {
     }
     
     func requestData() {
-        
         if CGSSEventTypes.ptRankingExists.contains(event.eventType) {
             requestPtData()
         }
@@ -77,21 +76,6 @@ class EventDetailController: BaseViewController {
     }
     
     func requestPtData() {
-//        EventPtDataRequest.requestPtData(event: event) { (list) in
-//            self.ptList = list
-//            if list != nil {
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.eventDetailView.setup(ptList: list!, onGoing: self?.event.isOnGoing ?? false)
-//                }
-//            } else {
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.eventDetailView.eventPtView.setLoading(loading: false)
-//                    self?.eventDetailView.eventPtView.gridView.isHidden = true
-//                }
-//            }
-//
-//        }
-
         let group = DispatchGroup()
         var items = [RankingItem]()
         for border in event.ptBorders {
@@ -128,19 +112,6 @@ class EventDetailController: BaseViewController {
     }
     
     func requestScoreData() {
-//        EventPtDataRequest.requestHighScoreData(event: event) { (list) in
-//            self.scoreList = list
-//            if list != nil {
-//                DispatchQueue.main.async { [weak self] in
-//                     self?.eventDetailView.setup(scoreList: list!, onGoing: self?.event.isOnGoing ?? false)
-//                }
-//            } else {
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.eventDetailView.eventScoreView.setLoading(loading: false)
-//                    self?.eventDetailView.eventScoreView.gridView.isHidden = true
-//                }
-//            }
-//        }
         let group = DispatchGroup()
         var items = [RankingItem]()
         for border in event.scoreBorders {

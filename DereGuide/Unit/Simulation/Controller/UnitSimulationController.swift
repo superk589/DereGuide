@@ -333,9 +333,9 @@ extension UnitSimulationController: UnitSimulationMainBodyCellDelegate {
             afkModeSimulator = simulator
             DispatchQueue.global(qos: .userInitiated).async {
                 #if DEBUG
-                    doSimulationBy(simulator, 5000, scene)
+                    doSimulationBy(simulator, 500, scene)
                 #else
-                    doSimulationBy(simulator, UInt(LiveSimulationAdvanceOptionsManager.default.simulationTimes), scene)
+                    doSimulationBy(simulator, UInt(LiveSimulationAdvanceOptionsManager.default.afkModeSimulationTimes), scene)
                 #endif
             }
         } else {

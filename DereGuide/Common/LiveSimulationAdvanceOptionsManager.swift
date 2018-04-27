@@ -16,15 +16,6 @@ class LiveSimulationAdvanceOptionsManager {
         
     }
     
-//    var considerOverloadSkillsTriggerLifeCondition: Bool {
-//        set {
-//            UserDefaults.standard.set(newValue, forKey: "considerOverloadSkillsTriggerLifeCondition")
-//        }
-//        get {
-//            return UserDefaults.standard.bool(forKey: "considerOverloadSkillsTriggerLifeCondition")
-//        }
-//    }
-    
     var roomUpValue: Int {
         set {
             UserDefaults.standard.set(newValue, forKey: "roomUpValue")
@@ -79,6 +70,15 @@ class LiveSimulationAdvanceOptionsManager {
         }
     }
     
+    var afkModeSimulationTimes: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "afkModeSimuationTimes")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "afkModeSimuationTimes") as? Int ?? 1000
+        }
+    }
+    
     func reset() {
 //        considerOverloadSkillsTriggerLifeCondition = false
         greatPercent = 0.0
@@ -86,6 +86,7 @@ class LiveSimulationAdvanceOptionsManager {
         roomUpValue = 10
         afkModeStartSeconds = 0.0
         afkModeStartCombo = 0
+        afkModeSimulationTimes = 1000
     }
 
 }

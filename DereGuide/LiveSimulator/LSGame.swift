@@ -74,6 +74,7 @@ struct LSGame {
     var afkMode = false
     var difficulty: CGSSLiveDifficulty
     var isDead = false
+    var missedNotes = [LSNote]()
     
     init(initialLife: Int, maxLife: Int, numberOfNotes: Int, difficulty: CGSSLiveDifficulty, score: Int = 0) {
         self.currentLife = initialLife
@@ -86,14 +87,13 @@ struct LSGame {
     mutating func perform(_ action: LSAction) {
         switch action {
         case .note(let note):
-            
             noteIndex += 1
-            
             if isDead {
                 processNoteAfterDead(note)
             } else if afkMode && !(hasSkillBoost && hasStrongPerfectSupport) && note.sec > LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds && noteIndex > LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo {
                 // if in afk mode, note will be missed unless skill boost and perfect support are on
                 processNoteMissing(note)
+                missedNotes.append(note)
             } else {
                 processNormalNote(note)
             }
@@ -122,7 +122,9 @@ struct LSGame {
         
         // calculate life loss
         let lostLife: Int
-        if hasDamegeGuard {
+        if hasDamegeGuard || ([.hold, .slide].contains(note.rangeType) && missedNotes.contains(where: { (missedNote) -> Bool in
+            return missedNote.beatmapNote === note.beatmapNote.previous
+        })) {
             lostLife = 0
         } else {
             lostLife = note.lifeLost(in: difficulty, evaluation: .miss)

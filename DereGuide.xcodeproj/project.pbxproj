@@ -353,7 +353,6 @@
 		12D975CE1E379619005E932B /* EventScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CD1E379619005E932B /* EventScoreView.swift */; };
 		12D975D01E379DF7005E932B /* EventRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975CF1E379DF7005E932B /* EventRanking.swift */; };
 		12D975D41E37AB3D005E932B /* EventRankingSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */; };
-		12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D71E386FB0005E932B /* EventPtDataRequest.swift */; };
 		12D975DA1E38716F005E932B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975D91E38716F005E932B /* BaseRequest.swift */; };
 		12D975DC1E3871CD005E932B /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D975DB1E3871CD005E932B /* BaseSession.swift */; };
 		12DE93351FC025AB004039F0 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */; };
@@ -822,7 +821,6 @@
 		12D975CD1E379619005E932B /* EventScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScoreView.swift; sourceTree = "<group>"; };
 		12D975CF1E379DF7005E932B /* EventRanking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRanking.swift; sourceTree = "<group>"; };
 		12D975D31E37AB3D005E932B /* EventRankingSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRankingSpeed.swift; sourceTree = "<group>"; };
-		12D975D71E386FB0005E932B /* EventPtDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPtDataRequest.swift; sourceTree = "<group>"; };
 		12D975D91E38716F005E932B /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		12D975DB1E3871CD005E932B /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -1092,7 +1090,6 @@
 			isa = PBXGroup;
 			children = (
 				1238059E1DAA1995007361CF /* CGSSEvent.swift */,
-				12D975D71E386FB0005E932B /* EventPtDataRequest.swift */,
 				1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */,
 				12636EC71E375DA900E3C833 /* EventLogItem.swift */,
 				12D975CF1E379DF7005E932B /* EventRanking.swift */,
@@ -2508,7 +2505,6 @@
 				12523FFA1D8AC4B200E48BD5 /* GachaSimulatorView.swift in Sources */,
 				120659C21E6BD3C200936C49 /* ScrollViewIndicator.swift in Sources */,
 				12725F27203FC6F800FBBB64 /* DashboardSettingTableViewCell.swift in Sources */,
-				12D975D81E386FB0005E932B /* EventPtDataRequest.swift in Sources */,
 				12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */,
 				1269E9DC1D520B5D0071AD7F /* CGSSDAO.swift in Sources */,
 				12F4EAED1EE0017100A92C9F /* UnitSimulationScoreDistributionController.swift in Sources */,

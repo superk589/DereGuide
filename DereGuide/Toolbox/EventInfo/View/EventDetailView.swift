@@ -25,11 +25,11 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
     
     let timeIndicator = TimeStatusIndicator()
     
-    let line1 = UIView()
+    let line1 = LineView()
     
-    let line2 = UIView()
+    let line2 = LineView()
     
-    let line3 = UIView()
+    let line3 = LineView()
     
     let card1View = EventCardView()
     
@@ -99,7 +99,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalTo(line1.snp.bottom)
             make.height.equalTo(91)
         }
-        let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
         card1View.addGestureRecognizer(tap1)
     
         addSubview(line3)
@@ -115,7 +115,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.top.equalTo(line3.snp.bottom)
             make.height.equalTo(91)
         }
-        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(tapAction(tap:)))
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
         card2View.addGestureRecognizer(tap2)
         
         addSubview(line2)

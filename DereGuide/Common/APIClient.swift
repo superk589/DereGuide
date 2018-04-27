@@ -33,9 +33,9 @@ class APIClient {
     private var apis = "https://apis.game.starlight-stage.jp"
     
     private func lolfuscate(_ s: String) -> String {
-        let mid = s.map { String.init(format: "%02d\($0.shiftScalarBy(10))%d", 100.arc4random, 10.arc4random) }.joined()
+        let mid = s.map { String(format: "%02d\($0.shiftScalarBy(10))%d", 100.arc4random, 10.arc4random) }.joined()
         let post = (0..<32).map { _ in String(10.arc4random) }.joined()
-        return String.init(format: "%04x\(mid)\(post)", s.count)
+        return String(format: "%04x\(mid)\(post)", s.count)
     }
     
     private func unlolfuscate(_ s: String) -> String {

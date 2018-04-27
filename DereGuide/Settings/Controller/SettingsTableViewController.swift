@@ -93,7 +93,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @objc private func showPrivacyPolicy() {
-        let sb = UIStoryboard.init(name: "Main", bundle: nil)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
@@ -109,14 +109,13 @@ class SettingsTableViewController: UITableViewController {
         } else if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
             print("open twitter by SLComposeViewController")
             vc.setInitialText("#\(Config.appName)\n")
-            self.tabBarController?.present(vc, animated: true, completion: nil)
+            tabBarController?.present(vc, animated: true, completion: nil)
         } else {
             print("open twitter failed")
         }
     }
     
     @objc private func sendEmail() {
-        // 首先要判断设备具不具备发送邮件功能
         if MFMailComposeViewController.canSendMail() {
             let controller = MFMailComposeViewController()
             controller.setSubject(NSLocalizedString("\(Config.appName)问题反馈", comment: "设置页面"))
@@ -126,11 +125,11 @@ class SettingsTableViewController: UITableViewController {
                 controller.setCcRecipients(["gaiban@poketb.com"])
             }
             controller.addAttachmentData(DeviceInformationManager.default.toString().data(using: .utf8)!, mimeType: "text/plain", fileName: "device_information.txt")
-            self.present(controller, animated: true, completion: nil)
+            present(controller, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController.init(title: NSLocalizedString("打开邮箱失败", comment: "设置页面"), message: NSLocalizedString("未设置邮箱账户", comment: "设置页面"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: NSLocalizedString("打开邮箱失败", comment: "设置页面"), message: NSLocalizedString("未设置邮箱账户", comment: "设置页面"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("确定", comment: "设置页面"), style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -229,36 +228,34 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @objc func postReview() {
-        // let url = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(CGSSGlobal.appid)"
-        guard let url = URL.init(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") else {
-            return
+    @objc private func postReview() {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") {
+            UIApplication.shared.openURL(url)
         }
-        UIApplication.shared.openURL(url)
     }
     
-    @objc func showAck() {
-        let ackVC = AcknowledgementViewController()
-        ackVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(ackVC, animated: true)
+    @objc private func showAck() {
+        let vc = AcknowledgementViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func showLicense() {
-        let licenseVC = LicenseViewController()
-        licenseVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(licenseVC, animated: true)
+    @objc private func showLicense() {
+        let vc = LicenseViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func showDonate() {
-        let donationVC = DonationViewController()
-        donationVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(donationVC, animated: true)
+    @objc private func showDonate() {
+        let vc = DonationViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCellData()
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = NSLocalizedString("设置", comment: "")
@@ -267,8 +264,8 @@ class SettingsTableViewController: UITableViewController {
 }
 
 // MARK: MFMailComposeViewControllerDelegate
+
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
-    // 发送邮件代理方法
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)

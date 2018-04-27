@@ -26,12 +26,12 @@ class NoteScoreLabel: UILabel {
 
 class NoteScoreTableViewCell: UITableViewCell {
     
-    let comboIndexLabel = UILabel()
-    let perfectBonusLabel = UILabel()
-    let comboBonusLabel = UILabel()
-    let skillBoostLabel = UILabel()
-    let finalScoreLabel = UILabel()
-    let totalScoreLabel = UILabel()
+    let comboIndexLabel = NoteScoreLabel()
+    let perfectBonusLabel = NoteScoreLabel()
+    let comboBonusLabel = NoteScoreLabel()
+    let skillBoostLabel = NoteScoreLabel()
+    let finalScoreLabel = NoteScoreLabel()
+    let totalScoreLabel = NoteScoreLabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

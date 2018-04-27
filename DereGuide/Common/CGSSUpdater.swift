@@ -281,17 +281,16 @@ open class CGSSUpdater: NSObject {
     func checkMaster(callback: CGSSCheckCompletionClosure) {
         if CGSSVersionManager.default.currentMasterTruthVersion < CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkMasterExistence() {
             if let hash = CGSSGameResource.shared.getMasterHash() {
-                let item = CGSSUpdateItem.init(dataType: .master, id: CGSSVersionManager.default.currentManifestTruthVersion, hash: hash)
+                let item = CGSSUpdateItem(dataType: .master, id: CGSSVersionManager.default.currentManifestTruthVersion, hash: hash)
                 callback([item], nil)
             } else {
-                let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("无法获取游戏原始数据", comment: "弹出框正文"))
+                let error = CGSSUpdaterError(localizedDescription: NSLocalizedString("无法获取游戏原始数据", comment: "弹出框正文"))
                 callback(nil, error)
             }
         } else {
             callback(nil, nil)
         }
     }
-    
     
     func checkBeatmap(callback: CGSSCheckCompletionClosure) {
         var items = [CGSSUpdateItem]()
@@ -301,7 +300,7 @@ open class CGSSUpdater: NSObject {
                     continue
                 }
             }
-            let item = CGSSUpdateItem.init(dataType: .beatmap, id: key, hash: value)
+            let item = CGSSUpdateItem(dataType: .beatmap, id: key, hash: value)
             items.append(item)
         }
         callback(items, nil)
@@ -416,7 +415,7 @@ open class CGSSUpdater: NSObject {
                 if error != nil {
                     callback(item, nil, error)
                 } else if (response as! HTTPURLResponse).statusCode != 200 {
-                    let error = CGSSUpdaterError.init(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
+                    let error = CGSSUpdaterError(localizedDescription: NSLocalizedString("数据服务器存在异常，请您稍后再尝试更新。", comment: "数据更新时的错误提示"))
                     callback(item, nil, error)
                 } else {
                     callback(item, data, nil)
@@ -429,7 +428,7 @@ open class CGSSUpdater: NSObject {
     func updateItems(_ items: [CGSSUpdateItem], progress: @escaping (Int, Int) -> Void, complete: @escaping (Int, Int) -> Void) {
         isUpdating = true
         let total = items.count
-        let queue = DispatchQueue.init(label: "zzk.dereguide.updater_queue_progress")
+        let queue = DispatchQueue(label: "zzk.dereguide.updater_queue_progress")
         var success = 0
         var process = 0 {
             didSet {

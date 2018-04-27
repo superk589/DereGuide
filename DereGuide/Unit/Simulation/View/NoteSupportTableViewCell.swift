@@ -13,13 +13,13 @@ class NoteSupportTableViewCell: UITableViewCell {
     
     var stackView: UIStackView!
     
-    let comboIndexLabel = UILabel()
-    let skillBoostLabel = UILabel()
-    let perfectLockLabel = UILabel()
-    let comboContinueLabel = UILabel()
-    let healLabel = UILabel()
-    let damageGuardLabel = UILabel()
-    let lifeLabel = UILabel()
+    let comboIndexLabel = NoteScoreLabel()
+    let skillBoostLabel = NoteScoreLabel()
+    let perfectLockLabel = NoteScoreLabel()
+    let comboContinueLabel = NoteScoreLabel()
+    let healLabel = NoteScoreLabel()
+    let damageGuardLabel = NoteScoreLabel()
+    let lifeLabel = NoteScoreLabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
