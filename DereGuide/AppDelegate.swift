@@ -70,11 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
-            if lastVersion < 15 {
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
-            }
             if lastVersion < 16 {
                 UnitEditingAdvanceOptionsManager.default.reset()
+            }
+            if lastVersion < 17 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
         }
         

@@ -22,6 +22,7 @@ class GachaFilterSortController: BaseFilterSortController {
     
     var gachaTypeTitles = [CGSSGachaTypes.normal.description,
                            CGSSGachaTypes.limit.description,
+                           CGSSGachaTypes.limitReappear.description,
                            CGSSGachaTypes.fes.description,
                            CGSSGachaTypes.singleType.description,
                            CGSSGachaTypes.premium.description]

@@ -15,7 +15,7 @@ struct CGSSGachaFilter: CGSSFilter {
     var searchText: String = ""
     
     init(typeMask: UInt) {
-        gachaTypes = CGSSGachaTypes.init(rawValue: typeMask)
+        gachaTypes = CGSSGachaTypes(rawValue: typeMask)
     }
     
     func filter(_ list: [CGSSGacha]) -> [CGSSGacha] {
@@ -57,7 +57,7 @@ struct CGSSGachaFilter: CGSSFilter {
     }
     
     init?(fromFile path: String) {
-        if let dict = NSDictionary.init(contentsOfFile: path) {
+        if let dict = NSDictionary(contentsOfFile: path) {
             if let typeMask = dict.object(forKey: "typeMask") as? UInt {
                 self.init(typeMask: typeMask)
                 return

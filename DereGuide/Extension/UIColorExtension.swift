@@ -42,7 +42,7 @@ extension UIColor {
     static let rail = UIColor(hexString: "81CD46")
     
     static let normal = UIColor(red: 1.0 * 253 / 255, green: 1.0 * 186 / 255, blue: 1.0 * 80 / 255, alpha: 1)
-    static let limited = UIColor(red: 1.0 * 236 / 255, green: 1.0 * 103 / 255, blue: 1.0 * 105 / 255, alpha: 1)
+    static let limited = UIColor(hexString: "#E68599")
     static let cinfes = UIColor(red: 1.0 * 25 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 218 / 255, alpha: 1)
     static let premium = UIColor(hexString: "EB2537")
     

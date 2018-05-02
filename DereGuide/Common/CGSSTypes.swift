@@ -552,10 +552,11 @@ struct CGSSGachaTypes: OptionSet {
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let normal = CGSSGachaTypes.init(rawValue: 1 << 0)
     static let limit = CGSSGachaTypes.init(rawValue: 1 << 1)
-    static let fes = CGSSGachaTypes.init(rawValue: 1 << 2)
-    static let singleType = CGSSGachaTypes.init(rawValue: 1 << 3)
-    static let premium = CGSSGachaTypes(rawValue: 1 << 4)
-    static let all = CGSSGachaTypes.init(rawValue: 0b11111)
+    static let limitReappear = CGSSGachaTypes(rawValue: 1 << 2)
+    static let fes = CGSSGachaTypes.init(rawValue: 1 << 3)
+    static let singleType = CGSSGachaTypes.init(rawValue: 1 << 4)
+    static let premium = CGSSGachaTypes(rawValue: 1 << 5)
+    static let all = CGSSGachaTypes.init(rawValue: 0b111111)
     
     var description: String {
         switch self {
@@ -567,6 +568,8 @@ struct CGSSGachaTypes: OptionSet {
             return NSLocalizedString("单属性卡池", comment: "")
         case CGSSGachaTypes.premium:
             return NSLocalizedString("高级试音会", comment: "")
+        case CGSSGachaTypes.limitReappear:
+            return NSLocalizedString("限定复刻卡池", comment: "")
         default:
             return NSLocalizedString("普通试音会", comment: "")
         }

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import DynamicColor
 
 extension Array {
     func random() -> Element? {
@@ -78,7 +79,7 @@ extension CGSSGacha {
     }
     
     var bannerURL: URL! {
-        return URL.init(string: String.init(format: "https://game.starlight-stage.jp/image/announce/title/thumbnail_gacha_%04d.png", bannerId))
+        return URL(string: String(format: "https://game.starlight-stage.jp/image/announce/title/thumbnail_gacha_%04d.png", bannerId))
     }
         
     var detailBannerURL: URL! {
@@ -97,27 +98,33 @@ extension CGSSGacha {
     
     var gachaType: CGSSGachaTypes {
         if dicription.contains("フェス限定") {
-            return CGSSGachaTypes.fes
+            return .fes
         } else if dicription.contains("期間限定") {
-            return CGSSGachaTypes.limit
+            if isReappeared {
+                return .limitReappear
+            } else {
+                return .limit
+            }
         } else if dicription.contains("クールタイプ") || dicription.contains("パッションタイプ") || dicription.contains("キュートタイプ") {
-            return CGSSGachaTypes.singleType
+            return .singleType
         } else if id >= 60000 && id < 70000 {
-            return CGSSGachaTypes.premium
+            return .premium
         } else {
-            return CGSSGachaTypes.normal
+            return .normal
         }
     }
     
     var gachaColor: UIColor {
         switch gachaType {
-        case CGSSGachaTypes.normal:
+        case .normal:
             return .normal
-        case CGSSGachaTypes.limit:
+        case .limit:
             return .limited
-        case CGSSGachaTypes.fes:
+        case .limitReappear:
+            return UIColor.limited.lighter()
+        case .fes:
             return .cinfes
-        case CGSSGachaTypes.premium:
+        case .premium:
             return .premium
         default:
             return .allType
@@ -243,7 +250,7 @@ class CGSSGacha: NSObject {
             var start = 0
             odds = [RewardOdds]()
             for reward in rewardTable.values {
-                odds.append(RewardOdds.init(reward: reward, start: start, end: start + reward.relativeOdds))
+                odds.append(RewardOdds(reward: reward, start: start, end: start + reward.relativeOdds))
                 start += reward.relativeOdds
             }
         }
@@ -252,7 +259,7 @@ class CGSSGacha: NSObject {
             var start = 0
             srOdds = [RewardOdds]()
             for reward in rewardTable.values {
-                srOdds.append(RewardOdds.init(reward: reward, start: start, end: start + reward.relativeSROdds))
+                srOdds.append(RewardOdds(reward: reward, start: start, end: start + reward.relativeSROdds))
                 start += reward.relativeSROdds
             }
         }

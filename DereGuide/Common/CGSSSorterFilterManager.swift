@@ -41,7 +41,7 @@ class CGSSSorterFilterManager {
         static let live = CGSSLiveFilter(typeMask: 0b1111, eventMask: 0b1111, difficultyMask: 0b11111111)
         static let event = CGSSEventFilter(typeMask: 0b111111)
         static let gacha = CGSSCardFilter(cardMask: 0b111, attributeMask: 0b111, rarityMask: 0b11111111, skillMask: 0b1111_1111_1111_1111, gachaMask: 0b11111,  conditionMask: 0b1111111, procMask: 0b1111, favoriteMask: nil)
-        static let gachaPool = CGSSGachaFilter(typeMask: 0b11111)
+        static let gachaPool = CGSSGachaFilter(typeMask: 0b111111)
         static let song = CGSSSongFilter(liveMask: 0b1111, eventMask: 0b1111, centerMask: 0b1111, positionNumMask: 0b111111, favoriteMask: 0b11)
     }
     
