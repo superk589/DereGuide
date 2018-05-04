@@ -21,7 +21,7 @@ class WipeTableViewCell: UITableViewCell {
         leftLabel.font = .systemFont(ofSize: 16)
         
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.centerY.equalToSuperview()
         }
         
@@ -29,7 +29,7 @@ class WipeTableViewCell: UITableViewCell {
         rightLabel.font = .systemFont(ofSize: 16)
         
         rightLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
+            make.right.equalTo(readableContentGuide)
             make.centerY.equalToSuperview()
             make.left.greaterThanOrEqualTo(leftLabel.snp.right).offset(5)
         }

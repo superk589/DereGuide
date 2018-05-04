@@ -22,12 +22,6 @@
 	</dict>
 	<dict>
 		<key>site</key>
-		<string>https://portal.starlightstage.jp</string>
-		<key>name</key>
-		<string>Starlight Portal</string>
-	</dict>
-	<dict>
-		<key>site</key>
 		<string>https://deresute.me</string>
 		<key>name</key>
 		<string>deresute.me</string>

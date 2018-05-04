@@ -23,31 +23,29 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
     var headerTitles = [NSLocalizedString("Data Sources", comment: ""), NSLocalizedString("Special Thanks to", comment: "")]
     
     lazy var dataSources: [[String: String]] = {
-        return NSArray.init(contentsOfFile: self.path1!) as! [[String: String]]
+        return NSArray(contentsOfFile: self.path1!) as! [[String: String]]
     }()
     
     lazy var supporters: [String] = {
-        return NSArray.init(contentsOfFile: self.path2!) as! [String]
+        return NSArray(contentsOfFile: self.path2!) as! [String]
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = NSLocalizedString("致谢", comment: "")
-        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.register(AcknowledgementTableViewCell.self, forCellReuseIdentifier: "AckCell")
         
-        tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,6 +55,7 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headerTitles[section]
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return dataSources.count
@@ -78,22 +77,10 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if let cell = tableView.cellForRow(at: indexPath) as? LicenseTableViewCell {
-            if let url = URL.init(string: cell.siteLabel.text ?? "") {
+            if let url = URL(string: cell.siteLabel.text ?? "") {
                 UIApplication.shared.openURL(url)
             }
         }
     }
     
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

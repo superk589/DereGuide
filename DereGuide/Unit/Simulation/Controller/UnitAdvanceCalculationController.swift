@@ -53,9 +53,8 @@ class UnitAdvanceCalculationController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.keyboardDismissMode = .onDrag
-        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
         
         tableView.register(UnitAdvanceCalculationCell.self, forCellReuseIdentifier: UnitAdvanceCalculationCell.description())
         tableView.register(UnitAdvanceDescriptionCell.self, forCellReuseIdentifier: UnitAdvanceDescriptionCell.description())

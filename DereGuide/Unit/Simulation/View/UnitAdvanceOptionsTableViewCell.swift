@@ -49,7 +49,9 @@ class UnitAdvanceOptionsTableViewCell: UITableViewCell {
             optionView = view
             contentView.addSubview(view)
             view.snp.makeConstraints { (make) in
-                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+                make.top.equalTo(10)
+                make.bottom.equalTo(-10)
+                make.left.right.equalTo(readableContentGuide)
             }
         }
         

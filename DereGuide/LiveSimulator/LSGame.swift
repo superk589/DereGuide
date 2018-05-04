@@ -92,10 +92,17 @@ struct LSGame {
                 processNoteAfterDead(note)
             } else if afkMode && !(hasSkillBoost && hasStrongPerfectSupport) && note.sec > LiveSimulationAdvanceOptionsManager.default.afkModeStartSeconds && noteIndex > LiveSimulationAdvanceOptionsManager.default.afkModeStartCombo {
                 // if in afk mode, note will be missed unless skill boost and perfect support are on
-                processNoteMissing(note)
+                processMissingNote(note)
                 missedNotes.append(note)
             } else {
-                processNormalNote(note)
+                if afkMode && ([.hold, .slide].contains(note.rangeType) && missedNotes.contains(where: { (missedNote) -> Bool in
+                    return missedNote.beatmapNote === note.beatmapNote.previous
+                })) {
+                    processSilentlyMissingNote(note)
+                    missedNotes.append(note)
+                } else {
+                    processNormalNote(note)
+                }
             }
         case .skillStart(let id, let skill):
             switch skill.type {
@@ -117,7 +124,7 @@ struct LSGame {
         }
     }
     
-    private mutating func processNoteMissing(_ note: LSNote) {
+    private mutating func processMissingNote(_ note: LSNote) {
         combo = 0
         
         // calculate life loss
@@ -155,6 +162,24 @@ struct LSGame {
                             guard: hasDamegeGuard)
     }
     
+    // for the note followed any note of a missed slide or long press note
+    private mutating func processSilentlyMissingNote(_ note: LSNote) {
+        generateLogIfNeeded(noteIndex: noteIndex, score: 0, sum: score,
+                            baseScore: note.baseScore,
+                            baseComboBonus: bonusGroup.baseComboBonus,
+                            comboBonus: bonusGroup.comboBonus,
+                            basePerfectBonus: bonusGroup.basePerfectBonus,
+                            perfectBonus: bonusGroup.perfectBonus,
+                            comboFactor: 0,
+                            skillBoost: bonusGroup.skillBoost,
+                            lifeRestore: 0,
+                            currentLife: currentLife,
+                            perfectLock: hasPerfectSupport,
+                            strongPerfectLock: hasStrongPerfectSupport,
+                            comboContinue: hasComboSupport,
+                            guard: hasDamegeGuard)
+    }
+    
     private mutating func processNoteAfterDead(_ note: LSNote) {
         generateLogIfNeeded(noteIndex: noteIndex, score: 0, sum: 0,
                             baseScore: note.baseScore,
@@ -173,7 +198,7 @@ struct LSGame {
     }
     
     private mutating func processNormalNote(_ note: LSNote) {
-        
+            
         combo += 1
         
         // calculate life (as restored life may change life sparkle bonus value. And in fact, restoring life is calculated first)

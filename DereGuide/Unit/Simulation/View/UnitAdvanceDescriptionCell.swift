@@ -19,7 +19,7 @@ class UnitAdvanceDescriptionCell: UITableViewCell {
 
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
             make.bottom.equalTo(-10)
         }
@@ -29,7 +29,7 @@ class UnitAdvanceDescriptionCell: UITableViewCell {
         
         contentView.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(10)
             make.left.equalTo(leftLabel.snp.right)
         }

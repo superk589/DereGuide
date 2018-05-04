@@ -23,8 +23,8 @@ class LicenseTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(8)
-            make.left.equalTo(10)
-            make.right.lessThanOrEqualTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         titleLabel.numberOfLines = 0
         
@@ -33,7 +33,7 @@ class LicenseTableViewCell: UITableViewCell {
         siteLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(titleLabel)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
             make.bottom.equalToSuperview().offset(-8)
         }
         siteLabel.textColor = .darkGray

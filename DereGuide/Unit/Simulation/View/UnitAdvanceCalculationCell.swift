@@ -46,24 +46,24 @@ class UnitAdvanceCalculationCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
         }
         stackView = UIStackView()
         contentView.addSubview(stackView)
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.spacing = 5
         stackView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.right.equalTo(-10)
+            make.right.equalTo(readableContentGuide)
         }
         
         contentView.addSubview(resultView)
         resultView.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
-            make.left.equalTo(10)
+            make.right.equalTo(readableContentGuide)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(stackView.snp.bottom).offset(10)
         }
         
@@ -72,8 +72,8 @@ class UnitAdvanceCalculationCell: UITableViewCell {
         startButton.addTarget(self, action: #selector(handleStartButton(_:)), for: .touchUpInside)
         contentView.addSubview(startButton)
         startButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(resultView.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }
@@ -100,7 +100,7 @@ class UnitAdvanceCalculationCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    @objc func handleStartButton(_ button: UIButton) {
+    @objc private func handleStartButton(_ button: UIButton) {
         delegate?.unitAdvanceCalculationCell(self, didStartCalculationWith: inputStrings)
     }
     

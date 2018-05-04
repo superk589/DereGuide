@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class WipeTableViewController: BaseTableViewController {
+class WipeTableViewController: UITableViewController {
 
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("图片", comment: ""),
@@ -24,15 +24,10 @@ class WipeTableViewController: BaseTableViewController {
 
         tableView.allowsMultipleSelection = true
         tableView.setEditing(true, animated: true)
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(WipeTableViewCell.self, forCellReuseIdentifier: "WipeCell")
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     
@@ -73,11 +68,6 @@ class WipeTableViewController: BaseTableViewController {
             }
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
@@ -92,7 +82,7 @@ class WipeTableViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.init(rawValue: UITableViewCellEditingStyle.delete.rawValue | UITableViewCellEditingStyle.insert.rawValue)!
+        return UITableViewCellEditingStyle(rawValue: UITableViewCellEditingStyle.delete.rawValue | UITableViewCellEditingStyle.insert.rawValue)!
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,24 +127,24 @@ class WipeTableViewController: BaseTableViewController {
         }
 
         cell.leftLabel.text = dataTypes[indexPath.row]
-        // Configure the cell...
+
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             for i in 1..<dataTypes.count {
-                tableView.selectRow(at: IndexPath.init(row: i, section: 0), animated: false, scrollPosition: .none)
+                tableView.selectRow(at: IndexPath(row: i, section: 0), animated: false, scrollPosition: .none)
             }
         }
     }
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             for i in 1..<dataTypes.count {
-                tableView.deselectRow(at: IndexPath.init(row: i, section: 0), animated: false)
+                tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: false)
             }
         } else {
-            tableView.deselectRow(at: IndexPath.init(row: 0, section: 0), animated: false)
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
         }
     }
 }

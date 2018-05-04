@@ -57,10 +57,8 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         
         scrollView.addSubview(questionView1)
         questionView1.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.right.width.equalTo(scrollView.readableContentGuide)
             make.top.equalTo(10)
-            make.width.equalToSuperview().offset(-20)
         }
         
         scrollView.addSubview(questionView2)
@@ -80,8 +78,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
         scrollView.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(questionView2.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.left.right.equalTo(scrollView.readableContentGuide)
             make.height.equalTo(80)
             make.bottom.equalToSuperview().offset(-20)
         }
@@ -103,7 +100,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     func requestData() {
         request = SKProductsRequest(productIdentifiers: Config.iAPRemoveADProductIDs)
         request?.delegate = self
-        hud = LoadingImageView.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        hud = LoadingImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         hud?.show(to: self.collectionView)
         request?.start()
     }
@@ -128,7 +125,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     // MARK: UICollectionViewDelegate & DataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width - 30) / 2, height: 80)
+        return CGSize(width: (scrollView.readableContentGuide.layoutFrame.width - 30) / 2, height: 80)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -185,8 +182,8 @@ extension DonationViewController: SKProductsRequestDelegate {
     }
 }
 
-
 // MARK: StoreKitTransactionObserver
+
 extension DonationViewController: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {

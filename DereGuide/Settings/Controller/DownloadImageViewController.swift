@@ -11,7 +11,7 @@ import SDWebImage
 
 typealias DownloadImageCell = WipeTableViewCell
 
-class DownloadImageViewController: BaseTableViewController {
+class DownloadImageViewController: UITableViewController {
     
     var dataTypes = [NSLocalizedString("全选", comment: ""),
                      NSLocalizedString("卡片大图", comment: ""),
@@ -111,7 +111,7 @@ class DownloadImageViewController: BaseTableViewController {
     
     func setupCellAtIndex(_ index: Int) {
         DispatchQueue.main.async {
-            let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? DownloadImageCell
+            let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? DownloadImageCell
             let urls = self.getURLsBy(index: index)
             cell?.rightLabel.text = "\(urls.inCache.count)/\(urls.count)"
         }
@@ -123,10 +123,12 @@ class DownloadImageViewController: BaseTableViewController {
         
         tableView.allowsMultipleSelection = true
         tableView.setEditing(true, animated: true)
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(DownloadImageCell.self, forCellReuseIdentifier: "CacheCell")
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "703-download"), style: .plain, target: self, action: #selector(cacheData))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "703-download"), style: .plain, target: self, action: #selector(cacheData))
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
         calculate()
         // Do any additional setup after loading the view.
@@ -144,7 +146,7 @@ class DownloadImageViewController: BaseTableViewController {
             for card in cards {
                 // 卡片大图
                 if card.hasSpread! {
-                    if let url = URL.init(string: card.spreadImageRef!) {
+                    if let url = URL(string: card.spreadImageRef!) {
                         SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
                             if isInCache {
                                 self.spreadURLs.inCache.append(url)
@@ -177,7 +179,7 @@ class DownloadImageViewController: BaseTableViewController {
                 }
                 
                 // 卡片图
-                if let url = URL.init(string: card.cardImageRef) {
+                if let url = URL(string: card.cardImageRef) {
                     SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
                         if isInCache {
                             self.cardImageURLs.inCache.append(url)
@@ -291,12 +293,10 @@ class DownloadImageViewController: BaseTableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return dataTypes.count
     }
     
@@ -312,24 +312,24 @@ class DownloadImageViewController: BaseTableViewController {
             setupCellAtIndex(indexPath.row)
         }
         cell.leftLabel.text = dataTypes[indexPath.row]
-        // Configure the cell...
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             for i in 1..<dataTypes.count {
-                tableView.selectRow(at: IndexPath.init(row: i, section: 0), animated: false, scrollPosition: .none)
+                tableView.selectRow(at: IndexPath(row: i, section: 0), animated: false, scrollPosition: .none)
             }
         }
     }
+    
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             for i in 1..<dataTypes.count {
-                tableView.deselectRow(at: IndexPath.init(row: i, section: 0), animated: false)
+                tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: false)
             }
         } else {
-            tableView.deselectRow(at: IndexPath.init(row: 0, section: 0), animated: false)
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
         }
     }
 

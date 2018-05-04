@@ -259,6 +259,7 @@ class SettingsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         navigationItem.title = NSLocalizedString("设置", comment: "")
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
     
 }

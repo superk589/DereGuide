@@ -11,13 +11,10 @@ import SnapKit
 
 class UnitAdvanceCalculationResultView: UIView {
     
-    let leftLabel: UILabel
-    let rightLabel: UILabel
+    let leftLabel = UILabel()
+    let rightLabel = UILabel()
     
     override init(frame: CGRect) {
-        leftLabel = UILabel()
-        rightLabel = UILabel()
-        
         super.init(frame: frame)
         
         addSubview(leftLabel)
@@ -32,7 +29,7 @@ class UnitAdvanceCalculationResultView: UIView {
         }
         rightLabel.textColor = .cute
         rightLabel.textAlignment = .right
-        rightLabel.font = UIFont.systemFont(ofSize: 16)
+        rightLabel.font = .systemFont(ofSize: 14)
         rightLabel.adjustsFontSizeToFitWidth = true
         
         let line = LineView()
@@ -45,8 +42,7 @@ class UnitAdvanceCalculationResultView: UIView {
         leftLabel.numberOfLines = 2
         leftLabel.adjustsFontSizeToFitWidth = true
         leftLabel.baselineAdjustment = .alignCenters
-        leftLabel.textColor = UIColor.darkGray
-        leftLabel.font = UIFont.systemFont(ofSize: 14)
+        leftLabel.font = .systemFont(ofSize: 14)
         leftLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(rightLabel)
             make.left.equalToSuperview()

@@ -10,13 +10,10 @@ import UIKit
 
 class TextFieldOption: UIControl {
 
-    let label: UILabel
-    let textField: UnitSimulationAppealInputTextField
-    
+    let label = UILabel()
+    let textField = UnitSimulationAppealInputTextField()
     
     override init(frame: CGRect) {
-        label = UILabel()
-        textField = UnitSimulationAppealInputTextField()
         
         super.init(frame: frame)
         
@@ -24,7 +21,7 @@ class TextFieldOption: UIControl {
         addSubview(textField)
         
         textField.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.right.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2).offset(-10)
         }
@@ -32,7 +29,7 @@ class TextFieldOption: UIControl {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14)
         label.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.centerY.equalToSuperview()

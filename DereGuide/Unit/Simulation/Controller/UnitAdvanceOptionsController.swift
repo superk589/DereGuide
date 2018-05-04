@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class UnitAdvanceOptionsController: BaseTableViewController {
+class UnitAdvanceOptionsController: UITableViewController {
 
     var staticCells = [UnitAdvanceOptionsTableViewCell]()
     

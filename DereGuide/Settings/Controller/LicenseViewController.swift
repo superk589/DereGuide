@@ -17,33 +17,25 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of \(Config.appName)", comment: "") , NSLocalizedString("Third-party Libraries", comment: "")]
     
     lazy var thirdPartyLibraries: [[String: String]] = {
-        return NSArray.init(contentsOfFile: self.path!) as! [[String: String]]
+        return NSArray(contentsOfFile: self.path!) as! [[String: String]]
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = NSLocalizedString("版权声明", comment: "")
-        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.fwidth, height: view.fheight), style: .grouped)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.register(LicenseTableViewCell.self, forCellReuseIdentifier: "LicenseCell")
-        
-        tableView.cellLayoutMarginsFollowReadableWidth = false
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return headerTitles.count
@@ -52,6 +44,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headerTitles[section]
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 || section == 1 {
             return 1
@@ -76,20 +69,10 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if let cell = tableView.cellForRow(at: indexPath) as? LicenseTableViewCell {
-            if let url = URL.init(string: cell.siteLabel.text ?? "") {
+            if let url = URL(string: cell.siteLabel.text ?? "") {
                 UIApplication.shared.openURL(url)
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
