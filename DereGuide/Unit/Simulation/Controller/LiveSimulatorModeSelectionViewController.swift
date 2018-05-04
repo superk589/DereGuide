@@ -127,8 +127,7 @@ class LiveSimulatorModeSelectionViewController: UITableViewController {
         prepareNavigationBar()
         
         tableView.register(DashboardSettingTableViewCell.self, forCellReuseIdentifier: DashboardSettingTableViewCell.description())
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-        tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0)
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -173,7 +172,9 @@ class LiveSimulatorModeSelectionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sections[indexPath.section].selectedIndex = indexPath.row
-        tableView.reloadSections([indexPath.section], with: .none)
+        UIView.performWithoutAnimation {
+            tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

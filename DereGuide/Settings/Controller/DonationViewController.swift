@@ -125,7 +125,7 @@ class DonationViewController: BaseViewController, UICollectionViewDelegate, UICo
     // MARK: UICollectionViewDelegate & DataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (scrollView.readableContentGuide.layoutFrame.width - 30) / 2, height: 80)
+        return CGSize(width: (scrollView.readableContentGuide.layoutFrame.width - 10) / 2, height: 80)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

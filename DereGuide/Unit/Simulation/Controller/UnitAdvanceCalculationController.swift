@@ -45,7 +45,7 @@ class UnitAdvanceCalculationController: UITableViewController {
     convenience init(result: LSResult) {
         self.init()
         self.result = result
-        self.navigationItem.title = NSLocalizedString("高级计算", comment: "")
+        navigationItem.title = NSLocalizedString("高级计算", comment: "")
     }
     
     override func viewDidLoad() {

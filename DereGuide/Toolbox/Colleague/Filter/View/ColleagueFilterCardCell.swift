@@ -20,7 +20,7 @@ class ColleagueFilterCardCell: UITableViewCell {
         contentView.addSubview(cardIcon)
         cardIcon.snp.makeConstraints { (make) in
             make.top.equalTo(10)
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.bottom.equalTo(-10)
         }
         cardIcon.isUserInteractionEnabled = false
@@ -29,7 +29,7 @@ class ColleagueFilterCardCell: UITableViewCell {
         leftLabel.font = .systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("添加一名偶像", comment: "")
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.centerY.equalToSuperview()
         }
         leftLabel.textColor = .darkGray

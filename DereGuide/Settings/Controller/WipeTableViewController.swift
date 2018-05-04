@@ -26,8 +26,9 @@ class WipeTableViewController: UITableViewController {
         tableView.setEditing(true, animated: true)
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.register(WipeTableViewCell.self, forCellReuseIdentifier: "WipeCell")
+        tableView.rowHeight = 44
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(wipeData))
     }
     
     

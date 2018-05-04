@@ -73,7 +73,9 @@ class SettingsTableViewController: UITableViewController {
     private var cacheSize: String? {
         set {
             sections[0][3].detail = newValue
-            tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+            UIView.performWithoutAnimation {
+                tableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+            }
         }
         get {
             return sections[0][3].detail

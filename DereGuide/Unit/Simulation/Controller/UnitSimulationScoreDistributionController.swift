@@ -54,7 +54,6 @@ class UnitSimulationScoreDistributionController: BaseViewController {
         self.navigationItem.title = NSLocalizedString("得分分布", comment: "")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,7 +79,7 @@ class UnitSimulationScoreDistributionController: BaseViewController {
             make.left.right.equalToSuperview()
         }
         
-        let data = LineChartData.init(dataSets: [])
+        let data = LineChartData(dataSets: [])
         
         chartView.legend.enabled = false
         chartView.data = data
@@ -119,6 +118,10 @@ class UnitSimulationScoreDistributionController: BaseViewController {
                 DispatchQueue.main.async {
                     data.addDataSet(dataSet)
                     strongSelf.chartView.notifyDataSetChanged()
+                    CGSSLoadingHUDManager.default.hide()
+                }
+            } else {
+                DispatchQueue.main.async {
                     CGSSLoadingHUDManager.default.hide()
                 }
             }

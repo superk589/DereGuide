@@ -19,7 +19,7 @@ class ColleagueFilterTypeCell: UITableViewCell {
 
         contentView.addSubview(icon)
         icon.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
             make.bottom.equalTo(-10)
             make.width.height.equalTo(24)
@@ -28,7 +28,7 @@ class ColleagueFilterTypeCell: UITableViewCell {
         leftLabel.font = .systemFont(ofSize: 14)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.centerY.equalToSuperview()
         }
         

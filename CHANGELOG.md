@@ -1,7 +1,25 @@
 # ChangeLog
 
+### 1.8.6
+
+1. 修复挂机模式中，长按或滑条断掉之后的 Note 仍会扣血的问题。
+2. 将复刻限定卡池视为一个单独的类别。
+3. 其他细节优化和 Bug 修复。
+
+##### Japanese version
+
+1. 放置モードに、長押しやスライドの始端ノーツがミスした場合、終端までダメージをカウントされる（計2回）の不具合を修正
+2. ガシャメニューに復刻限定ガシャが単独分類として設置されます
+3. 他の機能改善とバグ修正
+
+##### English version
+
+1. Fix the bug that in AFK mode, notes after missed note in long press or slide still cause life loss.
+2. Separate limited gacha and reappeared limited gacha in gacha filter.
+3. Bug fixes and improvements.
 
 ### 1.8.5
+2018-4-12
 
 细节优化和 Bug 修复。
 

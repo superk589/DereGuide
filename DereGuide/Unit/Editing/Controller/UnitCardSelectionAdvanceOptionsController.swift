@@ -12,7 +12,7 @@ protocol UnitCardSelectionAdvanceOptionsControllerDelegate: class {
     func recentUsedIdolsNeedToReload()
 }
 
-class UnitCardSelectionAdvanceOptionsController: BaseTableViewController {
+class UnitCardSelectionAdvanceOptionsController: UITableViewController {
     
     weak var delegate: UnitCardSelectionAdvanceOptionsControllerDelegate?
     
@@ -51,7 +51,7 @@ class UnitCardSelectionAdvanceOptionsController: BaseTableViewController {
     }
     
     private func prepareNaviBar() {
-        let resetItem = UIBarButtonItem.init(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
+        let resetItem = UIBarButtonItem(title: NSLocalizedString("重置", comment: "导航栏按钮"), style: .plain, target: self, action: #selector(resetAction))
         navigationItem.rightBarButtonItem = resetItem
     }
     
@@ -64,7 +64,7 @@ class UnitCardSelectionAdvanceOptionsController: BaseTableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.tableFooterView = UIView()
         
         tableView.register(UnitAdvanceOptionsTableViewCell.self, forCellReuseIdentifier: UnitAdvanceOptionsTableViewCell.description())

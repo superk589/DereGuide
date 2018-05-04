@@ -121,8 +121,7 @@ class ColleagueFilterController: UITableViewController {
         
         tableView.register(ColleagueFilterTypeCell.self, forCellReuseIdentifier: ColleagueFilterTypeCell.description())
         tableView.register(ColleagueFilterCardCell.self, forCellReuseIdentifier: ColleagueFilterCardCell.description())
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-        tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0)
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -256,7 +255,11 @@ class ColleagueFilterController: UITableViewController {
                     tableView.deleteSections([1, 2], with: .automatic)
                 }
             }
-            tableView.reloadSections([0], with: .none)
+            
+            // to avoid a wierd jumping animation
+            UIView.performWithoutAnimation {
+                tableView.reloadSections([0], with: .none)
+            }
         case 2:
             lastSelectedIndex = indexPath.row
             navigationController?.pushViewController(cardSelectionViewController, animated: true)

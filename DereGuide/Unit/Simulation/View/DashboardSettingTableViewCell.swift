@@ -15,10 +15,10 @@ class DashboardSettingTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        leftLabel.font = UIFont.systemFont(ofSize: 14)
+        leftLabel.font = .systemFont(ofSize: 14)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.centerY.equalToSuperview()
         }
         selectionStyle = .none

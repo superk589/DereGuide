@@ -128,6 +128,7 @@ class DownloadImageViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "703-download"), style: .plain, target: self, action: #selector(cacheData))
         
+        tableView.rowHeight = 44
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
         calculate()

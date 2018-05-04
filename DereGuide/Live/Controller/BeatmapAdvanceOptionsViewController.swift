@@ -98,8 +98,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         prepareStaticCells()
         
         tableView.register(ColleagueFilterCardCell.self, forCellReuseIdentifier: ColleagueFilterCardCell.description())
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-        tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0)
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         

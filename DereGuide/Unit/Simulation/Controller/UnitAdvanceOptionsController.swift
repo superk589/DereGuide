@@ -82,7 +82,8 @@ class UnitAdvanceOptionsController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.keyboardDismissMode = .onDrag
         tableView.tableFooterView = UIView()
         
         tableView.register(UnitAdvanceOptionsTableViewCell.self, forCellReuseIdentifier: UnitAdvanceOptionsTableViewCell.description())
