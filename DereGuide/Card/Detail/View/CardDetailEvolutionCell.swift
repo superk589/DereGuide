@@ -28,14 +28,14 @@ class CardDetailEvolutionCell: UITableViewCell {
         leftLabel.text = NSLocalizedString("进化信息", comment: "卡片详情页")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
         contentView.addSubview(fromIcon)
         fromIcon.snp.makeConstraints { (make) in
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
         }
 
         contentView.addSubview(arrowImageView)

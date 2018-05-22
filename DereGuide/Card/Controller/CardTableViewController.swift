@@ -25,10 +25,9 @@ class CardTableViewController: BaseCardTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let vc = CardDetailViewController()
-        vc.card = cardList[indexPath.row]
+        let card = cardList[indexPath.row]
+        let vc = CDTabViewController(card: card)
         vc.hidesBottomBarWhenPushed = true
-        
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -46,9 +45,10 @@ extension CardTableViewController: UIViewControllerPreviewingDelegate {
         guard let indexPath = tableView.indexPathForRow(at: location),
             let cell = tableView.cellForRow(at: indexPath) else { return nil }
         
-        let vc = CardDetailViewController()
-        vc.card = cardList[indexPath.row]
-        vc.preferredContentSize = CGSize.init(width: view.shortSide, height: CGSSGlobal.spreadImageHeight * view.shortSide / CGSSGlobal.spreadImageWidth + 68)
+        let card = cardList[indexPath.row]
+        let vc = CDTabViewController(card: card)
+
+        vc.preferredContentSize = CGSize(width: view.shortSide, height: CGSSGlobal.spreadImageHeight * view.shortSide / CGSSGlobal.spreadImageWidth + 68)
         
         previewingContext.sourceRect = cell.frame
         

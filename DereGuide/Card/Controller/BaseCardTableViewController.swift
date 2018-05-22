@@ -17,6 +17,7 @@ protocol BaseCardTableViewControllerDelegate {
 class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortControllerDelegate, ZKDrawerControllerDelegate {
 
     var cardList = [CGSSCard]()
+    
     var filter: CGSSCardFilter {
         set {
             CGSSSorterFilterManager.default.cardfilter = newValue
@@ -25,6 +26,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
             return CGSSSorterFilterManager.default.cardfilter
         }
     }
+    
     var sorter: CGSSSorter {
         set {
             CGSSSorterFilterManager.default.cardSorter = newValue
@@ -33,6 +35,7 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
             return CGSSSorterFilterManager.default.cardSorter
         }
     }
+    
     var delegate: BaseCardTableViewControllerDelegate?
     
     lazy var filterVC: CardFilterSortController = {
@@ -56,8 +59,8 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
         
         let item1 = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         navigationItem.rightBarButtonItem = item1
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
-        tableView.separatorStyle = .none
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "CardCell")
    
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .gameResoureceProcessedEnd, object: nil)
@@ -100,17 +103,6 @@ class BaseCardTableViewController: BaseModelTableViewController, CardFilterSortC
                 self.setNeedsReloadData()
             }
         }
-    }
-    
-    @available(iOS 10.0, *)
-    func transitionToCollectionView() {
-//        navigationController?.isHeroEnabled = true
-//        isHeroEnabled = true
-        let vc = BaseCardCollectionViewController()
-        vc.cards = self.cardList
-//        hero_replaceViewController(with: vc)
-        
-//        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func filterAction() {

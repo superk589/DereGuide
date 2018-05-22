@@ -24,14 +24,13 @@ class CardAppealView: UIView {
         titleLabel.textColor = .black
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalToSuperview()
             make.top.equalTo(10)
         }
         
         addSubview(appealGridLabel)
         appealGridLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.right.equalToSuperview()
             make.height.equalTo(90)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.bottom.equalTo(-10)

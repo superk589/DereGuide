@@ -10,15 +10,15 @@ import UIKit
 
 class CardDetailRelativeStrengthCell: UITableViewCell {
     
-    var rankingView: CardRankingView!
+    let rankingView = CardRankingView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        rankingView = CardRankingView()
         contentView.addSubview(rankingView)
         rankingView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalTo(readableContentGuide)
         }
         selectionStyle = .none
     }

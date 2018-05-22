@@ -9,16 +9,17 @@
 import UIKit
 import SnapKit
 
-class CardTableViewCell: ReadableWidthTableViewCell {
+class CardTableViewCell: UITableViewCell {
     
-    var cardView: CardView!
+    let cardView = CardView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        cardView = CardView()
-        readableContentView.addSubview(cardView)
+
+        contentView.addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalTo(readableContentGuide)
         }
     }
     

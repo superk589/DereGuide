@@ -102,12 +102,6 @@ class CGSSEvent: CGSSBaseModel {
         self.scoreBorders = scoreBorders
         super.init()
         
-        // 内部数据错误 特殊处理
-        if id == 1004 {
-            self.reward[0].cardId = 300135
-            self.reward[1].cardId = 200129
-        }
-        
     }
     
     public required init?(coder aDecoder: NSCoder) {

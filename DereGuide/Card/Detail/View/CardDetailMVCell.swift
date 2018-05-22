@@ -30,7 +30,7 @@ class CardDetailMVCell: UITableViewCell {
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("出演MV", comment: "")
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -41,8 +41,8 @@ class CardDetailMVCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
         }

@@ -23,7 +23,7 @@ class CardDetailSkillCell: UITableViewCell {
         leftLabel.text = NSLocalizedString("特技", comment: "通用")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -34,7 +34,7 @@ class CardDetailSkillCell: UITableViewCell {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(leftLabel.snp.right).offset(10)
             make.top.equalTo(leftLabel)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         
         descriptionLabel.numberOfLines = 0
@@ -43,14 +43,14 @@ class CardDetailSkillCell: UITableViewCell {
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
-            make.left.equalTo(10)
-            make.right.lessThanOrEqualTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         
         contentView.addSubview(gridLabel)
         gridLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.bottom.equalTo(-10)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
         }

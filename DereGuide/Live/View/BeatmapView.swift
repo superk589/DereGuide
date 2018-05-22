@@ -375,7 +375,7 @@ struct AdvanceBeatmapDrawer {
         return beatmap.validNotes
     }
     
-    func export(sectionPerColumn:CGFloat, title:String) -> UIImage? {
+    func export(sectionPerColumn: CGFloat, title: String) -> UIImage? {
         let textHeight:CGFloat = 50
         // 一列的原始高度
         let beatmapH = sectionPerColumn * sectionHeight
@@ -387,37 +387,37 @@ struct AdvanceBeatmapDrawer {
         let columns = ceil(totalBeatmapHeight / beatmapH)
         // 生成的图片总宽度
         let imageW = columns * columnWidth
-        UIGraphicsBeginImageContext(CGSize.init(width: columnWidth, height: totalHeight))
+        UIGraphicsBeginImageContext(CGSize(width: columnWidth, height: totalHeight))
         guard let imageContext = UIGraphicsGetCurrentContext() else {
             return nil
         }
-        let rect = CGRect.init(x: 0, y: 0, width: columnWidth, height: totalHeight)
+        let rect = CGRect(x: 0, y: 0, width: columnWidth, height: totalHeight)
         draw(rect)
-        let image = UIImage.init(cgImage: imageContext.makeImage()!)
+        let image = UIImage(cgImage: imageContext.makeImage()!)
         UIGraphicsEndImageContext()
         
-        UIGraphicsBeginImageContext(CGSize.init(width: imageW, height: imageH))
+        UIGraphicsBeginImageContext(CGSize(width: imageW, height: imageH))
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
         }
-        let path = UIBezierPath.init(rect: CGRect.init(x: 0, y: 0, width: imageW, height: imageH))
+        let path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: imageW, height: imageH))
         UIColor.white.set()
         path.fill()
         // 画标题
         UIColor.darkGray.set()
         let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24), NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-        (title as NSString).draw(at: CGPoint.init(x: 30, y: 10), withAttributes: attDict)
+        (title as NSString).draw(at: CGPoint(x: 30, y: 10), withAttributes: attDict)
         for i in 0..<Int(columns) {
             
-            let subImage:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: totalHeight - columnH * CGFloat(i + 1) + CGFloat(i) * 2 * heightInset, width: columnWidth, height: columnH))
+            let subImage:CGImage! = image.cgImage?.cropping(to: CGRect(x: 0, y: totalHeight - columnH * CGFloat(i + 1) + CGFloat(i) * 2 * heightInset, width: columnWidth, height: columnH))
             
             // 最后一列特殊处理
             if i == Int(columns) - 1 {
                 let offset = totalBeatmapHeight.truncatingRemainder(dividingBy: beatmapH)
-                UIImage.init(cgImage: subImage).draw(in: CGRect.init(x: CGFloat(i) * columnWidth, y: imageH - 2 * heightInset - offset, width: columnWidth, height: offset + heightInset * 2))
+                UIImage(cgImage: subImage).draw(in: CGRect(x: CGFloat(i) * columnWidth, y: imageH - 2 * heightInset - offset, width: columnWidth, height: offset + heightInset * 2))
             } else {
                 // 这样的画法不会上下颠倒
-                UIImage.init(cgImage: subImage).draw(in: CGRect.init(x: CGFloat(i) * columnWidth, y: textHeight, width: columnWidth, height: columnH))
+                UIImage(cgImage: subImage).draw(in: CGRect(x: CGFloat(i) * columnWidth, y: textHeight, width: columnWidth, height: columnH))
             }
             
             // CGImage坐标系Y轴和UIImage的相反, 画出的图是上下颠倒的
@@ -431,23 +431,23 @@ struct AdvanceBeatmapDrawer {
         let locations:[CGFloat] = [0, 1]
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
-        let gradient = CGGradient.init(colorsSpace: colorSpace, colors: colors as CFArray, locations: locations)
+        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors as CFArray, locations: locations)
         
-        var startPoint = CGPoint.init(x: 0, y: imageH)
-        var endPoint = CGPoint.init(x: 0, y: imageH - heightInset)
+        var startPoint = CGPoint(x: 0, y: imageH)
+        var endPoint = CGPoint(x: 0, y: imageH - heightInset)
         
-        context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions.init(rawValue: 0))
+        context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions(rawValue: 0))
 
-        startPoint = CGPoint.init(x: 0, y: textHeight)
-        endPoint = CGPoint.init(x: 0, y: textHeight + heightInset)
-        context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions.init(rawValue: 0))
+        startPoint = CGPoint(x: 0, y: textHeight)
+        endPoint = CGPoint(x: 0, y: textHeight + heightInset)
+        context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions(rawValue: 0))
 
         
         // 另一种思路处理上下颠倒, 翻转180度
         // context.translateBy(x: imageW, y: imageH + 50)
         // context.concatenate(CGAffineTransform.init(rotationAngle: CGFloat(M_PI)))
         
-        let newImage = UIImage.init(cgImage: context.makeImage()!)
+        let newImage = UIImage(cgImage: context.makeImage()!)
         UIGraphicsEndImageContext()
 
         return newImage

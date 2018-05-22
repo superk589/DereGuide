@@ -25,15 +25,14 @@ class CardRankingView: UIView {
         addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalToSuperview()
             make.top.equalTo(10)
         }
         
         addSubview(rangkingGridLabel)
         rangkingGridLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.right.equalToSuperview()
             make.height.equalTo(54)
             make.bottom.equalTo(-10)
         }

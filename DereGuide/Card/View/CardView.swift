@@ -38,7 +38,7 @@ class CardView: UIView {
         cardIconView.isUserInteractionEnabled = false
         addSubview(cardIconView)
         cardIconView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalToSuperview()
             make.top.equalTo(10)
         }
         
@@ -46,8 +46,8 @@ class CardView: UIView {
         rarityLabel.font = .systemFont(ofSize: 10)
         addSubview(rarityLabel)
         rarityLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(68)
-            make.top.equalTo(9)
+            make.left.equalTo(cardIconView.snp.right).offset(10)
+            make.top.equalTo(cardIconView)
         }
         
         cardNameLabel.font = .systemFont(ofSize: 16)
@@ -55,7 +55,7 @@ class CardView: UIView {
         cardNameLabel.baselineAdjustment = .alignCenters
         addSubview(cardNameLabel)
         cardNameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(68)
+            make.left.equalTo(cardIconView.snp.right).offset(10)
             make.top.equalTo(rarityLabel.snp.bottom).offset(2)
         }
     
@@ -65,7 +65,7 @@ class CardView: UIView {
         addSubview(romajiLabel)
         romajiLabel.snp.makeConstraints { (make) in
             make.left.equalTo(cardNameLabel.snp.right).offset(5)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualToSuperview()
             make.lastBaseline.equalTo(cardNameLabel)
         }
         romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -87,7 +87,7 @@ class CardView: UIView {
         skillLabel.textAlignment = .right
         addSubview(skillLabel)
         skillLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
+            make.right.equalToSuperview()
             make.top.equalTo(rarityLabel)
             make.left.greaterThanOrEqualTo(titleLabel.snp.right).offset(5)
         }
@@ -121,8 +121,8 @@ class CardView: UIView {
         stackView.axis = .horizontal
         addSubview(stackView)
         stackView.snp.makeConstraints { (make) in
-            make.left.equalTo(68)
-            make.right.equalTo(-10)
+            make.left.equalTo(cardIconView.snp.right)
+            make.right.equalToSuperview()
             make.bottom.equalTo(cardIconView.snp.bottom)
         }
     }

@@ -22,7 +22,7 @@ class CardDetailLeaderSkillCell: UITableViewCell {
         leftLabel.text = NSLocalizedString("队长技能", comment: "通用")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -33,7 +33,7 @@ class CardDetailLeaderSkillCell: UITableViewCell {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(leftLabel.snp.right).offset(10)
             make.top.equalTo(leftLabel)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         
         descriptionLabel.numberOfLines = 0
@@ -41,10 +41,10 @@ class CardDetailLeaderSkillCell: UITableViewCell {
         descriptionLabel.textColor = .darkGray
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         selectionStyle = .none
 

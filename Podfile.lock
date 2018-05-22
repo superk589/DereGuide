@@ -1,4 +1,5 @@
 PODS:
+  - AutoInsetter (1.2.3)
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
@@ -11,6 +12,7 @@ PODS:
   - lz4 (128)
   - MessagePack.swift (3.0.0)
   - MJRefresh (3.1.15.3)
+  - Pageboy (2.5.1)
   - ReachabilitySwift (4.1.0)
   - RijndaelSwift (0.1.3)
   - SDWebImage (4.3.3):
@@ -18,6 +20,9 @@ PODS:
   - SDWebImage/Core (4.3.3)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
+  - Tabman (1.8.2):
+    - AutoInsetter (~> 1.2.0)
+    - Pageboy (~> 2.5.0)
   - TTGTagCollectionView (1.9.0)
   - ZKCornerRadiusView (0.1.0)
   - ZKDrawerController (0.3.5):
@@ -31,7 +36,7 @@ DEPENDENCIES:
   - DynamicColor
   - EasyTipView (from `https://github.com/igorkislyuk/EasyTipView.git`)
   - FMDB
-  - ImageViewer
+  - ImageViewer (from `https://github.com/superk589/ImageViewer.git`)
   - lz4
   - MessagePack.swift (from `https://github.com/superk589/MessagePack.swift.git`)
   - MJRefresh
@@ -40,6 +45,7 @@ DEPENDENCIES:
   - SDWebImage
   - SnapKit
   - SwiftyJSON
+  - Tabman (from `https://github.com/superk589/Tabman.git`)
   - TTGTagCollectionView
   - ZKCornerRadiusView
   - ZKDrawerController
@@ -47,12 +53,13 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AutoInsetter
     - Charts
     - DynamicColor
     - FMDB
-    - ImageViewer
     - lz4
     - MJRefresh
+    - Pageboy
     - ReachabilitySwift
     - RijndaelSwift
     - SDWebImage
@@ -66,36 +73,49 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   EasyTipView:
     :git: https://github.com/igorkislyuk/EasyTipView.git
+  ImageViewer:
+    :git: https://github.com/superk589/ImageViewer.git
   MessagePack.swift:
     :git: https://github.com/superk589/MessagePack.swift.git
+  Tabman:
+    :git: https://github.com/superk589/Tabman.git
 
 CHECKOUT OPTIONS:
   EasyTipView:
     :commit: 11de6146d447582abe0304bb287600ff93abb23a
     :git: https://github.com/igorkislyuk/EasyTipView.git
+  ImageViewer:
+    :commit: 0b2b3c67213249530cce444be075b2409923ae2d
+    :git: https://github.com/superk589/ImageViewer.git
   MessagePack.swift:
     :commit: e600495425d1e2848204a9504cef0f9604baaa1e
     :git: https://github.com/superk589/MessagePack.swift.git
+  Tabman:
+    :commit: 6c933f1bb6debbb58ceca73a7aa7e16c99794117
+    :git: https://github.com/superk589/Tabman.git
 
 SPEC CHECKSUMS:
+  AutoInsetter: 1a8f8ad5e7da8e993970b3809cfb8e8e330f4db1
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
   EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  ImageViewer: 3def6e39c6979ce3e9d001c78eec0d8b895f2f73
+  ImageViewer: 997018c2f4f7f9830602349bbcc3b2b776424942
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   MessagePack.swift: e739e7d1b9820c91bda31a1165f64bf1abd561d4
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  Pageboy: f0295ea949f0b0123a1b486fd347ea892d0078e0
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   RijndaelSwift: 2d722b9390d8cebc0dd19c20bc84ddb4db06eb18
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Tabman: 69ce69b44cec1ad693b82c24cdbdf0c45915668c
   TTGTagCollectionView: 958f20b946dee92a8ba20dc37d10a06737641ae9
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: 00b1b3a1b8b5299e284f30b49d704ac282041e52
   ZKPageViewController: 95b09fbb880061bbf33d05086a7e734a8ed899f6
 
-PODFILE CHECKSUM: fd4dd78283be68e7a896fd71a78ed28676febad7
+PODFILE CHECKSUM: b1546c04f5ab5b4098739c543d320a35f90bbbc0
 
 COCOAPODS: 1.5.3

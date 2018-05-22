@@ -26,7 +26,7 @@ class CardDetailSourceCell: UITableViewCell {
         leftLabel.text = NSLocalizedString("获得途径", comment: "卡片详情页")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -47,8 +47,8 @@ class CardDetailSourceCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.bottom.equalTo(-10)
         }
         selectionStyle = .none

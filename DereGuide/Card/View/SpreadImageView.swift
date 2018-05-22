@@ -13,7 +13,7 @@ import ImageViewer
 
 class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableView {
     
-    var progressIndicator: UIProgressView!
+    let progressIndicator = UIProgressView()
     
     var url: URL?
     
@@ -21,9 +21,8 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableVie
         super.init(frame: frame)
         contentMode = .scaleAspectFit
         clipsToBounds = true
-        backgroundColor = UIColor.black
+        backgroundColor = .black
     
-        progressIndicator = UIProgressView()
         addSubview(progressIndicator)
         progressIndicator.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()
@@ -67,6 +66,10 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableVie
         progressIndicator.isHidden = false
     }
     
+    override var intrinsicContentSize: CGSize {
+        return image?.size ?? .zero
+    }
+    
     func setImage(with url: URL, shouldShowIndicator: Bool = true) {
         
         self.url = url
@@ -88,6 +91,7 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableVie
                     DispatchQueue.main.async {
                         self?.progressIndicator.progress = 1
                         self?.hideIndicator()
+                        self?.invalidateIntrinsicContentSize()
                     }
                 }
             }

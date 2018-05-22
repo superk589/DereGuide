@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CardDetailSetable {
+    func setup(with card: CGSSCard)
+}
+
 class CardDetailBasicCell: UITableViewCell {
     
     let iconView = CGSSCardIconView()
@@ -21,7 +25,7 @@ class CardDetailBasicCell: UITableViewCell {
 
         contentView.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
             make.bottom.equalTo(-10)
         }
@@ -48,7 +52,7 @@ class CardDetailBasicCell: UITableViewCell {
         addSubview(romajiLabel)
         romajiLabel.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(5)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
             make.lastBaseline.equalTo(nameLabel)
         }
         romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)

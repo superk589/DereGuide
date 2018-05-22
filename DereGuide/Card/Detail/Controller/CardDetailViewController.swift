@@ -55,19 +55,6 @@ class CardDetailViewController: BaseTableViewController {
         return result
     }()
     
-    fileprivate func createGalleryViewController(startIndex: Int) -> GalleryViewController {
-        let config = [
-            GalleryConfigurationItem.closeButtonMode(.builtIn),
-            GalleryConfigurationItem.closeLayout(.pinLeft(32, 20)),
-            GalleryConfigurationItem.hideDecorationViewsOnLaunch(true),
-            GalleryConfigurationItem.deleteButtonMode(.none),
-            GalleryConfigurationItem.thumbnailsButtonMode(.none),
-            GalleryConfigurationItem.swipeToDismissMode(.vertical)
-        ]
-        let vc = GalleryViewController(startIndex: startIndex, itemsDataSource: self, itemsDelegate: nil, displacedViewsDataSource: self, configuration: config)
-        return vc
-    }
-    
     fileprivate struct Row: CustomStringConvertible {
         var type: UITableViewCell.Type
         var description: String {
@@ -80,10 +67,6 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     fileprivate var rows: [Row] = []
-    
-    var spreadImageView: SpreadImageView? {
-        return (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? CardDetailSpreadImageCell)?.spreadImageView
-    }
     
     private func loadDataAsync() {
         CGSSGameResource.shared.master.getMusicInfo(charaID: card.charaId) { (songs) in
@@ -101,9 +84,6 @@ class CardDetailViewController: BaseTableViewController {
         rows.removeAll()
         guard let card = self.card else {
             return
-        }
-        if card.hasSpread {
-            rows.append(Row(type: CardDetailSpreadImageCell.self))
         }
         rows.append(Row(type: CardDetailBasicCell.self))
         rows.append(Row(type: CardDetailAppealCell.self))
@@ -129,29 +109,7 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // 自定义titleView的文字大小
-        let titleView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
-        titleView.text = card.name
-        titleView.font = UIFont.systemFont(ofSize: 12)
-        titleView.textAlignment = .center
-        titleView.adjustsFontSizeToFitWidth = true
-        titleView.baselineAdjustment = .alignCenters
-        navigationItem.titleView = titleView
-        
-        // let rightItem = UIBarButtonItem.init(title: CGSSFavoriteManager.defaultManager.contains(card.id!) ? "取消":"收藏", style: .Plain, target: self, action: #selector(addOrRemoveFavorite))
-        let rightItem = UIBarButtonItem.init(image: FavoriteCardsManager.shared.contains(card.id) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
-        rightItem.tintColor = UIColor.red
-        navigationItem.rightBarButtonItem = rightItem
-        
-        // let leftItem = UIBarButtonItem.init(title: "返回", style: .Plain, target: self, action: #selector(backAction))
-        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        
-        navigationItem.leftBarButtonItem = leftItem
-        
-        prepareToolbar()
-        
+        super.viewDidLoad()        
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
     }
@@ -160,18 +118,6 @@ class CardDetailViewController: BaseTableViewController {
         for row in rows {
             tableView
             .register(row.type, forCellReuseIdentifier: row.description)
-        }
-    }
-    
-    // 添加当前卡到收藏
-    @objc func addOrRemoveFavorite() {
-        let manager = FavoriteCardsManager.shared
-        if !manager.contains(card.id) {
-            manager.add(card)
-            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
-        } else {
-            manager.remove(card.id)
-            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
         }
     }
     
@@ -197,16 +143,7 @@ class CardDetailViewController: BaseTableViewController {
     }
     
     func prepareToolbar() {
-//        let item1 = UIBarButtonItem.init(title: NSLocalizedString("3D模型", comment: ""), style: .plain, target: self, action: #selector(show3DModelAction))
-//        let spaceItem1 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let item2 = UIBarButtonItem.init(title: NSLocalizedString("卡片图", comment: ""), style: .plain, target: self, action: #selector(showCardImageAction))
-        let spaceItem2 = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let item3 = UIBarButtonItem.init(title: NSLocalizedString("签名图", comment: ""), style: .plain, target: self, action: #selector(showSignImageAction))
 
-        if card.signImageURL == nil {
-            item3.isEnabled = false
-        }
-        toolbarItems = [item2, spaceItem2, item3]
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -250,16 +187,6 @@ class CardDetailViewController: BaseTableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func showCardImageAction() {
-        let vc = createGalleryViewController(startIndex: 0)
-        presentImageGallery(vc)
-    }
-    
-    @objc func showSignImageAction() {
-        let vc = createGalleryViewController(startIndex: 2)
-        presentImageGallery(vc)
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if isSpreadModeOn && indexPath.row == 0 {
             return UIScreen.main.bounds.height
@@ -287,8 +214,6 @@ class CardDetailViewController: BaseTableViewController {
         case let cell as CardDetailMVCell:
             cell.delegate = self
             cell.setup(songs: songs)
-        case let cell as CardDetailSpreadImageCell:
-            cell.delegate = self
         default:
             break
         }
@@ -318,32 +243,6 @@ extension CardDetailViewController: CardDetailRelatedCardsCellDelegate {
     }
 }
 
-extension CardDetailViewController: CardDetailSpreadImageCellDelegate {
-    func cardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell, longPressAt point: CGPoint) {
-        
-        guard let image = cardDetailSpreadImageCell.spreadImageView.image else {
-            return
-        }
-        // 作为被分享的内容 不能是可选类型 否则分享项不显示
-        let urlArray = [image]
-        let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
-        let excludeActivitys:[UIActivityType] = []
-        activityVC.excludedActivityTypes = excludeActivitys
-        activityVC.popoverPresentationController?.sourceView = cardDetailSpreadImageCell.spreadImageView
-        activityVC.popoverPresentationController?.sourceRect = CGRect(x: point.x, y: point.y, width: 0, height: 0)
-        present(activityVC, animated: true, completion: nil)
-        
-        // play sound like pop(3d touch)
-        AudioServicesPlaySystemSound(1520)
-        
-    }
-    
-    func tappedCardDetailSpreadImageCell(_ cardDetailSpreadImageCell: CardDetailSpreadImageCell) {
-        let vc = createGalleryViewController(startIndex: 1)
-        presentImageGallery(vc)
-    }
-}
-
 extension CardDetailViewController: GalleryItemsDataSource {
     
     func itemCount() -> Int {
@@ -359,18 +258,6 @@ extension CardDetailViewController: GalleryItemsDataSource {
     
     func provideGalleryItem(_ index: Int) -> GalleryItem {
         return items[index]
-    }
-    
-}
-
-extension CardDetailViewController: GalleryDisplacedViewsDataSource {
-    
-    func provideDisplacementItem(atIndex index: Int) -> DisplaceableView? {
-        if index == 1 {
-            return spreadImageView
-        } else {
-            return nil
-        }
     }
     
 }

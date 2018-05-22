@@ -30,7 +30,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
         leftLabel.text = NSLocalizedString("角色所有卡片", comment: "卡片详情页")
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -43,7 +43,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
         contentView.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
             make.top.equalTo(10)
-            make.right.equalTo(-10)
+            make.right.equalTo(readableContentGuide)
         }
         
         collectionView.contentInset = .zero
@@ -53,8 +53,8 @@ class CardDetailRelatedCardsCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(rightLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
         }

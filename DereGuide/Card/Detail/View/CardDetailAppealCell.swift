@@ -10,18 +10,17 @@ import UIKit
 
 class CardDetailAppealCell: UITableViewCell {
     
-    var appealView: CardAppealView!
+    let appealView = CardAppealView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        appealView = CardAppealView()
         contentView.addSubview(appealView)
         appealView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalTo(readableContentGuide)
         }
         selectionStyle = .none
-
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -161,9 +161,11 @@ class EventViewController: BaseModelTableViewController, ZKDrawerControllerDeleg
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bannerId = eventList.count - indexPath.row + 1
+        let event = eventList[indexPath.row]
         let vc = EventDetailController()
         vc.bannerId = bannerId
-        vc.event = eventList[indexPath.row]
+        vc.event = event
+        print("event id: \(event.id)")
         let cell = tableView.cellForRow(at: indexPath) as? EventTableViewCell
         bannerView = cell?.banner
         navigationController?.pushViewController(vc, animated: true)
