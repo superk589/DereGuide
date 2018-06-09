@@ -158,7 +158,7 @@ extension CGSSSkill {
     
     var triggerEvaluations1: LSTriggerEvaluations {
         switch skillTypeId {
-        case 1, 14, 15, 17, 21...23, 26:
+        case 1, 14, 15, 17, 21, 22, 23, 26:
             return .perfect
         case 2, 18:
             return [.perfect, .great]

@@ -46,7 +46,7 @@ DEPENDENCIES:
   - ZKPageViewController
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Charts
     - DynamicColor
     - FMDB
@@ -98,4 +98,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd4dd78283be68e7a896fd71a78ed28676febad7
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
