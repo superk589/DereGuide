@@ -185,7 +185,15 @@ extension CGSSCard {
     }
     
     var spreadImageURL: URL? {
-        return URL.init(string: spreadImageRef)
+        return URL(string: spreadImageRef)
+    }
+    
+    var cardImageURL: URL? {
+        return URL(string: cardImageRef)
+    }
+    
+    var spriteImageURL: URL? {
+        return URL(string: spriteImageRef)
     }
 }
 

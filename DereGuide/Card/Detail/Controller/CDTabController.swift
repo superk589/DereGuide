@@ -23,7 +23,7 @@ class CDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         let detailVC = CardDetailViewController()
         let imageVC = CDImageViewController()
         detailVC.card = card
-        imageVC.card = card
+        imageVC.prepareRows(for: card)
         
         viewControllers = [detailVC, imageVC]
 
@@ -40,7 +40,7 @@ class CDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         // 自定义titleView的文字大小
         let titleView = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
         titleView.text = card.name
-        titleView.font = UIFont.scaledFont(forTextStyle: .title1, ofSize: 12)
+        titleView.font = UIFont.systemFont(ofSize: 12)
         titleView.textAlignment = .center
         titleView.adjustsFontSizeToFitWidth = true
         titleView.baselineAdjustment = .alignCenters

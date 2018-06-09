@@ -11,7 +11,7 @@ import SDWebImage
 import SnapKit
 import ImageViewer
 
-class SpreadImageView: UIImageView, UIGestureRecognizerDelegate, DisplaceableView {
+class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
     
     let progressIndicator = UIProgressView()
     

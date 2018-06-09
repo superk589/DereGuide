@@ -27,10 +27,10 @@ class CDImageView: UIImageView {
     }
     
     override var intrinsicContentSize: CGSize {
-        if image == nil {
-            return CGSize(width: CDImageTableViewCell.imageHeight * 3 / 2, height: CDImageTableViewCell.imageHeight)
+        if let imageSize = image?.size {
+            return CGSize(width: imageSize.width / imageSize.height * CDImageTableViewCell.imageHeight, height: CDImageTableViewCell.imageHeight)
         } else {
-            return image!.size
+            return CGSize(width: CDImageTableViewCell.imageHeight * 3 / 2, height: CDImageTableViewCell.imageHeight)
         }
     }
     
@@ -41,6 +41,7 @@ class CDImageView: UIImageView {
         indicator.startAnimating()
         sd_setImage(with: url, placeholderImage: nil, options: .scaleDownLargeImages) { [weak self] (image, error, _, _) in
             self?.indicator.stopAnimating()
+            self?.invalidateIntrinsicContentSize()
             completion?()
         }
     }

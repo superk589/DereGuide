@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.6</string>
+	<string>1.8.8</string>
 	<key>CFBundleVersion</key>
-	<string>64</string>
+	<string>66</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -27,7 +27,7 @@
 			<key>UNNotificationExtensionCategory</key>
 			<string>birthdayCategory</string>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>0.69869707</real>
+			<real>0.69869707000000003</real>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
