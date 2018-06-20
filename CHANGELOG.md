@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.8.7
+
+**此版本起，不再支持低于 iOS 10.0 的设备**
+修复一个在 iOS 12 Beta 版本上启动时闪退的问题。
+
+##### Japanese version
+
+**このバージョンから、iOS 10.0以下はサポート対象外です**
+
+##### English version
+
+**Does not support devices below iOS 10.0 by this version**
+Fix a crash while launching on iOS 12 beta.
+
 ### 1.8.6
 
 1. 修复挂机模式中，长按或滑条断掉之后的 Note 仍会扣血的问题。

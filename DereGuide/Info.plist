@@ -22,11 +22,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.6</string>
+	<string>1.8.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>64</string>
+	<string>65</string>
 	<key>Data version</key>
 	<string>2.0.0</string>
 	<key>Document version</key>
@@ -46,9 +46,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
