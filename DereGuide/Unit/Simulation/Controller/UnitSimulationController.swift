@@ -10,13 +10,24 @@ import UIKit
 import StoreKit
 import CoreData
 
-class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
+class UnitSimulationController: BaseTableViewController, UnitDetailConfigurable {
     
-    var unit: Unit! {
+    var unit: Unit {
         didSet {
             tableView?.reloadData()
             resetDataGrid()
         }
+    }
+    
+    weak var parentTabController: UDTabViewController?
+    
+    init(unit: Unit) {
+        self.unit = unit
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate func resetDataGrid() {
@@ -146,12 +157,10 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
         tableView.deselectRow(at: indexPath, animated: false)
         switch indexPath.row {
         case 0:
-            if let unit = self.unit {
-                let vc = UnitEditingController()
-                vc.parentUnit = unit
-                vc.delegate = self
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = UnitEditingController()
+            vc.parentUnit = unit
+            vc.delegate = self
+            navigationController?.pushViewController(vc, animated: true)
         case 1:
             navigationController?.pushViewController(liveSelectionViewController, animated: true)
         case 3:
@@ -260,7 +269,7 @@ class UnitSimulationController: BaseTableViewController, UnitCollectionPage {
 extension UnitSimulationController: UnitEditingControllerDelegate {
     func unitEditingController(_ unitEditingController: UnitEditingController, didModify units: Set<Unit>) {
         if units.contains(self.unit) {
-            if let vc = pageViewController as? UnitDetailController {
+            if let vc = parentTabController {
                 vc.setNeedsReloadUnit()
                 vc.reloadUnitIfNeeded()
             }

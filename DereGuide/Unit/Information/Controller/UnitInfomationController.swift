@@ -8,12 +8,23 @@
 
 import UIKit
 
-class UnitInfomationController: BaseTableViewController, UnitCollectionPage {
+class UnitInfomationController: BaseTableViewController, UnitDetailConfigurable {
         
-    var unit: Unit! {
+    var unit: Unit {
         didSet {
             self.tableView.reloadData()
         }
+    }
+    
+    weak var parentTabController: UDTabViewController?
+    
+    init(unit: Unit) {
+        self.unit = unit
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

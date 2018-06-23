@@ -266,7 +266,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         // 检查队伍数据的完整性, 用户删除数据后, 可能导致队伍中队员的数据缺失, 导致程序崩溃
         let unit = units[indexPath.row]
         if unit.validateMembers() {
-            let vc = UnitDetailController()
+            let vc = UDTabViewController(unit: unit)
             vc.unit = unit
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)

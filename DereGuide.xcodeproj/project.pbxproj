@@ -232,6 +232,7 @@
 		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
 		1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB431E41C1CD00CEDE04 /* DataSource.plist */; };
 		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
+		1281D37D20DDE8B700E9D9FB /* UDTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281D37C20DDE8B700E9D9FB /* UDTabViewController.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
 		12852EE71EF912DE00E26A73 /* UnitAdvanceCalculationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12852EE61EF912DE00E26A73 /* UnitAdvanceCalculationController.swift */; };
@@ -264,7 +265,6 @@
 		129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */; };
 		129ECB251ECB3BC00010BC7F /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB241ECB3BC00010BC7F /* GridView.swift */; };
 		129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB261ECBD2D90010BC7F /* GridLabel.swift */; };
-		129ECB291ECBFB930010BC7F /* UnitDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129ECB281ECBFB930010BC7F /* UnitDetailController.swift */; };
 		129EEDBD1F297336001AFC5B /* FavoriteCardsRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */; };
 		129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */; };
 		12A14D401F223A020070D7A1 /* UnitModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A14D3F1F223A020070D7A1 /* UnitModifier.swift */; };
@@ -693,6 +693,7 @@
 		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
 		1281CB431E41C1CD00CEDE04 /* DataSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataSource.plist; sourceTree = "<group>"; };
 		1281CB451E41C79300CEDE04 /* SpecialThanks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpecialThanks.plist; sourceTree = "<group>"; };
+		1281D37C20DDE8B700E9D9FB /* UDTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDTabViewController.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* DereGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DereGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1282EE6C1D011A8F0024318C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -725,7 +726,6 @@
 		129ECB1A1ECB2BF40010BC7F /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		129ECB241ECB3BC00010BC7F /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		129ECB261ECBD2D90010BC7F /* GridLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLabel.swift; sourceTree = "<group>"; };
-		129ECB281ECBFB930010BC7F /* UnitDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitDetailController.swift; sourceTree = "<group>"; };
 		129EEDBC1F297336001AFC5B /* FavoriteCardsRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardsRemote.swift; sourceTree = "<group>"; };
 		129EEDBE1F297399001AFC5B /* FavoriteCharasRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharasRemote.swift; sourceTree = "<group>"; };
 		12A14D3F1F223A020070D7A1 /* UnitModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitModifier.swift; sourceTree = "<group>"; };
@@ -1490,7 +1490,7 @@
 			isa = PBXGroup;
 			children = (
 				1269E9F31D520C3E0071AD7F /* UnitTableViewController.swift */,
-				129ECB281ECBFB930010BC7F /* UnitDetailController.swift */,
+				1281D37C20DDE8B700E9D9FB /* UDTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2282,7 +2282,6 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/ZKCornerRadiusView/ZKCornerRadiusView.framework",
 				"${BUILT_PRODUCTS_DIR}/ZKDrawerController/ZKDrawerController.framework",
-				"${BUILT_PRODUCTS_DIR}/ZKPageViewController/ZKPageViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/lz4/lz4.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2305,7 +2304,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKCornerRadiusView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKDrawerController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZKPageViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lz4.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2468,7 +2466,6 @@
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
 				12643A2F1DA75B59004DE4F0 /* WipeTableViewController.swift in Sources */,
-				129ECB291ECBFB930010BC7F /* UnitDetailController.swift in Sources */,
 				1211B0B01EAF5A730027DD51 /* LiveDetailViewController.swift in Sources */,
 				126666241D7D70F70022348E /* CGSSLiveFilter.swift in Sources */,
 				12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */,
@@ -2691,6 +2688,7 @@
 				12D45AC41E2E0D620009986F /* EventCardView.swift in Sources */,
 				1269E9DA1D520B5D0071AD7F /* CGSSCardRarity.swift in Sources */,
 				12B225A71F80DB6F0013E90E /* SongJacketCollectionViewCell.swift in Sources */,
+				1281D37D20DDE8B700E9D9FB /* UDTabViewController.swift in Sources */,
 				122EECC91D5DC516008ADE08 /* UIViewExtension.swift in Sources */,
 				12FC8B531EDE6DEB003CF3C3 /* UnitSimulationDescriptionCell.swift in Sources */,
 				1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */,

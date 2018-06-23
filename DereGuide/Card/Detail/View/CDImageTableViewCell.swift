@@ -51,6 +51,7 @@ class CDImageTableViewCell: UITableViewCell {
         stackView.spacing = 10
         stackView.distribution = .fillProportionally
         
+        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

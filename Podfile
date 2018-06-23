@@ -14,7 +14,6 @@ target 'DereGuide' do
   pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
   pod 'DynamicColor'
   pod 'ImageViewer', :git => 'https://github.com/superk589/ImageViewer.git'
-  pod 'ZKPageViewController'
   pod 'MJRefresh'
   pod 'RijndaelSwift'
   pod 'MessagePack.swift', :git => 'https://github.com/superk589/MessagePack.swift.git'
