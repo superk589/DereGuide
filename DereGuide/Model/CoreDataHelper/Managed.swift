@@ -57,7 +57,13 @@ extension Managed {
 
 extension Managed where Self: NSManagedObject {
     
-    public static var entity: NSEntityDescription { return NSEntityDescription(cls: Self.self, name: entityName) }
+    public static var entity: NSEntityDescription {
+        if #available(iOS 10.0, *) {
+            return entity()
+        } else {
+            return NSEntityDescription(cls: Self.self, name: entityName)
+        }
+    }
     
     public static func findOrCreate(in context: NSManagedObjectContext, matching predicate: NSPredicate = Self.defaultPredicate, configure: (Self) -> ()) -> Self {
         guard let object = findOrFetch(in: context, matching: predicate) else {
