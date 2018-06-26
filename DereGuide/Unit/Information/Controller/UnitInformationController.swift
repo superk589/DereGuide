@@ -1,5 +1,5 @@
 //
-//  UnitInfomationController.swift
+//  UnitInformationController.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/5/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnitInfomationController: BaseTableViewController, UnitDetailConfigurable {
+class UnitInformationController: BaseTableViewController, UnitDetailConfigurable {
         
     var unit: Unit {
         didSet {
@@ -84,7 +84,7 @@ class UnitInfomationController: BaseTableViewController, UnitDetailConfigurable 
 }
 
 
-extension UnitInfomationController: UnitInformationUnitCellDelegate {
+extension UnitInformationController: UnitInformationUnitCellDelegate {
     
     func unitInformationUnitCell(_ unitInformationUnitCell: UnitInformationUnitCell, didClick cardIcon: CGSSCardIconView) {
         if let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {

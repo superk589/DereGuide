@@ -42,7 +42,7 @@ class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource
     
     init(unit: Unit) {
         self.unit = unit
-        viewControllers = [UnitSimulationController(unit: unit), UnitInfomationController(unit: unit)]
+        viewControllers = [UnitSimulationController(unit: unit), UnitInformationController(unit: unit)]
         super.init(nibName: nil, bundle: nil)
         viewControllers.forEach { $0.parentTabController = self }
     }
