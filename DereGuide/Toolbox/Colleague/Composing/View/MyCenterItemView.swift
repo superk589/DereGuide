@@ -17,7 +17,7 @@ class MyCenterItemView: UIView {
     private var typeIcon: UIImageView!
     
     private(set) var cardID: Int!
-    private(set) var potential: CGSSPotential!
+    private(set) var potential: Potential!
   
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +68,7 @@ class MyCenterItemView: UIView {
         typeIcon.image = liveType.icon
     }
     
-    func setupWith(cardID: Int, potential: CGSSPotential = .zero) {
+    func setupWith(cardID: Int, potential: Potential = .zero) {
         self.cardID = cardID
         self.potential = potential
         

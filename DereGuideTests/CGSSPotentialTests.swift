@@ -22,9 +22,9 @@ class CGSSPotentialTests: XCTestCase {
     }
     
     func testEquatable() {
-        let p1 = CGSSPotential(vocalLevel: 0, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
-        let p2 = CGSSPotential(vocalLevel: 0, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
-        let p3 = CGSSPotential(vocalLevel: 1, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
+        let p1 = Potential(vocalLevel: 0, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
+        let p2 = Potential(vocalLevel: 0, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
+        let p3 = Potential(vocalLevel: 1, danceLevel: 0, visualLevel: 10, lifeLevel: 1)
         XCTAssert(p1 == p2)
         XCTAssert(p1 != p3)
     }

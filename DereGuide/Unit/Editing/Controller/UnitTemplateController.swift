@@ -49,7 +49,7 @@ class UnitTemplateController: BaseTableViewController {
                     for id in array {
                         if let subDict = id as? [String: Any] {
                             if let id = subDict["id"] as? Int, let potentials = subDict["potential"] as? [String: Int] {
-                                let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: CGSSPotential(vocalLevel: potentials["vocalLevel"]!, danceLevel: potentials["danceLevel"]!, visualLevel: potentials["visualLevel"]!, lifeLevel: 0))
+                                let member = Member.insert(into: context, cardID: id, skillLevel: 10, potential: Potential(vocal: potentials["vocalLevel"]!, dance: potentials["danceLevel"]!, visual: potentials["visualLevel"]!, skill: 0, life: 0))
                                 members.append(member)
                             }
                         } else if let id = id as? Int {

@@ -10,11 +10,11 @@ import UIKit
 
 class PotentialLabel: UILabel {
     
-    func setup(with potential: CGSSPotential) {
-        let vocal = NSAttributedString(string: String(potential.vocalLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let dance = NSAttributedString(string: String(potential.danceLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let visual = NSAttributedString(string: String(potential.visualLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let life = NSAttributedString(string: String(potential.lifeLevel), attributes: [NSAttributedStringKey.foregroundColor: UIColor.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+    func setup(with potential: Potential) {
+        let vocal = NSAttributedString(string: String(potential.vocal), attributes: [NSAttributedStringKey.foregroundColor: UIColor.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let dance = NSAttributedString(string: String(potential.dance), attributes: [NSAttributedStringKey.foregroundColor: UIColor.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let visual = NSAttributedString(string: String(potential.visual), attributes: [NSAttributedStringKey.foregroundColor: UIColor.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let life = NSAttributedString(string: String(potential.life), attributes: [NSAttributedStringKey.foregroundColor: UIColor.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let separator = NSAttributedString.init(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
 //        let plus = NSAttributedString.init(string: "+", attributes: [NSAttributedStringKey.foregroundColor: Color.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         
@@ -69,7 +69,7 @@ class UnitSimulationCardView: UIView {
         
     }
     
-    func setupWith(card: CGSSCard, potential: CGSSPotential, skillLevel: Int?) {
+    func setupWith(card: CGSSCard, potential: Potential, skillLevel: Int?) {
         icon.cardID = card.id
         potentialLabel.setup(with: potential)
         if let level = skillLevel {

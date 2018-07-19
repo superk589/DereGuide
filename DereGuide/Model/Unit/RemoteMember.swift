@@ -23,6 +23,7 @@ struct RemoteMember: RemoteRecord {
     var vocalLevel: Int64
     var visualLevel: Int64
     var lifeLevel: Int64
+    var skillPotentialLevel: Int64
     var participatedPosition: Int64
     var participatedUnit: CKReference
     
@@ -58,14 +59,15 @@ extension RemoteMember {
         self.danceLevel = danceLevel.int64Value
         self.visualLevel = visualLevel.int64Value
         self.lifeLevel = (record["lifeLevel"] as? NSNumber)?.int64Value ?? 0
+        self.skillPotentialLevel = (record["skillPotentialLevel"] as? NSNumber)?.int64Value ?? 0
         self.participatedPosition = participatedPosition.int64Value
     }
 }
 
 extension RemoteMember {
 
-    var potential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: Int(lifeLevel))
+    var potential: Potential {
+        return Potential(vocal: Int(vocalLevel), dance: Int(danceLevel), visual: Int(visualLevel), skill: Int(skillPotentialLevel), life: Int(lifeLevel))
     }
     
     @discardableResult

@@ -46,6 +46,11 @@ class Profile: NSManagedObject {
     @NSManaged public var coolLifeLevel: Int16
     @NSManaged public var passionLifeLevel: Int16
     
+    @NSManaged public var allTypeSkillPotentialLevel: Int16
+    @NSManaged public var cuteSkillPotentialLevel: Int16
+    @NSManaged public var coolSkillPotentialLevel: Int16
+    @NSManaged public var passionSkillPotentialLevel: Int16
+    
     @NSManaged public var guestCuteMinLevel: Int16
     @NSManaged public var guestCoolMinLevel: Int16
     @NSManaged public var guestPassionMinLevel: Int16
@@ -65,55 +70,59 @@ class Profile: NSManagedObject {
 
 extension Profile {
     
-    var cutePotential: CGSSPotential {
+    var cutePotential: Potential {
         get {
-            return CGSSPotential(vocalLevel: Int(cuteVocalLevel), danceLevel: Int(cuteDanceLevel), visualLevel: Int(cuteVisualLevel), lifeLevel: Int(cuteLifeLevel))
+            return Potential(vocal: Int(cuteVocalLevel), dance: Int(cuteDanceLevel), visual: Int(cuteVisualLevel), skill: Int(cuteSkillPotentialLevel), life: Int(cuteLifeLevel))
         }
         set {
-            cuteVocalLevel = Int16(newValue.vocalLevel)
-            cuteDanceLevel = Int16(newValue.danceLevel)
-            cuteVisualLevel = Int16(newValue.visualLevel)
-            cuteLifeLevel = Int16(newValue.lifeLevel)
+            cuteVocalLevel = Int16(newValue.vocal)
+            cuteDanceLevel = Int16(newValue.dance)
+            cuteVisualLevel = Int16(newValue.visual)
+            cuteLifeLevel = Int16(newValue.life)
+            cuteSkillPotentialLevel = Int16(newValue.skill)
         }
     }
     
-    var coolPotential: CGSSPotential {
+    var coolPotential: Potential {
         get {
-            return CGSSPotential(vocalLevel: Int(coolVocalLevel), danceLevel: Int(coolDanceLevel), visualLevel: Int(coolVisualLevel), lifeLevel: Int(coolLifeLevel))
+            return Potential(vocal: Int(coolVocalLevel), dance: Int(coolDanceLevel), visual: Int(coolVisualLevel), skill: Int(coolSkillPotentialLevel), life: Int(coolLifeLevel))
         }
         set {
-            coolVocalLevel = Int16(newValue.vocalLevel)
-            coolDanceLevel = Int16(newValue.danceLevel)
-            coolVisualLevel = Int16(newValue.visualLevel)
-            coolLifeLevel = Int16(newValue.lifeLevel)
+            coolVocalLevel = Int16(newValue.vocal)
+            coolDanceLevel = Int16(newValue.dance)
+            coolVisualLevel = Int16(newValue.visual)
+            coolLifeLevel = Int16(newValue.life)
+            coolSkillPotentialLevel = Int16(newValue.skill)
         }
     }
     
-    var passionPotential: CGSSPotential {
+    var passionPotential: Potential {
         get {
-            return CGSSPotential(vocalLevel: Int(passionVocalLevel), danceLevel: Int(passionDanceLevel), visualLevel: Int(passionVisualLevel), lifeLevel: Int(passionLifeLevel))
+            return Potential(vocal: Int(passionVocalLevel), dance: Int(passionDanceLevel), visual: Int(passionVisualLevel), skill: Int(passionSkillPotentialLevel), life: Int(passionLifeLevel))
         }
         set {
-            passionVocalLevel = Int16(newValue.vocalLevel)
-            passionDanceLevel = Int16(newValue.danceLevel)
-            passionVisualLevel = Int16(newValue.visualLevel)
-            passionLifeLevel = Int16(newValue.lifeLevel)
+            passionVocalLevel = Int16(newValue.vocal)
+            passionDanceLevel = Int16(newValue.dance)
+            passionVisualLevel = Int16(newValue.visual)
+            passionLifeLevel = Int16(newValue.life)
+            passionSkillPotentialLevel = Int16(newValue.skill)
         }
     }
     
-    var allTypePotential: CGSSPotential {
+    var allTypePotential: Potential {
         get {
-            return CGSSPotential(vocalLevel: Int(allTypeVocalLevel), danceLevel: Int(allTypeDanceLevel), visualLevel: Int(allTypeVisualLevel), lifeLevel: Int(allTypeLifeLevel))
+            return Potential(vocal: Int(allTypeVocalLevel), dance: Int(allTypeDanceLevel), visual: Int(allTypeVisualLevel), skill: Int(allTypeSkillPotentialLevel), life: Int(allTypeLifeLevel))
         }
         set {
-            allTypeVocalLevel = Int16(newValue.vocalLevel)
-            allTypeDanceLevel = Int16(newValue.danceLevel)
-            allTypeVisualLevel = Int16(newValue.visualLevel)
-            allTypeLifeLevel = Int16(newValue.lifeLevel)
+            allTypeVocalLevel = Int16(newValue.vocal)
+            allTypeDanceLevel = Int16(newValue.dance)
+            allTypeVisualLevel = Int16(newValue.visual)
+            allTypeLifeLevel = Int16(newValue.life)
+            allTypeSkillPotentialLevel = Int16(newValue.skill)
         }
     }
     
-    var myCenters: [(Int, CGSSPotential)] {
+    var myCenters: [(Int, Potential)] {
         set {
             cuteCardID = Int32(newValue[0].0)
             cutePotential = newValue[0].1
@@ -180,6 +189,11 @@ extension Profile {
         self.cuteLifeLevel = 0
         self.coolLifeLevel = 0
         self.allTypeLifeLevel = 0
+        
+        self.passionSkillPotentialLevel = 0
+        self.cuteSkillPotentialLevel = 0
+        self.coolSkillPotentialLevel = 0
+        self.allTypeSkillPotentialLevel = 0
         
         self.guestCuteMinLevel = 0
         self.guestCoolMinLevel = 0
@@ -256,6 +270,11 @@ extension Profile: RemoteUploadable {
         record["coolLifeLevel"] = coolLifeLevel as CKRecordValue
         record["passionLifeLevel"] = passionLifeLevel as CKRecordValue
         
+        record["allTypeSkillPotentialLevel"] = allTypeSkillPotentialLevel as CKRecordValue
+        record["cuteSkillPotentialLevel"] = cuteSkillPotentialLevel as CKRecordValue
+        record["coolSkillPotentialLevel"] = coolSkillPotentialLevel as CKRecordValue
+        record["passionSkillPotentialLevel"] = passionSkillPotentialLevel as CKRecordValue
+        
         return record
     }
     
@@ -305,6 +324,11 @@ extension Profile {
         profile.cuteLifeLevel = Int16(remoteRecord.cuteLifeLevel)
         profile.coolLifeLevel = Int16(remoteRecord.coolLifeLevel)
         profile.allTypeLifeLevel = Int16(remoteRecord.allTypeLifeLevel)
+        
+        profile.passionSkillPotentialLevel = Int16(remoteRecord.passionSkillPotentialLevel)
+        profile.cuteSkillPotentialLevel = Int16(remoteRecord.cuteSkillPotentialLevel)
+        profile.coolSkillPotentialLevel = Int16(remoteRecord.coolSkillPotentialLevel)
+        profile.allTypeSkillPotentialLevel = Int16(remoteRecord.allTypeSkillPotentialLevel)
         
         return profile
         

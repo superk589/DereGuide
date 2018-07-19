@@ -19,11 +19,11 @@ class MyCenterEditingViewController: UIViewController {
     
     weak var delegate: MyCenterEditingViewControllerDelegate?
     
-    var potential: CGSSPotential {
+    var potential: Potential {
         return editingView.potential
     }
     
-    func setupWith(card: CGSSCard, potential: CGSSPotential = .zero) {
+    func setupWith(card: CGSSCard, potential: Potential = .zero) {
         if editingView == nil {
             editingView = MyCenterEditingView()
             view.addSubview(editingView)

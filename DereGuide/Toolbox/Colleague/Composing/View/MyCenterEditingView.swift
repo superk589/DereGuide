@@ -23,14 +23,14 @@ class MyCenterEditingView: UIView {
     var stackView: UIStackView!
 
     var card: CGSSCard!
-    var potential: CGSSPotential {
+    var potential: Potential {
         set {
-            vocalStepper.value = Double(newValue.vocalLevel)
-            danceStepper.value = Double(newValue.danceLevel)
-            visualStepper.value = Double(newValue.visualLevel)
+            vocalStepper.value = Double(newValue.vocal)
+            danceStepper.value = Double(newValue.dance)
+            visualStepper.value = Double(newValue.visual)
         }
         get {
-            return CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: 0)
+            return Potential(vocal: Int(vocalStepper.value), dance: Int(danceStepper.value), visual: Int(visualStepper.value), skill: 0, life: 0)
         }
     }
     
@@ -85,7 +85,7 @@ class MyCenterEditingView: UIView {
         delegate?.didDelete(myCenterEditingView: self)
     }
     
-    func setupWith(potential: CGSSPotential, card: CGSSCard) {
+    func setupWith(potential: Potential, card: CGSSCard) {
         self.card = card
         self.potential = potential
         setDescriptionLabels()

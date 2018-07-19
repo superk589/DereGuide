@@ -15,6 +15,7 @@ class MemberEditingView: UIView {
     let danceStepper = ValueStepper()
     let visualStepper = ValueStepper()
     let lifeStepper = ValueStepper()
+    var skillPotentialStepper = ValueStepper()
     
     var stackView: UIStackView!
     
@@ -42,8 +43,9 @@ class MemberEditingView: UIView {
         config(stepper: danceStepper, maximumValue: 10, minimumValue: 0, tintColor: .dance, prefix: "Da +")
         config(stepper: visualStepper, maximumValue: 10, minimumValue: 0, tintColor: .visual, prefix: "Vi +")
         config(stepper: lifeStepper, maximumValue: 10, minimumValue: 0, tintColor: .life, prefix: "HP +")
+        config(stepper: skillPotentialStepper, maximumValue: 10, minimumValue: 0, tintColor: .skill, prefix: "SP +")
         
-        stackView = UIStackView(arrangedSubviews: [skillStepper, vocalStepper, danceStepper, visualStepper, lifeStepper])
+        stackView = UIStackView(arrangedSubviews: [skillStepper, vocalStepper, danceStepper, visualStepper, lifeStepper, skillPotentialStepper])
         addSubview(stackView)
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -57,7 +59,7 @@ class MemberEditingView: UIView {
     }
     
     @objc func handleStepperValueChanged(_ stepper: ValueStepper) {
-        let potential = CGSSPotential(vocalLevel: Int(vocalStepper.value), danceLevel: Int(danceStepper.value), visualLevel: Int(visualStepper.value), lifeLevel: Int(lifeStepper.value))
+        let potential = Potential(vocal: Int(vocalStepper.value), dance: Int(danceStepper.value), visual: Int(visualStepper.value), skill: Int(skillPotentialStepper.value), life: Int(lifeStepper.value))
         let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         if stepper == skillStepper {
             if let skill = card.skill {
@@ -71,6 +73,8 @@ class MemberEditingView: UIView {
             stepper.descriptionLabel.text = String(appeal.visual)
         } else if stepper == lifeStepper {
             stepper.descriptionLabel.text = String(appeal.life)
+        } else if stepper == skillPotentialStepper {
+            stepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType]?[Int(stepper.value)] ?? 0)
         }
     }
     
@@ -104,6 +108,9 @@ class MemberEditingView: UIView {
         
         lifeStepper.value = Double(member.lifeLevel)
         lifeStepper.descriptionLabel.text = String(appeal.life)
+        
+        skillPotentialStepper.value = Double(member.skillPotentialLevel)
+        skillPotentialStepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType]?[Int(skillPotentialStepper.value)] ?? 0)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -26,16 +26,20 @@ struct RemoteProfile: RemoteRecord {
     var passionDanceLevel: Int64
     var passionVocalLevel: Int64
     var passionLifeLevel: Int64
+    var passionSkillPotentialLevel: Int64
     var coolDanceLevel: Int64
     var coolVocalLevel: Int64
     var coolLifeLevel: Int64
+    var coolSkillPotentialLevel: Int64
     var cuteLifeLevel: Int64
     var cuteVisualLevel: Int64
     var cuteDanceLevel: Int64
+    var cuteSkillPotentialLevel: Int64
     var allTypeVisualLevel: Int64
     var allTypeDanceLevel: Int64
     var allTypeVocalLevel: Int64
     var allTypeLifeLevel: Int64
+    var allTypeSkillPotentialLevel: Int64
     var message: String
     var id: RemoteIdentifier
     var creatorID: RemoteIdentifier
@@ -125,7 +129,12 @@ extension RemoteProfile {
         self.cuteLifeLevel = (record["cuteLifeLevel"] as? NSNumber)?.int64Value ?? 0
         self.coolLifeLevel = (record["coolLifeLevel"] as? NSNumber)?.int64Value ?? 0
         self.passionLifeLevel = (record["passionLifeLevel"] as? NSNumber)?.int64Value ?? 0
-
+        
+        self.allTypeSkillPotentialLevel = (record["allTypeSkillPotentialLevel"] as? NSNumber)?.int64Value ?? 0
+        self.cuteSkillPotentialLevel = (record["cuteSkillPotentialLevel"] as? NSNumber)?.int64Value ?? 0
+        self.coolSkillPotentialLevel = (record["coolSkillPotentialLevel"] as? NSNumber)?.int64Value ?? 0
+        self.passionSkillPotentialLevel = (record["passionSkillPotentialLevel"] as? NSNumber)?.int64Value ?? 0
+        
         self.guestCuteMinLevel = guestCuteMinLevel.int64Value
         self.guestCoolMinLevel = guestCoolMinLevel.int64Value
         self.guestPassionMinLevel = guestPassionMinLevel.int64Value

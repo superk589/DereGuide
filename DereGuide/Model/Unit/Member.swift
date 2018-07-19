@@ -27,6 +27,7 @@ public class Member: NSManagedObject {
     @NSManaged public var updatedAt: Date
     @NSManaged public var participatedUnit: Unit?
     @NSManaged public var participatedPosition: Int16
+    @NSManaged public var skillPotentialLevel: Int16
     
     @NSManaged fileprivate var primitiveCreatedAt: Date
     @NSManaged fileprivate var primitiveUpdatedAt: Date
@@ -61,30 +62,32 @@ public class Member: NSManagedObject {
         }
     }
     
-    func setBy(cardID: Int, skillLevel: Int, potential: CGSSPotential) {
+    func setBy(cardID: Int, skillLevel: Int, potential: Potential) {
         self.cardID = Int32(cardID)
         self.skillLevel = Int16(skillLevel)
-        self.vocalLevel = Int16(potential.vocalLevel)
-        self.danceLevel = Int16(potential.danceLevel)
-        self.visualLevel = Int16(potential.visualLevel)
-        self.lifeLevel = Int16(potential.lifeLevel)
+        self.vocalLevel = Int16(potential.vocal)
+        self.danceLevel = Int16(potential.dance)
+        self.visualLevel = Int16(potential.visual)
+        self.lifeLevel = Int16(potential.life)
+        self.skillPotentialLevel = Int16(potential.skill)
     }
     
     @discardableResult
-    private static func insert(into moc: NSManagedObjectContext, cardID: Int32, skillLevel: Int16, potential: CGSSPotential, participatedPostion: Int16 = 0) -> Member {
+    private static func insert(into moc: NSManagedObjectContext, cardID: Int32, skillLevel: Int16, potential: Potential, participatedPostion: Int16 = 0) -> Member {
         let member: Member = moc.insertObject()
         member.cardID = cardID
         member.skillLevel = skillLevel
-        member.vocalLevel = Int16(potential.vocalLevel)
-        member.danceLevel = Int16(potential.danceLevel)
-        member.visualLevel = Int16(potential.visualLevel)
-        member.lifeLevel = Int16(potential.lifeLevel)
+        member.vocalLevel = Int16(potential.vocal)
+        member.danceLevel = Int16(potential.dance)
+        member.visualLevel = Int16(potential.visual)
+        member.lifeLevel = Int16(potential.life)
+        member.skillPotentialLevel = Int16(potential.skill)
         member.participatedPosition = participatedPostion
         return member
     }
     
     @discardableResult
-    static func insert(into moc: NSManagedObjectContext, cardID: Int, skillLevel: Int, potential: CGSSPotential, participatedPostion: Int = 0) -> Member {
+    static func insert(into moc: NSManagedObjectContext, cardID: Int, skillLevel: Int, potential: Potential, participatedPostion: Int = 0) -> Member {
         return insert(into: moc, cardID: Int32(cardID), skillLevel: Int16(skillLevel), potential: potential, participatedPostion: Int16(participatedPostion))
     }
     
@@ -120,6 +123,7 @@ extension Member: RemoteUpdatable {
         self.visualLevel = Int16(remoteRecord.visualLevel)
         self.skillLevel = Int16(remoteRecord.skillLevel)
         self.lifeLevel = Int16(remoteRecord.lifeLevel)
+        self.skillPotentialLevel = Int16(remoteRecord.skillPotentialLevel)
         self.updatedAt = remoteRecord.localModifiedAt
     }
     
@@ -132,8 +136,8 @@ extension Member {
         return dao.findCardById(Int(cardID))
     }
     
-    var potential: CGSSPotential {
-        return CGSSPotential(vocalLevel: Int(vocalLevel), danceLevel: Int(danceLevel), visualLevel: Int(visualLevel), lifeLevel: Int(lifeLevel))
+    var potential: Potential {
+        return Potential(vocal: Int(vocalLevel), dance: Int(danceLevel), visual: Int(visualLevel), skill: Int(skillPotentialLevel), life: Int(lifeLevel))
     }
     
 }

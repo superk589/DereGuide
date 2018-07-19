@@ -10,8 +10,8 @@ import UIKit
 import SwiftyJSON
 
 extension CGSSCard {
-    var properPotential: CGSSPotential {
-        return CGSSPotential(vocalLevel: 10, danceLevel: 10, visualLevel: 10, lifeLevel: 0)
+    var properPotential: Potential {
+        return Potential(vocal: 10, dance: 10, visual: 10, skill: 5, life: 0)
 //        switch attributeType {
 //        case CGSSAttributeTypes.vocal:
 //            return CGSSPotential(vocalLevel: 10, danceLevel: 10, visualLevel: 5, lifeLevel: 0)
@@ -24,19 +24,20 @@ extension CGSSCard {
 //        }
     }
     
-    func properPotentialByLevel(_ level: Int) -> CGSSPotential {
+    func properPotentialByLevel(_ level: Int) -> Potential {
         let first = min(level, 10)
         let second = max(min(level - 10, 10), 0)
         let third = max(min(level - 20, 10), 0)
+        let fourth = max(min(level - 30, 10), 0)
         switch attributeType {
         case CGSSAttributeTypes.vocal:
-            return CGSSPotential(vocalLevel: first, danceLevel: second, visualLevel: third, lifeLevel: 0)
+            return Potential(vocal: first, dance: second, visual: third, skill: fourth, life: 0)
         case CGSSAttributeTypes.dance:
-            return CGSSPotential(vocalLevel: third, danceLevel: first, visualLevel: second, lifeLevel: 0)
+            return Potential(vocal: third, dance: first, visual: second, skill: fourth, life: 0)
         case CGSSAttributeTypes.visual:
-            return CGSSPotential(vocalLevel: second, danceLevel: third, visualLevel: first, lifeLevel: 0)
+            return Potential(vocal: second, dance: third, visual: first, skill: fourth, life: 0)
         default:
-            return CGSSPotential.zero
+            return Potential.zero
         }
     }
 }

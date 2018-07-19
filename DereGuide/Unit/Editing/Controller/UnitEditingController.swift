@@ -267,7 +267,7 @@ class UnitEditingController: BaseViewController {
         }
     }
     
-    fileprivate func createOrReplaceMember(cardID: Int, skillLevel: Int, potential: CGSSPotential, at index: Int) {
+    fileprivate func createOrReplaceMember(cardID: Int, skillLevel: Int, potential: Potential, at index: Int) {
         
         let member: Member
         

@@ -27,7 +27,7 @@ struct CGSSAppeal {
         return [String(total + backValue), String(vocal), String(dance), String(visual)]
     }
     
-    func addBy(potential: CGSSPotential, rarity: CGSSRarityTypes) -> CGSSAppeal {
+    func addBy(potential: Potential, rarity: CGSSRarityTypes) -> CGSSAppeal {
         return potential.toAppeal(of: rarity) + self
     }
 }

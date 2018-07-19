@@ -19,7 +19,7 @@ class ColleagueMyCentersCell: ColleagueBaseCell {
     var infoButton = UIButton(type: .infoLight)
     var editableView = MyCenterGroupView()
     
-    var centers: [(Int, CGSSPotential)] {
+    var centers: [(Int, Potential)] {
         return editableView.result
     }
     

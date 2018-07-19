@@ -25,7 +25,7 @@ class MyCenterGroupView: UIView {
     
     var editableItemViews = [MyCenterItemView]()
     
-    var result: [(Int, CGSSPotential)] {
+    var result: [(Int, Potential)] {
         return editableItemViews.map { ($0.cardID, $0.potential) }
     }
     
@@ -86,7 +86,7 @@ class MyCenterGroupView: UIView {
         delegate?.profileMemberEditableView(self, didDoubleTap: view)
     }
     
-    func setupWith(cardID: Int, potential: CGSSPotential, at index: Int, hidesIfNeeded: Bool = false) {
+    func setupWith(cardID: Int, potential: Potential, at index: Int, hidesIfNeeded: Bool = false) {
         editableItemViews[index].setupWith(cardID: cardID, potential: potential)
         if cardID == 0 && hidesIfNeeded {
             editableItemViews[index].isHidden = true

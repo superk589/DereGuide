@@ -492,7 +492,7 @@ struct LeaderSkillUpContent {
 
 extension CGSSCard {
     // 扩展一个获取卡片在队伍中的表现值的方法
-    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = LiveSimulationAdvanceOptionsManager.default.roomUpValue, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: CGSSPotential) -> CGSSAppeal {
+    func getAppealBy(liveType: CGSSCardTypes, roomUpValue: Int = LiveSimulationAdvanceOptionsManager.default.roomUpValue, contents: [CGSSCardTypes: [LeaderSkillUpType: Int]], potential: Potential) -> CGSSAppeal {
         var appeal = self.appeal.addBy(potential: potential, rarity: self.rarityType)
         var factor = 100 + roomUpValue
         if liveType == cardType || liveType == .allType {

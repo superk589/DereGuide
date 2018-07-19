@@ -18,6 +18,7 @@ extension UIColor {
     static let dance = UIColor(red: 1.0 * 89 / 255, green: 1.0 * 187 / 255, blue: 1.0 * 219 / 255, alpha: 1)
     static let visual = UIColor(red: 1.0 * 254 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 66 / 255, alpha: 1)
     static let life = UIColor(red: 1.0 * 75 / 255, green: 1.0 * 202 / 255, blue: 1.0 * 137 / 255, alpha: 1)
+    static let skill = UIColor(hexString: "A464D8")
     
     static let debut = UIColor(red: 1.0 * 138 / 255, green: 1.0 * 206 / 255, blue: 1.0 * 233 / 255, alpha: 1)
     static let regular = UIColor(red: 1.0 * 253 / 255, green: 1.0 * 164 / 255, blue: 1.0 * 40 / 255, alpha: 1)
