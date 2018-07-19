@@ -12,7 +12,7 @@ PODS:
   - lz4 (128)
   - MessagePack.swift (3.0.0)
   - MJRefresh (3.1.15.3)
-  - Pageboy (2.5.1)
+  - Pageboy (2.5.2)
   - ReachabilitySwift (4.1.0)
   - RijndaelSwift (0.1.3)
   - SDWebImage (4.4.1):
@@ -99,7 +99,7 @@ SPEC CHECKSUMS:
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   MessagePack.swift: e739e7d1b9820c91bda31a1165f64bf1abd561d4
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  Pageboy: f0295ea949f0b0123a1b486fd347ea892d0078e0
+  Pageboy: dd62a213a5cfb9cf3f97a0845e8703c0b8377a9a
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   RijndaelSwift: 2d722b9390d8cebc0dd19c20bc84ddb4db06eb18
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4

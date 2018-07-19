@@ -80,6 +80,9 @@ class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.indicator.preferredStyle = .clear
             appearance.layout.extendBackgroundEdgeInsets = true
+            appearance.state.color = .lightGray
+            appearance.state.selectedColor = .parade
+            appearance.layout.itemDistribution = .centered
         })
     }
     

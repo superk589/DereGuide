@@ -80,9 +80,13 @@ class CDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         dataSource = self
         bar.items = items
         bar.location = .bottom
+
         bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.indicator.preferredStyle = .clear
             appearance.layout.extendBackgroundEdgeInsets = true
+            appearance.state.color = .lightGray
+            appearance.state.selectedColor = .parade
+            appearance.layout.itemDistribution = .centered
         })
     }
     
