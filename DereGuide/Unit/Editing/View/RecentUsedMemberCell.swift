@@ -15,13 +15,13 @@ protocol RecentUsedMemberCellDelegate: class {
 
 class RecentUsedMemberCell: UICollectionViewCell {
     
-    var cardView: UnitSimulationCardView!
+    let cardView = UnitSimulationCardView()
     
     weak var delegate: RecentUsedMemberCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        cardView = UnitSimulationCardView()
+
         contentView.addSubview(cardView)
         cardView.icon.isUserInteractionEnabled = false
         cardView.snp.makeConstraints { (make) in

@@ -89,7 +89,7 @@ class UnitEditingController: BaseViewController {
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         let maxWidth = min(floor((view.shortSide - 70) / 6), 96)
-        layout.itemSize = CGSize(width: maxWidth, height: maxWidth + 29)
+        layout.itemSize = CGSize(width: maxWidth, height: maxWidth + 48)
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -319,7 +319,7 @@ extension UnitEditingController: RecentUsedMemberCellDelegate {
         }
         let tevc = MemberEditingViewController()
         tevc.modalPresentationStyle = .popover
-        tevc.preferredContentSize = CGSize.init(width: 240, height: 350)
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 410)
         
         let member = recentMembers[index]
         guard let card = member.card else {
@@ -353,7 +353,7 @@ extension UnitEditingController: MemberGroupViewDelegate {
         }
         let tevc = MemberEditingViewController()
         tevc.modalPresentationStyle = .popover
-        tevc.preferredContentSize = CGSize.init(width: 240, height: 350)
+        tevc.preferredContentSize = CGSize.init(width: 240, height: 410)
         
         guard let member = members[index], let card = member.card else {
             return
@@ -393,6 +393,7 @@ extension UnitEditingController: UIPopoverPresentationControllerDelegate {
         member.danceLevel = Int16(round(vc.editView.danceStepper.value))
         member.visualLevel = Int16(round(vc.editView.visualStepper.value))
         member.lifeLevel = Int16(round(vc.editView.lifeStepper.value))
+        member.skillPotentialLevel = Int16(round(vc.editView.skillPotentialStepper.value))
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

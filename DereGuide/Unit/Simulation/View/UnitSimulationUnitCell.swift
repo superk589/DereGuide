@@ -10,15 +10,27 @@ import UIKit
 
 class PotentialLabel: UILabel {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        numberOfLines = 2
+        textAlignment = .center
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setup(with potential: Potential) {
+        let skill = NSAttributedString(string: String(potential.skill), attributes: [NSAttributedStringKey.foregroundColor: UIColor.skill, .font: UIFont.systemFont(ofSize: 12)])
         let vocal = NSAttributedString(string: String(potential.vocal), attributes: [NSAttributedStringKey.foregroundColor: UIColor.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let dance = NSAttributedString(string: String(potential.dance), attributes: [NSAttributedStringKey.foregroundColor: UIColor.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let visual = NSAttributedString(string: String(potential.visual), attributes: [NSAttributedStringKey.foregroundColor: UIColor.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let life = NSAttributedString(string: String(potential.life), attributes: [NSAttributedStringKey.foregroundColor: UIColor.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let separator = NSAttributedString.init(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-//        let plus = NSAttributedString.init(string: "+", attributes: [NSAttributedStringKey.foregroundColor: Color.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let separator = NSAttributedString(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+//        let plus = NSAttributedString(string: "+", attributes: [NSAttributedStringKey.foregroundColor: UIColor.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let enter = NSAttributedString(string: "\n")
         
-        self.attributedText = vocal + separator + dance + separator + visual + separator + life
+        self.attributedText = life + separator + skill + enter + vocal + separator + dance + separator + visual
     }
     
 }

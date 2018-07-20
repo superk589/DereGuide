@@ -43,7 +43,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 99
+        tableView.estimatedRowHeight = 133
         tableView.tableFooterView = UIView()
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.keyboardDismissMode = .onDrag

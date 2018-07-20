@@ -103,7 +103,7 @@ extension Member: UpdateTimestampable {}
 extension Member: RemoteRefreshable {
     @NSManaged public var markedForLocalChange: Bool
     var localTrackedKeys: [String] {
-        return ["cardID", "vocalLevel", "skillLevel", "danceLevel", "visualLevel", "lifeLevel"]
+        return ["cardID", "vocalLevel", "skillLevel", "danceLevel", "visualLevel", "lifeLevel", "skillPotentialLevel"]
     }
 }
 
@@ -180,11 +180,12 @@ extension Member: RemoteUploadable {
         record["vocalLevel"] = vocalLevel as CKRecordValue
         record["danceLevel"] = danceLevel as CKRecordValue
         record["visualLevel"] = visualLevel as CKRecordValue
+        record["lifeLevel"] = lifeLevel as CKRecordValue
+        record["skillPotentialLevel"] = skillPotentialLevel as CKRecordValue
         record["participatedPosition"] = participatedPosition as CKRecordValue
         record["participatedUnit"] = participatedUnit!.ckReference!
         record["localCreatedAt"] = createdAt as NSDate
         record["localModifiedAt"] = updatedAt as NSDate
-        record["lifeLevel"] = lifeLevel as CKRecordValue
         return record
     }
 
