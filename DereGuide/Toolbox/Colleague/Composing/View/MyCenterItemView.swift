@@ -28,7 +28,7 @@ class MyCenterItemView: UIView {
         cardView.snp.makeConstraints { (make) in
             make.top.equalTo(2)
             make.left.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(cardView.snp.width).offset(14.5)
+            make.height.greaterThanOrEqualTo(cardView.snp.width).offset(28)
         }
         
         typeIcon = UIImageView()

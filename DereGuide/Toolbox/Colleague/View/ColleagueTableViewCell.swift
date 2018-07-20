@@ -99,7 +99,7 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         myCenterGroupView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.top.equalTo(messageLabel.snp.bottom).offset(5)
-            make.height.lessThanOrEqualTo(89.5)
+            make.height.lessThanOrEqualTo(103)
             make.bottom.equalTo(-10)
         }
         myCenterGroupView.delegate = self
