@@ -27,7 +27,7 @@ struct Config {
     static let appName = NSLocalizedString("DereGuide", comment: "")
     
     static let maximumSinglePotential = 10
-    static let maximumTotalPotential = 30
+    static let maximumTotalPotential = 35
     
     // max = 15928 + 500 + 500 + 500
     // ceil(0.5 × max × 1.3) * 10
