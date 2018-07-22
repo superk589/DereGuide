@@ -63,7 +63,7 @@ class MemberEditingView: UIView {
         let appeal = card.appeal.addBy(potential: potential, rarity: card.rarityType)
         if stepper == skillStepper {
             if let skill = card.skill {
-                stepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(Int(stepper.value)) / 100, skill.condition, skill.procChanceOfLevel(Int(stepper.value)) / 100, skill.skillFilterType.description)
+                stepper.descriptionLabel.text = String(format: "%.2f/%ds, %.2f%%\n%@", Double(skill.effectLengthOfLevel(Int(stepper.value))) / 100, skill.condition, Double(skill.procChanceOfLevel(Int(stepper.value))) / 100, skill.skillFilterType.description)
             }
         } else if stepper == vocalStepper {
             stepper.descriptionLabel.text = String(appeal.vocal)
@@ -89,7 +89,7 @@ class MemberEditingView: UIView {
         if let skill = member.card?.skill {
             skillStepper.value = Double(member.skillLevel)
             skillStepper.valueLabel.text = "SLv. \(member.skillLevel)"
-            skillStepper.descriptionLabel.text = String.init(format: "%.2f/%ds, %.2f%%\n%@", skill.effectLengthOfLevel(Int(member.skillLevel)) / 100, skill.condition, skill.procChanceOfLevel(Int(member.skillLevel)) / 100, skill.skillFilterType.description)
+            skillStepper.descriptionLabel.text = String(format: "%.2f/%ds, %.2f%%\n%@", Double(skill.effectLengthOfLevel(Int(member.skillLevel))) / 100, skill.condition, Double(skill.procChanceOfLevel(Int(member.skillLevel))) / 100, skill.skillFilterType.description)
         } else {
             setSkillItemNotAvailable()
         }

@@ -206,7 +206,7 @@ class LiveSimulator {
         } else {
             procedBonuses = bonuses
                 .sorted { $0.range.begin < $1.range.begin }
-                .filter { 1000000.proc($0.rate * (100 + $0.rateBonus))}
+                .filter { 1000000.proc(($0.rate + $0.ratePotentialBonus * 100) * (100 + $0.rateBonus))}
         }
         
         var actions = [LSAction]()
