@@ -120,7 +120,7 @@ class SettingsTableViewController: UITableViewController {
     @objc private func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
             let controller = MFMailComposeViewController()
-            controller.setSubject(NSLocalizedString("\(Config.appName)问题反馈", comment: "设置页面"))
+            controller.setSubject("\(Config.appName) " + NSLocalizedString("问题反馈", comment: "设置页面"))
             controller.mailComposeDelegate = self
             controller.setToRecipients(["superk589@vip.qq.com"])
             if CGSSGlobal.languageType == .ja {

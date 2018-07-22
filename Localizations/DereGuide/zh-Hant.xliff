@@ -1,0 +1,2254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="ja">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="5Hs-jz-swe.title">
+        <source>卡片导航</source>
+        <target>カードナビ</target>
+        <note>Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe";</note>
+      </trans-unit>
+      <trans-unit id="8Lu-2l-B9T.title">
+        <source>卡片</source>
+        <target>カード</target>
+        <note>Class = "UITabBarItem"; title = "卡片"; ObjectID = "8Lu-2l-B9T";</note>
+      </trans-unit>
+      <trans-unit id="08b-yF-FVx.title">
+        <source>工具</source>
+        <target>ツール</target>
+        <note>Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx";</note>
+      </trans-unit>
+      <trans-unit id="Eme-MZ-6LK.title">
+        <source>根标签栏</source>
+        <target>Root TabBar</target>
+        <note>Class = "UITabBarController"; title = "根标签栏"; ObjectID = "Eme-MZ-6LK";</note>
+      </trans-unit>
+      <trans-unit id="IyO-O4-iMn.title">
+        <source>组队导航</source>
+        <target>ユニットナビ</target>
+        <note>Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn";</note>
+      </trans-unit>
+      <trans-unit id="Ji2-5n-2Mz.title">
+        <source>组队</source>
+        <target>ユニット</target>
+        <note>Class = "UITabBarItem"; title = "组队"; ObjectID = "Ji2-5n-2Mz";</note>
+      </trans-unit>
+      <trans-unit id="KxG-H5-NIc.title">
+        <source>谱面导航</source>
+        <target>譜面ナビ</target>
+        <note>Class = "UINavigationController"; title = "谱面导航"; ObjectID = "KxG-H5-NIc";</note>
+      </trans-unit>
+      <trans-unit id="Lc3-lA-ZOL.title">
+        <source>设置导航</source>
+        <target>設定ナビ</target>
+        <note>Class = "UINavigationController"; title = "设置导航"; ObjectID = "Lc3-lA-ZOL";</note>
+      </trans-unit>
+      <trans-unit id="OeQ-8h-gYQ.title">
+        <source>谱面</source>
+        <target>譜面</target>
+        <note>Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ";</note>
+      </trans-unit>
+      <trans-unit id="gE2-j0-zef.title">
+        <source>谱面</source>
+        <target>譜面</target>
+        <note>Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef";</note>
+      </trans-unit>
+      <trans-unit id="gI8-ss-NS6.title">
+        <source>设置</source>
+        <target>設定</target>
+        <note>Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6";</note>
+      </trans-unit>
+      <trans-unit id="hop-gk-wsV.title">
+        <source>卡片</source>
+        <target>卡片</target>
+        <note>Class = "UITableViewController"; title = "卡片"; ObjectID = "hop-gk-wsV";</note>
+      </trans-unit>
+      <trans-unit id="omj-Op-jcb.title">
+        <source>我的队伍</source>
+        <target>マイユニット</target>
+        <note>Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb";</note>
+      </trans-unit>
+      <trans-unit id="sAv-Q2-aG8.title">
+        <source>工具导航</source>
+        <target>ツールナビ</target>
+        <note>Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8";</note>
+      </trans-unit>
+      <trans-unit id="wJt-PI-tVQ.title">
+        <source>工具</source>
+        <target>ツール</target>
+        <note>Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ";</note>
+      </trans-unit>
+      <trans-unit id="zeC-Rh-4X6.title">
+        <source>实用工具</source>
+        <target>便利ツール</target>
+        <note>Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6";</note>
+      </trans-unit>
+      <trans-unit id="zkd-c8-p78.title">
+        <source>设置</source>
+        <target>設定</target>
+        <note>Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="ja">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <target>$(PRODUCT_NAME)</target>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryAddUsageDescription">
+        <source>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</source>
+        <target>ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。</target>
+        <note>Privacy - Photo Library Additions Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryUsageDescription">
+        <source>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</source>
+        <target>ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。</target>
+        <note>Privacy - Photo Library Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="ja">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="%@和%@">
+        <source>%1$@和%2$@</source>
+        <target>%@ と %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@收到了你的祝福">
+        <source>%@收到了你的祝福</source>
+        <target>%@はあなたの祝福を受け取っています</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d日%d时">
+        <source>%1$d日%2$d时</source>
+        <target>%1$d日%2$d時</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d日%d时%d分">
+        <source>%1$d日%2$d时%3$d分</source>
+        <target>%1$d日%2$d時%3$d分</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%d月%d日">
+        <source>%1$d月%2$d日</source>
+        <target>%1$d月%2$d日</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="* 不含后援值，歌曲模式为常规模式">
+        <source>* 不含后援值，歌曲模式为常规模式</source>
+        <target>* 通常モードのサポートアピール含んでない数値です</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\n* 如果您在高级选项中设置了手动打前 x 秒或前 x combo，则指定范围的Note视为全P">
+        <source>* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\n* 如果您在高级选项中设置了手动打前 x 秒或前 x combo，则指定范围的Note视为全P</source>
+        <target>* 「全パ」モードにノーツを全PERFECTとして計算します\n* 放置モードにスキルブースト及びSSR PERFECTサポートによるPERFECTを除き、ノーツを全MISSとして計算します\n* アドバンスオプションに留守番設定をした場合、設定された範囲のノーツは全PERFECTになる</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="* 左滑删除">
+        <source>* 左滑删除</source>
+        <target>* 左スワイプで消せる</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确">
+        <source>* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确</source>
+        <target>* このチャートはスコア確率分布の近接確率密度の曲線グラフです。グラフ精度とシミュレート回数は正の相関関係です。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="* 极限分数中所有技能100%触发\n* 极限分数1中note取PERFECT判定区间中的最优值\n* 模拟计算结果是取模拟次数前x%内的最低分数，每次会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a">
+        <source>* 极限分数中所有技能100%1$触发\n* 极限分数1中note取PERFECT判定区间中的最优值\n* 模拟计算结果是取模拟次数前x%2$内的最低分数，每次会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a</source>
+        <target>* 極限スコアは特技100%発動として計算しています\n* 極限スコア1の計算にPERFECT判定は最適値を取るよう補正を行います\n* シミュレート計算は設定回数のシミュレートを行い、並べたシミュレート結果のx%にそれぞれの最低値を取ります、結果は毎回異なります\n* GrooveまたはLIVE Paradeのモードを設定した時、ゲストは無視しています\n* 一部平均スコアの計算に非対応する特技に対して、平均スコアは「n/a」と表示される場合があります</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发">
+        <source>* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发</source>
+        <target>* ランダムモードに特技は発動率によってランダムに発動されます\n* 極限1モードにはノーツを判定範囲でスコア最適値を取るよう補正を行い、特技100%発動として計算します\n* 極限2モードに特技100%発動として計算します\n* サイレントモードに、発動確率が100%以下の特技は発動しないとして計算します</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Combo保护">
+        <source>Combo保护</source>
+        <target>COMBOサポート</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Combo加成">
+        <source>Combo加成</source>
+        <target>COMBOボーナス</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cool">
+        <source>Cool</source>
+        <target>Cool</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copyright of">
+        <source>Copyright of</source>
+        <target>Copyright of</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copyright of Game Data">
+        <source>Copyright of Game Data</source>
+        <target>Copyright of Game Data</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Co曲">
+        <source>Co曲</source>
+        <target>Co曲</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="Cute">
+        <source>Cute</source>
+        <target>Cute</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cu曲">
+        <source>Cu曲</source>
+        <target>Cu曲</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="Dance表现值">
+        <source>Dance表现值</source>
+        <target>Danceアピール値</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="Data Sources">
+        <source>Data Sources</source>
+        <target>Data Sources</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="DereGuide">
+        <source>DereGuide</source>
+        <target>DereGuide</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。">
+        <source>DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。</source>
+        <target>DereGuideは、「有料な機能」または「広告」が一切入ってない完全無料アプリであり、これからも引き続きプロデューサーの皆様に無料で提供したいと思ってます。しかし、開発やバックエンドサーバーの維持などには費用が必要で、私たち個人の力ではこれからのアプリ運営を維持することが大変難しいです。これからの、DereGuideの運営は、皆様の応援が必要です。このアプリを気に入った方、もしくはこのアプリは使いやすいと思っている方がいらっしゃったら、ぜひ、私たちを応援してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="FES限定">
+        <source>FES限定</source>
+        <target>フェス限定</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="FES限定卡池">
+        <source>FES限定卡池</source>
+        <target>フェス限ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="GREAT占比%(不考虑专注技能只加成PERFECT的因素)">
+        <source>GREAT占比%(不考虑专注技能只加成PERFECT的因素)</source>
+        <target>GREAT割合%(ｺﾝｾﾝﾄﾚｰｼｮﾝによるGREATは考慮しません)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。">
+        <source>Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。</source>
+        <target>ユニットがライフ回復を発動できる場合、Grooveモードにライフは２倍で計算する</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groove活动">
+        <source>Groove活动</source>
+        <target>Grooveイベント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groove类别">
+        <source>Groove类别</source>
+        <target>Grooveタイプ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="HP">
+        <source>HP</source>
+        <target>HP</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="MV站位">
+        <source>MV站位</source>
+        <target>MVポジション</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Note列表">
+        <source>Note列表</source>
+        <target>ノーツリスト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Passion">
+        <source>Passion</source>
+        <target>Passion</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pa曲">
+        <source>Pa曲</source>
+        <target>Pa曲</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="S Rank率%">
+        <source>S Rank率%</source>
+        <target>Ｓランク率%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Skill Boost">
+        <source>Skill Boost</source>
+        <target>スキルブースト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Solo">
+        <source>Solo</source>
+        <target>ソロ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Special Thanks to">
+        <source>Special Thanks to</source>
+        <target>Special Thanks to</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sprite">
+        <source>Sprite</source>
+        <target>Sprite</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Third-party Libraries">
+        <source>Third-party Libraries</source>
+        <target>Third-party Libraries</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Twitter">
+        <source>Twitter</source>
+        <target>Twitter</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Visual表现值">
+        <source>Visual表现值</source>
+        <target>Visualアピール値</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="Vocal表现值">
+        <source>Vocal表现值</source>
+        <target>Vocalアピール値</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="bpm">
+        <source>bpm</source>
+        <target>bpm</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="note数">
+        <source>note数</source>
+        <target>note数</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="、">
+        <source>、</source>
+        <target>、</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="一个月内">
+        <source>一个月内</source>
+        <target>1ヶ月以内</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="一般计算">
+        <source>一般计算</source>
+        <target>通常計算</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="七天内">
+        <source>七天内</source>
+        <target>一週間以内</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="三围">
+        <source>三围</source>
+        <target>スリーサイズ</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="三色协同">
+        <source>三色协同</source>
+        <target>シナジー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="上位">
+        <source>上位</source>
+        <target>上位</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="下一步">
+        <source>下一步</source>
+        <target>次へ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="下位">
+        <source>下位</source>
+        <target>下位</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="不再公开您之前已经发布的信息">
+        <source>不再公开您之前已经发布的信息</source>
+        <target>済ました情報の掲載を取り消す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="不填表示">
+        <source>不填表示</source>
+        <target>入力なし＝</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="不明">
+        <source>不明</source>
+        <target>不明</target>
+        <note>通用, 通常不会出现, 为一些未知字符串预留</note>
+      </trans-unit>
+      <trans-unit id="不限">
+        <source>不限</source>
+        <target>制限なし</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="与歌曲颜色相同">
+        <source>与歌曲颜色相同</source>
+        <target>楽曲タイプと同じ色</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="专注">
+        <source>专注</source>
+        <target>コンセントレーション</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="中">
+        <source>中</source>
+        <target>中</target>
+        <note>技能触发几率的简写</note>
+      </trans-unit>
+      <trans-unit id="中确率">
+        <source>中确率</source>
+        <target>中確率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="为什么会有这个页面？">
+        <source>为什么会有这个页面？</source>
+        <target>このページについて</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="习惯用手">
+        <source>习惯用手</source>
+        <target>利き手</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="五十音">
+        <source>五十音</source>
+        <target>五十音</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="人组合">
+        <source>人组合</source>
+        <target>人ﾕﾆｯﾄ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="今天">
+        <source>今天</source>
+        <target>今日</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="今天是%@的生日(%d月%d日)">
+        <source>今天是%1$@的生日(%2$d月%3$d日)</source>
+        <target>今日は%1$@の誕生日です(%2$d月%3$d日)</target>
+        <note>生日通知正文</note>
+      </trans-unit>
+      <trans-unit id="传统活动">
+        <source>传统活动</source>
+        <target>アタポン形式イベント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="位置">
+        <source>位置</source>
+        <target>タイプ別</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="低">
+        <source>低</source>
+        <target>低</target>
+        <note>技能触发几率的简写</note>
+      </trans-unit>
+      <trans-unit id="低确率">
+        <source>低确率</source>
+        <target>低確率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="体重">
+        <source>体重</source>
+        <target>体重</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="使BAD/NICE音符不会中断COMBO">
+        <source>使BAD/NICE音符不会中断COMBO</source>
+        <target>NICE/BADでもCOMBO継続</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使NICE音符不会中断COMBO">
+        <source>使NICE音符不会中断COMBO</source>
+        <target>NICEでもCOMBO継続</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使你的COMBO不会中断">
+        <source>使你的COMBO不会中断</source>
+        <target>NICE/BAD/MISSでもCOMBO継続</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使你的生命不会减少">
+        <source>使你的生命不会减少</source>
+        <target>ライフが減少しなくなる</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档">
+        <source>使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档</source>
+        <target>発動中のスコア・COMBOのボーナス %d%% アップ、ライフ回復・ガードする時ライフ1回復、判定強化の適用範囲を1段階広げる</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="使所有GREAT/NICE/BAD音符改判为PERFECT">
+        <source>使所有GREAT/NICE/BAD音符改判为PERFECT</source>
+        <target>GREAT/NICE/BADをPERFECTにする</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有GREAT/NICE音符改判为PERFECT">
+        <source>使所有GREAT/NICE音符改判为PERFECT</source>
+        <target>GREAT/NICEをPERFECTにする</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有GREAT音符改判为PERFECT">
+        <source>使所有GREAT音符改判为PERFECT</source>
+        <target>GREATをPERFECTにする</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命">
+        <source>使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命</source>
+        <target>PERFECT/GREAT/NICEでライフ %d 回復</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成">
+        <source>使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成</source>
+        <target>PERFECT/GREAT/NICEのスコア %d%% アップ</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT/GREAT音符恢复你 %d 点生命">
+        <source>使所有PERFECT/GREAT音符恢复你 %d 点生命</source>
+        <target>PERFECT/GREATでライフ %d 回復</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT/GREAT音符获得 %d%% 的分数加成">
+        <source>使所有PERFECT/GREAT音符获得 %d%% 的分数加成</source>
+        <target>PERFECT/GREATのスコア %d%% アップ</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符恢复你 %d 点生命">
+        <source>使所有PERFECT音符恢复你 %d 点生命</source>
+        <target>PERFECTでライフ %d 回復</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成">
+        <source>使所有PERFECT音符获得 %d%% 的分数加成</source>
+        <target>PERFECTのスコア %d%% アップ</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小">
+        <source>使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小</source>
+        <target>PERFECTのスコア %d%% アップ、PERFECT判定される時間が短くなる</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="使所有音符恢复你 %d 点生命">
+        <source>使所有音符恢复你 %d 点生命</source>
+        <target>全てノーツがライフ %d 回復</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="使用后援表现值">
+        <source>使用后援表现值</source>
+        <target>サポートアピール</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="使用固定值">
+        <source>使用固定值</source>
+        <target>固定アピール値を使用</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="保存">
+        <source>保存</source>
+        <target>保存</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="保存信息，但是暂不公开">
+        <source>保存信息，但是暂不公开</source>
+        <target>掲載しないのまま情報を保存する</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="修改最近使用中的偶像潜能同步到同角色所有卡片">
+        <source>修改最近使用中的偶像潜能同步到同角色所有卡片</source>
+        <target>「最近に使う」にポテンシャルの設定を\n該当キャラの他のカードにも同期する</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="偶像">
+        <source>偶像</source>
+        <target>アイドル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="偶像生日提醒">
+        <source>偶像生日提醒</source>
+        <target>アイドル誕生日通知</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="全P">
+        <source>全P</source>
+        <target>全パ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="全才">
+        <source>全才</source>
+        <target>オールラウンド</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="全选">
+        <source>全选</source>
+        <target>全選択</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="全部">
+        <source>全部</source>
+        <target>全部</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="全部取消">
+        <source>全部取消</source>
+        <target>全非選択</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="关于">
+        <source>关于</source>
+        <target>アプリについて</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="兴趣">
+        <source>兴趣</source>
+        <target>趣味</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="其他">
+        <source>其他</source>
+        <target>他</target>
+        <note>通用, 通常不会出现, 为未知字符预留</note>
+      </trans-unit>
+      <trans-unit id="出演MV">
+        <source>出演MV</source>
+        <target>出演MV</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="出现率">
+        <source>出现率</source>
+        <target>出現率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="出生地">
+        <source>出生地</source>
+        <target>出身地</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="分数加成">
+        <source>分数加成</source>
+        <target>SCOREボーナス</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="删除">
+        <source>删除</source>
+        <target>消す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="动作模式">
+        <source>动作模式</source>
+        <target>判定パターン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="十连">
+        <source>十连</source>
+        <target>10回引く</target>
+        <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="升序">
+        <source>升序</source>
+        <target>昇順</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="协力活动">
+        <source>协力活动</source>
+        <target>LIVE Party!!</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级">
+        <source>单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级</source>
+        <target>タップ：編集枠を変更\nダブルタップ：すべてのカードから選択\n長押し：ポテンシャルや特技レベルの編集</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="单属性卡池">
+        <source>单属性卡池</source>
+        <target>タイプセレクト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="单抽">
+        <source>单抽</source>
+        <target>１回引く</target>
+        <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="占比">
+        <source>占比</source>
+        <target>割合</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡池">
+        <source>卡池</source>
+        <target>ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡池名称或描述">
+        <source>卡池名称或描述</source>
+        <target>ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡池封面">
+        <source>卡池封面</source>
+        <target>ガシャヘッダー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡片">
+        <source>卡片</source>
+        <target>カード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡片图">
+        <source>卡片图</source>
+        <target>カード画像</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡片大图">
+        <source>卡片大图</source>
+        <target>カードイラスト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡片头像">
+        <source>卡片头像</source>
+        <target>カードアイコン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="卡片属性">
+        <source>卡片属性</source>
+        <target>ステータス</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="参考值">
+        <source>参考值</source>
+        <target>参考値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布">
+        <source>双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布</source>
+        <target>ダブルタップで全てのアイドルから選択、ロングタップでポテ振りやアイドル消す、「ゲスト参戦アイドル」で少なくとも1タイプを登録しなければ掲載できません</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="反馈">
+        <source>反馈</source>
+        <target>フィードバック</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="发布">
+        <source>发布</source>
+        <target>掲載する</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="发布失败，请确保iCloud已登录并且网络状态正常">
+        <source>发布失败，请确保iCloud已登录并且网络状态正常</source>
+        <target>掲載失敗。iCloudログイン状況とネットワーク接続状況を確認してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="发布成功">
+        <source>发布成功</source>
+        <target>掲載成功</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="发送邮件">
+        <source>发送邮件</source>
+        <target>メール</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="取消">
+        <source>取消</source>
+        <target>キャンセル</target>
+        <note>底部弹出框按钮
+   弹出框按钮
+   生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="取消收藏">
+        <source>取消收藏</source>
+        <target>ブクマを取り消す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="变更时间">
+        <source>变更时间</source>
+        <target>変更日時</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="只有%@">
+        <source>只有%@</source>
+        <target>%@のみ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间">
+        <source>向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间</source>
+        <target>プロデュース情報を全てのユーザーに配布します。再び掲載する場合、元の情報は上書きされし、更新時間も更新されます。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="启动时自动检查更新">
+        <source>启动时自动检查更新</source>
+        <target>アプリ起動時に更新の確認を行う</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。">
+        <source>因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。</source>
+        <target>データ更新(削除)の影響でユニットデータが破損しました。現在進行中の更新が終わるのをお待ち下さい。または、手動で更新を行ってください。</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="图片">
+        <source>图片</source>
+        <target>画像</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="基础分">
+        <source>基础分</source>
+        <target>基本スコア</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="增速(/h)">
+        <source>增速(/h)</source>
+        <target>時速 (/h)</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="处理中...">
+        <source>处理中...</source>
+        <target>処理中...</target>
+        <note>耗时任务处理过程提示框</note>
+      </trans-unit>
+      <trans-unit id="复制">
+        <source>复制</source>
+        <target>コピー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="大图">
+        <source>大图</source>
+        <target>大圖</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="天井">
+        <source>天井</source>
+        <target>天井</target>
+        <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="失败">
+        <source>失败</source>
+        <target>失敗</target>
+        <note>设置页面
+   通用</note>
+      </trans-unit>
+      <trans-unit id="好友">
+        <source>好友</source>
+        <target>ゲスト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="好友技能">
+        <source>好友技能</source>
+        <target>ゲスト効果</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="如何支持我们？">
+        <source>如何支持我们？</source>
+        <target>応援方法について</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单">
+        <source>如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单</source>
+        <target>一部の難易度を隠すや、難易度のテキストを隠したいの場合、サイドメニューを利用してください</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="姓名假名">
+        <source>姓名假名</source>
+        <target>ふりがな</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="存活率%">
+        <source>存活率%</source>
+        <target>生存率%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="完成">
+        <source>完成</source>
+        <target>完了</target>
+        <note>导航栏按钮</note>
+      </trans-unit>
+      <trans-unit id="完成LIVE时，获得的粉丝数提高 %d%%">
+        <source>完成LIVE时，获得的粉丝数提高 %d%%</source>
+        <target>LIVEクリア時、獲得ファン数が %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="完成LIVE时，额外获得特别奖励">
+        <source>完成LIVE时，额外获得特别奖励</source>
+        <target>LIVEクリア時、特別報酬を追加で獲得</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="寻找同僚">
+        <source>寻找同僚</source>
+        <target>同僚を探す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="小屋加成%">
+        <source>小屋加成%</source>
+        <target>ﾙｰﾑｱｲﾃﾑボーナス%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="属性">
+        <source>属性</source>
+        <target>屬性</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="属性排名">
+        <source>属性排名</source>
+        <target>ステータス順位</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="岁">
+        <source>岁</source>
+        <target>歳</target>
+        <note>角色年龄</note>
+      </trans-unit>
+      <trans-unit id="巡演活动">
+        <source>巡演活动</source>
+        <target>LIVE Parade</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="已付声">
+        <source>已付声</source>
+        <target>ＣＶあり</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="已复制ID到剪贴板">
+        <source>已复制ID到剪贴板</source>
+        <target>ゲームIDがクリップボードにコピーされました</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="已开启">
+        <source>已开启</source>
+        <target>オン</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="已收藏">
+        <source>已收藏</source>
+        <target>ブクマした</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="希望征集的队长">
+        <source>希望征集的队长</source>
+        <target>募集したいゲストアイドル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="常规模式">
+        <source>常规模式</source>
+        <target>通常モード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="常规歌曲">
+        <source>常规歌曲</source>
+        <target>通常曲</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="平均分数">
+        <source>平均分数</source>
+        <target>平均ｽｺｱ</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="平均覆盖率%">
+        <source>平均覆盖率%</source>
+        <target>平均ｶﾊﾞｰ率%</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="年龄">
+        <source>年龄</source>
+        <target>年齢</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="序号">
+        <source>序号</source>
+        <target>番号</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="开启生日通知提醒">
+        <source>开启生日通知提醒</source>
+        <target>誕生日の通知を行います</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="开始计算">
+        <source>开始计算</source>
+        <target>計算開始</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="强判">
+        <source>强判</source>
+        <target>PERFECTサポート</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当%@属性的偶像存在于队伍时，">
+        <source>当%@属性的偶像存在于队伍时，</source>
+        <target>%@アイドル編成時、</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成">
+        <source>当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>3タイプ全てのアイドル編成時、PERFECTのスコア %1$d%% アップ/ライフ %3$d 回復、COMBOボーナス %2$d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
+        <source>当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>Coolアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
+        <source>当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>Cuteアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
+        <source>当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>Passionアイドルのみ編成時、PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当前Pt">
+        <source>当前Pt</source>
+        <target>現在pt</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当前分数">
+        <source>当前分数</source>
+        <target>現在スコア</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="当前版本">
+        <source>当前版本</source>
+        <target>現在のバージョン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="彩色曲">
+        <source>彩色曲</source>
+        <target>全ﾀｲﾌﾟ</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="待定">
+        <source>待定</source>
+        <target>未定</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="得分">
+        <source>得分</source>
+        <target>ｽｺｱ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="得分分布">
+        <source>得分分布</source>
+        <target>スコア確率分布</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="得分计算">
+        <source>得分计算</source>
+        <target>スコア計算</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="总分">
+        <source>总分</source>
+        <target>合計</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="恢复">
+        <source>恢复</source>
+        <target>復元</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="恢复失败">
+        <source>恢复失败</source>
+        <target>復元失敗</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="恢复生命">
+        <source>恢复生命</source>
+        <target>ライフ回復</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。">
+        <source>您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。</source>
+        <target>以下いずれかのアプリ内課金アイテムを購入するで私たちを応援することができます。より優れた利用体験を提供するため、このページの広告は廃止されます。よって、あなたの購入行為は機能の拡張や仮想アイテムなどを得られません。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您无法创建超过 %d 个队伍">
+        <source>您无法创建超过 %d 个队伍</source>
+        <target>ユニット数が %d 件の上限を到達しています。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您的当前账号未曾购买过去除广告服务。">
+        <source>您的当前账号未曾购买过去除广告服务。</source>
+        <target>あなたのApple IDは課金アイテムを購入しておりませんでした。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您的设备未开启应用内购买。">
+        <source>您的设备未开启应用内购买。</source>
+        <target>あなたの端末にはアプリ内購入機能を有効にしておりません。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您输入的变量不合法">
+        <source>您输入的变量不合法</source>
+        <target>ご入力された変数は不正です</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您输入的游戏ID不合法">
+        <source>您输入的游戏ID不合法</source>
+        <target>不正なゲームIDです</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="您输入的游戏ID不存在">
+        <source>您输入的游戏ID不存在</source>
+        <target>ご入力したゲームIDは存在しないです</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="悲观">
+        <source>悲观</source>
+        <target>サイレント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="感谢您的支持，广告已经被移除。">
+        <source>感谢您的支持，广告已经被移除。</source>
+        <target>応援してありがとうございます。広告は取り除きました。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="成功">
+        <source>成功</source>
+        <target>成功</target>
+        <note>设置页面
+   通用</note>
+      </trans-unit>
+      <trans-unit id="我的信息">
+        <source>我的信息</source>
+        <target>プロデュース情報</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="我的队长">
+        <source>我的队长</source>
+        <target>ゲスト参戦アイドル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="所有">
+        <source>所有</source>
+        <target>全員</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="所有Cool">
+        <source>所有Cool</source>
+        <target>Coolアイドル</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="所有Cute">
+        <source>所有Cute</source>
+        <target>Cuteアイドル</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="所有Passion">
+        <source>所有Passion</source>
+        <target>Passionアイドル</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="所有表现值">
+        <source>所有表现值</source>
+        <target>全アピール値</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="所有音符改判为PERFECT">
+        <source>所有音符改判为PERFECT</source>
+        <target>GREAT/NICE/BAD/MISSをPERFECTにする</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="打开邮箱失败">
+        <source>打开邮箱失败</source>
+        <target>fail to open mail</target>
+        <note>设置页面</note>
+      </trans-unit>
+      <trans-unit id="技能触发">
+        <source>技能触发</source>
+        <target>特技発動</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="抽卡次数">
+        <source>抽卡次数</source>
+        <target>引く回数</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="持续时间s">
+        <source>持续时间s</source>
+        <target>継続時間s</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="挂机">
+        <source>挂机</source>
+        <target>放置</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="挂机模式中，手动打前 x combo">
+        <source>挂机模式中，手动打前 x combo</source>
+        <target>放置モードに、前 x コンボに留守番をする</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="挂机模式中，手动打前 x 秒">
+        <source>挂机模式中，手动打前 x 秒</source>
+        <target>放置モードに、前 x 秒に留守番をする</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="挂机模式模拟次数">
+        <source>挂机模式模拟次数</source>
+        <target>放置モードシミュレート回数</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="排名">
+        <source>排名</source>
+        <target>順位</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="排序">
+        <source>排序</source>
+        <target>並べ替え</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="提升%@偶像的%@ %d%%。">
+        <source>提升%1$@偶像的%2$@ %3$d%%。</source>
+        <target>%1$@の%2$@ %3$d%% アップ。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="提示">
+        <source>提示</source>
+        <target>ご注意</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="撤销">
+        <source>撤销</source>
+        <target>取り消す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="撤销中...">
+        <source>撤销中...</source>
+        <target>取り消し中...</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="撤销失败，请确保iCloud已登录并且网络状态正常">
+        <source>撤销失败，请确保iCloud已登录并且网络状态正常</source>
+        <target>取り消し失敗。iCloudログイン状況とネットワーク接続状況を確認してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="撤销成功">
+        <source>撤销成功</source>
+        <target>取り消し成功</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="支持作者">
+        <source>支持作者</source>
+        <target>開発者を応援する</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="收藏">
+        <source>收藏</source>
+        <target>ブクマする</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="数据">
+        <source>数据</source>
+        <target>データ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="数据主版本过低，请点击确定开始更新">
+        <source>数据主版本过低，请点击确定开始更新</source>
+        <target>データが古い、またはデータの初回ダウンロードが必要です。更新を行います。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="数据存在新版本，推荐进行更新，请点击确定开始更新">
+        <source>数据存在新版本，推荐进行更新，请点击确定开始更新</source>
+        <target>新しいデータを確認しました。更新を行います。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="数据是最新版本">
+        <source>数据是最新版本</source>
+        <target>データバージョンは最新です</target>
+        <note>更新框</note>
+      </trans-unit>
+      <trans-unit id="数据服务器存在异常，请您稍后再尝试更新。">
+        <source>数据服务器存在异常，请您稍后再尝试更新。</source>
+        <target>データサーバーに異常があります。しばらく待ってから再び更新してください。</target>
+        <note>数据更新时的错误提示</note>
+      </trans-unit>
+      <trans-unit id="数据缺失">
+        <source>数据缺失</source>
+        <target>データは不完全です</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="数据需要更新">
+        <source>数据需要更新</source>
+        <target>データの更新が必要です</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="新增卡片">
+        <source>新增卡片</source>
+        <target>新アイドル</target>
+        <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="无">
+        <source>无</source>
+        <target>なし</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="无法获取游戏原始数据">
+        <source>无法获取游戏原始数据</source>
+        <target>マスターデータ取得失敗</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="日文名/罗马音">
+        <source>日文名/罗马音</source>
+        <target>名前/ローマ字</target>
+        <note>搜索框文字, 不宜过长</note>
+      </trans-unit>
+      <trans-unit id="日文名/罗马音/CV">
+        <source>日文名/罗马音/CV</source>
+        <target>名前/ローマ字/CV</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="时区">
+        <source>时区</source>
+        <target>タイムゾーン</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="时长">
+        <source>时长</source>
+        <target>時間</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="明天">
+        <source>明天</source>
+        <target>明日</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="星座">
+        <source>星座</source>
+        <target>星座</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="星星数">
+        <source>星星数</source>
+        <target>スタージュエル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="昵称">
+        <source>昵称</source>
+        <target>ニックネーム</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="昵称不能超过10个文字">
+        <source>昵称不能超过10个文字</source>
+        <target>ニックネームは10文字超えることはできない</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="显示网格和标注">
+        <source>显示网格和标注</source>
+        <target>グリッドと表記を表示</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="普池">
+        <source>普池</source>
+        <target>恒常ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="普通试音会">
+        <source>普通试音会</source>
+        <target>恒常ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="更新完成">
+        <source>更新完成</source>
+        <target>更新完了</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="更新时间">
+        <source>更新时间</source>
+        <target>更新日時</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最低%@等级">
+        <source>最低%@等级</source>
+        <target>%@ Lv.最低値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最低分数">
+        <source>最低分数</source>
+        <target>スコア最低値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最低潜能等级">
+        <source>最低潜能等级</source>
+        <target>ポテLv.最低値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最后更新时间：">
+        <source>最后更新时间：</source>
+        <target>最終アップデート時間：</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最大覆盖率%">
+        <source>最大覆盖率%</source>
+        <target>最大ｶﾊﾞｰ率%</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="最终Pt">
+        <source>最终Pt</source>
+        <target>最終pt</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最终分数">
+        <source>最终分数</source>
+        <target>最終スコア</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最近使用">
+        <source>最近使用</source>
+        <target>最近に使う</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最近使用中也包含好友的队长">
+        <source>最近使用中也包含好友的队长</source>
+        <target>「最近に使う」にゲストセンターも含む</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）">
+        <source>最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）</source>
+        <target>「最近に使う」にはポテンシャルと特技レベルが一致する同じカードを同じアイドルとして扱います。タップして下画面の編集枠にアイドルを変更します。長押してアイドルのポテンシャルや特技レベルを編集します、該当アイドルを含んでるユニットにも同期更新します。その他に、アイドルのポテンシャル設定は該当キャラの他のカードにも同期します（アドバンスオプションに切ってきます）</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最高分数">
+        <source>最高分数</source>
+        <target>スコア最高値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="最高得分">
+        <source>最高得分</source>
+        <target>スコア最高値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="有 %@%% 的几率">
+        <source>有 %@%% 的几率</source>
+        <target>%@%% の確率で</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="未付声">
+        <source>未付声</source>
+        <target>ＣＶなし</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="未开启">
+        <source>未开启</source>
+        <target>オフ</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。">
+        <source>未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。</source>
+        <target>対応するの譜面データが見つかりません。また、現時点に公式が譜面データを配布していません。現在進行中の更新が終わるのをお待ち下さい。または、手動で更新を行ってください。</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="未指定">
+        <source>未指定</source>
+        <target>指定しない</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="未收藏">
+        <source>未收藏</source>
+        <target>ブクマしてない</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="未知">
+        <source>未知</source>
+        <target>未知</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="未能获取到正确的数据，请稍后再试">
+        <source>未能获取到正确的数据，请稍后再试</source>
+        <target>正しいデータを取得できません、あとでもう一度試してください</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="未设置邮箱账户">
+        <source>未设置邮箱账户</source>
+        <target>メールアカウントが設定されていません</target>
+        <note>设置页面</note>
+      </trans-unit>
+      <trans-unit id="本程序基于MIT协议，详情请访问：">
+        <source>本程序基于MIT协议，详情请访问：</source>
+        <target>このアプリはMITライセンスでライセンスされています。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="本程序是非官方程序，与官方应用\&quot;アイドルマスターシンデレラガールズ スターライトステージ\&quot;没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。">
+        <source>本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。</source>
+        <target>このアプリは公式のものではありません。公式アプリ「アイドルマスターシンデレラガールズ スターライトステージ」と一切の関係はありません。利用しているゲームデータの著作権は以下の持ち主に帰属します：\nBANDAI NAMCO Entertainment Inc.\n\nアプリに利用した非公式データはインターネットから取得しています。公式の著作権に違反しない限り、ソース提供者の著作権表記を従います。\n\n本アプリは提供しているデータの信頼性を保証できません。アプリのご利用におけるリスクは使用者自身に引き受けています。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="极限1">
+        <source>极限1</source>
+        <target>極限1</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="极限2">
+        <source>极限2</source>
+        <target>極限2</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="极限分数">
+        <source>极限分数</source>
+        <target>極限ｽｺｱ</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="查看完整卡池">
+        <source>查看完整卡池</source>
+        <target>出現アイドル一覧</target>
+        <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="查看完整图表">
+        <source>查看完整图表</source>
+        <target>チャートを見る</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="查看角色详情">
+        <source>查看角色详情</source>
+        <target>キャラ詳細</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="根据概率密度曲线估算分数区间[a, b]的概率">
+        <source>根据概率密度曲线估算分数区间[a, b]的概率</source>
+        <target>確率密度曲線によるスコア間隔[a, b]の推定当たる確率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="检查更新中">
+        <source>检查更新中</source>
+        <target>更新を確認中</target>
+        <note>更新框</note>
+      </trans-unit>
+      <trans-unit id="检查更新失败">
+        <source>检查更新失败</source>
+        <target>更新に失敗</target>
+        <note>更新框</note>
+      </trans-unit>
+      <trans-unit id="模拟抽卡">
+        <source>模拟抽卡</source>
+        <target>ガシャシミュレーター</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟挂机模式">
+        <source>模拟挂机模式</source>
+        <target>放置モード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟次数">
+        <source>模拟次数</source>
+        <target>シミュレート回数</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟结果中分数落入指定区间[a, b]的概率">
+        <source>模拟结果中分数落入指定区间[a, b]的概率</source>
+        <target>ｼﾐｭﾚｰﾄ結果にスコアが指定間隔[a, b]に当たる確率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟结果中前x%的最低分数">
+        <source>模拟结果中前x%的最低分数</source>
+        <target>ｼﾐｭﾚｰﾄ結果に前部x%の最低値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟结果中后x%的最高分数">
+        <source>模拟结果中后x%的最高分数</source>
+        <target>ｼﾐｭﾚｰﾄ結果に後部x%の最高値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="模拟计算">
+        <source>模拟计算</source>
+        <target>シミュレート計算</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="歌曲分数档位">
+        <source>歌曲分数档位</source>
+        <target>ハイスコアランキング</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="歌曲名">
+        <source>歌曲名</source>
+        <target>曲名</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="歌曲名/词曲作者/演唱者">
+        <source>歌曲名/词曲作者/演唱者</source>
+        <target>曲名/アーティスト/歌手</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="歌曲封面">
+        <source>歌曲封面</source>
+        <target>楽曲ジャケット</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="歌曲模式">
+        <source>歌曲模式</source>
+        <target>LIVEモード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="正在完成更新">
+        <source>正在完成更新</source>
+        <target>更新は間もなく終了です</target>
+        <note>更新框</note>
+      </trans-unit>
+      <trans-unit id="每 %d 秒，">
+        <source>每 %d 秒，</source>
+        <target>%d 秒毎、</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="没有更多数据了">
+        <source>没有更多数据了</source>
+        <target>データは読み込み完了しました</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="活动">
+        <source>活动</source>
+        <target>イベント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="活动pt档位">
+        <source>活动pt档位</source>
+        <target>イベントptランキング</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="活动名">
+        <source>活动名</source>
+        <target>イベント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="活动封面">
+        <source>活动封面</source>
+        <target>イベントヘッダー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="活动曲">
+        <source>活动曲</source>
+        <target>イベント曲</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="流行曲">
+        <source>流行曲</source>
+        <target>流行曲</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO">
+        <source>消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO</source>
+        <target>ライフを %2$d 消費し、PERFECTのスコア %1$d%% アップ、NICE/BADでもCOMBO継続</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="添加一名偶像">
+        <source>添加一名偶像</source>
+        <target>アイドルを選択</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="清除缓存数据">
+        <source>清除缓存数据</source>
+        <target>キャッシュ削除</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="游戏ID">
+        <source>游戏ID</source>
+        <target>ゲームID</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="游戏编号">
+        <source>游戏编号</source>
+        <target>ゲーム内部番号</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="潜能">
+        <source>潜能</source>
+        <target>ポテンシャル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="灰姑娘之路">
+        <source>灰姑娘之路</source>
+        <target>スシロー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="版权声明">
+        <source>版权声明</source>
+        <target>著作権声明</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="特技">
+        <source>特技</source>
+        <target>特技</target>
+        <note>通用</note>
+      </trans-unit>
+      <trans-unit id="特技列表">
+        <source>特技列表</source>
+        <target>特技リスト</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="特技发动几率">
+        <source>特技发动几率</source>
+        <target>特技発動確率</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="理论最低分数">
+        <source>理论最低分数</source>
+        <target>理論最低値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="理论最高分数">
+        <source>理论最高分数</source>
+        <target>理論最高値</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="生命">
+        <source>生命</source>
+        <target>ライフ</target>
+        <note>队长技能描述</note>
+      </trans-unit>
+      <trans-unit id="生命闪耀">
+        <source>生命闪耀</source>
+        <target>ライフスパークル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="生日">
+        <source>生日</source>
+        <target>誕生日</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="生日快乐!!">
+        <source>生日快乐!!</source>
+        <target>ご誕生日おめでとうございます！</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="用户配置">
+        <source>用户配置</source>
+        <target>ユーザープロファイル</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="留言">
+        <source>留言</source>
+        <target>コメント</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="目前仅支持筛选单个位置，如果您不需要筛选请设置为\&quot;不限\&quot;">
+        <source>目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\"</source>
+        <target>現在1タイプのみでの絞り込みができます。絞り込めたくないの場合は「制限なし」を選択してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="相册编号">
+        <source>相册编号</source>
+        <target>アルバム順</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="确定">
+        <source>确定</source>
+        <target>OK</target>
+        <note>弹出框按钮
+   设置页面</note>
+      </trans-unit>
+      <trans-unit id="秒">
+        <source>秒</source>
+        <target>秒</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="移动网络下加载卡片大图">
+        <source>移动网络下加载卡片大图</source>
+        <target>モバイル回線でﾌﾙｻｲｽﾞ画像を読み込む</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="稀有度">
+        <source>稀有度</source>
+        <target>レア度</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="筛选">
+        <source>筛选</source>
+        <target>絞り込み</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="筛选条件">
+        <source>筛选条件</source>
+        <target>絞り込み条件</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="签名">
+        <source>签名</source>
+        <target>簽名</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="签名图">
+        <source>签名图</source>
+        <target>サイン画像</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="篷车活动">
+        <source>篷车活动</source>
+        <target>シンデレラキャラバン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="系统通知设置">
+        <source>系统通知设置</source>
+        <target>システム通知設定</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="累计">
+        <source>累计</source>
+        <target>合計</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="纵向缩放比例">
+        <source>纵向缩放比例</source>
+        <target>縦向きスケーリング</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="绘制参数">
+        <source>绘制参数</source>
+        <target>描画パラメータ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="缓存图片完成">
+        <source>缓存图片完成</source>
+        <target>画像キャッシュ完了</target>
+        <note>设置页面</note>
+      </trans-unit>
+      <trans-unit id="缓存所有图片">
+        <source>缓存所有图片</source>
+        <target>すべての画像をキャッシュする</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="编辑队伍">
+        <source>编辑队伍</source>
+        <target>ユニット編集</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="自动播放时显示按键区辅助线">
+        <source>自动播放时显示按键区辅助线</source>
+        <target>自動再生する時ノーツ落下補助線を表示</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="自定义计算">
+        <source>自定义计算</source>
+        <target>カスタム計算</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="至少添加一名自己的队长">
+        <source>至少添加一名自己的队长</source>
+        <target>少なくとも1タイプのアイドルを登録しなければならない</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="至少进行一次模拟计算之后才能查看得分分布">
+        <source>至少进行一次模拟计算之后才能查看得分分布</source>
+        <target>調べる前にまず一回シミュレート計算して下さい</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="至少进行一次模拟计算之后才能进行高级计算">
+        <source>至少进行一次模拟计算之后才能进行高级计算</source>
+        <target>計算する前にまず一回シミュレート計算して下さい</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="致谢">
+        <source>致谢</source>
+        <target>クレジット</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="获取到的卡数据异常">
+        <source>获取到的卡数据异常</source>
+        <target>取得したカードデータは異常です</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="获取数据中...">
+        <source>获取数据中...</source>
+        <target>データを取得中...</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="获取数据失败">
+        <source>获取数据失败</source>
+        <target>データ取得失敗</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="获取数据失败，请检查您的网络并确保iCloud处于登录状态">
+        <source>获取数据失败，请检查您的网络并确保iCloud处于登录状态</source>
+        <target>データ取得失敗。iCloudログイン状況とネットワーク接続状況を確認してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="获得途径">
+        <source>获得途径</source>
+        <target>入手方法</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="获得途径(进化前)">
+        <source>获得途径(进化前)</source>
+        <target>入手方法(特訓前)</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="获得额外的 %d%% 的COMBO加成">
+        <source>获得额外的 %d%% 的COMBO加成</source>
+        <target>COMBOボーナス %d%% アップ</target>
+        <note>技能描述</note>
+      </trans-unit>
+      <trans-unit id="获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命">
+        <source>获得额外的 %1$d%% 的COMBO加成，并使所有PERFECT音符恢复你 %2$d 点生命</source>
+        <target>COMBOボーナス %d%% アップ、PERFECTでライフ %d 回復</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="获得额外的COMBO加成，当前生命值越高加成越高">
+        <source>获得额外的COMBO加成，当前生命值越高加成越高</source>
+        <target>ライフ値が多いほどCOMBOボーナスアップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="血型">
+        <source>血型</source>
+        <target>血液型</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="表格类型">
+        <source>表格类型</source>
+        <target>テーブルタイプ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="表现值">
+        <source>表现值</source>
+        <target>アピール</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="角色头像">
+        <source>角色头像</source>
+        <target>キャラアイコン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="角色所有卡片">
+        <source>角色所有卡片</source>
+        <target>キャラのすべてのカード</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="触发几率%">
+        <source>触发几率%</source>
+        <target>発動確率%</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="触发模式">
+        <source>触发模式</source>
+        <target>発動パターン</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="计算中...">
+        <source>计算中...</source>
+        <target>計算中...</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="计算结果">
+        <source>计算结果</source>
+        <target>計算結果</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="设置">
+        <source>设置</source>
+        <target>設定</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="评价">
+        <source>评价</source>
+        <target>レビュー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="请先选择歌曲">
+        <source>请先选择歌曲</source>
+        <target>まず曲を選んでください</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="请完善队伍后，再点击存储">
+        <source>请完善队伍后，再点击存储</source>
+        <target>ユニットを完成した後でセーブしてください</target>
+        <note>弹出框正文</note>
+      </trans-unit>
+      <trans-unit id="请等待更新完成或手动取消更新后，再尝试清除数据。">
+        <source>请等待更新完成或手动取消更新后，再尝试清除数据。</source>
+        <target>現在進行中の更新が終わるまでお待ち下さい。または、手動で更新をキャンセルした後、再びデータを削除してください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="请等待更新完成或手动取消更新后，再尝试缓存图片。">
+        <source>请等待更新完成或手动取消更新后，再尝试缓存图片。</source>
+        <target>現在進行中の更新が終わるまでお待ち下さい。または、手動で更新をキャンセルした後、再びキャッシュを行ってください。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="请选择歌曲">
+        <source>请选择歌曲</source>
+        <target>曲を選んでください</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="谱面">
+        <source>谱面</source>
+        <target>譜面</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="身高">
+        <source>身高</source>
+        <target>身長</target>
+        <note>角色信息页面</note>
+      </trans-unit>
+      <trans-unit id="辅助技能">
+        <source>辅助技能</source>
+        <target>サポート特技</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="输入您的游戏ID">
+        <source>输入您的游戏ID</source>
+        <target>あなたのゲームIDを入力</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="过载">
+        <source>过载</source>
+        <target>オーバーロード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="返场">
+        <source>返场</source>
+        <target>アンコール</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="还没有队伍，点击右上＋创建一个吧">
+        <source>还没有队伍，点击右上＋创建一个吧</source>
+        <target>＋ボタンでユニットを登録しましょう</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="进化信息">
+        <source>进化信息</source>
+        <target>特訓情報</target>
+        <note>卡片详情页</note>
+      </trans-unit>
+      <trans-unit id="选择Groove类别">
+        <source>选择Groove类别</source>
+        <target>Grooveタイプを選んでください</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="选择提醒时区">
+        <source>选择提醒时区</source>
+        <target>通知の時間帯を選んでください</target>
+        <note>生日提醒页面</note>
+      </trans-unit>
+      <trans-unit id="选择歌曲模式">
+        <source>选择歌曲模式</source>
+        <target>LIVEモードを選んでください</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="选择难度">
+        <source>选择难度</source>
+        <target>難易度を選んでください</target>
+        <note>底部弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="选项">
+        <source>选项</source>
+        <target>オプション</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="重复发动上一个其他偶像发动过的技能">
+        <source>重复发动上一个其他偶像发动过的技能</source>
+        <target>直前に発動した他アイドルの特技効果を繰り返す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="重置">
+        <source>重置</source>
+        <target>リセット</target>
+        <note>导航栏按钮
+   模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="重试">
+        <source>重试</source>
+        <target>リトライ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="锁血">
+        <source>锁血</source>
+        <target>ダメージガード</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="问题反馈">
+        <source>问题反馈</source>
+        <target>問題反饋</target>
+        <note>设置页面</note>
+      </trans-unit>
+      <trans-unit id="队伍不完整">
+        <source>队伍不完整</source>
+        <target>ユニットは未完成です</target>
+        <note>弹出框标题</note>
+      </trans-unit>
+      <trans-unit id="队伍中存在未知的技能类型，计算结果可能不准确。">
+        <source>队伍中存在未知的技能类型，计算结果可能不准确。</source>
+        <target>ユニットに未定義(undefined)のスキルタイプが存在します。計算結果の正確性は保証できません。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="队伍信息">
+        <source>队伍信息</source>
+        <target>ユニット情報</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="队伍模板">
+        <source>队伍模板</source>
+        <target>テンプレート</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="队长">
+        <source>队长</source>
+        <target>センター</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="队长加成">
+        <source>队长加成</source>
+        <target>センターボーナス</target>
+        <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="队长技能">
+        <source>队长技能</source>
+        <target>センター効果</target>
+        <note>通用
+   队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="降序">
+        <source>降序</source>
+        <target>降順</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="限定">
+        <source>限定</source>
+        <target>限定ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="限定卡池">
+        <source>限定卡池</source>
+        <target>限定ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="限定复刻卡池">
+        <source>限定复刻卡池</source>
+        <target>復刻限定ガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="随机">
+        <source>随机</source>
+        <target>ランダム</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="隐私政策">
+        <source>隐私政策</source>
+        <target>プライバシーポリシー</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="隐藏难度文字">
+        <source>隐藏难度文字</source>
+        <target>難易度テキストを隠す</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="难度">
+        <source>难度</source>
+        <target>難易度</target>
+        <note>谱面页面导航按钮</note>
+      </trans-unit>
+      <trans-unit id="集中">
+        <source>集中</source>
+        <target>フォーカス</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="需重启应用">
+        <source>需重启应用</source>
+        <target>アプリの再起動が必要</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="颜色方案">
+        <source>颜色方案</source>
+        <target>カラーリング</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="首次出现时间">
+        <source>首次出现时间</source>
+        <target>初登場日時</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="高">
+        <source>高</source>
+        <target>高</target>
+        <note>技能触发几率的简写</note>
+      </trans-unit>
+      <trans-unit id="高确率">
+        <source>高确率</source>
+        <target>高確率</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="高级计算">
+        <source>高级计算</source>
+        <target>アドバンス計算</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="高级试音会">
+        <source>高级试音会</source>
+        <target>プレミアムガシャ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="高级选项">
+        <source>高级选项</source>
+        <target>アドバンスオプション</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="默认潜能等级">
+        <source>默认潜能等级</source>
+        <target>既定ポテLv.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="默认特技等级">
+        <source>默认特技等级</source>
+        <target>既定特技Lv.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="，持续 %@ 秒。">
+        <source>，持续 %@ 秒。</source>
+        <target>、%@ 秒間継続します。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DereGuideTests/zh-Hans.lproj/InfoPlist.strings" datatype="plaintext" source-language="zh-Hans" target-language="ja">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <target>$(PRODUCT_NAME)</target>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" datatype="plaintext" source-language="zh-Hans" target-language="ja">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+        <source>NotificationContent</source>
+        <target>NotificationContent</target>
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <target>$(PRODUCT_NAME)</target>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

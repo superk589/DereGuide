@@ -1,81 +1,51 @@
+/* Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe"; */
+"5Hs-jz-swe.title" = "Cards Nav Controller";
 
 /* Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx"; */
 "08b-yF-FVx.title" = "Tools";
 
-/* Class = "UINavigationItem"; title = "我的隊伍"; ObjectID = "omj-Op-jcb"; */
-"omj-Op-jcb.title" = "Units";
-
-/* Class = "UITableViewController"; title = "角色排序和篩選"; ObjectID = "1ey-jy-bHg"; */
-"1ey-jy-bHg.title" = "Idol Sorting/Filtering Table View Controller";
-
-/* Class = "UITableViewController"; title = "歌曲篩選和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "Beatmap Sorting/Filtering Table View Controller";
-
-/* Class = "UINavigationController"; title = "卡片導航"; ObjectID = "5Hs-jz-swe"; */
-"5Hs-jz-swe.title" = "Cards Nav Controller";
-
 /* Class = "UITabBarItem"; title = "卡片"; ObjectID = "8Lu-2l-B9T"; */
 "8Lu-2l-B9T.title" = "Cards";
 
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "D6I-uh-wTP"; */
-"D6I-uh-wTP.headerTitle" = "Sort";
-
-/* Class = "UITabBarController"; title = "根標籤欄"; ObjectID = "Eme-MZ-6LK"; */
+/* Class = "UITabBarController"; title = "根标签栏"; ObjectID = "Eme-MZ-6LK"; */
 "Eme-MZ-6LK.title" = "Root Tab Bar Controller";
 
-/* Class = "UINavigationController"; title = "組隊導航"; ObjectID = "IyO-O4-iMn"; */
+/* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
+"gE2-j0-zef.title" = "Beatmaps";
+
+/* Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6"; */
+"gI8-ss-NS6.title" = "Settings";
+
+/* Class = "UITableViewController"; title = "卡片"; ObjectID = "hop-gk-wsV"; */
+"hop-gk-wsV.title" = "Cards";
+
+/* Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn"; */
 "IyO-O4-iMn.title" = "Unit Nav Controller";
 
-/* Class = "UITabBarItem"; title = "組隊"; ObjectID = "Ji2-5n-2Mz"; */
+/* Class = "UITabBarItem"; title = "组队"; ObjectID = "Ji2-5n-2Mz"; */
 "Ji2-5n-2Mz.title" = "Units";
 
-/* Class = "UINavigationController"; title = "歌曲導航"; ObjectID = "KxG-H5-NIc"; */
+/* Class = "UINavigationController"; title = "谱面导航"; ObjectID = "KxG-H5-NIc"; */
 "KxG-H5-NIc.title" = "Beatmap Nav Controller";
 
-/* Class = "UINavigationController"; title = "設定導航"; ObjectID = "Lc3-lA-ZOL"; */
+/* Class = "UINavigationController"; title = "设置导航"; ObjectID = "Lc3-lA-ZOL"; */
 "Lc3-lA-ZOL.title" = "Settings Nav Controller";
 
 /* Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ"; */
 "OeQ-8h-gYQ.title" = "Beatmaps";
 
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
-"S9a-oB-UoS.headerTitle" = "Sort";
+/* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb"; */
+"omj-Op-jcb.title" = "Units";
 
-/* Class = "UITableViewController"; title = "卡片篩選和排序"; ObjectID = "XB8-jt-AiW"; */
-"XB8-jt-AiW.title" = "Card Sorting/Filtering Table View Controller";
-
-/* Class = "UITableViewController"; title = "卡片"; ObjectID = "XEw-Y1-ITn"; */
-"XEw-Y1-ITn.title" = "Cards";
-
-/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "XrL-IG-AMC"; */
-"XrL-IG-AMC.headerTitle" = "Filter";
-
-/* Class = "UITableViewController"; title = "組隊"; ObjectID = "Zys-WZ-9cy"; */
-"Zys-WZ-9cy.title" = "Unit";
-
-/* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
-"gE2-j0-zef.title" = "Beatmaps";
-
-/* Class = "UITabBarItem"; title = "設定"; ObjectID = "gI8-ss-NS6"; */
-"gI8-ss-NS6.title" = "Settings";
-
-/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "hJn-41-ekr"; */
-"hJn-41-ekr.headerTitle" = "Filter";
-
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
-"rD2-JL-rj6.headerTitle" = "Sort";
-
-/* Class = "UINavigationController"; title = "工具導航"; ObjectID = "sAv-Q2-aG8"; */
+/* Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8"; */
 "sAv-Q2-aG8.title" = "Tools Nav Controller";
-
-/* Class = "UITableViewSection"; headerTitle = "篩選"; ObjectID = "vSe-a1-0gm"; */
-"vSe-a1-0gm.headerTitle" = "Filter";
 
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "Tools";
 
-/* Class = "UITableViewSection"; headerTitle = "資料"; ObjectID = "zA8-n9-zYp"; */
-"zA8-n9-zYp.headerTitle" = "Data";
-
-/* Class = "UINavigationItem"; title = "實用工具"; ObjectID = "zeC-Rh-4X6"; */
+/* Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6"; */
 "zeC-Rh-4X6.title" = "Tools";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78"; */
+"zkd-c8-p78.title" = "Settings";
+

@@ -1,5 +1,26 @@
 # ChangeLog
 
+### 1.9
+
+1. 新增对技能触发几率潜能的支持，并提高潜能等级上限至 35。
+2. 更新技能效果的持续时间和触发几率的算法。
+3. 恢复对 iOS 9.0 的支持。
+4. 其他细节优化。
+
+##### Japanese version
+
+1. ユニット編成：新たなポテンシャル「特技発動率」およびポテンシャル上限Lv. 35に対応しました
+2. スコア計算：特技の継続時間と発動確率の計算パターンを更新しました
+3. 互換性：再び iOS 9.x に対応しました
+4. 他の機能改善
+
+##### English version
+
+1. Support for skill proc chance potential, and increase max potential to 35.
+2. Update algorithm of skill effect length and skill proc chance.
+3. Support for iOS 9.0 again.
+4. Other minor improvements.
+
 ### 1.8.7
 
 **此版本起，不再支持低于 iOS 10.0 的设备**

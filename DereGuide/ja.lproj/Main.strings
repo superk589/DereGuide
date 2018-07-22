@@ -1,30 +1,23 @@
+/* Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe"; */
+"5Hs-jz-swe.title" = "カードナビ";
 
 /* Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx"; */
 "08b-yF-FVx.title" = "ツール";
 
-/* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb"; */
-"omj-Op-jcb.title" = "マイユニット";
-
-/* Class = "UITableViewSection"; headerTitle = "反馈"; ObjectID = "1cN-eL-xzi"; */
-"1cN-eL-xzi.headerTitle" = "フィードバック";
-
-/* Class = "UITableViewController"; title = "角色排序和筛选"; ObjectID = "1ey-jy-bHg"; */
-"1ey-jy-bHg.title" = "キャラの絞り込み・並べ替え";
-
-/* Class = "UITableViewController"; title = "歌曲筛选和排序"; ObjectID = "2yB-7S-JxI"; */
-"2yB-7S-JxI.title" = "楽曲の絞り込み・並べ替え";
-
-/* Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe"; */
-"5Hs-jz-swe.title" = "カードナビ";
-
 /* Class = "UITabBarItem"; title = "卡片"; ObjectID = "8Lu-2l-B9T"; */
 "8Lu-2l-B9T.title" = "カード";
 
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "D6I-uh-wTP"; */
-"D6I-uh-wTP.headerTitle" = "並べ替える";
-
 /* Class = "UITabBarController"; title = "根标签栏"; ObjectID = "Eme-MZ-6LK"; */
 "Eme-MZ-6LK.title" = "Root TabBar";
+
+/* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
+"gE2-j0-zef.title" = "譜面";
+
+/* Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6"; */
+"gI8-ss-NS6.title" = "設定";
+
+/* Class = "UITableViewController"; title = "卡片"; ObjectID = "hop-gk-wsV"; */
+"hop-gk-wsV.title" = "卡片";
 
 /* Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn"; */
 "IyO-O4-iMn.title" = "ユニットナビ";
@@ -32,7 +25,7 @@
 /* Class = "UITabBarItem"; title = "组队"; ObjectID = "Ji2-5n-2Mz"; */
 "Ji2-5n-2Mz.title" = "ユニット";
 
-/* Class = "UINavigationController"; title = "歌曲导航"; ObjectID = "KxG-H5-NIc"; */
+/* Class = "UINavigationController"; title = "谱面导航"; ObjectID = "KxG-H5-NIc"; */
 "KxG-H5-NIc.title" = "譜面ナビ";
 
 /* Class = "UINavigationController"; title = "设置导航"; ObjectID = "Lc3-lA-ZOL"; */
@@ -41,41 +34,18 @@
 /* Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ"; */
 "OeQ-8h-gYQ.title" = "譜面";
 
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "S9a-oB-UoS"; */
-"S9a-oB-UoS.headerTitle" = "並べ替える";
-
-/* Class = "UITableViewController"; title = "卡片筛选和排序"; ObjectID = "XB8-jt-AiW"; */
-"XB8-jt-AiW.title" = "カードの絞り込み・並べ替え";
-
-/* Class = "UITableViewController"; title = "卡片"; ObjectID = "XEw-Y1-ITn"; */
-"XEw-Y1-ITn.title" = "カード";
-
-/* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "XrL-IG-AMC"; */
-"XrL-IG-AMC.headerTitle" = "絞り込む";
-
-/* Class = "UITableViewController"; title = "组队"; ObjectID = "Zys-WZ-9cy"; */
-"Zys-WZ-9cy.title" = "ユニット";
-
-/* Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef"; */
-"gE2-j0-zef.title" = "譜面";
-
-/* Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6"; */
-"gI8-ss-NS6.title" = "設定";
-
-/* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "hJn-41-ekr"; */
-"hJn-41-ekr.headerTitle" = "絞り込む";
-
-/* Class = "UITableViewSection"; headerTitle = "排序"; ObjectID = "rD2-JL-rj6"; */
-"rD2-JL-rj6.headerTitle" = "並べ替える";
+/* Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb"; */
+"omj-Op-jcb.title" = "マイユニット";
 
 /* Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8"; */
 "sAv-Q2-aG8.title" = "ツールナビ";
-
-/* Class = "UITableViewSection"; headerTitle = "筛选"; ObjectID = "vSe-a1-0gm"; */
-"vSe-a1-0gm.headerTitle" = "絞り込む";
 
 /* Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ"; */
 "wJt-PI-tVQ.title" = "ツール";
 
 /* Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6"; */
 "zeC-Rh-4X6.title" = "便利ツール";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78"; */
+"zkd-c8-p78.title" = "設定";
+

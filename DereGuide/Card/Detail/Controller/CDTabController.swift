@@ -74,8 +74,8 @@ class CDTabViewController: TabmanViewController, PageboyViewControllerDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        let items = [NSLocalizedString("Status", comment: ""),
-                     NSLocalizedString("Image", comment: "")].map { Item(title: $0) }
+        let items = [NSLocalizedString("属性", comment: ""),
+                     NSLocalizedString("图片", comment: "")].map { Item(title: $0) }
         
         dataSource = self
         bar.items = items

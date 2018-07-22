@@ -38,19 +38,6 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             
         }
         
-//        enum ShiftType: String, Codable, CustomStringConvertible {
-//            case fixedSpeed
-//            case fixedLength
-//            var description: String {
-//                switch self {
-//                case .fixedSpeed:
-//                    return NSLocalizedString("固定速度", comment: "")
-//                case .fixedLength:
-//                    return NSLocalizedString("固定小节长度", comment: "")
-//                }
-//            }
-//        }
-        
         var theme: ColorTheme
         var verticalScale: CGFloat
         var showsPlayLine: Bool
@@ -125,20 +112,6 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         option3.switch.isOn = !setting.hidesAssistedLines
         option3.addTarget(self, action: #selector(handleOption3Switch(_:)), for: .valueChanged)
         let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
-        
-//        let option4 = SegmentedOption()
-//        option4.label.text = NSLocalizedString("BPM变化时的对齐方式", comment: "")
-//
-//        option4.segmentedControll.insertSegment(withTitle: Setting.ShiftType.fixedLength.description, at: 0, animated: false)
-//        option4.segmentedControll.insertSegment(withTitle: Setting.ShiftType.fixedSpeed.description, at: 1, animated: false)
-//        if setting.shiftType == .fixedLength {
-//            option4.segmentedControll.selectedSegmentIndex = 0
-//        } else {
-//            option4.segmentedControll.selectedSegmentIndex = 1
-//        }
-//        option4.addTarget(self, action: #selector(handleOption4(_:)), for: .valueChanged)
-//
-//        let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .segmented(option4))
         
         staticCells = [cell1, cell2, cell3]
     }

@@ -67,15 +67,15 @@ class CDImageViewController: UITableViewController, CDImageTableViewCellDelegate
         rows.removeAll()
         
         if let spreadImageURL = card.spreadImageURL {
-            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("Spread", comment: ""), [spreadImageURL])))
+            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("大图", comment: ""), [spreadImageURL])))
         }
         
         if let signImageURL = card.signImageURL {
-            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("Sign", comment: ""), [signImageURL])))
+            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("签名", comment: ""), [signImageURL])))
         }
         
         if let cardImageURL = card.cardImageURL {
-            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("Portrait Card", comment: ""), [cardImageURL])))
+            rows.append(Row(type: CDImageTableViewCell.self, data: .album(NSLocalizedString("卡片图", comment: ""), [cardImageURL])))
         }
         
         if let spriteImageURL = card.spriteImageURL {

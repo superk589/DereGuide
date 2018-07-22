@@ -14,7 +14,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     var tableView: UITableView!
     
-    var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of \(Config.appName)", comment: "") , NSLocalizedString("Third-party Libraries", comment: "")]
+    var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of", comment: "") + " \(Config.appName)", NSLocalizedString("Third-party Libraries", comment: "")]
     
     lazy var thirdPartyLibraries: [[String: String]] = {
         return NSArray(contentsOfFile: self.path!) as! [[String: String]]

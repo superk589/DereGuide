@@ -30,7 +30,7 @@ class UnitEditingAdvanceOptionsManager {
             UserDefaults.standard.set(newValue, forKey: "defaultPotentialLevel")
         }
         get {
-            return UserDefaults.standard.object(forKey: "defaultPotentialLevel") as? Int ?? 30
+            return UserDefaults.standard.object(forKey: "defaultPotentialLevel") as? Int ?? Config.maximumTotalPotential
         }
     }
     
