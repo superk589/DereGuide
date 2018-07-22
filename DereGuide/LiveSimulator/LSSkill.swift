@@ -96,10 +96,13 @@ struct LSSkill {
     var type: LSSkillType
     
     /// 0 ~ 10000
-    var rate: Double
+    var rate: Int
     
     /// in percent, 30 means 0.3
     var rateBonus: Int
+    
+    /// in percent, 20 means 0.2
+    var ratePotentialBonus: Int
     
     /// overload skills' trigger life value
     var triggerLife: Int
@@ -120,7 +123,7 @@ struct LSSkill {
 extension LSSkill {
     
     var probability: Double {
-        return min(1, rate * Double(100 + rateBonus) / 1000000)
+        return min(1, Double(rate * (100 + rateBonus)) / 1000000)
     }
     
     var isConcentrated: Bool {

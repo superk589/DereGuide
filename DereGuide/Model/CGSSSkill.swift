@@ -83,21 +83,21 @@ extension CGSSSkill {
     
     @nonobjc func getLocalizedExplainByRange(_ range: CountableClosedRange<Int>) -> String {
         
-        let probabilityRangeString = String(format: "%.2f ~ %.2f", self.procChanceOfLevel(range.lowerBound) / 100, self.procChanceOfLevel(range.upperBound) / 100)
+        let probabilityRangeString = String(format: "%.2f ~ %.2f", Double(procChanceOfLevel(range.lowerBound)) / 100, Double(procChanceOfLevel(range.upperBound)) / 100)
         let probabilityExplain = String.init(format: probabilityClause, probabilityRangeString)
         
-        let lengthRangeString = String(format: "%.2f ~ %.2f", self.effectLengthOfLevel(range.lowerBound) / 100, self.effectLengthOfLevel(range.upperBound) / 100)
-        let lengthExplain = String.init(format: lengthClause, lengthRangeString)
+        let lengthRangeString = String(format: "%.2f ~ %.2f", Double(effectLengthOfLevel(range.lowerBound)) / 100, Double(effectLengthOfLevel(range.upperBound)) / 100)
+        let lengthExplain = String(format: lengthClause, lengthRangeString)
         
         return intervalExplain + probabilityExplain + effectExpalin + lengthExplain
     }
     
     @nonobjc func getLocalizedExplainByLevel(_ level: Int) -> String {
       
-        let probabilityRangeString = String(format: "%.2f", self.procChanceOfLevel(level) / 100)
+        let probabilityRangeString = String(format: "%@", (Decimal(procChanceOfLevel(level)) / 100).description)
         let probabilityExplain = String.init(format: probabilityClause, probabilityRangeString)
         
-        let lengthRangeString = String(format: "%.2f", self.effectLengthOfLevel(level) / 100)
+        let lengthRangeString = String(format: "%@", (Decimal(effectLengthOfLevel(level)) / 100).description)
         let lengthExplain = String.init(format: lengthClause, lengthRangeString)
         
         return intervalExplain + probabilityExplain + effectExpalin + lengthExplain
@@ -112,21 +112,31 @@ extension CGSSSkill {
     }
     
     // 在计算触发几率和持续时间时 要在取每等级增量部分进行一次向下取整
-    func procChanceOfLevel(_ lv: Int) -> Double {
+    func procChanceOfLevel(_ lv: Int) -> Int {
         if let p = procChance {
-            let p1 = Double(p[1])
-            let p0 = Double(p[0])
-            return (floor((p1 - p0) / 9) * (Double(lv) - 1) + p0)
+            let p1 = Float(p[1])
+            let p0 = Float(p[0])
+            return wpcap(x :(p1 - p0) / 9 * Float(lv - 1) + p0)
         } else {
             return 0
         }
     }
     
-    func effectLengthOfLevel(_ lv: Int) -> Double {
+    func wpcap(x: Float) -> Int {
+        var n = Int(x)
+        let n10 = Int(x * 10)
+        if (n10 % 10 != 0) {
+            n += 1
+        }
+        return n
+    }
+    
+    func effectLengthOfLevel(_ lv: Int) -> Int {
         if let e = effectLength {
-            let e1 = Double(e[1])
-            let e0 = Double(e[0])
-            return (floor((e1 - e0) / 9) * (Double(lv) - 1) + e0)
+            let e1 = Float(e[1])
+            let e0 = Float(e[0])
+            
+            return wpcap(x: (e1 - e0) / 9 * Float(lv - 1) + e0)
         } else {
             return 0
         }

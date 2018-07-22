@@ -309,7 +309,7 @@ class LiveCoordinator {
                     // 计算同属性歌曲 技能发动率的提升数值(groove活动中是同类型的groove类别)
                     var rateBonus = 0
                     if grooveType != nil {
-                        if member.card!.cardType == CGSSCardTypes.init(grooveType: grooveType!) {
+                        if member.card!.cardType == CGSSCardTypes(grooveType: grooveType!) {
                             rateBonus += 30
                         }
                     } else {
@@ -322,25 +322,29 @@ class LiveCoordinator {
                         rateBonus += leaderSkillBonus
                     }
                     
+                    // 计算触发几率潜能
+                    let sp = member.potential.skill
+                    let ratePotentialBonus = potentialOfLevel[member.card!.rarityType]?[sp] ?? 0
+                    
                     // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.timeOfLastNote)
                     for range in ranges {
                         switch type {
                         case .skillBoost:
-                            let bonus = LSSkill(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, value3: skill.value3, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                            let bonus = LSSkill(range: range, value: skillBoostValue[skill.value] ?? 1000, value2: skill.value2, value3: skill.value3, type: .skillBoost, rate: rankedSkill.chance, rateBonus: rateBonus, ratePotentialBonus: ratePotentialBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                             bonuses.append(bonus)
                         case .synergy:
                             if unit.isThreeColor(isInGrooveOrParade: (simulatorType != .normal)) {
-                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, ratePotentialBonus: ratePotentialBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                                 bonuses.append(bonus)
                             }
                         case .deep:
                             if unit.isAllOfType(cardType, isInGrooveOrParade: (simulatorType != .normal)) {
-                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                                let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, ratePotentialBonus: ratePotentialBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                                 bonuses.append(bonus)
                             }
                         default:
-                            let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
+                            let bonus = LSSkill(range: range, value: skill.value, value2: skill.value2, value3: skill.value3, type: type, rate: rankedSkill.chance, rateBonus: rateBonus, ratePotentialBonus: ratePotentialBonus, triggerLife: skill.skillTriggerValue, position: i, triggerEvaluations1: skill.triggerEvaluations1, triggerEvaluations2: skill.triggerEvaluations2, triggerEvaluations3: skill.triggerEvalutions3)
                             bonuses.append(bonus)
                         }
                     }
