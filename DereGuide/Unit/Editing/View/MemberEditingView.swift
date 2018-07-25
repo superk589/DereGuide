@@ -74,7 +74,7 @@ class MemberEditingView: UIView {
         } else if stepper == lifeStepper {
             stepper.descriptionLabel.text = String(appeal.life)
         } else if stepper == skillPotentialStepper {
-            stepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType]?[Int(stepper.value)] ?? 0)
+            stepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType.baseRarity]?[Int(stepper.value)] ?? 0)
         }
     }
     
@@ -110,7 +110,7 @@ class MemberEditingView: UIView {
         lifeStepper.descriptionLabel.text = String(appeal.life)
         
         skillPotentialStepper.value = Double(member.skillPotentialLevel)
-        skillPotentialStepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType]?[Int(skillPotentialStepper.value)] ?? 0)
+        skillPotentialStepper.descriptionLabel.text = String(format: "+%d%%", skillPotentialOfLevel[card.rarityType.baseRarity]?[Int(skillPotentialStepper.value)] ?? 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
