@@ -324,7 +324,7 @@ class LiveCoordinator {
                     
                     // 计算触发几率潜能
                     let sp = member.potential.skill
-                    let ratePotentialBonus = potentialOfLevel[member.card!.rarityType]?[sp] ?? 0
+                    let ratePotentialBonus = potentialOfLevel[card.rarityType.baseRarity]?[sp] ?? 0
                     
                     // 生成所有可触发范围
                     let ranges = rankedSkill.getUpRanges(lastNoteSec: beatmap.timeOfLastNote)
