@@ -1,5 +1,21 @@
 # ChangeLog
 
+### 1.9.1
+
+1. 修复技能触发几率潜能模拟时未能正确生效的问题。
+2. 修复模拟抽卡页面的错误。
+3. 修复一些界面布局问题。
+
+##### Japanese version
+1. スコア計算：シミュレート計算に特技発動率のポテンシャルを正しく加算されますよう、修正を行いました
+2. ガシャ情報：シミュレーター画面の不具合を修正
+3. 他の UI レイアウトの不具合を修正
+
+##### English version
+1. Fix the bug that skill potential does not work properly during simulation.
+2. Fix gacha detail page.
+3. Fix some layout issues.
+
 ### 1.9
 
 1. 新增对技能触发几率潜能的支持，并提高潜能等级上限至 35。
