@@ -19,7 +19,7 @@ class CardDetailRelatedCardsCell: UITableViewCell {
     let rightLabel = UILabel()
     let collectionView = TTGTagCollectionView()
     
-    var tagViews = NSCache<NSNumber, CGSSCardIconView>()
+    var tagViews = [Int: CGSSCardIconView]()
     
     weak var delegate: (CardDetailRelatedCardsCellDelegate & CGSSIconViewDelegate)?
     
@@ -91,12 +91,12 @@ extension CardDetailRelatedCardsCell: TTGTagCollectionViewDelegate, TTGTagCollec
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
         let icon: CGSSCardIconView
-        if let view = tagViews.object(forKey: NSNumber(value: index)) {
+        if let view = tagViews[Int(index)] {
             icon = view
         } else {
             icon = CGSSCardIconView()
             icon.isUserInteractionEnabled = false
-            tagViews.setObject(icon, forKey: NSNumber(value: index))
+            tagViews[Int(index)] = icon
         }
         icon.cardID = cards[Int(index)].id
         return icon

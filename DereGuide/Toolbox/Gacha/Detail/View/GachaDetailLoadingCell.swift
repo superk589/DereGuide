@@ -8,11 +8,7 @@
 
 import UIKit
 
-class GachaDetailLoadingCell: ReadableWidthTableViewCell {
-
-    override var maxReadableWidth: CGFloat {
-        return 824
-    }
+class GachaDetailLoadingCell: UITableViewCell {
     
     let leftLabel = UILabel()
     
@@ -29,17 +25,17 @@ class GachaDetailLoadingCell: ReadableWidthTableViewCell {
         
         leftLabel.font = UIFont.systemFont(ofSize: 16)
         leftLabel.text = NSLocalizedString("模拟抽卡", comment: "")
-        readableContentView.addSubview(leftLabel)
+        contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
-        readableContentView.addSubview(loadingView)
+        contentView.addSubview(loadingView)
         loadingView.snp.makeConstraints { (make) in
             make.top.equalTo(leftLabel.snp.bottom).offset(8)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.bottom.equalTo(-20)
         }
         

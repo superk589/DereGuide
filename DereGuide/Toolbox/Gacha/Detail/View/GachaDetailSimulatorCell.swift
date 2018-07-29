@@ -8,11 +8,7 @@
 
 import UIKit
 
-class GachaDetailSimulatorCell: ReadableWidthTableViewCell {
-
-    override var maxReadableWidth: CGFloat {
-        return 824
-    }
+class GachaDetailSimulatorCell: UITableViewCell {
     
     let simulatorView = GachaSimulatorView()
     
@@ -24,9 +20,10 @@ class GachaDetailSimulatorCell: ReadableWidthTableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        readableContentView.addSubview(simulatorView)
+        contentView.addSubview(simulatorView)
         simulatorView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalTo(readableContentGuide)
         }
         
         selectionStyle = .none

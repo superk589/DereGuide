@@ -13,7 +13,7 @@ protocol GachaDetailNewCardsCellDelegate: class {
     func navigateToFullAvailableList(gachaDetailNewCardsCell: GachaDetailNewCardsCell)
 }
 
-class GachaDetailNewCardsCell: ReadableWidthTableViewCell {
+class GachaDetailNewCardsCell: UITableViewCell {
     
     let titleLabel = UILabel()
     
@@ -21,29 +21,25 @@ class GachaDetailNewCardsCell: ReadableWidthTableViewCell {
     
     let collectionView = TTGTagCollectionView()
     
-    let tagViews = NSCache<NSNumber, GachaCardView>()
-    
-    override var maxReadableWidth: CGFloat {
-        return 824
-    }
+    var tagViews = [Int: GachaCardView]()
     
     weak var delegate: (GachaDetailNewCardsCellDelegate & CGSSIconViewDelegate)?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        readableContentView.addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.text = NSLocalizedString("新增卡片", comment: "模拟抽卡页面")
         titleLabel.textColor = .black
         
-        readableContentView.addSubview(fullAvailableListLabel)
+        contentView.addSubview(fullAvailableListLabel)
         fullAvailableListLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(titleLabel)
         }
         fullAvailableListLabel.text = NSLocalizedString("查看完整卡池", comment: "模拟抽卡页面") + " >"
@@ -57,12 +53,12 @@ class GachaDetailNewCardsCell: ReadableWidthTableViewCell {
         collectionView.contentInset = .zero
         collectionView.verticalSpacing = 5
         collectionView.horizontalSpacing = 5
-        readableContentView.addSubview(collectionView)
+        contentView.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
         }
@@ -102,12 +98,12 @@ extension GachaDetailNewCardsCell: TTGTagCollectionViewDelegate, TTGTagCollectio
     
     func tagCollectionView(_ tagCollectionView: TTGTagCollectionView!, tagViewFor index: UInt) -> UIView! {
         let gachaCardView: GachaCardView
-        if let view = tagViews.object(forKey: NSNumber.init(value: index)) {
+        if let view = tagViews[Int(index)] {
             gachaCardView = view
         } else {
             gachaCardView = GachaCardView()
             gachaCardView.icon.isUserInteractionEnabled = false
-            tagViews.setObject(gachaCardView, forKey: NSNumber.init(value: index))
+            tagViews[Int(index)] = gachaCardView
         }
         gachaCardView.setupWith(card: cardsWithOdds[Int(index)].card, odds: cardsWithOdds[Int(index)].odds)
         return gachaCardView

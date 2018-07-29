@@ -68,14 +68,15 @@ class GachaSimulatorView: UIView {
         tenButton.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.width.equalToSuperview().dividedBy(2).offset(-15)
-            make.top.equalTo(singleButton)
+            make.top.equalTo(resultView.snp.bottom).offset(10)
         }
         
         addSubview(resultGrid)
         resultGrid.snp.makeConstraints { (make) in
-            make.top.equalTo(tenButton.snp.bottom).offset(10)
+            make.top.equalTo(resultView.snp.bottom).offset(60)
             make.left.equalTo(10)
             make.right.equalTo(-10)
+            make.height.equalTo(72)
         }
         
         resetButton.setTitle(NSLocalizedString("重置", comment: "模拟抽卡页面"), for: .normal)
@@ -85,6 +86,7 @@ class GachaSimulatorView: UIView {
         resetButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
+            make.height.equalTo(40)
             make.top.equalTo(resultGrid.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }

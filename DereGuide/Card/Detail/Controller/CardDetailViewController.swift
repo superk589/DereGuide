@@ -112,6 +112,7 @@ class CardDetailViewController: BaseTableViewController {
         super.viewDidLoad()        
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
     
     private func registerCells() {

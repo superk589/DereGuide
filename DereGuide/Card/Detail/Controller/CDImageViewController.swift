@@ -101,6 +101,12 @@ class CDImageViewController: UITableViewController, CDImageTableViewCellDelegate
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.tableFooterView = UIView()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return staticCells.count
     }

@@ -8,20 +8,19 @@
 
 import UIKit
 
-class GachaDetailBannerCell: ReadableWidthTableViewCell {
+class GachaDetailBannerCell: UITableViewCell {
 
     let banner = BannerView()
-    
-    override var maxReadableWidth: CGFloat {
-        return 824
-    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        readableContentView.addSubview(banner)
+        contentView.addSubview(banner)
         banner.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.greaterThanOrEqualTo(readableContentGuide)
+            make.right.lessThanOrEqualTo(readableContentGuide)
+            make.center.equalToSuperview()
             make.width.equalTo(banner.snp.height).multipliedBy(824.0 / 212.0)
         }
         

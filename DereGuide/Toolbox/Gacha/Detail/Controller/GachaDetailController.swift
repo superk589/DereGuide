@@ -40,20 +40,14 @@ class GachaDetailController: BaseTableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
-        tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
         // fix on iOS 9, after custom transition, tableView may have wrong origin
         if tableView.frame.origin.y != 0 {
             tableView.frame.origin.y = 0
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -184,7 +178,7 @@ class GachaDetailController: BaseTableViewController {
             }
             cell.delegate = self
         case let cell as GachaDetailGuaranteesCell:
-            cell.setup(cards: gacha.cardsOfguaranteed)
+            cell.cards = gacha.cardsOfguaranteed
             cell.delegate = self
         case let cell as GachaDetailSimulatorCell:
             cell.setup(cardIDs: gachaCardIDs, result: gachaResult)
@@ -231,8 +225,7 @@ extension GachaDetailController: GachaSimulatorViewDelegate {
     
     func gachaSimulateView(_ gachaSimulatorView: GachaSimulatorView, didClick cardIcon: CGSSCardIconView) {
         if let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {
-            let vc = CardDetailViewController()
-            vc.card = card
+            let vc = CDTabViewController(card: card)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -248,9 +241,8 @@ extension GachaDetailController: GachaSimulatorViewDelegate {
 extension GachaDetailController: CGSSIconViewDelegate {
     
     func iconClick(_ iv: CGSSIconView) {
-        if let icon = iv as? CGSSCardIconView, let id = icon.cardID {
-            let vc = CardDetailViewController()
-            vc.card = CGSSDAO.shared.findCardById(id)
+        if let icon = iv as? CGSSCardIconView, let id = icon.cardID, let card = CGSSDAO.shared.findCardById(id) {
+            let vc = CDTabViewController(card: card)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

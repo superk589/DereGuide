@@ -59,28 +59,33 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     private var homeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if self.viewControllers.count <= showHomeButtonCount {
-            if let items = viewController.toolbarItems {
-                if items.count > 0 && items.contains(where: { ![flexibleSpaceItem, homeItem].contains($0) }) {
-                    setToolbarHidden(false, animated: animated)
-                } else {
-                    setToolbarHidden(true, animated: animated)
-                }
-            } else {
-                setToolbarHidden(true, animated: animated)
-            }
+//        if self.viewControllers.count <= showHomeButtonCount {
+//            if let items = viewController.toolbarItems {
+//                if items.count > 0 && items.contains(where: { ![flexibleSpaceItem, homeItem].contains($0) }) {
+//                    setToolbarHidden(false, animated: animated)
+//                } else {
+//                    setToolbarHidden(true, animated: animated)
+//                }
+//            } else {
+//                setToolbarHidden(true, animated: animated)
+//            }
+//        } else {
+//            setToolbarHidden(false, animated: animated)
+//            if let items = viewController.toolbarItems {
+//                if !items.contains(homeItem) {
+//                    if items.count > 0 {
+//                        viewController.toolbarItems?.append(flexibleSpaceItem)
+//                    }
+//                    viewController.toolbarItems?.append(homeItem)
+//                }
+//            } else {
+//                viewController.toolbarItems = [homeItem]
+//            }
+//        }
+        if let items = viewController.toolbarItems {
+            setToolbarHidden(items.count == 0, animated: animated)
         } else {
-            setToolbarHidden(false, animated: animated)
-            if let items = viewController.toolbarItems {
-                if !items.contains(homeItem) {
-                    if items.count > 0 {
-                        viewController.toolbarItems?.append(flexibleSpaceItem)
-                    }
-                    viewController.toolbarItems?.append(homeItem)
-                }
-            } else {
-                viewController.toolbarItems = [homeItem]
-            }
+            setToolbarHidden(true, animated: animated)
         }
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GachaDetailBasicCell: ReadableWidthTableViewCell {
+class GachaDetailBasicCell: UITableViewCell {
 
     let nameLabel = UILabel()
     
@@ -20,55 +20,51 @@ class GachaDetailBasicCell: ReadableWidthTableViewCell {
     
     let timeIndicator = TimeStatusIndicator()
     
-    override var maxReadableWidth: CGFloat {
-        return 824
-    }
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-        readableContentView.addSubview(nameLabel)
+        contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
         }
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.baselineAdjustment = .alignCenters
         nameLabel.textAlignment = .left
         nameLabel.font = UIFont.systemFont(ofSize: 16)
         
-        readableContentView.addSubview(ratioLabel)
+        contentView.addSubview(ratioLabel)
         ratioLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
         ratioLabel.font = UIFont.systemFont(ofSize: 12)
         ratioLabel.textAlignment = .left
         ratioLabel.textColor = .vocal
         
-        readableContentView.addSubview(detailLabel)
+        contentView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(ratioLabel.snp.bottom).offset(8)
         }
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.numberOfLines = 0
         detailLabel.textColor = .darkGray
         
-        readableContentView.addSubview(timeIndicator)
+        contentView.addSubview(timeIndicator)
         timeIndicator.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.height.width.equalTo(12)
             make.top.equalTo(detailLabel.snp.bottom).offset(6)
         }
         
-        readableContentView.addSubview(timeLabel)
+        contentView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { (make) in
             make.left.equalTo(timeIndicator.snp.right).offset(10)
             make.centerY.equalTo(timeIndicator)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
             make.bottom.equalTo(-10)
         }
         timeLabel.font = UIFont.systemFont(ofSize: 12)
