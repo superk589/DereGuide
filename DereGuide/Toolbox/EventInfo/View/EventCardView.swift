@@ -28,7 +28,8 @@ class EventCardView: UIView {
         
         addSubview(cardView)
         cardView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.top.equalTo(descLabel.snp.bottom).offset(-2)
             make.height.equalTo(68)
         }

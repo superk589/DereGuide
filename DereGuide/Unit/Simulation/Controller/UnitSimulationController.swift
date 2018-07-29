@@ -282,9 +282,8 @@ extension UnitSimulationController: UnitSimulationUnitCellDelegate {
     
     func unitSimulationUnitCell(_ unitSimulationUnitCell: UnitSimulationUnitCell, didClick cardIcon: CGSSCardIconView) {
         if let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {
-            let cardDVC = CardDetailViewController()
-            cardDVC.card = card
-            navigationController?.pushViewController(cardDVC, animated: true)
+            let vc = CDTabViewController(card: card)
+            navigationController?.pushViewController(vc, animated: true)
         }
 
     }

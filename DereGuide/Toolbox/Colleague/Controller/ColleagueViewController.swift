@@ -162,8 +162,7 @@ extension ColleagueViewController: ColleagueTableViewCellDelegate {
     
     func colleagueTableViewCell(_ cell: ColleagueTableViewCell, didTap cardIcon: CGSSCardIconView) {
         if let cardID = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(cardID) {
-            let vc = CardDetailViewController()
-            vc.card = card
+            let vc = CDTabViewController(card: card)
             navigationController?.pushViewController(vc, animated: true)
         }
     }

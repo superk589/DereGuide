@@ -85,10 +85,9 @@ class GachaCardTableViewController: BaseCardTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let cardDetailVC = CardDetailViewController()
-        cardDetailVC.card = cardList[indexPath.row]
-        cardDetailVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(cardDetailVC, animated: true)
+        let vc = CDTabViewController(card: cardList[indexPath.row])
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func doneAndReturn(filter: CGSSCardFilter, sorter: CGSSSorter) {

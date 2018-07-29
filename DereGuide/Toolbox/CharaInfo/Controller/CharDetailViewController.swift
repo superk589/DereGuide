@@ -136,9 +136,8 @@ extension CharDetailViewController: CardDetailRelatedCardsCellDelegate, CGSSIcon
     }
     
     func iconClick(_ iv: CGSSIconView) {
-        if let cardIcon = iv as? CGSSCardIconView {
-            let vc = CardDetailViewController()
-            vc.card = CGSSDAO.shared.findCardById(cardIcon.cardID!)
+        if let cardIcon = iv as? CGSSCardIconView, let id = cardIcon.cardID, let card = CGSSDAO.shared.findCardById(id) {
+            let vc = CDTabViewController(card: card)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

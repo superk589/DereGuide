@@ -200,7 +200,7 @@ extension EventDetailController: EventDetailViewDelegate {
     func gotoLiveTrendView(eventDetailView: EventDetailView) {
         let vc = EventTrendViewController()
         vc.eventId = event.id
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func refreshPtView(eventDetailView: EventDetailView) {
@@ -215,7 +215,7 @@ extension EventDetailController: EventDetailViewDelegate {
         if let list = self.ptList, list.list.count > 0 {
             let vc = EventChartController()
             vc.rankingList = list
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -223,17 +223,14 @@ extension EventDetailController: EventDetailViewDelegate {
         if let list = self.scoreList, list.list.count > 0 {
             let vc = EventChartController()
             vc.rankingList = list
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     func eventDetailView(_ view: EventDetailView, didClick icon: CGSSCardIconView) {
-        if let id = icon.cardID {
-            if let card = CGSSDAO.shared.findCardById(id) {
-                let vc = CardDetailViewController()
-                vc.card = card
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+        if let id = icon.cardID, let card = CGSSDAO.shared.findCardById(id) {
+            let vc = CDTabViewController(card: card)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
