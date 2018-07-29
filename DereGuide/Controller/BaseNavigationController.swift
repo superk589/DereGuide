@@ -54,9 +54,9 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         setToolbarHidden(true, animated: true)
     }
     
-    private var flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    private lazy var flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     
-    private var homeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
+    private lazy var homeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "750-home-toolbar"), style: .plain, target: self, action: #selector(popToRoot))
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 //        if self.viewControllers.count <= showHomeButtonCount {

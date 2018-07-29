@@ -60,15 +60,14 @@ extension CGSSBeatmapNote {
 extension CGSSBeatmapNote {
     
     var rangeType: RangeType {
-        if type == 3 {
-            if status != 2 && status != 1 {
-                return .flick
-            } else {
-                return .slide
-            }
-        } else if type == 2 {
+        switch (status, type) {
+        case (1, _), (2, _):
+            return .flick
+        case (_, 3):
+            return .slide
+        case (_, 2):
             return .hold
-        } else {
+        default:
             return .click
         }
     }
