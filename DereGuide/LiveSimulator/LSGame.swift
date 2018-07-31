@@ -357,10 +357,13 @@ struct LSGame {
     }
     
     private(set) var hasLifeSparkle = false
+    private(set) var bestLifeSparkle: LSSkill?
     
     private mutating func updateLifeSparkle() {
-        hasLifeSparkle = skills.values
-            .contains { $0.type == .lifeSparkle }
+        bestLifeSparkle = skills.values
+            .filter { $0.type == .lifeSparkle }
+            .max { $0.baseRarity.rawValue < $1.baseRarity.rawValue }
+        hasLifeSparkle = bestLifeSparkle != nil
     }
     
     private(set) var bestPerfectBonus: LSSkill?
@@ -395,7 +398,7 @@ struct LSGame {
     private mutating func updateBonusGroup() {
         let maxPerfectBonus = bestPerfectBonus?.value ?? 100
         let maxComboBonus = bestComboBonus?.comboBonusValue ?? 100
-        let lifeSparkleBonus = hasLifeSparkle ? LiveCoordinator.comboBonusValueOfLife(currentLife) : 100
+        let lifeSparkleBonus = hasLifeSparkle ? LiveCoordinator.comboBonusValueOfLife(currentLife, baseRarity: bestLifeSparkle!.baseRarity) : 100
         let maxSkillBoost = bestSkillBoost?.value ?? 1000
         bonusGroup = LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
     }

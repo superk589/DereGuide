@@ -118,6 +118,8 @@ struct LSSkill {
     
     /// what kind of note evaluation can get bonus of effect 3
     var triggerEvaluations3: LSTriggerEvaluations
+    
+    var baseRarity: CGSSRarityTypes
 }
 
 extension LSSkill {
