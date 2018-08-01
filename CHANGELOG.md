@@ -1,5 +1,27 @@
 # ChangeLog
 
+### 1.9.2
+
+1. 支持计算 31 星难度歌曲得分。
+2. 根据官方数据调整生命闪耀技能的加成数值。
+3. 修复模拟算分时技能触发几率的 Bug。
+4. 修复一些页面布局问题。
+
+##### Japanese version
+
+1. スコア計算：譜面難易度★31に対応します
+2. データ：一部アイドルのライフスパークル効果量を変更
+3. スコア計算：シミュレート計算に異常の発動確率のバグを修正
+4. 一部の UI レイアウトの不具合を修正
+
+##### English version
+
+1. Support for 31 MASTER+ in simulation.
+2. Adjust life sparkle skills' bonus value as the formal data.
+3. Fix skill proc chance bug.
+4. Fix some layout issues.
+
+
 ### 1.9.1
 
 1. 修复技能触发几率潜能模拟时未能正确生效的问题。
