@@ -51,11 +51,14 @@ fileprivate let lifeToComboBonus: [CGSSRarityTypes: [Int: Int]] = [
 
 ]
 
+fileprivate let maxLifeToComboBonusKey = 1600
+
 class LiveCoordinator {
     
     class func comboBonusValueOfLife(_ life: Int, baseRarity: CGSSRarityTypes) -> Int {
         let key = life / 10 * 10
-        return lifeToComboBonus[baseRarity]?[key] ?? 108
+        let bonues = lifeToComboBonus[baseRarity]?[key] ?? lifeToComboBonus[baseRarity]?[maxLifeToComboBonusKey] ?? 100
+        return bonues
     }
     
     var unit: Unit
