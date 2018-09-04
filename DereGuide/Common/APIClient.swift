@@ -72,7 +72,7 @@ class APIClient {
         let body = (Rijndael(key: key, mode: .cbc)!.encrypt(data: plain, blockSize: 32, iv: msgIV)! + key).base64EncodedData()
         let sid = self.sid ?? viewerID + udid
 
-        let base = base ?? self.base
+        let base = base ?? self.apis
         
         let url = URL(string: base + path)!
         

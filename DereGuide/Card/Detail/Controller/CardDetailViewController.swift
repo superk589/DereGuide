@@ -269,10 +269,8 @@ extension CardDetailViewController: CGSSIconViewDelegate {
             let dao = CGSSDAO.shared
             // 如果因为数据更新导致未查找到指定的卡片, 则不弹出新页面
             if let card = dao.findCardById(icon.cardID!) {
-                let cardDetailVC = CardDetailViewController()
-                cardDetailVC.card = card
-                // cardDetailVC.modalTransitionStyle = .CoverVertical
-                self.navigationController?.pushViewController(cardDetailVC, animated: true)
+                let vc = CDTabViewController(card: card)
+                navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

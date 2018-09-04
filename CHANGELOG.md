@@ -1,5 +1,18 @@
 # ChangeLog
 
+
+### 1.9.3
+1. 修复当生命值大于 1600 时，生命闪耀加成计算错误的问题。
+2. 修复卡池和活动图片缺失的问题。
+3. 修复无法模拟抽卡的问题。
+4. 其他细节优化。
+
+##### English version
+1. Fix when hp > 1600, life sparkle skill has wrong bonus value.
+2. Fix the missing cover image of gacha and event.
+3. Fix that gacha simulator always fails.
+4. Other minor improvements.
+
 ### 1.9.2
 
 1. 支持计算 31 星难度歌曲得分。

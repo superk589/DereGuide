@@ -84,11 +84,11 @@ extension CGSSGacha {
         
     var detailBannerURL: URL! {
         if id > 30170 && isReappeared {
-            return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
+            return URL(string: String(format: "https://apis.game.starlight-stage.jp/image/announce/image/header_gacha_%04d.png", detailBannerId))
         } else if gachaType == .premium {
             return URL(string: String(format: "https://apis.game.starlight-stage.jp/image/announce/header/header_premium_%04d.png", detailBannerId % 10000))
         } else {
-            return URL(string: String(format: "https://games.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))
+            return URL(string: String(format: "https://apis.game.starlight-stage.jp/image/announce/header/header_gacha_%04d.png", detailBannerId))
         }
     }
     

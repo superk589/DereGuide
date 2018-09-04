@@ -55,12 +55,12 @@ extension CGSSEvent {
     var detailBannerURL: URL! {
         // new url https://apis.game.starlight-stage.jp/image/announce/header/header_event_%04d.png
         if startDate.toDate() > Date() {
-            return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", id))
+            return URL.init(string: String.init(format: "https://apis.game.starlight-stage.jp/image/event/teaser/event_teaser_%04d.png", id))
         } else {
             if detailBannerId == 20 {
-                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d_2.png", detailBannerId))
+                return URL.init(string: String.init(format: "https://apis.game.starlight-stage.jp/image/announce/header/header_event_%04d_2.png", detailBannerId))
             } else {
-                return URL.init(string: String.init(format: "https://games.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId))
+                return URL.init(string: String.init(format: "https://apis.game.starlight-stage.jp/image/announce/header/header_event_%04d.png", detailBannerId))
             }
         }
     }
