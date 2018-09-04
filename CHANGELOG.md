@@ -7,6 +7,12 @@
 3. 修复无法模拟抽卡的问题。
 4. 其他细节优化。
 
+##### Japanese version
+1. スコア計算：ライフが 1600 上回る場合、特技「ライフスパークル」の係数が 0 になる不具合を修正
+2. 全般：ガシャやイベントのヘッダー画像が正しく取得できるように修正した
+3. ツール：ガシャシミュレーターの修正
+4. 他の機能改善
+
 ##### English version
 1. Fix when hp > 1600, life sparkle skill has wrong bonus value.
 2. Fix the missing cover image of gacha and event.
