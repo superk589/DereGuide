@@ -50,7 +50,7 @@ extension CGSSChar {
 
 class BirthdayCenter {
     static let `default` = BirthdayCenter()
-    var chars: [CGSSChar]!
+    var chars = [CGSSChar]()
     var lastSortDate: Date!
     
     private init() {

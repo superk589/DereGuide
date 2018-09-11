@@ -18,7 +18,7 @@ private enum Button: Int {
     case increase
 }
 
-@IBDesignable open class ValueStepper: UIControl {
+@IBDesignable class ValueStepper: UIControl {
     
     // MARK - Public variables
     
@@ -204,7 +204,7 @@ private enum Button: Int {
         setUp()
     }
     
-    open override static var requiresConstraintBasedLayout: Bool {
+    override public static var requiresConstraintBasedLayout: Bool {
         get {
             return true
         }

@@ -66,15 +66,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 13 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.event)
             }
-            if lastVersion < 14 {
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
-                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
-            }
             if lastVersion < 17 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
             if lastVersion < 18 {
                 UnitEditingAdvanceOptionsManager.default.reset()
+            }
+            if lastVersion < 19 {
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
+                try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
         }
         

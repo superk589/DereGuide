@@ -558,6 +558,11 @@
         <target>Perfect notes will receive a %d%% score bonus, but become harder to hit</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="使所有音符恢复你 %d 点生命">
         <source>使所有音符恢复你 %d 点生命</source>
         <target>all notes will restore %d health</target>
@@ -818,6 +823,11 @@
       <trans-unit id="图片">
         <source>图片</source>
         <target>Images</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="坐标之力">
+        <source>坐标之力</source>
+        <target>Coordination</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="基础分">
@@ -2234,7 +2244,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" datatype="plaintext" source-language="zh-Hans" target-language="en">
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>

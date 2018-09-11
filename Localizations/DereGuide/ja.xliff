@@ -98,7 +98,7 @@
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_NAME)</source>
-        <target>$(PRODUCT_NAME)</target>
+        <target>DereGuide</target>
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSPhotoLibraryAddUsageDescription">
@@ -558,6 +558,11 @@
         <target>PERFECTのスコア %d%% アップ、PERFECT判定される時間が短くなる</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
+        <target>PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="使所有音符恢复你 %d 点生命">
         <source>使所有音符恢复你 %d 点生命</source>
         <target>全てノーツがライフ %d 回復</target>
@@ -820,6 +825,11 @@
         <target>画像</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="坐标之力">
+        <source>坐标之力</source>
+        <target>コーディネイト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="基础分">
         <source>基础分</source>
         <target>基本スコア</target>
@@ -842,7 +852,7 @@
       </trans-unit>
       <trans-unit id="大图">
         <source>大图</source>
-        <target>スプレッド</target>
+        <target>大圖</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="天井">
@@ -913,7 +923,7 @@
       </trans-unit>
       <trans-unit id="属性">
         <source>属性</source>
-        <target>ステータス</target>
+        <target>屬性</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="属性排名">
@@ -1790,7 +1800,7 @@
       </trans-unit>
       <trans-unit id="签名">
         <source>签名</source>
-        <target>サイン</target>
+        <target>簽名</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="签名图">
@@ -2081,7 +2091,7 @@
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>
-        <target>フィードバック</target>
+        <target>問題反饋</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="队伍不完整">
@@ -2234,7 +2244,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" datatype="plaintext" source-language="zh-Hans" target-language="ja">
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="ja">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>

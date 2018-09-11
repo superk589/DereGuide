@@ -30,7 +30,7 @@
 	<key>Data version</key>
 	<string>2.0.0</string>
 	<key>Document version</key>
-	<integer>18</integer>
+	<integer>19</integer>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>

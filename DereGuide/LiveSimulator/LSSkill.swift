@@ -29,8 +29,10 @@ enum LSSkillType {
     
     case synergy
     
-    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy]
-    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy]
+    case coordination
+    
+    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy, .coordination]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy, .coordination]
     static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal, .synergy]
 
     init?(type: CGSSSkillTypes) {
@@ -63,6 +65,8 @@ enum LSSkillType {
             self = .lifeSparkle
         case CGSSSkillTypes.synergy:
             self = .synergy
+        case CGSSSkillTypes.coordination:
+            self = .coordination
         default:
             return nil
         }
@@ -137,7 +141,7 @@ extension LSSkill {
 extension LSSkill {
     
     var comboBonusValue: Int {
-        if type == .deep || type == .synergy {
+        if type == .deep || type == .synergy || type == .coordination {
             return value2
         } else if LSSkillType.allComboBonus.contains(type) {
             return value
@@ -163,7 +167,7 @@ extension CGSSSkill {
     
     var triggerEvaluations1: LSTriggerEvaluations {
         switch skillTypeId {
-        case 1, 14, 15, 17, 21, 22, 23, 26:
+        case 1, 14, 15, 17, 21, 22, 23, 26, 27:
             return .perfect
         case 2, 18:
             return [.perfect, .great]

@@ -312,6 +312,9 @@ struct LSGame {
             updateHealer()
             updatePerfectBonus()
             updateComboBonus()
+        case .coordination:
+            updatePerfectBonus()
+            updateComboBonus()
         default:
             break
         }
@@ -364,6 +367,7 @@ struct LSGame {
             .filter { $0.type == .lifeSparkle }
             .max { $0.baseRarity.rawValue < $1.baseRarity.rawValue }
         hasLifeSparkle = bestLifeSparkle != nil
+        updateBonusGroup()
     }
     
     private(set) var bestPerfectBonus: LSSkill?

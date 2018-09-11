@@ -24,7 +24,7 @@ struct DataPath {
 
 open class CGSSDAO: NSObject {
     
-    open static let shared = CGSSDAO()
+    public static let shared = CGSSDAO()
     
     // 主数据 采用懒加载
     open lazy var skillDict = CGSSDAO.loadDataFromFile(.skill)

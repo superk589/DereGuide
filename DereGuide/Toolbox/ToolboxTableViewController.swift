@@ -11,11 +11,11 @@ import UIKit
 class ToolboxTableViewController: UITableViewController {
     
     let path = Bundle.main.path(forResource: "ToolboxList", ofType: ".plist")
-    var dataSource: [[String: String]]!
+    var dataSource = [[String: String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = NSArray(contentsOfFile: path!) as! [[String: String]]
+        dataSource = NSArray(contentsOfFile: path!) as! [[String : String]]
         tableView.register(ToolboxTableViewCell.self, forCellReuseIdentifier: ToolboxTableViewCell.description())
         tableView.tableFooterView = UIView()
         tableView.cellLayoutMarginsFollowReadableWidth = true

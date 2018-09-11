@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LSLog {
+struct LSLog: Codable {
     
     /// 从1开始的Index
     var noteIndex: Int

@@ -176,7 +176,7 @@ class DMComposingStepTwoController: BaseTableViewController {
     }
     
     func setup(parentProfile: Profile) {
-        self.profile = context.object(with: parentProfile.objectID) as! Profile
+        self.profile = context.object(with: parentProfile.objectID) as? Profile
     }
     
     fileprivate func postDidCompleted(_ error: RemoteError?, _ remoteProfiles: [ProfileRemote.R]) {
