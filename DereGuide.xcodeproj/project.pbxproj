@@ -243,7 +243,6 @@
 		1285F4A61F32CC1E002A81F7 /* MyCenterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1285F4A51F32CC1E002A81F7 /* MyCenterCardView.swift */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E94931EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */; };
-		128EC5FF2104AD6B00EBED33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646D2104AD5E001AA456 /* InfoPlist.strings */; };
 		1291820A1F5853E800F91C0B /* DMProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182091F5853E800F91C0B /* DMProfile.swift */; };
 		1291820D1F58544600F91C0B /* DMSupportCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291820C1F58544600F91C0B /* DMSupportCard.swift */; };
 		1291820F1F5854FE00F91C0B /* DMLeaderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291820E1F5854FE00F91C0B /* DMLeaderCard.swift */; };
@@ -276,6 +275,11 @@
 		12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12A3F1691E5ADA96007B470E /* BpmShift.plist */; };
 		12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */; };
 		12A71D5D1D8B8AD10021320D /* GachaCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */; };
+		12AA985B2147FF480060C6D8 /* VersionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AA98542147FF480060C6D8 /* VersionLog.swift */; };
+		12AA985C2147FF480060C6D8 /* VLNoScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AA98562147FF480060C6D8 /* VLNoScheduleTableViewCell.swift */; };
+		12AA985D2147FF480060C6D8 /* VLTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AA98572147FF480060C6D8 /* VLTableViewHeaderFooterView.swift */; };
+		12AA985E2147FF480060C6D8 /* VLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AA98582147FF480060C6D8 /* VLTableViewCell.swift */; };
+		12AA985F2147FF480060C6D8 /* VLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AA985A2147FF480060C6D8 /* VLTableViewController.swift */; };
 		12ABE3401F42CE67003A5E7F /* ColleagueFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE33F1F42CE67003A5E7F /* ColleagueFilterController.swift */; };
 		12ABE3471F42D61A003A5E7F /* ColleagueFilterTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */; };
 		12ABE34B1F42DD02003A5E7F /* ColleagueFilterCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */; };
@@ -364,6 +368,8 @@
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
 		12E45DE9205560E90059E73A /* GachaResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E45DE8205560E80059E73A /* GachaResultCardView.swift */; };
 		12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */; };
+		12E9A1002147FFD6006769A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646A2104AD5E001AA456 /* InfoPlist.strings */; };
+		12E9A1022147FFD6006769A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646D2104AD5E001AA456 /* InfoPlist.strings */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
 		12EECCD31ED57EFA0047666C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EECCD21ED57EFA0047666C /* NotificationViewController.swift */; };
@@ -742,6 +748,11 @@
 		12A3F16D1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSBeatmapShiftingInfo.swift; sourceTree = "<group>"; };
 		12A71D5C1D8B8AD10021320D /* GachaCardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaCardTableViewController.swift; sourceTree = "<group>"; };
 		12A71D911D8C20260021320D /* DereGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DereGuide.entitlements; sourceTree = "<group>"; };
+		12AA98542147FF480060C6D8 /* VersionLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionLog.swift; sourceTree = "<group>"; };
+		12AA98562147FF480060C6D8 /* VLNoScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLNoScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		12AA98572147FF480060C6D8 /* VLTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		12AA98582147FF480060C6D8 /* VLTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLTableViewCell.swift; sourceTree = "<group>"; };
+		12AA985A2147FF480060C6D8 /* VLTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VLTableViewController.swift; sourceTree = "<group>"; };
 		12ABE33F1F42CE67003A5E7F /* ColleagueFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterController.swift; sourceTree = "<group>"; };
 		12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterTypeCell.swift; sourceTree = "<group>"; };
 		12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterCardCell.swift; sourceTree = "<group>"; };
@@ -840,6 +851,8 @@
 		12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapHashManager.swift; sourceTree = "<group>"; };
 		12E45DE8205560E80059E73A /* GachaResultCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaResultCardView.swift; sourceTree = "<group>"; };
 		12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDifficultyView.swift; sourceTree = "<group>"; };
+		12E9A0FF2147FFD6006769A6 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		12E9A1012147FFD6006769A6 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		12EECCCE1ED57EF90047666C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12EECCD21ED57EFA0047666C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		12EECCD51ED57EFA0047666C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -1062,6 +1075,7 @@
 				1257C1C31F5CDF5300C3DFE1 /* MusicInfo */,
 				1238059B1DAA1582007361CF /* EventInfo */,
 				129B95551F3156BF007B7AE2 /* Colleague */,
+				12AA98522147FF480060C6D8 /* VersionLog */,
 				124E470C1D654AB700DD0399 /* ToolboxTableViewCell.swift */,
 				124E470D1D654AB700DD0399 /* ToolboxTableViewController.swift */,
 				121D23791E70F97700319519 /* BannerViewAnimator.swift */,
@@ -1725,6 +1739,42 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		12AA98522147FF480060C6D8 /* VersionLog */ = {
+			isa = PBXGroup;
+			children = (
+				12AA98532147FF480060C6D8 /* Model */,
+				12AA98552147FF480060C6D8 /* View */,
+				12AA98592147FF480060C6D8 /* ViewController */,
+			);
+			path = VersionLog;
+			sourceTree = "<group>";
+		};
+		12AA98532147FF480060C6D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				12AA98542147FF480060C6D8 /* VersionLog.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		12AA98552147FF480060C6D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12AA98562147FF480060C6D8 /* VLNoScheduleTableViewCell.swift */,
+				12AA98572147FF480060C6D8 /* VLTableViewHeaderFooterView.swift */,
+				12AA98582147FF480060C6D8 /* VLTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		12AA98592147FF480060C6D8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				12AA985A2147FF480060C6D8 /* VLTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		12ABE3411F42D351003A5E7F /* Filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -2253,6 +2303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				126B646C2104AD5E001AA456 /* InfoPlist.strings in Resources */,
+				12E9A1002147FFD6006769A6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2261,7 +2312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12EECCD61ED57EFA0047666C /* MainInterface.storyboard in Resources */,
-				128EC5FF2104AD6B00EBED33 /* InfoPlist.strings in Resources */,
+				12E9A1022147FFD6006769A6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2407,6 +2458,7 @@
 				1239AC171F2ACA71005B6C35 /* FavoriteCharasManager.swift in Sources */,
 				1245F79A1F175B07009A80EC /* CloudKitMergePolicy.swift in Sources */,
 				12D6244C1F171FB70017999A /* ChangeProcessor.swift in Sources */,
+				12AA985D2147FF480060C6D8 /* VLTableViewHeaderFooterView.swift in Sources */,
 				12D6244D1F171FB70017999A /* UnitsRemote.swift in Sources */,
 				1291820F1F5854FE00F91C0B /* DMLeaderCard.swift in Sources */,
 				12D6244F1F171FB70017999A /* UnitUploader.swift in Sources */,
@@ -2463,6 +2515,7 @@
 				129516CF1F09E41E00D71ADF /* ValueStepper.swift in Sources */,
 				12ABE3471F42D61A003A5E7F /* ColleagueFilterTypeCell.swift in Sources */,
 				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
+				12AA985F2147FF480060C6D8 /* VLTableViewController.swift in Sources */,
 				12CDC6D81F662FA1004BB7AE /* CGSSSongFilter.swift in Sources */,
 				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
@@ -2556,6 +2609,7 @@
 				12FC8B5C1EDE6E6D003CF3C3 /* NoteScoreTableViewSectionFooter.swift in Sources */,
 				12F9B0401F28956C00D3B47E /* RemoteFavoriteChara.swift in Sources */,
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
+				12AA985B2147FF480060C6D8 /* VersionLog.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LiveCoordinator.swift in Sources */,
 				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */,
@@ -2594,6 +2648,7 @@
 				12B4C1CB1F9B648B00EC03FC /* CGSSBeatmapNote.swift in Sources */,
 				1269E9FC1D520C3E0071AD7F /* UnitTableViewCell.swift in Sources */,
 				1206F6D01E29053C000FAC78 /* CharFilterSortController.swift in Sources */,
+				12AA985C2147FF480060C6D8 /* VLNoScheduleTableViewCell.swift in Sources */,
 				122497261E8E859C005C743C /* LSNote.swift in Sources */,
 				124E47151D654AB700DD0399 /* ToolboxTableViewController.swift in Sources */,
 				1269EA041D520C9F0071AD7F /* LiveTableViewController.swift in Sources */,
@@ -2758,6 +2813,7 @@
 				12725F29203FED1500FBBB64 /* ScoreDashboardController.swift in Sources */,
 				12F33DA71F0F32E900B75E47 /* Member.swift in Sources */,
 				1262F4F41ECC4E8700AD6424 /* Protocols.swift in Sources */,
+				12AA985E2147FF480060C6D8 /* VLTableViewCell.swift in Sources */,
 				12693CA62081D13C0052C365 /* IntExtenstion.swift in Sources */,
 				1228794E1F8A56AE00AD1F5F /* CharaProfileTitleView.swift in Sources */,
 				12F57C611EE2978000638650 /* LiveSimulationAdvanceOptionsManager.swift in Sources */,
@@ -2875,6 +2931,7 @@
 				126B646B2104AD5E001AA456 /* en */,
 				128EC6002104AD6B00EBED33 /* ja */,
 				120FE4062104AD7600A1B833 /* zh-Hant */,
+				12E9A0FF2147FFD6006769A6 /* zh-Hant-TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2884,6 +2941,7 @@
 			children = (
 				126B646E2104AD5E001AA456 /* en */,
 				128EC5FE2104AD6B00EBED33 /* ja */,
+				12E9A1012147FFD6006769A6 /* zh-Hant-TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

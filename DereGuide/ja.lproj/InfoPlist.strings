@@ -1,14 +1,9 @@
-/* 
-  InfoPlist.strings
-  DereGuide
+/* Bundle name */
+"CFBundleName" = "DereGuide";
 
-  Created by zzk on 2016/9/26.
-  Copyright © 2016 zzk. All rights reserved.
-*/
+/* Privacy - Photo Library Additions Usage Description */
+"NSPhotoLibraryAddUsageDescription" = "ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。";
 
-NSPhotoLibraryUsageDescription = "ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。";
-NSPhotoLibraryAddUsageDescription = "ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。";
-shortcutItemTitle1 = "カード";
-shortcutItemTitle2 = "譜面";
-shortcutItemTitle3 = "イベント";
-shortcutItemTitle4 = "ガシャシミュレーター";
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "ここでアプリをアルバムへのアクセス権限を許可してください。プライバシーの変更はあとでシステム設定に変更することができます。";
+

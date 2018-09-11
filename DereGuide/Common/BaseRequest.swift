@@ -142,5 +142,3 @@ class BaseRequest {
         return newStr ?? ""
     }
 }
-
-

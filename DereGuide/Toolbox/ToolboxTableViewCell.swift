@@ -11,28 +11,18 @@ import SnapKit
 
 class ToolboxTableViewCell: UITableViewCell {
     
-    let icon = CGSSCardIconView()
-    let descLabel = UILabel()
+    let titleLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        icon.isUserInteractionEnabled = false
-
-        descLabel.font = .systemFont(ofSize: 16)
-        descLabel.backgroundColor = .white
-        contentView.addSubview(icon)
-        contentView.addSubview(descLabel)
+        titleLabel.font = .systemFont(ofSize: 16)
+        titleLabel.backgroundColor = .white
+        contentView.addSubview(titleLabel)
         
-        icon.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.left.equalTo(readableContentGuide)
-            make.height.width.equalTo(48)
-        }
-        
-        descLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalTo(icon.snp.right).offset(10)
+            make.left.equalTo(readableContentGuide)
             make.right.lessThanOrEqualTo(readableContentGuide)
         }
     }

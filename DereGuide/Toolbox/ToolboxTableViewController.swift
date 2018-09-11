@@ -36,10 +36,7 @@ class ToolboxTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToolboxTableViewCell.description(), for: indexPath) as! ToolboxTableViewCell
-        
-        cell.descLabel.text = dataSource[indexPath.row]["title"]
-        cell.icon.cardID = Int(dataSource[indexPath.row]["iconId"]!)
-        
+        cell.titleLabel.text = dataSource[indexPath.row]["title"]
         return cell
     }
     

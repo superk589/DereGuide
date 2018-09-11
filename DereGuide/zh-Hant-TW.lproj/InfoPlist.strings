@@ -1,14 +1,9 @@
-/* 
-  InfoPlist.strings
-  DereGuide
+/* Bundle name */
+"CFBundleName" = "$(PRODUCT_NAME)";
 
-  Created by zzk on 2016/9/26.
-  Copyright © 2016 zzk. All rights reserved.
-*/
+/* Privacy - Photo Library Additions Usage Description */
+"NSPhotoLibraryAddUsageDescription" = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
 
-NSPhotoLibraryUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
-NSPhotoLibraryAddUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
-shortcutItemTitle1 = "卡片";
-shortcutItemTitle2 = "譜面";
-shortcutItemTitle3 = "活動";
-shortcutItemTitle4 = "模擬抽卡";
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
+

@@ -265,6 +265,9 @@
 /* No comment provided by engineer. */
 "使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小" = "PERFECTのスコア %d%% アップ、PERFECT判定される時間が短くなる";
 
+/* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ";
+
 /* 技能描述 */
 "使所有音符恢复你 %d 点生命" = "全てノーツがライフ %d 回復";
 
@@ -458,6 +461,9 @@
 
 /* No comment provided by engineer. */
 "图片" = "画像";
+
+/* No comment provided by engineer. */
+"坐标之力" = "コーディネイト";
 
 /* No comment provided by engineer. */
 "基础分" = "基本スコア";

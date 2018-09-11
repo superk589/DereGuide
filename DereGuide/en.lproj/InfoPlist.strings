@@ -1,14 +1,9 @@
-/*
-  InfoPlist.strings
-  DereGuide
+/* Bundle name */
+"CFBundleName" = "$(PRODUCT_NAME)";
 
-  Created by zzk on 2016/9/26.
-  Copyright © 2016 zzk. All rights reserved.
-*/
+/* Privacy - Photo Library Additions Usage Description */
+"NSPhotoLibraryAddUsageDescription" = "For saving images to the camera roll. This permission can be changed from the Settings app.";
 
-NSPhotoLibraryUsageDescription = "For saving images to the camera roll. This permission can be changed from the Settings app.";
-NSPhotoLibraryAddUsageDescription = "For saving images to the camera roll. This permission can be changed from the Settings app.";
-shortcutItemTitle1 = "Card";
-shortcutItemTitle2 = "Beatmap";
-shortcutItemTitle3 = "Event";
-shortcutItemTitle4 = "Gacha Simulation";
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "For saving images to the camera roll. This permission can be changed from the Settings app.";
+
