@@ -50,5 +50,11 @@
 		<key>title</key>
 		<string>同僚の募集・探す</string>
 	</dict>
+    <dict>
+        <key>cName</key>
+        <string>VLTableViewController</string>
+        <key>title</key>
+        <string>データ更新ログ</string>
+    </dict>
 </array>
 </plist>
