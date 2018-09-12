@@ -688,6 +688,11 @@
         <target>LIVE Party</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="协调">
+        <source>协调</source>
+        <target>Coordination</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级">
         <source>单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级</source>
         <target>Click to select a position, double click to select from full card list, long press to edit its skill level and potential levels</target>
@@ -823,11 +828,6 @@
       <trans-unit id="图片">
         <source>图片</source>
         <target>Images</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="坐标之力">
-        <source>坐标之力</source>
-        <target>Coordination</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="基础分">
@@ -1297,6 +1297,11 @@
         <target>Up to date!</target>
         <note>更新框</note>
       </trans-unit>
+      <trans-unit id="数据更新日志">
+        <source>数据更新日志</source>
+        <target>Version Log</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="数据服务器存在异常，请您稍后再尝试更新。">
         <source>数据服务器存在异常，请您稍后再尝试更新。</source>
         <target>The data server is down, please try again later.</target>
@@ -1312,10 +1317,40 @@
         <target>The data needs to be updated.</target>
         <note>弹出框标题</note>
       </trans-unit>
+      <trans-unit id="新卡池：%@">
+        <source>新卡池：%@</source>
+        <target>New Gacha: %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="新卡片：%@%@，技能：%@%@%@">
+        <source>新卡片：%1$@%2$@，技能：%3$@%4$@%5$@</source>
+        <target>New Card: %1$@%2$@, Skill：%3$@ %4$@ %5$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="新增卡片">
         <source>新增卡片</source>
         <target>New cards</target>
         <note>模拟抽卡页面</note>
+      </trans-unit>
+      <trans-unit id="新小剧场动画：%@ %@">
+        <source>新小剧场动画：%1$@ %2$@</source>
+        <target>New Gekijou Anime: %1$@ %2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="新小剧场：%@ %@">
+        <source>新小剧场：%1$@ %2$@</source>
+        <target>New Gekijou: %1$@ %2$@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="新歌曲：%@">
+        <source>新歌曲：%@</source>
+        <target>New Music: %@</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="新活动：%@">
+        <source>新活动：%@</source>
+        <target>New Event: %@</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="无">
         <source>无</source>
@@ -2232,7 +2267,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuideTests/zh-Hans.lproj/InfoPlist.strings" datatype="plaintext" source-language="zh-Hans" target-language="en">
+  <file original="DereGuideTests/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
     </header>

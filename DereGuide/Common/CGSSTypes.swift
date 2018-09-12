@@ -107,7 +107,7 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
         case CGSSSkillTypes.synergy:
             return NSLocalizedString("三色协同", comment: "")
         case CGSSSkillTypes.coordination:
-            return NSLocalizedString("坐标之力", comment: "")
+            return NSLocalizedString("协调", comment: "")
         default:
             return NSLocalizedString("未知", comment: "")
         }
@@ -246,7 +246,7 @@ struct CGSSAttributeTypes: OptionSet {
     }
 }
 
-struct CGSSRarityTypes: OptionSet, Hashable {
+struct CGSSRarityTypes: OptionSet, Hashable, CustomStringConvertible {
     let rawValue: UInt
     init(rawValue: UInt) { self.rawValue = rawValue }
     static let n = CGSSRarityTypes.init(rawValue: 1 << 0)
@@ -266,6 +266,28 @@ struct CGSSRarityTypes: OptionSet, Hashable {
         return Int(self.rawValue)
     }
     
+    var description: String {
+        switch self {
+        case .n:
+            return "N"
+        case .np:
+            return "N+"
+        case .r:
+            return "R"
+        case .rp:
+            return "R+"
+        case .sr:
+            return "SR"
+        case .srp:
+            return "SR+"
+        case .ssr:
+            return "SSR"
+        case .ssrp:
+            return "SSR+"
+        default:
+            return ""
+        }
+    }
 }
 
 struct CGSSFavoriteTypes: OptionSet {
@@ -288,6 +310,19 @@ struct CGSSProcTypes: OptionSet, Hashable, CustomStringConvertible {
     var hashValue: Int {
         return Int(self.rawValue)
     }
+    
+    init(typeID: Int) {
+        switch typeID {
+        case 2:
+            self = .low
+        case 3:
+            self = .middle
+        case 4:
+            self = .high
+        default:
+            self = .none
+        }
+    }
 
     var description: String {
         switch self {
@@ -301,6 +336,19 @@ struct CGSSProcTypes: OptionSet, Hashable, CustomStringConvertible {
             return NSLocalizedString("无", comment: "")
         }
 
+    }
+    
+    var descriptionShort: String {
+        switch self {
+        case .high:
+            return NSLocalizedString("高", comment: "技能触发几率的简写")
+        case .middle:
+            return NSLocalizedString("中", comment: "技能触发几率的简写")
+        case .low:
+            return NSLocalizedString("低", comment: "技能触发几率的简写")
+        default:
+            return NSLocalizedString("其他", comment: "")
+        }
     }
 }
 

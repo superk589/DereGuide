@@ -17,7 +17,8 @@ class VLTableViewController: UITableViewController {
     var currentPage = 1 {
         didSet {
             if currentPage == 1 {
-                models.removeAll()
+                models = []
+                tableView.reloadData()
             }
             requestData(page: currentPage)
         }
@@ -30,7 +31,7 @@ class VLTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = NSLocalizedString("Version Log", comment: "")
+        navigationItem.title = NSLocalizedString("数据更新日志", comment: "")
         
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension

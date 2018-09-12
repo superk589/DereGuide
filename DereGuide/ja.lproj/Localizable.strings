@@ -380,6 +380,9 @@
 "协力活动" = "LIVE Party!!";
 
 /* No comment provided by engineer. */
+"协调" = "コーディネイト";
+
+/* No comment provided by engineer. */
 "单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级" = "タップ：編集枠を変更\nダブルタップ：すべてのカードから選択\n長押し：ポテンシャルや特技レベルの編集";
 
 /* No comment provided by engineer. */
@@ -461,9 +464,6 @@
 
 /* No comment provided by engineer. */
 "图片" = "画像";
-
-/* No comment provided by engineer. */
-"坐标之力" = "コーディネイト";
 
 /* No comment provided by engineer. */
 "基础分" = "基本スコア";

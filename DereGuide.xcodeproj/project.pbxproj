@@ -2343,7 +2343,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DereGuide/Pods-DereGuide-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DereGuide/Pods-DereGuide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicColor/DynamicColor.framework",
@@ -2388,7 +2388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DereGuide/Pods-DereGuide-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DereGuide/Pods-DereGuide-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		73DFF39EEFFCFBA9C4CA9A4B /* [CP] Check Pods Manifest.lock */ = {
@@ -2433,7 +2433,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DereGuideTests/Pods-DereGuideTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DereGuideTests/Pods-DereGuideTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2442,7 +2442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DereGuideTests/Pods-DereGuideTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DereGuideTests/Pods-DereGuideTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3100,10 +3100,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "${SRCROOT}/OptimizationProfiles/$(PROJECT_NAME).profdata";
 				CODE_SIGN_ENTITLEMENTS = DereGuide/DereGuide.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 75;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3112,7 +3114,7 @@
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(PROJECT_DIR)/DereGuide",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/DereGuide/Info.plist";
+				INFOPLIST_FILE = DereGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
@@ -3125,6 +3127,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -3135,10 +3138,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "${SRCROOT}/OptimizationProfiles/$(PROJECT_NAME).profdata";
 				CODE_SIGN_ENTITLEMENTS = DereGuide/DereGuide.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3146,7 +3151,7 @@
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(PROJECT_DIR)/DereGuide",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/DereGuide/Info.plist";
+				INFOPLIST_FILE = DereGuide/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
@@ -3158,6 +3163,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -3222,9 +3228,11 @@
 			baseConfigurationReference = CD90BBC7690D3D99A457511B /* Pods-NotificationContent.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "${SRCROOT}/OptimizationProfiles/$(PROJECT_NAME).profdata";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3235,6 +3243,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -3243,9 +3252,11 @@
 			baseConfigurationReference = C7E9041B9ECF68D8ABC0ABB9 /* Pods-NotificationContent.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_OPTIMIZATION_PROFILE_FILE = "${SRCROOT}/OptimizationProfiles/$(PROJECT_NAME).profdata";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3255,6 +3266,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

@@ -380,6 +380,9 @@
 "协力活动" = "協力活動";
 
 /* No comment provided by engineer. */
+"协调" = "協調";
+
+/* No comment provided by engineer. */
 "单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级" = "單擊選擇要修改的位置，雙擊可以從全部卡片中選擇，長按可以編輯潛能和技能等級";
 
 /* No comment provided by engineer. */
@@ -461,9 +464,6 @@
 
 /* No comment provided by engineer. */
 "图片" = "圖片";
-
-/* No comment provided by engineer. */
-"坐标之力" = "";
 
 /* No comment provided by engineer. */
 "基础分" = "基礎分";
@@ -743,6 +743,9 @@
 /* 更新框 */
 "数据是最新版本" = "資料是最新版本";
 
+/* No comment provided by engineer. */
+"数据更新日志" = "資料更新日誌";
+
 /* 数据更新时的错误提示 */
 "数据服务器存在异常，请您稍后再尝试更新。" = "資料伺服器存在異常，請您稍後再嘗試更新。";
 
@@ -752,8 +755,26 @@
 /* 弹出框标题 */
 "数据需要更新" = "資料需要更新";
 
+/* No comment provided by engineer. */
+"新卡池：%@" = "新卡池：%@";
+
+/* No comment provided by engineer. */
+"新卡片：%@%@，技能：%@%@%@" = "新卡片：%1$@%2$@，技能：%3$@%4$@%5$@";
+
 /* 模拟抽卡页面 */
 "新增卡片" = "新增卡片";
+
+/* No comment provided by engineer. */
+"新小剧场：%@ %@" = "新小劇場：%1$@ %2$@";
+
+/* No comment provided by engineer. */
+"新小剧场动画：%@ %@" = "新小劇場動畫：%1$@ %2$@";
+
+/* No comment provided by engineer. */
+"新歌曲：%@" = "新歌曲：%@";
+
+/* No comment provided by engineer. */
+"新活动：%@" = "新活動：%@";
 
 /* No comment provided by engineer. */
 "无" = "無";
