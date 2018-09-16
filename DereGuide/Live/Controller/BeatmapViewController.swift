@@ -80,7 +80,7 @@ class BeatmapViewController: UIViewController {
         
         updateUI()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -192,7 +192,7 @@ class BeatmapViewController: UIViewController {
     
     func enterImageView() {
         beatmapView.exportImageAsync(title: getImageTitle()) { (image) in
-            let data = UIImagePNGRepresentation(image!)
+            let data = image!.pngData()
             try? data?.write(to: URL.init(fileURLWithPath: "/Users/zzk/Desktop/aaa.png"))
         }
     }
@@ -211,7 +211,7 @@ class BeatmapViewController: UIViewController {
             // activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
             
             // 需要屏蔽的模块
-            let cludeActivitys:[UIActivityType] = []
+            let cludeActivitys:[UIActivity.ActivityType] = []
             
             // 排除活动类型
             activityVC.excludedActivityTypes = cludeActivitys
@@ -256,7 +256,7 @@ class BeatmapViewController: UIViewController {
     private lazy var displayLink = CADisplayLink(target: self.beatmapView, selector: #selector(BeatmapView.frameUpdated(displayLink:)))
     
     func startAutoScrolling() {
-        displayLink.add(to: .current, forMode: .defaultRunLoopMode)
+        displayLink.add(to: .current, forMode: RunLoop.Mode.default)
         beatmapView.startAutoScrolling()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
@@ -264,7 +264,7 @@ class BeatmapViewController: UIViewController {
     func endAutoScrolling() {
         // if click too quickly, the main runloop may receive two or more pause action, removing display link from runloop twice will crash.
         if beatmapView.isAutoScrolling {
-            displayLink.remove(from: .current, forMode: .defaultRunLoopMode)
+            displayLink.remove(from: .current, forMode: RunLoop.Mode.default)
             beatmapView.endAutoScrolling()
             navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         }

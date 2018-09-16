@@ -78,7 +78,7 @@ class AcknowledgementViewController: BaseViewController, UITableViewDelegate, UI
         tableView.deselectRow(at: indexPath, animated: false)
         if let cell = tableView.cellForRow(at: indexPath) as? LicenseTableViewCell {
             if let url = URL(string: cell.siteLabel.text ?? "") {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
     }

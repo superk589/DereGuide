@@ -12,7 +12,7 @@ class WideLoadingButton: WideButton {
 
     private(set) var isLoading = false
 
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let indicator = UIActivityIndicatorView(style: .white)
     
     var normalTitle = "" {
         didSet {

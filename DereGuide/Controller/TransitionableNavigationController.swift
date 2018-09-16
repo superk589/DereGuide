@@ -23,7 +23,7 @@ class TransitionableNavigationController: BaseNavigationController {
         customGesture.isEnabled = false
     }
     
-    override func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    override func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let type = TransitionTypes.init(operation: operation)
         if let from = fromVC as? Transitionable, let to = toVC as? Transitionable {
             if from.transitionTypes.contains(type) && to.transitionTypes.contains(type) {

@@ -65,7 +65,7 @@ class SpreadImageViewController: UIViewController {
                 let urlArray = [image]
                 let location = longPress.location(in: imageView)
                 let activityVC = UIActivityViewController.init(activityItems: urlArray, applicationActivities: nil)
-                let excludeActivitys:[UIActivityType] = []
+                let excludeActivitys:[UIActivity.ActivityType] = []
                 activityVC.excludedActivityTypes = excludeActivitys
                 activityVC.popoverPresentationController?.sourceView = imageView
                 activityVC.popoverPresentationController?.sourceRect = CGRect(x: location.x, y: location.y, width: 0, height: 0)

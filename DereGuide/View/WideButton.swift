@@ -18,7 +18,7 @@ class WideButton: UIButton {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: 40)
+        return CGSize(width: UIView.noIntrinsicMetric, height: 40)
     }
     
     required init?(coder aDecoder: NSCoder) {

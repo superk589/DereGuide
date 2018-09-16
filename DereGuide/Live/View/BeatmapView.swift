@@ -306,7 +306,7 @@ class BeatmapView: IndicatorScrollView {
     
     private func drawTime() {
         guard let player = self.player else { return }
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.black]
         let elapsed = player.currentOffset()
         let time: NSString = NSString(format: "%d:%02d", Int(elapsed) / 60, Int(elapsed) % 60)
         time.draw(at: CGPoint(x: 10, y: playOffsetY - 19), withAttributes: attributes)
@@ -314,7 +314,7 @@ class BeatmapView: IndicatorScrollView {
     
     private func drawBPM() {
         guard let player = self.player else { return }
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.black]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.black]
         let bpm: NSString = NSString(format: "%d", player.currentBPM())
         bpm.draw(at: CGPoint(x: 10, y: playOffsetY + 4), withAttributes: attributes)
     }
@@ -405,7 +405,7 @@ struct AdvanceBeatmapDrawer {
         path.fill()
         // 画标题
         UIColor.darkGray.set()
-        let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24), NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         (title as NSString).draw(at: CGPoint(x: 30, y: 10), withAttributes: attDict)
         for i in 0..<Int(columns) {
             
@@ -470,7 +470,7 @@ struct AdvanceBeatmapDrawer {
             if i % 8 == 0 {
                 UIColor.darkGray.set()
                 let sectionNumber: NSString = NSString.init(format: "%03d", i / 8)
-                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+                let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
                 sectionNumber.draw(at: CGPoint(x: widthInset - 25, y: pointY - 7), withAttributes: attDict)
                 let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
                 comboNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: pointY - 7), withAttributes: attDict)
@@ -503,13 +503,13 @@ struct AdvanceBeatmapDrawer {
                 
                 UIColor.red.set()
                 let bpmNumber = NSString(format: "%d", point.bpm)
-                let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.bpmShift]
+                let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.bpmShift]
                 bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y - 14 + offset), withAttributes: attDict)
                 
                 if i > 0 {
                     let lastPoint = shiftingPoints[i - 1]
                     let bpmNumber = NSString(format: "%d", lastPoint.bpm)
-                    let attDict = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor
+                    let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor
                         .bpmShift]
                     bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y + offset), withAttributes: attDict)
                 }

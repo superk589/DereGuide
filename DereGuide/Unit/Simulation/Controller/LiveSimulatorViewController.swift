@@ -13,15 +13,15 @@ class LiveSimulatorViewController: BaseViewController {
     
     lazy var scoreDashboard: ScoreDashboardController = {
         let vc = ScoreDashboardController()
-        addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
+        addChild(vc)
+        vc.didMove(toParent: self)
         return vc
     }()
     
     lazy var supportDashboard: SupportDashboardController = {
         let vc = SupportDashboardController()
-        addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
+        addChild(vc)
+        vc.didMove(toParent: self)
         return vc
     }()
     

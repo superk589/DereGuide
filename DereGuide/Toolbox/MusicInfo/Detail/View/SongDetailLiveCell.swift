@@ -23,7 +23,7 @@ class SongDetailLiveCell: ReadableWidthTableViewCell {
     
     weak var delegate: SongDetailLiveCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         centerLabel.font = UIFont.systemFont(ofSize: 16)

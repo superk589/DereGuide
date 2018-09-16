@@ -122,7 +122,7 @@ class ColleagueFilterController: UITableViewController {
         tableView.register(ColleagueFilterTypeCell.self, forCellReuseIdentifier: ColleagueFilterTypeCell.description())
         tableView.register(ColleagueFilterCardCell.self, forCellReuseIdentifier: ColleagueFilterCardCell.description())
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
         totalStepperOption = createSteppterOption(minValue: 0, maxValue: Double(Config.maximumTotalPotential), currentValue: Double(setting.minLevel), tintColor: .parade, title: NSLocalizedString("最低潜能等级", comment: ""))
@@ -268,7 +268,7 @@ class ColleagueFilterController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         switch indexPath.section {
         case 0, 1:
             return .none
@@ -283,7 +283,7 @@ class ColleagueFilterController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .insert {
             lastSelectedIndex = indexPath.row
         } else if editingStyle == .delete {

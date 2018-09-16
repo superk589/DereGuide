@@ -18,7 +18,7 @@ class CharaProfileContentLabel: UILabel {
         border = CAShapeLayer()
         border.strokeColor = UIColor.darkGray.cgColor
         border.lineWidth = 1
-        border.lineCap = "square"
+        border.lineCap = convertToCAShapeLayerLineCap("square")
         border.lineDashPattern = [4, 2]
         layer.addSublayer(border)
         
@@ -40,4 +40,9 @@ class CharaProfileContentLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAShapeLayerLineCap(_ input: String) -> CAShapeLayerLineCap {
+	return CAShapeLayerLineCap(rawValue: input)
 }

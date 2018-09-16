@@ -106,7 +106,7 @@ class CDImageViewController: UITableViewController, CDImageTableViewCellDelegate
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

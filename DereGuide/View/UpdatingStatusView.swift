@@ -34,7 +34,7 @@ class UpdatingStatusView: UIView {
         }
         
         cancelButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        cancelButton.setImage(#imageLiteral(resourceName: "433-x").withRenderingMode(.alwaysTemplate), for: UIControlState())
+        cancelButton.setImage(#imageLiteral(resourceName: "433-x").withRenderingMode(.alwaysTemplate), for: UIControl.State())
         cancelButton.tintColor = .white
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.masksToBounds = true

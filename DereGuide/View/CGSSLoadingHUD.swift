@@ -130,7 +130,7 @@ class CGSSLoadingHUDManager {
             }
             for subview in window.subviews {
                 if subview is UpdatingStatusView {
-                    window.bringSubview(toFront: subview)
+                    window.bringSubviewToFront(subview)
                 }
             }
             self.hud.alpha = 1

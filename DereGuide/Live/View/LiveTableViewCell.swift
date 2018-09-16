@@ -27,7 +27,7 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
     
     weak var delegate: LiveTableViewCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         readableContentView.addSubview(jacketImageView)

@@ -76,7 +76,7 @@ class GachaResultCardView: UIView {
         moveAni.path = movePath.cgPath
         moveAni.duration = 8
         moveAni.repeatCount = .infinity
-        moveAni.calculationMode = "cubicPaced"
+        moveAni.calculationMode = convertToCAAnimationCalculationMode("cubicPaced")
         moveAni.isRemovedOnCompletion = false
         
         let opacityAni = CABasicAnimation(keyPath: "opacity")
@@ -139,4 +139,9 @@ class GachaResultCardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAAnimationCalculationMode(_ input: String) -> CAAnimationCalculationMode {
+	return CAAnimationCalculationMode(rawValue: input)
 }

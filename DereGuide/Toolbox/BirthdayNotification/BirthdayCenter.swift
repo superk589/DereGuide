@@ -177,19 +177,6 @@ class BirthdayCenter {
     }
     
     func removeBirthdayNotifications() {
-        if #available(iOS 10.0, *) {
-//            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        } else {
-            
-        }
-        
-        if let notifications = UIApplication.shared.scheduledLocalNotifications {
-            for notification in notifications {
-                if notification.category == "Birthday" {
-                    UIApplication.shared.cancelLocalNotification(notification)
-                }
-            }
-        }
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }

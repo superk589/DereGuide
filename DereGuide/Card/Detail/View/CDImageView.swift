@@ -11,7 +11,7 @@ import SDWebImage
 
 class CDImageView: UIImageView {
     
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let indicator = UIActivityIndicatorView(style: .gray)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

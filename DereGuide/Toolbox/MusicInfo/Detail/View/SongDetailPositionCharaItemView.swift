@@ -53,7 +53,7 @@ class SongDetailPositionCharaItemView: UIView {
         didSet {
             charaPlaceholder.isHidden = !showsPlaceholder
             charaIcon.isHidden = showsPlaceholder
-            bringSubview(toFront: showsPlaceholder ? charaPlaceholder : charaIcon)
+            bringSubviewToFront(showsPlaceholder ? charaPlaceholder : charaIcon)
         }
     }
 }

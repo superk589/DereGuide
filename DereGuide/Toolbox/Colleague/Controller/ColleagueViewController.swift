@@ -29,7 +29,7 @@ class ColleagueViewController: BaseTableViewController {
         prepareNavigationBar()
         
         tableView.register(ColleagueTableViewCell.self, forCellReuseIdentifier: ColleagueTableViewCell.description())
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 159
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .white
@@ -51,7 +51,7 @@ class ColleagueViewController: BaseTableViewController {
     
     var remote = ProfileRemote()
     
-    var cursor: CKQueryCursor?
+    var cursor: CKQueryOperation.Cursor?
     
     var profiles = [Profile]()
     

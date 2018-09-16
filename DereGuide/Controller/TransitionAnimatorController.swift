@@ -20,7 +20,7 @@ struct TransitionTypes: OptionSet {
     static let interactive = TransitionTypes.init(rawValue: 1 << 4)
     static let all: TransitionTypes = [.pop, .push, .present, .dismiss, .interactive]
     
-    init(operation: UINavigationControllerOperation) {
+    init(operation: UINavigationController.Operation) {
         switch operation {
         case .pop:
             self = .pop

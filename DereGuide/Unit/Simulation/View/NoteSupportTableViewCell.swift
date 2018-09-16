@@ -21,7 +21,7 @@ class NoteSupportTableViewCell: UITableViewCell {
     let damageGuardLabel = NoteScoreLabel()
     let lifeLabel = NoteScoreLabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         let font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -65,9 +65,9 @@ class NoteSupportTableViewCell: UITableViewCell {
     
     func setup(with log: LSLog) {
         
-        let attributeStr = NSMutableAttributedString(string: String(format: "%d", log.noteIndex), attributes: [NSAttributedStringKey.foregroundColor: UIColor.allType])
+        let attributeStr = NSMutableAttributedString(string: String(format: "%d", log.noteIndex), attributes: [NSAttributedString.Key.foregroundColor: UIColor.allType])
         if log.comboFactor > 1 {
-            attributeStr.append(NSAttributedString(string: String(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10)]))
+            attributeStr.append(NSAttributedString(string: String(format: "(x%.1f)", log.comboFactor), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]))
         }
         comboIndexLabel.text = String(log.noteIndex)
         

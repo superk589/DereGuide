@@ -14,7 +14,7 @@ class CardDetailLeaderSkillCell: UITableViewCell {
     let nameLabel = UILabel()
     let descriptionLabel = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel.textColor = .black

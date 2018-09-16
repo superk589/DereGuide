@@ -104,10 +104,10 @@ class SettingsTableViewController: UITableViewController {
     @objc private func sendTweet() {
         if let url = URL(string: "twitter://post?message=%23\(Config.appName)%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter using url scheme")
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else if let url = URL(string: "https://twitter.com/intent/tweet?text=%23\(Config.appName)%0d"), UIApplication.shared.canOpenURL(url) {
             print("open twitter by openURL")
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else if let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
             print("open twitter by SLComposeViewController")
             vc.setInitialText("#\(Config.appName)\n")
@@ -232,7 +232,7 @@ class SettingsTableViewController: UITableViewController {
     
     @objc private func postReview() {
         if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(CGSSGlobal.appid)?action=write-review") {
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
@@ -259,7 +259,7 @@ class SettingsTableViewController: UITableViewController {
         prepareCellData()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         navigationItem.title = NSLocalizedString("设置", comment: "")
         tableView.cellLayoutMarginsFollowReadableWidth = true
     }

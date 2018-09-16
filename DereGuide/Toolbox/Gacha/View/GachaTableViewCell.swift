@@ -26,7 +26,7 @@ class GachaTableViewCell: UITableViewCell {
     private let topSpace: CGFloat = 10
     private let leftSpace: CGFloat = 10
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         accessoryType = .disclosureIndicator

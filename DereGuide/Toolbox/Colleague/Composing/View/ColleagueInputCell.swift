@@ -61,7 +61,7 @@ class ColleagueInputCell: ColleagueBaseCell {
     
     weak var delegate: ColleagueInputCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         input = ColleagueInputTextField()
         super.init(style: style, reuseIdentifier: reuseIdentifier)

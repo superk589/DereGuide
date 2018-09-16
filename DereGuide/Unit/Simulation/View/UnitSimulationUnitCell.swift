@@ -21,12 +21,12 @@ class PotentialLabel: UILabel {
     }
     
     func setup(with potential: Potential) {
-        let skill = NSAttributedString(string: String(potential.skill), attributes: [NSAttributedStringKey.foregroundColor: UIColor.skill, .font: UIFont.systemFont(ofSize: 12)])
-        let vocal = NSAttributedString(string: String(potential.vocal), attributes: [NSAttributedStringKey.foregroundColor: UIColor.vocal, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let dance = NSAttributedString(string: String(potential.dance), attributes: [NSAttributedStringKey.foregroundColor: UIColor.dance, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let visual = NSAttributedString(string: String(potential.visual), attributes: [NSAttributedStringKey.foregroundColor: UIColor.visual, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let life = NSAttributedString(string: String(potential.life), attributes: [NSAttributedStringKey.foregroundColor: UIColor.life, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
-        let separator = NSAttributedString(string: "/", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
+        let skill = NSAttributedString(string: String(potential.skill), attributes: [NSAttributedString.Key.foregroundColor: UIColor.skill, .font: UIFont.systemFont(ofSize: 12)])
+        let vocal = NSAttributedString(string: String(potential.vocal), attributes: [NSAttributedString.Key.foregroundColor: UIColor.vocal, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        let dance = NSAttributedString(string: String(potential.dance), attributes: [NSAttributedString.Key.foregroundColor: UIColor.dance, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        let visual = NSAttributedString(string: String(potential.visual), attributes: [NSAttributedString.Key.foregroundColor: UIColor.visual, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        let life = NSAttributedString(string: String(potential.life), attributes: [NSAttributedString.Key.foregroundColor: UIColor.life, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        let separator = NSAttributedString(string: "/", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
 //        let plus = NSAttributedString(string: "+", attributes: [NSAttributedStringKey.foregroundColor: UIColor.allType, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)])
         let enter = NSAttributedString(string: "\n")
         
@@ -114,7 +114,7 @@ class UnitSimulationUnitCell: UITableViewCell, CGSSIconViewDelegate {
     
     weak var delegate: UnitSimulationUnitCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         var views = [UIView]()

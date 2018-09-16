@@ -11,7 +11,7 @@ import MJRefresh
 
 class CGSSRefreshFooter: MJRefreshAutoFooter {
     
-    var loadingView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    var loadingView = UIActivityIndicatorView(style: .gray)
     var stateLabel = UILabel()
     
     var centerOffset: CGFloat = 0
@@ -51,6 +51,8 @@ class CGSSRefreshFooter: MJRefreshAutoFooter {
         stateLabel.font = UIFont.systemFont(ofSize: 16)
         stateLabel.textColor = .gray
         addSubview(stateLabel)
+        
+        ignoredScrollViewContentInsetBottom = 300
     }
     
     override func placeSubviews(){

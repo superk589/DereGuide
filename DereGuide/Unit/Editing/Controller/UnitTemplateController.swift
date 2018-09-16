@@ -20,7 +20,7 @@ class UnitTemplateController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = NSLocalizedString("队伍模板", comment: "")
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 99
         tableView.register(UnitTemplateCell.self, forCellReuseIdentifier: UnitTemplateCell.description())
         tableView.tableFooterView = UIView()

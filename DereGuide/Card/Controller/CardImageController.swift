@@ -51,7 +51,7 @@ class CardImageController: BaseViewController {
         activityVC.popoverPresentationController?.barButtonItem = item
         // activityVC.popoverPresentationController?.sourceRect = CGRect(x: item.width / 2, y: 0, width: 0, height: 0)
         // 需要屏蔽的模块
-        let cludeActivitys:[UIActivityType] = []
+        let cludeActivitys:[UIActivity.ActivityType] = []
         // 排除活动类型
         activityVC.excludedActivityTypes = cludeActivitys
         

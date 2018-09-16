@@ -37,7 +37,7 @@ class CharDetailViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
         prepareNavigationBar()

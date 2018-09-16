@@ -36,7 +36,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     
     // 如果不实现这个方法, 在根视图的左侧向右滑动几下再点击push新页面会卡死
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return childViewControllers.count > 1
+        return children.count > 1
     }
     
     private var showHomeButtonCount = 3
@@ -45,7 +45,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
 
         // 使用自定义动画效果
         let transition = CATransition()
-        transition.type = kCATransitionFade
+        transition.type = CATransitionType.fade
         transition.duration = 0.3
         view.layer.add(transition, forKey: kCATransition)
         popViewController(animated: false)
@@ -89,7 +89,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
         }
     }
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if let vc = fromVC as? (BannerAnimatorProvider & BannerContainer), toVC is BannerContainer, operation == .push {
             vc.bannerAnimator.animatorType = .push

@@ -192,7 +192,7 @@ class CardDetailViewController: BaseTableViewController {
         if isSpreadModeOn && indexPath.row == 0 {
             return UIScreen.main.bounds.height
         } else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     

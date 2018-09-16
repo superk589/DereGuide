@@ -39,7 +39,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
     
     let afkModeCancelButton = WideButton()
     
-    let afkModeIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let afkModeIndicator = UIActivityIndicatorView(style: .white)
     
     let afkModeGrid = GridLabel(rows: 2, columns: 3)
     
@@ -55,7 +55,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
     
     weak var delegate: UnitSimulationMainBodyCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         calculationButton = WideButton()
@@ -88,7 +88,7 @@ class UnitSimulationMainBodyCell: UITableViewCell {
             make.top.equalTo(calculationGrid.snp.bottom).offset(10)
         }
         
-        simulatingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        simulatingIndicator = UIActivityIndicatorView(style: .white)
         simulationButton.addSubview(simulatingIndicator)
         simulatingIndicator.snp.makeConstraints { (make) in
             make.right.equalTo(simulationButton.titleLabel!.snp.left)

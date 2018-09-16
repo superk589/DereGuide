@@ -100,7 +100,7 @@ class BaseRequest {
             if v is UIImage {
                 data.append("Content-Disposition: form-data; name=\"\(k)\"; filename=\"\(fileNames?[k] ?? "")\"\r\n".data(using: .utf8)!)
                 data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-                let imageData = UIImagePNGRepresentation(v as? UIImage ?? UIImage()) ?? Data()
+                let imageData = (v as? UIImage ?? UIImage()).pngData() ?? Data()
                 data.append(imageData)
                 data.append("\r\n".data(using: .utf8)!)
             } else if v is String {

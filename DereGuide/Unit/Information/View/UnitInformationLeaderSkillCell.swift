@@ -14,7 +14,7 @@ class UnitInformationLeaderSkillCell: UITableViewCell {
     
     let leaderGrid = GridLabel(rows: 4, columns: 6)
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        
         leftLabel.text = NSLocalizedString("队长加成", comment: "队伍详情页面")

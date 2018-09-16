@@ -84,7 +84,7 @@ private enum Button: Int {
     
     /// Decrease button positioned on the left of the stepper.
     internal let decreaseButton: UIButton = {
-        let button = UIButton(type: UIButtonType.custom)
+        let button = UIButton(type: UIButton.ButtonType.custom)
         button.backgroundColor = .clear
         button.tag = Button.decrease.rawValue
         return button
@@ -92,7 +92,7 @@ private enum Button: Int {
     
     /// Increase button positioned on the right of the stepper.
     internal let increaseButton: UIButton = {
-        let button = UIButton(type: UIButtonType.custom)
+        let button = UIButton(type: UIButton.ButtonType.custom)
         button.backgroundColor = .clear
         button.tag = Button.increase.rawValue
         return button
@@ -315,7 +315,7 @@ private enum Button: Int {
         // Start a timer to handle the continuous pressed case
         if autorepeat {
             let timer = Timer.init(fireAt: Date().addingTimeInterval(0.5), interval: 0.1, target: self, selector: #selector(continuousIncrement(_:)), userInfo: ["sender": sender], repeats: true)
-            RunLoop.main.add(timer, forMode: .defaultRunLoopMode)
+            RunLoop.main.add(timer, forMode: RunLoop.Mode.default)
             self.continuousTimer = timer
         }
         sender.backgroundColor = UIColor(white: 1.0, alpha: 0.1)

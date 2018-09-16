@@ -107,7 +107,7 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
         tableView.register(LiveTableViewCell.self, forCellReuseIdentifier: LiveTableViewCell.description())
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 86
         tableView.separatorStyle = .none
         

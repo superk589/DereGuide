@@ -76,7 +76,7 @@ extension Remote {
         return NSSortDescriptor(key: #keyPath(CKRecord.modificationDate), ascending: false)
     }
     
-    func predicateOfUser(_ userID: CKRecordID) -> NSPredicate {
+    func predicateOfUser(_ userID: CKRecord.ID) -> NSPredicate {
         return NSPredicate(format: "creatorUserRecordID == %@", userID)
     }
     
@@ -99,22 +99,18 @@ extension Remote {
                 return
             }
             
-            let reference = CKReference(recordID: userID, action: .none)
+            let reference = CKRecord.Reference(recordID: userID, action: .none)
             
             let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
 
-            let info = CKNotificationInfo()
+            let info = CKSubscription.NotificationInfo()
             info.shouldSendContentAvailable = true
             info.soundName = ""
             
             let subscription: CKSubscription
             
-            if #available(iOS 10.0, *) {
-                let options: CKQuerySubscriptionOptions = [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion]
-                subscription = CKQuerySubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: options)
-            } else {
-                subscription = CKSubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion])
-            }
+            let options: CKQuerySubscription.Options = [.firesOnRecordCreation, .firesOnRecordUpdate, .firesOnRecordDeletion]
+            subscription = CKQuerySubscription(recordType: R.recordType, predicate: predicate, subscriptionID: Self.subscriptionID, options: options)
             subscription.notificationInfo = info
             let op = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: [])
             op.modifySubscriptionsCompletionBlock = { (foo, bar, error: Error?) -> () in
@@ -154,7 +150,7 @@ extension Remote {
         }
     }
     
-    func fetchRecordsWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], resultsLimit: Int, completion: @escaping ([R], CKQueryCursor?, RemoteError?) -> ()) {
+    func fetchRecordsWith(_ predicates: [NSPredicate], _ sortDescriptors: [NSSortDescriptor], resultsLimit: Int, completion: @escaping ([R], CKQueryOperation.Cursor?, RemoteError?) -> ()) {
         let query = CKQuery(recordType: R.recordType, predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
         query.sortDescriptors = sortDescriptors
         let op = CKQueryOperation(query: query)
@@ -173,7 +169,7 @@ extension Remote {
         
     }
     
-    func fetchRecordsWith(cursor: CKQueryCursor, resultsLimit: Int, completion: @escaping ([R], CKQueryCursor?, RemoteError?) -> ()) {
+    func fetchRecordsWith(cursor: CKQueryOperation.Cursor, resultsLimit: Int, completion: @escaping ([R], CKQueryOperation.Cursor?, RemoteError?) -> ()) {
         let op = CKQueryOperation(cursor: cursor)
         op.resultsLimit = resultsLimit
         var results = [CKRecord]()
@@ -236,7 +232,7 @@ extension Remote {
         
         let op = CKFetchRecordsOperation(recordIDs: locals
             .compactMap { $0.remoteIdentifier }
-            .map(CKRecordID.init(recordName:))
+            .map(CKRecord.ID.init(recordName:))
         )
         
         op.fetchRecordsCompletionBlock = { records, error in
@@ -254,9 +250,9 @@ extension Remote {
     }
     
     func remove(_ locals: [L], completion: @escaping ([RemoteIdentifier], RemoteError?) -> ()) {
-        let recordIDsToDelete = locals.map { (l: L) -> CKRecordID in
+        let recordIDsToDelete = locals.map { (l: L) -> CKRecord.ID in
             guard let name = l.remoteIdentifier else { fatalError("Must have a remote ID") }
-            return CKRecordID(recordName: name)
+            return CKRecord.ID(recordName: name)
         }
         let op = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDsToDelete)
         op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
@@ -266,7 +262,7 @@ extension Remote {
     }
     
     func remove(_ ids: [RemoteIdentifier], completion: @escaping ([RemoteIdentifier], RemoteError?) -> ()) {
-        let recordIDsToDelete = ids.map(CKRecordID.init(recordName:))
+        let recordIDsToDelete = ids.map(CKRecord.ID.init(recordName:))
         let op = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDsToDelete)
         op.modifyRecordsCompletionBlock = { _, deletedRecordIDs, error in
             completion((deletedRecordIDs ?? []).map { $0.recordName }, RemoteError(cloudKitError: error))

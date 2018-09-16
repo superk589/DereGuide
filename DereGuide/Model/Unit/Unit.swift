@@ -136,11 +136,11 @@ extension Unit: RemoteDeletable {
     @NSManaged public var markedForRemoteDeletion: Bool
     @NSManaged public var remoteIdentifier: String?
     
-    var ckReference: CKReference? {
+    var ckReference: CKRecord.Reference? {
         guard let id = remoteIdentifier else {
             return nil
         }
-        return CKReference(recordID: CKRecordID.init(recordName: id), action: .deleteSelf)
+        return CKRecord.Reference(recordID: CKRecord.ID.init(recordName: id), action: .deleteSelf)
     }
     
     public func markForRemoteDeletion() {

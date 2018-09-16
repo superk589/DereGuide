@@ -25,7 +25,7 @@ struct RemoteMember: RemoteRecord {
     var lifeLevel: Int64
     var skillPotentialLevel: Int64
     var participatedPosition: Int64
-    var participatedUnit: CKReference
+    var participatedUnit: CKRecord.Reference
     
 }
 
@@ -36,7 +36,7 @@ extension RemoteMember {
     init?(record: CKRecord) {
         guard record.recordType == RemoteMember.recordType else { return nil }
         guard let cardID = record.object(forKey: "cardID") as? NSNumber,
-            let participatedUnit = record["participatedUnit"] as? CKReference,
+            let participatedUnit = record["participatedUnit"] as? CKRecord.Reference,
             let skillLevel = record["skillLevel"] as? NSNumber,
             let vocalLevel = record["vocalLevel"] as? NSNumber,
             let danceLevel = record["danceLevel"] as? NSNumber,

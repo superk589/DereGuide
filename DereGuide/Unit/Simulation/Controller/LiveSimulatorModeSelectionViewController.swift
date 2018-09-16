@@ -128,7 +128,7 @@ class LiveSimulatorModeSelectionViewController: UITableViewController {
         
         tableView.register(DashboardSettingTableViewCell.self, forCellReuseIdentifier: DashboardSettingTableViewCell.description())
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
         prepareSections()

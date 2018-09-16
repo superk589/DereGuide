@@ -69,7 +69,7 @@ class SliderOption: UIControl {
         sliderDescriptionLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
     }
     
-    override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControlEvents) {
+    override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControl.Event) {
         slider.addTarget(target, action: action, for: controllEvents)
     }
     

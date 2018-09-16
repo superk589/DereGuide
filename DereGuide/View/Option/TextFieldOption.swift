@@ -40,7 +40,7 @@ class TextFieldOption: UIControl {
         
     }
     
-    override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControlEvents) {
+    override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
         textField.addTarget(target, action: action, for: controlEvents)
     }
     

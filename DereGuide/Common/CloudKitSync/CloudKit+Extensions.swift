@@ -11,16 +11,16 @@ import CloudKit
 enum CloudKitRecordChange {
     case created(CKRecord)
     case updated(CKRecord)
-    case deleted(CKRecordID)
+    case deleted(CKRecord.ID)
 }
 
 
 extension CKContainer {
 
-    func fetchAllPendingNotifications(changeToken: CKServerChangeToken?, subcriptionID: String?, processChanges: @escaping (_ changeReasons: [CKRecordID: CKQueryNotificationReason], _ error: NSError?, _ callback: @escaping (_ success: Bool) -> ()) -> ()) {
+    func fetchAllPendingNotifications(changeToken: CKServerChangeToken?, subcriptionID: String?, processChanges: @escaping (_ changeReasons: [CKRecord.ID: CKQueryNotification.Reason], _ error: NSError?, _ callback: @escaping (_ success: Bool) -> ()) -> ()) {
         let op = CKFetchNotificationChangesOperation(previousServerChangeToken: changeToken)
-        var changeReasons: [CKRecordID: CKQueryNotificationReason] = [:]
-        var notificationIDs: [CKNotificationID] = []
+        var changeReasons: [CKRecord.ID: CKQueryNotification.Reason] = [:]
+        var notificationIDs: [CKNotification.ID] = []
         
         op.notificationChangedBlock = { note in
             if note.subscriptionID == subcriptionID {
@@ -50,9 +50,9 @@ extension CKContainer {
 
 extension CKDatabase {
 
-    func fetchRecords(for changeReasons: [CKRecordID: CKQueryNotificationReason], completion: @escaping ([CloudKitRecordChange], NSError?) -> ()) {
-        var deletedIDs: [CKRecordID] = []
-        var insertedOrUpdatedIDs: [CKRecordID] = []
+    func fetchRecords(for changeReasons: [CKRecord.ID: CKQueryNotification.Reason], completion: @escaping ([CloudKitRecordChange], NSError?) -> ()) {
+        var deletedIDs: [CKRecord.ID] = []
+        var insertedOrUpdatedIDs: [CKRecord.ID] = []
         for (id, reason) in changeReasons {
             switch reason {
             case .recordDeleted: deletedIDs.append(id)
@@ -103,15 +103,15 @@ extension CKQueryOperation {
 
 extension NSError {
 
-    func partiallyFailedRecords() -> [CKRecordID:NSError] {
+    func partiallyFailedRecords() -> [CKRecord.ID:NSError] {
         guard domain == CKErrorDomain else { return [:] }
         let errorCode = CKError.Code(rawValue: code)
         guard errorCode == .partialFailure else { return [:] }
-        return userInfo[CKPartialErrorsByItemIDKey] as? [CKRecordID:NSError] ?? [:]
+        return userInfo[CKPartialErrorsByItemIDKey] as? [CKRecord.ID:NSError] ?? [:]
     }
 
-    var partiallyFailedRecordIDsWithPermanentError: [CKRecordID] {
-        var result: [CKRecordID] = []
+    var partiallyFailedRecordIDsWithPermanentError: [CKRecord.ID] {
+        var result: [CKRecord.ID] = []
         for (remoteID, partialError) in partiallyFailedRecords() {
             if partialError.permanentCloudKitError {
                 result.append(remoteID)

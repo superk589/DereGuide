@@ -62,7 +62,7 @@ class UnitCardSelectionAdvanceOptionsController: UITableViewController {
         prepareStaticCells()
         prepareNaviBar()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.tableFooterView = UIView()

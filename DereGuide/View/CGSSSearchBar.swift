@@ -33,7 +33,7 @@ class CGSSSearchBar: UISearchBar {
     override var intrinsicContentSize: CGSize {
         // fix a layout issue in iOS 11
         if #available(iOS 11.0, *) {
-            return UILayoutFittingExpandedSize
+            return UIView.layoutFittingExpandedSize
         } else {
             return super.intrinsicContentSize
         }
@@ -60,6 +60,6 @@ class SearchBarWrapper: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
+        return UIView.layoutFittingExpandedSize
     }
 }

@@ -38,7 +38,7 @@ class GachaDetailController: BaseTableViewController {
         
         prepareRows()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.cellLayoutMarginsFollowReadableWidth = true
         

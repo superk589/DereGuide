@@ -20,7 +20,7 @@ class CardDetailEvolutionCell: UITableViewCell {
     
     weak var delegate: CGSSIconViewDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel.textColor = .black

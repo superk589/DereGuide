@@ -161,7 +161,7 @@ class SongDetailController: BaseTableViewController, BannerContainer {
         case 0:
             return 152
         default:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     

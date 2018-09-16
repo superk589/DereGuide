@@ -62,7 +62,7 @@ class BannerView: UIImageView {
         if style == .system {
             if indicator == nil {
                 indicator = UIActivityIndicatorView.init()
-                indicator?.activityIndicatorViewStyle = .gray
+                indicator?.style = .gray
                 addSubview(indicator!)
             }
         } else {

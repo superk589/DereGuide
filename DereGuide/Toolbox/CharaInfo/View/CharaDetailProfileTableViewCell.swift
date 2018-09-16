@@ -15,7 +15,7 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
     let iconView = CGSSCharaIconView()
     let charaProfileView = CharaProfileView()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(iconView)

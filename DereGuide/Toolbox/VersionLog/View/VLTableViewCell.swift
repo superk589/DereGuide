@@ -20,7 +20,7 @@ class VLTableViewCell: UITableViewCell {
     
     private let stackView = UIStackView()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         topView.axis = .horizontal

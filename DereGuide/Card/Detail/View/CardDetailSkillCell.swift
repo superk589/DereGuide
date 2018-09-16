@@ -15,7 +15,7 @@ class CardDetailSkillCell: UITableViewCell {
     let descriptionLabel = UILabel()
     let gridLabel = GridLabel(rows: 4, columns: 5)
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel.textColor = .black

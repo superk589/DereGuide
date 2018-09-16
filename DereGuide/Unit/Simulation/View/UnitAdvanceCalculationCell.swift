@@ -36,9 +36,9 @@ class UnitAdvanceCalculationCell: UITableViewCell {
     var stackView: UIStackView!
     let startButton = WideButton()
     let resultView = UnitAdvanceCalculationResultView()
-    let startButtonIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let startButtonIndicator = UIActivityIndicatorView(style: .white)
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         titleLabel.font = .systemFont(ofSize: 16)

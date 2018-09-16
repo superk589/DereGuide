@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class BirthdayNotificationViewController: BaseTableViewController {
     
@@ -36,12 +37,12 @@ class BirthdayNotificationViewController: BaseTableViewController {
         prepareStaticCellData()
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         tableView.register(BirthdayNotificationTableViewCell.self, forCellReuseIdentifier: "BirthdayNotificationCell")
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateEnd, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSettings), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         reloadData()
         
@@ -61,7 +62,15 @@ class BirthdayNotificationViewController: BaseTableViewController {
     }
     
     private var isSystemNotificationSettingOn: Bool {
-        return !(UIApplication.shared.currentUserNotificationSettings?.types == nil || UIApplication.shared.currentUserNotificationSettings?.types == [])
+        let settings = DispatchSemaphore.sync { (closure) in
+            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: closure)
+        }
+        switch settings?.authorizationStatus {
+        case .some(.authorized):
+            return true
+        default:
+            return false
+        }
     }
     
     private var isBirthdayNotificationOn: Bool {
@@ -91,8 +100,8 @@ class BirthdayNotificationViewController: BaseTableViewController {
     }
     
     @objc func gotoSystemNotificationSettings() {
-        if let url = URL.init(string: UIApplicationOpenSettingsURLString), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
+        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     

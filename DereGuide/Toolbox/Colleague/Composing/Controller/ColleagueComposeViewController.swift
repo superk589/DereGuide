@@ -68,7 +68,7 @@ class ColleagueComposeViewController: BaseTableViewController {
         prepareStaticCells()
         setupStaticCells()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: .zero)
@@ -80,7 +80,7 @@ class ColleagueComposeViewController: BaseTableViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         }
         
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        indicator = UIActivityIndicatorView(style: .white)
         indicator.color = .parade
     }
     

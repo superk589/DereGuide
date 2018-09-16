@@ -25,7 +25,7 @@ class SongDetailCoverFlowCell: UITableViewCell {
     
     var collectionView: UICollectionView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let layout = UICollectionViewFlowLayout()

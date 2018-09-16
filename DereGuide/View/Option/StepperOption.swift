@@ -54,7 +54,7 @@ class StepperOption: UIControl {
         stepper.value = currentValue
     }
     
-    override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControlEvents) {
+    override func addTarget(_ target: Any?, action: Selector, for controllEvents: UIControl.Event) {
         stepper.addTarget(target, action: action, for: controllEvents)
     }
     

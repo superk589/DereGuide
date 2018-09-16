@@ -61,7 +61,7 @@ extension RemoteUnit {
 extension RemoteUnit {
     
     func insert(into context: NSManagedObjectContext, completion: @escaping (Bool) -> ()) {
-        let recordToMatch = CKReference(recordID: CKRecordID(recordName: id), action: .deleteSelf)
+        let recordToMatch = CKRecord.Reference(recordID: CKRecord.ID(recordName: id), action: .deleteSelf)
         let predicate = NSPredicate(format: "participatedUnit = %@", recordToMatch)
         SyncCoordinator.shared.membersRemote.fetchRecordsForCurrentUserWith([predicate], [NSSortDescriptor.init(key: "participatedPosition", ascending: true)], completion: { (remoteMembers) in
             guard remoteMembers.count == 6 else {

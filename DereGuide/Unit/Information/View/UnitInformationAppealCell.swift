@@ -37,7 +37,7 @@ class UnitInformationAppealCell: UITableViewCell {
     
     weak var delegate: UnitInformationAppealCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel.text = NSLocalizedString("表现值", comment: "队伍详情页面")

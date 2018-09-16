@@ -14,7 +14,7 @@ extension UIActivityViewController {
         let urlArray = images
         let activityVC = UIActivityViewController(activityItems: urlArray, applicationActivities: nil)
         activityVC.popoverPresentationController?.barButtonItem = barButtonItem
-        let cludeActivitys:[UIActivityType] = []
+        let cludeActivitys:[UIActivity.ActivityType] = []
         activityVC.excludedActivityTypes = cludeActivitys
         (viewController ?? UIApplication.shared.keyWindow?.rootViewController)?.present(activityVC, animated: true, completion: nil)
     }
@@ -24,7 +24,7 @@ extension UIActivityViewController {
         let activityVC = UIActivityViewController(activityItems: urlArray, applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = view
         activityVC.popoverPresentationController?.sourceRect = rect ?? .zero
-        let cludeActivitys:[UIActivityType] = []
+        let cludeActivitys:[UIActivity.ActivityType] = []
         activityVC.excludedActivityTypes = cludeActivitys
         (viewController ?? UIApplication.shared.keyWindow?.rootViewController)?.present(activityVC, animated: true, completion: nil)
     }

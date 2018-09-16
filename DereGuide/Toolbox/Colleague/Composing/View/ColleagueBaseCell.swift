@@ -13,7 +13,7 @@ class ColleagueBaseCell: UITableViewCell {
 
     var leftLabel: UILabel
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         leftLabel = UILabel()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

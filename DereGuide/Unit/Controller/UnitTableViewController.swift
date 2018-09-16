@@ -42,7 +42,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         tableView.register(UnitTableViewCell.self, forCellReuseIdentifier: UnitTableViewCell.description())
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 133
         tableView.tableFooterView = UIView()
         tableView.cellLayoutMarginsFollowReadableWidth = false
@@ -205,10 +205,10 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
         return cell
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if isEditing {
             // 编辑状态时 为多选删除模式
-            return UITableViewCellEditingStyle(rawValue: 0b11)!
+            return UITableViewCell.EditingStyle(rawValue: 0b11)!
         } else {
             // 非编辑状态时 为左滑删除模式
             return .delete
@@ -235,7 +235,7 @@ class UnitTableViewController: BaseViewController, UIPopoverPresentationControll
 //    }
     
     // Override to support editing the table view.
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             units[indexPath.row].markForRemoteDeletion()
             context.saveOrRollback()

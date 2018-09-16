@@ -39,7 +39,7 @@ class GridView: UIStackView {
         axis = .vertical
     }
     
-    override var distribution: UIStackViewDistribution {
+    override var distribution: UIStackView.Distribution {
         set {
             super.distribution = newValue
             for stackView in arrangedSubviews {

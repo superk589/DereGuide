@@ -15,7 +15,7 @@ class UnitInformationSkillListCell: UITableViewCell {
     
     let skillListGrid = GridLabel(rows: 5, columns: 1, textAligment: .left)
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         leftLabel.text = NSLocalizedString("特技列表", comment: "队伍详情页面")

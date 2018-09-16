@@ -29,13 +29,13 @@ protocol ApplicationActiveStateObserving : ObserverTokenStore {
 
 extension ApplicationActiveStateObserving {
     func setupApplicationActiveNotifications() {
-        addObserverToken(NotificationCenter.default.addObserver(forName: .UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] note in
+        addObserverToken(NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] note in
             guard let observer = self else { return }
             observer.perform {
                 observer.applicationDidEnterBackground()
             }
         })
-        addObserverToken(NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] note in
+        addObserverToken(NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] note in
             guard let observer = self else { return }
             observer.perform {
                 observer.applicationDidBecomeActive()

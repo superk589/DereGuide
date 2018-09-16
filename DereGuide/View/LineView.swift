@@ -17,7 +17,7 @@ class LineView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric, height: 1 / Screen.scale)
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: 1 / Screen.scale)
     }
     
     required init?(coder aDecoder: NSCoder) {

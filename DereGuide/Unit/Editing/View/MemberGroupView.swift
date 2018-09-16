@@ -99,7 +99,7 @@ class MemberEditableItemView: UIView {
             strokeColor = color
         }
         cardView.setup(with: member)
-        bringSubview(toFront: cardView)
+        bringSubviewToFront(cardView)
     }
 }
 

@@ -84,7 +84,7 @@ class MyCenterItemView: UIView {
         didSet {
             cardPlaceholder.isHidden = !showsPlaceholder
             cardView.isHidden = showsPlaceholder
-            bringSubview(toFront: showsPlaceholder ? cardPlaceholder : cardView)
+            bringSubviewToFront(showsPlaceholder ? cardPlaceholder : cardView)
         }
     }
 }

@@ -79,8 +79,8 @@ class DMComposingStepOneController: BaseViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -91,20 +91,20 @@ class DMComposingStepOneController: BaseViewController {
     @objc func avoidKeyboard(_ notification: Notification) {
         guard
             // 结束位置
-            let endFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             
             // 开始位置
             // let beginFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
             
             // 持续时间
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
             
             else {
                 return
         }
         
         // 时间曲线函数
-        let curve = UIViewAnimationOptions.init(rawValue: (notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? UIViewAnimationOptions.curveEaseOut.rawValue)
+        let curve = UIView.AnimationOptions.init(rawValue: (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? UIView.AnimationOptions.curveEaseOut.rawValue)
         lastKeyboardFrame = endFrame
         lastCurve = curve
         lastDuration = duration.doubleValue
@@ -118,7 +118,7 @@ class DMComposingStepOneController: BaseViewController {
     }
     
     private var lastKeyboardFrame: CGRect?
-    private var lastCurve: UIViewAnimationOptions?
+    private var lastCurve: UIView.AnimationOptions?
     private var lastDuration: TimeInterval?
     
     

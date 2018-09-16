@@ -210,7 +210,8 @@
 		1269EA241D520E7E0071AD7F /* CGSSCardIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA231D520E7E0071AD7F /* CGSSCardIconView.swift */; };
 		1269EA261D520E9F0071AD7F /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */; };
 		1269EA281D520EAF0071AD7F /* UpdatingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */; };
-		126B646C2104AD5E001AA456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646A2104AD5E001AA456 /* InfoPlist.strings */; };
+		126B5448214E3728001A5C8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646A2104AD5E001AA456 /* InfoPlist.strings */; };
+		126B544B214E4E08001A5C8F /* DispatchSemaphore+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126B544A214E4E08001A5C8F /* DispatchSemaphore+Sync.swift */; };
 		1271C6B31D69812300DEF52B /* CharInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */; };
 		1271C6B71D69816800DEF52B /* CharDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1271C6B61D69816800DEF52B /* CharDetailViewController.swift */; };
 		127227DA1ECACD660022E6D4 /* CGSSLiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127227D91ECACD660022E6D4 /* CGSSLiveDetail.swift */; };
@@ -368,7 +369,6 @@
 		12E41E4B1E533A7D00D22A0F /* BeatmapHashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E41E4A1E533A7D00D22A0F /* BeatmapHashManager.swift */; };
 		12E45DE9205560E90059E73A /* GachaResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E45DE8205560E80059E73A /* GachaResultCardView.swift */; };
 		12E65CEE1F0C8917001B69AF /* LiveDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E65CED1F0C8917001B69AF /* LiveDifficultyView.swift */; };
-		12E9A1002147FFD6006769A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646A2104AD5E001AA456 /* InfoPlist.strings */; };
 		12E9A1022147FFD6006769A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 126B646D2104AD5E001AA456 /* InfoPlist.strings */; };
 		12EECCCF1ED57EFA0047666C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC21ED5636000B75BA0 /* UserNotifications.framework */; };
 		12EECCD01ED57EFA0047666C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12536DC41ED5636000B75BA0 /* UserNotificationsUI.framework */; };
@@ -511,7 +511,6 @@
 		120DBB2C1EEE3A0D004E0084 /* UnitTemplate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnitTemplate.plist; sourceTree = "<group>"; };
 		120DBB2E1EEE414A004E0084 /* UnitTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTemplate.swift; sourceTree = "<group>"; };
 		120FB5E61E59496B003802CD /* LiveSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSimulator.swift; sourceTree = "<group>"; };
-		120FE4062104AD7600A1B833 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		1211B0AB1EAF5A5E0027DD51 /* LiveDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		1211B0AF1EAF5A730027DD51 /* LiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDetailViewController.swift; sourceTree = "<group>"; };
 		121685ED1F1D911300F204D8 /* GachaSimulationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaSimulationResult.swift; sourceTree = "<group>"; };
@@ -679,6 +678,8 @@
 		1269EA231D520E7E0071AD7F /* CGSSCardIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardIconView.swift; sourceTree = "<group>"; };
 		1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
 		1269EA271D520EAF0071AD7F /* UpdatingStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatingStatusView.swift; sourceTree = "<group>"; };
+		126B5447214E36C3001A5C8F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		126B544A214E4E08001A5C8F /* DispatchSemaphore+Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchSemaphore+Sync.swift"; sourceTree = "<group>"; };
 		126B646B2104AD5E001AA456 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		126B646E2104AD5E001AA456 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1271C6B21D69812200DEF52B /* CharInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -1062,6 +1063,7 @@
 				1265DDB81FA034B500A2A679 /* Array+SafeIndex.swift */,
 				12F48AEF2020083C00CE57E1 /* UIViewControllerExtension.swift */,
 				12693CA52081D13C0052C365 /* IntExtenstion.swift */,
+				126B544A214E4E08001A5C8F /* DispatchSemaphore+Sync.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2223,7 +2225,7 @@
 					1282EE5E1D011A8F0024318C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MXJJEEMF3U;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2243,14 +2245,14 @@
 					12C2B62720010402006EE7F7 = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = MXJJEEMF3U;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1282EE5E1D011A8F0024318C;
 					};
 					12EECCCD1ED57EF90047666C = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = MXJJEEMF3U;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -2302,8 +2304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				126B646C2104AD5E001AA456 /* InfoPlist.strings in Resources */,
-				12E9A1002147FFD6006769A6 /* InfoPlist.strings in Resources */,
+				126B5448214E3728001A5C8F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2629,6 +2630,7 @@
 				129ECB1B1ECB2BF40010BC7F /* CheckBox.swift in Sources */,
 				12FC8B551EDE6DEB003CF3C3 /* UnitSimulationMainBodyCell.swift in Sources */,
 				123F320E1E6FED0F00B69D26 /* SpreadImageViewAnimator.swift in Sources */,
+				126B544B214E4E08001A5C8F /* DispatchSemaphore+Sync.swift in Sources */,
 				129182171F58E29500F91C0B /* DMComposingStepOneController.swift in Sources */,
 				12808E891F8606CE00DDCF38 /* SongDetailLiveDifficultyView.swift in Sources */,
 				12FC8B3C1EDE6DA7003CF3C3 /* UnitInformationController.swift in Sources */,
@@ -2930,8 +2932,8 @@
 			children = (
 				126B646B2104AD5E001AA456 /* en */,
 				128EC6002104AD6B00EBED33 /* ja */,
-				120FE4062104AD7600A1B833 /* zh-Hant */,
 				12E9A0FF2147FFD6006769A6 /* zh-Hant-TW */,
+				126B5447214E36C3001A5C8F /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3115,7 +3117,7 @@
 					"$(PROJECT_DIR)/DereGuide",
 				);
 				INFOPLIST_FILE = DereGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3124,8 +3126,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/DereGuide/Bridge-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -3152,7 +3153,7 @@
 					"$(PROJECT_DIR)/DereGuide",
 				);
 				INFOPLIST_FILE = DereGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3160,8 +3161,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/DereGuide/Bridge-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -3190,7 +3190,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DereGuide.app/DereGuide";
 			};
@@ -3217,7 +3217,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.DereGuideTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DereGuide.app/DereGuide";
 			};
@@ -3241,8 +3241,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -3264,8 +3263,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzk.cgssguide.NotificationContent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

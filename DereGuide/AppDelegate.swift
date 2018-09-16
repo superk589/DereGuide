@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var syncCoordinator: SyncCoordinator!
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // 处理一系列启动任务
         
@@ -97,11 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         CGSSClient.shared.tabBarController = rootTabBarController
         
-        // 判断是否通过本地消息进入, 如果是跳转到指定页面
-        if let notification = launchOptions?[.localNotification] as? UILocalNotification {
-            openSpecificPageWithLocalNotification(notification)
-        }
-        
         // 注册远程推送 用于订阅CloudKit同步信息
         application.registerForRemoteNotifications()
 
@@ -175,10 +170,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        //
-    }
-    
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let drawer = window?.rootViewController as? ZKDrawerController, let center = drawer.centerViewController as? UITabBarController, let nav = center.selectedViewController as? UINavigationController, let topmost = nav.topViewController {
             if topmost is BeatmapViewController {
@@ -214,26 +205,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("register remote notfication failed")
-    }
-    
-    private func openSpecificPageWithLocalNotification(_ notification: UILocalNotification) {
-        if notification.category == NotificationCategory.birthday {
-            let tabBarController = CGSSClient.shared.tabBarController
-            if let nvc = tabBarController?.selectedViewController as? UINavigationController,
-                let charaId = notification.userInfo?["chara_id"] as? Int,
-                let chara = CGSSDAO.shared.findCharById(charaId) {
-                let vc = CharDetailViewController()
-                vc.chara = chara
-                vc.hidesBottomBarWhenPushed = true
-                nvc.pushViewController(vc, animated: true)
-                nvc.navigationBar.setNeedsLayout()
-            }
-        }
-    }
-    
-    // 接收到本地消息
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        openSpecificPageWithLocalNotification(notification)
     }
     
     // 接收到远程消息

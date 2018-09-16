@@ -38,7 +38,7 @@ class ColleagueButtonsCell: UITableViewCell {
     
     weak var delegate: ColleaColleagueButtonsCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let descriptionLabel2 = ColleagueDescriptionLabel()
@@ -95,7 +95,7 @@ class ColleagueButtonsCell: UITableViewCell {
         delegate?.didSave(self)
     }
     
-    private lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    private lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .white)
     
     func setRevoking(_ isRevoking: Bool) {
         if isRevoking {
