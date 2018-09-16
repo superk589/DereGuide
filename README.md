@@ -19,9 +19,9 @@ This is an unofficial iOS utility application for **The Idolmaster Cinderella Gi
 <https://itunes.apple.com/app/dereguide/id1131934691>
 
 ## Requirements
-* iOS 9.0+
-* Xcode 9.0+
-* Swift 4.0+
+* iOS 10.0+
+* Xcode 10.0+
+* Swift 4.2+
 
 ## How to build
 * Clone the repository
@@ -38,17 +38,9 @@ $ open DereGuide.xcworkspace
 ```
 
 ## Localization
-Localization files can be found in DereGuide/*.lproj.
-
-Though the base localization is in Chinese, you can take the English one in en.lproj or the Japanese one in ja.lproj as reference.
-
-| File name | Description|
-| :------- | :------ |
-| InfoPlist.strings       | Localizable strings for some app settings
-| LaunchScreen.strings    | Localizable strings for launch screen, unused now
-| Localizable.strings     | Localizable strings for all strings in code
-| Main.strings            | Localizable strings for UI made by storyboard, length sensitive
-| ToolboxList.plist       | Xml style, localizable strings for tools in toolbox
+If you want to localize the app, please goto `./Localizations/DereGuide/` and edit the .xliff files.  
+If you want to add a new language please tell me.  
+For developers only, if you have macOS and Xcode, please read `./Localizations/README.md` and use those scripts to export or import localization.
 
 ## Contributors of other languages
 ### English:

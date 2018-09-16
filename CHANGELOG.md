@@ -1,5 +1,19 @@
 # ChangeLog
 
+### 1.9.4
+**此版本起不再支持低于 iOS 10.0 的设备**
+1. 支持新技能类型“协调”。
+2. 修复算分时生命闪耀的计算错误。
+3. 新增工具“数据更新日志”。
+
+##### Japanese version
+**このバージョンから、iOS 10.0以下はサポート対象外です**
+
+##### English version
+**Does not support devices below iOS 10.0 by this version**
+1. Support for new skill type "coordination".
+2. Fix the calculation error of life sparkle skills in live simulator.
+3. Add new tool "Version Log".
 
 ### 1.9.3
 1. 修复当生命值大于 1600 时，生命闪耀加成计算错误的问题。
