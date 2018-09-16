@@ -1,9 +1,25 @@
 /* Bundle name */
 "CFBundleName" = "$(PRODUCT_NAME)";
 
-/* Privacy - Photo Library Additions Usage Description */
+/* (No Comment) */
 "NSPhotoLibraryAddUsageDescription" = "For saving images to the camera roll. This permission can be changed from the Settings app.";
 
-/* Privacy - Photo Library Usage Description */
+/* InfoPlist.strings
+  DereGuide
+
+  Created by zzk on 2016/9/26.
+  Copyright © 2016 zzk. All rights reserved. */
 "NSPhotoLibraryUsageDescription" = "For saving images to the camera roll. This permission can be changed from the Settings app.";
+
+/* (No Comment) */
+"shortcutItemTitle1" = "Card";
+
+/* (No Comment) */
+"shortcutItemTitle2" = "Beatmap";
+
+/* (No Comment) */
+"shortcutItemTitle3" = "Event";
+
+/* (No Comment) */
+"shortcutItemTitle4" = "Gacha Simulator";
 

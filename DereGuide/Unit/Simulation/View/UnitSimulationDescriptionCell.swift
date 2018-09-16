@@ -19,7 +19,8 @@ class UnitSimulationDescriptionCell: UITableViewCell {
         descriptionLabel.font = .systemFont(ofSize: 14)
         descriptionLabel.textColor = .darkGray
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = NSLocalizedString("* 极限分数中所有技能100%触发\n* 极限分数1中note取PERFECT判定区间中的最优值\n* 模拟计算结果是取模拟次数前x%内的最低分数，每次会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a", comment: "队伍详情页面")
+        let text = NSLocalizedString("* 极限分数中所有技能100%触发\\n* 极限分数1中note取PERFECT判定区间中的最优值\\n* 模拟计算结果是取模拟次数前x%内的最低分数，每次会略有不同\\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a", comment: "").replacingOccurrences(of: "\\n", with: "\n")
+        descriptionLabel.text = text
 
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { (make) in

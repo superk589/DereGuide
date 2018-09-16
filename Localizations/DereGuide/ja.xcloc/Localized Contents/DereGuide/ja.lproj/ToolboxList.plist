@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>cName</key>
+		<string>BirthdayNotificationViewController</string>
+		<key>iconId</key>
+		<string>200247</string>
+		<key>title</key>
+		<string>アイドル誕生日通知</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>CharInfoViewController</string>
+		<key>iconId</key>
+		<string>300151</string>
+		<key>title</key>
+		<string>キャラ情報を見る</string>
+	</dict>
+    <dict>
+        <key>cName</key>
+        <string>SongViewController</string>
+        <key>iconId</key>
+        <string>200294</string>
+        <key>title</key>
+        <string>楽曲情報を見る</string>
+    </dict>
+	<dict>
+		<key>cName</key>
+		<string>GachaViewController</string>
+		<key>iconId</key>
+		<string>100282</string>
+		<key>title</key>
+		<string>ガシャシミュレーター</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>EventViewController</string>
+		<key>iconId</key>
+		<string>200206</string>
+		<key>title</key>
+		<string>イベント詳細情報を見る</string>
+	</dict>
+	<dict>
+		<key>cName</key>
+		<string>ColleagueViewController</string>
+		<key>iconId</key>
+		<string>300310</string>
+		<key>title</key>
+		<string>同僚の募集・探す</string>
+	</dict>
+    <dict>
+        <key>cName</key>
+        <string>VLTableViewController</string>
+        <key>title</key>
+        <string>データ更新ログ</string>
+    </dict>
+</array>
+</plist>

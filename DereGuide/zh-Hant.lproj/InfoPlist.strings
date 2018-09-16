@@ -1,14 +1,22 @@
-/* 
-  InfoPlist.strings
+/* (No Comment) */
+"NSPhotoLibraryAddUsageDescription" = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
+
+/* InfoPlist.strings
   DereGuide
 
   Created by zzk on 2016/9/26.
-  Copyright © 2016 zzk. All rights reserved.
-*/
+  Copyright © 2016 zzk. All rights reserved. */
+"NSPhotoLibraryUsageDescription" = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
 
-NSPhotoLibraryUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
-NSPhotoLibraryAddUsageDescription = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";
-shortcutItemTitle1 = "卡片";
-shortcutItemTitle2 = "譜面";
-shortcutItemTitle3 = "活動";
-shortcutItemTitle4 = "模擬抽卡";
+/* (No Comment) */
+"shortcutItemTitle1" = "卡片";
+
+/* (No Comment) */
+"shortcutItemTitle2" = "譜面";
+
+/* (No Comment) */
+"shortcutItemTitle3" = "活動";
+
+/* (No Comment) */
+"shortcutItemTitle4" = "模擬抽卡";
+

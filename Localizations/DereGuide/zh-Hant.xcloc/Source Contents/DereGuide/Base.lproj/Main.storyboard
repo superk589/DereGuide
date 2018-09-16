@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--设置-->
+        <scene sceneID="s4U-8z-nuO">
+            <objects>
+                <tableViewController id="3da-nI-rZF" customClass="SettingsTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Tco-bQ-VW0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="3da-nI-rZF" id="mS0-1D-myC"/>
+                            <outlet property="delegate" destination="3da-nI-rZF" id="NAQ-zg-yxN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="设置" id="zkd-c8-p78"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KtH-vf-hgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2774" y="214.99999999999997"/>
+        </scene>
+        <!--Privacy Policy View Controller-->
+        <scene sceneID="OlZ-Y3-p60">
+            <objects>
+                <viewController storyboardIdentifier="PrivacyPolicyViewController" hidesBottomBarWhenPushed="YES" id="2ao-EV-snd" customClass="PrivacyPolicyViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="19z-sH-Scw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0n3-F6-Y4f">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Privacy Policy">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+This page is used to inform app users regarding our policies with the collection</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" use">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> and disclosure of Personal Information if anyone decided to use our Service.
+
+If you choose to use our Service</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> which is accessible at DereGuide unless otherwise defined in this Privacy Policy.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Information Collection and Use">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+For a better experience</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" while using our Service">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" we may require you to provide us with certain personal information">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" including but not limited to ">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Units">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <font key="NSOriginalFont" size="14" name=".AppleSystemUIFont"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                            <font key="NSOriginalFont" size="14" name=".PingFangSC-Regular"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Favorite Cards and Characters">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <font key="NSOriginalFont" size="14" name=".AppleSystemUIFont"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=".">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                            <font key="NSOriginalFont" size="14" name=".AppleSystemUIFont"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> The information that we request will be retained by us and used as described in this privacy policy.
+
+The app does use third party services that may collect information used to identify you.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Device Information">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+We want to inform you that whenever you send a feedback via email</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" we collect data such as your device type">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" network status">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" operating system version">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" the configuration of the app">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" device language">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> and other statistics.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Security">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+We value your trust in providing us your Personal Information</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" or method of electronic storage is 100% secure and reliable">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> and we cannot guarantee its absolute security.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Children">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                                            <font key="NSOriginalFont" size="18" name=".AppleSystemUIFont"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="’">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".PingFangSC-Regular"/>
+                                            <font key="NSOriginalFont" size="18" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="s Privacy">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                                            <font key="NSOriginalFont" size="18" name=".AppleSystemUIFont"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", ">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> please contact us so that we will be able to do necessary actions.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Changes to This Privacy Policy">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+We may update our Privacy Policy from time to time. Thus</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Contact Us">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <font key="NSOriginalFont" size="18" name=".SFNSText"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+If you have any questions or suggestions about our Privacy Policy</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=",">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> do not hesitate to contact us.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="14"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="contentOffset">
+                                        <point key="value" x="0.0" y="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="leading" secondItem="znz-lr-Zo0" secondAttribute="leading" id="5DB-6v-Gch"/>
+                            <constraint firstItem="znz-lr-Zo0" firstAttribute="trailing" secondItem="0n3-F6-Y4f" secondAttribute="trailing" id="YeD-xe-U4O"/>
+                            <constraint firstItem="0n3-F6-Y4f" firstAttribute="top" secondItem="znz-lr-Zo0" secondAttribute="top" id="cVR-kK-CA0"/>
+                            <constraint firstAttribute="bottom" secondItem="0n3-F6-Y4f" secondAttribute="bottom" id="lnp-Fm-K92"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="znz-lr-Zo0"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="0n3-F6-Y4f" id="Zyq-gO-fdE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FJK-tI-XMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2775.1999999999998" y="917.99100449775119"/>
+        </scene>
+        <!--设置导航-->
+        <scene sceneID="3UH-G6-k3Y">
+            <objects>
+                <navigationController title="设置导航" id="Lc3-lA-ZOL" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="设置" image="settings" id="gI8-ss-NS6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PYk-Gh-Jnc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3da-nI-rZF" kind="relationship" relationship="rootViewController" id="y6z-Fu-weJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KeI-bc-MR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3594" y="214.99999999999997"/>
+        </scene>
+        <!--根标签栏-->
+        <scene sceneID="6Yg-Ih-m8u">
+            <objects>
+                <tabBarController storyboardIdentifier="RootTabBarController" title="根标签栏" automaticallyAdjustsScrollViewInsets="NO" id="Eme-MZ-6LK" customClass="RootTabBarController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="2VQ-b1-GKR" customClass="SafeAreaFixTabBar" customModule="DereGuide" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5Hs-jz-swe" kind="relationship" relationship="viewControllers" id="eSt-La-P0t"/>
+                        <segue destination="KxG-H5-NIc" kind="relationship" relationship="viewControllers" id="9Po-cc-mal"/>
+                        <segue destination="IyO-O4-iMn" kind="relationship" relationship="viewControllers" id="vi5-tW-gH1"/>
+                        <segue destination="sAv-Q2-aG8" kind="relationship" relationship="viewControllers" id="YK7-1L-5Ya"/>
+                        <segue destination="Lc3-lA-ZOL" kind="relationship" relationship="viewControllers" id="ncu-eh-RAu"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSz-SK-JmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5894" y="-574"/>
+        </scene>
+        <!--工具-->
+        <scene sceneID="8P3-YV-X5h">
+            <objects>
+                <tableViewController title="工具" id="08b-yF-FVx" customClass="ToolboxTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" id="kTP-1s-QKZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="08b-yF-FVx" id="8yc-8Y-GPW"/>
+                            <outlet property="delegate" destination="08b-yF-FVx" id="xbl-d9-GB8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="实用工具" id="zeC-Rh-4X6"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cxK-iM-5Qj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4453" y="918"/>
+        </scene>
+        <!--组队导航-->
+        <scene sceneID="3Ro-R5-hIA">
+            <objects>
+                <navigationController title="组队导航" id="IyO-O4-iMn" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="组队" image="people" id="Ji2-5n-2Mz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="agS-1H-YQh">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="GZS-2K-Fnc" kind="relationship" relationship="rootViewController" id="M7l-fS-Jjp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6nx-Ag-0t2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5894" y="1721"/>
+        </scene>
+        <!--我的队伍-->
+        <scene sceneID="ILv-7i-9nP">
+            <objects>
+                <viewController id="GZS-2K-Fnc" customClass="UnitTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Ek-cq-sl0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="SFx-l4-dxh"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我的队伍" id="omj-Op-jcb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5N-Xu-pZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5169" y="1720"/>
+        </scene>
+        <!--谱面-->
+        <scene sceneID="5me-Bd-loQ">
+            <objects>
+                <tableViewController id="NCZ-z5-ATr" customClass="LiveTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZgZ-l1-I3U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="NCZ-z5-ATr" id="WpT-LU-ubX"/>
+                            <outlet property="delegate" destination="NCZ-z5-ATr" id="MKW-ew-3hp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="谱面" id="OeQ-8h-gYQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jVT-IT-Bgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3594" y="-1252"/>
+        </scene>
+        <!--谱面导航-->
+        <scene sceneID="kBj-5g-TfY">
+            <objects>
+                <navigationController title="谱面导航" id="KxG-H5-NIc" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="谱面" image="musical_notes" id="gE2-j0-zef"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="unN-TZ-n18">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NCZ-z5-ATr" kind="relationship" relationship="rootViewController" id="w5I-LT-cSW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jda-UR-jBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4463" y="-1252"/>
+        </scene>
+        <!--卡片导航-->
+        <scene sceneID="73S-hd-Baf">
+            <objects>
+                <navigationController title="卡片导航" automaticallyAdjustsScrollViewInsets="NO" id="5Hs-jz-swe" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="卡片" image="stack_of_photos" id="8Lu-2l-B9T"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TKb-dn-xix">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hop-gk-wsV" kind="relationship" relationship="rootViewController" id="MmV-tx-OLQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Whv-b0-gNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3594" y="-565.99999999999989"/>
+        </scene>
+        <!--卡片-->
+        <scene sceneID="wNd-5k-mcB">
+            <objects>
+                <tableViewController title="卡片" id="hop-gk-wsV" customClass="CardTableViewController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="YO4-wT-KNm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="hop-gk-wsV" id="hh8-Pc-QAa"/>
+                            <outlet property="delegate" destination="hop-gk-wsV" id="EVY-nZ-7bI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="g0Z-NG-74c"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y61-0Z-B5w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2865" y="-566"/>
+        </scene>
+        <!--工具导航-->
+        <scene sceneID="x9V-Lw-SAR">
+            <objects>
+                <navigationController title="工具导航" automaticallyAdjustsScrollViewInsets="NO" id="sAv-Q2-aG8" customClass="BaseNavigationController" customModule="DereGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="工具" image="product" id="wJt-PI-tVQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B0B-4S-3iD">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="08b-yF-FVx" kind="relationship" relationship="rootViewController" id="TxQ-lt-fTR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9YH-eO-fG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5265" y="918"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="musical_notes" width="30" height="30"/>
+        <image name="people" width="30" height="30"/>
+        <image name="product" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
+        <image name="stack_of_photos" width="30" height="30"/>
+    </resources>
+</document>

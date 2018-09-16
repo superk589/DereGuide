@@ -1,99 +1,100 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.0" build-num="10A254a"/>
     </header>
     <body>
       <trans-unit id="5Hs-jz-swe.title">
         <source>卡片导航</source>
-        <target>卡片導航</target>
+        <target>Cards Nav Controller</target>
         <note>Class = "UINavigationController"; title = "卡片导航"; ObjectID = "5Hs-jz-swe";</note>
       </trans-unit>
       <trans-unit id="8Lu-2l-B9T.title">
         <source>卡片</source>
-        <target>卡片</target>
+        <target>Cards</target>
         <note>Class = "UITabBarItem"; title = "卡片"; ObjectID = "8Lu-2l-B9T";</note>
       </trans-unit>
       <trans-unit id="08b-yF-FVx.title">
         <source>工具</source>
-        <target>工具</target>
+        <target>Tools</target>
         <note>Class = "UITableViewController"; title = "工具"; ObjectID = "08b-yF-FVx";</note>
       </trans-unit>
       <trans-unit id="Eme-MZ-6LK.title">
         <source>根标签栏</source>
-        <target>根標籤欄</target>
+        <target>Root Tab Bar Controller</target>
         <note>Class = "UITabBarController"; title = "根标签栏"; ObjectID = "Eme-MZ-6LK";</note>
       </trans-unit>
       <trans-unit id="IyO-O4-iMn.title">
         <source>组队导航</source>
-        <target>組隊導航</target>
+        <target>Unit Nav Controller</target>
         <note>Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn";</note>
       </trans-unit>
       <trans-unit id="Ji2-5n-2Mz.title">
         <source>组队</source>
-        <target>組隊</target>
+        <target>Units</target>
         <note>Class = "UITabBarItem"; title = "组队"; ObjectID = "Ji2-5n-2Mz";</note>
       </trans-unit>
       <trans-unit id="KxG-H5-NIc.title">
         <source>谱面导航</source>
-        <target>歌曲導航</target>
+        <target>Beatmap Nav Controller</target>
         <note>Class = "UINavigationController"; title = "谱面导航"; ObjectID = "KxG-H5-NIc";</note>
       </trans-unit>
       <trans-unit id="Lc3-lA-ZOL.title">
         <source>设置导航</source>
-        <target>設定導航</target>
+        <target>Settings Nav Controller</target>
         <note>Class = "UINavigationController"; title = "设置导航"; ObjectID = "Lc3-lA-ZOL";</note>
       </trans-unit>
       <trans-unit id="OeQ-8h-gYQ.title">
         <source>谱面</source>
-        <target>歌曲</target>
+        <target>Beatmaps</target>
         <note>Class = "UINavigationItem"; title = "谱面"; ObjectID = "OeQ-8h-gYQ";</note>
       </trans-unit>
       <trans-unit id="gE2-j0-zef.title">
         <source>谱面</source>
-        <target>歌曲</target>
+        <target>Beatmaps</target>
         <note>Class = "UITabBarItem"; title = "谱面"; ObjectID = "gE2-j0-zef";</note>
       </trans-unit>
       <trans-unit id="gI8-ss-NS6.title">
         <source>设置</source>
-        <target>設定</target>
+        <target>Settings</target>
         <note>Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6";</note>
       </trans-unit>
       <trans-unit id="hop-gk-wsV.title">
         <source>卡片</source>
-        <target>卡片</target>
+        <target>Cards</target>
         <note>Class = "UITableViewController"; title = "卡片"; ObjectID = "hop-gk-wsV";</note>
       </trans-unit>
       <trans-unit id="omj-Op-jcb.title">
         <source>我的队伍</source>
-        <target>我的隊伍</target>
+        <target>Units</target>
         <note>Class = "UINavigationItem"; title = "我的队伍"; ObjectID = "omj-Op-jcb";</note>
       </trans-unit>
       <trans-unit id="sAv-Q2-aG8.title">
         <source>工具导航</source>
-        <target>工具導航</target>
+        <target>Tools Nav Controller</target>
         <note>Class = "UINavigationController"; title = "工具导航"; ObjectID = "sAv-Q2-aG8";</note>
       </trans-unit>
       <trans-unit id="wJt-PI-tVQ.title">
         <source>工具</source>
-        <target>工具</target>
+        <target>Tools</target>
         <note>Class = "UITabBarItem"; title = "工具"; ObjectID = "wJt-PI-tVQ";</note>
       </trans-unit>
       <trans-unit id="zeC-Rh-4X6.title">
         <source>实用工具</source>
-        <target>實用工具</target>
+        <target>Tools</target>
         <note>Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6";</note>
       </trans-unit>
       <trans-unit id="zkd-c8-p78.title">
         <source>设置</source>
-        <target>設定</target>
+        <target>Settings</target>
         <note>Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.0" build-num="10A254a"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
@@ -103,90 +104,114 @@
       </trans-unit>
       <trans-unit id="NSPhotoLibraryAddUsageDescription">
         <source>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</source>
-        <target>請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。</target>
-        <note>Privacy - Photo Library Additions Usage Description</note>
+        <target>For saving images to the camera roll. This permission can be changed from the Settings app.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="NSPhotoLibraryUsageDescription">
         <source>请允许本程序将图片保存至您的相册，随后您也可以在系统设置中随时修改。</source>
-        <target>請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。</target>
-        <note>Privacy - Photo Library Usage Description</note>
+        <target>For saving images to the camera roll. This permission can be changed from the Settings app.</target>
+        <note>InfoPlist.strings
+  DereGuide
+
+  Created by zzk on 2016/9/26.
+  Copyright © 2016 zzk. All rights reserved.</note>
+      </trans-unit>
+      <trans-unit id="shortcutItemTitle1">
+        <source>卡片</source>
+        <target>Card</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="shortcutItemTitle2">
+        <source>谱面</source>
+        <target>Beatmap</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="shortcutItemTitle3">
+        <source>活动</source>
+        <target>Event</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="shortcutItemTitle4">
+        <source>模拟抽卡</source>
+        <target>Gacha Simulator</target>
+        <note/>
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.0" build-num="10A254a"/>
     </header>
     <body>
       <trans-unit id="%@和%@">
         <source>%1$@和%2$@</source>
-        <target>%@和%@</target>
+        <target>%@ and %@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="%@收到了你的祝福">
         <source>%@收到了你的祝福</source>
-        <target>%@收到了你的祝福</target>
-        <note>No comment provided by engineer.</note>
+        <target>%@ received your blessing</target>
+        <note/>
       </trans-unit>
       <trans-unit id="%d日%d时">
         <source>%1$d日%2$d时</source>
-        <target>%1$d日%2$d時</target>
-        <note>No comment provided by engineer.</note>
+        <target>%1$d(%2$02d)</target>
+        <note>图表的x轴文字要尽可能短</note>
       </trans-unit>
       <trans-unit id="%d日%d时%d分">
         <source>%1$d日%2$d时%3$d分</source>
-        <target>%1$d日%2$d時%3$d分</target>
-        <note>No comment provided by engineer.</note>
+        <target>%1$d(%2$02d:%3$02d) </target>
+        <note>图表中点击某点后出现的描述文字 后面跟着分数或pt值</note>
       </trans-unit>
       <trans-unit id="%d月%d日">
         <source>%1$d月%2$d日</source>
-        <target>%1$d月%2$d日</target>
+        <target>%1$d/%2$d</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="* 不含后援值，歌曲模式为常规模式">
         <source>* 不含后援值，歌曲模式为常规模式</source>
-        <target>* 不含後援值，歌曲模式為常規模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>* Does not contain support appeal, in normal mode</target>
+        <note/>
       </trans-unit>
       <trans-unit id="* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\n* 如果您在高级选项中设置了手动打前 x 秒或前 x combo，则指定范围的Note视为全P">
         <source>* 全P模式中所有Note都为Perfect\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\n* 如果您在高级选项中设置了手动打前 x 秒或前 x combo，则指定范围的Note视为全P</source>
-        <target>* 全P模式中所有Note都為Perfect\n* 掛機模式中除非技能增強和SSR強判技能同時存在，所有Note都將丟失\n* 如果您在高階選項中設定了手動打前 x 秒或前 x combo，則指定範圍的Note視為全P</target>
-        <note>No comment provided by engineer.</note>
+        <target>* In AFK mode, all notes are assumed to be missed, except when skill boost and perfect lock are on.\n* If you set "play for the first x seconds or x combo" in advance options, notes in that range are assumed as perfect.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="* 左滑删除">
         <source>* 左滑删除</source>
-        <target>* 左滑刪除</target>
-        <note>No comment provided by engineer.</note>
+        <target>* Swipe to delete</target>
+        <note/>
       </trans-unit>
       <trans-unit id="* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确">
         <source>* 本图是得分分布的近似概率密度曲线，模拟次数越多越精确</source>
-        <target>* 本圖是得分分佈的近似概率密度曲線，模擬次數越多越精確</target>
-        <note>No comment provided by engineer.</note>
+        <target>* This graph is the approximate probability density curve of the score distribution, the more times of simulation the more accurate of the result.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="* 极限分数中所有技能100%触发\n* 极限分数1中note取PERFECT判定区间中的最优值\n* 模拟计算结果是取模拟次数前x%内的最低分数，每次会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a">
         <source>* 极限分数中所有技能100%1$触发\n* 极限分数1中note取PERFECT判定区间中的最优值\n* 模拟计算结果是取模拟次数前x%2$内的最低分数，每次会略有不同\n* 选取Groove模式或LIVE Parade模式时会自动忽略好友队长的影响\n* 存在一些暂时不支持计算平均分数的技能，平均分数将会显示为n/a</source>
-        <target>* 極限分數中所有技能100%觸發\n* 極限分數1中note取PERFECT判定區間中的最優值\n* 模擬計算結果是取模擬次數前x%內的最低分數，每次會略有不同\n* 選取Groove模式或LIVE Parade模式時會自動忽略好友隊長的影響\n* 存在一些暫時無法計算平均分數的技能，平均分數將會顯示為n/a</target>
-        <note>队伍详情页面</note>
+        <target>* Optimistic score assumes that skills always activate.\n* In optimistic score 1, it takes the best score of each note within its Perfect duration.\n* The simulation result is taken from the lowest score of simulation times' top x%. Results will vary between simulations.\n* In Groove or LIVE Parade mode, the partner's leader is ignored automatically.\n* Some skill types are not supported in average score calculating. It will show "n/a" instead.</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发">
         <source>* 随机模式中技能按照触发率随机触发\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\n* 极限2模式中技能必定触发\n* 悲观模式中技能触发几率低于100%的技能必定不触发</source>
-        <target>* 隨機模式中技能按照觸發率隨機觸發\n* 極限1模式中所有Note取判定區間內的最大得分而且技能必定觸發\n* 極限2模式中技能必定觸發\n* 悲觀模式中技能觸發機率低於100%的技能必定不觸發</target>
-        <note>No comment provided by engineer.</note>
+        <target>* In random mode, all skills are triggered based on their real rate.\n* In optimistic 1, it takes the best score of each note within its Perfect duration.\n* In optimistic 2, all notes are assumed to be Perfect.\n* In pessimistic mode, all skills are assumed to be not triggered, unless it has a 100% proc rate.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Combo保护">
         <source>Combo保护</source>
-        <target>Combo保護</target>
-        <note>No comment provided by engineer.</note>
+        <target>Combo Support</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="Combo加成">
         <source>Combo加成</source>
-        <target>Combo加成</target>
-        <note>No comment provided by engineer.</note>
+        <target>Combo Bonus</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="Cool">
         <source>Cool</source>
         <target>Cool</target>
-        <note>No comment provided by engineer.</note>
+        <note/>
       </trans-unit>
       <trans-unit id="Copyright of">
         <source>Copyright of</source>
@@ -194,74 +219,74 @@
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Copyright of Game Data">
-        <source>Copyright of Game Data</source>
-        <target>遊戲相關資料版權</target>
-        <note>No comment provided by engineer.</note>
+        <source>游戏相关数据版权</source>
+        <target>Copyright of Game Data</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Co曲">
         <source>Co曲</source>
-        <target>Co曲</target>
+        <target>Cool-type</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="Cute">
         <source>Cute</source>
         <target>Cute</target>
-        <note>No comment provided by engineer.</note>
+        <note/>
       </trans-unit>
       <trans-unit id="Cu曲">
         <source>Cu曲</source>
-        <target>Cu曲</target>
+        <target>Cute-type</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="Dance表现值">
         <source>Dance表现值</source>
-        <target>Dance表現值</target>
+        <target>the Dance appeal</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="Data Sources">
-        <source>Data Sources</source>
-        <target>資料來源</target>
-        <note>No comment provided by engineer.</note>
+        <source>数据来源</source>
+        <target>Data Sources</target>
+        <note/>
       </trans-unit>
       <trans-unit id="DereGuide">
         <source>DereGuide</source>
         <target>DereGuide</target>
-        <note>No comment provided by engineer.</note>
+        <note>new app name</note>
       </trans-unit>
       <trans-unit id="DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。">
         <source>DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会使用广告进行盈利。但是DereGuide的开发和所使用的服务器的维持都需要一定资金的支持，如果您喜欢这款应用，请支持我们。</source>
-        <target>DereGuide是一款免費應用，現在以及未來都不會增加任何需要收費開啟的功能，也不會使用廣告進行盈利。但是DereGuide的開發和所使用的伺服器的維持都需要一定資金的支援，如果您喜歡這款應用，請支援我們。</target>
-        <note>No comment provided by engineer.</note>
+        <target>DereGuide is a free application, and will not add any advertisement or paid feature. However, DereGuide is short of funds for the future development and server costs. If you like this application, please support us.</target>
+        <note>"DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会加入任何影响您使用的广告。DereGuide的开发和后端服务器的维护需要您的支持，如果您喜欢这款应用，请支持我们。" = "DereGuide是一款免费应用，现在以及未来都不会增加任何需要收费开启的功能，也不会加入任何影响您使用的广告。DereGuide的开发和后端服务器的维护需要您的支持，如果您喜欢这款应用，请支持我们。";</note>
       </trans-unit>
       <trans-unit id="FES限定">
         <source>FES限定</source>
-        <target>FES限定</target>
-        <note>No comment provided by engineer.</note>
+        <target>CinFes</target>
+        <note/>
       </trans-unit>
       <trans-unit id="FES限定卡池">
         <source>FES限定卡池</source>
-        <target>FES限定卡池</target>
-        <note>No comment provided by engineer.</note>
+        <target>CinFes Gacha</target>
+        <note/>
       </trans-unit>
       <trans-unit id="GREAT占比%(不考虑专注技能只加成PERFECT的因素)">
         <source>GREAT占比%(不考虑专注技能只加成PERFECT的因素)</source>
-        <target>GREAT佔比%(不考慮專注技能只加成PERFECT的因素)</target>
-        <note>No comment provided by engineer.</note>
+        <target>Great Percent % (Concentration skills only affect perfect notes is not taken into consideration)</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。">
         <source>Groove模式中，若队伍可发动生命恢复效果，起始状态就拥有两倍生命值。</source>
-        <target>Groove模式中，若隊伍可發動生命恢復效果，起始狀態就擁有兩倍生命值。</target>
-        <note>No comment provided by engineer.</note>
+        <target>In groove, if you can gain healing effect, simulate with double hp at begining</target>
+        <note>new in 1.8.1</note>
       </trans-unit>
       <trans-unit id="Groove活动">
         <source>Groove活动</source>
-        <target>Groove活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>Groove Event</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Groove类别">
         <source>Groove类别</source>
-        <target>Groove類別</target>
-        <note>No comment provided by engineer.</note>
+        <target>Groove Type</target>
+        <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="HP">
         <source>HP</source>
@@ -270,43 +295,45 @@
       </trans-unit>
       <trans-unit id="MV站位">
         <source>MV站位</source>
-        <target>MV站位</target>
-        <note>No comment provided by engineer.</note>
+        <target>Positions</target>
+        <note>
+</note>
       </trans-unit>
       <trans-unit id="Note列表">
         <source>Note列表</source>
-        <target>Note列表</target>
-        <note>No comment provided by engineer.</note>
+        <target>Note List</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Passion">
         <source>Passion</source>
         <target>Passion</target>
-        <note>No comment provided by engineer.</note>
+        <note/>
       </trans-unit>
       <trans-unit id="Pa曲">
         <source>Pa曲</source>
-        <target>Pa曲</target>
+        <target>Passion-type</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="S Rank率%">
         <source>S Rank率%</source>
-        <target>S Rank率%</target>
-        <note>No comment provided by engineer.</note>
+        <target>S Rank %</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Skill Boost">
-        <source>Skill Boost</source>
-        <target>技能增強</target>
-        <note>No comment provided by engineer.</note>
+        <source>技能增强</source>
+        <target>Skill Boost</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Solo">
         <source>Solo</source>
         <target>Solo</target>
-        <note>No comment provided by engineer.</note>
+        <note>
+</note>
       </trans-unit>
       <trans-unit id="Special Thanks to">
-        <source>Special Thanks to</source>
-        <target>特別鳴謝</target>
-        <note>No comment provided by engineer.</note>
+        <source>特别鸣谢</source>
+        <target>Special Thanks to</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Sprite">
         <source>Sprite</source>
@@ -314,23 +341,23 @@
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Third-party Libraries">
-        <source>Third-party Libraries</source>
-        <target>第三方庫</target>
-        <note>No comment provided by engineer.</note>
+        <source>第三方库</source>
+        <target>Third-party Libraries</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Twitter">
         <source>Twitter</source>
         <target>Twitter</target>
-        <note>No comment provided by engineer.</note>
+        <note/>
       </trans-unit>
       <trans-unit id="Visual表现值">
         <source>Visual表现值</source>
-        <target>Visual表現值</target>
+        <target>the Visual appeal</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="Vocal表现值">
         <source>Vocal表现值</source>
-        <target>Vocal表現值</target>
+        <target>the Vocal appeal</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="bpm">
@@ -340,1948 +367,1939 @@
       </trans-unit>
       <trans-unit id="note数">
         <source>note数</source>
-        <target>note數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Number of Notes</target>
+        <note>new in 1.3.0</note>
       </trans-unit>
       <trans-unit id="、">
         <source>、</source>
-        <target>、</target>
-        <note>No comment provided by engineer.</note>
+        <target>, </target>
+        <note/>
       </trans-unit>
       <trans-unit id="一个月内">
         <source>一个月内</source>
-        <target>一個月內</target>
+        <target>This Month</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="一般计算">
         <source>一般计算</source>
-        <target>一般計算</target>
+        <target>Calculate</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="七天内">
         <source>七天内</source>
-        <target>七天內</target>
+        <target>This Week</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="三围">
         <source>三围</source>
-        <target>三圍</target>
+        <target>B/W/H</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="三色协同">
         <source>三色协同</source>
-        <target>三色協同</target>
-        <note>No comment provided by engineer.</note>
+        <target>Synergy</target>
+        <note/>
       </trans-unit>
       <trans-unit id="上位">
         <source>上位</source>
-        <target>上位</target>
-        <note>No comment provided by engineer.</note>
+        <target>Upper Card</target>
+        <note/>
       </trans-unit>
       <trans-unit id="下一步">
         <source>下一步</source>
-        <target>下一步</target>
-        <note>No comment provided by engineer.</note>
+        <target>Next</target>
+        <note/>
       </trans-unit>
       <trans-unit id="下位">
         <source>下位</source>
-        <target>下位</target>
-        <note>No comment provided by engineer.</note>
+        <target>Lower Card</target>
+        <note/>
       </trans-unit>
       <trans-unit id="不再公开您之前已经发布的信息">
         <source>不再公开您之前已经发布的信息</source>
-        <target>不再公開您之前已經發布的資訊</target>
-        <note>No comment provided by engineer.</note>
+        <target>Make the profile you post previously unlisted</target>
+        <note/>
       </trans-unit>
       <trans-unit id="不填表示">
         <source>不填表示</source>
-        <target>不填表示</target>
-        <note>No comment provided by engineer.</note>
+        <target>empty represent </target>
+        <note>-∞ 或 +∞</note>
       </trans-unit>
       <trans-unit id="不明">
         <source>不明</source>
-        <target>不明</target>
+        <target>??</target>
         <note>通用, 通常不会出现, 为一些未知字符串预留</note>
       </trans-unit>
       <trans-unit id="不限">
         <source>不限</source>
-        <target>不限</target>
-        <note>No comment provided by engineer.</note>
+        <target>no limit</target>
+        <note/>
       </trans-unit>
       <trans-unit id="与歌曲颜色相同">
         <source>与歌曲颜色相同</source>
-        <target>與歌曲顏色相同</target>
-        <note>No comment provided by engineer.</note>
+        <target>Same as song color</target>
+        <note/>
       </trans-unit>
       <trans-unit id="专注">
         <source>专注</source>
-        <target>專注</target>
-        <note>No comment provided by engineer.</note>
+        <target>Concentration</target>
+        <note>Skill Type: Concentration</note>
       </trans-unit>
       <trans-unit id="中">
         <source>中</source>
-        <target>中</target>
+        <target>Med.</target>
         <note>技能触发几率的简写</note>
       </trans-unit>
       <trans-unit id="中确率">
         <source>中确率</source>
-        <target>中確率</target>
-        <note>No comment provided by engineer.</note>
+        <target>Med.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="为什么会有这个页面？">
         <source>为什么会有这个页面？</source>
-        <target>為什麼會有這個頁面？</target>
-        <note>No comment provided by engineer.</note>
+        <target>What is this?</target>
+        <note/>
       </trans-unit>
       <trans-unit id="习惯用手">
         <source>习惯用手</source>
-        <target>習慣用手</target>
+        <target>Hand</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="五十音">
         <source>五十音</source>
-        <target>五十音</target>
-        <note>No comment provided by engineer.</note>
+        <target>Kana</target>
+        <note/>
       </trans-unit>
       <trans-unit id="人组合">
         <source>人组合</source>
-        <target>人組合</target>
-        <note>No comment provided by engineer.</note>
+        <target> idols unit</target>
+        <note>new in 1.6 &amp; 歌曲是由几人组合演唱的, 2人组合, 5人组合等</note>
       </trans-unit>
       <trans-unit id="今天">
         <source>今天</source>
-        <target>今天</target>
+        <target>Today</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="今天是%@的生日(%d月%d日)">
         <source>今天是%1$@的生日(%2$d月%3$d日)</source>
-        <target>今天是%1$@的生日(%2$d月%3$d日)</target>
+        <target>Today is %1$@'s birthday (%2$d/%3$d)</target>
         <note>生日通知正文</note>
       </trans-unit>
       <trans-unit id="传统活动">
         <source>传统活动</source>
-        <target>傳統活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>Token Event</target>
+        <note/>
       </trans-unit>
       <trans-unit id="位置">
         <source>位置</source>
-        <target>位置</target>
-        <note>No comment provided by engineer.</note>
+        <target>Position</target>
+        <note/>
       </trans-unit>
       <trans-unit id="低">
         <source>低</source>
-        <target>低</target>
+        <target>Low</target>
         <note>技能触发几率的简写</note>
       </trans-unit>
       <trans-unit id="低确率">
         <source>低确率</source>
-        <target>低確率</target>
-        <note>No comment provided by engineer.</note>
+        <target>Low</target>
+        <note/>
       </trans-unit>
       <trans-unit id="体重">
         <source>体重</source>
-        <target>體重</target>
+        <target>Weight</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="使BAD/NICE音符不会中断COMBO">
         <source>使BAD/NICE音符不会中断COMBO</source>
-        <target>使BAD/NICE音符不會中斷COMBO</target>
+        <target>Bad/Nice notes will not break combo</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使NICE音符不会中断COMBO">
         <source>使NICE音符不会中断COMBO</source>
-        <target>使NICE音符不會中斷COMBO</target>
+        <target>Nice notes will not break combo</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使你的COMBO不会中断">
         <source>使你的COMBO不会中断</source>
-        <target>使你的COMBO不會中斷</target>
+        <target>your combo will not be broken</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使你的生命不会减少">
         <source>使你的生命不会减少</source>
-        <target>使你的生命不會減少</target>
+        <target>you will not lose health</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档">
         <source>使当前发动的分数加成和COMBO加成额外提高 %d%%，生命恢复和护盾额外恢复 1 点生命，改判范围增加一档</source>
-        <target>使當前發動的分數加成和COMBO加成額外提高 %d%%，生命恢復和護盾額外恢復 1 點生命，改判範圍增加一檔</target>
-        <note>No comment provided by engineer.</note>
+        <target>currently active combo bonus and score bonus will gain extra %d%%, healer and guard will restore extra 1 health, perfect lock will extend its scope</target>
+        <note/>
       </trans-unit>
       <trans-unit id="使所有GREAT/NICE/BAD音符改判为PERFECT">
         <source>使所有GREAT/NICE/BAD音符改判为PERFECT</source>
-        <target>使所有GREAT/NICE/BAD音符改判為PERFECT</target>
+        <target>Bad/Nice/Great notes will become Perfect notes</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有GREAT/NICE音符改判为PERFECT">
         <source>使所有GREAT/NICE音符改判为PERFECT</source>
-        <target>使所有GREAT/NICE音符改判為PERFECT</target>
+        <target>Nice/Great notes will become Perfect notes</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有GREAT音符改判为PERFECT">
         <source>使所有GREAT音符改判为PERFECT</source>
-        <target>使所有GREAT音符改判為PERFECT</target>
+        <target>Great notes will become Perfect notes</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命">
         <source>使所有PERFECT/GREAT/NICE音符恢复你 %d 点生命</source>
-        <target>使所有PERFECT/GREAT/NICE音符恢復你 %d 點生命</target>
+        <target>Nice/Great/Perfect notes will restore %d health</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成">
         <source>使所有PERFECT/GREAT/NICE音符获得 %d%% 的分数加成</source>
-        <target>使所有PERFECT/GREAT/NICE音符獲得 %d%% 的分數加成</target>
+        <target>Nice/Great/Perfect notes will receive a %d%% score bonus</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT/GREAT音符恢复你 %d 点生命">
         <source>使所有PERFECT/GREAT音符恢复你 %d 点生命</source>
-        <target>使所有PERFECT/GREAT音符恢復你 %d 點生命</target>
+        <target>Great/Perfect notes will restore %d health</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT/GREAT音符获得 %d%% 的分数加成">
         <source>使所有PERFECT/GREAT音符获得 %d%% 的分数加成</source>
-        <target>使所有PERFECT/GREAT音符獲得 %d%% 的分數加成</target>
+        <target>Great/Perfect notes will receive a %d%% score bonus</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT音符恢复你 %d 点生命">
         <source>使所有PERFECT音符恢复你 %d 点生命</source>
-        <target>使所有PERFECT音符恢復你 %d 點生命</target>
+        <target>Perfect notes will restore %d health</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成">
         <source>使所有PERFECT音符获得 %d%% 的分数加成</source>
-        <target>使所有PERFECT音符獲得 %d%% 的分數加成</target>
+        <target>Perfect notes will receive a %d%% score bonus</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小">
         <source>使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小</source>
-        <target>使所有PERFECT音符獲得 %d%% 的分數加成，且使PERFECT判定區間的時間範圍縮小</target>
-        <note>No comment provided by engineer.</note>
+        <target>Perfect notes will receive a %d%% score bonus, but become harder to hit</target>
+        <note/>
       </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
-        <target>使所有PERFECT音符獲得 %1$d%% 的分數加成，並獲得額外的 %2$d%% 的COMBO加成</target>
+        <target>Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="使所有音符恢复你 %d 点生命">
         <source>使所有音符恢复你 %d 点生命</source>
-        <target>使所有音符恢復你 %d 點生命</target>
+        <target>all notes will restore %d health</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="使用后援表现值">
         <source>使用后援表现值</source>
-        <target>使用後援表現值</target>
+        <target>Use Support Appeal</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="使用固定值">
-        <source>使用固定值</source>
-        <target>使用固定表現值</target>
+        <source>使用固定表现值</source>
+        <target>Use Custom Appeal</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="保存">
         <source>保存</source>
-        <target>儲存</target>
-        <note>No comment provided by engineer.</note>
+        <target>Save</target>
+        <note/>
       </trans-unit>
       <trans-unit id="保存信息，但是暂不公开">
         <source>保存信息，但是暂不公开</source>
-        <target>儲存資訊，但是暫不公開</target>
-        <note>No comment provided by engineer.</note>
+        <target>Save the profile, but don't post it</target>
+        <note/>
       </trans-unit>
       <trans-unit id="修改最近使用中的偶像潜能同步到同角色所有卡片">
         <source>修改最近使用中的偶像潜能同步到同角色所有卡片</source>
-        <target>修改最近使用中的偶像潛能同步到同角色所有卡片</target>
-        <note>No comment provided by engineer.</note>
+        <target>Synchronize to all of the same chara while editing recent idols' potential</target>
+        <note/>
       </trans-unit>
       <trans-unit id="偶像">
         <source>偶像</source>
-        <target>偶像</target>
-        <note>No comment provided by engineer.</note>
+        <target>Idols</target>
+        <note/>
       </trans-unit>
       <trans-unit id="偶像生日提醒">
         <source>偶像生日提醒</source>
-        <target>偶像生日提醒</target>
-        <note>No comment provided by engineer.</note>
+        <target>Birthday Notification</target>
+        <note/>
       </trans-unit>
       <trans-unit id="全P">
         <source>全P</source>
-        <target>全P</target>
-        <note>No comment provided by engineer.</note>
+        <target>Full Perfect</target>
+        <note/>
       </trans-unit>
       <trans-unit id="全才">
         <source>全才</source>
-        <target>全才</target>
-        <note>No comment provided by engineer.</note>
+        <target>All Round</target>
+        <note>Skill Type: All Round</note>
       </trans-unit>
       <trans-unit id="全选">
         <source>全选</source>
-        <target>全選</target>
-        <note>No comment provided by engineer.</note>
+        <target>Select All</target>
+        <note/>
       </trans-unit>
       <trans-unit id="全部">
         <source>全部</source>
-        <target>全部</target>
-        <note>No comment provided by engineer.</note>
+        <target>All</target>
+        <note/>
       </trans-unit>
       <trans-unit id="全部取消">
         <source>全部取消</source>
-        <target>全部取消</target>
-        <note>No comment provided by engineer.</note>
+        <target>Deselect All</target>
+        <note>全选的反义</note>
       </trans-unit>
       <trans-unit id="关于">
         <source>关于</source>
-        <target>關於</target>
-        <note>No comment provided by engineer.</note>
+        <target>About</target>
+        <note/>
       </trans-unit>
       <trans-unit id="兴趣">
         <source>兴趣</source>
-        <target>興趣</target>
+        <target>Hobby</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="其他">
         <source>其他</source>
-        <target>其他</target>
+        <target>Other</target>
         <note>通用, 通常不会出现, 为未知字符预留</note>
       </trans-unit>
       <trans-unit id="出演MV">
         <source>出演MV</source>
-        <target>出演MV</target>
-        <note>No comment provided by engineer.</note>
+        <target>Starred in</target>
+        <note>卡详情页面和角色详情页面增加该偶像出演过的mv</note>
       </trans-unit>
       <trans-unit id="出现率">
         <source>出现率</source>
-        <target>出現率</target>
-        <note>No comment provided by engineer.</note>
+        <target>Rate</target>
+        <note>new controller for score detail</note>
       </trans-unit>
       <trans-unit id="出生地">
         <source>出生地</source>
-        <target>出生地</target>
+        <target>Hometown</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="分数加成">
         <source>分数加成</source>
-        <target>分數加成</target>
-        <note>No comment provided by engineer.</note>
+        <target>Score Bonus</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="删除">
         <source>删除</source>
-        <target>刪除</target>
-        <note>No comment provided by engineer.</note>
+        <target>Delete</target>
+        <note>new in 1.5.0</note>
       </trans-unit>
       <trans-unit id="动作模式">
         <source>动作模式</source>
-        <target>動作模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>Action Mode</target>
+        <note/>
       </trans-unit>
       <trans-unit id="十连">
         <source>十连</source>
-        <target>十連</target>
+        <target>10-pull</target>
         <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="升序">
         <source>升序</source>
-        <target>升序</target>
-        <note>No comment provided by engineer.</note>
+        <target>Ascending</target>
+        <note/>
       </trans-unit>
       <trans-unit id="协力活动">
         <source>协力活动</source>
-        <target>協力活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>LIVE Party</target>
+        <note/>
       </trans-unit>
       <trans-unit id="协调">
         <source>协调</source>
-        <target>協調</target>
+        <target>Coordination</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级">
         <source>单击选择要修改的位置，双击可以从全部卡片中选择，长按可以编辑潜能和技能等级</source>
-        <target>單擊選擇要修改的位置，雙擊可以從全部卡片中選擇，長按可以編輯潛能和技能等級</target>
-        <note>No comment provided by engineer.</note>
+        <target>Click to select a position, double click to select from full card list, long press to edit its skill level and potential levels</target>
+        <note/>
       </trans-unit>
       <trans-unit id="单属性卡池">
         <source>单属性卡池</source>
-        <target>單屬性卡池</target>
-        <note>No comment provided by engineer.</note>
+        <target>Type Select Gacha</target>
+        <note/>
       </trans-unit>
       <trans-unit id="单抽">
         <source>单抽</source>
-        <target>單抽</target>
+        <target>Single-pull</target>
         <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="占比">
         <source>占比</source>
-        <target>佔比</target>
-        <note>No comment provided by engineer.</note>
+        <target>percent</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡池">
         <source>卡池</source>
-        <target>卡池</target>
-        <note>No comment provided by engineer.</note>
+        <target>Gacha</target>
+        <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="卡池名称或描述">
         <source>卡池名称或描述</source>
-        <target>卡池名稱或描述</target>
-        <note>No comment provided by engineer.</note>
+        <target>Name, Description</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡池封面">
         <source>卡池封面</source>
-        <target>卡池封面</target>
-        <note>No comment provided by engineer.</note>
+        <target>Gacha Banner</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡片">
         <source>卡片</source>
-        <target>卡片</target>
-        <note>No comment provided by engineer.</note>
+        <target>Cards</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡片图">
         <source>卡片图</source>
-        <target>卡片圖</target>
-        <note>No comment provided by engineer.</note>
+        <target>Card Image</target>
+        <note>new in v1.2.0(7+)</note>
       </trans-unit>
       <trans-unit id="卡片大图">
         <source>卡片大图</source>
-        <target>卡片大圖</target>
-        <note>No comment provided by engineer.</note>
+        <target>Card Spread Image</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡片头像">
         <source>卡片头像</source>
-        <target>卡片頭像</target>
-        <note>No comment provided by engineer.</note>
+        <target>Card Thumbnail</target>
+        <note/>
       </trans-unit>
       <trans-unit id="卡片属性">
         <source>卡片属性</source>
-        <target>卡片屬性</target>
+        <target>Card Stats</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="参考值">
         <source>参考值</source>
-        <target>參考值</target>
-        <note>No comment provided by engineer.</note>
+        <target>Reference Value</target>
+        <note/>
       </trans-unit>
       <trans-unit id="双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布">
         <source>双击从全部卡片中选择，长按编辑潜能或者移除偶像，我的队长中至少要填一个位置才能发布</source>
-        <target>雙擊從全部卡片中選擇，長按編輯潛能或者移除偶像，我的隊長中至少要填一個位置才能發佈</target>
-        <note>No comment provided by engineer.</note>
+        <target>Double click to select from all cards, long press to edit potential or delete it. You have to set at least one center.</target>
+        <note>using manually input</note>
       </trans-unit>
       <trans-unit id="反馈">
         <source>反馈</source>
-        <target>反饋</target>
-        <note>No comment provided by engineer.</note>
+        <target>Feedback</target>
+        <note/>
       </trans-unit>
       <trans-unit id="发布">
         <source>发布</source>
-        <target>發佈</target>
-        <note>No comment provided by engineer.</note>
+        <target>Post</target>
+        <note/>
       </trans-unit>
       <trans-unit id="发布失败，请确保iCloud已登录并且网络状态正常">
         <source>发布失败，请确保iCloud已登录并且网络状态正常</source>
-        <target>釋出失敗，請確保iCloud已登入並且網路狀態正常</target>
-        <note>No comment provided by engineer.</note>
+        <target>Post failed, please verify your iCloud account and the internet connection</target>
+        <note/>
       </trans-unit>
       <trans-unit id="发布成功">
         <source>发布成功</source>
-        <target>發佈成功</target>
-        <note>No comment provided by engineer.</note>
+        <target>Posting succeed</target>
+        <note/>
       </trans-unit>
       <trans-unit id="发送邮件">
         <source>发送邮件</source>
-        <target>傳送郵件</target>
-        <note>No comment provided by engineer.</note>
+        <target>E-mail</target>
+        <note/>
       </trans-unit>
       <trans-unit id="取消">
         <source>取消</source>
-        <target>取消</target>
+        <target>Cancel</target>
         <note>底部弹出框按钮
    弹出框按钮
    生日提醒页面</note>
       </trans-unit>
       <trans-unit id="取消收藏">
         <source>取消收藏</source>
-        <target>取消收藏</target>
-        <note>No comment provided by engineer.</note>
+        <target>Remove from Favorites</target>
+        <note/>
       </trans-unit>
       <trans-unit id="变更时间">
         <source>变更时间</source>
-        <target>變更時間</target>
-        <note>No comment provided by engineer.</note>
+        <target>Last updated time</target>
+        <note>歌曲筛选条件 原本的更新时间改为首次出现时间, 加入新条件变更时间倒序作为默认排序</note>
       </trans-unit>
       <trans-unit id="只有%@">
         <source>只有%@</source>
-        <target>只有%@</target>
-        <note>No comment provided by engineer.</note>
+        <target>only %@</target>
+        <note/>
       </trans-unit>
       <trans-unit id="向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间">
         <source>向所有用户公开您的信息，重复发布会自动覆盖之前的内容并刷新更新时间</source>
-        <target>向所有使用者公開您的資訊，重複釋出會自動覆蓋之前的內容並重新整理更新時間</target>
-        <note>No comment provided by engineer.</note>
+        <target>Make your profile public, repeated posts will automatically overwrite the previous content and refresh the update time</target>
+        <note>both</note>
       </trans-unit>
       <trans-unit id="启动时自动检查更新">
         <source>启动时自动检查更新</source>
-        <target>啟動時自動檢查更新</target>
-        <note>No comment provided by engineer.</note>
+        <target>Check for Updates at Launch</target>
+        <note>settings from storyboard</note>
       </trans-unit>
       <trans-unit id="因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。">
         <source>因数据更新导致队伍数据不完整，建议等待当前更新完成，或尝试在卡片页面下拉更新数据。</source>
-        <target>因數據更新導致隊伍資料不完整，建議等待當前更新完成，或嘗試在卡片頁面下拉更新數據。</target>
+        <target>Some card data is currently unavailable. If an update is in progress, please wait for it to complete, or pull down from the Cards page to update manually.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="图片">
         <source>图片</source>
-        <target>圖片</target>
-        <note>No comment provided by engineer.</note>
+        <target>Images</target>
+        <note/>
       </trans-unit>
       <trans-unit id="基础分">
         <source>基础分</source>
-        <target>基礎分</target>
-        <note>No comment provided by engineer.</note>
+        <target>Base Score</target>
+        <note>score detail table footer</note>
       </trans-unit>
       <trans-unit id="增速(/h)">
         <source>增速(/h)</source>
-        <target>增速(/h)</target>
-        <note>No comment provided by engineer.</note>
+        <target>Speed(/h)</target>
+        <note/>
       </trans-unit>
       <trans-unit id="处理中...">
         <source>处理中...</source>
-        <target>處理中...</target>
+        <target>Please wait</target>
         <note>耗时任务处理过程提示框</note>
       </trans-unit>
       <trans-unit id="复制">
         <source>复制</source>
-        <target>複製</target>
-        <note>No comment provided by engineer.</note>
+        <target>Copy</target>
+        <note>new in v1.1.5</note>
       </trans-unit>
       <trans-unit id="大图">
         <source>大图</source>
-        <target>大圖</target>
+        <target>Spread</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="天井">
         <source>天井</source>
-        <target>天井</target>
+        <target>300-pulls guarantees</target>
         <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="失败">
         <source>失败</source>
-        <target>失敗</target>
+        <target>Failed</target>
         <note>设置页面
    通用</note>
       </trans-unit>
       <trans-unit id="好友">
         <source>好友</source>
-        <target>好友</target>
-        <note>No comment provided by engineer.</note>
+        <target>Guest</target>
+        <note>队伍编辑页面</note>
       </trans-unit>
       <trans-unit id="好友技能">
         <source>好友技能</source>
-        <target>好友技能</target>
+        <target>Guest Center Skill</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="如何支持我们？">
         <source>如何支持我们？</source>
-        <target>如何支援我們？</target>
-        <note>No comment provided by engineer.</note>
+        <target>How to do it?</target>
+        <note>"捐赠的钱款将用在什么地方？" = "捐赠的钱款将用在什么地方？";</note>
       </trans-unit>
       <trans-unit id="如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单">
         <source>如需隐藏某些难度，或隐藏难度描述文字，请使用侧边菜单</source>
-        <target>如需隱藏某些難度，或隱藏難度描述文字，請使用側邊選單</target>
-        <note>No comment provided by engineer.</note>
+        <target>If you want to hide some difficulties or hide difficulty description text, please config in the side menu.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="姓名假名">
         <source>姓名假名</source>
-        <target>姓名假名</target>
+        <target>Kana</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="存活率%">
         <source>存活率%</source>
-        <target>存活率%</target>
-        <note>No comment provided by engineer.</note>
+        <target>Survival %</target>
+        <note/>
       </trans-unit>
       <trans-unit id="完成">
         <source>完成</source>
-        <target>完成</target>
+        <target>Done</target>
         <note>导航栏按钮</note>
       </trans-unit>
       <trans-unit id="完成LIVE时，获得的粉丝数提高 %d%%">
         <source>完成LIVE时，获得的粉丝数提高 %d%%</source>
-        <target>完成LIVE時，獲得的粉絲數提高 %d%%</target>
-        <note>No comment provided by engineer.</note>
+        <target>gives %d%% extra fans when you finish a live.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="完成LIVE时，额外获得特别奖励">
         <source>完成LIVE时，额外获得特别奖励</source>
-        <target>完成LIVE時，額外獲得特別獎勵</target>
-        <note>No comment provided by engineer.</note>
+        <target>gives extra rewards when you finish a live.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="寻找同僚">
         <source>寻找同僚</source>
-        <target>尋找同僚</target>
-        <note>No comment provided by engineer.</note>
+        <target>Colleague Finder</target>
+        <note/>
       </trans-unit>
       <trans-unit id="小屋加成%">
         <source>小屋加成%</source>
-        <target>小屋加成%</target>
-        <note>No comment provided by engineer.</note>
+        <target>Room Bonus %</target>
+        <note/>
       </trans-unit>
       <trans-unit id="属性">
         <source>属性</source>
-        <target>屬性</target>
+        <target>Status</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="属性排名">
         <source>属性排名</source>
-        <target>屬性排名</target>
+        <target>Relative Strength</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="岁">
         <source>岁</source>
-        <target>歲</target>
+        <target> years</target>
         <note>角色年龄</note>
       </trans-unit>
       <trans-unit id="巡演活动">
         <source>巡演活动</source>
-        <target>巡演活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>LIVE Parade</target>
+        <note/>
       </trans-unit>
       <trans-unit id="已付声">
         <source>已付声</source>
-        <target>已付聲</target>
-        <note>No comment provided by engineer.</note>
+        <target>Voiced</target>
+        <note/>
       </trans-unit>
       <trans-unit id="已复制ID到剪贴板">
         <source>已复制ID到剪贴板</source>
-        <target>已複製ID到剪貼簿</target>
-        <note>No comment provided by engineer.</note>
+        <target>Game ID is copied to clipboard</target>
+        <note/>
       </trans-unit>
       <trans-unit id="已开启">
         <source>已开启</source>
-        <target>已開啟</target>
+        <target>Yes</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="已收藏">
         <source>已收藏</source>
-        <target>已收藏</target>
-        <note>No comment provided by engineer.</note>
+        <target>Favorited</target>
+        <note/>
       </trans-unit>
       <trans-unit id="希望征集的队长">
         <source>希望征集的队长</source>
-        <target>希望徵集的隊長</target>
-        <note>No comment provided by engineer.</note>
+        <target>Centers Wanted</target>
+        <note/>
       </trans-unit>
       <trans-unit id="常规模式">
         <source>常规模式</source>
-        <target>常規模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>Regular</target>
+        <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="常规歌曲">
         <source>常规歌曲</source>
-        <target>常規歌曲</target>
-        <note>No comment provided by engineer.</note>
+        <target>Regular Songs</target>
+        <note/>
       </trans-unit>
       <trans-unit id="平均分数">
         <source>平均分数</source>
-        <target>平均分數</target>
+        <target>Avg. Score</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="平均覆盖率%">
         <source>平均覆盖率%</source>
-        <target>平均覆蓋率%</target>
+        <target>Avg. cover. %</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="年龄">
         <source>年龄</source>
-        <target>年齡</target>
+        <target>Age</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="序号">
         <source>序号</source>
-        <target>序號</target>
-        <note>No comment provided by engineer.</note>
+        <target>Index</target>
+        <note/>
       </trans-unit>
       <trans-unit id="开启生日通知提醒">
         <source>开启生日通知提醒</source>
-        <target>開啟生日通知提醒</target>
+        <target>Enable Birthday Notifications</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="开始计算">
         <source>开始计算</source>
-        <target>開始計算</target>
-        <note>No comment provided by engineer.</note>
+        <target>Calculate</target>
+        <note/>
       </trans-unit>
       <trans-unit id="强判">
         <source>强判</source>
-        <target>強判</target>
-        <note>No comment provided by engineer.</note>
+        <target>Perfect Support</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="当%@属性的偶像存在于队伍时，">
         <source>当%@属性的偶像存在于队伍时，</source>
-        <target>當%@屬性的偶像存在於隊伍時，</target>
-        <note>No comment provided by engineer.</note>
+        <target>When there are %@ idols on the team, </target>
+        <note/>
       </trans-unit>
       <trans-unit id="当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成">
         <source>当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成</source>
-        <target>當Cute、Cool和Passion偶像存在於隊伍時，使所有PERFECT音符獲得 %1$d%% 的分數加成/恢復你 %3$d 點生命，並獲得額外的 %2$d%% 的COMBO加成</target>
-        <note>No comment provided by engineer.</note>
+        <target>with all three types of idols on the team, you will gain an extra %2$d%% combo bonus, and Perfect notes will receive a %1$d%% score bonus plus restore %3$d health</target>
+        <note/>
       </trans-unit>
       <trans-unit id="当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>当仅有Cool偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
-        <target>當僅有Cool偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成</target>
+        <target>with only Cool idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>当仅有Cute偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
-        <target>當僅有Cute偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成</target>
+        <target>with only Cute idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>当仅有Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
-        <target>當僅有Passion偶像存在於隊伍時，使所有PERFECT音符獲得 %d%% 的分數加成，並獲得額外的 %d%% 的COMBO加成</target>
+        <target>with only Passion idols on the team, Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="当前Pt">
         <source>当前Pt</source>
-        <target>當前Pt</target>
-        <note>No comment provided by engineer.</note>
+        <target>Current Pt.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="当前分数">
         <source>当前分数</source>
-        <target>當前分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Current Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="当前版本">
         <source>当前版本</source>
-        <target>當前版本</target>
-        <note>No comment provided by engineer.</note>
+        <target>Current Version</target>
+        <note/>
       </trans-unit>
       <trans-unit id="彩色曲">
         <source>彩色曲</source>
-        <target>彩色曲</target>
+        <target>All-type</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="待定">
         <source>待定</source>
-        <target>待定</target>
-        <note>No comment provided by engineer.</note>
+        <target>TBD</target>
+        <note/>
       </trans-unit>
       <trans-unit id="得分">
         <source>得分</source>
-        <target>得分</target>
-        <note>No comment provided by engineer.</note>
+        <target>Score</target>
+        <note>score detail table header (length sensitive)</note>
       </trans-unit>
       <trans-unit id="得分分布">
         <source>得分分布</source>
-        <target>得分分佈</target>
-        <note>No comment provided by engineer.</note>
+        <target>Score Distribution Graph</target>
+        <note>new in 1.3.2</note>
       </trans-unit>
       <trans-unit id="得分计算">
         <source>得分计算</source>
-        <target>得分計算</target>
-        <note>No comment provided by engineer.</note>
+        <target>Live Simulator</target>
+        <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="总分">
         <source>总分</source>
-        <target>總分</target>
-        <note>No comment provided by engineer.</note>
+        <target>Total Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="恢复">
         <source>恢复</source>
-        <target>恢復</target>
-        <note>No comment provided by engineer.</note>
+        <target>Restore</target>
+        <note/>
       </trans-unit>
       <trans-unit id="恢复失败">
         <source>恢复失败</source>
-        <target>恢復失敗</target>
-        <note>No comment provided by engineer.</note>
+        <target>Restore Failed</target>
+        <note/>
       </trans-unit>
       <trans-unit id="恢复生命">
         <source>恢复生命</source>
-        <target>恢復生命</target>
-        <note>No comment provided by engineer.</note>
+        <target>Healer</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。">
         <source>您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。</source>
-        <target>您可以通過購買下面的兩個虛擬商品來支援本程式。為了更好的App體驗，我們決定不在本頁新增象徵性的廣告，因此您的購買不會獲得任何虛擬物品或者功能上的擴充。</target>
-        <note>No comment provided by engineer.</note>
+        <target>You can purchase one of the items below to support us. To make the application better, we decide not to include a symbolic advertiesment in this page. You will NOT get any virtual items or new features after purchase.</target>
+        <note>"您的捐赠将用于DereGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。" = "您的捐赠将用于DereGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。";</note>
       </trans-unit>
       <trans-unit id="您无法创建超过 %d 个队伍">
         <source>您无法创建超过 %d 个队伍</source>
-        <target>您無法建立超過 %d 個隊伍</target>
-        <note>No comment provided by engineer.</note>
+        <target>The number of units has reached the limit of %d</target>
+        <note>new in 1.4.3</note>
       </trans-unit>
       <trans-unit id="您的当前账号未曾购买过去除广告服务。">
         <source>您的当前账号未曾购买过去除广告服务。</source>
-        <target>您的當前賬號未曾購買過去除廣告服務。</target>
-        <note>No comment provided by engineer.</note>
+        <target>You have not bought an advertisement removing service yet.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="您的设备未开启应用内购买。">
         <source>您的设备未开启应用内购买。</source>
-        <target>您的裝置未開啟應用內購買。</target>
-        <note>No comment provided by engineer.</note>
+        <target>Your device do not allow in-app purchasing.</target>
+        <note>"您也可以通过点击下方的广告来支持我们。" = "您也可以通过点击下方的广告来支持我们。";</note>
       </trans-unit>
       <trans-unit id="您输入的变量不合法">
         <source>您输入的变量不合法</source>
-        <target>您輸入的變數不合法</target>
-        <note>No comment provided by engineer.</note>
+        <target>Your input is invalid</target>
+        <note/>
       </trans-unit>
       <trans-unit id="您输入的游戏ID不合法">
         <source>您输入的游戏ID不合法</source>
-        <target>您輸入的遊戲ID不合法</target>
-        <note>No comment provided by engineer.</note>
+        <target>The game ID is invalid</target>
+        <note/>
       </trans-unit>
       <trans-unit id="您输入的游戏ID不存在">
         <source>您输入的游戏ID不存在</source>
-        <target>您輸入的遊戲ID不存在</target>
-        <note>No comment provided by engineer.</note>
+        <target>The game ID doesn't exists</target>
+        <note/>
       </trans-unit>
       <trans-unit id="悲观">
         <source>悲观</source>
-        <target>悲觀</target>
-        <note>No comment provided by engineer.</note>
+        <target>Pessimistic</target>
+        <note/>
       </trans-unit>
       <trans-unit id="感谢您的支持，广告已经被移除。">
         <source>感谢您的支持，广告已经被移除。</source>
-        <target>感謝您的支援，廣告已經被移除。</target>
-        <note>No comment provided by engineer.</note>
+        <target>Thank you for supporting us, the ad. is removed.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="成功">
         <source>成功</source>
-        <target>成功</target>
+        <target>Success</target>
         <note>设置页面
    通用</note>
       </trans-unit>
       <trans-unit id="我的信息">
         <source>我的信息</source>
-        <target>我的資料</target>
-        <note>No comment provided by engineer.</note>
+        <target>My Profile</target>
+        <note/>
       </trans-unit>
       <trans-unit id="我的队长">
         <source>我的队长</source>
-        <target>我的隊長</target>
-        <note>No comment provided by engineer.</note>
+        <target>My Centers</target>
+        <note/>
       </trans-unit>
       <trans-unit id="所有">
         <source>所有</source>
-        <target>所有</target>
+        <target>all</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="所有Cool">
         <source>所有Cool</source>
-        <target>所有Cool</target>
+        <target>all Cool</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="所有Cute">
         <source>所有Cute</source>
-        <target>所有Cute</target>
+        <target>all Cute</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="所有Passion">
         <source>所有Passion</source>
-        <target>所有Passion</target>
+        <target>all Passion</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="所有表现值">
         <source>所有表现值</source>
-        <target>所有表現值</target>
+        <target>all appeals</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="所有音符改判为PERFECT">
         <source>所有音符改判为PERFECT</source>
-        <target>所有音符改判為PERFECT</target>
+        <target>all notes will become Perfect notes</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="打开邮箱失败">
         <source>打开邮箱失败</source>
-        <target>開啟郵箱失敗</target>
+        <target>Unable to open Mail</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="技能触发">
         <source>技能触发</source>
-        <target>技能觸發</target>
+        <target>Skill chance</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="抽卡次数">
         <source>抽卡次数</source>
-        <target>抽卡次數</target>
-        <note>No comment provided by engineer.</note>
+        <target>pulls</target>
+        <note/>
       </trans-unit>
       <trans-unit id="持续时间s">
         <source>持续时间s</source>
-        <target>持續時間s</target>
+        <target>Dur. (sec)</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="挂机">
         <source>挂机</source>
-        <target>掛機</target>
-        <note>No comment provided by engineer.</note>
+        <target>AFK</target>
+        <note/>
       </trans-unit>
       <trans-unit id="挂机模式中，手动打前 x combo">
         <source>挂机模式中，手动打前 x combo</source>
-        <target>挂机模式中，手动打前 x combo</target>
-        <note>No comment provided by engineer.</note>
+        <target>In AFK mode, play for the first x combo</target>
+        <note/>
       </trans-unit>
       <trans-unit id="挂机模式中，手动打前 x 秒">
         <source>挂机模式中，手动打前 x 秒</source>
-        <target>掛機模式中，手動打前x秒</target>
-        <note>No comment provided by engineer.</note>
+        <target>In AFK mode, play for the first x seconds</target>
+        <note>new in 1.8.5</note>
       </trans-unit>
       <trans-unit id="挂机模式模拟次数">
         <source>挂机模式模拟次数</source>
-        <target>掛機模式模擬次數</target>
-        <note>No comment provided by engineer.</note>
+        <target>AFK mode simulation times</target>
+        <note>new in 1.8.6</note>
       </trans-unit>
       <trans-unit id="排名">
         <source>排名</source>
-        <target>排名</target>
-        <note>No comment provided by engineer.</note>
+        <target>Ranking</target>
+        <note>new in 1.8.4</note>
       </trans-unit>
       <trans-unit id="排序">
         <source>排序</source>
-        <target>排序</target>
-        <note>No comment provided by engineer.</note>
+        <target>Sort</target>
+        <note/>
       </trans-unit>
       <trans-unit id="提升%@偶像的%@ %d%%。">
         <source>提升%1$@偶像的%2$@ %3$d%%。</source>
-        <target>提升%@偶像的%@ %d%%。</target>
+        <target>raises %2$@ of %1$@ members by %3$d%%.</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="提示">
         <source>提示</source>
-        <target>提示</target>
-        <note>No comment provided by engineer.</note>
+        <target>Attention</target>
+        <note>弹出框标题
+   设置页面</note>
       </trans-unit>
       <trans-unit id="撤销">
         <source>撤销</source>
-        <target>撤銷</target>
-        <note>No comment provided by engineer.</note>
+        <target>Revoke</target>
+        <note/>
       </trans-unit>
       <trans-unit id="撤销中...">
         <source>撤销中...</source>
-        <target>撤銷中...</target>
-        <note>No comment provided by engineer.</note>
+        <target>Revoking...</target>
+        <note/>
       </trans-unit>
       <trans-unit id="撤销失败，请确保iCloud已登录并且网络状态正常">
         <source>撤销失败，请确保iCloud已登录并且网络状态正常</source>
-        <target>撤銷失敗，請確保iCloud已登入並且網路狀態正常</target>
-        <note>No comment provided by engineer.</note>
+        <target>Revoke failed，please verify your iCloud account and the internet connection</target>
+        <note/>
       </trans-unit>
       <trans-unit id="撤销成功">
         <source>撤销成功</source>
-        <target>撤銷成功</target>
-        <note>No comment provided by engineer.</note>
+        <target>Revoking succeed</target>
+        <note/>
       </trans-unit>
       <trans-unit id="支持作者">
         <source>支持作者</source>
-        <target>支援作者</target>
-        <note>No comment provided by engineer.</note>
+        <target>Support us</target>
+        <note>"捐赠" = "捐赠";</note>
       </trans-unit>
       <trans-unit id="收藏">
         <source>收藏</source>
-        <target>收藏</target>
-        <note>No comment provided by engineer.</note>
+        <target>Add to Favorites</target>
+        <note>used in 3d touch peek menu</note>
       </trans-unit>
       <trans-unit id="数据">
         <source>数据</source>
-        <target>資料</target>
-        <note>No comment provided by engineer.</note>
+        <target>Data</target>
+        <note/>
       </trans-unit>
       <trans-unit id="数据主版本过低，请点击确定开始更新">
         <source>数据主版本过低，请点击确定开始更新</source>
-        <target>數據主版本過低，請點選確定開始更新</target>
-        <note>No comment provided by engineer.</note>
+        <target>Local data needs to be updated. Press OK to update.</target>
+        <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="数据存在新版本，推荐进行更新，请点击确定开始更新">
         <source>数据存在新版本，推荐进行更新，请点击确定开始更新</source>
-        <target>數據存在新版本，推薦進行更新，請點選確定開始更新</target>
-        <note>No comment provided by engineer.</note>
+        <target>An update is available for the local data. Press OK to update now, or Cancel to update later.</target>
+        <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="数据是最新版本">
         <source>数据是最新版本</source>
-        <target>資料是最新版本</target>
+        <target>Up to date!</target>
         <note>更新框</note>
       </trans-unit>
       <trans-unit id="数据更新日志">
         <source>数据更新日志</source>
-        <target>資料更新日誌</target>
+        <target>Version Log</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="数据服务器存在异常，请您稍后再尝试更新。">
         <source>数据服务器存在异常，请您稍后再尝试更新。</source>
-        <target>資料伺服器存在異常，請您稍後再嘗試更新。</target>
+        <target>The data server is down, please try again later.</target>
         <note>数据更新时的错误提示</note>
       </trans-unit>
       <trans-unit id="数据缺失">
         <source>数据缺失</source>
-        <target>資料缺失</target>
+        <target>Missing Data</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="数据需要更新">
         <source>数据需要更新</source>
-        <target>資料需要更新</target>
+        <target>The data needs to be updated.</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="新卡池：%@">
         <source>新卡池：%@</source>
-        <target>新卡池：%@</target>
+        <target>New Gacha: %@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新卡片：%@%@，技能：%@%@%@">
         <source>新卡片：%1$@%2$@，技能：%3$@%4$@%5$@</source>
-        <target>新卡片：%1$@%2$@，技能：%3$@%4$@%5$@</target>
+        <target>New Card: %1$@%2$@, Skill：%3$@ %4$@ %5$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新增卡片">
         <source>新增卡片</source>
-        <target>新增卡片</target>
+        <target>New cards</target>
         <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="新小剧场动画：%@ %@">
         <source>新小剧场动画：%1$@ %2$@</source>
-        <target>新小劇場動畫：%1$@ %2$@</target>
+        <target>New Gekijou Anime: %1$@ %2$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新小剧场：%@ %@">
         <source>新小剧场：%1$@ %2$@</source>
-        <target>新小劇場：%1$@ %2$@</target>
+        <target>New Gekijou: %1$@ %2$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新歌曲：%@">
         <source>新歌曲：%@</source>
-        <target>新歌曲：%@</target>
+        <target>New Music: %@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新活动：%@">
         <source>新活动：%@</source>
-        <target>新活動：%@</target>
+        <target>New Event: %@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="无">
         <source>无</source>
-        <target>無</target>
-        <note>No comment provided by engineer.</note>
+        <target>None</target>
+        <note>空字符串说明文字</note>
       </trans-unit>
       <trans-unit id="无法获取游戏原始数据">
         <source>无法获取游戏原始数据</source>
-        <target>無法獲取遊戲原始數據</target>
+        <target>Unable to download the master database.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="日文名/罗马音">
         <source>日文名/罗马音</source>
-        <target>日文名/羅馬音</target>
+        <target>Name, Title</target>
         <note>搜索框文字, 不宜过长</note>
       </trans-unit>
       <trans-unit id="日文名/罗马音/CV">
         <source>日文名/罗马音/CV</source>
-        <target>日文名/羅馬音/CV</target>
+        <target>Name, CV</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="时区">
         <source>时区</source>
-        <target>時區</target>
+        <target>Time zone</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="时长">
         <source>时长</source>
-        <target>時長</target>
+        <target>Duration</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="明天">
         <source>明天</source>
-        <target>明天</target>
+        <target>Tomorrow</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="星座">
         <source>星座</source>
-        <target>星座</target>
+        <target>Sign</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="星星数">
         <source>星星数</source>
-        <target>星星數</target>
-        <note>No comment provided by engineer.</note>
+        <target>star jewels</target>
+        <note/>
       </trans-unit>
       <trans-unit id="昵称">
         <source>昵称</source>
-        <target>暱稱</target>
-        <note>No comment provided by engineer.</note>
+        <target>Nickname</target>
+        <note/>
       </trans-unit>
       <trans-unit id="昵称不能超过10个文字">
         <source>昵称不能超过10个文字</source>
-        <target>暱稱不能超過10個文字</target>
-        <note>No comment provided by engineer.</note>
+        <target>Nickname must be within 10 characters</target>
+        <note/>
       </trans-unit>
       <trans-unit id="显示网格和标注">
         <source>显示网格和标注</source>
-        <target>顯示網格和標註</target>
-        <note>No comment provided by engineer.</note>
+        <target>Show grid line and side text</target>
+        <note/>
       </trans-unit>
       <trans-unit id="普池">
         <source>普池</source>
-        <target>普池</target>
-        <note>No comment provided by engineer.</note>
+        <target>Gacha</target>
+        <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="普通试音会">
         <source>普通试音会</source>
-        <target>普通試音會</target>
-        <note>No comment provided by engineer.</note>
+        <target>Normal Gacha</target>
+        <note/>
       </trans-unit>
       <trans-unit id="更新完成">
         <source>更新完成</source>
-        <target>更新完成</target>
+        <target>Update Complete</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="更新时间">
         <source>更新时间</source>
-        <target>更新時間</target>
-        <note>No comment provided by engineer.</note>
+        <target>Update Time</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最低%@等级">
         <source>最低%@等级</source>
-        <target>最低%@等級</target>
-        <note>No comment provided by engineer.</note>
+        <target>Min. %@ Lv.</target>
+        <note>new in 1.7.2</note>
       </trans-unit>
       <trans-unit id="最低分数">
         <source>最低分数</source>
-        <target>最低分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Minimum Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最低潜能等级">
         <source>最低潜能等级</source>
-        <target>最低潛能等級</target>
-        <note>No comment provided by engineer.</note>
+        <target>Min. Potential Lv.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最后更新时间：">
         <source>最后更新时间：</source>
-        <target>最後更新時間：</target>
-        <note>No comment provided by engineer.</note>
+        <target>Last updated time:</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最大覆盖率%">
         <source>最大覆盖率%</source>
-        <target>最大覆蓋率%</target>
+        <target>Max. cover. %</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="最终Pt">
         <source>最终Pt</source>
-        <target>最終Pt</target>
-        <note>No comment provided by engineer.</note>
+        <target>Final Pt.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最终分数">
         <source>最终分数</source>
-        <target>最終分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Final Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最近使用">
         <source>最近使用</source>
-        <target>最近使用</target>
-        <note>No comment provided by engineer.</note>
+        <target>Recent idols</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最近使用中也包含好友的队长">
         <source>最近使用中也包含好友的队长</source>
-        <target>最近使用中也包含好友的隊長</target>
-        <note>No comment provided by engineer.</note>
+        <target>Include guest leaders in recent idols</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）">
         <source>最近使用中将潜能和特技等级相同的同一张卡视作同一偶像。单击将偶像添加至底部编辑区域。长按编辑偶像的潜能和特技等级，会自动更新所有包含该偶像的队伍。另外该偶像的潜能等级会自动同步到同角色所有卡片（此功能高级选项中可关闭）</source>
-        <target>最近使用中將潛能和特技等級相同的同一張卡視作同一偶像。單擊將偶像新增至底部編輯區域。長按編輯偶像的潛能和特技等級，會自動更新所有包含該偶像的隊伍。另外該偶像的潛能等級會自動同步到同角色所有卡片（此功能高階選項中可關閉）</target>
-        <note>No comment provided by engineer.</note>
+        <target>In Recent idols, it regards cards with the same skill level and potential levels as the same idol. Click to add it to the bottom editing area. Long press to edit its skill level and potential levels, this action will update all the units contains this idol. Besides, the idol's potential levels will be synchronized to all of the same chara(can be closed in advance options).</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最高分数">
         <source>最高分数</source>
-        <target>最高分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Maximum Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="最高得分">
         <source>最高得分</source>
-        <target>最高得分</target>
-        <note>No comment provided by engineer.</note>
+        <target>Max Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="有 %@%% 的几率">
         <source>有 %@%% 的几率</source>
-        <target>有 %@%% 的機率</target>
-        <note>No comment provided by engineer.</note>
+        <target>there is a %@%% chance that </target>
+        <note/>
       </trans-unit>
       <trans-unit id="未付声">
         <source>未付声</source>
-        <target>未付聲</target>
+        <target>Unvoiced</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="未开启">
         <source>未开启</source>
-        <target>未開啟</target>
+        <target>No</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。">
         <source>未找到对应谱面，建议等待当前更新完成，或尝试下拉歌曲列表手动更新数据。如果更新后仍未找到，可能是官方还未更新此谱面。</source>
-        <target>未找到對應譜面，建議等待當前更新完成，或嘗試下拉歌曲列表手動更新資料。如果更新後仍未找到，可能是官方還未更新此譜面。</target>
+        <target>Can't find the beatmap. If an update is in progress, please wait for it to complete, or pull down to update manually. If still not found, maybe the formal data is not updated.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="未指定">
         <source>未指定</source>
-        <target>未指定</target>
-        <note>No comment provided by engineer.</note>
+        <target>Unspecific</target>
+        <note>作为歌曲筛选项目出现, "お願い ! シンデレラ"等mv中未指定center的歌曲</note>
       </trans-unit>
       <trans-unit id="未收藏">
         <source>未收藏</source>
-        <target>未收藏</target>
-        <note>No comment provided by engineer.</note>
+        <target>Not Favorited</target>
+        <note/>
       </trans-unit>
       <trans-unit id="未知">
         <source>未知</source>
-        <target>未知</target>
-        <note>No comment provided by engineer.</note>
+        <target>Unknown</target>
+        <note/>
       </trans-unit>
       <trans-unit id="未能获取到正确的数据，请稍后再试">
         <source>未能获取到正确的数据，请稍后再试</source>
-        <target>未能獲取到正確的資料，請稍後再試</target>
-        <note>No comment provided by engineer.</note>
+        <target>Request failed, please retry later</target>
+        <note>using deresute.me</note>
       </trans-unit>
       <trans-unit id="未设置邮箱账户">
         <source>未设置邮箱账户</source>
-        <target>未設定郵箱賬戶</target>
+        <target>There aren't any Mail accounts</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="本程序基于MIT协议，详情请访问：">
         <source>本程序基于MIT协议，详情请访问：</source>
-        <target>本程式基於MIT協議，詳情請訪問：</target>
-        <note>No comment provided by engineer.</note>
+        <target>DereGuide is under the terms of the MIT license, for details please visit:</target>
+        <note/>
       </trans-unit>
-      <trans-unit id="本程序是非官方程序，与官方应用\&quot;アイドルマスターシンデレラガールズ スターライトステージ\&quot;没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。">
-        <source>本程序是非官方程序，与官方应用\"アイドルマスターシンデレラガールズ スターライトステージ\"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。</source>
-        <target>本程式是非官方程式，與官方應用\"アイドルマスターシンデレラガールズ スターライトステージ\"沒有任何關聯。所有本程式中使用的遊戲相關資料版權所屬為：\nBANDAI NAMCO Entertainment Inc.\n\n本程式所使用的非官方資料來源於網路，其版權在不違反官方版權的前提下遵循資料提供者的版權宣告。\n\n本程式不能保證所提供的資料真實可靠，由此帶來的風險由使用者承擔。</target>
-        <note>No comment provided by engineer.</note>
+      <trans-unit id="本程序是非官方程序，与官方应用&quot;アイドルマスターシンデレラガールズ スターライトステージ&quot;没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。">
+        <source>本程序是非官方程序，与官方应用"アイドルマスターシンデレラガールズ スターライトステージ"没有任何关联。所有本程序中使用的游戏相关数据版权所属为：\nBANDAI NAMCO Entertainment Inc.\n\n本程序所使用的非官方数据来源于网络，其版权在不违反官方版权的前提下遵循数据提供者的版权声明。\n\n本程序不能保证所提供的数据真实可靠，由此带来的风险由使用者承担。</source>
+        <target>This is not an official app and has no connections with the official app "アイドルマスターシンデレラガールズ スターライトステージ". All game data used belongs to the original publisher: \nBANDAI NAMCO Entertainment Inc.\n\nAll the unofficial data used are fetched from Internet. Such data is used in compliance with their original sources' copyright policies.\n\nDereGuide doesn't take responsibility for accuracy of the data. Any risk arising therefrom shall be assumed by your own.</target>
+        <note>new in 1.2.1</note>
       </trans-unit>
       <trans-unit id="极限1">
         <source>极限1</source>
-        <target>極限1</target>
-        <note>No comment provided by engineer.</note>
+        <target>Optimistic 1</target>
+        <note/>
       </trans-unit>
       <trans-unit id="极限2">
         <source>极限2</source>
-        <target>極限2</target>
-        <note>No comment provided by engineer.</note>
+        <target>Optimistic 2</target>
+        <note/>
       </trans-unit>
       <trans-unit id="极限分数">
         <source>极限分数</source>
-        <target>極限分數</target>
+        <target>Optimistic Score </target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="查看完整卡池">
         <source>查看完整卡池</source>
-        <target>檢視完整卡池</target>
+        <target>Full availability list</target>
         <note>模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="查看完整图表">
         <source>查看完整图表</source>
-        <target>檢視完整圖表</target>
-        <note>No comment provided by engineer.</note>
+        <target>Full ranking chart</target>
+        <note/>
       </trans-unit>
       <trans-unit id="查看角色详情">
         <source>查看角色详情</source>
-        <target>檢視角色詳情</target>
+        <target>Idol information</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="根据概率密度曲线估算分数区间[a, b]的概率">
         <source>根据概率密度曲线估算分数区间[a, b]的概率</source>
-        <target>根據概率密度曲線估算分數區間[a, b]的概率</target>
-        <note>No comment provided by engineer.</note>
+        <target>Estimate the probability of score falls in [a, b] by kernel density estimation</target>
+        <note>
+</note>
       </trans-unit>
       <trans-unit id="检查更新中">
         <source>检查更新中</source>
-        <target>檢查更新中</target>
+        <target>Checking...</target>
         <note>更新框</note>
       </trans-unit>
       <trans-unit id="检查更新失败">
         <source>检查更新失败</source>
-        <target>檢查更新失敗</target>
+        <target>Failed to check for updates.</target>
         <note>更新框</note>
       </trans-unit>
       <trans-unit id="模拟抽卡">
         <source>模拟抽卡</source>
-        <target>模擬抽卡</target>
-        <note>No comment provided by engineer.</note>
+        <target>Simulation</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟挂机模式">
         <source>模拟挂机模式</source>
-        <target>模擬掛機模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>AFK Mode</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟次数">
         <source>模拟次数</source>
-        <target>模擬次數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Simulation Times</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟结果中分数落入指定区间[a, b]的概率">
         <source>模拟结果中分数落入指定区间[a, b]的概率</source>
-        <target>模擬結果中分數落入指定區間[a, b]的概率</target>
-        <note>No comment provided by engineer.</note>
+        <target>The probability of simulation result falls in [a, b]</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟结果中前x%的最低分数">
         <source>模拟结果中前x%的最低分数</source>
-        <target>模擬結果中前x%的最低分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Minimum score of the highest x% in simulation result</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟结果中后x%的最高分数">
         <source>模拟结果中后x%的最高分数</source>
-        <target>模擬結果中後x%的最高分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Maximum score of the lowest x% in simulation result</target>
+        <note/>
       </trans-unit>
       <trans-unit id="模拟计算">
         <source>模拟计算</source>
-        <target>模擬計算</target>
+        <target>Simulate</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="歌曲分数档位">
         <source>歌曲分数档位</source>
-        <target>歌曲分數檔位</target>
-        <note>No comment provided by engineer.</note>
+        <target>High Score Ranking</target>
+        <note/>
       </trans-unit>
       <trans-unit id="歌曲名">
         <source>歌曲名</source>
-        <target>歌曲名</target>
+        <target>Name</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="歌曲名/词曲作者/演唱者">
         <source>歌曲名/词曲作者/演唱者</source>
-        <target>歌曲名/詞曲作者/演唱者</target>
-        <note>No comment provided by engineer.</note>
+        <target>Name, Composer, Lyricist, Singer</target>
+        <note>
+</note>
       </trans-unit>
       <trans-unit id="歌曲封面">
         <source>歌曲封面</source>
-        <target>歌曲封面</target>
-        <note>No comment provided by engineer.</note>
+        <target>Album Cover</target>
+        <note/>
       </trans-unit>
       <trans-unit id="歌曲模式">
         <source>歌曲模式</source>
-        <target>歌曲模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>Live Mode</target>
+        <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="正在完成更新">
         <source>正在完成更新</source>
-        <target>正在完成更新</target>
+        <target>Finishing...</target>
         <note>更新框</note>
       </trans-unit>
       <trans-unit id="每 %d 秒，">
         <source>每 %d 秒，</source>
-        <target>每 %d 秒，</target>
-        <note>No comment provided by engineer.</note>
+        <target>Every %d seconds: </target>
+        <note/>
       </trans-unit>
       <trans-unit id="没有更多数据了">
         <source>没有更多数据了</source>
-        <target>沒有更多資料了</target>
-        <note>No comment provided by engineer.</note>
+        <target>No more</target>
+        <note/>
       </trans-unit>
       <trans-unit id="活动">
         <source>活动</source>
-        <target>活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>Event</target>
+        <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="活动pt档位">
         <source>活动pt档位</source>
-        <target>活動pt檔位</target>
-        <note>No comment provided by engineer.</note>
+        <target>Event Pt. Ranking</target>
+        <note/>
       </trans-unit>
       <trans-unit id="活动名">
         <source>活动名</source>
-        <target>活動名</target>
-        <note>No comment provided by engineer.</note>
+        <target>Name</target>
+        <note/>
       </trans-unit>
       <trans-unit id="活动封面">
         <source>活动封面</source>
-        <target>活動封面</target>
-        <note>No comment provided by engineer.</note>
+        <target>Event Banner</target>
+        <note/>
       </trans-unit>
       <trans-unit id="活动曲">
         <source>活动曲</source>
-        <target>活動曲</target>
-        <note>No comment provided by engineer.</note>
+        <target>Event Song</target>
+        <note/>
       </trans-unit>
       <trans-unit id="流行曲">
         <source>流行曲</source>
-        <target>流行曲</target>
-        <note>No comment provided by engineer.</note>
+        <target>Bonus Song</target>
+        <note>new in 1.2.7</note>
       </trans-unit>
       <trans-unit id="消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO">
         <source>消耗 %2$d 生命，PERFECT音符获得 %1$d%% 的分数加成，并且NICE/BAD音符不会中断COMBO</source>
-        <target>消耗 %2$d 生命，PERFECT音符獲得 %1$d%% 的分數加成，並且NICE/BAD音符不會中斷COMBO</target>
+        <target>%2$d life will be consumed, then: Perfect notes receive a %1$d%% score bonus, and Nice/Bad notes will not break combo</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="添加一名偶像">
         <source>添加一名偶像</source>
-        <target>新增一名偶像</target>
-        <note>No comment provided by engineer.</note>
+        <target>Add an idol</target>
+        <note/>
       </trans-unit>
       <trans-unit id="清除缓存数据">
         <source>清除缓存数据</source>
-        <target>清除快取資料</target>
-        <note>No comment provided by engineer.</note>
+        <target>Clear Cached Data</target>
+        <note/>
       </trans-unit>
       <trans-unit id="游戏ID">
         <source>游戏ID</source>
-        <target>遊戲ID</target>
-        <note>No comment provided by engineer.</note>
+        <target>Game ID</target>
+        <note/>
       </trans-unit>
       <trans-unit id="游戏编号">
         <source>游戏编号</source>
-        <target>遊戲編號</target>
-        <note>No comment provided by engineer.</note>
+        <target>Character ID</target>
+        <note/>
       </trans-unit>
       <trans-unit id="潜能">
         <source>潜能</source>
-        <target>潛能</target>
-        <note>No comment provided by engineer.</note>
+        <target>Potential</target>
+        <note/>
       </trans-unit>
       <trans-unit id="灰姑娘之路">
         <source>灰姑娘之路</source>
-        <target>灰姑娘之路</target>
-        <note>No comment provided by engineer.</note>
+        <target>Cinderella Road</target>
+        <note>new in 1.7.4</note>
       </trans-unit>
       <trans-unit id="版权声明">
         <source>版权声明</source>
-        <target>版權聲明</target>
-        <note>No comment provided by engineer.</note>
+        <target>Copyright</target>
+        <note/>
       </trans-unit>
       <trans-unit id="特技">
         <source>特技</source>
-        <target>特技</target>
+        <target>Skill</target>
         <note>通用</note>
       </trans-unit>
       <trans-unit id="特技列表">
         <source>特技列表</source>
-        <target>特技列表</target>
+        <target>Skill List</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="特技发动几率">
         <source>特技发动几率</source>
-        <target>特技發動機率</target>
+        <target>the skill probability</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="理论最低分数">
         <source>理论最低分数</source>
-        <target>理論最低分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Theoretical Minimum Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="理论最高分数">
         <source>理论最高分数</source>
-        <target>理論最高分數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Theoretical Maximum Score</target>
+        <note/>
       </trans-unit>
       <trans-unit id="生命">
         <source>生命</source>
-        <target>生命</target>
+        <target>life</target>
         <note>队长技能描述</note>
       </trans-unit>
       <trans-unit id="生命闪耀">
         <source>生命闪耀</source>
-        <target>生命閃耀</target>
-        <note>No comment provided by engineer.</note>
+        <target>Life Sparkle</target>
+        <note>new in 1.7.1</note>
       </trans-unit>
       <trans-unit id="生日">
         <source>生日</source>
-        <target>生日</target>
+        <target>Birthday</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="生日快乐!!">
         <source>生日快乐!!</source>
-        <target>生日快樂!!</target>
-        <note>No comment provided by engineer.</note>
+        <target>Happy birthday!!</target>
+        <note/>
       </trans-unit>
       <trans-unit id="用户配置">
         <source>用户配置</source>
-        <target>使用者配置</target>
-        <note>No comment provided by engineer.</note>
+        <target>Settings</target>
+        <note/>
       </trans-unit>
       <trans-unit id="留言">
         <source>留言</source>
-        <target>留言</target>
-        <note>No comment provided by engineer.</note>
+        <target>Message</target>
+        <note/>
       </trans-unit>
-      <trans-unit id="目前仅支持筛选单个位置，如果您不需要筛选请设置为\&quot;不限\&quot;">
-        <source>目前仅支持筛选单个位置，如果您不需要筛选请设置为\"不限\"</source>
-        <target>目前僅支援篩選單個位置，如果您不需要篩選請設定為\"不限\"</target>
-        <note>No comment provided by engineer.</note>
+      <trans-unit id="目前仅支持筛选单个位置，如果您不需要筛选请设置为&quot;不限&quot;">
+        <source>目前仅支持筛选单个位置，如果您不需要筛选请设置为"不限"</source>
+        <target>Only support filtering one position each time, if you don't want to filter, set to "no limit"</target>
+        <note/>
       </trans-unit>
       <trans-unit id="相册编号">
         <source>相册编号</source>
-        <target>相簿編號</target>
-        <note>No comment provided by engineer.</note>
+        <target>Album Order</target>
+        <note/>
       </trans-unit>
       <trans-unit id="确定">
         <source>确定</source>
-        <target>確定</target>
+        <target>OK</target>
         <note>弹出框按钮
    设置页面</note>
       </trans-unit>
       <trans-unit id="秒">
         <source>秒</source>
-        <target>秒</target>
+        <target>sec.</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="移动网络下加载卡片大图">
         <source>移动网络下加载卡片大图</source>
-        <target>行動網路下載入卡片大圖</target>
-        <note>No comment provided by engineer.</note>
+        <target>Use Cellular Data for Large Images</target>
+        <note/>
       </trans-unit>
       <trans-unit id="稀有度">
         <source>稀有度</source>
-        <target>稀有度</target>
-        <note>No comment provided by engineer.</note>
+        <target>Rarity</target>
+        <note/>
       </trans-unit>
       <trans-unit id="筛选">
         <source>筛选</source>
-        <target>篩選</target>
-        <note>No comment provided by engineer.</note>
+        <target>Filter</target>
+        <note/>
       </trans-unit>
       <trans-unit id="筛选条件">
         <source>筛选条件</source>
-        <target>篩選條件</target>
-        <note>No comment provided by engineer.</note>
+        <target>Filter Conditions</target>
+        <note/>
       </trans-unit>
       <trans-unit id="签名">
         <source>签名</source>
-        <target>簽名</target>
+        <target>Sign</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="签名图">
         <source>签名图</source>
-        <target>簽名圖</target>
-        <note>No comment provided by engineer.</note>
+        <target>Sign Image</target>
+        <note/>
       </trans-unit>
       <trans-unit id="篷车活动">
         <source>篷车活动</source>
-        <target>篷車活動</target>
-        <note>No comment provided by engineer.</note>
+        <target>Caravan Event</target>
+        <note/>
       </trans-unit>
       <trans-unit id="系统通知设置">
         <source>系统通知设置</source>
-        <target>系統通知設定</target>
+        <target>Notifications Allowed</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="累计">
         <source>累计</source>
-        <target>累計</target>
-        <note>No comment provided by engineer.</note>
+        <target>Total</target>
+        <note/>
       </trans-unit>
       <trans-unit id="纵向缩放比例">
         <source>纵向缩放比例</source>
-        <target>縱向縮放比例</target>
-        <note>No comment provided by engineer.</note>
+        <target>Vertical scale</target>
+        <note/>
       </trans-unit>
       <trans-unit id="绘制参数">
         <source>绘制参数</source>
-        <target>繪製引數</target>
-        <note>No comment provided by engineer.</note>
+        <target>Drawing parameters</target>
+        <note/>
       </trans-unit>
       <trans-unit id="缓存图片完成">
         <source>缓存图片完成</source>
-        <target>快取圖片完成</target>
+        <target>Complete</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="缓存所有图片">
         <source>缓存所有图片</source>
-        <target>快取所有圖片</target>
-        <note>No comment provided by engineer.</note>
+        <target>Download All Images</target>
+        <note/>
       </trans-unit>
       <trans-unit id="编辑队伍">
         <source>编辑队伍</source>
-        <target>編輯隊伍</target>
-        <note>No comment provided by engineer.</note>
+        <target>Edit Unit</target>
+        <note/>
       </trans-unit>
       <trans-unit id="自动播放时显示按键区辅助线">
         <source>自动播放时显示按键区辅助线</source>
-        <target>自動播放時顯示按鍵區輔助線</target>
-        <note>No comment provided by engineer.</note>
+        <target>Show assisted line when auto-scrolling</target>
+        <note>new in 1.7</note>
       </trans-unit>
       <trans-unit id="自定义计算">
         <source>自定义计算</source>
-        <target>自定義計算</target>
-        <note>No comment provided by engineer.</note>
+        <target>Custom Calculation</target>
+        <note/>
       </trans-unit>
       <trans-unit id="至少添加一名自己的队长">
         <source>至少添加一名自己的队长</source>
-        <target>至少新增一名自己的隊長</target>
-        <note>No comment provided by engineer.</note>
+        <target>At least add one of my centers</target>
+        <note/>
       </trans-unit>
       <trans-unit id="至少进行一次模拟计算之后才能查看得分分布">
         <source>至少进行一次模拟计算之后才能查看得分分布</source>
-        <target>至少進行一次模擬計算之後才能檢視得分分佈</target>
-        <note>No comment provided by engineer.</note>
+        <target>Distribution graph is not available until simulating at least once</target>
+        <note/>
       </trans-unit>
       <trans-unit id="至少进行一次模拟计算之后才能进行高级计算">
         <source>至少进行一次模拟计算之后才能进行高级计算</source>
-        <target>至少進行一次模擬計算之後才能進行高階計算</target>
-        <note>No comment provided by engineer.</note>
+        <target>Advance calculation is not available until simulating at least once</target>
+        <note/>
       </trans-unit>
       <trans-unit id="致谢">
         <source>致谢</source>
-        <target>致謝</target>
-        <note>No comment provided by engineer.</note>
+        <target>Acknowledgements</target>
+        <note/>
       </trans-unit>
       <trans-unit id="获取到的卡数据异常">
         <source>获取到的卡数据异常</source>
-        <target>獲取到的卡牌數據異常</target>
+        <target>The card data could not be parsed.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="获取数据中...">
         <source>获取数据中...</source>
-        <target>獲取資料中...</target>
-        <note>No comment provided by engineer.</note>
+        <target>Loading...</target>
+        <note/>
       </trans-unit>
       <trans-unit id="获取数据失败">
         <source>获取数据失败</source>
-        <target>獲取資料失敗</target>
-        <note>No comment provided by engineer.</note>
+        <target>Request failed</target>
+        <note>new in 1.7.3</note>
       </trans-unit>
       <trans-unit id="获取数据失败，请检查您的网络并确保iCloud处于登录状态">
         <source>获取数据失败，请检查您的网络并确保iCloud处于登录状态</source>
-        <target>獲取資料失敗，請檢查您的網路</target>
-        <note>No comment provided by engineer.</note>
+        <target>Request failed, please check your network connection and make sure iCloud is signed in.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="获得途径">
         <source>获得途径</source>
-        <target>獲得途徑</target>
+        <target>Source</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="获得途径(进化前)">
-        <source>获得途径(进化前)</source>
-        <target>獲得途徑(特訓前)</target>
+        <source>获得途径(特训前)</source>
+        <target>Source</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="获得额外的 %d%% 的COMBO加成">
         <source>获得额外的 %d%% 的COMBO加成</source>
-        <target>獲得額外的 %d%% 的COMBO加成</target>
+        <target>you will gain an extra %d%% combo bonus</target>
         <note>技能描述</note>
       </trans-unit>
       <trans-unit id="获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命">
         <source>获得额外的 %1$d%% 的COMBO加成，并使所有PERFECT音符恢复你 %2$d 点生命</source>
-        <target>獲得額外的 %d%% 的COMBO加成，並使所有PERFECT音符恢復你 %d 點生命</target>
+        <target>you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="获得额外的COMBO加成，当前生命值越高加成越高">
         <source>获得额外的COMBO加成，当前生命值越高加成越高</source>
-        <target>獲得額外的COMBO加成，當前生命值越高加成越高</target>
-        <note>No comment provided by engineer.</note>
+        <target>that you will gain an extra combo bonus based on your current health</target>
+        <note/>
       </trans-unit>
       <trans-unit id="血型">
         <source>血型</source>
-        <target>血型</target>
+        <target>Blood type</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="表格类型">
         <source>表格类型</source>
-        <target>表格型別</target>
-        <note>No comment provided by engineer.</note>
+        <target>Table Type</target>
+        <note>new in 1.8</note>
       </trans-unit>
       <trans-unit id="表现值">
         <source>表现值</source>
-        <target>表現值</target>
+        <target>Total Appeal</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="角色头像">
         <source>角色头像</source>
-        <target>角色頭像</target>
-        <note>No comment provided by engineer.</note>
+        <target>Character Thumbnail</target>
+        <note/>
       </trans-unit>
       <trans-unit id="角色所有卡片">
         <source>角色所有卡片</source>
-        <target>角色所有卡片</target>
+        <target>All Cards for This Idol</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="触发几率%">
         <source>触发几率%</source>
-        <target>觸發機率%</target>
+        <target>Proc. (%)</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="触发模式">
         <source>触发模式</source>
-        <target>觸發模式</target>
-        <note>No comment provided by engineer.</note>
+        <target>Proc Mode</target>
+        <note/>
       </trans-unit>
       <trans-unit id="计算中...">
         <source>计算中...</source>
-        <target>計算中...</target>
-        <note>No comment provided by engineer.</note>
+        <target>Calculating...</target>
+        <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="计算结果">
         <source>计算结果</source>
-        <target>計算結果</target>
-        <note>No comment provided by engineer.</note>
+        <target>Result</target>
+        <note/>
       </trans-unit>
       <trans-unit id="设置">
         <source>设置</source>
-        <target>設定</target>
-        <note>No comment provided by engineer.</note>
+        <target>Settings</target>
+        <note/>
       </trans-unit>
       <trans-unit id="评价">
         <source>评价</source>
-        <target>評價</target>
-        <note>No comment provided by engineer.</note>
+        <target>Review in App Store</target>
+        <note/>
       </trans-unit>
       <trans-unit id="请先选择歌曲">
         <source>请先选择歌曲</source>
-        <target>請先選擇歌曲</target>
+        <target>Please select a song.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="请完善队伍后，再点击存储">
         <source>请完善队伍后，再点击存储</source>
-        <target>請完善隊伍後，再點選儲存</target>
+        <target>Please fill all the member slots before saving.</target>
         <note>弹出框正文</note>
       </trans-unit>
       <trans-unit id="请等待更新完成或手动取消更新后，再尝试清除数据。">
         <source>请等待更新完成或手动取消更新后，再尝试清除数据。</source>
-        <target>請等待更新完成或手動取消更新後，再嘗試清除資料。</target>
-        <note>No comment provided by engineer.</note>
+        <target>Please wait for the update to complete before clearing the cache.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="请等待更新完成或手动取消更新后，再尝试缓存图片。">
         <source>请等待更新完成或手动取消更新后，再尝试缓存图片。</source>
-        <target>請等待更新完成或手動取消更新後，再嘗試快取圖片。</target>
-        <note>No comment provided by engineer.</note>
+        <target>Please wait for the update to complete before caching the image.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="请选择歌曲">
         <source>请选择歌曲</source>
-        <target>請選擇歌曲</target>
+        <target>Select Song</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="谱面">
         <source>谱面</source>
-        <target>谱面</target>
-        <note>No comment provided by engineer.</note>
+        <target>Beatmaps</target>
+        <note/>
       </trans-unit>
       <trans-unit id="身高">
         <source>身高</source>
-        <target>身高</target>
+        <target>Height</target>
         <note>角色信息页面</note>
       </trans-unit>
       <trans-unit id="辅助技能">
         <source>辅助技能</source>
-        <target>輔助技能</target>
-        <note>No comment provided by engineer.</note>
+        <target>Support Skill</target>
+        <note/>
       </trans-unit>
       <trans-unit id="输入您的游戏ID">
         <source>输入您的游戏ID</source>
-        <target>輸入您的遊戲ID</target>
-        <note>No comment provided by engineer.</note>
+        <target>Your Game ID</target>
+        <note/>
       </trans-unit>
       <trans-unit id="过载">
         <source>过载</source>
-        <target>過載</target>
-        <note>No comment provided by engineer.</note>
+        <target>Overload</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="返场">
         <source>返场</source>
-        <target>返場</target>
-        <note>No comment provided by engineer.</note>
+        <target>Encore</target>
+        <note>Skill Type: Encore</note>
       </trans-unit>
       <trans-unit id="还没有队伍，点击右上＋创建一个吧">
         <source>还没有队伍，点击右上＋创建一个吧</source>
-        <target>還沒有隊伍，點選右上＋建立一個吧</target>
-        <note>No comment provided by engineer.</note>
+        <target>No units, click + to create</target>
+        <note/>
       </trans-unit>
       <trans-unit id="进化信息">
-        <source>进化信息</source>
-        <target>特訓資訊</target>
+        <source>特训信息</source>
+        <target>Awakening</target>
         <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="选择Groove类别">
         <source>选择Groove类别</source>
-        <target>選擇Groove類別</target>
+        <target>Select a Groove type...</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="选择提醒时区">
         <source>选择提醒时区</source>
-        <target>選擇提醒時區</target>
+        <target>Select the time zone to use for notifications...</target>
         <note>生日提醒页面</note>
       </trans-unit>
       <trans-unit id="选择歌曲模式">
         <source>选择歌曲模式</source>
-        <target>選擇歌曲模式</target>
+        <target>Select a live type...</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="选择难度">
         <source>选择难度</source>
-        <target>選擇難度</target>
+        <target>Select a beatmap to view...</target>
         <note>底部弹出框标题</note>
       </trans-unit>
       <trans-unit id="选项">
         <source>选项</source>
-        <target>選項</target>
-        <note>No comment provided by engineer.</note>
+        <target>Options</target>
+        <note/>
       </trans-unit>
       <trans-unit id="重复发动上一个其他偶像发动过的技能">
         <source>重复发动上一个其他偶像发动过的技能</source>
-        <target>重複發動上一個其他偶像發動過的技能</target>
-        <note>No comment provided by engineer.</note>
+        <target>to activate the previous skill again</target>
+        <note/>
       </trans-unit>
       <trans-unit id="重置">
         <source>重置</source>
-        <target>重置</target>
+        <target>Reset</target>
         <note>导航栏按钮
    模拟抽卡页面</note>
       </trans-unit>
       <trans-unit id="重试">
         <source>重试</source>
-        <target>重試</target>
-        <note>No comment provided by engineer.</note>
+        <target>Retry</target>
+        <note/>
       </trans-unit>
       <trans-unit id="锁血">
         <source>锁血</source>
-        <target>鎖血</target>
-        <note>No comment provided by engineer.</note>
+        <target>Damage Guard</target>
+        <note>技能类型</note>
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>
-        <target>問題反饋</target>
+        <target>Feedback</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="队伍不完整">
         <source>队伍不完整</source>
-        <target>隊伍不完整</target>
+        <target>Incomplete Unit</target>
         <note>弹出框标题</note>
       </trans-unit>
       <trans-unit id="队伍中存在未知的技能类型，计算结果可能不准确。">
         <source>队伍中存在未知的技能类型，计算结果可能不准确。</source>
-        <target>隊伍中存在未知的技能型別，計算結果可能不準確。</target>
-        <note>No comment provided by engineer.</note>
+        <target>There are unknown skills in the unit, calculation results may not be accurate.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="队伍信息">
         <source>队伍信息</source>
-        <target>隊伍資訊</target>
-        <note>No comment provided by engineer.</note>
+        <target>Unit Information</target>
+        <note/>
       </trans-unit>
       <trans-unit id="队伍模板">
         <source>队伍模板</source>
-        <target>隊伍模板</target>
-        <note>No comment provided by engineer.</note>
+        <target>Unit Template</target>
+        <note>new in 1.4.0</note>
       </trans-unit>
       <trans-unit id="队长">
         <source>队长</source>
-        <target>隊長</target>
-        <note>No comment provided by engineer.</note>
+        <target>Center</target>
+        <note>队伍编辑页面</note>
       </trans-unit>
       <trans-unit id="队长加成">
         <source>队长加成</source>
-        <target>隊長加成</target>
+        <target>Center Bonus</target>
         <note>队伍详情页面</note>
       </trans-unit>
       <trans-unit id="队长技能">
         <source>队长技能</source>
-        <target>隊長技能</target>
+        <target>Center Skill</target>
         <note>通用
    队伍详情页面</note>
       </trans-unit>
       <trans-unit id="降序">
         <source>降序</source>
-        <target>降序</target>
-        <note>No comment provided by engineer.</note>
+        <target>Descending</target>
+        <note/>
       </trans-unit>
       <trans-unit id="限定">
         <source>限定</source>
-        <target>限定</target>
-        <note>No comment provided by engineer.</note>
+        <target>Limited</target>
+        <note>卡片详情页</note>
       </trans-unit>
       <trans-unit id="限定卡池">
         <source>限定卡池</source>
-        <target>限定卡池</target>
-        <note>No comment provided by engineer.</note>
+        <target>Limited Gacha</target>
+        <note/>
       </trans-unit>
       <trans-unit id="限定复刻卡池">
         <source>限定复刻卡池</source>
-        <target>限定復刻卡池</target>
-        <note>No comment provided by engineer.</note>
+        <target>Reappeared Limited Gacha</target>
+        <note/>
       </trans-unit>
       <trans-unit id="随机">
         <source>随机</source>
-        <target>隨機</target>
-        <note>No comment provided by engineer.</note>
+        <target>Random</target>
+        <note/>
       </trans-unit>
       <trans-unit id="隐私政策">
         <source>隐私政策</source>
-        <target>隱私政策</target>
-        <note>No comment provided by engineer.</note>
+        <target>Privacy Policy</target>
+        <note/>
       </trans-unit>
       <trans-unit id="隐藏难度文字">
         <source>隐藏难度文字</source>
-        <target>隱藏難度文字</target>
-        <note>No comment provided by engineer.</note>
+        <target>Hide difficutly text</target>
+        <note/>
       </trans-unit>
       <trans-unit id="难度">
         <source>难度</source>
-        <target>難度</target>
+        <target>Difficulty</target>
         <note>谱面页面导航按钮</note>
       </trans-unit>
       <trans-unit id="集中">
         <source>集中</source>
-        <target>集中</target>
-        <note>No comment provided by engineer.</note>
+        <target>Focus</target>
+        <note/>
       </trans-unit>
       <trans-unit id="需重启应用">
         <source>需重启应用</source>
-        <target>需重啟程式</target>
-        <note>No comment provided by engineer.</note>
+        <target>restart required</target>
+        <note/>
       </trans-unit>
       <trans-unit id="颜色方案">
         <source>颜色方案</source>
-        <target>顏色方案</target>
-        <note>No comment provided by engineer.</note>
+        <target>Color schemes</target>
+        <note>new in 1.6.1</note>
       </trans-unit>
       <trans-unit id="首次出现时间">
         <source>首次出现时间</source>
-        <target>首次出現時間</target>
-        <note>No comment provided by engineer.</note>
+        <target>Created time</target>
+        <note/>
       </trans-unit>
       <trans-unit id="高">
         <source>高</source>
-        <target>高</target>
+        <target>High</target>
         <note>技能触发几率的简写</note>
       </trans-unit>
       <trans-unit id="高确率">
         <source>高确率</source>
-        <target>高確率</target>
-        <note>No comment provided by engineer.</note>
+        <target>High</target>
+        <note/>
       </trans-unit>
       <trans-unit id="高级计算">
         <source>高级计算</source>
-        <target>高階計算</target>
-        <note>No comment provided by engineer.</note>
+        <target>Advance Calculation</target>
+        <note/>
       </trans-unit>
       <trans-unit id="高级试音会">
         <source>高级试音会</source>
-        <target>高階試音會</target>
-        <note>No comment provided by engineer.</note>
+        <target>Premium Gacha</target>
+        <note>new in 1.8.3</note>
       </trans-unit>
       <trans-unit id="高级选项">
         <source>高级选项</source>
-        <target>高階選項</target>
-        <note>No comment provided by engineer.</note>
+        <target>Advance Options</target>
+        <note/>
       </trans-unit>
       <trans-unit id="默认潜能等级">
         <source>默认潜能等级</source>
-        <target>預設潛能等級</target>
-        <note>No comment provided by engineer.</note>
+        <target>Default Potential Level</target>
+        <note/>
       </trans-unit>
       <trans-unit id="默认特技等级">
         <source>默认特技等级</source>
-        <target>預設特技等級</target>
-        <note>No comment provided by engineer.</note>
+        <target>Default Skill Level</target>
+        <note/>
       </trans-unit>
       <trans-unit id="，持续 %@ 秒。">
         <source>，持续 %@ 秒。</source>
-        <target>，持續 %@ 秒。</target>
-        <note>No comment provided by engineer.</note>
+        <target> for %@ seconds.</target>
+        <note/>
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuideTests/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-        <target>$(PRODUCT_NAME)</target>
-        <note>Bundle name</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.0" build-num="10A254a"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName">
