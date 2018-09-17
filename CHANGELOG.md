@@ -8,6 +8,9 @@
 
 ##### Japanese version
 **このバージョンから、iOS 10.0以下はサポート対象外です**
+1 全般：新しい特技「コーディネート」の対応
+2 スコア計算：計算パターンにおいてライフスパークルの不具合を修正
+3 ツール：「データ更新ログ」を追加
 
 ##### English version
 **Does not support devices below iOS 10.0 by this version**
