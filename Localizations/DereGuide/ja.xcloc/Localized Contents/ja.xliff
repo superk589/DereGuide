@@ -1328,6 +1328,7 @@
       </trans-unit>
       <trans-unit id="数据更新日志">
         <source>数据更新日志</source>
+        <target>データ更新ログ</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="数据服务器存在异常，请您稍后再尝试更新。">
@@ -1347,10 +1348,12 @@
       </trans-unit>
       <trans-unit id="新卡池：%@">
         <source>新卡池：%@</source>
+        <target>新しいガチャ：%@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新卡片：%@%@，技能：%@%@%@">
         <source>新卡片：%1$@%2$@，技能：%3$@%4$@%5$@</source>
+        <target>新しいカード：％1$@％2$@、スキル：％3$@％4$@％5$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新增卡片">
@@ -1360,18 +1363,22 @@
       </trans-unit>
       <trans-unit id="新小剧场动画：%@ %@">
         <source>新小剧场动画：%1$@ %2$@</source>
+        <target>新しい劇場アニメ：%1$@ %2$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新小剧场：%@ %@">
         <source>新小剧场：%1$@ %2$@</source>
+        <target>新しい劇場：%1$@ %2$@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新歌曲：%@">
         <source>新歌曲：%@</source>
+        <target>新しい音楽：%@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="新活动：%@">
         <source>新活动：%@</source>
+        <target>新しいイベント：%@</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="无">

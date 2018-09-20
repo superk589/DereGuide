@@ -72,7 +72,8 @@ class LiveSimulator {
                 }
                 var oneTry = snapshot
                 oneTry.perform(.note(note))
-                if oneTry.score > tempGame.score {
+                if oneTry.score > tempGame.score ||
+                    (oneTry.currentLife > tempGame.currentLife && oneTry.score == tempGame.score) {
                     tempGame = oneTry
                     tempActionSlice = snapshotActionSlice
                 }

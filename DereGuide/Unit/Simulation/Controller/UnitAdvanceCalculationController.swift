@@ -24,6 +24,7 @@ class UnitAdvanceCalculationController: UITableViewController {
     
     var formulator: LiveFormulator!
     var result: LSResult!
+    var simulator: LiveSimulator!
     
     fileprivate lazy var descriptionSection: [DescriptionRow] = {
         let row1 = DescriptionRow(name: NSLocalizedString("模拟次数", comment: ""), value: self.result.scores.count)

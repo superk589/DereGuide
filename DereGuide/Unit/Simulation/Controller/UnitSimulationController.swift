@@ -210,8 +210,8 @@ class UnitSimulationController: BaseTableViewController, UnitDetailConfigurable 
         if let result = self.simulationResult, result.scores.count > 0, let scene = scene {
             let vc = UnitAdvanceCalculationController(result: result)
             let coordinator = LiveCoordinator.init(unit: unit, scene: scene, simulatorType: simulatorType, grooveType: grooveType)
-            let formulator = coordinator.generateLiveFormulator()
-            vc.formulator = formulator
+            vc.formulator = coordinator.generateLiveFormulator()
+            vc.simulator = coordinator.generateLiveSimulator()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             UIAlertController.showHintMessage(NSLocalizedString("至少进行一次模拟计算之后才能进行高级计算", comment: ""), in: nil)

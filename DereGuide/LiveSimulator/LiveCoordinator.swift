@@ -107,7 +107,7 @@ class LiveCoordinator {
     }
     
     func getComboFactor(of combo: Int, criticalPoints: [Int]) -> Double {
-        var result: Double = 1
+        var result = 1.0
         for i in 0..<criticalPoints.count {
             if combo >= criticalPoints[i] {
                 result = comboFactor[i]
