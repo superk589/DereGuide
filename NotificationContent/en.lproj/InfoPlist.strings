@@ -2,5 +2,5 @@
 "CFBundleDisplayName" = "NotificationContent";
 
 /* Bundle name */
-"CFBundleName" = "$(PRODUCT_NAME)";
+"CFBundleName" = "DereGuide";
 

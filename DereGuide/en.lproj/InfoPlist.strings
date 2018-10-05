@@ -1,5 +1,5 @@
 /* Bundle name */
-"CFBundleName" = "$(PRODUCT_NAME)";
+"CFBundleName" = "DereGuide";
 
 /* (No Comment) */
 "NSPhotoLibraryAddUsageDescription" = "For saving images to the camera roll. This permission can be changed from the Settings app.";

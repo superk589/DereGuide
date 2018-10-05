@@ -1,5 +1,5 @@
 /* Bundle name */
-"CFBundleName" = "$(PRODUCT_NAME)";
+"CFBundleName" = "DereGuide";
 
 /* (No Comment) */
 "NSPhotoLibraryAddUsageDescription" = "請允許本程式將圖片儲存至您的相簿，隨後您也可以在系統設定中隨時修改。";

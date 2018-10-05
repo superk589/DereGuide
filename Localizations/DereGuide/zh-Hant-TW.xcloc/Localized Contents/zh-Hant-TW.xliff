@@ -98,7 +98,7 @@
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_NAME)</source>
-        <target>$(PRODUCT_NAME)</target>
+        <target>DereGuide</target>
         <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSPhotoLibraryAddUsageDescription">
