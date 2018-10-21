@@ -689,6 +689,7 @@
 		12725F2A203FEDBC00FBBB64 /* SupportDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDashboardController.swift; sourceTree = "<group>"; };
 		12738EEC1E2B3C890040E413 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		12738EEE1E2B6C150040E413 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		127416AE217CA790001B89AC /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
 		127CBEAB1ECA8CDC00C119F9 /* Potential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Potential.swift; sourceTree = "<group>"; };
@@ -1334,6 +1335,7 @@
 				12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */,
 				1281CB431E41C1CD00CEDE04 /* DataSource.plist */,
 				1281CB451E41C79300CEDE04 /* SpecialThanks.plist */,
+				127416AE217CA790001B89AC /* PrivacyPolicy.md */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
