@@ -1,5 +1,5 @@
 //
-//  CharInfoViewController.swift
+//  CharaTableViewController.swift
 //  DereGuide
 //
 //  Created by zzk on 16/8/18.
@@ -9,7 +9,7 @@
 import UIKit
 import ZKDrawerController
 
-class CharInfoViewController: BaseModelTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
+class CharaTableViewController: BaseModelTableViewController, CharFilterSortControllerDelegate, ZKDrawerControllerDelegate {
     
     var charList: [CGSSChar]!
     var filter: CGSSCharFilter {
@@ -39,19 +39,15 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
             navigationItem.titleView = searchBar
         }
         searchBar.placeholder = NSLocalizedString("日文名/罗马音/CV", comment: "角色信息页面")
-    
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: self, action: #selector(cancelAction))
-//
-        tableView.separatorStyle = .none
-        self.tableView.register(CharInfoTableViewCell.self, forCellReuseIdentifier: "CharCell")
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(backAction))
-        
-        navigationItem.leftBarButtonItem = backItem
+
+        tableView.register(CharaTableViewCell.self, forCellReuseIdentifier: "CharCell")
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "798-filter-toolbar"), style: .plain, target: self, action: #selector(filterAction))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "765-arrow-left-toolbar"), style: .plain, target: self, action: #selector(handleNavigationRightItem(_:)))
         
         filterVC = CharFilterSortController()
-        filterVC.filter = self.filter
-        filterVC.sorter = self.sorter
+        filterVC.filter = filter
+        filterVC.sorter = sorter
         filterVC.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(setNeedsReloadData), name: .favoriteCharasChanged, object: nil)
@@ -62,7 +58,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func backAction() {
+    @objc private func handleNavigationRightItem(_ item: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
@@ -114,12 +110,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
         drawerController?.rightViewController = nil
         // self.navigationController?.setToolbarHidden(true, animated: true)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     func drawerController(_ drawerVC: ZKDrawerController, didHide vc: UIViewController) {
         
     }
@@ -131,7 +122,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CharCell", for: indexPath) as! CharInfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CharCell", for: indexPath) as! CharaTableViewCell
         cell.setupWith(char: charList[indexPath.row], sorter: self.sorter)
         return cell
     }
@@ -150,7 +141,7 @@ class CharInfoViewController: BaseModelTableViewController, CharFilterSortContro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let vc = CharDetailViewController()
+        let vc = CharaDetailViewController()
         vc.chara = charList[indexPath.row]
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)

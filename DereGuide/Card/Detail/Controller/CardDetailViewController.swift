@@ -238,7 +238,7 @@ class CardDetailViewController: BaseTableViewController {
 
 extension CardDetailViewController: CardDetailRelatedCardsCellDelegate {
     func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
-        let vc = CharDetailViewController()
+        let vc = CharaDetailViewController()
         vc.chara = card.chara
         navigationController?.pushViewController(vc, animated: true)
     }

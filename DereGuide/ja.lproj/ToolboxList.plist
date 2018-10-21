@@ -12,20 +12,20 @@
 	</dict>
 	<dict>
 		<key>cName</key>
-		<string>CharInfoViewController</string>
+		<string>CharaTableViewController</string>
 		<key>iconId</key>
 		<string>300151</string>
 		<key>title</key>
 		<string>キャラ情報を見る</string>
 	</dict>
-    <dict>
-        <key>cName</key>
-        <string>SongViewController</string>
-        <key>iconId</key>
-        <string>200294</string>
-        <key>title</key>
-        <string>楽曲情報を見る</string>
-    </dict>
+	<dict>
+		<key>cName</key>
+		<string>SongViewController</string>
+		<key>iconId</key>
+		<string>200294</string>
+		<key>title</key>
+		<string>楽曲情報を見る</string>
+	</dict>
 	<dict>
 		<key>cName</key>
 		<string>GachaViewController</string>
@@ -50,11 +50,11 @@
 		<key>title</key>
 		<string>同僚の募集・探す</string>
 	</dict>
-    <dict>
-        <key>cName</key>
-        <string>VLTableViewController</string>
-        <key>title</key>
-        <string>データ更新ログ</string>
-    </dict>
+	<dict>
+		<key>cName</key>
+		<string>VLTableViewController</string>
+		<key>title</key>
+		<string>データ更新ログ</string>
+	</dict>
 </array>
 </plist>

@@ -56,7 +56,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate {
         if let charaId = userInfo["charaId"] as? Int {
             if let chara = CGSSDAO.shared.findCharById(charaId),
                 let nvc = CGSSClient.shared.tabBarController?.selectedViewController as? UINavigationController {
-                let vc = CharDetailViewController()
+                let vc = CharaDetailViewController()
                 vc.chara = chara
                 vc.hidesBottomBarWhenPushed = true
                 nvc.pushViewController(vc, animated: false)

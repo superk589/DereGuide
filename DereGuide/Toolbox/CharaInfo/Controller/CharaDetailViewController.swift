@@ -1,5 +1,5 @@
 //
-//  CharDetailViewController.swift
+//  CharaDetailViewController.swift
 //  DereGuide
 //
 //  Created by zzk on 16/8/21.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class CharDetailViewController: BaseTableViewController {
+class CharaDetailViewController: BaseTableViewController {
     
     var chara: CGSSChar! {
         didSet {
@@ -37,14 +37,14 @@ class CharDetailViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         prepareNavigationBar()
     }
     
     private func prepareNavigationBar() {
-        let rightItem = UIBarButtonItem.init(image: FavoriteCharasManager.shared.contains(chara.charaId) ? UIImage.init(named: "748-heart-toolbar-selected") : UIImage.init(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
+        let rightItem = UIBarButtonItem(image: FavoriteCharasManager.shared.contains(chara.charaId) ? UIImage(named: "748-heart-toolbar-selected") : UIImage(named: "748-heart-toolbar"), style: .plain, target: self, action: #selector(addOrRemoveFavorite))
         rightItem.tintColor = UIColor.red
         navigationItem.rightBarButtonItem = rightItem
     }
@@ -54,10 +54,10 @@ class CharDetailViewController: BaseTableViewController {
         let manager = FavoriteCharasManager.shared
         if !manager.contains(chara.charaId) {
             manager.add(chara)
-            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar-selected")
+            self.navigationItem.rightBarButtonItem?.image = UIImage(named: "748-heart-toolbar-selected")
         } else {
             manager.remove(chara.charaId)
-            self.navigationItem.rightBarButtonItem?.image = UIImage.init(named: "748-heart-toolbar")
+            self.navigationItem.rightBarButtonItem?.image = UIImage(named: "748-heart-toolbar")
         }
     }
     
@@ -119,7 +119,7 @@ class CharDetailViewController: BaseTableViewController {
     }
 }
 
-extension CharDetailViewController: CardDetailMVCellDelegate {
+extension CharaDetailViewController: CardDetailMVCellDelegate {
     
     func cardDetailMVCell(_ cardDetailMVCell: CardDetailMVCell, didClickAt index: Int) {
         let vc = SongDetailController()
@@ -129,7 +129,7 @@ extension CharDetailViewController: CardDetailMVCellDelegate {
     
 }
 
-extension CharDetailViewController: CardDetailRelatedCardsCellDelegate, CGSSIconViewDelegate {
+extension CharaDetailViewController: CardDetailRelatedCardsCellDelegate, CGSSIconViewDelegate {
     
     func didClickRightDetail(_ cardDetailRelatedCardsCell: CardDetailRelatedCardsCell) {
         

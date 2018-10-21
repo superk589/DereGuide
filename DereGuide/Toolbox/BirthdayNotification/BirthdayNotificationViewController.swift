@@ -205,7 +205,7 @@ class BirthdayNotificationViewController: BaseTableViewController {
 extension BirthdayNotificationViewController: BirthdayNotificationTableViewCellDelegate {
     
     func charIconClick(_ icon: CGSSCharaIconView) {
-        let vc = CharDetailViewController()
+        let vc = CharaDetailViewController()
         vc.chara = CGSSDAO.shared.findCharById(icon.charaID!)
         self.navigationController?.pushViewController(vc, animated: true)
     }

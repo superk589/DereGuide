@@ -1,5 +1,5 @@
 //
-//  CharView.swift
+//  CharaView.swift
 //  DereGuide
 //
 //  Created by zzk on 2017/7/13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CharView: UIView {
+class CharaView: UIView {
     
     let iconView = CGSSCharaIconView()
     let nameLabel = UILabel()
@@ -36,9 +36,10 @@ class CharView: UIView {
         iconView.isUserInteractionEnabled = false
         addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.top.equalTo(10)
+            make.top.equalTo(10)
             make.height.width.equalTo(48)
             make.bottom.equalTo(-10)
+            make.left.equalToSuperview()
         }
         
         cvLabel.font = .systemFont(ofSize: 12)
@@ -55,7 +56,7 @@ class CharView: UIView {
         sortingPropertyLabel.textAlignment = .right
         sortingPropertyLabel.snp.makeConstraints { (make) in
             make.left.greaterThanOrEqualTo(cvLabel.snp.right).offset(5)
-            make.right.equalTo(-10)
+            make.right.lessThanOrEqualToSuperview()
             make.top.equalTo(cvLabel)
         }
         
@@ -68,7 +69,7 @@ class CharView: UIView {
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(iconView.snp.right).offset(10)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualToSuperview()
             make.top.equalTo(cvLabel.snp.bottom)
         }
         
@@ -78,7 +79,7 @@ class CharView: UIView {
         addSubview(romajiLabel)
         romajiLabel.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(5)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualToSuperview()
             make.lastBaseline.equalTo(nameLabel)
         }
         romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -108,7 +109,7 @@ class CharView: UIView {
         addSubview(stackView)
         stackView.snp.makeConstraints { (make) in
             make.left.equalTo(68)
-            make.right.equalTo(-10)
+            make.right.equalToSuperview()
             make.bottom.equalTo(iconView.snp.bottom)
         }
     }

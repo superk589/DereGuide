@@ -20,7 +20,7 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
         
         contentView.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
             make.height.width.equalTo(48)
         }
@@ -40,7 +40,7 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
         addSubview(romajiLabel)
         romajiLabel.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(5)
-            make.right.lessThanOrEqualTo(-10)
+            make.right.lessThanOrEqualTo(readableContentGuide)
             make.lastBaseline.equalTo(nameLabel)
         }
         romajiLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -51,8 +51,8 @@ class CharaDetailProfileTableViewCell: UITableViewCell {
         contentView.addSubview(charaProfileView)
         charaProfileView.snp.makeConstraints { (make) in
             make.top.equalTo(iconView.snp.bottom).offset(20)
-            make.left.equalTo(10)
-            make.right.bottom.equalTo(-10)
+            make.left.right.equalTo(readableContentGuide)
+            make.bottom.equalTo(-10)
         }
         
         selectionStyle = .none

@@ -22,15 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // 处理一系列启动任务
-        
-        // 设置通知代理
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = NotificationHandler.default
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        // set user notification delegate
+        UNUserNotificationCenter.current().delegate = NotificationHandler.default
+       
         // 更新时清理过期的文档数据
         UserDefaults.standard.executeDocumentReset { (lastVersion) in
             if lastVersion < 2 {
