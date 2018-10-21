@@ -39,6 +39,7 @@ class BirthdayNotificationViewController: BaseTableViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.register(BirthdayNotificationTableViewCell.self, forCellReuseIdentifier: "BirthdayNotificationCell")
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .updateEnd, object: nil)

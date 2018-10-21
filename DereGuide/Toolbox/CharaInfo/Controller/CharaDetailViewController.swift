@@ -37,6 +37,7 @@ class CharaDetailViewController: BaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = chara.name
         tableView.estimatedRowHeight = 68
         tableView.tableFooterView = UIView()
         tableView.cellLayoutMarginsFollowReadableWidth = true

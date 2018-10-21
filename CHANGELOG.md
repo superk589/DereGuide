@@ -1,5 +1,16 @@
 # ChangeLog
 
+### 1.9.5 
+1. 细节优化和 Bug 修复。
+
+##### Japanese version
+
+1. 機能改善とバグ修正
+
+##### English version
+
+1. Bug fixes and improvements.
+
 ### 1.9.4
 **此版本起不再支持低于 iOS 10.0 的设备**
 1. 支持新技能类型“协调”。

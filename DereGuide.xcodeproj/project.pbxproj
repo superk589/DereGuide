@@ -201,7 +201,6 @@
 		1269EA051D520C9F0071AD7F /* BeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA011D520C9F0071AD7F /* BeatmapView.swift */; };
 		1269EA061D520C9F0071AD7F /* LiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA021D520C9F0071AD7F /* LiveTableViewCell.swift */; };
 		1269EA0A1D520CD50071AD7F /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA081D520CD50071AD7F /* BaseNavigationController.swift */; };
-		1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA091D520CD50071AD7F /* RootTabBarController.swift */; };
 		1269EA131D520D370071AD7F /* CGSSCardFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */; };
 		1269EA141D520D370071AD7F /* CGSSFavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */; };
 		1269EA161D520D370071AD7F /* CGSSSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1269EA0F1D520D370071AD7F /* CGSSSorter.swift */; };
@@ -669,7 +668,6 @@
 		1269EA011D520C9F0071AD7F /* BeatmapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeatmapView.swift; sourceTree = "<group>"; };
 		1269EA021D520C9F0071AD7F /* LiveTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveTableViewCell.swift; sourceTree = "<group>"; };
 		1269EA081D520CD50071AD7F /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		1269EA091D520CD50071AD7F /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		1269EA0C1D520D370071AD7F /* CGSSCardFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSCardFilter.swift; sourceTree = "<group>"; };
 		1269EA0D1D520D370071AD7F /* CGSSFavoriteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSFavoriteManager.swift; sourceTree = "<group>"; };
 		1269EA0F1D520D370071AD7F /* CGSSSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSSorter.swift; sourceTree = "<group>"; };
@@ -1558,7 +1556,6 @@
 				1237D11B1EEFDD0400C43337 /* TransitionableNavigationController.swift */,
 				12D4F8B81E1CCF880064991E /* BaseViewController.swift */,
 				1269EA251D520E9F0071AD7F /* RefreshableTableViewController.swift */,
-				1269EA091D520CD50071AD7F /* RootTabBarController.swift */,
 				121B82151EB7516F00273F37 /* BaseModelTableViewController.swift */,
 				125849B01EE6A26C006AF479 /* BaseModelCollectionViewController.swift */,
 				122EECE61D5F2131008ADE08 /* BaseTableViewController.swift */,
@@ -2518,7 +2515,6 @@
 				1224972A1E8E85DD005C743C /* LSRange.swift in Sources */,
 				12AA985F2147FF480060C6D8 /* VLTableViewController.swift in Sources */,
 				12CDC6D81F662FA1004BB7AE /* CGSSSongFilter.swift in Sources */,
-				1269EA0B1D520CD50071AD7F /* RootTabBarController.swift in Sources */,
 				1269E9C41D520B160071AD7F /* CardTableViewCell.swift in Sources */,
 				1206F6D81E2A412D000FAC78 /* EventFilterSortController.swift in Sources */,
 				129D6EBE1D58B0C20071BC4D /* CGSSRankedSkill.swift in Sources */,
@@ -3107,7 +3103,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3144,7 +3140,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3232,7 +3228,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3255,7 +3251,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

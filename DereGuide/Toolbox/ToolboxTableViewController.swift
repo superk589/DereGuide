@@ -44,6 +44,7 @@ class ToolboxTableViewController: UITableViewController {
         let vcType = NSClassFromString("DereGuide." + dataSource[indexPath.row]["cName"]!) as! UIViewController.Type
         let vc = vcType.init()
         vc.hidesBottomBarWhenPushed = true
+        vc.navigationItem.title = dataSource[indexPath.row]["title"]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

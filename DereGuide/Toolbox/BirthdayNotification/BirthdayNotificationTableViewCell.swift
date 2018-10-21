@@ -74,7 +74,7 @@ class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDe
         leftLabel.font = .systemFont(ofSize: 16)
         contentView.addSubview(leftLabel)
         leftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(15)
+            make.left.equalTo(readableContentGuide)
             make.top.equalTo(10)
         }
         
@@ -85,8 +85,8 @@ class BirthdayNotificationTableViewCell: UITableViewCell, TTGTagCollectionViewDe
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
+            make.left.equalTo(readableContentGuide)
+            make.right.equalTo(readableContentGuide)
             make.top.equalTo(leftLabel.snp.bottom).offset(5)
             make.bottom.equalTo(-10)
         }

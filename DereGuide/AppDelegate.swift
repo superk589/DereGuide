@@ -82,14 +82,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 初始化DrawerController和TabBarController
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
-        let rootTabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarController") as! RootTabBarController
+        let tabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarController") as! UITabBarController
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        let drawerController = ZKDrawerController.init(main: rootTabBarController)
+        let drawerController = ZKDrawerController(main: tabBarController)
         drawerController.drawerStyle = .cover
         drawerController.gestureRecognizerWidth = 120
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()
-        CGSSClient.shared.tabBarController = rootTabBarController
+        CGSSClient.shared.tabBarController = tabBarController
         
         // 注册远程推送 用于订阅CloudKit同步信息
         application.registerForRemoteNotifications()
