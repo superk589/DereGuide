@@ -22,7 +22,7 @@ class DownloadImageViewController: UITableViewController {
                      NSLocalizedString("歌曲封面", comment: ""),
                      NSLocalizedString("活动封面", comment: ""),
                      NSLocalizedString("卡池封面", comment: ""),
-                     NSLocalizedString("角色透过图", comment: "")]
+                     NSLocalizedString("卡片 Sprite 图", comment: "")]
     
     private struct ResourceURLs {
         var inCache = [URL]()
@@ -86,6 +86,12 @@ class DownloadImageViewController: UITableViewController {
         }
     }
     
+    private var cardSpriteURLs = ResourceURLs() {
+        didSet {
+            setupCellAtIndex(9)
+        }
+    }
+    
     private func getURLsBy(index: Int) -> ResourceURLs {
         switch index {
         case 1:
@@ -104,6 +110,8 @@ class DownloadImageViewController: UITableViewController {
             return eventURLs
         case 8:
             return gachaURLs
+        case 9:
+            return cardSpriteURLs
         default:
             return ResourceURLs()
         }
@@ -191,6 +199,16 @@ class DownloadImageViewController: UITableViewController {
                     })
                 }
 
+                // sprite 图
+                if let url = card.spriteImageURL {
+                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                        if isInCache {
+                            self.cardSpriteURLs.inCache.append(url)
+                        } else {
+                            self.cardSpriteURLs.needToDownload.append(url)
+                        }
+                    })
+                }
             }
             
             for char in chars {
@@ -250,6 +268,7 @@ class DownloadImageViewController: UITableViewController {
                     }
                 }
             })
+            
         }
     }
     func removeAllURLs() {
@@ -261,6 +280,7 @@ class DownloadImageViewController: UITableViewController {
         eventURLs.removeAll()
         jacketURLs.removeAll()
         gachaURLs.removeAll()
+        cardSpriteURLs.removeAll()
     }
     
     @objc private func cacheData() {
