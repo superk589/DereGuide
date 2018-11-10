@@ -17,7 +17,7 @@ target 'DereGuide' do
   pod 'MJRefresh'
   pod 'RijndaelSwift'
   pod 'MessagePack.swift', :git => 'https://github.com/superk589/MessagePack.swift.git'
-  pod 'Tabman'
+  pod 'Tabman', :git => 'https://github.com/superk589/Tabman.git'
   pod 'Eureka'
 end
 target 'NotificationContent' do

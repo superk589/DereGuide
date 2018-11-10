@@ -44,7 +44,7 @@ DEPENDENCIES:
   - SDWebImage
   - SnapKit
   - SwiftyJSON
-  - Tabman
+  - Tabman (from `https://github.com/superk589/Tabman.git`)
   - TTGTagCollectionView
   - ZKCornerRadiusView
   - ZKDrawerController
@@ -65,7 +65,6 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - SwiftyJSON
-    - Tabman
     - TTGTagCollectionView
     - ZKCornerRadiusView
     - ZKDrawerController
@@ -75,6 +74,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/superk589/ImageViewer.git
   MessagePack.swift:
     :git: https://github.com/superk589/MessagePack.swift.git
+  Tabman:
+    :git: https://github.com/superk589/Tabman.git
 
 CHECKOUT OPTIONS:
   ImageViewer:
@@ -83,6 +84,9 @@ CHECKOUT OPTIONS:
   MessagePack.swift:
     :commit: e600495425d1e2848204a9504cef0f9604baaa1e
     :git: https://github.com/superk589/MessagePack.swift.git
+  Tabman:
+    :commit: 2a74059ec2c997957e54b4d2432c4c9b38a0d283
+    :git: https://github.com/superk589/Tabman.git
 
 SPEC CHECKSUMS:
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
@@ -106,6 +110,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: 8145e455d53a72fe4b1c833cfdcfcf238f6a3233
 
-PODFILE CHECKSUM: 1299e90d8f3e49653d31571e1263dfa61b5db8a4
+PODFILE CHECKSUM: 791dc6dab98c28c7e2589506dea28239b0343802
 
 COCOAPODS: 1.6.0.beta.2
