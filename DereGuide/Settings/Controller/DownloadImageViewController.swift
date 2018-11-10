@@ -21,7 +21,8 @@ class DownloadImageViewController: UITableViewController {
                      NSLocalizedString("角色头像", comment: ""),
                      NSLocalizedString("歌曲封面", comment: ""),
                      NSLocalizedString("活动封面", comment: ""),
-                     NSLocalizedString("卡池封面", comment: "")]
+                     NSLocalizedString("卡池封面", comment: ""),
+                     NSLocalizedString("角色透过图", comment: "")]
     
     private struct ResourceURLs {
         var inCache = [URL]()

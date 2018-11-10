@@ -644,12 +644,12 @@ class CGSSGameResource: NSObject {
     static let manifestPath = path + "/manifest.db"
     
     lazy var master: Master = {
-        let dbQueue = Master.init(path: CGSSGameResource.masterPath)
+        let dbQueue = Master(path: CGSSGameResource.masterPath)!
         return dbQueue
     }()
     
     lazy var manifest: Manifest = {
-        let db = Manifest.init(path: CGSSGameResource.manifestPath)
+        let db = Manifest(path: CGSSGameResource.manifestPath)
         return db
     }()
     
@@ -717,8 +717,8 @@ class CGSSGameResource: NSObject {
         let fm = FileManager.default
         var result: [CGSSBeatmap]?
         let semaphore = DispatchSemaphore.init(value: 0)
-        let dbQueue = MusicScoreDBQueue.init(path: path)
-        if fm.fileExists(atPath: path) {
+        
+        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue(path: path) {
             dbQueue.getBeatmaps(callback: { (beatmaps) in
                 result = beatmaps
                 semaphore.signal()
@@ -736,8 +736,7 @@ class CGSSGameResource: NSObject {
         
         let path = String.init(format: DataPath.beatmap, liveId)
         let fm = FileManager.default
-        let dbQueue = MusicScoreDBQueue.init(path: path)
-        if fm.fileExists(atPath: path) {
+        if fm.fileExists(atPath: path), let dbQueue = MusicScoreDBQueue(path: path) {
             dbQueue.getBeatmapCount(callback: { (count) in
                 result = count
                 semaphore.signal()

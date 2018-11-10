@@ -11,13 +11,14 @@ target 'DereGuide' do
   pod 'SnapKit'
   pod 'TTGTagCollectionView'
   pod 'Charts'
-  pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
+  pod 'EasyTipView'
   pod 'DynamicColor'
   pod 'ImageViewer', :git => 'https://github.com/superk589/ImageViewer.git'
   pod 'MJRefresh'
   pod 'RijndaelSwift'
   pod 'MessagePack.swift', :git => 'https://github.com/superk589/MessagePack.swift.git'
-  pod 'Tabman', :git => 'https://github.com/superk589/Tabman.git'
+  pod 'Tabman'
+  pod 'Eureka'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

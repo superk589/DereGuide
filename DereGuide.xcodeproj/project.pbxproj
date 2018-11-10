@@ -32,6 +32,7 @@
 		1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */; };
 		1209CA262040F63B003CB270 /* RankingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA252040F63B003CB270 /* RankingPage.swift */; };
 		1209CA282040F696003CB270 /* RankingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA272040F696003CB270 /* RankingItem.swift */; };
+		120B71D32196A15A00B45A4A /* ImageCacheTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B71D22196A15A00B45A4A /* ImageCacheTableViewController.swift */; };
 		120BDE881F4871260098E93C /* WideLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE871F4871260098E93C /* WideLoadingButton.swift */; };
 		120BDE8A1F4897F90098E93C /* StepperOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE891F4897F90098E93C /* StepperOption.swift */; };
 		120DBB271EEE2F6B004E0084 /* UnitCardSelectionAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */; };
@@ -503,6 +504,7 @@
 		1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEventFilter.swift; sourceTree = "<group>"; };
 		1209CA252040F63B003CB270 /* RankingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPage.swift; sourceTree = "<group>"; };
 		1209CA272040F696003CB270 /* RankingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingItem.swift; sourceTree = "<group>"; };
+		120B71D22196A15A00B45A4A /* ImageCacheTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTableViewController.swift; sourceTree = "<group>"; };
 		120BDE871F4871260098E93C /* WideLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideLoadingButton.swift; sourceTree = "<group>"; };
 		120BDE891F4897F90098E93C /* StepperOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperOption.swift; sourceTree = "<group>"; };
 		120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCardSelectionAdvanceOptionsController.swift; sourceTree = "<group>"; };
@@ -1503,6 +1505,7 @@
 				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
 				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
 				12D4F8AC1E1BCD780064991E /* DonationViewController.swift */,
+				120B71D22196A15A00B45A4A /* ImageCacheTableViewController.swift */,
 				12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */,
 				12DE93341FC025AB004039F0 /* PrivacyPolicyViewController.swift */,
 			);
@@ -2348,6 +2351,7 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicColor/DynamicColor.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageViewer/ImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -2370,6 +2374,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicColor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyTipView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -2831,6 +2836,7 @@
 				122879421F8A549700AD1F5F /* CharaDetailRelatedCardsTableViewCell.swift in Sources */,
 				12816B361F7CF73B000456CE /* SongDetailPositionCell.swift in Sources */,
 				1224972C1E8E85FC005C743C /* LSOptions.swift in Sources */,
+				120B71D32196A15A00B45A4A /* ImageCacheTableViewController.swift in Sources */,
 				129ECB271ECBD2D90010BC7F /* GridLabel.swift in Sources */,
 				1239B0541E2FB41200958849 /* BannerView.swift in Sources */,
 				122497241E8E8582005C743C /* LFDistribution.swift in Sources */,
