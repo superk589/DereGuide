@@ -284,7 +284,7 @@
 		12ABE3471F42D61A003A5E7F /* ColleagueFilterTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */; };
 		12ABE34B1F42DD02003A5E7F /* ColleagueFilterCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */; };
 		12AC19261FDA3990006A5D55 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC19251FDA3990006A5D55 /* BalloonMarker.swift */; };
-		12AC1F302007528600713AB6 /* SafeAreaFixTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1F2F2007528600713AB6 /* SafeAreaFixTabBar.swift */; };
+		12AC1F302007528600713AB6 /* FixedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1F2F2007528600713AB6 /* FixedTabBar.swift */; };
 		12AC80281E4307A300B48D8D /* DownloadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */; };
 		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
 		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
@@ -757,7 +757,7 @@
 		12ABE3461F42D61A003A5E7F /* ColleagueFilterTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterTypeCell.swift; sourceTree = "<group>"; };
 		12ABE34A1F42DD02003A5E7F /* ColleagueFilterCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueFilterCardCell.swift; sourceTree = "<group>"; };
 		12AC19251FDA3990006A5D55 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
-		12AC1F2F2007528600713AB6 /* SafeAreaFixTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeAreaFixTabBar.swift; sourceTree = "<group>"; };
+		12AC1F2F2007528600713AB6 /* FixedTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedTabBar.swift; sourceTree = "<group>"; };
 		12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageViewController.swift; sourceTree = "<group>"; };
 		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
@@ -1489,7 +1489,7 @@
 				1235F6D51F8E187C00119F94 /* CGSSRefreshHeader.swift */,
 				1235F6D71F8E1B1E00119F94 /* CGSSRefreshFooter.swift */,
 				12AC19251FDA3990006A5D55 /* BalloonMarker.swift */,
-				12AC1F2F2007528600713AB6 /* SafeAreaFixTabBar.swift */,
+				12AC1F2F2007528600713AB6 /* FixedTabBar.swift */,
 				12D4F8BE1E1E66840064991E /* FilterAndSorting */,
 			);
 			path = View;
@@ -2526,7 +2526,7 @@
 				127AA1A51E34FDF80006627B /* CardImageController.swift in Sources */,
 				129B95611F31CA51007B7AE2 /* ColleagueBaseCell.swift in Sources */,
 				12816B311F7CE188000456CE /* SongDetailHeaderCell.swift in Sources */,
-				12AC1F302007528600713AB6 /* SafeAreaFixTabBar.swift in Sources */,
+				12AC1F302007528600713AB6 /* FixedTabBar.swift in Sources */,
 				1269E9D61D520B5D0071AD7F /* CGSSBaseModel.swift in Sources */,
 				12D4F8B91E1CCF880064991E /* BaseViewController.swift in Sources */,
 				12D4F8B11E1CAB330064991E /* DonationCell.swift in Sources */,
