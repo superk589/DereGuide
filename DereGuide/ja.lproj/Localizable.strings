@@ -410,6 +410,9 @@
 /* (No Comment) */
 "卡片" = "カード";
 
+/* No comment provided by engineer. */
+"卡片 Sprite 图" = "カードスプライト";
+
 /* new in v1.2.0(7+) */
 "卡片图" = "カード画像";
 

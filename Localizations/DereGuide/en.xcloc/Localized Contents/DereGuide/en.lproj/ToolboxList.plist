@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>cName</key>
-		<string>CharInfoViewController</string>
+		<string>CharaTableViewController</string>
 		<key>iconId</key>
 		<string>300151</string>
 		<key>title</key>

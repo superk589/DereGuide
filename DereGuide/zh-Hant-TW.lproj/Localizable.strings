@@ -408,6 +408,9 @@
 /* (No Comment) */
 "卡片" = "卡片";
 
+/* No comment provided by engineer. */
+"卡片 Sprite 图" = "卡片 Sprite 圖";
+
 /* new in v1.2.0(7+) */
 "卡片图" = "卡片圖";
 

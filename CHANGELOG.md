@@ -1,6 +1,17 @@
 # ChangeLog
 
-### 1.9.5 
+### 1.9.6
+1. 细节优化和 Bug 修复。
+
+##### Japanese version
+
+1. 機能改善とバグ修正
+
+##### English version
+
+1. Bug fixes and improvements.
+
+### 1.9.5
 1. 细节优化和 Bug 修复。
 
 ##### Japanese version
