@@ -13,7 +13,7 @@ import SDWebImage
 extension URL {
     static let enDatabase = URL(string: "https://starlight.kirara.ca")!
     static let cnDatabase = URL(string: "http://starlight.346lab.org")!
-    static let images = URL(string: "https://truecolor.kirara.ca")!
+    static let images = URL(string: "https://hidamarirhodonite.kirara.ca")!
     static func manifest(truthVersion: String) -> URL {
         return URL(string: "https://storages.game.starlight-stage.jp/dl/\(truthVersion)/manifests/iOS_AHigh_SHigh")!
     }
