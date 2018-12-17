@@ -45,7 +45,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         var hidesAssistedLines: Bool
 //        var shiftType: ShiftType
         
-//        var isMirrorFlipped: Bool
+        var isMirrorFlippedByDefault: Bool
         
         func save() {
             try? JSONEncoder().encode(self).write(to: URL.init(fileURLWithPath: Path.document + "/beatmapSettings.json"))
@@ -65,7 +65,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             verticalScale = 1.0
             showsPlayLine = true
             hidesAssistedLines = false
-//            shiftType = .fixedLength
+            isMirrorFlippedByDefault = false
         }
     }
     
@@ -113,7 +113,13 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         option3.addTarget(self, action: #selector(handleOption3Switch(_:)), for: .valueChanged)
         let cell3 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option3))
         
-        staticCells = [cell1, cell2, cell3]
+        let option4 = SwitchOption()
+        option4.label.text = NSLocalizedString("默认开启谱面镜像", comment: "")
+        option4.switch.isOn = setting.isMirrorFlippedByDefault
+        option4.addTarget(self, action: #selector(handleOption4Switch(_:)), for: .valueChanged)
+        let cell4 = UnitAdvanceOptionsTableViewCell(optionStyle: .switch(option4))
+        
+        staticCells = [cell1, cell2, cell3, cell4]
     }
     
     @objc func doneAction() {
@@ -138,13 +144,9 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         setting.hidesAssistedLines = !`switch`.isOn
     }
     
-//    @objc private func handleOption4(_ segmentedControll: UISegmentedControl) {
-//        if segmentedControll.selectedSegmentIndex == 0 {
-//            setting.shiftType = .fixedLength
-//        } else {
-//            setting.shiftType = .fixedSpeed
-//        }
-//    }
+    @objc private func handleOption4Switch(_ `switch`: UISwitch) {
+        setting.isMirrorFlippedByDefault = `switch`.isOn
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count

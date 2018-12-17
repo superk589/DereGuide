@@ -1291,6 +1291,9 @@
 /* (No Comment) */
 "高级选项" = "Advance Options";
 
+/* No comment provided by engineer. */
+"默认开启谱面镜像" = "Mirror flipped by default";
+
 /* (No Comment) */
 "默认潜能等级" = "Default Potential Level";
 

@@ -26,6 +26,9 @@ class BeatmapViewController: UIViewController {
             titleLabel.text = "\(scene.live.name)\n\(scene.stars)☆ \(scene.difficulty.description) bpm: \(scene.live.bpm) notes: \(beatmap.numberOfNotes)"
             pause()
             beatmapView.setup(beatmap: beatmap, bpm: scene.live.bpm, type: scene.live.type, setting: setting)
+            if setting.isMirrorFlippedByDefault {
+                flip()
+            }
             beatmapView.setNeedsDisplay()
         }
     }

@@ -16,6 +16,9 @@
 /* Class = "UITabBarItem"; title = "设置"; ObjectID = "gI8-ss-NS6"; */
 "gI8-ss-NS6.title" = "設定";
 
+/* Class = "UITableViewController"; title = "卡片"; ObjectID = "hop-gk-wsV"; */
+"hop-gk-wsV.title" = "卡片";
+
 /* Class = "UINavigationController"; title = "组队导航"; ObjectID = "IyO-O4-iMn"; */
 "IyO-O4-iMn.title" = "組隊導航";
 
@@ -42,4 +45,7 @@
 
 /* Class = "UINavigationItem"; title = "实用工具"; ObjectID = "zeC-Rh-4X6"; */
 "zeC-Rh-4X6.title" = "實用工具";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "zkd-c8-p78"; */
+"zkd-c8-p78.title" = "設定";
 

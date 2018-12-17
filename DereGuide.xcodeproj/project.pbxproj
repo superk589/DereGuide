@@ -690,6 +690,7 @@
 		12738EEC1E2B3C890040E413 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		12738EEE1E2B6C150040E413 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		127416AE217CA790001B89AC /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
+		127A553521C7E68400DA6C1E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		127AA1A21E34FDEC0006627B /* SignImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignImageController.swift; sourceTree = "<group>"; };
 		127AA1A41E34FDF80006627B /* CardImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageController.swift; sourceTree = "<group>"; };
 		127CBEAB1ECA8CDC00C119F9 /* Potential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Potential.swift; sourceTree = "<group>"; };
@@ -2944,6 +2945,7 @@
 				126B646E2104AD5E001AA456 /* en */,
 				128EC5FE2104AD6B00EBED33 /* ja */,
 				12E9A1012147FFD6006769A6 /* zh-Hant-TW */,
+				127A553521C7E68400DA6C1E /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

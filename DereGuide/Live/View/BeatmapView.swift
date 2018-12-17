@@ -149,7 +149,6 @@ class BeatmapView: IndicatorScrollView {
         self.setting = setting
         self.bpm = bpm
         self.type = type
-        
         beatmap.contextFree()
         
         indicator.strokeColor = self.strokeColor

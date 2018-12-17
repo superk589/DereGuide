@@ -2284,6 +2284,11 @@
         <target>高階選項</target>
         <note/>
       </trans-unit>
+      <trans-unit id="默认开启谱面镜像">
+        <source>默认开启谱面镜像</source>
+        <target>預設開啟譜面翻轉</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="默认潜能等级">
         <source>默认潜能等级</source>
         <target>預設潛能等級</target>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
@@ -91,7 +91,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
@@ -137,7 +137,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>
@@ -2284,6 +2284,11 @@
         <target>高階選項</target>
         <note/>
       </trans-unit>
+      <trans-unit id="默认开启谱面镜像">
+        <source>默认开启谱面镜像</source>
+        <target>預設開啟譜面翻轉</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="默认潜能等级">
         <source>默认潜能等级</source>
         <target>預設潛能等級</target>
@@ -2301,7 +2306,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant-TW">
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="zh-Hant">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
     </header>

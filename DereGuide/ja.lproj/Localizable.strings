@@ -1293,6 +1293,9 @@
 /* (No Comment) */
 "高级选项" = "アドバンスオプション";
 
+/* No comment provided by engineer. */
+"默认开启谱面镜像" = "ミラーフリップはデフォルトでオン";
+
 /* (No Comment) */
 "默认潜能等级" = "既定ポテLv.";
 

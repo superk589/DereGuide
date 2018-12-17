@@ -1291,6 +1291,9 @@
 /* (No Comment) */
 "高级选项" = "高階選項";
 
+/* No comment provided by engineer. */
+"默认开启谱面镜像" = "預設開啟譜面翻轉";
+
 /* (No Comment) */
 "默认潜能等级" = "預設潛能等級";
 
