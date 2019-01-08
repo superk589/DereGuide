@@ -366,7 +366,7 @@
       </trans-unit>
       <trans-unit id="note数">
         <source>note数</source>
-        <target>note数</target>
+        <target>ﾉｰﾂ数</target>
         <note>new in 1.3.0</note>
       </trans-unit>
       <trans-unit id="、">
@@ -763,7 +763,7 @@
       </trans-unit>
       <trans-unit id="卡片 Sprite 图">
         <source>卡片 Sprite 图</source>
-        <target>カードスプライト</target>
+        <target>スプライト画像</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="卡片图">
@@ -865,7 +865,7 @@
       </trans-unit>
       <trans-unit id="基础分">
         <source>基础分</source>
-        <target>基本スコア</target>
+        <target>基礎スコア</target>
         <note>score detail table footer</note>
       </trans-unit>
       <trans-unit id="增速(/h)">
@@ -885,7 +885,7 @@
       </trans-unit>
       <trans-unit id="大图">
         <source>大图</source>
-        <target>大圖</target>
+        <target>ｲﾗｽﾄ</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="天井">
@@ -956,7 +956,7 @@
       </trans-unit>
       <trans-unit id="属性">
         <source>属性</source>
-        <target>屬性</target>
+        <target>タイプ</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="属性排名">
@@ -1131,7 +1131,7 @@
       </trans-unit>
       <trans-unit id="您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。">
         <source>您可以通过购买下面的两个虚拟商品来支持本程序。为了更好的App体验，我们决定不在本页添加象征性的广告，因此您的购买不会获得任何虚拟物品或者功能上的扩展。</source>
-        <target>以下いずれかのアプリ内課金アイテムを購入するで私たちを応援することができます。より優れた利用体験を提供するため、このページの広告は廃止されます。よって、あなたの購入行為は機能の拡張や仮想アイテムなどを得られません。</target>
+        <target>以下いずれかのアプリ内課金アイテムを購入するで私たちを応援することができます。より優れた利用体験を提供するため、本来このページに表示される広告は撤去されます。よって、あなたの購入行為は機能の拡張や仮想アイテムなどを得られません。</target>
         <note>"您的捐赠将用于DereGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。" = "您的捐赠将用于DereGuide所使用的后端服务器费用，域名使用费用，开发者账号费用，以及服务器未来升级所需费用。";</note>
       </trans-unit>
       <trans-unit id="您无法创建超过 %d 个队伍">
@@ -1871,7 +1871,7 @@
       </trans-unit>
       <trans-unit id="签名">
         <source>签名</source>
-        <target>簽名</target>
+        <target>ｻｲﾝ</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="签名图">
@@ -2162,7 +2162,7 @@
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>
-        <target>問題反饋</target>
+        <target>フィードバック・お問い合わせ</target>
         <note>设置页面</note>
       </trans-unit>
       <trans-unit id="队伍不完整">
