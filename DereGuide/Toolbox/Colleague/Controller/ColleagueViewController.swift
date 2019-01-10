@@ -141,7 +141,7 @@ class ColleagueViewController: BaseTableViewController {
         let vc = DMComposingStepOneController()
         if UIDevice.current.userInterfaceIdiom == .pad {
             let nav = BaseNavigationController(rootViewController: vc)
-            let drawer = ZKDrawerController(main: nav)
+            let drawer = ZKDrawerController(center: nav)
             drawer.modalPresentationStyle = .formSheet
             present(drawer, animated: true, completion: nil)
         } else {
@@ -151,7 +151,7 @@ class ColleagueViewController: BaseTableViewController {
     
     @objc func filterAction() {
         let nav = BaseNavigationController(rootViewController: filterController)
-        let drawer = ZKDrawerController(main: nav)
+        let drawer = ZKDrawerController(center: nav)
         drawer.modalPresentationStyle = .formSheet
         present(drawer, animated: true, completion: nil)
     }

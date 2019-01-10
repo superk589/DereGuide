@@ -3,9 +3,9 @@ PODS:
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
-  - DynamicColor (4.0.2)
+  - DynamicColor (4.0.3)
   - EasyTipView (2.0.1)
-  - Eureka (4.3.0)
+  - Eureka (4.3.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -24,9 +24,9 @@ PODS:
   - Tabman (1.10.2):
     - AutoInsetter (~> 1.3.0)
     - Pageboy (~> 2.6.0)
-  - TTGTagCollectionView (1.9.0)
+  - TTGTagCollectionView (1.11.0)
   - ZKCornerRadiusView (0.1.0)
-  - ZKDrawerController (0.4):
+  - ZKDrawerController (0.5.0):
     - SnapKit
 
 DEPENDENCIES:
@@ -91,9 +91,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
-  DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
+  DynamicColor: bf19b33fe404c59a68e64af95cc6b017346e7e75
   EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
-  Eureka: 6d711cb30ca333b4bc893110285a722ae3840114
+  Eureka: 28ea296f06710f6745266b71f17862048941a32d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   ImageViewer: 997018c2f4f7f9830602349bbcc3b2b776424942
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
@@ -106,9 +106,9 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   Tabman: 6cff148419c5d8812d0e9f08f93b6f1c6ba54502
-  TTGTagCollectionView: 958f20b946dee92a8ba20dc37d10a06737641ae9
+  TTGTagCollectionView: be3f47f2df1e4cef7e596cb64cac1532bb6b5904
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
-  ZKDrawerController: 8145e455d53a72fe4b1c833cfdcfcf238f6a3233
+  ZKDrawerController: ac64d9a3eb37f69cfc8f867928c6bc821f311b30
 
 PODFILE CHECKSUM: 791dc6dab98c28c7e2589506dea28239b0343802
 

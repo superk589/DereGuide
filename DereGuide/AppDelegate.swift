@@ -70,6 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
             }
+            if lastVersion < 20 {
+                CGSSCacheManager.shared.wipeCard()
+            }
         }
         
         // 规划近期偶像生日
@@ -84,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
         let tabBarController = sb.instantiateViewController(withIdentifier: "RootTabBarController") as! UITabBarController
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        let drawerController = ZKDrawerController(main: tabBarController)
+        let drawerController = ZKDrawerController(center: tabBarController)
         drawerController.drawerStyle = .cover
         drawerController.gestureRecognizerWidth = 120
         window?.rootViewController = drawerController
