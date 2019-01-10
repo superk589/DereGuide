@@ -92,6 +92,12 @@ class Master: FMDatabaseQueue {
             // snow wings 两张活动卡数据库中遗失 做特殊处理
             list.append(200129)
             list.append(300135)
+            
+            // trust me 卡片问题
+            list.append(300593)
+            list.append(300595)
+            list.removeAll { $0 == 300583 }
+            list.removeAll { $0 == 300585 }
         }) {
             callback(list)
         }
@@ -225,7 +231,13 @@ class Master: FMDatabaseQueue {
                 var rewards = [Reward]()
                 let subSet = try db.executeQuery(rewardSql, values: nil)
                 while subSet.next() {
-                    let rewardId = Int(subSet.int(forColumn: "reward_id"))
+                    var rewardId = Int(subSet.int(forColumn: "reward_id"))
+                    if rewardId == 300583 {
+                        rewardId = 300593
+                    }
+                    if rewardId == 300585 {
+                        rewardId = 300595
+                    }
                     let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
                     let reward = Reward.init(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0)
                     rewards.append(reward)
