@@ -101,7 +101,7 @@ class Master: FMDatabaseQueue {
         var list = [Int]()
         
         execute({ (db) in
-            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription not like '%限定%'"
+            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription not like '%限定%' UNION select card_id reward_id from gacha_data a, gacha_available_2 b where a.id = b.gacha_id and a.dicription not like '%限定%'"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let rewardId = set.int(forColumnIndex: 0)
@@ -115,7 +115,7 @@ class Master: FMDatabaseQueue {
     func getTimeLimitAvailableList(callback: @escaping FMDBCallBackClosure<[Int]>) {
         var list = [Int]()
         execute({ (db) in
-            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0"
+            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0 UNION select card_id reward_id from gacha_data a, gacha_available_2 b where a.id = b.gacha_id and a.dicription like '%期間限定%' and recommend_order > 0"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let rewardId = set.int(forColumnIndex: 0)
@@ -129,7 +129,7 @@ class Master: FMDatabaseQueue {
     func getFesAvailableList(callback: @escaping FMDBCallBackClosure<[Int]>) {
         var list = [Int]()
         execute({ (db) in
-            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0"
+            let selectSql = "select reward_id from gacha_data a, gacha_available b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0 UNION select card_id reward_id from gacha_data a, gacha_available_2 b where a.id = b.gacha_id and a.dicription like '%フェス限定%' and recommend_order > 0"
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
                 let rewardId = set.int(forColumnIndex: 0)
@@ -158,15 +158,13 @@ class Master: FMDatabaseQueue {
                 let srRatio = Int(set.int(forColumn: "sr_ratio"))
                 let ssrRatio = Int(set.int(forColumn: "ssr_ratio"))
                 
-                let rewardSql = "select * from gacha_available where gacha_id = \(id)"
+                let rewardSql = "select reward_id, recommend_order from gacha_available where gacha_id = \(id) UNION select card_id reward_id, recommend_order from gacha_available_2 where gacha_id = \(id)"
                 var rewards = [Reward]()
                 let subSet = try db.executeQuery(rewardSql, values: nil)
                 while subSet.next() {
                     let rewardId = Int(subSet.int(forColumn: "reward_id"))
                     let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
-                    let relativeOdds = Int(subSet.int(forColumn: "relative_odds"))
-                    let relativeSROdds = Int(subSet.int(forColumn: "relative_sr_odds"))
-                    rewards.append(Reward(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: relativeOdds, relativeSROdds: relativeSROdds))
+                    rewards.append(Reward(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0))
                 }
                 
                 let gachaPool = CGSSGacha(id: id, name: name!, dicription: dicription!, startDate: startDate!, endDate: endDate!, rareRatio: rareRatio, srRatio: srRatio, ssrRatio: ssrRatio, rewards: rewards)
@@ -567,18 +565,29 @@ class Master: FMDatabaseQueue {
         var dict = [Int: String]()
         execute({ (db) in
             let selectSql = """
-                SELECT
-                    a.id,
-                    min( c.start_date ) gacha_date,
-                    min( e.event_start ) event_date
-                FROM
-                    card_data a
-                    LEFT JOIN gacha_available b ON a.id = b.reward_id
-                    LEFT JOIN gacha_data c ON b.gacha_id = c.id
-                    LEFT JOIN event_available d ON a.id = d.reward_id
-                    LEFT JOIN event_data e ON d.event_id = e.id
-                GROUP BY
-                    a.id
+            SELECT
+                a.id,
+                min(c.start_date) gacha_date,
+                min(e.event_start) event_date
+            FROM
+                card_data a
+                LEFT JOIN (
+                    SELECT
+                        reward_id,
+                        gacha_id
+                    FROM
+                        gacha_available
+                    UNION
+                    SELECT
+                        card_id reward_id,
+                        gacha_id
+                    FROM
+                        gacha_available_2) b ON a.id = b.reward_id
+                LEFT JOIN gacha_data c ON b.gacha_id = c.id
+                LEFT JOIN event_available d ON a.id = d.reward_id
+                LEFT JOIN event_data e ON d.event_id = e.id
+            GROUP BY
+                a.id
             """
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
