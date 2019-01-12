@@ -273,8 +273,12 @@ class CGSSGacha: NSObject {
         ssrRatio = ((gachaOdds.chargeRate[.ssr]?.double() ?? 0) * 100).roundedInt()
         rareRatio = ((gachaOdds.chargeRate[.r]?.double() ?? 0) * 100).roundedInt()
         for (key, value) in gachaOdds.cardIDOdds {
-            rewardTable[key]?.relativeOdds = (value.chargeOdds.double() * 10000).roundedInt()
-            rewardTable[key]?.relativeSROdds = (value.srOdds.double() * 10000).roundedInt()
+            rewardTable[key] = Reward(
+                cardId: key,
+                recommandOrder: rewardTable[key]?.recommandOrder ?? 0,
+                relativeOdds: (value.chargeOdds.double() * 10000).roundedInt(),
+                relativeSROdds: (value.srOdds.double() * 10000).roundedInt()
+            )
         }
     }
     
