@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import SDWebImage
 import Social
+import AcknowList
 
 class SettingsTableViewController: UITableViewController {
 
@@ -59,7 +60,7 @@ class SettingsTableViewController: UITableViewController {
         
         aboutRows.append(Row(title: NSLocalizedString("支持作者", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showDonate)))
         
-        aboutRows.append(Row(title: NSLocalizedString("致谢", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showAck)))
+        aboutRows.append(Row(title: NSLocalizedString("致谢", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showAcknowledgement)))
         
         aboutRows.append(Row(title: NSLocalizedString("版权声明", comment: ""), detail: nil, hasDisclosure: true, accessoryView: nil, selector: #selector(showLicense)))
        
@@ -236,8 +237,8 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @objc private func showAck() {
-        let vc = AcknowledgementViewController()
+    @objc private func showAcknowledgement() {
+        let vc = AcknowListViewController()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }

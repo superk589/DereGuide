@@ -32,6 +32,7 @@
 		1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */; };
 		1209CA262040F63B003CB270 /* RankingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA252040F63B003CB270 /* RankingPage.swift */; };
 		1209CA282040F696003CB270 /* RankingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1209CA272040F696003CB270 /* RankingItem.swift */; };
+		120AD43F21EDDF3B00F8DC08 /* Pods-DereGuide-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 120AD43E21EDDF3B00F8DC08 /* Pods-DereGuide-acknowledgements.plist */; };
 		120BDE881F4871260098E93C /* WideLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE871F4871260098E93C /* WideLoadingButton.swift */; };
 		120BDE8A1F4897F90098E93C /* StepperOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120BDE891F4897F90098E93C /* StepperOption.swift */; };
 		120DBB271EEE2F6B004E0084 /* UnitCardSelectionAdvanceOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */; };
@@ -231,8 +232,6 @@
 		12816B361F7CF73B000456CE /* SongDetailPositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */; };
 		12816B381F7CF750000456CE /* SongDetailLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12816B371F7CF750000456CE /* SongDetailLiveCell.swift */; };
 		1281CB421E40D92D00CEDE04 /* TimeZoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */; };
-		1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB431E41C1CD00CEDE04 /* DataSource.plist */; };
-		1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1281CB451E41C79300CEDE04 /* SpecialThanks.plist */; };
 		1281D37D20DDE8B700E9D9FB /* UDTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281D37C20DDE8B700E9D9FB /* UDTabViewController.swift */; };
 		1282EE631D011A8F0024318C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1282EE621D011A8F0024318C /* AppDelegate.swift */; };
 		1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1282EE6C1D011A8F0024318C /* Assets.xcassets */; };
@@ -287,11 +286,9 @@
 		12AC1F302007528600713AB6 /* FixedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC1F2F2007528600713AB6 /* FixedTabBar.swift */; };
 		12AC80281E4307A300B48D8D /* DownloadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */; };
 		12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5A91D9128250054D9CD /* LicenseViewController.swift */; };
-		12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */; };
 		12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */; };
 		12AE77C81E39A81C006A9653 /* StatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C71E39A81C006A9653 /* StatusIndicator.swift */; };
 		12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */; };
-		12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */; };
 		12AE77F31E3F7750006A9653 /* LicenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */; };
 		12B0A0631F305DBE005967C1 /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B0A0621F305DBE005967C1 /* Syncable.swift */; };
 		12B225A51F80D6EC0013E90E /* SongDetailCoverFlowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */; };
@@ -503,6 +500,7 @@
 		1206F6DB1E2A4C24000FAC78 /* CGSSEventFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSEventFilter.swift; sourceTree = "<group>"; };
 		1209CA252040F63B003CB270 /* RankingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPage.swift; sourceTree = "<group>"; };
 		1209CA272040F696003CB270 /* RankingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingItem.swift; sourceTree = "<group>"; };
+		120AD43E21EDDF3B00F8DC08 /* Pods-DereGuide-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-DereGuide-acknowledgements.plist"; sourceTree = "<group>"; };
 		120BDE871F4871260098E93C /* WideLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WideLoadingButton.swift; sourceTree = "<group>"; };
 		120BDE891F4897F90098E93C /* StepperOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperOption.swift; sourceTree = "<group>"; };
 		120DBB261EEE2F6A004E0084 /* UnitCardSelectionAdvanceOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCardSelectionAdvanceOptionsController.swift; sourceTree = "<group>"; };
@@ -702,8 +700,6 @@
 		12816B351F7CF73B000456CE /* SongDetailPositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailPositionCell.swift; sourceTree = "<group>"; };
 		12816B371F7CF750000456CE /* SongDetailLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailLiveCell.swift; sourceTree = "<group>"; };
 		1281CB411E40D92D00CEDE04 /* TimeZoneExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneExtension.swift; sourceTree = "<group>"; };
-		1281CB431E41C1CD00CEDE04 /* DataSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataSource.plist; sourceTree = "<group>"; };
-		1281CB451E41C79300CEDE04 /* SpecialThanks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpecialThanks.plist; sourceTree = "<group>"; };
 		1281D37C20DDE8B700E9D9FB /* UDTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDTabViewController.swift; sourceTree = "<group>"; };
 		1282EE5F1D011A8F0024318C /* DereGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DereGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282EE621D011A8F0024318C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -761,11 +757,9 @@
 		12AC1F2F2007528600713AB6 /* FixedTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedTabBar.swift; sourceTree = "<group>"; };
 		12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageViewController.swift; sourceTree = "<group>"; };
 		12ACD5A91D9128250054D9CD /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
-		12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementViewController.swift; sourceTree = "<group>"; };
 		12AD63C01DA2376100A02C04 /* CGSSLoadingHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSSLoadingHUD.swift; sourceTree = "<group>"; };
 		12AE77C71E39A81C006A9653 /* StatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusIndicator.swift; sourceTree = "<group>"; };
 		12AE77C91E39ACC2006A9653 /* TimeStatusIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeStatusIndicator.swift; sourceTree = "<group>"; };
-		12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ThirdPartyLibraries.plist; sourceTree = "<group>"; };
 		12AE77F21E3F7750006A9653 /* LicenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableViewCell.swift; sourceTree = "<group>"; };
 		12B0A0621F305DBE005967C1 /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
 		12B225A41F80D6EC0013E90E /* SongDetailCoverFlowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailCoverFlowCell.swift; sourceTree = "<group>"; };
@@ -1333,9 +1327,6 @@
 			children = (
 				1206DEAA1DACDD8600A5A69D /* View */,
 				1269E9EB1D520BA40071AD7F /* Controller */,
-				12AE77F01E3F7407006A9653 /* ThirdPartyLibraries.plist */,
-				1281CB431E41C1CD00CEDE04 /* DataSource.plist */,
-				1281CB451E41C79300CEDE04 /* SpecialThanks.plist */,
 				127416AE217CA790001B89AC /* PrivacyPolicy.md */,
 			);
 			path = Settings;
@@ -1501,7 +1492,6 @@
 			children = (
 				1269E9ED1D520BC60071AD7F /* SettingsTableViewController.swift */,
 				12ACD5A91D9128250054D9CD /* LicenseViewController.swift */,
-				12ACD5AB1D9128720054D9CD /* AcknowledgementViewController.swift */,
 				12643A2E1DA75B59004DE4F0 /* WipeTableViewController.swift */,
 				12D4F8AC1E1BCD780064991E /* DonationViewController.swift */,
 				12AC80271E4307A300B48D8D /* DownloadImageViewController.swift */,
@@ -1661,6 +1651,7 @@
 				12C9A9B81E4D7D8D00A7B8CE /* Bridge-Header.h */,
 				1244F5E71D98E6210021E4B1 /* ToolboxList.plist */,
 				1244F5D81D98E4EC0021E4B1 /* Info.plist */,
+				120AD43E21EDDF3B00F8DC08 /* Pods-DereGuide-acknowledgements.plist */,
 			);
 			path = DereGuide;
 			sourceTree = "<group>";
@@ -2286,14 +2277,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				120AD43F21EDDF3B00F8DC08 /* Pods-DereGuide-acknowledgements.plist in Resources */,
 				12F376201D5C96A8003A358C /* Main.storyboard in Resources */,
 				1282EE6D1D011A8F0024318C /* Assets.xcassets in Resources */,
 				12F3761F1D5C96A8003A358C /* LaunchScreen.storyboard in Resources */,
-				12AE77F11E3F7407006A9653 /* ThirdPartyLibraries.plist in Resources */,
 				1244F5E51D98E6210021E4B1 /* ToolboxList.plist in Resources */,
-				1281CB441E41C1CD00CEDE04 /* DataSource.plist in Resources */,
 				1244F5DE1D98E51B0021E4B1 /* InfoPlist.strings in Resources */,
-				1281CB461E41C79300CEDE04 /* SpecialThanks.plist in Resources */,
 				1244F59C1D9814350021E4B1 /* Localizable.strings in Resources */,
 				120DBB2D1EEE3A0D004E0084 /* UnitTemplate.plist in Resources */,
 				12A3F16A1E5ADA96007B470E /* BpmShift.plist in Resources */,
@@ -2345,6 +2334,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DereGuide/Pods-DereGuide-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AcknowList/AcknowList.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicColor/DynamicColor.framework",
@@ -2368,6 +2358,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AcknowList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoInsetter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicColor.framework",
@@ -2613,7 +2604,6 @@
 				12AE77CA1E39ACC2006A9653 /* TimeStatusIndicator.swift in Sources */,
 				12AA985B2147FF480060C6D8 /* VersionLog.swift in Sources */,
 				129D6EBC1D5883D80071BC4D /* LiveCoordinator.swift in Sources */,
-				12ACD5AC1D9128720054D9CD /* AcknowledgementViewController.swift in Sources */,
 				122F36AB1F7DEE98006DDE55 /* FavoriteSongUploader.swift in Sources */,
 				12A3F16E1E5AF4FE007B470E /* CGSSBeatmapShiftingInfo.swift in Sources */,
 				12DE93351FC025AB004039F0 /* PrivacyPolicyViewController.swift in Sources */,

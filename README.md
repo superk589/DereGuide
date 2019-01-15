@@ -53,25 +53,21 @@ For developers only, if you have macOS and Xcode, please read `./Localizations/R
 
 ## Acknowledgement
 
-### API Provider
 * [Starlight Database](https://starlight.kirara.ca)
     * by [The Holy Constituency of the Summer Triangle](https://github.com/summertriangle-dev)
     * Chinese branch maintained by [CaiMiao](https://github.com/CaiMiao)
-
 * deresute.info
     * by [Snack-X](https://github.com/Snack-X)
-
 * [starlight.tachibana.cool](https://starlight.tachibana.cool)
     * by [Cryptomelone](https://github.com/Cryptomelone)
-
 * [Starlight Portal](https://portal.starlightstage.jp)
-
 * [deresute.me](https://deresute.me)
     * by [Hector Martin](https://github.com/marcan)
-
-### Design and Algorithm Support
-* KIYOMI拖把酱
+* Chieri
 * [statementreply](https://github.com/statementreply)
+* KIYOMI拖把酱
+* StarlightDeck
+* ZXQ
 
 ## Contact
 Follow and contact me on [Twitter](https://twitter.com/superk64). If you find an issue, just [open a ticket](https://github.com/superk589/DereGuide/issues/new). Pull requests are warmly welcome as well.

@@ -19,6 +19,7 @@ target 'DereGuide' do
   pod 'MessagePack.swift', :git => 'https://github.com/superk589/MessagePack.swift.git'
   pod 'Tabman', :git => 'https://github.com/superk589/Tabman.git'
   pod 'Eureka'
+  pod 'AcknowList'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'
