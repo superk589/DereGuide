@@ -15,10 +15,10 @@ extension URL {
     static let cnDatabase = URL(string: "http://starlight.346lab.org")!
     static let images = URL(string: "https://hidamarirhodonite.kirara.ca")!
     static func manifest(truthVersion: String) -> URL {
-        return URL(string: "https://storages.game.starlight-stage.jp/dl/\(truthVersion)/manifests/iOS_AHigh_SHigh")!
+        return URL(string: "https://asset-starlight-stage.akamaized.net/dl/\(truthVersion)/manifests/iOS_AHigh_SHigh")!
     }
-    static func master(truthVersion: String) -> URL {
-        return URL(string: "https://storages.game.starlight-stage.jp/dl/resources/Generic//\(truthVersion)")!
+    static func master(hash: String) -> URL {
+        return URL(string: "https://asset-starlight-stage.akamaized.net/dl/resources/Generic/\(hash[0..<2])/\(hash)")!
     }
     static let dataVersion = URL(string: "http://346lab.org/dereguide/client_json/force_update.json")!
 }
@@ -40,28 +40,21 @@ struct CGSSUpdaterError: Error {
     var localizedDescription: String
 }
 
-class CGSSUpdateItem: NSObject {
+struct CGSSUpdateItem {
     
-    var dataType: CGSSUpdateDataTypes
-    var id: String
-    var hashString: String
+    let dataType: CGSSUpdateDataTypes
+    let id: String
+    let hash: String
     
     var dataURL: URL? {
         switch dataType {
         case CGSSUpdateDataTypes.card:
             return URL.cnDatabase.appendingPathComponent("/api/v1/card_t/\(id)")
         case CGSSUpdateDataTypes.master, .beatmap:
-            return URL.master(truthVersion: hashString)
+            return URL.master(hash: hash)
         default:
             return nil
         }
-    }
-    
-    init(dataType:CGSSUpdateDataTypes, id:String, hash: String) {
-        self.dataType = dataType
-        self.id = id
-        self.hashString = hash
-        super.init()
     }
 }
 
@@ -496,7 +489,7 @@ open class CGSSUpdater: NSObject {
                         let beatmapData = LZ4Decompressor.decompress(data!)
                         let dao = CGSSDAO.shared
                         dao.saveBeatmapData(data: beatmapData, liveId: Int(item.id) ?? 0)
-                        BeatmapHashManager.default.hashTable[item.id] = item.hashString
+                        BeatmapHashManager.default.hashTable[item.id] = item.hash
                         queue.sync {
                             success += 1
                         }

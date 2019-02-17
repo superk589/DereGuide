@@ -12,7 +12,7 @@ import Reachability
 struct Config {
     static let iAPRemoveADProductIDs: Set<String> = ["dereguide_small_tips", "dereguide_medium_tips"]
     static let bundleID = "com.zzk.cgssguide"
-    static let unityVersion = "5.4.5p1"
+    static let unityVersion = "2017.4.2f2"
     
     static let cloudKitDebug = true
     static let maxNumberOfStoredUnits = 100

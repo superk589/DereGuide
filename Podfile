@@ -20,6 +20,7 @@ target 'DereGuide' do
   pod 'Tabman', :git => 'https://github.com/superk589/Tabman.git'
   pod 'Eureka'
   pod 'AcknowList'
+  pod 'CryptoSwift'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

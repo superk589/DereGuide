@@ -4,6 +4,7 @@ PODS:
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
+  - CryptoSwift (0.13.1)
   - DynamicColor (4.0.3)
   - EasyTipView (2.0.1)
   - Eureka (4.3.1)
@@ -33,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - AcknowList
   - Charts
+  - CryptoSwift
   - DynamicColor
   - EasyTipView
   - Eureka
@@ -56,6 +58,7 @@ SPEC REPOS:
     - AcknowList
     - AutoInsetter
     - Charts
+    - CryptoSwift
     - DynamicColor
     - EasyTipView
     - Eureka
@@ -95,6 +98,7 @@ SPEC CHECKSUMS:
   AcknowList: 5b8820004d019d0a8d6a091ea2392dcb54bd3ad2
   AutoInsetter: 0ea4dddc17042ab45114ec5d5980764efae98584
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
+  CryptoSwift: ff68c35a53e03177d31aaa2c1e8b3e010aeed6cb
   DynamicColor: bf19b33fe404c59a68e64af95cc6b017346e7e75
   EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
@@ -114,6 +118,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: ac64d9a3eb37f69cfc8f867928c6bc821f311b30
 
-PODFILE CHECKSUM: c5fd4469f7c551c62e1a03803429583629df851c
+PODFILE CHECKSUM: c6be5b95232bc36ec24ff7261acbd2fd7dc43109
 
 COCOAPODS: 1.6.0.beta.2

@@ -9,6 +9,7 @@
 import Foundation
 import MessagePack
 import RijndaelSwift
+import CryptoSwift
 
 class APIClient {
     
@@ -34,7 +35,7 @@ class APIClient {
     
     private func lolfuscate(_ s: String) -> String {
         let mid = s.map { String(format: "%02d\($0.shiftScalarBy(10))%d", 100.arc4random, 10.arc4random) }.joined()
-        let post = (0..<32).map { _ in String(10.arc4random) }.joined()
+        let post = (0..<16).map { _ in String(10.arc4random) }.joined()
         return String(format: "%04x\(mid)\(post)", s.count)
     }
     
@@ -47,9 +48,9 @@ class APIClient {
     }
     
     func call(base: String? = nil, path: String, userInfo: [String: Any], callback: ((MessagePackValue?) -> Void)?) {
-        let iv = (0..<32).map { _ in String(9.arc4random + 1) }.joined()
+        let iv = (0..<16).map { _ in String(9.arc4random + 1) }.joined()
         var params = userInfo
-        params["viewer_id"] = iv + Rijndael(key: rijndaelKey, mode: .cbc)!.encrypt(data: viewerID.data(using: .ascii)!, blockSize: 32, iv: iv.data(using: .ascii))!.base64EncodedString()
+        params["viewer_id"] = try! iv + AES(key: rijndaelKey.bytes, blockMode: CBC(iv: iv.bytes)).encrypt(viewerID.bytes).toBase64()!
         var msgpack = [MessagePackValue: MessagePackValue]()
         for (key, value) in params {
             switch value {
@@ -66,10 +67,11 @@ class APIClient {
             }
         }
         
-        let plain = pack(MessagePackValue(msgpack)).base64EncodedData()
+        let plain = pack(MessagePackValue(msgpack))
         let key = Data(Data(bytes: (0..<32).map { _ in UInt8.max.arc4random }).base64EncodedData()[0..<32])
-        let msgIV = udid.replacingOccurrences(of: "-", with: "").data(using: .ascii)
-        let body = (Rijndael(key: key, mode: .cbc)!.encrypt(data: plain, blockSize: 32, iv: msgIV)! + key).base64EncodedData()
+        let msgIV = udid.replacingOccurrences(of: "-", with: "").hexadecimal()!
+        let aes = try! AES(key: key.bytes, blockMode: CBC(iv: msgIV.bytes))
+        let body = Data(bytes: (try! aes.encrypt(plain.base64EncodedData().bytes) + key.bytes)).base64EncodedData()
         let sid = self.sid ?? viewerID + udid
 
         let base = base ?? self.apis
@@ -77,26 +79,33 @@ class APIClient {
         let url = URL(string: base + path)!
         
         var request = URLRequest(url: url)
-        request.addValue(((udid + viewerID + path).data(using: .ascii)! + plain).sha1().hexadecimal(), forHTTPHeaderField: "PARAM")
-        request.addValue("910841675", forHTTPHeaderField: "KEYCHAIN")
-        request.addValue(lolfuscate(userID), forHTTPHeaderField: "USER_ID")
-        request.addValue("", forHTTPHeaderField: "CARRIER")
-        request.addValue(lolfuscate(udid), forHTTPHeaderField: "UDID")
-        request.addValue(CGSSVersionManager.default.gameVersion?.description ?? "3.5.2", forHTTPHeaderField: "APP_VER")
-        request.addValue(CGSSVersionManager.default.apiInfo?.truthVersion ?? "10013600", forHTTPHeaderField: "RES_VER")
-        request.addValue("127.0.0.1", forHTTPHeaderField: "IP_ADDRESS")
-        request.addValue("iPad5,3", forHTTPHeaderField: "DEVICE_NAME")
-        request.addValue(Config.unityVersion, forHTTPHeaderField: "X-Unity-Version")
-        request.addValue((sid.data(using: .ascii)! + salt).md5().hexadecimal(), forHTTPHeaderField: "SID")
-        request.addValue("Apple A8X GPU", forHTTPHeaderField: "GRAPHICS_DEVICE_NAME")
-        request.addValue("3F015210-232E-46BD-B794-17C12F1DEB60", forHTTPHeaderField: "DEVICE_ID")
-        request.addValue("iPhone OS 11.2.2", forHTTPHeaderField: "PLATFORM_OS_VERSION")
-        request.addValue("1", forHTTPHeaderField: "DEVICE")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("BNEI0242/116 CFNetwork/893.14.2 Darwin/17.3.0", forHTTPHeaderField: "User-Agent")
-        request.addValue("5D4DA824-C48A-4390-85F2-17EAAEB1F5FD", forHTTPHeaderField: "IDFA")
-        request.setValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
-
+        
+        request.allHTTPHeaderFields = [
+            "User-Agent": "BNEI0242/173 CFNetwork/976 Darwin/18.2.0",
+            "PARAM": ((udid + viewerID + path).data(using: .ascii)! + plain.base64EncodedData()).sha1().hexadecimal(),
+            "PROCESSOR-TYPE": "arm64",
+            "DEVICE-NAME": "iPad5,3",
+            "GRAPHICS-DEVICE-NAME": "Apple A8X GPU",
+            "PLATFORM-OS-VERSION": "iOS 12.1.3",
+            "KEYCHAIN": "148444250",
+            "UDID": lolfuscate(udid),
+            "DEVICE-ID": "432B4E5E-F7D8-470C-A71B-C5606522B0FF",
+            "SID": (sid.data(using: .ascii)! + salt).md5().hexadecimal(),
+            "X-Unity-Version": Config.unityVersion,
+            "Connection": "keep-alive",
+            "CARRIER": "",
+            "IP-ADDRESS": "192.168.0.101",
+            "Accept-Language": "zh-cn",
+            "APP-VER": CGSSVersionManager.default.gameVersion?.description ?? "4.6.2",
+            "RES-VER": CGSSVersionManager.default.apiInfo?.truthVersion ?? "10051400",
+            "USER-ID": lolfuscate(userID),
+            "Accept": "*/*",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept-Encoding": "br, gzip, deflate",
+            "DEVICE": "1",
+            "IDFA": "5D4DA824-C48A-4390-85F2-17EAAEB1F5FD"
+        ]
+        
         request.httpMethod = "POST"
         request.httpBody = body
         
@@ -108,9 +117,12 @@ class APIClient {
                     callback?(nil)
                     return
                 }
-                let rijndael = Rijndael(key: Data(decodedData[decodedData.count - 32..<decodedData.count]), mode: .cbc)!
-                let plain = rijndael.decrypt(data: Data(decodedData[0..<decodedData.count - 32]), blockSize: 32, iv: msgIV)!.split(separator: 0)[0]
-                guard let decodedPlain = Data(base64Encoded: plain) else {
+                let key = Data(decodedData[decodedData.count - 32..<decodedData.count])
+                let aes = try! AES(key: key.bytes, blockMode: CBC(iv: msgIV.bytes))
+                let cipher = Data(decodedData[0..<decodedData.count - 32])
+                let plain = try! aes.decrypt(cipher.bytes)
+                
+                guard let decodedPlain = Data(base64Encoded: Data(bytes: plain)) else {
                     callback?(nil)
                     return
                 }

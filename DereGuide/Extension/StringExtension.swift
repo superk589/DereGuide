@@ -56,4 +56,34 @@ extension String {
         return String(format: hash as String)
     }
     
+    subscript(value: PartialRangeUpTo<Int>) -> Substring {
+        get {
+            return self[..<index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+    
+    subscript(value: PartialRangeThrough<Int>) -> Substring {
+        get {
+            return self[...index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+    
+    subscript(value: PartialRangeFrom<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)...]
+        }
+    }
+    
+    subscript(value: CountableRange<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)..<index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+    
+    subscript(value: CountableClosedRange<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)...index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+    
 }

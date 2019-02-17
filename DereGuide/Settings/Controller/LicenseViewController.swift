@@ -14,11 +14,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     var tableView: UITableView!
     
-    var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of", comment: "") + " \(Config.appName)", NSLocalizedString("Third-party Libraries", comment: "")]
-    
-    lazy var thirdPartyLibraries: [[String: String]] = {
-        return NSArray(contentsOfFile: self.path!) as! [[String: String]]
-    }()
+    var headerTitles = [NSLocalizedString("Copyright of Game Data", comment: ""), NSLocalizedString("Copyright of", comment: "") + " \(Config.appName)"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +42,7 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 || section == 1 {
-            return 1
-        } else {
-            return thirdPartyLibraries.count
-        }
-        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,8 +52,6 @@ class LicenseViewController: BaseViewController, UITableViewDelegate, UITableVie
             cell.setup(title: text, site: "")
         } else if indexPath.section == 1 {
             cell.setup(title: NSLocalizedString("本程序基于MIT协议，详情请访问：", comment: ""), site: "https://github.com/superk589/DereGuide")
-        } else {
-            cell.setup(title: thirdPartyLibraries[indexPath.row]["name"]!, site: thirdPartyLibraries[indexPath.row]["site"]!)
         }
         return cell
     }
