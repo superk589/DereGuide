@@ -14,6 +14,9 @@ enum PatchType: String, Codable {
     case leaderSkill
     case chara
     case beatmap
+    case userID
+    case udid
+    case viewerID
 }
 
 struct PatchItem: Codable {

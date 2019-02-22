@@ -1,15 +1,27 @@
 {
-    "version": "2.0.0",
+    "version": "3.9.1",
     "reasons": {
-        "default": "To avoid a potential crash, please update your cached data.",
-        "ja": "強制終了のバグを防ぐため、データ更新が必要となります。",
-        "zh-Hans": "为了避免一个导致闪退的 Bug，需要您更新缓存数据。数据量较大，请确认您的网络后再点击确认。",
-        "zh-Hant": "為了避免一個導致閃退的 Bug，需要您更新快取資料。資料量較大，請確認您的網路後再點選確認。"
+        "default": "To apply latest change for a part of idols (cards) in regard to Life Sparkle skill and base parameter adjustment, please update your cached data.",
+        "ja": "一部アイドルのライフ値およびライフスパークル効果量を更新するため、データ更新が必要となります。\n続行する前、データ余量およびネット環境を確認してください。",
+        "zh-Hans": "为更新最新的卡片平衡性改动，需要您更新缓存数据。数据量较大，请确认您的剩余流量及网络环境后再点击确认。",
+        "zh-Hant": "為更新最新的卡牌平衡性改動，需要您更新快取資料。資料量較大，請確認您的通訊餘量及網路環境後再點選確認。"
     },
     "items": [
         {
             "id": "100001",
             "type": "card"
+        },
+        {
+            "id": "c3798e43-3ea2-4fe5-a2ee-316ee478921c",
+            "type": "udid"
+        },
+        {
+            "id": "313178201",
+            "type": "userID"
+        },    
+        {
+            "id": "679595005",
+            "type": "viewerID"
         },
         {
             "id": "101",

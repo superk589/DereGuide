@@ -140,6 +140,12 @@ extension Refreshable where Self: UIViewController {
                                     let cards = dao.findCardsByCharId(id)
                                     dao.cardDict.removeObjects(forKeys: cards.map { String($0.id) })
                                 }
+                            case .udid:
+                                APIClient.shared.udid = item.id
+                            case .userID:
+                                APIClient.shared.userID = item.id
+                            case .viewerID:
+                                APIClient.shared.viewerID = item.id
                             default:
                                 break
                             }

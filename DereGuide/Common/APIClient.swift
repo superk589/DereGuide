@@ -23,9 +23,36 @@ class APIClient {
     
     private let salt = "r!I@nt8e5i=".data(using: .ascii)!
     
-    private let userID = "775891250"
-    private let viewerID = "910841675"
-    private let udid = "600a5efd-cae5-41ff-a0c7-7deda751c5ed"
+//    private let userID = "775891250"
+//    private let viewerID = "910841675"
+//    private let udid = "600a5efd-cae5-41ff-a0c7-7deda751c5ed"
+    
+    var userID: String {
+        get {
+            return UserDefaults.standard.value(forKey: "user_id") as? String ?? "313178201"
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "user_id")
+        }
+    }
+    
+    var viewerID: String {
+        get {
+            return UserDefaults.standard.value(forKey: "viewer_id") as? String ?? "679595005"
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "viewer_id")
+        }
+    }
+    
+    var udid: String {
+        get {
+            return UserDefaults.standard.value(forKey: "udid") as? String ?? "c3798e43-3ea2-4fe5-a2ee-316ee478921c"
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "udid")
+        }
+    }
     
     private var sid: String?
 
