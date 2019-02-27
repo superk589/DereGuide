@@ -224,6 +224,7 @@ class CGSSLive: NSObject {
     var musicDataId : Int
     var name : String
     @objc dynamic var startDate : String
+    @objc dynamic var nameKana: String
     var type : Int
     
     var details = [CGSSLiveDetail]()
@@ -278,6 +279,7 @@ class CGSSLive: NSObject {
         name = json["name"].stringValue.replacingOccurrences(of: "\\n", with: "")
         startDate = json["start_date"].stringValue
         type = json["type"].intValue
+        nameKana = json["name_kana"].stringValue
         super.init()
     }
     

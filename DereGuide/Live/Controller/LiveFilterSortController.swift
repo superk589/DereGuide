@@ -25,9 +25,9 @@ class LiveFilterSortController: BaseFilterSortController {
     var eventTypeTitles = [NSLocalizedString("常规歌曲", comment: ""), NSLocalizedString("传统活动", comment: ""), NSLocalizedString("Groove活动", comment: ""), NSLocalizedString("巡演活动", comment: "")]
     
     
-    var sorterMethods = ["updateId", "startDate", "bpm", "maxDiffStars", "maxNumberOfNotes", "sLength"]
+    var sorterMethods = ["updateId", "startDate", "bpm", "maxDiffStars", "maxNumberOfNotes", "sLength", "nameKana"]
     
-    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("难度", comment: ""), NSLocalizedString("note数", comment: ""), NSLocalizedString("时长", comment: "")]
+    var sorterTitles = [NSLocalizedString("变更时间", comment: ""), NSLocalizedString("首次出现时间", comment: ""), "bpm", NSLocalizedString("难度", comment: ""), NSLocalizedString("note数", comment: ""), NSLocalizedString("时长", comment: ""), NSLocalizedString("五十音", comment: "")]
     
     var sorterOrderTitles = [NSLocalizedString("降序", comment: ""), NSLocalizedString("升序", comment: "")]
     

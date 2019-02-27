@@ -14,9 +14,6 @@ enum PatchType: String, Codable {
     case leaderSkill
     case chara
     case beatmap
-    case userID
-    case udid
-    case viewerID
 }
 
 struct PatchItem: Codable {
@@ -34,6 +31,12 @@ struct DataVersionPayload: Codable {
     
     /// patch items, used in silent updating, should be removed every minor reversion.
     var items: [PatchItem]
+    
+    var userID: String?
+    
+    var viewerID: String?
+    
+    var udid: String?
     
 }
 

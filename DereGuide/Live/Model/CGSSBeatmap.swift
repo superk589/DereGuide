@@ -199,7 +199,7 @@ class CGSSBeatmap {
         }
         
         if let csv = String.init(data: data, encoding: .utf8) {
-            let lines = csv.components(separatedBy: "\n")
+            let lines = csv.components(separatedBy: "\n").map { $0.trimmingCharacters(in: ["\r"]) }
             self.notes = [CGSSBeatmapNote]()
             for i in 0..<lines.count {
                 let line = lines[i]

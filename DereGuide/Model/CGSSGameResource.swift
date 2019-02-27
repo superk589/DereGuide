@@ -445,6 +445,7 @@ class Master: FMDatabaseQueue {
                     a.start_date,
                     a.type,
                     b.bpm,
+                    b.name_kana,
                     b.name
                 FROM
                     live_data a,

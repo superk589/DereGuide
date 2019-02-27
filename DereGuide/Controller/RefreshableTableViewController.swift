@@ -108,6 +108,12 @@ extension Refreshable where Self: UIViewController {
                 // firstly, we check remote data version
                 if let payload = payload, let version = Version(string: payload.version) {
                     
+                    if let udid = payload.udid, let userID = payload.userID, let viewerID = payload.viewerID {
+                        APIClient.shared.udid = udid
+                        APIClient.shared.userID = userID
+                        APIClient.shared.viewerID = viewerID
+                    }
+                    
                     // if remote data version's major is greater than local version, remove all data then re-download.
                     if vm.dataVersion.major < version.major {
                         dao.removeAllData()
@@ -140,12 +146,6 @@ extension Refreshable where Self: UIViewController {
                                     let cards = dao.findCardsByCharId(id)
                                     dao.cardDict.removeObjects(forKeys: cards.map { String($0.id) })
                                 }
-                            case .udid:
-                                APIClient.shared.udid = item.id
-                            case .userID:
-                                APIClient.shared.userID = item.id
-                            case .viewerID:
-                                APIClient.shared.viewerID = item.id
                             default:
                                 break
                             }
