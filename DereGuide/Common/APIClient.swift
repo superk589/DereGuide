@@ -227,6 +227,18 @@ class APIClient {
         }
     }
     
+    func getProfile(friendID: Int, callback: ((MessagePackValue?) -> Void)?) {
+        let args: [String: Any] = [
+            "friend_id": UInt(friendID),
+            "timezone": "09:00:00",
+            ]
+        
+        // need more test
+        call(base: apis, path: "/profile/get_profile", userInfo: args) { pack in
+            callback?(pack)
+        }
+    }
+    
     func resetSID() {
         sid = nil
     }

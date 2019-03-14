@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import KeyboardLayoutGuide
 
 class DMComposingStepOneController: BaseViewController {
     
@@ -71,7 +72,12 @@ class DMComposingStepOneController: BaseViewController {
         confirmButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10).priority(990)
+            } else {
+                make.bottom.equalTo(-10).priority(990)
+            }
+            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-10)
         }
         confirmButton.backgroundColor = .dance
         
@@ -79,42 +85,6 @@ class DMComposingStepOneController: BaseViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc func avoidKeyboard(_ notification: Notification) {
-        guard
-            // 结束位置
-            let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            
-            // 开始位置
-            // let beginFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
-            
-            // 持续时间
-            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
-            
-            else {
-                return
-        }
-        
-        // 时间曲线函数
-        let curve = UIView.AnimationOptions.init(rawValue: (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? UIView.AnimationOptions.curveEaseOut.rawValue)
-        lastKeyboardFrame = endFrame
-        lastCurve = curve
-        lastDuration = duration.doubleValue
-        let frame = view.convert(endFrame, from: nil)
-        let intersection = frame.intersection(view.frame)
-        UIView.animate(withDuration: duration.doubleValue, delay: 0, options: [curve], animations: {
-            self.confirmButton.transform = CGAffineTransform(translationX: 0, y: -intersection.height )
-        }, completion: nil)
-        
-        view.setNeedsLayout()
     }
     
     private var lastKeyboardFrame: CGRect?
@@ -139,27 +109,40 @@ class DMComposingStepOneController: BaseViewController {
     }
     
     @objc func confirmAction() {
-        guard input.check(pattern: "^[0-9]{9}$") else {
+        guard let text = input.text, let friendID = Int(text), input.check(pattern: "^[0-9]{9}$") else {
             UIAlertController.showHintMessage(NSLocalizedString("您输入的游戏ID不合法", comment: ""), in: self)
             return
         }
         confirmButton.setLoading(true)
-        BaseRequest.default.getWith(urlString: "https://deresute.me/\(input.text!)/json") { [weak self] (data, response, error) in
+        APIClient.shared.getProfile(friendID: friendID) { [weak self] (msg) in
             DispatchQueue.main.async {
                 self?.confirmButton.setLoading(false)
-                if error != nil {
-                    UIAlertController.showHintMessage(NSLocalizedString("未能获取到正确的数据，请稍后再试", comment: ""), in: self)
-                } else if response?.statusCode != 200 {
-                    UIAlertController.showHintMessage(NSLocalizedString("您输入的游戏ID不存在", comment: ""), in: self)
-                } else {
-                    let json = JSON(data!)
-                    let profile = DMProfile(fromJson: json)
+                if let msg = msg {
+                    let profile = GameProfile(from: msg)
                     let vc = DMComposingStepTwoController()
-                    vc.setup(dmProfile: profile)
+                    vc.setup(gameProfile: profile)
                     self?.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    UIAlertController.showHintMessage(NSLocalizedString("未能获取到正确的数据，请稍后再试", comment: ""), in: self)
                 }
             }
         }
+//        BaseRequest.default.getWith(urlString: "https://deresute.me/\(input.text!)/json") { [weak self] (data, response, error) in
+//            DispatchQueue.main.async {
+//                self?.confirmButton.setLoading(false)
+//                if error != nil {
+//                    UIAlertController.showHintMessage(NSLocalizedString("未能获取到正确的数据，请稍后再试", comment: ""), in: self)
+//                } else if response?.statusCode != 200 {
+//                    UIAlertController.showHintMessage(NSLocalizedString("您输入的游戏ID不存在", comment: ""), in: self)
+//                } else {
+//                    let json = JSON(data!)
+//                    let profile = DMProfile(fromJson: json)
+//                    let vc = DMComposingStepTwoController()
+//                    vc.setup(dmProfile: profile)
+//                    self?.navigationController?.pushViewController(vc, animated: true)
+//                }
+//            }
+//        }
     }
 }
 

@@ -86,6 +86,10 @@ class DMComposingStepTwoController: BaseTableViewController {
         profile = Profile.findOrCreate(in: context, dmProfile: dmProfile)
     }
     
+    func setup(gameProfile: GameProfile) {
+        profile = Profile.findOrCreate(in: context, gameProfile: gameProfile)
+    }
+    
     var tip2: EasyTipView?
     var maskView: UIView?
     

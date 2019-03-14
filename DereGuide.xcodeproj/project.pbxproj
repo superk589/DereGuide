@@ -240,6 +240,7 @@
 		1285F4A21F32CB03002A81F7 /* MyCenterGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1285F4A11F32CB03002A81F7 /* MyCenterGroupView.swift */; };
 		1285F4A41F32CB55002A81F7 /* MyCenterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1285F4A31F32CB55002A81F7 /* MyCenterItemView.swift */; };
 		1285F4A61F32CC1E002A81F7 /* MyCenterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1285F4A51F32CC1E002A81F7 /* MyCenterCardView.swift */; };
+		1287B97B223A47070044F4E4 /* GameProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1287B97A223A47070044F4E4 /* GameProfile.swift */; };
 		128E82201E2E561700B2E626 /* GachaDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E821F1E2E561700B2E626 /* GachaDetailController.swift */; };
 		128E94931EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */; };
 		1291820A1F5853E800F91C0B /* DMProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129182091F5853E800F91C0B /* DMProfile.swift */; };
@@ -709,6 +710,7 @@
 		1285F4A11F32CB03002A81F7 /* MyCenterGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCenterGroupView.swift; sourceTree = "<group>"; };
 		1285F4A31F32CB55002A81F7 /* MyCenterItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCenterItemView.swift; sourceTree = "<group>"; };
 		1285F4A51F32CC1E002A81F7 /* MyCenterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCenterCardView.swift; sourceTree = "<group>"; };
+		1287B97A223A47070044F4E4 /* GameProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProfile.swift; sourceTree = "<group>"; };
 		128E821F1E2E561700B2E626 /* GachaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GachaDetailController.swift; sourceTree = "<group>"; };
 		128E94921EFA4E4C00E09433 /* UnitAdvanceCalculationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitAdvanceCalculationResultView.swift; sourceTree = "<group>"; };
 		128EC5FE2104AD6B00EBED33 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1664,6 +1666,7 @@
 				1291820E1F5854FE00F91C0B /* DMLeaderCard.swift */,
 				129182101F58552800F91C0B /* DMPotential.swift */,
 				129182121F58554000F91C0B /* DMCleared.swift */,
+				1287B97A223A47070044F4E4 /* GameProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2343,6 +2346,7 @@
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageViewer/ImageViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/Keyboard+LayoutGuide/KeyboardLayoutGuide.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MessagePack.swift/MessagePack.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
@@ -2368,6 +2372,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardLayoutGuide.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagePack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
@@ -2631,6 +2636,7 @@
 				122EECEB1D609CAF008ADE08 /* CGSSIconView.swift in Sources */,
 				12FC8B631EDE90F0003CF3C3 /* TextFieldOption.swift in Sources */,
 				125849B11EE6A26C006AF479 /* BaseModelCollectionViewController.swift in Sources */,
+				1287B97B223A47070044F4E4 /* GameProfile.swift in Sources */,
 				12ACD5AA1D9128250054D9CD /* LicenseViewController.swift in Sources */,
 				124BA50B1E913E78002E48FE /* EventTrendCell.swift in Sources */,
 				12C390191F3413340077FB38 /* CenterWantedItemView.swift in Sources */,
@@ -3101,7 +3107,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3138,7 +3144,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3226,7 +3232,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3249,7 +3255,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 88;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
