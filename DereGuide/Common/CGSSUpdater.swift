@@ -136,6 +136,17 @@ open class CGSSUpdater: NSObject {
         configSession()
     }
     
+    func loadCheck(callback: @escaping CGSSFinishedClosure) {
+        APIClient.shared.check { (msg) in
+            if let requiredResVersion = msg?.dictionaryValue?["data_headers"]?.dictionaryValue?["required_res_ver"]?.stringValue {
+                CGSSVersionManager.default.newestTruthVersion = requiredResVersion
+                callback(true, nil)
+            } else {
+                callback(true, nil)
+            }
+        }
+    }
+    
     func checkApiInfo(callback: @escaping CGSSFinishedClosure) {
         let url = URL.cnDatabase.appendingPathComponent("/api/v1/info")
         let task = checkSession.dataTask(with: url) { (data, response, error) in
@@ -173,7 +184,8 @@ open class CGSSUpdater: NSObject {
     }
 
     func checkManifest(callback: @escaping CGSSFinishedClosure) {
-        if let truthVersion = CGSSVersionManager.default.apiInfo?.truthVersion, truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
+        let truthVersion = CGSSVersionManager.default.newestTruthVersion
+        if truthVersion > CGSSVersionManager.default.currentManifestTruthVersion || !CGSSGameResource.shared.checkManifestExistence() {
             let url = URL.manifest(truthVersion: truthVersion)
             var request = URLRequest(url: url)
             request.setUnityVersion()
@@ -324,6 +336,14 @@ open class CGSSUpdater: NSObject {
             firstCheckGroup.leave()
         }
         
+        firstCheckGroup.enter()
+        checkAppVersion { (finished, error) in
+            if let e = error {
+                errors.append(e)
+            }
+            firstCheckGroup.leave()
+        }
+        
         firstCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
             if errors.count > 0 {
                 self?.isChecking = false
@@ -331,7 +351,7 @@ open class CGSSUpdater: NSObject {
             } else {
                 
                 secondCheckGroup.enter()
-                self?.checkAppVersion { (finished, error) in
+                self?.loadCheck { (finished, error) in
                     if let e = error {
                         errors.append(e)
                     }

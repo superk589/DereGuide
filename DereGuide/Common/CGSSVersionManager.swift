@@ -27,6 +27,15 @@ class CGSSVersionManager {
         }
     }
     
+    var newestTruthVersion: String {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "newest_truth_version")
+        }
+        get {
+            return UserDefaults.standard.object(forKey: "newest_truth_version") as? String ?? "0"
+        }
+    }
+    
     var dataVersion: Version {
         set {
             UserDefaults.standard.set(newValue.description, forKey: "data_version")
@@ -66,14 +75,10 @@ class CGSSVersionManager {
     }
     
     func setMasterTruthVersionToNewest() {
-        if let info = apiInfo {
-            currentMasterTruthVersion = info.truthVersion
-        }
+        currentMasterTruthVersion = newestTruthVersion
     }
     
     func setManifestTruthVersionToNewest() {
-        if let info = apiInfo {
-            currentManifestTruthVersion = info.truthVersion
-        }
+        currentManifestTruthVersion = newestTruthVersion
     }
 }

@@ -124,7 +124,7 @@ class APIClient {
             "IP-ADDRESS": "192.168.0.101",
             "Accept-Language": "zh-cn",
             "APP-VER": CGSSVersionManager.default.gameVersion?.description ?? "4.6.2",
-            "RES-VER": CGSSVersionManager.default.apiInfo?.truthVersion ?? "10051400",
+            "RES-VER": CGSSVersionManager.default.newestTruthVersion,
             "USER-ID": lolfuscate(userID),
             "Accept": "*/*",
             "Content-Type": "application/x-www-form-urlencoded",
@@ -171,7 +171,7 @@ class APIClient {
         task.resume()
     }
     
-    func versionCheck() {
+    func check(callback: ((MessagePackValue?) -> Void)?) {
         let args: [String: Any] = [
             "campaign_data": "",
             "campaign_user": Int(120692),
@@ -179,7 +179,9 @@ class APIClient {
             "app_type": UInt(0),
             "timezone": "09:00:00"
         ]
-        call(path: "/load/check", userInfo: args, callback: nil)
+        call(path: "/load/check", userInfo: args) {
+            callback?($0)
+        }
     }
     
     func gachaRates(gachaID: Int, callback: ((MessagePackValue?) -> Void)?) {
