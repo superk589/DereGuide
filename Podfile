@@ -21,7 +21,6 @@ target 'DereGuide' do
   pod 'Eureka'
   pod 'AcknowList'
   pod 'CryptoSwift'
-  pod 'Keyboard+LayoutGuide'
 end
 target 'NotificationContent' do
   pod 'SDWebImage'

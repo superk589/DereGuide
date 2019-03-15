@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import KeyboardLayoutGuide
 
 class DMComposingStepOneController: BaseViewController {
     
@@ -72,12 +71,7 @@ class DMComposingStepOneController: BaseViewController {
         confirmButton.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            if #available(iOS 11.0, *) {
-                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10).priority(990)
-            } else {
-                make.bottom.equalTo(-10).priority(990)
-            }
-            make.bottom.lessThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-10)
+            make.bottom.equalTo(-10)
         }
         confirmButton.backgroundColor = .dance
         
@@ -85,6 +79,42 @@ class DMComposingStepOneController: BaseViewController {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(avoidKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func avoidKeyboard(_ notification: Notification) {
+        guard
+            // 结束位置
+            let endFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            
+            // 开始位置
+            // let beginFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+            
+            // 持续时间
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
+            
+            else {
+                return
+        }
+        
+        // 时间曲线函数
+        let curve = UIView.AnimationOptions.init(rawValue: (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? UIView.AnimationOptions.curveEaseOut.rawValue)
+        lastKeyboardFrame = endFrame
+        lastCurve = curve
+        lastDuration = duration.doubleValue
+        let frame = view.convert(endFrame, from: nil)
+        let intersection = frame.intersection(view.frame)
+        UIView.animate(withDuration: duration.doubleValue, delay: 0, options: [curve], animations: {
+            self.confirmButton.transform = CGAffineTransform(translationX: 0, y: -intersection.height )
+        }, completion: nil)
+        
+        view.setNeedsLayout()
     }
     
     private var lastKeyboardFrame: CGRect?
