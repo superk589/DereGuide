@@ -337,11 +337,16 @@ open class CGSSUpdater: NSObject {
         }
         
         firstCheckGroup.enter()
-        checkAppVersion { (finished, error) in
+        checkAppVersion { [weak self] (finished, error) in
             if let e = error {
                 errors.append(e)
             }
-            firstCheckGroup.leave()
+            self?.loadCheck { (finished, error) in
+                if let e = error {
+                    errors.append(e)
+                }
+                firstCheckGroup.leave()
+            }
         }
         
         firstCheckGroup.notify(queue: DispatchQueue.main) { [weak self] in
@@ -349,15 +354,6 @@ open class CGSSUpdater: NSObject {
                 self?.isChecking = false
                 complete(itemsNeedToUpdate, errors)
             } else {
-                
-                secondCheckGroup.enter()
-                self?.loadCheck { (finished, error) in
-                    if let e = error {
-                        errors.append(e)
-                    }
-                    secondCheckGroup.leave()
-                }
-                
                 if dataTypes.contains(.beatmap) || dataTypes.contains(.master) {
                     secondCheckGroup.enter()
                     self?.checkManifest(callback: { (finished, error) in

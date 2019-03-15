@@ -11,6 +11,12 @@ import MessagePack
 import RijndaelSwift
 import CryptoSwift
 
+enum APIClientError: Error {
+    case newResVersion
+    case newAppVersion
+    case accountBanned
+}
+
 class APIClient {
     
     static let shared = APIClient()
