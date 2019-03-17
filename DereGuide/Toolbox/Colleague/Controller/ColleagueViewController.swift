@@ -92,9 +92,10 @@ class ColleagueViewController: BaseTableViewController {
                     let moreProfiles = remoteProfiles.map { Profile.insert(remoteRecord: $0, into: self.childContext) }
                     self.profiles.append(contentsOf: moreProfiles)
                     self.cursor = cursor
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: moreProfiles.enumerated().map { IndexPath.init(row: $0.offset + self.profiles.count - moreProfiles.count, section: 0) }, with: .automatic)
-                    self.tableView.endUpdates()
+                    self.tableView.reloadData()
+//                    self.tableView.beginUpdates()
+//                    self.tableView.insertRows(at: moreProfiles.enumerated().map { IndexPath.init(row: $0.offset + self.profiles.count - moreProfiles.count, section: 0) }, with: .automatic)
+//                    self.tableView.endUpdates()
                 }
                 completion()
             }
