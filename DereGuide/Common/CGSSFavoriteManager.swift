@@ -46,7 +46,7 @@ class CGSSFavoriteManager {
     }
     
     func remove(_ card: CGSSCard) {
-        if let index = favoriteCards.index(of: card.id!) {
+        if let index = favoriteCards.firstIndex(of: card.id!) {
             self.favoriteCards.remove(at: index)
         }
     }
@@ -60,7 +60,7 @@ class CGSSFavoriteManager {
     }
     
     func remove(_ char: CGSSChar) {
-        if let index = favoriteChars.index(of: char.charaId!) {
+        if let index = favoriteChars.firstIndex(of: char.charaId!) {
             self.favoriteChars.remove(at: index)
         }
     }

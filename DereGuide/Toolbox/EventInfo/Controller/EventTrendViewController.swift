@@ -42,7 +42,7 @@ class EventTrendViewController: BaseTableViewController, BannerAnimatorProvider,
                     let now = Date()
                     for trend in trends {
                         if trend.startDate.toDate() <= now && trend.endDate.toDate() > now {
-                            let index = trends.index(of: trend)!
+                            let index = trends.firstIndex(of: trend)!
                             self.tableView.selectRow(at: IndexPath.init(row: index, section: 0), animated: true, scrollPosition: .top)
                         }
                     }

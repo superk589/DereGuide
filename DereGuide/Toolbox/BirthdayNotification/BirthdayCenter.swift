@@ -102,8 +102,8 @@ class BirthdayCenter {
                         
                         let url = URL.images.appendingPathComponent("/icon_char/\(char.charaId!).png")
                 
-                        if let key = SDWebImageManager.shared().cacheKey(for: url) {
-                            if let path = SDImageCache.shared().defaultCachePath(forKey: key) {
+                        if let key = SDWebImageManager.shared.cacheKey(for: url) {
+                            if let path = SDImageCache.shared.cachePath(forKey: key) {
                                 let imageURL = URL(fileURLWithPath: path)
                                 // by adding into a notification, the attachment will be moved to a new location so you need to copy it first
                                 let fileManager = FileManager.default
@@ -139,7 +139,7 @@ class BirthdayCenter {
                         let body = NSLocalizedString("今天是%@的生日(%d月%d日)", comment: "生日通知正文")
                         localNotification.alertBody = String.init(format: body, char.name!, char.birthMonth!, char.birthDay!)
                         localNotification.category = NotificationCategory.birthday
-                        localNotification.userInfo = ["chara_id": char.charaId]
+                        localNotification.userInfo = ["chara_id": char.charaId!]
                         UIApplication.shared.scheduleLocalNotification(localNotification)
                     }
                     

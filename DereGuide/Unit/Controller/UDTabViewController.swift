@@ -15,7 +15,7 @@ protocol UnitDetailConfigurable: class {
     var parentTabController: UDTabViewController? { set get }
 }
 
-class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource {
+class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource, TMBarDataSource {
     
     private var viewControllers: [UnitDetailConfigurable & UIViewController]
     
@@ -66,24 +66,28 @@ class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         }
     }
     
+    private var items = [TMBarItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let items = [
+        self.items = [
             NSLocalizedString("得分计算", comment: ""),
             NSLocalizedString("队伍信息", comment: "")
-        ].map { Item(title: $0) }
+        ].map { TMBarItem(title: $0) }
         
-        bar.items = items
         dataSource = self
-        bar.location = .bottom
-        bar.appearance = TabmanBar.Appearance({ (appearance) in
-            appearance.indicator.preferredStyle = .clear
-            appearance.layout.extendBackgroundEdgeInsets = true
-            appearance.state.color = .lightGray
-            appearance.state.selectedColor = .parade
-            appearance.layout.itemDistribution = .centered
-        })
+        
+        let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMBarIndicator.None>()
+        let systemBar = bar.systemBar()
+        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        bar.layout.transitionStyle = .progressive
+        addBar(systemBar, dataSource: self, at: .bottom)
+        bar.buttons.customize { (button) in
+            button.selectedTintColor = .parade
+            button.tintColor = .lightGray
+        }
+        systemBar.backgroundStyle = .blur(style: .extraLight)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,4 +113,7 @@ class UDTabViewController: TabmanViewController, PageboyViewControllerDataSource
         return .at(index: 0)
     }
     
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return items[index]
+    }
 }

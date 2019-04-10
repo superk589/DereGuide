@@ -191,7 +191,7 @@ class MemberGroupView: UIView {
     
     @objc func handleTapGesture(_ tap: UITapGestureRecognizer) {
         if let view = tap.view as? MemberEditableItemView {
-            if let index = stackView.arrangedSubviews.index(of: view) {
+            if let index = stackView.arrangedSubviews.firstIndex(of: view) {
                 currentIndex = index
             }
         }
@@ -200,7 +200,7 @@ class MemberGroupView: UIView {
     @objc func handleLongPressGesture(_ longPress: UILongPressGestureRecognizer) {
         if longPress.state == .began {
             guard let view = longPress.view as? MemberEditableItemView else { return }
-            if let index = stackView.arrangedSubviews.index(of: view) {
+            if let index = stackView.arrangedSubviews.firstIndex(of: view) {
                 currentIndex = index
             }
             delegate?.memberGroupView(self, didLongPressAt: view)

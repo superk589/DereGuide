@@ -243,14 +243,14 @@ class BeatmapViewController: UIViewController {
     }
     
     @objc private func play() {
-        if let index = toolbarItems?.index(of: playItem) {
+        if let index = toolbarItems?.firstIndex(of: playItem) {
             toolbarItems?[index] = pauseItem
         }
         startAutoScrolling()
     }
     
     @objc private func pause() {
-        if let index = toolbarItems?.index(of: pauseItem) {
+        if let index = toolbarItems?.firstIndex(of: pauseItem) {
             toolbarItems?[index] = playItem
         }
         endAutoScrolling()

@@ -109,7 +109,7 @@ class UnitAdvanceCalculationCell: UITableViewCell {
         variableNames = data.variableDescriptions
         for view in stackView.arrangedSubviews {
             if let view = view as? UnitAdvanceCalculationCellVariableView,
-                let index = stackView.arrangedSubviews.index(of: view),
+                let index = stackView.arrangedSubviews.firstIndex(of: view),
                 let variables = data.variables {
                 view.textField.text = variables[index]
             }

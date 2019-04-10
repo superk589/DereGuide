@@ -18,8 +18,8 @@ class CGSSCacheManager {
     }
     
     func wipeImage() {
-        SDImageCache.shared().clearDisk()
-        SDImageCache.shared().clearMemory()
+        SDImageCache.shared.clearDisk()
+        SDImageCache.shared.clearMemory()
         if let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, .userDomainMask, true).first {
             let subPath = cachePath + "/default"
             if FileManager.default.fileExists(atPath: subPath) {

@@ -114,14 +114,14 @@ class LiveSimulatorModeSelectionViewController: UITableViewController {
     private func prepareSections() {
         sections.removeAll()
         
-        sections.append(Section(title: NSLocalizedString("表格类型", comment: ""), items: DashboardType.all.map { $0.description }, rawValues: DashboardType.all.map { $0.rawValue }, selectedIndex: DashboardType.all.index(of: setting.dashboardType) ?? 0, footer: nil))
+        sections.append(Section(title: NSLocalizedString("表格类型", comment: ""), items: DashboardType.all.map { $0.description }, rawValues: DashboardType.all.map { $0.rawValue }, selectedIndex: DashboardType.all.firstIndex(of: setting.dashboardType) ?? 0, footer: nil))
         
         let text = NSLocalizedString("* 全P模式中所有Note都为Perfect\\n* 挂机模式中除非技能增强和SSR强判技能同时存在，所有Note都将丢失\\n* 如果您在高级选项中设置了手动打前 x 秒或前 x combo，则指定范围的Note视为全P", comment: "").replacingOccurrences(of: "\\n", with: "\n")
         
-        sections.append(Section(title: NSLocalizedString("动作模式", comment: ""), items: ActionMode.all.map { $0.description }, rawValues: ActionMode.all.map { $0.rawValue }, selectedIndex: ActionMode.all.index(of: setting.actionMode) ?? 0, footer: text))
+        sections.append(Section(title: NSLocalizedString("动作模式", comment: ""), items: ActionMode.all.map { $0.description }, rawValues: ActionMode.all.map { $0.rawValue }, selectedIndex: ActionMode.all.firstIndex(of: setting.actionMode) ?? 0, footer: text))
         
         let text2 = NSLocalizedString("* 随机模式中技能按照触发率随机触发\\n* 极限1模式中所有Note取判定区间内的最大得分而且技能必定触发\\n* 极限2模式中技能必定触发\\n* 悲观模式中技能触发几率低于100%的技能必定不触发", comment: "").replacingOccurrences(of: "\\n", with: "\n")
-        sections.append(Section(title: NSLocalizedString("触发模式", comment: ""), items: ProcMode.all.map { $0.description }, rawValues: ProcMode.all.map { $0.rawValue }, selectedIndex: ProcMode.all.index(of: setting.procMode) ?? 2, footer: text2))
+        sections.append(Section(title: NSLocalizedString("触发模式", comment: ""), items: ProcMode.all.map { $0.description }, rawValues: ProcMode.all.map { $0.rawValue }, selectedIndex: ProcMode.all.firstIndex(of: setting.procMode) ?? 2, footer: text2))
     }
     
     override func viewDidLoad() {

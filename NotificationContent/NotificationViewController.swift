@@ -40,7 +40,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         if let spriteImageRef = notification.request.content.userInfo["cardSpriteImageRef"] as? String {
-            imageView.setImage(with: URL.init(string: spriteImageRef)!, options: .progressiveDownload)
+            imageView.setImage(with: URL.init(string: spriteImageRef)!, options: .progressiveLoad)
         }
         
     }

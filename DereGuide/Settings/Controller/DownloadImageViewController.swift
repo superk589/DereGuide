@@ -156,8 +156,8 @@ class DownloadImageViewController: UITableViewController {
             for card in cards {
                 // 卡片大图
                 if card.hasSpread! {
-                    if let url = URL(string: card.spreadImageRef!) {
-                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                    if let url = URL(string: card.spreadImageRef!), let key = SDWebImageManager.shared.cacheKey(for: url) {
+                        SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                             if isInCache {
                                 self.spreadURLs.inCache.append(url)
                             } else {
@@ -169,17 +169,19 @@ class DownloadImageViewController: UITableViewController {
                 
                 // 卡头像图
                 let url = URL.images.appendingPathComponent("/icon_card/\(card.id!).png")
-                SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                    if isInCache {
-                        self.cardIconURLs.inCache.append(url)
-                    } else {
-                        self.cardIconURLs.needToDownload.append(url)
-                    }
-                })
+                if let key = SDWebImageManager.shared.cacheKey(for: url) {
+                    SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
+                        if isInCache {
+                            self.cardIconURLs.inCache.append(url)
+                        } else {
+                            self.cardIconURLs.needToDownload.append(url)
+                        }
+                    })
+                }
                 
                 // 卡签名图
-                if let url = card.signImageURL {
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                if let url = card.signImageURL, let key = SDWebImageManager.shared.cacheKey(for: url) {
+                    SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                         if isInCache {
                             self.cardSignURLs.inCache.append(url)
                         } else {
@@ -189,8 +191,8 @@ class DownloadImageViewController: UITableViewController {
                 }
                 
                 // 卡片图
-                if let url = URL(string: card.cardImageRef) {
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                if let url = URL(string: card.cardImageRef), let key = SDWebImageManager.shared.cacheKey(for: url) {
+                    SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                         if isInCache {
                             self.cardImageURLs.inCache.append(url)
                         } else {
@@ -200,8 +202,8 @@ class DownloadImageViewController: UITableViewController {
                 }
 
                 // sprite 图
-                if let url = card.spriteImageURL {
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                if let url = card.spriteImageURL, let key = SDWebImageManager.shared.cacheKey(for: url) {
+                    SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                         if isInCache {
                             self.cardSpriteURLs.inCache.append(url)
                         } else {
@@ -214,57 +216,59 @@ class DownloadImageViewController: UITableViewController {
             for char in chars {
                 // 角色头像图
                 let url = URL.images.appendingPathComponent("/icon_char/\(char.charaId!).png")
-                SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                    if isInCache {
-                        self.charIconURLs.inCache.append(url)
-                    } else {
-                        self.charIconURLs.needToDownload.append(url)
-                    }
-                })
+                if let key = SDWebImageManager.shared.cacheKey(for: url) {
+                    SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
+                        if isInCache {
+                            self.charIconURLs.inCache.append(url)
+                        } else {
+                            self.charIconURLs.needToDownload.append(url)
+                        }
+                    })
+                }
             }
             
             // 所有歌曲封面图
             CGSSGameResource.shared.master.getLives(callback: { (lives) in
                 for live in lives {
                     let url = live.jacketURL
-                    SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
-                        if isInCache {
-                            self.jacketURLs.inCache.append(url)
-                        } else {
-                            self.jacketURLs.needToDownload.append(url)
-                        }
-                    })
+                    if let key = SDWebImageManager.shared.cacheKey(for: url) {
+                        SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
+                            if isInCache {
+                                self.jacketURLs.inCache.append(url)
+                            } else {
+                                self.jacketURLs.needToDownload.append(url)
+                            }
+                        })
+                    }
                 }
             })
             
             
             CGSSGameResource.shared.master.getEvents(callback: { (events) in
                 for event in events {
-                    if let url = event.detailBannerURL {
-                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                    if let url = event.detailBannerURL, let key = SDWebImageManager.shared.cacheKey(for: url) {
+                        SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                             if isInCache {
                                 self.eventURLs.inCache.append(url)
                             } else {
                                 self.eventURLs.needToDownload.append(url)
                             }
                         })
-                        
                     }
                 }
             })
             
             CGSSGameResource.shared.master.getValidGacha(callback: { (pools) in
                 for gachaPool in pools {
-                    if let url = gachaPool.detailBannerURL, ![30001, 30006].contains(gachaPool.id) {
+                    if let url = gachaPool.detailBannerURL, ![30001, 30006].contains(gachaPool.id), let key = SDWebImageManager.shared.cacheKey(for: url) {
                         // 温泉旅行和初始卡池的图片目前缺失, 故不加入待下载列表
-                        SDWebImageManager.shared().cachedImageExists(for: url, completion: { (isInCache) in
+                        SDImageCache.shared.diskImageExists(withKey: key, completion: { (isInCache) in
                             if isInCache {
                                 self.gachaURLs.inCache.append(url)
                             } else {
                                 self.gachaURLs.needToDownload.append(url)
                             }
                         })
-                        
                     }
                 }
             })
@@ -293,7 +297,7 @@ class DownloadImageViewController: UITableViewController {
         }
         CGSSUpdatingHUDManager.shared.show()
         CGSSUpdatingHUDManager.shared.cancelAction = { [weak self] in
-            SDWebImagePrefetcher.shared().cancelPrefetching()
+            SDWebImagePrefetcher.shared.cancelPrefetching()
             CGSSUpdater.default.isUpdating = false
             self?.calculate()
         }

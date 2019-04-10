@@ -551,8 +551,8 @@ open class CGSSUpdater: NSObject {
     func updateImages(urls: [URL], progress: @escaping CGSSProgressClosure, complete: @escaping CGSSProgressClosure) {
         
         isUpdating = true
-        SDWebImagePrefetcher.shared().prefetcherQueue = DispatchQueue.global(qos: .userInitiated)
-        SDWebImagePrefetcher.shared().prefetchURLs(urls, progress: { (a, b) in
+        SDWebImagePrefetcher.shared.delegateQueue = DispatchQueue.global(qos: .userInitiated)
+        SDWebImagePrefetcher.shared.prefetchURLs(urls, progress: { (a, b) in
             progress(Int(a), Int(b))
         }, completed: { [weak self] (a, b) in
             complete(Int(a - b), Int(a))

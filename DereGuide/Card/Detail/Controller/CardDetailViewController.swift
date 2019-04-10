@@ -26,7 +26,7 @@ class CardDetailViewController: BaseTableViewController {
                 completion(nil)
                 return
             }
-            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
+            SDWebImageManager.shared.loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
                 completion(image)
             })
         }

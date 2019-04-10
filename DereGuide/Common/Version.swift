@@ -9,7 +9,7 @@
 import Foundation
 
 /// A struct representing a semver version.
-public struct Version {
+public struct Version: Hashable {
     
     /// The major version.
     public let major: Int
@@ -40,30 +40,6 @@ public struct Version {
         self.patch = patch
         self.prereleaseIdentifiers = prereleaseIdentifiers
         self.buildMetadataIdentifiers = buildMetadataIdentifiers
-    }
-}
-
-extension Version: Hashable {
-    
-    static public func == (lhs: Version, rhs: Version) -> Bool {
-        return lhs.major == rhs.major &&
-            lhs.minor == rhs.minor &&
-            lhs.patch == rhs.patch &&
-            lhs.prereleaseIdentifiers == rhs.prereleaseIdentifiers &&
-            lhs.buildMetadataIdentifiers == rhs.buildMetadataIdentifiers
-    }
-    
-    public var hashValue: Int {
-        // FIXME: We need Swift hashing utilities; this is based on CityHash
-        // inspired code inside the Swift stdlib.
-        let mul: UInt64 = 0x9ddfea08eb382d69
-        var result: UInt64 = 0
-        result = (result &* mul) ^ UInt64(bitPattern: Int64(major.hashValue))
-        result = (result &* mul) ^ UInt64(bitPattern: Int64(minor.hashValue))
-        result = (result &* mul) ^ UInt64(bitPattern: Int64(patch.hashValue))
-        result = prereleaseIdentifiers.reduce(result, { ($0 &* mul) ^ UInt64(bitPattern: Int64($1.hashValue)) })
-        result = buildMetadataIdentifiers.reduce(result, { ($0 &* mul) ^ UInt64(bitPattern: Int64($1.hashValue)) })
-        return Int(truncatingIfNeeded: result)
     }
 }
 
@@ -132,8 +108,8 @@ public extension Version {
     /// - Parameters:
     ///   - string: The string to parse.
     init?(string: String) {
-        let prereleaseStartIndex = string.index(of: "-")
-        let metadataStartIndex = string.index(of: "+")
+        let prereleaseStartIndex = string.firstIndex(of: "-")
+        let metadataStartIndex = string.firstIndex(of: "+")
         
         let requiredEndIndex = prereleaseStartIndex ?? metadataStartIndex ?? string.endIndex
         let requiredCharacters = string.prefix(upTo: requiredEndIndex)
@@ -191,13 +167,13 @@ extension ClosedRange where Bound == Version {
 
 // Disabled because compiler hits an assertion https://bugs.swift.org/browse/SR-5014
 #if false
-    extension CountableRange where Bound == Version {
-        /// Marked as unavailable because we have custom rules for contains.
-        public func contains(_ element: Version) -> Bool {
-            // Unfortunately, we can't use unavailable here.
-            fatalError("contains(_:) is unavailable, use contains(version:)")
-        }
+extension CountableRange where Bound == Version {
+    /// Marked as unavailable because we have custom rules for contains.
+    public func contains(_ element: Version) -> Bool {
+        // Unfortunately, we can't use unavailable here.
+        fatalError("contains(_:) is unavailable, use contains(version:)")
     }
+}
 #endif
 
 extension Range where Bound == Version {

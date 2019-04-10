@@ -26,7 +26,7 @@ class CDImageViewController: UITableViewController, CDImageTableViewCellDelegate
                 completion(nil)
                 return
             }
-            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
+            SDWebImageManager.shared.loadImage(with: url, options: [], progress: nil, completed: { (image, _, _, _, _, _) in
                 completion(image)
             })
             
@@ -118,7 +118,7 @@ class CDImageViewController: UITableViewController, CDImageTableViewCellDelegate
     }
     
     func cdImageTableViewCell(_ cdImageTableViewCell: CDImageTableViewCell, didSelect imageView: UIImageView, url: URL?) {
-        if let index = urls.index(where: { $0.absoluteString == String(url?.absoluteString.split(separator: "@").first ?? "") }) {
+        if let index = urls.firstIndex(where: { $0.absoluteString == String(url?.absoluteString.split(separator: "@").first ?? "") }) {
             let vc = createGalleryViewController(startIndex: index, image: imageView.image)
             presentImageGallery(vc)
         }
@@ -146,7 +146,7 @@ extension CDImageViewController: GalleryDisplacedViewsDataSource {
         var item: Int?
         for i in 0..<rows.count {
             if case .album(_, let urls) = rows[i].data {
-                if let index = urls.index(where: { $0 == url }) {
+                if let index = urls.firstIndex(where: { $0 == url }) {
                     item = index
                     row = i
                     break

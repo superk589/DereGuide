@@ -202,6 +202,8 @@ extension DonationViewController: SKPaymentTransactionObserver {
                 finishTransaction(transaction)
             case .purchasing:
                 break
+            @unknown default:
+                fatalError()
             }
         }
     }

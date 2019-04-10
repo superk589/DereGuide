@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // 设置SDWebImage过期时间
-        SDImageCache.shared().config.maxCacheAge = 60 * 60 * 24 * 365 * 10 // 10年缓存时间
+        SDImageCache.shared.config.maxDiskAge = -1
         
         // 初始化DrawerController和TabBarController
         let sb = UIStoryboard.init(name: "Main", bundle: nil)

@@ -98,7 +98,7 @@ class EventFilterSortController: BaseFilterSortController {
                 cell.presetIndex(index: sorter.ascending ? 1 : 0)
             case 1:
                 cell.setup(titles: sorterTitles)
-                if let index = sorterMethods.index(of: sorter.property) {
+                if let index = sorterMethods.firstIndex(of: sorter.property) {
                     cell.presetIndex(index: UInt(index))
                 }
             default:

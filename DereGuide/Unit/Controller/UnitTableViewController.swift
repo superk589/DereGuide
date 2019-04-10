@@ -319,6 +319,8 @@ extension UnitTableViewController: NSFetchedResultsControllerDelegate {
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        @unknown default:
+            fatalError()
         }
         
     }

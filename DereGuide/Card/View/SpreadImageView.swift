@@ -42,8 +42,8 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
     
     @objc func handleDoubleTap(_ tap: UITapGestureRecognizer) {
         if let url = self.url {
-            if let key = SDWebImageManager.shared().cacheKey(for: url) {
-                SDImageCache.shared().removeImage(forKey: key, withCompletion: {
+            if let key = SDWebImageManager.shared.cacheKey(for: url) {
+                SDImageCache.shared.removeImage(forKey: key, withCompletion: {
                     self.setImage(with: url)
                 })
             }
@@ -74,7 +74,11 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
         
         self.url = url
         
-        SDWebImageManager.shared().cachedImageExists(for: url) { [weak self] (isInCache) in
+        guard let key = SDWebImageManager.shared.cacheKey(for: url) else {
+            return
+        }
+        
+        SDImageCache.shared.diskImageExists(withKey: key) { [weak self] (isInCache) in
             if !UserDefaults.standard.shouldCacheFullImage && !isInCache && CGSSGlobal.isMobileNet() {
                 return
             } else {
@@ -83,7 +87,7 @@ class SpreadImageView: UIImageView, UIGestureRecognizerDelegate {
                 } else {
                     self?.hideIndicator()
                 }
-                self?.sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveDownload], progress: { (current, total, url) in
+                self?.sd_setImage(with: url, placeholderImage: nil, options: [.retryFailed, .progressiveLoad], progress: { (current, total, url) in
                     DispatchQueue.main.async {
                         self?.progressIndicator.progress = Float(current) / Float(total)
                     }

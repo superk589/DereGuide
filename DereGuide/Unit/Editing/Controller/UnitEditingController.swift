@@ -348,7 +348,7 @@ extension UnitEditingController: MemberGroupViewDelegate {
     }
     
     func memberGroupView(_ memberGroupView: MemberGroupView, didLongPressAt item: MemberEditableItemView) {
-        guard let index = memberGroupView.editableItemViews.index(of: item), let _ = members[index] else {
+        guard let index = memberGroupView.editableItemViews.firstIndex(of: item), let _ = members[index] else {
             return
         }
         let tevc = MemberEditingViewController()

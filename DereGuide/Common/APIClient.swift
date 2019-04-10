@@ -101,10 +101,10 @@ class APIClient {
         }
         
         let plain = pack(MessagePackValue(msgpack))
-        let key = Data(Data(bytes: (0..<32).map { _ in UInt8.max.arc4random }).base64EncodedData()[0..<32])
+        let key = Data(Data((0..<32).map { _ in UInt8.max.arc4random }).base64EncodedData()[0..<32])
         let msgIV = udid.replacingOccurrences(of: "-", with: "").hexadecimal()!
         let aes = try! AES(key: key.bytes, blockMode: CBC(iv: msgIV.bytes))
-        let body = Data(bytes: (try! aes.encrypt(plain.base64EncodedData().bytes) + key.bytes)).base64EncodedData()
+        let body = Data((try! aes.encrypt(plain.base64EncodedData().bytes) + key.bytes)).base64EncodedData()
         let sid = self.sid ?? viewerID + udid
 
         let base = base ?? self.apis
@@ -155,7 +155,7 @@ class APIClient {
                 let cipher = Data(decodedData[0..<decodedData.count - 32])
                 let plain = try! aes.decrypt(cipher.bytes)
                 
-                guard let decodedPlain = Data(base64Encoded: Data(bytes: plain)) else {
+                guard let decodedPlain = Data(base64Encoded: Data(plain)) else {
                     callback?(nil)
                     return
                 }
@@ -258,7 +258,7 @@ extension String {
         let data = self.data(using: String.Encoding.utf8)!
         var digest = [UInt8](repeating: 0, count:Int(CC_SHA1_DIGEST_LENGTH))
         data.withUnsafeBytes {
-            _ = CC_SHA1($0, CC_LONG(data.count), &digest)
+            _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest)
         }
         let hexBytes = digest.map { String(format: "%02hhx", $0) }
         return hexBytes.joined()
@@ -269,19 +269,18 @@ extension Data {
     func sha1() -> Data {
         var bytes: [UInt8] = Array(repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         withUnsafeBytes {
-            _ = CC_SHA1($0, CC_LONG(count), &bytes)
+            _ = CC_SHA1($0.baseAddress, CC_LONG(count), &bytes)
         }
-        return Data(bytes: bytes)
+        return Data(bytes)
     }
     func md5() -> Data {
         var bytes: [UInt8] = Array(repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         withUnsafeBytes {
-            _ = CC_MD5($0, CC_LONG(count), &bytes)
+            _ = CC_MD5($0.baseAddress, CC_LONG(count), &bytes)
         }
-        return Data(bytes: bytes)
+        return Data(bytes)
     }
 }
-
 
 extension Int {
     var arc4random: Int {

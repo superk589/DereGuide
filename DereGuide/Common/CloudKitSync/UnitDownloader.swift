@@ -107,7 +107,7 @@ extension UnitDownloader {
         remoteUnit.insert(into: context.managedObjectContext) { success in
             if success {
                 context.delayedSaveOrRollback()
-                guard let index = self.unitsInFetching.index(of: remoteUnit.id) else {
+                guard let index = self.unitsInFetching.firstIndex(of: remoteUnit.id) else {
                     return
                 }
                 self.unitsInFetching.remove(at: index)

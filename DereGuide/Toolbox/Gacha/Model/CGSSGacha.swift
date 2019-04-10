@@ -291,7 +291,7 @@ class CGSSGacha: NSObject {
             var index: Int?
             repeat {
                 let rand = arc4random_uniform(UInt32(arr.last?.end ?? 0))
-                index = arr.index { $0.start <= Int(rand) && $0.end > Int(rand) }
+                index = arr.firstIndex { $0.start <= Int(rand) && $0.end > Int(rand) }
             } while index == nil
             return arr[index!].reward.cardId
         } else {
