@@ -39,7 +39,7 @@ extension LSResult: DistributionChartRepresentable {
             entries.append(ChartDataEntry.init(x: Double(current), y: k / Double(scores.count)))
             current += step
         }
-        return LineChartDataSet.init(values: entries, label: nil)
+        return LineChartDataSet.init(entries: entries, label: nil)
     }
 }
 

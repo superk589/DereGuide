@@ -96,7 +96,7 @@ class EventChartController: BaseViewController {
         var colors = ChartColorTemplates.vordiplom()
         var dataSets = [LineChartDataSet]()
         for border in rankingList.borders.prefix(5) {
-            let set = LineChartDataSet.init(values: rankingList.chartEntries[border] ?? [], label: String(border))
+            let set = LineChartDataSet.init(entries: rankingList.chartEntries[border] ?? [], label: String(border))
             set.drawCirclesEnabled = false
             let color = colors.removeLast()
             set.setColor(color)

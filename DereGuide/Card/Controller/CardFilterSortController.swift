@@ -39,6 +39,7 @@ class CardFilterSortController: BaseFilterSortController {
         CGSSSkillTypes.lifeSparkle.description,
         CGSSSkillTypes.synergy.description,
         CGSSSkillTypes.coordination.description,
+        CGSSSkillTypes.tuning.description,
         CGSSSkillTypes.unknown.description,
         CGSSSkillTypes.none.description
     ]

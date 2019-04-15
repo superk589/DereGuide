@@ -315,6 +315,9 @@ struct LSGame {
         case .coordination:
             updatePerfectBonus()
             updateComboBonus()
+        case .turning:
+            updatePerfectSupport()
+            updateComboBonus()
         default:
             break
         }
@@ -337,7 +340,7 @@ struct LSGame {
     private(set) var hasPerfectSupport = false
     private(set) var hasStrongPerfectSupport = false
     private mutating func updatePerfectSupport() {
-        hasPerfectSupport = skills.values.contains { $0.type == .perfectLock }
+        hasPerfectSupport = skills.values.contains { $0.type == .perfectLock || $0.type == .turning }
         hasStrongPerfectSupport = skills.values.contains { $0.type == .perfectLock && $0.triggerEvaluations1.contains(.bad) }
     }
     

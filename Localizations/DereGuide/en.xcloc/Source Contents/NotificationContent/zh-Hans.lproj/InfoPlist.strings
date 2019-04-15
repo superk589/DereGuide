@@ -1,4 +1,4 @@
 /* Bundle display name */
 "CFBundleDisplayName" = "NotificationContent";
 /* Bundle name */
-"CFBundleName" = "$(PRODUCT_NAME)";
+"CFBundleName" = "NotificationContent";

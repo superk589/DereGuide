@@ -1107,6 +1107,9 @@
 "获得额外的 %d%% 的COMBO加成" = "獲得額外的 %d%% 的COMBO加成";
 
 /* No comment provided by engineer. */
+"获得额外的 %d%% 的COMBO加成，并使所有GREAT/NICE音符改判为PERFECT" = "獲得額外的 %d%% 的COMBO加成，並使所有GREAT/NICE音符改判為PERFECT";
+
+/* No comment provided by engineer. */
 "获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "獲得額外的 %d%% 的COMBO加成，並使所有PERFECT音符恢復你 %d 點生命";
 
 /* (No Comment) */
@@ -1159,6 +1162,9 @@
 
 /* 队伍详情页面 */
 "请选择歌曲" = "請選擇歌曲";
+
+/* No comment provided by engineer. */
+"调音" = "調音";
 
 /* (No Comment) */
 "谱面" = "谱面";

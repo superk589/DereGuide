@@ -29,11 +29,13 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     
     static let synergy = CGSSSkillTypes(rawValue: 1 << 13)
     static let coordination = CGSSSkillTypes(rawValue: 1 << 14)
-
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 15)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 16)
     
-    static let all = CGSSSkillTypes.init(rawValue: 0b1_1111_1111_1111_1111)
+    static let tuning = CGSSSkillTypes(rawValue: 1 << 15 )
+
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 16)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 17)
+    
+    static let all = CGSSSkillTypes.init(rawValue: 0b11_1111_1111_1111_1111)
     
     init(typeID: Int) {
         switch typeID {
@@ -67,6 +69,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             self = .synergy
         case 27:
             self = .coordination
+        case 31:
+            self = .tuning
         default:
             self = .unknown
         }
@@ -108,6 +112,8 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             return NSLocalizedString("三色协同", comment: "")
         case CGSSSkillTypes.coordination:
             return NSLocalizedString("协调", comment: "")
+        case CGSSSkillTypes.tuning:
+            return NSLocalizedString("调音", comment: "")
         default:
             return NSLocalizedString("未知", comment: "")
         }

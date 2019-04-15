@@ -30,9 +30,10 @@ enum LSSkillType {
     case synergy
     
     case coordination
+    case turning
     
     static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy, .coordination]
-    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy, .coordination]
+    static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy, .coordination, .turning]
     static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal, .synergy]
 
     init?(type: CGSSSkillTypes) {
@@ -67,6 +68,8 @@ enum LSSkillType {
             self = .synergy
         case CGSSSkillTypes.coordination:
             self = .coordination
+        case CGSSSkillTypes.tuning:
+            self = .turning
         default:
             return nil
         }
@@ -187,6 +190,8 @@ extension CGSSSkill {
             return .nice
         case 10:
             return [.bad, .nice]
+        case 31:
+            return [.perfect]
         default:
             return .all
         }
@@ -200,6 +205,8 @@ extension CGSSSkill {
             return [.nice, .bad]
         case 24:
             return .perfect
+        case 31:
+            return [.great, .nice]
         default:
             return .all
         }

@@ -1,5 +1,16 @@
 # ChangeLog
 
+### 1.10
+1. 新增技能类型“调音”。
+
+##### Japanese version
+
+1. 新しい特技「チューニング 」の対応
+
+##### English version
+
+1. Add new skill type "tuning".
+
 ### 1.9.6
 1. 细节优化和 Bug 修复。
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" datatype="plaintext" target-language="en">
+  <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
     </header>
     <body>
       <trans-unit id="5Hs-jz-swe.title">
@@ -91,13 +91,13 @@
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
+  <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+        <source>DereGuide</source>
         <target>DereGuide</target>
         <note>Bundle name</note>
       </trans-unit>
@@ -137,9 +137,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
+  <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
     </header>
     <body>
       <trans-unit id="%@和%@">
@@ -1982,6 +1982,11 @@
         <target>you will gain an extra %d%% combo bonus</target>
         <note>技能描述</note>
       </trans-unit>
+      <trans-unit id="获得额外的 %d%% 的COMBO加成，并使所有GREAT/NICE音符改判为PERFECT">
+        <source>获得额外的 %d%% 的COMBO加成，并使所有GREAT/NICE音符改判为PERFECT</source>
+        <target>you will gain an extra %d%% combo bonus, and Nice/Great notes will become Perfect notes</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命">
         <source>获得额外的 %1$d%% 的COMBO加成，并使所有PERFECT音符恢复你 %2$d 点生命</source>
         <target>you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health</target>
@@ -2071,6 +2076,11 @@
         <source>请选择歌曲</source>
         <target>Select Song</target>
         <note>队伍详情页面</note>
+      </trans-unit>
+      <trans-unit id="调音">
+        <source>调音</source>
+        <target>Tuning</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="谱面">
         <source>谱面</source>
@@ -2306,9 +2316,9 @@
       </trans-unit>
     </body>
   </file>
-  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" datatype="plaintext" target-language="en">
+  <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" target-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName">
@@ -2317,7 +2327,7 @@
         <note>Bundle display name</note>
       </trans-unit>
       <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+        <source>NotificationContent</source>
         <target>DereGuide</target>
         <note>Bundle name</note>
       </trans-unit>

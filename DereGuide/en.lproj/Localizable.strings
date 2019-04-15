@@ -1107,6 +1107,9 @@
 "获得额外的 %d%% 的COMBO加成" = "you will gain an extra %d%% combo bonus";
 
 /* No comment provided by engineer. */
+"获得额外的 %d%% 的COMBO加成，并使所有GREAT/NICE音符改判为PERFECT" = "you will gain an extra %d%% combo bonus, and Nice/Great notes will become Perfect notes";
+
+/* No comment provided by engineer. */
 "获得额外的 %d%% 的COMBO加成，并使所有PERFECT音符恢复你 %d 点生命" = "you will gain an extra %d%% combo bonus, and Perfect notes will restore %d health";
 
 /* (No Comment) */
@@ -1159,6 +1162,9 @@
 
 /* 队伍详情页面 */
 "请选择歌曲" = "Select Song";
+
+/* No comment provided by engineer. */
+"调音" = "Tuning";
 
 /* (No Comment) */
 "谱面" = "Beatmaps";
