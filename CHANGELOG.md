@@ -5,7 +5,7 @@
 
 ##### Japanese version
 
-1. 新しい特技「チューニング 」の対応
+1. 新しい特技「チューニング」の対応
 
 ##### English version
 
