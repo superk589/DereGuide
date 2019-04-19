@@ -268,6 +268,12 @@
 "使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小" = "Perfect notes will receive a %d%% score bonus, but become harder to hit";
 
 /* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%" = "Perfect notes will receive a %1$d%% score bonus, and flick notes a %2$d%% score bonus";
+
+/* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%" = "Perfect notes will receive a %1$d%% score bonus, and hold notes a %2$d%% score bonus";
+
+/* No comment provided by engineer. */
 "使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus";
 
 /* 技能描述 */
@@ -970,6 +976,9 @@
 /* (No Comment) */
 "游戏编号" = "Character ID";
 
+/* No comment provided by engineer. */
+"滑块演技" = "Flick Act";
+
 /* (No Comment) */
 "潜能" = "Potential";
 
@@ -1223,6 +1232,9 @@
 
 /* 技能类型 */
 "锁血" = "Damage Guard";
+
+/* No comment provided by engineer. */
+"长按演技" = "Hold Act";
 
 /* 设置页面 */
 "问题反馈" = "Feedback";

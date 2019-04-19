@@ -18,6 +18,14 @@ class CGSSBeatmapNote {
         static let hold = RangeType.click
     }
     
+    // note 类型
+    enum NoteType {
+        case click
+        case flick
+        case slide
+        case hold
+    }
+    
     var id: Int!
     var sec: Float!
     var type: Int!
@@ -72,4 +80,16 @@ extension CGSSBeatmapNote {
         }
     }
     
+    var noteType: NoteType {
+        switch (status, type) {
+        case (1, _), (2, _):
+            return .flick
+        case (_, 3):
+            return .slide
+        case (_, 2):
+            return .hold
+        default:
+            return .click
+        }
+    }
 }

@@ -30,12 +30,15 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
     static let synergy = CGSSSkillTypes(rawValue: 1 << 13)
     static let coordination = CGSSSkillTypes(rawValue: 1 << 14)
     
-    static let tuning = CGSSSkillTypes(rawValue: 1 << 15 )
-
-    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 16)
-    static let none = CGSSSkillTypes.init(rawValue: 1 << 17)
+    static let longAct = CGSSSkillTypes(rawValue: 1 << 15)
+    static let flickAct = CGSSSkillTypes(rawValue: 1 << 16)
     
-    static let all = CGSSSkillTypes.init(rawValue: 0b11_1111_1111_1111_1111)
+    static let tuning = CGSSSkillTypes(rawValue: 1 << 17)
+
+    static let unknown = CGSSSkillTypes.init(rawValue: 1 << 18)
+    static let none = CGSSSkillTypes.init(rawValue: 1 << 19)
+    
+    static let all = CGSSSkillTypes.init(rawValue: 0b1111_1111_1111_1111_1111)
     
     init(typeID: Int) {
         switch typeID {
@@ -69,6 +72,10 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             self = .synergy
         case 27:
             self = .coordination
+        case 28:
+            self = .longAct
+        case 29:
+            self = .flickAct
         case 31:
             self = .tuning
         default:
@@ -112,6 +119,10 @@ struct CGSSSkillTypes: OptionSet, CustomStringConvertible {
             return NSLocalizedString("三色协同", comment: "")
         case CGSSSkillTypes.coordination:
             return NSLocalizedString("协调", comment: "")
+        case CGSSSkillTypes.longAct:
+            return NSLocalizedString("长按演技", comment: "")
+        case CGSSSkillTypes.flickAct:
+            return NSLocalizedString("滑块演技", comment: "")
         case CGSSSkillTypes.tuning:
             return NSLocalizedString("调音", comment: "")
         default:

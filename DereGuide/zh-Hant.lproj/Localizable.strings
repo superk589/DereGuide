@@ -268,6 +268,12 @@
 "使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小" = "使所有PERFECT音符獲得 %d%% 的分數加成，且使PERFECT判定區間的時間範圍縮小";
 
 /* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%" = "使所有PERFECT音符獲得 %1$d%% 的分數加成，如果音符型別是滑塊則改為提高 %2$d%%";
+
+/* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%" = "使所有PERFECT音符獲得 %1$d%% 的分數加成，如果音符型別是長按則改為提高 %2$d%%";
+
+/* No comment provided by engineer. */
 "使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "使所有PERFECT音符獲得 %1$d%% 的分數加成，並獲得額外的 %2$d%% 的COMBO加成";
 
 /* 技能描述 */
@@ -970,6 +976,9 @@
 /* (No Comment) */
 "游戏编号" = "遊戲編號";
 
+/* No comment provided by engineer. */
+"滑块演技" = "滑塊演技";
+
 /* (No Comment) */
 "潜能" = "潛能";
 
@@ -1223,6 +1232,9 @@
 
 /* 技能类型 */
 "锁血" = "鎖血";
+
+/* No comment provided by engineer. */
+"长按演技" = "長按演技";
 
 /* 设置页面 */
 "问题反馈" = "問題反饋";

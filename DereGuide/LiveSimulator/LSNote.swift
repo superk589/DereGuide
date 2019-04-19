@@ -14,6 +14,7 @@ struct LSNote {
     var baseScore: Double
     var sec: Float
     var rangeType: CGSSBeatmapNote.RangeType
+    var noteType: CGSSBeatmapNote.NoteType
     var beatmapNote: CGSSBeatmapNote
     func lifeLost(in difficulty: CGSSLiveDifficulty, evaluation: LSEvaluationType) -> Int {
         return lifeLoss[evaluation]?[difficulty]?[rangeType] ?? 0

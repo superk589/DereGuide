@@ -30,9 +30,13 @@ enum LSSkillType {
     case synergy
     
     case coordination
+    
+    case longAct
+    case flickAct
+    
     case turning
     
-    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy, .coordination]
+    static let allPerfectBonus: [LSSkillType] = [LSSkillType.perfectBonus, .overload, .deep, .concentration, .synergy, .coordination, .flickAct, .longAct]
     static let allComboBonus: [LSSkillType] = [LSSkillType.allRound, .comboBonus, .deep, .synergy, .coordination, .turning]
     static let allLifeResotre: [LSSkillType] = [LSSkillType.allRound, .heal, .synergy]
 
@@ -70,6 +74,10 @@ enum LSSkillType {
             self = .coordination
         case CGSSSkillTypes.tuning:
             self = .turning
+        case CGSSSkillTypes.longAct:
+            self = .longAct
+        case CGSSSkillTypes.flickAct:
+            self = .flickAct
         default:
             return nil
         }
@@ -143,13 +151,25 @@ extension LSSkill {
 
 extension LSSkill {
     
+    func perfectBonusValue(noteType: CGSSBeatmapNote.NoteType) -> Int {
+        if type == .longAct && noteType == .hold {
+            return value2
+        } else if type == .flickAct && noteType == .flick {
+            return value2
+        } else if LSSkillType.allPerfectBonus.contains(type) {
+            return value
+        } else {
+            return 100
+        }
+    }
+    
     var comboBonusValue: Int {
         if type == .deep || type == .synergy || type == .coordination {
             return value2
         } else if LSSkillType.allComboBonus.contains(type) {
             return value
         } else {
-            return 0
+            return 100
         }
     }
     
@@ -170,7 +190,7 @@ extension CGSSSkill {
     
     var triggerEvaluations1: LSTriggerEvaluations {
         switch skillTypeId {
-        case 1, 14, 15, 17, 21, 22, 23, 26, 27:
+        case 1, 14, 15, 17, 21, 22, 23, 26, 27, 28, 29:
             return .perfect
         case 2, 18:
             return [.perfect, .great]
@@ -203,7 +223,7 @@ extension CGSSSkill {
         switch skillTypeId {
         case 14:
             return [.nice, .bad]
-        case 24:
+        case 24, 28, 29:
             return .perfect
         case 31:
             return [.great, .nice]

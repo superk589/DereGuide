@@ -584,6 +584,16 @@
         <target>Perfect notes will receive a %d%% score bonus, but become harder to hit</target>
         <note/>
       </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是滑块则改为提高 %2$d%%</source>
+        <target>Perfect notes will receive a %1$d%% score bonus, and flick notes a %2$d%% score bonus</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是长按则改为提高 %2$d%%</source>
+        <target>Perfect notes will receive a %1$d%% score bonus, and hold notes a %2$d%% score bonus</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
         <target>Perfect notes will receive a %d%% score bonus, and you will gain an extra %d%% combo bonus</target>
@@ -1756,6 +1766,11 @@
         <target>Character ID</target>
         <note/>
       </trans-unit>
+      <trans-unit id="滑块演技">
+        <source>滑块演技</source>
+        <target>Flick Act</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="潜能">
         <source>潜能</source>
         <target>Potential</target>
@@ -2172,6 +2187,11 @@
         <source>锁血</source>
         <target>Damage Guard</target>
         <note>技能类型</note>
+      </trans-unit>
+      <trans-unit id="长按演技">
+        <source>长按演技</source>
+        <target>Hold Act</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>

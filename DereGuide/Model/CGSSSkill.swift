@@ -37,6 +37,8 @@ fileprivate let skillDescriptions = [
     25: NSLocalizedString("获得额外的COMBO加成，当前生命值越高加成越高", comment: ""),
     26: NSLocalizedString("当Cute、Cool和Passion偶像存在于队伍时，使所有PERFECT音符获得 %1$d%% 的分数加成/恢复你 %3$d 点生命，并获得额外的 %2$d%% 的COMBO加成", comment: ""),
     27: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成", comment: ""),
+    28: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%", comment: ""),
+    29: NSLocalizedString("使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%", comment: ""),
     31: NSLocalizedString("获得额外的 %d%% 的COMBO加成，并使所有GREAT/NICE音符改判为PERFECT", comment: ""),
 ]
 
@@ -50,7 +52,7 @@ extension CGSSSkill {
     
     private var effectValue: Int {
         var effectValue = value!
-        if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24, 26, 27, 31].contains(skillTypeId) {
+        if [1, 2, 3, 4, 14, 15, 21, 22, 23, 24, 26, 27, 28, 29, 31].contains(skillTypeId) {
             effectValue -= 100
         } else if [20].contains(skillTypeId) {
             // there is only one possibility: 20% up for combo bonus and perfect bonus, using fixed value here instead of reading it from database table skill_boost_type. if more possiblities are added to the game, fix here.
@@ -61,7 +63,7 @@ extension CGSSSkill {
     
     private var effectValue2: Int {
         var effectValue2 = value2!
-        if [21, 22, 23, 26, 27].contains(skillTypeId) {
+        if [21, 22, 23, 26, 27, 28, 29].contains(skillTypeId) {
             effectValue2  -= 100
         }
         return effectValue2

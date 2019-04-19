@@ -1,15 +1,17 @@
 # ChangeLog
 
 ### 1.11
-1. 寻找同僚中支持新增的 5 个自由位。
+1. 支持新技能类型“长按演技”和“滑块演技”。
+2. 寻找同僚中支持新增的 5 个自由位。
 
 ##### Japanese version
-
-1. 同僚募集フリー枠を対応
+1. 新しい特技「ロングアクト」と「フリックアクト」の対応
+2. 同僚募集フリー枠の対応
 
 ##### English version
 
-1. In colleague finder, support for the newly added 5 free charas.
+1. Add new skill types "long act" and "flick act".
+2. In colleague finder, support for the newly added 5 free charas.
 
 ### 1.10
 1. 新增技能类型“调音”。

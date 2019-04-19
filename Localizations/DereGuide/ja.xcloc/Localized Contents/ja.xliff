@@ -584,6 +584,16 @@
         <target>PERFECTのスコア %d%% アップ、PERFECT判定される時間が短くなる</target>
         <note/>
       </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是滑块则改为提高 %2$d%%</source>
+        <target>PERFECTのスコア %d%% アップ、フリックアイコンの場合 %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是长按则改为提高 %2$d%%</source>
+        <target>PERFECTのスコア %d%% アップ、ロングアイコンの場合 %d%% アップ</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
         <target>PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ</target>
@@ -1758,6 +1768,11 @@
         <target>ゲーム内部番号</target>
         <note/>
       </trans-unit>
+      <trans-unit id="滑块演技">
+        <source>滑块演技</source>
+        <target>フリックアクト</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="潜能">
         <source>潜能</source>
         <target>ポテンシャル</target>
@@ -2174,6 +2189,11 @@
         <source>锁血</source>
         <target>ダメージガード</target>
         <note>技能类型</note>
+      </trans-unit>
+      <trans-unit id="长按演技">
+        <source>长按演技</source>
+        <target>ロングアクト</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>

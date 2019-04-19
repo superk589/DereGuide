@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastVersion < 20 {
                 CGSSCacheManager.shared.wipeCard()
             }
-            if lastVersion < 21 {
+            if lastVersion < 22 {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.card)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)

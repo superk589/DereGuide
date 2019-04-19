@@ -584,6 +584,16 @@
         <target>使所有PERFECT音符獲得 %d%% 的分數加成，且使PERFECT判定區間的時間範圍縮小</target>
         <note/>
       </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是滑块则改为提高 %2$d%%</source>
+        <target>使所有PERFECT音符獲得 %1$d%% 的分數加成，如果音符型別是滑塊則改為提高 %2$d%%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%">
+        <source>使所有PERFECT音符获得 %1$d%% 的分数加成，如果音符类型是长按则改为提高 %2$d%%</source>
+        <target>使所有PERFECT音符獲得 %1$d%% 的分數加成，如果音符型別是長按則改為提高 %2$d%%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成">
         <source>使所有PERFECT音符获得 %1$d%% 的分数加成，并获得额外的 %2$d%% 的COMBO加成</source>
         <target>使所有PERFECT音符獲得 %1$d%% 的分數加成，並獲得額外的 %2$d%% 的COMBO加成</target>
@@ -1756,6 +1766,11 @@
         <target>遊戲編號</target>
         <note/>
       </trans-unit>
+      <trans-unit id="滑块演技">
+        <source>滑块演技</source>
+        <target>滑塊演技</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="潜能">
         <source>潜能</source>
         <target>潛能</target>
@@ -2172,6 +2187,11 @@
         <source>锁血</source>
         <target>鎖血</target>
         <note>技能类型</note>
+      </trans-unit>
+      <trans-unit id="长按演技">
+        <source>长按演技</source>
+        <target>長按演技</target>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="问题反馈">
         <source>问题反馈</source>

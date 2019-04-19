@@ -132,7 +132,7 @@ class LiveCoordinator {
             
             let comboFactor = getComboFactor(of: i + 1, criticalPoints: criticalPoints)
     
-            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec, rangeType: notes[i].rangeType, beatmapNote: notes[i])
+            let lsNote = LSNote(comboFactor: comboFactor, baseScore: baseScore, sec: notes[i].sec, rangeType: notes[i].rangeType, noteType: notes[i].noteType, beatmapNote: notes[i])
             
             lsNotes.append(lsNote)
         }

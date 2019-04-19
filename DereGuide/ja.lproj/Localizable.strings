@@ -268,6 +268,12 @@
 "使所有PERFECT音符获得 %d%% 的分数加成，且使PERFECT判定区间的时间范围缩小" = "PERFECTのスコア %d%% アップ、PERFECT判定される時間が短くなる";
 
 /* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是滑块则改为提高 %d%%" = "PERFECTのスコア %d%% アップ、フリックアイコンの場合 %d%% アップ";
+
+/* No comment provided by engineer. */
+"使所有PERFECT音符获得 %d%% 的分数加成，如果音符类型是长按则改为提高 %d%%" = "PERFECTのスコア %d%% アップ、ロングアイコンの場合 %d%% アップ";
+
+/* No comment provided by engineer. */
 "使所有PERFECT音符获得 %d%% 的分数加成，并获得额外的 %d%% 的COMBO加成" = "PERFECTのスコア %d%% アップ、COMBOボーナス %d%% アップ";
 
 /* 技能描述 */
@@ -970,6 +976,9 @@
 /* (No Comment) */
 "游戏编号" = "ゲーム内部番号";
 
+/* No comment provided by engineer. */
+"滑块演技" = "フリックアクト";
+
 /* (No Comment) */
 "潜能" = "ポテンシャル";
 
@@ -1223,6 +1232,9 @@
 
 /* 技能类型 */
 "锁血" = "ダメージガード";
+
+/* No comment provided by engineer. */
+"长按演技" = "ロングアクト";
 
 /* 设置页面 */
 "问题反馈" = "フィードバック・お問い合わせ";
