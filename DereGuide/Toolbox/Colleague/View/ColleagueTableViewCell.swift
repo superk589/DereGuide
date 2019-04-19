@@ -132,16 +132,11 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         for (index, center) in profile.myCenters.enumerated() {
             myCenterGroupView.setupWith(cardID: center.0, potential: center.1, at: index, hidesIfNeeded: true)
         }
-        if profile.freeCharaID1 == 0 {
-            freeCardGroupView.isHidden = true
-        } else {
-            freeCardGroupView.isHidden = false
-            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID1), at: 0)
-            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID2), at: 1)
-            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID3), at: 2)
-            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID4), at: 3)
-            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID5), at: 4)
-        }
+        freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID1), at: 0)
+        freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID2), at: 1)
+        freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID3), at: 2)
+        freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID4), at: 3)
+        freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID5), at: 4)
     }
     
 }
