@@ -63,7 +63,7 @@ class MyCenterGroupView: UIView {
             make.left.equalTo(10).priority(900)
             //
             make.bottom.equalToSuperview()
-            make.width.lessThanOrEqualTo(104 * 5 + 30)
+            make.width.lessThanOrEqualTo(96 * 4 + 6 * 3)
             make.centerX.equalToSuperview()
         }
         

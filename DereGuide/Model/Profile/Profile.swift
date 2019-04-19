@@ -61,6 +61,12 @@ class Profile: NSManagedObject {
     
     @NSManaged public var leaderCardID: Int32
     
+    @NSManaged public var freeCharaID1: Int32
+    @NSManaged public var freeCharaID2: Int32
+    @NSManaged public var freeCharaID3: Int32
+    @NSManaged public var freeCharaID4: Int32
+    @NSManaged public var freeCharaID5: Int32
+
     override func awakeFromInsert() {
         super.awakeFromInsert()
         setPrimitiveValue("", forKey: "gameID")
@@ -201,6 +207,12 @@ extension Profile {
         self.guestAllTypeMinLevel = 0
         
         self.leaderCardID = 0
+        
+        self.freeCharaID1 = 0
+        self.freeCharaID2 = 0
+        self.freeCharaID3 = 0
+        self.freeCharaID4 = 0
+        self.freeCharaID5 = 0
     }
 }
 
@@ -275,6 +287,12 @@ extension Profile: RemoteUploadable {
         record["coolSkillPotentialLevel"] = coolSkillPotentialLevel as CKRecordValue
         record["passionSkillPotentialLevel"] = passionSkillPotentialLevel as CKRecordValue
         
+        record["freeCharaID1"] = freeCharaID1 as CKRecordValue
+        record["freeCharaID2"] = freeCharaID2 as CKRecordValue
+        record["freeCharaID3"] = freeCharaID3 as CKRecordValue
+        record["freeCharaID4"] = freeCharaID4 as CKRecordValue
+        record["freeCharaID5"] = freeCharaID5 as CKRecordValue
+
         return record
     }
     
@@ -329,6 +347,12 @@ extension Profile {
         profile.cuteSkillPotentialLevel = Int16(remoteRecord.cuteSkillPotentialLevel)
         profile.coolSkillPotentialLevel = Int16(remoteRecord.coolSkillPotentialLevel)
         profile.allTypeSkillPotentialLevel = Int16(remoteRecord.allTypeSkillPotentialLevel)
+        
+        profile.freeCharaID1 = Int32(remoteRecord.freeCharaID1)
+        profile.freeCharaID2 = Int32(remoteRecord.freeCharaID2)
+        profile.freeCharaID3 = Int32(remoteRecord.freeCharaID3)
+        profile.freeCharaID4 = Int32(remoteRecord.freeCharaID4)
+        profile.freeCharaID5 = Int32(remoteRecord.freeCharaID5)
         
         return profile
         

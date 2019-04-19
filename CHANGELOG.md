@@ -1,5 +1,16 @@
 # ChangeLog
 
+### 1.11
+1. 寻找同僚中支持新增的 5 个自由位。
+
+##### Japanese version
+
+1. 同僚募集フリー枠を対応
+
+##### English version
+
+1. In colleague finder, support for the newly added 5 free charas.
+
 ### 1.10
 1. 新增技能类型“调音”。
 

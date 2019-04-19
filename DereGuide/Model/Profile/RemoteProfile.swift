@@ -55,6 +55,12 @@ struct RemoteProfile: RemoteRecord {
     
     var leaderCardID: Int64
     
+    var freeCharaID1: Int64
+    var freeCharaID2: Int64
+    var freeCharaID3: Int64
+    var freeCharaID4: Int64
+    var freeCharaID5: Int64
+
 }
 
 extension RemoteProfile {
@@ -141,6 +147,12 @@ extension RemoteProfile {
         self.guestAllTypeMinLevel = guestAllTypeMinLevel.int64Value
         self.leaderCardID = leaderCardID.int64Value
         self.isOpen = isOpen.int64Value
+        
+        self.freeCharaID1 = (record["freeCharaID1"] as? NSNumber)?.int64Value ?? 0
+        self.freeCharaID2 = (record["freeCharaID2"] as? NSNumber)?.int64Value ?? 0
+        self.freeCharaID3 = (record["freeCharaID3"] as? NSNumber)?.int64Value ?? 0
+        self.freeCharaID4 = (record["freeCharaID4"] as? NSNumber)?.int64Value ?? 0
+        self.freeCharaID5 = (record["freeCharaID5"] as? NSNumber)?.int64Value ?? 0
     }
     
 }

@@ -1927,6 +1927,11 @@
         <target>自定義計算</target>
         <note/>
       </trans-unit>
+      <trans-unit id="自由位置">
+        <source>自由位置</source>
+        <target>自由位置</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="至少添加一名自己的队长">
         <source>至少添加一名自己的队长</source>
         <target>至少新增一名自己的隊長</target>

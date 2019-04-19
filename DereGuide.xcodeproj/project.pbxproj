@@ -322,6 +322,9 @@
 		12CDC6E71F663ACD004BB7AE /* DereGuide.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6E21F663A41004BB7AE /* DereGuide.xcdatamodeld */; };
 		12CDC6E91F663F0E004BB7AE /* RemoteFavoriteSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6E81F663F0E004BB7AE /* RemoteFavoriteSong.swift */; };
 		12CDC6EB1F663FA4004BB7AE /* FavoriteSongsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CDC6EA1F663FA4004BB7AE /* FavoriteSongsManager.swift */; };
+		12D071B2226962B8001E7CD3 /* FreeCardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D071B1226962B7001E7CD3 /* FreeCardItemView.swift */; };
+		12D071B42269631C001E7CD3 /* FreeCardGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D071B32269631C001E7CD3 /* FreeCardGroupView.swift */; };
+		12D071B62269645F001E7CD3 /* ColleagueMyFreeCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D071B52269645F001E7CD3 /* ColleagueMyFreeCardsCell.swift */; };
 		12D45AB71E2CB5470009986F /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB61E2CB5470009986F /* EventDetailView.swift */; };
 		12D45AB91E2CB5560009986F /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45AB81E2CB5560009986F /* EventDetailController.swift */; };
 		12D45ABD1E2D0C770009986F /* NavigationTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */; };
@@ -801,6 +804,9 @@
 		12CDC6E61F663A41004BB7AE /* DereGuide 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DereGuide 2.xcdatamodel"; sourceTree = "<group>"; };
 		12CDC6E81F663F0E004BB7AE /* RemoteFavoriteSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteSong.swift; sourceTree = "<group>"; };
 		12CDC6EA1F663FA4004BB7AE /* FavoriteSongsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSongsManager.swift; sourceTree = "<group>"; };
+		12D071B1226962B7001E7CD3 /* FreeCardItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeCardItemView.swift; sourceTree = "<group>"; };
+		12D071B32269631C001E7CD3 /* FreeCardGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCardGroupView.swift; sourceTree = "<group>"; };
+		12D071B52269645F001E7CD3 /* ColleagueMyFreeCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleagueMyFreeCardsCell.swift; sourceTree = "<group>"; };
 		12D45AB61E2CB5470009986F /* EventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		12D45AB81E2CB5560009986F /* EventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
 		12D45ABC1E2D0C760009986F /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
@@ -1880,6 +1886,7 @@
 				129B95591F31B50F007B7AE2 /* ColleagueInputCell.swift */,
 				129B955E1F31B565007B7AE2 /* ColleagueMessageCell.swift */,
 				12C390141F34128D0077FB38 /* ColleagueMyCentersCell.swift */,
+				12D071B52269645F001E7CD3 /* ColleagueMyFreeCardsCell.swift */,
 				12C390161F3412AF0077FB38 /* ColleagueCentersWantedCell.swift */,
 				122D083B1F3406FB00A3741F /* ColleagueButtonsCell.swift */,
 				12C875811F32F4700051C75A /* MyCenterEditingView.swift */,
@@ -1890,6 +1897,8 @@
 				12C3901A1F3413450077FB38 /* CenterWantedCardView.swift */,
 				12C3901E1F34241D0077FB38 /* CenterWantedEditingView.swift */,
 				12C390201F34466F0077FB38 /* CenterWantedGroupView.swift */,
+				12D071B1226962B7001E7CD3 /* FreeCardItemView.swift */,
+				12D071B32269631C001E7CD3 /* FreeCardGroupView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2499,6 +2508,7 @@
 				12353A4E1F0F6A92008286C2 /* ModelVersion.swift in Sources */,
 				124FEBDE1F8524EE00478062 /* SongDetailPositionCharaItemView.swift in Sources */,
 				129EEDBD1F297336001AFC5B /* FavoriteCardsRemote.swift in Sources */,
+				12D071B62269645F001E7CD3 /* ColleagueMyFreeCardsCell.swift in Sources */,
 				12353A501F0F6A92008286C2 /* ModelBuilder.swift in Sources */,
 				129B95661F31D8E0007B7AE2 /* Profile.swift in Sources */,
 				12353A511F0F6A92008286C2 /* Managed.swift in Sources */,
@@ -2759,6 +2769,7 @@
 				1209CA262040F63B003CB270 /* RankingPage.swift in Sources */,
 				129EEDBF1F297399001AFC5B /* FavoriteCharasRemote.swift in Sources */,
 				12536DBC1ED5218600B75BA0 /* UIAlertExtension.swift in Sources */,
+				12D071B2226962B8001E7CD3 /* FreeCardItemView.swift in Sources */,
 				1239AC151F2AC576005B6C35 /* IDSearchable.swift in Sources */,
 				12F8DF242011873900F8A3DC /* GachaDetailSimulatorCell.swift in Sources */,
 				12AD63C11DA2376100A02C04 /* CGSSLoadingHUD.swift in Sources */,
@@ -2836,6 +2847,7 @@
 				1257C1CE1F5CEF1600C3DFE1 /* SongDetailController.swift in Sources */,
 				12F33DA51F0F32E900B75E47 /* Unit.swift in Sources */,
 				12ABE34B1F42DD02003A5E7F /* ColleagueFilterCardCell.swift in Sources */,
+				12D071B42269631C001E7CD3 /* FreeCardGroupView.swift in Sources */,
 				1206F6DC1E2A4C24000FAC78 /* CGSSEventFilter.swift in Sources */,
 				1245F7A11F1C629D009A80EC /* RemoteRefreshable.swift in Sources */,
 				12D45AC61E2E26AD0009986F /* CardView.swift in Sources */,
@@ -3101,7 +3113,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3138,7 +3150,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3226,7 +3238,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3249,7 +3261,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = MXJJEEMF3U;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

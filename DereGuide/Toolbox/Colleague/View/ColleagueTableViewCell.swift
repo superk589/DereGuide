@@ -32,6 +32,8 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
     let centerWantedLabel = UILabel()
     let centerWantedGroupView = CenterWantedGroupView()
     
+    let freeCardGroupView = FreeCardGroupView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -100,9 +102,16 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
             make.left.equalToSuperview()
             make.top.equalTo(messageLabel.snp.bottom).offset(5)
             make.height.lessThanOrEqualTo(103)
-            make.bottom.equalTo(-10)
         }
         myCenterGroupView.delegate = self
+        
+        readableContentView.addSubview(freeCardGroupView)
+        freeCardGroupView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(myCenterGroupView.snp.bottom).offset(5)
+            make.height.lessThanOrEqualTo(96)
+            make.bottom.equalTo(-10)
+        }
         
         selectionStyle = .none
     }
@@ -122,6 +131,16 @@ class ColleagueTableViewCell: ReadableWidthTableViewCell {
         createdDateLabel.text = profile.remoteCreatedAt?.getElapsedInterval()
         for (index, center) in profile.myCenters.enumerated() {
             myCenterGroupView.setupWith(cardID: center.0, potential: center.1, at: index, hidesIfNeeded: true)
+        }
+        if profile.freeCharaID1 == 0 {
+            freeCardGroupView.isHidden = true
+        } else {
+            freeCardGroupView.isHidden = false
+            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID1), at: 0)
+            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID2), at: 1)
+            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID3), at: 2)
+            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID4), at: 3)
+            freeCardGroupView.setupWith(cardID: Int(profile.freeCharaID5), at: 4)
         }
     }
     

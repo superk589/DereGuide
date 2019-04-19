@@ -18,6 +18,9 @@ class GameProfile {
     let coolSupportCard: CardInfo?
     let passionSupportCard: CardInfo?
     let allTypeSupportCard: CardInfo?
+    
+    let freeCards: [CardInfo]
+    
     let name: String
     
     struct CardInfo {
@@ -37,8 +40,8 @@ class GameProfile {
         
         let potentialInfos = friendInfo?.dictionaryValue?["user_chara_potential"]
         
-        func cardOfIndex(i: Int) -> CardInfo {
-            let potentialInfo = potentialInfos?.dictionaryValue?[.string("chara_\(i)")]
+        func cardOfIndex(i: Int, isFreeChara: Bool = false) -> CardInfo {
+            let potentialInfo = potentialInfos?.dictionaryValue?[.string("\(isFreeChara ? "free_" : "")chara_\(i)")]
             let potential = Potential(
                 vocal: potentialInfo?.dictionaryValue?["param_1"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
                 dance: potentialInfo?.dictionaryValue?["param_2"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
@@ -46,7 +49,7 @@ class GameProfile {
                 skill: potentialInfo?.dictionaryValue?["param_4"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
                 life: potentialInfo?.dictionaryValue?["param_5"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
             )
-            let id = friendInfo?.dictionaryValue?["support_card_info"]?.dictionaryValue?[.uint(UInt64(i))]?.dictionaryValue?["card_id"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
+            let id = friendInfo?.dictionaryValue?[.string("\(isFreeChara ? "free_" : "")support_card_info")]?.dictionaryValue?[.uint(UInt64(i))]?.dictionaryValue?["card_id"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
             return CardInfo(id: id, potential: potential)
         }
         
@@ -54,6 +57,13 @@ class GameProfile {
         coolSupportCard = cardOfIndex(i: 2)
         passionSupportCard = cardOfIndex(i: 3)
         allTypeSupportCard = cardOfIndex(i: 4)
+        
+        freeCards = [
+            cardOfIndex(i: 1, isFreeChara: true),
+            cardOfIndex(i: 2, isFreeChara: true),
+            cardOfIndex(i: 3, isFreeChara: true),
+            cardOfIndex(i: 4, isFreeChara: true)
+        ].filter { $0.id != 0 }
     }
 }
 
@@ -96,6 +106,12 @@ extension Profile {
         profile.passionLifeLevel = gameProfile.passionSupportCard.flatMap { Int16($0.potential.life) } ?? 0
         profile.allTypeLifeLevel = gameProfile.allTypeSupportCard.flatMap { Int16($0.potential.life) } ?? 0
         
+        profile.freeCharaID1 = Int32(gameProfile.freeCards[safe: 0]?.id ?? 0)
+        profile.freeCharaID2 = Int32(gameProfile.freeCards[safe: 1]?.id ?? 0)
+        profile.freeCharaID3 = Int32(gameProfile.freeCards[safe: 2]?.id ?? 0)
+        profile.freeCharaID4 = Int32(gameProfile.freeCards[safe: 3]?.id ?? 0)
+        profile.freeCharaID5 = Int32(gameProfile.freeCards[safe: 4]?.id ?? 0)
+
         return profile
     }
 }

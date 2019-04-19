@@ -45,6 +45,7 @@ class DMComposingStepTwoController: BaseTableViewController {
         Row(type: ColleagueDescriptionCell.self, title: NSLocalizedString("昵称", comment: "")),
         Row(type: ColleagueMyCentersCell.self, title: NSLocalizedString("我的队长", comment: "")),
         //        Row(type: ColleagueCentersWantedCell.self, title: NSLocalizedString("希望征集的队长", comment: "")),
+        Row(type: ColleagueMyFreeCardsCell.self, title: NSLocalizedString("自由位置", comment: "")),
         Row(type: ColleagueMessageCell.self, title: NSLocalizedString("留言", comment: "")),
         Row(type: ColleagueButtonsCell.self, title: "")
     ]
@@ -214,7 +215,7 @@ class DMComposingStepTwoController: BaseTableViewController {
         profile.gameID = (cells[0] as! ColleagueDescriptionCell).rightLabel.text ?? ""
         profile.myCenters = (cells[2] as! ColleagueMyCentersCell).centers
         //        profile.centersWanted = (cells[3] as! ColleagueCentersWantedCell).centers
-        profile.message = (cells[3] as! ColleagueMessageCell).messageView.text.trimmingCharacters(in: ["\n", " "])
+        profile.message = (cells[4] as! ColleagueMessageCell).messageView.text.trimmingCharacters(in: ["\n", " "])
         
         context.saveOrRollback()
         parentContext.saveOrRollback()
@@ -250,6 +251,8 @@ class DMComposingStepTwoController: BaseTableViewController {
                 //            case 3:
             //                (cell as! ColleagueCentersWantedCell).setup(profile)
             case 3:
+                (cell as! ColleagueMyFreeCardsCell).setup(profile)
+            case 4:
                 (cell as! ColleagueMessageCell).setup(with: profile.message ?? "")
             default:
                 break
