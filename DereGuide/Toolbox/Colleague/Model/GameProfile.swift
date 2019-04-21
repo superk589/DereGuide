@@ -62,7 +62,8 @@ class GameProfile {
             cardOfIndex(i: 1, isFreeChara: true),
             cardOfIndex(i: 2, isFreeChara: true),
             cardOfIndex(i: 3, isFreeChara: true),
-            cardOfIndex(i: 4, isFreeChara: true)
+            cardOfIndex(i: 4, isFreeChara: true),
+            cardOfIndex(i: 5, isFreeChara: true),
         ].filter { $0.id != 0 }
     }
 }
