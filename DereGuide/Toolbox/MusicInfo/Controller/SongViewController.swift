@@ -178,7 +178,7 @@ class SongViewController: BaseModelCollectionViewController, BannerAnimatorProvi
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? SongCollectionViewCell {
             bannerView = cell.jacketImageView
         }

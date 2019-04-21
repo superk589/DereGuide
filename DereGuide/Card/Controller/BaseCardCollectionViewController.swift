@@ -74,7 +74,7 @@ class BaseCardCollectionViewController: BaseModelCollectionViewController {
     
     // MARK: UICollectionViewDelegate
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CDTabViewController(card: cards[indexPath.item])
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
