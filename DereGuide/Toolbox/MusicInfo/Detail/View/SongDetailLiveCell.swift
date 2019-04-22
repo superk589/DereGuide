@@ -62,7 +62,7 @@ class SongDetailLiveCell: ReadableWidthTableViewCell {
         
         for detail in live.details {
             let tag = SongDetailLiveDifficultyView()
-            tag.setup(liveDetail: detail)
+            tag.setup(liveDetail: detail, subtitle: nil)
             tagViews.append(tag)
         }
 

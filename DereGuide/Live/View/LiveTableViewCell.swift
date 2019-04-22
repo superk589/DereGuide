@@ -71,7 +71,7 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
         selectionStyle = .none
     }
     
-    func setup(live: CGSSLive) {
+    func setup(live: CGSSLive, sorter: CGSSSorter?) {
         self.live = live
         tagViews.removeAll()
         
@@ -84,7 +84,24 @@ class LiveTableViewCell: ReadableWidthTableViewCell {
         
         for detail in live.selectedLiveDetails {
             let tag = SongDetailLiveDifficultyView()
-            tag.setup(liveDetail: detail, shouldShowText: !UserDefaults.standard.shouldHideDifficultyText)
+            var subtitle: String?
+            if let sorter = sorter, ["normalPercent", "flickPercent", "holdPercent", "slidePercent", "maxNumberOfNotes"].contains(sorter.property) {
+                switch sorter.property {
+                case "normalPercent":
+                    subtitle = String(format: "%.2f%%", live.getBeatmap(of: detail.difficulty)?.noteTypeDistribution.percentOfClick ?? 0)
+                case "holdPercent":
+                    subtitle = String(format: "%.2f%%", live.getBeatmap(of: detail.difficulty)?.noteTypeDistribution.percentOfHold ?? 0)
+                case "flickPercent":
+                    subtitle = String(format: "%.2f%%", live.getBeatmap(of: detail.difficulty)?.noteTypeDistribution.percentOfFlick ?? 0)
+                case "slidePercent":
+                    subtitle = String(format: "%.2f%%", live.getBeatmap(of: detail.difficulty)?.noteTypeDistribution.percentOfSlide ?? 0)
+                case "maxNumberOfNotes":
+                    subtitle = String(live.getBeatmap(of: detail.difficulty)?.numberOfNotes ?? 0)
+                default:
+                    break
+                }
+            }
+            tag.setup(liveDetail: detail, shouldShowText: !UserDefaults.standard.shouldHideDifficultyText, subtitle: subtitle)
             tagViews.append(tag)
         }
         

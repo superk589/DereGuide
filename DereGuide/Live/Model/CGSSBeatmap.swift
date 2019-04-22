@@ -106,6 +106,52 @@ class CGSSBeatmap {
         }
     }
     
+    struct NoteTypeDistribution {
+        var click: Int
+        var hold: Int
+        var flick: Int
+        var slide: Int
+        
+        var numberOfNotes: Int {
+            return click + hold + flick + slide
+        }
+        
+        var percentOfClick: Float {
+            return Float(click) / Float(numberOfNotes) * 100
+        }
+        
+        var percentOfHold: Float {
+            return Float(hold) / Float(numberOfNotes) * 100
+        }
+        
+        var percentOfFlick: Float {
+            return Float(flick) / Float(numberOfNotes) * 100
+        }
+        
+        var percentOfSlide: Float {
+            return Float(slide) / Float(numberOfNotes) * 100
+        }
+    }
+    
+    lazy var noteTypeDistribution = self.calculateNoteTypeDistribution()
+    
+    func calculateNoteTypeDistribution() -> NoteTypeDistribution {
+        var distribution = NoteTypeDistribution(click: 0, hold: 0, flick: 0, slide: 0)
+        for note in validNotes {
+            switch note.noteType {
+            case .click:
+                distribution.click += 1
+            case .flick:
+                distribution.flick += 1
+            case .slide:
+                distribution.slide += 1
+            case .hold:
+                distribution.hold += 1
+            }
+        }
+        return distribution
+    }
+    
     func addShiftingOffset(info: CGSSBeatmapShiftingInfo, rawBpm: Int) {
         
         // calculate start offset using the first bpm in shifting info

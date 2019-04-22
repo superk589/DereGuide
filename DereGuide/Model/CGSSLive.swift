@@ -101,6 +101,30 @@ extension CGSSLive {
 //        return self.getBeatmap(of: selectableMaxDifficulty)?.numberOfNotes ?? 0
     }
     
+    @objc dynamic var normalPercent: Float {
+        return selectedLiveDetails.map {
+            return getBeatmap(of: $0.difficulty)?.noteTypeDistribution.percentOfClick ?? 0
+        }.max() ?? 0
+    }
+    
+    @objc dynamic var holdPercent: Float {
+        return selectedLiveDetails.map {
+            return getBeatmap(of: $0.difficulty)?.noteTypeDistribution.percentOfHold ?? 0
+        }.max() ?? 0
+    }
+    
+    @objc dynamic var flickPercent: Float {
+        return selectedLiveDetails.map {
+            return getBeatmap(of: $0.difficulty)?.noteTypeDistribution.percentOfFlick ?? 0
+            }.max() ?? 0
+    }
+    
+    @objc dynamic var slidePercent: Float {
+        return selectedLiveDetails.map {
+            return getBeatmap(of: $0.difficulty)?.noteTypeDistribution.percentOfSlide ?? 0
+            }.max() ?? 0
+    }
+    
     @objc dynamic var sLength: Float {
         return getBeatmap(of: .debut)?.totalSeconds ?? 0
     }

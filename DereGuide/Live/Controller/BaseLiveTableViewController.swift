@@ -196,7 +196,7 @@ class BaseLiveTableViewController: BaseModelTableViewController, ZKDrawerControl
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LiveTableViewCell.description(), for: indexPath) as! LiveTableViewCell
         
-        cell.setup(live: liveList[indexPath.row])
+        cell.setup(live: liveList[indexPath.row], sorter: sorter)
         
         // important, because the new height of the cell may be different with the previuous one, we should let system know to calculate it again.
         cell.setNeedsUpdateConstraints()

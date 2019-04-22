@@ -308,7 +308,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             }
             
             if let live = event.live {
-                liveView.setup(live: live)
+                liveView.setup(live: live, sorter: nil)
                 liveView.snp.updateConstraints { (update) in
                     update.height.equalTo(88)
                 }

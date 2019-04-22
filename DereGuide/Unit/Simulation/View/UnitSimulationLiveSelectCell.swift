@@ -16,6 +16,7 @@ class UnitSimulationLiveView: UIView {
     let nameLabel = UILabel()
     let descriptionLabel = UILabel()
     let backgroundLabel = UILabel()
+    let noteDistributionLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +24,7 @@ class UnitSimulationLiveView: UIView {
         addSubview(jacketImageView)
         jacketImageView.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
-            make.width.height.equalTo(48)
+            make.width.height.equalTo(64)
             make.bottom.equalToSuperview()
         }
         
@@ -51,10 +52,21 @@ class UnitSimulationLiveView: UIView {
         descriptionLabel.textAlignment = .left
         addSubview(descriptionLabel)
         
+        addSubview(noteDistributionLabel)
+        noteDistributionLabel.font = .systemFont(ofSize: 12)
+        noteDistributionLabel.textColor = .darkGray
+        noteDistributionLabel.adjustsFontSizeToFitWidth = true
+        noteDistributionLabel.baselineAdjustment = .alignCenters
+        noteDistributionLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(typeIcon)
+            make.right.lessThanOrEqualTo(-10)
+            make.bottom.equalTo(jacketImageView)
+        }
+        
         descriptionLabel.snp.makeConstraints { (make) in
             make.left.equalTo(typeIcon)
-            make.bottom.equalTo(jacketImageView)
             make.right.lessThanOrEqualTo(-10)
+            make.bottom.equalTo(noteDistributionLabel.snp.top).offset(-5)
         }
         
         addSubview(backgroundLabel)
@@ -83,6 +95,15 @@ class UnitSimulationLiveView: UIView {
         typeIcon.image = scene.live.icon
         
         jacketImageView.sd_setImage(with: scene.live.jacketURL)
+        
+        let format = "normal: %.0f%% hold: %.0f%% flick: %.0f%% slide: %.0f%%"
+        noteDistributionLabel.text = String(
+            format: format,
+            beatmap.noteTypeDistribution.percentOfClick,
+            beatmap.noteTypeDistribution.percentOfHold,
+            beatmap.noteTypeDistribution.percentOfFlick,
+            beatmap.noteTypeDistribution.percentOfSlide
+        )
     }
 
     required init?(coder aDecoder: NSCoder) {

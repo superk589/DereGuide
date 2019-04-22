@@ -12,7 +12,7 @@ class SongDetailLiveDifficultyView: LiveDifficultyView {
     
     private var shouldShowText: Bool = true
     
-    func setup(liveDetail: CGSSLiveDetail, shouldShowText: Bool = true) {
+    func setup(liveDetail: CGSSLiveDetail, shouldShowText: Bool = true, subtitle: String?) {
         let color = backgoundView.zk.backgroundColor
         backgoundView.zk.backgroundColor = liveDetail.difficulty.color
         
@@ -24,9 +24,9 @@ class SongDetailLiveDifficultyView: LiveDifficultyView {
         self.shouldShowText = shouldShowText
         
         if shouldShowText {
-            label.text = liveDetail.difficulty.description + " \(liveDetail.stars)"
+            setup(title: liveDetail.difficulty.description + " \(liveDetail.stars)", subtitle: subtitle)
         } else {
-            label.text = "\(liveDetail.stars)"
+            setup(title: "\(liveDetail.stars)", subtitle: subtitle)
         }
     }
     
