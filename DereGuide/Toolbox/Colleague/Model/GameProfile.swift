@@ -46,8 +46,8 @@ class GameProfile {
                 vocal: potentialInfo?.dictionaryValue?["param_1"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
                 dance: potentialInfo?.dictionaryValue?["param_2"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
                 visual: potentialInfo?.dictionaryValue?["param_3"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
-                skill: potentialInfo?.dictionaryValue?["param_4"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
-                life: potentialInfo?.dictionaryValue?["param_5"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
+                skill: potentialInfo?.dictionaryValue?["param_5"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0,
+                life: potentialInfo?.dictionaryValue?["param_4"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
             )
             let id = friendInfo?.dictionaryValue?[.string("\(isFreeChara ? "free_" : "")support_card_info")]?.dictionaryValue?[.uint(UInt64(i))]?.dictionaryValue?["card_id"]?.unsignedIntegerValue.flatMap(Int.init) ?? 0
             return CardInfo(id: id, potential: potential)
