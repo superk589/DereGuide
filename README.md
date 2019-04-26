@@ -1,7 +1,7 @@
 # DereGuide
 
 ## Introduction
-This is an unofficial iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. It's mainly based on APIs provided by other sites. It's designed to collect, cache and rearragne the game data so that you can easily search them. It also has some advance features such as live score simulator and beatmap player.
+This is an unofficial iOS utility application for **The Idolmaster Cinderella Girls: Starlight Stage (デレステ)**. It's mainly based on APIs provided by other sites. It's designed to collect, cache and rearrange the game data so that you can easily search them. It also has some advance features such as live score simulator and beatmap player.
 
 ## Modules
 * Card Viewer
