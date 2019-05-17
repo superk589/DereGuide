@@ -719,6 +719,9 @@
 "排序" = "Sort";
 
 /* No comment provided by engineer. */
+"提升%@偶像的%@ %d%%、%@偶像的%@ %d%%。" = "raises %2$@ of %1$@ members by %3$d%%, raises %5$@ of %4$@ members by %6$d%%.";
+
+/* No comment provided by engineer. */
 "提升%@偶像的%@ %d%%。" = "raises %2$@ of %1$@ members by %3$d%%.";
 
 /* 弹出框标题

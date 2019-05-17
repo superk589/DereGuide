@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="DereGuide/Base.lproj/Main.storyboard" source-language="zh-Hans" target-language="zh-Hant" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2.1" build-num="10E1001"/>
     </header>
     <body>
       <trans-unit id="5Hs-jz-swe.title">
@@ -93,7 +93,7 @@
   </file>
   <file original="DereGuide/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" target-language="zh-Hant" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2.1" build-num="10E1001"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
@@ -139,7 +139,7 @@
   </file>
   <file original="DereGuide/zh-Hans.lproj/Localizable.strings" source-language="zh-Hans" target-language="zh-Hant" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2.1" build-num="10E1001"/>
     </header>
     <body>
       <trans-unit id="%@和%@">
@@ -1278,6 +1278,11 @@
         <target>排序</target>
         <note/>
       </trans-unit>
+      <trans-unit id="提升%@偶像的%@ %d%%、%@偶像的%@ %d%%。">
+        <source>提升%1$@偶像的%2$@ %3$d%%、%4$@偶像的%5$@ %6$d%%。</source>
+        <target>提升%1$@偶像的%2$@ %3$d%%、%4$@偶像的%5$@ %6$d%%。</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="提升%@偶像的%@ %d%%。">
         <source>提升%1$@偶像的%2$@ %3$d%%。</source>
         <target>提升%@偶像的%@ %d%%。</target>
@@ -2343,7 +2348,7 @@
   </file>
   <file original="NotificationContent/zh-Hans.lproj/InfoPlist.strings" source-language="zh-Hans" target-language="zh-Hant" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2" build-num="10E125"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.2.1" build-num="10E1001"/>
     </header>
     <body>
       <trans-unit id="CFBundleDisplayName">
