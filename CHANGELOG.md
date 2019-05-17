@@ -1,5 +1,15 @@
 # ChangeLog
 
+### 1.11.2
+
+支持新的队长技
+
+##### Japanese version
+新しいリーダースキルの対応
+
+##### English version
+Support new leader skills
+
 ### 1.11
 1. 支持新技能类型“长按演技”和“滑块演技”。
 2. 寻找同僚中支持新增的 5 个自由位。
