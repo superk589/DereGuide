@@ -9,20 +9,30 @@
 import Foundation
 import SwiftyJSON
 
-fileprivate let leaderSkillTarget = [
+private let leaderSkillTarget = [
     "cute": NSLocalizedString("所有Cute", comment: "队长技能描述"),
     "cool": NSLocalizedString("所有Cool", comment: "队长技能描述"),
     "passion": NSLocalizedString("所有Passion", comment: "队长技能描述"),
-    "all": NSLocalizedString("所有", comment: "队长技能描述")
+    "all": NSLocalizedString("所有", comment: "队长技能描述"),
+    "1": NSLocalizedString("所有Cute", comment: "队长技能描述"),
+    "2": NSLocalizedString("所有Cool", comment: "队长技能描述"),
+    "3": NSLocalizedString("所有Passion", comment: "队长技能描述"),
+    "4": NSLocalizedString("所有", comment: "队长技能描述")
 ]
 
-fileprivate let leaderSkillParam = [
+private let leaderSkillParam = [
     "vocal": NSLocalizedString("Vocal表现值", comment: "队长技能描述"),
     "visual": NSLocalizedString("Visual表现值", comment: "队长技能描述"),
     "dance": NSLocalizedString("Dance表现值", comment: "队长技能描述"),
     "all": NSLocalizedString("所有表现值", comment: "队长技能描述"),
     "life": NSLocalizedString("生命", comment: "队长技能描述"),
     "skill_probability": NSLocalizedString("特技发动几率", comment: "队长技能描述"),
+    "1": NSLocalizedString("Vocal表现值", comment: "队长技能描述"),
+    "2": NSLocalizedString("Visual表现值", comment: "队长技能描述"),
+    "3": NSLocalizedString("Dance表现值", comment: "队长技能描述"),
+    "4": NSLocalizedString("所有表现值", comment: "队长技能描述"),
+    "5": NSLocalizedString("生命", comment: "队长技能描述"),
+    "6": NSLocalizedString("特技发动几率", comment: "队长技能描述"),
 ]
 
 fileprivate let effectClause = NSLocalizedString("提升%@偶像的%@ %d%%。", comment: "")
@@ -40,33 +50,32 @@ extension CGSSLeaderSkill {
     
     private func buildPredicateClause() -> String {
         var needList: [String] = []
+        var needSum = 0
         if needCute > 0 {
             needList.append(NSLocalizedString("Cute", comment: ""))
+            needSum += needCute
         }
         if needCool > 0 {
             needList.append(NSLocalizedString("Cool", comment: ""))
+            needSum += needCool
         }
         if needPassion > 0 {
             needList.append(NSLocalizedString("Passion", comment: ""))
+            needSum += needPassion
         }
         
         var needStr = ""
         if needList.count > 0 {
             if needList.count == 1 {
                 needStr = needList[0]
+            } else if needList.count == 2 {
+                needStr = needList.joined(separator: andMark)
             } else {
                 needStr = needList[..<(needList.count - 1)].joined(separator: andMark)
                 needStr = String.init(format: andConjunction, needStr, needList.last!)
             }
             
-            // FIXME: consider values of need_x in leader_skill_t
-            // Rei_Fan49 - Today at 5:36 PM
-            // princess and focus only works for single color
-            // it requires 5 or 6 per color
-            // which implies monocolor unit or no activation
-            // cinfest unit requires 1 each color (according to internal data)
-            
-            if needList.count < 3 {
+            if needList.count < 3 && needSum >= 5 {
                 needStr = String.init(format: only, needStr)
             }
             
@@ -81,7 +90,7 @@ extension CGSSLeaderSkill {
             let attr = leaderSkillTarget[targetAttribute] ?? NSLocalizedString("未知", comment: "")
             let param = leaderSkillParam[targetParam] ?? NSLocalizedString("未知", comment: "")
             
-            let effect = String.init(format: effectClause, attr, param, upValue)
+            let effect = String(format: effectClause, attr, param, upValue)
             
             let built = buildPredicateClause() + effect
             
@@ -92,6 +101,15 @@ extension CGSSLeaderSkill {
             return built.firstCharacterUppercased()
         } else if upType == 1 && type == 40 {
             let effect = String(format: NSLocalizedString("完成LIVE时，获得的粉丝数提高 %d%%", comment: ""), upValue)
+            let built = buildPredicateClause() + effect
+            return built.firstCharacterUppercased()
+        } else if upType == 1 && type == 50 {
+            let format = NSLocalizedString("提升%@偶像的%@ %d%%、%@偶像的%@ %d%%。", comment: "")
+            let attr = leaderSkillTarget[targetAttribute] ?? NSLocalizedString("未知", comment: "")
+            let param = leaderSkillParam[targetParam] ?? NSLocalizedString("未知", comment: "")
+            let attr2 = leaderSkillTarget[targetAttribute2] ?? NSLocalizedString("未知", comment: "")
+            let param2 = leaderSkillParam[targetParam2] ?? NSLocalizedString("未知", comment: "")
+            let effect = String(format: format, attr, param, upValue, attr2, param2, upValue2)
             let built = buildPredicateClause() + effect
             return built.firstCharacterUppercased()
         } else {
@@ -114,9 +132,12 @@ class CGSSLeaderSkill: CGSSBaseModel {
     var specialId: Int!
     var targetAttribute: String!
     var targetParam: String!
+    var targetAttribute2: String!
+    var targetParam2: String!
     var type: Int!
     var upType: Int!
     var upValue: Int!
+    var upValue2: Int!
     
     /**
      * Instantiate the instance using the passed json values to set the properties values
@@ -139,6 +160,9 @@ class CGSSLeaderSkill: CGSSBaseModel {
         type = json["type"].intValue
         upType = json["up_type"].intValue
         upValue = json["up_value"].intValue
+        targetParam2 = json["target_param_2"].stringValue
+        targetAttribute2 = json["target_attribute_2"].stringValue
+        upValue2 = json["up_value_2"].intValue
     }
     
     /**
@@ -161,7 +185,9 @@ class CGSSLeaderSkill: CGSSBaseModel {
         type = aDecoder.decodeObject(forKey: "type") as? Int
         upType = aDecoder.decodeObject(forKey: "up_type") as? Int
         upValue = aDecoder.decodeObject(forKey: "up_value") as? Int
-        
+        targetParam2 = aDecoder.decodeObject(forKey: "target_param_2") as? String ?? ""
+        targetAttribute2 = aDecoder.decodeObject(forKey: "target_attribute_2") as? String ?? ""
+        upValue2 = aDecoder.decodeObject(forKey: "up_value_2") as? Int ?? 0
     }
     
     /**
@@ -210,7 +236,15 @@ class CGSSLeaderSkill: CGSSBaseModel {
         if upValue != nil {
             aCoder.encode(upValue, forKey: "up_value")
         }
-        
+        if targetAttribute2 != nil {
+            aCoder.encode(targetAttribute2, forKey: "target_attribute_2")
+        }
+        if targetParam2 != nil {
+            aCoder.encode(targetParam2, forKey: "target_param_2")
+        }
+        if upValue2 != nil {
+            aCoder.encode(upValue2, forKey: "up_value_2")
+        }
     }
     
 }

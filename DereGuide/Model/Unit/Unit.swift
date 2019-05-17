@@ -354,6 +354,35 @@ extension Unit {
                 break
             }
             
+            switch leaderSkill.targetAttribute2! {
+            case "1":
+                for upType in getUpType2(leaderSkill) {
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .cute, upValue: leaderSkill.upValue2!)
+                    contents.append(content)
+                }
+            case "2":
+                for upType in getUpType2(leaderSkill) {
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .cool, upValue: leaderSkill.upValue2!)
+                    contents.append(content)
+                }
+            case "3":
+                for upType in getUpType2(leaderSkill) {
+                    let content = LeaderSkillUpContent.init(upType: upType, upTarget: .passion, upValue: leaderSkill.upValue2!)
+                    contents.append(content)
+                }
+            case "4":
+                for upType in getUpType2(leaderSkill) {
+                    let content1 = LeaderSkillUpContent.init(upType: upType, upTarget: .cute, upValue: leaderSkill.upValue2!)
+                    contents.append(content1)
+                    let content2 = LeaderSkillUpContent.init(upType: upType, upTarget: .cool, upValue: leaderSkill.upValue2!)
+                    contents.append(content2)
+                    let content3 = LeaderSkillUpContent.init(upType: upType, upTarget: .passion, upValue: leaderSkill.upValue2!)
+                    contents.append(content3)
+                }
+            default:
+                break
+            }
+            
         }
         return contents
     }
@@ -449,6 +478,25 @@ extension Unit {
         case "life":
             return [LeaderSkillUpType.life]
         case "skill_probability":
+            return [LeaderSkillUpType.proc]
+        default:
+            return [LeaderSkillUpType]()
+        }
+    }
+    
+    func getUpType2(_ leaderSkill: CGSSLeaderSkill) -> [LeaderSkillUpType] {
+        switch leaderSkill.targetParam2! {
+        case "1":
+            return [LeaderSkillUpType.vocal]
+        case "2":
+            return [LeaderSkillUpType.dance]
+        case "3":
+            return [LeaderSkillUpType.visual]
+        case "4":
+            return [LeaderSkillUpType.vocal, LeaderSkillUpType.dance, LeaderSkillUpType.visual]
+        case "5":
+            return [LeaderSkillUpType.life]
+        case "6":
             return [LeaderSkillUpType.proc]
         default:
             return [LeaderSkillUpType]()
