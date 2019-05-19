@@ -1,14 +1,30 @@
 {
-    "version": "3.9.2",
+    "version": "3.9.3",
     "reasons": {
-        "default": "To apply latest change for a part of idols (cards) in regard to Life Sparkle skill and base parameter adjustment, please update your cached data.",
-        "ja": "一部アイドルのライフ値およびライフスパークル効果量を更新するため、データ更新が必要となります。\n続行する前、データ余量およびネット環境を確認してください。",
-        "zh-Hans": "为更新最新的卡片平衡性改动，需要您更新缓存数据。数据量较大，请确认您的剩余流量及网络环境后再点击确认。",
-        "zh-Hant": "為更新最新的卡牌平衡性改動，需要您更新快取資料。資料量較大，請確認您的通訊餘量及網路環境後再點選確認。"
+        "default": "To apply latest leader skills, please update your cached data.",
+        "ja": "リーダースキルを更新するため、データ更新が必要となります。\n続行する前、データ余量およびネット環境を確認してください。",
+        "zh-Hans": "为更新队长技能数据，需要您更新缓存数据。数据量较大，请确认您的剩余流量及网络环境后再点击确认。",
+        "zh-Hant": "為更新隊長技能資料，需要您更新快取資料。資料量較大，請確認您的通訊餘量及網路環境後再點選確認。"
     },
     "viewerID": "744701328",
     "userID": "857528111",
     "udid": "b0d8c365-7ded-4d58-9425-dd504360d44b",
     "items": [
+        {
+            "id": "300666",
+            "type": "card"
+        },
+        {
+            "id": "300665",
+            "type": "card"
+        },
+         {
+            "id": "200676",
+            "type": "card"
+        },
+        {
+            "id": "200675",
+            "type": "card"
+        }
     ]
 }

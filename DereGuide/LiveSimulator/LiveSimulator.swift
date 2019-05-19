@@ -202,11 +202,11 @@ class LiveSimulator {
             procedBonuses = bonuses.sorted { $0.range.begin < $1.range.begin }
         } else if options.contains(.pessimistic) {
             procedBonuses = bonuses
-                .filter { $0.rate * (100 + $0.rateBonus) >= 1000000 }
+                .filter { $0.rate1000000 >= 1000000 }
                 .sorted { $0.range.begin < $1.range.begin }
         } else {
             procedBonuses = bonuses
-                .filter { 1000000.proc(($0.rate + $0.ratePotentialBonus * 100) * (100 + $0.rateBonus))}
+                .filter { 1000000.proc($0.rate1000000)}
                 .sorted { $0.range.begin < $1.range.begin }
         }
         

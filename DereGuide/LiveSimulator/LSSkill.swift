@@ -140,11 +140,16 @@ struct LSSkill {
 extension LSSkill {
     
     var probability: Double {
-        return min(1, Double(rate * (100 + rateBonus)) / 1000000)
+        return min(1, Double((rate + ratePotentialBonus * 100) * (100 + rateBonus)) / 1000000)
     }
     
     var isConcentrated: Bool {
         return type == .concentration
+    }
+    
+    /// rate in integer, from 0 to 1000000
+    var rate1000000: Int {
+        return min(1000000, (rate + ratePotentialBonus * 100) * (100 + rateBonus))
     }
     
 }
