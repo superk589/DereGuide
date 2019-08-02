@@ -17,7 +17,6 @@ class ToolboxTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         titleLabel.font = .systemFont(ofSize: 16)
-        titleLabel.backgroundColor = .white
         contentView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { (make) in

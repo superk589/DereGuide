@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class CGSSBeatmapNote {
     
@@ -20,10 +21,39 @@ class CGSSBeatmapNote {
     
     // note 类型
     enum NoteType {
+        enum FlickDirection {
+            case left
+            case right
+        }
         case click
-        case flick
+        case flick(FlickDirection)
         case slide
         case hold
+        case wideClick(width: Int)
+        case wideFlick(width: Int, direction: FlickDirection)
+        case wideSlide(width: Int)
+        
+        var isWide: Bool {
+            switch self {
+            case .click, .flick, .hold, .slide:
+                return false
+            default:
+                return true
+            }
+        }
+        
+        var width: Int {
+            switch self {
+            case .click, .flick, .hold, .slide:
+                return 1
+            case .wideSlide(let width):
+                return width
+            case .wideFlick(let width, _):
+                return width
+            case .wideClick(let width):
+                return width
+            }
+        }
     }
     
     var id: Int!
@@ -82,12 +112,22 @@ extension CGSSBeatmapNote {
     
     var noteType: NoteType {
         switch (status, type) {
-        case (1, _), (2, _):
-            return .flick
-        case (_, 3):
-            return .slide
+        case (1, 1):
+            return .flick(.left)
+        case (2, 1):
+            return .flick(.right)
         case (_, 2):
             return .hold
+        case (_, 3):
+            return .slide
+        case (_, 4):
+            return .wideClick(width: status)
+        case (_, 5):
+            return .wideSlide(width: status)
+        case (_, 6):
+            return .wideFlick(width: status, direction: .left)
+        case (_, 7):
+            return .wideFlick(width: status, direction: .right)
         default:
             return .click
         }

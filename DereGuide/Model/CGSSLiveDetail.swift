@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
+enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable, CaseIterable {
     
     case debut = 1
     case regular
@@ -19,8 +19,8 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
     case legacyMasterPlus = 101
     case light = 11
     case trick = 12
-    
-    static let all: [CGSSLiveDifficulty] = [CGSSLiveDifficulty.debut, .regular, .pro, .master, .masterPlus, .legacyMasterPlus, .light, .trick]
+    case piano = 21
+    case forte = 22
     
     var description: String {
         
@@ -41,6 +41,10 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
             return "LIGHT"
         case .trick:
             return "TRICK"
+        case .piano:
+            return "PIANO"
+        case .forte:
+            return "FORTE"
         }
     }
     
@@ -62,6 +66,10 @@ enum CGSSLiveDifficulty: Int, CustomStringConvertible, ColorRepresentable {
             return .light
         case .trick:
             return .trick
+        case .piano:
+            return .piano
+        case .forte:
+            return .forte
         }
     }
     
@@ -83,8 +91,10 @@ struct CGSSLiveDifficultyTypes: OptionSet {
     static let legacyMasterPlus = CGSSLiveDifficultyTypes.init(rawValue: 1 << 5)
     static let light = CGSSLiveDifficultyTypes.init(rawValue: 1 << 6)
     static let trick = CGSSLiveDifficultyTypes.init(rawValue: 1 << 7)
+    static let piano = CGSSLiveDifficultyTypes.init(rawValue: 1 << 8)
+    static let forte = CGSSLiveDifficultyTypes.init(rawValue: 1 << 9)
     
-    static let all = CGSSLiveDifficultyTypes.init(rawValue: 0b11111111)
+    static let all = CGSSLiveDifficultyTypes.init(rawValue: 0b1111111111)
     
     init(difficulty: CGSSLiveDifficulty) {
         switch difficulty {
@@ -104,6 +114,10 @@ struct CGSSLiveDifficultyTypes: OptionSet {
             self = .light
         case .trick:
             self = .trick
+        case .piano:
+            self = .piano
+        case .forte:
+            self = .forte
         }
     }
 }

@@ -25,6 +25,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             case single
             case type3
             case type4
+            case type6
             var description: String {
                 switch self {
                 case .single:
@@ -33,6 +34,8 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
                     return "TYPE 3"
                 case .type4:
                     return "TYPE 4"
+                case .type6:
+                    return "TYPE 6"
                 }
             }
             
@@ -61,7 +64,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
         }
        
         init() {
-            theme = .type4
+            theme = .type6
             verticalScale = 1.0
             showsPlayLine = true
             hidesAssistedLines = false
@@ -159,7 +162,7 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 4
         case 1:
             return staticCells.count
         default:
@@ -181,6 +184,9 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
             case 2:
                 cell.setup(.type4)
                 cell.customSelected = setting.theme == .type4
+            case 3:
+                cell.setup(.type6)
+                cell.customSelected = setting.theme == .type6
             default:
                 fatalError("invalid indexpath")
             }
@@ -202,6 +208,8 @@ class BeatmapAdvanceOptionsViewController: UITableViewController {
                 setting.theme = .type3
             case 2:
                 setting.theme = .type4
+            case 3:
+                setting.theme = .type6
             default:
                 break
             }

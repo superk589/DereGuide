@@ -20,7 +20,7 @@ class LiveFilterSortController: BaseFilterSortController {
     
     var songTypeTitles = ["Cute", "Cool", "Passion", NSLocalizedString("彩色曲", comment: "")]
     
-    var difficultyTypeTitles = CGSSLiveDifficulty.all.map { $0.description }
+    var difficultyTypeTitles = CGSSLiveDifficulty.allCases.map { $0.description }
     
     var eventTypeTitles = [NSLocalizedString("常规歌曲", comment: ""), NSLocalizedString("传统活动", comment: ""), NSLocalizedString("Groove活动", comment: ""), NSLocalizedString("巡演活动", comment: "")]
     

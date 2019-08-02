@@ -147,7 +147,7 @@ extension CGSSLive {
         case 3:
             return .passion
         default:
-            return .darkText
+            return .allType
         }
     }
     

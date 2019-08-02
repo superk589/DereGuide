@@ -296,7 +296,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         } else {
             startToEndLabel.text = "\(event.startDate.toDate().toString(format: "(zzz)yyyy-MM-dd HH:mm:ss", timeZone: TimeZone.current)) ~ \(event.endDate.toDate().toString(timeZone: TimeZone.current))"
             if event.reward.count >= 2 {
-                var rewards = event.reward.sorted(by: { (r1, r2) -> Bool in
+                let rewards = event.reward.sorted(by: { (r1, r2) -> Bool in
                     return r1.recommandOrder < r2.recommandOrder
                 })
                 if let card1 = CGSSDAO.shared.findCardById(rewards[0].cardId) {

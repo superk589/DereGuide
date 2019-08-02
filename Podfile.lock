@@ -1,9 +1,9 @@
 PODS:
   - AcknowList (1.8)
   - AutoInsetter (1.7.0)
-  - Charts (3.3):
-    - Charts/Core (= 3.3)
-  - Charts/Core (3.3)
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - CryptoSwift (1.0.0)
   - DynamicColor (4.0.3)
   - EasyTipView (2.0.4)
@@ -93,7 +93,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AcknowList: 5b8820004d019d0a8d6a091ea2392dcb54bd3ad2
   AutoInsetter: 766e76cd41da7026373778524074f9a6b64b24d5
-  Charts: a5609adcbd70a0f7e15c6984d7e9b5ceecf3b71d
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   DynamicColor: bf19b33fe404c59a68e64af95cc6b017346e7e75
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
@@ -114,6 +114,6 @@ SPEC CHECKSUMS:
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: 475b3a991e65d2e0f0667967a4f04f8d0d0cbabe
 
-PODFILE CHECKSUM: 07d0a436869f574df2e72dc4b36991f0639d008d
+PODFILE CHECKSUM: a7664566efe0861f05cee98b57869e7d8de0d10b
 
-COCOAPODS: 1.7.0.beta.3
+COCOAPODS: 1.7.5

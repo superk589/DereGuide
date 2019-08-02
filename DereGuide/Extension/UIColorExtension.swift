@@ -28,6 +28,8 @@ extension UIColor {
     static let legacyMasterPlus = UIColor.masterPlus.lighter()
     static let light = UIColor(hexString: "E1F3A6")
     static let trick = UIColor(hexString: "E1B9F7")
+    static let piano = UIColor.lightGray.lighter()
+    static let forte = UIColor.lightGray
     
     static let cute = UIColor(red: 1.0 * 248 / 255, green: 1.0 * 24 / 255, blue: 1.0 * 117 / 255, alpha: 1)
     static let cool = UIColor(red: 1.0 * 42 / 255, green: 1.0 * 113 / 255, blue: 1.0 * 247 / 255, alpha: 1)

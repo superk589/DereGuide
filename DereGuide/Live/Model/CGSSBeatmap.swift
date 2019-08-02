@@ -19,6 +19,10 @@ class CGSSBeatmap {
     
     var originalShiftingPoints: [BpmShiftingPoint]?
     
+    var isGrandLive: Bool {
+        return difficulty == .piano || difficulty == .forte
+    }
+    
     var isValid: Bool {
         return notes.count > 0
     }
@@ -67,7 +71,7 @@ class CGSSBeatmap {
     lazy var beginTime = TimeInterval(self.timeOfFirstNote)
     
     func contextFree() {
-        var positionPressed = [Int?](repeating: nil, count: 5)
+        var positionPressed = [Int?](repeating: nil, count: 15)
         var slides = [Int: Int]()
         for (index, note) in self.validNotes.enumerated() {
             note.comboIndex = index + 1
@@ -93,7 +97,7 @@ class CGSSBeatmap {
                     let previousIndex = slides[note.groupId]!
                     let previous = validNotes[previousIndex]
                     // 对于个别歌曲(如:维纳斯, absolute nine) 组id存在复用问题 对interval进行额外判断 大于4s的flick间隔判断为不合法
-                    if previous.intervalTo(note) < 4 || note.type == 3 {
+                    if previous.intervalTo(note) < 4 || (note.type == 3 || note.type == 5 || note.type == 6 || note.type == 7) {
                         previous.append(note)
                         
                         let startIndex = previousIndex + 1
@@ -146,6 +150,12 @@ class CGSSBeatmap {
             case .slide:
                 distribution.slide += 1
             case .hold:
+                distribution.hold += 1
+            case .wideFlick:
+                distribution.flick += 1
+            case .wideClick:
+                distribution.click += 1
+            case .wideSlide:
                 distribution.hold += 1
             }
         }

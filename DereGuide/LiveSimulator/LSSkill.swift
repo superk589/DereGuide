@@ -157,13 +157,16 @@ extension LSSkill {
 extension LSSkill {
     
     func perfectBonusValue(noteType: CGSSBeatmapNote.NoteType) -> Int {
-        if type == .longAct && noteType == .hold {
+        switch (type, noteType) {
+        case (.longAct, .hold),
+             (.longAct, .wideSlide):
             return value2
-        } else if type == .flickAct && noteType == .flick {
+        case (.flickAct, .flick),
+             (.flickAct, .wideFlick):
             return value2
-        } else if LSSkillType.allPerfectBonus.contains(type) {
+        case (let x, _) where LSSkillType.allPerfectBonus.contains(x):
             return value
-        } else {
+        default:
             return 100
         }
     }

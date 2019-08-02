@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToolboxTableViewController: UITableViewController {
+class ToolboxTableViewController: BaseTableViewController {
     
     let path = Bundle.main.path(forResource: "ToolboxList", ofType: ".plist")
     var dataSource = [[String: String]]()

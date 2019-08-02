@@ -399,7 +399,7 @@ struct LSGame {
             .max { $0.perfectBonusValue(noteType: .click) < $1.perfectBonusValue(noteType: .click) }
         bestPerfectBonusForFlick = skills.values
             .filter { LSSkillType.allPerfectBonus.contains($0.type) }
-            .max { $0.perfectBonusValue(noteType: .flick) < $1.perfectBonusValue(noteType: .flick) }
+            .max { $0.perfectBonusValue(noteType: .flick(.left)) < $1.perfectBonusValue(noteType: .flick(.left)) }
         bestPerfectBonusForHold = skills.values
             .filter { LSSkillType.allPerfectBonus.contains($0.type) }
             .max { $0.perfectBonusValue(noteType: .hold) < $1.perfectBonusValue(noteType: .hold) }
@@ -435,7 +435,7 @@ struct LSGame {
         let maxSkillBoost = bestSkillBoost?.value ?? 1000
         bonusGroup = LSScoreBonusGroup(basePerfectBonus: maxPerfectBonus, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
         bonusGroupForHold = LSScoreBonusGroup(basePerfectBonus: bestPerfectBonusForHold?.perfectBonusValue(noteType: .hold) ?? 100, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
-        bonusGroupForFlick = LSScoreBonusGroup(basePerfectBonus: bestPerfectBonusForFlick?.perfectBonusValue(noteType: .flick) ?? 100, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
+        bonusGroupForFlick = LSScoreBonusGroup(basePerfectBonus: bestPerfectBonusForFlick?.perfectBonusValue(noteType: .flick(.left)) ?? 100, baseComboBonus: max(maxComboBonus, lifeSparkleBonus), skillBoost: maxSkillBoost)
     }
     
     // MARK: Combo factor calculation

@@ -13,7 +13,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         // 设置导航控制器背景颜色 防止跳转时页面闪烁
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = .white
         // self.navigationBar.tintColor = UIColor.whiteColor()
         // 设置右滑手势代理 防止右滑在修改了左侧导航按钮之后失效
         self.interactivePopGestureRecognizer?.delegate = self
