@@ -20,7 +20,7 @@ class CGSSBeatmapNote {
     }
     
     // note 类型
-    enum NoteType {
+    enum Style {
         enum FlickDirection {
             case left
             case right
@@ -29,9 +29,9 @@ class CGSSBeatmapNote {
         case flick(FlickDirection)
         case slide
         case hold
-        case wideClick(width: Int)
-        case wideFlick(width: Int, direction: FlickDirection)
-        case wideSlide(width: Int)
+        case wideClick
+        case wideFlick(FlickDirection)
+        case wideSlide
         
         var isWide: Bool {
             switch self {
@@ -41,18 +41,14 @@ class CGSSBeatmapNote {
                 return true
             }
         }
-        
-        var width: Int {
-            switch self {
-            case .click, .flick, .hold, .slide:
-                return 1
-            case .wideSlide(let width):
-                return width
-            case .wideFlick(let width, _):
-                return width
-            case .wideClick(let width):
-                return width
-            }
+    }
+    
+    var width: Int {
+        switch style {
+        case .click, .flick, .hold, .slide:
+            return 1
+        default:
+            return status
         }
     }
     
@@ -110,7 +106,7 @@ extension CGSSBeatmapNote {
         }
     }
     
-    var noteType: NoteType {
+    var style: Style {
         switch (status, type) {
         case (1, 1):
             return .flick(.left)
@@ -121,13 +117,13 @@ extension CGSSBeatmapNote {
         case (_, 3):
             return .slide
         case (_, 4):
-            return .wideClick(width: status)
+            return .wideClick
         case (_, 5):
-            return .wideSlide(width: status)
+            return .wideSlide
         case (_, 6):
-            return .wideFlick(width: status, direction: .left)
+            return .wideFlick(.left)
         case (_, 7):
-            return .wideFlick(width: status, direction: .right)
+            return .wideFlick(.right)
         default:
             return .click
         }

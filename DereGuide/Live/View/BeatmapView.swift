@@ -55,7 +55,7 @@ protocol BeatmapViewSettingDelegate: class {
 
 class BeatmapView: IndicatorScrollView {
     
-    var drawer: AdvanceBeatmapDrawer?
+    var drawer: BeatmapDrawer?
     var beatmap: CGSSBeatmap!
     var bpm: Int!
     var type: Int!
@@ -86,6 +86,21 @@ class BeatmapView: IndicatorScrollView {
         }
     }
     
+    var colorTheme: BeatmapDrawer.Theme {
+        let colorTheme: BeatmapDrawer.Theme
+        switch setting.theme {
+        case .single:
+            colorTheme = .single(mainColor: strokeColor)
+        case .type3:
+            colorTheme = .type3
+        case .type4:
+            colorTheme = .type4
+        case .type6:
+            colorTheme = .type6
+        }
+        return colorTheme
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
@@ -98,19 +113,19 @@ class BeatmapView: IndicatorScrollView {
         guard let drawer = self.drawer else {
             return 0
         }
-        let offsetY = contentOffset.y - drawer.heightInset + point.y
+        let offsetY = contentOffset.y - drawer.inset.bottom + point.y
         return offsetY / drawer.totalBeatmapHeight
     }
     
     func setProgress(_ progress: CGFloat, for point: CGPoint) {
         guard let drawer = self.drawer else { return }
-        contentOffset.y = progress * drawer.totalBeatmapHeight + drawer.heightInset - point.y
+        contentOffset.y = progress * drawer.totalBeatmapHeight + drawer.inset.bottom - point.y
     }
     
     private var verticalScale: CGFloat {
         set {
             setting.verticalScale = max(0.5, min(newValue, 2))
-            drawer?.sectionHeight = 245 * setting.verticalScale
+            drawer?.barHeight = 245 * setting.verticalScale
             setNeedsDisplay()
         }
         get {
@@ -154,22 +169,37 @@ class BeatmapView: IndicatorScrollView {
         indicator.strokeColor = self.strokeColor
         
         /* debug */
-//        beatmap.exportNote()
-//        beatmap.exportIntervalToBpm()
-//        beatmap.exportNoteWithOffset()
-        let widthInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
-        let innerWidthInset: CGFloat
+        //        beatmap.exportNote()
+        //        beatmap.exportIntervalToBpm()
+        //        beatmap.exportNoteWithOffset()
+        let horizontalInset: CGFloat = ceil(CGSSGlobal.width / 7.2)
+        let innerPadding: CGFloat
         if frame.width > frame.height {
-            innerWidthInset = widthInset / 3
+            innerPadding = horizontalInset / 3
         } else {
-            innerWidthInset = widthInset
+            innerPadding = horizontalInset
         }
         let sectionHeight: CGFloat = 245
-        let heightInset: CGFloat = 60
+        let verticalInset: CGFloat = 60
         let noteRadius: CGFloat = 7
         
-        drawer = AdvanceBeatmapDrawer(sectionHeight: sectionHeight, columnWidth: frame.width, widthInset: widthInset, innerWidthInset: innerWidthInset, heightInset: heightInset, noteRadius: noteRadius, beatmap: beatmap, bpm: bpm, mirrorFlip: false, strokeColor: strokeColor, lineWidth: 1, tapColor: strokeColor, flickRightColor: strokeColor, flickLeftColor: strokeColor, slideColor: strokeColor, holdColor: strokeColor, isGrandLive: beatmap.isGrandLive, hidesAssistedLines: setting.hidesAssistedLines)
-        setupDrawer()
+        verticalScale = setting.verticalScale
+        let inset = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
+        
+        drawer = BeatmapDrawer(
+            barHeight: sectionHeight,
+            columnWidth: frame.width,
+            inset: inset,
+            numberAreaWidth: innerPadding,
+            noteRadius: noteRadius,
+            beatmap: beatmap,
+            bpm: bpm,
+            mirrorFlip: false,
+            lineWidth: 1,
+            colorTheme: colorTheme,
+            hidesAssistedLines: setting.hidesAssistedLines
+        )
+        
         contentSize.height = drawer?.totalHeight ?? 0
         if #available(iOS 11.0, *) {
         } else {
@@ -182,51 +212,16 @@ class BeatmapView: IndicatorScrollView {
         setNeedsDisplay()
     }
     
-    private func setupDrawer() {
-        if drawer == nil { return }
-        switch setting.theme {
-        case .single:
-            drawer?.tapColor = strokeColor
-            drawer?.holdColor = strokeColor
-            drawer?.flickLeftColor = strokeColor
-            drawer?.flickRightColor = strokeColor
-            drawer?.slideColor = strokeColor
-            drawer?.strokeColor = strokeColor
-        case .type4:
-            drawer?.tapColor = .tap
-            drawer?.holdColor = .hold
-            drawer?.flickLeftColor = .flick4
-            drawer?.flickRightColor = .flick4
-            drawer?.slideColor = .slide
-            drawer?.strokeColor = UIColor.init(hexString: "7f7f7f")
-        case .type3:
-            drawer?.tapColor = .tap
-            drawer?.holdColor = .hold
-            drawer?.flickLeftColor = .flick3
-            drawer?.flickRightColor = .flick3
-            drawer?.slideColor = .slide
-            drawer?.strokeColor = UIColor.init(hexString: "7f7f7f")
-        case .type6:
-            drawer?.tapColor = .tap
-            drawer?.holdColor = .hold
-            drawer?.flickLeftColor = .flick3
-            drawer?.flickRightColor = .flick4
-            drawer?.slideColor = .slide
-            drawer?.strokeColor = UIColor.init(hexString: "7f7f7f")
-        }
-        
-        verticalScale = setting.verticalScale
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         drawer?.columnWidth = frame.width
         contentSize.width = frame.width
-        drawer?.widthInset = ceil(frame.width / 7.2)
+        drawer?.inset.left = ceil(frame.width / 7.2)
+        drawer?.inset.right = ceil(frame.width / 7.2)
         if frame.width > frame.height {
-            drawer?.innerWidthInset = ceil(frame.width / 21.6)
+            drawer?.numberAreaWidth = ceil(frame.width / 21.6)
         } else {
-            drawer?.innerWidthInset = ceil(frame.width / 7.2)
+            drawer?.numberAreaWidth = ceil(frame.width / 7.2)
         }
     }
     
@@ -243,15 +238,27 @@ class BeatmapView: IndicatorScrollView {
     }
     
     func exportImageAsync(title:String, callBack: @escaping (UIImage?) -> Void) {
-
+        
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            guard let drawer = self.drawer else {
+            guard let _ = self.drawer else {
                 DispatchQueue.main.async {
                     callBack(nil)
                 }
                 return
             }
-            let adBeatmapDrawer = AdvanceBeatmapDrawer.init(sectionHeight: 240, columnWidth: 200, widthInset: 32, innerWidthInset: 5, heightInset: 35, noteRadius: 7, beatmap: self.beatmap, bpm: self.bpm, mirrorFlip: self.mirrorFlip, strokeColor: drawer.strokeColor, lineWidth: 1, tapColor: drawer.tapColor, flickRightColor: drawer.flickRightColor, flickLeftColor: drawer.flickLeftColor, slideColor: drawer.slideColor, holdColor: drawer.holdColor, isGrandLive: self.beatmap.isGrandLive, hidesAssistedLines: false)
+            let adBeatmapDrawer = BeatmapDrawer(
+                barHeight: 240,
+                columnWidth: 200,
+                inset: UIEdgeInsets(top: 35, left: 32, bottom: 35, right: 32),
+                numberAreaWidth: 5,
+                noteRadius: 7,
+                beatmap: self.beatmap,
+                bpm: self.bpm,
+                mirrorFlip: self.mirrorFlip,
+                lineWidth: 1,
+                colorTheme: self.colorTheme,
+                hidesAssistedLines: false
+            )
             let newImage = adBeatmapDrawer.export(sectionPerColumn: 4, title: title)
             
             DispatchQueue.main.async {
@@ -284,17 +291,17 @@ class BeatmapView: IndicatorScrollView {
         get {
             guard let drawer = self.drawer else { return 0 }
             if #available(iOS 11.0, *) {
-                return frame.height + contentOffset.y - drawer.heightInset - adjustedContentInset.bottom
+                return frame.height + contentOffset.y - drawer.inset.bottom - adjustedContentInset.bottom
             } else {
-                return frame.height + contentOffset.y - drawer.heightInset - contentInset.bottom
+                return frame.height + contentOffset.y - drawer.inset.bottom - contentInset.bottom
             }
         }
         set {
             guard let drawer = self.drawer else { return }
             if #available(iOS 11.0, *) {
-                contentOffset.y = -frame.height + newValue + drawer.heightInset + adjustedContentInset.bottom
+                contentOffset.y = -frame.height + newValue + drawer.inset.bottom + adjustedContentInset.bottom
             } else {
-                contentOffset.y = -frame.height + newValue + drawer.heightInset + contentInset.bottom
+                contentOffset.y = -frame.height + newValue + drawer.inset.bottom + contentInset.bottom
             }
         }
     }
@@ -303,9 +310,9 @@ class BeatmapView: IndicatorScrollView {
         guard let drawer = self.drawer else { return nil }
         let path = UIBezierPath()
         if #available(iOS 11.0, *) {
-            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.heightInset - adjustedContentInset.bottom))
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.inset.bottom - adjustedContentInset.bottom))
         } else {
-            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.heightInset - contentInset.bottom))
+            path.move(to: CGPoint(x: 0, y: frame.height + contentOffset.y - drawer.inset.bottom - contentInset.bottom))
         }
         path.addLine(to: CGPoint(x: frame.maxX, y: path.currentPoint.y))
         UIColor.black.set()
@@ -341,45 +348,78 @@ extension BeatmapView: UIGestureRecognizerDelegate {
     }
     
 }
-struct AdvanceBeatmapDrawer {
+
+struct BeatmapDrawer {
     
-    var sectionHeight: CGFloat
+    struct Theme {
+        var clickColor: UIColor
+        var holdColor: UIColor
+        var flickLeftColor: UIColor
+        var flickRightColor: UIColor
+        var slideColor: UIColor
+        var lineColor: UIColor
+        
+        /// 单一颜色风格，颜色为传入的歌曲主题色
+        /// - Parameter mainColor: 主题色
+        static func single(mainColor: UIColor) -> Theme {
+            return Theme(clickColor: mainColor, holdColor: mainColor, flickLeftColor: mainColor, flickRightColor: mainColor, slideColor: mainColor, lineColor: mainColor)
+        }
+        
+        /// 区分 note 类型颜色，左右箭头颜色固定为绿色
+        static let type3 = Theme(clickColor: .tap, holdColor: .hold, flickLeftColor: .flick3, flickRightColor: .flick3, slideColor: .slide, lineColor: .beatmapLine)
+        
+        /// 区分 note 类型颜色，左右箭头颜色固定为蓝色
+        static let type4 = Theme(clickColor: .tap, holdColor: .hold, flickLeftColor: .flick4, flickRightColor: .flick4, slideColor: .slide, lineColor: .beatmapLine)
+        
+        /// 区分左右箭头颜色，区分 note 类型颜色
+        static let type6 = Theme(clickColor: .tap, holdColor: .hold, flickLeftColor: .flick3, flickRightColor: .flick4, slideColor: .slide, lineColor: .beatmapLine)
+    }
+    
+    /// 小节高度
+    var barHeight: CGFloat
+    
+    /// 列宽度，通常展示时是屏幕的宽度，导出时需要指定
     var columnWidth: CGFloat
-    var widthInset: CGFloat
-    var innerWidthInset: CGFloat
-    var heightInset: CGFloat
+    
+    /// 整列的内边缘距离
+    var inset: UIEdgeInsets
+    
+    /// combo 数字和小节数字所在区域的宽度
+    var numberAreaWidth: CGFloat
+    
+    /// note 的半径
     var noteRadius: CGFloat
+    
     var beatmap: CGSSBeatmap
     var bpm: Int
+    
+    /// 是否镜像翻转
     var mirrorFlip: Bool
-    var strokeColor: UIColor
+    
     var lineWidth: CGFloat
+    var colorTheme: Theme
     
-    var tapColor: UIColor
-    var flickRightColor: UIColor
-    var flickLeftColor: UIColor
-    var slideColor: UIColor
-    var holdColor: UIColor
-    var isGrandLive: Bool
-    
-
+    /// 是否隐藏辅助线
     var hidesAssistedLines: Bool
-//    var prefersConstantSpeed: Bool
-    
+
+    var isGrandLive: Bool {
+        return beatmap.isGrandLive
+    }
+        
     var interval: CGFloat {
         if isGrandLive {
-            return (columnWidth - 2 * widthInset - 2 * innerWidthInset) / 14
+            return (columnWidth - inset.left - inset.right - 2 * numberAreaWidth) / 14
         } else {
-            return (columnWidth - 2 * widthInset - 2 * innerWidthInset) / 4
+            return (columnWidth - inset.left - inset.right - 2 * numberAreaWidth) / 4
         }
     }
     
     var secScale: CGFloat {
-        return sectionHeight * (CGFloat(bpm) / 60 / 4)
+        return barHeight * (CGFloat(bpm) / 60 / 4)
     }
     
     var totalHeight: CGFloat {
-        return secScale * CGFloat(beatmap.validSeconds + (beatmap.lastNote?.offset ?? 0)) + 2 * heightInset
+        return secScale * CGFloat(beatmap.validSeconds + (beatmap.lastNote?.offset ?? 0)) + inset.top + inset.bottom
     }
     
     var totalBeatmapHeight: CGFloat {
@@ -393,9 +433,9 @@ struct AdvanceBeatmapDrawer {
     func export(sectionPerColumn: CGFloat, title: String) -> UIImage? {
         let textHeight:CGFloat = 50
         // 一列的原始高度
-        let beatmapH = sectionPerColumn * sectionHeight
+        let beatmapH = sectionPerColumn * barHeight
         // 一列含上下边界的高度
-        let columnH = beatmapH + 2 * heightInset
+        let columnH = beatmapH + inset.top + inset.bottom
         // 生成的图片总高度
         let imageH = columnH + textHeight
         // 总列数
@@ -424,12 +464,12 @@ struct AdvanceBeatmapDrawer {
         (title as NSString).draw(at: CGPoint(x: 30, y: 10), withAttributes: attDict)
         for i in 0..<Int(columns) {
             
-            let subImage:CGImage! = image.cgImage?.cropping(to: CGRect(x: 0, y: totalHeight - columnH * CGFloat(i + 1) + CGFloat(i) * 2 * heightInset, width: columnWidth, height: columnH))
+            let subImage:CGImage! = image.cgImage?.cropping(to: CGRect(x: 0, y: totalHeight - columnH * CGFloat(i + 1) + CGFloat(i) * (inset.top + inset.bottom), width: columnWidth, height: columnH))
             
             // 最后一列特殊处理
             if i == Int(columns) - 1 {
                 let offset = totalBeatmapHeight.truncatingRemainder(dividingBy: beatmapH)
-                UIImage(cgImage: subImage).draw(in: CGRect(x: CGFloat(i) * columnWidth, y: imageH - 2 * heightInset - offset, width: columnWidth, height: offset + heightInset * 2))
+                UIImage(cgImage: subImage).draw(in: CGRect(x: CGFloat(i) * columnWidth, y: imageH - inset.top - inset.bottom - offset, width: columnWidth, height: offset + inset.top + inset.bottom))
             } else {
                 // 这样的画法不会上下颠倒
                 UIImage(cgImage: subImage).draw(in: CGRect(x: CGFloat(i) * columnWidth, y: textHeight, width: columnWidth, height: columnH))
@@ -440,7 +480,7 @@ struct AdvanceBeatmapDrawer {
             
             // let bottomSide:CGImage! = image.cgImage?.cropping(to: CGRect.init(x: 0, y: contentSize.height - columnH * CGFloat(i) + CGFloat(i) * 2 * BeatmapView.heightInset - BeatmapView.heightInset, width: CGSSGlobal.width, height: BeatmapView.heightInset))
             
-          
+            
         }
         // 边缘颜色渐变
         let locations:[CGFloat] = [0, 1]
@@ -449,14 +489,14 @@ struct AdvanceBeatmapDrawer {
         let gradient = CGGradient(colorsSpace: colorSpace, colors: colors as CFArray, locations: locations)
         
         var startPoint = CGPoint(x: 0, y: imageH)
-        var endPoint = CGPoint(x: 0, y: imageH - heightInset)
+        var endPoint = CGPoint(x: 0, y: imageH - inset.bottom)
         
         context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions(rawValue: 0))
-
+        
         startPoint = CGPoint(x: 0, y: textHeight)
-        endPoint = CGPoint(x: 0, y: textHeight + heightInset)
+        endPoint = CGPoint(x: 0, y: textHeight + inset.top)
         context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: CGGradientDrawingOptions(rawValue: 0))
-
+        
         
         // 另一种思路处理上下颠倒, 翻转180度
         // context.translateBy(x: imageW, y: imageH + 50)
@@ -464,78 +504,130 @@ struct AdvanceBeatmapDrawer {
         
         let newImage = UIImage(cgImage: context.makeImage()!)
         UIGraphicsEndImageContext()
-
+        
         return newImage
     }
+    
+    func draw(_ rect: CGRect) {
+        
+        if !hidesAssistedLines {
+            // 画纵向辅助线
+            drawVerticalLine(rect)
+            
+            // 画小节线
+            drawSectionLine(rect)
+            
+            // 画 bpm 改变线
+            drawBpmShiftLine(rect)
+        }
+        
+        let range = convertRectToIndexRange(rect)
+        
+        drawGroupLine(indexRange: range)
+        drawHoldConnectionLine(indexRange: range)
+        drawSyncLine(indexRange: range)
+        drawNote(rangeIndex: range)
+    }
+    
+    private func convertRectToIndexRange(_ rect: CGRect) -> Range<Int> {
+        // 滑条 长按 同步线
+        let maxY = rect.maxY + noteRadius
+        let minY = rect.minY - noteRadius
+        var minIndex = beatmap.comboForSec(getShiftedOffset(y: maxY))
+        var maxIndex = beatmap.comboForSec(getShiftedOffset(y: minY))
+        
+        // if full screen has no notes, then expand the index
+        if maxIndex - minIndex < 1 {
+            if minIndex - 2 > 0 {
+                minIndex -= 2
+            } else if maxIndex + 2 < notes.count {
+                maxIndex += 2
+            }
+        }
+        
+        // if one side has long press or slide over the screen, the other side not, we need to expand the index too
+        if let along = notes[minIndex].along {
+            minIndex = along.comboIndex - 1
+        }
+        
+        return minIndex..<maxIndex
+    }
+}
+
+// MARK: Drawing logic
+extension BeatmapDrawer {
     
     private func drawVerticalLine(_ rect: CGRect) {
         let count = isGrandLive ? 15 : 5
         for i in 1...count {
-            let path = pathForVerticalLine(rect.origin.y, height: rect.size.height, positionX: isGrandLive ? getWidePointX(i, width: 1).start : getPointX(i))
+            let x = isGrandLive ? getWidePointX(i, width: 1).start : getPointX(i)
+            let origin = CGPoint(x: x, y: rect.origin.y)
+            let path = pathForVerticalLine(origin: origin, height: rect.size.height)
             UIColor.lightGray.withAlphaComponent(0.5).set()
             path.stroke()
         }
     }
     
     private func drawSectionLine(_ rect: CGRect) {
-        let halfquadSectionMax = Int(((totalHeight - rect.origin.y - heightInset) / sectionHeight * 8))
-        let rectMin = totalHeight - rect.size.height - rect.origin.y - heightInset
-        let halfquadSectionMin = Int(rectMin / sectionHeight * 8)
+        let halfquadSectionMax = Int(((totalHeight - rect.origin.y - inset.bottom) / barHeight * 8))
+        let rectMin = totalHeight - rect.size.height - rect.origin.y - inset.bottom
+        let halfquadSectionMin = Int(rectMin / barHeight * 8)
         for i in halfquadSectionMin...halfquadSectionMax {
-            let pointY = totalHeight - heightInset - CGFloat(i) * sectionHeight / 8
+            let pointY = totalHeight - inset.bottom - CGFloat(i) * barHeight / 8
             if i % 8 == 0 {
                 UIColor.darkGray.set()
                 let sectionNumber: NSString = NSString.init(format: "%03d", i / 8)
                 let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
-                sectionNumber.draw(at: CGPoint(x: widthInset - 25, y: pointY - 7), withAttributes: attDict)
+                sectionNumber.draw(at: CGPoint(x: numberAreaWidth - 25, y: pointY - 7), withAttributes: attDict)
                 let comboNumber: NSString = NSString.init(format: "%d", beatmap.comboForSec(Float(i / 8) / (Float(bpm) / 60 / 4)))
-                comboNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: pointY - 7), withAttributes: attDict)
+                comboNumber.draw(at: CGPoint(x: columnWidth - numberAreaWidth + 4, y: pointY - 7), withAttributes: attDict)
             }
             else if i % 2 == 0 { UIColor.lightGray.set() }
             else { UIColor.lightGray.withAlphaComponent(0.5).set() }
-            let path = pathForSectionLine(pointY)
+            let path = pathForBarLine(pointY)
             path.stroke()
         }
     }
+    
     
     private func drawBpmShiftLine(_ rect: CGRect) {
         if let shiftingPoints = beatmap.shiftingPoints {
             for i in 0..<shiftingPoints.count {
                 let point = shiftingPoints[i]
                 let y = getPointY(point.timestamp)
-                if y < rect.minX - sectionHeight { break }
-                if y > rect.maxY + sectionHeight { continue }
-                let path = pathForSectionLine(y)
+                if y < rect.minX - barHeight { break }
+                if y > rect.maxY + barHeight { continue }
+                let path = pathForBarLine(y)
                 UIColor.bpmShift.set()
                 path.stroke()
                 
                 var offset: CGFloat = 0
-                let remainder = (totalHeight - y - heightInset).truncatingRemainder(dividingBy: sectionHeight)
+                let remainder = (totalHeight - y - inset.bottom).truncatingRemainder(dividingBy: barHeight)
                 if remainder < 24 {
                     offset = remainder - 24
-                } else if sectionHeight - remainder < 24 {
-                    offset = -24 - sectionHeight + remainder
+                } else if barHeight - remainder < 24 {
+                    offset = -24 - barHeight + remainder
                 }
                 
                 UIColor.red.set()
                 let bpmNumber = NSString(format: "%d", point.bpm)
                 let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.bpmShift]
-                bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y - 14 + offset), withAttributes: attDict)
+                bpmNumber.draw(at: CGPoint(x: columnWidth - numberAreaWidth + 4, y: y - 14 + offset), withAttributes: attDict)
                 
                 if i > 0 {
                     let lastPoint = shiftingPoints[i - 1]
                     let bpmNumber = NSString(format: "%d", lastPoint.bpm)
                     let attDict = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor
                         .bpmShift]
-                    bpmNumber.draw(at: CGPoint(x: columnWidth - widthInset + 4, y: y + offset), withAttributes: attDict)
+                    bpmNumber.draw(at: CGPoint(x: columnWidth - numberAreaWidth + 4, y: y + offset), withAttributes: attDict)
                 }
                 
                 let path2 = UIBezierPath.init()
-                path2.move(to: CGPoint(x: columnWidth - widthInset, y: y))
-                path2.addLine(to: CGPoint(x: columnWidth - widthInset + 1, y: y))
-                path2.addLine(to: CGPoint(x: columnWidth - widthInset + 1, y: y + offset))
+                path2.move(to: CGPoint(x: columnWidth - numberAreaWidth, y: y))
+                path2.addLine(to: CGPoint(x: columnWidth - numberAreaWidth + 1, y: y))
+                path2.addLine(to: CGPoint(x: columnWidth - numberAreaWidth + 1, y: y + offset))
                 let bpmLength = bpmNumber.boundingRect(with: CGSize.init(width: 999, height: 999), options: NSStringDrawingOptions.init(rawValue: 0), attributes: attDict, context: nil).size.width
-                path2.addLine(to: CGPoint(x: columnWidth - widthInset + bpmLength + 4, y: y + offset))
+                path2.addLine(to: CGPoint(x: columnWidth - numberAreaWidth + bpmLength + 4, y: y + offset))
                 path2.lineWidth = 1
                 path2.stroke()
             }
@@ -543,35 +635,35 @@ struct AdvanceBeatmapDrawer {
     }
     
     typealias Note = CGSSBeatmapNote
-
-    private func drawNote(minIndex: Int, maxIndex: Int) {
+    
+    private func drawNote(rangeIndex: Range<Int>) {
         
-        for i in minIndex..<maxIndex {
+        for i in rangeIndex {
             let note = notes[i]
             if note.finishPos != 0 {
-                switch note.noteType {
+                switch note.style {
                 case .hold:
-                    let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
+                    let outerPath = pathForNoteOuter(note.finishPos, sec: note.offsetSecond)
                     // 长按类型中间画一个小圆
-                    holdColor.set()
+                    colorTheme.holdColor.set()
                     outerPath.fill()
-                    let innerPath = pathForSmallPoint(note.finishPos, sec: note.offsetSecond)
+                    let innerPath = pathForNoteInner(note.finishPos, sec: note.offsetSecond)
                     UIColor.white.set()
                     innerPath.fill()
                 case .slide:
-                    let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
+                    let outerPath = pathForNoteOuter(note.finishPos, sec: note.offsetSecond)
                     // slide 中间画一个小横线
-                    slideColor.set()
+                    colorTheme.slideColor.set()
                     outerPath.fill()
-                    let path = pathForSmallPoint(note.finishPos, sec: note.offsetSecond)
-                    let path2 = pathForSlidePoint(note.finishPos, sec: note.offsetSecond)
+                    let path = pathForNoteInner(note.finishPos, sec: note.offsetSecond)
+                    let path2 = pathForSlideNote(note.finishPos, sec: note.offsetSecond)
                     UIColor.white.set()
                     path.fill()
                     path2.stroke()
                 case .flick(.left) where !mirrorFlip,
                      .flick(.right) where mirrorFlip:
-                    let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
-                    flickLeftColor.set()
+                    let outerPath = pathForNoteOuter(note.finishPos, sec: note.offsetSecond)
+                    colorTheme.flickLeftColor.set()
                     outerPath.fill()
                     let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: center.x - noteRadius + 1, y: center.y)
@@ -590,8 +682,8 @@ struct AdvanceBeatmapDrawer {
                     path2.fill()
                 case .flick(.right) where !mirrorFlip,
                      .flick(.left) where mirrorFlip:
-                    let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
-                    flickRightColor.set()
+                    let outerPath = pathForNoteOuter(note.finishPos, sec: note.offsetSecond)
+                    colorTheme.flickRightColor.set()
                     outerPath.fill()
                     let center = CGPoint(x: getPointX(note.finishPos), y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: center.x + noteRadius - 1, y: center.y)
@@ -608,25 +700,25 @@ struct AdvanceBeatmapDrawer {
                     path.fill()
                     // path2.stroke()
                     path2.fill()
-                case .wideClick(let width):
-                    let outerPath = pathForWidePoint(position: note.finishPos, sec: note.offsetSecond, width: width)
-                    tapColor.set()
+                case .wideClick:
+                    let outerPath = pathForWideNoteOuter(position: note.finishPos, sec: note.offsetSecond, width: note.width)
+                    colorTheme.clickColor.set()
                     outerPath.fill()
-                case .wideSlide(let width):
-                    let outerPath = pathForWidePoint(position: note.finishPos, sec: note.offsetSecond, width: width)
-                    holdColor.set()
+                case .wideSlide:
+                    let outerPath = pathForWideNoteOuter(position: note.finishPos, sec: note.offsetSecond, width: note.width)
+                    colorTheme.holdColor.set()
                     outerPath.fill()
-                    let innerPath = pathForSmallWidePoint(note.finishPos, sec: note.offsetSecond, width: width)
+                    let innerPath = pathForWideNoteInner(note.finishPos, sec: note.offsetSecond, width: note.width)
                     UIColor.white.set()
                     innerPath.fill()
-                case .wideFlick(let width, direction: .left) where !mirrorFlip,
-                     .wideFlick(let width, direction: .right) where mirrorFlip:
-                    let outerPath = pathForWidePoint(position: note.finishPos, sec: note.offsetSecond, width: width)
-                    flickLeftColor.set()
+                case .wideFlick(.left) where !mirrorFlip,
+                     .wideFlick(.right) where mirrorFlip:
+                    let outerPath = pathForWideNoteOuter(position: note.finishPos, sec: note.offsetSecond, width: note.width)
+                    colorTheme.flickLeftColor.set()
                     outerPath.fill()
-                     let (start, end) = getWidePointX(note.finishPos, width: width)
-                                       let startPoint = CGPoint(x: start, y: getPointY(note.offsetSecond))
-                                       let endPoint = CGPoint(x: end, y: getPointY(note.offsetSecond))
+                    let (start, end) = getWidePointX(note.finishPos, width: note.width)
+                    let startPoint = CGPoint(x: start, y: getPointY(note.offsetSecond))
+                    let endPoint = CGPoint(x: end, y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: startPoint.x - noteRadius + 1, y: startPoint.y)
                     let point2 = CGPoint(x: startPoint.x + 1, y: startPoint.y - noteRadius + 3)
                     let point3 = CGPoint(x: startPoint.x + 1, y: startPoint.y + noteRadius - 3)
@@ -637,12 +729,12 @@ struct AdvanceBeatmapDrawer {
                     path.addLine(to: point3)
                     UIColor.white.set()
                     path.fill()
-                case .wideFlick(let width, direction: .right) where !mirrorFlip,
-                     .wideFlick(let width, direction: .left) where mirrorFlip:
-                    let outerPath = pathForWidePoint(position: note.finishPos, sec: note.offsetSecond, width: width)
-                    flickRightColor.set()
+                case .wideFlick(.right) where !mirrorFlip,
+                     .wideFlick(.left) where mirrorFlip:
+                    let outerPath = pathForWideNoteOuter(position: note.finishPos, sec: note.offsetSecond, width: note.width)
+                    colorTheme.flickRightColor.set()
                     outerPath.fill()
-                    let (start, end) = getWidePointX(note.finishPos, width: width)
+                    let (start, end) = getWidePointX(note.finishPos, width: note.width)
                     let startPoint = CGPoint(x: start, y: getPointY(note.offsetSecond))
                     let endPoint = CGPoint(x: end, y: getPointY(note.offsetSecond))
                     let point1 = CGPoint(x: endPoint.x + noteRadius - 1, y: startPoint.y)
@@ -656,8 +748,8 @@ struct AdvanceBeatmapDrawer {
                     UIColor.white.set()
                     path.fill()
                 case .click:
-                    let outerPath = pathForPoint(note.finishPos, sec: note.offsetSecond)
-                    tapColor.set()
+                    let outerPath = pathForNoteOuter(note.finishPos, sec: note.offsetSecond)
+                    colorTheme.clickColor.set()
                     outerPath.fill()
                 default:
                     fatalError()
@@ -666,19 +758,19 @@ struct AdvanceBeatmapDrawer {
         }
     }
     
-    private func drawNoteSyncLine(minIndex: Int, maxIndex: Int) {
+    private func drawSyncLine(indexRange: Range<Int>) {
         var syncNote: Note?
-        for i in minIndex..<maxIndex {
+        for i in indexRange {
             let note = notes[i]
             if note.finishPos != 0 {
                 // 画同步线
                 if note.sync == 1 {
                     if syncNote != nil {
                         if syncNote!.offsetSecond == note.offsetSecond {
-                            let path = note.noteType.isWide ? pathForWideSyncLine(syncNote!, note2: note) : pathForSyncLine(syncNote!, note2: note)
+                            let path = note.style.isWide ? pathForWideSyncLine(syncNote!, note2: note) : pathForSyncLine(syncNote!, note2: note)
                             UIColor.white.set()
                             path.stroke()
-                            strokeColor.withAlphaComponent(0.5).set()
+                            colorTheme.lineColor.withAlphaComponent(0.5).set()
                             path.stroke()
                         } else {
                             syncNote = note
@@ -691,43 +783,9 @@ struct AdvanceBeatmapDrawer {
         }
     }
     
-    private func drawNoteLongPressLine(minIndex: Int, maxIndex: Int) {
-        var lastPressedNote = [Note?](repeating: nil, count: 15)
-        if isGrandLive { return }
-        for i in minIndex..<maxIndex {
-            let note = notes[i]
-            if note.finishPos != 0 {
-                // 简单长按类型
-                if note.longPressType == 1 {
-                    lastPressedNote[note.finishPos - 1] = note
-                }
-                if note.longPressType == 2 && note.previous != nil {
-                    let path = pathForLongPress(note.finishPos, sec1: note.previous!.offsetSecond, sec2: note.offsetSecond)
-                    UIColor.white.set()
-                    path.fill()
-                    strokeColor.withAlphaComponent(0.25).set()
-                    path.fill()
-                    lastPressedNote[note.finishPos - 1] = nil
-                }
-            }
-        }
-        
-        let pressed: [Note] = lastPressedNote.compactMap { $0 }
-        for last in pressed {
-            if let next = last.next {
-                let path = pathForLongPress(last.finishPos, sec1: last.offsetSecond, sec2: next.offsetSecond)
-                UIColor.white.set()
-                path.fill()
-                strokeColor.withAlphaComponent(0.25).set()
-                path.fill()
-            }
-        }
-
-    }
-    
-    private func drawNoteGroupLine(minIndex: Int, maxIndex: Int) {
+    private func drawGroupLine(indexRange: Range<Int>) {
         var lastSlideOrFlickNote = [Int: Note]()
-        for i in minIndex..<maxIndex {
+        for i in indexRange {
             let note = notes[i]
             if note.finishPos != 0 {
                 // 画滑条
@@ -735,17 +793,15 @@ struct AdvanceBeatmapDrawer {
                     lastSlideOrFlickNote[note.groupId] = note
                     if note.previous != nil {
                         let path: UIBezierPath?
-                        switch note.noteType {
+                        switch note.style {
                         case .flick:
-                            path = pathForFlick(note.previous!, note2: note)
+                            path = pathForFlickConnectionLine(note.previous!, note2: note)
                         case .slide:
-                            path = pathForSlide(note.previous!, note2: note)
+                            path = pathForSlideConnectionLine(note.previous!, note2: note)
                         default:
-                            path = pathForWideSlide(note.previous!, note2: note)
+                            path = pathForWideSlideConnectionLine(note.previous!, note2: note)
                         }
-//                        UIColor.white.set()
-//                        path?.fill()
-                        strokeColor.withAlphaComponent(0.25).set()
+                        colorTheme.lineColor.withAlphaComponent(0.25).set()
                         path?.fill()
                     }
                 }
@@ -755,73 +811,66 @@ struct AdvanceBeatmapDrawer {
         for last in lastSlideOrFlickNote.values {
             if let next = last.next {
                 let path: UIBezierPath?
-                switch last.noteType {
+                switch last.style {
                 case .flick:
-                    path = pathForFlick(last, note2: next)
+                    path = pathForFlickConnectionLine(last, note2: next)
                 case .slide:
-                    path = pathForSlide(last, note2: next)
+                    path = pathForSlideConnectionLine(last, note2: next)
                 default:
-                    path = pathForWideSlide(last, note2: next)
+                    path = pathForWideSlideConnectionLine(last, note2: next)
                 }
-//                UIColor.white.set()
-//                path?.fill()
-                strokeColor.withAlphaComponent(0.25).set()
+                colorTheme.lineColor.withAlphaComponent(0.25).set()
                 path?.fill()
             }
         }
     }
     
-    func draw(_ rect: CGRect) {
-        
-        if !hidesAssistedLines {
-            // 画纵向辅助线
-            drawVerticalLine(rect)
-            
-            // 画小节线
-            drawSectionLine(rect)
-            
-            // 画 bpm 改变线
-            drawBpmShiftLine(rect)
-        }
-        
-        
-        // 滑条 长按 同步线
-        let maxY = rect.maxY + noteRadius
-        let minY = rect.minY - noteRadius
-        var minIndex = beatmap.comboForSec(getShiftedOffset(y: maxY))
-        var maxIndex = beatmap.comboForSec(getShiftedOffset(y: minY))
-       
-        // if full screen has no notes, then expand the index
-        if maxIndex - minIndex < 1 {
-            if minIndex - 2 > 0 {
-                minIndex -= 2
-            } else if maxIndex + 2 < notes.count {
-                maxIndex += 2
+    private func drawHoldConnectionLine(indexRange: Range<Int>) {
+        var lastPressedNote = [Note?](repeating: nil, count: 15)
+        if isGrandLive { return }
+        for i in indexRange {
+            let note = notes[i]
+            if note.finishPos != 0 {
+                // 简单长按类型
+                if note.longPressType == 1 {
+                    lastPressedNote[note.finishPos - 1] = note
+                }
+                if note.longPressType == 2 && note.previous != nil {
+                    let path = pathForHoldConnectionLine(note.finishPos, sec1: note.previous!.offsetSecond, sec2: note.offsetSecond)
+                    UIColor.white.set()
+                    path.fill()
+                    colorTheme.lineColor.withAlphaComponent(0.25).set()
+                    path.fill()
+                    lastPressedNote[note.finishPos - 1] = nil
+                }
             }
         }
         
-        // if one side has long press or slide over the screen, the other side not, we need to expand the index too
-        if let along = notes[minIndex].along {
-            minIndex = along.comboIndex - 1
+        let pressed = lastPressedNote.compactMap { $0 }
+        for last in pressed {
+            if let next = last.next {
+                let path = pathForHoldConnectionLine(last.finishPos, sec1: last.offsetSecond, sec2: next.offsetSecond)
+                UIColor.white.set()
+                path.fill()
+                colorTheme.lineColor.withAlphaComponent(0.25).set()
+                path.fill()
+            }
         }
         
-        drawNoteGroupLine(minIndex: minIndex, maxIndex: maxIndex)
-        
-        drawNoteLongPressLine(minIndex: minIndex, maxIndex: maxIndex)
-        
-        drawNoteSyncLine(minIndex: minIndex, maxIndex: maxIndex)
-
-        // 画点
-        drawNote(minIndex: minIndex, maxIndex: maxIndex)
     }
+    
+}
 
-    private func pathForPoint(_ position: Int, sec: Float) -> UIBezierPath {
+// MARK: Note shapes
+extension BeatmapDrawer {
+    
+    private func pathForNoteOuter(_ position: Int, sec: Float) -> UIBezierPath {
         let radius = noteRadius
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
     
-    private func pathForWidePoint(position: Int, sec: Float, width: Int) -> UIBezierPath {
+    private func pathForWideNoteOuter(position: Int, sec: Float, width: Int) -> UIBezierPath {
         let xRadius = noteRadius
         let yRadius = noteRadius - 2
         let (start, end) = getWidePointX(position, width: width)
@@ -830,13 +879,13 @@ struct AdvanceBeatmapDrawer {
         return pathForRoundedRectangle(startPoint: startPoint, endPoint: endPoint, xRadius: xRadius, yRadius: yRadius)
     }
     
-    private func pathForSmallPoint(_ position: Int, sec: Float) -> UIBezierPath {
+    private func pathForNoteInner(_ position: Int, sec: Float) -> UIBezierPath {
         let radius = floor(noteRadius / 2)
         let center = CGPoint(x: getPointX(position), y: getPointY(sec))
         return pathForCircleCenteredAtPoint(center, withRadius: radius)
     }
     
-    private func pathForSmallWidePoint(_ position: Int, sec: Float, width: Int) -> UIBezierPath {
+    private func pathForWideNoteInner(_ position: Int, sec: Float, width: Int) -> UIBezierPath {
         let xRadius = noteRadius / 2
         let yRadius = noteRadius / 2 - 2
         let (start, end) = getWidePointX(position, width: width)
@@ -845,7 +894,7 @@ struct AdvanceBeatmapDrawer {
         return pathForRoundedRectangle(startPoint: startPoint, endPoint: endPoint, xRadius: xRadius, yRadius: yRadius)
     }
     
-    fileprivate func pathForSlidePoint(_ position: Int, sec: Float) -> UIBezierPath {
+    fileprivate func pathForSlideNote(_ position: Int, sec: Float) -> UIBezierPath {
         let path = UIBezierPath()
         let x = getPointX(position)
         let y = getPointY(sec)
@@ -855,64 +904,21 @@ struct AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
-        let x1 = getPointX(note1.finishPos)
-        let x2 = getPointX(note2.finishPos)
-        let y = getPointY(note1.offsetSecond)
-        
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: x1, y: y))
-        path.addLine(to: CGPoint(x: x2, y: y))
-        path.lineWidth = 3
-        return path
-    }
+}
+
+// MARK: Note connection lines
+extension BeatmapDrawer {
     
-    private func pathForWideSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
-        let (x1, _) = getWidePointX(note1.finishPos, width: note1.noteType.width)
-        let (x2, _) = getWidePointX(note2.finishPos, width: note2.noteType.width)
-        let y = getPointY(note1.offsetSecond)
-        
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: x1, y: y))
-        path.addLine(to: CGPoint(x: x2, y: y))
-        path.lineWidth = 3
-        return path
-    }
-    
-    private func pathForLongPress(_ position: Int, sec1: Float, sec2: Float) -> UIBezierPath {
+    private func pathForHoldConnectionLine(_ position: Int, sec1: Float, sec2: Float) -> UIBezierPath {
+        let y1 = getPointY(sec1)
         let y2 = getPointY(sec2)
-        return pathForLongPress(position, sec1: sec1, y: y2)
-    }
-    
-    private func pathForWideLongPress(_ position: Int, sec1: Float, sec2: Float, width: Int) -> UIBezierPath {
-        let y2 = getPointY(sec2)
-        return pathForWideLongPress(position, sec1: sec1, y: y2, width: width)
-    }
-    
-    private func pathForFlick(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
-        
-        let x1 = getPointX(note1.finishPos)
-        let x2 = getPointX(note2.finishPos)
-        let y1 = getPointY(note1.offsetSecond)
-        let y2 = getPointY(note2.offsetSecond)
-        // 个别情况下flicks的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
-        // 但是要注意新类型slide会超过1个section故排除slide
-        if y1 - y2 > sectionHeight {
-            return nil
-        }
-        
-        let t = atan((y1 - y2) / (x2 - x1))
+        let x = getPointX(position)
         let r = (noteRadius + 1) / 2
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: x1 - sin(t) * r, y: y1 - cos(t) * r))
-        path.addLine(to: CGPoint(x: x1 + sin(t) * r, y: y1 + cos(t) * r))
-        path.addLine(to: CGPoint(x: x2 + sin(t) * r, y: y2 + cos(t) * r))
-        path.addLine(to: CGPoint(x: x2 - sin(t) * r, y: y2 - cos(t) * r))
+        let path = UIBezierPath(rect: CGRect(x: x - r, y: y2, width: r * 2, height: y1 - y2))
         return path
     }
     
-    private func pathForSlide(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
-        
+    private func pathForSlideConnectionLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
         let x1 = getPointX(note1.finishPos)
         let x2 = getPointX(note2.finishPos)
         let y1 = getPointY(note1.offsetSecond)
@@ -927,9 +933,9 @@ struct AdvanceBeatmapDrawer {
         return path
     }
     
-    private func pathForWideSlide(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
-        let (startX1, endX1) = getWidePointX(note1.finishPos, width: note1.noteType.width)
-        let (startX2, endX2) = getWidePointX(note2.finishPos, width: note2.noteType.width)
+    private func pathForWideSlideConnectionLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
+        let (startX1, endX1) = getWidePointX(note1.finishPos, width: note1.width)
+        let (startX2, endX2) = getWidePointX(note2.finishPos, width: note2.width)
         let y1 = getPointY(note1.offsetSecond)
         let y2 = getPointY(note2.offsetSecond)
         let t1 = atan((y1 - y2) / (startX2 - startX1))
@@ -948,39 +954,86 @@ struct AdvanceBeatmapDrawer {
         path.addLine(to: CGPoint(x: startX2 - startSign * sin(t1) * r, y: y2 - startSign * cos(t1) * r))
         return path
     }
-
     
-    private func pathForLongPress(_ position: Int, sec1: Float, y: CGFloat) -> UIBezierPath {
-        let x = getPointX(position)
-        let y1 = getPointY(sec1)
+    private func pathForFlickConnectionLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath? {
+        let x1 = getPointX(note1.finishPos)
+        let x2 = getPointX(note2.finishPos)
+        let y1 = getPointY(note1.offsetSecond)
+        let y2 = getPointY(note2.offsetSecond)
+        // 个别情况下flicks的组id会重复使用,为了避免这种情况带来的错误,当滑条的点间距大于1个section时,失效
+        // 但是要注意新类型slide会超过1个section故排除slide
+        if y1 - y2 > barHeight {
+            return nil
+        }
+        
+        let t = atan((y1 - y2) / (x2 - x1))
         let r = (noteRadius + 1) / 2
-        let path = UIBezierPath.init(rect: CGRect(x: x - r, y: y, width: r * 2, height: y1 - y))
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1 - sin(t) * r, y: y1 - cos(t) * r))
+        path.addLine(to: CGPoint(x: x1 + sin(t) * r, y: y1 + cos(t) * r))
+        path.addLine(to: CGPoint(x: x2 + sin(t) * r, y: y2 + cos(t) * r))
+        path.addLine(to: CGPoint(x: x2 - sin(t) * r, y: y2 - cos(t) * r))
         return path
     }
     
-    private func pathForWideLongPress(_ position: Int, sec1: Float, y: CGFloat, width: Int) -> UIBezierPath {
-        let (startX, endX) = getWidePointX(position, width: width)
-        let y1 = getPointY(sec1)
-        let r = (noteRadius + 1) / 2
-        let path = UIBezierPath.init(rect: CGRect(x: startX - r, y: y, width: endX + r, height: y1 - y))
+    private func pathForSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
+        let x1 = getPointX(note1.finishPos)
+        let x2 = getPointX(note2.finishPos)
+        let y = getPointY(note1.offsetSecond)
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y))
+        path.addLine(to: CGPoint(x: x2, y: y))
+        path.lineWidth = 3
         return path
     }
+    
+    private func pathForWideSyncLine(_ note1: CGSSBeatmapNote, note2: CGSSBeatmapNote) -> UIBezierPath {
+        let (x1, _) = getWidePointX(note1.finishPos, width: note1.width)
+        let (x2, _) = getWidePointX(note2.finishPos, width: note2.width)
+        let y = getPointY(note1.offsetSecond)
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y))
+        path.addLine(to: CGPoint(x: x2, y: y))
+        path.lineWidth = 3
+        return path
+    }
+}
 
-    private func pathForSectionLine(_ positionY: CGFloat) -> UIBezierPath {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: widthInset, y: positionY))
-        path.addLine(to: CGPoint(x: columnWidth - widthInset, y: positionY))
-        path.lineWidth = lineWidth
-        return path
+// MARK: Position converting
+extension BeatmapDrawer {
+    
+    /// Get the shifted offset time from the very begining of the beatmap to a specific point in all the drawing area
+    ///
+    /// - Parameter y: the point.y of the drawing area
+    /// - Returns: the shifted offset time
+    func getShiftedOffset(y: CGFloat) -> Float {
+        return Float((totalHeight - y - inset.bottom) / secScale)
     }
     
-    private func pathForVerticalLine(_ originY: CGFloat, height: CGFloat, positionX: CGFloat) -> UIBezierPath {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: positionX, y: originY))
-        path.addLine(to: CGPoint(x: positionX, y: originY + height))
-        path.lineWidth = lineWidth
-        return path
+    func getWidePointX(_ position: Int, width: Int) -> (start: CGFloat, end: CGFloat) {
+        let endPosition = position + width - 1
+        let x1 = inset.left + numberAreaWidth + interval * (CGFloat(mirrorFlip ? 16 - position : position) - 1)
+        let x2 = inset.left + numberAreaWidth + interval * (CGFloat(mirrorFlip ? 16 - endPosition : endPosition) - 1)
+        if mirrorFlip {
+            return (start: x2, end: x1)
+        } else {
+            return (start: x1, end: x2)
+        }
     }
+    
+    func getPointX(_ position: Int) -> CGFloat {
+        return inset.left + numberAreaWidth + interval * (CGFloat(mirrorFlip ? 6 - position : position) - 1)
+    }
+    
+    func getPointY(_ sec: Float) -> CGFloat {
+        return totalHeight - CGFloat(sec - self.beatmap.timeOfFirstNote) * secScale - inset.bottom
+    }
+}
+
+// MARK: Basic shapes
+extension BeatmapDrawer {
     
     private func pathForCircleCenteredAtPoint(_ midPoint: CGPoint, withRadius radius: CGFloat) -> UIBezierPath {
         let path = UIBezierPath(
@@ -1000,37 +1053,26 @@ struct AdvanceBeatmapDrawer {
         path.lineWidth = lineWidth
         return path
     }
-
-    func getPointX(_ position: Int) -> CGFloat {
-        return widthInset + innerWidthInset + interval * (CGFloat(mirrorFlip ? 6 - position : position) - 1)
+    
+    private func pathForBarLine(_ originY: CGFloat) -> UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: numberAreaWidth, y: originY))
+        path.addLine(to: CGPoint(x: columnWidth - numberAreaWidth, y: originY))
+        path.lineWidth = lineWidth
+        return path
     }
     
-    func getPointY(_ sec: Float) -> CGFloat {
-        return totalHeight - CGFloat(sec - self.beatmap.timeOfFirstNote) * secScale - heightInset
+    private func pathForVerticalLine(origin: CGPoint, height: CGFloat) -> UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: origin.x, y: origin.y))
+        path.addLine(to: CGPoint(x: origin.x, y: origin.y + height))
+        path.lineWidth = lineWidth
+        return path
     }
     
-    func getWidePointX(_ position: Int, width: Int) -> (start: CGFloat, end: CGFloat) {
-        let endPosition = position + width - 1
-        let x1 = widthInset + innerWidthInset + interval * (CGFloat(mirrorFlip ? 16 - position : position) - 1)
-        let x2 = widthInset + innerWidthInset + interval * (CGFloat(mirrorFlip ? 16 - endPosition : endPosition) - 1)
-        if mirrorFlip {
-            return (start: x2, end: x1)
-        } else {
-            return (start: x1, end: x2)
-        }
-    }
-    
-    
-    /// Get the shifted offset time from the very begining of the beatmap to a specific point in all the drawing area
-    ///
-    /// - Parameter y: the point.y of the drawing area
-    /// - Returns: the shifted offset time
-    func getShiftedOffset(y: CGFloat) -> Float {
-        return Float((totalHeight - y - heightInset) / secScale)
-    }
 }
 
-extension CGRect {
+private extension CGRect {
     init(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat) {
         self.init(x: x1, y: y1, width: x2 - x1, height: y2 - y1)
     }

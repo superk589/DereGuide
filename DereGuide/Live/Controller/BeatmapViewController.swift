@@ -308,7 +308,7 @@ extension BeatmapViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         beatmapView.setNeedsDisplay()
         guard let drawer = beatmapView.drawer else { return }
-        if beatmapView.isAutoScrolling && beatmapView.playOffsetY + drawer.heightInset < drawer.getPointY(beatmapView.beatmap.lastNote?.offsetSecond ?? 0) {
+        if beatmapView.isAutoScrolling && beatmapView.playOffsetY + drawer.inset.bottom < drawer.getPointY(beatmapView.beatmap.lastNote?.offsetSecond ?? 0) {
             pause()
         }
     }

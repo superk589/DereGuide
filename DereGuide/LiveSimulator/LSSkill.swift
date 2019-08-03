@@ -156,7 +156,7 @@ extension LSSkill {
 
 extension LSSkill {
     
-    func perfectBonusValue(noteType: CGSSBeatmapNote.NoteType) -> Int {
+    func perfectBonusValue(noteType: CGSSBeatmapNote.Style) -> Int {
         switch (type, noteType) {
         case (.longAct, .hold),
              (.longAct, .wideSlide):

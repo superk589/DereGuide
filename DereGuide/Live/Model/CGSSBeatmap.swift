@@ -142,7 +142,7 @@ class CGSSBeatmap {
     func calculateNoteTypeDistribution() -> NoteTypeDistribution {
         var distribution = NoteTypeDistribution(click: 0, hold: 0, flick: 0, slide: 0)
         for note in validNotes {
-            switch note.noteType {
+            switch note.style {
             case .click:
                 distribution.click += 1
             case .flick:

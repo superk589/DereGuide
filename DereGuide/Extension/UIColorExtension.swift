@@ -54,6 +54,7 @@ extension UIColor {
     static let slide = UIColor(hexString: "A544D9")
     static let tap = UIColor(hexString: "EC6279")
     static let hold = UIColor(hexString: "F7CD72")
+    static let beatmapLine = UIColor(hexString: "7F7F7F")
     
     static let allType = UIColor.darkGray
 
