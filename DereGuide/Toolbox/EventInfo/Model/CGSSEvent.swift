@@ -25,6 +25,8 @@ extension CGSSEvent {
             return .groove
         case CGSSEventTypes.rail:
             return .rail
+        case CGSSEventTypes.carnival:
+            return .carnival
         default:
             return .parade
         }

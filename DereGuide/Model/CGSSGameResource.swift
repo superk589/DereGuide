@@ -98,6 +98,43 @@ class Master: FMDatabaseQueue {
             list.append(300595)
             list.removeAll { $0 == 300583 }
             list.removeAll { $0 == 300585 }
+
+            // LIVE Carnival rewards are not in event_available table,
+            // needs special handling
+            var name = ""
+            let liveSQL = """
+            select b.name
+            from (
+                select *, rank() over (order by sort) as rank
+                from live_data
+                where event_type = 7
+            ) a
+            left join music_data b on a.music_data_id = b.id
+            where rank in (
+                select rank
+                from (
+                    select *, rank() over (order by event_start) as rank
+                    from event_data where type = 7
+                )
+            )
+            """
+            let subSet3 = try db.executeQuery(liveSQL, values: nil)
+            while subSet3.next() {
+                name = String(subSet3.string(forColumn: "name") ?? "")
+                break
+            }
+
+            if name != "" {
+                let rewardSql = """
+                select id as reward_id
+                from card_data
+                where name like '%\(name)%' and rarity = 5
+                """
+                let subSet4 = try db.executeQuery(rewardSql, values: nil)
+                while subSet4.next() {
+                    list.append(Int(subSet4.int(forColumn: "reward_id")))
+                }
+            }
         }) {
             callback(list)
         }
@@ -226,43 +263,91 @@ class Master: FMDatabaseQueue {
                 let startDate = set.string(forColumn: "event_start")
                 let endDate = set.string(forColumn: "event_end")
                 let secondHalfStartDate = set.string(forColumn: "second_half_start")
-                
-                let rewardSql = "select * from event_available where event_id = \(id)"
+
                 var rewards = [Reward]()
-                let subSet = try db.executeQuery(rewardSql, values: nil)
-                while subSet.next() {
-                    var rewardId = Int(subSet.int(forColumn: "reward_id"))
-                    if rewardId == 300583 {
-                        rewardId = 300593
-                    }
-                    if rewardId == 300585 {
-                        rewardId = 300595
-                    }
-                    let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
-                    let reward = Reward.init(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0)
-                    rewards.append(reward)
-                }
-                
-                var liveId: Int = 0
-                if type == 5 || type == 3 {
-                    grooveOrParadeCount += 1
-                    let liveSql = "select * from live_data where sort = \(3000 + grooveOrParadeCount) and event_type > 0"
-                    let subSet2 = try db.executeQuery(liveSql, values: nil)
-                    while subSet2.next() {
-                        liveId = Int(subSet2.int(forColumn: "id"))
-                        break
+                if type != 7 {
+                    let rewardSql = "select * from event_available where event_id = \(id)"
+                    let subSet = try db.executeQuery(rewardSql, values: nil)
+                    while subSet.next() {
+                        var rewardId = Int(subSet.int(forColumn: "reward_id"))
+                        if rewardId == 300583 {
+                            rewardId = 300593
+                        }
+                        if rewardId == 300585 {
+                            rewardId = 300595
+                        }
+                        let recommendOrder = Int(subSet.int(forColumn: "recommend_order"))
+                        let reward = Reward.init(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0)
+                        rewards.append(reward)
                     }
                 } else {
-                    // here use event_type > 0 to filter, cuz sort_id may be the same (1024)
-                    // another way is to use start_date
-                    let liveSql = "select * from live_data where sort = \(id) and event_type > 0"
-                    let subSet2 = try db.executeQuery(liveSql, values: nil)
-                    while subSet2.next() {
-                        liveId = Int(subSet2.int(forColumn: "id"))
+                    var name = ""
+                    let liveSQL = """
+                    select b.name
+                    from (
+                        select *, rank() over (order by sort) as rank
+                        from live_data
+                        where event_type = 7
+                    ) a
+                    left join music_data b on a.music_data_id = b.id
+                    where rank in (
+                        select rank
+                        from (
+                            select *, rank() over (order by event_start) as rank
+                            from event_data where type = 7
+                        )
+                        where id = \(id)
+                    )
+                    order by a.id asc
+                    limit 1;
+                    """
+                    let subSet3 = try db.executeQuery(liveSQL, values: nil)
+                    while subSet3.next() {
+                        name = String(subSet3.string(forColumn: "name") ?? "")
                         break
                     }
+
+                    if name != "" {
+                        let rewardSql = """
+                        select id as reward_id, rank() over (order by disp_order asc) as recommend_order
+                        from card_data
+                        where name like '%\(name)%' and rarity = 5
+                        """
+                        let subSet4 = try db.executeQuery(rewardSql, values: nil)
+                        while subSet4.next() {
+                            let rewardId = Int(subSet4.int(forColumn: "reward_id"))
+                            let recommendOrder = Int(subSet4.int(forColumn: "recommend_order"))
+                            let reward = Reward.init(cardId: rewardId, recommandOrder: recommendOrder, relativeOdds: 0, relativeSROdds: 0)
+                            rewards.append(reward)
+                        }
+                    }
                 }
-                
+
+                var liveId: Int = 0
+                let liveSql = """
+                select *
+                from (
+                    select *, rank() over (order by sort) as rank
+                    from live_data
+                    where event_type = \(type)
+                )
+                where rank in (
+                    select rank
+                    from (
+                        select *, rank() over (order by event_start) as rank
+                        from event_data where type = \(type)
+                    )
+                    where id = \(id)
+                )
+                order by id asc
+                limit 1;
+                """
+                let subSet2 = try db.executeQuery(liveSql, values: nil)
+                while subSet2.next() {
+                    liveId = Int(subSet2.int(forColumn: "id"))
+                    break
+                }
+
                 var ptBorders = [Int]()
                 if type == 1 {
                     let sql = "select rank_min from atapon_point_rank_disp where event_id = \(id) limit 6"
@@ -301,7 +386,7 @@ class Master: FMDatabaseQueue {
                 }
                 
                 let event = CGSSEvent(sortId: sortId, id: id, type: type, startDate: startDate!, endDate: endDate!, name: name!, secondHalfStartDate: secondHalfStartDate!, reward: rewards, liveId: liveId, ptBorders: ptBorders, scoreBorders: scoreBorders)
-                
+
                 list.append(event)
             }
         }) {

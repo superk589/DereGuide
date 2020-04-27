@@ -26,7 +26,8 @@ class EventFilterSortController: BaseFilterSortController {
                            CGSSEventTypes.groove.description,
                            CGSSEventTypes.party.description,
                            CGSSEventTypes.parade.description,
-                           CGSSEventTypes.rail.description]
+                           CGSSEventTypes.rail.description,
+                           CGSSEventTypes.carnival.description]
     
     var sorterTitles = [NSLocalizedString("更新时间", comment: "")]
     var sorterMethods = ["sortId"]
