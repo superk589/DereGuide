@@ -31,10 +31,14 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
     
     let line3 = LineView()
     
+    let line6 = LineView()
+
     let card1View = EventCardView()
     
     let card2View = EventCardView()
     
+    let card3View = EventCardView()
+
     let songDescLabel = UILabel()
     
     let liveTrendLabel = UILabel()
@@ -117,12 +121,28 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         }
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
         card2View.addGestureRecognizer(tap2)
+
+        addSubview(line6)
+        line6.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(1 / Screen.scale)
+            make.top.equalTo(card2View.snp.bottom).offset(8)
+        }
+
+        addSubview(card3View)
+        card3View.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(line6.snp.bottom)
+            make.height.equalTo(91)
+        }
+        let tap5 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
+        card3View.addGestureRecognizer(tap5)
         
         addSubview(line2)
         line2.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.height.equalTo(1 / Screen.scale)
-            make.top.equalTo(card2View.snp.bottom)
+            make.top.equalTo(card3View.snp.bottom)
         }
         
         addSubview(songDescLabel)
@@ -282,6 +302,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             startToEndLabel.text = NSLocalizedString("待定", comment: "")
             card1View.isHidden = true
             card2View.isHidden = true
+            card3View.isHidden = true
             liveView.isHidden = true
             songDescLabel.isHidden = true
             liveTrendLabel.isHidden = true
@@ -289,7 +310,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             line1.isHidden = true
             line2.isHidden = true
             line3.isHidden = true
-            
+            line6.isHidden = true
+
             eventPtContentView.isHidden = true
             eventScoreContentView.isHidden = true
             
@@ -302,8 +324,25 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
                 if let card1 = CGSSDAO.shared.findCardById(rewards[0].cardId) {
                     card1View.setup(card: card1, desc: NSLocalizedString("上位", comment: ""))
                 }
-                if let card2 = CGSSDAO.shared.findCardById(rewards[1].cardId) {
-                    card2View.setup(card: card2, desc: NSLocalizedString("下位", comment: ""))
+                if event.reward.count >= 3 {
+                    if let card2 = CGSSDAO.shared.findCardById(rewards[1].cardId) {
+                        card2View.setup(card: card2, desc: NSLocalizedString("中位", comment: ""))
+                    }
+                    if let card3 = CGSSDAO.shared.findCardById(rewards[2].cardId) {
+                        card3View.setup(card: card3, desc: NSLocalizedString("下位", comment: ""))
+                    }
+                } else {
+                    if let card2 = CGSSDAO.shared.findCardById(rewards[1].cardId) {
+                        card2View.setup(card: card2, desc: NSLocalizedString("下位", comment: ""))
+                    }
+                    card3View.isHidden = true
+                    line6.isHidden = true
+
+                    line2.snp.makeConstraints { (make) in
+                        make.left.right.equalToSuperview()
+                        make.height.equalTo(1 / Screen.scale)
+                        make.top.equalTo(card2View.snp.bottom)
+                    }
                 }
             }
             
