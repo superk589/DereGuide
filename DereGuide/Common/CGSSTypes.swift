@@ -581,16 +581,20 @@ struct CGSSLiveEventTypes: OptionSet, CustomStringConvertible {
 
 struct CGSSEventTypes: OptionSet, CustomStringConvertible {
     let rawValue: UInt
-    init(rawValue: UInt) { self.rawValue = rawValue }
+    init(rawValue: UInt) {
+        self.rawValue = rawValue
+        
+    }
     static let tradition = CGSSEventTypes.init(rawValue: 1 << 0)
     static let groove = CGSSEventTypes.init(rawValue: 1 << 2)
     static let parade = CGSSEventTypes.init(rawValue: 1 << 4)
     static let kyalapon = CGSSEventTypes.init(rawValue: 1 << 1)
     static let party = CGSSEventTypes.init(rawValue: 1 << 3)
     static let rail = CGSSEventTypes.init(rawValue: 1 << 5)
-    static let all = CGSSEventTypes.init(rawValue: 0b111111)
+    static let carnival = CGSSEventTypes.init(rawValue: 1 << 6)
+    static let all = CGSSEventTypes.init(rawValue: 0b1111111)
     static let ptRankingExists: CGSSEventTypes = [.groove, .tradition]
-    static let scoreRankingExists: CGSSEventTypes = [.groove, .tradition, .parade]
+    static let scoreRankingExists: CGSSEventTypes = [.groove, .tradition, .parade, .carnival]
     static let hasSong: CGSSEventTypes = .scoreRankingExists
     init (eventType: Int) {
         self.rawValue = 1 << UInt(eventType - 1)
@@ -610,6 +614,8 @@ struct CGSSEventTypes: OptionSet, CustomStringConvertible {
             return NSLocalizedString("巡演活动", comment: "")
         case CGSSEventTypes.rail:
             return NSLocalizedString("灰姑娘之路", comment: "")
+        case CGSSEventTypes.carnival:
+            return NSLocalizedString("嘉年华活动", comment: "")
         default:
             return NSLocalizedString("未知", comment: "")
         }

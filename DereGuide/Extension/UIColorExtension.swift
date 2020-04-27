@@ -43,7 +43,8 @@ extension UIColor {
     static let tradition = UIColor(red: 1.0 * 113 / 255, green: 1.0 * 80 / 255, blue: 1.0 * 69 / 255, alpha: 1)
     
     static let rail = UIColor(hexString: "81CD46")
-    
+    static let carnival = UIColor(hexString: "F57C00")
+
     static let normal = UIColor(red: 1.0 * 253 / 255, green: 1.0 * 186 / 255, blue: 1.0 * 80 / 255, alpha: 1)
     static let limited = UIColor(hexString: "#E68599")
     static let cinfes = UIColor(red: 1.0 * 25 / 255, green: 1.0 * 154 / 255, blue: 1.0 * 218 / 255, alpha: 1)
