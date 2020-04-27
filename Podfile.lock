@@ -1,13 +1,12 @@
 PODS:
   - AcknowList (1.8)
-  - AutoInsetter (1.7.0)
   - Charts (3.3.0):
     - Charts/Core (= 3.3.0)
   - Charts/Core (3.3.0)
   - CryptoSwift (1.0.0)
   - DynamicColor (4.0.3)
   - EasyTipView (2.0.4)
-  - Eureka (5.0.0)
+  - Eureka (5.2.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -15,7 +14,7 @@ PODS:
   - lz4 (128)
   - MessagePack.swift (3.0.0)
   - MJRefresh (3.1.16)
-  - Pageboy (3.2.0)
+  - Pageboy (3.5.1)
   - ReachabilitySwift (4.3.1)
   - RijndaelSwift (0.2.0)
   - SDWebImage (5.0.1):
@@ -23,9 +22,8 @@ PODS:
   - SDWebImage/Core (5.0.1)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.3.0)
-  - Tabman (2.3.0):
-    - AutoInsetter (~> 1.7)
-    - Pageboy (~> 3.2)
+  - Tabman (2.8.2):
+    - Pageboy (~> 3.5.1)
   - TTGTagCollectionView (1.11.1)
   - ZKCornerRadiusView (0.1.0)
   - ZKDrawerController (0.6.0):
@@ -54,9 +52,8 @@ DEPENDENCIES:
   - ZKDrawerController
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AcknowList
-    - AutoInsetter
     - Charts
     - CryptoSwift
     - DynamicColor
@@ -92,28 +89,27 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AcknowList: 5b8820004d019d0a8d6a091ea2392dcb54bd3ad2
-  AutoInsetter: 766e76cd41da7026373778524074f9a6b64b24d5
   Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   DynamicColor: bf19b33fe404c59a68e64af95cc6b017346e7e75
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
-  Eureka: 0f64f477ec8ef6201c6fec143d60ff5c201cf654
+  Eureka: c883105488e05bc65539f583246ecf9657cabbfe
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   ImageViewer: 997018c2f4f7f9830602349bbcc3b2b776424942
   lz4: 5e066195ca751d552becaa026f8fe213ff738adf
   MessagePack.swift: e739e7d1b9820c91bda31a1165f64bf1abd561d4
   MJRefresh: 7798e16e53a5ef7f332dd05b27664db4e29530fd
-  Pageboy: 503fd8d9ed03408d2e651576a59c6188e2bcbf8b
+  Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   RijndaelSwift: 3ee38b6371cb534019c1be2b34590a041e95bf45
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
-  Tabman: 0152bf356e9a0a49821cbb38ddd8593e49ef00bf
+  Tabman: 05f32e419b07411b5ec74516212ffbff2a9dfc0e
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   ZKCornerRadiusView: fbe9e51aea9b9847663406a841ae0e0951e1657b
   ZKDrawerController: 475b3a991e65d2e0f0667967a4f04f8d0d0cbabe
 
-PODFILE CHECKSUM: a7664566efe0861f05cee98b57869e7d8de0d10b
+PODFILE CHECKSUM: 0453dad87653b9668629b4a304110f8be8a17ca5
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.1

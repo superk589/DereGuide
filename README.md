@@ -15,8 +15,9 @@ This is an unofficial iOS utility application for **The Idolmaster Cinderella Gi
 * Colleague Finder
 * Birthday Reminder
 
-## Download at App Store
-<https://itunes.apple.com/app/dereguide/id1131934691>
+## Install via TestFlight
+https://testflight.apple.com/join/Gr3OOW9I  
+For some reason, the App Store version will not be updated any more.
 
 ## Requirements
 * iOS 10.0+

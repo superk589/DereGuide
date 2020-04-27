@@ -71,6 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.unitCard)
                 try? FileManager.default.removeItem(atPath: CGSSSorterFilterManager.FilterPath.gachaPool)
             }
+            if lastVersion < 23 {
+                CGSSCacheManager.shared.wipeCard()
+            }
         }
         
         // 规划近期偶像生日
