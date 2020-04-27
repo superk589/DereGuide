@@ -265,7 +265,14 @@ class Master: FMDatabaseQueue {
 
                 var rewards = [Reward]()
                 if type != 7 {
-                    let rewardSql = "select * from event_available where event_id = \(id)"
+                    // Get cards that are available as event rewards only
+                    // i.e. remove N cards from event rewards list
+                    let rewardSql = """
+                    select a.*
+                    from event_available a
+                    left join card_data b on a.reward_id = b.id
+                    where b.rarity >= 5 and a.event_id = \(id)
+                    """
                     let subSet = try db.executeQuery(rewardSql, values: nil)
                     while subSet.next() {
                         var rewardId = Int(subSet.int(forColumn: "reward_id"))
