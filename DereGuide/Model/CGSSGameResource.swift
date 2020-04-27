@@ -251,7 +251,6 @@ class Master: FMDatabaseQueue {
         var list = [CGSSEvent]()
         execute({ (db) in
             let selectSql = "select * from event_data order by event_start asc"
-            var grooveOrParadeCount = 0
             var count = 0
             let set = try db.executeQuery(selectSql, values: nil)
             while set.next() {
