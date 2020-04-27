@@ -25,13 +25,13 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
     
     let timeIndicator = TimeStatusIndicator()
     
-    let line1 = LineView()
+    let cardViewLine1 = LineView()
     
+    let cardViewLine2 = LineView()
+
+    let cardViewLine3 = LineView()
+
     let line2 = LineView()
-    
-    let line3 = LineView()
-    
-    let line6 = LineView()
 
     let card1View = EventCardView()
     
@@ -90,8 +90,8 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             make.centerY.equalTo(startToEndLabel)
         }
         
-        addSubview(line1)
-        line1.snp.makeConstraints { (make) in
+        addSubview(cardViewLine1)
+        cardViewLine1.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.height.equalTo(1 / Screen.scale)
             make.top.equalTo(startToEndLabel.snp.bottom).offset(8)
@@ -100,14 +100,14 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         addSubview(card1View)
         card1View.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(line1.snp.bottom)
+            make.top.equalTo(cardViewLine1.snp.bottom)
             make.height.equalTo(91)
         }
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
-        card1View.addGestureRecognizer(tap1)
+        let cardViewTap1 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
+        card1View.addGestureRecognizer(cardViewTap1)
     
-        addSubview(line3)
-        line3.snp.makeConstraints { (make) in
+        addSubview(cardViewLine2)
+        cardViewLine2.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.height.equalTo(1 / Screen.scale)
             make.top.equalTo(card1View.snp.bottom)
@@ -116,14 +116,14 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         addSubview(card2View)
         card2View.snp.makeConstraints { (make) in
             make.right.left.equalToSuperview()
-            make.top.equalTo(line3.snp.bottom)
+            make.top.equalTo(cardViewLine2.snp.bottom)
             make.height.equalTo(91)
         }
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
-        card2View.addGestureRecognizer(tap2)
+        let cardViewTap2 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
+        card2View.addGestureRecognizer(cardViewTap2)
 
-        addSubview(line6)
-        line6.snp.makeConstraints { (make) in
+        addSubview(cardViewLine3)
+        cardViewLine3.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.height.equalTo(1 / Screen.scale)
             make.top.equalTo(card2View.snp.bottom).offset(8)
@@ -132,11 +132,11 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
         addSubview(card3View)
         card3View.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(line6.snp.bottom)
+            make.top.equalTo(cardViewLine3.snp.bottom)
             make.height.equalTo(91)
         }
-        let tap5 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
-        card3View.addGestureRecognizer(tap5)
+        let cardViewTap3 = UITapGestureRecognizer(target: self, action: #selector(tapAction(tap:)))
+        card3View.addGestureRecognizer(cardViewTap3)
         
         addSubview(line2)
         line2.snp.makeConstraints { (make) in
@@ -307,10 +307,10 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
             songDescLabel.isHidden = true
             liveTrendLabel.isHidden = true
             
-            line1.isHidden = true
+            cardViewLine1.isHidden = true
             line2.isHidden = true
-            line3.isHidden = true
-            line6.isHidden = true
+            cardViewLine2.isHidden = true
+            cardViewLine3.isHidden = true
 
             eventPtContentView.isHidden = true
             eventScoreContentView.isHidden = true
@@ -336,7 +336,7 @@ class EventDetailView: UIView, CGSSIconViewDelegate {
                         card2View.setup(card: card2, desc: NSLocalizedString("下位", comment: ""))
                     }
                     card3View.isHidden = true
-                    line6.isHidden = true
+                    cardViewLine3.isHidden = true
 
                     line2.snp.makeConstraints { (make) in
                         make.left.right.equalToSuperview()
